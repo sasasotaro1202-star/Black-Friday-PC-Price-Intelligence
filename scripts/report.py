@@ -62,11 +62,12 @@ def main():
     events = read_events()
 
     products = build_products(latest, catalog)
+    generated = iso(now_jst())
     scored = []
     reference_only = []
 
     for product in products:
-        row = build_row(product, anchors, events)
+        row = build_row(product, anchors, events, prediction_time=generated)
         if row.get("decision_score") is None:
             reference_only.append(row)
         else:
@@ -76,13 +77,13 @@ def main():
     available = [x for x in scored if x.get("stock_status") != "out_of_stock"]
     unavailable = [x for x in scored if x.get("stock_status") == "out_of_stock"]
     available.sort(key=lambda x: (
-        x.get("decision_score", -1),
-        -x.get("current_price_jpy", 999999999),
+        -x.get("decision_score", -1),
+        x.get("current_price_jpy") if x.get("current_price_jpy") is not None else 10**12,
         x.get("id", ""),
     ))
     unavailable.sort(key=lambda x: (
-        x.get("decision_score", -1),
-        -x.get("current_price_jpy", 999999999),
+        -x.get("decision_score", -1),
+        x.get("current_price_jpy") if x.get("current_price_jpy") is not None else 10**12,
         x.get("id", ""),
     ))
     for i, row in enumerate(available, 1):
@@ -91,7 +92,6 @@ def main():
         row["rank"] = None
 
     scored = available
-    generated = iso(now_jst())
     action = scored[0] if scored else None
 
     quality = {
