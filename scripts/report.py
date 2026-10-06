@@ -94,14 +94,25 @@ def history_score(x,anchors):
             best=max(best, min(15,best+2))
     return best
 
-def stock_score(status):
-    return {
-        "in_stock":12,
+def stock_score(x,anchors):
+    status=x.get("stock_status","unknown")
+    base={
+        "in_stock":10,
         "low_stock":6,
         "preorder_or_backorder":3,
-        "unknown":4,
+        "unknown":3,
         "out_of_stock":0
-    }.get(status,4)
+    }.get(status,3)
+    name=normalized_name(x)
+    risk=0
+    for a in anchors:
+        family=a.get("family","").lower()
+        key=a.get("key","").lower()
+        note=a.get("historical_note","").lower()
+        if ((family and family in name) or (key and key in name)) and ("sold out" in note or "売り切れ" in note or "在庫切れ" in note):
+            risk=5
+            break
+    return max(0, min(15, base + (5 if status=="in_stock" and risk else 0) - risk))
 
 def timing_score(x,anchors):
     price=x.get("price_jpy")
@@ -138,7 +149,7 @@ def decision_score(x,anchors):
     perf,gpu=performance_score(x)
     ps=price_score(p)
     hs=history_score(x,anchors)
-    ss=stock_score(x.get("stock_status"))
+    ss=stock_score(x,anchors)
     ts,timing=timing_score(x,anchors)
     total=min(100,perf+ps+hs+ss+ts)
     return total,{
@@ -189,7 +200,7 @@ def main():
             "performance_max":40,
             "price_max":25,
             "historical_evidence_max":15,
-            "stock_max":12,
+            "stock_max":15,
             "timing_max":10,
             "note":"100-point buy score combines performance and season-long purchase readiness; it is not a probability."
         }
