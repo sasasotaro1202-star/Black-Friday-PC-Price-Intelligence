@@ -4,9 +4,15 @@ def load(path,default):
     try:
         with open(path,"r",encoding="utf-8") as f:return json.load(f)
     except Exception:return default
+BUDGET=280000
+MAX_OBSERVATION_PRICE=600000
+
+def required_discount(price):
+    return 0 if price<=BUDGET else (price-BUDGET)/price*100
+
 def score(x):
     p=x.get("price_jpy")
-    if not p or p>400000 or x.get("fetch_status")!="ok":return -999
+    if not p or p>MAX_OBSERVATION_PRICE or x.get("fetch_status")!="ok":return -999
     s=json.dumps(x.get("spec",{}),ensure_ascii=False).lower()
     z=0
     if "rtx 5090" in s:z+=90
@@ -16,12 +22,16 @@ def score(x):
     elif x.get("stock_status")=="low_stock":z+=9
     if x.get("spec",{}).get("ram_gb",0)>=32:z+=8
     if x.get("spec",{}).get("vram_gb",0)>=16:z+=5
-    if p<=350000:z+=8
-    elif p<=400000:z+=4
+    req=required_discount(p)
+    if req<=5:z+=12
+    elif req<=10:z+=10
+    elif req<=20:z+=7
+    elif req<=30:z+=4
+    elif req<=40:z+=1
     return z
 def main():
     latest=load(os.path.join(ROOT,"data/current_latest.json"),{})
-    products=[x for x in latest.get("products",[]) if x.get("price_jpy") and x["price_jpy"]<=400000 and x.get("fetch_status")=="ok"]
+    products=[x for x in latest.get("products",[]) if x.get("price_jpy") and x["price_jpy"]<=MAX_OBSERVATION_PRICE and x.get("fetch_status")=="ok"]
     ranked=sorted(products,key=score,reverse=True)
     lines=["# 現在の購入判断","", "自動観測時点: "+str(latest.get("generated_at","")), ""]
     labels=["今この瞬間の最有力候補","今この瞬間の次善候補","今この瞬間の売り切れ対策候補"]
