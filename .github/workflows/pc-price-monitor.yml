@@ -3,6 +3,8 @@ name: PC Price Intelligence
 on:
   push:
     branches: ["main"]
+    paths-ignore:
+      - "data/**"
   workflow_dispatch:
   schedule:
     - cron: "7,22,37,52 * * * *"
