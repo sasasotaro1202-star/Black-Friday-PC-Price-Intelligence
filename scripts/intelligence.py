@@ -514,7 +514,7 @@ def data_quality_cap(item):
         cap = min(cap, 74)
     elif variant == "gpu_only":
         cap = min(cap, 82)
-    if mode == "search_snippet":
+    if mode in ("search_snippet", "direct_meta"):
         cap = min(cap, 84)
     elif mode == "public_baseline":
         cap = min(cap, 69)
@@ -630,7 +630,7 @@ def decision_score(item, anchors, events=None):
     stock_known = item.get("stock_status") in ("in_stock", "low_stock")
     if item.get("stock_status") == "out_of_stock":
         status = "UNAVAILABLE"
-    elif item.get("price_source_mode") in ("search_snippet", "public_baseline", "stale_previous", "direct_text"):
+    elif item.get("price_source_mode") in ("search_snippet", "public_baseline", "stale_previous", "direct_text", "direct_meta"):
         status = "VERIFY_NOW"
     elif price <= BUDGET and direct_verified and identity_verified and stock_known and score >= 90:
         status = "BUY_NOW"
