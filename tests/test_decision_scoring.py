@@ -76,8 +76,10 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertEqual(result["status"], "anomaly_corroborated")
 
     def test_build_row_uses_one_supplied_prediction_snapshot(self):
-        item = self.candidate()
         snapshot = "2026-10-07T08:00:00+09:00"
+        item = self.candidate()
+        item["retrieval_time"] = snapshot
+        item["available_at"] = snapshot
         row = intelligence.build_row(item, [], [], prediction_time=snapshot)
         self.assertEqual(row["prediction_time"], snapshot)
         self.assertEqual(
