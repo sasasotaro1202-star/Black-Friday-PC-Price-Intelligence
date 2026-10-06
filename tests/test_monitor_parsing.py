@@ -37,6 +37,7 @@ class MonitorParsingTests(unittest.TestCase):
           {"price":"289800","priceCurrency":"JPY","availability":"https://schema.org/OutOfStock"}
         ]}
         </script>
+        在庫あり
         """
         parsed = monitor.parse_page("https://example.com/test", html)
         self.assertEqual(parsed["stock_status"], "unknown")
