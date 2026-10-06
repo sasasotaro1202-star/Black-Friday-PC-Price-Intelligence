@@ -124,6 +124,12 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertIsNotNone(score)
         self.assertEqual(detail["status"], "VERIFY_NOW")
 
+    def test_meta_price_is_verify_only(self):
+        item = self.candidate(price=250000, source="direct_meta")
+        score, detail = intelligence.decision_score(item, [], [])
+        self.assertIsNotNone(score)
+        self.assertEqual(detail["status"], "VERIFY_NOW")
+
     def test_stale_observation_is_unactionable(self):
         item = self.candidate()
         old = intelligence.now_jst() - intelligence.timedelta(minutes=61)
