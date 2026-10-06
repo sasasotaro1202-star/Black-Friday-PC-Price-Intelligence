@@ -1,4 +1,4 @@
-import json,os,re
+import json,os
 from html.parser import HTMLParser
 from urllib.parse import quote,parse_qs,urlparse
 from urllib.request import Request,urlopen
@@ -25,7 +25,8 @@ def fetch(url):
         return r.read().decode(enc,errors="replace")
 
 class P(HTMLParser):
-    def __init__(self):super().__init__();self.links=[]
+    def __init__(self):
+        super().__init__();self.links=[]
     def handle_starttag(self,tag,attrs):
         if tag=="a":
             d=dict(attrs)
@@ -33,7 +34,8 @@ class P(HTMLParser):
 
 def search(q):
     html=fetch("https://html.duckduckgo.com/html/?q="+quote(q))
-    p=P();p.feed(html);out=[];seen=set()
+    p=P();p.feed(html)
+    out=[];seen=set()
     for h in p.links:
         if "uddg=" in h:
             u=parse_qs(urlparse(h).query).get("uddg")
@@ -46,6 +48,11 @@ def allowed(u,domains):
     host=urlparse(u).netloc.lower()
     return any(host==d or host.endswith("."+d) for d in domains)
 
+def useful(u):
+    p=urlparse(u).path.lower()
+    blocked=["/filter","/search","/search?","/store/laptops/for-gaming","/laptops/for-gaming/all-series"]
+    return not any(x in (p+"?"+urlparse(u).query.lower()) for x in blocked)
+
 def main():
     cfg=load(os.path.join(ROOT,"config/targets.json"),{})
     urls=[];seen=set()
@@ -53,9 +60,7 @@ def main():
         try:found=search(q)
         except Exception:continue
         for u in found:
-            if u in seen or not allowed(u,cfg.get("allowed_domains",[])):continue
-            if not any(k in u.lower() for k in ["/product","/products","/p/","/item","/sku","/shop/","/store/","dp/"]):
-                continue
+            if not allowed(u,cfg.get("allowed_domains",[])) or not useful(u) or u in seen:continue
             seen.add(u);urls.append(u)
     urls=urls[:100]
     save(os.path.join(ROOT,"data/watchlist.json"),{"generated_at":NOW.isoformat(),"urls":urls})
