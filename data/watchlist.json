@@ -50,22 +50,34 @@
       "id": "gtune-p5-13620h-5070"
     },
     {
-      "url": "https://store.asus.com/jp/rog/90nr0pj4-m001d0-rog-zephyrus-g16-2026.html?config=90NR0PJ4-M001D0",
-      "query": "ROG Zephyrus G16 GU606AP Ultra 9 386H RTX 5070 32GB 1TB 日本",
-      "priority": "normal",
-      "id": "zephyrus-g16-386h-5070ti"
+      "id": "zephyrus-g16-386h-5070ti",
+      "url": "https://store.asus.com/jp/90nr0pc2-m002c0-rog-zephyrus-g16-2026.html",
+      "query": "ROG Zephyrus G16 GU606AR-U9R5070TIG32G RTX 5070 Ti 32GB 1TB 日本",
+      "priority": "normal"
     },
     {
-      "url": "https://store.asus.com/jp/rog/90nr0pka-m001b0-rog-zephyrus-g14-2026.html?config=90NR0PKA-M001B0",
-      "query": "ROG Zephyrus G14 2026 RTX 5070 Ti 32GB 1TB 日本",
-      "priority": "normal",
-      "id": "zephyrus-g14-386h-5070ti"
+      "id": "zephyrus-g14-386h-5070ti",
+      "url": "https://store.asus.com/jp/90nr0p94-m001d0-rog-zephyrus-g14-2026-gu405.html",
+      "query": "ROG Zephyrus G14 GU405AR-U9R5070TIG RTX 5070 Ti 32GB 1TB 日本",
+      "priority": "normal"
     },
     {
       "url": "https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200",
       "query": "GIGABYTE GAMING A18 PRO RTX 5070 Ti 32GB 1TB 日本",
       "priority": "high",
       "id": "gigabyte-a18-pro-240h-5070ti"
+    },
+    {
+      "id": "rog-g16-2025-275hx-5070ti",
+      "url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
+      "query": "ROG Strix G16 G615LR-U9R5070TI Core Ultra 9 275HX RTX 5070 Ti 32GB 1TB 日本",
+      "priority": "high"
+    },
+    {
+      "id": "rog-g18-2025-275hx-5070ti",
+      "url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025-g815/",
+      "query": "ROG Strix G18 G815LR-U9R5070TI Core Ultra 9 275HX RTX 5070 Ti 32GB 1TB 日本",
+      "priority": "high"
     }
   ],
   "last_discovery_attempt_at": "2026-10-07T06:48:29+09:00",
