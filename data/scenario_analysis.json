@@ -1,0 +1,81 @@
+{
+  "generated_at": "2026-10-07T07:10:40+09:00",
+  "budget_jpy": 280000,
+  "note": "Scenario bands are decision aids, not statistical probabilities.",
+  "rows": [
+    {
+      "id": "gtune-p6-13700hx-5070",
+      "name": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
+      "current_price_jpy": 258819,
+      "required_discount_pct": 0.0,
+      "reachability": "high",
+      "historical_floor_jpy": null,
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 232900.0
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 220000.0
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 207100.0
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 194100.0
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 181200.0
+        }
+      ],
+      "first_280k_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 232900.0
+      },
+      "stock_status": "in_stock",
+      "source_mode": "direct_page",
+      "confidence": "high"
+    },
+    {
+      "id": "gtune-p5-13620h-5070",
+      "name": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
+      "current_price_jpy": 90000,
+      "required_discount_pct": 0.0,
+      "reachability": "high",
+      "historical_floor_jpy": null,
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 81000.0
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 76500.0
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 72000.0
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 67500.0
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 63000.0
+        }
+      ],
+      "first_280k_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 81000.0
+      },
+      "stock_status": "in_stock",
+      "source_mode": "direct_page",
+      "confidence": "high"
+    }
+  ]
+}
