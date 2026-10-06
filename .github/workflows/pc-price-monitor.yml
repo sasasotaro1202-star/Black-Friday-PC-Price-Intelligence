@@ -19,9 +19,11 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
       - name: Check watchlist freshness
         id: watchlist
@@ -36,14 +38,10 @@ jobs:
                   data=json.load(f)
               urls=data.get("urls") or []
               ts=data.get("generated_at")
-              if ts:
-                  age=(datetime.now(JST)-datetime.fromisoformat(ts.replace("Z","+00:00"))).total_seconds()
-              else:
-                  age=10**12
+              age=(datetime.now(JST)-datetime.fromisoformat(ts.replace("Z","+00:00"))).total_seconds() if ts else 10**12
               stale=age >= 24*3600
           except Exception:
-              urls=[]
-              stale=True
+              urls=[]; stale=True
           print(f"needs_refresh={str((not urls) or stale).lower()}")
           PY
 
@@ -51,26 +49,36 @@ jobs:
         if: steps.watchlist.outputs.needs_refresh == 'true'
         run: python scripts/discover.py
 
-      - name: Collect public observations
+      - name: Collect and publish with conflict-safe retry
+        shell: bash
         env:
           MONITOR_MAX_URLS: "80"
-        run: python scripts/monitor.py
-
-      - name: Build current report
-        run: python scripts/report.py
-
-      - name: Build timing analysis
-        run: python scripts/timing_analysis.py
-
-      - name: Commit changed data
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/
-          if git diff --cached --quiet; then
-            echo "No data changes."
-            exit 0
-          fi
-          git commit -m "data: update PC price intelligence"
-          git pull --rebase origin main
-          git push
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            git fetch --no-tags origin main
+            git reset --hard origin/main
+
+            python scripts/monitor.py
+            python scripts/report.py
+            python scripts/timing_analysis.py
+
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/
+            if git diff --cached --quiet; then
+              echo "No data changes."
+              exit 0
+            fi
+            git commit -m "data: update PC price intelligence"
+
+            if git push origin HEAD:main; then
+              echo "Published on attempt $attempt"
+              exit 0
+            fi
+
+            echo "Push conflict on attempt $attempt; refreshing from origin and retrying."
+            git reset --hard origin/main
+          done
+          echo "Failed to publish after 3 attempts."
+          exit 1
