@@ -566,13 +566,16 @@ def decision_score(item, anchors, events=None):
     wr = wait_risk(item, trend)
 
     status = "WATCH"
+    direct_verified = item.get("price_source_mode") == "direct_structured"
+    identity_verified = item.get("variant_match") in ("exact", "trusted_url", "strong")
+    stock_known = item.get("stock_status") in ("in_stock", "low_stock")
     if item.get("stock_status") == "out_of_stock":
         status = "UNAVAILABLE"
-    elif item.get("price_source_mode") in ("search_snippet", "public_baseline", "stale_previous"):
+    elif item.get("price_source_mode") in ("search_snippet", "public_baseline", "stale_previous", "direct_text"):
         status = "VERIFY_NOW"
-    elif price <= BUDGET and item.get("stock_status") == "in_stock" and score >= 90:
+    elif price <= BUDGET and direct_verified and identity_verified and stock_known and score >= 90:
         status = "BUY_NOW"
-    elif price <= BUDGET and item.get("stock_status") == "low_stock" and score >= 85:
+    elif price <= BUDGET and direct_verified and identity_verified and item.get("stock_status") == "low_stock" and score >= 85:
         status = "BUY_NOW_LOW_STOCK"
     elif required_discount(price) > 20:
         status = "WAIT_FOR_DISCOUNT"

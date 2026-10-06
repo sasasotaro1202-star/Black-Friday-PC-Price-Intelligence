@@ -111,6 +111,12 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertIsNotNone(score)
         self.assertEqual(detail["status"], "UNAVAILABLE")
 
+    def test_direct_text_is_verify_only(self):
+        item = self.candidate(price=250000, source="direct_text")
+        score, detail = intelligence.decision_score(item, [], [])
+        self.assertIsNotNone(score)
+        self.assertEqual(detail["status"], "VERIFY_NOW")
+
     def test_unknown_stock_is_capped(self):
         item = self.candidate(stock="unknown")
         score, detail = intelligence.decision_score(item, [], [])
