@@ -264,7 +264,23 @@ def main():
                     item["data_confidence"]=prev.get("data_confidence","medium")
                     fetch_stats["partial"]+=1
                 else:
-                    item["last_fetch_status"]="partial"
+                    base=baselines.get(cid)
+                    if base:
+                        item.update({
+                            "id":cid,
+                            "name":base.get("name",u),
+                            "price_jpy":base.get("price_jpy"),
+                            "stock_status":base.get("stock_status","unknown"),
+                            "spec":{"gpu":base.get("gpu"),"cpu":base.get("cpu"),
+                                    "tgp_w":base.get("tgp_w"),"ram_gb":base.get("ram_gb"),
+                                    "ssd":base.get("ssd")},
+                            "price_source_mode":"public_baseline",
+                            "price_source_url":base.get("source_url"),
+                            "data_confidence":"low",
+                            "last_fetch_status":"partial"
+                        })
+                    else:
+                        item["last_fetch_status"]="partial"
                     fetch_stats["partial"]+=1
             item["fingerprint"]=fingerprint(item)
         except Exception as exc:
@@ -279,6 +295,7 @@ def main():
                 fb=search_fallback(query,u) if query else None
                 if fb:
                     item={
+                      "id":cid,
                       "url":u,"store":urlparse(u).netloc.lower(),
                       "name":fb["source_title"] or u,
                       "price_jpy":fb["price_jpy"],
