@@ -100,7 +100,11 @@ def main():
     events_path=os.path.join(ROOT,"data/change_events.jsonl")
     watch_path=os.path.join(ROOT,"data/watchlist.json")
     watch=read_json(watch_path,{"generated_at":None,"urls":[]})
-    urls=watch.get("urls",[])[:80]
+    try:
+        max_urls=max(1,min(int(os.environ.get("MONITOR_MAX_URLS","80")),80))
+    except Exception:
+        max_urls=80
+    urls=watch.get("urls",[])[:max_urls]
     previous=read_json(latest_path,{}).get("products",[])
     previous_by_url={x["url"]:x for x in previous}
     products=[]
