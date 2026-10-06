@@ -1,0 +1,72 @@
+name: PC Price Intelligence - Watchdog
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "12 * * * *"
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: pc-price-intelligence-watchdog
+  cancel-in-progress: true
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check freshness and integrity
+        id: check
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python scripts/watchdog.py
+          python scripts/healthcheck.py
+          python scripts/validate.py
+
+      - name: Recover monitor when data is stale or unhealthy
+        if: steps.check.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          latest="$(gh run list --workflow pc-price-monitor.yml --branch main --limit 1 --json databaseId,status,conclusion --jq '.[0]')"
+
+          if [ -z "$latest" ] || [ "$latest" = "null" ]; then
+            echo "No monitor run found; dispatching a fresh run."
+            gh workflow run pc-price-monitor.yml --ref main
+            exit 0
+          fi
+
+          status="$(printf '%s' "$latest" | python -c 'import json,sys; x=json.load(sys.stdin); print(x.get("status",""))')"
+          conclusion="$(printf '%s' "$latest" | python -c 'import json,sys; x=json.load(sys.stdin); print(x.get("conclusion") or "")')"
+          run_id="$(printf '%s' "$latest" | python -c 'import json,sys; x=json.load(sys.stdin); print(x["databaseId"])')"
+
+          if [ "$status" = "completed" ] && [ "$conclusion" != "success" ]; then
+            echo "Latest monitor failed; re-running failed jobs: $run_id"
+            gh run rerun "$run_id" --failed
+          elif [ "$status" = "completed" ] && [ "$conclusion" = "success" ]; then
+            echo "Latest monitor succeeded but watchdog still sees unhealthy data; dispatching a fresh run."
+            gh workflow run pc-price-monitor.yml --ref main
+          else
+            echo "Monitor is already queued or running; no duplicate recovery run."
+          fi
+
+      - name: Recover failed test workflow
+        if: steps.check.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          failed="$(gh run list --workflow pc-price-tests.yml --branch main --limit 1 --json databaseId,status,conclusion --jq '.[0] | select(.status=="completed" and .conclusion!="success") | .databaseId')"
+          if [ -n "$failed" ]; then
+            echo "Re-running failed test jobs: $failed"
+            gh run rerun "$failed" --failed
+          fi
