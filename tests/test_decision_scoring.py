@@ -3,24 +3,15 @@ import pathlib
 import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-
 spec = importlib.util.spec_from_file_location("intelligence", ROOT / "scripts" / "intelligence.py")
 intelligence = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(intelligence)
 
 class DecisionScoringTests(unittest.TestCase):
-    def candidate(
-        self,
-        price=280000,
-        gpu="RTX 5070 Ti Laptop GPU",
-        cpu="Ryzen 9 9955HX",
-        tgp=115,
-        ram=32,
-        ssd="1 TB",
-        stock="in_stock",
-        source="direct_structured",
-        variant="exact",
-    ):
+    def candidate(self, price=280000, gpu="RTX 5070 Ti Laptop GPU", cpu="Ryzen 9 9955HX",
+                  tgp=115, ram=32, ssd="1 TB", stock="in_stock",
+                  source="direct_structured", variant="exact"):
+        now = intelligence.iso(intelligence.now_jst())
         return {
             "id": "test",
             "name": f"{cpu} {gpu}",
@@ -32,15 +23,9 @@ class DecisionScoringTests(unittest.TestCase):
             "data_confidence": "high",
             "variant_match": variant,
             "family": "Test",
-            "spec": {
-                "gpu": gpu,
-                "cpu": cpu,
-                "tgp_w": tgp,
-                "ram_gb": ram,
-                "ssd": ssd,
-            },
-            "retrieval_time": intelligence.iso(intelligence.now_jst()),
-            "available_at": intelligence.iso(intelligence.now_jst()),
+            "spec": {"gpu": gpu, "cpu": cpu, "tgp_w": tgp, "ram_gb": ram, "ssd": ssd},
+            "retrieval_time": now,
+            "available_at": now,
         }
 
     def test_budget_discount(self):
@@ -51,6 +36,11 @@ class DecisionScoringTests(unittest.TestCase):
         s = intelligence.scenario_prices(400000)
         self.assertEqual(s[0]["price_jpy"], 360000)
         self.assertEqual(s[-1]["price_jpy"], 280000)
+
+    def test_price_parser_rejects_monthly_context(self):
+        picked = intelligence.pick_price("月々9,000円 / 販売価格 289,800円(税込)")
+        self.assertIsNotNone(picked)
+        self.assertEqual(picked["price_jpy"], 289800)
 
     def test_price_score_monotonic(self):
         self.assertGreater(intelligence.price_score(280000), intelligence.price_score(350000))
@@ -78,6 +68,15 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertTrue(result["valid"])
         self.assertEqual(result["status"], "anomaly_corroborated")
 
+    def test_shared_family_variant_is_never_exact(self):
+        item = {"id":"x","url":"https://example.com/family","name":"ROG Strix G16",
+                "page_text_excerpt":"ROG Strix G16","parsed_spec":{}}
+        cat = {"id":"x","url":"https://example.com/family","url_is_exact":False,
+               "name":"ROG Strix G16","family":"ROG Strix G16",
+               "cpu":"Ryzen 9 9955HX3D","gpu":"RTX 5070 Ti","identity_confidence":"high"}
+        out = intelligence.enrich_identity(item, cat)
+        self.assertEqual(out["variant_match"], "ambiguous")
+
     def test_ambiguous_variant_is_capped(self):
         item = self.candidate(variant="ambiguous")
         score, detail = intelligence.decision_score(item, [], [])
@@ -96,10 +95,7 @@ class DecisionScoringTests(unittest.TestCase):
         score, detail = intelligence.decision_score(item, [], [])
         self.assertIsNotNone(score)
         self.assertLessEqual(score, 100)
-        self.assertLessEqual(
-            sum(detail[k] for k in ("performance","price","history","stock","timing")),
-            100
-        )
+        self.assertLessEqual(sum(detail[k] for k in ("performance","price","history","stock","timing")), 100)
 
 if __name__ == "__main__":
     unittest.main()

@@ -44,8 +44,7 @@ jobs:
           from datetime import datetime, timezone, timedelta
           JST=timezone(timedelta(hours=9))
           try:
-              with open("data/watchlist.json", encoding="utf-8") as f:
-                  d=json.load(f)
+              with open("data/watchlist.json", encoding="utf-8") as f: d=json.load(f)
               urls=d.get("urls") or []
               ts=d.get("generated_at")
               age=(datetime.now(JST)-datetime.fromisoformat(ts.replace("Z","+00:00"))).total_seconds() if ts else 10**12
@@ -57,7 +56,7 @@ jobs:
       - name: Refresh watchlist
         if: steps.window.outputs.in_window == 'true' && steps.watchlist.outputs.needs_refresh == 'true'
         run: python scripts/discover.py
-      - name: Collect, sanitize, score and publish
+      - name: Collect, recover, sanitize, score and publish
         if: steps.window.outputs.in_window == 'true'
         env:
           MONITOR_MAX_URLS: "30"
@@ -68,6 +67,7 @@ jobs:
             git fetch --no-tags origin main
             git reset --hard origin/main
             python scripts/monitor.py
+            python scripts/recover.py
             python scripts/sanitize.py
             python scripts/report.py
             python scripts/timing_analysis.py
