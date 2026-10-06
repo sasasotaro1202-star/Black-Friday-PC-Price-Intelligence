@@ -108,17 +108,49 @@ def main():
     previous=read_json(latest_path,{}).get("products",[])
     previous_by_url={x["url"]:x for x in previous}
     products=[]
+    fetch_stats={"direct_ok":0,"partial":0,"error":0,"total":len(urls)}
     for u in urls:
+        prev=previous_by_url.get(u)
         try:
             html,final=fetch(u)
             item=parse(final,html)
+            item["last_checked_at"]=NOW.isoformat()
+            item["price_source_mode"]="direct_page"
+            item["data_confidence"]="high" if item.get("price_jpy") else "low"
+            if item.get("price_jpy") is None and prev:
+                # Preserve the last confirmed state when the page is readable
+                # but does not expose a machine-readable price.
+                merged=dict(prev)
+                merged["last_checked_at"]=NOW.isoformat()
+                merged["last_fetch_status"]="partial"
+                merged["last_fetch_url"]=final
+                merged["price_source_mode"]=prev.get("price_source_mode","direct_page")
+                merged["data_confidence"]=prev.get("data_confidence","medium")
+                item=merged
+                fetch_stats["partial"]+=1
+            else:
+                item["last_fetch_status"]="ok"
+                fetch_stats["direct_ok"]+=1
             item["fingerprint"]=fingerprint(item)
             products.append(item)
-        except Exception:
-            products.append({"url":u,"store":urlparse(u).netloc.lower(),"name":u,
-                             "price_jpy":None,"stock_status":"unknown","spec":{},
-                             "fetch_status":"error","observed_at":NOW.isoformat(),
-                             "fingerprint":hashlib.sha256(u.encode()).hexdigest()})
+        except Exception as exc:
+            if prev:
+                # Keep the last known-good state; record the failed retrieval separately.
+                item=dict(prev)
+                item["last_checked_at"]=NOW.isoformat()
+                item["last_fetch_status"]="error"
+                item["last_fetch_error"]=type(exc).__name__
+                item["data_confidence"]=prev.get("data_confidence","medium")
+                item["fingerprint"]=fingerprint(item)
+            else:
+                item={"url":u,"store":urlparse(u).netloc.lower(),"name":u,
+                      "price_jpy":None,"stock_status":"unknown","spec":{},
+                      "fetch_status":"error","last_fetch_status":"error",
+                      "last_checked_at":NOW.isoformat(),"observed_at":NOW.isoformat(),
+                      "price_source_mode":"direct_page","data_confidence":"none",
+                      "fingerprint":hashlib.sha256(u.encode()).hexdigest()}
+            fetch_stats["error"]+=1
+            products.append(item)
     changes=[]
     for item in products:
         prev=previous_by_url.get(item["url"])
