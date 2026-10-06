@@ -1,28 +1,29 @@
 {
-  "budget_jpy": 400000,
-  "brands": ["Lenovo", "ASUS", "HP", "MSI", "Acer"],
+  "budget_jpy": 280000,
+  "target_date": "2026-11-27",
+  "brands": ["Lenovo", "ASUS", "HP", "MSI", "Acer", "GIGABYTE", "マウスコンピューター", "Thirdwave"],
   "queries": [
-    "RTX 5080 Laptop ノート 32GB 1TB Lenovo 日本",
-    "RTX 5080 Laptop ノート 32GB 1TB ASUS 日本",
-    "RTX 5080 Laptop ノート 32GB 1TB MSI 日本",
-    "RTX 5080 Laptop ノート 32GB 1TB Acer 日本",
-    "RTX 5080 Laptop ノート 32GB 1TB HP 日本",
-    "RTX 5070 Ti Laptop ノート 32GB 1TB Lenovo 日本",
-    "RTX 5070 Ti Laptop ノート 32GB 1TB ASUS 日本",
-    "RTX 5070 Ti Laptop ノート 32GB 1TB MSI 日本",
-    "RTX 5070 Ti Laptop ノート 32GB 1TB Acer 日本",
-    "RTX 5070 Ti Laptop ノート 32GB 1TB HP 日本",
-    "RTX 5090 Laptop ノート 32GB 1TB 日本 Amazon",
-    "RTX 5080 Laptop ゲーミングノート Amazon.co.jp",
-    "RTX 5070 Ti Laptop ゲーミングノート Amazon.co.jp",
-    "RTX 5080 ノート ゲーミング Lenovo 公式",
-    "RTX 5080 ノート ゲーミング ASUS 公式",
-    "RTX 5080 ノート ゲーミング MSI 公式"
+    "ROG Strix G16 Ryzen 9 9955HX3D RTX 5070 Ti 32GB 1TB 日本",
+    "ROG Strix G16 Ryzen 9 8940HX RTX 5070 Ti 32GB 1TB 日本",
+    "GALLERIA ZL9R-R57T-6 RTX 5070 Ti 9955HX 32GB 1TB",
+    "MSI Vector 16 HX AI RTX 5070 Ti 275HX 32GB 1TB 日本",
+    "Legion Pro 5i Gen 10 RTX 5070 Ti 275HX 32GB 1TB 日本",
+    "Predator Helios Neo 16 AI RTX 5070 Ti 290HX Plus 32GB 1TB 日本",
+    "OMEN MAX 16 RTX 5070 Ti 32GB 1TB 日本",
+    "TUF Gaming A16 RTX 5070 8940HX 32GB 1TB 日本",
+    "G TUNE P6 RTX 5070 13700HX 32GB 1TB 日本",
+    "G TUNE P5 RTX 5070 13620H 32GB 1TB 日本",
+    "TUF Gaming F16 RTX 5070 14650HX 32GB 日本",
+    "GIGABYTE GAMING A18 PRO RTX 5070 Ti 32GB 1TB 日本",
+    "GIGABYTE AERO X16 RTX 5070 32GB 1TB 日本",
+    "RTX 5070 Ti Laptop 32GB 1TB ゲーミングノート 日本",
+    "RTX 5080 Laptop 32GB 1TB ゲーミングノート 日本"
   ],
   "allowed_domains": [
-    "lenovo.com","asus.com","hp.com","msi.com","acer.com",
+    "lenovo.com","asus.com","hp.com","msi.com","acer.com","gigabyte.com",
+    "mouse-jp.co.jp","dospara.co.jp",
     "amazon.co.jp","rakuten.co.jp","yodobashi.com","biccamera.com","yamada-denkiweb.com"
   ],
-  "max_results_per_query": 6,
-  "max_pages_per_run": 35
+  "max_results_per_query": 8,
+  "max_pages_per_run": 50
 }
