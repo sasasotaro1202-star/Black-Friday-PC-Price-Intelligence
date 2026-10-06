@@ -40,7 +40,7 @@ def main():
             errors.append(f"current price without available_at: {cid}")
         if current is not None and not p.get("retrieval_time"):
             errors.append(f"current price without retrieval_time: {cid}")
-        if p.get("available_at") or p.get("retrieval_time"):
+        if current is not None:
             a = parse_dt(p.get("available_at"))
             r = parse_dt(p.get("retrieval_time"))
             # current_latest is an observation snapshot. It must prove
