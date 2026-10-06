@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T06:49:50+09:00",
+  "generated_at": "2026-10-07T06:51:08+09:00",
   "watchlist_generated_at": "2026-10-07T06:49:06+09:00",
   "products": [
     {
@@ -11,7 +11,11 @@
       "spec": {},
       "fetch_status": "error",
       "observed_at": "2026-10-07T06:49:50+09:00",
-      "fingerprint": "6bfd6a0ce671f3421bc26ba9443e7ed96f8b2abdd799da66f4d4a10310431131"
+      "fingerprint": "de2ae122ed003534b543188b92b6182775ed91312ae7f30e6396102f088e3aaf",
+      "last_checked_at": "2026-10-07T06:51:08+09:00",
+      "last_fetch_status": "error",
+      "last_fetch_error": "HTTPError",
+      "data_confidence": "medium"
     },
     {
       "url": "https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gaming-a16-2025.html",
@@ -22,7 +26,11 @@
       "spec": {},
       "fetch_status": "error",
       "observed_at": "2026-10-07T06:49:50+09:00",
-      "fingerprint": "c9562904ad0d20be7ebbabb8012b7f77ba5b39ad9dc7c25df05a705f5d5ab086"
+      "fingerprint": "241020974026f05123f902060a4a28350ce0a98a8c0c04ba3d2b2078d082fe56",
+      "last_checked_at": "2026-10-07T06:51:08+09:00",
+      "last_fetch_status": "error",
+      "last_fetch_error": "HTTPError",
+      "data_confidence": "medium"
     },
     {
       "url": "https://store.asus.com/jp/asus-tuf-gaming-f16-fx608.html?config=90NR0NB1-M00580",
@@ -33,7 +41,11 @@
       "spec": {},
       "fetch_status": "error",
       "observed_at": "2026-10-07T06:49:50+09:00",
-      "fingerprint": "a122301e2c1b8eb75c44a0af5e233bddf55d72efd47ddd52b3f1dc8093b2f44c"
+      "fingerprint": "c975887dd48fda81a986e95836b45fbefc765a52b6f424557c9cff0f8308e72c",
+      "last_checked_at": "2026-10-07T06:51:08+09:00",
+      "last_fetch_status": "error",
+      "last_fetch_error": "HTTPError",
+      "data_confidence": "medium"
     },
     {
       "url": "https://www.dospara.co.jp/on/demandware.store/Sites-dospara-Site/ja_JP/Search-UpdateGrid?q=GeFORCE%20RTX%20%E3%82%AC%E3%83%AC%E3%83%AA%E3%82%A2",
@@ -44,7 +56,12 @@
       "spec": {},
       "fetch_status": "ok",
       "observed_at": "2026-10-07T06:49:50+09:00",
-      "fingerprint": "78f30195aab3e348d03afba311747c6d6f528a9c1047fa26bbe5784a98b0996a"
+      "fingerprint": "78f30195aab3e348d03afba311747c6d6f528a9c1047fa26bbe5784a98b0996a",
+      "last_checked_at": "2026-10-07T06:51:08+09:00",
+      "last_fetch_status": "partial",
+      "last_fetch_url": "https://www.dospara.co.jp/on/demandware.store/Sites-dospara-Site/ja_JP/Search-UpdateGrid?q=GeFORCE%20RTX%20%E3%82%AC%E3%83%AC%E3%83%AA%E3%82%A2",
+      "price_source_mode": "direct_page",
+      "data_confidence": "medium"
     },
     {
       "url": "https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040",
@@ -55,7 +72,12 @@
       "spec": {},
       "fetch_status": "ok",
       "observed_at": "2026-10-07T06:49:50+09:00",
-      "fingerprint": "a33f1ef481223988fdd2f7257e949233941be5d8fac8c848265cce7853d3ae63"
+      "fingerprint": "a33f1ef481223988fdd2f7257e949233941be5d8fac8c848265cce7853d3ae63",
+      "last_checked_at": "2026-10-07T06:51:08+09:00",
+      "last_fetch_status": "partial",
+      "last_fetch_url": "https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040",
+      "price_source_mode": "direct_page",
+      "data_confidence": "medium"
     },
     {
       "url": "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1",
@@ -66,7 +88,11 @@
       "spec": {},
       "fetch_status": "error",
       "observed_at": "2026-10-07T06:49:50+09:00",
-      "fingerprint": "d11a74983e051b5d3e33c12d3a7e133143e1291e4d23721c7197cf9db7239cd4"
+      "fingerprint": "ceb5e00eb26a80a3f31b29e793b06f4e4d87d434b351a57c84fa99265afdc8d8",
+      "last_checked_at": "2026-10-07T06:51:08+09:00",
+      "last_fetch_status": "error",
+      "last_fetch_error": "TimeoutError",
+      "data_confidence": "medium"
     },
     {
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
@@ -77,7 +103,12 @@
       "spec": {},
       "fetch_status": "ok",
       "observed_at": "2026-10-07T06:49:50+09:00",
-      "fingerprint": "78f6b385d9cf11a3e808cbe25221761e9add02bb1147e684aafa956af4c501b3"
+      "fingerprint": "78f6b385d9cf11a3e808cbe25221761e9add02bb1147e684aafa956af4c501b3",
+      "last_checked_at": "2026-10-07T06:51:08+09:00",
+      "last_fetch_status": "partial",
+      "last_fetch_url": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
+      "price_source_mode": "direct_page",
+      "data_confidence": "medium"
     },
     {
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
@@ -88,7 +119,12 @@
       "spec": {},
       "fetch_status": "ok",
       "observed_at": "2026-10-07T06:49:50+09:00",
-      "fingerprint": "aa780039d59295c1a278e495c3240d9349bf21d146b2dfae0ce1caef2b979598"
+      "fingerprint": "aa780039d59295c1a278e495c3240d9349bf21d146b2dfae0ce1caef2b979598",
+      "last_checked_at": "2026-10-07T06:51:08+09:00",
+      "last_fetch_status": "partial",
+      "last_fetch_url": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
+      "price_source_mode": "direct_page",
+      "data_confidence": "medium"
     }
   ]
 }
