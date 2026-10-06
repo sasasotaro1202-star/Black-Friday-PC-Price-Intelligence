@@ -163,11 +163,8 @@ def enrich_identity(item, catalog_item):
     out["parsed_spec"] = parsed
     out["spec"] = spec
 
-    canonical = str(cat.get("url") or "")
-    current_url = str(item.get("url") or "")
-    exact_url = bool(canonical and current_url and canonical.rstrip("/") == current_url.rstrip("/"))
-    if cat.get("url_is_exact"):
-        exact_url = True
+    # URL equality alone is insufficient: shared family pages can expose many variants.
+    exact_url = bool(cat.get("url_is_exact"))
 
     blob = norm_text(" ".join([
         str(item.get("page_text_excerpt") or ""),
