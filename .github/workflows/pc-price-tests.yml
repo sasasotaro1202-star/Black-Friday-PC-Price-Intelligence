@@ -20,5 +20,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Run ranking regression tests
-        run: python -m unittest discover -s tests -p "test_*.py" -v
+      - name: Run regression and fail-closed validation tests
+        run: |
+          python -m unittest discover -s tests -p "test_*.py" -v
+          python -m py_compile scripts/*.py

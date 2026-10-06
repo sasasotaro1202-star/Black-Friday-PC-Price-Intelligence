@@ -1,6 +1,16 @@
 {
   "budget_jpy": 280000,
   "target_date": "2026-11-27",
+  "monitor_window_start": "2026-11-14T00:00:00+09:00",
+  "monitor_window_end": "2026-12-04T23:59:59+09:00",
+  "monitor_interval_minutes": 15,
+  "black_friday_interval_minutes": 5,
+  "official_2026_dates": {
+    "amazon_japan": null,
+    "lenovo": null,
+    "asus": null,
+    "note": "null means not independently verified as an official 2026 campaign date yet; broad watch window remains active."
+  },
   "brands": [
     "Lenovo",
     "ASUS",
@@ -9,7 +19,12 @@
     "Acer",
     "GIGABYTE",
     "マウスコンピューター",
-    "Thirdwave"
+    "Thirdwave",
+    "TSUKUMO",
+    "FRONTIER",
+    "Sycom",
+    "ARK",
+    "STORM"
   ],
   "queries": [
     "ROG Strix G16 Ryzen 9 9955HX3D RTX 5070 Ti 32GB 1TB 日本",
@@ -17,24 +32,20 @@
     "GALLERIA ZL9R-R57T-6 RTX 5070 Ti 9955HX 32GB 1TB",
     "MSI Vector 16 HX AI RTX 5070 Ti 275HX 32GB 1TB 日本",
     "Legion Pro 5i Gen 10 RTX 5070 Ti 275HX 32GB 1TB 日本",
-    "Predator Helios Neo 16 AI RTX 5070 Ti 290HX Plus 32GB 1TB 日本",
+    "Predator Helios Neo 16 AI RTX 5070 Ti 32GB 1TB 日本",
     "OMEN MAX 16 RTX 5070 Ti 32GB 1TB 日本",
     "TUF Gaming A16 RTX 5070 8940HX 32GB 1TB 日本",
     "G TUNE P6 RTX 5070 13700HX 32GB 1TB 日本",
     "G TUNE P5 RTX 5070 13620H 32GB 1TB 日本",
-    "TUF Gaming F16 RTX 5070 14650HX 32GB 日本",
+    "TUF Gaming F16 RTX 5070 14650HX 32GB 1TB 日本",
     "GIGABYTE GAMING A18 PRO RTX 5070 Ti 32GB 1TB 日本",
     "GIGABYTE AERO X16 RTX 5070 32GB 1TB 日本",
     "RTX 5070 Ti Laptop 32GB 1TB ゲーミングノート 日本",
     "RTX 5080 Laptop 32GB 1TB ゲーミングノート 日本",
-    "ROG Strix G18 2026 RTX 5070 Ti 32GB 1TB 290HX Plus 日本",
-    "ROG Zephyrus G16 2026 RTX 5070 Ti 32GB 1TB 386H 日本",
-    "ROG Zephyrus G14 2026 RTX 5070 Ti 32GB 1TB 386H 日本",
-    "RTX 5080 Laptop ノート 32GB 1TB 2026 日本",
-    "RTX 5090 Laptop ノート 32GB 1TB 2026 日本",
-    "OMEN MAX 16 5070 Ti 32GB 1TB 2026 日本",
-    "Vector 16 HX AI 5070 Ti 32GB 1TB 2026 日本",
-    "Legion Pro 7i 5070 Ti 32GB 1TB 2026 日本"
+    "RTX 5090 Laptop 32GB 1TB ゲーミングノート 日本",
+    "RTX 5070 Ti ゲーミングデスクトップ 32GB 1TB 日本",
+    "RTX 5080 ゲーミングデスクトップ 32GB 1TB 日本",
+    "RTX 5070 ゲーミングデスクトップ 32GB 1TB 日本"
   ],
   "allowed_domains": [
     "lenovo.com",
@@ -49,7 +60,13 @@
     "rakuten.co.jp",
     "yodobashi.com",
     "biccamera.com",
-    "yamada-denkiweb.com"
+    "yamada-denkiweb.com",
+    "tsukumo.co.jp",
+    "frontier-direct.jp",
+    "sycom.co.jp",
+    "ark-pc.co.jp",
+    "stormst.com",
+    "kakaku.com"
   ],
   "max_results_per_query": 8,
   "max_pages_per_run": 50

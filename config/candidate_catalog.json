@@ -1,0 +1,271 @@
+{
+  "generated_at": "2026-10-07T07:00:00+09:00",
+  "note": "Curated identity layer. reference_price_jpy is not treated as current price. Shared family pages must not be treated as exact variants unless url_is_exact=true.",
+  "candidates": [
+    {
+      "id": "rog-g16-9955hx3d",
+      "name": "ROG Strix G16 G614FR-R9X3D5070TI",
+      "family": "ROG Strix G16",
+      "form_factor": "laptop",
+      "gpu": "RTX 5070 Ti Laptop GPU",
+      "cpu": "Ryzen 9 9955HX3D",
+      "tgp_w": 140,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 12,
+      "url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
+      "url_is_exact": false,
+      "identity_confidence": "high",
+      "reference_price_jpy": 359800,
+      "aliases": [
+        "G614FR-R9X3D5070TI"
+      ]
+    },
+    {
+      "id": "rog-g16-8940hx-5070ti",
+      "name": "ROG Strix G16 G614PR-R9R5070TI",
+      "family": "ROG Strix G16",
+      "form_factor": "laptop",
+      "gpu": "RTX 5070 Ti Laptop GPU",
+      "cpu": "Ryzen 9 8940HX",
+      "tgp_w": 140,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 12,
+      "url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
+      "url_is_exact": false,
+      "identity_confidence": "high",
+      "reference_price_jpy": 359800,
+      "historical_floor_jpy": 299800,
+      "historical_sellout": true,
+      "aliases": [
+        "G614PR-R9R5070TI"
+      ]
+    },
+    {
+      "id": "galleria-zl9r-9955hx-5070ti",
+      "name": "GALLERIA ZL9R-R57T-6",
+      "family": "GALLERIA ZL9R-R57T-6",
+      "form_factor": "laptop",
+      "gpu": "RTX 5070 Ti Laptop GPU",
+      "cpu": "Ryzen 9 9955HX",
+      "tgp_w": 115,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 12,
+      "url": "https://www.dospara.co.jp/TC143/MC17880.html",
+      "url_is_exact": true,
+      "identity_confidence": "high",
+      "reference_price_jpy": 329980,
+      "aliases": [
+        "ZL9R-R57T-6"
+      ]
+    },
+    {
+      "id": "tuf-a16-8940hx-5070",
+      "name": "ASUS TUF Gaming A16 FA608PP-R9R5070S",
+      "family": "TUF Gaming A16",
+      "form_factor": "laptop",
+      "gpu": "RTX 5070 Laptop GPU",
+      "cpu": "Ryzen 9 8940HX",
+      "tgp_w": 115,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 8,
+      "url": "https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gaming-a16-2025.html",
+      "url_is_exact": true,
+      "identity_confidence": "high",
+      "reference_price_jpy": 319800,
+      "historical_floor_jpy": 219800,
+      "aliases": [
+        "FA608PP",
+        "FA608U/P"
+      ]
+    },
+    {
+      "id": "candidate-4",
+      "name": "Lenovo Legion Pro 5i Gen 10",
+      "family": "Legion Pro 5i Gen 10",
+      "form_factor": "laptop",
+      "gpu": "RTX 5070 Ti Laptop GPU",
+      "cpu": "Core Ultra 9 275HX",
+      "tgp_w": 115,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 12,
+      "url": "https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040",
+      "url_is_exact": true,
+      "identity_confidence": "high",
+      "aliases": [
+        "Legion Pro 5i Gen 10"
+      ]
+    },
+    {
+      "id": "candidate-5",
+      "name": "Acer Predator Helios Neo 16 AI",
+      "family": "Predator Helios Neo 16 AI",
+      "form_factor": "laptop",
+      "gpu": "RTX 5070 Ti Laptop GPU",
+      "cpu": "Core Ultra 9",
+      "tgp_w": 115,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 12,
+      "url": "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1",
+      "url_is_exact": true,
+      "identity_confidence": "high",
+      "aliases": [
+        "PHN16"
+      ]
+    },
+    {
+      "id": "gtune-p6-13700hx-5070",
+      "name": "G TUNE P6-I7G70BK-B",
+      "family": "G TUNE P6",
+      "form_factor": "laptop",
+      "gpu": "RTX 5070 Laptop GPU",
+      "cpu": "Core i7-13700HX",
+      "tgp_w": 115,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 8,
+      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
+      "url_is_exact": true,
+      "identity_confidence": "high",
+      "reference_price_jpy": 284700,
+      "aliases": [
+        "G TUNE P6-I7G70BK-B"
+      ]
+    },
+    {
+      "id": "gtune-p5-13620h-5070",
+      "name": "G TUNE P5-I7G70BK-C",
+      "family": "G TUNE P5",
+      "form_factor": "laptop",
+      "gpu": "RTX 5070 Laptop GPU",
+      "cpu": "Core i7-13620H",
+      "tgp_w": 115,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 8,
+      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
+      "url_is_exact": true,
+      "identity_confidence": "high",
+      "reference_price_jpy": 329800,
+      "aliases": [
+        "G TUNE P5-I7G70BK-C"
+      ]
+    },
+    {
+      "id": "tuf-f16-14650hx-5070",
+      "name": "ASUS TUF Gaming F16 FX608",
+      "family": "TUF Gaming F16",
+      "form_factor": "laptop",
+      "gpu": "RTX 5070 Laptop GPU",
+      "cpu": "Core i7-14650HX",
+      "tgp_w": 115,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 8,
+      "url": "https://store.asus.com/jp/asus-tuf-gaming-f16-fx608.html?config=90NR0NB1-M00580",
+      "url_is_exact": true,
+      "identity_confidence": "high",
+      "aliases": [
+        "FX608JPR"
+      ]
+    },
+    {
+      "id": "zephyrus-g16-386h-5070ti",
+      "name": "ROG Zephyrus G16 GU606AR-U9R5070TIG32G",
+      "family": "ROG Zephyrus G16",
+      "form_factor": "laptop",
+      "gpu": "RTX 5070 Ti Laptop GPU",
+      "cpu": "Core Ultra 9 386H",
+      "tgp_w": 140,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 12,
+      "url": "https://store.asus.com/jp/90nr0pc2-m002c0-rog-zephyrus-g16-2026.html",
+      "url_is_exact": true,
+      "identity_confidence": "high",
+      "reference_price_jpy": 599800,
+      "aliases": [
+        "GU606AR-U9R5070TIG32G"
+      ]
+    },
+    {
+      "id": "zephyrus-g14-386h-5070ti",
+      "name": "ROG Zephyrus G14 GU405AR-U9R5070TIG",
+      "family": "ROG Zephyrus G14",
+      "form_factor": "laptop",
+      "gpu": "RTX 5070 Ti Laptop GPU",
+      "cpu": "Core Ultra 9 386H",
+      "tgp_w": 130,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 12,
+      "url": "https://store.asus.com/jp/90nr0p94-m001d0-rog-zephyrus-g14-2026-gu405.html",
+      "url_is_exact": true,
+      "identity_confidence": "high",
+      "reference_price_jpy": 684800,
+      "aliases": [
+        "GU405AR-U9R5070TIG"
+      ]
+    },
+    {
+      "id": "gigabyte-a18-pro-240h-5070ti",
+      "name": "GIGABYTE GAMING A18 PRO DXJG3JPBC4JH",
+      "family": "GAMING A18 PRO",
+      "form_factor": "laptop",
+      "gpu": "RTX 5070 Ti Laptop GPU",
+      "cpu": "Core 7 240H",
+      "tgp_w": 115,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 12,
+      "url": "https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200",
+      "url_is_exact": false,
+      "identity_confidence": "high",
+      "reference_price_jpy": 419800,
+      "aliases": [
+        "DXJG3JPBC4JH"
+      ]
+    },
+    {
+      "id": "rog-g16-2025-275hx-5070ti",
+      "name": "ROG Strix G16 G615LR-U9R5070TI",
+      "family": "ROG Strix G16",
+      "form_factor": "laptop",
+      "gpu": "RTX 5070 Ti Laptop GPU",
+      "cpu": "Core Ultra 9 275HX",
+      "tgp_w": 140,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 12,
+      "url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
+      "url_is_exact": false,
+      "identity_confidence": "high",
+      "aliases": [
+        "G615LR-U9R5070TI"
+      ]
+    },
+    {
+      "id": "rog-g18-2025-275hx-5070ti",
+      "name": "ROG Strix G18 G815LR-U9R5070TI",
+      "family": "ROG Strix G18",
+      "form_factor": "laptop",
+      "gpu": "RTX 5070 Ti Laptop GPU",
+      "cpu": "Core Ultra 9 275HX",
+      "tgp_w": 140,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 12,
+      "url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025-g815/",
+      "url_is_exact": false,
+      "identity_confidence": "high",
+      "aliases": [
+        "G815LR-U9R5070TI"
+      ]
+    }
+  ]
+}

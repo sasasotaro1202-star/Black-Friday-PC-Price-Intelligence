@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: pc-price-intelligence-writer
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   collect:
@@ -24,8 +24,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-
-      - name: Check watchlist freshness
+      - name: Refresh watchlist when empty or stale
         id: watchlist
         shell: bash
         run: |
@@ -35,35 +34,33 @@ jobs:
           JST=timezone(timedelta(hours=9))
           try:
               with open("data/watchlist.json", encoding="utf-8") as f:
-                  data=json.load(f)
-              urls=data.get("urls") or []
-              ts=data.get("generated_at")
+                  d=json.load(f)
+              urls=d.get("urls") or []
+              ts=d.get("generated_at")
               age=(datetime.now(JST)-datetime.fromisoformat(ts.replace("Z","+00:00"))).total_seconds() if ts else 10**12
               stale=age >= 24*3600
           except Exception:
               urls=[]; stale=True
           print(f"needs_refresh={str((not urls) or stale).lower()}")
           PY
-
-      - name: Refresh watchlist when empty or stale
+      - name: Refresh watchlist
         if: steps.watchlist.outputs.needs_refresh == 'true'
         run: python scripts/discover.py
-
-      - name: Collect and publish with conflict-safe retry
-        shell: bash
+      - name: Collect, sanitize, score and publish
         env:
           MONITOR_MAX_URLS: "80"
+        shell: bash
         run: |
           set -euo pipefail
           for attempt in 1 2 3; do
             git fetch --no-tags origin main
             git reset --hard origin/main
-
             python scripts/monitor.py
+            python scripts/sanitize.py
             python scripts/report.py
             python scripts/timing_analysis.py
             python scripts/scenario_analysis.py
-
+            python scripts/validate.py
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add data/
@@ -72,13 +69,11 @@ jobs:
               exit 0
             fi
             git commit -m "data: update PC price intelligence"
-
             if git push origin HEAD:main; then
               echo "Published on attempt $attempt"
               exit 0
             fi
-
-            echo "Push conflict on attempt $attempt; refreshing from origin and retrying."
+            git fetch --no-tags origin main
             git reset --hard origin/main
           done
           echo "Failed to publish after 3 attempts."

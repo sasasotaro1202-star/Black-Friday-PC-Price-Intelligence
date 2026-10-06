@@ -3,9 +3,7 @@ name: PC Price Intelligence - Black Friday Season Fast
 on:
   workflow_dispatch:
   schedule:
-    # Broad 2026 Black Friday-season watch window.
-    # Exact 2026 retailer dates are not assumed until officially published.
-    - cron: "2,7,12,17,22,27,32,37,42,47,52,57 * 14-30 11 *"
+    - cron: "2,7,12,17,22,27,32,37,42,47,52,57 * 13-30 11 *"
     - cron: "2,7,12,17,22,27,32,37,42,47,52,57 * 1-4 12 *"
 
 permissions:
@@ -13,53 +11,82 @@ permissions:
 
 concurrency:
   group: pc-price-intelligence-writer
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
-
-      - name: Refresh watchlist when empty or stale
+        with:
+          fetch-depth: 1
+      - name: Check exact Black Friday season window (JST)
+        id: window
         shell: bash
         run: |
-          python - <<'PY'
-          import json, subprocess
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          from datetime import datetime, timezone, timedelta
+          JST=timezone(timedelta(hours=9))
+          now=datetime.now(JST)
+          start=datetime(2026,11,14,tzinfo=JST)
+          end=datetime(2026,12,4,23,59,59,tzinfo=JST)
+          print(f"in_window={str(start <= now <= end).lower()}")
+          print(f"now_jst={now.isoformat()}")
+          PY
+      - name: Refresh watchlist when empty or stale
+        id: watchlist
+        if: steps.window.outputs.in_window == 'true'
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
           from datetime import datetime, timezone, timedelta
           JST=timezone(timedelta(hours=9))
           try:
-              d=json.load(open("data/watchlist.json",encoding="utf-8"))
+              with open("data/watchlist.json", encoding="utf-8") as f:
+                  d=json.load(f)
               urls=d.get("urls") or []
               ts=d.get("generated_at")
               age=(datetime.now(JST)-datetime.fromisoformat(ts.replace("Z","+00:00"))).total_seconds() if ts else 10**12
-              needs=(not urls) or age >= 24*3600
+              stale=age >= 24*3600
           except Exception:
-              needs=True
-          if needs:
-              subprocess.check_call(["python","scripts/discover.py"])
+              urls=[]; stale=True
+          print(f"needs_refresh={str((not urls) or stale).lower()}")
           PY
-
-      - name: Fast season monitoring
+      - name: Refresh watchlist
+        if: steps.window.outputs.in_window == 'true' && steps.watchlist.outputs.needs_refresh == 'true'
+        run: python scripts/discover.py
+      - name: Collect, sanitize, score and publish
+        if: steps.window.outputs.in_window == 'true'
         env:
           MONITOR_MAX_URLS: "30"
-        run: python scripts/monitor.py
-
-      - name: Update 100-point decision report
+        shell: bash
         run: |
-          python scripts/report.py
-          python scripts/timing_analysis.py
-          python scripts/scenario_analysis.py
-
-      - name: Commit changed data
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/
-          if git diff --cached --quiet; then
-            echo "No data changes."
-            exit 0
-          fi
-          git commit -m "data: fast Black Friday season observation"
-          git push
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            git fetch --no-tags origin main
+            git reset --hard origin/main
+            python scripts/monitor.py
+            python scripts/sanitize.py
+            python scripts/report.py
+            python scripts/timing_analysis.py
+            python scripts/scenario_analysis.py
+            python scripts/validate.py
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/
+            if git diff --cached --quiet; then
+              echo "No data changes."
+              exit 0
+            fi
+            git commit -m "data: fast Black Friday season observation"
+            if git push origin HEAD:main; then
+              echo "Published on attempt $attempt"
+              exit 0
+            fi
+            git fetch --no-tags origin main
+            git reset --hard origin/main
+          done
+          echo "Failed to publish after 3 attempts."
+          exit 1
