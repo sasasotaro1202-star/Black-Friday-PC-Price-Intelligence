@@ -72,14 +72,25 @@ def main():
         else:
             scored.append(row)
 
-    scored.sort(key=lambda x: (
+    # Never let an out-of-stock product become the purchase recommendation.
+    available = [x for x in scored if x.get("stock_status") != "out_of_stock"]
+    unavailable = [x for x in scored if x.get("stock_status") == "out_of_stock"]
+    available.sort(key=lambda x: (
         x.get("decision_score", -1),
         -x.get("current_price_jpy", 999999999),
         x.get("id", ""),
     ))
-    for i, row in enumerate(scored, 1):
+    unavailable.sort(key=lambda x: (
+        x.get("decision_score", -1),
+        -x.get("current_price_jpy", 999999999),
+        x.get("id", ""),
+    ))
+    for i, row in enumerate(available, 1):
         row["rank"] = i
+    for row in unavailable:
+        row["rank"] = None
 
+    scored = available
     generated = iso(now_jst())
     action = scored[0] if scored else None
 
@@ -101,6 +112,10 @@ def main():
         "variant_ambiguous": sum(1 for x in products if x.get("variant_match") == "ambiguous"),
         "unknown_stock": sum(1 for x in products if x.get("stock_status") == "unknown"),
         "out_of_stock": sum(1 for x in products if x.get("stock_status") == "out_of_stock"),
+        "pit_unknown": sum(
+            1 for x in products
+            if x.get("current_price_jpy") is not None and not x.get("available_at")
+        ),
         "pit_failures": sum(
             1 for x in products
             if x.get("current_price_jpy") is not None and
@@ -123,6 +138,7 @@ def main():
         },
         "quality": quality,
         "products": scored,
+        "unavailable_products": unavailable,
         "reference_only": reference_only,
         "method": {
             "total": 100,

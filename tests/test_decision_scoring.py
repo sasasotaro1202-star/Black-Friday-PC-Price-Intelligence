@@ -68,6 +68,13 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertTrue(result["valid"])
         self.assertEqual(result["status"], "anomaly_corroborated")
 
+    def test_missing_pit_is_unactionable(self):
+        item = self.candidate()
+        item["available_at"] = None
+        score, detail = intelligence.decision_score(item, [], [])
+        self.assertIsNone(score)
+        self.assertEqual(detail["status"], "UNACTIONABLE")
+
     def test_shared_family_variant_is_never_exact(self):
         item = {"id":"x","url":"https://example.com/family","name":"ROG Strix G16",
                 "page_text_excerpt":"ROG Strix G16","parsed_spec":{}}
@@ -97,6 +104,12 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertIsNotNone(score)
         self.assertLessEqual(score, 74)
         self.assertEqual(detail["score_cap"], 74)
+
+    def test_out_of_stock_is_not_buy_now(self):
+        item = self.candidate(price=250000, stock="out_of_stock")
+        score, detail = intelligence.decision_score(item, [], [])
+        self.assertIsNotNone(score)
+        self.assertEqual(detail["status"], "UNAVAILABLE")
 
     def test_unknown_stock_is_capped(self):
         item = self.candidate(stock="unknown")

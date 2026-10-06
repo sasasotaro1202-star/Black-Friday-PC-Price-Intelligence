@@ -532,7 +532,17 @@ def wait_risk(item, trend=None):
 def decision_score(item, anchors, events=None):
     events = events or []
     price = item.get("current_price_jpy")
-    if price is None or item.get("price_validation_status") in (None, "missing", "anomaly_rejected"):
+    prediction = item.get("prediction_time")
+    available = item.get("available_at")
+    available_dt = parse_dt(available)
+    prediction_dt = parse_dt(prediction)
+    if (
+        price is None
+        or item.get("price_validation_status") in (None, "missing", "anomaly_rejected", "reference_only", "variant_ambiguous")
+        or available_dt is None
+        or prediction_dt is None
+        or available_dt > prediction_dt
+    ):
         return None, {
             "status": "UNACTIONABLE",
             "reason": "current_price_not_verified",
@@ -610,11 +620,11 @@ def decision_score(item, anchors, events=None):
 
 def build_row(item, anchors, events=None, rank=None):
     out = dict(item)
-    score, detail = decision_score(item, anchors, events)
+    out["prediction_time"] = iso(now_jst())
+    score, detail = decision_score(out, anchors, events)
     out["decision_score"] = score
     out["score_detail"] = detail
     out["rank"] = rank
-    out["prediction_time"] = iso(now_jst())
     out["available_at"] = item.get("available_at")
     out["pit_valid"] = False if not item.get("available_at") else bool(
         parse_dt(item.get("available_at")) and

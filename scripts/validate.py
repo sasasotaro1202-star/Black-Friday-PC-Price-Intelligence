@@ -30,6 +30,10 @@ def main():
             errors.append(f"validated without current price: {cid}")
         if status == "anomaly_rejected" and current is not None:
             errors.append(f"anomaly rejected but current price exposed: {cid}")
+        if current is not None and not p.get("available_at"):
+            errors.append(f"current price without available_at: {cid}")
+        if current is not None and not p.get("retrieval_time"):
+            errors.append(f"current price without retrieval_time: {cid}")
         if p.get("available_at") and p.get("retrieval_time"):
             a = parse_dt(p["available_at"])
             r = parse_dt(p["retrieval_time"])
@@ -52,6 +56,10 @@ def main():
                 errors.append(f"missing prediction_time: {r.get('id')}")
             av = r.get("available_at")
             pr = r.get("prediction_time")
+            if not av:
+                errors.append(f"missing available_at in ranking: {r.get('id')}")
+            if not pr:
+                errors.append(f"missing prediction_time: {r.get('id')}")
             if av and pr:
                 a = parse_dt(av)
                 p = parse_dt(pr)
@@ -60,6 +68,8 @@ def main():
 
     if rankings.get("quality", {}).get("pit_failures", 0) != 0:
         errors.append("reported PIT failures != 0")
+    if rankings.get("quality", {}).get("pit_unknown", 0) != 0:
+        errors.append("reported PIT unknown != 0")
 
     if errors:
         for e in errors:

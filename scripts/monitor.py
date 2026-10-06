@@ -161,8 +161,9 @@ def parse_page(url, html):
     text_html = re.sub(r"\s+", " ", text_html)
 
     name = None
-    structured_price = None
+    structured_prices = []
     structured_stock = "unknown"
+    price_ambiguity = None
 
     blocks = re.findall(
         r'<script[^>]+type=["\\\']application/ld\+json["\\\'][^>]*>(.*?)</script>',
@@ -189,13 +190,17 @@ def parse_page(url, html):
                 except Exception:
                     p = None
                 if p and (currency in ("JPY", "YEN", "") or "¥" in str(offer.get("price"))):
-                    if structured_price is None or p < structured_price:
-                        structured_price = p
+                    structured_prices.append(p)
                 av = str(offer.get("availability") or "")
                 if "InStock" in av:
                     structured_stock = "in_stock"
                 elif "OutOfStock" in av:
                     structured_stock = "out_of_stock"
+
+    unique_structured_prices = sorted(set(structured_prices))
+    structured_price = unique_structured_prices[0] if len(unique_structured_prices) == 1 else None
+    if len(unique_structured_prices) > 1:
+        price_ambiguity = "multiple_structured_prices"
 
     meta = re.search(
         r'<meta[^>]+(?:property|name)=["\\\']product:price:amount["\\\'][^>]+content=["\\\']([^"\\\']+)',
@@ -230,6 +235,7 @@ def parse_page(url, html):
         "fetch_status": "ok",
         "price_source_mode": picked["source"] if picked else "none",
         "price_context": picked.get("context") if picked else None,
+        "price_ambiguity": price_ambiguity,
         "data_confidence": "high" if picked and picked["source"] == "direct_structured" else "medium" if picked else "low",
     }
 

@@ -11,6 +11,8 @@ def main():
     repaired = 0
     rejected = 0
     fallback_used = 0
+    fallback_attempts = 0
+    max_fallback_attempts = 8
 
     for raw in state.get("products", []):
         cid = str(raw.get("id") or "")
@@ -22,7 +24,8 @@ def main():
             item.get("query") and
             item.get("price_source_mode") not in ("public_baseline", "stale_previous")
         )
-        if needs_fallback:
+        if needs_fallback and fallback_attempts < max_fallback_attempts:
+            fallback_attempts += 1
             fb = search_fallback(item.get("query"), item.get("url"))
             if fb:
                 reference = item.get("last_valid_price_jpy")
@@ -79,6 +82,8 @@ def main():
         "fallback_used": fallback_used,
         "repaired": repaired,
         "rejected": rejected,
+        "fallback_attempts": fallback_attempts,
+        "fallback_limit": max_fallback_attempts,
     }
     with open(path, "w", encoding="utf-8") as f:
         json.dump(state, f, ensure_ascii=False, indent=2)

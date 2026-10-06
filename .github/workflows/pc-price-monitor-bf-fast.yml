@@ -76,7 +76,9 @@ jobs:
             python scripts/report.py
             python scripts/timing_analysis.py
             python scripts/scenario_analysis.py
+            python scripts/healthcheck.py
             python scripts/validate.py
+            git diff --check
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add data/
