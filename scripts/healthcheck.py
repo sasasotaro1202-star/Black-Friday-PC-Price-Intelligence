@@ -237,7 +237,7 @@ def main():
 
         if stock == "out_of_stock":
             errors.append(f"out_of_stock leaked into actionable ranking: {rid}")
-        if source in ("search_snippet", "public_baseline", "stale_previous", "direct_text") and status != "VERIFY_NOW":
+        if source in ("search_snippet", "public_baseline", "stale_previous", "direct_text", "direct_meta") and status != "VERIFY_NOW":
             errors.append(f"verification-source status mismatch: {rid}")
 
         if status in ("BUY_NOW", "BUY_NOW_LOW_STOCK"):
