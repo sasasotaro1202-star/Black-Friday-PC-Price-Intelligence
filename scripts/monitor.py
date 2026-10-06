@@ -111,7 +111,7 @@ def source_bonus(url):
 
 def stock_from_text(text):
     s = norm_text(text)
-    if any(x in s for x in ("在庫切れ", "売り切れ", "out of stock", "sold out", "在庫なし")):
+    if any(x in s for x in ("在庫切れ", "品切れ", "売り切れ", "out of stock", "sold out", "在庫なし")):
         return "out_of_stock"
     if any(x in s for x in ("残りわずか", "low stock", "only 1", "only one", "残り1")):
         return "low_stock"
