@@ -62,17 +62,23 @@ def main():
         for u in found:
             if not allowed(u,cfg.get("allowed_domains",[])) or not useful(u) or u in seen:continue
             seen.add(u);urls.append(u)
-    urls=urls[:100]
     watch_path=os.path.join(ROOT,"data/watchlist.json")
     previous=load(watch_path,{"generated_at":None,"urls":[]})
+    # Merge discoveries with the existing watchlist so temporary search failures
+    # never remove important manually seeded product pages.
+    merged=[];seen2=set()
+    for u in previous.get("urls",[])+urls:
+        if u not in seen2:
+            seen2.add(u);merged.append(u)
+    merged=merged[:100]
     if urls:
-        save(watch_path,{"generated_at":NOW.isoformat(),"urls":urls,"discovery_status":"ok","discovery_error":None})
-        count=len(urls)
+        save(watch_path,{"generated_at":NOW.isoformat(),"urls":merged,"discovery_status":"ok","discovery_error":None})
+        count=len(merged)
         status="ok"
     else:
         previous["last_discovery_attempt_at"]=NOW.isoformat()
         previous["discovery_status"]="empty_or_failed"
-        previous["discovery_error"]="No usable URLs discovered; previous watchlist preserved."
+        previous["discovery_error"]="No usable URLs discovered; existing watchlist preserved."
         save(watch_path,previous)
         count=len(previous.get("urls",[]))
         status="preserved"
