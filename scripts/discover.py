@@ -63,7 +63,19 @@ def main():
             if not allowed(u,cfg.get("allowed_domains",[])) or not useful(u) or u in seen:continue
             seen.add(u);urls.append(u)
     urls=urls[:100]
-    save(os.path.join(ROOT,"data/watchlist.json"),{"generated_at":NOW.isoformat(),"urls":urls})
-    print(json.dumps({"generated_at":NOW.isoformat(),"urls":len(urls)},ensure_ascii=False))
+    watch_path=os.path.join(ROOT,"data/watchlist.json")
+    previous=load(watch_path,{"generated_at":None,"urls":[]})
+    if urls:
+        save(watch_path,{"generated_at":NOW.isoformat(),"urls":urls,"discovery_status":"ok","discovery_error":None})
+        count=len(urls)
+        status="ok"
+    else:
+        previous["last_discovery_attempt_at"]=NOW.isoformat()
+        previous["discovery_status"]="empty_or_failed"
+        previous["discovery_error"]="No usable URLs discovered; previous watchlist preserved."
+        save(watch_path,previous)
+        count=len(previous.get("urls",[]))
+        status="preserved"
+    print(json.dumps({"generated_at":NOW.isoformat(),"urls":count,"status":status},ensure_ascii=False))
 
 if __name__=="__main__":main()
