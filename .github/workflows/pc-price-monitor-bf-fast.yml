@@ -1,0 +1,57 @@
+name: PC Price Intelligence - Black Friday Fast
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "2,7,12,17,22,27,32,37,42,47,52,57 * 24-30 11 *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pc-price-intelligence-fast
+  cancel-in-progress: true
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Bootstrap watchlist when empty
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          try:
+              d=json.load(open("data/watchlist.json",encoding="utf-8"))
+              empty=not bool(d.get("urls"))
+          except Exception:
+              empty=True
+          if empty:
+              import subprocess
+              subprocess.check_call(["python","scripts/discover.py"])
+          PY
+
+      - name: Fast candidate monitoring
+        env:
+          MONITOR_MAX_URLS: "30"
+        run: python scripts/monitor.py
+
+      - name: Update reports
+        run: |
+          python scripts/report.py
+          python scripts/timing_analysis.py
+
+      - name: Commit changed data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "No data changes."
+            exit 0
+          fi
+          git commit -m "data: fast Black Friday price observation"
+          git push
