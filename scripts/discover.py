@@ -56,32 +56,24 @@ def useful(u):
 def main():
     cfg=load(os.path.join(ROOT,"config/targets.json"),{})
     urls=[];seen=set()
+    previous=load(os.path.join(ROOT,"data/watchlist.json"),{"generated_at":None,"urls":[]})
+    # Preserve all known URLs first; discovery only appends new candidates.
+    for u in previous.get("urls",[]):
+        if isinstance(u,str) and u.startswith("http") and u not in seen:
+            seen.add(u);urls.append(u)
     for q in cfg.get("queries",[]):
         try:found=search(q)
         except Exception:continue
         for u in found:
             if not allowed(u,cfg.get("allowed_domains",[])) or not useful(u) or u in seen:continue
             seen.add(u);urls.append(u)
+    urls=urls[:100]
     watch_path=os.path.join(ROOT,"data/watchlist.json")
-    previous=load(watch_path,{"generated_at":None,"urls":[]})
-    # Merge discoveries with the existing watchlist so temporary search failures
-    # never remove important manually seeded product pages.
-    merged=[];seen2=set()
-    for u in previous.get("urls",[])+urls:
-        if u not in seen2:
-            seen2.add(u);merged.append(u)
-    merged=merged[:100]
-    if urls:
-        save(watch_path,{"generated_at":NOW.isoformat(),"urls":merged,"discovery_status":"ok","discovery_error":None})
-        count=len(merged)
-        status="ok"
-    else:
-        previous["last_discovery_attempt_at"]=NOW.isoformat()
-        previous["discovery_status"]="empty_or_failed"
-        previous["discovery_error"]="No usable URLs discovered; existing watchlist preserved."
-        save(watch_path,previous)
-        count=len(previous.get("urls",[]))
-        status="preserved"
-    print(json.dumps({"generated_at":NOW.isoformat(),"urls":count,"status":status},ensure_ascii=False))
+    previous["generated_at"]=NOW.isoformat()
+    previous["urls"]=urls
+    previous["discovery_status"]="ok" if urls else "empty"
+    previous["discovery_error"]=None if urls else "No usable URLs discovered."
+    save(watch_path,previous)
+    print(json.dumps({"generated_at":NOW.isoformat(),"urls":len(urls),"status":previous["discovery_status"]},ensure_ascii=False))
 
 if __name__=="__main__":main()
