@@ -5,7 +5,7 @@ on:
     branches: ["main"]
   workflow_dispatch:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "7,22,37,52 * * * *"
 
 permissions:
   contents: write
@@ -20,10 +20,37 @@ jobs:
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
+
+      - name: Check watchlist
+        id: watchlist
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          try:
+              with open("data/watchlist.json", encoding="utf-8") as f:
+                  data=json.load(f)
+              empty=not bool(data.get("urls"))
+          except Exception:
+              empty=True
+          print(f"empty={str(empty).lower()}")
+          PY
+
+      - name: Bootstrap watchlist when empty
+        if: steps.watchlist.outputs.empty == 'true'
+        run: python scripts/discover.py
+
       - name: Collect public observations
+        env:
+          MONITOR_MAX_URLS: "80"
         run: python scripts/monitor.py
+
       - name: Build current report
         run: python scripts/report.py
+
+      - name: Build timing analysis
+        run: python scripts/timing_analysis.py
+
       - name: Commit changed data
         run: |
           git config user.name "github-actions[bot]"
@@ -33,5 +60,5 @@ jobs:
             echo "No data changes."
             exit 0
           fi
-          git commit -m "data: update PC price observations"
+          git commit -m "data: update PC price intelligence"
           git push
