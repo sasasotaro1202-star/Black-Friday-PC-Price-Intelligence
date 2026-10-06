@@ -1,14 +1,17 @@
 import importlib.util
 import pathlib
+import sys
 import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-monitor_spec = importlib.util.spec_from_file_location("monitor", ROOT / "scripts" / "monitor.py")
-monitor = importlib.util.module_from_spec(monitor_spec)
-monitor_spec.loader.exec_module(monitor)
 spec = importlib.util.spec_from_file_location("intelligence", ROOT / "scripts" / "intelligence.py")
 intelligence = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(intelligence)
+sys.modules["intelligence"] = intelligence
+
+monitor_spec = importlib.util.spec_from_file_location("monitor", ROOT / "scripts" / "monitor.py")
+monitor = importlib.util.module_from_spec(monitor_spec)
+monitor_spec.loader.exec_module(monitor)
 
 class DecisionScoringTests(unittest.TestCase):
     def candidate(self, price=280000, gpu="RTX 5070 Ti Laptop GPU", cpu="Ryzen 9 9955HX",
