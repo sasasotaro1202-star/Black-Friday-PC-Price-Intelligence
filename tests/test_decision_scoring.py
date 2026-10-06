@@ -157,6 +157,13 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertIsNotNone(score)
         self.assertLessEqual(score, 89)
 
+    def test_score_arithmetic_matches_cap(self):
+        item = self.candidate()
+        score, detail = intelligence.decision_score(item, [], [])
+        components = sum(detail[k] for k in ("performance", "price", "history", "stock", "timing"))
+        self.assertEqual(detail["score_before_cap"], min(100, components))
+        self.assertEqual(score, min(detail["score_before_cap"], detail["score_cap"]))
+
     def test_score_components_sum_within_100(self):
         item = self.candidate()
         score, detail = intelligence.decision_score(item, [], [])
