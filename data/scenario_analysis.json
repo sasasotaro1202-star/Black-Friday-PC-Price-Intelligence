@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T07:28:49+09:00",
+  "generated_at": "2026-10-07T07:54:00+09:00",
   "budget_jpy": 280000,
   "note": "10/15/20/25/30% scenarios are planning bands, not probabilities.",
   "rows": [
@@ -39,7 +39,7 @@
         "discount_pct": 10,
         "price_jpy": 256200
       },
-      "stock_status": "in_stock",
+      "stock_status": "out_of_stock",
       "price_source_mode": "direct_structured",
       "price_validation_status": "validated",
       "dynamic_candidate": false
@@ -80,7 +80,7 @@
         "discount_pct": 20,
         "price_jpy": 263800
       },
-      "stock_status": "in_stock",
+      "stock_status": "out_of_stock",
       "price_source_mode": "direct_structured",
       "price_validation_status": "validated",
       "dynamic_candidate": false
