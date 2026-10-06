@@ -34,7 +34,7 @@ def save(path,obj):
         json.dump(obj,f,ensure_ascii=False,indent=2)
 
 def normalized_name(x):
-    return re.sub(r"\\s+"," ",str(x.get("name","")).lower()).strip()
+    return re.sub(r"\s+"," ",str(x.get("name","")).lower()).strip()
 
 def spec_text(x):
     return json.dumps(x.get("spec",{}),ensure_ascii=False).lower()+" "+normalized_name(x)
@@ -139,7 +139,7 @@ def performance_score(x):
     cp=cpu_points(x)
     spec=x.get("spec",{})
     ram=2 if spec.get("ram_gb",0)>=32 else 0
-    ssd=2 if re.search(r"1\\s*TB",str(spec.get("ssd","")),re.I) else 0
+    ssd=2 if re.search(r"1\s*TB",str(spec.get("ssd","")),re.I) else 0
     return min(40,gp+cp+ram+ssd),gpu
 
 def decision_score(x,anchors):
