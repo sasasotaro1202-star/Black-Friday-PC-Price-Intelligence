@@ -1,0 +1,28 @@
+{
+  "budget_jpy": 400000,
+  "brands": ["Lenovo", "ASUS", "HP", "MSI", "Acer"],
+  "queries": [
+    "RTX 5080 Laptop ノート 32GB 1TB Lenovo 日本",
+    "RTX 5080 Laptop ノート 32GB 1TB ASUS 日本",
+    "RTX 5080 Laptop ノート 32GB 1TB MSI 日本",
+    "RTX 5080 Laptop ノート 32GB 1TB Acer 日本",
+    "RTX 5080 Laptop ノート 32GB 1TB HP 日本",
+    "RTX 5070 Ti Laptop ノート 32GB 1TB Lenovo 日本",
+    "RTX 5070 Ti Laptop ノート 32GB 1TB ASUS 日本",
+    "RTX 5070 Ti Laptop ノート 32GB 1TB MSI 日本",
+    "RTX 5070 Ti Laptop ノート 32GB 1TB Acer 日本",
+    "RTX 5070 Ti Laptop ノート 32GB 1TB HP 日本",
+    "RTX 5090 Laptop ノート 32GB 1TB 日本 Amazon",
+    "RTX 5080 Laptop ゲーミングノート Amazon.co.jp",
+    "RTX 5070 Ti Laptop ゲーミングノート Amazon.co.jp",
+    "RTX 5080 ノート ゲーミング Lenovo 公式",
+    "RTX 5080 ノート ゲーミング ASUS 公式",
+    "RTX 5080 ノート ゲーミング MSI 公式"
+  ],
+  "allowed_domains": [
+    "lenovo.com","asus.com","hp.com","msi.com","acer.com",
+    "amazon.co.jp","rakuten.co.jp","yodobashi.com","biccamera.com","yamada-denkiweb.com"
+  ],
+  "max_results_per_query": 6,
+  "max_pages_per_run": 35
+}
