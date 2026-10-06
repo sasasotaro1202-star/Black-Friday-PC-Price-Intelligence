@@ -1,4 +1,5 @@
 import json, os
+from collections import Counter
 from datetime import datetime, timezone, timedelta
 
 JST=timezone(timedelta(hours=9))
@@ -6,24 +7,17 @@ ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BUDGET=280000
 TARGET=datetime(2026,11,27,tzinfo=JST)
 
-GPU_ORDER=("rtx 5080","rtx 5070 ti","rtx 5070","rtx 5060 ti","rtx 5060")
-GPU_POINTS={"rtx 5080":100,"rtx 5070 ti":90,"rtx 5070":72,"rtx 5060 ti":48,"rtx 5060":40}
+GPU_ORDER=("rtx 5090","rtx 5080","rtx 5070 ti","rtx 5070","rtx 5060 ti","rtx 5060")
+GPU_POINTS={"rtx 5090":100,"rtx 5080":92,"rtx 5070 ti":82,"rtx 5070":65,"rtx 5060 ti":47,"rtx 5060":38}
 
-# Historical sale/event anchors. These describe public sale/published times,
-# not the seller's hidden internal price-change timestamp.
 HISTORY=[
-  {"date":"2025-11-19","label":"Amazon surprise pre-sale begins","kind":"sale_start","source":"https://game.watch.impress.co.jp/docs/news/2064238.html"},
-  {"date":"2025-11-21","label":"Amazon early sale begins","kind":"sale_start","source":"https://game.watch.impress.co.jp/docs/news/2064238.html"},
-  {"date":"2025-11-22","label":"ASUS TUF A16 RTX 5070 32GB/1TB observed at ¥219,800","kind":"price_observation","price":219800,"product":"TUF Gaming A16 FA608UP","source":"https://note.com/utopia_pc/n/nf617ebb9eec3"},
-  {"date":"2025-11-22","label":"ASUS ROG Strix G16 RTX 5070 Ti 32GB/1TB observed at ¥299,800","kind":"price_observation","price":299800,"product":"ROG Strix G16 G614PR-R9R5070TI","source":"https://note.com/utopia_pc/n/nf617ebb9eec3"},
-  {"date":"2025-11-24","label":"Amazon main Black Friday begins","kind":"sale_start","source":"https://game.watch.impress.co.jp/docs/news/2064238.html"},
-  {"date":"2025-11-30","label":"ASUS TUF A16 RTX 5070 32GB/1TB still observed at ¥219,800","kind":"price_observation","price":219800,"product":"TUF Gaming A16 FA608UP","source":"https://ascii.jp/elem/000/004/356/4356081/"},
-  {"date":"2025-11-21","label":"MSI Vector 16 HX AI RTX 5070 Ti observed at ¥409,800","kind":"price_observation","price":409800,"product":"MSI Vector 16 HX AI","source":"https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/2065186.html"},
-  {"date":"2025-11-14","label":"Lenovo Black Friday campaign begins","kind":"sale_window","source":"https://www.lenovo.com/jp/ja/campaigns/black-friday/"},
-  {"date":"2024-11-27","label":"Amazon Black Friday early sale period","kind":"sale_start","source":"https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/1642325.html"},
-  {"date":"2024-11-29","label":"Amazon Black Friday main sale period","kind":"sale_start","source":"https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/1642325.html"},
-  {"date":"2023-11-22","label":"Amazon Black Friday early sale period","kind":"sale_start","source":"https://akiba-pc.watch.impress.co.jp/docs/news/news/1548903.html"},
-  {"date":"2023-11-24","label":"Amazon Black Friday main sale period","kind":"sale_start","source":"https://akiba-pc.watch.impress.co.jp/docs/news/news/1548903.html"}
+  {"date":"2025-11-19","label":"Amazon surprise/pre-sale begins","source":"https://game.watch.impress.co.jp/docs/news/2064238.html"},
+  {"date":"2025-11-21","label":"Amazon early sale begins","source":"https://game.watch.impress.co.jp/docs/news/2064238.html"},
+  {"date":"2025-11-22","label":"ROG Strix G16 RTX 5070 Ti 32GB/1TB observed at ¥299,800","price":299800,"source":"https://note.com/utopia_pc/n/nf617ebb9eec3"},
+  {"date":"2025-11-24","label":"Amazon main Black Friday begins","source":"https://game.watch.impress.co.jp/docs/news/2064238.html"},
+  {"date":"2025-11-24","label":"TUF Gaming A16 RTX 5070 32GB/1TB observed at ¥219,800","price":219800,"source":"https://pc.watch.impress.co.jp/docs/news/todays_sales/2067328.html"},
+  {"date":"2025-11-30","label":"TUF Gaming A16 RTX 5070 32GB/1TB still observed at ¥219,800","price":219800,"source":"https://ascii.jp/elem/000/004/356/4356081/"},
+  {"date":"2025-11-14","label":"Lenovo Black Friday campaign begins","source":"https://www.lenovo.com/jp/ja/campaigns/black-friday/"}
 ]
 
 def load(path,default):
@@ -31,123 +25,143 @@ def load(path,default):
         with open(path,encoding="utf-8") as f:return json.load(f)
     except Exception:return default
 
-def pct_required(price):
-    if not price or price<=0:return None
+def required_discount(price):
+    if not price:return None
     return max(0.0,(price-BUDGET)/price*100)
 
 def gpu_key(item):
-    s=json.dumps(item.get("spec",{}),ensure_ascii=False).lower()
+    s=json.dumps(item.get("spec",{}),ensure_ascii=False).lower()+" "+str(item.get("name","")).lower()
     for g in GPU_ORDER:
         if g in s:return g
     return None
 
-def cpu_points(item):
-    s=json.dumps(item.get("spec",{}),ensure_ascii=False).lower()
-    pts=0
-    for token,bonus in [
-        ("9955hx3d",18),("9955hx",16),("8940hx",14),("8945hx",13),
-        ("ultra 9",13),("275hx",13),("290hx",13),("13700hx",11),
-        ("14650hx",10),("13620h",8),("ryzen 9",8),("core i9",9)
-    ]:
-        if token in s: pts=max(pts,bonus)
-    return pts
-
 def performance_score(item):
     g=gpu_key(item)
     if not g:return -1
-    s=GPU_POINTS[g]+cpu_points(item)
     spec=item.get("spec",{})
-    if spec.get("ram_gb",0)>=32:s+=7
-    if spec.get("vram_gb",0)>=12:s+=3
-    if spec.get("refresh_hz",0)>=240:s+=2
-    return s
-
-def feasibility(required):
-    if required is None:return "UNKNOWN"
-    if required<=10:return "HIGH"
-    if required<=20:return "REALISTIC"
-    if required<=30:return "AGGRESSIVE"
-    if required<=40:return "LOW"
-    if required<=50:return "VERY_LOW"
-    return "EXTREME"
-
-def parse_date(s):
-    return datetime.fromisoformat(s+"T00:00:00+09:00")
+    tgp=spec.get("tgp_w") or 0
+    ram=spec.get("ram_gb") or 0
+    score=GPU_POINTS[g]
+    score += 10 if any(x in json.dumps(spec,ensure_ascii=False).lower() for x in ["9955hx3d","9955hx","8940hx","290hx","275hx"]) else 8 if "ultra 9" in json.dumps(spec,ensure_ascii=False).lower() else 5
+    score += 7 if ram>=32 else 3
+    score += 4 if tgp>=130 else 3 if tgp>=115 else 2 if tgp>=100 else 0
+    return score
 
 def timing_windows():
     return [
-      ("2026-11-14","2026-11-20","manufacturer/preview window","HIGH"),
-      ("2026-11-19","2026-11-23","Amazon-like surprise/early-sale window","VERY_HIGH"),
-      ("2026-11-24","2026-11-27","main-sale lead-in + Black Friday","MAX"),
-      ("2026-11-28","2026-11-30","post-Black-Friday / Cyber-Monday tail","HIGH"),
-      ("2026-12-01","2026-12-04","campaign tail / clearance risk","MEDIUM")
+      ("2026-11-14","2026-11-20","メーカー予告・先行","HIGH"),
+      ("2026-11-19","2026-11-23","先行セール/サプライズ","VERY_HIGH"),
+      ("2026-11-24","2026-11-27","本番前半〜BF当日","MAX"),
+      ("2026-11-28","2026-11-30","本番後半/Cyber Monday","HIGH"),
+      ("2026-12-01","2026-12-04","延長・在庫処分","MEDIUM")
     ]
+
+def dynamic_change_timing():
+    path=os.path.join(ROOT,"data/change_events.jsonl")
+    hours=Counter();dates=Counter();price_changes=[]
+    if os.path.exists(path):
+        with open(path,encoding="utf-8") as f:
+            for line in f:
+                try:e=json.loads(line)
+                except Exception:continue
+                old=e.get("old_price_jpy");new=e.get("new_price_jpy")
+                if old is None or new is None or old==new:continue
+                ts=e.get("observed_at")
+                if not ts:continue
+                try:d=datetime.fromisoformat(ts)
+                except Exception:continue
+                hours[d.hour]+=1
+                dates[d.strftime("%m-%d")]+=1
+                price_changes.append({
+                  "observed_at":ts,"old_price_jpy":old,"new_price_jpy":new,
+                  "delta_jpy":new-old,"url":e.get("url"),"name":e.get("name"),
+                  "mode":e.get("price_source_mode")
+                })
+    if not price_changes:
+        return {"sample_size":0,"hourly_counts":{},"date_counts":{},"top_hours":[],"recent_changes":[]}
+    top=hours.most_common()
+    return {"sample_size":len(price_changes),
+            "hourly_counts":dict(sorted(hours.items())),
+            "date_counts":dict(sorted(dates.items())),
+            "top_hours":[h for h in top if h[1]>0][:8],
+            "recent_changes":price_changes[-50:]}
 
 def main():
     latest=load(os.path.join(ROOT,"data/current_latest.json"),{})
-    products=[x for x in latest.get("products",[]) if x.get("fetch_status")=="ok" and x.get("price_jpy")]
+    products=[x for x in latest.get("products",[])
+              if x.get("price_jpy") and x.get("price_jpy")<=700000
+              and x.get("fetch_status") in ("ok","search_fallback","baseline")]
     rows=[]
     for p in products:
-        price=p["price_jpy"]
-        req=pct_required(price)
+        req=required_discount(p["price_jpy"])
         g=gpu_key(p)
         perf=performance_score(p)
-        if g:
-            rank_value=perf + max(0,35-req*0.55)
-            rows.append({
-              "name":p.get("name"),"store":p.get("store"),"price_jpy":price,
-              "required_discount_pct":round(req,1),"feasibility":feasibility(req),
-              "gpu":g,"performance_score":perf,"rank_value":round(rank_value,1),
-              "observed_at":p.get("observed_at"),"url":p.get("url")
-            })
-    rows.sort(key=lambda x:x["rank_value"],reverse=True)
+        rows.append({
+          "id":p.get("id"),"name":p.get("name"),"store":p.get("store"),
+          "price_jpy":p["price_jpy"],"required_discount_pct":round(req,1),
+          "feasibility":"HIGH" if req<=10 else "REALISTIC" if req<=20 else "AGGRESSIVE" if req<=30 else "LOW" if req<=40 else "VERY_LOW",
+          "gpu":g,"performance_score":perf,"observed_at":p.get("last_checked_at") or p.get("observed_at"),
+          "source_mode":p.get("price_source_mode"),"confidence":p.get("data_confidence")
+        })
+    rows.sort(key=lambda x:(x["performance_score"],-x["required_discount_pct"]),reverse=True)
+
+    dynamic=dynamic_change_timing()
     out={
       "generated_at":datetime.now(JST).replace(microsecond=0).isoformat(),
-      "budget_jpy":BUDGET,"target_black_friday":TARGET.date().isoformat(),
+      "budget_jpy":BUDGET,
+      "target_black_friday":TARGET.date().isoformat(),
       "target_products":rows[:30],
       "historical_events":HISTORY,
       "historical_timing_windows":timing_windows(),
+      "observed_change_timing":dynamic,
       "interpretation":{
-        "important_caveat":"Observed/publication time is not the seller's exact hidden price-change time.",
-        "why_watch_early":"Historical Amazon and manufacturer campaigns show material prices can appear before the main Black Friday start.",
-        "why_keep_monitoring":"A good price can persist into the sale, but inventory can disappear before the main event."
+        "important_caveat":"Observed/publication time is not the seller's hidden internal price-change timestamp.",
+        "dynamic_timing_rule":"Only meaningful price changes with both old and new prices are used for empirical hour analysis.",
+        "minimum_sample_for_hour_pattern":20
       }
     }
     os.makedirs(os.path.join(ROOT,"data","reports"),exist_ok=True)
     with open(os.path.join(ROOT,"data","timing_analysis.json"),"w",encoding="utf-8") as f:
         json.dump(out,f,ensure_ascii=False,indent=2)
+
     lines=[
-      "# Black Friday price timing analysis",
-      "",
+      "# Black Friday price timing analysis","",
       f"Generated: {out['generated_at']}",
       f"Budget: ¥{BUDGET:,}",
-      f"Target Black Friday date: {TARGET.date()}",
+      f"Target Black Friday: {TARGET.date()}","",
+      "## Current candidates",
       "",
-      "## Current candidates by performance × required discount",
-      "",
-      "| Rank | Product | Current | Required discount | Feasibility | GPU | Perf score |",
-      "|---:|---|---:|---:|---|---|---:|"
+      "|Rank|Product|Current|Required discount|Feasibility|GPU|Perf|Source|",
+      "|---:|---|---:|---:|---|---|---:|---|"
     ]
     for i,r in enumerate(rows[:20],1):
-        lines.append(f"| {i} | {r['name'][:55]} | ¥{r['price_jpy']:,} | {r['required_discount_pct']:.1f}% | {r['feasibility']} | {r['gpu']} | {r['performance_score']} |")
-    lines += [
-      "","## 2026 watch windows (forecast, not guaranteed price-change timestamps)","",
-      "| Window | Reason | Priority |","|---|---|---|"
-    ]
+        lines.append(f"|{i}|{str(r['name'])[:55]}|¥{r['price_jpy']:,}|{r['required_discount_pct']:.1f}%|{r['feasibility']}|{r['gpu']}|{r['performance_score']}|{r['source_mode']}|")
+
+    lines += ["","## Empirical price-change timing","",
+              f"- Meaningful price-change sample: **{dynamic['sample_size']}**"]
+    if dynamic["sample_size"]<20:
+        lines.append("- **観測不足:** 20件未満なので、時間帯の傾向を断定しません。")
+    else:
+        lines.append("- 観測件数が20件以上になったため、実測ベースの時間帯傾向を参照します。")
+        lines.append("- 上位時間帯: "+", ".join(f"{h:02d}時={n}件" for h,n in dynamic["top_hours"]))
+
+    lines += ["","## 2026 watch windows (forecast, not guaranteed price-change timestamps)","",
+              "|Window|Reason|Priority|","|---|---|---|"]
     for a,b,label,prio in timing_windows():
-        lines.append(f"| {a} → {b} | {label} | **{prio}** |")
+        lines.append(f"|{a} → {b}|{label}|**{prio}**|")
+
     lines += ["","## Historical anchors",""]
     for h in HISTORY:
-        price=f" ¥{h['price']:,}" if h.get("price") else ""
-        lines.append(f"- {h['date']} | {h['label']}{price} | {h['source']}")
-    lines += [
-      "","## Rules",
-      "- Do not treat a missing fetch as stockout.",
-      "- Do not infer an exact seller price-change timestamp from article publication time.",
-      "- Prefer the first observed price and retain every subsequent change event.",
-      "- For the 2026 campaign, a lower-than-expected price should be evaluated immediately against stock and configuration."
-    ]
+        p=f" ¥{h['price']:,}" if h.get("price") else ""
+        lines.append(f"- {h['date']} | {h['label']}{p} | {h['source']}")
+
+    lines += ["","## Rules",
+              "- Missing retrieval is not stockout.",
+              "- Baseline/search-snippet prices are evidence with lower confidence than direct structured product data.",
+              "- Seller-internal price-change time is never claimed from an article publication timestamp.",
+              "- A lower-than-expected price should be evaluated together with stock and configuration before purchase."]
     with open(os.path.join(ROOT,"data","reports","timing_analysis.md"),"w",encoding="utf-8") as f:
         f.write("\n".join(lines))
 
-if __name__=="__main__":main()
+if __name__=="__main__":
+    main()
