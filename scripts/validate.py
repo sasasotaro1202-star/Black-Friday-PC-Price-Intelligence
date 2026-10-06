@@ -43,9 +43,11 @@ def main():
         if p.get("available_at") or p.get("retrieval_time"):
             a = parse_dt(p.get("available_at"))
             r = parse_dt(p.get("retrieval_time"))
-            pr = parse_dt(p.get("prediction_time"))
-            if not a or not r or not pr or a > r or r > pr:
-                errors.append(f"PIT chain violation: {cid}")
+            # current_latest is an observation snapshot. It must prove
+            # available_at <= retrieval_time; prediction_time is added later
+            # by report.py for the ranking decision snapshot.
+            if not a or not r or a > r:
+                errors.append(f"observation PIT violation: {cid}")
 
     ranked = rankings.get("products", [])
     expected_order = sorted(ranked, key=lambda x: (
