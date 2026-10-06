@@ -1,0 +1,24 @@
+name: PC Price Intelligence - Tests
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "scripts/**"
+      - "config/**"
+      - "tests/**"
+      - ".github/workflows/**"
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run ranking regression tests
+        run: python -m unittest discover -s tests -p "test_*.py" -v
