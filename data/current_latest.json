@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-07T07:04:48+09:00",
+  "generated_at": "2026-10-07T07:06:01+09:00",
   "watchlist_generated_at": "2026-10-07T00:00:00+09:00",
   "fetch_stats": {
     "direct_ok": 2,
     "fallback_ok": 0,
     "partial": 2,
-    "error": 3,
+    "error": 7,
     "total": 11
   },
   "products": [
@@ -17,12 +17,13 @@
       "stock_status": "unknown",
       "spec": {},
       "fetch_status": "error",
-      "observed_at": "2026-10-07T06:49:50+09:00",
-      "fingerprint": "0717d5ae92c20169163cf0e476f4c5c70941346e3fbcc567fc20d8e761876b08",
-      "last_checked_at": "2026-10-07T07:04:48+09:00",
+      "observed_at": "2026-10-07T07:06:01+09:00",
+      "last_checked_at": "2026-10-07T07:06:01+09:00",
       "last_fetch_status": "error",
       "last_fetch_error": "HTTPError",
-      "data_confidence": "medium"
+      "price_source_mode": "none",
+      "data_confidence": "none",
+      "fingerprint": "6bfd6a0ce671f3421bc26ba9443e7ed96f8b2abdd799da66f4d4a10310431131"
     },
     {
       "url": "https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gaming-a16-2025.html",
@@ -32,12 +33,13 @@
       "stock_status": "unknown",
       "spec": {},
       "fetch_status": "error",
-      "observed_at": "2026-10-07T06:49:50+09:00",
-      "fingerprint": "034b590016b9d275588f103b20a3865c64814681709301722d5c6d6e3cc61325",
-      "last_checked_at": "2026-10-07T07:04:48+09:00",
+      "observed_at": "2026-10-07T07:06:01+09:00",
+      "last_checked_at": "2026-10-07T07:06:01+09:00",
       "last_fetch_status": "error",
       "last_fetch_error": "HTTPError",
-      "data_confidence": "medium"
+      "price_source_mode": "none",
+      "data_confidence": "none",
+      "fingerprint": "c9562904ad0d20be7ebbabb8012b7f77ba5b39ad9dc7c25df05a705f5d5ab086"
     },
     {
       "url": "https://store.asus.com/jp/asus-tuf-gaming-f16-fx608.html?config=90NR0NB1-M00580",
@@ -47,12 +49,13 @@
       "stock_status": "unknown",
       "spec": {},
       "fetch_status": "error",
-      "observed_at": "2026-10-07T06:49:50+09:00",
-      "fingerprint": "c995d63f48302e0f758d7b17388f80c70115e47a864db94c58c1c4cbd29da80f",
-      "last_checked_at": "2026-10-07T07:04:48+09:00",
+      "observed_at": "2026-10-07T07:06:01+09:00",
+      "last_checked_at": "2026-10-07T07:06:01+09:00",
       "last_fetch_status": "error",
       "last_fetch_error": "HTTPError",
-      "data_confidence": "medium"
+      "price_source_mode": "none",
+      "data_confidence": "none",
+      "fingerprint": "a122301e2c1b8eb75c44a0af5e233bddf55d72efd47ddd52b3f1dc8093b2f44c"
     },
     {
       "url": "https://www.dospara.co.jp/TC143/MC17880.html",
@@ -62,8 +65,8 @@
       "stock_status": "unknown",
       "spec": {},
       "fetch_status": "error",
-      "observed_at": "2026-10-07T07:04:48+09:00",
-      "last_checked_at": "2026-10-07T07:04:48+09:00",
+      "observed_at": "2026-10-07T07:06:01+09:00",
+      "last_checked_at": "2026-10-07T07:06:01+09:00",
       "last_fetch_status": "error",
       "last_fetch_error": "HTTPError",
       "price_source_mode": "none",
@@ -76,15 +79,19 @@
       "name": "https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040",
       "price_jpy": null,
       "stock_status": "out_of_stock",
-      "spec": {},
+      "spec": {
+        "ram_gb": 32,
+        "cpu": "Core Ultra 9 275HX",
+        "ssd": "1 TB"
+      },
       "fetch_status": "ok",
-      "observed_at": "2026-10-07T06:49:50+09:00",
-      "fingerprint": "089c6fc68f668dd95cfabb96e097e356c2f1835596138bef1b96e21e580852b4",
-      "last_checked_at": "2026-10-07T07:04:48+09:00",
-      "last_fetch_status": "partial",
-      "last_fetch_url": "https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040",
+      "observed_at": "2026-10-07T07:06:01+09:00",
+      "last_checked_at": "2026-10-07T07:06:01+09:00",
       "price_source_mode": "direct_page",
-      "data_confidence": "medium"
+      "data_confidence": "low",
+      "id": "candidate-4",
+      "last_fetch_status": "partial",
+      "fingerprint": "60f1cca20f855426e54c92886a1f907360fdda3e124c7a948e3f89d5c22e09e1"
     },
     {
       "url": "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1",
@@ -94,12 +101,13 @@
       "stock_status": "unknown",
       "spec": {},
       "fetch_status": "error",
-      "observed_at": "2026-10-07T06:49:50+09:00",
-      "fingerprint": "7c1f65af6fadfc7c6e256582e8ab0907568ce6841d9031601ff41f4350f59da8",
-      "last_checked_at": "2026-10-07T07:04:48+09:00",
+      "observed_at": "2026-10-07T07:06:01+09:00",
+      "last_checked_at": "2026-10-07T07:06:01+09:00",
       "last_fetch_status": "error",
       "last_fetch_error": "TimeoutError",
-      "data_confidence": "medium"
+      "price_source_mode": "none",
+      "data_confidence": "none",
+      "fingerprint": "d11a74983e051b5d3e33c12d3a7e133143e1291e4d23721c7197cf9db7239cd4"
     },
     {
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
@@ -112,12 +120,13 @@
         "ssd": "1 TB"
       },
       "fetch_status": "ok",
-      "observed_at": "2026-10-07T07:04:48+09:00",
-      "last_checked_at": "2026-10-07T07:04:48+09:00",
+      "observed_at": "2026-10-07T07:06:01+09:00",
+      "last_checked_at": "2026-10-07T07:06:01+09:00",
       "price_source_mode": "direct_page",
       "data_confidence": "high",
+      "id": "gtune-p6-13700hx-5070",
       "last_fetch_status": "ok",
-      "fingerprint": "a9a826bea3be554a5933f5cc74ab4dac387a1a0e754a55d60ab238a8e2898c06"
+      "fingerprint": "fb8796be4f5c8da2f1880446d0a2ff8b858660c66a38089ab81f6c4fe61ad464"
     },
     {
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
@@ -131,12 +140,13 @@
         "ssd": "1 TB"
       },
       "fetch_status": "ok",
-      "observed_at": "2026-10-07T07:04:48+09:00",
-      "last_checked_at": "2026-10-07T07:04:48+09:00",
+      "observed_at": "2026-10-07T07:06:01+09:00",
+      "last_checked_at": "2026-10-07T07:06:01+09:00",
       "price_source_mode": "direct_page",
       "data_confidence": "high",
+      "id": "gtune-p5-13620h-5070",
       "last_fetch_status": "ok",
-      "fingerprint": "53e089e11ed4d87b701e6f82ffdaacfed68367f8722d794c79d3dcb7437f4f8e"
+      "fingerprint": "7ad67dd03e2be1b9750d188620a3925bed8aa323f76e928d5252cfde64628155"
     },
     {
       "url": "https://store.asus.com/jp/rog/90nr0pj4-m001d0-rog-zephyrus-g16-2026.html?config=90NR0PJ4-M001D0",
@@ -146,8 +156,8 @@
       "stock_status": "unknown",
       "spec": {},
       "fetch_status": "error",
-      "observed_at": "2026-10-07T07:04:48+09:00",
-      "last_checked_at": "2026-10-07T07:04:48+09:00",
+      "observed_at": "2026-10-07T07:06:01+09:00",
+      "last_checked_at": "2026-10-07T07:06:01+09:00",
       "last_fetch_status": "error",
       "last_fetch_error": "HTTPError",
       "price_source_mode": "none",
@@ -162,8 +172,8 @@
       "stock_status": "unknown",
       "spec": {},
       "fetch_status": "error",
-      "observed_at": "2026-10-07T07:04:48+09:00",
-      "last_checked_at": "2026-10-07T07:04:48+09:00",
+      "observed_at": "2026-10-07T07:06:01+09:00",
+      "last_checked_at": "2026-10-07T07:06:01+09:00",
       "last_fetch_status": "error",
       "last_fetch_error": "HTTPError",
       "price_source_mode": "none",
@@ -181,12 +191,13 @@
         "ssd": "1 TB"
       },
       "fetch_status": "ok",
-      "observed_at": "2026-10-07T07:04:48+09:00",
-      "last_checked_at": "2026-10-07T07:04:48+09:00",
+      "observed_at": "2026-10-07T07:06:01+09:00",
+      "last_checked_at": "2026-10-07T07:06:01+09:00",
       "price_source_mode": "direct_page",
       "data_confidence": "low",
+      "id": "gigabyte-a18-pro-240h-5070ti",
       "last_fetch_status": "partial",
-      "fingerprint": "3015b8f9a1628f95991a274d6ce962c2597b90fe8e2e380bafdfa328f8923744"
+      "fingerprint": "112d4c8ffa65a4c0f68392ecbe28ada60a63e084b31479ee4fbaf1bb96159c4e"
     }
   ]
 }
