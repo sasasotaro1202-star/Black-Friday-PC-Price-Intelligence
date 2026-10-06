@@ -39,6 +39,7 @@ def main():
         watch_items = []
     watch_ids = []
     watch_urls = []
+    watch_priority = {}
     watch_url_ids = {}
     catalog_map = {str(x.get("id") or ""): x for x in catalog_items if isinstance(x, dict)}
     for i, entry in enumerate(watch_items):
@@ -53,6 +54,7 @@ def main():
             errors.append(f"watchlist entry {i} invalid url")
         if cid:
             watch_ids.append(cid)
+            watch_priority[cid] = str(entry.get("priority") or "normal").lower()
         if url:
             watch_urls.append(url)
             watch_url_ids.setdefault(url, []).append(cid)
@@ -265,6 +267,39 @@ def main():
         for key, expected in expected_quality.items():
             if quality.get(key) != expected:
                 errors.append(f"quality.{key} mismatch")
+
+        critical_ids = sorted(cid for cid, priority in watch_priority.items() if priority == "critical")
+        partition_by_id = {str(x.get("id")): x for x in partition if x.get("id")}
+        critical_unverified = sorted(
+            cid for cid in critical_ids
+            if not (
+                partition_by_id.get(cid, {}).get("current_price_jpy") is not None
+                and partition_by_id.get(cid, {}).get("price_source_mode") == "direct_structured"
+                and partition_by_id.get(cid, {}).get("variant_match") in ("exact", "trusted_url", "strong")
+                and partition_by_id.get(cid, {}).get("stock_status") in ("in_stock", "low_stock", "out_of_stock")
+            )
+        )
+        if quality.get("critical_candidate_count") != len(critical_ids):
+            errors.append("quality.critical_candidate_count mismatch")
+        if quality.get("critical_unverified_count") != len(critical_unverified):
+            errors.append("quality.critical_unverified_count mismatch")
+        expected_coverage = "COMPLETE" if not critical_unverified else "PARTIAL"
+        if quality.get("coverage_status") != expected_coverage:
+            errors.append("quality.coverage_status mismatch")
+
+        gate = rankings.get("purchase_gate") or {}
+        gate_ids = sorted(str(x) for x in (gate.get("critical_unverified_ids") or []))
+        if gate_ids != critical_unverified:
+            errors.append("purchase_gate critical_unverified_ids mismatch")
+        if gate.get("coverage_status") != expected_coverage:
+            errors.append("purchase_gate coverage_status mismatch")
+        expected_allowed = bool(
+            ranked
+            and expected_coverage == "COMPLETE"
+            and (ranked[0].get("score_detail") or {}).get("status") in ("BUY_NOW", "BUY_NOW_LOW_STOCK")
+        )
+        if bool(gate.get("allowed")) != expected_allowed:
+            errors.append("purchase_gate allowed mismatch")
 
     # Actionable row invariants.
     for r in ranked:
