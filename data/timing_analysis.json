@@ -1,138 +1,117 @@
 {
-  "generated_at": "2026-10-07T07:06:27+09:00",
+  "generated_at": "2026-10-07T07:08:39+09:00",
   "budget_jpy": 280000,
   "target_black_friday": "2026-11-27",
   "target_products": [
     {
+      "id": "gtune-p5-13620h-5070",
       "name": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
       "store": "www.mouse-jp.co.jp",
       "price_jpy": 90000,
       "required_discount_pct": 0.0,
       "feasibility": "HIGH",
       "gpu": "rtx 5070",
-      "performance_score": 79,
-      "rank_value": 114.0,
-      "observed_at": "2026-10-07T07:06:01+09:00",
-      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/"
+      "performance_score": 77,
+      "observed_at": "2026-10-07T07:08:13+09:00",
+      "source_mode": "direct_page",
+      "confidence": "high"
+    },
+    {
+      "id": "gtune-p6-13700hx-5070",
+      "name": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
+      "store": "www.mouse-jp.co.jp",
+      "price_jpy": 258819,
+      "required_discount_pct": 0.0,
+      "feasibility": "HIGH",
+      "gpu": null,
+      "performance_score": -1,
+      "observed_at": "2026-10-07T07:08:13+09:00",
+      "source_mode": "direct_page",
+      "confidence": "high"
     }
   ],
   "historical_events": [
     {
       "date": "2025-11-19",
-      "label": "Amazon surprise pre-sale begins",
-      "kind": "sale_start",
+      "label": "Amazon surprise/pre-sale begins",
       "source": "https://game.watch.impress.co.jp/docs/news/2064238.html"
     },
     {
       "date": "2025-11-21",
       "label": "Amazon early sale begins",
-      "kind": "sale_start",
       "source": "https://game.watch.impress.co.jp/docs/news/2064238.html"
     },
     {
       "date": "2025-11-22",
-      "label": "ASUS TUF A16 RTX 5070 32GB/1TB observed at ¥219,800",
-      "kind": "price_observation",
-      "price": 219800,
-      "product": "TUF Gaming A16 FA608UP",
-      "source": "https://note.com/utopia_pc/n/nf617ebb9eec3"
-    },
-    {
-      "date": "2025-11-22",
-      "label": "ASUS ROG Strix G16 RTX 5070 Ti 32GB/1TB observed at ¥299,800",
-      "kind": "price_observation",
+      "label": "ROG Strix G16 RTX 5070 Ti 32GB/1TB observed at ¥299,800",
       "price": 299800,
-      "product": "ROG Strix G16 G614PR-R9R5070TI",
       "source": "https://note.com/utopia_pc/n/nf617ebb9eec3"
     },
     {
       "date": "2025-11-24",
       "label": "Amazon main Black Friday begins",
-      "kind": "sale_start",
       "source": "https://game.watch.impress.co.jp/docs/news/2064238.html"
     },
     {
-      "date": "2025-11-30",
-      "label": "ASUS TUF A16 RTX 5070 32GB/1TB still observed at ¥219,800",
-      "kind": "price_observation",
+      "date": "2025-11-24",
+      "label": "TUF Gaming A16 RTX 5070 32GB/1TB observed at ¥219,800",
       "price": 219800,
-      "product": "TUF Gaming A16 FA608UP",
-      "source": "https://ascii.jp/elem/000/004/356/4356081/"
+      "source": "https://pc.watch.impress.co.jp/docs/news/todays_sales/2067328.html"
     },
     {
-      "date": "2025-11-21",
-      "label": "MSI Vector 16 HX AI RTX 5070 Ti observed at ¥409,800",
-      "kind": "price_observation",
-      "price": 409800,
-      "product": "MSI Vector 16 HX AI",
-      "source": "https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/2065186.html"
+      "date": "2025-11-30",
+      "label": "TUF Gaming A16 RTX 5070 32GB/1TB still observed at ¥219,800",
+      "price": 219800,
+      "source": "https://ascii.jp/elem/000/004/356/4356081/"
     },
     {
       "date": "2025-11-14",
       "label": "Lenovo Black Friday campaign begins",
-      "kind": "sale_window",
       "source": "https://www.lenovo.com/jp/ja/campaigns/black-friday/"
-    },
-    {
-      "date": "2024-11-27",
-      "label": "Amazon Black Friday early sale period",
-      "kind": "sale_start",
-      "source": "https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/1642325.html"
-    },
-    {
-      "date": "2024-11-29",
-      "label": "Amazon Black Friday main sale period",
-      "kind": "sale_start",
-      "source": "https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/1642325.html"
-    },
-    {
-      "date": "2023-11-22",
-      "label": "Amazon Black Friday early sale period",
-      "kind": "sale_start",
-      "source": "https://akiba-pc.watch.impress.co.jp/docs/news/news/1548903.html"
-    },
-    {
-      "date": "2023-11-24",
-      "label": "Amazon Black Friday main sale period",
-      "kind": "sale_start",
-      "source": "https://akiba-pc.watch.impress.co.jp/docs/news/news/1548903.html"
     }
   ],
   "historical_timing_windows": [
     [
       "2026-11-14",
       "2026-11-20",
-      "manufacturer/preview window",
+      "メーカー予告・先行",
       "HIGH"
     ],
     [
       "2026-11-19",
       "2026-11-23",
-      "Amazon-like surprise/early-sale window",
+      "先行セール/サプライズ",
       "VERY_HIGH"
     ],
     [
       "2026-11-24",
       "2026-11-27",
-      "main-sale lead-in + Black Friday",
+      "本番前半〜BF当日",
       "MAX"
     ],
     [
       "2026-11-28",
       "2026-11-30",
-      "post-Black-Friday / Cyber-Monday tail",
+      "本番後半/Cyber Monday",
       "HIGH"
     ],
     [
       "2026-12-01",
       "2026-12-04",
-      "campaign tail / clearance risk",
+      "延長・在庫処分",
       "MEDIUM"
     ]
   ],
+  "observed_change_timing": {
+    "sample_size": 0,
+    "hourly_counts": {},
+    "date_counts": {},
+    "top_hours": [],
+    "recent_changes": []
+  },
   "interpretation": {
-    "important_caveat": "Observed/publication time is not the seller's exact hidden price-change time.",
-    "why_watch_early": "Historical Amazon and manufacturer campaigns show material prices can appear before the main Black Friday start.",
-    "why_keep_monitoring": "A good price can persist into the sale, but inventory can disappear before the main event."
+    "important_caveat": "Observed/publication time is not the seller's hidden internal price-change timestamp.",
+    "dynamic_timing_rule": "Only meaningful price changes with both old and new prices are used for empirical hour analysis.",
+    "minimum_sample_for_hour_pattern": 20
   }
 }
