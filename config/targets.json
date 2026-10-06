@@ -1,7 +1,16 @@
 {
   "budget_jpy": 280000,
   "target_date": "2026-11-27",
-  "brands": ["Lenovo", "ASUS", "HP", "MSI", "Acer", "GIGABYTE", "マウスコンピューター", "Thirdwave"],
+  "brands": [
+    "Lenovo",
+    "ASUS",
+    "HP",
+    "MSI",
+    "Acer",
+    "GIGABYTE",
+    "マウスコンピューター",
+    "Thirdwave"
+  ],
   "queries": [
     "ROG Strix G16 Ryzen 9 9955HX3D RTX 5070 Ti 32GB 1TB 日本",
     "ROG Strix G16 Ryzen 9 8940HX RTX 5070 Ti 32GB 1TB 日本",
@@ -17,12 +26,30 @@
     "GIGABYTE GAMING A18 PRO RTX 5070 Ti 32GB 1TB 日本",
     "GIGABYTE AERO X16 RTX 5070 32GB 1TB 日本",
     "RTX 5070 Ti Laptop 32GB 1TB ゲーミングノート 日本",
-    "RTX 5080 Laptop 32GB 1TB ゲーミングノート 日本"
+    "RTX 5080 Laptop 32GB 1TB ゲーミングノート 日本",
+    "ROG Strix G18 2026 RTX 5070 Ti 32GB 1TB 290HX Plus 日本",
+    "ROG Zephyrus G16 2026 RTX 5070 Ti 32GB 1TB 386H 日本",
+    "ROG Zephyrus G14 2026 RTX 5070 Ti 32GB 1TB 386H 日本",
+    "RTX 5080 Laptop ノート 32GB 1TB 2026 日本",
+    "RTX 5090 Laptop ノート 32GB 1TB 2026 日本",
+    "OMEN MAX 16 5070 Ti 32GB 1TB 2026 日本",
+    "Vector 16 HX AI 5070 Ti 32GB 1TB 2026 日本",
+    "Legion Pro 7i 5070 Ti 32GB 1TB 2026 日本"
   ],
   "allowed_domains": [
-    "lenovo.com","asus.com","hp.com","msi.com","acer.com","gigabyte.com",
-    "mouse-jp.co.jp","dospara.co.jp",
-    "amazon.co.jp","rakuten.co.jp","yodobashi.com","biccamera.com","yamada-denkiweb.com"
+    "lenovo.com",
+    "asus.com",
+    "hp.com",
+    "msi.com",
+    "acer.com",
+    "gigabyte.com",
+    "mouse-jp.co.jp",
+    "dospara.co.jp",
+    "amazon.co.jp",
+    "rakuten.co.jp",
+    "yodobashi.com",
+    "biccamera.com",
+    "yamada-denkiweb.com"
   ],
   "max_results_per_query": 8,
   "max_pages_per_run": 50
