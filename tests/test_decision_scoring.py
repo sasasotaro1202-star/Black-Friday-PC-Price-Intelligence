@@ -26,6 +26,7 @@ class DecisionScoringTests(unittest.TestCase):
             "spec": {"gpu": gpu, "cpu": cpu, "tgp_w": tgp, "ram_gb": ram, "ssd": ssd},
             "retrieval_time": now,
             "available_at": now,
+            "prediction_time": now,
         }
 
     def test_budget_discount(self):
@@ -116,6 +117,39 @@ class DecisionScoringTests(unittest.TestCase):
         score, detail = intelligence.decision_score(item, [], [])
         self.assertIsNotNone(score)
         self.assertEqual(detail["status"], "VERIFY_NOW")
+
+    def test_stale_observation_is_unactionable(self):
+        item = self.candidate()
+        old = intelligence.now_jst() - intelligence.timedelta(minutes=61)
+        item["retrieval_time"] = intelligence.iso(old)
+        item["available_at"] = intelligence.iso(old)
+        item["prediction_time"] = intelligence.iso(intelligence.now_jst())
+        score, detail = intelligence.decision_score(item, [], [])
+        self.assertIsNone(score)
+        self.assertEqual(detail["reason"], "stale_observation")
+
+    def test_pit_requires_retrieval_before_prediction(self):
+        item = self.candidate()
+        future = intelligence.now_jst() + intelligence.timedelta(minutes=1)
+        item["retrieval_time"] = intelligence.iso(future)
+        score, detail = intelligence.decision_score(item, [], [])
+        self.assertIsNone(score)
+        self.assertEqual(detail["reason"], "retrieval_after_prediction")
+
+    def test_exact_catalog_cannot_override_parsed_conflict(self):
+        item = {
+            "id":"x","url":"https://example.com/exact","name":"Expected",
+            "page_text_excerpt":"Expected RTX 5070 Ti Core Ultra 9 275HX",
+            "parsed_spec":{"gpu":"RTX 5070 Laptop GPU","cpu":"Core Ultra 9 275HX","ram_gb":32,"ssd":"1 TB","tgp_w":115}
+        }
+        cat = {
+            "id":"x","url":"https://example.com/exact","url_is_exact":True,
+            "name":"Expected","family":"Expected","cpu":"Core Ultra 9 275HX",
+            "gpu":"RTX 5070 Ti Laptop GPU","ram_gb":32,"ssd":"1 TB","tgp_w":115,
+            "identity_confidence":"high"
+        }
+        out = intelligence.enrich_identity(item, cat)
+        self.assertEqual(out["variant_match"], "ambiguous")
 
     def test_unknown_stock_is_capped(self):
         item = self.candidate(stock="unknown")

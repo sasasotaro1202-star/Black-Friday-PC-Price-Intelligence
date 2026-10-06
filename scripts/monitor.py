@@ -162,6 +162,7 @@ def parse_page(url, html):
 
     name = None
     structured_prices = []
+    availability_states = set()
     structured_stock = "unknown"
     price_ambiguity = None
 
@@ -193,14 +194,21 @@ def parse_page(url, html):
                     structured_prices.append(p)
                 av = str(offer.get("availability") or "")
                 if "InStock" in av:
-                    structured_stock = "in_stock"
+                    availability_states.add("in_stock")
                 elif "OutOfStock" in av:
-                    structured_stock = "out_of_stock"
+                    availability_states.add("out_of_stock")
+                elif "PreOrder" in av or "BackOrder" in av:
+                    availability_states.add("preorder_or_backorder")
 
     unique_structured_prices = sorted(set(structured_prices))
     structured_price = unique_structured_prices[0] if len(unique_structured_prices) == 1 else None
     if len(unique_structured_prices) > 1:
         price_ambiguity = "multiple_structured_prices"
+
+    if len(availability_states) == 1:
+        structured_stock = next(iter(availability_states))
+    elif len(availability_states) > 1:
+        structured_stock = "unknown"
 
     meta = re.search(
         r'<meta[^>]+(?:property|name)=["\\\']product:price:amount["\\\'][^>]+content=["\\\']([^"\\\']+)',
@@ -230,6 +238,7 @@ def parse_page(url, html):
         "name": name or url,
         "price_jpy": picked["price_jpy"] if picked else None,
         "stock_status": structured_stock if structured_stock != "unknown" else stock_from_text(text_html),
+        "stock_ambiguity": "multiple_offer_availability" if len(availability_states) > 1 else None,
         "parsed_spec": specs,
         "page_text_excerpt": text_html[:12000],
         "fetch_status": "ok",
@@ -398,9 +407,16 @@ def corroborate_anomaly(item, search):
     sp = search.get("price_jpy")
     if sp is None:
         return item
-    if abs(sp - p) / float(max(1, p)) <= 0.10:
-        item["current_price_jpy"] = p
-        item["price_jpy"] = p
+    item["parsed_spec"] = {**item.get("parsed_spec", {}), **search.get("spec", {})}
+    item["page_text_excerpt"] = ((search.get("title") or "") + " " + (search.get("snippet") or ""))[:12000]
+    item = enrich_identity(item, load_catalog().get(str(item.get("id")), {}))
+    reference = item.get("last_valid_price_jpy") or item.get("reference_price_jpy")
+    checked = validate_price(sp, item, reference_price=reference, corroborated=False)
+    identity_ok = item.get("variant_match") in ("exact", "trusted_url", "strong")
+    close_to_anomalous = abs(sp - p) / float(max(1, p)) <= 0.10
+    if checked["valid"] and identity_ok and close_to_anomalous:
+        item["current_price_jpy"] = sp
+        item["price_jpy"] = sp
         item["available_at"] = item.get("retrieval_time")
         item["price_validation_status"] = "anomaly_corroborated"
         item["price_validation_reason"] = "independent_search_corroboration"
@@ -472,19 +488,31 @@ def main():
                 item["stock_status"] = item["stock_status"] if item["stock_status"] != "unknown" else fallback["stock_status"]
                 item["parsed_spec"] = {**fallback.get("spec", {}), **item.get("parsed_spec", {})}
                 item["page_text_excerpt"] = item.get("page_text_excerpt", "")
-                item["price_jpy"] = fallback["price_jpy"]
-                item["current_price_jpy"] = fallback["price_jpy"]
-                item["last_valid_price_jpy"] = fallback["price_jpy"]
-                item["available_at"] = retrieval_time
-                item["price_source_mode"] = "search_snippet"
-                item["price_validation_status"] = "validated"
-                item["price_validation_reason"] = "search_fallback"
-                item["data_confidence"] = "medium"
-                item["corroborating_source_url"] = fallback["url"]
-                item["corroborating_source_title"] = fallback["title"]
-                item["corroborating_source_snippet"] = fallback["snippet"]
+                item["page_text_excerpt"] = ((fallback.get("title") or "") + " " + (fallback.get("snippet") or ""))[:12000]
                 item = enrich_identity(item, cat)
-                stats["search_corrob"] += 1
+                reference = item.get("last_valid_price_jpy")
+                if reference is None:
+                    reference = cat.get("reference_price_jpy", cat.get("price_jpy"))
+                checked = validate_price(fallback["price_jpy"], item, reference_price=reference, corroborated=False)
+                identity_ok = item.get("variant_match") in ("exact", "trusted_url", "strong")
+                if checked["valid"] and identity_ok:
+                    item["price_jpy"] = fallback["price_jpy"]
+                    item["current_price_jpy"] = fallback["price_jpy"]
+                    item["last_valid_price_jpy"] = fallback["price_jpy"]
+                    item["available_at"] = retrieval_time
+                    item["price_source_mode"] = "search_snippet"
+                    item["price_validation_status"] = checked["status"]
+                    item["price_validation_reason"] = "search_fallback:" + checked["reason"]
+                    item["data_confidence"] = "medium"
+                    item["corroborating_source_url"] = fallback["url"]
+                    item["corroborating_source_title"] = fallback["title"]
+                    item["corroborating_source_snippet"] = fallback["snippet"]
+                    stats["search_corrob"] += 1
+                else:
+                    item["current_price_jpy"] = None
+                    item["price_jpy"] = None
+                    item["price_validation_status"] = "reference_only" if reference is not None else "missing"
+                    item["price_validation_reason"] = "search_fallback_rejected:" + ("identity_mismatch" if not identity_ok else checked["reason"])
             elif previous.get("current_price_jpy") is not None:
                 item["current_price_jpy"] = None
                 item["price_jpy"] = None

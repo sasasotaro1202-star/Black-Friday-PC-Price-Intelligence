@@ -8,6 +8,8 @@ JST = timezone(timedelta(hours=9))
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BUDGET = 280000
 MAX_TRACKED_PRICE = 900000
+ACTIONABLE_MAX_AGE_NORMAL_MINUTES = 60
+ACTIONABLE_MAX_AGE_BF_MINUTES = 30
 
 GPU_POINTS = {
     "rtx 5090": 25,
@@ -174,9 +176,29 @@ def enrich_identity(item, catalog_item):
     ]))
     expected_cpu = norm_text(exp.get("cpu"))
     expected_gpu = norm_text(exp.get("gpu"))
+    parsed_cpu = norm_text(parsed.get("cpu"))
+    parsed_gpu = normalize_gpu(parsed.get("gpu"))
+    cpu_conflict = bool(expected_cpu and parsed_cpu and expected_cpu not in parsed_cpu and parsed_cpu not in expected_cpu)
+    gpu_conflict = bool(expected_gpu and parsed_gpu and normalize_gpu(expected_gpu) != parsed_gpu)
+    numeric_conflicts = []
+    for key in ("tgp_w", "ram_gb", "vram_gb"):
+        ev, pv = exp.get(key), parsed.get(key)
+        if ev not in (None, "") and pv not in (None, ""):
+            try:
+                if int(ev) != int(pv):
+                    numeric_conflicts.append(key)
+            except Exception:
+                pass
+    ssd_conflict = bool(
+        exp.get("ssd") and parsed.get("ssd") and
+        norm_text(exp.get("ssd")).replace(" ", "") != norm_text(parsed.get("ssd")).replace(" ", "")
+    )
+    contradiction = cpu_conflict or gpu_conflict or bool(numeric_conflicts) or ssd_conflict
     cpu_ok = bool(expected_cpu and expected_cpu in blob)
     gpu_ok = bool(expected_gpu and normalize_gpu(expected_gpu) == gpu_key(item)) if expected_gpu else True
-    if exact_url and (cpu_ok and gpu_ok):
+    if contradiction:
+        variant = "ambiguous"
+    elif exact_url and (cpu_ok and gpu_ok):
         variant = "exact"
     elif exact_url and (cat.get("identity_confidence") == "high"):
         variant = "trusted_url"
@@ -186,7 +208,8 @@ def enrich_identity(item, catalog_item):
         variant = "gpu_only"
     else:
         variant = "ambiguous"
-
+    if contradiction:
+        out["variant_ambiguity_reason"] = "parsed_spec_contradicts_catalog"
     out["variant_match"] = variant
     out["identity_confidence"] = cat.get("identity_confidence", "low")
     return out
@@ -397,6 +420,10 @@ def season_phase(now=None):
             return label
     return "ブラックフライデー監視期間"
 
+def actionable_max_age_minutes(now=None):
+    now = now or now_jst()
+    return ACTIONABLE_MAX_AGE_BF_MINUTES if season_phase(now) != "通常監視期間" else ACTIONABLE_MAX_AGE_NORMAL_MINUTES
+
 def timing_score(item, now=None):
     price = item.get("current_price_jpy") if item.get("current_price_jpy") is not None else item.get("price_jpy")
     d = required_discount(price)
@@ -534,15 +561,33 @@ def decision_score(item, anchors, events=None):
     price = item.get("current_price_jpy")
     prediction = item.get("prediction_time")
     available = item.get("available_at")
+    retrieval = item.get("retrieval_time")
     available_dt = parse_dt(available)
+    retrieval_dt = parse_dt(retrieval)
     prediction_dt = parse_dt(prediction)
+    max_age = actionable_max_age_minutes(prediction_dt or now_jst())
+    observation_age = None
+    if retrieval_dt is not None and prediction_dt is not None:
+        observation_age = (prediction_dt - retrieval_dt).total_seconds() / 60.0
+    pit_invalid = (
+        available_dt is None or retrieval_dt is None or prediction_dt is None
+        or available_dt > retrieval_dt or retrieval_dt > prediction_dt
+        or observation_age is None or observation_age < -5 or observation_age > max_age
+    )
     if (
         price is None
         or item.get("price_validation_status") in (None, "missing", "anomaly_rejected", "reference_only", "variant_ambiguous")
-        or available_dt is None
-        or prediction_dt is None
-        or available_dt > prediction_dt
+        or pit_invalid
     ):
+        reason = "current_price_not_verified"
+        if observation_age is not None and observation_age > max_age:
+            reason = "stale_observation"
+        elif retrieval_dt is None:
+            reason = "retrieval_time_missing"
+        elif available_dt is not None and available_dt > retrieval_dt:
+            reason = "available_after_retrieval"
+        elif retrieval_dt is not None and prediction_dt is not None and retrieval_dt > prediction_dt:
+            reason = "retrieval_after_prediction"
         return None, {
             "status": "UNACTIONABLE",
             "reason": "current_price_not_verified",
@@ -552,6 +597,8 @@ def decision_score(item, anchors, events=None):
             "stock": 0,
             "timing": 0,
             "score_cap": 0,
+            "observation_age_minutes": round(observation_age, 1) if observation_age is not None else None,
+            "max_actionable_age_minutes": max_age,
         }
 
     perf, gpu = performance_score(item)
@@ -618,6 +665,8 @@ def decision_score(item, anchors, events=None):
         "data_confidence": confidence_from_item(item),
         "price_source_mode": item.get("price_source_mode"),
         "variant_match": item.get("variant_match"),
+        "observation_age_minutes": round(observation_age, 1) if observation_age is not None else None,
+        "max_actionable_age_minutes": max_age,
     }
     return score, detail
 
@@ -629,8 +678,8 @@ def build_row(item, anchors, events=None, rank=None):
     out["score_detail"] = detail
     out["rank"] = rank
     out["available_at"] = item.get("available_at")
-    out["pit_valid"] = False if not item.get("available_at") else bool(
-        parse_dt(item.get("available_at")) and
-        parse_dt(item.get("available_at")) <= parse_dt(out["prediction_time"])
-    )
+    av = parse_dt(item.get("available_at"))
+    rt = parse_dt(item.get("retrieval_time"))
+    pr = parse_dt(out["prediction_time"])
+    out["pit_valid"] = bool(av and rt and pr and av <= rt <= pr)
     return out

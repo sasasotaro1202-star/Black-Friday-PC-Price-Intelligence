@@ -88,8 +88,12 @@ jobs:
             fi
             git commit -m "data: fast Black Friday season observation"
             if git push origin HEAD:main; then
-              echo "Published on attempt $attempt"
-              exit 0
+              git fetch --no-tags origin main
+              if [ "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)" ]; then
+                echo "Published and verified on attempt $attempt"
+                exit 0
+              fi
+              echo "Push returned success but origin/main does not match HEAD."
             fi
             git fetch --no-tags origin main
             git reset --hard origin/main

@@ -47,10 +47,13 @@ def main():
             errors.append(f"current price has non-actionable validation status: {cid}")
         av = parse_dt(p.get("available_at"))
         rt = parse_dt(p.get("retrieval_time"))
-        if av is None or rt is None:
+        pr = parse_dt(p.get("prediction_time"))
+        if av is None or rt is None or pr is None:
             errors.append(f"current price lacks PIT timestamps: {cid}")
         elif av > rt:
             errors.append(f"available_at after retrieval_time: {cid}")
+        elif rt > pr:
+            errors.append(f"retrieval_time after prediction_time: {cid}")
         if int(current) <= 0:
             errors.append(f"non-positive current price: {cid}")
 
@@ -91,6 +94,16 @@ def main():
     if ranks and sorted(ranks) != list(range(1, len(ranks)+1)):
         errors.append("ranking ranks are not contiguous")
 
+    expected_order = sorted(products_ranked, key=lambda x: (
+        -(x.get("decision_score") if x.get("decision_score") is not None else -1),
+        x.get("current_price_jpy") if x.get("current_price_jpy") is not None else 10**12,
+        str(x.get("id") or ""),
+    ))
+    if [str(x.get("id") or "") for x in products_ranked] != [str(x.get("id") or "") for x in expected_order]:
+        errors.append("ranking order is not deterministic score-desc/price-asc/id-asc")
+    if products_ranked and (rankings.get("top_recommendation") or {}).get("id") != products_ranked[0].get("id"):
+        errors.append("top recommendation does not match rank 1")
+
     for r in products_ranked:
         if r.get("stock_status") == "out_of_stock":
             errors.append(f"out_of_stock leaked into actionable rankings: {r.get('id')}")
@@ -103,8 +116,9 @@ def main():
             if not 0 <= score <= 100:
                 errors.append(f"score range violation: {r.get('id')}")
             av = parse_dt(r.get("available_at"))
+            rt = parse_dt(r.get("retrieval_time"))
             pr = parse_dt(r.get("prediction_time"))
-            if av is None or pr is None or av > pr:
+            if av is None or rt is None or pr is None or av > rt or rt > pr:
                 errors.append(f"ranking PIT violation: {r.get('id')}")
 
     top = rankings.get("top_recommendation") or {}

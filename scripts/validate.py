@@ -34,13 +34,25 @@ def main():
             errors.append(f"current price without available_at: {cid}")
         if current is not None and not p.get("retrieval_time"):
             errors.append(f"current price without retrieval_time: {cid}")
-        if p.get("available_at") and p.get("retrieval_time"):
-            a = parse_dt(p["available_at"])
-            r = parse_dt(p["retrieval_time"])
-            if a and r and a > r:
-                errors.append(f"PIT availability after retrieval: {cid}")
+        if p.get("available_at") or p.get("retrieval_time"):
+            a = parse_dt(p.get("available_at"))
+            r = parse_dt(p.get("retrieval_time"))
+            pr = parse_dt(p.get("prediction_time"))
+            if not a or not r or not pr or a > r or r > pr:
+                errors.append(f"PIT chain violation: {cid}")
 
-    for r in rankings.get("products", []):
+    ranked = rankings.get("products", [])
+    expected_order = sorted(ranked, key=lambda x: (
+        -(x.get("decision_score") if x.get("decision_score") is not None else -1),
+        x.get("current_price_jpy") if x.get("current_price_jpy") is not None else 10**12,
+        str(x.get("id") or ""),
+    ))
+    if [str(x.get("id") or "") for x in ranked] != [str(x.get("id") or "") for x in expected_order]:
+        errors.append("ranking is not deterministically sorted")
+    if ranked and (rankings.get("top_recommendation") or {}).get("id") != ranked[0].get("id"):
+        errors.append("top_recommendation is not rank 1")
+
+    for r in ranked:
         score = r.get("decision_score")
         detail = r.get("score_detail") or {}
         if score is not None:
@@ -55,15 +67,19 @@ def main():
             if not r.get("prediction_time"):
                 errors.append(f"missing prediction_time: {r.get('id')}")
             av = r.get("available_at")
+            rt = r.get("retrieval_time")
             pr = r.get("prediction_time")
             if not av:
                 errors.append(f"missing available_at in ranking: {r.get('id')}")
+            if not rt:
+                errors.append(f"missing retrieval_time in ranking: {r.get('id')}")
             if not pr:
                 errors.append(f"missing prediction_time: {r.get('id')}")
-            if av and pr:
+            if av and rt and pr:
                 a = parse_dt(av)
+                rdt = parse_dt(rt)
                 p = parse_dt(pr)
-                if not a or not p or a > p:
+                if not a or not rdt or not p or a > rdt or rdt > p:
                     errors.append(f"PIT violation in ranking: {r.get('id')}")
 
     if rankings.get("quality", {}).get("pit_failures", 0) != 0:
