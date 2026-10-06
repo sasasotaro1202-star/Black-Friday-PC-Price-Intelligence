@@ -58,6 +58,7 @@ PRICE_EXCLUDE_CONTEXT = (
     "月額", "月々", "分割", "円/月", "円／月", "1回", "２４回",
     "24回", "36回", "48回", "ポイント還元", "ポイント付与",
     "通常価格", "定価", "参考価格", "メーカー希望", "上限",
+    "割引額", "値引き額", "円引き", "off", "ＯＦＦ", "discount",
 )
 
 PRICE_INCLUDE_CONTEXT = (
@@ -224,6 +225,15 @@ def price_context_score(context):
         score -= 1
     return score
 
+def is_discount_amount_context(context, matched_text):
+    c = norm_text(context)
+    m = norm_text(matched_text)
+    if re.search(r'¥?\s*' + re.escape(m) + r'\s*(?:円)?\s*(?:off|オフ|引き|円引き)', c, re.I):
+        return True
+    if re.search(r'(?:割引|値引き)\D{0,12}¥?\s*' + re.escape(m), c, re.I):
+        return True
+    return False
+
 def price_candidates(text):
     text = re.sub(r"\s+", " ", str(text or ""))
     out = []
@@ -246,6 +256,8 @@ def price_candidates(text):
             seen.add(value)
             context = text[max(0, m.start()-110):min(len(text), m.end()+110)]
             score = price_context_score(context)
+            if is_discount_amount_context(context, m.group(1)):
+                score -= 60
             if 100000 <= value <= 700000:
                 score += 4
             if value < 120000:
