@@ -1,9 +1,12 @@
-name: PC Price Intelligence - Black Friday Fast
+name: PC Price Intelligence - Black Friday Season Fast
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "2,7,12,17,22,27,32,37,42,47,52,57 * 24-30 11 *"
+    # Broad 2026 Black Friday-season watch window.
+    # Exact 2026 retailer dates are not assumed until officially published.
+    - cron: "2,7,12,17,22,27,32,37,42,47,52,57 * 14-30 11 *"
+    - cron: "2,7,12,17,22,27,32,37,42,47,52,57 * 1-4 12 *"
 
 permissions:
   contents: write
@@ -34,12 +37,12 @@ jobs:
               subprocess.check_call(["python","scripts/discover.py"])
           PY
 
-      - name: Fast candidate monitoring
+      - name: Fast season monitoring
         env:
           MONITOR_MAX_URLS: "30"
         run: python scripts/monitor.py
 
-      - name: Update reports
+      - name: Update 100-point decision report
         run: |
           python scripts/report.py
           python scripts/timing_analysis.py
@@ -53,5 +56,5 @@ jobs:
             echo "No data changes."
             exit 0
           fi
-          git commit -m "data: fast Black Friday price observation"
+          git commit -m "data: fast Black Friday season observation"
           git push
