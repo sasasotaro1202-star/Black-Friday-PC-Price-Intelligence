@@ -62,6 +62,7 @@ jobs:
             python scripts/monitor.py
             python scripts/report.py
             python scripts/timing_analysis.py
+            python scripts/scenario_analysis.py
 
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
