@@ -1,8 +1,23 @@
 import json
 import os
 
-from intelligence import ROOT, load_json, parse_dt
+from intelligence import ROOT, load_json, load_anchors, parse_dt, decision_score
 
+
+def read_events():
+    path = os.path.join(ROOT, "data", "change_events.jsonl")
+    events = []
+    if not os.path.exists(path):
+        return events
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            if not line.strip():
+                continue
+            try:
+                events.append(json.loads(line))
+            except Exception:
+                pass
+    return events
 
 def main():
     errors = []
@@ -137,6 +152,9 @@ def main():
                     if av is None or rt is None or pr is None or av > rt or rt > pr:
                         errors.append(f"invalid PIT in change event line {n}")
 
+    anchors = load_anchors()
+    events = read_events()
+
     # Ranking integrity
     rankings = load_json(os.path.join(ROOT, "data", "decision_rankings.json"), {})
     ranked = rankings.get("products", [])
@@ -230,6 +248,17 @@ def main():
             errors.append(f"score_before_cap mismatch: {rid}")
         if score_num != min(expected_before_cap, cap):
             errors.append(f"decision_score arithmetic mismatch: {rid}")
+
+        recomputed_score, recomputed_detail = decision_score(r, anchors, events)
+        if recomputed_score != score_num:
+            errors.append(f"recomputed score mismatch: {rid}")
+        for key in (
+            "status", "performance", "price", "history", "stock", "timing",
+            "gpu", "required_discount_pct", "score_before_cap", "score_cap",
+            "wait_risk", "historical_floor_jpy", "price_source_mode", "variant_match",
+        ):
+            if recomputed_detail.get(key) != detail.get(key):
+                errors.append(f"recomputed detail mismatch: {rid}:{key}")
 
         status = detail.get("status")
         source = r.get("price_source_mode")
