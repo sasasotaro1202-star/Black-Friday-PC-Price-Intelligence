@@ -234,7 +234,9 @@ def parse_page(url, html):
             picked = {"price_jpy": raw["price_jpy"], "source": "direct_text", "context": raw["context"]}
 
     text_stock = stock_from_text(text_html)
-    if text_stock in ("out_of_stock", "low_stock", "preorder_or_backorder"):
+    if len(availability_states) > 1:
+        final_stock = "unknown"
+    elif text_stock in ("out_of_stock", "low_stock", "preorder_or_backorder"):
         final_stock = text_stock
     elif structured_stock != "unknown":
         final_stock = structured_stock
