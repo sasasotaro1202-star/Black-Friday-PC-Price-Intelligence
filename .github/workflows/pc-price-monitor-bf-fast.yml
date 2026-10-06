@@ -61,5 +61,4 @@ jobs:
             exit 0
           fi
           git commit -m "data: fast Black Friday season observation"
-          git pull --rebase origin main
           git push
