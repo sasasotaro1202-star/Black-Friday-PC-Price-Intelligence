@@ -134,7 +134,8 @@ def main():
                         "old_spec":prev.get("spec") if prev else None,
                         "new_spec":item.get("spec"),
                         "event_type":"new" if not prev else "changed"})
-    write_json(latest_path,{"generated_at":NOW.isoformat(),"watchlist_generated_at":watch.get("generated_at"),"products":products})
+    if changes or not os.path.exists(latest_path):
+        write_json(latest_path,{"generated_at":NOW.isoformat(),"watchlist_generated_at":watch.get("generated_at"),"products":products})
     if changes:
         os.makedirs(os.path.dirname(events_path),exist_ok=True)
         with open(events_path,"a",encoding="utf-8") as f:
