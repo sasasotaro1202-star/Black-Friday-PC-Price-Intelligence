@@ -30,6 +30,8 @@ def main():
             errors.append(f"validated without current price: {cid}")
         if status == "anomaly_rejected" and current is not None:
             errors.append(f"anomaly rejected but current price exposed: {cid}")
+        if current is not None and (isinstance(current, bool) or not isinstance(current, (int, float)) or int(current) != current):
+            errors.append(f"current price is not an integer number: {cid}")
         if current is not None and p.get("price_jpy") != current:
             errors.append(f"current price field mismatch: {cid}")
         if current is None and p.get("price_jpy") is not None:
