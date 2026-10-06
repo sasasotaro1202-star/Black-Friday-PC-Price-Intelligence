@@ -1,8 +1,68 @@
 {
-  "generated_at": "2026-10-07T07:03:52+09:00",
+  "generated_at": "2026-10-07T07:05:15+09:00",
   "budget_jpy": 280000,
   "season_phase": "通常監視期間",
-  "products": [],
+  "products": [
+    {
+      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
+      "store": "www.mouse-jp.co.jp",
+      "name": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
+      "price_jpy": 90000,
+      "stock_status": "in_stock",
+      "spec": {
+        "gpu": "RTX 5070 Laptop GPU",
+        "ram_gb": 32,
+        "ssd": "1 TB"
+      },
+      "fetch_status": "ok",
+      "observed_at": "2026-10-07T07:04:48+09:00",
+      "last_checked_at": "2026-10-07T07:04:48+09:00",
+      "price_source_mode": "direct_page",
+      "data_confidence": "high",
+      "last_fetch_status": "ok",
+      "fingerprint": "53e089e11ed4d87b701e6f82ffdaacfed68367f8722d794c79d3dcb7437f4f8e",
+      "decision_score": 61,
+      "score_detail": {
+        "performance": 21,
+        "price": 20,
+        "history": 0,
+        "stock": 10,
+        "timing": 10,
+        "gpu": "rtx 5070",
+        "required_discount_pct": 0.0,
+        "timing_guidance": "今の価格が目標以下。売り切れ前に確保"
+      }
+    },
+    {
+      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
+      "store": "www.mouse-jp.co.jp",
+      "name": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
+      "price_jpy": 258819,
+      "stock_status": "in_stock",
+      "spec": {
+        "ram_gb": 32,
+        "ssd": "1 TB"
+      },
+      "fetch_status": "ok",
+      "observed_at": "2026-10-07T07:04:48+09:00",
+      "last_checked_at": "2026-10-07T07:04:48+09:00",
+      "price_source_mode": "direct_page",
+      "data_confidence": "high",
+      "last_fetch_status": "ok",
+      "fingerprint": "a9a826bea3be554a5933f5cc74ab4dac387a1a0e754a55d60ab238a8e2898c06",
+      "decision_score": 44,
+      "score_detail": {
+        "performance": 4,
+        "price": 20,
+        "history": 0,
+        "stock": 10,
+        "timing": 10,
+        "gpu": "",
+        "required_discount_pct": 0.0,
+        "timing_guidance": "今の価格が目標以下。売り切れ前に確保"
+      }
+    }
+  ],
   "method": {
     "total": 100,
     "performance_max": 40,

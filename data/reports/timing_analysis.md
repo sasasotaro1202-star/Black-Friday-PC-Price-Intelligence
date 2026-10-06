@@ -1,6 +1,6 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-07T07:03:52+09:00
+Generated: 2026-10-07T07:05:15+09:00
 Budget: ¥280,000
 Target Black Friday date: 2026-11-27
 
@@ -8,6 +8,7 @@ Target Black Friday date: 2026-11-27
 
 | Rank | Product | Current | Required discount | Feasibility | GPU | Perf score |
 |---:|---|---:|---:|---|---|---:|
+| 1 | https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw | ¥90,000 | 0.0% | HIGH | rtx 5070 | 79 |
 
 ## 2026 watch windows (forecast, not guaranteed price-change timestamps)
 

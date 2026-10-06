@@ -1,8 +1,21 @@
 {
-  "generated_at": "2026-10-07T07:03:52+09:00",
+  "generated_at": "2026-10-07T07:05:15+09:00",
   "budget_jpy": 280000,
   "target_black_friday": "2026-11-27",
-  "target_products": [],
+  "target_products": [
+    {
+      "name": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
+      "store": "www.mouse-jp.co.jp",
+      "price_jpy": 90000,
+      "required_discount_pct": 0.0,
+      "feasibility": "HIGH",
+      "gpu": "rtx 5070",
+      "performance_score": 79,
+      "rank_value": 114.0,
+      "observed_at": "2026-10-07T07:04:48+09:00",
+      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/"
+    }
+  ],
   "historical_events": [
     {
       "date": "2025-11-19",
