@@ -13,7 +13,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: pc-price-intelligence
+  group: pc-price-intelligence-writer
   cancel-in-progress: true
 
 jobs:
@@ -23,23 +23,32 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check watchlist
+      - name: Check watchlist freshness
         id: watchlist
         shell: bash
         run: |
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import json
+          from datetime import datetime, timezone, timedelta
+          JST=timezone(timedelta(hours=9))
           try:
               with open("data/watchlist.json", encoding="utf-8") as f:
                   data=json.load(f)
-              empty=not bool(data.get("urls"))
+              urls=data.get("urls") or []
+              ts=data.get("generated_at")
+              if ts:
+                  age=(datetime.now(JST)-datetime.fromisoformat(ts.replace("Z","+00:00"))).total_seconds()
+              else:
+                  age=10**12
+              stale=age >= 24*3600
           except Exception:
-              empty=True
-          print(f"empty={str(empty).lower()}")
+              urls=[]
+              stale=True
+          print(f"needs_refresh={str((not urls) or stale).lower()}")
           PY
 
-      - name: Bootstrap watchlist when empty
-        if: steps.watchlist.outputs.empty == 'true'
+      - name: Refresh watchlist when empty or stale
+        if: steps.watchlist.outputs.needs_refresh == 'true'
         run: python scripts/discover.py
 
       - name: Collect public observations
@@ -63,4 +72,5 @@ jobs:
             exit 0
           fi
           git commit -m "data: update PC price intelligence"
+          git pull --rebase origin main
           git push
