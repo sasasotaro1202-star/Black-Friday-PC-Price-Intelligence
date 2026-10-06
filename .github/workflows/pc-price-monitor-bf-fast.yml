@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: pc-price-intelligence-fast
+  group: pc-price-intelligence-writer
   cancel-in-progress: true
 
 jobs:
@@ -22,18 +22,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Bootstrap watchlist when empty
+      - name: Refresh watchlist when empty or stale
         shell: bash
         run: |
           python - <<'PY'
-          import json
+          import json, subprocess
+          from datetime import datetime, timezone, timedelta
+          JST=timezone(timedelta(hours=9))
           try:
               d=json.load(open("data/watchlist.json",encoding="utf-8"))
-              empty=not bool(d.get("urls"))
+              urls=d.get("urls") or []
+              ts=d.get("generated_at")
+              age=(datetime.now(JST)-datetime.fromisoformat(ts.replace("Z","+00:00"))).total_seconds() if ts else 10**12
+              needs=(not urls) or age >= 24*3600
           except Exception:
-              empty=True
-          if empty:
-              import subprocess
+              needs=True
+          if needs:
               subprocess.check_call(["python","scripts/discover.py"])
           PY
 
@@ -57,4 +61,5 @@ jobs:
             exit 0
           fi
           git commit -m "data: fast Black Friday season observation"
+          git pull --rebase origin main
           git push
