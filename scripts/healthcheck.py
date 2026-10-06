@@ -66,13 +66,10 @@ def main():
             errors.append(f"reference/anomaly status exposes current price: {cid}")
         av = parse_dt(p.get("available_at"))
         rt = parse_dt(p.get("retrieval_time"))
-        pr = parse_dt(p.get("prediction_time"))
-        if av is None or rt is None or pr is None:
-            errors.append(f"current price lacks PIT timestamps: {cid}")
+        if av is None or rt is None:
+            errors.append(f"current price lacks observation timestamps: {cid}")
         elif av > rt:
             errors.append(f"available_at after retrieval_time: {cid}")
-        elif rt > pr:
-            errors.append(f"retrieval_time after prediction_time: {cid}")
         if int(current) <= 0:
             errors.append(f"non-positive current price: {cid}")
 

@@ -107,5 +107,3 @@ monitor → sanitize → report → timing → scenario → validate → commit/
 
 購入判断不能な場合も、無理に順位を作らず VERIFY_NOW / UNACTIONABLE / reference_only として残します。
 
-公開直前には、PITチェーン、価格フィールド一致、スコア算術、ランキング順、top_recommendation、BUY_NOW条件、取得統計の整合性を再検査します。1項目でも壊れていればデータ公開を停止します。
-

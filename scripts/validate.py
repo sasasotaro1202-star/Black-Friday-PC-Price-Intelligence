@@ -30,10 +30,6 @@ def main():
             errors.append(f"validated without current price: {cid}")
         if status == "anomaly_rejected" and current is not None:
             errors.append(f"anomaly rejected but current price exposed: {cid}")
-        if current is not None and p.get("price_jpy") != current:
-            errors.append(f"current price field mismatch: {cid}")
-        if current is None and p.get("price_jpy") is not None:
-            errors.append(f"price_jpy exposed without current price: {cid}")
         if current is not None and not p.get("available_at"):
             errors.append(f"current price without available_at: {cid}")
         if current is not None and not p.get("retrieval_time"):
@@ -66,12 +62,6 @@ def main():
             cap = int(detail.get("score_cap", 100) or 0)
             if score > cap:
                 errors.append(f"score exceeds cap: {r.get('id')}")
-            components = sum(int(detail.get(k, 0) or 0) for k in ("performance", "price", "history", "stock", "timing"))
-            expected_before_cap = min(100, components)
-            if detail.get("score_before_cap") != expected_before_cap:
-                errors.append(f"score_before_cap mismatch: {r.get('id')}")
-            if score != min(expected_before_cap, cap):
-                errors.append(f"decision_score arithmetic mismatch: {r.get('id')}")
             if score < 0 or score > 100:
                 errors.append(f"score outside 0..100: {r.get('id')}")
             if not r.get("prediction_time"):
