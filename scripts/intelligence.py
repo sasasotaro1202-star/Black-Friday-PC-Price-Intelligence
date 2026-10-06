@@ -682,9 +682,9 @@ def decision_score(item, anchors, events=None):
     }
     return score, detail
 
-def build_row(item, anchors, events=None, rank=None):
+def build_row(item, anchors, events=None, rank=None, prediction_time=None):
     out = dict(item)
-    out["prediction_time"] = iso(now_jst())
+    out["prediction_time"] = prediction_time or iso(now_jst())
     score, detail = decision_score(out, anchors, events)
     out["decision_score"] = score
     out["score_detail"] = detail
