@@ -39,6 +39,8 @@ def main():
         watch_items = []
     watch_ids = []
     watch_urls = []
+    watch_url_ids = {}
+    catalog_map = {str(x.get("id") or ""): x for x in catalog_items if isinstance(x, dict)}
     for i, entry in enumerate(watch_items):
         if not isinstance(entry, dict):
             errors.append(f"watchlist entry {i} is not an object")
@@ -53,10 +55,14 @@ def main():
             watch_ids.append(cid)
         if url:
             watch_urls.append(url)
+            watch_url_ids.setdefault(url, []).append(cid)
     if len(watch_ids) != len(set(watch_ids)):
         errors.append("watchlist duplicate id")
-    if len(watch_urls) != len(set(watch_urls)):
-        errors.append("watchlist duplicate url")
+    for url, ids in watch_url_ids.items():
+        if len(ids) > 1:
+            # Duplicate URLs are valid only for explicitly shared family pages.
+            if not all(not catalog_map.get(cid, {}).get("url_is_exact") for cid in ids):
+                errors.append(f"watchlist duplicate url for non-shared page: {url}")
 
     # Latest observation integrity
     latest = load_json(os.path.join(ROOT, "data", "current_latest.json"), {})
