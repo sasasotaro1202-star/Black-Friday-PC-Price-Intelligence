@@ -3,6 +3,9 @@ import pathlib
 import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
+monitor_spec = importlib.util.spec_from_file_location("monitor", ROOT / "scripts" / "monitor.py")
+monitor = importlib.util.module_from_spec(monitor_spec)
+monitor_spec.loader.exec_module(monitor)
 spec = importlib.util.spec_from_file_location("intelligence", ROOT / "scripts" / "intelligence.py")
 intelligence = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(intelligence)
@@ -150,6 +153,23 @@ class DecisionScoringTests(unittest.TestCase):
         }
         out = intelligence.enrich_identity(item, cat)
         self.assertEqual(out["variant_match"], "ambiguous")
+
+    def test_stock_text_overrides_conflicting_structured_stock(self):
+        self.assertEqual(monitor.stock_from_text("在庫あり 品切れ中"), "out_of_stock")
+
+    def test_explicit_sold_out_text_overrides_jsonld_instock(self):
+        html = """<script type="application/ld+json">
+        {"@type":"Product","name":"Test PC","offers":{"priceCurrency":"JPY","price":"250000","availability":"https://schema.org/InStock"}}
+        </script><div>販売価格 ¥250,000 品切れ中</div>"""
+        parsed = monitor.parse_page("https://example.com/test", html)
+        self.assertEqual(parsed["stock_status"], "out_of_stock")
+
+    def test_score_arithmetic_matches_cap(self):
+        item = self.candidate()
+        score, detail = intelligence.decision_score(item, [], [])
+        components = sum(detail[k] for k in ("performance", "price", "history", "stock", "timing"))
+        self.assertEqual(detail["score_before_cap"], min(100, components))
+        self.assertEqual(score, min(detail["score_before_cap"], detail["score_cap"]))
 
     def test_unknown_stock_is_capped(self):
         item = self.candidate(stock="unknown")

@@ -44,6 +44,16 @@ def main():
             errors.append("fetch_stats contains invalid counters")
         elif fetch_stats.get("total") != len(products):
             errors.append("fetch_stats.total != latest product count")
+    if not isinstance(products, list):
+        errors.append("latest.products is not a list")
+        products = []
+    fetch_stats = latest.get("fetch_stats") or {}
+    if fetch_stats:
+        keys = ("total", "direct_verified", "search_corrob", "stale_previous", "baseline_only", "anomaly_rejected", "errors")
+        if any(not isinstance(fetch_stats.get(k), int) or fetch_stats.get(k) < 0 for k in keys):
+            errors.append("fetch_stats contains invalid counters")
+        elif fetch_stats.get("total") != len(products):
+            errors.append("fetch_stats.total != latest product count")
     latest_ids = [str(x.get("id") or "") for x in products if x.get("id")]
     if len(latest_ids) != len(set(latest_ids)):
         errors.append("latest duplicate id")
@@ -56,6 +66,14 @@ def main():
         status = p.get("price_validation_status")
         if status in (None, "missing", "reference_only", "variant_ambiguous", "anomaly_rejected"):
             errors.append(f"current price has non-actionable validation status: {cid}")
+        if p.get("current_price_jpy") is not None and p.get("price_jpy") != p.get("current_price_jpy"):
+            errors.append(f"price_jpy/current_price_jpy mismatch: {cid}")
+        if p.get("current_price_jpy") is None and p.get("price_jpy") is not None:
+            errors.append(f"price_jpy exposed without current price: {cid}")
+        if status in ("validated", "anomaly_corroborated") and p.get("current_price_jpy") is None:
+            errors.append(f"validated status without current price: {cid}")
+        if status in ("reference_only", "variant_ambiguous", "anomaly_rejected") and p.get("current_price_jpy") is not None:
+            errors.append(f"non-actionable status exposes current price: {cid}")
         if p.get("current_price_jpy") is not None and p.get("price_jpy") != p.get("current_price_jpy"):
             errors.append(f"price_jpy/current_price_jpy mismatch: {cid}")
         if p.get("current_price_jpy") is None and p.get("price_jpy") is not None:
@@ -132,6 +150,28 @@ def main():
                 errors.append(f"score cap violation: {r.get('id')}")
             if not 0 <= score <= 100:
                 errors.append(f"score range violation: {r.get('id')}")
+            components = sum(int(d.get(k, 0) or 0) for k in ("performance", "price", "history", "stock", "timing"))
+            expected_before_cap = min(100, components)
+            if d.get("score_before_cap") != expected_before_cap:
+                errors.append(f"score_before_cap mismatch: {r.get('id')}")
+            if score != min(expected_before_cap, cap):
+                errors.append(f"decision_score arithmetic mismatch: {r.get('id')}")
+            status = d.get("status")
+            source = r.get("price_source_mode")
+            stock = r.get("stock_status")
+            if stock == "out_of_stock" and status != "UNAVAILABLE":
+                errors.append(f"out_of_stock status mismatch: {r.get('id')}")
+            if source in ("search_snippet", "public_baseline", "stale_previous", "direct_text") and status != "VERIFY_NOW":
+                errors.append(f"verification-source status mismatch: {r.get('id')}")
+            if status in ("BUY_NOW", "BUY_NOW_LOW_STOCK"):
+                if source != "direct_structured":
+                    errors.append(f"buy-now source not direct_structured: {r.get('id')}")
+                if r.get("current_price_jpy") is None or r.get("current_price_jpy") > 280000:
+                    errors.append(f"buy-now price invalid: {r.get('id')}")
+                if r.get("variant_match") not in ("exact", "trusted_url", "strong"):
+                    errors.append(f"buy-now identity not verified: {r.get('id')}")
+                if stock not in ("in_stock", "low_stock"):
+                    errors.append(f"buy-now stock not verified: {r.get('id')}")
             components = sum(int(d.get(k, 0) or 0) for k in ("performance", "price", "history", "stock", "timing"))
             expected_before_cap = min(100, components)
             if d.get("score_before_cap") != expected_before_cap:

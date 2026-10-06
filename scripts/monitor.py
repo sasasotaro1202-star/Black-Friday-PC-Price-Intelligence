@@ -117,7 +117,7 @@ def stock_from_text(text):
         return "low_stock"
     if any(x in s for x in ("取り寄せ", "予約", "preorder", "back order")):
         return "preorder_or_backorder"
-    if any(x in s for x in ("在庫あり", "in stock", "available", "お取り寄せ可能")):
+    if any(x in s for x in ("在庫あり", "in stock", "お取り寄せ可能")):
         return "in_stock"
     return "unknown"
 
@@ -231,13 +231,21 @@ def parse_page(url, html):
         if raw:
             picked = {"price_jpy": raw["price_jpy"], "source": "direct_text", "context": raw["context"]}
 
+    text_stock = stock_from_text(text_html)
+    if text_stock in ("out_of_stock", "low_stock", "preorder_or_backorder"):
+        final_stock = text_stock
+    elif structured_stock != "unknown":
+        final_stock = structured_stock
+    else:
+        final_stock = text_stock
+
     specs = parse_specs(text_html[:450000])
     return {
         "url": url,
         "store": urlparse(url).netloc.lower(),
         "name": name or url,
         "price_jpy": picked["price_jpy"] if picked else None,
-        "stock_status": structured_stock if structured_stock != "unknown" else stock_from_text(text_html),
+        "stock_status": final_stock,
         "stock_ambiguity": "multiple_offer_availability" if len(availability_states) > 1 else None,
         "parsed_spec": specs,
         "page_text_excerpt": text_html[:12000],
