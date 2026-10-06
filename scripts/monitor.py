@@ -222,10 +222,12 @@ def parse_page(url, html):
             meta_price = None
 
     picked = None
-    if structured_price:
+    if price_ambiguity:
+        picked = None
+    elif structured_price:
         picked = {"price_jpy": structured_price, "source": "direct_structured"}
     elif meta_price:
-        picked = {"price_jpy": meta_price, "source": "direct_structured"}
+        picked = {"price_jpy": meta_price, "source": "direct_meta"}
     else:
         raw = pick_price(text_html)
         if raw:
