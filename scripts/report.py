@@ -62,13 +62,13 @@ def required_discount(price):
 def price_score(price):
     d=required_discount(price)
     if d is None:return 0
-    if d<=0:return 25
-    if d<=5:return 24
-    if d<=10:return 22
-    if d<=15:return 19
-    if d<=20:return 16
-    if d<=25:return 12
-    if d<=30:return 8
+    if d<=0:return 20
+    if d<=5:return 19
+    if d<=10:return 18
+    if d<=15:return 16
+    if d<=20:return 13
+    if d<=25:return 10
+    if d<=30:return 7
     if d<=40:return 4
     if d<=50:return 2
     return 0
@@ -198,7 +198,7 @@ def main():
         "method":{
             "total":100,
             "performance_max":40,
-            "price_max":25,
+            "price_max":20,
             "historical_evidence_max":15,
             "stock_max":15,
             "timing_max":10,
