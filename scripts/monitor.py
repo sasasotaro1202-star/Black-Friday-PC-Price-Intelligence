@@ -7,7 +7,7 @@ from urllib.request import Request,urlopen
 JST=timezone(timedelta(hours=9))
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 NOW=datetime.now(JST).replace(microsecond=0)
-UA="Mozilla/5.0 (compatible; BF-PC-Price-Intelligence/1.0)"
+UA="Mozilla/5.0 (compatible; BF-PC-Price-Intelligence/1.1)"
 
 def read_json(path,default):
     try:
@@ -26,30 +26,6 @@ def fetch(url,timeout=18):
         enc=r.headers.get_content_charset() or "utf-8"
         return r.read().decode(enc,errors="replace"),r.geturl()
 
-class Links(HTMLParser):
-    def __init__(self):
-        super().__init__();self.links=[]
-    def handle_starttag(self,tag,attrs):
-        if tag=="a":
-            d=dict(attrs)
-            if d.get("href"):self.links.append(d["href"])
-
-def search_web(q):
-    html,_=fetch("https://html.duckduckgo.com/html/?q="+quote(q),22)
-    p=Links();p.feed(html)
-    out=[];seen=set()
-    for href in p.links:
-        if "uddg=" in href:
-            u=parse_qs(urlparse(href).query).get("uddg")
-            if u:href=u[0]
-        if href.startswith("http") and href not in seen:
-            seen.add(href);out.append(href)
-    return out
-
-def allowed(u,domains):
-    host=urlparse(u).netloc.lower()
-    return any(host==d or host.endswith("."+d) for d in domains)
-
 def jsonld(html):
     blocks=re.findall(r'<script[^>]+type=["\\\']application/ld\\+json["\\\'][^>]*>(.*?)</script>',html,re.I|re.S)
     out=[]
@@ -63,6 +39,9 @@ def jsonld(html):
 def price(text):
     vals=[]
     for m in re.findall(r"(?:¥|￥)\\s*([0-9]{2,3}(?:,[0-9]{3})+|[0-9]{5,7})",text):
+        try:vals.append(int(m.replace(",","")))
+        except Exception:pass
+    for m in re.findall(r"(?<![0-9])([0-9]{2,3}(?:,[0-9]{3})+)\\s*円",text):
         try:vals.append(int(m.replace(",","")))
         except Exception:pass
     vals=[x for x in vals if 50000<=x<=1000000]
@@ -113,36 +92,29 @@ def parse(url,html):
             "spec":specs(text[:300000]),"fetch_status":"ok","observed_at":NOW.isoformat()}
 
 def fingerprint(x):
-    s={k:x.get(k) for k in ["name","price_jpy","stock_status","spec","fetch_status"]}
-    return hashlib.sha256(json.dumps(s,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+    stable={k:x.get(k) for k in ["name","price_jpy","stock_status","spec","fetch_status"]}
+    return hashlib.sha256(json.dumps(stable,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
 
 def main():
-    cfg=read_json(os.path.join(ROOT,"config/targets.json"),{})
     latest_path=os.path.join(ROOT,"data/current_latest.json")
     events_path=os.path.join(ROOT,"data/change_events.jsonl")
+    watch_path=os.path.join(ROOT,"data/watchlist.json")
+    watch=read_json(watch_path,{"generated_at":None,"urls":[]})
+    urls=watch.get("urls",[])[:80]
     previous=read_json(latest_path,{}).get("products",[])
     previous_by_url={x["url"]:x for x in previous}
-    discovered=[]
-    for q in cfg.get("queries",[]):
-        try:discovered.extend(search_web(q)[:cfg.get("max_results_per_query",6)])
-        except Exception:pass
-    urls=[];seen=set()
-    for u in discovered:
-        if u in seen or not allowed(u,cfg.get("allowed_domains",[])):continue
-        seen.add(u);urls.append(u)
-        if len(urls)>=cfg.get("max_pages_per_run",35):break
     products=[]
     for u in urls:
         try:
             html,final=fetch(u)
             item=parse(final,html)
-            blob=(item["name"]+" "+json.dumps(item["spec"],ensure_ascii=False)).lower()
-            if any(g in blob for g in ["rtx 5080","rtx 5090","rtx 5070 ti"]) and any(k in blob for k in ["laptop","ノート","gaming","ゲーミング"]):
-                item["fingerprint"]=fingerprint(item);products.append(item)
+            item["fingerprint"]=fingerprint(item)
+            products.append(item)
         except Exception:
-            products.append({"url":u,"store":urlparse(u).netloc.lower(),"name":u,"price_jpy":None,
-                             "stock_status":"unknown","spec":{},"fetch_status":"error",
-                             "observed_at":NOW.isoformat(),"fingerprint":hashlib.sha256(u.encode()).hexdigest()})
+            products.append({"url":u,"store":urlparse(u).netloc.lower(),"name":u,
+                             "price_jpy":None,"stock_status":"unknown","spec":{},
+                             "fetch_status":"error","observed_at":NOW.isoformat(),
+                             "fingerprint":hashlib.sha256(u.encode()).hexdigest()})
     changes=[]
     for item in products:
         prev=previous_by_url.get(item["url"])
@@ -158,12 +130,11 @@ def main():
                         "old_spec":prev.get("spec") if prev else None,
                         "new_spec":item.get("spec"),
                         "event_type":"new" if not prev else "changed"})
-    write_json(latest_path,{"generated_at":NOW.isoformat(),"products":products})
+    write_json(latest_path,{"generated_at":NOW.isoformat(),"watchlist_generated_at":watch.get("generated_at"),"products":products})
     if changes:
         os.makedirs(os.path.dirname(events_path),exist_ok=True)
         with open(events_path,"a",encoding="utf-8") as f:
             for e in changes:f.write(json.dumps(e,ensure_ascii=False)+"\\n")
-    print(json.dumps({"observed_at":NOW.isoformat(),"checked_urls":len(urls),
-                      "products":len(products),"changes":len(changes)},ensure_ascii=False))
+    print(json.dumps({"observed_at":NOW.isoformat(),"watch_urls":len(urls),"products":len(products),"changes":len(changes)},ensure_ascii=False))
 
 if __name__=="__main__":main()
