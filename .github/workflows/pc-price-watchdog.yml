@@ -3,7 +3,7 @@ name: PC Price Intelligence - Watchdog
 on:
   workflow_dispatch:
   schedule:
-    - cron: "12 * * * *"
+    - cron: "12,27,42,57 * * * *"
 
 permissions:
   contents: read
