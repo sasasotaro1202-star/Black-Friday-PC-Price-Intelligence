@@ -67,6 +67,9 @@ def main():
     # Latest observation integrity
     latest = load_json(os.path.join(ROOT, "data", "current_latest.json"), {})
     products = latest.get("products", [])
+    latest_generated = parse_dt(latest.get("generated_at"))
+    if latest_generated is None:
+        errors.append("latest.generated_at is missing or invalid")
     if not isinstance(products, list):
         errors.append("latest.products is not a list")
         products = []
@@ -122,6 +125,8 @@ def main():
                 errors.append(f"current price lacks observation timestamps: {cid}")
             elif av > rt:
                 errors.append(f"available_at after retrieval_time: {cid}")
+            if latest_generated is not None and rt is not None and rt != latest_generated:
+                errors.append(f"latest retrieval timestamp mismatch: {cid}")
 
     # Event-log integrity
     event_path = os.path.join(ROOT, "data", "change_events.jsonl")
@@ -198,6 +203,12 @@ def main():
     if [str(x.get("id") or "") for x in ranked] != [str(x.get("id") or "") for x in expected_order]:
         errors.append("ranking order is not deterministic score-desc/price-asc/id-asc")
 
+    ranking_generated = parse_dt(rankings.get("generated_at"))
+    ranking_prediction = parse_dt(rankings.get("prediction_time"))
+    if ranking_generated is None or ranking_prediction is None:
+        errors.append("ranking generated_at/prediction_time missing or invalid")
+    elif ranking_generated != ranking_prediction:
+        errors.append("ranking generated_at != prediction_time")
     top = rankings.get("top_recommendation") or {}
     if ranked:
         if top.get("id") != ranked[0].get("id"):
@@ -206,6 +217,8 @@ def main():
         errors.append("top recommendation exists while ranking is empty")
     if top.get("status") == "UNAVAILABLE":
         errors.append("top recommendation is unavailable")
+    if not ranked and top.get("id") is not None:
+        errors.append("top recommendation must be empty when no actionable ranking exists")
 
     # Quality counters must describe the actual output partition.
     quality = rankings.get("quality") or {}
@@ -221,11 +234,37 @@ def main():
             if x.get("stock_status") == "out_of_stock"
         ):
             errors.append("quality.out_of_stock mismatch")
-        if quality.get("unknown_stock") != sum(
-            1 for x in ranked + unavailable + reference_only
-            if x.get("stock_status") == "unknown"
-        ):
-            errors.append("quality.unknown_stock mismatch")
+        partition = ranked + unavailable + reference_only
+        expected_quality = {
+            "direct_verified": sum(
+                1 for x in partition
+                if x.get("current_price_jpy") is not None
+                and x.get("price_source_mode") in ("direct_structured", "direct_page", "direct_text")
+            ),
+            "search_verified": sum(
+                1 for x in partition
+                if x.get("current_price_jpy") is not None
+                and x.get("price_source_mode") == "search_snippet"
+            ),
+            "anomaly_rejected": sum(1 for x in partition if x.get("price_validation_status") == "anomaly_rejected"),
+            "variant_ambiguous": sum(1 for x in partition if x.get("variant_match") == "ambiguous"),
+            "unknown_stock": sum(1 for x in partition if x.get("stock_status") == "unknown"),
+            "out_of_stock": sum(1 for x in partition if x.get("stock_status") == "out_of_stock"),
+            "dynamic_candidate_count": sum(1 for x in partition if x.get("dynamic_candidate")),
+            "pit_unknown": sum(
+                1 for x in partition
+                if x.get("current_price_jpy") is not None and not x.get("available_at")
+            ),
+            "pit_failures": sum(
+                1 for x in partition
+                if x.get("current_price_jpy") is not None
+                and x.get("available_at") and x.get("prediction_time")
+                and not x.get("pit_valid", False)
+            ),
+        }
+        for key, expected in expected_quality.items():
+            if quality.get(key) != expected:
+                errors.append(f"quality.{key} mismatch")
 
     # Actionable row invariants.
     for r in ranked:
@@ -295,10 +334,28 @@ def main():
             errors.append(f"ranking PIT violation: {rid}")
 
     # The entire ranked state must be partitioned back to the catalog/live candidate set.
-    if quality:
-        dynamic = sum(1 for x in ranked + unavailable + reference_only if x.get("dynamic_candidate"))
-        if quality.get("dynamic_candidate_count") != dynamic:
-            errors.append("quality.dynamic_candidate_count mismatch")
+    expected_ids = set(catalog_ids)
+    expected_ids.update(str(x.get("id") or "") for x in products if x.get("id"))
+    if set(all_ranked_ids) != expected_ids:
+        missing = sorted(expected_ids - set(all_ranked_ids))
+        extra = sorted(set(all_ranked_ids) - expected_ids)
+        errors.append(f"ranking partition does not match live/catalog ids: missing={missing}, extra={extra}")
+
+    for r in ranked:
+        if ranking_prediction is not None and parse_dt(r.get("prediction_time")) != ranking_prediction:
+            errors.append(f"ranking prediction snapshot mismatch: {r.get('id')}")
+
+    for r in unavailable:
+        if r.get("stock_status") != "out_of_stock":
+            errors.append(f"unavailable partition contains non-out-of-stock row: {r.get('id')}")
+        if r.get("rank") is not None:
+            errors.append(f"unavailable row has a rank: {r.get('id')}")
+
+    for r in reference_only:
+        if r.get("decision_score") is not None:
+            errors.append(f"reference-only row has a decision score: {r.get('id')}")
+        if r.get("current_price_jpy") is not None:
+            errors.append(f"reference-only row exposes current price: {r.get('id')}")
 
     if errors:
         for e in errors:
