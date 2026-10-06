@@ -590,7 +590,7 @@ def decision_score(item, anchors, events=None):
             reason = "retrieval_after_prediction"
         return None, {
             "status": "UNACTIONABLE",
-            "reason": "current_price_not_verified",
+            "reason": reason,
             "performance": 0,
             "price": 0,
             "history": 0,

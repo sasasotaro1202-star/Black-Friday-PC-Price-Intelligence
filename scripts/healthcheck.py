@@ -82,8 +82,9 @@ def main():
                 seen_events.add(key)
                 if e.get("new_price_jpy") is not None:
                     av = parse_dt(e.get("available_at"))
+                    rt = parse_dt(e.get("retrieval_time"))
                     pr = parse_dt(e.get("prediction_time"))
-                    if av is None or pr is None or av > pr:
+                    if av is None or rt is None or pr is None or av > rt or rt > pr:
                         errors.append(f"invalid PIT in change event line {n}")
 
     rankings = load_json(os.path.join(ROOT, "data", "decision_rankings.json"), {})
