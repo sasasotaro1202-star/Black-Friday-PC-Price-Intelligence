@@ -55,25 +55,45 @@ def useful(u):
 
 def main():
     cfg=load(os.path.join(ROOT,"config/targets.json"),{})
-    urls=[];seen=set()
-    previous=load(os.path.join(ROOT,"data/watchlist.json"),{"generated_at":None,"urls":[]})
-    # Preserve all known URLs first; discovery only appends new candidates.
-    for u in previous.get("urls",[]):
-        if isinstance(u,str) and u.startswith("http") and u not in seen:
-            seen.add(u);urls.append(u)
-    for q in cfg.get("queries",[]):
-        try:found=search(q)
-        except Exception:continue
-        for u in found:
-            if not allowed(u,cfg.get("allowed_domains",[])) or not useful(u) or u in seen:continue
-            seen.add(u);urls.append(u)
-    urls=urls[:100]
     watch_path=os.path.join(ROOT,"data/watchlist.json")
+    previous=load(watch_path,{"generated_at":None,"urls":[]})
+    entries=[];seen=set()
+
+    def add(entry):
+        if isinstance(entry,str):
+            entry={"id":entry,"url":entry,"query":"","priority":"normal"}
+        elif isinstance(entry,dict):
+            entry=dict(entry)
+            entry.setdefault("id",entry.get("url",""))
+            entry.setdefault("query","")
+            entry.setdefault("priority","normal")
+        else:
+            return
+        u=entry.get("url","")
+        cid=entry.get("id","")
+        if not u or not u.startswith("http") or not cid or cid in seen:return
+        seen.add(cid);entries.append(entry)
+
+    # Preserve all curated/manual candidates first.
+    for entry in previous.get("urls",[]):
+        add(entry)
+
+    # Append discovered candidates, carrying the exact query used for fallback price search.
+    for q in cfg.get("queries",[]):
+        try:
+            found=search(q)
+        except Exception:
+            continue
+        for u in found:
+            if not allowed(u,cfg.get("allowed_domains",[])) or not useful(u):continue
+            add({"id":u,"url":u,"query":q,"priority":"discovered"})
+
+    entries=entries[:100]
     previous["generated_at"]=NOW.isoformat()
-    previous["urls"]=urls
-    previous["discovery_status"]="ok" if urls else "empty"
-    previous["discovery_error"]=None if urls else "No usable URLs discovered."
+    previous["urls"]=entries
+    previous["discovery_status"]="ok" if entries else "empty"
+    previous["discovery_error"]=None if entries else "No usable URLs discovered."
     save(watch_path,previous)
-    print(json.dumps({"generated_at":NOW.isoformat(),"urls":len(urls),"status":previous["discovery_status"]},ensure_ascii=False))
+    print(json.dumps({"generated_at":NOW.isoformat(),"urls":len(entries),"status":previous["discovery_status"]},ensure_ascii=False))
 
 if __name__=="__main__":main()
