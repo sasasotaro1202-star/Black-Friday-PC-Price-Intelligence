@@ -63,6 +63,12 @@ def main():
 
     products = build_products(latest, catalog)
     generated = iso(now_jst())
+    watch = load_json(os.path.join(ROOT, "data", "watchlist.json"), {"urls": []})
+    priority_by_id = {
+        str(x.get("id")): str(x.get("priority") or "normal").lower()
+        for x in (watch.get("urls") or [])
+        if isinstance(x, dict) and x.get("id")
+    }
     scored = []
     reference_only = []
 
@@ -94,8 +100,30 @@ def main():
     scored = available
     action = scored[0] if scored else None
 
+    partition = scored + unavailable + reference_only
+    critical_ids = [cid for cid, priority in priority_by_id.items() if priority == "critical"]
+    by_id = {str(x.get("id")): x for x in partition if x.get("id")}
+    critical_unverified = [
+        cid for cid in critical_ids
+        if not (
+            by_id.get(cid, {}).get("current_price_jpy") is not None
+            and by_id.get(cid, {}).get("price_source_mode") == "direct_structured"
+            and by_id.get(cid, {}).get("variant_match") in ("exact", "trusted_url", "strong")
+            and by_id.get(cid, {}).get("stock_status") in ("in_stock", "low_stock", "out_of_stock")
+        )
+    ]
+    coverage_status = "COMPLETE" if not critical_unverified else "PARTIAL"
+    purchase_gate_allowed = bool(
+        action
+        and coverage_status == "COMPLETE"
+        and action.get("score_detail", {}).get("status") in ("BUY_NOW", "BUY_NOW_LOW_STOCK")
+    )
+
     quality = {
         "candidate_count": len(products),
+        "critical_candidate_count": len(critical_ids),
+        "critical_unverified_count": len(critical_unverified),
+        "coverage_status": coverage_status,
         "actionable_count": len(scored),
         "reference_only_count": len(reference_only),
         "dynamic_candidate_count": sum(1 for x in products if x.get("dynamic_candidate")),
@@ -130,6 +158,12 @@ def main():
         "prediction_time": generated,
         "budget_jpy": BUDGET,
         "season_phase": __import__("intelligence").season_phase(),
+        "purchase_gate": {
+            "allowed": purchase_gate_allowed,
+            "coverage_status": coverage_status,
+            "critical_unverified_ids": critical_unverified,
+            "reason": "critical_candidates_not_fully_verified" if critical_unverified else "no_buy_now_candidate" if not purchase_gate_allowed else "all_critical_candidates_verified",
+        },
         "top_recommendation": {
             "id": action.get("id") if action else None,
             "name": action.get("name") if action else None,
@@ -206,6 +240,9 @@ def main():
         "## データ品質",
         "",
         f"- 候補総数: {quality['candidate_count']}",
+        f"- 重要候補: {quality['critical_candidate_count']}",
+        f"- 重要候補の未確認: {quality['critical_unverified_count']}",
+        f"- カバレッジ: {quality['coverage_status']}",
         f"- 現行価格を使える候補: {quality['actionable_count']}",
         f"- 参照情報のみ: {quality['reference_only_count']}",
         f"- 自動発見候補: {quality['dynamic_candidate_count']}",
