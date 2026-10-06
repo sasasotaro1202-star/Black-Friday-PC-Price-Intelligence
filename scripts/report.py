@@ -138,9 +138,13 @@ def performance_score(x):
     gpu,gp=gpu_points(x)
     cp=cpu_points(x)
     spec=x.get("spec",{})
+    tgp=spec.get("tgp_w") or 0
+    vram=spec.get("vram_gb") or 0
     ram=2 if spec.get("ram_gb",0)>=32 else 0
     ssd=2 if re.search(r"1\s*TB",str(spec.get("ssd","")),re.I) else 0
-    return min(40,gp+cp+ram+ssd),gpu
+    tgp_bonus=4 if tgp>=130 else 3 if tgp>=115 else 2 if tgp>=100 else 0
+    vram_bonus=1 if vram>=12 else 0
+    return min(40,gp+cp+ram+ssd+tgp_bonus+vram_bonus),gpu
 
 def decision_score(x,anchors):
     p=x.get("price_jpy")
@@ -179,10 +183,13 @@ def main():
     anchors=hist.get("anchors",[])
     products=[x for x in latest.get("products",[])
               if x.get("price_jpy") and x.get("price_jpy")<=MAX_OBSERVATION_PRICE
-              and x.get("fetch_status")=="ok"]
+              and x.get("fetch_status") in ("ok","search_fallback","baseline")]
+
     ranked=[]
     for p in products:
         total,detail=decision_score(p,anchors)
+        detail["source_mode"]=p.get("price_source_mode","unknown")
+        detail["data_confidence"]=p.get("data_confidence","unknown")
         ranked.append({
             **p,
             "decision_score":total,
