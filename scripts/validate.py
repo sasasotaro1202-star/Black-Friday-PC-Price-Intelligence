@@ -50,6 +50,12 @@ def main():
                 errors.append(f"observation PIT violation: {cid}")
 
     ranked = rankings.get("products", [])
+    ranking_prediction = parse_dt(rankings.get("prediction_time"))
+    ranking_generated = parse_dt(rankings.get("generated_at"))
+    if ranking_prediction is None or ranking_generated is None:
+        errors.append("ranking prediction/generated time missing")
+    elif ranking_prediction != ranking_generated:
+        errors.append("ranking prediction_time != generated_at")
     expected_order = sorted(ranked, key=lambda x: (
         -(x.get("decision_score") if x.get("decision_score") is not None else -1),
         x.get("current_price_jpy") if x.get("current_price_jpy") is not None else 10**12,
@@ -80,6 +86,8 @@ def main():
                 errors.append(f"score outside 0..100: {r.get('id')}")
             if not r.get("prediction_time"):
                 errors.append(f"missing prediction_time: {r.get('id')}")
+            elif ranking_prediction is not None and parse_dt(r.get("prediction_time")) != ranking_prediction:
+                errors.append(f"ranking prediction snapshot mismatch: {r.get('id')}")
             av = r.get("available_at")
             rt = r.get("retrieval_time")
             pr = r.get("prediction_time")
