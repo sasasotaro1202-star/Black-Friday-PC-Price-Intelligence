@@ -223,9 +223,21 @@ def main():
         d=r["score_detail"]
         lines.append(
             f"|{i}|{r.get('name','')[:45]}|¥{r['price_jpy']:,}|{d['required_discount_pct']:.1f}%|"
-            f"{d['performance']}/40|{d['price']}/25|{d['history']}/15|{d['stock']}/12|{d['timing']}/10|"
+            f"{d['performance']}/40|{d['price']}/20|{d['history']}/15|{d['stock']}/15|{d['timing']}/10|"
             f"**{r['decision_score']}/100**|"
         )
+
+    lines += ["", "## 上位候補の買い方", ""]
+    for i,r in enumerate(ranked[:10],1):
+        d=r["score_detail"]
+        lines += [
+            f"### {i}. {r.get('name','')}",
+            f"- **総合: {r['decision_score']}/100**",
+            f"- 性能 {d['performance']}/40 / 価格 {d['price']}/20 / 過去セール根拠 {d['history']}/15 / 在庫安全度 {d['stock']}/15 / タイミング {d['timing']}/10",
+            f"- 現在価格: ¥{r['price_jpy']:,} / 28万円まで必要な値下げ: {d['required_discount_pct']:.1f}%",
+            f"- 判断: {d['timing_guidance']}",
+            ""
+        ]
 
     lines += [
         "",
