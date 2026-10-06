@@ -1,81 +1,408 @@
 {
-  "generated_at": "2026-10-07T07:10:40+09:00",
+  "generated_at": "2026-10-07T07:28:49+09:00",
   "budget_jpy": 280000,
-  "note": "Scenario bands are decision aids, not statistical probabilities.",
+  "note": "10/15/20/25/30% scenarios are planning bands, not probabilities.",
   "rows": [
     {
       "id": "gtune-p6-13700hx-5070",
-      "name": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
-      "current_price_jpy": 258819,
-      "required_discount_pct": 0.0,
-      "reachability": "high",
+      "name": "G TUNE P6-I7G70BK-B",
+      "form_factor": "laptop",
+      "current_price_jpy": 284700,
+      "reference_price_jpy": 284700,
+      "reference_only": false,
+      "required_discount_pct": 1.7,
       "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
       "scenario_prices": [
         {
           "discount_pct": 10,
-          "price_jpy": 232900.0
+          "price_jpy": 256200
         },
         {
           "discount_pct": 15,
-          "price_jpy": 220000.0
+          "price_jpy": 242000
         },
         {
           "discount_pct": 20,
-          "price_jpy": 207100.0
+          "price_jpy": 227800
         },
         {
           "discount_pct": 25,
-          "price_jpy": 194100.0
+          "price_jpy": 213500
         },
         {
           "discount_pct": 30,
-          "price_jpy": 181200.0
+          "price_jpy": 199300
         }
       ],
       "first_280k_scenario": {
         "discount_pct": 10,
-        "price_jpy": 232900.0
+        "price_jpy": 256200
       },
       "stock_status": "in_stock",
-      "source_mode": "direct_page",
-      "confidence": "high"
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
     },
     {
       "id": "gtune-p5-13620h-5070",
-      "name": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
-      "current_price_jpy": 90000,
-      "required_discount_pct": 0.0,
-      "reachability": "high",
+      "name": "G TUNE P5-I7G70BK-C（ブラック）",
+      "form_factor": "laptop",
+      "current_price_jpy": 329800,
+      "reference_price_jpy": 329800,
+      "reference_only": false,
+      "required_discount_pct": 15.1,
       "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
       "scenario_prices": [
         {
           "discount_pct": 10,
-          "price_jpy": 81000.0
+          "price_jpy": 296800
         },
         {
           "discount_pct": 15,
-          "price_jpy": 76500.0
+          "price_jpy": 280300
         },
         {
           "discount_pct": 20,
-          "price_jpy": 72000.0
+          "price_jpy": 263800
         },
         {
           "discount_pct": 25,
-          "price_jpy": 67500.0
+          "price_jpy": 247400
         },
         {
           "discount_pct": 30,
-          "price_jpy": 63000.0
+          "price_jpy": 230900
         }
       ],
       "first_280k_scenario": {
-        "discount_pct": 10,
-        "price_jpy": 81000.0
+        "discount_pct": 20,
+        "price_jpy": 263800
       },
       "stock_status": "in_stock",
-      "source_mode": "direct_page",
-      "confidence": "high"
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "candidate-4",
+      "name": "Lenovo Legion Pro 5i Gen 10（16型 Intel）",
+      "form_factor": "laptop",
+      "current_price_jpy": 354865,
+      "reference_price_jpy": null,
+      "reference_only": false,
+      "required_discount_pct": 21.1,
+      "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 319400
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 301600
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 283900
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 266100
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 248400
+        }
+      ],
+      "first_280k_scenario": {
+        "discount_pct": 25,
+        "price_jpy": 266100
+      },
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "tuf-a16-8940hx-5070",
+      "name": "ASUS TUF Gaming A16 FA608PP-R9R5070S",
+      "form_factor": "laptop",
+      "current_price_jpy": null,
+      "reference_price_jpy": 319800,
+      "reference_only": true,
+      "required_discount_pct": 12.4,
+      "historical_floor_jpy": 219800,
+      "historical_floor_strength": "same_family",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 287800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 271800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 255800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 239800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 223900
+        }
+      ],
+      "first_280k_scenario": {
+        "discount_pct": 15,
+        "price_jpy": 271800
+      },
+      "stock_status": "unknown",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "galleria-zl9r-9955hx-5070ti",
+      "name": "GALLERIA ZL9R-R57T-6",
+      "form_factor": "laptop",
+      "current_price_jpy": null,
+      "reference_price_jpy": 329980,
+      "reference_only": true,
+      "required_discount_pct": 15.1,
+      "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 297000
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 280500
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 264000
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 247500
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 231000
+        }
+      ],
+      "first_280k_scenario": {
+        "discount_pct": 20,
+        "price_jpy": 264000
+      },
+      "stock_status": "unknown",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "rog-g16-9955hx3d",
+      "name": "ROG Strix G16 G614FR-R9X3D5070TI",
+      "form_factor": "laptop",
+      "current_price_jpy": null,
+      "reference_price_jpy": 359800,
+      "reference_only": true,
+      "required_discount_pct": 22.2,
+      "historical_floor_jpy": 299800,
+      "historical_floor_strength": "same_family",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 323800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 305800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 287800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 269800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 251900
+        }
+      ],
+      "first_280k_scenario": {
+        "discount_pct": 25,
+        "price_jpy": 269800
+      },
+      "stock_status": "unknown",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "rog-g16-8940hx-5070ti",
+      "name": "ROG Strix G16 G614PR-R9R5070TI",
+      "form_factor": "laptop",
+      "current_price_jpy": null,
+      "reference_price_jpy": 359800,
+      "reference_only": true,
+      "required_discount_pct": 22.2,
+      "historical_floor_jpy": 299800,
+      "historical_floor_strength": "same_family",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 323800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 305800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 287800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 269800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 251900
+        }
+      ],
+      "first_280k_scenario": {
+        "discount_pct": 25,
+        "price_jpy": 269800
+      },
+      "stock_status": "unknown",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": null,
+      "dynamic_candidate": false
+    },
+    {
+      "id": "gigabyte-a18-pro-240h-5070ti",
+      "name": "GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）",
+      "form_factor": "laptop",
+      "current_price_jpy": null,
+      "reference_price_jpy": 419800,
+      "reference_only": true,
+      "required_discount_pct": 33.3,
+      "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 377800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 356800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 335800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 314800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 293900
+        }
+      ],
+      "first_280k_scenario": null,
+      "stock_status": "out_of_stock",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "variant_ambiguous",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "zephyrus-g16-386h-5070ti",
+      "name": "ROG Zephyrus G16 GU606AR-U9R5070TIG32G",
+      "form_factor": "laptop",
+      "current_price_jpy": null,
+      "reference_price_jpy": 599800,
+      "reference_only": true,
+      "required_discount_pct": 53.3,
+      "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 539800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 509800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 479800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 449800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 419900
+        }
+      ],
+      "first_280k_scenario": null,
+      "stock_status": "unknown",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "zephyrus-g14-386h-5070ti",
+      "name": "ROG Zephyrus G14 GU405AR-U9R5070TIG",
+      "form_factor": "laptop",
+      "current_price_jpy": null,
+      "reference_price_jpy": 684800,
+      "reference_only": true,
+      "required_discount_pct": 59.1,
+      "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 616300
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 582100
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 547800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 513600
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 479400
+        }
+      ],
+      "first_280k_scenario": null,
+      "stock_status": "unknown",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
+      "dynamic_candidate": false
     }
   ]
 }

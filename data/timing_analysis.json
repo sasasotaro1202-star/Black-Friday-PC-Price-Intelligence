@@ -1,33 +1,46 @@
 {
-  "generated_at": "2026-10-07T07:10:40+09:00",
+  "generated_at": "2026-10-07T07:28:49+09:00",
   "budget_jpy": 280000,
   "target_black_friday": "2026-11-27",
   "target_products": [
     {
-      "id": "gtune-p5-13620h-5070",
-      "name": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
-      "store": "www.mouse-jp.co.jp",
-      "price_jpy": 90000,
-      "required_discount_pct": 0.0,
+      "id": "gtune-p6-13700hx-5070",
+      "name": "G TUNE P6-I7G70BK-B",
+      "store": null,
+      "price_jpy": 284700,
+      "required_discount_pct": 1.7,
       "feasibility": "HIGH",
       "gpu": "rtx 5070",
-      "performance_score": 77,
-      "observed_at": "2026-10-07T07:10:14+09:00",
-      "source_mode": "direct_page",
-      "confidence": "high"
+      "performance_score": 35,
+      "source_mode": "direct_structured",
+      "confidence": "high",
+      "dynamic_candidate": false
     },
     {
-      "id": "gtune-p6-13700hx-5070",
-      "name": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
-      "store": "www.mouse-jp.co.jp",
-      "price_jpy": 258819,
-      "required_discount_pct": 0.0,
-      "feasibility": "HIGH",
-      "gpu": null,
-      "performance_score": -1,
-      "observed_at": "2026-10-07T07:10:14+09:00",
-      "source_mode": "direct_page",
-      "confidence": "high"
+      "id": "gtune-p5-13620h-5070",
+      "name": "G TUNE P5-I7G70BK-C（ブラック）",
+      "store": null,
+      "price_jpy": 329800,
+      "required_discount_pct": 15.1,
+      "feasibility": "REALISTIC",
+      "gpu": "rtx 5070",
+      "performance_score": 32,
+      "source_mode": "direct_structured",
+      "confidence": "high",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "candidate-4",
+      "name": "Lenovo Legion Pro 5i Gen 10（16型 Intel）",
+      "store": null,
+      "price_jpy": 354865,
+      "required_discount_pct": 21.1,
+      "feasibility": "AGGRESSIVE",
+      "gpu": "rtx 5070 ti",
+      "performance_score": 40,
+      "source_mode": "direct_structured",
+      "confidence": "high",
+      "dynamic_candidate": false
     }
   ],
   "historical_events": [
@@ -70,38 +83,6 @@
       "source": "https://www.lenovo.com/jp/ja/campaigns/black-friday/"
     }
   ],
-  "historical_timing_windows": [
-    [
-      "2026-11-14",
-      "2026-11-20",
-      "メーカー予告・先行",
-      "HIGH"
-    ],
-    [
-      "2026-11-19",
-      "2026-11-23",
-      "先行セール/サプライズ",
-      "VERY_HIGH"
-    ],
-    [
-      "2026-11-24",
-      "2026-11-27",
-      "本番前半〜BF当日",
-      "MAX"
-    ],
-    [
-      "2026-11-28",
-      "2026-11-30",
-      "本番後半/Cyber Monday",
-      "HIGH"
-    ],
-    [
-      "2026-12-01",
-      "2026-12-04",
-      "延長・在庫処分",
-      "MEDIUM"
-    ]
-  ],
   "observed_change_timing": {
     "sample_size": 0,
     "hourly_counts": {},
@@ -110,8 +91,7 @@
     "recent_changes": []
   },
   "interpretation": {
-    "important_caveat": "Observed/publication time is not the seller's hidden internal price-change timestamp.",
-    "dynamic_timing_rule": "Only meaningful price changes with both old and new prices are used for empirical hour analysis.",
+    "important_caveat": "Observed/retrieval time is an upper bound on when this system knew the change, not seller-internal price-change time.",
     "minimum_sample_for_hour_pattern": 20
   }
 }

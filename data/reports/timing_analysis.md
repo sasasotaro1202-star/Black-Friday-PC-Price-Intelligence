@@ -1,30 +1,21 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-07T07:10:40+09:00
+Generated: 2026-10-07T07:28:49+09:00
 Budget: ¥280,000
 Target Black Friday: 2026-11-27
 
-## Current candidates
+## Current actionable candidates
 
 |Rank|Product|Current|Required discount|Feasibility|GPU|Perf|Source|
 |---:|---|---:|---:|---|---|---:|---|
-|1|https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw|¥90,000|0.0%|HIGH|rtx 5070|77|direct_page|
-|2|https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw|¥258,819|0.0%|HIGH|None|-1|direct_page|
+|1|G TUNE P6-I7G70BK-B|¥284,700|1.7%|HIGH|rtx 5070|35|direct_structured|
+|2|G TUNE P5-I7G70BK-C（ブラック）|¥329,800|15.1%|REALISTIC|rtx 5070|32|direct_structured|
+|3|Lenovo Legion Pro 5i Gen 10（16型 Intel）|¥354,865|21.1%|AGGRESSIVE|rtx 5070 ti|40|direct_structured|
 
 ## Empirical price-change timing
 
-- Meaningful price-change sample: **0**
-- **観測不足:** 20件未満なので、時間帯の傾向を断定しません。
-
-## 2026 watch windows (forecast, not guaranteed price-change timestamps)
-
-|Window|Reason|Priority|
-|---|---|---|
-|2026-11-14 → 2026-11-20|メーカー予告・先行|**HIGH**|
-|2026-11-19 → 2026-11-23|先行セール/サプライズ|**VERY_HIGH**|
-|2026-11-24 → 2026-11-27|本番前半〜BF当日|**MAX**|
-|2026-11-28 → 2026-11-30|本番後半/Cyber Monday|**HIGH**|
-|2026-12-01 → 2026-12-04|延長・在庫処分|**MEDIUM**|
+- Meaningful change sample: **0**
+- **観測不足:** 20件未満なので時間帯の傾向は作りません。
 
 ## Historical anchors
 
@@ -38,6 +29,5 @@ Target Black Friday: 2026-11-27
 
 ## Rules
 - Missing retrieval is not stockout.
-- Baseline/search-snippet prices are evidence with lower confidence than direct structured product data.
-- Seller-internal price-change time is never claimed from an article publication timestamp.
-- A lower-than-expected price should be evaluated together with stock and configuration before purchase.
+- Seller-internal price-change time is never inferred from article publication time.
+- Timing observations are empirical only after sufficient sample size.
