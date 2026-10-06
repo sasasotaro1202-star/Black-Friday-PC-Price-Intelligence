@@ -75,6 +75,16 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertTrue(result["valid"])
         self.assertEqual(result["status"], "anomaly_corroborated")
 
+    def test_build_row_uses_one_supplied_prediction_snapshot(self):
+        item = self.candidate()
+        snapshot = "2026-10-07T08:00:00+09:00"
+        row = intelligence.build_row(item, [], [], prediction_time=snapshot)
+        self.assertEqual(row["prediction_time"], snapshot)
+        self.assertEqual(
+            row["score_detail"]["observation_age_minutes"],
+            0.0,
+        )
+
     def test_missing_pit_is_unactionable(self):
         item = self.candidate()
         item["available_at"] = None
