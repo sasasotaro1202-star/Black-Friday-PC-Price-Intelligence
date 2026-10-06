@@ -77,6 +77,20 @@ class DecisionScoringTests(unittest.TestCase):
         out = intelligence.enrich_identity(item, cat)
         self.assertEqual(out["variant_match"], "ambiguous")
 
+    def test_history_exact_beats_family(self):
+        item = {"id":"exact-id","name":"TUF Gaming A16 FA608PP-R9R5070S",
+                "family":"TUF Gaming A16","spec":{"gpu":"RTX 5070 Laptop GPU"}}
+        anchors=[{"key":"TUF Gaming A16 FA608PP","family":"TUF Gaming A16",
+                  "gpu":"RTX 5070","historical_price_jpy":219800}]
+        score,_=intelligence.history_score(item,anchors)
+        self.assertGreaterEqual(score,12)
+
+    def test_dynamic_candidate_is_capped(self):
+        item = self.candidate()
+        item["dynamic_candidate"]=True
+        score,detail=intelligence.decision_score(item,[],[])
+        self.assertLessEqual(score,74)
+
     def test_ambiguous_variant_is_capped(self):
         item = self.candidate(variant="ambiguous")
         score, detail = intelligence.decision_score(item, [], [])

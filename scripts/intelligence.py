@@ -301,35 +301,51 @@ def price_score(price):
             return points
     return 0
 
-def history_match(item, anchor):
+def history_match_strength(item, anchor):
     name = norm_text(item.get("name"))
     family = norm_text(item.get("family"))
     key = norm_text(item.get("id"))
     afamily = norm_text(anchor.get("family"))
     akey = norm_text(anchor.get("key"))
     aliases = [norm_text(x) for x in (item.get("aliases") or [])]
-    return bool(
-        (afamily and (afamily in family or afamily in name)) or
+    g = gpu_key(item)
+    ag = normalize_gpu(anchor.get("gpu"))
+
+    exact = bool(
         (akey and (akey == key or akey in name)) or
-        any(afamily and afamily in a for a in aliases)
+        (akey and any(akey in a for a in aliases))
     )
+    if exact:
+        return 3
+    same_family = bool(afamily and (afamily in family or afamily in name))
+    if same_family and g and ag and g == ag:
+        return 2
+    if same_family:
+        return 1
+    return 0
+
+def history_match(item, anchor):
+    return history_match_strength(item, anchor) > 0
 
 def history_score(item, anchors):
     best = 0
     matched = []
     g = gpu_key(item)
     for a in anchors:
-        if not history_match(item, a):
+        strength = history_match_strength(item, a)
+        if strength <= 0:
             continue
         matched.append(a)
         p = a.get("historical_price_jpy")
         ag = normalize_gpu(a.get("gpu"))
-        local = 0
         if p and p <= BUDGET:
-            local = 13
+            local = {3: 13, 2: 10, 1: 7}[strength]
         elif p:
             d = required_discount(p)
-            local = 11 if d is not None and d <= 20 else 7
+            base = 10 if d is not None and d <= 20 else 6
+            local = {3: base, 2: max(5, base-1), 1: max(4, base-3)}[strength]
+        else:
+            local = 0
         if g and ag and g == ag:
             local += 2
         if a.get("historical_sellout") or "売り切れ" in norm_text(a.get("historical_note")):
@@ -453,6 +469,8 @@ def data_quality_cap(item):
     cap = 100
     variant = item.get("variant_match")
     mode = item.get("price_source_mode")
+    if item.get("dynamic_candidate"):
+        cap = min(cap, 74)
     if variant == "ambiguous":
         cap = min(cap, 74)
     elif variant == "gpu_only":
