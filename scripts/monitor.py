@@ -201,13 +201,17 @@ def search_fallback(query,canonical_url):
 
 def normalize_watch_entry(entry):
     if isinstance(entry,str):
-        return {"url":entry,"query":""}
+        return {"id":entry,"url":entry,"query":"","priority":"normal"}
     if isinstance(entry,dict):
-        return {"url":entry.get("url",""),"query":entry.get("query",""),"priority":entry.get("priority","normal")}
-    return {"url":"","query":""}
+        return {"id":entry.get("id") or entry.get("url",""),"url":entry.get("url",""),"query":entry.get("query",""),"priority":entry.get("priority","normal")}
+    return {"id":"","url":"","query":"","priority":"normal"}
+
+def load_baselines():
+    data=read_json(os.path.join(ROOT,"config/public_baselines.json"),{})
+    return {x.get("id"):x for x in data.get("candidates",[]) if x.get("id")}
 
 def fingerprint(x):
-    stable={k:x.get(k) for k in ["url","name","price_jpy","stock_status","spec","fetch_status","price_source_mode","data_confidence"]}
+    stable={k:x.get(k) for k in ["id","url","name","price_jpy","stock_status","spec","fetch_status","price_source_mode","data_confidence"]}
     return hashlib.sha256(json.dumps(stable,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
 
 def meaningful_change(prev,item):
@@ -228,15 +232,17 @@ def main():
     except Exception:max_urls=80
     entries=entries[:max_urls]
     previous=read_json(latest_path,{}).get("products",[])
-    previous_by_url={x["url"]:x for x in previous if x.get("url")}
+    previous_by_id={x.get("id") or x.get("url"):x for x in previous if x.get("id") or x.get("url")}
+    baselines=load_baselines()
     products=[];changes=[];fetch_stats={"direct_ok":0,"fallback_ok":0,"partial":0,"error":0,"total":len(entries)}
 
     for entry in entries:
-        u=entry["url"];query=entry.get("query","");prev=previous_by_url.get(u)
+        cid=entry["id"];u=entry["url"];query=entry.get("query","");prev=previous_by_id.get(cid)
         item=None
         try:
             html,final=fetch(u)
             item=parse_page(final,html)
+            item["id"]=cid
             if item.get("price_jpy") is not None:
                 item["last_fetch_status"]="ok"
                 fetch_stats["direct_ok"]+=1
