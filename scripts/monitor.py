@@ -2,8 +2,11 @@ import hashlib
 import json
 import os
 import re
+import subprocess
+import time
 from html.parser import HTMLParser
 from urllib.parse import quote, parse_qs, urlparse
+from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from intelligence import (
@@ -33,14 +36,72 @@ def append_jsonl(path, rows):
             f.write(json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n")
 
 def fetch(url, timeout=18):
-    req = Request(url, headers={
+    headers = {
         "User-Agent": UA,
         "Accept-Language": "ja-JP,ja;q=0.9,en;q=0.5",
         "Accept": "text/html,application/xhtml+xml,application/json;q=0.8,*/*;q=0.5",
-    })
-    with urlopen(req, timeout=timeout) as r:
-        enc = r.headers.get_content_charset() or "utf-8"
-        return r.read().decode(enc, errors="replace"), r.geturl(), dict(r.headers)
+        "Cache-Control": "no-cache",
+        "Pragma": "no-cache",
+    }
+    try:
+        req = Request(url, headers=headers)
+        with urlopen(req, timeout=timeout) as r:
+            enc = r.headers.get_content_charset() or "utf-8"
+            return r.read().decode(enc, errors="replace"), r.geturl(), dict(r.headers)
+    except (HTTPError, URLError, TimeoutError):
+        # A second request with a normal browser UA handles transient blocks
+        # without trusting the response unless it actually returns 2xx/3xx.
+        time.sleep(1)
+        browser_headers = dict(headers)
+        browser_headers["User-Agent"] = (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
+        )
+        try:
+            req = Request(url, headers=browser_headers)
+            with urlopen(req, timeout=timeout) as r:
+                enc = r.headers.get_content_charset() or "utf-8"
+                return r.read().decode(enc, errors="replace"), r.geturl(), dict(r.headers)
+        except (HTTPError, URLError, TimeoutError):
+            pass
+
+    # GitHub-hosted runners normally include curl. It is used only as a
+    # transport fallback; candidate URLs still come exclusively from the
+    # curated watchlist/catalog.
+    cmd = [
+        "curl", "-L", "--compressed", "-sS",
+        "--connect-timeout", str(min(10, timeout)),
+        "--max-time", str(timeout),
+        "-A", (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
+        ),
+        "-H", "Accept-Language: ja-JP,ja;q=0.9,en;q=0.5",
+        "-H", "Cache-Control: no-cache",
+        "-w", "\n__BF_STATUS__:%{http_code}\n__BF_URL__:%{url_effective}",
+        url,
+    ]
+    try:
+        p = subprocess.run(cmd, capture_output=True, text=False, timeout=timeout + 5, check=False)
+        body = p.stdout.decode("utf-8", errors="replace")
+        status_marker = "\n__BF_STATUS__:"
+        url_marker = "\n__BF_URL__:"
+        if status_marker in body and url_marker in body:
+            body_part, tail = body.rsplit(status_marker, 1)
+            status_text, final_url = tail.split(url_marker, 1)
+            status = int(status_text.strip())
+            final_url = final_url.strip()
+            if 200 <= status < 400:
+                return body_part, final_url or url, {
+                    "X-BF-Fetch-Method": "curl",
+                    "X-BF-HTTP-Status": str(status),
+                }
+            raise RuntimeError(f"curl_http_{status}")
+        if p.returncode != 0:
+            raise RuntimeError(f"curl_exit_{p.returncode}")
+    except Exception as exc:
+        raise exc
+    raise RuntimeError("curl_no_response")
 
 class SearchParser(HTMLParser):
     def __init__(self):
@@ -483,6 +544,10 @@ def main():
         try:
             html, final_url, _headers = fetch(entry["url"])
             raw = parse_page(final_url, html)
+        except HTTPError as exc:
+            request_error = f"HTTPError:{exc.code}"
+        except URLError as exc:
+            request_error = f"URLError:{getattr(exc, 'reason', 'unknown')}"
         except Exception as exc:
             request_error = type(exc).__name__
 
