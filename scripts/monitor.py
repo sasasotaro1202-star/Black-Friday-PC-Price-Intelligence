@@ -372,6 +372,8 @@ def parse_page(url, html, expected=None):
             all_availability_states.add("out_of_stock")
         elif "PreOrder" in av or "BackOrder" in av:
             all_availability_states.add("preorder_or_backorder")
+    if len(all_availability_states) == 1:
+        structured_stock = next(iter(all_availability_states))
 
     meta = re.search(
         r'<meta[^>]+(?:property|name)=["\\\']product:price:amount["\\\'][^>]+content=["\\\']([^"\\\']+)',
@@ -414,7 +416,7 @@ def parse_page(url, html, expected=None):
         "name": name or url,
         "price_jpy": picked["price_jpy"] if picked else None,
         "stock_status": final_stock,
-        "stock_ambiguity": "multiple_offer_availability" if len(availability_states) > 1 else None,
+        "stock_ambiguity": "multiple_offer_availability" if len(all_availability_states) > 1 else None,
         "parsed_spec": specs,
         "page_text_excerpt": text_html[:12000],
         "benefit_signals": benefit_signals,
