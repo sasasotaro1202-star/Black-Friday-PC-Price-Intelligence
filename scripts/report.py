@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 
@@ -12,6 +13,14 @@ def sales_url(item):
     """Return only a real HTTP(S) product URL; never fabricate a purchase URL."""
     url = str(item.get("url") or "").strip()
     return url if url.startswith(("https://", "http://")) else None
+
+
+def file_sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
 
 def read_events():
     path = os.path.join(ROOT, "data", "change_events.jsonl")
@@ -63,10 +72,14 @@ def build_products(latest, catalog):
     return out
 
 def main():
-    latest = load_json(os.path.join(ROOT, "data", "current_latest.json"), {"products": []})
+    latest_path = os.path.join(ROOT, "data", "current_latest.json")
+    latest = load_json(latest_path, {"products": []})
     anchors = load_anchors()
     catalog = load_catalog()
     events = read_events()
+
+    source_snapshot_generated_at = latest.get("generated_at")
+    source_snapshot_sha256 = file_sha256(latest_path) if os.path.exists(latest_path) else None
 
     products = build_products(latest, catalog)
     generated = iso(now_jst())
@@ -87,6 +100,8 @@ def main():
         row["noncash_benefit_value_jpy"] = noncash_benefit_value_jpy(product)
         row["benefit_confidence"] = product.get("benefit_confidence")
         row["purchase_url"] = sales_url(product)
+        row["source_snapshot_generated_at"] = source_snapshot_generated_at
+        row["source_snapshot_sha256"] = source_snapshot_sha256
         if row.get("decision_score") is None:
             reference_only.append(row)
         else:
@@ -169,6 +184,8 @@ def main():
     out = {
         "generated_at": generated,
         "prediction_time": generated,
+        "source_snapshot_generated_at": source_snapshot_generated_at,
+        "source_snapshot_sha256": source_snapshot_sha256,
         "budget_jpy": BUDGET,
         "effective_budget_jpy": BUDGET,
         "effective_soft_max_jpy": EFFECTIVE_SOFT_MAX,
@@ -207,6 +224,8 @@ def main():
         "# ブラックフライデー期間通算・購入ランキング",
         "",
         f"更新: {generated}",
+        f"観測スナップショット: {source_snapshot_generated_at or '未確認'}",
+        f"観測スナップショットSHA256: {source_snapshot_sha256 or '未確認'}",
         f"予算: ¥{BUDGET:,}",
         f"フェーズ: **{out['season_phase']}**",
         "",
