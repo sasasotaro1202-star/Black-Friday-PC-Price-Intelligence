@@ -7,7 +7,7 @@ on:
       - "data/**"
   workflow_dispatch:
   schedule:
-    - cron: "7,22,37,52 * * * *"
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: write
@@ -38,9 +38,15 @@ jobs:
           end=datetime(2026,12,4,23,59,59,tzinfo=JST)
           in_bf=start <= now <= end
           event=os.environ.get("GITHUB_EVENT_NAME","")
-          skip=(event=="schedule" and in_bf)
+          # The cron runs every 5 minutes so the BF window can truly observe
+          # fast-moving sale/stock changes. Outside BF, run only every 15 minutes.
+          regular_due = now.minute % 15 == 0
+          run_now = event != "schedule" or in_bf or regular_due
+          skip = not run_now
           print(f"skip={str(skip).lower()}")
           print(f"now_jst={now.isoformat()}")
+          print(f"in_bf={str(in_bf).lower()}")
+          print(f"regular_due={str(regular_due).lower()}")
           PY
 
       - name: Refresh watchlist when empty or stale
