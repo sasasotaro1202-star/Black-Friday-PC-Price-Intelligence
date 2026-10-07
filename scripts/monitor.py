@@ -436,8 +436,19 @@ def extract_benefit_signals(text):
                 value = int(m.group(1).replace(",", ""))
             except ValueError:
                 continue
-            ctx = s[max(0, m.start()-80):min(len(s), m.end()+100)]
-            add("accessory_stated_value_jpy", value, "confirmed", False, ctx)
+            ctx = s[max(0, m.start()-100):min(len(s), m.end()+120)]
+            bundled = bool(re.search(
+                r"(?:プレゼント|付属|同梱|セット|無料|無償|進呈|特典|キャンペーン)",
+                ctx,
+                re.I
+            ))
+            add(
+                "accessory_stated_value_jpy",
+                value,
+                "confirmed" if bundled else "unconfirmed",
+                False,
+                ctx,
+            )
 
     # Accessory-specific discount is an opportunity signal, not PC cash value.
     for m in re.finditer(r"(?:周辺機器|アクセサリ|アクセサリー)[^。\n]{0,80}?([0-9]{1,2})\s*%\s*(?:OFF|オフ|割引)", s, re.I):
