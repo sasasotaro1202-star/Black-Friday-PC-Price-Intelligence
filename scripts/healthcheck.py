@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 
@@ -5,6 +6,14 @@ from intelligence import (
     ROOT, load_json, load_anchors, parse_dt, decision_score,
     effective_cost, EFFECTIVE_SOFT_MAX, EFFECTIVE_HARD_MAX
 )
+
+
+def file_sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
 
 
 def read_events():
@@ -70,7 +79,8 @@ def main():
                 errors.append(f"watchlist duplicate url for non-shared page: {url}")
 
     # Latest observation integrity
-    latest = load_json(os.path.join(ROOT, "data", "current_latest.json"), {})
+    latest_path = os.path.join(ROOT, "data", "current_latest.json")
+    latest = load_json(latest_path, {})
     products = latest.get("products", [])
     latest_generated = parse_dt(latest.get("generated_at"))
     if latest_generated is None:
@@ -214,6 +224,16 @@ def main():
         errors.append("ranking generated_at/prediction_time missing or invalid")
     elif ranking_generated != ranking_prediction:
         errors.append("ranking generated_at != prediction_time")
+
+    # Derived ranking must identify exactly which observation snapshot produced it.
+    latest_hash = file_sha256(latest_path) if os.path.exists(latest_path) else None
+    if "source_snapshot_generated_at" not in rankings or "source_snapshot_sha256" not in rankings:
+        errors.append("ranking source snapshot provenance missing")
+    else:
+        if rankings.get("source_snapshot_generated_at") != latest.get("generated_at"):
+            errors.append("ranking source snapshot generated_at mismatch")
+        if latest_hash and rankings.get("source_snapshot_sha256") != latest_hash:
+            errors.append("ranking source snapshot SHA256 mismatch")
     top = rankings.get("top_recommendation") or {}
     if ranked:
         if top.get("id") != ranked[0].get("id"):
@@ -308,6 +328,17 @@ def main():
             if bool(gate.get("allowed")) != expected_allowed:
                 errors.append("purchase_gate allowed mismatch")
     
+
+    # Purchase links are data, not presentation-only decoration.
+    # A row may be unpriced/reference-only, but when a purchase URL exists it must
+    # be the same trusted product URL recorded in the source row and use HTTP(S).
+    for r in ranked + unavailable + reference_only:
+        purl = r.get("purchase_url")
+        if purl is not None:
+            if not isinstance(purl, str) or not purl.startswith(("https://", "http://")):
+                errors.append(f"invalid purchase_url: {r.get('id')}")
+            elif purl != r.get("url"):
+                errors.append(f"purchase_url does not match source url: {r.get('id')}")
 
     # Actionable row invariants.
     for r in ranked:
@@ -419,6 +450,17 @@ def main():
             errors.append(f"reference-only row has a decision score: {r.get('id')}")
         if r.get("current_price_jpy") is not None:
             errors.append(f"reference-only row exposes current price: {r.get('id')}")
+
+    # Timing/scenario files are also derived artifacts. When present, they
+    # must point to the same exact current observation snapshot.
+    for derived_name in ("timing_analysis.json", "scenario_analysis.json"):
+        derived_path = os.path.join(ROOT, "data", derived_name)
+        if os.path.exists(derived_path):
+            derived = load_json(derived_path, {})
+            if derived.get("source_snapshot_generated_at") != latest.get("generated_at"):
+                errors.append(f"{derived_name} source snapshot generated_at mismatch")
+            if latest_hash and derived.get("source_snapshot_sha256") != latest_hash:
+                errors.append(f"{derived_name} source snapshot SHA256 mismatch")
 
     if errors:
         for e in errors:
