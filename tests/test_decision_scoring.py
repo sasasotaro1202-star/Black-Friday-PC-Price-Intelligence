@@ -39,6 +39,35 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertEqual(intelligence.required_discount(280000), 0)
         self.assertAlmostEqual(intelligence.required_discount(350000), 20.0, places=6)
 
+    def test_effective_cost_uses_confirmed_benefit_only(self):
+        item = self.candidate(price=289000)
+        item["shipping_jpy"] = 1000
+        item["mandatory_fee_jpy"] = 0
+        item["confirmed_benefit_value_jpy"] = 5000
+        item["benefit_confidence"] = "confirmed"
+        self.assertEqual(intelligence.cash_total_cost(item), 290000)
+        self.assertEqual(intelligence.effective_cost(item), 285000)
+
+    def test_unconfirmed_benefit_is_not_subtracted(self):
+        item = self.candidate(price=289000)
+        item["confirmed_benefit_value_jpy"] = 50000
+        item["benefit_confidence"] = "conditional"
+        self.assertEqual(intelligence.effective_cost(item), 289000)
+
+    def test_near_budget_can_be_buy_now_when_effective_cost_is_strong(self):
+        item = self.candidate(price=289000)
+        item["confirmed_benefit_value_jpy"] = 4000
+        item["benefit_confidence"] = "confirmed"
+        score, detail = intelligence.decision_score(item, [], [])
+        self.assertEqual(detail["effective_cost_jpy"], 285000)
+        self.assertEqual(detail["status"], "BUY_NOW")
+        self.assertLessEqual(detail["effective_cost_jpy"], intelligence.EFFECTIVE_SOFT_MAX)
+
+    def test_over_290k_effective_cost_waits(self):
+        item = self.candidate(price=300000)
+        score, detail = intelligence.decision_score(item, [], [])
+        self.assertEqual(detail["status"], "WAIT_FOR_DISCOUNT")
+
     def test_scenario_prices(self):
         s = intelligence.scenario_prices(400000)
         self.assertEqual(s[0]["price_jpy"], 360000)
