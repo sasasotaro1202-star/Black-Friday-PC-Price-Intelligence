@@ -185,22 +185,38 @@ def stock_from_text(text):
 def _spec_window(text, hints=None):
     s = " ".join(str(text or "").split())
     hints = hints or {}
-    terms = [str(x) for x in (hints.get("aliases") or []) if x]
-    for key in ("model_code", "name", "id", "query"):
-        if hints.get(key):
-            terms.append(str(hints[key]))
     compact = "".join(s.split()).lower()
+
+    # Prefer the strongest identity anchors first. The exact model/SKU code is
+    # substantially safer than the broad product name, id, or search query,
+    # because manufacturer pages often contain multiple related variants.
+    anchor_groups = [
+        [str(hints.get("model_code"))] if hints.get("model_code") else [],
+        [str(x) for x in (hints.get("aliases") or []) if x],
+        [str(hints.get("name"))] if hints.get("name") else [],
+        [str(hints.get("id"))] if hints.get("id") else [],
+        [str(hints.get("query"))] if hints.get("query") else [],
+    ]
+
     best = None
-    for term in terms:
-        t = "".join(norm_text(term).split()).lower()
-        if not t:
-            continue
-        pos = compact.find(t)
-        if pos >= 0:
-            # Use the compact position only as an anchor; widen enough to include the surrounding spec table.
-            best = pos if best is None else min(best, pos)
+    for group in anchor_groups:
+        positions = []
+        for term in group:
+            t = "".join(norm_text(term).split()).lower()
+            if not t:
+                continue
+            pos = compact.find(t)
+            if pos >= 0:
+                positions.append(pos)
+        if positions:
+            best = min(positions)
+            break
+
     if best is None:
         return s[:14000]
+
+    # Use the compact position only as an anchor; widen enough to include the
+    # surrounding exact-variant specification table without scanning the whole page.
     return s[max(0, best-3500):min(len(s), best+12000)]
 
 def parse_specs(text, expected=None):
