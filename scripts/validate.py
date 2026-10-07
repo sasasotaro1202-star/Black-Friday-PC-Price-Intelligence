@@ -1,8 +1,17 @@
+import hashlib
 import json
 import os
 import sys
 
 from intelligence import ROOT, parse_dt, load_catalog, load_json
+
+def file_sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
 
 def fail(message):
     print("VALIDATION_FAIL:", message)
@@ -15,6 +24,7 @@ def main():
         errors.append("duplicate catalog ids")
 
     latest = load_json(os.path.join(ROOT, "data", "current_latest.json"), {})
+    latest_path = os.path.join(ROOT, "data", "current_latest.json")
     rankings = load_json(os.path.join(ROOT, "data", "decision_rankings.json"), {})
 
     seen = set()
@@ -56,6 +66,20 @@ def main():
         errors.append("ranking prediction/generated time missing")
     elif ranking_prediction != ranking_generated:
         errors.append("ranking prediction_time != generated_at")
+    latest_hash = file_sha256(latest_path) if os.path.exists(latest_path) else None
+    if rankings.get("source_snapshot_generated_at") != latest.get("generated_at"):
+        errors.append("ranking source snapshot generated_at mismatch")
+    if latest_hash and rankings.get("source_snapshot_sha256") != latest_hash:
+        errors.append("ranking source snapshot SHA256 mismatch")
+
+    for r in ranked + list(rankings.get("unavailable_products", [])) + list(rankings.get("reference_only", [])):
+        purl = r.get("purchase_url")
+        if purl is not None:
+            if not isinstance(purl, str) or not purl.startswith(("https://", "http://")):
+                errors.append(f"invalid purchase_url: {r.get('id')}")
+            elif purl != r.get("url"):
+                errors.append(f"purchase_url/source url mismatch: {r.get('id')}")
+
     expected_order = sorted(ranked, key=lambda x: (
         -(x.get("decision_score") if x.get("decision_score") is not None else -1),
         x.get("current_price_jpy") if x.get("current_price_jpy") is not None else 10**12,
