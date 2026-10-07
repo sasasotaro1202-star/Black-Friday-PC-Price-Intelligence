@@ -52,6 +52,23 @@ class MonitorParsingTests(unittest.TestCase):
         parsed = monitor.parse_page("https://example.com/test", html)
         self.assertEqual(parsed["price_source_mode"], "direct_meta")
 
+    def test_benefit_signals_are_recorded_but_not_counted_as_cash(self):
+        html = """
+        <html><body>
+        販売価格 289,800円
+        5,000円分ポイント還元
+        周辺機器同時購入で30%OFF
+        在庫あり
+        </body></html>
+        """
+        parsed = monitor.parse_page("https://example.com/test", html)
+        kinds = {x["kind"] for x in parsed["benefit_signals"]}
+        self.assertIn("point_value_jpy", kinds)
+        self.assertIn("accessory_bundle_percent", kinds)
+        self.assertEqual(parsed["confirmed_benefit_value_jpy"], 0)
+        self.assertEqual(parsed["benefit_confidence"], "unconfirmed")
+        self.assertTrue(all(not x["counts_toward_effective_cost"] for x in parsed["benefit_signals"]))
+
 
 if __name__ == "__main__":
     unittest.main()
