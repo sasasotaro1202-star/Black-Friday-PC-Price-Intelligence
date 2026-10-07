@@ -107,6 +107,19 @@ class MonitorParsingTests(unittest.TestCase):
         parsed = monitor.parse_page("https://example.com/test", html)
         self.assertEqual(parsed["price_source_mode"], "direct_meta")
 
+    def test_real_included_peripheral_is_detected(self):
+        html = """
+        <div>
+          ゲーミングモニターをプレゼント
+          キーボード・マウス同梱
+        </div>
+        """
+        parsed = monitor.parse_page("https://example.com/test", html)
+        self.assertGreaterEqual(
+            sum(1 for x in parsed["benefit_signals"] if x["kind"] == "included_peripheral"),
+            1,
+        )
+
     def test_mouse_computer_brand_is_not_a_bundled_mouse(self):
         html = """
         <div>
