@@ -54,6 +54,39 @@ class DecisionScoringTests(unittest.TestCase):
         item["benefit_confidence"] = "conditional"
         self.assertEqual(intelligence.effective_cost(item), 289000)
 
+    def test_bundle_value_does_not_reduce_effective_cost(self):
+        item = self.candidate(price=399800, gpu="RTX 5070 Ti", cpu="Ryzen 7 7700", ram=32, ssd="1 TB")
+        item["form_factor"] = "desktop"
+        item["spec"]["form_factor"] = "desktop"
+        item["benefit_signals"] = [{
+            "kind": "accessory_stated_value_jpy",
+            "value": 30000,
+            "value_jpy": 30000,
+            "certainty": "confirmed",
+            "counts_toward_effective_cost": False,
+        }]
+        self.assertEqual(intelligence.effective_cost(item), 399800)
+        self.assertEqual(intelligence.noncash_benefit_value_jpy(item), 30000)
+        self.assertGreaterEqual(intelligence.bundle_value_score(item), 2)
+
+    def test_high_value_desktop_is_watchlisted_not_buy_now(self):
+        item = self.candidate(price=399800, gpu="RTX 5070 Ti", cpu="Ryzen 7 7700", ram=32, ssd="1 TB")
+        item["form_factor"] = "desktop"
+        item["spec"]["form_factor"] = "desktop"
+        item["spec"]["vram_gb"] = 16
+        item["benefit_signals"] = [{
+            "kind": "accessory_stated_value_jpy",
+            "value": 60000,
+            "value_jpy": 60000,
+            "certainty": "confirmed",
+            "counts_toward_effective_cost": False,
+        }]
+        score, detail = intelligence.decision_score(item, [], [])
+        self.assertEqual(detail["status"], "VALUE_WATCH")
+        self.assertGreaterEqual(detail["value_bonus"], 3)
+        self.assertEqual(detail["effective_cost_jpy"], 399800)
+        self.assertLessEqual(score, 100)
+
     def test_near_budget_can_be_buy_now_when_effective_cost_is_strong(self):
         item = self.candidate(price=289000)
         item["confirmed_benefit_value_jpy"] = 4000
