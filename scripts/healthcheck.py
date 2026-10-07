@@ -91,6 +91,10 @@ def main():
 
     fetch_stats = latest.get("fetch_stats") or {}
     coverage = latest.get("coverage") or {}
+    latest_ids = [
+        str(p.get("id") or "") for p in products
+        if isinstance(p, dict) and p.get("id")
+    ]
     if coverage:
         required = ("watchlist_count", "processed_count", "skipped_count", "max_urls")
         if any(not isinstance(coverage.get(k), int) or coverage.get(k) < 0 for k in required):
