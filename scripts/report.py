@@ -4,7 +4,7 @@ import os
 from intelligence import (
     ROOT, BUDGET, EFFECTIVE_SOFT_MAX, EFFECTIVE_HARD_MAX,
     load_json, save_json, load_catalog, load_anchors,
-    build_row, cash_total_cost, confirmed_benefit_value, effective_cost,
+    build_row, cash_total_cost, confirmed_benefit_value, effective_cost, noncash_benefit_value_jpy,
     now_jst, iso, scenario_prices
 )
 
@@ -79,6 +79,7 @@ def main():
         row["cash_total_cost_jpy"] = cash_total_cost(product)
         row["confirmed_benefit_value_jpy"] = confirmed_benefit_value(product)
         row["effective_cost_jpy"] = effective_cost(product)
+        row["noncash_benefit_value_jpy"] = noncash_benefit_value_jpy(product)
         row["benefit_confidence"] = product.get("benefit_confidence")
         if row.get("decision_score") is None:
             reference_only.append(row)
@@ -235,14 +236,15 @@ def main():
     lines += [
         "## 100点ランキング",
         "",
-        "|順位|タイプ|商品|現在価格|実質コスト|実質28万円まで|性能|価格|過去根拠|在庫|時期|総合|判定|",
-        "|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|",
+        "|順位|タイプ|商品|現在価格|実質コスト|特典・構成価値|28万円まで|性能|価格価値|過去根拠|在庫|時期|総合|判定|",
+        "|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|",
     ]
     for row in scored[:20]:
         d = row["score_detail"]
         lines.append(
             f"|{row['rank']}|{row.get('form_factor','unknown')}|{row.get('name','')[:55]}|¥{row['current_price_jpy']:,}|"
-            f"¥{row.get('effective_cost_jpy'):,}|{d.get('required_effective_discount_pct', 0):.1f}%|"
+            f"¥{row.get('effective_cost_jpy'):,}|¥{row.get('noncash_benefit_value_jpy', 0):,} / +{d.get('value_bonus', 0)}|"
+            f"{d.get('required_effective_discount_pct', 0):.1f}%|"
             f"{d['performance']}/40|{d['price']}/20|"
             f"{d['history']}/15|{d['stock']}/15|{d['timing']}/10|"
             f"**{row['decision_score']}/100**|{d['status']}|"
@@ -294,15 +296,19 @@ def main():
         "- BUY_NOW_NEAR_BUDGET: 実質28.5〜29.0万円でも、性能・在庫・データ品質が特に強い場合だけ許可。",
         "- BUY_NOW_LOW_STOCK: 実質予算内・低在庫。最安値待ちを避ける。",
         "- STRONG_WATCH: 未到達でも性能・価格距離・過去根拠が強い。",
+        "- VALUE_WATCH: 29万円超でも、デスクトップの性能と確認済み周辺機器/構成特典が強い候補。購入許可ではなく値下げ監視対象。",
         "- WAIT_FOR_DISCOUNT: 大幅値下げ待ち。",
-        "- VERIFY_NOW: 検索補完など。購入前に販売ページで再確認。",
+        "- VERIFY_NOW: 検索補完など。購入前に販売ページで再確認。"
         "- UNACTIONABLE: 現行価格を確認できない、または異常値・構成不一致。",
         "",
         "## Fail-closedルール",
         "",
         "- 取得失敗は売り切れではない。",
         "- 月額、分割、ポイント等の数字を販売価格として採用しない。",
-        "- 異常な激安価格は独立確認なしでは採用しない。",
+        "- 一般的な「X円OFF」は表示価格に既に反映済みの可能性があるため、実質コストから二重控除しない。",
+        "- 追加クーポン/カート値引きだけを confirmed cash benefit として実質コストに反映する。",
+        "- モニター等の周辺機器価値、無料アップグレード、保証延長は実質コストから控除せず、別の価値加点として扱う。",
+        "- 異常な激安価格は独立確認なしでは採用しない。"
         "- 参照価格は現在価格ではない。",
         "- 共有商品ページは exact variant とみなさない。",
         "- 過去価格は同一構成 > 同GPU同シリーズ > 同シリーズの順で証拠力を下げる。",
