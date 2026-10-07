@@ -116,6 +116,7 @@ def main():
         row["confirmed_benefit_value_jpy"] = confirmed_benefit_value(product)
         row["effective_cost_jpy"] = effective_cost(product)
         row["noncash_benefit_value_jpy"] = noncash_benefit_value_jpy(product)
+        row["value_equivalent_cost_jpy"] = value_equivalent_cost(product)
         row["benefit_confidence"] = product.get("benefit_confidence")
         row["purchase_url"] = sales_url(product)
         row["source_snapshot_generated_at"] = source_snapshot_generated_at
@@ -292,7 +293,7 @@ def main():
         "## 100点ランキング",
         "",
         "|順位|タイプ|商品|現在価格|現金総額|確定現金特典|実質コスト|非現金価値|価値加点|28万円まで|性能|価格価値|過去根拠|在庫|時期|総合|判定|購入リンク|",
-        "|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|",
+        "|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|",
     ]
     for row in scored[:20]:
         d = row["score_detail"]
@@ -370,7 +371,7 @@ def main():
         "- 月額、分割、ポイント等の数字を販売価格として採用しない。",
         "- 一般的な「X円OFF」は表示価格に既に反映済みの可能性があるため、実質コストから二重控除しない。",
         "- 追加クーポン/カート値引きだけを confirmed cash benefit として実質コストに反映する。",
-        "- モニター等の周辺機器価値、無料アップグレード、保証延長は実質コストから控除せず、別の価値加点として扱う。",
+        "- モニター等の周辺機器価値、無料アップグレード、保証延長は実質コストから控除せず、別の価値加点・参考総価値換算として扱う。",
         "- 異常な激安価格は独立確認なしでは採用しない。",
         "- 参照価格は現在価格ではない。",
         "- 共有商品ページは exact variant とみなさない。",
