@@ -470,7 +470,7 @@ def extract_benefit_signals(text):
         add("configuration_upgrade", 1, "confirmed", False, ctx)
 
     for m in re.finditer(
-        r"(?:保証|サポート)[^。\n]{0,80}(?:延長|追加|プレミアム|5年|4年|24時間.?365日)",
+        r"(?:保証|サポート)[^。\n]{0,80}(?:延長|追加|プレミアム|5年|4年)",
         s, re.I
     ):
         ctx = s[max(0, m.start()-40):min(len(s), m.end()+100)]
@@ -486,12 +486,16 @@ def extract_benefit_signals(text):
         s, re.I
     ):
         ctx = s[max(0, m.start()-40):min(len(s), m.end()+90)]
+        if re.search(r"(?:送料|金利|手数料|分割|ショッピングローン|ローン)", ctx, re.I):
+            continue
         add("included_peripheral", 1, "confirmed", False, ctx)
     for m in re.finditer(
         benefit_terms + r"[^。\n]{0,25}" + peripheral_terms,
         s, re.I
     ):
         ctx = s[max(0, m.start()-40):min(len(s), m.end()+90)]
+        if re.search(r"(?:送料|金利|手数料|分割|ショッピングローン|ローン)", ctx, re.I):
+            continue
         add("included_peripheral", 1, "confirmed", False, ctx)
 
     return signals
