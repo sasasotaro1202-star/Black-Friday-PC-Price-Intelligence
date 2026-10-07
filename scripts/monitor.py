@@ -219,9 +219,45 @@ def _spec_window(text, hints=None):
     # surrounding exact-variant specification table without scanning the whole page.
     return s[max(0, best-3500):min(len(s), best+12000)]
 
+def _spec_anchor_position(text, hints=None):
+    s = " ".join(str(text or "").split())
+    hints = hints or {}
+    compact = "".join(s.split()).lower()
+    anchor_groups = [
+        [str(hints.get("model_code"))] if hints.get("model_code") else [],
+        [str(x) for x in (hints.get("aliases") or []) if x],
+        [str(hints.get("name"))] if hints.get("name") else [],
+        [str(hints.get("id"))] if hints.get("id") else [],
+        [str(hints.get("query"))] if hints.get("query") else [],
+    ]
+    for group in anchor_groups:
+        positions = []
+        for term in group:
+            t = "".join(norm_text(term).split()).lower()
+            if t:
+                pos = compact.find(t)
+                if pos >= 0:
+                    positions.append(pos)
+        if positions:
+            return positions[0]
+    return None
+
 def parse_specs(text, expected=None):
     s = _spec_window(text, expected)
     out = {}
+    expected = expected or {}
+    anchor = _spec_anchor_position(s, expected)
+    compact = "".join(s.split()).lower()
+
+    def near_expected(value, radius=2600):
+        if value in (None, "") or anchor is None:
+            return False
+        term = "".join(norm_text(value).split()).lower()
+        if not term:
+            return False
+        pos = compact.find(term)
+        return pos >= 0 and abs(pos - anchor) <= radius
+
     gpu_patterns = [
         r"(RTX\s*(?:5090|5080|5070\s*Ti|5070|5060\s*Ti|5060)(?:\s*Laptop(?:\s*GPU)?)?)",
         r"(Radeon\s+RX\s*(?:9070\s*XT|9070|9060\s*XT|9060|9050|7900\s*(?:XTX|XT)|7800\s*XT|7700\s*XT))",
@@ -231,6 +267,9 @@ def parse_specs(text, expected=None):
         if m:
             out["gpu"] = re.sub(r"\s+", " ", m.group(1)).strip()
             break
+    if near_expected(expected.get("gpu")):
+        out["gpu"] = str(expected["gpu"])
+
     tgp = re.search(r"(?:TGP|Total Graphics Power|最大(?:GPU)?電力|GPU電力)[^0-9]{0,40}(\d{2,3})\s*W", s, re.I)
     if tgp:
         out["tgp_w"] = int(tgp.group(1))
@@ -256,6 +295,9 @@ def parse_specs(text, expected=None):
         if m:
             out["cpu"] = re.sub(r"\s+", " ", m.group(0)).strip()
             break
+    if near_expected(expected.get("cpu")):
+        out["cpu"] = str(expected["cpu"])
+
     m = re.search(r"(?:SSD|ストレージ|Storage|M\.2 SSD)[^0-9]{0,18}(\d+(?:\.\d+)?)\s*(TB|GB)", s, re.I)
     if m:
         out["ssd"] = m.group(1) + " " + m.group(2)
@@ -263,6 +305,20 @@ def parse_specs(text, expected=None):
         out["form_factor"] = "desktop"
     elif re.search(r"(?:ノート(?:PC|パソコン)?|Laptop PC)", s, re.I):
         out["form_factor"] = "laptop"
+
+    if str(expected.get("form_factor") or "").lower() in ("desktop", "laptop") and anchor is not None:
+        form_terms = (
+            [r"デスクトップ(?:PC|パソコン)?", r"Desktop PC", r"Desktop"]
+            if str(expected["form_factor"]).lower() == "desktop"
+            else [r"ノート(?:PC|パソコン)?", r"Laptop PC", r"Laptop"]
+        )
+        form_positions = []
+        for pat in form_terms:
+            for m in re.finditer(pat, s, re.I):
+                form_positions.append(m.start())
+        if form_positions and min(abs(p - anchor) for p in form_positions) <= 2600:
+            out["form_factor"] = str(expected["form_factor"])
+
     psu = re.search(r"(?:電源|Power Supply)[^0-9]{0,30}(\d{3,4})\s*W", s, re.I)
     if psu:
         out["psu_w"] = int(psu.group(1))
