@@ -107,20 +107,26 @@ GitHub ActionsのcronはUTC基準なので、5分監視ワークフローはUTC�
 
 GitHub Actionsだけで動作し、外部の有料APIを必須にしません。
 
+通常監視は15分間隔、2026年ブラックフライデー監視窓では5分間隔です。スケジューラ自体は5分ごとに起動し、通常期間は15分ごとだけ本処理を通します。これにより「設定上5分」と「実際の実行」が食い違わないようにしています。
+
 処理順序:
 
-monitor → sanitize → report → timing → scenario → validate → commit/push
+monitor → sanitize → report → timing → scenario → healthcheck → validate → commit/push
+
+各派生JSONには元の current_latest.json の生成時刻とSHA256を保存し、healthcheckで完全一致を要求します。価格観測とランキングが別スナップショットから混ざった場合は公開を停止します。
+
+monitorは候補カバレッジも記録します。処理対象数、未処理ID、処理率、取得成功率、価格確認率を data/current_latest.json に残し、容量上限で取りこぼした候補も追跡します。
 
 データ書き込みワークフローは共通concurrency groupを使用し、新しい監視実行を優先する設定にしています。古い監視実行が長時間残っても、最新の価格情報が待たされ続けないようにします。さらにpush失敗時はorigin/mainへ同期して最大3回再試行します。
 
 ## 出力
 
-- data/current_latest.json: 最新観測
+- data/current_latest.json: 最新観測、処理カバレッジ、価格確認率
 - data/change_events.jsonl: 価格・在庫等の変化イベント
-- data/decision_rankings.json: 100点ランキング
-- data/scenario_analysis.json: 値下げシナリオ
-- data/timing_analysis.json: 価格変更時間帯分析
-- data/reports/latest.md: 読みやすい最新レポート
+- data/decision_rankings.json: 100点ランキング、購入リンク、元観測スナップショットSHA256
+- data/scenario_analysis.json: 値下げシナリオ、元観測スナップショットSHA256
+- data/timing_analysis.json: 価格変更時間帯分析、元観測スナップショットSHA256
+- data/reports/latest.md: 読みやすい最新レポート。現金総額・確定現金特典・実質コスト・非現金価値・購入リンクを表示
 
 購入判断不能な場合も、無理に順位を作らず VERIFY_NOW / UNACTIONABLE / reference_only として残します。
 
