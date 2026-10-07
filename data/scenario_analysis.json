@@ -1,5 +1,7 @@
 {
-  "generated_at": "2026-10-08T05:07:47+09:00",
+  "generated_at": "2026-10-08T08:33:32+09:00",
+  "source_snapshot_generated_at": "2026-10-08T08:33:11+09:00",
+  "source_snapshot_sha256": "3a6eb27915abf5ca4a7d4332cfc75059e05a7b06edce2be3791556139c074296",
   "budget_jpy": 280000,
   "note": "10/15/20/25/30% scenarios are planning bands, not probabilities.",
   "rows": [
@@ -202,6 +204,47 @@
       "first_280k_scenario": {
         "discount_pct": 15,
         "price_jpy": 271800
+      },
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "candidate-4",
+      "name": "Lenovo Legion Pro 5i Gen 10（16型 Intel）",
+      "form_factor": "laptop",
+      "current_price_jpy": 354865,
+      "reference_price_jpy": null,
+      "reference_only": false,
+      "required_discount_pct": 21.1,
+      "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 319400
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 301600
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 283900
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 266100
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 248400
+        }
+      ],
+      "first_280k_scenario": {
+        "discount_pct": 25,
+        "price_jpy": 266100
       },
       "stock_status": "in_stock",
       "price_source_mode": "direct_structured",
