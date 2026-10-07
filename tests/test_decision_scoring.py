@@ -58,9 +58,11 @@ class DecisionScoringTests(unittest.TestCase):
         item = self.candidate(price=289000)
         item["confirmed_benefit_value_jpy"] = 4000
         item["benefit_confidence"] = "confirmed"
-        score, detail = intelligence.decision_score(item, [], [])
+        anchors = [{"key": "test", "family": "Test", "gpu": "RTX 5070 Ti", "historical_price_jpy": 250000}]
+        score, detail = intelligence.decision_score(item, anchors, [])
         self.assertEqual(detail["effective_cost_jpy"], 285000)
         self.assertEqual(detail["status"], "BUY_NOW")
+        self.assertGreaterEqual(score, 90)
         self.assertLessEqual(detail["effective_cost_jpy"], intelligence.EFFECTIVE_SOFT_MAX)
 
     def test_over_290k_effective_cost_waits(self):
