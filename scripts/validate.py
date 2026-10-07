@@ -25,6 +25,21 @@ def main():
 
     latest = load_json(os.path.join(ROOT, "data", "current_latest.json"), {})
     latest_path = os.path.join(ROOT, "data", "current_latest.json")
+    coverage = latest.get("coverage") or {}
+    if coverage:
+        processed = coverage.get("processed_count")
+        watchlist_count = coverage.get("watchlist_count")
+        skipped = coverage.get("skipped_count")
+        if processed != len(latest.get("products", [])):
+            errors.append("coverage.processed_count mismatch")
+        if not isinstance(watchlist_count, int) or not isinstance(skipped, int) or not isinstance(processed, int):
+            errors.append("coverage counters invalid")
+        elif watchlist_count < processed or skipped != watchlist_count - processed:
+            errors.append("coverage counters inconsistent")
+        expected_rate = round(100.0 * processed / watchlist_count, 1) if watchlist_count else 100.0
+        if coverage.get("processing_rate_pct") != expected_rate:
+            errors.append("coverage.processing_rate_pct mismatch")
+
     rankings = load_json(os.path.join(ROOT, "data", "decision_rankings.json"), {})
 
     seen = set()
