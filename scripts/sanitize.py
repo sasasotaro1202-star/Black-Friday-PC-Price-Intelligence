@@ -76,6 +76,30 @@ def main():
         repaired.append(item)
 
     state["products"] = repaired
+
+    # Recompute fetch statistics from the final sanitized observation state.
+    # Monitor-level counters can become stale when sanitize moves a price into
+    # reference-only evidence, so the published snapshot must describe what is
+    # actually present in current_latest.json.
+    final = state["products"]
+    state["fetch_stats"] = {
+        "total": len(final),
+        "direct_verified": sum(
+            1 for x in final
+            if x.get("current_price_jpy") is not None
+            and x.get("price_source_mode") in ("direct_structured", "direct_page", "direct_text")
+        ),
+        "search_corrob": sum(
+            1 for x in final
+            if x.get("current_price_jpy") is not None
+            and x.get("price_source_mode") == "search_snippet"
+        ),
+        "stale_previous": sum(1 for x in final if x.get("price_source_mode") == "stale_previous"),
+        "baseline_only": sum(1 for x in final if x.get("price_source_mode") == "public_baseline"),
+        "anomaly_rejected": sum(1 for x in final if x.get("price_validation_status") == "anomaly_rejected"),
+        "errors": sum(1 for x in final if x.get("fetch_status") == "error"),
+    }
+
     state.setdefault("sanitizer", {})
     state["sanitizer"] = stats
     save_json(path, state)
