@@ -1,8 +1,49 @@
 {
-  "generated_at": "2026-10-07T16:41:39+09:00",
+  "generated_at": "2026-10-07T17:29:39+09:00",
   "budget_jpy": 280000,
   "note": "10/15/20/25/30% scenarios are planning bands, not probabilities.",
   "rows": [
+    {
+      "id": "desktop-gtune-dg-a5g60-5060",
+      "name": "G TUNE DG-A5A60",
+      "form_factor": "desktop",
+      "current_price_jpy": 269800,
+      "reference_price_jpy": 194800,
+      "reference_only": false,
+      "required_discount_pct": 0.0,
+      "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 242800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 229300
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 215800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 202400
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 188900
+        }
+      ],
+      "first_280k_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 242800
+      },
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
     {
       "id": "gtune-p6-13700hx-5070",
       "name": "G TUNE P6-I7G70BK-B",
@@ -45,6 +86,47 @@
       "dynamic_candidate": false
     },
     {
+      "id": "desktop-gtune-dg-i7g70-5070",
+      "name": "G TUNE DG-I7G70",
+      "form_factor": "desktop",
+      "current_price_jpy": 299800,
+      "reference_price_jpy": 299800,
+      "reference_only": false,
+      "required_discount_pct": 6.6,
+      "historical_floor_jpy": 219800,
+      "historical_floor_strength": "same_gpu",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 269800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 254800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 239800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 224800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 209900
+        }
+      ],
+      "first_280k_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 269800
+      },
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
       "id": "candidate-4",
       "name": "Lenovo Legion Pro 5i Gen 10（16型 Intel）",
       "form_factor": "laptop",
@@ -79,6 +161,47 @@
       "first_280k_scenario": {
         "discount_pct": 25,
         "price_jpy": 266100
+      },
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "desktop-gtune-fg-a7g7t-5070ti",
+      "name": "G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）",
+      "form_factor": "desktop",
+      "current_price_jpy": 399800,
+      "reference_price_jpy": 399800,
+      "reference_only": false,
+      "required_discount_pct": 30.0,
+      "historical_floor_jpy": 299800,
+      "historical_floor_strength": "same_gpu",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 359800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 339800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 319800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 299800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 279900
+        }
+      ],
+      "first_280k_scenario": {
+        "discount_pct": 30,
+        "price_jpy": 279900
       },
       "stock_status": "in_stock",
       "price_source_mode": "direct_structured",

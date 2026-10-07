@@ -1,8 +1,21 @@
 {
-  "generated_at": "2026-10-07T16:41:39+09:00",
+  "generated_at": "2026-10-07T17:29:39+09:00",
   "budget_jpy": 280000,
   "target_black_friday": "2026-11-27",
   "target_products": [
+    {
+      "id": "desktop-gtune-dg-a5g60-5060",
+      "name": "G TUNE DG-A5A60",
+      "store": null,
+      "price_jpy": 269800,
+      "required_discount_pct": 0.0,
+      "feasibility": "HIGH",
+      "gpu": "rtx 5060",
+      "performance_score": 14,
+      "source_mode": "direct_structured",
+      "confidence": "high",
+      "dynamic_candidate": false
+    },
     {
       "id": "gtune-p6-13700hx-5070",
       "name": "G TUNE P6-I7G70BK-B",
@@ -17,6 +30,19 @@
       "dynamic_candidate": false
     },
     {
+      "id": "desktop-gtune-dg-i7g70-5070",
+      "name": "G TUNE DG-I7G70",
+      "store": null,
+      "price_jpy": 299800,
+      "required_discount_pct": 6.6,
+      "feasibility": "HIGH",
+      "gpu": "rtx 5070",
+      "performance_score": 30,
+      "source_mode": "direct_structured",
+      "confidence": "high",
+      "dynamic_candidate": false
+    },
+    {
       "id": "candidate-4",
       "name": "Lenovo Legion Pro 5i Gen 10（16型 Intel）",
       "store": null,
@@ -25,6 +51,19 @@
       "feasibility": "AGGRESSIVE",
       "gpu": "rtx 5070 ti",
       "performance_score": 40,
+      "source_mode": "direct_structured",
+      "confidence": "high",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "desktop-gtune-fg-a7g7t-5070ti",
+      "name": "G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）",
+      "store": null,
+      "price_jpy": 399800,
+      "required_discount_pct": 30.0,
+      "feasibility": "AGGRESSIVE",
+      "gpu": "rtx 5070 ti",
+      "performance_score": 38,
       "source_mode": "direct_structured",
       "confidence": "high",
       "dynamic_candidate": false
