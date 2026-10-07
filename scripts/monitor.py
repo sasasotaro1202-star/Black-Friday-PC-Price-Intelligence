@@ -357,38 +357,112 @@ def parse_specs(text, expected=None):
     return out
 
 def extract_benefit_signals(text):
-    """Extract benefit hints without treating them as guaranteed cash savings."""
+    """Extract promotions into cash-equivalent vs non-cash value layers.
+
+    Only an explicitly additional checkout/coupon discount can reduce effective
+    cost. Generic "X円OFF" is kept as unconfirmed because it may already be
+    reflected in the displayed sale price. Peripheral/configuration benefits
+    never reduce effective cost; they are separate value evidence.
+    """
     s = re.sub(r"\s+", " ", str(text or ""))
     signals = []
-    patterns = [
-        (r"([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\s*円(?:分|相当)?\s*(?:の)?(?:ポイント|ポイント還元|還元)",
-         "point_value_jpy"),
-        (r"(?:ポイント|還元)[^0-9]{0,20}([0-9]{1,2})\s*%",
-         "point_percent"),
-        (r"([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\s*円(?:の)?(?:キャッシュバック|還元)",
-         "cashback_value_jpy"),
-        (r"(?:周辺機器|アクセサリ)[^。\n]{0,60}([0-9]{1,2})\s*%\s*(?:OFF|オフ)",
-         "accessory_bundle_percent"),
-    ]
     seen = set()
-    for pat, kind in patterns:
+    peripheral_terms = (
+        "周辺機器", "アクセサリ", "アクセサリー", "モニター", "ディスプレイ",
+        "キーボード", "マウス", "ヘッドセット", "スピーカー", "webカメラ",
+        "ドッキングステーション", "ドック"
+    )
+
+    def add(kind, value=None, certainty="unconfirmed", counts=False, context=""):
+        key = (kind, value)
+        if key in seen:
+            return
+        seen.add(key)
+        signals.append({
+            "kind": kind,
+            "value": value,
+            "value_jpy": value if kind.endswith("_jpy") else None,
+            "text": context[:320],
+            "certainty": certainty,
+            "counts_toward_effective_cost": bool(counts),
+        })
+
+    # Points/cashback remain separate unless the program is explicitly cash-like
+    # and guaranteed. Generic point language is never subtracted.
+    for pat, kind in [
+        (r"([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\s*円(?:分|相当)?\s*(?:の)?(?:ポイント|ポイント還元|還元)", "point_value_jpy"),
+        (r"(?:ポイント|還元)[^0-9]{0,20}([0-9]{1,2})\s*%", "point_percent"),
+        (r"([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\s*円(?:の)?(?:キャッシュバック|還元)", "cashback_value_jpy"),
+    ]:
         for m in re.finditer(pat, s, re.I):
-            raw = m.group(1)
             try:
-                value = int(raw.replace(",", "")) if "value_jpy" in kind else int(raw)
+                value = int(m.group(1).replace(",", ""))
             except ValueError:
                 continue
-            key = (kind, value)
-            if key in seen:
-                continue
-            seen.add(key)
-            signals.append({
-                "kind": kind,
-                "value": value,
-                "text": s[max(0, m.start()-60):min(len(s), m.end()+60)],
-                "certainty": "unconfirmed",
-                "counts_toward_effective_cost": False,
-            })
+            ctx = s[max(0, m.start()-90):min(len(s), m.end()+90)]
+            add(kind, value, "unconfirmed", False, ctx)
+
+    # Additional checkout/coupon discount: count only when the text explicitly
+    # describes an extra discount triggered at checkout/cart/code time.
+    coupon_pat = r"([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\s*円\s*(?:OFF|オフ|引き|値引き|割引)"
+    for m in re.finditer(coupon_pat, s, re.I):
+        try:
+            value = int(m.group(1).replace(",", ""))
+        except ValueError:
+            continue
+        ctx = s[max(0, m.start()-120):min(len(s), m.end()+120)]
+        ctx_norm = norm_text(ctx)
+        is_peripheral = any(term in ctx_norm for term in peripheral_terms)
+        extra_checkout = bool(re.search(
+            r"(?:クーポン|coupon|コード|カート|購入時|決済時|注文時|適用後|追加で|さらに|併用)",
+            ctx, re.I
+        ))
+        # Avoid subtracting a displayed sale reduction that is already included
+        # in current price, or a peripheral-only discount.
+        if extra_checkout and not is_peripheral:
+            add("additional_cash_discount_jpy", value, "confirmed", True, ctx)
+        else:
+            add("displayed_discount_jpy", value, "unconfirmed", False, ctx)
+
+    # Explicit accessory/bundle value: useful for desktop value comparison, never
+    # a cash deduction. This is deliberately limited to stated monetary value.
+    value_pat = r"(?:モニター|ディスプレイ|キーボード|マウス|ヘッドセット|スピーカー|webカメラ|ドッキングステーション|周辺機器|アクセサリ)[^。\n]{0,90}?([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\s*円(?:相当|分)"
+    for m in re.finditer(value_pat, s, re.I):
+        try:
+            value = int(m.group(1).replace(",", ""))
+        except ValueError:
+            continue
+        ctx = s[max(0, m.start()-80):min(len(s), m.end()+100)]
+        add("accessory_stated_value_jpy", value, "confirmed", False, ctx)
+
+    # Accessory-specific discount is an opportunity signal, not PC cash value.
+    for m in re.finditer(r"(?:周辺機器|アクセサリ|アクセサリー)[^。\n]{0,80}?([0-9]{1,2})\s*%\s*(?:OFF|オフ|割引)", s, re.I):
+        try:
+            value = int(m.group(1))
+        except ValueError:
+            continue
+        ctx = s[max(0, m.start()-60):min(len(s), m.end()+100)]
+        add("accessory_bundle_percent", value, "confirmed", False, ctx)
+
+    # Free upgrades / included extras are tracked as value evidence. No monetary
+    # amount is invented when the page does not state one.
+    for m in re.finditer(
+        r"(?:メモリ|RAM|SSD|ストレージ|容量|保証|サポート)[^。\n]{0,80}(?:無料|無償|アップグレード|延長)",
+        s, re.I
+    ):
+        ctx = s[max(0, m.start()-40):min(len(s), m.end()+100)]
+        lower = ctx.lower()
+        kind = "warranty_or_support_value" if re.search(r"保証|サポート", ctx, re.I) else "configuration_upgrade"
+        add(kind, 1, "confirmed", False, ctx)
+
+    # Clearly free/included peripherals are useful but remain non-cash evidence.
+    for m in re.finditer(
+        r"(?:モニター|ディスプレイ|キーボード|マウス|ヘッドセット|スピーカー|webカメラ)[^。\n]{0,70}(?:無料|無償|付属|プレゼント|同梱)",
+        s, re.I
+    ):
+        ctx = s[max(0, m.start()-40):min(len(s), m.end()+100)]
+        add("included_peripheral", 1, "confirmed", False, ctx)
+
     return signals
 
 
@@ -527,8 +601,17 @@ def parse_page(url, html, expected=None):
         "parsed_spec": specs,
         "page_text_excerpt": text_html[:12000],
         "benefit_signals": benefit_signals,
-        "confirmed_benefit_value_jpy": 0,
-        "benefit_confidence": "unconfirmed",
+        "confirmed_benefit_value_jpy": sum(
+            int(x.get("value_jpy") or 0)
+            for x in benefit_signals
+            if x.get("counts_toward_effective_cost") and x.get("certainty") == "confirmed"
+        ),
+        "benefit_confidence": (
+            "confirmed"
+            if any(x.get("counts_toward_effective_cost") and x.get("certainty") == "confirmed"
+                   for x in benefit_signals)
+            else "unconfirmed"
+        ),
         "fetch_status": "ok",
         "price_source_mode": picked["source"] if picked else "none",
         "price_context": picked.get("context") if picked else None,
@@ -671,8 +754,8 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
             "page_text_excerpt": raw.get("page_text_excerpt") or "",
             "price_context": raw.get("price_context"),
             "benefit_signals": raw.get("benefit_signals") or [],
-            "confirmed_benefit_value_jpy": 0,
-            "benefit_confidence": "unconfirmed",
+            "confirmed_benefit_value_jpy": int(raw.get("confirmed_benefit_value_jpy") or 0),
+            "benefit_confidence": raw.get("benefit_confidence") or "unconfirmed",
         })
         item = enrich_identity(item, catalog_item)
         candidate_price = raw.get("price_jpy")
