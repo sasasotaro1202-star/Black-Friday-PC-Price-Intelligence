@@ -8,6 +8,11 @@ from intelligence import (
     now_jst, iso, scenario_prices
 )
 
+def sales_url(item):
+    """Return only a real HTTP(S) product URL; never fabricate a purchase URL."""
+    url = str(item.get("url") or "").strip()
+    return url if url.startswith(("https://", "http://")) else None
+
 def read_events():
     path = os.path.join(ROOT, "data", "change_events.jsonl")
     events = []
@@ -81,6 +86,7 @@ def main():
         row["effective_cost_jpy"] = effective_cost(product)
         row["noncash_benefit_value_jpy"] = noncash_benefit_value_jpy(product)
         row["benefit_confidence"] = product.get("benefit_confidence")
+        row["purchase_url"] = sales_url(product)
         if row.get("decision_score") is None:
             reference_only.append(row)
         else:
@@ -179,6 +185,7 @@ def main():
             "name": action.get("name") if action else None,
             "decision_score": action.get("decision_score") if action else None,
             "status": action.get("score_detail", {}).get("status") if action else "NO_VERIFIED_CANDIDATE",
+            "purchase_url": sales_url(action) if action else None,
         },
         "quality": quality,
         "products": scored,
@@ -217,6 +224,7 @@ def main():
             f"- 確定特典価値: ¥{action.get('confirmed_benefit_value_jpy', 0):,}",
             f"- 実質コスト: ¥{action.get('effective_cost_jpy'):,}" if action.get("effective_cost_jpy") is not None else "- 実質コスト: 未確認",
             f"- 判定: **{d['status']}**",
+            (f"- 購入リンク: [販売ページ]({sales_url(action)})" if sales_url(action) else "- 購入リンク: 未確認"),
             f"- 買い判断: {d['reason']}",
             f"- 待つリスク: **{d['wait_risk']}**",
             f"- 実質28万円まで必要値下げ: {d['required_effective_discount_pct']:.1f}%" if d.get("required_effective_discount_pct") is not None else "- 実質28万円まで必要値下げ: 未確認",
@@ -236,8 +244,8 @@ def main():
     lines += [
         "## 100点ランキング",
         "",
-        "|順位|タイプ|商品|現在価格|実質コスト|特典・構成価値|28万円まで|性能|価格価値|過去根拠|在庫|時期|総合|判定|",
-        "|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|",
+        "|順位|タイプ|商品|現在価格|実質コスト|特典・構成価値|28万円まで|性能|価格価値|過去根拠|在庫|時期|総合|判定|購入リンク|",
+        "|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|",
     ]
     for row in scored[:20]:
         d = row["score_detail"]
@@ -248,6 +256,8 @@ def main():
             f"{d['performance']}/40|{d['price']}/20|"
             f"{d['history']}/15|{d['stock']}/15|{d['timing']}/10|"
             f"**{row['decision_score']}/100**|{d['status']}|"
+            + (f"[販売ページ]({sales_url(row)})" if sales_url(row) else "未確認")
+            + "|"
         )
 
     lines += [
@@ -298,7 +308,7 @@ def main():
         "- STRONG_WATCH: 未到達でも性能・価格距離・過去根拠が強い。",
         "- VALUE_WATCH: 29万円超でも、デスクトップの性能と確認済み周辺機器/構成特典が強い候補。購入許可ではなく値下げ監視対象。",
         "- WAIT_FOR_DISCOUNT: 大幅値下げ待ち。",
-        "- VERIFY_NOW: 検索補完など。購入前に販売ページで再確認。"
+        "- VERIFY_NOW: 検索補完など。購入前に販売ページで再確認。",
         "- UNACTIONABLE: 現行価格を確認できない、または異常値・構成不一致。",
         "",
         "## Fail-closedルール",
@@ -308,7 +318,7 @@ def main():
         "- 一般的な「X円OFF」は表示価格に既に反映済みの可能性があるため、実質コストから二重控除しない。",
         "- 追加クーポン/カート値引きだけを confirmed cash benefit として実質コストに反映する。",
         "- モニター等の周辺機器価値、無料アップグレード、保証延長は実質コストから控除せず、別の価値加点として扱う。",
-        "- 異常な激安価格は独立確認なしでは採用しない。"
+        "- 異常な激安価格は独立確認なしでは採用しない。",
         "- 参照価格は現在価格ではない。",
         "- 共有商品ページは exact variant とみなさない。",
         "- 過去価格は同一構成 > 同GPU同シリーズ > 同シリーズの順で証拠力を下げる。",
