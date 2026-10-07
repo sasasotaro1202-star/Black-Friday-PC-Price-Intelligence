@@ -134,6 +134,28 @@ def main():
             errors.append("fetch_stats contains invalid counters")
         elif fetch_stats.get("total") != len(products):
             errors.append("fetch_stats.total != latest product count")
+        else:
+            expected_fetch_stats = {
+                "direct_verified": sum(
+                    1 for x in products
+                    if x.get("current_price_jpy") is not None
+                    and x.get("price_source_mode") in ("direct_structured", "direct_page", "direct_text")
+                ),
+                "search_corrob": sum(
+                    1 for x in products
+                    if x.get("current_price_jpy") is not None
+                    and x.get("price_source_mode") == "search_snippet"
+                ),
+                "stale_previous": sum(1 for x in products if x.get("price_source_mode") == "stale_previous"),
+                "baseline_only": sum(1 for x in products if x.get("price_source_mode") == "public_baseline"),
+                "anomaly_rejected": sum(
+                    1 for x in products if x.get("price_validation_status") == "anomaly_rejected"
+                ),
+                "errors": sum(1 for x in products if x.get("fetch_status") == "error"),
+            }
+            for key, expected in expected_fetch_stats.items():
+                if fetch_stats.get(key) != expected:
+                    errors.append(f"fetch_stats.{key} mismatch")
 
     latest_ids = []
     for p in products:
