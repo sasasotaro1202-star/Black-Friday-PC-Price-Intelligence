@@ -90,6 +90,40 @@ def main():
         products = []
 
     fetch_stats = latest.get("fetch_stats") or {}
+    coverage = latest.get("coverage") or {}
+    if coverage:
+        required = ("watchlist_count", "processed_count", "skipped_count", "max_urls")
+        if any(not isinstance(coverage.get(k), int) or coverage.get(k) < 0 for k in required):
+            errors.append("coverage contains invalid counters")
+        else:
+            if coverage.get("processed_count") != len(products):
+                errors.append("coverage.processed_count != latest product count")
+            if coverage.get("watchlist_count") < coverage.get("processed_count"):
+                errors.append("coverage.watchlist_count < processed_count")
+            if coverage.get("skipped_count") != coverage.get("watchlist_count") - coverage.get("processed_count"):
+                errors.append("coverage.skipped_count mismatch")
+            ids = coverage.get("skipped_ids") or []
+            if not isinstance(ids, list) or len(ids) != coverage.get("skipped_count"):
+                errors.append("coverage.skipped_ids mismatch")
+            if len(ids) != len(set(ids)):
+                errors.append("coverage.skipped_ids contains duplicates")
+            if set(ids) & set(latest_ids):
+                errors.append("coverage skipped id overlaps processed id")
+            expected_processing_rate = round(
+                100.0 * coverage["processed_count"] / coverage["watchlist_count"], 1
+            ) if coverage["watchlist_count"] else 100.0
+            if coverage.get("processing_rate_pct") != expected_processing_rate:
+                errors.append("coverage.processing_rate_pct mismatch")
+            expected_transport_rate = round(
+                100.0 * sum(1 for p in products if p.get("fetch_status") == "ok") / len(products), 1
+            ) if products else 0.0
+            if coverage.get("transport_success_rate_pct") != expected_transport_rate:
+                errors.append("coverage.transport_success_rate_pct mismatch")
+            expected_price_rate = round(
+                100.0 * sum(1 for p in products if p.get("current_price_jpy") is not None) / len(products), 1
+            ) if products else 0.0
+            if coverage.get("price_verified_rate_pct") != expected_price_rate:
+                errors.append("coverage.price_verified_rate_pct mismatch")
     if fetch_stats:
         keys = ("total", "direct_verified", "search_corrob", "stale_previous", "baseline_only", "anomaly_rejected", "errors")
         if any(not isinstance(fetch_stats.get(k), int) or fetch_stats.get(k) < 0 for k in keys):
