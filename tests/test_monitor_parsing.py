@@ -107,6 +107,24 @@ class MonitorParsingTests(unittest.TestCase):
         parsed = monitor.parse_page("https://example.com/test", html)
         self.assertEqual(parsed["price_source_mode"], "direct_meta")
 
+    def test_mouse_computer_brand_is_not_a_bundled_mouse(self):
+        html = """
+        <div>
+          マウスは3年保証で送料無料
+          マウスコンピューター公式 G TUNE デスクトップPC
+          付属品 ディスプレイ ー キーボード ー マウス ー
+        </div>
+        """
+        parsed = monitor.parse_page("https://example.com/test", html)
+        self.assertFalse(any(
+            x["kind"] == "included_peripheral"
+            for x in parsed["benefit_signals"]
+        ))
+        self.assertFalse(any(
+            x["kind"] == "warranty_or_support_value"
+            for x in parsed["benefit_signals"]
+        ))
+
     def test_additional_coupon_discount_is_confirmed_cash_benefit(self):
         html = """
         <div>
