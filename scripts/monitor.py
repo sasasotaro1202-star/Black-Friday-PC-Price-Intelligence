@@ -203,8 +203,8 @@ def _spec_window(text, hints=None):
         return s[:14000]
     return s[max(0, best-3500):min(len(s), best+12000)]
 
-def parse_specs(text, hints=None):
-    s = _spec_window(text, hints)
+def parse_specs(text, expected=None):
+    s = _spec_window(text, expected)
     out = {}
     gpu_patterns = [
         r"(RTX\s*(?:5090|5080|5070\s*Ti|5070|5060\s*Ti|5060)(?:\s*Laptop(?:\s*GPU)?)?)",
