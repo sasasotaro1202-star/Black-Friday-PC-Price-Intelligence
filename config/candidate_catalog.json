@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-07T17:28:00+09:00",
-  "note": "Curated identity layer for laptops and desktops. reference_price_jpy is not treated as current price. Shared family pages must not be treated as exact variants unless url_is_exact=true. Desktop candidates are evaluated in the same 100-point purchase-priority framework.",
+  "generated_at": "2026-10-07T17:35:00+09:00",
+  "note": "Curated identity layer for laptops and desktops. Desktop entries are anchored to exact official product URLs/model codes; related-product text must not override the selected variant. reference_price_jpy is not current price.",
   "candidates": [
     {
       "id": "rog-g16-9955hx3d",
@@ -278,8 +278,8 @@
       "ram_gb": 16,
       "ssd": "500 GB",
       "vram_gb": 12,
-      "psu_w": null,
-      "cooler": "air",
+      "psu_w": 750,
+      "cooler": "240mm liquid",
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/",
       "url_is_exact": true,
       "identity_confidence": "high",
@@ -290,7 +290,7 @@
     },
     {
       "id": "desktop-gtune-fg-a7g7t-5070ti",
-      "name": "G TUNE FG-A7G7T",
+      "name": "G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）",
       "family": "G TUNE FG",
       "form_factor": "desktop",
       "gpu": "RTX 5070 Ti",
@@ -299,8 +299,6 @@
       "ram_gb": 32,
       "ssd": "1 TB",
       "vram_gb": 16,
-      "psu_w": null,
-      "cooler": "360mm liquid",
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/",
       "url_is_exact": true,
       "identity_confidence": "high",
@@ -320,14 +318,75 @@
       "ram_gb": 16,
       "ssd": "500 GB",
       "vram_gb": 8,
-      "psu_w": null,
-      "cooler": "air",
-      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga5a60b5badw101dec/",
+      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/",
       "url_is_exact": true,
       "identity_confidence": "high",
       "reference_price_jpy": 194800,
       "aliases": [
         "DGA5G60B5BADW102DECWA"
+      ]
+    },
+    {
+      "id": "desktop-gtune-dg-i5g70-5070",
+      "name": "G TUNE DG-I5G70",
+      "family": "G TUNE DG",
+      "form_factor": "desktop",
+      "gpu": "RTX 5070",
+      "cpu": "Core Ultra 5 250K Plus",
+      "tgp_w": null,
+      "ram_gb": 16,
+      "ssd": "500 GB",
+      "vram_gb": 12,
+      "psu_w": null,
+      "cooler": "240mm liquid",
+      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/",
+      "url_is_exact": true,
+      "identity_confidence": "high",
+      "reference_price_jpy": 279800,
+      "aliases": [
+        "DGI5G70B8BGDW102DECRISE"
+      ]
+    },
+    {
+      "id": "desktop-gtune-dg-a7g70-5070",
+      "name": "G TUNE DG-A7G70",
+      "family": "G TUNE DG",
+      "form_factor": "desktop",
+      "gpu": "RTX 5070",
+      "cpu": "Ryzen 7 5700X",
+      "tgp_w": null,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 12,
+      "psu_w": null,
+      "cooler": "240mm liquid",
+      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101dec",
+      "url_is_exact": true,
+      "identity_confidence": "high",
+      "reference_price_jpy": 304800,
+      "aliases": [
+        "DGA7G70B5BBDW101DEC"
+      ]
+    },
+    {
+      "id": "desktop-gtune-fg-a7g70-5070",
+      "name": "G TUNE FG-A7G70",
+      "family": "G TUNE FG",
+      "form_factor": "desktop",
+      "gpu": "RTX 5070",
+      "cpu": "Ryzen 7 7700",
+      "tgp_w": null,
+      "ram_gb": 32,
+      "ssd": "1 TB",
+      "vram_gb": 12,
+      "psu_w": null,
+      "cooler": "360mm liquid",
+      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/",
+      "url_is_exact": true,
+      "identity_confidence": "high",
+      "reference_price_jpy": 319800,
+      "aliases": [
+        "FGA7G70G8BDDW101DECWA"
       ]
     }
   ]
