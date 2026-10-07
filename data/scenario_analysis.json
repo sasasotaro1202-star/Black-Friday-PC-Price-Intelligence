@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T16:40:47+09:00",
+  "generated_at": "2026-10-07T16:41:39+09:00",
   "budget_jpy": 280000,
   "note": "10/15/20/25/30% scenarios are planning bands, not probabilities.",
   "rows": [
@@ -160,8 +160,8 @@
         "price_jpy": 271800
       },
       "stock_status": "unknown",
-      "price_source_mode": "stale_previous",
-      "price_validation_status": "missing",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
       "dynamic_candidate": false
     },
     {
