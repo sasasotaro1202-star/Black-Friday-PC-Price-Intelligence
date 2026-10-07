@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 
@@ -6,8 +7,19 @@ from intelligence import (
     scenario_prices, required_discount, now_jst, iso
 )
 
+def file_sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
 def main():
-    latest=load_json(os.path.join(ROOT,"data","current_latest.json"),{"products":[]})
+    latest_path=os.path.join(ROOT,"data","current_latest.json")
+    latest=load_json(latest_path,{"products":[]})
+    source_snapshot_generated_at=latest.get("generated_at")
+    source_snapshot_sha256=file_sha256(latest_path) if os.path.exists(latest_path) else None
     catalog=load_catalog()
     anchors=load_anchors()
     live={str(x.get("id")):x for x in latest.get("products",[]) if x.get("id")}
@@ -81,7 +93,10 @@ def main():
         })
 
     rows.sort(key=lambda x:(x["reference_only"],x["required_discount_pct"],x["historical_floor_jpy"] or 999999999))
-    out={"generated_at":iso(now_jst()),"budget_jpy":BUDGET,
+    out={"generated_at":iso(now_jst()),
+         "source_snapshot_generated_at":source_snapshot_generated_at,
+         "source_snapshot_sha256":source_snapshot_sha256,
+         "budget_jpy":BUDGET,
          "note":"10/15/20/25/30% scenarios are planning bands, not probabilities.",
          "rows":rows}
     os.makedirs(os.path.join(ROOT,"data","reports"),exist_ok=True)
