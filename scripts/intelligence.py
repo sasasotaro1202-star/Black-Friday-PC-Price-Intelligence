@@ -415,6 +415,18 @@ def noncash_benefit_value_jpy(item):
                 total += min(value, 150000)
     return min(total, 200000)
 
+def value_equivalent_cost(item):
+    """Reference-only value-equivalent cost; never used for purchase authorization.
+
+    It subtracts only independently confirmed non-cash bundle/configuration value
+    from the cash/effective cost. This is intentionally separate from effective_cost
+    to prevent free peripherals or service value from masking the cash price.
+    """
+    eff = effective_cost(item)
+    if eff is None:
+        return None
+    return max(0, eff - noncash_benefit_value_jpy(item))
+
 def bundle_value_score(item):
     """Small ranking bonus for confirmed non-cash desktop/laptop bundle value."""
     signals = item.get("benefit_signals") or []
