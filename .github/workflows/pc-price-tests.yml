@@ -34,3 +34,4 @@ jobs:
           python scripts/timing_analysis.py
           python scripts/scenario_analysis.py
           python scripts/healthcheck.py
+          python scripts/validate.py
