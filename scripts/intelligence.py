@@ -574,8 +574,16 @@ def performance_score(item):
     ssd_bonus = 2 if re.search(r"1\s*TB", ssd, re.I) else 1 if re.search(r"[2-9]\s*TB", ssd, re.I) else 0
     tgp_bonus = 4 if tgp >= 130 else 3 if tgp >= 115 else 2 if tgp >= 100 else 0
     vram_bonus = 2 if vram >= 16 else 1 if vram >= 12 else 0
-    desktop_bonus = 2 if form_factor == "desktop" and g in ("rtx 5070", "rtx 5070 ti", "rtx 5080", "rtx 5090") else 0
-    return min(40, gp + cp + ram_bonus + ssd_bonus + tgp_bonus + vram_bonus + desktop_bonus), g
+    desktop_bonus = 2 if form_factor == "desktop" and g else 0
+    psu = int(spec.get("psu_w") or item.get("psu_w") or 0)
+    cooler = norm_text(spec.get("cooler") or item.get("cooler"))
+    desktop_hardware_bonus = 0
+    if form_factor == "desktop":
+        if psu >= 750:
+            desktop_hardware_bonus += 1
+        if re.search(r"(?:liquid|水冷)", cooler, re.I):
+            desktop_hardware_bonus += 1
+    return min(40, gp + cp + ram_bonus + ssd_bonus + tgp_bonus + vram_bonus + desktop_bonus + desktop_hardware_bonus), g
 
 def confidence_from_item(item):
     if item.get("price_validation_status") == "anomaly_rejected":
