@@ -82,6 +82,11 @@ def main():
     cfg = load(os.path.join(ROOT, "config", "targets.json"), {})
     watch_path = os.path.join(ROOT, "data", "watchlist.json")
     previous = load(watch_path, {"generated_at": None, "urls": []})
+    previous_ids = {
+        str(e.get("id") or "")
+        for e in (previous.get("urls") or [])
+        if isinstance(e, dict) and e.get("id")
+    }
     entries, seen_ids, seen_urls = [], set(), set()
 
     def add(entry):
@@ -120,12 +125,26 @@ def main():
     entries = entries[:100]
 
     now = datetime.now(JST).replace(microsecond=0).isoformat()
+    current_ids = {str(e.get("id") or "") for e in entries if e.get("id")}
+    added_ids = sorted(current_ids - previous_ids)
+    retained_ids = sorted(current_ids & previous_ids)
+    removed_ids = sorted(previous_ids - current_ids)
+    discovery_stats = {
+        "previous_count": len(previous_ids),
+        "current_count": len(current_ids),
+        "newly_discovered_count": len(added_ids),
+        "retained_count": len(retained_ids),
+        "removed_count": len(removed_ids),
+        "newly_discovered_ids": added_ids[:100],
+        "removed_ids": removed_ids[:100],
+    }
     previous.update({
         "generated_at": now,
         "urls": entries,
         "discovery_status": "ok" if entries else "empty",
         "discovery_error": None if entries else "No usable URLs discovered.",
         "discovered_count": len(entries),
+        "discovery_stats": discovery_stats,
     })
     save(watch_path, previous)
     print(json.dumps({"generated_at": now, "urls": len(entries), "status": previous["discovery_status"]}, ensure_ascii=False))
