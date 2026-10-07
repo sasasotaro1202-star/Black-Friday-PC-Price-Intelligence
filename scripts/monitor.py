@@ -182,12 +182,39 @@ def stock_from_text(text):
         return "in_stock"
     return "unknown"
 
-def parse_specs(text):
-    s = " ".join(text.split())
+def _spec_window(text, hints=None):
+    s = " ".join(str(text or "").split())
+    hints = hints or {}
+    terms = [str(x) for x in (hints.get("aliases") or []) if x]
+    for key in ("model_code", "name", "id", "query"):
+        if hints.get(key):
+            terms.append(str(hints[key]))
+    compact = "".join(s.split()).lower()
+    best = None
+    for term in terms:
+        t = "".join(norm_text(term).split()).lower()
+        if not t:
+            continue
+        pos = compact.find(t)
+        if pos >= 0:
+            # Use the compact position only as an anchor; widen enough to include the surrounding spec table.
+            best = pos if best is None else min(best, pos)
+    if best is None:
+        return s[:14000]
+    return s[max(0, best-3500):min(len(s), best+12000)]
+
+def parse_specs(text, hints=None):
+    s = _spec_window(text, hints)
     out = {}
-    gpu = re.search(r"(RTX\s*(?:5090|5080|5070\s*Ti|5070|5060\s*Ti|5060)\s*Laptop(?:\s*GPU)?)", s, re.I)
-    if gpu:
-        out["gpu"] = gpu.group(1)
+    gpu_patterns = [
+        r"(RTX\s*(?:5090|5080|5070\s*Ti|5070|5060\s*Ti|5060)(?:\s*Laptop(?:\s*GPU)?)?)",
+        r"(Radeon\s+RX\s*(?:9070\s*XT|9070|9060\s*XT|9060|9050|7900\s*(?:XTX|XT)|7800\s*XT|7700\s*XT))",
+    ]
+    for pat in gpu_patterns:
+        m = re.search(pat, s, re.I)
+        if m:
+            out["gpu"] = re.sub(r"\s+", " ", m.group(1)).strip()
+            break
     tgp = re.search(r"(?:TGP|Total Graphics Power|最大(?:GPU)?電力|GPU電力)[^0-9]{0,40}(\d{2,3})\s*W", s, re.I)
     if tgp:
         out["tgp_w"] = int(tgp.group(1))
@@ -200,19 +227,34 @@ def parse_specs(text):
     cpu_patterns = [
         r"Ryzen\s+9\s+\d{3,5}[A-Z0-9\-]*",
         r"Ryzen\s+7\s+\d{3,5}[A-Z0-9\-]*",
+        r"Ryzen\s+5\s+\d{3,5}[A-Z0-9\-]*",
         r"Core\s+Ultra\s+9\s+\d{3,5}[A-Z0-9\-]*",
         r"Core\s+Ultra\s+7\s+\d{3,5}[A-Z0-9\-]*",
+        r"Core\s+Ultra\s+5\s+\d{3,5}[A-Z0-9\-]*",
         r"Core\s+i9[- ]\d{4,5}[A-Z0-9\-]*",
         r"Core\s+i7[- ]\d{4,5}[A-Z0-9\-]*",
+        r"Core\s+i5[- ]\d{4,5}[A-Z0-9\-]*",
     ]
     for pat in cpu_patterns:
         m = re.search(pat, s, re.I)
         if m:
-            out["cpu"] = m.group(0)
+            out["cpu"] = re.sub(r"\s+", " ", m.group(0)).strip()
             break
-    m = re.search(r"(?:SSD|ストレージ|Storage)[^0-9]{0,18}(\d+(?:\.\d+)?)\s*(TB|GB)", s, re.I)
+    m = re.search(r"(?:SSD|ストレージ|Storage|M\.2 SSD)[^0-9]{0,18}(\d+(?:\.\d+)?)\s*(TB|GB)", s, re.I)
     if m:
         out["ssd"] = m.group(1) + " " + m.group(2)
+    if re.search(r"(?:デスクトップ(?:PC|パソコン)?|Desktop PC)", s, re.I):
+        out["form_factor"] = "desktop"
+    elif re.search(r"(?:ノート(?:PC|パソコン)?|Laptop PC)", s, re.I):
+        out["form_factor"] = "laptop"
+    psu = re.search(r"(?:電源|Power Supply)[^0-9]{0,30}(\d{3,4})\s*W", s, re.I)
+    if psu:
+        out["psu_w"] = int(psu.group(1))
+    if re.search(r"(?:水冷|簡易水冷)", s, re.I):
+        mm = re.search(r"(\d{2,3})\s*mm\s*(?:ラジエーター|radiator)", s, re.I)
+        out["cooler"] = f"{mm.group(1)}mm liquid" if mm else "liquid"
+    elif re.search(r"(?:CPUクーラー[^\n]{0,40}|空冷)", s, re.I):
+        out["cooler"] = "air"
     return out
 
 def extract_benefit_signals(text):
@@ -251,7 +293,7 @@ def extract_benefit_signals(text):
     return signals
 
 
-def parse_page(url, html):
+def parse_page(url, html, expected=None):
     text_html = re.sub(r"<script[^>]*>.*?</script>", " ", html, flags=re.I | re.S)
     text_html = re.sub(r"<style[^>]*>.*?</style>", " ", text_html, flags=re.I | re.S)
     text_html = re.sub(r"<[^>]+>", " ", text_html)
@@ -340,7 +382,7 @@ def parse_page(url, html):
     else:
         final_stock = text_stock
 
-    specs = parse_specs(text_html[:450000])
+    specs = parse_specs(text_html[:450000], expected=expected)
     benefit_signals = extract_benefit_signals(text_html[:450000])
     return {
         "url": url,
@@ -593,7 +635,7 @@ def main():
 
         try:
             html, final_url, _headers = fetch(entry["url"])
-            raw = parse_page(final_url, html)
+            raw = parse_page(final_url, html, expected=cat)
         except HTTPError as exc:
             request_error = f"HTTPError:{exc.code}"
         except URLError as exc:
