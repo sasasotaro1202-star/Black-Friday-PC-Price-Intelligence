@@ -5,7 +5,7 @@ import os
 from intelligence import (
     ROOT, BUDGET, EFFECTIVE_SOFT_MAX, EFFECTIVE_HARD_MAX,
     load_json, save_json, load_catalog, load_anchors,
-    build_row, cash_total_cost, confirmed_benefit_value, effective_cost, noncash_benefit_value_jpy,
+    build_row, cash_total_cost, confirmed_benefit_value, effective_cost, noncash_benefit_value_jpy, value_equivalent_cost,
     now_jst, iso, scenario_prices
 )
 
@@ -271,6 +271,7 @@ def main():
             f"- 必須費用込み現金総額: ¥{action.get('cash_total_cost_jpy'):,}" if action.get("cash_total_cost_jpy") is not None else "- 必須費用込み現金総額: 未確認",
             f"- 確定特典価値: ¥{action.get('confirmed_benefit_value_jpy', 0):,}",
             f"- 実質コスト: ¥{action.get('effective_cost_jpy'):,}" if action.get("effective_cost_jpy") is not None else "- 実質コスト: 未確認",
+            f"- 参考総価値換算額: ¥{action.get('value_equivalent_cost_jpy'):,}（購入許可には不使用）" if action.get("value_equivalent_cost_jpy") is not None else "- 参考総価値換算額: 未確認",
             f"- 判定: **{d['status']}**",
             (f"- 購入リンク: [販売ページ]({sales_url(action)})" if sales_url(action) else "- 購入リンク: 未確認"),
             f"- 買い判断: {d['reason']}",
