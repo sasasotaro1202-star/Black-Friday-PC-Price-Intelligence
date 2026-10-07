@@ -300,10 +300,28 @@ def parse_page(url, html, expected=None):
     text_html = re.sub(r"\s+", " ", text_html)
 
     name = None
-    structured_prices = []
-    availability_states = set()
+    structured_offers = []
+    all_availability_states = set()
     structured_stock = "unknown"
     price_ambiguity = None
+    matched_structured = False
+
+    expected_terms = []
+    if expected:
+        expected_terms.extend([str(x) for x in (expected.get("aliases") or []) if x])
+        for key in ("model_code", "name"):
+            if expected.get(key):
+                expected_terms.append(str(expected[key]))
+
+    def _jsonld_name_matches(product_name):
+        pn = "".join(norm_text(product_name).split())
+        if not pn or not expected_terms:
+            return False
+        return any(
+            "".join(norm_text(term).split()) in pn or
+            pn in "".join(norm_text(term).split())
+            for term in expected_terms
+        )
 
     blocks = re.findall(
         r'<script[^>]+type=["\\\']application/ld\+json["\\\'][^>]*>(.*?)</script>',
@@ -318,7 +336,11 @@ def parse_page(url, html, expected=None):
         for obj in objs:
             if "Product" not in str(obj.get("@type", "")):
                 continue
+            product_name = str(obj.get("name") or "")
             name = obj.get("name") or name
+            matched = _jsonld_name_matches(product_name)
+            if matched:
+                matched_structured = True
             offers = obj.get("offers")
             offers_list = offers if isinstance(offers, list) else [offers] if isinstance(offers, dict) else []
             for offer in offers_list:
@@ -330,24 +352,26 @@ def parse_page(url, html, expected=None):
                 except Exception:
                     p = None
                 if p and (currency in ("JPY", "YEN", "") or "¥" in str(offer.get("price"))):
-                    structured_prices.append(p)
-                av = str(offer.get("availability") or "")
-                if "InStock" in av:
-                    availability_states.add("in_stock")
-                elif "OutOfStock" in av:
-                    availability_states.add("out_of_stock")
-                elif "PreOrder" in av or "BackOrder" in av:
-                    availability_states.add("preorder_or_backorder")
+                    structured_offers.append({
+                        "price": p,
+                        "matched": matched,
+                        "availability": str(offer.get("availability") or ""),
+                    })
 
-    unique_structured_prices = sorted(set(structured_prices))
+    selected_offers = [x for x in structured_offers if x["matched"]] if matched_structured else structured_offers
+    unique_structured_prices = sorted(set(x["price"] for x in selected_offers))
     structured_price = unique_structured_prices[0] if len(unique_structured_prices) == 1 else None
     if len(unique_structured_prices) > 1:
         price_ambiguity = "multiple_structured_prices"
 
-    if len(availability_states) == 1:
-        structured_stock = next(iter(availability_states))
-    elif len(availability_states) > 1:
-        structured_stock = "unknown"
+    selected_states = {x["availability"] for x in selected_offers if x["availability"]}
+    for av in selected_states:
+        if "InStock" in av:
+            all_availability_states.add("in_stock")
+        elif "OutOfStock" in av:
+            all_availability_states.add("out_of_stock")
+        elif "PreOrder" in av or "BackOrder" in av:
+            all_availability_states.add("preorder_or_backorder")
 
     meta = re.search(
         r'<meta[^>]+(?:property|name)=["\\\']product:price:amount["\\\'][^>]+content=["\\\']([^"\\\']+)',
@@ -373,7 +397,7 @@ def parse_page(url, html, expected=None):
             picked = {"price_jpy": raw["price_jpy"], "source": "direct_text", "context": raw["context"]}
 
     text_stock = stock_from_text(text_html)
-    if len(availability_states) > 1:
+    if len(all_availability_states) > 1:
         final_stock = "unknown"
     elif text_stock in ("out_of_stock", "low_stock", "preorder_or_backorder"):
         final_stock = text_stock
