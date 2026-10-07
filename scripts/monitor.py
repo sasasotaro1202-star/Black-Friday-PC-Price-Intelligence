@@ -215,6 +215,42 @@ def parse_specs(text):
         out["ssd"] = m.group(1) + " " + m.group(2)
     return out
 
+def extract_benefit_signals(text):
+    """Extract benefit hints without treating them as guaranteed cash savings."""
+    s = re.sub(r"\\s+", " ", str(text or ""))
+    signals = []
+    patterns = [
+        (r"([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\\s*円(?:分|相当)?\\s*(?:の)?(?:ポイント|ポイント還元|還元)",
+         "point_value_jpy"),
+        (r"(?:ポイント|還元)[^0-9]{0,20}([0-9]{1,2})\\s*%",
+         "point_percent"),
+        (r"([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\\s*円(?:の)?(?:キャッシュバック|還元)",
+         "cashback_value_jpy"),
+        (r"(?:周辺機器|アクセサリ)[^。\\n]{0,60}([0-9]{1,2})\\s*%\\s*(?:OFF|オフ)",
+         "accessory_bundle_percent"),
+    ]
+    seen = set()
+    for pat, kind in patterns:
+        for m in re.finditer(pat, s, re.I):
+            raw = m.group(1)
+            try:
+                value = int(raw.replace(",", "")) if "value_jpy" in kind else int(raw)
+            except ValueError:
+                continue
+            key = (kind, value)
+            if key in seen:
+                continue
+            seen.add(key)
+            signals.append({
+                "kind": kind,
+                "value": value,
+                "text": s[max(0, m.start()-60):min(len(s), m.end()+60)],
+                "certainty": "unconfirmed",
+                "counts_toward_effective_cost": False,
+            })
+    return signals
+
+
 def parse_page(url, html):
     text_html = re.sub(r"<script[^>]*>.*?</script>", " ", html, flags=re.I | re.S)
     text_html = re.sub(r"<style[^>]*>.*?</style>", " ", text_html, flags=re.I | re.S)
@@ -305,6 +341,7 @@ def parse_page(url, html):
         final_stock = text_stock
 
     specs = parse_specs(text_html[:450000])
+    benefit_signals = extract_benefit_signals(text_html[:450000])
     return {
         "url": url,
         "store": urlparse(url).netloc.lower(),
@@ -314,6 +351,9 @@ def parse_page(url, html):
         "stock_ambiguity": "multiple_offer_availability" if len(availability_states) > 1 else None,
         "parsed_spec": specs,
         "page_text_excerpt": text_html[:12000],
+        "benefit_signals": benefit_signals,
+        "confirmed_benefit_value_jpy": 0,
+        "benefit_confidence": "unconfirmed",
         "fetch_status": "ok",
         "price_source_mode": picked["source"] if picked else "none",
         "price_context": picked.get("context") if picked else None,
@@ -374,6 +414,8 @@ def fingerprint(item):
         k: item.get(k)
         for k in ("id", "url", "current_price_jpy", "stock_status",
                   "spec", "price_validation_status", "price_source_mode",
+                  "benefit_signals", "confirmed_benefit_value_jpy",
+                  "benefit_confidence",
                   "variant_match", "fetch_status")
     }
     return hashlib.sha256(json.dumps(stable, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
@@ -400,7 +442,9 @@ def meaningful_change(prev, item):
         prev.get("current_price_jpy") != item.get("current_price_jpy") or
         prev.get("stock_status") != item.get("stock_status") or
         prev.get("price_validation_status") != item.get("price_validation_status") or
-        prev.get("variant_match") != item.get("variant_match")
+        prev.get("variant_match") != item.get("variant_match") or
+        prev.get("benefit_signals") != item.get("benefit_signals") or
+        prev.get("confirmed_benefit_value_jpy") != item.get("confirmed_benefit_value_jpy")
     )
 
 def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
@@ -437,6 +481,9 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
         "parsed_spec": {},
         "spec": {},
         "page_text_excerpt": "",
+        "benefit_signals": [],
+        "confirmed_benefit_value_jpy": 0,
+        "benefit_confidence": "unconfirmed",
     }
 
     if raw:
@@ -448,6 +495,9 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
             "parsed_spec": raw.get("parsed_spec") or {},
             "page_text_excerpt": raw.get("page_text_excerpt") or "",
             "price_context": raw.get("price_context"),
+            "benefit_signals": raw.get("benefit_signals") or [],
+            "confirmed_benefit_value_jpy": 0,
+            "benefit_confidence": "unconfirmed",
         })
         item = enrich_identity(item, catalog_item)
         candidate_price = raw.get("price_jpy")
