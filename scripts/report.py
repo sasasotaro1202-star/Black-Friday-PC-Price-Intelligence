@@ -147,6 +147,7 @@ def main():
     action = scored[0] if scored else None
 
     partition = scored + unavailable + reference_only
+    quality = {}
     # Quality counters must describe the same final partition that healthcheck
     # validates, not the pre-suppression source rows.
     quality["candidate_count"] = len(partition)
