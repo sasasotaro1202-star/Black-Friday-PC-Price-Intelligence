@@ -1,6 +1,6 @@
 # ブラックフライデー期間通算・購入ランキング
 
-更新: 2026-10-07T23:39:15+09:00
+更新: 2026-10-08T05:07:47+09:00
 予算: ¥280,000
 フェーズ: **通常監視期間**
 
@@ -25,11 +25,10 @@
 |---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
 |1|desktop|G TUNE DG-I7G70|¥299,800|¥299,800|¥0 / +0|6.6%|32/40|18/20|0/15|11/15|9/10|**70/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/)|
 |2|desktop|G TUNE FG-A7G70|¥319,800|¥319,800|¥0 / +0|12.4%|33/40|16/20|0/15|11/15|8/10|**68/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/)|
-|3|laptop|Lenovo Legion Pro 5i Gen 10（16型 Intel）|¥354,865|¥354,865|¥0 / +0|21.1%|40/40|10/20|0/15|11/15|5/10|**66/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040)|
-|4|desktop|G TUNE DG-I5G70|¥279,800|¥279,800|¥0 / +0|0.0%|22/40|20/20|0/15|11/15|10/10|**63/100**|WATCH|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/)|
-|5|desktop|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|¥399,800|¥0 / +0|30.0%|38/40|7/20|0/15|11/15|5/10|**61/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/)|
-|6|desktop|G TUNE DG-A5G60|¥194,800|¥194,800|¥0 / +0|0.0%|15/40|20/20|0/15|11/15|10/10|**56/100**|WATCH|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
-|7|desktop|G TUNE DG-A7G70|¥459,800|¥459,800|¥0 / +0|39.1%|25/40|4/20|0/15|11/15|3/10|**43/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101dec)|
+|3|desktop|G TUNE DG-I5G70|¥279,800|¥279,800|¥0 / +0|0.0%|22/40|20/20|0/15|11/15|10/10|**63/100**|WATCH|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/)|
+|4|desktop|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|¥399,800|¥0 / +0|30.0%|38/40|7/20|0/15|11/15|5/10|**61/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/)|
+|5|desktop|G TUNE DG-A5G60|¥194,800|¥194,800|¥0 / +0|0.0%|15/40|20/20|0/15|11/15|10/10|**56/100**|WATCH|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
+|6|desktop|G TUNE DG-A7G70|¥459,800|¥459,800|¥0 / +0|39.1%|25/40|4/20|0/15|11/15|3/10|**43/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101dec)|
 
 ## データ品質
 
@@ -42,14 +41,14 @@
 - 重要候補: 5
 - 重要候補の未確認: 4
 - カバレッジ: PARTIAL
-- 現行価格を使える候補: 7
-- 参照情報のみ: 11
+- 現行価格を使える候補: 6
+- 参照情報のみ: 12
 - 自動発見候補: 0
-- 直接確認: 9
+- 直接確認: 8
 - 検索補完: 0
 - 異常価格棄却: 0
 - 構成不明: 3
-- 在庫不明: 10
+- 在庫不明: 11
 - 売り切れ確認: 3
 - PIT失敗: 0
 
@@ -61,19 +60,16 @@
 ### 2. G TUNE FG-A7G70
 10%→¥287,800 / 15%→¥271,800 / 20%→¥255,800 / 25%→¥239,800 / 30%→¥223,900 / 28万円到達→15%
 
-### 3. Lenovo Legion Pro 5i Gen 10（16型 Intel）
-10%→¥319,400 / 15%→¥301,600 / 20%→¥283,900 / 25%→¥266,100 / 30%→¥248,400 / 28万円到達→25%
-
-### 4. G TUNE DG-I5G70
+### 3. G TUNE DG-I5G70
 10%→¥251,800 / 15%→¥237,800 / 20%→¥223,800 / 25%→¥209,800 / 30%→¥195,900 / 28万円到達→10%
 
-### 5. G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）
+### 4. G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）
 10%→¥359,800 / 15%→¥339,800 / 20%→¥319,800 / 25%→¥299,800 / 30%→¥279,900 / 28万円到達→30%
 
-### 6. G TUNE DG-A5G60
+### 5. G TUNE DG-A5G60
 10%→¥175,300 / 15%→¥165,600 / 20%→¥155,800 / 25%→¥146,100 / 30%→¥136,400 / 28万円到達→10%
 
-### 7. G TUNE DG-A7G70
+### 6. G TUNE DG-A7G70
 10%→¥413,800 / 15%→¥390,800 / 20%→¥367,800 / 25%→¥344,800 / 30%→¥321,900 / 30%でも28万円未到達
 
 ## 判定ルール
