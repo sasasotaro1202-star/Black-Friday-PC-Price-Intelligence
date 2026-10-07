@@ -45,8 +45,15 @@ CPU_POINTS = [
     ("13700hx", 11),
     ("14650hx", 10),
     ("13620h", 8),
-    ("ryzen 9", 9),
     ("core ultra 7", 9),
+    ("270k plus", 10),
+    ("14700f", 10),
+    ("ryzen 9", 9),
+    ("ryzen 7 9700x", 10),
+    ("ryzen 7 7700", 7),
+    ("7800x3d", 11),
+    ("9800x3d", 12),
+    ("ryzen 5 4500", 4),
 ]
 
 GPU_ORDER = (
@@ -529,6 +536,7 @@ def performance_score(item):
     gp = GPU_POINTS.get(g, 0)
     cp = cpu_key(item)
     spec = item.get("spec") or {}
+    form_factor = norm_text(item.get("form_factor") or spec.get("form_factor"))
     tgp = int(spec.get("tgp_w") or 0)
     ram = int(spec.get("ram_gb") or 0)
     vram = int(spec.get("vram_gb") or 0)
@@ -536,8 +544,9 @@ def performance_score(item):
     ram_bonus = 2 if ram >= 32 else 1 if ram >= 24 else 0
     ssd_bonus = 2 if re.search(r"1\s*TB", ssd, re.I) else 1 if re.search(r"[2-9]\s*TB", ssd, re.I) else 0
     tgp_bonus = 4 if tgp >= 130 else 3 if tgp >= 115 else 2 if tgp >= 100 else 0
-    vram_bonus = 1 if vram >= 12 else 0
-    return min(40, gp + cp + ram_bonus + ssd_bonus + tgp_bonus + vram_bonus), g
+    vram_bonus = 2 if vram >= 16 else 1 if vram >= 12 else 0
+    desktop_bonus = 2 if form_factor == "desktop" and g in ("rtx 5070", "rtx 5070 ti", "rtx 5080", "rtx 5090") else 0
+    return min(40, gp + cp + ram_bonus + ssd_bonus + tgp_bonus + vram_bonus + desktop_bonus), g
 
 def confidence_from_item(item):
     if item.get("price_validation_status") == "anomaly_rejected":
@@ -564,7 +573,7 @@ def data_quality_cap(item):
     variant = item.get("variant_match")
     mode = item.get("price_source_mode")
     if item.get("dynamic_candidate"):
-        cap = min(cap, 74)
+        cap = min(cap, 84)
     if variant == "ambiguous":
         cap = min(cap, 74)
     elif variant == "gpu_only":
