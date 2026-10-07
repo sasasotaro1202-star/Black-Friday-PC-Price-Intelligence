@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 from collections import Counter
@@ -20,6 +21,14 @@ HISTORY=[
   {"date":"2025-11-30","label":"TUF Gaming A16 RTX 5070 32GB/1TB still observed at ¥219,800","price":219800,"source":"https://ascii.jp/elem/000/004/356/4356081/"},
   {"date":"2025-11-14","label":"Lenovo Black Friday campaign begins","source":"https://www.lenovo.com/jp/ja/campaigns/black-friday/"}
 ]
+
+def file_sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
 
 def read_events():
     path=os.path.join(ROOT,"data","change_events.jsonl")
@@ -74,7 +83,10 @@ def dynamic_change_timing(events):
     }
 
 def main():
-    latest=load_json(os.path.join(ROOT,"data","current_latest.json"),{"products":[]})
+    latest_path=os.path.join(ROOT,"data","current_latest.json")
+    latest=load_json(latest_path,{"products":[]})
+    source_snapshot_generated_at=latest.get("generated_at")
+    source_snapshot_sha256=file_sha256(latest_path) if os.path.exists(latest_path) else None
     catalog=load_catalog()
     live={str(x.get("id")):x for x in latest.get("products",[]) if x.get("id")}
 
@@ -109,6 +121,8 @@ def main():
     dynamic=dynamic_change_timing(read_events())
     out={
         "generated_at":iso(now_jst()),
+        "source_snapshot_generated_at":source_snapshot_generated_at,
+        "source_snapshot_sha256":source_snapshot_sha256,
         "budget_jpy":BUDGET,
         "target_black_friday":TARGET.date().isoformat(),
         "target_products":rows[:50],
@@ -125,6 +139,8 @@ def main():
     lines=[
         "# Black Friday price timing analysis","",
         f"Generated: {out['generated_at']}",
+        f"Source snapshot: {source_snapshot_generated_at or 'UNCONFIRMED'}",
+        f"Source snapshot SHA256: {source_snapshot_sha256 or 'UNCONFIRMED'}",
         f"Budget: ¥{BUDGET:,}",
         f"Target Black Friday: {TARGET.date()}","",
         "## Current actionable candidates","",
