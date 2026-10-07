@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T00:00:00+09:00",
+  "generated_at": "2026-10-07T17:28:00+09:00",
   "urls": [
     {
       "url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
@@ -78,9 +78,28 @@
       "url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025-g815/",
       "query": "ROG Strix G18 G815LR-U9R5070TI Core Ultra 9 275HX RTX 5070 Ti 32GB 1TB 日本",
       "priority": "high"
+    },
+    {
+      "id": "desktop-gtune-dg-i7g70-5070",
+      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/",
+      "query": "G TUNE DG-I7G70 RTX 5070 Core Ultra 7 270K Plus 16GB 500GB デスクトップ 日本",
+      "priority": "high"
+    },
+    {
+      "id": "desktop-gtune-fg-a7g7t-5070ti",
+      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/",
+      "query": "G TUNE FG-A7G7T RTX 5070 Ti Ryzen 7 7700 32GB 1TB デスクトップ 日本",
+      "priority": "high"
+    },
+    {
+      "id": "desktop-gtune-dg-a5g60-5060",
+      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga5a60b5badw101dec/",
+      "query": "G TUNE DG-A5G60 RTX 5060 Ryzen 5 4500 16GB 500GB デスクトップ 日本",
+      "priority": "normal"
     }
   ],
   "last_discovery_attempt_at": "2026-10-07T06:48:29+09:00",
   "discovery_status": "ok",
-  "discovery_error": null
+  "discovery_error": null,
+  "desktop_included": true
 }
