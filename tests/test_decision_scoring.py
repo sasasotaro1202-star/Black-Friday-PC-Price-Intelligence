@@ -89,6 +89,23 @@ class DecisionScoringTests(unittest.TestCase):
         high = intelligence.performance_score(self.candidate(tgp=140))[0]
         self.assertGreater(high, low)
 
+    def test_desktop_gpu_is_compared_in_same_framework(self):
+        laptop = self.candidate(gpu="RTX 5070 Ti Laptop GPU", tgp=115, ram=32, ssd="1 TB")
+        desktop = self.candidate(gpu="RTX 5070 Ti", tgp=0, ram=32, ssd="1 TB")
+        desktop["form_factor"] = "desktop"
+        desktop["spec"]["form_factor"] = "desktop"
+        desktop["spec"]["vram_gb"] = 16
+        lp = intelligence.performance_score(laptop)[0]
+        dp = intelligence.performance_score(desktop)[0]
+        self.assertGreater(dp, lp)
+
+    def test_desktop_cpu_tokens_are_scored(self):
+        item = self.candidate(gpu="RTX 5070", cpu="Core Ultra 7 270K Plus", ram=32, ssd="1 TB")
+        item["form_factor"] = "desktop"
+        item["spec"]["form_factor"] = "desktop"
+        score = intelligence.performance_score(item)[0]
+        self.assertGreaterEqual(score, 20)
+
     def test_5070ti_beats_5070(self):
         ti = intelligence.performance_score(self.candidate(gpu="RTX 5070 Ti Laptop GPU"))[0]
         base = intelligence.performance_score(self.candidate(gpu="RTX 5070 Laptop GPU"))[0]
