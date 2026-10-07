@@ -459,23 +459,38 @@ def extract_benefit_signals(text):
         ctx = s[max(0, m.start()-60):min(len(s), m.end()+100)]
         add("accessory_bundle_percent", value, "confirmed", False, ctx)
 
-    # Free upgrades / included extras are tracked as value evidence. No monetary
-    # amount is invented when the page does not state one.
+    # Free configuration upgrades are tracked as value evidence. Warranty/support
+    # is counted only when it is clearly an incremental offer (extension or
+    # enhanced support), not a generic site-wide warranty statement.
     for m in re.finditer(
-        r"(?:メモリ|RAM|SSD|ストレージ|容量|保証|サポート)[^。\n]{0,80}(?:無料|無償|アップグレード|延長)",
+        r"(?:メモリ|RAM|SSD|ストレージ|容量)[^。\n]{0,80}(?:無料|無償|アップグレード)",
         s, re.I
     ):
         ctx = s[max(0, m.start()-40):min(len(s), m.end()+100)]
-        lower = ctx.lower()
-        kind = "warranty_or_support_value" if re.search(r"保証|サポート", ctx, re.I) else "configuration_upgrade"
-        add(kind, 1, "confirmed", False, ctx)
+        add("configuration_upgrade", 1, "confirmed", False, ctx)
+
+    for m in re.finditer(
+        r"(?:保証|サポート)[^。\n]{0,80}(?:延長|追加|プレミアム|5年|4年|24時間.?365日)",
+        s, re.I
+    ):
+        ctx = s[max(0, m.start()-40):min(len(s), m.end()+100)]
+        add("warranty_or_support_value", 1, "confirmed", False, ctx)
 
     # Clearly free/included peripherals are useful but remain non-cash evidence.
+    # Keep the proximity tight and exclude the retailer brand phrase
+    # "マウスコンピューター", which is not a bundled mouse.
+    peripheral_terms = r"(?:モニター|ディスプレイ|キーボード|(?<!コンピューター)マウス|ヘッドセット|スピーカー|webカメラ)"
     for m in re.finditer(
-        r"(?:モニター|ディスプレイ|キーボード|マウス|ヘッドセット|スピーカー|webカメラ)[^。\n]{0,70}(?:無料|無償|付属|プレゼント|同梱)",
+        peripheral_terms + r"[^。\n]{0,35}(?:無料|無償|付属|プレゼント|同梱)",
         s, re.I
     ):
-        ctx = s[max(0, m.start()-40):min(len(s), m.end()+100)]
+        ctx = s[max(0, m.start()-40):min(len(s), m.end()+90)]
+        add("included_peripheral", 1, "confirmed", False, ctx)
+    for m in re.finditer(
+        r"(?:無料|無償|付属|プレゼント|同梱)[^。\n]{0,35}" + peripheral_terms,
+        s, re.I
+    ):
+        ctx = s[max(0, m.start()-40):min(len(s), m.end()+90)]
         add("included_peripheral", 1, "confirmed", False, ctx)
 
     return signals
