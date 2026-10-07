@@ -480,14 +480,15 @@ def extract_benefit_signals(text):
     # Keep the proximity tight and exclude the retailer brand phrase
     # "マウスコンピューター", which is not a bundled mouse.
     peripheral_terms = r"(?:モニター|ディスプレイ|キーボード|(?<!コンピューター)マウス|ヘッドセット|スピーカー|webカメラ)"
+    benefit_terms = r"(?:無料|無償|プレゼント|同梱|付属(?!品))"
     for m in re.finditer(
-        peripheral_terms + r"[^。\n]{0,35}(?:無料|無償|付属|プレゼント|同梱)",
+        peripheral_terms + r"[^。\n]{0,25}" + benefit_terms,
         s, re.I
     ):
         ctx = s[max(0, m.start()-40):min(len(s), m.end()+90)]
         add("included_peripheral", 1, "confirmed", False, ctx)
     for m in re.finditer(
-        r"(?:無料|無償|付属|プレゼント|同梱)[^。\n]{0,35}" + peripheral_terms,
+        benefit_terms + r"[^。\n]{0,25}" + peripheral_terms,
         s, re.I
     ):
         ctx = s[max(0, m.start()-40):min(len(s), m.end()+90)]
