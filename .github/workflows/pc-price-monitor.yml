@@ -76,7 +76,7 @@ jobs:
       - name: Collect, recover, sanitize, score and publish
         if: steps.gate.outputs.skip != 'true'
         env:
-          MONITOR_MAX_URLS: "80"
+          MONITOR_MAX_URLS: "100"
         shell: bash
         run: |
           set -euo pipefail
