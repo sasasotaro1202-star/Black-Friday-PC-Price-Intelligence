@@ -853,9 +853,9 @@ def main():
     entries = [x for x in entries if x.get("id") and x.get("url")]
 
     try:
-        max_urls = max(1, min(int(os.environ.get("MONITOR_MAX_URLS", "80")), 80))
+        max_urls = max(1, min(int(os.environ.get("MONITOR_MAX_URLS", "100")), 100))
     except Exception:
-        max_urls = 80
+        max_urls = 100
     entries = entries[:max_urls]
 
     previous_state = read(latest_path, {"products": []})
