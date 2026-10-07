@@ -45,7 +45,10 @@
     "RTX 5090 Laptop 32GB 1TB ゲーミングノート 日本",
     "RTX 5070 Ti ゲーミングデスクトップ 32GB 1TB 日本",
     "RTX 5080 ゲーミングデスクトップ 32GB 1TB 日本",
-    "RTX 5070 ゲーミングデスクトップ 32GB 1TB 日本"
+    "RTX 5070 ゲーミングデスクトップ 32GB 1TB 日本",
+    "G TUNE DG-I7G70 RTX 5070 Core Ultra 7 270K Plus 16GB 500GB デスクトップ 日本",
+    "G TUNE FG-A7G7T RTX 5070 Ti Ryzen 7 7700 32GB 1TB デスクトップ 日本",
+    "G TUNE DG-A5G60 RTX 5060 Ryzen 5 4500 16GB 500GB デスクトップ 日本"
   ],
   "allowed_domains": [
     "lenovo.com",
@@ -69,5 +72,7 @@
     "kakaku.com"
   ],
   "max_results_per_query": 8,
-  "max_pages_per_run": 50
+  "max_pages_per_run": 50,
+  "desktop_enabled": true,
+  "desktop_note": "Desktop PCs are evaluated in the same integrated purchase-priority ranking as laptops, with desktop-specific GPU/VRAM/CPU factors."
 }
