@@ -107,6 +107,49 @@ class MonitorParsingTests(unittest.TestCase):
         parsed = monitor.parse_page("https://example.com/test", html)
         self.assertEqual(parsed["price_source_mode"], "direct_meta")
 
+    def test_additional_coupon_discount_is_confirmed_cash_benefit(self):
+        html = """
+        <div>
+          販売価格 399,800円
+          PC本体 クーポンコード入力で30,000円OFF
+          在庫あり
+        </div>
+        """
+        parsed = monitor.parse_page("https://example.com/test", html)
+        self.assertEqual(parsed["confirmed_benefit_value_jpy"], 30000)
+        self.assertEqual(parsed["benefit_confidence"], "confirmed")
+        self.assertTrue(any(
+            x["kind"] == "additional_cash_discount_jpy"
+            and x["counts_toward_effective_cost"]
+            for x in parsed["benefit_signals"]
+        ))
+
+    def test_generic_discount_is_not_double_counted(self):
+        html = """
+        <div>
+          G TUNE PC 30,000円OFF 販売価格 369,800円
+          在庫あり
+        </div>
+        """
+        parsed = monitor.parse_page("https://example.com/test", html)
+        self.assertEqual(parsed["confirmed_benefit_value_jpy"], 0)
+
+    def test_accessory_value_is_separate_from_effective_cost(self):
+        html = """
+        <div>
+          販売価格 399,800円
+          27,800円相当のゲーミングモニターをプレゼント
+          在庫あり
+        </div>
+        """
+        parsed = monitor.parse_page("https://example.com/test", html)
+        self.assertEqual(parsed["confirmed_benefit_value_jpy"], 0)
+        self.assertEqual(parsed["benefit_confidence"], "unconfirmed")
+        self.assertTrue(any(
+            x["kind"] == "accessory_stated_value_jpy" and x["value_jpy"] == 27800
+            for x in parsed["benefit_signals"]
+        ))
+
     def test_benefit_signals_are_recorded_but_not_counted_as_cash(self):
         html = """
         <html><body>
