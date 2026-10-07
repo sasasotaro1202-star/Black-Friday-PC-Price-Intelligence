@@ -22,6 +22,24 @@ def file_sha256(path):
             h.update(chunk)
     return h.hexdigest()
 
+
+def suppress_current_price(row):
+    """Convert a non-actionable row into reference-only evidence."""
+    out = dict(row)
+    if out.get("current_price_jpy") is not None:
+        out["last_valid_price_jpy"] = (
+            out.get("last_valid_price_jpy")
+            or out.get("current_price_jpy")
+        )
+    out["reference_price_jpy"] = (
+        out.get("reference_price_jpy")
+        or out.get("last_valid_price_jpy")
+    )
+    out["current_price_jpy"] = None
+    out["price_jpy"] = None
+    out["current_price_suppressed"] = True
+    return out
+
 def read_events():
     path = os.path.join(ROOT, "data", "change_events.jsonl")
     events = []
@@ -103,21 +121,7 @@ def main():
         row["source_snapshot_generated_at"] = source_snapshot_generated_at
         row["source_snapshot_sha256"] = source_snapshot_sha256
         if row.get("decision_score") is None:
-            # Non-actionable/stale observations are retained as reference evidence,
-            # never exposed as a current purchase price.
-            if row.get("current_price_jpy") is not None:
-                row["last_valid_price_jpy"] = (
-                    row.get("last_valid_price_jpy")
-                    or row.get("current_price_jpy")
-                )
-            row["reference_price_jpy"] = (
-                row.get("reference_price_jpy")
-                or row.get("last_valid_price_jpy")
-            )
-            row["current_price_jpy"] = None
-            row["price_jpy"] = None
-            row["current_price_suppressed"] = True
-            reference_only.append(row)
+            reference_only.append(suppress_current_price(row))
         else:
             scored.append(row)
 
