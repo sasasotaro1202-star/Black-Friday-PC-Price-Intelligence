@@ -210,7 +210,7 @@ def main():
         lines += [
             "## 現時点の最優先候補",
             "",
-            f"**1位: {action.get('name','')} — {action['decision_score']}/100**",
+            f"**1位: [{action.get('form_factor','unknown')}] {action.get('name','')} — {action['decision_score']}/100**",
             f"- 現在価格: ¥{price:,}",
             f"- 必須費用込み現金総額: ¥{action.get('cash_total_cost_jpy'):,}" if action.get("cash_total_cost_jpy") is not None else "- 必須費用込み現金総額: 未確認",
             f"- 確定特典価値: ¥{action.get('confirmed_benefit_value_jpy', 0):,}",
@@ -235,13 +235,13 @@ def main():
     lines += [
         "## 100点ランキング",
         "",
-        "|順位|商品|現在価格|実質コスト|実質28万円まで|性能|価格|過去根拠|在庫|時期|総合|判定|",
-        "|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|",
+        "|順位|タイプ|商品|現在価格|実質コスト|実質28万円まで|性能|価格|過去根拠|在庫|時期|総合|判定|",
+        "|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|",
     ]
     for row in scored[:20]:
         d = row["score_detail"]
         lines.append(
-            f"|{row['rank']}|{row.get('name','')[:55]}|¥{row['current_price_jpy']:,}|"
+            f"|{row['rank']}|{row.get('form_factor','unknown')}|{row.get('name','')[:55]}|¥{row['current_price_jpy']:,}|"
             f"¥{row.get('effective_cost_jpy'):,}|{d.get('required_effective_discount_pct', 0):.1f}%|"
             f"{d['performance']}/40|{d['price']}/20|"
             f"{d['history']}/15|{d['stock']}/15|{d['timing']}/10|"
@@ -253,6 +253,8 @@ def main():
         "## データ品質",
         "",
         f"- 候補総数: {quality['candidate_count']}",
+        f"- デスクトップ候補: {sum(1 for x in products if x.get('form_factor') == 'desktop')}",
+        f"- ノート候補: {sum(1 for x in products if x.get('form_factor') == 'laptop')}",
         f"- 実質予算: ¥{BUDGET:,}",
         f"- 実質ソフト上限: ¥{EFFECTIVE_SOFT_MAX:,}",
         f"- 実質ハード上限: ¥{EFFECTIVE_HARD_MAX:,}",
