@@ -99,6 +99,31 @@ class DecisionScoringTests(unittest.TestCase):
         dp = intelligence.performance_score(desktop)[0]
         self.assertGreaterEqual(dp, lp)
 
+    def test_form_factor_conflict_is_fail_closed(self):
+        item = self.candidate(gpu="RTX 5070", cpu="Core Ultra 5 250K Plus")
+        item["form_factor"] = "laptop"
+        item["parsed_spec"] = {"form_factor":"laptop", "cpu":"Core Ultra 5 250K Plus", "gpu":"RTX 5070"}
+        cat = {
+            "id":"test",
+            "name":"Desktop",
+            "family":"Desktop",
+            "form_factor":"desktop",
+            "gpu":"RTX 5070",
+            "cpu":"Core Ultra 5 250K Plus",
+            "url_is_exact":True,
+            "identity_confidence":"high",
+        }
+        out = intelligence.enrich_identity(item, cat)
+        self.assertEqual(out["variant_match"], "ambiguous")
+
+    def test_radeon_desktop_gpu_is_supported(self):
+        item = self.candidate(gpu="Radeon RX 9070 XT", cpu="Ryzen 7 7700", ram=32, ssd="1 TB")
+        item["form_factor"] = "desktop"
+        item["spec"]["form_factor"] = "desktop"
+        score, gpu = intelligence.performance_score(item)
+        self.assertEqual(gpu, "rx 9070 xt")
+        self.assertGreater(score, 0)
+
     def test_desktop_cpu_tokens_are_scored(self):
         item = self.candidate(gpu="RTX 5070", cpu="Core Ultra 7 270K Plus", ram=32, ssd="1 TB")
         item["form_factor"] = "desktop"
