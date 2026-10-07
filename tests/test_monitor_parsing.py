@@ -63,6 +63,27 @@ class MonitorParsingTests(unittest.TestCase):
         self.assertEqual(parsed["parsed_spec"]["form_factor"], "desktop")
         self.assertEqual(parsed["parsed_spec"]["cpu"], "Ryzen 7 5700X")
 
+    def test_exact_variant_core_specs_beat_related_specs(self):
+        html = """
+        <div>
+          G TUNE DG-A5G60 関連製品 G TUNE DG-A7G70 Ryzen 7 5700X RTX 5070 32GB
+          G TUNE DG-A5G60 DGA5G60B5BADW102DECWA
+          CPU AMD Ryzen 5 4500 プロセッサ グラフィックス NVIDIA GeForce RTX 5060
+          メモリ 16GB M.2 SSD 500GB デスクトップPC
+        </div>
+        """
+        expected = {
+            "name": "G TUNE DG-A5G60",
+            "aliases": ["DGA5G60B5BADW102DECWA"],
+            "form_factor": "desktop",
+            "gpu": "RTX 5060",
+            "cpu": "Ryzen 5 4500",
+        }
+        parsed = monitor.parse_page("https://example.com", html, expected=expected)
+        self.assertEqual(parsed["parsed_spec"]["cpu"], "Ryzen 5 4500")
+        self.assertEqual(parsed["parsed_spec"]["gpu"], "RTX 5060")
+        self.assertEqual(parsed["parsed_spec"]["form_factor"], "desktop")
+
     def test_desktop_form_factor_is_parsed(self):
         html = """
         <div>G TUNE DG-I5G70 DGI5G70B8BGDW102DECRISE
