@@ -43,6 +43,40 @@ class MonitorParsingTests(unittest.TestCase):
         self.assertEqual(parsed["stock_status"], "unknown")
         self.assertEqual(parsed["stock_ambiguity"], "multiple_offer_availability")
 
+    def test_exact_jsonld_offer_beats_related_product_offer(self):
+        html = """
+        <script type="application/ld+json">
+        {"@type":"Product","name":"G TUNE DG-A7G70","offers":{"priceCurrency":"JPY","price":"459800","availability":"https://schema.org/InStock"}}
+        </script>
+        <script type="application/ld+json">
+        {"@type":"Product","name":"G TUNE DG-A7G70 [DGA7G70B5BBDW101DEC]","offers":{"priceCurrency":"JPY","price":"304800","availability":"https://schema.org/InStock"}}
+        </script>
+        <div>G TUNE DG-A7G70 DGA7G70B5BBDW101DEC Ryzen 7 5700X RTX 5070 32GB 1TB デスクトップ</div>
+        """
+        expected = {
+            "name": "G TUNE DG-A7G70",
+            "aliases": ["DGA7G70B5BBDW101DEC"],
+            "form_factor": "desktop",
+        }
+        parsed = monitor.parse_page("https://example.com", html, expected=expected)
+        self.assertEqual(parsed["price_jpy"], 304800)
+        self.assertEqual(parsed["parsed_spec"]["form_factor"], "desktop")
+        self.assertEqual(parsed["parsed_spec"]["cpu"], "Ryzen 7 5700X")
+
+    def test_desktop_form_factor_is_parsed(self):
+        html = """
+        <div>G TUNE DG-I5G70 DGI5G70B8BGDW102DECRISE
+        Windows 11 デスクトップPC Intel Core Ultra 5 プロセッサー 250K Plus
+        GeForce RTX 5070 16GB 500GB
+        </div>
+        """
+        parsed = monitor.parse_page(
+            "https://example.com",
+            html,
+            expected={"name":"G TUNE DG-I5G70","aliases":["DGI5G70B8BGDW102DECRISE"]},
+        )
+        self.assertEqual(parsed["parsed_spec"]["form_factor"], "desktop")
+
     def test_meta_price_is_distinct_source(self):
         html = """
         <html><head>
