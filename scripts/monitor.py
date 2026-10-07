@@ -852,10 +852,12 @@ def main():
     entries = [normalize_entry(x) for x in watch.get("urls", [])]
     entries = [x for x in entries if x.get("id") and x.get("url")]
 
+    total_watchlist_entries = len(entries)
     try:
         max_urls = max(1, min(int(os.environ.get("MONITOR_MAX_URLS", "100")), 100))
     except Exception:
         max_urls = 100
+    skipped_entries = entries[max_urls:]
     entries = entries[:max_urls]
 
     previous_state = read(latest_path, {"products": []})
@@ -995,10 +997,32 @@ def main():
             }
             changes.append(event)
 
+    processed_count = len(products)
+    transport_success_count = sum(1 for x in products if x.get("fetch_status") == "ok")
+    price_verified_count = sum(1 for x in products if x.get("current_price_jpy") is not None)
+    coverage = {
+        "watchlist_count": total_watchlist_entries,
+        "processed_count": processed_count,
+        "skipped_count": len(skipped_entries),
+        "max_urls": max_urls,
+        "processing_rate_pct": round(
+            100.0 * processed_count / total_watchlist_entries, 1
+        ) if total_watchlist_entries else 100.0,
+        "transport_success_rate_pct": round(
+            100.0 * transport_success_count / processed_count, 1
+        ) if processed_count else 0.0,
+        "price_verified_rate_pct": round(
+            100.0 * price_verified_count / processed_count, 1
+        ) if processed_count else 0.0,
+        "skipped_reason": "capacity_limit" if skipped_entries else None,
+        "skipped_ids": [x.get("id") for x in skipped_entries if x.get("id")],
+    }
+
     write_path_state = {
         "generated_at": retrieval_time,
         "watchlist_generated_at": watch.get("generated_at"),
         "fetch_stats": stats,
+        "coverage": coverage,
         "products": products,
     }
     save_json(latest_path, write_path_state)
@@ -1010,6 +1034,7 @@ def main():
         "products": len(products),
         "changes": len(changes),
         "fetch_stats": stats,
+        "coverage": coverage,
     }, ensure_ascii=False))
 
 if __name__ == "__main__":
