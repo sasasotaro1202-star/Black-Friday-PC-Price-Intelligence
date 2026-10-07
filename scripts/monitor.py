@@ -248,15 +248,29 @@ def parse_specs(text, expected=None):
     expected = expected or {}
     anchor = _spec_anchor_position(s, expected)
     compact = "".join(s.split()).lower()
+    compact_core = re.sub(r"[^a-z0-9]+", "", s.lower())
+
+    anchor_core = None
+    for group_key in ("model_code", "aliases", "name", "id", "query"):
+        terms = [str(x) for x in (expected.get(group_key) or [])] if group_key == "aliases" else ([str(expected.get(group_key))] if expected.get(group_key) else [])
+        for term in terms:
+            core_term = re.sub(r"[^a-z0-9]+", "", term.lower())
+            if core_term:
+                pos = compact_core.find(core_term)
+                if pos >= 0:
+                    anchor_core = pos
+                    break
+        if anchor_core is not None:
+            break
 
     def near_expected(value, radius=2600):
-        if value in (None, "") or anchor is None:
+        if value in (None, ""):
             return False
-        term = "".join(norm_text(value).split()).lower()
-        if not term:
+        term_core = re.sub(r"[^a-z0-9]+", "", str(value).lower())
+        if not term_core or anchor_core is None:
             return False
-        pos = compact.find(term)
-        return pos >= 0 and abs(pos - anchor) <= radius
+        pos = compact_core.find(term_core)
+        return pos >= 0 and abs(pos - anchor_core) <= radius
 
     gpu_patterns = [
         r"(RTX\s*(?:5090|5080|5070\s*Ti|5070|5060\s*Ti|5060)(?:\s*Laptop(?:\s*GPU)?)?)",
