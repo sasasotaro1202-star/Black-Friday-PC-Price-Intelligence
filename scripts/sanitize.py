@@ -82,6 +82,25 @@ def main():
     # reference-only evidence, so the published snapshot must describe what is
     # actually present in current_latest.json.
     final = state["products"]
+    # Normalize coverage against the final sanitized state as well. This prevents
+    # a parser/sanitizer downgrade from leaving an obsolete verification rate.
+    prior_coverage = state.get("coverage") or {}
+    watchlist_count = int(prior_coverage.get("watchlist_count") or len(final))
+    processed_count = len(final)
+    skipped_count = max(0, watchlist_count - processed_count)
+    transport_success_count = sum(1 for x in final if x.get("fetch_status") == "ok")
+    price_verified_count = sum(1 for x in final if x.get("current_price_jpy") is not None)
+    state["coverage"] = {
+        "watchlist_count": watchlist_count,
+        "processed_count": processed_count,
+        "skipped_count": skipped_count,
+        "max_urls": int(prior_coverage.get("max_urls") or watchlist_count or processed_count or 1),
+        "processing_rate_pct": round(100.0 * processed_count / watchlist_count, 1) if watchlist_count else 100.0,
+        "transport_success_rate_pct": round(100.0 * transport_success_count / processed_count, 1) if processed_count else 0.0,
+        "price_verified_rate_pct": round(100.0 * price_verified_count / processed_count, 1) if processed_count else 0.0,
+        "skipped_reason": prior_coverage.get("skipped_reason"),
+        "skipped_ids": prior_coverage.get("skipped_ids") or [],
+    }
     state["fetch_stats"] = {
         "total": len(final),
         "direct_verified": sum(
