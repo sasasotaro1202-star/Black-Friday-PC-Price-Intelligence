@@ -1,7 +1,10 @@
 import json
 import os
 
-from intelligence import ROOT, load_json, load_anchors, parse_dt, decision_score
+from intelligence import (
+    ROOT, load_json, load_anchors, parse_dt, decision_score,
+    effective_cost, EFFECTIVE_SOFT_MAX, EFFECTIVE_HARD_MAX
+)
 
 
 def read_events():
@@ -300,7 +303,7 @@ def main():
             expected_allowed = bool(
                 ranked
                 and expected_coverage == "COMPLETE"
-                and (ranked[0].get("score_detail") or {}).get("status") in ("BUY_NOW", "BUY_NOW_LOW_STOCK")
+                and (ranked[0].get("score_detail") or {}).get("status") in ("BUY_NOW", "BUY_NOW_LOW_STOCK", "BUY_NOW_NEAR_BUDGET")
             )
             if bool(gate.get("allowed")) != expected_allowed:
                 errors.append("purchase_gate allowed mismatch")
@@ -339,7 +342,9 @@ def main():
             errors.append(f"recomputed score mismatch: {rid}")
         for key in (
             "status", "performance", "price", "history", "stock", "timing",
-            "gpu", "required_discount_pct", "score_before_cap", "score_cap",
+            "gpu", "required_discount_pct", "required_effective_discount_pct",
+            "cash_total_cost_jpy", "confirmed_benefit_value_jpy", "effective_cost_jpy",
+            "score_before_cap", "score_cap",
             "wait_risk", "historical_floor_jpy", "price_source_mode", "variant_match",
         ):
             if recomputed_detail.get(key) != detail.get(key):
@@ -354,16 +359,34 @@ def main():
         if source in ("search_snippet", "public_baseline", "stale_previous", "direct_text", "direct_meta") and status != "VERIFY_NOW":
             errors.append(f"verification-source status mismatch: {rid}")
 
-        if status in ("BUY_NOW", "BUY_NOW_LOW_STOCK"):
+        if status in ("BUY_NOW", "BUY_NOW_LOW_STOCK", "BUY_NOW_NEAR_BUDGET"):
             if source != "direct_structured":
                 errors.append(f"buy-now source not direct_structured: {rid}")
-            if r.get("current_price_jpy") is None or r.get("current_price_jpy") > 280000:
-                errors.append(f"buy-now price invalid: {rid}")
+            eff = effective_cost(r)
+            if eff is None:
+                errors.append(f"buy-now effective cost missing: {rid}")
+            elif status in ("BUY_NOW", "BUY_NOW_LOW_STOCK") and eff > EFFECTIVE_SOFT_MAX:
+                errors.append(f"buy-now effective cost above soft limit: {rid}")
+            elif status == "BUY_NOW_NEAR_BUDGET" and not (EFFECTIVE_SOFT_MAX < eff <= EFFECTIVE_HARD_MAX):
+                errors.append(f"near-budget effective cost outside 285-290k band: {rid}")
             if r.get("variant_match") not in ("exact", "trusted_url", "strong"):
                 errors.append(f"buy-now identity not verified: {rid}")
             if stock not in ("in_stock", "low_stock"):
                 errors.append(f"buy-now stock not verified: {rid}")
-            threshold = 90 if status == "BUY_NOW" else 85
+            if status == "BUY_NOW_LOW_STOCK":
+                threshold = 85
+            elif status == "BUY_NOW_NEAR_BUDGET":
+                threshold = 94
+                if r.get("stock_status") != "in_stock":
+                    errors.append(f"near-budget candidate must be in_stock: {rid}")
+                try:
+                    perf = int((r.get("score_detail") or {}).get("performance", 0))
+                except Exception:
+                    perf = 0
+                if perf < 38:
+                    errors.append(f"near-budget performance below threshold: {rid}")
+            else:
+                threshold = 90
             if score_num < threshold:
                 errors.append(f"buy-now score below threshold: {rid}")
 
