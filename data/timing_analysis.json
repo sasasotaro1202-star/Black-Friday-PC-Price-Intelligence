@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T10:51:56+09:00",
+  "generated_at": "2026-10-07T16:07:32+09:00",
   "budget_jpy": 280000,
   "target_black_friday": "2026-11-27",
   "target_products": [
@@ -17,16 +17,16 @@
       "dynamic_candidate": false
     },
     {
-      "id": "gtune-p5-13620h-5070",
-      "name": "G TUNE P5-I7G70BK-C（ブラック）",
+      "id": "tuf-a16-8940hx-5070",
+      "name": "https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gaming-a16-2025.html",
       "store": null,
-      "price_jpy": 329800,
-      "required_discount_pct": 15.1,
+      "price_jpy": 319800,
+      "required_discount_pct": 12.4,
       "feasibility": "REALISTIC",
       "gpu": "rtx 5070",
-      "performance_score": 32,
-      "source_mode": "direct_structured",
-      "confidence": "high",
+      "performance_score": 37,
+      "source_mode": "direct_meta",
+      "confidence": "medium",
       "dynamic_candidate": false
     },
     {
@@ -38,6 +38,19 @@
       "feasibility": "AGGRESSIVE",
       "gpu": "rtx 5070 ti",
       "performance_score": 40,
+      "source_mode": "direct_structured",
+      "confidence": "high",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "gtune-p5-13620h-5070",
+      "name": "G TUNE P5-I7G70BK-C（ブラック）",
+      "store": null,
+      "price_jpy": 419800,
+      "required_discount_pct": 33.3,
+      "feasibility": "LOW",
+      "gpu": "rtx 5070",
+      "performance_score": 32,
       "source_mode": "direct_structured",
       "confidence": "high",
       "dynamic_candidate": false
@@ -84,11 +97,31 @@
     }
   ],
   "observed_change_timing": {
-    "sample_size": 0,
-    "hourly_counts": {},
-    "date_counts": {},
-    "top_hours": [],
-    "recent_changes": []
+    "sample_size": 1,
+    "hourly_counts": {
+      "16": 1
+    },
+    "date_counts": {
+      "10-07": 1
+    },
+    "top_hours": [
+      [
+        16,
+        1
+      ]
+    ],
+    "recent_changes": [
+      {
+        "id": "gtune-p5-13620h-5070",
+        "observed_at": "2026-10-07T16:07:09+09:00",
+        "old_price_jpy": 329800,
+        "new_price_jpy": 419800,
+        "delta_jpy": 90000,
+        "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
+        "name": "G TUNE P5-I7G70BK-C（ブラック）",
+        "source_mode": "direct_structured"
+      }
+    ]
   },
   "interpretation": {
     "important_caveat": "Observed/retrieval time is an upper bound on when this system knew the change, not seller-internal price-change time.",

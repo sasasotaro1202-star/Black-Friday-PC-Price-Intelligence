@@ -1,6 +1,6 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-07T10:51:56+09:00
+Generated: 2026-10-07T16:07:32+09:00
 Budget: ¥280,000
 Target Black Friday: 2026-11-27
 
@@ -9,12 +9,13 @@ Target Black Friday: 2026-11-27
 |Rank|Product|Current|Required discount|Feasibility|GPU|Perf|Source|
 |---:|---|---:|---:|---|---|---:|---|
 |1|G TUNE P6-I7G70BK-B|¥284,700|1.7%|HIGH|rtx 5070|35|direct_structured|
-|2|G TUNE P5-I7G70BK-C（ブラック）|¥329,800|15.1%|REALISTIC|rtx 5070|32|direct_structured|
+|2|https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gami|¥319,800|12.4%|REALISTIC|rtx 5070|37|direct_meta|
 |3|Lenovo Legion Pro 5i Gen 10（16型 Intel）|¥354,865|21.1%|AGGRESSIVE|rtx 5070 ti|40|direct_structured|
+|4|G TUNE P5-I7G70BK-C（ブラック）|¥419,800|33.3%|LOW|rtx 5070|32|direct_structured|
 
 ## Empirical price-change timing
 
-- Meaningful change sample: **0**
+- Meaningful change sample: **1**
 - **観測不足:** 20件未満なので時間帯の傾向は作りません。
 
 ## Historical anchors
