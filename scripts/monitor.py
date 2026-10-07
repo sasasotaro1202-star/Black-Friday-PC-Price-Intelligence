@@ -215,8 +215,21 @@ def _spec_window(text, hints=None):
     if best is None:
         return s[:14000]
 
-    # Use the compact position only as an anchor; widen enough to include the
-    # surrounding exact-variant specification table without scanning the whole page.
+    # Exact model/SKU anchors usually precede the product's own specification
+    # table. Do not include a large prefix: shared manufacturer pages often place
+    # related variants immediately before the selected variant and that can
+    # contaminate CPU/GPU/SSD parsing.
+    strongest_anchor = bool(
+        (hints.get("model_code") and "".join(norm_text(str(hints.get("model_code"))).split()).lower() in compact)
+        or any(
+            "".join(norm_text(str(x)).split()).lower() in compact
+            for x in (hints.get("aliases") or [])
+            if x
+        )
+    )
+    if strongest_anchor:
+        return s[max(0, best-400):min(len(s), best+12000)]
+
     return s[max(0, best-3500):min(len(s), best+12000)]
 
 def _spec_anchor_position(text, hints=None):
