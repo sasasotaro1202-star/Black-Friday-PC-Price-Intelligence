@@ -68,7 +68,7 @@ class MonitorParsingTests(unittest.TestCase):
         <div>
           G TUNE DG-A5G60 関連製品 G TUNE DG-A7G70 Ryzen 7 5700X RTX 5070 32GB
           G TUNE DG-A5G60 DGA5G60B5BADW102DECWA
-          CPU AMD Ryzen 5 4500 プロセッサ グラフィックス NVIDIA GeForce RTX 5060
+          CPU AMD Ryzen™ 5 4500 プロセッサ グラフィックス NVIDIA GeForce RTX 5060
           メモリ 16GB M.2 SSD 500GB デスクトップPC
         </div>
         """
