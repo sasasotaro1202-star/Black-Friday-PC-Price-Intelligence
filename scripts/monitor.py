@@ -426,14 +426,18 @@ def extract_benefit_signals(text):
 
     # Explicit accessory/bundle value: useful for desktop value comparison, never
     # a cash deduction. This is deliberately limited to stated monetary value.
-    value_pat = r"(?:モニター|ディスプレイ|キーボード|マウス|ヘッドセット|スピーカー|webカメラ|ドッキングステーション|周辺機器|アクセサリ)[^。\n]{0,90}?([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\s*円(?:相当|分)"
-    for m in re.finditer(value_pat, s, re.I):
-        try:
-            value = int(m.group(1).replace(",", ""))
-        except ValueError:
-            continue
-        ctx = s[max(0, m.start()-80):min(len(s), m.end()+100)]
-        add("accessory_stated_value_jpy", value, "confirmed", False, ctx)
+    value_patterns = [
+        r"(?:モニター|ディスプレイ|キーボード|マウス|ヘッドセット|スピーカー|webカメラ|ドッキングステーション|周辺機器|アクセサリ)[^。\n]{0,90}?([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\s*円(?:相当|分)",
+        r"([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\s*円(?:相当|分)[^。\n]{0,90}?(?:モニター|ディスプレイ|キーボード|マウス|ヘッドセット|スピーカー|webカメラ|ドッキングステーション|周辺機器|アクセサリ)",
+    ]
+    for value_pat in value_patterns:
+        for m in re.finditer(value_pat, s, re.I):
+            try:
+                value = int(m.group(1).replace(",", ""))
+            except ValueError:
+                continue
+            ctx = s[max(0, m.start()-80):min(len(s), m.end()+100)]
+            add("accessory_stated_value_jpy", value, "confirmed", False, ctx)
 
     # Accessory-specific discount is an opportunity signal, not PC cash value.
     for m in re.finditer(r"(?:周辺機器|アクセサリ|アクセサリー)[^。\n]{0,80}?([0-9]{1,2})\s*%\s*(?:OFF|オフ|割引)", s, re.I):
