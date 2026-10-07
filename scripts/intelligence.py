@@ -7,6 +7,10 @@ from datetime import datetime, timezone, timedelta
 JST = timezone(timedelta(hours=9))
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BUDGET = 280000
+EFFECTIVE_BUDGET = 280000
+EFFECTIVE_SOFT_MAX = 285000
+EFFECTIVE_HARD_MAX = 290000
+CASH_REFERENCE_MAX = 300000
 MAX_TRACKED_PRICE = 900000
 ACTIONABLE_MAX_AGE_NORMAL_MINUTES = 60
 ACTIONABLE_MAX_AGE_BF_MINUTES = 30
@@ -313,12 +317,62 @@ def validate_price(price_jpy, item, reference_price=None, corroborated=False):
         }
     return {"valid": True, "status": "validated", "reason": "within_expected_range"}
 
-def required_discount(price):
+def _int_or_none(value):
+    try:
+        if value in (None, ""):
+            return None
+        return int(round(float(value)))
+    except (TypeError, ValueError):
+        return None
+
+def cash_total_cost(item):
+    price = _int_or_none(item.get("current_price_jpy"))
+    if price is None:
+        return None
+    total = price
+    for key in ("shipping_jpy", "mandatory_fee_jpy", "mandatory_fees_jpy"):
+        value = _int_or_none(item.get(key))
+        if value is not None and value >= 0:
+            total += value
+    return total
+
+def confirmed_benefit_value(item):
+    value = _int_or_none(
+        item.get("confirmed_benefit_value_jpy")
+        if item.get("confirmed_benefit_value_jpy") is not None
+        else item.get("confirmed_cash_equivalent_benefit_jpy")
+    )
+    if value is None or value < 0:
+        return 0
+    confidence = norm_text(item.get("benefit_confidence") or "")
+    if confidence not in ("confirmed", "verified", "high"):
+        return 0
+    return value
+
+def effective_cost(item):
+    cash = cash_total_cost(item)
+    if cash is None:
+        return None
+
+    explicit = _int_or_none(item.get("effective_cost_jpy"))
+    basis = norm_text(item.get("effective_cost_basis") or "")
+    if explicit is not None and basis in ("confirmed", "verified"):
+        return max(0, explicit)
+
+    return max(0, cash - confirmed_benefit_value(item))
+
+def required_discount(price, target=BUDGET):
     if not price or price <= 0:
         return None
-    return max(0.0, (price - BUDGET) / float(price) * 100.0)
+    return max(0.0, (price - target) / float(price) * 100.0)
 
-def scenario_prices(price):
+def required_effective_discount(item):
+    eff = effective_cost(item)
+    if eff is None:
+        return None
+    return required_discount(eff, EFFECTIVE_BUDGET)
+
+def scenario_prices(price, target=BUDGET):
     if not price or price <= 0:
         return []
     return [
@@ -437,8 +491,8 @@ def actionable_max_age_minutes(now=None):
     return ACTIONABLE_MAX_AGE_BF_MINUTES if season_phase(now) != "通常監視期間" else ACTIONABLE_MAX_AGE_NORMAL_MINUTES
 
 def timing_score(item, now=None):
-    price = item.get("current_price_jpy") if item.get("current_price_jpy") is not None else item.get("price_jpy")
-    d = required_discount(price)
+    price = effective_cost(item)
+    d = required_discount(price, EFFECTIVE_BUDGET)
     stock = item.get("stock_status", "unknown")
     phase = season_phase(now)
     if d is None:
@@ -462,9 +516,10 @@ def timing_score(item, now=None):
     if stock == "low_stock":
         base = min(10, base + 1)
     guidance = (
-        "小幅値下げで28万円化。近いセール帯を重点監視" if d <= 10 else
-        "現実的な値下げ幅。価格と在庫を同時監視" if d <= 20 else
-        "大幅値下げ待ち。28万円到達時は即再評価" if d <= 30 else
+        "実質28万円以内。次の値下げより在庫確保を優先" if d <= 0 else
+        "実質28〜28.5万円。小幅な超過で、性能と在庫次第で購入候補" if d <= 1.8 else
+        "実質28.5〜29万円。性能・特典・在庫が明確に優位な場合だけ候補" if d <= 3.5 else
+        "実質29万円超。強い値下げまたは確実な特典が必要" if d <= 7.0 else
         "大幅特価が必要。価格期待だけで待ち続けない"
     )
     return base, guidance
@@ -571,6 +626,8 @@ def wait_risk(item, trend=None):
 def decision_score(item, anchors, events=None):
     events = events or []
     price = item.get("current_price_jpy")
+    cash_total = cash_total_cost(item)
+    eff = effective_cost(item)
     prediction = item.get("prediction_time")
     available = item.get("available_at")
     retrieval = item.get("retrieval_time")
@@ -588,6 +645,7 @@ def decision_score(item, anchors, events=None):
     )
     if (
         price is None
+        or eff is None
         or item.get("price_validation_status") in (None, "missing", "anomaly_rejected", "reference_only", "variant_ambiguous")
         or pit_invalid
     ):
@@ -614,7 +672,7 @@ def decision_score(item, anchors, events=None):
         }
 
     perf, gpu = performance_score(item)
-    ps = price_score(price)
+    ps = price_score(eff)
     hs, matched = history_score(item, anchors)
     ss = stock_score(item, anchors)
     ts, guidance = timing_score(item, prediction_dt)
@@ -632,17 +690,21 @@ def decision_score(item, anchors, events=None):
         status = "UNAVAILABLE"
     elif item.get("price_source_mode") in ("search_snippet", "public_baseline", "stale_previous", "direct_text", "direct_meta"):
         status = "VERIFY_NOW"
-    elif price <= BUDGET and direct_verified and identity_verified and stock_known and score >= 90:
+    elif eff <= EFFECTIVE_SOFT_MAX and direct_verified and identity_verified and stock_known and score >= 90:
         status = "BUY_NOW"
-    elif price <= BUDGET and direct_verified and identity_verified and item.get("stock_status") == "low_stock" and score >= 85:
+    elif eff <= EFFECTIVE_HARD_MAX and direct_verified and identity_verified and stock_known and score >= 94 and perf >= 38:
+        status = "BUY_NOW_NEAR_BUDGET"
+    elif eff <= EFFECTIVE_SOFT_MAX and direct_verified and identity_verified and item.get("stock_status") == "low_stock" and score >= 85:
         status = "BUY_NOW_LOW_STOCK"
-    elif required_discount(price) > 20:
+    elif eff > EFFECTIVE_HARD_MAX:
         status = "WAIT_FOR_DISCOUNT"
     elif score >= 85:
         status = "STRONG_WATCH"
 
     reason_bits = [
-        f"28万円まで必要値下げ {required_discount(price):.1f}%" if price > BUDGET else "目標価格以下",
+        f"現金支払 ¥{cash_total:,}" if cash_total is not None else "現金支払額未確認",
+        f"実質コスト ¥{eff:,}" if eff is not None else "実質コスト未確認",
+        f"28万円まで必要値下げ {required_effective_discount(item):.1f}%" if required_effective_discount(item) is not None and eff > EFFECTIVE_BUDGET else "実質目標内",
         f"在庫 {item.get('stock_status', 'unknown')}",
         f"構成判定 {item.get('variant_match', 'ambiguous')}",
     ]
@@ -667,6 +729,11 @@ def decision_score(item, anchors, events=None):
         "timing": ts,
         "gpu": gpu,
         "required_discount_pct": round(required_discount(price), 1),
+        "required_effective_discount_pct": round(required_effective_discount(item), 1) if required_effective_discount(item) is not None else None,
+        "cash_total_cost_jpy": cash_total,
+        "confirmed_benefit_value_jpy": confirmed_benefit_value(item),
+        "effective_cost_jpy": eff,
+        "benefit_confidence": item.get("benefit_confidence"),
         "score_before_cap": total,
         "score_cap": cap,
         "wait_risk": wr,
