@@ -1,17 +1,30 @@
 {
-  "generated_at": "2026-10-07T17:30:49+09:00",
+  "generated_at": "2026-10-07T17:38:16+09:00",
   "budget_jpy": 280000,
   "target_black_friday": "2026-11-27",
   "target_products": [
     {
-      "id": "desktop-gtune-dg-a5g60-5060",
-      "name": "G TUNE DG-A5A60",
+      "id": "desktop-gtune-dg-i5g70-5070",
+      "name": "G TUNE DG-I5G70",
       "store": null,
-      "price_jpy": 269800,
+      "price_jpy": 279800,
+      "required_discount_pct": 0.0,
+      "feasibility": "HIGH",
+      "gpu": "rtx 5070",
+      "performance_score": 22,
+      "source_mode": "direct_structured",
+      "confidence": "high",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "desktop-gtune-dg-a5g60-5060",
+      "name": "G TUNE DG-A5G60",
+      "store": null,
+      "price_jpy": 194800,
       "required_discount_pct": 0.0,
       "feasibility": "HIGH",
       "gpu": "rtx 5060",
-      "performance_score": 14,
+      "performance_score": 15,
       "source_mode": "direct_structured",
       "confidence": "high",
       "dynamic_candidate": false
@@ -37,7 +50,20 @@
       "required_discount_pct": 6.6,
       "feasibility": "HIGH",
       "gpu": "rtx 5070",
-      "performance_score": 30,
+      "performance_score": 32,
+      "source_mode": "direct_structured",
+      "confidence": "high",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "desktop-gtune-fg-a7g70-5070",
+      "name": "G TUNE FG-A7G70",
+      "store": null,
+      "price_jpy": 319800,
+      "required_discount_pct": 12.4,
+      "feasibility": "REALISTIC",
+      "gpu": "rtx 5070",
+      "performance_score": 33,
       "source_mode": "direct_structured",
       "confidence": "high",
       "dynamic_candidate": false
@@ -49,7 +75,7 @@
       "price_jpy": 354865,
       "required_discount_pct": 21.1,
       "feasibility": "AGGRESSIVE",
-      "gpu": "rtx 5070 ti",
+      "gpu": "rtx 5080",
       "performance_score": 40,
       "source_mode": "direct_structured",
       "confidence": "high",
@@ -77,6 +103,19 @@
       "feasibility": "LOW",
       "gpu": "rtx 5070",
       "performance_score": 32,
+      "source_mode": "direct_structured",
+      "confidence": "high",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "desktop-gtune-dg-a7g70-5070",
+      "name": "G TUNE DG-A7G70",
+      "store": null,
+      "price_jpy": 459800,
+      "required_discount_pct": 39.1,
+      "feasibility": "LOW",
+      "gpu": "rtx 5070",
+      "performance_score": 25,
       "source_mode": "direct_structured",
       "confidence": "high",
       "dynamic_candidate": false
@@ -123,16 +162,21 @@
     }
   ],
   "observed_change_timing": {
-    "sample_size": 1,
+    "sample_size": 2,
     "hourly_counts": {
-      "16": 1
+      "16": 1,
+      "17": 1
     },
     "date_counts": {
-      "10-07": 1
+      "10-07": 2
     },
     "top_hours": [
       [
         16,
+        1
+      ],
+      [
+        17,
         1
       ]
     ],
@@ -145,6 +189,16 @@
         "delta_jpy": 90000,
         "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
         "name": "G TUNE P5-I7G70BK-C（ブラック）",
+        "source_mode": "direct_structured"
+      },
+      {
+        "id": "desktop-gtune-dg-a5g60-5060",
+        "observed_at": "2026-10-07T17:37:28+09:00",
+        "old_price_jpy": 269800,
+        "new_price_jpy": 194800,
+        "delta_jpy": -75000,
+        "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/",
+        "name": "G TUNE DG-A5G60",
         "source_mode": "direct_structured"
       }
     ]

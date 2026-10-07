@@ -1,13 +1,54 @@
 {
-  "generated_at": "2026-10-07T17:30:49+09:00",
+  "generated_at": "2026-10-07T17:38:16+09:00",
   "budget_jpy": 280000,
   "note": "10/15/20/25/30% scenarios are planning bands, not probabilities.",
   "rows": [
     {
-      "id": "desktop-gtune-dg-a5g60-5060",
-      "name": "G TUNE DG-A5A60",
+      "id": "desktop-gtune-dg-i5g70-5070",
+      "name": "G TUNE DG-I5G70",
       "form_factor": "desktop",
-      "current_price_jpy": 269800,
+      "current_price_jpy": 279800,
+      "reference_price_jpy": 279800,
+      "reference_only": false,
+      "required_discount_pct": 0.0,
+      "historical_floor_jpy": 219800,
+      "historical_floor_strength": "same_gpu",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 251800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 237800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 223800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 209800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 195900
+        }
+      ],
+      "first_280k_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 251800
+      },
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "desktop-gtune-dg-a5g60-5060",
+      "name": "G TUNE DG-A5G60",
+      "form_factor": "desktop",
+      "current_price_jpy": 194800,
       "reference_price_jpy": 194800,
       "reference_only": false,
       "required_discount_pct": 0.0,
@@ -16,28 +57,28 @@
       "scenario_prices": [
         {
           "discount_pct": 10,
-          "price_jpy": 242800
+          "price_jpy": 175300
         },
         {
           "discount_pct": 15,
-          "price_jpy": 229300
+          "price_jpy": 165600
         },
         {
           "discount_pct": 20,
-          "price_jpy": 215800
+          "price_jpy": 155800
         },
         {
           "discount_pct": 25,
-          "price_jpy": 202400
+          "price_jpy": 146100
         },
         {
           "discount_pct": 30,
-          "price_jpy": 188900
+          "price_jpy": 136400
         }
       ],
       "first_280k_scenario": {
         "discount_pct": 10,
-        "price_jpy": 242800
+        "price_jpy": 175300
       },
       "stock_status": "in_stock",
       "price_source_mode": "direct_structured",
@@ -120,6 +161,47 @@
       "first_280k_scenario": {
         "discount_pct": 10,
         "price_jpy": 269800
+      },
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "desktop-gtune-fg-a7g70-5070",
+      "name": "G TUNE FG-A7G70",
+      "form_factor": "desktop",
+      "current_price_jpy": 319800,
+      "reference_price_jpy": 319800,
+      "reference_only": false,
+      "required_discount_pct": 12.4,
+      "historical_floor_jpy": 219800,
+      "historical_floor_strength": "same_gpu",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 287800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 271800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 255800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 239800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 223900
+        }
+      ],
+      "first_280k_scenario": {
+        "discount_pct": 15,
+        "price_jpy": 271800
       },
       "stock_status": "in_stock",
       "price_source_mode": "direct_structured",
@@ -242,6 +324,44 @@
       ],
       "first_280k_scenario": null,
       "stock_status": "out_of_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "desktop-gtune-dg-a7g70-5070",
+      "name": "G TUNE DG-A7G70",
+      "form_factor": "desktop",
+      "current_price_jpy": 459800,
+      "reference_price_jpy": 304800,
+      "reference_only": false,
+      "required_discount_pct": 39.1,
+      "historical_floor_jpy": 219800,
+      "historical_floor_strength": "same_gpu",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 413800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 390800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 367800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 344800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 321900
+        }
+      ],
+      "first_280k_scenario": null,
+      "stock_status": "in_stock",
       "price_source_mode": "direct_structured",
       "price_validation_status": "validated",
       "dynamic_candidate": false
@@ -418,8 +538,8 @@
       "reference_price_jpy": 419800,
       "reference_only": true,
       "required_discount_pct": 33.3,
-      "historical_floor_jpy": null,
-      "historical_floor_strength": "none",
+      "historical_floor_jpy": 299800,
+      "historical_floor_strength": "same_gpu",
       "scenario_prices": [
         {
           "discount_pct": 10,
