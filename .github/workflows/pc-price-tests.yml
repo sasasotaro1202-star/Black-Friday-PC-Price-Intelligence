@@ -28,4 +28,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p "test_*.py" -v
           python -m py_compile scripts/*.py
+          # Regenerate derived ranking artifacts with the current scoring schema
+          # before healthcheck; otherwise stale committed JSON can fail a valid code change.
+          python scripts/report.py
           python scripts/healthcheck.py
