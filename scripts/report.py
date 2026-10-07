@@ -205,6 +205,7 @@ def main():
             "purchase_url": sales_url(action) if action else None,
         },
         "quality": quality,
+        "coverage": latest.get("coverage") or {},
         "products": scored,
         "unavailable_products": unavailable,
         "reference_only": reference_only,
@@ -263,14 +264,15 @@ def main():
     lines += [
         "## 100点ランキング",
         "",
-        "|順位|タイプ|商品|現在価格|実質コスト|特典・構成価値|28万円まで|性能|価格価値|過去根拠|在庫|時期|総合|判定|購入リンク|",
-        "|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|",
+        "|順位|タイプ|商品|現在価格|現金総額|確定現金特典|実質コスト|非現金価値|価値加点|28万円まで|性能|価格価値|過去根拠|在庫|時期|総合|判定|購入リンク|",
+        "|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|",
     ]
     for row in scored[:20]:
         d = row["score_detail"]
         lines.append(
             f"|{row['rank']}|{row.get('form_factor','unknown')}|{row.get('name','')[:55]}|¥{row['current_price_jpy']:,}|"
-            f"¥{row.get('effective_cost_jpy'):,}|¥{row.get('noncash_benefit_value_jpy', 0):,} / +{d.get('value_bonus', 0)}|"
+            f"¥{row.get('cash_total_cost_jpy'):,}|¥{row.get('confirmed_benefit_value_jpy', 0):,}|¥{row.get('effective_cost_jpy'):,}|"
+            f"¥{row.get('noncash_benefit_value_jpy', 0):,}|+{d.get('value_bonus', 0)}|"
             f"{d.get('required_effective_discount_pct', 0):.1f}%|"
             f"{d['performance']}/40|{d['price']}/20|"
             f"{d['history']}/15|{d['stock']}/15|{d['timing']}/10|"
@@ -302,6 +304,11 @@ def main():
         f"- 在庫不明: {quality['unknown_stock']}",
         f"- 売り切れ確認: {quality['out_of_stock']}",
         f"- PIT失敗: {quality['pit_failures']}",
+        f"- 処理対象: {(latest.get('coverage') or {}).get('processed_count', len(products))} / {(latest.get('coverage') or {}).get('watchlist_count', len(products))}",
+        f"- 処理率: {(latest.get('coverage') or {}).get('processing_rate_pct', 100.0):.1f}%",
+        f"- 取得成功率: {(latest.get('coverage') or {}).get('transport_success_rate_pct', 0.0):.1f}%",
+        f"- 価格確認率: {(latest.get('coverage') or {}).get('price_verified_rate_pct', 0.0):.1f}%",
+        f"- 未処理候補: {', '.join((latest.get('coverage') or {}).get('skipped_ids', [])) or 'なし'}",
         "",
         "## 価格シナリオ",
         "",
