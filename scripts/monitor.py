@@ -1,5 +1,6 @@
 import hashlib
 import json
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
 import re
 import subprocess
@@ -879,22 +880,34 @@ def main():
     }
     retrieval_time = iso(now_jst())
 
+    # Fetch/parse product pages concurrently. The ranking/event logic below stays
+    # deterministic because results are reassembled in original watchlist order.
+    def fetch_one(entry):
+        cid = entry["id"]
+        cat = catalog.get(cid, {})
+        try:
+            html, final_url, _headers = fetch(entry["url"])
+            return cid, parse_page(final_url, html, expected=cat), None
+        except HTTPError as exc:
+            return cid, None, f"HTTPError:{exc.code}"
+        except URLError as exc:
+            return cid, None, f"URLError:{getattr(exc, 'reason', 'unknown')}"
+        except Exception as exc:
+            return cid, None, type(exc).__name__
+
+    fetch_results = {}
+    workers = min(12, max(1, len(entries)))
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        future_map = {executor.submit(fetch_one, entry): entry["id"] for entry in entries}
+        for future in as_completed(future_map):
+            cid, raw, request_error = future.result()
+            fetch_results[cid] = (raw, request_error)
+
     for entry in entries:
         cid = entry["id"]
         previous = previous_by_id.get(cid, {})
         cat = catalog.get(cid, {})
-        raw = None
-        request_error = None
-
-        try:
-            html, final_url, _headers = fetch(entry["url"])
-            raw = parse_page(final_url, html, expected=cat)
-        except HTTPError as exc:
-            request_error = f"HTTPError:{exc.code}"
-        except URLError as exc:
-            request_error = f"URLError:{getattr(exc, 'reason', 'unknown')}"
-        except Exception as exc:
-            request_error = type(exc).__name__
+        raw, request_error = fetch_results.get(cid, (None, "fetch_result_missing"))
 
         item = apply_observation(entry, raw, previous, cat, retrieval_time)
 
