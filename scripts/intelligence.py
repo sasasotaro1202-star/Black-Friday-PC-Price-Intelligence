@@ -19,18 +19,34 @@ GPU_POINTS = {
     "rtx 5090": 25,
     "rtx 5080": 23,
     "rtx 5070 ti": 21,
+    "rx 7900 xtx": 22,
     "rtx 5070": 17,
+    "rx 9070 xt": 20,
+    "rx 9070": 18,
     "rtx 5060 ti": 11,
+    "rx 9060 xt": 14,
     "rtx 5060": 8,
+    "rx 9060": 7,
+    "rx 9050": 6,
+    "rx 7800 xt": 16,
+    "rx 7700 xt": 13,
 }
 
 GPU_FLOORS = {
     "rtx 5090": 300000,
     "rtx 5080": 240000,
     "rtx 5070 ti": 180000,
+    "rx 7900 xtx": 240000,
     "rtx 5070": 150000,
+    "rx 9070 xt": 160000,
+    "rx 9070": 150000,
     "rtx 5060 ti": 120000,
+    "rx 9060 xt": 110000,
     "rtx 5060": 100000,
+    "rx 9060": 90000,
+    "rx 9050": 80000,
+    "rx 7800 xt": 140000,
+    "rx 7700 xt": 120000,
 }
 
 CPU_POINTS = [
@@ -59,10 +75,18 @@ CPU_POINTS = [
 GPU_ORDER = (
     "rtx 5090",
     "rtx 5080",
+    "rx 7900 xtx",
     "rtx 5070 ti",
+    "rx 9070 xt",
     "rtx 5070",
+    "rx 9070",
     "rtx 5060 ti",
+    "rx 7800 xt",
+    "rx 7700 xt",
+    "rx 9060 xt",
     "rtx 5060",
+    "rx 9060",
+    "rx 9050",
 )
 
 PRICE_EXCLUDE_CONTEXT = (
@@ -122,6 +146,7 @@ def normalize_gpu(value):
     s = s.replace("nvidia ", "")
     if "5070 ti" in s:
         return "rtx 5070 ti"
+    s = s.replace("radeon ", "")
     for g in GPU_ORDER:
         if g in s:
             return g
@@ -188,10 +213,13 @@ def enrich_identity(item, catalog_item):
     ]))
     expected_cpu = norm_text(exp.get("cpu"))
     expected_gpu = norm_text(exp.get("gpu"))
+    expected_form = norm_text(exp.get("form_factor"))
     parsed_cpu = norm_text(parsed.get("cpu"))
     parsed_gpu = normalize_gpu(parsed.get("gpu"))
+    parsed_form = norm_text(parsed.get("form_factor"))
     cpu_conflict = bool(expected_cpu and parsed_cpu and expected_cpu not in parsed_cpu and parsed_cpu not in expected_cpu)
     gpu_conflict = bool(expected_gpu and parsed_gpu and normalize_gpu(expected_gpu) != parsed_gpu)
+    form_conflict = bool(expected_form and parsed_form and expected_form != parsed_form)
     numeric_conflicts = []
     for key in ("tgp_w", "ram_gb", "vram_gb"):
         ev, pv = exp.get(key), parsed.get(key)
@@ -205,16 +233,17 @@ def enrich_identity(item, catalog_item):
         exp.get("ssd") and parsed.get("ssd") and
         norm_text(exp.get("ssd")).replace(" ", "") != norm_text(parsed.get("ssd")).replace(" ", "")
     )
-    contradiction = cpu_conflict or gpu_conflict or bool(numeric_conflicts) or ssd_conflict
+    contradiction = cpu_conflict or gpu_conflict or form_conflict or bool(numeric_conflicts) or ssd_conflict
     cpu_ok = bool(expected_cpu and expected_cpu in blob)
     gpu_ok = bool(expected_gpu and normalize_gpu(expected_gpu) == gpu_key(item)) if expected_gpu else True
+    form_ok = bool(not expected_form or not parsed_form or expected_form == parsed_form)
     if contradiction:
         variant = "ambiguous"
-    elif exact_url and (cpu_ok and gpu_ok):
+    elif exact_url and (cpu_ok and gpu_ok and form_ok):
         variant = "exact"
     elif exact_url and (cat.get("identity_confidence") == "high"):
         variant = "trusted_url"
-    elif cpu_ok and gpu_ok:
+    elif cpu_ok and gpu_ok and form_ok:
         variant = "strong"
     elif expected_gpu and normalize_gpu(expected_gpu) == gpu_key(item):
         variant = "gpu_only"
