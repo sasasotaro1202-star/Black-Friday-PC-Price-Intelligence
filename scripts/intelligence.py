@@ -397,6 +397,74 @@ def effective_cost(item):
 
     return max(0, cash - confirmed_benefit_value(item))
 
+def noncash_benefit_value_jpy(item):
+    """Stated non-cash benefit value for comparison only.
+
+    This is never subtracted from the cash/effective cost. Only explicitly
+    stated, confirmed bundle/configuration values are included.
+    """
+    total = 0
+    for signal in item.get("benefit_signals") or []:
+        if signal.get("certainty") != "confirmed":
+            continue
+        if signal.get("counts_toward_effective_cost"):
+            continue
+        if signal.get("kind") == "accessory_stated_value_jpy":
+            value = _int_or_none(signal.get("value_jpy") or signal.get("value"))
+            if value and value > 0:
+                total += min(value, 150000)
+    return min(total, 200000)
+
+def bundle_value_score(item):
+    """Small ranking bonus for confirmed non-cash desktop/laptop bundle value."""
+    signals = item.get("benefit_signals") or []
+    stated = noncash_benefit_value_jpy(item)
+    score = 0
+    if stated >= 100000:
+        score += 4
+    elif stated >= 60000:
+        score += 3
+    elif stated >= 30000:
+        score += 2
+    elif stated >= 15000:
+        score += 1
+
+    if any(
+        x.get("kind") == "accessory_bundle_percent"
+        and x.get("certainty") == "confirmed"
+        and int(x.get("value") or 0) >= 20
+        for x in signals
+    ):
+        score += 1
+
+    if any(
+        x.get("kind") == "configuration_upgrade"
+        and x.get("certainty") == "confirmed"
+        for x in signals
+    ):
+        score += 1
+
+    if any(
+        x.get("kind") == "warranty_or_support_value"
+        and x.get("certainty") == "confirmed"
+        for x in signals
+    ):
+        score += 1
+
+    if any(
+        x.get("kind") == "included_peripheral"
+        and x.get("certainty") == "confirmed"
+        for x in signals
+    ):
+        score += 1
+
+    return min(score, 5)
+
+def price_value_score(item):
+    """Price score plus a capped non-cash bundle-value bonus, max 20."""
+    base = price_score(effective_cost(item))
+    return min(20, base + bundle_value_score(item))
+
 def required_discount(price, target=BUDGET):
     if not price or price <= 0:
         return None
@@ -718,7 +786,9 @@ def decision_score(item, anchors, events=None):
         }
 
     perf, gpu = performance_score(item)
-    ps = price_score(eff)
+    ps_base = price_score(eff)
+    value_bonus = bundle_value_score(item)
+    ps = min(20, ps_base + value_bonus)
     hs, matched = history_score(item, anchors)
     ss = stock_score(item, anchors)
     ts, guidance = timing_score(item, prediction_dt)
@@ -742,6 +812,14 @@ def decision_score(item, anchors, events=None):
         status = "BUY_NOW_NEAR_BUDGET"
     elif eff <= EFFECTIVE_SOFT_MAX and direct_verified and identity_verified and item.get("stock_status") == "low_stock" and score >= 85:
         status = "BUY_NOW_LOW_STOCK"
+    elif (
+        eff > EFFECTIVE_HARD_MAX
+        and item.get("form_factor") == "desktop"
+        and perf >= 30
+        and value_bonus >= 2
+        and eff <= 450000
+    ):
+        status = "VALUE_WATCH"
     elif eff > EFFECTIVE_HARD_MAX:
         status = "WAIT_FOR_DISCOUNT"
     elif score >= 85:
@@ -750,6 +828,7 @@ def decision_score(item, anchors, events=None):
     reason_bits = [
         f"現金支払 ¥{cash_total:,}" if cash_total is not None else "現金支払額未確認",
         f"実質コスト ¥{eff:,}" if eff is not None else "実質コスト未確認",
+        f"特典・構成価値 ¥{noncash_benefit_value_jpy(item):,} / 加点 {value_bonus}",
         f"28万円まで必要値下げ {required_effective_discount(item):.1f}%" if required_effective_discount(item) is not None and eff > EFFECTIVE_BUDGET else "実質目標内",
         f"在庫 {item.get('stock_status', 'unknown')}",
         f"構成判定 {item.get('variant_match', 'ambiguous')}",
@@ -770,6 +849,9 @@ def decision_score(item, anchors, events=None):
         "status": status,
         "performance": perf,
         "price": ps,
+        "price_base": ps_base,
+        "value_bonus": value_bonus,
+        "noncash_benefit_value_jpy": noncash_benefit_value_jpy(item),
         "history": hs,
         "stock": ss,
         "timing": ts,
@@ -778,6 +860,8 @@ def decision_score(item, anchors, events=None):
         "required_effective_discount_pct": round(required_effective_discount(item), 1) if required_effective_discount(item) is not None else None,
         "cash_total_cost_jpy": cash_total,
         "confirmed_benefit_value_jpy": confirmed_benefit_value(item),
+        "noncash_benefit_value_jpy": noncash_benefit_value_jpy(item),
+        "bundle_value_score": value_bonus,
         "effective_cost_jpy": eff,
         "benefit_confidence": item.get("benefit_confidence"),
         "score_before_cap": total,
