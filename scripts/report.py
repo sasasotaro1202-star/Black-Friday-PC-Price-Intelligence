@@ -147,6 +147,48 @@ def main():
     action = scored[0] if scored else None
 
     partition = scored + unavailable + reference_only
+    # Quality counters must describe the same final partition that healthcheck
+    # validates, not the pre-suppression source rows.
+    quality["candidate_count"] = len(partition)
+    quality["actionable_count"] = len(scored)
+    quality["reference_only_count"] = len(reference_only)
+    quality["direct_verified"] = sum(
+        1 for x in partition
+        if x.get("current_price_jpy") is not None
+        and x.get("price_source_mode") in ("direct_structured", "direct_page", "direct_text")
+    )
+    quality["search_verified"] = sum(
+        1 for x in partition
+        if x.get("current_price_jpy") is not None
+        and x.get("price_source_mode") == "search_snippet"
+    )
+    quality["anomaly_rejected"] = sum(
+        1 for x in partition if x.get("price_validation_status") == "anomaly_rejected"
+    )
+    quality["variant_ambiguous"] = sum(
+        1 for x in partition if x.get("variant_match") == "ambiguous"
+    )
+    quality["unknown_stock"] = sum(
+        1 for x in partition if x.get("stock_status") == "unknown"
+    )
+    quality["out_of_stock"] = sum(
+        1 for x in partition if x.get("stock_status") == "out_of_stock"
+    )
+    quality["dynamic_candidate_count"] = sum(
+        1 for x in partition if x.get("dynamic_candidate")
+    )
+    quality["pit_unknown"] = sum(
+        1 for x in partition
+        if x.get("current_price_jpy") is not None and not x.get("available_at")
+    )
+    quality["pit_failures"] = sum(
+        1 for x in partition
+        if x.get("current_price_jpy") is not None
+        and x.get("available_at")
+        and x.get("prediction_time")
+        and not x.get("pit_valid", False)
+    )
+
     critical_ids = [cid for cid, priority in priority_by_id.items() if priority == "critical"]
     by_id = {str(x.get("id")): x for x in partition if x.get("id")}
     critical_unverified = [
