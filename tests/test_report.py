@@ -26,6 +26,14 @@ class ReportLinkTests(unittest.TestCase):
             "https://example.com/product",
         )
 
+    def test_suppress_current_price_moves_value_to_reference_only(self):
+        row = {"current_price_jpy": 299800, "last_valid_price_jpy": None, "price_jpy": 299800}
+        out = report.suppress_current_price(row)
+        self.assertIsNone(out["current_price_jpy"])
+        self.assertIsNone(out["price_jpy"])
+        self.assertEqual(out["last_valid_price_jpy"], 299800)
+        self.assertTrue(out["current_price_suppressed"])
+
     def test_file_sha256_is_stable_for_same_bytes(self):
         import tempfile
         from pathlib import Path
