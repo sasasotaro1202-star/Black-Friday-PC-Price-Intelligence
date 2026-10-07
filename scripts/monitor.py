@@ -306,22 +306,26 @@ def parse_page(url, html, expected=None):
     price_ambiguity = None
     matched_structured = False
 
-    expected_terms = []
-    if expected:
-        expected_terms.extend([str(x) for x in (expected.get("aliases") or []) if x])
-        for key in ("model_code", "name"):
-            if expected.get(key):
-                expected_terms.append(str(expected[key]))
+    expected_aliases = [str(x) for x in (expected.get("aliases") or []) if expected] if expected else []
+    expected_name = str(expected.get("name") or "") if expected else ""
+    expected_model_code = str(expected.get("model_code") or "") if expected else ""
 
-    def _jsonld_name_matches(product_name):
+    def _jsonld_match_level(product_name):
         pn = "".join(norm_text(product_name).split())
-        if not pn or not expected_terms:
-            return False
-        return any(
-            "".join(norm_text(term).split()) in pn or
-            pn in "".join(norm_text(term).split())
-            for term in expected_terms
-        )
+        if not pn:
+            return 0
+        alias_terms = ["".join(norm_text(x).split()) for x in expected_aliases if x]
+        model_term = "".join(norm_text(expected_model_code).split())
+        name_term = "".join(norm_text(expected_name).split())
+        if any(term and term in pn for term in alias_terms):
+            return 3
+        if model_term and model_term in pn:
+            return 3
+        if name_term and (pn == name_term or pn.startswith(name_term + "[")):
+            return 2
+        if name_term and name_term in pn:
+            return 1
+        return 0
 
     blocks = re.findall(
         r'<script[^>]+type=["\\\']application/ld\+json["\\\'][^>]*>(.*?)</script>',
@@ -338,8 +342,8 @@ def parse_page(url, html, expected=None):
                 continue
             product_name = str(obj.get("name") or "")
             name = obj.get("name") or name
-            matched = _jsonld_name_matches(product_name)
-            if matched:
+            match_level = _jsonld_match_level(product_name)
+            if match_level:
                 matched_structured = True
             offers = obj.get("offers")
             offers_list = offers if isinstance(offers, list) else [offers] if isinstance(offers, dict) else []
@@ -354,11 +358,15 @@ def parse_page(url, html, expected=None):
                 if p and (currency in ("JPY", "YEN", "") or "¥" in str(offer.get("price"))):
                     structured_offers.append({
                         "price": p,
-                        "matched": matched,
+                        "match_level": match_level,
                         "availability": str(offer.get("availability") or ""),
                     })
 
-    selected_offers = [x for x in structured_offers if x["matched"]] if matched_structured else structured_offers
+    if matched_structured:
+        best_match = max(x["match_level"] for x in structured_offers)
+        selected_offers = [x for x in structured_offers if x["match_level"] == best_match]
+    else:
+        selected_offers = structured_offers
     unique_structured_prices = sorted(set(x["price"] for x in selected_offers))
     structured_price = unique_structured_prices[0] if len(unique_structured_prices) == 1 else None
     if len(unique_structured_prices) > 1:
