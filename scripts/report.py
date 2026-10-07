@@ -2,8 +2,10 @@ import json
 import os
 
 from intelligence import (
-    ROOT, BUDGET, load_json, save_json, load_catalog, load_anchors,
-    build_row, now_jst, iso, scenario_prices
+    ROOT, BUDGET, EFFECTIVE_SOFT_MAX, EFFECTIVE_HARD_MAX,
+    load_json, save_json, load_catalog, load_anchors,
+    build_row, cash_total_cost, confirmed_benefit_value, effective_cost,
+    now_jst, iso, scenario_prices
 )
 
 def read_events():
@@ -74,6 +76,10 @@ def main():
 
     for product in products:
         row = build_row(product, anchors, events, prediction_time=generated)
+        row["cash_total_cost_jpy"] = cash_total_cost(product)
+        row["confirmed_benefit_value_jpy"] = confirmed_benefit_value(product)
+        row["effective_cost_jpy"] = effective_cost(product)
+        row["benefit_confidence"] = product.get("benefit_confidence")
         if row.get("decision_score") is None:
             reference_only.append(row)
         else:
@@ -116,7 +122,7 @@ def main():
     purchase_gate_allowed = bool(
         action
         and coverage_status == "COMPLETE"
-        and action.get("score_detail", {}).get("status") in ("BUY_NOW", "BUY_NOW_LOW_STOCK")
+        and action.get("score_detail", {}).get("status") in ("BUY_NOW", "BUY_NOW_LOW_STOCK", "BUY_NOW_NEAR_BUDGET")
     )
 
     quality = {
@@ -157,6 +163,9 @@ def main():
         "generated_at": generated,
         "prediction_time": generated,
         "budget_jpy": BUDGET,
+        "effective_budget_jpy": BUDGET,
+        "effective_soft_max_jpy": EFFECTIVE_SOFT_MAX,
+        "effective_hard_max_jpy": EFFECTIVE_HARD_MAX,
         "season_phase": __import__("intelligence").season_phase(),
         "purchase_gate": {
             "allowed": purchase_gate_allowed,
@@ -203,10 +212,13 @@ def main():
             "",
             f"**1位: {action.get('name','')} — {action['decision_score']}/100**",
             f"- 現在価格: ¥{price:,}",
+            f"- 必須費用込み現金総額: ¥{action.get('cash_total_cost_jpy'):,}" if action.get("cash_total_cost_jpy") is not None else "- 必須費用込み現金総額: 未確認",
+            f"- 確定特典価値: ¥{action.get('confirmed_benefit_value_jpy', 0):,}",
+            f"- 実質コスト: ¥{action.get('effective_cost_jpy'):,}" if action.get("effective_cost_jpy") is not None else "- 実質コスト: 未確認",
             f"- 判定: **{d['status']}**",
             f"- 買い判断: {d['reason']}",
             f"- 待つリスク: **{d['wait_risk']}**",
-            f"- 28万円まで必要値下げ: {d['required_discount_pct']:.1f}%",
+            f"- 実質28万円まで必要値下げ: {d['required_effective_discount_pct']:.1f}%" if d.get("required_effective_discount_pct") is not None else "- 実質28万円まで必要値下げ: 未確認",
             f"- 構成判定: **{d.get('variant_match')}**",
             f"- 価格情報: **{d.get('price_source_mode')} / {d.get('data_confidence')}**",
             "",
@@ -223,14 +235,15 @@ def main():
     lines += [
         "## 100点ランキング",
         "",
-        "|順位|商品|現在価格|必要値下げ|性能|価格|過去根拠|在庫|時期|総合|判定|",
-        "|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---|",
+        "|順位|商品|現在価格|実質コスト|実質28万円まで|性能|価格|過去根拠|在庫|時期|総合|判定|",
+        "|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|",
     ]
     for row in scored[:20]:
         d = row["score_detail"]
         lines.append(
             f"|{row['rank']}|{row.get('name','')[:55]}|¥{row['current_price_jpy']:,}|"
-            f"{d['required_discount_pct']:.1f}%|{d['performance']}/40|{d['price']}/20|"
+            f"¥{row.get('effective_cost_jpy'):,}|{d.get('required_effective_discount_pct', 0):.1f}%|"
+            f"{d['performance']}/40|{d['price']}/20|"
             f"{d['history']}/15|{d['stock']}/15|{d['timing']}/10|"
             f"**{row['decision_score']}/100**|{d['status']}|"
         )
@@ -240,6 +253,9 @@ def main():
         "## データ品質",
         "",
         f"- 候補総数: {quality['candidate_count']}",
+        f"- 実質予算: ¥{BUDGET:,}",
+        f"- 実質ソフト上限: ¥{EFFECTIVE_SOFT_MAX:,}",
+        f"- 実質ハード上限: ¥{EFFECTIVE_HARD_MAX:,}",
         f"- 重要候補: {quality['critical_candidate_count']}",
         f"- 重要候補の未確認: {quality['critical_unverified_count']}",
         f"- カバレッジ: {quality['coverage_status']}",
@@ -272,8 +288,9 @@ def main():
     lines += [
         "## 判定ルール",
         "",
-        "- BUY_NOW: 目標価格以下・購入可能・データ品質を通過。",
-        "- BUY_NOW_LOW_STOCK: 目標価格以下・低在庫。最安値待ちを避ける。",
+        "- BUY_NOW: 実質コスト28.5万円以下・購入可能・データ品質を通過。",
+        "- BUY_NOW_NEAR_BUDGET: 実質28.5〜29.0万円でも、性能・在庫・データ品質が特に強い場合だけ許可。",
+        "- BUY_NOW_LOW_STOCK: 実質予算内・低在庫。最安値待ちを避ける。",
         "- STRONG_WATCH: 未到達でも性能・価格距離・過去根拠が強い。",
         "- WAIT_FOR_DISCOUNT: 大幅値下げ待ち。",
         "- VERIFY_NOW: 検索補完など。購入前に販売ページで再確認。",
