@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T16:07:32+09:00",
+  "generated_at": "2026-10-07T16:40:47+09:00",
   "budget_jpy": 280000,
   "note": "10/15/20/25/30% scenarios are planning bands, not probabilities.",
   "rows": [
@@ -41,47 +41,6 @@
       },
       "stock_status": "out_of_stock",
       "price_source_mode": "direct_structured",
-      "price_validation_status": "validated",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "tuf-a16-8940hx-5070",
-      "name": "https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gaming-a16-2025.html",
-      "form_factor": "laptop",
-      "current_price_jpy": 319800,
-      "reference_price_jpy": 319800,
-      "reference_only": false,
-      "required_discount_pct": 12.4,
-      "historical_floor_jpy": 219800,
-      "historical_floor_strength": "same_family",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 287800
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 271800
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 255800
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 239800
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 223900
-        }
-      ],
-      "first_280k_scenario": {
-        "discount_pct": 15,
-        "price_jpy": 271800
-      },
-      "stock_status": "preorder_or_backorder",
-      "price_source_mode": "direct_meta",
       "price_validation_status": "validated",
       "dynamic_candidate": false
     },
@@ -162,6 +121,47 @@
       "stock_status": "out_of_stock",
       "price_source_mode": "direct_structured",
       "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "tuf-a16-8940hx-5070",
+      "name": "ASUS TUF Gaming A16 FA608PP-R9R5070S",
+      "form_factor": "laptop",
+      "current_price_jpy": null,
+      "reference_price_jpy": 319800,
+      "reference_only": true,
+      "required_discount_pct": 12.4,
+      "historical_floor_jpy": 219800,
+      "historical_floor_strength": "same_family",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 287800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 271800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 255800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 239800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 223900
+        }
+      ],
+      "first_280k_scenario": {
+        "discount_pct": 15,
+        "price_jpy": 271800
+      },
+      "stock_status": "unknown",
+      "price_source_mode": "stale_previous",
+      "price_validation_status": "missing",
       "dynamic_candidate": false
     },
     {

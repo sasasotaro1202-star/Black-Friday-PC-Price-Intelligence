@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T16:07:32+09:00",
+  "generated_at": "2026-10-07T16:40:46+09:00",
   "budget_jpy": 280000,
   "target_black_friday": "2026-11-27",
   "target_products": [
@@ -14,19 +14,6 @@
       "performance_score": 35,
       "source_mode": "direct_structured",
       "confidence": "high",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "tuf-a16-8940hx-5070",
-      "name": "https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gaming-a16-2025.html",
-      "store": null,
-      "price_jpy": 319800,
-      "required_discount_pct": 12.4,
-      "feasibility": "REALISTIC",
-      "gpu": "rtx 5070",
-      "performance_score": 37,
-      "source_mode": "direct_meta",
-      "confidence": "medium",
       "dynamic_candidate": false
     },
     {
