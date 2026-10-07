@@ -103,6 +103,20 @@ def main():
         row["source_snapshot_generated_at"] = source_snapshot_generated_at
         row["source_snapshot_sha256"] = source_snapshot_sha256
         if row.get("decision_score") is None:
+            # Non-actionable/stale observations are retained as reference evidence,
+            # never exposed as a current purchase price.
+            if row.get("current_price_jpy") is not None:
+                row["last_valid_price_jpy"] = (
+                    row.get("last_valid_price_jpy")
+                    or row.get("current_price_jpy")
+                )
+            row["reference_price_jpy"] = (
+                row.get("reference_price_jpy")
+                or row.get("last_valid_price_jpy")
+            )
+            row["current_price_jpy"] = None
+            row["price_jpy"] = None
+            row["current_price_suppressed"] = True
             reference_only.append(row)
         else:
             scored.append(row)
