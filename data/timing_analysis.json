@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-09T08:56:33+09:00",
-  "source_snapshot_generated_at": "2026-10-09T08:56:25+09:00",
-  "source_snapshot_sha256": "6f35d4106925604d7cd22d24393eab8320570ccd81868a49cfe05efe0da23b7c",
+  "generated_at": "2026-10-09T13:19:17+09:00",
+  "source_snapshot_generated_at": "2026-10-09T13:19:12+09:00",
+  "source_snapshot_sha256": "d146d22e388c3fffb15c39c4cfb65805eb76421a565105e10bd450327ce78d49",
   "budget_jpy": 280000,
   "target_black_friday": "2026-11-27",
   "target_products": [
@@ -118,19 +118,6 @@
       "feasibility": "LOW",
       "gpu": "rtx 5070",
       "performance_score": 25,
-      "source_mode": "direct_structured",
-      "confidence": "high",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "candidate-5",
-      "name": "Acer Predator Helios Neo 16 AI Windows 11 Home Core Ultra 9 290HX Plus RTX 5070 Ti IPS 非光沢 WQXGA 240Hz 3ms G-SYNC DCI-P3 100% 32GBメモリ 1TB SSD 第5世代 AeroBladeファン 有線LAN WiFi 6E 英字キーボード ゲーミングノートパソコン PHN16-I71-N93Z57T/E",
-      "store": null,
-      "price_jpy": 547800,
-      "required_discount_pct": 48.9,
-      "feasibility": "VERY_LOW",
-      "gpu": "rtx 5070 ti",
-      "performance_score": 40,
       "source_mode": "direct_structured",
       "confidence": "high",
       "dynamic_candidate": false
