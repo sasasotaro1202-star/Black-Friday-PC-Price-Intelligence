@@ -30,7 +30,7 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(self.cfg["pc_budget_jpy"], 312200)
         self.assertEqual(self.cfg["pc_target_jpy"] - 279800, 32400)
         self.assertEqual(self.cfg["pc_budget_jpy"] - 279800, 32400)
-        self.assertEqual(next(x for x in self.cfg["peripherals"] if x["id"] == "speakers")["target_price_jpy"], 8000)
+        self.assertEqual(next(x for x in self.cfg["peripherals"] if x["id"] == "speakers")["target_price_jpy"], 12000)
         self.assertEqual(next(x for x in self.cfg["peripherals"] if x["id"] == "secondary_monitor")["target_price_jpy"], 10000)
         self.assertEqual(strategy["priority_plans"][0]["candidate_id"], "desktop-gtune-dg-i5g70-5070")
         self.assertEqual(strategy["priority_plans"][1]["last_verified_listing_reference_jpy"], 304800)
