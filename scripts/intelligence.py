@@ -964,7 +964,12 @@ def decision_score(item, anchors, events=None):
         f"現金支払 ¥{cash_total:,}" if cash_total is not None else "現金支払額未確認",
         f"実質コスト ¥{eff:,}" if eff is not None else "実質コスト未確認",
         f"特典・構成価値 ¥{noncash_benefit_value_jpy(item):,} / 加点 {value_bonus}",
-        f"PC目標価格 ¥{EFFECTIVE_BUDGET:,} まで必要値下げ {required_effective_discount(item):.1f}%" if required_effective_discount(item) is not None and eff > EFFECTIVE_BUDGET else "PC目標価格内",
+        (
+            f"PC目標価格 ¥{EFFECTIVE_BUDGET:,} まで必要値下げ {required_effective_discount(item):.1f}%"
+            if config_ready and required_effective_discount(item) is not None and eff > EFFECTIVE_BUDGET
+            else "完成構成未確認のため必要値下げ率未算出" if not config_ready
+            else "PC目標価格内"
+        ),
         f"在庫 {item.get('stock_status', 'unknown')}",
         f"構成判定 {item.get('variant_match', 'ambiguous')}",
     ]
@@ -992,7 +997,11 @@ def decision_score(item, anchors, events=None):
         "timing": ts,
         "gpu": gpu,
         "required_discount_pct": round(required_discount(price), 1),
-        "required_effective_discount_pct": round(required_effective_discount(item), 1) if required_effective_discount(item) is not None else None,
+        "required_effective_discount_pct": (
+            round(required_effective_discount(item), 1)
+            if config_ready and required_effective_discount(item) is not None else None
+        ),
+        "discount_comparable_to_completed_build": config_ready,
         "cash_total_cost_jpy": cash_total,
         "confirmed_benefit_value_jpy": confirmed_benefit_value(item),
         "noncash_benefit_value_jpy": noncash_benefit_value_jpy(item),

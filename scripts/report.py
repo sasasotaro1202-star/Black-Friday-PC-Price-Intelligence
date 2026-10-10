@@ -477,6 +477,12 @@ def main():
     }
     save_json(os.path.join(ROOT, "data", "decision_rankings.json"), out)
 
+    fetch_stats = latest.get("fetch_stats") or {}
+    error_breakdown = fetch_stats.get("errors_by_host_reason") or {}
+    error_breakdown_text = ", ".join(
+        "{}={}".format(k, v) for k, v in sorted(error_breakdown.items())
+    ) or "なし"
+
     lines = [
         "# ブラックフライデー期間通算・購入ランキング",
         "",
@@ -506,15 +512,27 @@ def main():
             f"- 必須費用込み現金総額: ¥{action.get('cash_total_cost_jpy'):,}" if action.get("cash_total_cost_jpy") is not None else "- 必須費用込み現金総額: 未確認",
             f"- 確定特典価値: ¥{action.get('confirmed_benefit_value_jpy', 0):,}",
             f"- 実質コスト（PC単体）: ¥{action.get('effective_cost_jpy'):,}" if action.get("effective_cost_jpy") is not None else "- 実質コスト（PC単体）: 未確認",
-            f"- PC＋周辺機器の試算総額: ¥{(action.get('effective_cost_jpy') or 0) + peripheral_projection['peripheral_projection_jpy']:,}" if action.get("effective_cost_jpy") is not None else "- PC＋周辺機器の試算総額: 未確認",
-            f"- 総予算の残額（試算）: ¥{budget['total_budget_jpy'] - ((action.get('effective_cost_jpy') or 0) + peripheral_projection['peripheral_projection_jpy']):,}" if action.get("effective_cost_jpy") is not None else "- 総予算の残額: 未確認",
+            (
+                f"- PC＋周辺機器の参考試算総額（構成変更費未含む）: ¥{(action.get('effective_cost_jpy') or 0) + peripheral_projection['peripheral_projection_jpy']:,}"
+                if action.get("effective_cost_jpy") is not None and not d.get("configuration_ready")
+                else f"- PC＋周辺機器の試算総額: ¥{(action.get('effective_cost_jpy') or 0) + peripheral_projection['peripheral_projection_jpy']:,}"
+                if action.get("effective_cost_jpy") is not None
+                else "- PC＋周辺機器の試算総額: 未確認"
+            ),
+            (
+                f"- 参考残額（構成変更費未含む）: ¥{budget['total_budget_jpy'] - ((action.get('effective_cost_jpy') or 0) + peripheral_projection['peripheral_projection_jpy']):,}"
+                if action.get("effective_cost_jpy") is not None and not d.get("configuration_ready")
+                else f"- 総予算の残額（試算）: ¥{budget['total_budget_jpy'] - ((action.get('effective_cost_jpy') or 0) + peripheral_projection['peripheral_projection_jpy']):,}"
+                if action.get("effective_cost_jpy") is not None
+                else "- 総予算の残額: 未確認"
+            ),
             f"- PC構成要件: {'達成' if d.get('configuration_ready') else '未達/未確認 (' + ', '.join(d.get('configuration_reasons') or []) + ')'}",
             f"- 参考総価値換算額: ¥{action.get('value_equivalent_cost_jpy'):,}（購入許可には不使用）" if action.get("value_equivalent_cost_jpy") is not None else "- 参考総価値換算額: 未確認",
             f"- 判定: **{d['status']}**",
             (f"- 購入リンク: [販売ページ]({sales_url(action)})" if sales_url(action) else "- 購入リンク: 未確認"),
             f"- 買い判断: {d['reason']}",
             f"- 待つリスク: **{d['wait_risk']}**",
-            f"- PC目標価格まで必要値下げ: {d['required_effective_discount_pct']:.1f}%" if d.get("required_effective_discount_pct") is not None else "- PC目標価格まで必要値下げ: 未確認",
+            f"- PC目標価格まで必要値下げ: {d['required_effective_discount_pct']:.1f}%" if d.get("required_effective_discount_pct") is not None else "- PC目標価格まで必要値下げ: 未算出（完成構成の価格・変更費用が未確認）" if not d.get("configuration_ready") else "- PC目標価格まで必要値下げ: 未確認",
             f"- 構成判定: **{d.get('variant_match')}**",
             f"- 価格情報: **{d.get('price_source_mode')} / {d.get('data_confidence')}**",
             "",
@@ -574,7 +592,7 @@ def main():
             f"|{row['rank']}|{row.get('form_factor','unknown')}|{row.get('name','')[:55]}|¥{row['current_price_jpy']:,}|"
             f"¥{row.get('cash_total_cost_jpy'):,}|¥{row.get('confirmed_benefit_value_jpy', 0):,}|¥{row.get('effective_cost_jpy'):,}|"
             f"¥{row.get('noncash_benefit_value_jpy', 0):,}|+{d.get('value_bonus', 0)}|"
-            f"{d.get('required_effective_discount_pct', 0):.1f}%|"
+            f"{(format(d['required_effective_discount_pct'], '.1f') + '%') if d.get('required_effective_discount_pct') is not None else '未算出'}|"
             f"{d['performance']}/40|{d['price']}/20|"
             f"{d['history']}/15|{d['stock']}/15|{d['timing']}/10|"
             f"**{row['decision_score']}/100**|{d['status']}|"
@@ -609,6 +627,9 @@ def main():
         f"- 処理率: {(latest.get('coverage') or {}).get('processing_rate_pct', 100.0):.1f}%",
         f"- 取得成功率: {(latest.get('coverage') or {}).get('transport_success_rate_pct', 0.0):.1f}%",
         f"- 価格確認率: {(latest.get('coverage') or {}).get('price_verified_rate_pct', 0.0):.1f}%",
+        f"- 検索補完（成功/試行）: {fetch_stats.get('search_fallback_successes', 0)}/{fetch_stats.get('search_fallback_attempts', 0)}",
+        f"- 検索SKU不一致による除外: {fetch_stats.get('search_identity_rejections', 0)}",
+        f"- 取得エラー内訳（host|reason）: {error_breakdown_text}",
         f"- 未処理候補: {', '.join((latest.get('coverage') or {}).get('skipped_ids', [])) or 'なし'}",
         "",
         "## 価格シナリオ",

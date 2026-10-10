@@ -163,7 +163,7 @@ def run_one(target, previous, retrieved_at):
         })
         return row
     except Exception as exc:
-        row["status"], row["error"] = "error", type(exc).__name__
+        row["status"], row["error"] = "error", f"{type(exc).__name__}:{str(exc)[:180]}"
         return row
 
 

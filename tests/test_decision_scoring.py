@@ -98,6 +98,14 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertGreaterEqual(score, 90)
         self.assertLessEqual(detail["effective_cost_jpy"], intelligence.EFFECTIVE_SOFT_MAX)
 
+    def test_incomplete_build_has_no_completed_build_discount_percentage(self):
+        item = self.candidate(price=299800, ram=16, ssd="500 GB")
+        score, detail = intelligence.decision_score(item, [], [])
+        self.assertEqual(detail["status"], "NEEDS_CONFIGURATION")
+        self.assertFalse(detail["discount_comparable_to_completed_build"])
+        self.assertIsNone(detail["required_effective_discount_pct"])
+        self.assertIn("完成構成未確認", detail["reason"])
+
     def test_over_290k_effective_cost_waits(self):
         item = self.candidate(price=310000)
         score, detail = intelligence.decision_score(item, [], [])

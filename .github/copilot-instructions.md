@@ -64,3 +64,13 @@ For each safe/free defect: observe → diagnose → implement → unit/regressio
 
 ## Window
 Broad watch window: 2026-11-14 00:00 JST through 2026-12-04 23:59 JST until official retailer-specific dates are independently verified.
+
+
+## Free source resilience and diagnostics
+
+- Use free public search providers in sequence when a direct page request fails; do not require API keys or paid services.
+- A search result's price is usable only when that result title/snippet contains a catalogued exact SKU/model alias, the URL host is on the allowlist, the price passes bounds validation, and the source is preserved for audit. Never infer SKU identity solely from the canonical product URL.
+- Preserve request failure details (HTTP status, curl exit/status code, timeout/connect reason), grouped by host and reason. Do not treat transport errors as stockout or a sale.
+- Keep search attempts, accepted fallback observations and rejected SKU matches separate in the report.
+- Limit concurrent requests to avoid raising merchant-side throttling. Do not improve metrics by weakening the identity, stock, freshness, or PIT gates.
+- For any PC missing 32 GB RAM or 1 TB SSD, leave the completed-build discount percentage uncomputed until the completed configuration price is known.

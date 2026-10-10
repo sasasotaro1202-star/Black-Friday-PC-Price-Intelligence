@@ -23,6 +23,15 @@ class PeripheralMonitorTests(unittest.TestCase):
             "target_price_jpy": 17500,
         }
 
+    def test_g213r_is_a_tracked_bf_target_with_exact_retail_url(self):
+        config = __import__("json").loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        target = next(x for x in config["peripherals"] if x["id"] == "keyboard")
+        self.assertTrue(target["track_current_price"])
+        self.assertEqual(target["monitor_url"], "https://www.biccamera.com/bc/item/9242996/")
+        self.assertEqual(target["target_price_jpy"], 5500)
+        self.assertIn("G213r", target["identity_terms"])
+        self.assertIn("www.biccamera.com", target["allowed_hosts"])
+
     def test_exact_model_context_resolves_price_and_low_stock(self):
         excerpt = (
             "AOC Q27G40E/11 ゲーミングモニター ￥20,790 2,079ゴールドポイント "
