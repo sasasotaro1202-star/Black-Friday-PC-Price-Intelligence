@@ -23,6 +23,16 @@ class PeripheralMonitorTests(unittest.TestCase):
             "target_price_jpy": 17500,
         }
 
+    def test_shipping_threshold_is_not_selected_as_peripheral_price(self):
+        context = "税込3,980円以上ご購入で送料無料"
+        self.assertIsNone(peripheral_monitor.local_price_candidate(context))
+
+    def test_shipping_threshold_does_not_hide_item_price_near_model(self):
+        context = "Logicool G213r 本体価格 ￥7,330 在庫あり。税込3,980円以上ご購入で送料無料。"
+        candidate = peripheral_monitor.local_price_candidate(context)
+        self.assertIsNotNone(candidate)
+        self.assertEqual(candidate["price_jpy"], 7330)
+
     def test_model_context_skips_navigation_mention_for_nearby_exact_price(self):
         text = (
             "Navigation keyboards support pages and category links. Logicool G213r global navigation. "
