@@ -84,6 +84,7 @@ jobs:
             git fetch --no-tags origin main
             git reset --hard origin/main
             python scripts/monitor.py
+            python scripts/peripheral_monitor.py
             python scripts/recover.py
             python scripts/sanitize.py
             python scripts/report.py
