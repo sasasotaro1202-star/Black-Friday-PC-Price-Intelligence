@@ -17,6 +17,14 @@ config/targets.json is the single source of truth.
 - Track monitor, speakers, mouse and mousepad prices separately from PC prices.
 - Do not subtract coupons, points, lotteries, future rewards, or eligibility-dependent perks until actual checkout applicability is verified.
 
+## 37万円購入戦略
+
+- Primary conditional target: `desktop-gtune-dg-i5g70-5070`. Its 279,800 JPY listing is only the 16 GB / 500 GB baseline. Never mark it purchase-ready until a 32 GB / 1 TB completed configuration and checkout price are verified. For a 279,800 JPY baseline, the max upgrade allowance is 20,000 JPY to reach the 299,800 JPY PC target or 22,400 JPY to reach the 302,200 JPY planning cap; these are arithmetic ceilings, not quoted upgrade prices.
+- Secondary complete-build watch: the exact outlet SKU `DGA7G70B5BBDW101DECWA`, official URL `https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/`. The 2026-10-10 observed listing reference was 304,800 JPY with Ryzen 7 5700X, RTX 5070, 32 GB RAM and 1 TB SSD. Always refresh price, inventory and SKU identity before treating it as current.
+- Outlier watch: RTX 5070 Ti desktop with at least 32 GB RAM / 1 TB SSD is eligible only if its directly verified completed build price is within the live dynamic PC cap. No assumed-zero upgrade costs.
+- Keep EDIFIER MR5 at a 32,000 JPY target. Coupons are not deducted until final checkout applicability is verified.
+- Do not hardcode the illustrative 96/94/95/97 scores. Compute the actual priority score from validated live evidence, and keep purchase gates closed whenever completed configuration or price is unknown.
+
 Current prices of tracked peripherals must adjust the dynamic PC cap. Missing/stale price or unknown stock must use the configured target as a planning reserve only and keep the overall purchase gate closed.
 
 ## Decision score
