@@ -1,5 +1,5 @@
 {
-  "budget_jpy": 321700,
+  "budget_jpy": 316200,
   "target_date": "2026-11-27",
   "monitor_window_start": "2026-11-14T00:00:00+09:00",
   "monitor_window_end": "2026-12-04T23:59:59+09:00",
@@ -101,13 +101,13 @@
   "desktop_note": "Desktop PCs are evaluated in the same integrated purchase-priority ranking as laptops, with desktop-specific GPU/VRAM/CPU factors.",
   "desktop_exact_candidate_count": 6,
   "total_budget_jpy": 370000,
-  "peripheral_budget_jpy": 48300,
-  "pc_target_jpy": 321700,
-  "pc_budget_jpy": 321700,
+  "peripheral_budget_jpy": 53800,
+  "pc_target_jpy": 316200,
+  "pc_budget_jpy": 316200,
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
-  "budget_scope_note": "budget_jpy is the PC-only target, not the full-system budget. Total 370000 JPY includes the main monitor, an affordable secondary monitor, budget Creative Pebble speakers, keyboard, mouse, mousepad, power strip, required cables and shipping reserve.",
+  "budget_scope_note": "budget_jpy is the PC-only target, not the full-system budget. Total 370000 JPY includes the 27-inch main monitor, 23.8-inch secondary monitor, value-focused EDIFIER R990BT 2.0 speakers, keyboard, mouse, mousepad, power strip, required cables and shipping reserve.",
   "peripherals": [
     {
       "id": "main_monitor",
@@ -152,27 +152,28 @@
     },
     {
       "id": "speakers",
-      "name": "Creative Pebble (classic) compact 2.0 USB-powered speakers",
-      "target_price_jpy": 2500,
+      "name": "EDIFIER R990BT 2.0 active bookshelf speakers",
+      "target_price_jpy": 8000,
       "track_current_price": true,
-      "monitor_url": "https://jp.creative.com/p/speakers/creative-pebble?AspxAutoDetectCookieSupport=1",
-      "purchase_url": "https://jp.creative.com/p/speakers/creative-pebble",
+      "monitor_url": "https://www.edifier.jp/products/r990bt",
+      "purchase_url": "https://www.edifier.jp/products/r990bt",
       "identity_terms": [
-        "Creative Pebble"
+        "R990BT"
       ],
       "allowed_hosts": [
-        "jp.creative.com"
+        "www.edifier.jp",
+        "www.edifier.com"
       ],
-      "min_price_jpy": 1500,
-      "max_price_jpy": 10000,
+      "min_price_jpy": 6000,
+      "max_price_jpy": 25000,
       "mandatory": true,
       "coupon_policy": "Do not subtract coupons or points unless reliably applied at checkout.",
       "price_target_phase": "black_friday",
-      "target_price_note": "2500円はBF期間中の購入目標。Creative Pebbleの低価格モデルを基準にし、上位モデル・高価格スピーカーの価格履歴は継承しない。現行表示とBF期間中の価格・在庫を再確認する。",
-      "model_code": "Creative Pebble classic",
+      "target_price_note": "¥8,000 is a stretch BF purchase target anchored to EDIFIER Japan's 2025 Black Friday listing at ¥7,999; this is not a prediction or confirmed 2026 price. Recheck the exact R990BT page, stock and checkout price during the 2026 BF window.",
+      "model_code": "R990BT",
       "monitor_urls": [
-        "https://jp.creative.com/p/speakers/creative-pebble?AspxAutoDetectCookieSupport=1",
-        "https://jp.creative.com/p/speakers/creative-pebble"
+        "https://www.edifier.jp/products/r990bt",
+        "https://www.edifier.com/jp/p/bookshelf-speakers/r990bt"
       ]
     },
     {
@@ -280,7 +281,7 @@
   ],
   "purchase_strategy": {
     "updated_at": "2026-10-10",
-    "purpose": "総予算37万円の中で、RTX 5070搭載32GB/1TB完成構成を優先し、主モニター＋手頃なサブモニター＋低価格スピーカーを含めた実用的な環境を組む。目標額はBF購入目標であり実売価格の確認とは区別する。",
+    "purpose": "総予算37万円の中で、RTX 5070搭載32GB/1TB完成構成を優先し、主モニター＋サブモニター＋価格と音質のバランスがよいEDIFIER R990BTを含めた実用的な環境を組む。目標額はBF購入目標であり実売価格の確認とは区別する。",
     "priority_plans": [
       {
         "candidate_id": "desktop-gtune-dg-i5g70-5070",
@@ -294,9 +295,9 @@
         "price_source_note": "279,800円は16GB/500GB基本構成の監視基準。32GB/1TB完成構成の実価格として扱わない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 321700,
-        "black_friday_planned_hard_cap_jpy": 321700,
-        "black_friday_target_note": "32GB RAM/1TB SSD完成構成のBF購入目標・計画上限は321,700円。279,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費の許容上限は目標・計画上限まで41,900円だが、実見積が確認されるまで費用ゼロとは扱わない。"
+        "black_friday_target_price_jpy": 316200,
+        "black_friday_planned_hard_cap_jpy": 316200,
+        "black_friday_target_note": "32GB RAM/1TB SSD完成構成のBF購入目標・計画上限は316,200円。279,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費の許容上限は目標・計画上限まで36,400円だが、実見積が確認されるまで費用ゼロとは扱わない。"
       },
       {
         "candidate_id": "desktop-gtune-dg-a7g70-5070",
@@ -308,9 +309,9 @@
         "reference_checked_date": "2026-10-10",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
         "reference_note": "公式ページで確認した参考価格。次の監視サイクルでも現行価格・在庫・SKUを検証する。",
-        "black_friday_target_price_jpy": 321700,
-        "black_friday_planned_hard_cap_jpy": 321700,
-        "black_friday_target_note": "32GB/1TB完成構成のBF購入目標・計画上限は321,700円。304,800円は事前参考掲載額でありBF価格ではない。BF期間中に価格・在庫・SKU・PITを再確認する。"
+        "black_friday_target_price_jpy": 316200,
+        "black_friday_planned_hard_cap_jpy": 316200,
+        "black_friday_target_note": "32GB/1TB完成構成のBF購入目標・計画上限は316,200円。304,800円は事前参考掲載額でありBF価格ではない。BF期間中に価格・在庫・SKU・PITを再確認する。"
       },
       {
         "candidate_id": "desktop-gtune-dg-i7g70-5070",
@@ -325,9 +326,9 @@
         "price_source_note": "299,800円は16GB/500GB基本構成の事前参考価格。32GB/1TB完成構成のBF実売価格ではない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 321700,
-        "black_friday_planned_hard_cap_jpy": 321700,
-        "black_friday_target_note": "CPU重視の大穴候補。32GB/1TB完成構成のBF購入目標・計画上限は321,700円。299,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費は上限まで21,900円以内が条件だが、実見積が確認されるまで費用ゼロとは扱わない。"
+        "black_friday_target_price_jpy": 316200,
+        "black_friday_planned_hard_cap_jpy": 316200,
+        "black_friday_target_note": "CPU重視の大穴候補。32GB/1TB完成構成のBF購入目標・計画上限は316,200円。299,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費は上限まで16,400円以内が条件だが、実見積が確認されるまで費用ゼロとは扱わない。"
       }
     ],
     "outlier_rule": {
@@ -339,19 +340,19 @@
       "maximum_completed_pc_price_uses": "dynamic_pc_cap_jpy",
       "requires_direct_price_stock_exact_identity_and_valid_pit": true,
       "zero_cost_upgrade_assumption_allowed": false,
-      "black_friday_target_cap_jpy": 321700,
+      "black_friday_target_cap_jpy": 316200,
       "price_basis": "completed_build_black_friday_offer_only"
     },
     "score_policy": "説明文にある96/94/95/97点は条件付きの目標イメージであり、実測スコアとして固定しない。実際のスコアはコードが確認済み価格・構成・在庫・性能・データ品質から計算する。",
     "speaker_strategy": {
       "id": "speakers",
-      "model": "Creative Pebble",
-      "target_price_jpy": 2500,
-      "priority": "value_and_budget",
-      "rationale": "ゲーム・動画・日常利用用に、小型で手頃な2.0ch USB給電スピーカーを採用し、音響費を抑えてサブモニターとPC本体へ予算を回す。",
+      "model": "EDIFIER R990BT",
+      "target_price_jpy": 8000,
+      "priority": "best-value sound-per-yen",
+      "rationale": "Creative Pebbleより音量・低音・ステレオ再生に余裕を持たせながら、3〜4万円級のモニタースピーカーは避ける。24W RMS、4インチ・ドライバー、Bluetooth 5.4、デュアルRCA入力を持つ価格と機能のバランス重視モデル。",
       "coupon_policy": "クーポンは購入画面で適用対象・最終決済額を確認するまで実質価格から控除しない。",
       "price_target_phase": "black_friday",
-      "target_price_note": "2,500円はBF購入目標。現行表示価格やクーポン適用前価格とは区別する。"
+      "target_price_note": "BF目標8,000円。2025年公式BF掲載の7,999円を参考にした目標であり、2026年の価格保証・予測ではない。"
     },
     "price_semantics": {
       "all_configured_target_prices_mean": "black_friday_purchase_targets",
