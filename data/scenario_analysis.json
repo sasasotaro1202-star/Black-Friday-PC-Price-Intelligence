@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-10T18:59:17+09:00",
-  "source_snapshot_generated_at": "2026-10-10T18:58:46+09:00",
-  "source_snapshot_sha256": "1c776a36803c3c03a426d3e96ef0bb409999da352a73fdb0e74bf0540c2da930",
+  "generated_at": "2026-10-10T19:01:16+09:00",
+  "source_snapshot_generated_at": "2026-10-10T19:00:49+09:00",
+  "source_snapshot_sha256": "47b91f1f46b06ca2a17bb4beb6d49914dee44a55c7bc3e63c948e312ac277076",
   "budget_jpy": 299800,
   "budget_scope": "pc_only_excluding_peripherals",
   "total_budget_jpy": 370000,
@@ -39,7 +39,7 @@
         "black_friday_price_observed_jpy": null,
         "black_friday_price_verified": false,
         "pre_black_friday_reference_price_jpy": 20790,
-        "pre_black_friday_reference_at": "2026-10-10T18:59:08+09:00",
+        "pre_black_friday_reference_at": "2026-10-10T19:01:10+09:00",
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "stock_status": "in_stock",
         "target_gap_vs_pre_bf_reference_jpy": 3290,
@@ -56,7 +56,7 @@
         "black_friday_price_observed_jpy": null,
         "black_friday_price_verified": false,
         "pre_black_friday_reference_price_jpy": 39980,
-        "pre_black_friday_reference_at": "2026-10-10T18:59:08+09:00",
+        "pre_black_friday_reference_at": "2026-10-10T19:01:10+09:00",
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "stock_status": "in_stock",
         "target_gap_vs_pre_bf_reference_jpy": 7980,
@@ -90,7 +90,7 @@
         "black_friday_price_observed_jpy": null,
         "black_friday_price_verified": false,
         "pre_black_friday_reference_price_jpy": 5350,
-        "pre_black_friday_reference_at": "2026-10-10T18:59:08+09:00",
+        "pre_black_friday_reference_at": "2026-10-10T19:01:10+09:00",
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "stock_status": "in_stock",
         "target_gap_vs_pre_bf_reference_jpy": 1550,
@@ -107,7 +107,7 @@
         "black_friday_price_observed_jpy": null,
         "black_friday_price_verified": false,
         "pre_black_friday_reference_price_jpy": 2640,
-        "pre_black_friday_reference_at": "2026-10-10T18:59:08+09:00",
+        "pre_black_friday_reference_at": "2026-10-10T19:01:10+09:00",
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "stock_status": "low_stock",
         "target_gap_vs_pre_bf_reference_jpy": 140,
@@ -180,7 +180,7 @@
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "pre_black_friday_reference_price_jpy": 399800,
-        "pre_black_friday_reference_at": "2026-10-10T18:58:46+09:00",
+        "pre_black_friday_reference_at": "2026-10-10T19:00:49+09:00",
         "catalog_reference_price_jpy": 399800,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 399800,
@@ -239,160 +239,6 @@
         "complete_build_target_comparable": true,
         "stock_status": "in_stock",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/"
-      },
-      {
-        "id": "desktop-gtune-dg-a5g60-5060",
-        "name": "G TUNE DG-A5G60",
-        "form_factor": "desktop",
-        "gpu": "RTX 5060",
-        "ram_gb": 16,
-        "ssd": "500 GB",
-        "black_friday_target_price_jpy": 299800,
-        "black_friday_price_observed_jpy": null,
-        "black_friday_offer_verified": false,
-        "pre_black_friday_reference_price_jpy": 194800,
-        "pre_black_friday_reference_at": "2026-10-10T18:58:46+09:00",
-        "catalog_reference_price_jpy": 194800,
-        "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
-        "scenario_base_price_jpy": 194800,
-        "scenario_base_note": "事前参考額を基準にした仮想割引。BF実売価格・値下げ確率ではない",
-        "scenario_prices": [
-          {
-            "discount_pct": 0,
-            "price_jpy": 194800
-          },
-          {
-            "discount_pct": 5,
-            "price_jpy": 185060
-          },
-          {
-            "discount_pct": 10,
-            "price_jpy": 175320
-          },
-          {
-            "discount_pct": 15,
-            "price_jpy": 165580
-          },
-          {
-            "discount_pct": 20,
-            "price_jpy": 155840
-          },
-          {
-            "discount_pct": 25,
-            "price_jpy": 146100
-          },
-          {
-            "discount_pct": 30,
-            "price_jpy": 136360
-          },
-          {
-            "discount_pct": 35,
-            "price_jpy": 126620
-          },
-          {
-            "discount_pct": 40,
-            "price_jpy": 116880
-          },
-          {
-            "discount_pct": 45,
-            "price_jpy": 107140
-          }
-        ],
-        "discount_needed_to_bf_target_jpy": 0,
-        "discount_needed_to_bf_target_pct": 0.0,
-        "discount_needed_to_planned_cap_jpy": 0,
-        "discount_needed_to_planned_cap_pct": 0.0,
-        "is_rtx_5070_ti_outlier": false,
-        "configuration_ready": false,
-        "configuration_reasons": [
-          "RAM 16GB<32GB",
-          "SSD 500GB<1000GB"
-        ],
-        "catalog_configuration_ready": false,
-        "catalog_configuration_reasons": [
-          "RAM 16GB<32GB",
-          "SSD 500GB<1000GB"
-        ],
-        "complete_build_target_comparable": true,
-        "stock_status": "in_stock",
-        "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/"
-      },
-      {
-        "id": "desktop-gtune-dg-i7g70-5070",
-        "name": "G TUNE DG-I7G70",
-        "form_factor": "desktop",
-        "gpu": "RTX 5070",
-        "ram_gb": 16,
-        "ssd": "500 GB",
-        "black_friday_target_price_jpy": 299800,
-        "black_friday_price_observed_jpy": null,
-        "black_friday_offer_verified": false,
-        "pre_black_friday_reference_price_jpy": 299800,
-        "pre_black_friday_reference_at": "2026-10-10T18:58:46+09:00",
-        "catalog_reference_price_jpy": 299800,
-        "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
-        "scenario_base_price_jpy": 299800,
-        "scenario_base_note": "事前参考額を基準にした仮想割引。BF実売価格・値下げ確率ではない",
-        "scenario_prices": [
-          {
-            "discount_pct": 0,
-            "price_jpy": 299800
-          },
-          {
-            "discount_pct": 5,
-            "price_jpy": 284810
-          },
-          {
-            "discount_pct": 10,
-            "price_jpy": 269820
-          },
-          {
-            "discount_pct": 15,
-            "price_jpy": 254830
-          },
-          {
-            "discount_pct": 20,
-            "price_jpy": 239840
-          },
-          {
-            "discount_pct": 25,
-            "price_jpy": 224850
-          },
-          {
-            "discount_pct": 30,
-            "price_jpy": 209860
-          },
-          {
-            "discount_pct": 35,
-            "price_jpy": 194870
-          },
-          {
-            "discount_pct": 40,
-            "price_jpy": 179880
-          },
-          {
-            "discount_pct": 45,
-            "price_jpy": 164890
-          }
-        ],
-        "discount_needed_to_bf_target_jpy": 0,
-        "discount_needed_to_bf_target_pct": 0.0,
-        "discount_needed_to_planned_cap_jpy": 0,
-        "discount_needed_to_planned_cap_pct": 0.0,
-        "is_rtx_5070_ti_outlier": false,
-        "configuration_ready": false,
-        "configuration_reasons": [
-          "RAM 16GB<32GB",
-          "SSD 500GB<1000GB"
-        ],
-        "catalog_configuration_ready": false,
-        "catalog_configuration_reasons": [
-          "RAM 16GB<32GB",
-          "SSD 500GB<1000GB"
-        ],
-        "complete_build_target_comparable": true,
-        "stock_status": "in_stock",
-        "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/"
       },
       {
         "id": "gtune-p6-13700hx-5070",
@@ -476,7 +322,7 @@
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "pre_black_friday_reference_price_jpy": 304800,
-        "pre_black_friday_reference_at": "2026-10-10T18:58:46+09:00",
+        "pre_black_friday_reference_at": "2026-10-10T19:00:49+09:00",
         "catalog_reference_price_jpy": 304800,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 304800,
@@ -618,7 +464,7 @@
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "pre_black_friday_reference_price_jpy": 319800,
-        "pre_black_friday_reference_at": "2026-10-10T18:58:46+09:00",
+        "pre_black_friday_reference_at": "2026-10-10T19:00:49+09:00",
         "catalog_reference_price_jpy": 319800,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 319800,
@@ -1307,6 +1153,83 @@
         "purchase_url": "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1"
       },
       {
+        "id": "desktop-gtune-dg-a5g60-5060",
+        "name": "G TUNE DG-A5G60",
+        "form_factor": "desktop",
+        "gpu": "RTX 5060",
+        "ram_gb": 16,
+        "ssd": "500 GB",
+        "black_friday_target_price_jpy": 299800,
+        "black_friday_price_observed_jpy": null,
+        "black_friday_offer_verified": false,
+        "pre_black_friday_reference_price_jpy": 194800,
+        "pre_black_friday_reference_at": "2026-10-10T19:00:49+09:00",
+        "catalog_reference_price_jpy": 194800,
+        "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
+        "scenario_base_price_jpy": 194800,
+        "scenario_base_note": "基本構成の参考額。RAM/SSD構成変更費を含まないため完成構成のBF目標と比較不可",
+        "scenario_prices": [
+          {
+            "discount_pct": 0,
+            "price_jpy": 194800
+          },
+          {
+            "discount_pct": 5,
+            "price_jpy": 185060
+          },
+          {
+            "discount_pct": 10,
+            "price_jpy": 175320
+          },
+          {
+            "discount_pct": 15,
+            "price_jpy": 165580
+          },
+          {
+            "discount_pct": 20,
+            "price_jpy": 155840
+          },
+          {
+            "discount_pct": 25,
+            "price_jpy": 146100
+          },
+          {
+            "discount_pct": 30,
+            "price_jpy": 136360
+          },
+          {
+            "discount_pct": 35,
+            "price_jpy": 126620
+          },
+          {
+            "discount_pct": 40,
+            "price_jpy": 116880
+          },
+          {
+            "discount_pct": 45,
+            "price_jpy": 107140
+          }
+        ],
+        "discount_needed_to_bf_target_jpy": null,
+        "discount_needed_to_bf_target_pct": null,
+        "discount_needed_to_planned_cap_jpy": null,
+        "discount_needed_to_planned_cap_pct": null,
+        "is_rtx_5070_ti_outlier": false,
+        "configuration_ready": false,
+        "configuration_reasons": [
+          "RAM 16GB<32GB",
+          "SSD 500GB<1000GB"
+        ],
+        "catalog_configuration_ready": false,
+        "catalog_configuration_reasons": [
+          "RAM 16GB<32GB",
+          "SSD 500GB<1000GB"
+        ],
+        "complete_build_target_comparable": false,
+        "stock_status": "in_stock",
+        "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/"
+      },
+      {
         "id": "desktop-gtune-dg-i5g70-5070",
         "name": "G TUNE DG-I5G70",
         "form_factor": "desktop",
@@ -1317,7 +1240,7 @@
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "pre_black_friday_reference_price_jpy": 279800,
-        "pre_black_friday_reference_at": "2026-10-10T18:58:46+09:00",
+        "pre_black_friday_reference_at": "2026-10-10T19:00:49+09:00",
         "catalog_reference_price_jpy": 279800,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 279800,
@@ -1382,6 +1305,83 @@
         "complete_build_target_comparable": false,
         "stock_status": "in_stock",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/"
+      },
+      {
+        "id": "desktop-gtune-dg-i7g70-5070",
+        "name": "G TUNE DG-I7G70",
+        "form_factor": "desktop",
+        "gpu": "RTX 5070",
+        "ram_gb": 16,
+        "ssd": "500 GB",
+        "black_friday_target_price_jpy": 299800,
+        "black_friday_price_observed_jpy": null,
+        "black_friday_offer_verified": false,
+        "pre_black_friday_reference_price_jpy": 299800,
+        "pre_black_friday_reference_at": "2026-10-10T19:00:49+09:00",
+        "catalog_reference_price_jpy": 299800,
+        "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
+        "scenario_base_price_jpy": 299800,
+        "scenario_base_note": "基本構成の参考額。RAM/SSD構成変更費を含まないため完成構成のBF目標と比較不可",
+        "scenario_prices": [
+          {
+            "discount_pct": 0,
+            "price_jpy": 299800
+          },
+          {
+            "discount_pct": 5,
+            "price_jpy": 284810
+          },
+          {
+            "discount_pct": 10,
+            "price_jpy": 269820
+          },
+          {
+            "discount_pct": 15,
+            "price_jpy": 254830
+          },
+          {
+            "discount_pct": 20,
+            "price_jpy": 239840
+          },
+          {
+            "discount_pct": 25,
+            "price_jpy": 224850
+          },
+          {
+            "discount_pct": 30,
+            "price_jpy": 209860
+          },
+          {
+            "discount_pct": 35,
+            "price_jpy": 194870
+          },
+          {
+            "discount_pct": 40,
+            "price_jpy": 179880
+          },
+          {
+            "discount_pct": 45,
+            "price_jpy": 164890
+          }
+        ],
+        "discount_needed_to_bf_target_jpy": null,
+        "discount_needed_to_bf_target_pct": null,
+        "discount_needed_to_planned_cap_jpy": null,
+        "discount_needed_to_planned_cap_pct": null,
+        "is_rtx_5070_ti_outlier": false,
+        "configuration_ready": false,
+        "configuration_reasons": [
+          "RAM 16GB<32GB",
+          "SSD 500GB<1000GB"
+        ],
+        "catalog_configuration_ready": false,
+        "catalog_configuration_reasons": [
+          "RAM 16GB<32GB",
+          "SSD 500GB<1000GB"
+        ],
+        "complete_build_target_comparable": false,
+        "stock_status": "in_stock",
+        "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/"
       },
       {
         "id": "rog-g16-2025-275hx-5070ti",
@@ -1456,7 +1456,7 @@
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "pre_black_friday_reference_price_jpy": 399800,
-        "pre_black_friday_reference_at": "2026-10-10T18:58:46+09:00",
+        "pre_black_friday_reference_at": "2026-10-10T19:00:49+09:00",
         "catalog_reference_price_jpy": 399800,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 399800,
