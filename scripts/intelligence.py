@@ -207,8 +207,14 @@ def peripheral_budget_projection():
         live = by_id.get(pid, {})
         price = live.get("current_price_jpy")
         stock = live.get("stock_status", "unknown")
-        valid = bool(target.get("track_current_price") and live.get("price_verified")
-                     and isinstance(price, int) and price > 0
+        # A peripheral ID may be reused after the target product changes.
+        # Never let a cached price for a previous model affect the new budget.
+        identity_matches = bool(
+            str(live.get("name") or "").strip()
+            and str(live.get("name") or "").strip() == str(target.get("name") or "").strip()
+        )
+        valid = bool(target.get("track_current_price") and identity_matches and live.get("price_verified")
+                     and isinstance(price, int) and not isinstance(price, bool) and price > 0
                      and stock in ("in_stock", "low_stock") and snapshot_fresh)
         if valid:
             selected_cost = price
@@ -220,8 +226,8 @@ def peripheral_budget_projection():
         total_projection += selected_cost
         rows.append({
             "id": pid, "name": target.get("name"), "target_price_jpy": target_price,
-            "current_price_jpy": price if live.get("price_verified") else None,
-            "stock_status": stock, "price_verified": bool(live.get("price_verified")),
+            "current_price_jpy": price if live.get("price_verified") and identity_matches else None,
+            "stock_status": stock, "price_verified": bool(live.get("price_verified") and identity_matches),
             "budget_cost_jpy": selected_cost,
             "cost_basis": "observed_verified" if valid else "target_reserve_unverified",
             "purchase_url": target.get("purchase_url") or target.get("monitor_url"),
