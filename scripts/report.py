@@ -6,7 +6,7 @@ from intelligence import (
     ROOT, BUDGET, EFFECTIVE_SOFT_MAX, EFFECTIVE_HARD_MAX,
     load_json, save_json, load_catalog, load_anchors,
     build_row, cash_total_cost, confirmed_benefit_value, effective_cost, noncash_benefit_value_jpy, value_equivalent_cost,
-    now_jst, iso, scenario_prices
+    now_jst, iso, scenario_prices, purchase_budget_policy, peripheral_budget_projection
 )
 
 def sales_url(item):
@@ -95,6 +95,8 @@ def main():
     anchors = load_anchors()
     catalog = load_catalog()
     events = read_events()
+    budget = purchase_budget_policy()
+    peripheral_projection = peripheral_budget_projection()
 
     source_snapshot_generated_at = latest.get("generated_at")
     source_snapshot_sha256 = file_sha256(latest_path) if os.path.exists(latest_path) else None
@@ -163,7 +165,10 @@ def main():
     purchase_gate_allowed = bool(
         action
         and coverage_status == "COMPLETE"
+        and peripheral_projection.get("budget_data_ready")
         and action.get("score_detail", {}).get("status") in ("BUY_NOW", "BUY_NOW_LOW_STOCK", "BUY_NOW_NEAR_BUDGET")
+        and action.get("effective_cost_jpy") is not None
+        and action.get("effective_cost_jpy") <= peripheral_projection.get("pc_dynamic_cap_jpy", 0)
     )
 
     quality = {
@@ -215,6 +220,16 @@ def main():
         "source_snapshot_generated_at": source_snapshot_generated_at,
         "source_snapshot_sha256": source_snapshot_sha256,
         "budget_jpy": BUDGET,
+        "budget_scope": "pc_only_excluding_peripherals",
+        "total_budget_jpy": budget["total_budget_jpy"],
+        "peripheral_budget_jpy": budget["peripheral_budget_jpy"],
+        "pc_target_jpy": budget["pc_target_jpy"],
+        "pc_budget_jpy": budget["pc_budget_jpy"],
+        "dynamic_pc_cap_jpy": peripheral_projection["pc_dynamic_cap_jpy"],
+        "peripheral_projection_jpy": peripheral_projection["peripheral_projection_jpy"],
+        "peripheral_budget_data_ready": peripheral_projection["budget_data_ready"],
+        "peripheral_prices_unverified_ids": peripheral_projection["tracked_peripheral_unverified_ids"],
+        "peripherals": peripheral_projection["peripherals"],
         "effective_budget_jpy": BUDGET,
         "effective_soft_max_jpy": EFFECTIVE_SOFT_MAX,
         "effective_hard_max_jpy": EFFECTIVE_HARD_MAX,
@@ -223,7 +238,13 @@ def main():
             "allowed": purchase_gate_allowed,
             "coverage_status": coverage_status,
             "critical_unverified_ids": critical_unverified,
-            "reason": "critical_candidates_not_fully_verified" if critical_unverified else "no_buy_now_candidate" if not purchase_gate_allowed else "all_critical_candidates_verified",
+            "reason": (
+                "critical_candidates_not_fully_verified" if critical_unverified else
+                "peripheral_prices_or_availability_unverified" if not peripheral_projection.get("budget_data_ready") else
+                "all_in_cost_exceeds_total_budget" if action and action.get("effective_cost_jpy", 10**12) > peripheral_projection.get("pc_dynamic_cap_jpy", 0) else
+                "no_buy_now_candidate" if not purchase_gate_allowed else
+                "all_critical_and_peripheral_candidates_verified"
+            ),
         },
         "top_recommendation": {
             "id": action.get("id") if action else None,
@@ -255,7 +276,14 @@ def main():
         f"更新: {generated}",
         f"観測スナップショット: {source_snapshot_generated_at or '未確認'}",
         f"観測スナップショットSHA256: {source_snapshot_sha256 or '未確認'}",
-        f"予算: ¥{BUDGET:,}",
+        f"総予算（PC＋周辺機器）: ¥{budget['total_budget_jpy']:,}",
+        f"周辺機器の目標予算: ¥{budget['peripheral_budget_jpy']:,}",
+        f"PC本体の目標価格: ¥{budget['pc_target_jpy']:,}",
+        f"PC本体の計画上限（周辺機器が目標価格の場合）: ¥{budget['pc_budget_jpy']:,}",
+        f"PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥{peripheral_projection['pc_dynamic_cap_jpy']:,}",
+        f"周辺機器の現行/目標価格ベース試算: ¥{peripheral_projection['peripheral_projection_jpy']:,}",
+        f"周辺機器の価格・在庫確認: {peripheral_projection['tracked_peripheral_verified_count']}/{peripheral_projection['tracked_peripheral_count']}",
+        f"全体購入許可: **{'許可' if purchase_gate_allowed else '保留'}**（{out['purchase_gate']['reason']}）",
         f"フェーズ: **{out['season_phase']}**",
         "",
     ]
