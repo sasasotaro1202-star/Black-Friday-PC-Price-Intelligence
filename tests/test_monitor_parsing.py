@@ -10,6 +10,21 @@ import monitor
 
 
 class MonitorParsingTests(unittest.TestCase):
+    def test_curl_http_000_preserves_transport_exit_and_stderr(self):
+        from types import SimpleNamespace
+        from unittest.mock import patch
+        from urllib.error import URLError
+        fake = SimpleNamespace(
+            stdout=b"page\n__BF_STATUS__:000\n__BF_URL__:https://example.com/product",
+            stderr=b"SSL connect error",
+            returncode=35,
+        )
+        with patch.object(monitor, "urlopen", side_effect=URLError("blocked")), \
+             patch.object(monitor.time, "sleep"), \
+             patch.object(monitor.subprocess, "run", return_value=fake):
+            with self.assertRaisesRegex(RuntimeError, "curl_exit_35.*SSL connect error"):
+                monitor.fetch("https://example.com/product", timeout=1)
+
     def test_bing_parser_extracts_organic_model_and_snippet(self):
         html = """
         <ol id="b_results">
