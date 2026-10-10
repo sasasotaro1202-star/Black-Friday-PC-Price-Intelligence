@@ -66,7 +66,11 @@
     "G TUNE DG-I5G70 32GB 1TB 構成変更 価格",
     "G TUNE DG-I7G70 32GB 1TB 構成変更 価格",
     "Core Ultra 7 265 RTX 5070 32GB 1TB デスクトップ 特価 日本",
-    "Ryzen 7 9700X RTX 5070 デスクトップ パソコン工房 ドスパラ マウス"
+    "Ryzen 7 9700X RTX 5070 デスクトップ パソコン工房 ドスパラ マウス",
+    "G TUNE DG-I5G70 DGI5G70B8BGDW102DECRISE 32GB 1TB 追加料金 公式",
+    "site:mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa DGA7G70B5BBDW101DECWA RTX 5070 32GB 1TB",
+    "RTX 5070 Ti デスクトップPC アウトレット 32GB 1TB 302200円以下",
+    "RTX 5070 Ti ゲーミングPC 32GB 1TB 完成構成 セール 日本"
   ],
   "allowed_domains": [
     "lenovo.com",
@@ -220,5 +224,52 @@
       "identity_terms": [],
       "mandatory": true
     }
-  ]
+  ],
+  "purchase_strategy": {
+    "updated_at": "2026-10-10",
+    "purpose": "37万円の一式予算で、RTX 5070完成構成と音質重視のEDIFIER MR5を狙う条件監視。これは購入優先方針であり、価格確認済みを意味しない。",
+    "priority_plans": [
+      {
+        "candidate_id": "desktop-gtune-dg-i5g70-5070",
+        "role": "primary_configuration_upgrade",
+        "label": "G-TUNE DG-I5G70 / RTX 5070",
+        "baseline_price_jpy": 279800,
+        "baseline_ram_gb": 16,
+        "baseline_ssd_gb": 500,
+        "target_ram_gb": 32,
+        "target_ssd_gb": 1000,
+        "price_source_note": "279,800円は16GB/500GB基本構成の監視基準。32GB/1TB構成の実価格として扱わない。",
+        "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
+        "status_if_unquoted": "NEEDS_CONFIGURATION"
+      },
+      {
+        "candidate_id": "desktop-gtune-dg-a7g70-5070",
+        "role": "secondary_outlet_complete_configuration",
+        "label": "G-TUNE DG-A7G70 / RTX 5070 outlet",
+        "target_ram_gb": 32,
+        "target_ssd_gb": 1000,
+        "last_verified_listing_reference_jpy": 304800,
+        "reference_checked_date": "2026-10-10",
+        "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
+        "reference_note": "公式ページで確認した参考価格。次の監視サイクルでも現行価格・在庫・SKUを検証する。"
+      }
+    ],
+    "outlier_rule": {
+      "label": "RTX 5070 Ti 大穴",
+      "form_factor": "desktop",
+      "gpu": "RTX 5070 Ti",
+      "minimum_ram_gb": 32,
+      "minimum_ssd_gb": 1000,
+      "maximum_completed_pc_price_uses": "dynamic_pc_cap_jpy",
+      "requires_direct_price_stock_exact_identity_and_valid_pit": true,
+      "never_assume_upgrade_cost_jpy": 0
+    },
+    "score_policy": "説明文にある96/94/95/97点は条件付きの目標イメージであり、実測スコアとして固定しない。実際のスコアはコードが確認済み価格・構成・在庫・性能・データ品質から計算する。",
+    "speaker_strategy": {
+      "id": "speakers",
+      "model": "EDIFIER MR5",
+      "target_price_jpy": 32000,
+      "coupon_policy": "クーポンは購入画面で適用対象・最終決済額を確認するまで実質価格から控除しない。"
+    }
+  }
 }
