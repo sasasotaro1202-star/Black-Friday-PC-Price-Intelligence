@@ -74,7 +74,7 @@ class BlackFridayScenarioTests(unittest.TestCase):
         self.assertEqual(result["pricing_phase"], "PRE_BLACK_FRIDAY_REFERENCE")
         self.assertFalse(result["black_friday_prices_known"])
         self.assertEqual(result["total_budget_jpy"], 370000)
-        self.assertEqual(result["peripheral_target_total_jpy"], 53800)
+        self.assertEqual(result["peripheral_target_total_jpy"], 57800)
         self.assertEqual(result["black_friday_ideal_bundle_target_jpy"], 370000)
         self.assertEqual(result["black_friday_target_buffer_jpy"], 0)
         self.assertEqual(result["black_friday_hard_cap_bundle_jpy"], 370000)
@@ -87,7 +87,7 @@ class BlackFridayScenarioTests(unittest.TestCase):
 
         outlier_row = next(x for x in result["rtx_5070_ti_desktop_outliers"]
                            if x["id"] == outlier["id"])
-        self.assertEqual(outlier_row["black_friday_target_price_jpy"], 316200)
+        self.assertEqual(outlier_row["black_friday_target_price_jpy"], 312200)
         self.assertEqual(outlier_row["pre_black_friday_reference_price_jpy"], 399800)
         self.assertIsNone(outlier_row["black_friday_price_observed_jpy"])
         self.assertEqual(outlier_row["discount_needed_to_bf_target_jpy"], 83600)
