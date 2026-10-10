@@ -151,11 +151,11 @@
       "target_price_note": "10000円はBF期間中のサブモニター購入目標。現行掲載額は事前参考値であり、BF価格・在庫は期間中に再確認する。"
     },
     {
-      "id": "speakers",
-      "name": "Creative Pebble compact 2.0 USB-powered speakers",
+      "id": "speakers_budget",
+      "name": "Creative Pebble (classic) compact 2.0 USB-powered speakers",
       "target_price_jpy": 2500,
       "track_current_price": true,
-      "monitor_url": "https://jp.creative.com/p/speakers/creative-pebble",
+      "monitor_url": "https://jp.creative.com/p/speakers/creative-pebble?AspxAutoDetectCookieSupport=1",
       "purchase_url": "https://jp.creative.com/p/speakers/creative-pebble",
       "identity_terms": [
         "Creative Pebble"
@@ -168,8 +168,12 @@
       "mandatory": true,
       "coupon_policy": "Do not subtract coupons or points unless reliably applied at checkout.",
       "price_target_phase": "black_friday",
-      "target_price_note": "2500円はBF期間中の購入目標。現在の公式サイト表示額・在庫とは区別し、BF実売として確定扱いしない。",
-      "model_code": "Creative Pebble"
+      "target_price_note": "2500円はBF期間中の購入目標。Creative Pebbleの低価格モデルを基準にし、上位モデル・高価格スピーカーの価格履歴は継承しない。現行表示とBF期間中の価格・在庫を再確認する。",
+      "model_code": "Creative Pebble classic",
+      "monitor_urls": [
+        "https://jp.creative.com/p/speakers/creative-pebble?AspxAutoDetectCookieSupport=1",
+        "https://jp.creative.com/p/speakers/creative-pebble"
+      ]
     },
     {
       "id": "keyboard",
