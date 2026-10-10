@@ -10,6 +10,63 @@ import monitor
 
 
 class MonitorParsingTests(unittest.TestCase):
+    def test_bing_parser_extracts_organic_model_and_snippet(self):
+        html = """
+        <ol id="b_results">
+          <li class="b_algo">
+            <h2><a href="https://www.biccamera.com/bc/item/9242996/">Logicool G213r ゲーミングキーボード</a></h2>
+            <div class="b_caption"><p>G213R 7,330円 在庫あり</p></div>
+          </li>
+        </ol>
+        """
+        parser = monitor.BingSearchParser()
+        parser.feed(html)
+        self.assertEqual(len(parser.results), 1)
+        self.assertEqual(parser.results[0]["url"], "https://www.biccamera.com/bc/item/9242996/")
+        self.assertIn("G213r", parser.results[0]["title"])
+        self.assertIn("7,330円", parser.results[0]["snippet"])
+
+    def test_search_result_identity_requires_curated_model_anchor(self):
+        expected = {"name": "G TUNE DG-A7G70", "aliases": ["DGA7G70B5BBDW101DECWA"]}
+        valid = {"title": "G TUNE DG-A7G70 DGA7G70B5BBDW101DECWA", "snippet": "304,800円 RTX 5070"}
+        wrong_sku = {"title": "G TUNE DG-A7G70 other configuration", "snippet": "229,800円 RTX 5060"}
+        self.assertEqual(monitor.search_identity_anchor(valid, expected), "DGA7G70B5BBDW101DECWA")
+        self.assertIsNone(monitor.search_identity_anchor(wrong_sku, expected))
+
+    def test_search_fallback_tries_bing_after_ddg_fails_and_requires_model_identity(self):
+        expected = {"name": "G213r", "aliases": ["G213r", "9242996"]}
+        bing = [{
+            "url": "https://www.biccamera.com/bc/item/9242996/",
+            "title": "Logicool G213r ゲーミングキーボード",
+            "snippet": "型番 G213R 7,330円 在庫あり",
+        }]
+        diagnostic = []
+        from unittest.mock import patch
+        with patch.object(monitor, "ddg_search", side_effect=RuntimeError("blocked")), \
+             patch.object(monitor, "bing_search", return_value=bing):
+            result = monitor.search_fallback("G213r", "https://www.biccamera.com/bc/item/9242996/",
+                                             expected=expected, diagnostics=diagnostic)
+        self.assertIsNotNone(result)
+        self.assertEqual(result["provider"], "bing")
+        self.assertEqual(result["identity_anchor"], "G213r")
+        self.assertEqual(result["price_jpy"], 7330)
+        self.assertEqual(diagnostic[0]["provider"], "duckduckgo")
+        self.assertEqual(diagnostic[0]["status"], "error")
+
+    def test_search_fallback_rejects_prices_without_exact_identity_even_on_allowed_host(self):
+        expected = {"name": "G213r", "aliases": ["G213r", "9242996"]}
+        ddg = [{
+            "url": "https://www.biccamera.com/bc/item/other/",
+            "title": "Gaming keyboard model XYZ",
+            "snippet": "7,330円 在庫あり",
+        }]
+        from unittest.mock import patch
+        with patch.object(monitor, "ddg_search", return_value=ddg), \
+             patch.object(monitor, "bing_search", return_value=[]):
+            result = monitor.search_fallback("G213r", "https://www.biccamera.com/bc/item/9242996/",
+                                             expected=expected)
+        self.assertIsNone(result)
+
     def test_discount_amount_is_not_selected_as_price(self):
         picked = intelligence.pick_price("90,000円OFF / 販売価格 329,800円(税込)")
         self.assertIsNotNone(picked)
