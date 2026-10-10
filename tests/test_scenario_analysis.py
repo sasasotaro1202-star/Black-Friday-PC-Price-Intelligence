@@ -49,9 +49,11 @@ class BlackFridayScenarioTests(unittest.TestCase):
         ts = "2026-10-10T17:59:00+09:00"
         outlier = self.catalog["desktop-gtune-fg-a7g7t-5070ti"]
         dg_i5 = self.catalog["desktop-gtune-dg-i5g70-5070"]
+        dg_a5 = self.catalog["desktop-gtune-dg-a5g60-5060"]
         latest = {"generated_at": ts, "products": [
             offer(outlier, 399800, ts, "2026-10-10T17:58:00+09:00"),
             offer(dg_i5, 279800, ts, "2026-10-10T17:58:00+09:00"),
+            offer(dg_a5, 194800, ts, "2026-10-10T17:58:00+09:00"),
         ]}
         peripheral_products = []
         for item in self.targets["peripherals"]:
@@ -100,6 +102,12 @@ class BlackFridayScenarioTests(unittest.TestCase):
         self.assertEqual(i5_row["pre_black_friday_reference_price_jpy"], 279800)
         self.assertFalse(i5_row["complete_build_target_comparable"])
         self.assertIsNone(i5_row["discount_needed_to_bf_target_jpy"])
+
+        underconfigured = next(x for x in result["pc_candidates"] if x["id"] == dg_a5["id"])
+        self.assertFalse(underconfigured["catalog_configuration_ready"])
+        self.assertFalse(underconfigured["complete_build_target_comparable"])
+        self.assertIsNone(underconfigured["discount_needed_to_bf_target_jpy"])
+        self.assertIsNone(underconfigured["discount_needed_to_bf_target_pct"])
 
     def test_bf_price_requires_fresh_verified_observation_inside_window(self):
         now = datetime.fromisoformat("2026-11-20T12:01:00+09:00")
