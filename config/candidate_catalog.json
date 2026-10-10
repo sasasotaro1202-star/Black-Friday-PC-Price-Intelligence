@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-07T17:35:00+09:00",
-  "note": "Curated identity layer for laptops and desktops. Desktop entries are anchored to exact official product URLs/model codes; related-product text must not override the selected variant. reference_price_jpy is not current price.",
+  "generated_at": "2026-10-10T18:35:00+09:00",
+  "note": "Curated identity layer for laptops and desktops. Exact URLs and model codes take priority; related-product text must not override the selected variant. reference_price_jpy is not current price. 2026-10-10: corrected the DG-A7G70 outlet URL to the exact 32GB/1TB SKU.",
   "candidates": [
     {
       "id": "rog-g16-9955hx3d",
@@ -345,28 +345,40 @@
       "reference_price_jpy": 279800,
       "aliases": [
         "DGI5G70B8BGDW102DECRISE"
-      ]
+      ],
+      "purchase_strategy_role": "primary_configuration_upgrade",
+      "target_ram_gb": 32,
+      "target_ssd_gb": "1 TB",
+      "configuration_upgrade_price_required": true,
+      "baseline_configuration_is_purchase_ready": false,
+      "baseline_price_reference_jpy": 279800,
+      "baseline_price_reference_ram_gb": 16,
+      "baseline_price_reference_ssd_gb": "500 GB",
+      "maximum_upgrade_cost_for_pc_target_jpy": 20000,
+      "maximum_upgrade_cost_for_pc_hard_cap_jpy": 22400
     },
     {
       "id": "desktop-gtune-dg-a7g70-5070",
-      "name": "G TUNE DG-A7G70",
+      "name": "G TUNE DG-A7G70 (official outlet; Ryzen 7 5700X / RTX 5070)",
       "family": "G TUNE DG",
       "form_factor": "desktop",
       "gpu": "RTX 5070",
       "cpu": "Ryzen 7 5700X",
       "tgp_w": null,
       "ram_gb": 32,
-      "ssd": "2 TB",
+      "ssd": "1 TB",
       "vram_gb": 12,
       "psu_w": null,
       "cooler": "240mm liquid",
-      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101dec",
+      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
       "url_is_exact": true,
       "identity_confidence": "high",
       "reference_price_jpy": 304800,
       "aliases": [
-        "DGA7G70B5BBDW101DEC"
-      ]
+        "DGA7G70B5BBDW101DECWA"
+      ],
+      "purchase_strategy_role": "secondary_outlet_complete_configuration",
+      "official_listing_reference_checked_date": "2026-10-10"
     },
     {
       "id": "desktop-gtune-fg-a7g70-5070",
