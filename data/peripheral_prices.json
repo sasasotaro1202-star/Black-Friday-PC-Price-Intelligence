@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-10T19:37:55+09:00",
+  "generated_at": "2026-10-10T19:43:01+09:00",
   "budget_scope": "Peripherals are separate from PC rankings; uncertain coupons/points are not deducted.",
   "tracked_count": 5,
   "verified_count": 4,
@@ -11,8 +11,8 @@
       "target_price_jpy": 17500,
       "monitor_url": "https://www.yodobashi.com/product/100000001009314680/",
       "purchase_url": "https://www.yodobashi.com/product/100000001009314680/",
-      "retrieval_time": "2026-10-10T19:37:55+09:00",
-      "available_at": "2026-10-10T19:37:55+09:00",
+      "retrieval_time": "2026-10-10T19:43:01+09:00",
+      "available_at": "2026-10-10T19:43:01+09:00",
       "current_price_jpy": 20790,
       "last_valid_price_jpy": 20790,
       "price_verified": true,
@@ -22,11 +22,20 @@
       "identity_verified": true,
       "status": "verified",
       "error": null,
-      "product_context_excerpt": " ゲーミングモニター/27.0型/qhd（2560×1440）/fast ipsパネル/ノングレア/180hz/0.5ms（mprt）/hdmi×1 dp×1 q27g40e/11 通販【全品無料配達】 ショッピングカートに入れる aoc エーオーシー ゲーミングモニター/27.0型/qhd（2560×1440）/fast ipsパネル/ノングレア/... ￥20,790 2,079 ゴールドポイント （10％還元） 在庫あり 2026年10月11日日曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ご注文商品の確認・変更 お客様情報の確認・変更 ヨドバシ・ドット・コム会員idの変更 ヨドバシ・ドット・コム会員パスワードの変更 ヨドバシ・ドット・コム会員パスワードの再設定 メールニュース・よく使う店舗の設定 お問い合わせ窓口のご案内 ログアウト ご利用履歴確認 ［→］表示地域の変更 コミュニティ お気に入り商品 注文照会 サイトマップ 店舗のご案内 新規会員登録 日本全国スピードお届け実施中！配達料金無料 javascriptがoffになっております。 ヨドバシ・ドット・コムはjavascriptをonにしてご利用く",
+      "retrieval_attempts": [
+        {
+          "url": "https://www.yodobashi.com/product/100000001009314680/",
+          "final_url": "https://www.yodobashi.com/product/100000001009314680/",
+          "status": "verified"
+        }
+      ],
       "target_met": false,
       "page_title": "https://www.yodobashi.com/product/100000001009314680/",
       "price_context": "】 ショッピングカートに入れる aoc エーオーシー ゲーミングモニター/27.0型/qhd（2560×1440）/fast ipsパネル/ノングレア/... ￥20,790 2,079 ゴールドポイント （10％還元） 在庫あり 2026年10月11日日曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
-      "coupon_note": null
+      "coupon_note": null,
+      "monitor_url_used": "https://www.yodobashi.com/product/100000001009314680/",
+      "source_url": "https://www.yodobashi.com/product/100000001009314680/",
+      "fallback_url_used": false
     },
     {
       "id": "speakers",
@@ -34,8 +43,8 @@
       "target_price_jpy": 32000,
       "monitor_url": "https://www.edifier.jp/products/mr5",
       "purchase_url": "https://www.edifier.jp/products/mr5",
-      "retrieval_time": "2026-10-10T19:37:55+09:00",
-      "available_at": "2026-10-10T19:37:55+09:00",
+      "retrieval_time": "2026-10-10T19:43:01+09:00",
+      "available_at": "2026-10-10T19:43:01+09:00",
       "current_price_jpy": 39980,
       "last_valid_price_jpy": 39980,
       "price_verified": true,
@@ -45,11 +54,20 @@
       "identity_verified": true,
       "status": "verified",
       "error": null,
-      "product_context_excerpt": "edifier mr5 | edifier コンテンツへスキップ 📫新規会員特典！無料登録すると全品10%offクーポンをプレゼント！詳しく≫ メニュー 検索 全商品 vgp受賞 新商品 staxシリーズ お得なセット + 追加 edifier mr5 「vgp2025金賞」| bluetooth6.0・最大110w出力・3way ハイレゾ対応 + 追加 edifier s300 wi-fi（2.4ghz/5ghz）接続＆apple airplay 2対応|高音質出力 + 追加 edifier t5s パワフルな70w出力と8インチウーファー搭載 自動スタンバイで省エネ対応 + 追加 edifier mp330 高音質・長時間・多機能を兼ね備えたポータブルスピーカー + 追加 edifier mr4 mkii 80w rmsの高出力とbi-amp駆動で、音源本来のサウンドを忠実かつクリアに再現。 もっと見る + 追加 edifier comfo bass pro 最大48時間再生、dolby audio",
+      "retrieval_attempts": [
+        {
+          "url": "https://www.edifier.jp/products/mr5",
+          "final_url": "https://www.edifier.jp/products/mr5",
+          "status": "verified"
+        }
+      ],
       "target_met": false,
       "page_title": "EDIFIER MR5",
       "price_context": null,
-      "coupon_note": "Do not subtract coupons or points unless reliably applied at checkout."
+      "coupon_note": "Do not subtract coupons or points unless reliably applied at checkout.",
+      "monitor_url_used": "https://www.edifier.jp/products/mr5",
+      "source_url": "https://www.edifier.jp/products/mr5",
+      "fallback_url_used": false
     },
     {
       "id": "keyboard",
@@ -57,7 +75,7 @@
       "target_price_jpy": 5500,
       "monitor_url": "https://www.biccamera.com/bc/item/9242996/",
       "purchase_url": "https://www.biccamera.com/bc/item/9242996/",
-      "retrieval_time": "2026-10-10T19:37:55+09:00",
+      "retrieval_time": "2026-10-10T19:43:01+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
@@ -65,9 +83,27 @@
       "stock_status": "unknown",
       "price_source_mode": "none",
       "price_validation_status": "missing",
-      "identity_verified": false,
-      "status": "error",
-      "error": "RuntimeError:curl_http_0"
+      "identity_verified": true,
+      "status": "price_unverified",
+      "error": "https://www.biccamera.com/bc/item/9242996/: RuntimeError:curl_exit_92:curl_http_000:curl: (92) HTTP/2 stream 1 was not closed cleanly: INTERNAL_ERROR (err 2); https://item.rakuten.co.jp/logicool/g213r/: missing_or_implausible_price",
+      "retrieval_attempts": [
+        {
+          "url": "https://www.biccamera.com/bc/item/9242996/",
+          "status": "error",
+          "error": "RuntimeError:curl_exit_92:curl_http_000:curl: (92) HTTP/2 stream 1 was not closed cleanly: INTERNAL_ERROR (err 2)"
+        },
+        {
+          "url": "https://item.rakuten.co.jp/logicool/g213r/",
+          "final_url": "https://item.rakuten.co.jp/logicool/g213r/",
+          "status": "price_unverified",
+          "error": "missing_or_implausible_price",
+          "price_candidate_jpy": null
+        }
+      ],
+      "product_context_excerpt": "【楽天市場】logicool g ゲーミングキーボード 有線 g213r パームレスト 日本語配列 メンブレン キーボード 静音 lightsync rgb 国内正規品 2年間無償保証：ロジクール 公式ストア 税込3,980円以上ご購入で送料無料 --> logicool公式ストアは全商品送料無料！ ショッピングガイド 楽天市場 新製品 ロジクール製品 ロジクールについて マウス ヘッドセット キーボード pcスピーカー マウス＆キーボード ipad・スマホアクセサリー ポインター ウェブカメラ mxシリーズ ergoシリーズ popシリーズ ロジクールの商品を全て見る ゲーミング logicool g について ゲーミングマウス ゲーミングスピーカー ゲーミングキーボード ゲームパッド / ハンドル ゲーミングヘッドセット ゲーミングマイク logicool g の商品を全て見る astro gamingについて ps4コントローラー ゲーミングヘッドセット --> astro gamingの商品を全て見る ミュージック ultimate ear",
+      "page_title": "https://item.rakuten.co.jp/logicool/g213r/",
+      "unverified_price_candidate_jpy": null,
+      "price_context": null
     },
     {
       "id": "mouse",
@@ -75,8 +111,8 @@
       "target_price_jpy": 3800,
       "monitor_url": "https://www.yodobashi.com/product/100000001004334450/",
       "purchase_url": "https://www.yodobashi.com/product/100000001004334450/",
-      "retrieval_time": "2026-10-10T19:37:55+09:00",
-      "available_at": "2026-10-10T19:37:55+09:00",
+      "retrieval_time": "2026-10-10T19:43:01+09:00",
+      "available_at": "2026-10-10T19:43:01+09:00",
       "current_price_jpy": 5350,
       "last_valid_price_jpy": 5350,
       "price_verified": true,
@@ -86,11 +122,20 @@
       "identity_verified": true,
       "status": "verified",
       "error": null,
-      "product_context_excerpt": "ヨドバシ.com - ロジクール logicool ワイヤレスゲーミングマウス lightspeed 無線 6ボタン heroセンサー搭載 軽量設計 ホワイト g304rwh 通販【全品無料配達】 ショッピングカートに入れる ロジクール logicool ワイヤレスゲーミングマウス lightspeed 無線 6ボタン heroセンサー搭載 軽... ￥5,350 535 ゴールドポイント （10％還元） 在庫あり 2026年10月11日日曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ご注文商品の確認・変更 お客様情報の確認・変更 ヨドバシ・ドット・コム会員idの変更 ヨドバシ・ドット・コム会員パスワードの変更 ヨドバシ・ドット・コム会員パスワードの再設定 メールニュース・よく使う店舗の設定 お問い合わせ窓口のご案内 ログアウト ご利用履歴確認 ［→］表示地域の変更 コミュニティ お気に入り商品 注文照会 サイトマップ 店舗のご案内 新規会員登録 日本全国スピードお届け実施中！配達料金無料 javascriptがoffになっております。 ヨドバシ・ドット・コムはjavascriptをonにしてご利用ください。詳し",
+      "retrieval_attempts": [
+        {
+          "url": "https://www.yodobashi.com/product/100000001004334450/",
+          "final_url": "https://www.yodobashi.com/product/100000001004334450/",
+          "status": "verified"
+        }
+      ],
       "target_met": false,
       "page_title": "https://www.yodobashi.com/product/100000001004334450/",
       "price_context": "】 ショッピングカートに入れる ロジクール logicool ワイヤレスゲーミングマウス lightspeed 無線 6ボタン heroセンサー搭載 軽... ￥5,350 535 ゴールドポイント （10％還元） 在庫あり 2026年10月11日日曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ご注",
-      "coupon_note": null
+      "coupon_note": null,
+      "monitor_url_used": "https://www.yodobashi.com/product/100000001004334450/",
+      "source_url": "https://www.yodobashi.com/product/100000001004334450/",
+      "fallback_url_used": false
     },
     {
       "id": "mousepad",
@@ -98,8 +143,8 @@
       "target_price_jpy": 2500,
       "monitor_url": "https://www.yodobashi.com/product/100000001009472873/",
       "purchase_url": "https://www.yodobashi.com/product/100000001009472873/",
-      "retrieval_time": "2026-10-10T19:37:55+09:00",
-      "available_at": "2026-10-10T19:37:55+09:00",
+      "retrieval_time": "2026-10-10T19:43:01+09:00",
+      "available_at": "2026-10-10T19:43:01+09:00",
       "current_price_jpy": 2640,
       "last_valid_price_jpy": 2640,
       "price_verified": true,
@@ -109,11 +154,20 @@
       "identity_verified": true,
       "status": "verified",
       "error": null,
-      "product_context_excerpt": "ヨドバシ.com - steelseries スティールシリーズ ゲーミングマウスパッド qck large white 2×400×450mm 63464 通販【全品無料配達】 ショッピングカートに入れる steelseries スティールシリーズ ゲーミングマウスパッド qck large white 2×400×450m... ￥2,640 264 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月11日日曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ご注文商品の確認・変更 お客様情報の確認・変更 ヨドバシ・ドット・コム会員idの変更 ヨドバシ・ドット・コム会員パスワードの変更 ヨドバシ・ドット・コム会員パスワードの再設定 メールニュース・よく使う店舗の設定 お問い合わせ窓口のご案内 ログアウト ご利用履歴確認 ［→］表示地域の変更 コミュニティ お気に入り商品 注文照会 サイトマップ 店舗のご案内 新規会員登録 日本全国スピードお届け実施中！配達料金無料 javascriptがoffになっております。 ヨド",
+      "retrieval_attempts": [
+        {
+          "url": "https://www.yodobashi.com/product/100000001009472873/",
+          "final_url": "https://www.yodobashi.com/product/100000001009472873/",
+          "status": "verified"
+        }
+      ],
       "target_met": false,
       "page_title": "https://www.yodobashi.com/product/100000001009472873/",
       "price_context": "】 ショッピングカートに入れる steelseries スティールシリーズ ゲーミングマウスパッド qck large white 2×400×450m... ￥2,640 264 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月11日日曜日まで に ヨドバシエクストリームサービス便（無料） がお届",
-      "coupon_note": null
+      "coupon_note": null,
+      "monitor_url_used": "https://www.yodobashi.com/product/100000001009472873/",
+      "source_url": "https://www.yodobashi.com/product/100000001009472873/",
+      "fallback_url_used": false
     },
     {
       "id": "power_strip",
@@ -126,7 +180,7 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": "2026-10-10T19:37:55+09:00",
+      "retrieval_time": "2026-10-10T19:43:01+09:00",
       "available_at": null,
       "price_source_mode": "none"
     },
@@ -141,7 +195,7 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": "2026-10-10T19:37:55+09:00",
+      "retrieval_time": "2026-10-10T19:43:01+09:00",
       "available_at": null,
       "price_source_mode": "none"
     },
@@ -156,7 +210,7 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": "2026-10-10T19:37:55+09:00",
+      "retrieval_time": "2026-10-10T19:43:01+09:00",
       "available_at": null,
       "price_source_mode": "none"
     }
