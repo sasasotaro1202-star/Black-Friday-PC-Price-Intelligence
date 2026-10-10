@@ -6,7 +6,8 @@ from intelligence import (
     ROOT, BUDGET, EFFECTIVE_SOFT_MAX, EFFECTIVE_HARD_MAX,
     load_json, save_json, load_catalog, load_anchors,
     build_row, cash_total_cost, confirmed_benefit_value, effective_cost, noncash_benefit_value_jpy, value_equivalent_cost,
-    now_jst, iso, scenario_prices, purchase_budget_policy, peripheral_budget_projection
+    now_jst, iso, scenario_prices, purchase_budget_policy, peripheral_budget_projection,
+    configuration_readiness, gpu_key
 )
 
 def sales_url(item):
@@ -39,6 +40,147 @@ def suppress_current_price(row):
     out["price_jpy"] = None
     out["current_price_suppressed"] = True
     return out
+
+
+def _trusted_live_offer(item):
+    price = item.get("current_price_jpy")
+    return bool(
+        isinstance(price, int) and not isinstance(price, bool) and price > 0
+        and item.get("price_source_mode") == "direct_structured"
+        and item.get("price_validation_status") not in (
+            None, "missing", "anomaly_rejected", "reference_only", "variant_ambiguous"
+        )
+        and item.get("variant_match") in ("exact", "trusted_url", "strong")
+        and item.get("stock_status") in ("in_stock", "low_stock")
+        and item.get("pit_valid") is True
+    )
+
+
+def build_purchase_strategy_status(products, strategy, budget, peripheral_projection):
+    """Build condition-based strategy rows; never treat reference prices as live offers."""
+    by_id = {str(x.get("id")): x for x in products if x.get("id")}
+    dynamic_cap = int(peripheral_projection.get("pc_dynamic_cap_jpy") or 0)
+    rows = []
+    for plan in strategy.get("priority_plans", []):
+        cid = str(plan.get("candidate_id") or "")
+        item = by_id.get(cid, {})
+        verified = _trusted_live_offer(item)
+        price = item.get("current_price_jpy") if verified else None
+        ready, reasons = configuration_readiness(item) if item else (False, ["候補の現行構成未確認"])
+        role = plan.get("role")
+        row = {
+            "candidate_id": cid, "role": role,
+            "label": plan.get("label") or item.get("name") or cid,
+            "url": sales_url(item) or plan.get("purchase_url"),
+            "current_price_jpy": price, "current_price_verified": verified,
+            "stock_status": item.get("stock_status", "unknown"),
+            "configuration_ready": ready, "configuration_reasons": reasons,
+            "target_ram_gb": plan.get("target_ram_gb"), "target_ssd_gb": plan.get("target_ssd_gb"),
+            "target_price_jpy": budget["pc_target_jpy"], "hard_cap_jpy": budget["pc_budget_jpy"],
+            "dynamic_pc_cap_jpy": dynamic_cap, "status": "PRICE_UNVERIFIED", "detail": "",
+        }
+        if role == "primary_configuration_upgrade":
+            baseline = int(plan.get("baseline_price_jpy") or 0)
+            row.update({
+                "baseline_price_reference_jpy": baseline,
+                "baseline_ram_gb": plan.get("baseline_ram_gb"),
+                "baseline_ssd_gb": plan.get("baseline_ssd_gb"),
+                "max_upgrade_cost_to_target_jpy": max(0, budget["pc_target_jpy"] - baseline),
+                "max_upgrade_cost_to_hard_cap_jpy": max(0, budget["pc_budget_jpy"] - baseline),
+                "max_upgrade_cost_to_dynamic_cap_jpy": max(0, dynamic_cap - baseline),
+            })
+            if not verified:
+                row["detail"] = "基本価格は計画基準のみ。完成構成の現行価格・在庫が未確認です。"
+            elif item.get("stock_status") == "out_of_stock":
+                row["status"], row["detail"] = "OUT_OF_STOCK", "商品ページで在庫切れを確認。"
+            elif not ready:
+                row["status"] = "NEEDS_CONFIGURATION"
+                row["detail"] = (
+                    f"基本価格基準¥{baseline:,}からの構成変更費上限："
+                    f"理想¥{row['max_upgrade_cost_to_target_jpy']:,}、"
+                    f"計画上限¥{row['max_upgrade_cost_to_hard_cap_jpy']:,}、"
+                    f"現在の動的上限¥{row['max_upgrade_cost_to_dynamic_cap_jpy']:,}。"
+                    "実際の構成変更価格は未確認。0円とは仮定しません。"
+                )
+            elif price <= dynamic_cap:
+                row["status"], row["detail"] = "WITHIN_DYNAMIC_CAP", "完成構成の価格は現在の動的本体上限内。全体購入ゲートは別途評価。"
+            else:
+                row["status"], row["detail"] = "WAIT_FOR_DISCOUNT", f"動的本体上限まで¥{price-dynamic_cap:,}の値下げが必要。"
+        elif role == "secondary_outlet_complete_configuration":
+            reference = int(plan.get("last_verified_listing_reference_jpy") or 0)
+            row["listing_reference_price_jpy"] = reference
+            if not verified:
+                row["detail"] = f"最終確認時の参考掲載額は¥{reference:,}。現行価格としては扱いません。"
+            elif item.get("stock_status") == "out_of_stock":
+                row["status"], row["detail"] = "OUT_OF_STOCK", "商品ページで在庫切れを確認。"
+            elif not ready:
+                row["status"], row["detail"] = "NEEDS_CONFIGURATION", "32GB RAM・1TB SSDの完成構成を確認できません。"
+            elif price <= dynamic_cap:
+                row["status"], row["detail"] = "WITHIN_DYNAMIC_CAP", "完成構成の価格は現在の動的本体上限内。全体購入ゲートは別途評価。"
+            else:
+                row["status"] = "WAIT_FOR_DISCOUNT"
+                row["discount_to_target_jpy"] = max(0, price - budget["pc_target_jpy"])
+                row["discount_to_planned_cap_jpy"] = max(0, price - budget["pc_budget_jpy"])
+                row["discount_to_dynamic_cap_jpy"] = max(0, price - dynamic_cap)
+                row["detail"] = (
+                    f"理想目標まで¥{row['discount_to_target_jpy']:,}、"
+                    f"計画上限まで¥{row['discount_to_planned_cap_jpy']:,}、"
+                    f"現在の動的上限まで¥{row['discount_to_dynamic_cap_jpy']:,}の値下げが必要。"
+                )
+        rows.append(row)
+
+    outlier = strategy.get("outlier_rule") or {}
+    token = str(outlier.get("gpu") or "RTX 5070 Ti").lower().replace("rtx ", "")
+    candidates = [
+        x for x in products
+        if x.get("form_factor") == outlier.get("form_factor", "desktop")
+        and token in gpu_key(x).lower()
+    ]
+    complete = []
+    eligible = []
+    for item in candidates:
+        if not _trusted_live_offer(item):
+            continue
+        ready, _ = configuration_readiness(item)
+        if ready:
+            complete.append(item)
+            if item["current_price_jpy"] <= min(budget["pc_budget_jpy"], dynamic_cap):
+                eligible.append(item)
+    eligible.sort(key=lambda x: (x["current_price_jpy"], x.get("id", "")))
+    complete.sort(key=lambda x: (x["current_price_jpy"], x.get("id", "")))
+    best = eligible[0] if eligible else (complete[0] if complete else None)
+    if eligible:
+        status = "MEETS_PRICE_AND_CONFIGURATION_CONDITIONS"
+        detail = "条件を満たす完成構成あり。ただし通常の全体購入ゲート通過前は購入許可ではありません。"
+    elif complete:
+        status = "WAIT_FOR_DISCOUNT"
+        detail = f"完成構成の直接確認候補あり。最安確認価格¥{complete[0]['current_price_jpy']:,}は動的上限超過。"
+    else:
+        status = "NO_VERIFIED_COMPLETE_CONFIGURATION"
+        detail = "直接確認済みの32GB/1TB以上・在庫ありのRTX 5070 Tiデスクトップは未発見。大穴監視を継続。"
+    rows.append({
+        "candidate_id": None, "role": "rtx_5070_ti_outlier",
+        "label": outlier.get("label") or "RTX 5070 Ti 大穴",
+        "current_price_jpy": best.get("current_price_jpy") if best else None,
+        "current_price_verified": bool(best), "stock_status": best.get("stock_status", "unknown") if best else "unknown",
+        "configuration_ready": bool(eligible), "configuration_reasons": [],
+        "target_ram_gb": int(outlier.get("minimum_ram_gb") or 32),
+        "target_ssd_gb": int(outlier.get("minimum_ssd_gb") or 1000),
+        "hard_cap_jpy": budget["pc_budget_jpy"], "dynamic_pc_cap_jpy": dynamic_cap,
+        "status": status, "detail": detail,
+        "eligible_candidate_ids": [x.get("id") for x in eligible],
+        "verified_complete_candidate_count": len(complete),
+        "monitored_candidate_count": len(candidates),
+        "url": sales_url(best) if best else None,
+    })
+    return {
+        "generated_at": iso(now_jst()), "total_budget_jpy": budget["total_budget_jpy"],
+        "peripheral_target_budget_jpy": budget["peripheral_budget_jpy"],
+        "pc_target_jpy": budget["pc_target_jpy"], "pc_planned_cap_jpy": budget["pc_budget_jpy"],
+        "dynamic_pc_cap_jpy": dynamic_cap, "rows": rows,
+        "score_policy_note": strategy.get("score_policy", "Actual scores are evidence-derived; no target score is hardcoded."),
+    }
+
 
 def read_events():
     path = os.path.join(ROOT, "data", "change_events.jsonl")
@@ -97,6 +239,8 @@ def main():
     events = read_events()
     budget = purchase_budget_policy()
     peripheral_projection = peripheral_budget_projection()
+    target_config = load_json(os.path.join(ROOT, "config", "targets.json"), {})
+    strategy_config = target_config.get("purchase_strategy") or {}
 
     source_snapshot_generated_at = latest.get("generated_at")
     source_snapshot_sha256 = file_sha256(latest_path) if os.path.exists(latest_path) else None
@@ -150,6 +294,9 @@ def main():
     action = scored[0] if scored else None
 
     partition = scored + unavailable + reference_only
+    purchase_strategy_status = build_purchase_strategy_status(
+        partition, strategy_config, budget, peripheral_projection
+    )
     critical_ids = [cid for cid, priority in priority_by_id.items() if priority == "critical"]
     by_id = {str(x.get("id")): x for x in partition if x.get("id")}
     critical_unverified = [
@@ -258,6 +405,7 @@ def main():
         "products": scored,
         "unavailable_products": unavailable,
         "reference_only": reference_only,
+        "purchase_strategy": purchase_strategy_status,
         "method": {
             "total": 100,
             "performance_max": 40,
@@ -322,6 +470,21 @@ def main():
         ]
 
     lines += [
+        "## 37万円購入戦略の条件監視",
+        "",
+        "|優先方針|確認済み現行価格|構成条件|判定|必要条件・値下げ額|",
+        "|---|---:|---|---|---|",
+        *[
+            f"|{r['label']}|"
+            f"{('¥'+format(r['current_price_jpy'],',')) if r.get('current_price_verified') and r.get('current_price_jpy') is not None else '未確認'}|"
+            f"{('達成' if r.get('configuration_ready') else '未達/未確認')}"
+            f"{(' ('+', '.join(r.get('configuration_reasons') or [])+')') if r.get('configuration_reasons') else ''}|"
+            f"**{r['status']}**|{r.get('detail','')}|"
+            for r in purchase_strategy_status["rows"]
+        ],
+        "",
+        purchase_strategy_status["score_policy_note"],
+        "",
         "## 周辺機器の価格監視（サブモニター・ヘッドセットなし）",
         "",
         "|項目|目標価格|観測価格|在庫|価格確認|購入ページ|",
