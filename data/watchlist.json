@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-10T15:54:40+09:00",
+  "generated_at": "2026-10-10T18:58:46+09:00",
   "urls": [
     {
       "url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
@@ -87,7 +87,7 @@
     },
     {
       "id": "desktop-gtune-dg-a7g70-5070",
-      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101dec",
+      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
       "query": "G TUNE DG-A7G70 Ryzen 7 5700X RTX 5070 32GB 1TB デスクトップ 日本",
       "priority": "high"
     },
@@ -128,14 +128,12 @@
   "desktop_included": true,
   "discovered_count": 20,
   "discovery_stats": {
-    "previous_count": 19,
+    "previous_count": 20,
     "current_count": 20,
-    "newly_discovered_count": 1,
-    "retained_count": 19,
+    "newly_discovered_count": 0,
+    "retained_count": 20,
     "removed_count": 0,
-    "newly_discovered_ids": [
-      "rog-g16-8940hx-5070ti"
-    ],
+    "newly_discovered_ids": [],
     "removed_ids": []
   }
 }
