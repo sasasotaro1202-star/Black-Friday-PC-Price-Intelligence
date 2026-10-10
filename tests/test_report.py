@@ -84,14 +84,14 @@ class ReportLinkTests(unittest.TestCase):
             "pit_valid": True,
             "spec": {"gpu": "RTX 5070", "ram_gb": 16, "ssd": "500 GB"},
         }
-        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
-                  "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
-        projection = {"pc_dynamic_cap_jpy": 302200}
+        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 45800,
+                  "pc_target_jpy": 321800, "pc_budget_jpy": 324200}
+        projection = {"pc_dynamic_cap_jpy": 324200}
         result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
         self.assertEqual(row["status"], "PRE_BF_TARGET_MONITORING")
-        self.assertEqual(row["max_upgrade_cost_to_bf_target_jpy"], 20000)
-        self.assertEqual(row["max_upgrade_cost_to_bf_hard_cap_jpy"], 22400)
+        self.assertEqual(row["max_upgrade_cost_to_bf_target_jpy"], 42000)
+        self.assertEqual(row["max_upgrade_cost_to_bf_hard_cap_jpy"], 44400)
         self.assertEqual(row["black_friday_target_price_jpy"], 321800)
         self.assertIsNone(row["black_friday_price_observed_jpy"])
         self.assertEqual(row["pre_black_friday_reference_price_jpy"], 279800)
@@ -105,7 +105,7 @@ class ReportLinkTests(unittest.TestCase):
                 "label": "DG-A7G70 outlet",
                 "target_ram_gb": 32,
                 "target_ssd_gb": 1000,
-                "last_verified_listing_reference_jpy": 304800,
+                "last_verified_listing_reference_jpy": 330000,
             }],
             "outlier_rule": {"gpu": "RTX 5070 Ti", "form_factor": "desktop",
                              "minimum_ram_gb": 32, "minimum_ssd_gb": 1000},
@@ -115,7 +115,7 @@ class ReportLinkTests(unittest.TestCase):
             "name": "G TUNE DG-A7G70",
             "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
             "form_factor": "desktop",
-            "current_price_jpy": 304800,
+            "current_price_jpy": 330000,
             "price_source_mode": "direct_structured",
             "price_validation_status": "validated",
             "variant_match": "exact",
@@ -123,18 +123,18 @@ class ReportLinkTests(unittest.TestCase):
             "pit_valid": True,
             "spec": {"gpu": "RTX 5070", "ram_gb": 32, "ssd": "1 TB"},
         }
-        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
-                  "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
+        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 45800,
+                  "pc_target_jpy": 321800, "pc_budget_jpy": 324200}
         projection = {"pc_dynamic_cap_jpy": 289240}
         result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
         self.assertEqual(row["status"], "PRE_BF_TARGET_MONITORING")
         self.assertEqual(row["black_friday_target_price_jpy"], 321800)
         self.assertIsNone(row["black_friday_price_observed_jpy"])
-        self.assertEqual(row["pre_black_friday_reference_price_jpy"], 304800)
-        self.assertEqual(row["black_friday_price_cap_jpy"], 302200)
-        self.assertEqual(row["pre_bf_reference_gap_to_target_jpy"], 5000)
-        self.assertEqual(row["pre_bf_reference_gap_to_planned_cap_jpy"], 2600)
+        self.assertEqual(row["pre_black_friday_reference_price_jpy"], 330000)
+        self.assertEqual(row["black_friday_price_cap_jpy"], 324200)
+        self.assertEqual(row["pre_bf_reference_gap_to_target_jpy"], 8200)
+        self.assertEqual(row["pre_bf_reference_gap_to_planned_cap_jpy"], 5800)
 
     def test_rtx_5070_ti_outlier_requires_verified_complete_configuration(self):
         from datetime import datetime
@@ -160,9 +160,9 @@ class ReportLinkTests(unittest.TestCase):
             "pit_valid": True,
             "spec": {"gpu": "RTX 5070 Ti", "ram_gb": 16, "ssd": "1 TB"},
         }
-        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
-                  "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
-        projection = {"pc_dynamic_cap_jpy": 302200}
+        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 45800,
+                  "pc_target_jpy": 321800, "pc_budget_jpy": 324200}
+        projection = {"pc_dynamic_cap_jpy": 324200}
         with patch.object(report, "now_jst", return_value=datetime.fromisoformat("2026-11-20T12:01:00+09:00")):
             result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
@@ -205,9 +205,9 @@ class ReportLinkTests(unittest.TestCase):
             "available_at": "2026-11-20T11:59:00+09:00",
             "spec": {"gpu": "RTX 5070", "ram_gb": 32, "ssd": "1 TB"},
         }
-        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
-                  "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
-        projection = {"pc_dynamic_cap_jpy": 302200, "budget_data_ready": True}
+        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 45800,
+                  "pc_target_jpy": 321800, "pc_budget_jpy": 324200}
+        projection = {"pc_dynamic_cap_jpy": 324200, "budget_data_ready": True}
         with patch.object(report, "now_jst", return_value=datetime.fromisoformat("2026-11-20T12:01:00+09:00")):
             result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
