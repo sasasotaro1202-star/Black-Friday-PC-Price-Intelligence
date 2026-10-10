@@ -1,5 +1,5 @@
 {
-  "budget_jpy": 280000,
+  "budget_jpy": 299800,
   "target_date": "2026-11-27",
   "monitor_window_start": "2026-11-14T00:00:00+09:00",
   "monitor_window_end": "2026-12-04T23:59:59+09:00",
@@ -54,7 +54,19 @@
     "G TUNE DG-A5G60 Ryzen 5 4500 RTX 5060 16GB 500GB デスクトップ 日本",
     "G TUNE DG-I5G70 Core Ultra 5 250K Plus RTX 5070 16GB 500GB デスクトップ 日本",
     "G TUNE DG-A7G70 Ryzen 7 5700X RTX 5070 32GB 1TB デスクトップ 日本",
-    "G TUNE FG-A7G70 Ryzen 7 7700 RTX 5070 32GB 1TB デスクトップ 日本"
+    "G TUNE FG-A7G70 Ryzen 7 7700 RTX 5070 32GB 1TB デスクトップ 日本",
+    "Ryzen 7 9700X RTX 5070 32GB 1TB デスクトップ ゲーミングPC 日本",
+    "THIRDWAVE Ryzen 7 9700X RTX 5070 32GB 1TB 価格",
+    "OZgaming M110A Ryzen 7 9700X RTX 5070 32GB 1TB",
+    "RTX 5060 Ti 16GB 64GB 1TB デスクトップPC 日本",
+    "RTX 5070 Ti 32GB 1TB デスクトップPC アウトレット 日本",
+    "RTX 5070 32GB 1TB デスクトップPC セール パソコン工房",
+    "RTX 5070 Ryzen 7 7700 32GB 1TB デスクトップPC TSUKUMO",
+    "RTX 5070 32GB 1TB デスクトップPC FRONTIER",
+    "G TUNE DG-I5G70 32GB 1TB 構成変更 価格",
+    "G TUNE DG-I7G70 32GB 1TB 構成変更 価格",
+    "Core Ultra 7 265 RTX 5070 32GB 1TB デスクトップ 特価 日本",
+    "Ryzen 7 9700X RTX 5070 デスクトップ パソコン工房 ドスパラ マウス"
   ],
   "allowed_domains": [
     "lenovo.com",
@@ -75,11 +87,138 @@
     "sycom.co.jp",
     "ark-pc.co.jp",
     "stormst.com",
-    "kakaku.com"
+    "kakaku.com",
+    "pc-koubou.jp",
+    "ozgaming.jp"
   ],
   "max_results_per_query": 8,
   "max_pages_per_run": 50,
   "desktop_enabled": true,
   "desktop_note": "Desktop PCs are evaluated in the same integrated purchase-priority ranking as laptops, with desktop-specific GPU/VRAM/CPU factors.",
-  "desktop_exact_candidate_count": 6
+  "desktop_exact_candidate_count": 6,
+  "total_budget_jpy": 370000,
+  "peripheral_budget_jpy": 67800,
+  "pc_target_jpy": 299800,
+  "pc_budget_jpy": 302200,
+  "minimum_ram_gb": 32,
+  "minimum_ssd_gb": 1000,
+  "desktop_preferred": true,
+  "budget_scope_note": "budget_jpy is the PC-only target, not the full-system budget. Total 370000 JPY includes one monitor, speakers, keyboard, mouse, mousepad, power strip, required cables and shipping reserve.",
+  "peripherals": [
+    {
+      "id": "main_monitor",
+      "name": "AOC Q27G40E/11 27-inch WQHD 180Hz",
+      "target_price_jpy": 17500,
+      "track_current_price": true,
+      "monitor_url": "https://www.yodobashi.com/product/100000001009314680/",
+      "purchase_url": "https://www.yodobashi.com/product/100000001009314680/",
+      "identity_terms": [
+        "Q27G40E/11",
+        "Q27G40E"
+      ],
+      "allowed_hosts": [
+        "www.yodobashi.com"
+      ],
+      "min_price_jpy": 10000,
+      "max_price_jpy": 60000,
+      "mandatory": true
+    },
+    {
+      "id": "speakers",
+      "name": "EDIFIER MR5 (high-quality sound priority)",
+      "target_price_jpy": 32000,
+      "track_current_price": true,
+      "monitor_url": "https://www.edifier.jp/products/mr5",
+      "purchase_url": "https://www.edifier.jp/products/mr5",
+      "identity_terms": [
+        "MR5"
+      ],
+      "allowed_hosts": [
+        "www.edifier.jp",
+        "edifier.jp"
+      ],
+      "min_price_jpy": 15000,
+      "max_price_jpy": 100000,
+      "mandatory": true,
+      "coupon_policy": "Do not subtract coupons or points unless reliably applied at checkout."
+    },
+    {
+      "id": "keyboard",
+      "name": "Logicool G213r",
+      "target_price_jpy": 5500,
+      "track_current_price": false,
+      "monitor_url": null,
+      "purchase_url": null,
+      "identity_terms": [
+        "G213r"
+      ],
+      "mandatory": true
+    },
+    {
+      "id": "mouse",
+      "name": "Logicool G304",
+      "target_price_jpy": 3800,
+      "track_current_price": true,
+      "monitor_url": "https://www.yodobashi.com/product/100000001004334450/",
+      "purchase_url": "https://www.yodobashi.com/product/100000001004334450/",
+      "identity_terms": [
+        "G304rWH",
+        "G304"
+      ],
+      "allowed_hosts": [
+        "www.yodobashi.com"
+      ],
+      "min_price_jpy": 1000,
+      "max_price_jpy": 15000,
+      "mandatory": true
+    },
+    {
+      "id": "mousepad",
+      "name": "SteelSeries QcK Large",
+      "target_price_jpy": 2500,
+      "track_current_price": true,
+      "monitor_url": "https://www.yodobashi.com/product/100000001009472873/",
+      "purchase_url": "https://www.yodobashi.com/product/100000001009472873/",
+      "identity_terms": [
+        "QcK Large",
+        "63464"
+      ],
+      "allowed_hosts": [
+        "www.yodobashi.com"
+      ],
+      "min_price_jpy": 800,
+      "max_price_jpy": 10000,
+      "mandatory": true
+    },
+    {
+      "id": "power_strip",
+      "name": "6-outlet surge-protected power strip",
+      "target_price_jpy": 1500,
+      "track_current_price": false,
+      "monitor_url": null,
+      "purchase_url": null,
+      "identity_terms": [],
+      "mandatory": true
+    },
+    {
+      "id": "cables",
+      "name": "Required cables only; check included monitor/speaker cables first",
+      "target_price_jpy": 1000,
+      "track_current_price": false,
+      "monitor_url": null,
+      "purchase_url": null,
+      "identity_terms": [],
+      "mandatory": true
+    },
+    {
+      "id": "shipping_reserve",
+      "name": "Shipping / multi-store purchase reserve",
+      "target_price_jpy": 4000,
+      "track_current_price": false,
+      "monitor_url": null,
+      "purchase_url": null,
+      "identity_terms": [],
+      "mandatory": true
+    }
+  ]
 }
