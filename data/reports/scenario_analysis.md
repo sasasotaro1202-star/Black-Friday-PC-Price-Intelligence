@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-10-10T23:20:42+09:00
+更新: 2026-10-10T23:26:07+09:00
 価格フェーズ: **PRE_BLACK_FRIDAY_REFERENCE**
 BF監視窓: 2026-11-14T00:00:00+09:00 ～ 2026-12-04T23:59:59+09:00
 総予算: ¥370,000
@@ -17,7 +17,7 @@ BF PC計画上限＋周辺機器目標: ¥370,000
 |---|---:|---:|---:|---|---|---|
 |AOC Q27G40E/11 27-inch WQHD 180Hz|¥17,500|未確認|¥20,790|in_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
 |ASUS VY249HGR 23.8-inch FHD IPS 120Hz secondary monitor|¥10,000|未確認|—|in_stock|black_friday_target_reserve|[商品ページ](https://www.amazon.co.jp/dp/B0DNDXMLR7)|
-|Creative Pebble compact 2.0 USB-powered speakers|¥2,500|未確認|—|unknown|black_friday_target_reserve|[商品ページ](https://jp.creative.com/p/speakers/creative-pebble)|
+|Creative Pebble (classic) compact 2.0 USB-powered speakers|¥2,500|未確認|—|unknown|black_friday_target_reserve|[商品ページ](https://jp.creative.com/p/speakers/creative-pebble)|
 |Logicool G213r|¥5,500|未確認|—|unknown|black_friday_target_reserve|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
 |Logicool G304|¥3,800|未確認|¥5,350|in_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
 |SteelSeries QcK Large|¥2,500|未確認|¥2,640|low_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001009472873/)|

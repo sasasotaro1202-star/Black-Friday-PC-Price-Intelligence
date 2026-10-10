@@ -1,8 +1,8 @@
 # ブラックフライデー期間通算・購入ランキング
 
-更新: 2026-10-10T23:20:42+09:00
-観測スナップショット: 2026-10-10T23:19:52+09:00
-観測スナップショットSHA256: 958e24dd9180e443894cceb67ac85bfef020ed07710b1dc8b9e55c5190fe69a0
+更新: 2026-10-10T23:26:07+09:00
+観測スナップショット: 2026-10-10T23:25:15+09:00
+観測スナップショットSHA256: 617c6c372c4cf50daedfe0254b3d2a690dc0c8800bb8cfd01731a4b2094e7fe4
 総予算（PC＋周辺機器）: ¥370,000
 周辺機器の目標予算: ¥48,300
 PC本体の目標価格: ¥321,700
@@ -56,7 +56,7 @@ PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥316,7
 |---|---:|---:|---|---|---|
 |AOC Q27G40E/11 27-inch WQHD 180Hz|¥17,500|¥20,790|in_stock|確認済み|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
 |ASUS VY249HGR 23.8-inch FHD IPS 120Hz secondary monitor|¥10,000|—（目標額で仮計算）|in_stock|未確認|[商品ページ](https://www.amazon.co.jp/dp/B0DNDXMLR7)|
-|Creative Pebble compact 2.0 USB-powered speakers|¥2,500|—（目標額で仮計算）|unknown|未確認|[商品ページ](https://jp.creative.com/p/speakers/creative-pebble)|
+|Creative Pebble (classic) compact 2.0 USB-powered speakers|¥2,500|—（目標額で仮計算）|unknown|未確認|[商品ページ](https://jp.creative.com/p/speakers/creative-pebble)|
 |Logicool G213r|¥5,500|—（目標額で仮計算）|unknown|未確認|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
 |Logicool G304|¥3,800|¥5,350|in_stock|確認済み|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
 |SteelSeries QcK Large|¥2,500|¥2,640|low_stock|確認済み|[商品ページ](https://www.yodobashi.com/product/100000001009472873/)|
@@ -104,7 +104,7 @@ PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥316,7
 - 取得成功率: 50.0%
 - 価格確認率: 45.0%
 - 検索補完（成功/試行）: 0/10
-- 検索SKU不一致による除外: 55
+- 検索SKU不一致による除外: 64
 - 取得エラー内訳（host|reason）: rog.asus.com|curl_http_404=1, store.acer.com| INTERNAL_ERROR (err 2)=1, store.asus.com|curl_http_403=7, www.dospara.co.jp|curl_http_404=1
 - 未処理候補: なし
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-10T23:20:14+09:00",
+  "generated_at": "2026-10-10T23:25:38+09:00",
   "budget_scope": "Peripherals are separate from PC rankings; uncertain coupons/points are not deducted.",
   "tracked_count": 6,
   "verified_count": 3,
@@ -8,11 +8,16 @@
     {
       "id": "main_monitor",
       "name": "AOC Q27G40E/11 27-inch WQHD 180Hz",
+      "identity_terms": [
+        "Q27G40E/11",
+        "Q27G40E"
+      ],
+      "model_code": null,
       "target_price_jpy": 17500,
       "monitor_url": "https://www.yodobashi.com/product/100000001009314680/",
       "purchase_url": "https://www.yodobashi.com/product/100000001009314680/",
-      "retrieval_time": "2026-10-10T23:20:14+09:00",
-      "available_at": "2026-10-10T23:20:14+09:00",
+      "retrieval_time": "2026-10-10T23:25:38+09:00",
+      "available_at": "2026-10-10T23:25:38+09:00",
       "current_price_jpy": 20790,
       "last_valid_price_jpy": 20790,
       "price_verified": true,
@@ -40,10 +45,14 @@
     {
       "id": "secondary_monitor",
       "name": "ASUS VY249HGR 23.8-inch FHD IPS 120Hz secondary monitor",
+      "identity_terms": [
+        "VY249HGR"
+      ],
+      "model_code": "VY249HGR",
       "target_price_jpy": 10000,
       "monitor_url": "https://www.amazon.co.jp/dp/B0DNDXMLR7",
       "purchase_url": "https://www.amazon.co.jp/dp/B0DNDXMLR7",
-      "retrieval_time": "2026-10-10T23:20:14+09:00",
+      "retrieval_time": "2026-10-10T23:25:38+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
@@ -70,22 +79,33 @@
     },
     {
       "id": "speakers",
-      "name": "Creative Pebble compact 2.0 USB-powered speakers",
+      "name": "Creative Pebble (classic) compact 2.0 USB-powered speakers",
+      "identity_terms": [
+        "Creative Pebble"
+      ],
+      "model_code": "Creative Pebble classic",
       "target_price_jpy": 2500,
-      "monitor_url": "https://jp.creative.com/p/speakers/creative-pebble",
+      "monitor_url": "https://jp.creative.com/p/speakers/creative-pebble?AspxAutoDetectCookieSupport=1",
       "purchase_url": "https://jp.creative.com/p/speakers/creative-pebble",
-      "retrieval_time": "2026-10-10T23:20:14+09:00",
+      "retrieval_time": "2026-10-10T23:25:38+09:00",
       "available_at": null,
       "current_price_jpy": null,
-      "last_valid_price_jpy": 39980,
+      "last_valid_price_jpy": null,
       "price_verified": false,
       "stock_status": "unknown",
       "price_source_mode": "none",
       "price_validation_status": "missing",
       "identity_verified": true,
       "status": "price_unverified",
-      "error": "https://jp.creative.com/p/speakers/creative-pebble: missing_or_implausible_price",
+      "error": "https://jp.creative.com/p/speakers/creative-pebble?AspxAutoDetectCookieSupport=1: missing_or_implausible_price; https://jp.creative.com/p/speakers/creative-pebble: missing_or_implausible_price",
       "retrieval_attempts": [
+        {
+          "url": "https://jp.creative.com/p/speakers/creative-pebble?AspxAutoDetectCookieSupport=1",
+          "final_url": "https://jp.creative.com/p/speakers/creative-pebble?AspxAutoDetectCookieSupport=1",
+          "status": "price_unverified",
+          "error": "missing_or_implausible_price",
+          "price_candidate_jpy": null
+        },
         {
           "url": "https://jp.creative.com/p/speakers/creative-pebble",
           "final_url": "https://jp.creative.com/p/speakers/creative-pebble",
@@ -102,10 +122,16 @@
     {
       "id": "keyboard",
       "name": "Logicool G213r",
+      "identity_terms": [
+        "G213r",
+        "G213R",
+        "9242996"
+      ],
+      "model_code": null,
       "target_price_jpy": 5500,
       "monitor_url": "https://www.biccamera.com/bc/item/9242996/",
       "purchase_url": "https://www.biccamera.com/bc/item/9242996/",
-      "retrieval_time": "2026-10-10T23:20:14+09:00",
+      "retrieval_time": "2026-10-10T23:25:38+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
@@ -138,11 +164,16 @@
     {
       "id": "mouse",
       "name": "Logicool G304",
+      "identity_terms": [
+        "G304rWH",
+        "G304"
+      ],
+      "model_code": null,
       "target_price_jpy": 3800,
       "monitor_url": "https://www.yodobashi.com/product/100000001004334450/",
       "purchase_url": "https://www.yodobashi.com/product/100000001004334450/",
-      "retrieval_time": "2026-10-10T23:20:14+09:00",
-      "available_at": "2026-10-10T23:20:14+09:00",
+      "retrieval_time": "2026-10-10T23:25:38+09:00",
+      "available_at": "2026-10-10T23:25:38+09:00",
       "current_price_jpy": 5350,
       "last_valid_price_jpy": 5350,
       "price_verified": true,
@@ -170,11 +201,16 @@
     {
       "id": "mousepad",
       "name": "SteelSeries QcK Large",
+      "identity_terms": [
+        "QcK Large",
+        "63464"
+      ],
+      "model_code": null,
       "target_price_jpy": 2500,
       "monitor_url": "https://www.yodobashi.com/product/100000001009472873/",
       "purchase_url": "https://www.yodobashi.com/product/100000001009472873/",
-      "retrieval_time": "2026-10-10T23:20:14+09:00",
-      "available_at": "2026-10-10T23:20:14+09:00",
+      "retrieval_time": "2026-10-10T23:25:38+09:00",
+      "available_at": "2026-10-10T23:25:38+09:00",
       "current_price_jpy": 2640,
       "last_valid_price_jpy": 2640,
       "price_verified": true,
@@ -210,7 +246,7 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": "2026-10-10T23:20:14+09:00",
+      "retrieval_time": "2026-10-10T23:25:38+09:00",
       "available_at": null,
       "price_source_mode": "none"
     },
@@ -225,7 +261,7 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": "2026-10-10T23:20:14+09:00",
+      "retrieval_time": "2026-10-10T23:25:38+09:00",
       "available_at": null,
       "price_source_mode": "none"
     },
@@ -240,7 +276,7 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": "2026-10-10T23:20:14+09:00",
+      "retrieval_time": "2026-10-10T23:25:38+09:00",
       "available_at": null,
       "price_source_mode": "none"
     }
