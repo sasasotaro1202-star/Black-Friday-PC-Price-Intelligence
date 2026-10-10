@@ -124,6 +124,26 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertTrue(ready)
         self.assertEqual(reasons, [])
 
+    def test_outlet_reference_below_target_is_not_reported_as_negative_discount(self):
+        from datetime import datetime
+        strategy = self.cfg["purchase_strategy"]
+        policy = {
+            "total_budget_jpy": 370000,
+            "peripheral_budget_jpy": 48300,
+            "pc_target_jpy": 321700,
+            "pc_budget_jpy": 321700,
+        }
+        with patch.object(report, "now_jst", return_value=datetime.fromisoformat("2026-10-10T10:00:00+09:00")):
+            result = report.build_purchase_strategy_status(
+                [],
+                strategy,
+                policy,
+                {"budget_data_ready": False, "pc_dynamic_cap_jpy": 0},
+            )
+        row = next(x for x in result["rows"] if x.get("role") == "secondary_outlet_complete_configuration")
+        self.assertIn("BF目標を¥16,900下回っています", row["detail"])
+        self.assertNotIn("¥-", row["detail"])
+
     def test_cached_price_for_previous_speaker_model_is_not_reused(self):
         now_text = intelligence.iso(intelligence.now_jst())
         products = []
