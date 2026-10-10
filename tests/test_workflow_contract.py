@@ -26,6 +26,15 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertNotIn("  schedule:", text)
         self.assertIn('MONITOR_MAX_URLS: "100"', text)
 
+    def test_watchlist_refresh_detects_missing_catalog_candidates(self):
+        for path in (
+            ROOT / ".github" / "workflows" / "pc-price-monitor.yml",
+            ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml",
+        ):
+            text = path.read_text(encoding="utf-8")
+            self.assertIn("missing_catalog_ids=catalog_ids - watch_ids", text)
+            self.assertIn("or bool(missing_catalog_ids)", text)
+
     def test_primary_workflow_does_not_cancel_in_progress_collection(self):
         text = WORKFLOW.read_text(encoding="utf-8")
         self.assertIn("cancel-in-progress: false", text)
