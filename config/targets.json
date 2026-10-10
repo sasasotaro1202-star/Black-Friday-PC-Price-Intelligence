@@ -154,15 +154,22 @@
       "id": "keyboard",
       "name": "Logicool G213r",
       "target_price_jpy": 5500,
-      "track_current_price": false,
-      "monitor_url": null,
-      "purchase_url": null,
+      "track_current_price": true,
+      "monitor_url": "https://www.biccamera.com/bc/item/9242996/",
+      "purchase_url": "https://www.biccamera.com/bc/item/9242996/",
       "identity_terms": [
-        "G213r"
+        "G213r",
+        "G213R",
+        "9242996"
       ],
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "5500円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
+      "target_price_note": "5500円はBF期間中の購入目標。現在の参考価格とは区別し、購入画面の実売をBF価格として扱わない。",
+      "allowed_hosts": [
+        "www.biccamera.com"
+      ],
+      "min_price_jpy": 3000,
+      "max_price_jpy": 15000
     },
     {
       "id": "mouse",
