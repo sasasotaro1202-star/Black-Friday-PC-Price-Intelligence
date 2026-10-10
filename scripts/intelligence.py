@@ -948,14 +948,14 @@ def decision_score(item, anchors, events=None):
     elif eff <= dynamic_soft_max and direct_verified and identity_verified and item.get("stock_status") == "low_stock" and score >= 85:
         status = "BUY_NOW_LOW_STOCK"
     elif (
-        eff > EFFECTIVE_HARD_MAX
+        eff > dynamic_pc_cap
         and item.get("form_factor") == "desktop"
         and perf >= 30
         and value_bonus >= 2
         and eff <= 450000
     ):
         status = "VALUE_WATCH"
-    elif eff > EFFECTIVE_HARD_MAX:
+    elif eff > dynamic_pc_cap:
         status = "WAIT_FOR_DISCOUNT"
     elif score >= 85:
         status = "STRONG_WATCH"
