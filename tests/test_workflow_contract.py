@@ -38,6 +38,15 @@ class WorkflowContractTests(unittest.TestCase):
             self.assertIn("missing_catalog_ids=catalog_ids - watch_ids", text)
             self.assertIn("or bool(missing_catalog_ids)", text)
 
+    def test_watchlist_refresh_detects_catalog_url_mismatches(self):
+        for path in (
+            ROOT / ".github" / "workflows" / "pc-price-monitor.yml",
+            ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml",
+        ):
+            text = path.read_text(encoding="utf-8")
+            self.assertIn("catalog_url_mismatch_ids", text)
+            self.assertIn("or bool(catalog_url_mismatch_ids)", text)
+
     def test_primary_workflow_does_not_cancel_in_progress_collection(self):
         text = WORKFLOW.read_text(encoding="utf-8")
         self.assertIn("cancel-in-progress: false", text)
