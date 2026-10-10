@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: pc-price-intelligence-writer
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   collect:
@@ -69,20 +69,21 @@ jobs:
           print(f"needs_refresh={str((not urls) or stale).lower()}")
           PY
 
-      - name: Refresh watchlist
-        if: steps.gate.outputs.skip != 'true' && steps.watchlist.outputs.needs_refresh == 'true'
-        run: python scripts/discover.py
-
       - name: Collect, recover, sanitize, score and publish
         if: steps.gate.outputs.skip != 'true'
         env:
           MONITOR_MAX_URLS: "100"
+          NEEDS_WATCHLIST_REFRESH: ${{ steps.watchlist.outputs.needs_refresh }}
         shell: bash
         run: |
           set -euo pipefail
           for attempt in 1 2 3; do
             git fetch --no-tags origin main
             git reset --hard origin/main
+            if [ "${NEEDS_WATCHLIST_REFRESH:-false}" = "true" ]; then
+              echo "Refreshing watchlist after syncing origin/main."
+              python scripts/discover.py
+            fi
             python scripts/monitor.py
             python scripts/peripheral_monitor.py
             python scripts/recover.py
