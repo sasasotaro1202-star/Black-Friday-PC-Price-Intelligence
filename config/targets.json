@@ -262,7 +262,7 @@
       "minimum_ssd_gb": 1000,
       "maximum_completed_pc_price_uses": "dynamic_pc_cap_jpy",
       "requires_direct_price_stock_exact_identity_and_valid_pit": true,
-      "never_assume_upgrade_cost_jpy": 0
+      "zero_cost_upgrade_assumption_allowed": false
     },
     "score_policy": "説明文にある96/94/95/97点は条件付きの目標イメージであり、実測スコアとして固定しない。実際のスコアはコードが確認済み価格・構成・在庫・性能・データ品質から計算する。",
     "speaker_strategy": {
