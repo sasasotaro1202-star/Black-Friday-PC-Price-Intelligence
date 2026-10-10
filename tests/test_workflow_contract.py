@@ -1,4 +1,6 @@
 import pathlib
+import re
+import textwrap
 import unittest
 
 
@@ -28,6 +30,29 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertIn("workflow_dispatch:", text)
         self.assertNotIn("  schedule:", text)
         self.assertIn('MONITOR_MAX_URLS: "100"', text)
+
+    def test_embedded_python_blocks_are_syntactically_valid(self):
+        for path in (
+            ROOT / ".github" / "workflows" / "pc-price-monitor.yml",
+            ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml",
+        ):
+            text = path.read_text(encoding="utf-8")
+            snippets = []
+            lines = text.splitlines()
+            index = 0
+            while index < len(lines):
+                if lines[index].strip().startswith("python - <<'PY'"):
+                    index += 1
+                    block = []
+                    while index < len(lines) and lines[index].strip() != "PY":
+                        block.append(lines[index])
+                        index += 1
+                    self.assertTrue(block, f"{path}: embedded block is empty")
+                    snippets.append(textwrap.dedent(chr(10).join(block)))
+                index += 1
+            self.assertTrue(snippets, str(path))
+            for number, snippet in enumerate(snippets, start=1):
+                compile(snippet, f"{path}:embedded-python-{number}", "exec")
 
     def test_watchlist_refresh_detects_missing_catalog_candidates(self):
         for path in (

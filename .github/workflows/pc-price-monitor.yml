@@ -72,7 +72,7 @@ jobs:
               urls=d.get("urls") or []
               ts=d.get("generated_at")
               watch_url_by_id={str(x.get("id")): x.get("url") for x in urls if isinstance(x, dict) and x.get("id")}
-              catalog_items=[x for x in (catalog.get("candidates") or []) if isinstance(x, dict) and x.get("id") and x.get("url")}
+              catalog_items=[x for x in (catalog.get("candidates") or []) if isinstance(x, dict) and x.get("id") and x.get("url")]
               catalog_url_by_id={str(x.get("id")): x.get("url") for x in catalog_items}
               watch_ids=set(watch_url_by_id)
               catalog_ids=set(catalog_url_by_id)
