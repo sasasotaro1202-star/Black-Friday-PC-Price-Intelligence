@@ -74,24 +74,24 @@ class BlackFridayScenarioTests(unittest.TestCase):
         self.assertEqual(result["pricing_phase"], "PRE_BLACK_FRIDAY_REFERENCE")
         self.assertFalse(result["black_friday_prices_known"])
         self.assertEqual(result["total_budget_jpy"], 370000)
-        self.assertEqual(result["peripheral_target_total_jpy"], 48300)
+        self.assertEqual(result["peripheral_target_total_jpy"], 53800)
         self.assertEqual(result["black_friday_ideal_bundle_target_jpy"], 370000)
         self.assertEqual(result["black_friday_target_buffer_jpy"], 0)
         self.assertEqual(result["black_friday_hard_cap_bundle_jpy"], 370000)
         self.assertFalse(result["all_in_checkout_total_final"])
 
         speaker = next(x for x in result["peripherals"] if x["id"] == "speakers")
-        self.assertEqual(speaker["black_friday_target_price_jpy"], 2500)
+        self.assertEqual(speaker["black_friday_target_price_jpy"], 8000)
         self.assertIsNone(speaker["black_friday_price_observed_jpy"])
-        self.assertEqual(speaker["pre_black_friday_reference_price_jpy"], 2600)
+        self.assertEqual(speaker["pre_black_friday_reference_price_jpy"], 8100)
 
         outlier_row = next(x for x in result["rtx_5070_ti_desktop_outliers"]
                            if x["id"] == outlier["id"])
-        self.assertEqual(outlier_row["black_friday_target_price_jpy"], 321700)
+        self.assertEqual(outlier_row["black_friday_target_price_jpy"], 316200)
         self.assertEqual(outlier_row["pre_black_friday_reference_price_jpy"], 399800)
         self.assertIsNone(outlier_row["black_friday_price_observed_jpy"])
-        self.assertEqual(outlier_row["discount_needed_to_bf_target_jpy"], 78100)
-        self.assertEqual(outlier_row["discount_needed_to_bf_target_pct"], 19.5)
+        self.assertEqual(outlier_row["discount_needed_to_bf_target_jpy"], 83600)
+        self.assertEqual(outlier_row["discount_needed_to_bf_target_pct"], 20.9)
         bands = {x["discount_pct"]: x["price_jpy"] for x in outlier_row["scenario_prices"]}
         self.assertEqual(bands[25], 299850)
         self.assertTrue(outlier_row["configuration_ready"])
@@ -122,7 +122,7 @@ class BlackFridayScenarioTests(unittest.TestCase):
             is_tracked = bool(item.get("track_current_price"))
             peripheral_products.append({
                 "id": item["id"],
-                "current_price_jpy": 30000 if item["id"] == "speakers" else item["target_price_jpy"],
+                "current_price_jpy": 11000 if item["id"] == "speakers" else item["target_price_jpy"],
                 "price_verified": is_tracked,
                 "identity_verified": is_tracked,
                 "stock_status": "in_stock" if is_tracked else "unknown",
@@ -144,7 +144,7 @@ class BlackFridayScenarioTests(unittest.TestCase):
         self.assertIsNone(row["pre_black_friday_reference_price_jpy"])
         speaker = next(x for x in result["peripherals"] if x["id"] == "speakers")
         self.assertTrue(speaker["black_friday_price_verified"])
-        self.assertEqual(speaker["black_friday_price_observed_jpy"], 30000)
+        self.assertEqual(speaker["black_friday_price_observed_jpy"], 11000)
         self.assertIsNone(speaker["pre_black_friday_reference_price_jpy"])
 
     def test_unavailable_or_stale_data_never_becomes_bf_observed_price(self):
