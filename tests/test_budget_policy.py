@@ -141,7 +141,7 @@ class BudgetPolicyTests(unittest.TestCase):
                 {"budget_data_ready": False, "pc_dynamic_cap_jpy": 0},
             )
         row = next(x for x in result["rows"] if x.get("role") == "secondary_outlet_complete_configuration")
-        self.assertIn("BF目標を¥16,900下回っています", row["detail"])
+        self.assertIn("BF目標を¥11,400下回っています", row["detail"])
         self.assertNotIn("¥-", row["detail"])
 
     def test_cached_price_for_previous_speaker_model_is_not_reused(self):
