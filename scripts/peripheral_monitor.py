@@ -17,7 +17,7 @@ def allowed_host(url, hosts):
     return any(host == str(h).lower() for h in hosts or [])
 
 
-def product_context_excerpt(excerpt, terms, before=300, after=1200):
+def product_context_excerpt(excerpt, terms, before=80, after=450):
     """Return a bounded text window around the first exact product/model anchor."""
     text = norm_text(excerpt)
     hits = []
@@ -128,14 +128,19 @@ def run_one(target, previous, retrieved_at):
             price = int(parsed.get("price_jpy")) if parsed.get("price_jpy") is not None else None
         except (TypeError, ValueError):
             price = None
-        # If structured product offers are absent/ambiguous, fall back only to
-        # price text in the exact product-title window, never the whole page.
-        if price is None and context:
-            contextual_price = local_price_candidate(context)
+        # Only exact-model structured offers can be trusted from a whole page.
+        # Retail pages commonly list recommendations and their unrelated prices below
+        # the selected product, so text/meta prices must come from the bounded exact-model window.
+        if price_source != "direct_structured":
+            contextual_price = local_price_candidate(context) if context else None
             if contextual_price:
                 price = contextual_price["price_jpy"]
                 price_source = "direct_text"
                 price_context = contextual_price["context"]
+            else:
+                price = None
+                price_source = "none"
+                price_context = None
         lower, upper = int(target.get("min_price_jpy") or 1), int(target.get("max_price_jpy") or 1000000)
         if price is None or price < lower or price > upper:
             row["unverified_price_candidate_jpy"] = price
