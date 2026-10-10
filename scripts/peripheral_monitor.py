@@ -89,15 +89,26 @@ def local_price_candidate(context):
             except (TypeError, ValueError):
                 continue
             snippet = text[max(0, match.start()-100):min(len(text), match.end()+100)]
-            # Exclude numbers that are shipping thresholds, discount amounts or
-            # points/financing rather than the item cash price.
-            lower_snippet = snippet.lower()
-            forbidden_context = (
-                "以上ご購入", "購入で送料無料", "送料無料まで", "送料", "円引き",
-                "off", "オフ", "ポイント", "還元", "月々", "月額", "分割",
-                "最低注文", "あと", "saving", "discount"
+            # Exclude only wording immediately attached to the matched amount.
+            # Nearby unrelated shipping text must not invalidate a real item price.
+            before_short = text[max(0, match.start()-45):match.start()].lower()
+            after_short = text[match.end():min(len(text), match.end()+50)].lower()
+            matched_context = before_short[-18:] + " <PRICE> " + after_short[:35]
+            threshold_after = re.match(
+                r"\s*(?:円)?\s*以上.{0,24}(?:ご購入|購入|お買い上げ|送料無料|送料)",
+                after_short,
             )
-            if any(token in lower_snippet for token in forbidden_context):
+            exclusion_after = re.match(
+                r"\s*(?:off|オフ|円引き|ポイント|pt\b|ポイント還元|月々|月額|分割)",
+                after_short,
+                re.I,
+            )
+            exclusion_before = re.search(
+                r"(?:割引|値引き|送料|ポイント|月々|月額|分割)\D{0,12}$",
+                before_short,
+                re.I,
+            )
+            if threshold_after or exclusion_after or exclusion_before:
                 continue
             matches.append((match.start(), value, snippet))
     if not matches:
