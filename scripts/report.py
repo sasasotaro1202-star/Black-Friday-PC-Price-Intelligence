@@ -1,6 +1,7 @@
 import hashlib
 import json
 import os
+from datetime import datetime
 
 from intelligence import (
     ROOT, BUDGET, EFFECTIVE_SOFT_MAX, EFFECTIVE_HARD_MAX,
@@ -55,131 +56,174 @@ def _trusted_live_offer(item):
     )
 
 
+def _parse_strategy_dt(value):
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    except (TypeError, ValueError):
+        return None
+
+
 def build_purchase_strategy_status(products, strategy, budget, peripheral_projection):
-    """Build condition-based strategy rows; never treat reference prices as live offers."""
+    """Report BF targets separately from pre-sale reference observations."""
+    now = now_jst()
+    phase = strategy.get("price_semantics") or {}
+    bf_start = _parse_strategy_dt(phase.get("window_start_jst"))
+    bf_end = _parse_strategy_dt(phase.get("window_end_jst"))
+    in_bf_window = bool(bf_start and bf_end and bf_start <= now <= bf_end)
+    budget_ready = bool(peripheral_projection.get("budget_data_ready"))
+    live_cap = int(peripheral_projection.get("pc_dynamic_cap_jpy") or 0)
+    planned_bf_cap = min(
+        int(budget["pc_budget_jpy"]),
+        int(budget["total_budget_jpy"]) - int(budget["peripheral_budget_jpy"]),
+    )
+    bf_cap = min(int(budget["pc_budget_jpy"]), live_cap) if in_bf_window and budget_ready else planned_bf_cap
     by_id = {str(x.get("id")): x for x in products if x.get("id")}
-    dynamic_cap = int(peripheral_projection.get("pc_dynamic_cap_jpy") or 0)
     rows = []
+
     for plan in strategy.get("priority_plans", []):
         cid = str(plan.get("candidate_id") or "")
         item = by_id.get(cid, {})
         verified = _trusted_live_offer(item)
-        price = item.get("current_price_jpy") if verified else None
-        ready, reasons = configuration_readiness(item) if item else (False, ["候補の現行構成未確認"])
+        observed_price = item.get("current_price_jpy") if verified else None
+        observed_at = _parse_strategy_dt(item.get("retrieval_time"))
+        observation_is_bf = bool(verified and in_bf_window and observed_at and bf_start <= observed_at <= bf_end)
+        bf_target = int(plan.get("black_friday_target_price_jpy") or budget["pc_target_jpy"])
+        ready, reasons = configuration_readiness(item) if item else (False, ["候補の構成未確認"])
+        stock = item.get("stock_status", "unknown")
         role = plan.get("role")
         row = {
-            "candidate_id": cid, "role": role,
-            "label": plan.get("label") or item.get("name") or cid,
+            "candidate_id": cid, "role": role, "label": plan.get("label") or item.get("name") or cid,
             "url": sales_url(item) or plan.get("purchase_url"),
-            "current_price_jpy": price, "current_price_verified": verified,
-            "stock_status": item.get("stock_status", "unknown"),
-            "configuration_ready": ready, "configuration_reasons": reasons,
-            "target_ram_gb": plan.get("target_ram_gb"), "target_ssd_gb": plan.get("target_ssd_gb"),
-            "target_price_jpy": budget["pc_target_jpy"], "hard_cap_jpy": budget["pc_budget_jpy"],
-            "dynamic_pc_cap_jpy": dynamic_cap, "status": "PRICE_UNVERIFIED", "detail": "",
+            "black_friday_target_price_jpy": bf_target, "black_friday_price_cap_jpy": bf_cap,
+            "black_friday_price_observed_jpy": observed_price if observation_is_bf else None,
+            "black_friday_offer_verified": observation_is_bf,
+            "pre_black_friday_reference_price_jpy": observed_price if verified and not observation_is_bf else None,
+            "pre_black_friday_reference_at": item.get("retrieval_time") if verified and not observation_is_bf else None,
+            "observed_price_jpy": observed_price,
+            "observed_price_phase": "BLACK_FRIDAY_WINDOW" if observation_is_bf else ("PRE_BLACK_FRIDAY_REFERENCE" if verified else "UNVERIFIED"),
+            "price_verified": verified, "stock_status": stock, "configuration_ready": ready,
+            "configuration_reasons": reasons, "target_ram_gb": plan.get("target_ram_gb"),
+            "target_ssd_gb": plan.get("target_ssd_gb"),
+            "current_live_pc_budget_cap_reference_jpy": live_cap,
+            "bf_budget_cap_is_final": bool(in_bf_window and budget_ready),
+            "status": "PRE_BF_TARGET_MONITORING" if not in_bf_window else "BF_PRICE_UNVERIFIED",
+            "detail": "",
         }
         if role == "primary_configuration_upgrade":
             baseline = int(plan.get("baseline_price_jpy") or 0)
             row.update({
                 "baseline_price_reference_jpy": baseline,
-                "baseline_ram_gb": plan.get("baseline_ram_gb"),
-                "baseline_ssd_gb": plan.get("baseline_ssd_gb"),
-                "max_upgrade_cost_to_target_jpy": max(0, budget["pc_target_jpy"] - baseline),
-                "max_upgrade_cost_to_hard_cap_jpy": max(0, budget["pc_budget_jpy"] - baseline),
-                "max_upgrade_cost_to_dynamic_cap_jpy": max(0, dynamic_cap - baseline),
+                "baseline_price_reference_phase": "PRE_BLACK_FRIDAY_BASE_CONFIGURATION",
+                "baseline_ram_gb": plan.get("baseline_ram_gb"), "baseline_ssd_gb": plan.get("baseline_ssd_gb"),
+                "max_upgrade_cost_to_bf_target_jpy": max(0, bf_target-baseline),
+                "max_upgrade_cost_to_bf_hard_cap_jpy": max(0, bf_cap-baseline),
             })
-            if not verified:
-                row["detail"] = "基本価格は計画基準のみ。完成構成の現行価格・在庫が未確認です。"
-            elif item.get("stock_status") == "out_of_stock":
-                row["status"], row["detail"] = "OUT_OF_STOCK", "商品ページで在庫切れを確認。"
-            elif item.get("stock_status") not in ("in_stock", "low_stock"):
-                row["status"], row["detail"] = "STOCK_UNCONFIRMED", "在庫を直接確認できていません。"
-            elif not ready:
-                row["status"] = "NEEDS_CONFIGURATION"
+            if not in_bf_window:
                 row["detail"] = (
-                    f"基本価格基準¥{baseline:,}からの構成変更費上限："
-                    f"理想¥{row['max_upgrade_cost_to_target_jpy']:,}、"
-                    f"計画上限¥{row['max_upgrade_cost_to_hard_cap_jpy']:,}、"
-                    f"現在の動的上限¥{row['max_upgrade_cost_to_dynamic_cap_jpy']:,}。"
-                    "実際の構成変更価格は未確認。0円とは仮定しません。"
+                    f"BF完成構成の目標は¥{bf_target:,}、計画上限は¥{bf_cap:,}。"
+                    f"¥{baseline:,}は16GB/500GB基本構成の事前参考価格でありBF価格ではありません。"
+                    f"構成変更費は理想まで¥{row['max_upgrade_cost_to_bf_target_jpy']:,}以内、"
+                    f"計画上限まで¥{row['max_upgrade_cost_to_bf_hard_cap_jpy']:,}以内が条件です。"
+                    "追加費用は未確認で、0円とは仮定しません。"
                 )
-            elif price <= dynamic_cap:
-                row["status"], row["detail"] = "WITHIN_DYNAMIC_CAP", "完成構成の価格は現在の動的本体上限内。全体購入ゲートは別途評価。"
+            elif not observation_is_bf:
+                row["status"], row["detail"] = "BF_PRICE_UNVERIFIED", "BF期間内の完成構成価格を直接確認できていません。事前価格をBF価格に流用しません。"
+            elif stock == "out_of_stock":
+                row["status"], row["detail"] = "OUT_OF_STOCK", "BF期間中の商品ページで在庫切れを確認。"
+            elif stock not in ("in_stock", "low_stock"):
+                row["status"], row["detail"] = "STOCK_UNCONFIRMED", "BF期間中の在庫を直接確認できていません。"
+            elif not ready:
+                row["status"], row["detail"] = "NEEDS_CONFIGURATION", "BF期間中に観測した価格も構成要件未達です。32GB RAM/1TB SSD完成構成の最終価格が必要です。"
+            elif observed_price <= bf_cap:
+                row["status"], row["detail"] = "MEETS_BF_PRICE_AND_CONFIGURATION", "BF期間内の直接観測価格・在庫・完成構成が条件内。全体購入ゲートは別途必要です。"
             else:
-                row["status"], row["detail"] = "WAIT_FOR_DISCOUNT", f"動的本体上限まで¥{price-dynamic_cap:,}の値下げが必要。"
+                row["status"], row["detail"] = "WAIT_FOR_DISCOUNT", f"BF観測価格から本体上限まで¥{observed_price-bf_cap:,}の値下げが必要です。"
         elif role == "secondary_outlet_complete_configuration":
             reference = int(plan.get("last_verified_listing_reference_jpy") or 0)
             row["listing_reference_price_jpy"] = reference
-            if not verified:
-                row["detail"] = f"最終確認時の参考掲載額は¥{reference:,}。現行価格としては扱いません。"
-            elif item.get("stock_status") == "out_of_stock":
-                row["status"], row["detail"] = "OUT_OF_STOCK", "商品ページで在庫切れを確認。"
+            if not in_bf_window:
+                row["detail"] = f"BF目標は¥{bf_target:,}、完成構成の計画上限は¥{bf_cap:,}。¥{reference:,}は10月の参考掲載額でBF価格ではありません。"
+            elif not observation_is_bf:
+                row["status"], row["detail"] = "BF_PRICE_UNVERIFIED", "BF期間中の価格・在庫・SKUを直接確認できていません。"
+            elif stock == "out_of_stock":
+                row["status"], row["detail"] = "OUT_OF_STOCK", "BF期間中の商品ページで在庫切れを確認。"
+            elif stock not in ("in_stock", "low_stock"):
+                row["status"], row["detail"] = "STOCK_UNCONFIRMED", "BF期間中の在庫を直接確認できていません。"
             elif not ready:
-                row["status"], row["detail"] = "NEEDS_CONFIGURATION", "32GB RAM・1TB SSDの完成構成を確認できません。"
-            elif price <= dynamic_cap:
-                row["status"], row["detail"] = "WITHIN_DYNAMIC_CAP", "完成構成の価格は現在の動的本体上限内。全体購入ゲートは別途評価。"
+                row["status"], row["detail"] = "NEEDS_CONFIGURATION", "BF期間中の価格を確認しましたが、32GB/1TB完成構成ではありません。"
+            elif observed_price <= bf_cap:
+                row["status"], row["detail"] = "MEETS_BF_PRICE_AND_CONFIGURATION", "BF期間内の直接観測価格・在庫・完成構成が条件内。全体購入ゲートは別途必要です。"
             else:
                 row["status"] = "WAIT_FOR_DISCOUNT"
-                row["discount_to_target_jpy"] = max(0, price - budget["pc_target_jpy"])
-                row["discount_to_planned_cap_jpy"] = max(0, price - budget["pc_budget_jpy"])
-                row["discount_to_dynamic_cap_jpy"] = max(0, price - dynamic_cap)
-                row["detail"] = (
-                    f"理想目標まで¥{row['discount_to_target_jpy']:,}、"
-                    f"計画上限まで¥{row['discount_to_planned_cap_jpy']:,}、"
-                    f"現在の動的上限まで¥{row['discount_to_dynamic_cap_jpy']:,}の値下げが必要。"
-                )
+                row["bf_price_target_gap_jpy"] = max(0, observed_price-bf_target)
+                row["bf_price_cap_gap_jpy"] = max(0, observed_price-bf_cap)
+                row["detail"] = f"BF観測価格から理想目標まで¥{row['bf_price_target_gap_jpy']:,}、BF本体上限まで¥{row['bf_price_cap_gap_jpy']:,}の値下げが必要です。"
         rows.append(row)
 
     outlier = strategy.get("outlier_rule") or {}
     token = str(outlier.get("gpu") or "RTX 5070 Ti").lower().replace("rtx ", "")
-    candidates = [
-        x for x in products
-        if x.get("form_factor") == outlier.get("form_factor", "desktop")
-        and token in gpu_key(x).lower()
-    ]
-    complete = []
-    eligible = []
+    candidates = [x for x in products if x.get("form_factor") == outlier.get("form_factor", "desktop") and token in gpu_key(x).lower()]
+    observed_complete, bf_complete, eligible = [], [], []
     for item in candidates:
         if not _trusted_live_offer(item) or item.get("stock_status") not in ("in_stock", "low_stock"):
             continue
         ready, _ = configuration_readiness(item)
-        if ready:
-            complete.append(item)
-            if item["current_price_jpy"] <= min(budget["pc_budget_jpy"], dynamic_cap):
+        if not ready:
+            continue
+        observed_complete.append(item)
+        observed_at = _parse_strategy_dt(item.get("retrieval_time"))
+        if in_bf_window and observed_at and bf_start <= observed_at <= bf_end:
+            bf_complete.append(item)
+            if int(item["current_price_jpy"]) <= bf_cap:
                 eligible.append(item)
     eligible.sort(key=lambda x: (x["current_price_jpy"], x.get("id", "")))
-    complete.sort(key=lambda x: (x["current_price_jpy"], x.get("id", "")))
-    best = eligible[0] if eligible else (complete[0] if complete else None)
-    if eligible:
-        status = "MEETS_PRICE_AND_CONFIGURATION_CONDITIONS"
-        detail = "条件を満たす完成構成あり。ただし通常の全体購入ゲート通過前は購入許可ではありません。"
-    elif complete:
-        status = "WAIT_FOR_DISCOUNT"
-        detail = f"完成構成の直接確認候補あり。最安確認価格¥{complete[0]['current_price_jpy']:,}は動的上限超過。"
+    bf_complete.sort(key=lambda x: (x["current_price_jpy"], x.get("id", "")))
+    observed_complete.sort(key=lambda x: (x["current_price_jpy"], x.get("id", "")))
+    if not in_bf_window:
+        best = observed_complete[0] if observed_complete else None
+        status, detail = "PRE_BF_TARGET_MONITORING", "事前価格は比較用参考情報のみ。ブラックフライデー販売価格として扱いません。"
+    elif eligible:
+        best = eligible[0]
+        status, detail = "MEETS_BF_PRICE_AND_CONFIGURATION", "条件を満たすBF期間内の完成構成を検出。全体購入ゲート通過前は購入許可ではありません。"
+    elif bf_complete:
+        best = bf_complete[0]
+        status, detail = "WAIT_FOR_DISCOUNT", f"BF期間中の完成構成を確認しましたが、本体上限を超過。最安確認価格は¥{best['current_price_jpy']:,}です。"
     else:
-        status = "NO_VERIFIED_COMPLETE_CONFIGURATION"
-        detail = "直接確認済みの32GB/1TB以上・在庫ありのRTX 5070 Tiデスクトップは未発見。大穴監視を継続。"
+        best = None
+        status, detail = "NO_VERIFIED_COMPLETE_CONFIGURATION", "BF期間内に価格・在庫・SKU・PITを直接確認できた32GB/1TB以上のRTX 5070 Tiデスクトップは未発見。"
     rows.append({
-        "candidate_id": None, "role": "rtx_5070_ti_outlier",
-        "label": outlier.get("label") or "RTX 5070 Ti 大穴",
-        "current_price_jpy": best.get("current_price_jpy") if best else None,
-        "current_price_verified": bool(best), "stock_status": best.get("stock_status", "unknown") if best else "unknown",
+        "candidate_id": None, "role": "rtx_5070_ti_outlier", "label": outlier.get("label") or "RTX 5070 Ti 大穴",
+        "black_friday_target_price_jpy": int(outlier.get("black_friday_target_cap_jpy") or budget["pc_budget_jpy"]),
+        "black_friday_price_observed_jpy": best.get("current_price_jpy") if best and in_bf_window else None,
+        "pre_black_friday_reference_price_jpy": best.get("current_price_jpy") if best and not in_bf_window else None,
+        "black_friday_offer_verified": bool(best and in_bf_window), "price_verified": bool(best),
+        "stock_status": best.get("stock_status", "unknown") if best else "unknown",
         "configuration_ready": bool(eligible), "configuration_reasons": [],
-        "target_ram_gb": int(outlier.get("minimum_ram_gb") or 32),
-        "target_ssd_gb": int(outlier.get("minimum_ssd_gb") or 1000),
-        "hard_cap_jpy": budget["pc_budget_jpy"], "dynamic_pc_cap_jpy": dynamic_cap,
-        "status": status, "detail": detail,
+        "target_ram_gb": int(outlier.get("minimum_ram_gb") or 32), "target_ssd_gb": int(outlier.get("minimum_ssd_gb") or 1000),
+        "bf_price_cap_jpy": bf_cap, "current_live_pc_budget_cap_reference_jpy": live_cap,
+        "bf_budget_cap_is_final": bool(in_bf_window and budget_ready), "status": status, "detail": detail,
         "eligible_candidate_ids": [x.get("id") for x in eligible],
-        "verified_complete_candidate_count": len(complete),
-        "monitored_candidate_count": len(candidates),
-        "url": sales_url(best) if best else None,
+        "verified_complete_candidate_count": len(bf_complete if in_bf_window else observed_complete),
+        "monitored_candidate_count": len(candidates), "url": sales_url(best) if best else None,
     })
     return {
-        "generated_at": iso(now_jst()), "total_budget_jpy": budget["total_budget_jpy"],
+        "generated_at": iso(now_jst()),
+        "pricing_phase": "BLACK_FRIDAY_WINDOW" if in_bf_window else "PRE_BLACK_FRIDAY_REFERENCE",
+        "black_friday_window_start_jst": phase.get("window_start_jst"),
+        "black_friday_window_end_jst": phase.get("window_end_jst"),
+        "future_black_friday_prices_known": bool(in_bf_window),
+        "total_budget_jpy": budget["total_budget_jpy"],
         "peripheral_target_budget_jpy": budget["peripheral_budget_jpy"],
-        "pc_target_jpy": budget["pc_target_jpy"], "pc_planned_cap_jpy": budget["pc_budget_jpy"],
-        "dynamic_pc_cap_jpy": dynamic_cap, "rows": rows,
+        "pc_target_jpy": budget["pc_target_jpy"],
+        "pc_planned_cap_jpy": budget["pc_budget_jpy"],
+        "black_friday_pc_price_cap_jpy": bf_cap,
+        "black_friday_pc_price_cap_final": bool(in_bf_window and budget_ready),
+        "current_live_pc_budget_cap_reference_jpy": live_cap,
+        "rows": rows,
         "score_policy_note": strategy.get("score_policy", "Actual scores are evidence-derived; no target score is hardcoded."),
+        "price_semantics_note": "BF目標額と実際に観測した価格は別フィールド。BF期間外の価格は参考値であり、BF実売価格として扱いません。",
     }
 
 
@@ -471,15 +515,22 @@ def main():
         ]
 
     lines += [
-        "## 37万円購入戦略の条件監視",
+        "## 37万円・ブラックフライデー購入目標の監視",
         "",
-        "|優先方針|確認済み現行価格|構成条件|判定|必要条件・値下げ額|",
-        "|---|---:|---|---|---|",
+        f"- 価格フェーズ: **{purchase_strategy_status['pricing_phase']}**",
+        f"- BF期間: {purchase_strategy_status['black_friday_window_start_jst']} ～ {purchase_strategy_status['black_friday_window_end_jst']}",
+        f"- BF本体計画上限: ¥{purchase_strategy_status['pc_planned_cap_jpy']:,}",
+        f"- BF本体上限（BF期間中の周辺機器価格を反映）: ¥{purchase_strategy_status['black_friday_pc_price_cap_jpy']:,}"
+        + ("（確定）" if purchase_strategy_status["black_friday_pc_price_cap_final"] else "（目標予算からの計画値。BF実売ではない）"),
+        "- BF期間外の観測価格は参考値。BF価格としてカウントしません。",
+        "",
+        "|優先方針|BF購入目標価格|BF期間内の確認済み価格|BF前の参考価格|判定|必要条件・値下げ額|",
+        "|---|---:|---:|---:|---|---|",
         *[
             f"|{r['label']}|"
-            f"{('¥'+format(r['current_price_jpy'],',')) if r.get('current_price_verified') and r.get('current_price_jpy') is not None else '未確認'}|"
-            f"{('達成' if r.get('configuration_ready') else '未達/未確認')}"
-            f"{(' ('+', '.join(r.get('configuration_reasons') or [])+')') if r.get('configuration_reasons') else ''}|"
+            f"{('¥'+format(r['black_friday_target_price_jpy'],',')) if r.get('black_friday_target_price_jpy') is not None else '動的上限'}|"
+            f"{('¥'+format(r['black_friday_price_observed_jpy'],',')) if r.get('black_friday_offer_verified') and r.get('black_friday_price_observed_jpy') is not None else '未確認'}|"
+            f"{('¥'+format(r['pre_black_friday_reference_price_jpy'],',')) if r.get('pre_black_friday_reference_price_jpy') is not None else '—'}|"
             f"**{r['status']}**|{r.get('detail','')}|"
             for r in purchase_strategy_status["rows"]
         ],
