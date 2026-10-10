@@ -111,25 +111,33 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
             "status": "PRE_BF_TARGET_MONITORING" if not in_bf_window else "BF_PRICE_UNVERIFIED",
             "detail": "",
         }
-        if role == "primary_configuration_upgrade":
+        if role in ("primary_configuration_upgrade", "higher_cpu_configuration_upgrade"):
             baseline = int(plan.get("baseline_price_jpy") or 0)
+            # A sale may change the base configuration price before BF. Use the
+            # latest verified listing to calculate upgrade headroom, but never
+            # treat that base price as a completed 32GB/1TB configuration.
+            headroom_basis = int(observed_price) if observed_price is not None else baseline
+            headroom_phase = row["observed_price_phase"] if observed_price is not None else "CONFIGURED_BASELINE_REFERENCE"
             row.update({
                 "baseline_price_reference_jpy": baseline,
                 "baseline_price_reference_phase": "PRE_BLACK_FRIDAY_BASE_CONFIGURATION",
+                "upgrade_headroom_basis_price_jpy": headroom_basis,
+                "upgrade_headroom_basis_phase": headroom_phase,
                 "baseline_ram_gb": plan.get("baseline_ram_gb"), "baseline_ssd_gb": plan.get("baseline_ssd_gb"),
-                "max_upgrade_cost_to_bf_target_jpy": max(0, bf_target-baseline),
-                "max_upgrade_cost_to_bf_hard_cap_jpy": max(0, bf_cap-baseline),
-                "max_upgrade_cost_to_target_jpy": max(0, bf_target-baseline),
-                "max_upgrade_cost_to_hard_cap_jpy": max(0, bf_cap-baseline),
-                "max_upgrade_cost_to_dynamic_cap_jpy": max(0, bf_cap-baseline),
+                "max_upgrade_cost_to_bf_target_jpy": max(0, bf_target-headroom_basis),
+                "max_upgrade_cost_to_bf_hard_cap_jpy": max(0, bf_cap-headroom_basis),
+                "max_upgrade_cost_to_target_jpy": max(0, bf_target-headroom_basis),
+                "max_upgrade_cost_to_hard_cap_jpy": max(0, bf_cap-headroom_basis),
+                "max_upgrade_cost_to_dynamic_cap_jpy": max(0, bf_cap-headroom_basis),
             })
             if not in_bf_window:
                 row["detail"] = (
                     f"BF完成構成の目標は¥{bf_target:,}、計画上限は¥{bf_cap:,}。"
                     f"¥{baseline:,}は16GB/500GB基本構成の事前参考価格でありBF価格ではありません。"
-                    f"構成変更費は理想まで¥{row['max_upgrade_cost_to_bf_target_jpy']:,}以内、"
+                    f"余地計算の基準は¥{headroom_basis:,}（{headroom_phase}）。"
+                    f"構成変更費は目標まで¥{row['max_upgrade_cost_to_bf_target_jpy']:,}以内、"
                     f"計画上限まで¥{row['max_upgrade_cost_to_bf_hard_cap_jpy']:,}以内が条件です。"
-                    "追加費用は未確認で、0円とは仮定しません。"
+                    "これは構成変更費の見積ではありません。32GB/1TB完成構成の確定価格を別途確認します。"
                 )
             elif not observation_is_bf:
                 row["status"], row["detail"] = "BF_PRICE_UNVERIFIED", "BF期間内の完成構成価格を直接確認できていません。事前価格をBF価格に流用しません。"
