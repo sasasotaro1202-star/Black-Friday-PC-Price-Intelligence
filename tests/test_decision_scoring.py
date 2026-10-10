@@ -36,8 +36,8 @@ class DecisionScoringTests(unittest.TestCase):
         }
 
     def test_budget_discount(self):
-        self.assertEqual(intelligence.required_discount(316200), 0)
-        self.assertAlmostEqual(intelligence.required_discount(350000), (350000 - 316200) / 350000 * 100, places=6)
+        self.assertEqual(intelligence.required_discount(312200), 0)
+        self.assertAlmostEqual(intelligence.required_discount(350000), (350000 - 312200) / 350000 * 100, places=6)
 
     def test_effective_cost_uses_confirmed_benefit_only(self):
         item = self.candidate(price=289000)
