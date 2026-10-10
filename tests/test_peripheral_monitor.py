@@ -69,6 +69,8 @@ class PeripheralMonitorTests(unittest.TestCase):
         ]
         target["allowed_hosts"] = ["www.biccamera.com", "item.rakuten.co.jp"]
         target["identity_terms"] = ["G213r", "G213R", "9242996"]
+        target["min_price_jpy"] = 3000
+        target["max_price_jpy"] = 15000
         parsed = {
             "page_text_excerpt": "Logicool G213r 型番 G213R ￥7,330 在庫あり",
             "price_jpy": 7330,
