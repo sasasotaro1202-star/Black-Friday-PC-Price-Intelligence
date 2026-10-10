@@ -2,6 +2,7 @@ import json
 import pathlib
 import sys
 import unittest
+from unittest.mock import patch
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -53,13 +54,39 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(reasons, [])
 
     def test_unverified_peripheral_snapshot_fails_purchase_readiness(self):
-        projection = intelligence.peripheral_budget_projection()
+        tracked_ids = [
+            p["id"] for p in self.cfg["peripherals"] if p.get("track_current_price")
+        ]
+        unknown_snapshot = {
+            "generated_at": None,
+            "products": [
+                {
+                    "id": pid,
+                    "current_price_jpy": None,
+                    "price_verified": False,
+                    "stock_status": "unknown",
+                }
+                for pid in tracked_ids
+            ],
+        }
+        original_load_json = intelligence.load_json
+
+        def deterministic_load_json(path, default):
+            if str(path).endswith("data/peripheral_prices.json"):
+                return unknown_snapshot
+            return original_load_json(path, default)
+
+        with patch.object(intelligence, "load_json", side_effect=deterministic_load_json):
+            projection = intelligence.peripheral_budget_projection()
+
         self.assertFalse(projection["budget_data_ready"])
-        self.assertTrue(projection["tracked_peripheral_unverified_ids"])
-        self.assertGreaterEqual(projection["peripheral_projection_jpy"], 0)
-        self.assertGreaterEqual(projection["pc_dynamic_cap_jpy"], 0)
-        self.assertLessEqual(projection["pc_dynamic_cap_jpy"], projection["pc_planned_cap_jpy"])
-        self.assertLessEqual(projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"], projection["total_budget_jpy"])
+        self.assertEqual(projection["tracked_peripheral_unverified_ids"], sorted(tracked_ids))
+        self.assertEqual(projection["peripheral_projection_jpy"], 67800)
+        self.assertEqual(projection["pc_dynamic_cap_jpy"], 302200)
+        self.assertLessEqual(
+            projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"],
+            projection["total_budget_jpy"],
+        )
 
 
 if __name__ == "__main__":
