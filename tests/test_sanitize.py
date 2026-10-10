@@ -22,6 +22,10 @@ class SanitizeFetchStatsTests(unittest.TestCase):
             "search_fallback_failures": 1,
             "search_identity_rejections": 4,
             "errors_by_host_reason": {"example.com|curl_exit_35": 1},
+            "alternate_url_attempts": 3,
+            "alternate_url_successes": 1,
+            "alternate_url_failures": 2,
+            "alternate_url_identity_rejections": 1,
         }
         final = [
             {"current_price_jpy": 100000, "price_source_mode": "direct_structured",
@@ -41,6 +45,10 @@ class SanitizeFetchStatsTests(unittest.TestCase):
         self.assertEqual(result["search_fallback_failures"], 1)
         self.assertEqual(result["search_identity_rejections"], 4)
         self.assertEqual(result["errors_by_host_reason"], {"example.com|curl_exit_35": 1})
+        self.assertEqual(result["alternate_url_attempts"], 3)
+        self.assertEqual(result["alternate_url_successes"], 1)
+        self.assertEqual(result["alternate_url_failures"], 2)
+        self.assertEqual(result["alternate_url_identity_rejections"], 1)
 
 
 if __name__ == "__main__":
