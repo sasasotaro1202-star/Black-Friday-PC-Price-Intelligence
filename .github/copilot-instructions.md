@@ -17,6 +17,15 @@ config/targets.json is the single source of truth.
 - Track monitor, speakers, mouse and mousepad prices separately from PC prices.
 - Do not subtract coupons, points, lotteries, future rewards, or eligibility-dependent perks until actual checkout applicability is verified.
 
+## Black Friday price semantics — mandatory
+
+- All purchase target prices in the 37万円 strategy and peripheral targets mean **prices targeted for purchase during the Black Friday window**, not today's prices.
+- Window: 2026-11-14 00:00 JST through 2026-12-04 23:59 JST.
+- Before the window, listings are `PRE_BLACK_FRIDAY_REFERENCE`; they must not populate `black_friday_price_observed_jpy` or be described as BF sale prices.
+- A BF-period observation requires source retrieval inside the window, verified current price, SKU identity, valid PIT, and confirmed stock.
+- Show BF target price, pre-window reference price, and observed BF-window price separately. Never present a future sale price as confirmed.
+- ¥299,800 PC target, ¥302,200 planned cap and ¥32,000 MR5 target are BF purchase goals. Use actual peripheral prices to adjust the PC cap only during the BF window and when the accessory snapshot is fresh and verified.
+
 ## 37万円購入戦略
 
 - Primary conditional target: `desktop-gtune-dg-i5g70-5070`. Its 279,800 JPY listing is only the 16 GB / 500 GB baseline. Never mark it purchase-ready until a 32 GB / 1 TB completed configuration and checkout price are verified. For a 279,800 JPY baseline, the max upgrade allowance is 20,000 JPY to reach the 299,800 JPY PC target or 22,400 JPY to reach the 302,200 JPY planning cap; these are arithmetic ceilings, not quoted upgrade prices.
