@@ -119,6 +119,9 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
                 "baseline_ram_gb": plan.get("baseline_ram_gb"), "baseline_ssd_gb": plan.get("baseline_ssd_gb"),
                 "max_upgrade_cost_to_bf_target_jpy": max(0, bf_target-baseline),
                 "max_upgrade_cost_to_bf_hard_cap_jpy": max(0, bf_cap-baseline),
+                "max_upgrade_cost_to_target_jpy": max(0, bf_target-baseline),
+                "max_upgrade_cost_to_hard_cap_jpy": max(0, bf_cap-baseline),
+                "max_upgrade_cost_to_dynamic_cap_jpy": max(0, bf_cap-baseline),
             })
             if not in_bf_window:
                 row["detail"] = (
@@ -144,7 +147,13 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
             reference = int(plan.get("last_verified_listing_reference_jpy") or 0)
             row["listing_reference_price_jpy"] = reference
             if not in_bf_window:
-                row["detail"] = f"BF目標は¥{bf_target:,}、完成構成の計画上限は¥{bf_cap:,}。¥{reference:,}は10月の参考掲載額でBF価格ではありません。"
+                row["pre_bf_reference_gap_to_target_jpy"] = max(0, reference - bf_target) if reference else None
+                row["pre_bf_reference_gap_to_planned_cap_jpy"] = max(0, reference - bf_cap) if reference else None
+                row["detail"] = (
+                    f"BF目標は¥{bf_target:,}、完成構成の計画上限は¥{bf_cap:,}。"
+                    f"¥{reference:,}は10月の参考掲載額でBF価格ではありません。"
+                    + (f" 参考額からBF目標まで¥{reference-bf_target:,}、計画上限まで¥{reference-bf_cap:,}の差があります。" if reference else "")
+                )
             elif not observation_is_bf:
                 row["status"], row["detail"] = "BF_PRICE_UNVERIFIED", "BF期間中の価格・在庫・SKUを直接確認できていません。"
             elif stock == "out_of_stock":
@@ -153,6 +162,8 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
                 row["status"], row["detail"] = "STOCK_UNCONFIRMED", "BF期間中の在庫を直接確認できていません。"
             elif not ready:
                 row["status"], row["detail"] = "NEEDS_CONFIGURATION", "BF期間中の価格を確認しましたが、32GB/1TB完成構成ではありません。"
+            elif not budget_ready:
+                row["status"], row["detail"] = "BF_BUDGET_UNVERIFIED", "PC価格・構成は確認できましたが、BF周辺機器の実売価格/在庫が揃わず、37万円総額の本体上限が未確定です。"
             elif observed_price <= bf_cap:
                 row["status"], row["detail"] = "MEETS_BF_PRICE_AND_CONFIGURATION", "BF期間内の直接観測価格・在庫・完成構成が条件内。全体購入ゲートは別途必要です。"
             else:
@@ -176,7 +187,7 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
         observed_at = _parse_strategy_dt(item.get("retrieval_time"))
         if in_bf_window and observed_at and bf_start <= observed_at <= bf_end:
             bf_complete.append(item)
-            if int(item["current_price_jpy"]) <= bf_cap:
+            if budget_ready and int(item["current_price_jpy"]) <= bf_cap:
                 eligible.append(item)
     eligible.sort(key=lambda x: (x["current_price_jpy"], x.get("id", "")))
     bf_complete.sort(key=lambda x: (x["current_price_jpy"], x.get("id", "")))
@@ -187,6 +198,9 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
     elif eligible:
         best = eligible[0]
         status, detail = "MEETS_BF_PRICE_AND_CONFIGURATION", "条件を満たすBF期間内の完成構成を検出。全体購入ゲート通過前は購入許可ではありません。"
+    elif bf_complete and not budget_ready:
+        best = bf_complete[0]
+        status, detail = "BF_BUDGET_UNVERIFIED", f"BF期間中の完成構成を確認しましたが、周辺機器の価格/在庫が未確認で本体上限は未確定。参考の確認価格は¥{best['current_price_jpy']:,}です。"
     elif bf_complete:
         best = bf_complete[0]
         status, detail = "WAIT_FOR_DISCOUNT", f"BF期間中の完成構成を確認しましたが、本体上限を超過。最安確認価格は¥{best['current_price_jpy']:,}です。"
@@ -518,6 +532,7 @@ def main():
         "## 37万円・ブラックフライデー購入目標の監視",
         "",
         f"- 価格フェーズ: **{purchase_strategy_status['pricing_phase']}**",
+        "- 以下のBF購入目標価格は開催期間の目標。開催前の表示価格は参考であり、BF価格の確定値ではありません。",
         f"- BF期間: {purchase_strategy_status['black_friday_window_start_jst']} ～ {purchase_strategy_status['black_friday_window_end_jst']}",
         f"- BF本体計画上限: ¥{purchase_strategy_status['pc_planned_cap_jpy']:,}",
         f"- BF本体上限（BF期間中の周辺機器価格を反映）: ¥{purchase_strategy_status['black_friday_pc_price_cap_jpy']:,}"
@@ -539,7 +554,7 @@ def main():
         "",
         "## 周辺機器の価格監視（サブモニター・ヘッドセットなし）",
         "",
-        "|項目|目標価格|観測価格|在庫|価格確認|購入ページ|",
+        "|項目|BF購入目標価格|観測価格（BF前は参考）|在庫|価格確認|購入ページ|",
         "|---|---:|---:|---|---|---|",
         *[
             f"|{p['name']}|¥{p['target_price_jpy']:,}|{('¥'+format(p['current_price_jpy'],',')) if p.get('current_price_jpy') is not None else '—（目標額で仮計算）'}|{p.get('stock_status','unknown')}|{('確認済み' if p.get('price_verified') else '未確認')}|{('[商品ページ]('+p['purchase_url']+')') if p.get('purchase_url') else '予算枠のみ'}|"
@@ -550,7 +565,7 @@ def main():
         "",
         "## 100点ランキング",
         "",
-        "|順位|タイプ|商品|現在価格|現金総額|確定現金特典|実質コスト|非現金価値|価値加点|PC目標まで|性能|価格価値|過去根拠|在庫|時期|総合|判定|購入リンク|",
+        "|順位|タイプ|商品|観測価格（BF前は参考）|現金総額|確定現金特典|実質コスト|非現金価値|価値加点|PC目標まで|性能|価格価値|過去根拠|在庫|時期|総合|判定|購入リンク|",
         "|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|",
     ]
     for row in scored[:20]:
