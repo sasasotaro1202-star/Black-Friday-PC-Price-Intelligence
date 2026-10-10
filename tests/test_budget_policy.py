@@ -17,20 +17,20 @@ class BudgetPolicyTests(unittest.TestCase):
 
     def test_all_in_budget_arithmetic(self):
         self.assertEqual(self.cfg["total_budget_jpy"], 370000)
-        self.assertEqual(self.cfg["peripheral_budget_jpy"], 57800)
-        self.assertEqual(self.cfg["pc_target_jpy"], 312200)
-        self.assertEqual(self.cfg["pc_budget_jpy"], 312200)
+        self.assertEqual(self.cfg["peripheral_budget_jpy"], 58800)
+        self.assertEqual(self.cfg["pc_target_jpy"], 311200)
+        self.assertEqual(self.cfg["pc_budget_jpy"], 311200)
         self.assertEqual(self.cfg["pc_budget_jpy"] + self.cfg["peripheral_budget_jpy"], self.cfg["total_budget_jpy"])
 
     def test_purchase_strategy_matches_37man_budget_and_speaker_goal(self):
         strategy = self.cfg["purchase_strategy"]
         self.assertEqual(self.cfg["total_budget_jpy"], 370000)
-        self.assertEqual(self.cfg["peripheral_budget_jpy"], 57800)
-        self.assertEqual(self.cfg["pc_target_jpy"], 312200)
-        self.assertEqual(self.cfg["pc_budget_jpy"], 312200)
-        self.assertEqual(self.cfg["pc_target_jpy"] - 279800, 32400)
-        self.assertEqual(self.cfg["pc_budget_jpy"] - 279800, 32400)
-        self.assertEqual(next(x for x in self.cfg["peripherals"] if x["id"] == "speakers")["target_price_jpy"], 12000)
+        self.assertEqual(self.cfg["peripheral_budget_jpy"], 58800)
+        self.assertEqual(self.cfg["pc_target_jpy"], 311200)
+        self.assertEqual(self.cfg["pc_budget_jpy"], 311200)
+        self.assertEqual(self.cfg["pc_target_jpy"] - 279800, 31400)
+        self.assertEqual(self.cfg["pc_budget_jpy"] - 279800, 31400)
+        self.assertEqual(next(x for x in self.cfg["peripherals"] if x["id"] == "speakers")["target_price_jpy"], 13000)
         self.assertEqual(next(x for x in self.cfg["peripherals"] if x["id"] == "secondary_monitor")["target_price_jpy"], 10000)
         self.assertEqual(strategy["priority_plans"][0]["candidate_id"], "desktop-gtune-dg-i5g70-5070")
         self.assertEqual(strategy["priority_plans"][1]["last_verified_listing_reference_jpy"], 304800)
@@ -43,8 +43,8 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(plan["baseline_price_jpy"], 299800)
         self.assertEqual((plan["baseline_ram_gb"], plan["baseline_ssd_gb"]), (16, 500))
         self.assertEqual((plan["target_ram_gb"], plan["target_ssd_gb"]), (32, 1000))
-        self.assertEqual(plan["black_friday_target_price_jpy"], 312200)
-        self.assertEqual(plan["black_friday_planned_hard_cap_jpy"], 312200)
+        self.assertEqual(plan["black_friday_target_price_jpy"], 311200)
+        self.assertEqual(plan["black_friday_planned_hard_cap_jpy"], 311200)
         self.assertIn("確定価格", plan["required_quote"])
 
     def test_upgrade_headroom_recalculates_from_latest_verified_base_price(self):
@@ -69,16 +69,16 @@ class BudgetPolicyTests(unittest.TestCase):
             strategy,
             {
                 "total_budget_jpy": 370000,
-                "peripheral_budget_jpy": 57800,
-                "pc_target_jpy": 312200,
-                "pc_budget_jpy": 312200,
+                "peripheral_budget_jpy": 58800,
+                "pc_target_jpy": 311200,
+                "pc_budget_jpy": 311200,
             },
             {"budget_data_ready": False, "pc_dynamic_cap_jpy": 0},
         )
         row = next(x for x in result["rows"] if x.get("candidate_id") == "desktop-gtune-dg-i7g70-5070")
         self.assertEqual(row["upgrade_headroom_basis_price_jpy"], 260000)
-        self.assertEqual(row["max_upgrade_cost_to_bf_target_jpy"], 52200)
-        self.assertEqual(row["max_upgrade_cost_to_bf_hard_cap_jpy"], 52200)
+        self.assertEqual(row["max_upgrade_cost_to_bf_target_jpy"], 51200)
+        self.assertEqual(row["max_upgrade_cost_to_bf_hard_cap_jpy"], 51200)
         self.assertFalse(row["configuration_ready"])
 
     def test_dg_a7g70_catalog_uses_exact_outlet_model_and_completed_specs(self):
@@ -110,9 +110,9 @@ class BudgetPolicyTests(unittest.TestCase):
 
     def test_intelligence_uses_pc_only_budget(self):
         self.assertEqual(intelligence.TOTAL_BUDGET, 370000)
-        self.assertEqual(intelligence.PERIPHERAL_BUDGET, 57800)
-        self.assertEqual(intelligence.BUDGET, 312200)
-        self.assertEqual(intelligence.PC_BUDGET, 312200)
+        self.assertEqual(intelligence.PERIPHERAL_BUDGET, 58800)
+        self.assertEqual(intelligence.BUDGET, 311200)
+        self.assertEqual(intelligence.PC_BUDGET, 311200)
 
     def test_incomplete_pc_base_config_is_not_ready(self):
         ready, reasons = intelligence.configuration_readiness({"spec": {"ram_gb": 16, "ssd": "500 GB"}})
@@ -129,9 +129,9 @@ class BudgetPolicyTests(unittest.TestCase):
         strategy = self.cfg["purchase_strategy"]
         policy = {
             "total_budget_jpy": 370000,
-            "peripheral_budget_jpy": 57800,
-            "pc_target_jpy": 312200,
-            "pc_budget_jpy": 312200,
+            "peripheral_budget_jpy": 58800,
+            "pc_target_jpy": 311200,
+            "pc_budget_jpy": 311200,
         }
         with patch.object(report, "now_jst", return_value=datetime.fromisoformat("2026-10-10T10:00:00+09:00")):
             result = report.build_purchase_strategy_status(
@@ -141,7 +141,7 @@ class BudgetPolicyTests(unittest.TestCase):
                 {"budget_data_ready": False, "pc_dynamic_cap_jpy": 0},
             )
         row = next(x for x in result["rows"] if x.get("role") == "secondary_outlet_complete_configuration")
-        self.assertIn("BF目標を¥7,400下回っています", row["detail"])
+        self.assertIn("BF目標を¥6,400下回っています", row["detail"])
         self.assertNotIn("¥-", row["detail"])
 
     def test_cached_price_for_previous_speaker_model_is_not_reused(self):
@@ -177,12 +177,12 @@ class BudgetPolicyTests(unittest.TestCase):
             projection = intelligence.peripheral_budget_projection()
 
         speaker_row = next(x for x in projection["peripherals"] if x["id"] == "speakers")
-        self.assertEqual(projection["peripheral_projection_jpy"], 57800)
+        self.assertEqual(projection["peripheral_projection_jpy"], 58800)
         self.assertIn("speakers", projection["tracked_peripheral_unverified_ids"])
         self.assertFalse(projection["budget_data_ready"])
         self.assertIsNone(speaker_row["current_price_jpy"])
         self.assertFalse(speaker_row["price_verified"])
-        self.assertEqual(speaker_row["budget_cost_jpy"], 12000)
+        self.assertEqual(speaker_row["budget_cost_jpy"], 13000)
         self.assertEqual(speaker_row["cost_basis"], "target_reserve_unverified")
 
     def test_unverified_peripheral_snapshot_fails_purchase_readiness(self):
@@ -213,8 +213,8 @@ class BudgetPolicyTests(unittest.TestCase):
 
         self.assertFalse(projection["budget_data_ready"])
         self.assertEqual(projection["tracked_peripheral_unverified_ids"], sorted(tracked_ids))
-        self.assertEqual(projection["peripheral_projection_jpy"], 57800)
-        self.assertEqual(projection["pc_dynamic_cap_jpy"], 312200)
+        self.assertEqual(projection["peripheral_projection_jpy"], 58800)
+        self.assertEqual(projection["pc_dynamic_cap_jpy"], 311200)
         self.assertLessEqual(
             projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"],
             projection["total_budget_jpy"],
