@@ -35,6 +35,8 @@ Preserve event_time, publication_time, available_at, retrieval_time and predicti
 - Normal monitoring executes about every 15 minutes.
 - Black Friday window monitoring executes about every 5 minutes.
 - Use a single scheduled workflow; keep the fast workflow manual-only to prevent duplicated runs.
+- Never cancel an in-progress price collection when a newer cron tick arrives; use `cancel-in-progress: false` for the shared writer concurrency group.
+- Run `scripts/discover.py` only after syncing/resetting to the latest `origin/main` inside the publish retry loop; otherwise the reset discards the newly discovered watchlist.
 - Monitor PCs and accessories separately; accessory prices must never appear as PC ranking rows.
 - GitHub Actions and Python standard library first. No paid APIs or unknown billing dependencies.
 - Validate budget arithmetic, accessory target sum, complete PC configuration, dynamic all-in PC cap, SKU identity, price source, stock, coverage counters, source snapshot hash, scoring arithmetic and PIT before publishing.
