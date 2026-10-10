@@ -286,6 +286,23 @@
         "black_friday_target_price_jpy": 321800,
         "black_friday_planned_hard_cap_jpy": 324200,
         "black_friday_target_note": "304,800円は2026-10-10に確認した参考掲載額でありBF価格ではない。BF購入目標321,800円、計画上限324,200円。BF期間に価格・在庫・SKU・PITを再確認する。"
+      },
+      {
+        "candidate_id": "desktop-gtune-dg-i7g70-5070",
+        "role": "higher_cpu_configuration_upgrade",
+        "label": "G-TUNE DG-I7G70 / RTX 5070（CPU重視の大穴）",
+        "baseline_price_jpy": 299800,
+        "baseline_ram_gb": 16,
+        "baseline_ssd_gb": 500,
+        "target_ram_gb": 32,
+        "target_ssd_gb": 1000,
+        "reference_checked_date": "2026-10-10",
+        "price_source_note": "299,800円は16GB/500GB基本構成の事前参考価格。32GB/1TB完成構成のBF実売価格ではない。",
+        "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
+        "status_if_unquoted": "NEEDS_CONFIGURATION",
+        "black_friday_target_price_jpy": 299800,
+        "black_friday_planned_hard_cap_jpy": 302200,
+        "black_friday_target_note": "CPU重視の大穴候補。16GB/500GBの基本価格だけでは購入判定せず、BF期間中の32GB/1TB完成構成価格・在庫・SKU・PITを確認し、37万円の総額ゲートを通過した場合のみ採用。"
       }
     ],
     "outlier_rule": {
