@@ -21,6 +21,29 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(self.cfg["pc_budget_jpy"], 302200)
         self.assertEqual(self.cfg["pc_budget_jpy"] + self.cfg["peripheral_budget_jpy"], self.cfg["total_budget_jpy"])
 
+    def test_purchase_strategy_matches_37man_budget_and_speaker_goal(self):
+        strategy = self.cfg["purchase_strategy"]
+        self.assertEqual(self.cfg["total_budget_jpy"], 370000)
+        self.assertEqual(self.cfg["peripheral_budget_jpy"], 67800)
+        self.assertEqual(self.cfg["pc_target_jpy"], 299800)
+        self.assertEqual(self.cfg["pc_budget_jpy"], 302200)
+        self.assertEqual(self.cfg["pc_target_jpy"] - 279800, 20000)
+        self.assertEqual(self.cfg["pc_budget_jpy"] - 279800, 22400)
+        self.assertEqual(next(x for x in self.cfg["peripherals"] if x["id"] == "speakers")["target_price_jpy"], 32000)
+        self.assertEqual(strategy["priority_plans"][0]["candidate_id"], "desktop-gtune-dg-i5g70-5070")
+        self.assertEqual(strategy["priority_plans"][1]["last_verified_listing_reference_jpy"], 304800)
+        self.assertFalse(strategy["outlier_rule"]["zero_cost_upgrade_assumption_allowed"])
+
+    def test_dg_a7g70_catalog_uses_exact_outlet_model_and_completed_specs(self):
+        with (ROOT / "config" / "candidate_catalog.json").open(encoding="utf-8") as f:
+            catalog = json.load(f)["candidates"]
+        candidate = next(x for x in catalog if x["id"] == "desktop-gtune-dg-a7g70-5070")
+        self.assertEqual(candidate["url"], "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/")
+        self.assertIn("DGA7G70B5BBDW101DECWA", candidate["aliases"])
+        self.assertEqual(candidate["ram_gb"], 32)
+        self.assertEqual(candidate["ssd"], "1 TB")
+        self.assertEqual(candidate["reference_price_jpy"], 304800)
+
     def test_peripheral_targets_sum_to_budget_and_no_unwanted_devices(self):
         self.assertEqual(sum(int(x["target_price_jpy"]) for x in self.cfg["peripherals"] if x.get("mandatory", True)), self.cfg["peripheral_budget_jpy"])
         ids = {x["id"] for x in self.cfg["peripherals"]}
