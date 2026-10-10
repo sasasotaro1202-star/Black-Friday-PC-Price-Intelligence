@@ -51,7 +51,6 @@ def _trusted_live_offer(item):
             None, "missing", "anomaly_rejected", "reference_only", "variant_ambiguous"
         )
         and item.get("variant_match") in ("exact", "trusted_url", "strong")
-        and item.get("stock_status") in ("in_stock", "low_stock")
         and item.get("pit_valid") is True
     )
 
@@ -93,6 +92,8 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
                 row["detail"] = "基本価格は計画基準のみ。完成構成の現行価格・在庫が未確認です。"
             elif item.get("stock_status") == "out_of_stock":
                 row["status"], row["detail"] = "OUT_OF_STOCK", "商品ページで在庫切れを確認。"
+            elif item.get("stock_status") not in ("in_stock", "low_stock"):
+                row["status"], row["detail"] = "STOCK_UNCONFIRMED", "在庫を直接確認できていません。"
             elif not ready:
                 row["status"] = "NEEDS_CONFIGURATION"
                 row["detail"] = (
@@ -139,7 +140,7 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
     complete = []
     eligible = []
     for item in candidates:
-        if not _trusted_live_offer(item):
+        if not _trusted_live_offer(item) or item.get("stock_status") not in ("in_stock", "low_stock"):
             continue
         ready, _ = configuration_readiness(item)
         if ready:
