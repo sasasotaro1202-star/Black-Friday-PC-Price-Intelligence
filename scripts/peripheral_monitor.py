@@ -6,7 +6,6 @@ import re
 from urllib.parse import urlparse
 from intelligence import ROOT, iso, now_jst, load_json, save_json, norm_text
 from monitor import fetch, parse_page, stock_from_text
-from intelligence import pick_price
 
 TARGETS_PATH = os.path.join(ROOT, "config", "targets.json")
 OUTPUT_PATH = os.path.join(ROOT, "data", "peripheral_prices.json")
@@ -42,11 +41,11 @@ def local_price_candidate(context):
     mice and mousepads. A points balance alone is not accepted as a price because it
     is not preceded by a yen symbol or followed by the yen unit.
     """
-    text = re.sub(r"\\s+", " ", str(context or ""))
+    text = re.sub(r"\s+", " ", str(context or ""))
     matches = []
     patterns = (
-        re.compile(r"(?:¥|￥)\\s*([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})(?:\\s*円)?"),
-        re.compile(r"(?<![0-9,])([0-9]{4,7})\\s*円"),
+        re.compile(r"(?:¥|￥)\s*([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})(?:\s*円)?"),
+        re.compile(r"(?<![0-9,])([0-9]{4,7})\s*円"),
     )
     for pattern in patterns:
         for match in pattern.finditer(text):
