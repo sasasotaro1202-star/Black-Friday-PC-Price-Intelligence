@@ -108,9 +108,9 @@ class BudgetPolicyTests(unittest.TestCase):
 
     def test_intelligence_uses_pc_only_budget(self):
         self.assertEqual(intelligence.TOTAL_BUDGET, 370000)
-        self.assertEqual(intelligence.PERIPHERAL_BUDGET, 45800)
-        self.assertEqual(intelligence.BUDGET, 321800)
-        self.assertEqual(intelligence.PC_BUDGET, 324200)
+        self.assertEqual(intelligence.PERIPHERAL_BUDGET, 67800)
+        self.assertEqual(intelligence.BUDGET, 299800)
+        self.assertEqual(intelligence.PC_BUDGET, 302200)
 
     def test_incomplete_pc_base_config_is_not_ready(self):
         ready, reasons = intelligence.configuration_readiness({"spec": {"ram_gb": 16, "ssd": "500 GB"}})
@@ -150,8 +150,8 @@ class BudgetPolicyTests(unittest.TestCase):
 
         self.assertFalse(projection["budget_data_ready"])
         self.assertEqual(projection["tracked_peripheral_unverified_ids"], sorted(tracked_ids))
-        self.assertEqual(projection["peripheral_projection_jpy"], 45800)
-        self.assertEqual(projection["pc_dynamic_cap_jpy"], 324200)
+        self.assertEqual(projection["peripheral_projection_jpy"], 67800)
+        self.assertEqual(projection["pc_dynamic_cap_jpy"], 302200)
         self.assertLessEqual(
             projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"],
             projection["total_budget_jpy"],
