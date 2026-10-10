@@ -137,6 +137,7 @@ class ReportLinkTests(unittest.TestCase):
         self.assertEqual(row["pre_bf_reference_gap_to_planned_cap_jpy"], 2600)
 
     def test_rtx_5070_ti_outlier_requires_verified_complete_configuration(self):
+        from datetime import datetime
         strategy = {
             "price_semantics": {
                 "window_start_jst": "2026-11-14T00:00:00+09:00",
