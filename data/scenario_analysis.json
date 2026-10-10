@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-10T15:51:01+09:00",
-  "source_snapshot_generated_at": "2026-10-10T15:50:29+09:00",
-  "source_snapshot_sha256": "427eca68fc470817b7de5c3d506de0ba693c2646e9d0e985a8e86a5abb8c21b3",
+  "generated_at": "2026-10-10T15:55:12+09:00",
+  "source_snapshot_generated_at": "2026-10-10T15:54:40+09:00",
+  "source_snapshot_sha256": "743b051356ecdb2c2be19aa925cb84791a2c6f908d080063e5936f7062409853",
   "budget_jpy": 299800,
   "budget_scope": "pc_only_excluding_peripherals",
   "total_budget_jpy": 370000,
@@ -536,7 +536,7 @@
       },
       "stock_status": "unknown",
       "price_source_mode": "public_baseline",
-      "price_validation_status": null,
+      "price_validation_status": "reference_only",
       "dynamic_candidate": false
     },
     {
