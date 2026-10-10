@@ -33,30 +33,6 @@ jobs:
           print(f"now_jst={now.isoformat()}")
           PY
 
-      - name: Refresh watchlist when empty or stale
-        id: watchlist
-        if: steps.window.outputs.in_window == 'true'
-        shell: bash
-        run: |
-          python - <<'PY' >> "$GITHUB_OUTPUT"
-          import json
-          from datetime import datetime, timezone, timedelta
-          JST=timezone(timedelta(hours=9))
-          try:
-              with open("data/watchlist.json", encoding="utf-8") as f: d=json.load(f)
-              urls=d.get("urls") or []
-              ts=d.get("generated_at")
-              age=(datetime.now(JST)-datetime.fromisoformat(ts.replace("Z","+00:00"))).total_seconds() if ts else 10**12
-              stale=age >= 24*3600
-          except Exception:
-              urls=[]; stale=True
-          print(f"needs_refresh={str((not urls) or stale).lower()}")
-          PY
-
-      - name: Refresh watchlist
-        if: steps.window.outputs.in_window == 'true' && steps.watchlist.outputs.needs_refresh == 'true'
-        run: python scripts/discover.py
-
       - name: Collect, recover, sanitize, score and publish
         if: steps.window.outputs.in_window == 'true'
         env:
@@ -67,6 +43,10 @@ jobs:
           for attempt in 1 2 3; do
             git fetch --no-tags origin main
             git reset --hard origin/main
+            if [ "$(python scripts/watchlist_freshness.py)" = "true" ]; then
+              echo "Refreshing watchlist after syncing origin/main."
+              python scripts/discover.py
+            fi
             python scripts/monitor.py
             python scripts/peripheral_monitor.py
             python scripts/recover.py

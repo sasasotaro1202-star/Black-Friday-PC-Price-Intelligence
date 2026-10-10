@@ -34,9 +34,10 @@ Preserve event_time, publication_time, available_at, retrieval_time and predicti
 ## Workflow design
 - Normal monitoring executes about every 15 minutes.
 - Black Friday window monitoring executes about every 5 minutes.
-- Use a single scheduled workflow; keep the fast workflow manual-only to prevent duplicated runs.
+- Use a single scheduled workflow; keep the fast workflow manual-only to prevent duplicated runs. Do not cancel in-progress collection when a new cron tick arrives.
 - Monitor PCs and accessories separately; accessory prices must never appear as PC ranking rows.
 - GitHub Actions and Python standard library first. No paid APIs or unknown billing dependencies.
+- Refresh the watchlist only after resetting to latest origin/main inside the publish retry loop; an earlier reset can discard newly discovered URLs. Restore missing curated catalog candidates after stale/corrupt watchlists.
 - Validate budget arithmetic, accessory target sum, complete PC configuration, dynamic all-in PC cap, SKU identity, price source, stock, coverage counters, source snapshot hash, scoring arithmetic and PIT before publishing.
 - Run tests and healthcheck before promoting changes. Never weaken safety gates to force a recommendation.
 
