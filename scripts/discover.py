@@ -121,6 +121,16 @@ def main():
         entries.append(entry)
 
     for entry in previous.get("urls", []):
+        # When the curated SKU URL is corrected, update the saved watch entry
+        # by ID before deduplication; otherwise the stale URL wins forever.
+        if isinstance(entry, dict):
+            cid = str(entry.get("id") or "")
+            curated = catalog_by_id.get(cid)
+            if curated and curated.get("url") and entry.get("url") != curated["url"]:
+                entry = dict(entry)
+                entry["url"] = curated["url"]
+                aliases = curated.get("aliases") or []
+                entry.setdefault("query", aliases[0] if aliases else (curated.get("name") or "curated catalog candidate"))
         add(entry)
 
     # The curated catalog is authoritative for candidate identity/coverage.
