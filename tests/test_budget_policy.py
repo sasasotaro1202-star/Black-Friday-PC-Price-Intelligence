@@ -7,6 +7,7 @@ from unittest.mock import patch
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import intelligence
+import report
 
 
 class BudgetPolicyTests(unittest.TestCase):
@@ -33,6 +34,51 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(strategy["priority_plans"][0]["candidate_id"], "desktop-gtune-dg-i5g70-5070")
         self.assertEqual(strategy["priority_plans"][1]["last_verified_listing_reference_jpy"], 304800)
         self.assertFalse(strategy["outlier_rule"]["zero_cost_upgrade_assumption_allowed"])
+
+    def test_dg_i7g70_high_cpu_outlier_is_explicitly_tracked(self):
+        strategy = self.cfg["purchase_strategy"]
+        plan = next(x for x in strategy["priority_plans"] if x["candidate_id"] == "desktop-gtune-dg-i7g70-5070")
+        self.assertEqual(plan["role"], "higher_cpu_configuration_upgrade")
+        self.assertEqual(plan["baseline_price_jpy"], 299800)
+        self.assertEqual((plan["baseline_ram_gb"], plan["baseline_ssd_gb"]), (16, 500))
+        self.assertEqual((plan["target_ram_gb"], plan["target_ssd_gb"]), (32, 1000))
+        self.assertEqual(plan["black_friday_target_price_jpy"], 299800)
+        self.assertEqual(plan["black_friday_planned_hard_cap_jpy"], 302200)
+        self.assertIn("確定価格", plan["required_quote"])
+
+    def test_upgrade_headroom_recalculates_from_latest_verified_base_price(self):
+        strategy = self.cfg["purchase_strategy"]
+        item = {
+            "id": "desktop-gtune-dg-i7g70-5070",
+            "name": "G TUNE DG-I7G70",
+            "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/",
+            "form_factor": "desktop",
+            "current_price_jpy": 260000,
+            "price_source_mode": "direct_structured",
+            "price_validation_status": "validated",
+            "variant_match": "exact",
+            "pit_valid": True,
+            "stock_status": "in_stock",
+            "retrieval_time": "2026-10-10T10:00:00+09:00",
+            "available_at": "2026-10-10T10:00:00+09:00",
+            "spec": {"ram_gb": 16, "ssd": "500 GB", "gpu": "RTX 5070", "cpu": "Core Ultra 7"},
+        }
+        result = report.build_purchase_strategy_status(
+            [item],
+            strategy,
+            {
+                "total_budget_jpy": 370000,
+                "peripheral_budget_jpy": 67800,
+                "pc_target_jpy": 299800,
+                "pc_budget_jpy": 302200,
+            },
+            {"budget_data_ready": False, "pc_dynamic_cap_jpy": 0},
+        )
+        row = next(x for x in result["rows"] if x.get("candidate_id") == "desktop-gtune-dg-i7g70-5070")
+        self.assertEqual(row["upgrade_headroom_basis_price_jpy"], 260000)
+        self.assertEqual(row["max_upgrade_cost_to_bf_target_jpy"], 39800)
+        self.assertEqual(row["max_upgrade_cost_to_bf_hard_cap_jpy"], 42200)
+        self.assertFalse(row["configuration_ready"])
 
     def test_dg_a7g70_catalog_uses_exact_outlet_model_and_completed_specs(self):
         with (ROOT / "config" / "candidate_catalog.json").open(encoding="utf-8") as f:
