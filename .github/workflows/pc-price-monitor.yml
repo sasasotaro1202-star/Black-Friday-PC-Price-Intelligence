@@ -8,6 +8,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "*/5 * * * *"
+    - cron: "*/15 * * * *"
 
 permissions:
   contents: write
@@ -28,6 +29,8 @@ jobs:
       - name: Check whether regular monitoring should run
         id: gate
         shell: bash
+        env:
+          SCHEDULE_CRON: ${{ github.event.schedule }}
         run: |
           python - <<'PY' >> "$GITHUB_OUTPUT"
           from datetime import datetime, timezone, timedelta
@@ -38,15 +41,20 @@ jobs:
           end=datetime(2026,12,4,23,59,59,tzinfo=JST)
           in_bf=start <= now <= end
           event=os.environ.get("GITHUB_EVENT_NAME","")
-          # The cron runs every 5 minutes so the BF window can truly observe
-          # fast-moving sale/stock changes. Outside BF, run only every 15 minutes.
-          regular_due = now.minute % 15 == 0
-          run_now = event != "schedule" or in_bf or regular_due
+          schedule_cron=os.environ.get("SCHEDULE_CRON","")
+          # GitHub scheduled runs can start after the cron minute. Route by the
+          # actual schedule expression, not the runner's start-time minute.
+          if event == "schedule":
+              expected_cron = "*/5 * * * *" if in_bf else "*/15 * * * *"
+              run_now = schedule_cron == expected_cron
+          else:
+              run_now = True
           skip = not run_now
           print(f"skip={str(skip).lower()}")
           print(f"now_jst={now.isoformat()}")
           print(f"in_bf={str(in_bf).lower()}")
-          print(f"regular_due={str(regular_due).lower()}")
+          print(f"schedule_cron={schedule_cron}")
+          print(f"run_now={str(run_now).lower()}")
           PY
 
       - name: Refresh watchlist when empty or stale
