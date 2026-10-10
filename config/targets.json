@@ -69,7 +69,7 @@
     "Ryzen 7 9700X RTX 5070 デスクトップ パソコン工房 ドスパラ マウス",
     "G TUNE DG-I5G70 DGI5G70B8BGDW102DECRISE 32GB 1TB 追加料金 公式",
     "site:mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa DGA7G70B5BBDW101DECWA RTX 5070 32GB 1TB",
-    "RTX 5070 Ti デスクトップPC アウトレット 32GB 1TB 302200円以下",
+    "RTX 5070 Ti デスクトップPC アウトレット 32GB 1TB 320200円以下",
     "RTX 5070 Ti ゲーミングPC 32GB 1TB 完成構成 セール 日本"
   ],
   "allowed_domains": [
@@ -341,14 +341,14 @@
     },
     "score_policy": "説明文にある96/94/95/97点は条件付きの目標イメージであり、実測スコアとして固定しない。実際のスコアはコードが確認済み価格・構成・在庫・性能・データ品質から計算する。",
     "speaker_strategy": {
-      "id": "speakers",
-      "model": "EDIFIER MR5",
-      "target_price_jpy": 32000,
-      "priority": "high_quality_sound",
-      "rationale": "スピーカーにも予算を配分し、音楽・ゲームの効果音を楽しめる音質を重視する。価格はBF期間の実売で確認する。",
+      "id": "speakers_budget",
+      "model": "Creative Pebble V2",
+      "target_price_jpy": 4000,
+      "priority": "budget_practical",
+      "rationale": "スピーカー費を抑え、RTX 5070級PCの性能とメイン＋サブの2画面環境を優先する。音質は日常のゲーム・動画用途に十分な手頃なステレオスピーカーを基準とする。",
       "coupon_policy": "クーポンは購入画面で適用対象・最終決済額を確認するまで実質価格から控除しない。",
       "price_target_phase": "black_friday",
-      "target_price_note": "32,000円はBF購入目標。現行表示価格やクーポン適用前価格とは区別する。"
+      "target_price_note": "4,000円はCreative Pebble V2のBF購入目標。BF前の観測値は参考価格であり、BF実売価格ではない。"
     },
     "price_semantics": {
       "all_configured_target_prices_mean": "black_friday_purchase_targets",
