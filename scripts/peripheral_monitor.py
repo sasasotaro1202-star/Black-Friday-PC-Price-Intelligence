@@ -17,21 +17,55 @@ def allowed_host(url, hosts):
     return any(host == str(h).lower() for h in hosts or [])
 
 
-def product_context_excerpt(excerpt, terms, before=80, after=450):
-    """Return a bounded text window around the first exact product/model anchor."""
+def product_context_excerpt(
+    excerpt, terms, before=80, after=650, min_price_jpy=None, max_price_jpy=None
+):
+    """Prefer an exact-model occurrence with a nearby plausible price over navigation text.
+
+    Retailer pages often mention a model in global navigation before the real product
+    card. Choosing the first occurrence can miss the price block entirely. Inspect each
+    model occurrence independently and prefer a bounded window with exactly one
+    explicit JPY price in the target's plausible price range.
+    """
     text = norm_text(excerpt)
     hits = []
+    seen = set()
     for raw in terms or []:
         term = norm_text(raw)
         if not term:
             continue
-        pos = text.find(term)
-        if pos >= 0:
-            hits.append((pos, -len(term), term))
+        for match in re.finditer(re.escape(term), text, re.I):
+            key = (match.start(), match.end(), term)
+            if key not in seen:
+                seen.add(key)
+                hits.append((match.start(), -len(term), term, match.end()))
     if not hits:
         return ""
-    pos, _neg_len, _term = min(hits)
-    return text[max(0, pos - before):pos + after]
+    hits.sort(key=lambda x: (x[0], x[1]))
+    priced = []
+    for pos, neg_len, term, end in hits:
+        window = text[max(0, pos-before):min(len(text), end+after)]
+        candidate = local_price_candidate(window)
+        if not candidate:
+            continue
+        price = candidate.get("price_jpy")
+        if min_price_jpy is not None and price < int(min_price_jpy):
+            continue
+        if max_price_jpy is not None and price > int(max_price_jpy):
+            continue
+        # Prefer a price very close to the model occurrence, then the longest
+        # exact term, then explicit sales/inventory wording in the same small window.
+        price_tokens = list(re.finditer(r"(?:¥|￥)\\s*[0-9,]+|[0-9,]+\\s*円", window))
+        price_pos = price_tokens[0].start() if price_tokens else len(window)
+        anchor_pos = max(0, pos - max(0, pos-before))
+        distance = abs(price_pos-anchor_pos)
+        keywords = sum(1 for token in ("税込", "販売価格", "在庫あり", "カートに入れる") if token in window)
+        priced.append((distance, neg_len, -keywords, pos, window))
+    if priced:
+        priced.sort()
+        return priced[0][-1]
+    pos, _neg_len, _term, end = hits[0]
+    return text[max(0, pos-before):min(len(text), end+after)]
 
 
 def local_price_candidate(context):
@@ -131,7 +165,11 @@ def run_one(target, previous, retrieved_at):
             parsed = parse_page(final_url, html, expected=expected)
             full_excerpt = parsed.get("page_text_excerpt") or ""
             excerpt = norm_text(full_excerpt)
-            context = product_context_excerpt(full_excerpt, terms)
+            context = product_context_excerpt(
+                full_excerpt, terms,
+                min_price_jpy=target.get("min_price_jpy"),
+                max_price_jpy=target.get("max_price_jpy"),
+            )
             identity_verified = bool(terms and any(term in excerpt for term in terms))
             last_candidate_state = {
                 "product_context_excerpt": context[:1400],
