@@ -112,7 +112,13 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
             "ram_gb": cat.get("ram_gb"), "ssd": cat.get("ssd")
         }}) if cat else (False, ["カタログ構成未確認"])
         plan_for_id = next((x for x in (strategy.get("priority_plans") or []) if str(x.get("candidate_id")) == cid), {})
-        base_config_only = plan_for_id.get("role") == "primary_configuration_upgrade" and not ready
+        # Do not calculate target discount from any price whose observed/catalog
+        # configuration misses the required 32GB/1TB build unless a verified
+        # completed-build quote exists.
+        base_config_only = (
+            (plan_for_id.get("role") == "primary_configuration_upgrade" and not ready)
+            or (not ready and not catalog_ready)
+        )
         if base_config_only:
             discount_target = discount_cap = None
             discount_target_pct = discount_cap_pct = None
