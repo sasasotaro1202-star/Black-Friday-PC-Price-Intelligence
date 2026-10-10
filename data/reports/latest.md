@@ -1,15 +1,15 @@
 # ブラックフライデー期間通算・購入ランキング
 
-更新: 2026-10-10T19:01:16+09:00
-観測スナップショット: 2026-10-10T19:00:49+09:00
-観測スナップショットSHA256: 47b91f1f46b06ca2a17bb4beb6d49914dee44a55c7bc3e63c948e312ac277076
+更新: 2026-10-10T19:38:21+09:00
+観測スナップショット: 2026-10-10T19:37:32+09:00
+観測スナップショットSHA256: 47575d41f914ab6f80a568811c2a79fa196be60a3dc83d96d936b2ecc532f6c3
 総予算（PC＋周辺機器）: ¥370,000
 周辺機器の目標予算: ¥67,800
 PC本体の目標価格: ¥299,800
 PC本体の計画上限（周辺機器が目標価格の場合）: ¥302,200
 PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥289,240
 周辺機器の現行/目標価格ベース試算: ¥80,760
-周辺機器の価格・在庫確認: 4/4
+周辺機器の価格・在庫確認: 4/5
 全体購入許可: **保留**（critical_candidates_not_fully_verified）
 フェーズ: **通常監視期間**
 
@@ -20,15 +20,15 @@ PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥289,2
 - 必須費用込み現金総額: ¥299,800
 - 確定特典価値: ¥0
 - 実質コスト（PC単体）: ¥299,800
-- PC＋周辺機器の試算総額: ¥380,560
-- 総予算の残額（試算）: ¥-10,560
+- PC＋周辺機器の参考試算総額（構成変更費未含む）: ¥380,560
+- 参考残額（構成変更費未含む）: ¥-10,560
 - PC構成要件: 未達/未確認 (RAM 16GB<32GB, SSD 500GB<1000GB)
 - 参考総価値換算額: ¥299,800（購入許可には不使用）
 - 判定: **NEEDS_CONFIGURATION**
 - 購入リンク: [販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/)
-- 買い判断: 現金支払 ¥299,800 / 実質コスト ¥299,800 / 特典・構成価値 ¥0 / 加点 0 / PC目標価格内 / 在庫 in_stock / 構成判定 exact
+- 買い判断: 現金支払 ¥299,800 / 実質コスト ¥299,800 / 特典・構成価値 ¥0 / 加点 0 / 完成構成未確認のため必要値下げ率未算出 / 在庫 in_stock / 構成判定 exact
 - 待つリスク: **MEDIUM**
-- PC目標価格まで必要値下げ: 0.0%
+- PC目標価格まで必要値下げ: 未算出（完成構成の価格・変更費用が未確認）
 - 構成判定: **exact**
 - 価格情報: **direct_structured / high**
 
@@ -55,26 +55,26 @@ PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥289,2
 |---|---:|---:|---|---|---|
 |AOC Q27G40E/11 27-inch WQHD 180Hz|¥17,500|¥20,790|in_stock|確認済み|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
 |EDIFIER MR5 (high-quality sound priority)|¥32,000|¥39,980|in_stock|確認済み|[商品ページ](https://www.edifier.jp/products/mr5)|
-|Logicool G213r|¥5,500|—（目標額で仮計算）|unknown|未確認|予算枠のみ|
+|Logicool G213r|¥5,500|—（目標額で仮計算）|unknown|未確認|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
 |Logicool G304|¥3,800|¥5,350|in_stock|確認済み|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
 |SteelSeries QcK Large|¥2,500|¥2,640|low_stock|確認済み|[商品ページ](https://www.yodobashi.com/product/100000001009472873/)|
 |6-outlet surge-protected power strip|¥1,500|—（目標額で仮計算）|unknown|未確認|予算枠のみ|
 |Required cables only; check included monitor/speaker cables first|¥1,000|—（目標額で仮計算）|unknown|未確認|予算枠のみ|
 |Shipping / multi-store purchase reserve|¥4,000|—（目標額で仮計算）|unknown|未確認|予算枠のみ|
 
-周辺機器価格確認: 4/4。未確認項目は目標額を試算に使用し、全体購入許可を保留します。
+周辺機器価格確認: 4/5。未確認項目は目標額を試算に使用し、全体購入許可を保留します。
 
 ## 100点ランキング
 
 |順位|タイプ|商品|観測価格（BF前は参考）|現金総額|確定現金特典|実質コスト|非現金価値|価値加点|PC目標まで|性能|価格価値|過去根拠|在庫|時期|総合|判定|購入リンク|
 |---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
-|1|desktop|G TUNE DG-I7G70|¥299,800|¥299,800|¥0|¥299,800|¥0|+0|0.0%|32/40|20/20|0/15|11/15|10/10|**73/100**|NEEDS_CONFIGURATION|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/)|
+|1|desktop|G TUNE DG-I7G70|¥299,800|¥299,800|¥0|¥299,800|¥0|+0|未算出|32/40|20/20|0/15|11/15|10/10|**73/100**|NEEDS_CONFIGURATION|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/)|
 |2|desktop|G TUNE FG-A7G70|¥319,800|¥319,800|¥0|¥319,800|¥0|+0|6.3%|33/40|18/20|0/15|11/15|9/10|**71/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/)|
 |3|laptop|Lenovo Legion Pro 5i Gen 10（16型 Intel）|¥354,865|¥354,865|¥0|¥354,865|¥0|+0|15.5%|40/40|13/20|0/15|11/15|7/10|**71/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040)|
 |4|desktop|G TUNE DG-A7G70|¥304,800|¥304,800|¥0|¥304,800|¥0|+0|1.6%|26/40|19/20|0/15|11/15|9/10|**65/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/)|
-|5|desktop|G TUNE DG-I5G70|¥279,800|¥279,800|¥0|¥279,800|¥0|+0|0.0%|22/40|20/20|0/15|11/15|10/10|**63/100**|NEEDS_CONFIGURATION|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/)|
+|5|desktop|G TUNE DG-I5G70|¥279,800|¥279,800|¥0|¥279,800|¥0|+0|未算出|22/40|20/20|0/15|11/15|10/10|**63/100**|NEEDS_CONFIGURATION|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/)|
 |6|desktop|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|¥399,800|¥0|¥399,800|¥0|+0|25.0%|38/40|7/20|0/15|11/15|5/10|**61/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/)|
-|7|desktop|G TUNE DG-A5G60|¥194,800|¥194,800|¥0|¥194,800|¥0|+0|0.0%|15/40|20/20|0/15|11/15|10/10|**56/100**|NEEDS_CONFIGURATION|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
+|7|desktop|G TUNE DG-A5G60|¥194,800|¥194,800|¥0|¥194,800|¥0|+0|未算出|15/40|20/20|0/15|11/15|10/10|**56/100**|NEEDS_CONFIGURATION|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
 
 ## データ品質
 
@@ -101,6 +101,9 @@ PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥289,2
 - 処理率: 100.0%
 - 取得成功率: 50.0%
 - 価格確認率: 45.0%
+- 検索補完（成功/試行）: 0/0
+- 検索SKU不一致による除外: 0
+- 取得エラー内訳（host|reason）: なし
 - 未処理候補: なし
 
 ## 価格シナリオ
