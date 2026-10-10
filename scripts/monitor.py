@@ -5,6 +5,7 @@ import os
 import re
 import subprocess
 import time
+import base64
 from html.parser import HTMLParser
 from urllib.parse import quote, parse_qs, urlparse
 from urllib.error import HTTPError, URLError
@@ -23,7 +24,10 @@ PRIMARY_DOMAINS = {
 }
 SECONDARY_DOMAINS = {
     "kakaku.com", "ascii.jp", "pc.watch.impress.co.jp",
-    "akiba-pc.watch.impress.co.jp", "joshinweb.jp", "shop.applied-net.co.jp"
+    "akiba-pc.watch.impress.co.jp", "joshinweb.jp", "shop.applied-net.co.jp",
+    "amazon.co.jp", "rakuten.co.jp", "yodobashi.com", "biccamera.com",
+    "yamada-denkiweb.com", "pc-koubou.jp", "ozgaming.jp", "sofmap.com",
+    "edion.com", "ksdenki.com", "nojima.co.jp"
 }
 UA = "Mozilla/5.0 (compatible; BF-PC-Price-Intelligence/3.0)"
 
@@ -162,6 +166,195 @@ def ddg_search(query, timeout=20):
             item["url"] = h
             out.append(item)
     return out
+
+
+class BingSearchParser(HTMLParser):
+    """Small dependency-free parser for Bing's organic result cards."""
+    def __init__(self):
+        super().__init__()
+        self.results = []
+        self.current = None
+        self.capture = None
+        self.buf = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        classes = attrs.get("class", "").split()
+        if tag == "li" and "b_algo" in classes:
+            self.current = {"url": "", "title": "", "snippet": ""}
+            self.capture = None
+            self.buf = []
+            return
+        if self.current is None:
+            return
+        if tag == "a" and not self.current.get("title") and attrs.get("href"):
+            self.current["url"] = attrs.get("href", "")
+            self.capture = "title"
+            self.buf = []
+        elif tag == "p" and not self.current.get("snippet"):
+            self.capture = "snippet"
+            self.buf = []
+
+    def handle_endtag(self, tag):
+        if self.current is None:
+            return
+        if tag == "a" and self.capture == "title":
+            self.current["title"] = " ".join("".join(self.buf).split())
+            self.capture = None
+            self.buf = []
+        elif tag == "p" and self.capture == "snippet":
+            self.current["snippet"] = " ".join("".join(self.buf).split())
+            self.capture = None
+            self.buf = []
+        elif tag == "li":
+            if self.current.get("url") and self.current.get("title"):
+                self.results.append(self.current)
+            self.current = None
+            self.capture = None
+            self.buf = []
+
+    def handle_data(self, data):
+        if self.current is not None and self.capture:
+            self.buf.append(data)
+
+
+def _unpack_bing_url(url):
+    """Resolve Bing's base64 redirect parameter when present; otherwise keep the URL."""
+    try:
+        parsed = urlparse(url)
+        if not (parsed.hostname or "").lower().endswith("bing.com"):
+            return url
+        params = parse_qs(parsed.query)
+        encoded = (params.get("u") or [""])[0]
+        if encoded.startswith("a1"):
+            raw = encoded[2:]
+            raw += "=" * ((4 - len(raw) % 4) % 4)
+            decoded = base64.urlsafe_b64decode(raw.encode("ascii")).decode("utf-8", errors="replace")
+            if decoded.startswith(("https://", "http://")):
+                return decoded
+    except Exception:
+        pass
+    return url
+
+
+def bing_search(query, timeout=9):
+    if not query:
+        return []
+    req = Request(
+        "https://www.bing.com/search?q=" + quote(query),
+        headers={"User-Agent": UA, "Accept-Language": "ja-JP,ja;q=0.9,en;q=0.5"},
+    )
+    with urlopen(req, timeout=timeout) as response:
+        charset = response.headers.get_content_charset() or "utf-8"
+        html = response.read().decode(charset, errors="replace")
+    parser = BingSearchParser()
+    parser.feed(html)
+    out = []
+    for row in parser.results:
+        url = _unpack_bing_url(row.get("url", ""))
+        if url.startswith(("https://", "http://")):
+            out.append({**row, "url": url})
+    return out
+
+
+def _normalized_model_anchor(value):
+    return re.sub(r"[^a-z0-9]+", "", norm_text(str(value or "")).lower())
+
+
+def search_identity_anchor(result, expected):
+    """Return the SKU/model alias actually present in a search result, or None.
+
+    The canonical product URL cannot prove that a different search-result snippet
+    describes the same SKU. A result must itself contain a curated alias/model code.
+    """
+    expected = expected or {}
+    blob = _normalized_model_anchor(
+        (result or {}).get("title", "") + " " + (result or {}).get("snippet", "")
+    )
+    aliases = []
+    if expected.get("model_code"):
+        aliases.append(expected["model_code"])
+    aliases.extend(expected.get("aliases") or [])
+    for alias in aliases:
+        normalized = _normalized_model_anchor(alias)
+        if len(normalized) >= 5 and normalized in blob:
+            return str(alias)
+    return None
+
+
+def _search_providers(query):
+    """Yield free HTML search providers in order; credentials and paid APIs are not required."""
+    yield "duckduckgo", ddg_search
+    yield "bing", bing_search
+
+
+def search_fallback(query, canonical_url, expected=None, diagnostics=None):
+    """Find a price only when the result itself contains the curated exact model anchor."""
+    expected = expected or {}
+    diagnostics = diagnostics if diagnostics is not None else []
+    candidates = []
+    for provider, search_fn in _search_providers(query):
+        try:
+            results = search_fn(query, timeout=9)
+            provider_error = None
+        except Exception as exc:
+            diagnostics.append({
+                "provider": provider,
+                "status": "error",
+                "error": f"{type(exc).__name__}:{str(exc)[:160]}",
+                "result_count": 0,
+                "identity_rejected_count": 0,
+            })
+            continue
+
+        identity_rejected = 0
+        priced_result_count = 0
+        matched_count = 0
+        for result in results or []:
+            url = result.get("url", "")
+            if not url.startswith(("https://", "http://")) or not host_allowed(url):
+                continue
+            blob = (result.get("title", "") + " " + result.get("snippet", "")).strip()
+            anchor = search_identity_anchor(result, expected)
+            if not anchor:
+                identity_rejected += 1
+                continue
+            raw = pick_price(blob)
+            if not raw:
+                continue
+            priced_result_count += 1
+            rel = relevance(query, blob)
+            if canonical_url and urlparse(url).netloc.lower() == urlparse(canonical_url).netloc.lower():
+                rel += 4
+            matched_count += 1
+            candidates.append({
+                "rank": rel + source_bonus(url),
+                "url": url,
+                "title": result.get("title", ""),
+                "snippet": result.get("snippet", ""),
+                "price_jpy": raw["price_jpy"],
+                "stock_status": stock_from_text(blob),
+                "spec": parse_specs(blob),
+                "identity_anchor": anchor,
+                "provider": provider,
+            })
+        diagnostics.append({
+            "provider": provider,
+            "status": "ok" if results is not None else "empty",
+            "result_count": len(results or []),
+            "priced_exact_model_count": priced_result_count,
+            "identity_rejected_count": identity_rejected,
+            "matched_count": matched_count,
+        })
+        # Stop on the first provider with an exact-identity price candidate. If
+        # it had only irrelevant results, try the next provider instead.
+        if candidates:
+            break
+    if not candidates:
+        return None
+    candidates.sort(key=lambda x: (x["rank"], -x["price_jpy"]), reverse=True)
+    return candidates[0]
+
 
 def host_allowed(url):
     host = urlparse(url).netloc.lower()
@@ -660,37 +853,6 @@ def relevance(query, blob):
     s = norm_text(blob)
     return sum(1 for t in set(tokens) if t in s)
 
-def search_fallback(query, canonical_url):
-    try:
-        results = ddg_search(query)
-    except Exception:
-        return None
-    candidates = []
-    for r in results:
-        u = r.get("url", "")
-        if not host_allowed(u):
-            continue
-        blob = (r.get("title", "") + " " + r.get("snippet", "")).strip()
-        raw = pick_price(blob)
-        if not raw:
-            continue
-        rel = relevance(query, blob)
-        if canonical_url and urlparse(u).netloc.lower() == urlparse(canonical_url).netloc.lower():
-            rel += 4
-        candidates.append({
-            "rank": rel + source_bonus(u),
-            "url": u,
-            "title": r.get("title", ""),
-            "snippet": r.get("snippet", ""),
-            "price_jpy": raw["price_jpy"],
-            "stock_status": stock_from_text(blob),
-            "spec": parse_specs(blob),
-        })
-    if not candidates:
-        return None
-    candidates.sort(key=lambda x: (x["rank"], -x["price_jpy"]), reverse=True)
-    return candidates[0]
-
 def normalize_entry(entry):
     if isinstance(entry, str):
         return {"id": entry, "url": entry, "query": "", "priority": "normal"}
@@ -816,7 +978,7 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
     return item
 
 def corroborate_anomaly(item, search):
-    if not search or item.get("price_validation_status") != "anomaly_rejected":
+    if not search or not search.get("identity_anchor") or item.get("price_validation_status") != "anomaly_rejected":
         return item
     p = item.get("price_jpy")
     if p is None:
@@ -877,6 +1039,11 @@ def main():
         "baseline_only": 0,
         "anomaly_rejected": 0,
         "errors": 0,
+        "search_fallback_attempts": 0,
+        "search_fallback_successes": 0,
+        "search_fallback_failures": 0,
+        "search_identity_rejections": 0,
+        "errors_by_host_reason": {},
     }
     retrieval_time = iso(now_jst())
 
@@ -893,10 +1060,13 @@ def main():
         except URLError as exc:
             return cid, None, f"URLError:{getattr(exc, 'reason', 'unknown')}"
         except Exception as exc:
-            return cid, None, type(exc).__name__
+            # Keep transport diagnostics (e.g. curl_http_403 or curl_exit_6).
+            # Exception class alone made every curl failure look identical.
+            return cid, None, f"{type(exc).__name__}:{str(exc)[:180]}"
 
     fetch_results = {}
-    workers = min(12, max(1, len(entries)))
+    # Limit concurrency to reduce merchant-side 403/429 responses on free runners.
+    workers = min(6, max(1, len(entries)))
     with ThreadPoolExecutor(max_workers=workers) as executor:
         future_map = {executor.submit(fetch_one, entry): entry["id"] for entry in entries}
         for future in as_completed(future_map):
@@ -917,8 +1087,16 @@ def main():
             item["last_fetch_error"] = request_error
             stats["errors"] += 1
 
-            fallback = search_fallback(entry.get("query", ""), entry["url"]) if entry.get("query") else None
+            fallback_diagnostics = []
+            stats["search_fallback_attempts"] += 1 if entry.get("query") else 0
+            fallback = search_fallback(
+                entry.get("query", ""), entry["url"], expected=cat, diagnostics=fallback_diagnostics
+            ) if entry.get("query") else None
+            item["search_fallback_diagnostics"] = fallback_diagnostics
+            for diagnostic in fallback_diagnostics:
+                stats["search_identity_rejections"] += int(diagnostic.get("identity_rejected_count") or 0)
             if fallback:
+                stats["search_fallback_successes"] += 1
                 item["name"] = fallback.get("title") or item["name"]
                 item["stock_status"] = item["stock_status"] if item["stock_status"] != "unknown" else fallback["stock_status"]
                 item["parsed_spec"] = {**fallback.get("spec", {}), **item.get("parsed_spec", {})}
@@ -929,7 +1107,10 @@ def main():
                 if reference is None:
                     reference = cat.get("reference_price_jpy", cat.get("price_jpy"))
                 checked = validate_price(fallback["price_jpy"], item, reference_price=reference, corroborated=False)
-                identity_ok = item.get("variant_match") in ("exact", "trusted_url", "strong")
+                # The result snippet itself must contain a curated exact alias.
+                # Never grant identity from the canonical page URL when the price
+                # came from a different search-result URL.
+                identity_ok = bool(fallback.get("identity_anchor"))
                 if checked["valid"] and identity_ok:
                     item["price_jpy"] = fallback["price_jpy"]
                     item["current_price_jpy"] = fallback["price_jpy"]
@@ -942,13 +1123,23 @@ def main():
                     item["corroborating_source_url"] = fallback["url"]
                     item["corroborating_source_title"] = fallback["title"]
                     item["corroborating_source_snippet"] = fallback["snippet"]
+                    item["search_provider"] = fallback.get("provider")
+                    item["search_identity_anchor"] = fallback.get("identity_anchor")
                     stats["search_corrob"] += 1
                 else:
                     item["current_price_jpy"] = None
                     item["price_jpy"] = None
                     item["price_validation_status"] = "reference_only" if reference is not None else "missing"
                     item["price_validation_reason"] = "search_fallback_rejected:" + ("identity_mismatch" if not identity_ok else checked["reason"])
-            elif previous.get("current_price_jpy") is not None:
+            else:
+                stats["search_fallback_failures"] += 1
+
+            host = (urlparse(entry.get("url", "")).hostname or "unknown").lower()
+            reason = str(request_error or "unknown").split(":")[-1][:100]
+            key = f"{host}|{reason}"
+            stats["errors_by_host_reason"][key] = stats["errors_by_host_reason"].get(key, 0) + 1
+
+            if not fallback and previous.get("current_price_jpy") is not None:
                 item["current_price_jpy"] = None
                 item["price_jpy"] = None
                 item["last_valid_price_jpy"] = previous.get("current_price_jpy")
@@ -968,7 +1159,16 @@ def main():
         else:
             # If a suspicious direct price appeared, use an independent search before discarding it.
             if item.get("price_validation_status") == "anomaly_rejected" and entry.get("query"):
-                fallback = search_fallback(entry["query"], entry["url"])
+                anomaly_diagnostics = []
+                stats["search_fallback_attempts"] += 1
+                fallback = search_fallback(entry["query"], entry["url"], expected=cat, diagnostics=anomaly_diagnostics)
+                item["search_fallback_diagnostics"] = anomaly_diagnostics
+                for diagnostic in anomaly_diagnostics:
+                    stats["search_identity_rejections"] += int(diagnostic.get("identity_rejected_count") or 0)
+                if fallback:
+                    stats["search_fallback_successes"] += 1
+                else:
+                    stats["search_fallback_failures"] += 1
                 item = corroborate_anomaly(item, fallback)
                 if item.get("price_validation_status") == "anomaly_rejected":
                     stats["anomaly_rejected"] += 1
