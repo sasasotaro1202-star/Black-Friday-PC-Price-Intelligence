@@ -125,7 +125,9 @@
       ],
       "min_price_jpy": 10000,
       "max_price_jpy": 60000,
-      "mandatory": true
+      "mandatory": true,
+      "price_target_phase": "black_friday",
+      "target_price_note": "17500円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
     },
     {
       "id": "speakers",
@@ -144,7 +146,9 @@
       "min_price_jpy": 15000,
       "max_price_jpy": 100000,
       "mandatory": true,
-      "coupon_policy": "Do not subtract coupons or points unless reliably applied at checkout."
+      "coupon_policy": "Do not subtract coupons or points unless reliably applied at checkout.",
+      "price_target_phase": "black_friday",
+      "target_price_note": "32000円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
     },
     {
       "id": "keyboard",
@@ -156,7 +160,9 @@
       "identity_terms": [
         "G213r"
       ],
-      "mandatory": true
+      "mandatory": true,
+      "price_target_phase": "black_friday",
+      "target_price_note": "5500円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
     },
     {
       "id": "mouse",
@@ -174,7 +180,9 @@
       ],
       "min_price_jpy": 1000,
       "max_price_jpy": 15000,
-      "mandatory": true
+      "mandatory": true,
+      "price_target_phase": "black_friday",
+      "target_price_note": "3800円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
     },
     {
       "id": "mousepad",
@@ -192,7 +200,9 @@
       ],
       "min_price_jpy": 800,
       "max_price_jpy": 10000,
-      "mandatory": true
+      "mandatory": true,
+      "price_target_phase": "black_friday",
+      "target_price_note": "2500円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
     },
     {
       "id": "power_strip",
@@ -202,7 +212,9 @@
       "monitor_url": null,
       "purchase_url": null,
       "identity_terms": [],
-      "mandatory": true
+      "mandatory": true,
+      "price_target_phase": "black_friday",
+      "target_price_note": "1500円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
     },
     {
       "id": "cables",
@@ -212,7 +224,9 @@
       "monitor_url": null,
       "purchase_url": null,
       "identity_terms": [],
-      "mandatory": true
+      "mandatory": true,
+      "price_target_phase": "black_friday",
+      "target_price_note": "1000円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
     },
     {
       "id": "shipping_reserve",
@@ -222,7 +236,9 @@
       "monitor_url": null,
       "purchase_url": null,
       "identity_terms": [],
-      "mandatory": true
+      "mandatory": true,
+      "price_target_phase": "black_friday",
+      "target_price_note": "4000円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
     }
   ],
   "purchase_strategy": {
@@ -240,7 +256,10 @@
         "target_ssd_gb": 1000,
         "price_source_note": "279,800円は16GB/500GB基本構成の監視基準。32GB/1TB構成の実価格として扱わない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
-        "status_if_unquoted": "NEEDS_CONFIGURATION"
+        "status_if_unquoted": "NEEDS_CONFIGURATION",
+        "black_friday_target_price_jpy": 299800,
+        "black_friday_planned_hard_cap_jpy": 302200,
+        "black_friday_target_note": "32GB RAM/1TB SSD完成構成のBF購入目標。279,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。"
       },
       {
         "candidate_id": "desktop-gtune-dg-a7g70-5070",
@@ -251,7 +270,10 @@
         "last_verified_listing_reference_jpy": 304800,
         "reference_checked_date": "2026-10-10",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
-        "reference_note": "公式ページで確認した参考価格。次の監視サイクルでも現行価格・在庫・SKUを検証する。"
+        "reference_note": "公式ページで確認した参考価格。次の監視サイクルでも現行価格・在庫・SKUを検証する。",
+        "black_friday_target_price_jpy": 299800,
+        "black_friday_planned_hard_cap_jpy": 302200,
+        "black_friday_target_note": "304,800円は10月確認時の参考掲載額でありBF価格ではない。BF購入目標は299,800円、計画上限は302,200円。"
       }
     ],
     "outlier_rule": {
@@ -262,14 +284,27 @@
       "minimum_ssd_gb": 1000,
       "maximum_completed_pc_price_uses": "dynamic_pc_cap_jpy",
       "requires_direct_price_stock_exact_identity_and_valid_pit": true,
-      "zero_cost_upgrade_assumption_allowed": false
+      "zero_cost_upgrade_assumption_allowed": false,
+      "black_friday_target_cap_jpy": 302200,
+      "price_basis": "completed_build_black_friday_offer_only"
     },
     "score_policy": "説明文にある96/94/95/97点は条件付きの目標イメージであり、実測スコアとして固定しない。実際のスコアはコードが確認済み価格・構成・在庫・性能・データ品質から計算する。",
     "speaker_strategy": {
       "id": "speakers",
       "model": "EDIFIER MR5",
       "target_price_jpy": 32000,
-      "coupon_policy": "クーポンは購入画面で適用対象・最終決済額を確認するまで実質価格から控除しない。"
+      "coupon_policy": "クーポンは購入画面で適用対象・最終決済額を確認するまで実質価格から控除しない。",
+      "price_target_phase": "black_friday",
+      "target_price_note": "32,000円はBF購入目標。現行表示価格やクーポン適用前価格とは区別する。"
+    },
+    "price_semantics": {
+      "all_configured_target_prices_mean": "black_friday_purchase_targets",
+      "window_start_jst": "2026-11-14T00:00:00+09:00",
+      "window_end_jst": "2026-12-04T23:59:59+09:00",
+      "pre_window_observations": "reference_only_not_black_friday_prices",
+      "future_black_friday_prices": "unknown_until_actually_observed",
+      "target_prices_are_promises": false,
+      "coupon_and_points": "exclude unless final checkout cash price and eligibility are verified"
     }
   }
 }
