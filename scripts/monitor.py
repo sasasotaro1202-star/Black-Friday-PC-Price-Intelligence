@@ -1096,7 +1096,6 @@ def main():
             for diagnostic in fallback_diagnostics:
                 stats["search_identity_rejections"] += int(diagnostic.get("identity_rejected_count") or 0)
             if fallback:
-                stats["search_fallback_successes"] += 1
                 item["name"] = fallback.get("title") or item["name"]
                 item["stock_status"] = item["stock_status"] if item["stock_status"] != "unknown" else fallback["stock_status"]
                 item["parsed_spec"] = {**fallback.get("spec", {}), **item.get("parsed_spec", {})}
@@ -1120,6 +1119,9 @@ def main():
                     item["price_validation_status"] = checked["status"]
                     item["price_validation_reason"] = "search_fallback:" + checked["reason"]
                     item["data_confidence"] = "medium"
+                    item["variant_match"] = "strong"
+                    item["identity_evidence_source"] = "search_result_model_anchor"
+                    stats["search_fallback_successes"] += 1
                     item["corroborating_source_url"] = fallback["url"]
                     item["corroborating_source_title"] = fallback["title"]
                     item["corroborating_source_snippet"] = fallback["snippet"]
@@ -1131,6 +1133,7 @@ def main():
                     item["price_jpy"] = None
                     item["price_validation_status"] = "reference_only" if reference is not None else "missing"
                     item["price_validation_reason"] = "search_fallback_rejected:" + ("identity_mismatch" if not identity_ok else checked["reason"])
+                    stats["search_fallback_failures"] += 1
             else:
                 stats["search_fallback_failures"] += 1
 
@@ -1139,7 +1142,9 @@ def main():
             key = f"{host}|{reason}"
             stats["errors_by_host_reason"][key] = stats["errors_by_host_reason"].get(key, 0) + 1
 
-            if not fallback and previous.get("current_price_jpy") is not None:
+            # Only fall back to stale/reference states when no validated exact-SKU
+            # search price was accepted. Keep successfully corroborated prices.
+            if item.get("current_price_jpy") is None and previous.get("current_price_jpy") is not None:
                 item["current_price_jpy"] = None
                 item["price_jpy"] = None
                 item["last_valid_price_jpy"] = previous.get("current_price_jpy")
@@ -1147,7 +1152,7 @@ def main():
                 item["available_at"] = None
                 item["data_confidence"] = "low"
                 stats["stale_previous"] += 1
-            elif cat.get("reference_price_jpy") is not None or cat.get("price_jpy") is not None:
+            elif item.get("current_price_jpy") is None and (cat.get("reference_price_jpy") is not None or cat.get("price_jpy") is not None):
                 item["reference_price_jpy"] = cat.get("reference_price_jpy", cat.get("price_jpy"))
                 item["price_source_mode"] = "public_baseline"
                 item["price_validation_status"] = "reference_only"
