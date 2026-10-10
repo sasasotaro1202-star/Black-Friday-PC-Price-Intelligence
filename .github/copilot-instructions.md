@@ -74,3 +74,12 @@ Broad watch window: 2026-11-14 00:00 JST through 2026-12-04 23:59 JST until offi
 - Keep search attempts, accepted fallback observations and rejected SKU matches separate in the report.
 - Limit concurrent requests to avoid raising merchant-side throttling. Do not improve metrics by weakening the identity, stock, freshness, or PIT gates.
 - For any PC missing 32 GB RAM or 1 TB SSD, leave the completed-build discount percentage uncomputed until the completed configuration price is known.
+
+
+## Alternate direct product sources
+
+- The canonical product URL remains the user-facing purchase link. Optional `alternate_price_urls` are measurement/evidence sources only, and must be curated for the same SKU/model.
+- Try the canonical URL first. Try registered alternate URLs only if the canonical fetch or price parse fails.
+- An alternate page must contain a catalogued exact SKU/model alias and have non-contradictory parsed identity/specs before any price is accepted.
+- Log every attempted source, the actual source URL, failure reason, and whether the alternate was accepted. Preserve these diagnostics through sanitization and include them in the report.
+- Use HTTP/1.1 as a curl transport compatibility fallback to reduce HTTP/2 stream failures; this is a transport retry, not a reason to bypass host, SKU, price, inventory, or PIT validation.
