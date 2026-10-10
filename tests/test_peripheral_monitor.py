@@ -91,6 +91,33 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertEqual(row["purchase_url"], row["monitor_url_used"])
         self.assertIn("curl_exit_35", row["retrieval_attempts"][0]["error"])
 
+    def test_old_price_is_not_inherited_after_product_replacement(self):
+        target = {
+            "id": "speakers",
+            "name": "Creative Pebble (classic) compact 2.0 USB-powered speakers",
+            "monitor_url": "https://jp.creative.com/p/speakers/creative-pebble",
+            "purchase_url": "https://jp.creative.com/p/speakers/creative-pebble",
+            "identity_terms": ["Creative Pebble"],
+            "model_code": "Creative Pebble classic",
+            "allowed_hosts": ["jp.creative.com"],
+            "min_price_jpy": 1500,
+            "max_price_jpy": 10000,
+            "target_price_jpy": 2500,
+        }
+        previous = {
+            "id": "speakers",
+            "name": "Edifier MR5 studio monitors",
+            "monitor_url": "https://www.edifier.jp/products/mr5",
+            "current_price_jpy": 39980,
+            "last_valid_price_jpy": 39980,
+            "stock_status": "in_stock",
+        }
+        with patch.object(peripheral_monitor, "fetch", side_effect=RuntimeError("temporary fetch failure")):
+            row = peripheral_monitor.run_one(target, previous, "2026-10-10T23:30:00+09:00")
+        self.assertIsNone(row["current_price_jpy"])
+        self.assertIsNone(row["last_valid_price_jpy"])
+        self.assertFalse(row["price_verified"])
+
     def test_price_outside_configured_range_remains_unverified(self):
         excerpt = "AOC Q27G40E/11 特価 ￥7,000 在庫あり"
         parsed = {
