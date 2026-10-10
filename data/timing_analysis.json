@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-11T03:03:06+09:00",
-  "source_snapshot_generated_at": "2026-10-11T03:02:10+09:00",
-  "source_snapshot_sha256": "2fb2d32b289ecbac65e05010eda1e1c749b9375e7d5381cf90eac900a0df4ebb",
+  "generated_at": "2026-10-11T06:37:21+09:00",
+  "source_snapshot_generated_at": "2026-10-11T06:36:26+09:00",
+  "source_snapshot_sha256": "6db000e49ba849dd9eeacded8b51b936b7f95e42fea1cc756b5c7fdccab32312",
   "budget_jpy": 311200,
   "target_black_friday": "2026-11-27",
   "target_products": [
@@ -79,19 +79,6 @@
       "feasibility": "HIGH",
       "gpu": "rtx 5070",
       "performance_score": 33,
-      "source_mode": "direct_structured",
-      "confidence": "high",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "candidate-4",
-      "name": "Lenovo Legion Pro 5i Gen 10（16型 Intel）",
-      "store": null,
-      "price_jpy": 354865,
-      "required_discount_pct": 12.3,
-      "feasibility": "REALISTIC",
-      "gpu": "rtx 5080",
-      "performance_score": 40,
       "source_mode": "direct_structured",
       "confidence": "high",
       "dynamic_candidate": false
