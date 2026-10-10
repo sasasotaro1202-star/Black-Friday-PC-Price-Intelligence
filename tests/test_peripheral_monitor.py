@@ -23,6 +23,20 @@ class PeripheralMonitorTests(unittest.TestCase):
             "target_price_jpy": 17500,
         }
 
+    def test_model_context_skips_navigation_mention_for_nearby_exact_price(self):
+        text = (
+            "Navigation keyboards support pages and category links. Logicool G213r global navigation. "
+            "Recommended keyboard models page. "
+            "Product title Logicool G213r G213R Japanese keyboard; tax included price ￥7,330; stock available."
+        )
+        context = peripheral_monitor.product_context_excerpt(
+            text, ["G213r", "G213R"], min_price_jpy=3000, max_price_jpy=15000
+        )
+        candidate = peripheral_monitor.local_price_candidate(context)
+        self.assertIsNotNone(candidate)
+        self.assertEqual(candidate["price_jpy"], 7330)
+        self.assertIn("7,330", context)
+
     def test_g213r_is_a_tracked_bf_target_with_exact_retail_url(self):
         config = __import__("json").loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
         target = next(x for x in config["peripherals"] if x["id"] == "keyboard")
