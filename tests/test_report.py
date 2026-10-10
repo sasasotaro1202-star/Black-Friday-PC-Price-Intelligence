@@ -34,6 +34,27 @@ class ReportLinkTests(unittest.TestCase):
         self.assertEqual(out["last_valid_price_jpy"], 299800)
         self.assertTrue(out["current_price_suppressed"])
 
+    def test_build_products_retains_uncatalogued_discovered_candidate(self):
+        discovered = {
+            "id": "discovered-a1b2c3d4",
+            "name": "Outlet RTX 5070 desktop",
+            "url": "https://example.com/pc",
+            "form_factor": "desktop",
+            "current_price_jpy": 249800,
+            "stock_status": "in_stock",
+            "price_source_mode": "direct_text",
+            "price_validation_status": "validated",
+            "spec": {"gpu": "RTX 5070", "ram_gb": 32, "ssd": "1 TB"},
+            "retrieval_time": "2026-10-10T10:00:00+09:00",
+            "available_at": "2026-10-10T10:00:00+09:00",
+        }
+        rows = report.build_products({"products": [discovered]}, {})
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["id"], discovered["id"])
+        self.assertTrue(rows[0]["dynamic_candidate"])
+        self.assertEqual(rows[0]["current_price_jpy"], 249800)
+        self.assertEqual(rows[0]["variant_match"], "ambiguous")
+
     def test_file_sha256_is_stable_for_same_bytes(self):
         import tempfile
         from pathlib import Path
