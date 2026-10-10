@@ -3,7 +3,7 @@ import json
 import os
 import sys
 
-from intelligence import ROOT, parse_dt, load_catalog, load_json
+from intelligence import ROOT, parse_dt, load_catalog, load_json, purchase_budget_policy, peripheral_budget_projection, configuration_readiness
 
 def file_sha256(path):
     h = hashlib.sha256()
@@ -19,6 +19,22 @@ def fail(message):
 
 def main():
     errors = []
+    policy = purchase_budget_policy()
+    peripheral_projection = peripheral_budget_projection()
+    peripheral_snapshot = load_json(os.path.join(ROOT, "data", "peripheral_prices.json"), {})
+    if policy["pc_budget_jpy"] + policy["peripheral_budget_jpy"] != policy["total_budget_jpy"]:
+        errors.append("budget arithmetic mismatch: PC cap + peripheral target != total budget")
+    if policy["pc_target_jpy"] > policy["pc_budget_jpy"]:
+        errors.append("PC target exceeds PC cap")
+    if sum(int(p.get("target_price_jpy") or 0) for p in policy["peripherals"] if p.get("mandatory", True)) != policy["peripheral_budget_jpy"]:
+        errors.append("peripheral target rows do not sum to peripheral budget")
+    tracked_ids = {str(p.get("id")) for p in policy["peripherals"] if p.get("track_current_price")}
+    snapshot_ids = {str(p.get("id")) for p in (peripheral_snapshot.get("products") or []) if p.get("id")}
+    if tracked_ids and not tracked_ids.issubset(snapshot_ids):
+        errors.append("peripheral snapshot missing tracked product ids")
+    for peripheral in (peripheral_snapshot.get("products") or []):
+        if peripheral.get("current_price_jpy") is not None and not peripheral.get("price_verified"):
+            errors.append(f"unverified peripheral price exposed as current: {peripheral.get('id')}")
     catalog = load_catalog()
     if len(catalog) != len(set(catalog)):
         errors.append("duplicate catalog ids")
@@ -107,6 +123,13 @@ def main():
 
     for r in ranked:
         score = r.get("decision_score")
+        detail = r.get("score_detail") or {}
+        if detail.get("status") in ("BUY_NOW", "BUY_NOW_LOW_STOCK", "BUY_NOW_NEAR_BUDGET"):
+            ready, reasons = configuration_readiness(r)
+            if not ready:
+                errors.append(f"buy-now PC below required configuration: {r.get('id')}:{','.join(reasons)}")
+            if effective_cost(r) is None or effective_cost(r) > peripheral_projection.get("pc_dynamic_cap_jpy", 0):
+                errors.append(f"buy-now purchase exceeds all-in budget: {r.get('id')}")
         detail = r.get("score_detail") or {}
         if score is not None:
             comps = sum(int(detail.get(k, 0) or 0) for k in ("performance","price","history","stock","timing"))

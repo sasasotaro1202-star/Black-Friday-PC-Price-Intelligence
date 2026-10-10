@@ -4,7 +4,8 @@ import os
 
 from intelligence import (
     ROOT, load_json, load_anchors, parse_dt, decision_score,
-    effective_cost, EFFECTIVE_SOFT_MAX, EFFECTIVE_HARD_MAX
+    effective_cost, EFFECTIVE_SOFT_MAX, EFFECTIVE_HARD_MAX,
+    purchase_budget_policy, configuration_readiness, peripheral_budget_projection
 )
 
 
@@ -33,6 +34,12 @@ def read_events():
 
 def main():
     errors = []
+    budget_policy = purchase_budget_policy()
+    budget_projection = peripheral_budget_projection()
+    if budget_policy["pc_budget_jpy"] + budget_policy["peripheral_budget_jpy"] != budget_policy["total_budget_jpy"]:
+        errors.append("budget arithmetic mismatch")
+    if sum(int(p.get("target_price_jpy") or 0) for p in budget_policy["peripherals"] if p.get("mandatory", True)) != budget_policy["peripheral_budget_jpy"]:
+        errors.append("peripheral target budget mismatch")
 
     # Catalog integrity
     catalog = load_json(os.path.join(ROOT, "config", "candidate_catalog.json"), {})
@@ -383,7 +390,10 @@ def main():
             expected_allowed = bool(
                 ranked
                 and expected_coverage == "COMPLETE"
+                and rankings.get("peripheral_budget_data_ready")
                 and (ranked[0].get("score_detail") or {}).get("status") in ("BUY_NOW", "BUY_NOW_LOW_STOCK", "BUY_NOW_NEAR_BUDGET")
+                and effective_cost(ranked[0]) is not None
+                and effective_cost(ranked[0]) <= budget_projection.get("pc_dynamic_cap_jpy", 0)
             )
             if bool(gate.get("allowed")) != expected_allowed:
                 errors.append("purchase_gate allowed mismatch")
@@ -462,6 +472,11 @@ def main():
                 errors.append(f"near-budget effective cost outside 285-290k band: {rid}")
             if r.get("variant_match") not in ("exact", "trusted_url", "strong"):
                 errors.append(f"buy-now identity not verified: {rid}")
+            config_ready, config_reasons = configuration_readiness(r)
+            if not config_ready:
+                errors.append(f"buy-now configuration below 32GB/1TB: {rid}:{','.join(config_reasons)}")
+            if eff is not None and eff > budget_projection.get("pc_dynamic_cap_jpy", 0):
+                errors.append(f"buy-now violates all-in budget cap: {rid}")
             if stock not in ("in_stock", "low_stock"):
                 errors.append(f"buy-now stock not verified: {rid}")
             if status == "BUY_NOW_LOW_STOCK":

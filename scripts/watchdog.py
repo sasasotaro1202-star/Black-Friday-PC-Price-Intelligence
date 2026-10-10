@@ -19,6 +19,7 @@ def main():
     now = datetime.now(JST)
     latest_path = os.path.join(ROOT, "data", "current_latest.json")
     ranking_path = os.path.join(ROOT, "data", "decision_rankings.json")
+    peripheral_path = os.path.join(ROOT, "data", "peripheral_prices.json")
     problems = []
 
     try:
@@ -48,6 +49,17 @@ def main():
     if generated and ranking_generated:
         if ranking_generated < generated - timedelta(minutes=20):
             problems.append("ranking_stale_relative_to_latest")
+
+    try:
+        peripherals = read_json(peripheral_path)
+        peripheral_generated = parse_dt(peripherals.get("generated_at"))
+        peripheral_threshold = timedelta(minutes=20 if in_bf else 45)
+        if peripheral_generated is None:
+            problems.append("peripheral_prices_generated_at_missing")
+        elif now - peripheral_generated > peripheral_threshold:
+            problems.append(f"peripheral_prices_stale:{int((now-peripheral_generated).total_seconds()/60)}m")
+    except Exception as exc:
+        problems.append("peripheral_prices_unreadable:" + type(exc).__name__)
 
     result = {
         "status": "PASS" if not problems else "ALERT",
