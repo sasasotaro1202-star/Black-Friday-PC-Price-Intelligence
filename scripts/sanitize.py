@@ -6,9 +6,40 @@ from intelligence import (
     validate_price
 )
 
+def final_fetch_stats(final_products, monitor_stats=None):
+    """Recompute final price counts after sanitization while preserving monitor diagnostics."""
+    monitor_stats = monitor_stats or {}
+    result = {
+        "total": len(final_products),
+        "direct_verified": sum(
+            1 for x in final_products
+            if x.get("current_price_jpy") is not None
+            and x.get("price_source_mode") in ("direct_structured", "direct_page", "direct_text")
+        ),
+        "search_corrob": sum(
+            1 for x in final_products
+            if x.get("current_price_jpy") is not None
+            and x.get("price_source_mode") == "search_snippet"
+        ),
+        "stale_previous": sum(1 for x in final_products if x.get("price_source_mode") == "stale_previous"),
+        "baseline_only": sum(1 for x in final_products if x.get("price_source_mode") == "public_baseline"),
+        "anomaly_rejected": sum(1 for x in final_products if x.get("price_validation_status") == "anomaly_rejected"),
+        "errors": sum(1 for x in final_products if x.get("fetch_status") == "error"),
+    }
+    # Monitor-side diagnostics are independent observations and survive sanitization.
+    for key in (
+        "search_fallback_attempts", "search_fallback_successes", "search_fallback_failures",
+        "search_identity_rejections", "errors_by_host_reason",
+    ):
+        if key in monitor_stats:
+            result[key] = monitor_stats[key]
+    return result
+
+
 def main():
     path = os.path.join(ROOT, "data", "current_latest.json")
     state = load_json(path, {"products": []})
+    monitor_fetch_stats = dict(state.get("fetch_stats") or {})
     catalog = load_catalog()
 
     stats = {
@@ -101,23 +132,7 @@ def main():
         "skipped_reason": prior_coverage.get("skipped_reason"),
         "skipped_ids": prior_coverage.get("skipped_ids") or [],
     }
-    state["fetch_stats"] = {
-        "total": len(final),
-        "direct_verified": sum(
-            1 for x in final
-            if x.get("current_price_jpy") is not None
-            and x.get("price_source_mode") in ("direct_structured", "direct_page", "direct_text")
-        ),
-        "search_corrob": sum(
-            1 for x in final
-            if x.get("current_price_jpy") is not None
-            and x.get("price_source_mode") == "search_snippet"
-        ),
-        "stale_previous": sum(1 for x in final if x.get("price_source_mode") == "stale_previous"),
-        "baseline_only": sum(1 for x in final if x.get("price_source_mode") == "public_baseline"),
-        "anomaly_rejected": sum(1 for x in final if x.get("price_validation_status") == "anomaly_rejected"),
-        "errors": sum(1 for x in final if x.get("fetch_status") == "error"),
-    }
+    state["fetch_stats"] = final_fetch_stats(final, monitor_fetch_stats)
 
     state.setdefault("sanitizer", {})
     state["sanitizer"] = stats
