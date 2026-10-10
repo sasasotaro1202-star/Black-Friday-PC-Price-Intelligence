@@ -1,9 +1,9 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-10T22:31:56+09:00
-Source snapshot: 2026-10-10T22:31:03+09:00
-Source snapshot SHA256: d6f2de2bd40bdcbbf398c3d8b13acfadb9ec3fb06f65549a53bd00f248f765ce
-Budget: ¥299,800
+Generated: 2026-10-10T22:33:54+09:00
+Source snapshot: 2026-10-10T22:33:04+09:00
+Source snapshot SHA256: 889c75a41f57523eccf34ae32900d5517920c033999b93ee870d92a5240da21e
+Budget: ¥321,800
 Target Black Friday: 2026-11-27
 
 ## Current actionable candidates
@@ -11,14 +11,14 @@ Target Black Friday: 2026-11-27
 |Rank|Product|Current|Required discount|Feasibility|GPU|Perf|Source|
 |---:|---|---:|---:|---|---|---:|---|
 |1|G TUNE P6-I7G70BK-B|¥284,700|0.0%|HIGH|rtx 5070|35|direct_structured|
-|2|G TUNE DG-I7G70|¥299,800|0.0%|HIGH|rtx 5070|32|direct_structured|
-|3|G TUNE DG-I5G70|¥279,800|0.0%|HIGH|rtx 5070|22|direct_structured|
-|4|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
-|5|G TUNE DG-A7G70|¥304,800|1.6%|HIGH|rtx 5070|26|direct_structured|
-|6|G TUNE FG-A7G70|¥319,800|6.3%|HIGH|rtx 5070|33|direct_structured|
-|7|Lenovo Legion Pro 5i Gen 10（16型 Intel）|¥354,865|15.5%|REALISTIC|rtx 5080|40|direct_structured|
-|8|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|25.0%|AGGRESSIVE|rtx 5070 ti|38|direct_structured|
-|9|G TUNE P5-I7G70BK-C（ブラック）|¥419,800|28.6%|AGGRESSIVE|rtx 5070|32|direct_structured|
+|2|G TUNE FG-A7G70|¥319,800|0.0%|HIGH|rtx 5070|33|direct_structured|
+|3|G TUNE DG-I7G70|¥299,800|0.0%|HIGH|rtx 5070|32|direct_structured|
+|4|G TUNE DG-A7G70|¥304,800|0.0%|HIGH|rtx 5070|26|direct_structured|
+|5|G TUNE DG-I5G70|¥279,800|0.0%|HIGH|rtx 5070|22|direct_structured|
+|6|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
+|7|Lenovo Legion Pro 5i Gen 10（16型 Intel）|¥354,865|9.3%|HIGH|rtx 5080|40|direct_structured|
+|8|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|19.5%|REALISTIC|rtx 5070 ti|38|direct_structured|
+|9|G TUNE P5-I7G70BK-C（ブラック）|¥419,800|23.3%|AGGRESSIVE|rtx 5070|32|direct_structured|
 
 ## Empirical price-change timing
 
