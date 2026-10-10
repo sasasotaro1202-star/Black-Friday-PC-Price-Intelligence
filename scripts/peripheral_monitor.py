@@ -84,17 +84,51 @@ def local_product_stock(context, parsed_stock="unknown"):
     return parsed_stock if parsed_stock in ("preorder_or_backorder", "unknown") else "unknown"
 
 
+def previous_matches_target(previous, target):
+    """Only reuse last-valid price history when it belongs to this exact tracked product."""
+    if not previous:
+        return False
+
+    if norm_text(previous.get("name")) != norm_text(target.get("name")):
+        return False
+
+    def url_identity(value):
+        if not value:
+            return None
+        parsed = urlparse(str(value))
+        # Ignore query-string differences, but retain retailer and product path.
+        return (parsed.netloc.lower(), (parsed.path or "/").rstrip("/") or "/")
+
+    old_url = url_identity(previous.get("monitor_url"))
+    new_url = url_identity(target.get("monitor_url"))
+    if not old_url or old_url != new_url:
+        return False
+
+    old_model = norm_text(previous.get("model_code"))
+    new_model = norm_text(target.get("model_code"))
+    if old_model != new_model:
+        return False
+
+    old_terms = sorted({norm_text(x) for x in (previous.get("identity_terms") or []) if norm_text(x)})
+    new_terms = sorted({norm_text(x) for x in (target.get("identity_terms") or []) if norm_text(x)})
+    if old_terms and new_terms and old_terms != new_terms:
+        return False
+
+    return True
+
+
 def run_one(target, previous, retrieved_at):
     primary_url = target.get("monitor_url")
     configured_urls = target.get("monitor_urls") or ([primary_url] if primary_url else [])
     row = {
         "id": target["id"], "name": target.get("name"),
+        "identity_terms": target.get("identity_terms") or [], "model_code": target.get("model_code"),
         "target_price_jpy": int(target.get("target_price_jpy") or 0),
         "monitor_url": primary_url,
         "purchase_url": target.get("purchase_url") or primary_url,
         "retrieval_time": retrieved_at, "available_at": None,
         "current_price_jpy": None,
-        "last_valid_price_jpy": previous.get("current_price_jpy") or previous.get("last_valid_price_jpy"),
+        "last_valid_price_jpy": (previous.get("current_price_jpy") or previous.get("last_valid_price_jpy")) if previous_matches_target(previous, target) else None,
         "price_verified": False, "stock_status": "unknown",
         "price_source_mode": "none", "price_validation_status": "missing",
         "identity_verified": False, "status": "error", "error": None,
