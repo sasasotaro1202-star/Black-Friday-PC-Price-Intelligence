@@ -1,8 +1,8 @@
 # ブラックフライデー期間通算・購入ランキング
 
-更新: 2026-10-10T15:39:08+09:00
-観測スナップショット: 2026-10-10T15:38:40+09:00
-観測スナップショットSHA256: 1f466b709877751f681395dfdc9a1d14ecf4e293c687b994affe706b94e4406e
+更新: 2026-10-10T15:44:05+09:00
+観測スナップショット: 2026-10-10T15:43:37+09:00
+観測スナップショットSHA256: 3308d6376543c3ea67b0795d386f398be8e512d280bf2c03ffff6b20710800a2
 総予算（PC＋周辺機器）: ¥370,000
 周辺機器の目標予算: ¥67,800
 PC本体の目標価格: ¥299,800
@@ -36,11 +36,11 @@ PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥294,2
 
 |項目|目標価格|観測価格|在庫|価格確認|購入ページ|
 |---|---:|---:|---|---|---|
-|AOC Q27G40E/11 27-inch WQHD 180Hz|¥17,500|—（目標額で仮計算）|preorder_or_backorder|未確認|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
+|AOC Q27G40E/11 27-inch WQHD 180Hz|¥17,500|—（目標額で仮計算）|in_stock|未確認|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
 |EDIFIER MR5 (high-quality sound priority)|¥32,000|¥39,980|in_stock|確認済み|[商品ページ](https://www.edifier.jp/products/mr5)|
 |Logicool G213r|¥5,500|—（目標額で仮計算）|unknown|未確認|予算枠のみ|
-|Logicool G304|¥3,800|—（目標額で仮計算）|preorder_or_backorder|未確認|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
-|SteelSeries QcK Large|¥2,500|—（目標額で仮計算）|preorder_or_backorder|未確認|[商品ページ](https://www.yodobashi.com/product/100000001009472873/)|
+|Logicool G304|¥3,800|—（目標額で仮計算）|in_stock|未確認|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
+|SteelSeries QcK Large|¥2,500|—（目標額で仮計算）|low_stock|未確認|[商品ページ](https://www.yodobashi.com/product/100000001009472873/)|
 |6-outlet surge-protected power strip|¥1,500|—（目標額で仮計算）|unknown|未確認|予算枠のみ|
 |Required cables only; check included monitor/speaker cables first|¥1,000|—（目標額で仮計算）|unknown|未確認|予算枠のみ|
 |Shipping / multi-store purchase reserve|¥4,000|—（目標額で仮計算）|unknown|未確認|予算枠のみ|
