@@ -85,86 +85,149 @@ def local_product_stock(context, parsed_stock="unknown"):
 
 
 def run_one(target, previous, retrieved_at):
-    url = target.get("monitor_url")
+    primary_url = target.get("monitor_url")
+    configured_urls = target.get("monitor_urls") or ([primary_url] if primary_url else [])
     row = {
         "id": target["id"], "name": target.get("name"),
         "target_price_jpy": int(target.get("target_price_jpy") or 0),
-        "monitor_url": url, "purchase_url": target.get("purchase_url") or url,
+        "monitor_url": primary_url,
+        "purchase_url": target.get("purchase_url") or primary_url,
         "retrieval_time": retrieved_at, "available_at": None,
         "current_price_jpy": None,
         "last_valid_price_jpy": previous.get("current_price_jpy") or previous.get("last_valid_price_jpy"),
         "price_verified": False, "stock_status": "unknown",
         "price_source_mode": "none", "price_validation_status": "missing",
         "identity_verified": False, "status": "error", "error": None,
+        "retrieval_attempts": [],
     }
-    if not url or not allowed_host(url, target.get("allowed_hosts")):
+    allowed_hosts = target.get("allowed_hosts") or []
+    urls = []
+    for candidate_url in configured_urls:
+        if candidate_url and allowed_host(candidate_url, allowed_hosts) and candidate_url not in urls:
+            urls.append(candidate_url)
+        else:
+            row["retrieval_attempts"].append({
+                "url": candidate_url, "status": "configuration_error",
+                "error": "missing_or_disallowed_product_url",
+            })
+    if not urls:
         row["status"], row["error"] = "configuration_error", "missing_or_disallowed_product_url"
         return row
-    try:
-        html, final_url, _headers = fetch(url, timeout=18)
-        if not allowed_host(final_url, target.get("allowed_hosts")):
-            raise ValueError("redirected_to_unapproved_host")
-        terms = [norm_text(x) for x in target.get("identity_terms", []) if norm_text(x)]
-        expected = {
-            "name": target.get("name") or "",
-            "aliases": target.get("identity_terms") or [],
-            "model_code": target.get("model_code") or "",
-            "url_is_exact": True,
-            "identity_confidence": "high",
-        }
-        parsed = parse_page(final_url, html, expected=expected)
-        full_excerpt = parsed.get("page_text_excerpt") or ""
-        excerpt = norm_text(full_excerpt)
-        context = product_context_excerpt(full_excerpt, terms)
-        row["product_context_excerpt"] = context[:1400]
-        identity_verified = bool(terms and any(term in excerpt for term in terms))
-        if not identity_verified:
-            row["status"], row["error"] = "identity_unverified", "exact_model_term_not_found"
-            row["stock_status"] = parsed.get("stock_status") or "unknown"
-            return row
-        price_source = parsed.get("price_source_mode") or "none"
-        price_context = parsed.get("price_context")
+
+    terms = [norm_text(x) for x in target.get("identity_terms", []) if norm_text(x)]
+    last_candidate_state = None
+    for attempt_index, candidate_url in enumerate(urls):
         try:
-            price = int(parsed.get("price_jpy")) if parsed.get("price_jpy") is not None else None
-        except (TypeError, ValueError):
-            price = None
-        # Only exact-model structured offers can be trusted from a whole page.
-        # Retail pages commonly list recommendations and their unrelated prices below
-        # the selected product, so text/meta prices must come from the bounded exact-model window.
-        if price_source != "direct_structured":
-            contextual_price = local_price_candidate(context) if context else None
-            if contextual_price:
-                price = contextual_price["price_jpy"]
-                price_source = "direct_text"
-                price_context = contextual_price["context"]
-            else:
+            html, final_url, _headers = fetch(candidate_url, timeout=18)
+            if not allowed_host(final_url, allowed_hosts):
+                raise ValueError("redirected_to_unapproved_host")
+            expected = {
+                "name": target.get("name") or "",
+                "aliases": target.get("identity_terms") or [],
+                "model_code": target.get("model_code") or "",
+                "url_is_exact": True,
+                "identity_confidence": "high",
+            }
+            parsed = parse_page(final_url, html, expected=expected)
+            full_excerpt = parsed.get("page_text_excerpt") or ""
+            excerpt = norm_text(full_excerpt)
+            context = product_context_excerpt(full_excerpt, terms)
+            identity_verified = bool(terms and any(term in excerpt for term in terms))
+            last_candidate_state = {
+                "product_context_excerpt": context[:1400],
+                "stock_status": local_product_stock(context, parsed.get("stock_status") or "unknown"),
+                "identity_verified": identity_verified,
+                "page_title": parsed.get("name"),
+            }
+            if not identity_verified:
+                row["retrieval_attempts"].append({
+                    "url": candidate_url, "final_url": final_url,
+                    "status": "identity_unverified", "error": "exact_model_term_not_found",
+                })
+                continue
+
+            price_source = parsed.get("price_source_mode") or "none"
+            price_context = parsed.get("price_context")
+            try:
+                price = int(parsed.get("price_jpy")) if parsed.get("price_jpy") is not None else None
+            except (TypeError, ValueError):
                 price = None
-                price_source = "none"
-                price_context = None
-        lower, upper = int(target.get("min_price_jpy") or 1), int(target.get("max_price_jpy") or 1000000)
-        if price is None or price < lower or price > upper:
-            row["unverified_price_candidate_jpy"] = price
-            row["status"], row["error"] = "price_unverified", "missing_or_implausible_price"
-            row["stock_status"] = local_product_stock(context, parsed.get("stock_status") or "unknown")
-            row["identity_verified"] = True
-            row["price_source_mode"] = price_source
-            row["price_context"] = price_context
+
+            # Whole-page text/meta prices can be from recommendations. Only
+            # structured exact-model offers or text beside the exact model title
+            # are considered here.
+            if price_source != "direct_structured":
+                contextual_price = local_price_candidate(context) if context else None
+                if contextual_price:
+                    price = contextual_price["price_jpy"]
+                    price_source = "direct_text"
+                    price_context = contextual_price["context"]
+                else:
+                    price = None
+                    price_source = "none"
+                    price_context = None
+
+            lower = int(target.get("min_price_jpy") or 1)
+            upper = int(target.get("max_price_jpy") or 1000000)
+            if price is None or price < lower or price > upper:
+                row["retrieval_attempts"].append({
+                    "url": candidate_url, "final_url": final_url,
+                    "status": "price_unverified",
+                    "error": "missing_or_implausible_price",
+                    "price_candidate_jpy": price,
+                })
+                last_candidate_state.update({
+                    "unverified_price_candidate_jpy": price,
+                    "price_source_mode": price_source,
+                    "price_context": price_context,
+                })
+                continue
+
+            stock = local_product_stock(context, parsed.get("stock_status") or "unknown")
+            row.update({
+                "current_price_jpy": price,
+                "last_valid_price_jpy": price,
+                "price_verified": True,
+                "stock_status": stock,
+                "price_source_mode": price_source,
+                "price_validation_status": "validated_exact_model_page",
+                "identity_verified": True,
+                "available_at": retrieved_at,
+                "status": "verified" if stock in ("in_stock", "low_stock") else "price_verified_stock_unknown",
+                "target_met": price <= int(target.get("target_price_jpy") or 0),
+                "page_title": parsed.get("name"),
+                "price_context": price_context,
+                "coupon_note": target.get("coupon_policy"),
+                "monitor_url_used": candidate_url,
+                "source_url": final_url,
+                "purchase_url": final_url,
+                "fallback_url_used": attempt_index > 0,
+            })
+            row["retrieval_attempts"].append({
+                "url": candidate_url, "final_url": final_url, "status": "verified",
+            })
             return row
-        stock = local_product_stock(context, parsed.get("stock_status") or "unknown")
-        row.update({
-            "current_price_jpy": price, "last_valid_price_jpy": price, "price_verified": True,
-            "stock_status": stock, "price_source_mode": price_source,
-            "price_validation_status": "validated_exact_model_page", "identity_verified": True,
-            "available_at": retrieved_at,
-            "status": "verified" if stock in ("in_stock", "low_stock") else "price_verified_stock_unknown",
-            "target_met": price <= int(target.get("target_price_jpy") or 0),
-            "page_title": parsed.get("name"), "price_context": price_context,
-            "coupon_note": target.get("coupon_policy"),
-        })
-        return row
-    except Exception as exc:
-        row["status"], row["error"] = "error", f"{type(exc).__name__}:{str(exc)[:180]}"
-        return row
+        except Exception as exc:
+            row["retrieval_attempts"].append({
+                "url": candidate_url,
+                "status": "error",
+                "error": f"{type(exc).__name__}:{str(exc)[:180]}",
+            })
+
+    if last_candidate_state:
+        row.update(last_candidate_state)
+    statuses = {x.get("status") for x in row["retrieval_attempts"]}
+    if "identity_unverified" in statuses:
+        row["status"] = "identity_unverified"
+    elif "price_unverified" in statuses:
+        row["status"] = "price_unverified"
+    else:
+        row["status"] = "error"
+    row["error"] = "; ".join(
+        f"{x.get('url')}: {x.get('error')}"
+        for x in row["retrieval_attempts"] if x.get("error")
+    )[:700] or "all_configured_urls_failed"
+    return row
 
 
 def main():
@@ -202,7 +265,7 @@ def main():
             "publication_time": None, "available_at": item.get("available_at"),
             "retrieval_time": observed_at, "prediction_time": observed_at,
             "pit_valid": bool(item.get("available_at") and item.get("available_at") <= observed_at),
-            "url": item.get("monitor_url"), "old_price_jpy": old_price, "new_price_jpy": new_price,
+            "url": item.get("source_url") or item.get("monitor_url"), "old_price_jpy": old_price, "new_price_jpy": new_price,
             "old_stock_status": old_stock, "new_stock_status": new_stock,
             "price_source_mode": item.get("price_source_mode"),
             "price_verified": item.get("price_verified", False), "status": item.get("status"),

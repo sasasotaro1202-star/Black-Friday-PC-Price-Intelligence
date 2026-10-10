@@ -166,10 +166,15 @@
       "price_target_phase": "black_friday",
       "target_price_note": "5500円はBF期間中の購入目標。現在の参考価格とは区別し、購入画面の実売をBF価格として扱わない。",
       "allowed_hosts": [
-        "www.biccamera.com"
+        "www.biccamera.com",
+        "item.rakuten.co.jp"
       ],
       "min_price_jpy": 3000,
-      "max_price_jpy": 15000
+      "max_price_jpy": 15000,
+      "monitor_urls": [
+        "https://www.biccamera.com/bc/item/9242996/",
+        "https://item.rakuten.co.jp/logicool/g213r/"
+      ]
     },
     {
       "id": "mouse",

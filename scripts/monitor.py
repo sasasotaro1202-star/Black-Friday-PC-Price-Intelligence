@@ -101,6 +101,9 @@ def fetch(url, timeout=18):
                     "X-BF-Fetch-Method": "curl",
                     "X-BF-HTTP-Status": str(status),
                 }
+            if status == 0:
+                stderr = p.stderr.decode("utf-8", errors="replace").strip()[:160]
+                raise RuntimeError(f"curl_exit_{p.returncode}:curl_http_000:{stderr}")
             raise RuntimeError(f"curl_http_{status}")
         if p.returncode != 0:
             raise RuntimeError(f"curl_exit_{p.returncode}")

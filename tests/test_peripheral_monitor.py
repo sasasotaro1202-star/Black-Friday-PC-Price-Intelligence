@@ -61,6 +61,36 @@ class PeripheralMonitorTests(unittest.TestCase):
         stock = peripheral_monitor.local_product_stock(context, "preorder_or_backorder")
         self.assertEqual(stock, "in_stock")
 
+    def test_second_exact_model_url_is_tried_when_first_transport_fails(self):
+        target = dict(self.target)
+        target["monitor_urls"] = [
+            "https://www.biccamera.com/bc/item/9242996/",
+            "https://item.rakuten.co.jp/logicool/g213r/",
+        ]
+        target["allowed_hosts"] = ["www.biccamera.com", "item.rakuten.co.jp"]
+        target["identity_terms"] = ["G213r", "G213R", "9242996"]
+        target["min_price_jpy"] = 3000
+        target["max_price_jpy"] = 15000
+        parsed = {
+            "page_text_excerpt": "Logicool G213r 型番 G213R ￥7,330 在庫あり",
+            "price_jpy": 7330,
+            "price_source_mode": "direct_structured",
+            "price_context": None,
+            "stock_status": "in_stock",
+            "name": "Logicool G213r",
+        }
+        with patch.object(peripheral_monitor, "fetch", side_effect=[
+            RuntimeError("curl_exit_35:curl_http_000:SSL connect error"),
+            ("<html></html>", "https://item.rakuten.co.jp/logicool/g213r/", {}),
+        ]), patch.object(peripheral_monitor, "parse_page", return_value=parsed):
+            row = peripheral_monitor.run_one(target, {}, "2026-10-10T15:00:00+09:00")
+        self.assertTrue(row["price_verified"])
+        self.assertEqual(row["current_price_jpy"], 7330)
+        self.assertTrue(row["fallback_url_used"])
+        self.assertEqual(row["monitor_url_used"], "https://item.rakuten.co.jp/logicool/g213r/")
+        self.assertEqual(row["purchase_url"], row["monitor_url_used"])
+        self.assertIn("curl_exit_35", row["retrieval_attempts"][0]["error"])
+
     def test_price_outside_configured_range_remains_unverified(self):
         excerpt = "AOC Q27G40E/11 特価 ￥7,000 在庫あり"
         parsed = {
