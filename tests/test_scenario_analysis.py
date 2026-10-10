@@ -142,9 +142,9 @@ class BlackFridayScenarioTests(unittest.TestCase):
         self.assertTrue(row["black_friday_offer_verified"])
         self.assertEqual(row["black_friday_price_observed_jpy"], 299800)
         self.assertIsNone(row["pre_black_friday_reference_price_jpy"])
-        speaker = next(x for x in result["peripherals"] if x["id"] == "speakers")
+        speaker = next(x for x in result["peripherals"] if x["id"] == "speakers_budget")
         self.assertTrue(speaker["black_friday_price_verified"])
-        self.assertEqual(speaker["black_friday_price_observed_jpy"], 30000)
+        self.assertEqual(speaker["black_friday_price_observed_jpy"], 4100)
         self.assertIsNone(speaker["pre_black_friday_reference_price_jpy"])
 
     def test_unavailable_or_stale_data_never_becomes_bf_observed_price(self):
