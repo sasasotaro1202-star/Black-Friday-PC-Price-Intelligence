@@ -126,8 +126,9 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
             "black_friday_target_price_jpy": bf_target,
             "black_friday_price_observed_jpy": live_price if is_bf_observation else None,
             "black_friday_offer_verified": is_bf_observation,
-            "pre_black_friday_reference_price_jpy": live_price if trusted and not is_bf_observation else reference,
+            "pre_black_friday_reference_price_jpy": live_price if trusted and not is_bf_observation else None,
             "pre_black_friday_reference_at": live.get("retrieval_time") if trusted and not is_bf_observation else None,
+            "catalog_reference_price_jpy": reference,
             "price_reference_kind": scenario_source,
             "scenario_base_price_jpy": scenario_base,
             "scenario_base_note": (
@@ -411,6 +412,7 @@ def main():
     for r in bf_plan["pc_candidates"]:
         bands={x["discount_pct"]:x["price_jpy"] for x in r.get("scenario_prices",[])}
         ref=r.get("pre_black_friday_reference_price_jpy")
+        catalog_ref=r.get("catalog_reference_price_jpy")
         base=r.get("scenario_base_price_jpy")
         bf_price=r.get("black_friday_price_observed_jpy")
         gap=r.get("discount_needed_to_bf_target_jpy")
@@ -419,7 +421,7 @@ def main():
         lines.append(
             f"|{(r.get('name') or r['id'])[:48]}|{r['form_factor']}|{r.get('gpu') or '—'}|"
             f"¥{r['black_friday_target_price_jpy']:,}|"
-            f"{('¥'+format(ref,',')) if ref is not None else (('¥'+format(base,',')) if base is not None else '未確認')}|"
+            f"{('¥'+format(ref,',')) if ref is not None else (('¥'+format(catalog_ref,',')) if catalog_ref is not None else '—')}|"
             f"{('¥'+format(bf_price,',')) if bf_price is not None else '未確認'}|"
             f"{('¥'+format(gap,',')) if gap is not None else '—'}|"
             f"{(format(pct,'.1f')+'%') if pct is not None else '—'}|"
