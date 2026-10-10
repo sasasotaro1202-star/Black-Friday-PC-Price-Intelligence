@@ -53,6 +53,18 @@ class MonitorParsingTests(unittest.TestCase):
         self.assertEqual(diagnostic[0]["provider"], "duckduckgo")
         self.assertEqual(diagnostic[0]["status"], "error")
 
+    def test_search_fallback_diagnostics_report_both_provider_outcomes(self):
+        expected = {"name": "G213r", "aliases": ["G213r"]}
+        diagnostic = []
+        from unittest.mock import patch
+        with patch.object(monitor, "ddg_search", side_effect=RuntimeError("temporarily blocked")), \
+             patch.object(monitor, "bing_search", return_value=[]):
+            result = monitor.search_fallback("G213r", "https://www.biccamera.com/bc/item/9242996/",
+                                             expected=expected, diagnostics=diagnostic)
+        self.assertIsNone(result)
+        self.assertEqual([x["provider"] for x in diagnostic], ["duckduckgo", "bing"])
+        self.assertTrue(all("status" in x for x in diagnostic))
+
     def test_search_fallback_rejects_prices_without_exact_identity_even_on_allowed_host(self):
         expected = {"name": "G213r", "aliases": ["G213r", "9242996"]}
         ddg = [{
