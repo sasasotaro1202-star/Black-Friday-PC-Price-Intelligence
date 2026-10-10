@@ -592,7 +592,7 @@ def main():
             f"|{row['rank']}|{row.get('form_factor','unknown')}|{row.get('name','')[:55]}|¥{row['current_price_jpy']:,}|"
             f"¥{row.get('cash_total_cost_jpy'):,}|¥{row.get('confirmed_benefit_value_jpy', 0):,}|¥{row.get('effective_cost_jpy'):,}|"
             f"¥{row.get('noncash_benefit_value_jpy', 0):,}|+{d.get('value_bonus', 0)}|"
-            (f"{d['required_effective_discount_pct']:.1f}%" if d.get("required_effective_discount_pct") is not None else "未算出") + "|"
+            f"{(format(d['required_effective_discount_pct'], '.1f') + '%') if d.get('required_effective_discount_pct') is not None else '未算出'}|"
             f"{d['performance']}/40|{d['price']}/20|"
             f"{d['history']}/15|{d['stock']}/15|{d['timing']}/10|"
             f"**{row['decision_score']}/100**|{d['status']}|"
