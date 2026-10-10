@@ -21,9 +21,79 @@ class MonitorParsingTests(unittest.TestCase):
         )
         with patch.object(monitor, "urlopen", side_effect=URLError("blocked")), \
              patch.object(monitor.time, "sleep"), \
-             patch.object(monitor.subprocess, "run", return_value=fake):
+             patch.object(monitor.subprocess, "run", return_value=fake) as run_mock:
             with self.assertRaisesRegex(RuntimeError, "curl_exit_35.*SSL connect error"):
                 monitor.fetch("https://example.com/product", timeout=1)
+        self.assertIn("--http1.1", run_mock.call_args.args[0])
+
+    def test_candidate_fetch_uses_curated_exact_model_alternate_after_http_failure(self):
+        from unittest.mock import patch
+        cat = {
+            "id": "test-exact",
+            "name": "Test Exact Desktop MODEL-EXACT",
+            "aliases": ["MODEL-EXACT"],
+            "model_code": "MODEL-EXACT",
+            "form_factor": "desktop",
+            "gpu": "RTX 5070",
+            "cpu": "Ryzen 7 9700X",
+            "ram_gb": 32,
+            "ssd": "1 TB",
+            "url_is_exact": True,
+            "identity_confidence": "high",
+            "alternate_price_urls": ["https://kakaku.com/item/K0000000000/"],
+        }
+        parsed = {
+            "url": "https://kakaku.com/item/K0000000000/",
+            "name": "Test Exact Desktop MODEL-EXACT",
+            "price_jpy": 299800,
+            "stock_status": "in_stock",
+            "parsed_spec": {"cpu": "Ryzen 7 9700X", "gpu": "RTX 5070",
+                            "ram_gb": 32, "ssd": "1 TB", "form_factor": "desktop"},
+            "page_text_excerpt": "MODEL-EXACT Ryzen 7 9700X RTX 5070 32GB 1TB 299,800円 在庫あり",
+            "price_source_mode": "direct_text",
+            "data_confidence": "medium",
+        }
+        with patch.object(monitor, "fetch", side_effect=[
+            RuntimeError("RuntimeError:curl_http_403"),
+            ("html", "https://kakaku.com/item/K0000000000/", {}),
+        ]) as fetch_mock, patch.object(monitor, "parse_page", return_value=parsed):
+            cid, result, error = monitor.fetch_candidate_with_alternates(
+                {"id": "test-exact", "url": "https://store.example.com/product", "query": "MODEL-EXACT"},
+                cat,
+            )
+        self.assertEqual(cid, "test-exact")
+        self.assertIsNone(error)
+        self.assertEqual(result["price_jpy"], 299800)
+        self.assertTrue(result["alternate_url_used"])
+        self.assertEqual(result["price_source_url"], "https://kakaku.com/item/K0000000000/")
+        self.assertEqual(result["alternate_url_identity_anchor"], "MODEL-EXACT")
+        self.assertEqual(len(fetch_mock.call_args_list), 2)
+
+    def test_candidate_fetch_rejects_alternate_page_without_catalogued_model_alias(self):
+        from unittest.mock import patch
+        cat = {
+            "id": "test-exact", "name": "Test Exact Desktop MODEL-EXACT",
+            "aliases": ["MODEL-EXACT"], "model_code": "MODEL-EXACT",
+            "form_factor": "desktop", "gpu": "RTX 5070", "cpu": "Ryzen 7 9700X",
+            "ram_gb": 32, "ssd": "1 TB", "url_is_exact": True, "identity_confidence": "high",
+            "alternate_price_urls": ["https://kakaku.com/item/K0000000000/"],
+        }
+        parsed = {
+            "name": "Another Desktop SKU-OTHER", "price_jpy": 229800,
+            "stock_status": "in_stock", "parsed_spec": {"cpu":"Ryzen 7 9700X","gpu":"RTX 5070",
+            "ram_gb":32,"ssd":"1 TB","form_factor":"desktop"},
+            "page_text_excerpt": "Another Desktop SKU-OTHER Ryzen 7 9700X RTX 5070 32GB 1TB 229,800円",
+            "price_source_mode": "direct_text", "data_confidence": "medium",
+        }
+        with patch.object(monitor, "fetch", side_effect=[
+            RuntimeError("RuntimeError:curl_http_403"),
+            ("html", "https://kakaku.com/item/K0000000000/", {}),
+        ]), patch.object(monitor, "parse_page", return_value=parsed):
+            cid, result, error = monitor.fetch_candidate_with_alternates(
+                {"id":"test-exact","url":"https://store.example.com/product","query":"MODEL-EXACT"}, cat
+            )
+        self.assertIsNone(result.get("price_jpy"))
+        self.assertIn("identity_rejected", error)
 
     def test_bing_parser_extracts_organic_model_and_snippet(self):
         html = """
