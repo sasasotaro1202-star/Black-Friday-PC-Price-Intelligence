@@ -37,14 +37,22 @@ class WorkflowContractTests(unittest.TestCase):
             ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml",
         ):
             text = path.read_text(encoding="utf-8")
-            snippets = re.findall(
-                r"^[ \\t]*python - <<'PY'.*\\n(.*?)^[ \\t]*PY[ \\t]*$",
-                text,
-                flags=re.MULTILINE | re.DOTALL,
-            )
+            snippets = []
+            lines = text.splitlines()
+            index = 0
+            while index < len(lines):
+                if lines[index].strip().startswith("python - <<'PY'"):
+                    index += 1
+                    block = []
+                    while index < len(lines) and lines[index].strip() != "PY":
+                        block.append(lines[index])
+                        index += 1
+                    self.assertTrue(block, f"{path}: embedded block is empty")
+                    snippets.append(textwrap.dedent("\\n".join(block)))
+                index += 1
             self.assertTrue(snippets, str(path))
-            for index, snippet in enumerate(snippets, start=1):
-                compile(textwrap.dedent(snippet), f"{path}:embedded-python-{index}", "exec")
+            for number, snippet in enumerate(snippets, start=1):
+                compile(snippet, f"{path}:embedded-python-{number}", "exec")
 
     def test_watchlist_refresh_detects_missing_catalog_candidates(self):
         for path in (
