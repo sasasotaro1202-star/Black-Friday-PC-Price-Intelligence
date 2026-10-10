@@ -26,6 +26,22 @@ class MonitorParsingTests(unittest.TestCase):
                 monitor.fetch("https://example.com/product", timeout=1)
         self.assertIn("--http1.1", run_mock.call_args.args[0])
 
+    def test_http_transport_uses_http11_after_http2_stream_errors(self):
+        from types import SimpleNamespace
+        from unittest.mock import patch
+        from urllib.error import URLError
+        fake = SimpleNamespace(
+            stdout=b"page\n__BF_STATUS__:000\n__BF_URL__:https://example.com/product",
+            stderr=b"HTTP/2 stream error",
+            returncode=92,
+        )
+        with patch.object(monitor, "urlopen", side_effect=URLError("blocked")), \
+             patch.object(monitor.time, "sleep"), \
+             patch.object(monitor.subprocess, "run", return_value=fake) as run_mock:
+            with self.assertRaisesRegex(RuntimeError, "curl_exit_92"):
+                monitor.fetch("https://example.com/product", timeout=1)
+        self.assertIn("--http1.1", run_mock.call_args.args[0])
+
     def test_candidate_fetch_uses_curated_exact_model_alternate_after_http_failure(self):
         from unittest.mock import patch
         cat = {
