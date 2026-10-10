@@ -30,6 +30,8 @@ def final_fetch_stats(final_products, monitor_stats=None):
     for key in (
         "search_fallback_attempts", "search_fallback_successes", "search_fallback_failures",
         "search_identity_rejections", "errors_by_host_reason",
+        "alternate_url_attempts", "alternate_url_successes",
+        "alternate_url_failures", "alternate_url_identity_rejections",
     ):
         if key in monitor_stats:
             result[key] = monitor_stats[key]
