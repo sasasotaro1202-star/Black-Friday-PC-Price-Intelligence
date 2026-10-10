@@ -55,6 +55,110 @@ class ReportLinkTests(unittest.TestCase):
         self.assertEqual(rows[0]["current_price_jpy"], 249800)
         self.assertEqual(rows[0]["variant_match"], "ambiguous")
 
+    def test_primary_plan_reports_upgrade_cost_ceiling_without_assuming_it(self):
+        strategy = {
+            "priority_plans": [{
+                "candidate_id": "desktop-gtune-dg-i5g70-5070",
+                "role": "primary_configuration_upgrade",
+                "label": "DG-I5G70",
+                "baseline_price_jpy": 279800,
+                "baseline_ram_gb": 16,
+                "baseline_ssd_gb": 500,
+                "target_ram_gb": 32,
+                "target_ssd_gb": 1000,
+            }],
+            "outlier_rule": {"gpu": "RTX 5070 Ti", "form_factor": "desktop",
+                             "minimum_ram_gb": 32, "minimum_ssd_gb": 1000},
+        }
+        candidate = {
+            "id": "desktop-gtune-dg-i5g70-5070",
+            "name": "G TUNE DG-I5G70",
+            "url": "https://example.com/dg-i5",
+            "form_factor": "desktop",
+            "current_price_jpy": 279800,
+            "price_source_mode": "direct_structured",
+            "price_validation_status": "validated",
+            "variant_match": "exact",
+            "stock_status": "in_stock",
+            "pit_valid": True,
+            "spec": {"gpu": "RTX 5070", "ram_gb": 16, "ssd": "500 GB"},
+        }
+        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
+                  "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
+        projection = {"pc_dynamic_cap_jpy": 302200}
+        result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
+        row = result["rows"][0]
+        self.assertEqual(row["status"], "NEEDS_CONFIGURATION")
+        self.assertEqual(row["max_upgrade_cost_to_target_jpy"], 20000)
+        self.assertEqual(row["max_upgrade_cost_to_hard_cap_jpy"], 22400)
+        self.assertEqual(row["max_upgrade_cost_to_dynamic_cap_jpy"], 22400)
+        self.assertIn("未確認", row["detail"])
+
+    def test_outlet_plan_reports_target_and_live_cap_gaps_separately(self):
+        strategy = {
+            "priority_plans": [{
+                "candidate_id": "desktop-gtune-dg-a7g70-5070",
+                "role": "secondary_outlet_complete_configuration",
+                "label": "DG-A7G70 outlet",
+                "target_ram_gb": 32,
+                "target_ssd_gb": 1000,
+                "last_verified_listing_reference_jpy": 304800,
+            }],
+            "outlier_rule": {"gpu": "RTX 5070 Ti", "form_factor": "desktop",
+                             "minimum_ram_gb": 32, "minimum_ssd_gb": 1000},
+        }
+        candidate = {
+            "id": "desktop-gtune-dg-a7g70-5070",
+            "name": "G TUNE DG-A7G70",
+            "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
+            "form_factor": "desktop",
+            "current_price_jpy": 304800,
+            "price_source_mode": "direct_structured",
+            "price_validation_status": "validated",
+            "variant_match": "exact",
+            "stock_status": "in_stock",
+            "pit_valid": True,
+            "spec": {"gpu": "RTX 5070", "ram_gb": 32, "ssd": "1 TB"},
+        }
+        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
+                  "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
+        projection = {"pc_dynamic_cap_jpy": 289240}
+        result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
+        row = result["rows"][0]
+        self.assertEqual(row["status"], "WAIT_FOR_DISCOUNT")
+        self.assertEqual(row["discount_to_target_jpy"], 5000)
+        self.assertEqual(row["discount_to_planned_cap_jpy"], 2600)
+        self.assertEqual(row["discount_to_dynamic_cap_jpy"], 15560)
+
+    def test_rtx_5070_ti_outlier_requires_verified_complete_configuration(self):
+        strategy = {
+            "priority_plans": [],
+            "outlier_rule": {"gpu": "RTX 5070 Ti", "form_factor": "desktop",
+                             "minimum_ram_gb": 32, "minimum_ssd_gb": 1000},
+        }
+        candidate = {
+            "id": "outlier-5070ti-incomplete",
+            "name": "RTX 5070 Ti desktop",
+            "url": "https://example.com/5070ti",
+            "form_factor": "desktop",
+            "current_price_jpy": 289800,
+            "price_source_mode": "direct_structured",
+            "price_validation_status": "validated",
+            "variant_match": "exact",
+            "stock_status": "in_stock",
+            "pit_valid": True,
+            "spec": {"gpu": "RTX 5070 Ti", "ram_gb": 16, "ssd": "1 TB"},
+        }
+        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
+                  "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
+        projection = {"pc_dynamic_cap_jpy": 302200}
+        result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
+        row = result["rows"][0]
+        self.assertEqual(row["role"], "rtx_5070_ti_outlier")
+        self.assertEqual(row["status"], "NO_VERIFIED_COMPLETE_CONFIGURATION")
+        self.assertFalse(row["configuration_ready"])
+        self.assertEqual(row["verified_complete_candidate_count"], 0)
+
     def test_file_sha256_is_stable_for_same_bytes(self):
         import tempfile
         from pathlib import Path
