@@ -7,12 +7,12 @@ Evaluate the best Japanese-market PC purchase throughout the entire 2026 Black F
 config/targets.json is the single source of truth.
 
 - Total budget: JPY 370,000 for PC + all required peripherals.
-- Peripheral target allocation: JPY 67,800.
-- PC target price: JPY 299,800.
-- PC planned hard cap: JPY 302,200 only when all peripherals stay within their target allocation.
+- Peripheral target allocation: JPY 45,800.
+- PC target price: JPY 321,800.
+- PC planned hard cap: JPY 324,200 only when all peripherals stay within their target allocation.
 - Required PC configuration: RAM >= 32GB and SSD >= 1TB.
 - One monitor only; no secondary monitor and no headset.
-- Sound quality is important: EDIFIER MR5 is the preferred speaker target; compare MR4 MKII or other alternatives when appropriate.
+- Speaker quality is a secondary priority: target a sensible-budget Creative Pebble X at JPY 10,000 BF target price. Do not overpay for audiophile/monitor-speaker performance; reallocate the former JPY 22,000 MR5 premium allocation to PC performance.
 - Include shipping, required fees, cable needs, and multi-store shipping reserve.
 - Track monitor, speakers, mouse and mousepad prices separately from PC prices.
 - Do not subtract coupons, points, lotteries, future rewards, or eligibility-dependent perks until actual checkout applicability is verified.
@@ -24,14 +24,14 @@ config/targets.json is the single source of truth.
 - Before the window, listings are `PRE_BLACK_FRIDAY_REFERENCE`; they must not populate `black_friday_price_observed_jpy` or be described as BF sale prices.
 - A BF-period observation requires source retrieval inside the window, verified current price, SKU identity, valid PIT, and confirmed stock.
 - Show BF target price, pre-window reference price, and observed BF-window price separately. Never present a future sale price as confirmed.
-- ¥299,800 PC target, ¥302,200 planned cap and ¥32,000 MR5 target are BF purchase goals. Use actual peripheral prices to adjust the PC cap only during the BF window and when the accessory snapshot is fresh and verified.
+- ¥321,800 PC target, ¥324,200 planned cap and ¥10,000 Creative Pebble X target are BF purchase goals. Use actual peripheral prices to adjust the PC cap only during the BF window and when the accessory snapshot is fresh and verified.
 
 ## 37万円購入戦略
 
-- Primary conditional target: `desktop-gtune-dg-i5g70-5070`. Its 279,800 JPY listing is only the 16 GB / 500 GB baseline. Never mark it purchase-ready until a 32 GB / 1 TB completed configuration and checkout price are verified. For a 279,800 JPY baseline, the max upgrade allowance is 20,000 JPY to reach the 299,800 JPY PC target or 22,400 JPY to reach the 302,200 JPY planning cap; these are arithmetic ceilings, not quoted upgrade prices.
+- Primary conditional target: `desktop-gtune-dg-i5g70-5070`. Its 279,800 JPY listing is only the 16 GB / 500 GB baseline. Never mark it purchase-ready until a 32 GB / 1 TB completed configuration and checkout price are verified. For a 279,800 JPY baseline, the max upgrade allowance is 42,000 JPY to reach the 321,800 JPY PC target or 44,400 JPY to reach the 324,200 JPY planning cap; these are arithmetic ceilings, not quoted upgrade prices.
 - Secondary complete-build watch: the exact outlet SKU `DGA7G70B5BBDW101DECWA`, official URL `https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/`. The 2026-10-10 observed listing reference was 304,800 JPY with Ryzen 7 5700X, RTX 5070, 32 GB RAM and 1 TB SSD. Always refresh price, inventory and SKU identity before treating it as current.
 - Outlier watch: RTX 5070 Ti desktop with at least 32 GB RAM / 1 TB SSD is eligible only if its directly verified completed build price is within the live dynamic PC cap. No assumed-zero upgrade costs.
-- Keep EDIFIER MR5 at a 32,000 JPY target. Coupons are not deducted until final checkout applicability is verified.
+- Keep Creative Pebble X at a 10,000 JPY BF target. Sound quality is intentionally not a premium requirement; prioritize the PC build. Coupons are not deducted until final checkout applicability is verified.
 - Do not hardcode the illustrative 96/94/95/97 scores. Compute the actual priority score from validated live evidence, and keep purchase gates closed whenever completed configuration or price is unknown.
 
 Current prices of tracked peripherals must adjust the dynamic PC cap. Missing/stale price or unknown stock must use the configured target as a planning reserve only and keep the overall purchase gate closed.

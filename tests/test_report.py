@@ -92,7 +92,7 @@ class ReportLinkTests(unittest.TestCase):
         self.assertEqual(row["status"], "PRE_BF_TARGET_MONITORING")
         self.assertEqual(row["max_upgrade_cost_to_bf_target_jpy"], 20000)
         self.assertEqual(row["max_upgrade_cost_to_bf_hard_cap_jpy"], 22400)
-        self.assertEqual(row["black_friday_target_price_jpy"], 299800)
+        self.assertEqual(row["black_friday_target_price_jpy"], 321800)
         self.assertIsNone(row["black_friday_price_observed_jpy"])
         self.assertEqual(row["pre_black_friday_reference_price_jpy"], 279800)
         self.assertIn("BF価格ではありません", row["detail"])
@@ -129,7 +129,7 @@ class ReportLinkTests(unittest.TestCase):
         result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
         self.assertEqual(row["status"], "PRE_BF_TARGET_MONITORING")
-        self.assertEqual(row["black_friday_target_price_jpy"], 299800)
+        self.assertEqual(row["black_friday_target_price_jpy"], 321800)
         self.assertIsNone(row["black_friday_price_observed_jpy"])
         self.assertEqual(row["pre_black_friday_reference_price_jpy"], 304800)
         self.assertEqual(row["black_friday_price_cap_jpy"], 302200)
@@ -184,7 +184,7 @@ class ReportLinkTests(unittest.TestCase):
                 "label": "DG-A7G70 outlet",
                 "target_ram_gb": 32,
                 "target_ssd_gb": 1000,
-                "black_friday_target_price_jpy": 299800,
+                "black_friday_target_price_jpy": 321800,
                 "last_verified_listing_reference_jpy": 304800,
             }],
             "outlier_rule": {"gpu": "RTX 5070 Ti", "form_factor": "desktop",

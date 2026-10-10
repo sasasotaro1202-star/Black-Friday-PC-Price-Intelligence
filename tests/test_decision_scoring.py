@@ -36,8 +36,8 @@ class DecisionScoringTests(unittest.TestCase):
         }
 
     def test_budget_discount(self):
-        self.assertEqual(intelligence.required_discount(299800), 0)
-        self.assertAlmostEqual(intelligence.required_discount(350000), (350000 - 299800) / 350000 * 100, places=6)
+        self.assertEqual(intelligence.required_discount(321800), 0)
+        self.assertAlmostEqual(intelligence.required_discount(350000), (350000 - 321800) / 350000 * 100, places=6)
 
     def test_effective_cost_uses_confirmed_benefit_only(self):
         item = self.candidate(price=289000)
@@ -106,8 +106,8 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertIsNone(detail["required_effective_discount_pct"])
         self.assertIn("完成構成未確認", detail["reason"])
 
-    def test_over_290k_effective_cost_waits(self):
-        item = self.candidate(price=310000)
+    def test_above_pc_target_effective_cost_waits(self):
+        item = self.candidate(price=330000)
         score, detail = intelligence.decision_score(item, [], [])
         self.assertEqual(detail["status"], "WAIT_FOR_DISCOUNT")
 
