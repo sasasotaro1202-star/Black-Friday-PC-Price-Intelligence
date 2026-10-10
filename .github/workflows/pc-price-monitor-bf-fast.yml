@@ -47,16 +47,24 @@ jobs:
               with open("config/candidate_catalog.json", encoding="utf-8") as f: catalog=json.load(f)
               urls=d.get("urls") or []
               ts=d.get("generated_at")
-              watch_ids={str(x.get("id")) for x in urls if isinstance(x, dict) and x.get("id")}
-              catalog_ids={str(x.get("id")) for x in (catalog.get("candidates") or []) if isinstance(x, dict) and x.get("id")}
+              watch_url_by_id={str(x.get("id")): x.get("url") for x in urls if isinstance(x, dict) and x.get("id")}
+              catalog_items=[x for x in (catalog.get("candidates") or []) if isinstance(x, dict) and x.get("id") and x.get("url")}
+              catalog_url_by_id={str(x.get("id")): x.get("url") for x in catalog_items}
+              watch_ids=set(watch_url_by_id)
+              catalog_ids=set(catalog_url_by_id)
               missing_catalog_ids=catalog_ids - watch_ids
+              catalog_url_mismatch_ids={
+                  cid for cid, url in catalog_url_by_id.items()
+                  if cid in watch_url_by_id and watch_url_by_id[cid] != url
+              }
               age=(datetime.now(JST)-datetime.fromisoformat(ts.replace("Z","+00:00"))).total_seconds() if ts else 10**12
               stale=age >= 24*3600
           except Exception:
-              urls=[]; stale=True; missing_catalog_ids={"catalog_unreadable"}
-          needs_refresh=(not urls) or stale or bool(missing_catalog_ids)
+              urls=[]; stale=True; missing_catalog_ids={"catalog_unreadable"}; catalog_url_mismatch_ids=set()
+          needs_refresh=(not urls) or stale or bool(missing_catalog_ids) or bool(catalog_url_mismatch_ids)
           print(f"needs_refresh={str(needs_refresh).lower()}")
           print(f"missing_catalog_count={len(missing_catalog_ids)}")
+          print(f"catalog_url_mismatch_count={len(catalog_url_mismatch_ids)}")
           PY
 
       - name: Collect, recover, sanitize, score and publish
