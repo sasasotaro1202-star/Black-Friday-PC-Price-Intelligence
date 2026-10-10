@@ -13,7 +13,7 @@ JST = timezone(timedelta(hours=9))
 BF_DISCOUNT_BANDS = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45]
 
 
-def _price_is_trusted(item, now):
+def _price_is_trusted(item, now, catalog_item=None):
     price = item.get("current_price_jpy")
     retrieved = parse_dt(item.get("retrieval_time"))
     available = parse_dt(item.get("available_at"))
@@ -24,6 +24,8 @@ def _price_is_trusted(item, now):
     if item.get("price_validation_status") not in ("validated", "validated_exact_model_page", "anomaly_corroborated"):
         return False
     if item.get("variant_match") not in ("exact", "trusted_url", "strong"):
+        return False
+    if catalog_item and catalog_item.get("url_is_exact") and item.get("url") != catalog_item.get("url"):
         return False
     if item.get("stock_status") not in ("in_stock", "low_stock"):
         return False
@@ -74,7 +76,7 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
     outlier_gpu = str(outlier_rule.get("gpu") or "RTX 5070 Ti").lower().replace("rtx ", "")
     for cid, cat in all_products.items():
         live = live_by_id.get(cid, {})
-        trusted = _price_is_trusted(live, now)
+        trusted = _price_is_trusted(live, now, cat)
         retrieved_at = parse_dt(live.get("retrieval_time")) if trusted else None
         is_bf_observation = bool(in_bf_window and retrieved_at and start <= retrieved_at <= end and trusted)
         live_price = live.get("current_price_jpy") if trusted else None
@@ -106,6 +108,14 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
             price_bands, discount_target, discount_cap = [], None, None
             discount_target_pct = discount_cap_pct = None
         ready, config_reasons = configuration_readiness(live) if live else (False, ["現行構成未確認"])
+        catalog_ready, catalog_reasons = configuration_readiness({"spec": {
+            "ram_gb": cat.get("ram_gb"), "ssd": cat.get("ssd")
+        }}) if cat else (False, ["カタログ構成未確認"])
+        plan_for_id = next((x for x in (strategy.get("priority_plans") or []) if str(x.get("candidate_id")) == cid), {})
+        base_config_only = plan_for_id.get("role") == "primary_configuration_upgrade" and not ready
+        if base_config_only:
+            discount_target = discount_cap = None
+            discount_target_pct = discount_cap_pct = None
         pc_rows.append({
             "id": cid,
             "name": live.get("name") or cat.get("name"),
@@ -123,7 +133,9 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
             "scenario_base_note": (
                 "観測済みBF価格を基準にした算術シナリオ"
                 if is_bf_observation else
-                "事前参考額を基準にした仮想割引。BF実売価格・値下げ確率ではない"
+                ("基本構成の参考額。RAM/SSD構成変更費を含まないため完成構成のBF目標と比較不可"
+                 if base_config_only else
+                 "事前参考額を基準にした仮想割引。BF実売価格・値下げ確率ではない")
             ),
             "scenario_prices": price_bands,
             "discount_needed_to_bf_target_jpy": discount_target,
@@ -133,6 +145,9 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
             "is_rtx_5070_ti_outlier": is_ti_desktop,
             "configuration_ready": ready,
             "configuration_reasons": config_reasons,
+            "catalog_configuration_ready": catalog_ready,
+            "catalog_configuration_reasons": catalog_reasons,
+            "complete_build_target_comparable": not base_config_only,
             "stock_status": live.get("stock_status", "unknown"),
             "purchase_url": live.get("url") or cat.get("url"),
         })
@@ -411,7 +426,7 @@ def main():
             f"{('¥'+format(bands[20],',')) if 20 in bands else '—'}|"
             f"{('¥'+format(bands[25],',')) if 25 in bands else '—'}|"
             f"{('¥'+format(bands[30],',')) if 30 in bands else '—'}|"
-            f"{('達成' if r['configuration_ready'] else '未達/未確認')}|{r['price_reference_kind']}|{link}|"
+            f"{('達成' if r['catalog_configuration_ready'] else '未達/未確認')}|{r['price_reference_kind']}|{link}|"
         )
     lines += ["", "## 既存の参照価格シナリオ（比較用・確率ではない）", "",
               "以下の参考価格ベースの値引率シナリオは、将来のブラックフライデー実売価格を保証するものではありません。"]
