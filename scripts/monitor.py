@@ -1170,11 +1170,11 @@ def main():
                 item["search_fallback_diagnostics"] = anomaly_diagnostics
                 for diagnostic in anomaly_diagnostics:
                     stats["search_identity_rejections"] += int(diagnostic.get("identity_rejected_count") or 0)
-                if fallback:
+                item = corroborate_anomaly(item, fallback)
+                if item.get("price_validation_status") == "anomaly_corroborated":
                     stats["search_fallback_successes"] += 1
                 else:
                     stats["search_fallback_failures"] += 1
-                item = corroborate_anomaly(item, fallback)
                 if item.get("price_validation_status") == "anomaly_rejected":
                     stats["anomaly_rejected"] += 1
             if item.get("current_price_jpy") is not None and item.get("price_validation_status") != "anomaly_rejected":
