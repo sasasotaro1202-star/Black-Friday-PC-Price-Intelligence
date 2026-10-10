@@ -48,7 +48,7 @@ class WorkflowContractTests(unittest.TestCase):
                         block.append(lines[index])
                         index += 1
                     self.assertTrue(block, f"{path}: embedded block is empty")
-                    snippets.append(textwrap.dedent("\\n".join(block)))
+                    snippets.append(textwrap.dedent("\n".join(block)))
                 index += 1
             self.assertTrue(snippets, str(path))
             for number, snippet in enumerate(snippets, start=1):
