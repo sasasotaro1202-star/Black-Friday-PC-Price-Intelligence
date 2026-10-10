@@ -1,6 +1,7 @@
 import importlib.util
 import pathlib
 import unittest
+from unittest.mock import patch
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("report", ROOT / "scripts" / "report.py")
@@ -137,6 +138,10 @@ class ReportLinkTests(unittest.TestCase):
 
     def test_rtx_5070_ti_outlier_requires_verified_complete_configuration(self):
         strategy = {
+            "price_semantics": {
+                "window_start_jst": "2026-11-14T00:00:00+09:00",
+                "window_end_jst": "2026-12-04T23:59:59+09:00",
+            },
             "priority_plans": [],
             "outlier_rule": {"gpu": "RTX 5070 Ti", "form_factor": "desktop",
                              "minimum_ram_gb": 32, "minimum_ssd_gb": 1000},
@@ -157,7 +162,8 @@ class ReportLinkTests(unittest.TestCase):
         policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
                   "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
         projection = {"pc_dynamic_cap_jpy": 302200}
-        result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
+        with patch.object(report, "now_jst", return_value=datetime.fromisoformat("2026-11-20T12:01:00+09:00")):
+            result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
         self.assertEqual(row["role"], "rtx_5070_ti_outlier")
         self.assertEqual(row["status"], "NO_VERIFIED_COMPLETE_CONFIGURATION")
