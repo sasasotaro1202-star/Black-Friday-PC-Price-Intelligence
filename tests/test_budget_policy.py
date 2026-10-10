@@ -17,20 +17,20 @@ class BudgetPolicyTests(unittest.TestCase):
 
     def test_all_in_budget_arithmetic(self):
         self.assertEqual(self.cfg["total_budget_jpy"], 370000)
-        self.assertEqual(self.cfg["peripheral_budget_jpy"], 45800)
-        self.assertEqual(self.cfg["pc_target_jpy"], 321800)
-        self.assertEqual(self.cfg["pc_budget_jpy"], 324200)
+        self.assertEqual(self.cfg["peripheral_budget_jpy"], 67800)
+        self.assertEqual(self.cfg["pc_target_jpy"], 299800)
+        self.assertEqual(self.cfg["pc_budget_jpy"], 302200)
         self.assertEqual(self.cfg["pc_budget_jpy"] + self.cfg["peripheral_budget_jpy"], self.cfg["total_budget_jpy"])
 
     def test_purchase_strategy_matches_37man_budget_and_speaker_goal(self):
         strategy = self.cfg["purchase_strategy"]
         self.assertEqual(self.cfg["total_budget_jpy"], 370000)
-        self.assertEqual(self.cfg["peripheral_budget_jpy"], 45800)
-        self.assertEqual(self.cfg["pc_target_jpy"], 321800)
-        self.assertEqual(self.cfg["pc_budget_jpy"], 324200)
-        self.assertEqual(self.cfg["pc_target_jpy"] - 279800, 42000)
-        self.assertEqual(self.cfg["pc_budget_jpy"] - 279800, 44400)
-        self.assertEqual(next(x for x in self.cfg["peripherals"] if x["id"] == "speakers")["target_price_jpy"], 10000)
+        self.assertEqual(self.cfg["peripheral_budget_jpy"], 67800)
+        self.assertEqual(self.cfg["pc_target_jpy"], 299800)
+        self.assertEqual(self.cfg["pc_budget_jpy"], 302200)
+        self.assertEqual(self.cfg["pc_target_jpy"] - 279800, 20000)
+        self.assertEqual(self.cfg["pc_budget_jpy"] - 279800, 22400)
+        self.assertEqual(next(x for x in self.cfg["peripherals"] if x["id"] == "speakers")["target_price_jpy"], 32000)
         self.assertEqual(strategy["priority_plans"][0]["candidate_id"], "desktop-gtune-dg-i5g70-5070")
         self.assertEqual(strategy["priority_plans"][1]["last_verified_listing_reference_jpy"], 304800)
         self.assertFalse(strategy["outlier_rule"]["zero_cost_upgrade_assumption_allowed"])
