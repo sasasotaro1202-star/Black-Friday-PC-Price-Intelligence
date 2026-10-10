@@ -32,6 +32,19 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertIn("G213r", target["identity_terms"])
         self.assertIn("www.biccamera.com", target["allowed_hosts"])
 
+
+    def test_secondary_monitor_and_budget_speaker_are_exact_tracked_targets(self):
+        config = __import__("json").loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        secondary = next(x for x in config["peripherals"] if x["id"] == "secondary_monitor")
+        speaker = next(x for x in config["peripherals"] if x["id"] == "speakers_budget")
+        self.assertEqual(secondary["target_price_jpy"], 10000)
+        self.assertEqual(secondary["monitor_url"], "https://kakaku.com/item/K0001775858/")
+        self.assertIn("H24V27", secondary["identity_terms"])
+        self.assertIn("kakaku.com", secondary["allowed_hosts"])
+        self.assertEqual(speaker["target_price_jpy"], 4000)
+        self.assertEqual(speaker["monitor_url"], "https://www.yodobashi.com/product/100000001007385571/")
+        self.assertIn("SP-PBLV2-BKA", speaker["identity_terms"])
+
     def test_exact_model_context_resolves_price_and_low_stock(self):
         excerpt = (
             "AOC Q27G40E/11 ゲーミングモニター ￥20,790 2,079ゴールドポイント "
