@@ -60,13 +60,19 @@ jobs:
           JST=timezone(timedelta(hours=9))
           try:
               with open("data/watchlist.json", encoding="utf-8") as f: d=json.load(f)
+              with open("config/candidate_catalog.json", encoding="utf-8") as f: catalog=json.load(f)
               urls=d.get("urls") or []
               ts=d.get("generated_at")
+              watch_ids={str(x.get("id")) for x in urls if isinstance(x, dict) and x.get("id")}
+              catalog_ids={str(x.get("id")) for x in (catalog.get("candidates") or []) if isinstance(x, dict) and x.get("id")}
+              missing_catalog_ids=catalog_ids - watch_ids
               age=(datetime.now(JST)-datetime.fromisoformat(ts.replace("Z","+00:00"))).total_seconds() if ts else 10**12
               stale=age >= 24*3600
           except Exception:
-              urls=[]; stale=True
-          print(f"needs_refresh={str((not urls) or stale).lower()}")
+              urls=[]; stale=True; missing_catalog_ids={"catalog_unreadable"}
+          needs_refresh=(not urls) or stale or bool(missing_catalog_ids)
+          print(f"needs_refresh={str(needs_refresh).lower()}")
+          print(f"missing_catalog_count={len(missing_catalog_ids)}")
           PY
 
       - name: Collect, recover, sanitize, score and publish
