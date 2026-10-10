@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-10T18:35:00+09:00",
-  "note": "Curated identity layer for laptops and desktops. Exact URLs and model codes take priority; related-product text must not override the selected variant. reference_price_jpy is not current price. 2026-10-10: corrected the DG-A7G70 outlet URL to the exact 32GB/1TB SKU.",
+  "generated_at": "2026-10-10T19:45:00+09:00",
+  "note": "Curated identity layer for laptops and desktops. Exact URLs and model codes take priority; related-product text must not override the selected variant. reference_price_jpy is not current price. 2026-10-10: corrected the DG-A7G70 outlet URL to the exact 32GB/1TB SKU. Added explicitly curated alternate evidence pages for select exact-SKU listings. Alternate URLs are accepted only when page title/body contains a catalogued model alias and parsed specs pass identity checks; the preferred purchase URL remains the canonical URL.",
   "candidates": [
     {
       "id": "rog-g16-9955hx3d",
@@ -19,6 +19,9 @@
       "reference_price_jpy": 359800,
       "aliases": [
         "G614FR-R9X3D5070TI"
+      ],
+      "alternate_price_urls": [
+        "https://www.asus.com/jp/product-compare?ProductID=30699"
       ]
     },
     {
@@ -80,6 +83,9 @@
       "aliases": [
         "FA608PP",
         "FA608U/P"
+      ],
+      "alternate_price_urls": [
+        "https://kakaku.com/item/K0001704128/"
       ]
     },
     {
@@ -172,6 +178,9 @@
       "identity_confidence": "high",
       "aliases": [
         "FX608JPR"
+      ],
+      "alternate_price_urls": [
+        "https://store.asus.com/jp/90nr0ng1-m00520-asus-tuf-gaming-f16-2025.html"
       ]
     },
     {
@@ -265,6 +274,9 @@
       "identity_confidence": "high",
       "aliases": [
         "G815LR-U9R5070TI"
+      ],
+      "alternate_price_urls": [
+        "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025/spec/?config=90NR0LK1-M002M0"
       ]
     },
     {
@@ -400,6 +412,29 @@
       "aliases": [
         "FGA7G70G8BDDW101DECWA"
       ]
+    },
+    {
+      "id": "galleria-zl9r-r57t-6-64gb-2tb",
+      "name": "GALLERIA ZL9R-R57T-6 (official outlet configuration; 64GB/2TB)",
+      "family": "GALLERIA ZL9R-R57T-6",
+      "form_factor": "laptop",
+      "gpu": "RTX 5070 Ti Laptop GPU",
+      "cpu": "Ryzen 9 9955HX",
+      "tgp_w": 115,
+      "ram_gb": 64,
+      "ssd": "2 TB",
+      "vram_gb": 12,
+      "url": "https://www.dospara.co.jp/TC143/MC18548-SN3458.html",
+      "url_is_exact": true,
+      "identity_confidence": "high",
+      "reference_price_jpy": 382980,
+      "aliases": [
+        "ZL9R-R57T-6",
+        "MC18548-SN3458"
+      ],
+      "price_reference_source": "https://www.dospara.co.jp/TC143/MC18548-SN3458.html",
+      "reference_checked_date": "2026-10-10",
+      "reference_configuration_note": "Distinct 64GB/2TB configuration; never substitute its price/specs for the 32GB/1TB ZL9R-R57T-6 candidate."
     }
   ]
 }
