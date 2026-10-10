@@ -34,22 +34,22 @@ class MonitorParsingTests(unittest.TestCase):
         self.assertIsNone(monitor.search_identity_anchor(wrong_sku, expected))
 
     def test_search_fallback_tries_bing_after_ddg_fails_and_requires_model_identity(self):
-        expected = {"name": "G213r", "aliases": ["G213r", "9242996"]}
+        expected = {"name": "G TUNE DG-A7G70", "aliases": ["DGA7G70B5BBDW101DECWA"]}
         bing = [{
             "url": "https://www.biccamera.com/bc/item/9242996/",
-            "title": "Logicool G213r ゲーミングキーボード",
-            "snippet": "型番 G213R 7,330円 在庫あり",
+            "title": "G TUNE DG-A7G70 DGA7G70B5BBDW101DECWA デスクトップPC",
+            "snippet": "Ryzen 7 5700X RTX 5070 32GB SSD 1TB 304,800円 在庫あり",
         }]
         diagnostic = []
         from unittest.mock import patch
         with patch.object(monitor, "ddg_search", side_effect=RuntimeError("blocked")), \
              patch.object(monitor, "bing_search", return_value=bing):
-            result = monitor.search_fallback("G213r", "https://www.biccamera.com/bc/item/9242996/",
+            result = monitor.search_fallback("G TUNE DG-A7G70", "https://www.biccamera.com/bc/item/9242996/",
                                              expected=expected, diagnostics=diagnostic)
         self.assertIsNotNone(result)
         self.assertEqual(result["provider"], "bing")
-        self.assertEqual(result["identity_anchor"], "G213r")
-        self.assertEqual(result["price_jpy"], 7330)
+        self.assertEqual(result["identity_anchor"], "DGA7G70B5BBDW101DECWA")
+        self.assertEqual(result["price_jpy"], 304800)
         self.assertEqual(diagnostic[0]["provider"], "duckduckgo")
         self.assertEqual(diagnostic[0]["status"], "error")
 
