@@ -2,6 +2,7 @@
 """Observe exact peripheral product pages independently from PC ranking candidates."""
 import json
 import os
+import re
 from urllib.parse import urlparse
 from intelligence import ROOT, iso, now_jst, load_json, save_json, norm_text
 from monitor import fetch, parse_page, stock_from_text
@@ -32,6 +33,38 @@ def product_context_excerpt(excerpt, terms, before=300, after=1200):
         return ""
     pos, _neg_len, _term = min(hits)
     return text[max(0, pos - before):pos + after]
+
+
+def local_price_candidate(context):
+    """Extract explicit JPY-denominated values from a short exact-model window.
+
+    Unlike the general PC parser, this permits sub-50,000-yen prices for monitors,
+    mice and mousepads. A points balance alone is not accepted as a price because it
+    is not preceded by a yen symbol or followed by the yen unit.
+    """
+    text = re.sub(r"\\s+", " ", str(context or ""))
+    matches = []
+    patterns = (
+        re.compile(r"(?:¥|￥)\\s*([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})(?:\\s*円)?"),
+        re.compile(r"(?<![0-9,])([0-9]{4,7})\\s*円"),
+    )
+    for pattern in patterns:
+        for match in pattern.finditer(text):
+            raw = match.group(1)
+            try:
+                value = int(raw.replace(",", ""))
+            except (TypeError, ValueError):
+                continue
+            snippet = text[max(0, match.start()-80):min(len(text), match.end()+80)]
+            matches.append((match.start(), value, snippet))
+    if not matches:
+        return None
+    # If multiple distinct explicit prices occur in the exact-model window, fail closed.
+    distinct = {value for _pos, value, _snippet in matches}
+    if len(distinct) != 1:
+        return None
+    _pos, value, snippet = min(matches, key=lambda x: x[0])
+    return {"price_jpy": value, "context": snippet}
 
 
 def local_product_stock(context, parsed_stock="unknown"):
@@ -99,14 +132,11 @@ def run_one(target, previous, retrieved_at):
         # If structured product offers are absent/ambiguous, fall back only to
         # price text in the exact product-title window, never the whole page.
         if price is None and context:
-            contextual_price = pick_price(context)
+            contextual_price = local_price_candidate(context)
             if contextual_price:
-                try:
-                    price = int(contextual_price.get("price_jpy"))
-                    price_source = "direct_text"
-                    price_context = contextual_price.get("context")
-                except (TypeError, ValueError):
-                    price = None
+                price = contextual_price["price_jpy"]
+                price_source = "direct_text"
+                price_context = contextual_price["context"]
         lower, upper = int(target.get("min_price_jpy") or 1), int(target.get("max_price_jpy") or 1000000)
         if price is None or price < lower or price > upper:
             row["unverified_price_candidate_jpy"] = price

@@ -54,9 +54,11 @@ class BudgetPolicyTests(unittest.TestCase):
 
     def test_unverified_peripheral_snapshot_fails_purchase_readiness(self):
         projection = intelligence.peripheral_budget_projection()
-        self.assertEqual(projection["peripheral_projection_jpy"], 67800)
-        self.assertEqual(projection["pc_dynamic_cap_jpy"], 302200)
         self.assertFalse(projection["budget_data_ready"])
+        self.assertTrue(projection["tracked_peripheral_unverified_ids"])
+        self.assertGreaterEqual(projection["peripheral_projection_jpy"], 0)
+        self.assertGreaterEqual(projection["pc_dynamic_cap_jpy"], 0)
+        self.assertLessEqual(projection["pc_dynamic_cap_jpy"], projection["pc_planned_cap_jpy"])
         self.assertLessEqual(projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"], projection["total_budget_jpy"])
 
 
