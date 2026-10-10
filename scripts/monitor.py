@@ -74,7 +74,7 @@ def fetch(url, timeout=18):
     # transport fallback; candidate URLs still come exclusively from the
     # curated watchlist/catalog.
     cmd = [
-        "curl", "-L", "--compressed", "-sS",
+        "curl", "-L", "--compressed", "--http1.1", "-sS",
         "--connect-timeout", str(min(10, timeout)),
         "--max-time", str(timeout),
         "-A", (
@@ -875,7 +875,7 @@ def fingerprint(item):
                   "spec", "price_validation_status", "price_source_mode",
                   "benefit_signals", "confirmed_benefit_value_jpy",
                   "benefit_confidence",
-                  "variant_match", "fetch_status")
+                  "variant_match", "fetch_status", "price_source_url", "alternate_url_used")
     }
     return hashlib.sha256(json.dumps(stable, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
 
@@ -1009,6 +1009,101 @@ def corroborate_anomaly(item, search):
         item["corroborating_source_snippet"] = search.get("snippet")
     return item
 
+
+def fetch_candidate_with_alternates(entry, catalog_item):
+    """Fetch the canonical URL, then curated exact-model alternates if needed.
+
+    Alternate pages are accepted only when their body includes a curated SKU/model
+    alias and parsed identity/specs agree with the catalog. A URL being on an
+    allowed domain alone is never sufficient evidence of product identity.
+    """
+    cid = str(entry.get("id") or "")
+    cat = catalog_item or {}
+    candidates = [entry.get("url")]
+    candidates.extend(cat.get("alternate_price_urls") or [])
+    urls = []
+    for url in candidates:
+        if url and url not in urls:
+            urls.append(url)
+    attempts = []
+    last_error = None
+    for index, requested_url in enumerate(urls):
+        is_alternate = index > 0
+        try:
+            if not host_allowed(requested_url):
+                raise RuntimeError("unapproved_source_host")
+            html, final_url, _headers = fetch(requested_url)
+            if not host_allowed(final_url):
+                raise RuntimeError("redirected_to_unapproved_source_host")
+            parsed = parse_page(final_url, html, expected=cat)
+            if parsed.get("price_jpy") is None:
+                attempts.append({
+                    "url": requested_url, "final_url": final_url,
+                    "is_alternate": is_alternate, "status": "price_missing",
+                    "error": parsed.get("price_ambiguity") or "price_not_found",
+                })
+                last_error = "price_missing:" + str(parsed.get("price_ambiguity") or "price_not_found")
+                continue
+
+            identity_anchor = None
+            if is_alternate:
+                identity_anchor = search_identity_anchor({
+                    "title": parsed.get("name") or "",
+                    "snippet": parsed.get("page_text_excerpt") or "",
+                }, cat)
+                if not identity_anchor:
+                    attempts.append({
+                        "url": requested_url, "final_url": final_url,
+                        "is_alternate": True, "status": "identity_rejected",
+                        "error": "catalogued_model_alias_not_found",
+                    })
+                    last_error = "alternate_identity_rejected:" + str(requested_url)
+                    continue
+                probe = dict(parsed)
+                probe.update({
+                    "id": cid, "url": final_url,
+                    "query": entry.get("query", ""),
+                    "name": parsed.get("name") or cat.get("name") or "",
+                })
+                probe = enrich_identity(probe, cat)
+                if probe.get("variant_match") not in ("exact", "trusted_url", "strong"):
+                    attempts.append({
+                        "url": requested_url, "final_url": final_url,
+                        "is_alternate": True, "status": "identity_rejected",
+                        "error": "parsed_variant_not_strong",
+                        "variant_match": probe.get("variant_match"),
+                    })
+                    last_error = "alternate_variant_not_strong:" + str(requested_url)
+                    continue
+
+            parsed["price_source_url"] = final_url
+            parsed["price_source_url_requested"] = requested_url
+            parsed["alternate_url_used"] = is_alternate
+            parsed["alternate_url_identity_anchor"] = identity_anchor
+            attempts.append({
+                "url": requested_url, "final_url": final_url,
+                "is_alternate": is_alternate, "status": "accepted",
+                "identity_anchor": identity_anchor,
+            })
+            parsed["source_attempts"] = attempts
+            return cid, parsed, None
+        except Exception as exc:
+            last_error = f"{type(exc).__name__}:{str(exc)[:180]}"
+            attempts.append({
+                "url": requested_url, "is_alternate": is_alternate,
+                "status": "error", "error": last_error,
+            })
+
+    error = "; ".join(
+        f"{x.get('url')}: {x.get('error')}"
+        for x in attempts if x.get("error")
+    ) or str(last_error or "all_candidate_sources_failed")
+    return cid, {
+        "name": cat.get("name") or entry.get("name") or entry.get("url"),
+        "source_attempts": attempts,
+    }, error
+
+
 def main():
     watch_path = os.path.join(ROOT, "data", "watchlist.json")
     latest_path = os.path.join(ROOT, "data", "current_latest.json")
@@ -1046,6 +1141,10 @@ def main():
         "search_fallback_successes": 0,
         "search_fallback_failures": 0,
         "search_identity_rejections": 0,
+        "alternate_url_attempts": 0,
+        "alternate_url_successes": 0,
+        "alternate_url_failures": 0,
+        "alternate_url_identity_rejections": 0,
         "errors_by_host_reason": {},
     }
     retrieval_time = iso(now_jst())
@@ -1055,17 +1154,7 @@ def main():
     def fetch_one(entry):
         cid = entry["id"]
         cat = catalog.get(cid, {})
-        try:
-            html, final_url, _headers = fetch(entry["url"])
-            return cid, parse_page(final_url, html, expected=cat), None
-        except HTTPError as exc:
-            return cid, None, f"HTTPError:{exc.code}"
-        except URLError as exc:
-            return cid, None, f"URLError:{getattr(exc, 'reason', 'unknown')}"
-        except Exception as exc:
-            # Keep transport diagnostics (e.g. curl_http_403 or curl_exit_6).
-            # Exception class alone made every curl failure look identical.
-            return cid, None, f"{type(exc).__name__}:{str(exc)[:180]}"
+        return fetch_candidate_with_alternates(entry, cat)
 
     fetch_results = {}
     # Limit concurrency to reduce merchant-side 403/429 responses on free runners.
@@ -1083,6 +1172,20 @@ def main():
         raw, request_error = fetch_results.get(cid, (None, "fetch_result_missing"))
 
         item = apply_observation(entry, raw, previous, cat, retrieval_time)
+        source_attempts = (raw or {}).get("source_attempts") or []
+        item["source_attempts"] = source_attempts
+        item["price_source_url"] = (raw or {}).get("price_source_url")
+        item["price_source_url_requested"] = (raw or {}).get("price_source_url_requested")
+        item["alternate_url_used"] = bool((raw or {}).get("alternate_url_used"))
+        for attempt in source_attempts:
+            if attempt.get("is_alternate"):
+                stats["alternate_url_attempts"] += 1
+                if attempt.get("status") == "accepted":
+                    stats["alternate_url_successes"] += 1
+                else:
+                    stats["alternate_url_failures"] += 1
+                if attempt.get("status") == "identity_rejected":
+                    stats["alternate_url_identity_rejections"] += 1
 
         if request_error:
             item["fetch_status"] = "error"
