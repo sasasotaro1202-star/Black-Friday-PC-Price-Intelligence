@@ -477,6 +477,12 @@ def main():
     }
     save_json(os.path.join(ROOT, "data", "decision_rankings.json"), out)
 
+    fetch_stats = latest.get("fetch_stats") or {}
+    error_breakdown = fetch_stats.get("errors_by_host_reason") or {}
+    error_breakdown_text = ", ".join(
+        "{}={}".format(k, v) for k, v in sorted(error_breakdown.items())
+    ) or "なし"
+
     lines = [
         "# ブラックフライデー期間通算・購入ランキング",
         "",
@@ -621,6 +627,9 @@ def main():
         f"- 処理率: {(latest.get('coverage') or {}).get('processing_rate_pct', 100.0):.1f}%",
         f"- 取得成功率: {(latest.get('coverage') or {}).get('transport_success_rate_pct', 0.0):.1f}%",
         f"- 価格確認率: {(latest.get('coverage') or {}).get('price_verified_rate_pct', 0.0):.1f}%",
+        f"- 検索補完（成功/試行）: {fetch_stats.get('search_fallback_successes', 0)}/{fetch_stats.get('search_fallback_attempts', 0)}",
+        f"- 検索SKU不一致による除外: {fetch_stats.get('search_identity_rejections', 0)}",
+        f"- 取得エラー内訳（host|reason）: {error_breakdown_text}",
         f"- 未処理候補: {', '.join((latest.get('coverage') or {}).get('skipped_ids', [])) or 'なし'}",
         "",
         "## 価格シナリオ",
