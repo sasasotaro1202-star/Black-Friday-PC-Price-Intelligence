@@ -1,5 +1,5 @@
 {
-  "budget_jpy": 299800,
+  "budget_jpy": 325000,
   "target_date": "2026-11-27",
   "monitor_window_start": "2026-11-14T00:00:00+09:00",
   "monitor_window_end": "2026-12-04T23:59:59+09:00",
@@ -101,13 +101,13 @@
   "desktop_note": "Desktop PCs are evaluated in the same integrated purchase-priority ranking as laptops, with desktop-specific GPU/VRAM/CPU factors.",
   "desktop_exact_candidate_count": 6,
   "total_budget_jpy": 370000,
-  "peripheral_budget_jpy": 67800,
-  "pc_target_jpy": 299800,
-  "pc_budget_jpy": 302200,
+  "peripheral_budget_jpy": 38800,
+  "pc_target_jpy": 325000,
+  "pc_budget_jpy": 331200,
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
-  "budget_scope_note": "budget_jpy is the PC-only target, not the full-system budget. Total 370000 JPY includes one monitor, speakers, keyboard, mouse, mousepad, power strip, required cables and shipping reserve.",
+  "budget_scope_note": "budget_jpy is the PC-only Black Friday target, not the full-system budget. Total 370000 JPY includes one monitor, basic stereo speakers, keyboard, mouse, mousepad, power strip, required cables and shipping reserve. PC performance is prioritized over premium audio.",
   "peripherals": [
     {
       "id": "main_monitor",
@@ -131,24 +131,24 @@
     },
     {
       "id": "speakers",
-      "name": "EDIFIER MR5 (high-quality sound priority)",
-      "target_price_jpy": 32000,
+      "name": "Logicool Z150 compact stereo speakers (basic sound; PC performance prioritized)",
+      "target_price_jpy": 3000,
       "track_current_price": true,
-      "monitor_url": "https://www.edifier.jp/products/mr5",
-      "purchase_url": "https://www.edifier.jp/products/mr5",
+      "monitor_url": "https://www.logicool.co.jp/ja-jp/shop/p/z150-compact-stereo-speakers.980-000802",
+      "purchase_url": "https://www.logicool.co.jp/ja-jp/shop/p/z150-compact-stereo-speakers.980-000802",
       "identity_terms": [
-        "MR5"
+        "Z150",
+        "980-000802"
       ],
       "allowed_hosts": [
-        "www.edifier.jp",
-        "edifier.jp"
+        "www.logicool.co.jp"
       ],
-      "min_price_jpy": 15000,
-      "max_price_jpy": 100000,
+      "min_price_jpy": 2000,
+      "max_price_jpy": 10000,
       "mandatory": true,
       "coupon_policy": "Do not subtract coupons or points unless reliably applied at checkout.",
       "price_target_phase": "black_friday",
-      "target_price_note": "32000円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
+      "target_price_note": "3000円はBF期間中の購入目標。BF前の公式表示価格や在庫は参考情報であり、期間内に実測するまでBF実売価格とは扱わない。"
     },
     {
       "id": "keyboard",
@@ -255,7 +255,7 @@
   ],
   "purchase_strategy": {
     "updated_at": "2026-10-10",
-    "purpose": "37万円の一式予算で、RTX 5070完成構成と音質重視のEDIFIER MR5を狙う条件監視。これは購入優先方針であり、価格確認済みを意味しない。",
+    "purpose": "37万円の一式予算で、PC本体の性能・冷却・拡張性を優先し、必要十分な廉価ステレオスピーカーを含む完成構成を狙う条件監視。これは購入優先方針であり、価格確認済みを意味しない。",
     "priority_plans": [
       {
         "candidate_id": "desktop-gtune-dg-i5g70-5070",
@@ -269,9 +269,9 @@
         "price_source_note": "279,800円は16GB/500GB基本構成の監視基準。32GB/1TB構成の実価格として扱わない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 299800,
-        "black_friday_planned_hard_cap_jpy": 302200,
-        "black_friday_target_note": "32GB RAM/1TB SSD完成構成のBF購入目標。279,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。"
+        "black_friday_target_price_jpy": 325000,
+        "black_friday_planned_hard_cap_jpy": 331200,
+        "black_friday_target_note": "32GB RAM/1TB SSD完成構成のBF購入目標は325,000円、総額37万円を守るPC計画上限は331,200円。279,800円は16GB/500GB基本構成の事前参考価格で、構成変更費の見積もりではない。"
       },
       {
         "candidate_id": "desktop-gtune-dg-a7g70-5070",
@@ -297,17 +297,17 @@
       "maximum_completed_pc_price_uses": "dynamic_pc_cap_jpy",
       "requires_direct_price_stock_exact_identity_and_valid_pit": true,
       "zero_cost_upgrade_assumption_allowed": false,
-      "black_friday_target_cap_jpy": 302200,
+      "black_friday_target_cap_jpy": 331200,
       "price_basis": "completed_build_black_friday_offer_only"
     },
     "score_policy": "説明文にある96/94/95/97点は条件付きの目標イメージであり、実測スコアとして固定しない。実際のスコアはコードが確認済み価格・構成・在庫・性能・データ品質から計算する。",
     "speaker_strategy": {
       "id": "speakers",
-      "model": "EDIFIER MR5",
-      "target_price_jpy": 32000,
+      "model": "Logicool Z150",
+      "target_price_jpy": 3000,
       "coupon_policy": "クーポンは購入画面で適用対象・最終決済額を確認するまで実質価格から控除しない。",
       "price_target_phase": "black_friday",
-      "target_price_note": "32,000円はBF購入目標。現行表示価格やクーポン適用前価格とは区別する。"
+      "target_price_note": "3,000円はBF期間中の購入目標。音質は必要十分を優先し、余剰予算はPC本体に回す。BF前の表示価格をBF価格として扱わない。"
     },
     "price_semantics": {
       "all_configured_target_prices_mean": "black_friday_purchase_targets",
