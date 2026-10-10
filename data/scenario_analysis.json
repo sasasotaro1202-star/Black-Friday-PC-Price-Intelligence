@@ -1,10 +1,55 @@
 {
-  "generated_at": "2026-10-10T10:20:32+09:00",
-  "source_snapshot_generated_at": "2026-10-10T10:20:10+09:00",
-  "source_snapshot_sha256": "220cef4e65ee5e53aaf95cc4e45c1c8f7ad1c59aada277d464b3d97323ff2fbd",
-  "budget_jpy": 280000,
-  "note": "10/15/20/25/30% scenarios are planning bands, not probabilities.",
+  "generated_at": "2026-10-10T15:39:08+09:00",
+  "source_snapshot_generated_at": "2026-10-10T15:38:40+09:00",
+  "source_snapshot_sha256": "1f466b709877751f681395dfdc9a1d14ecf4e293c687b994affe706b94e4406e",
+  "budget_jpy": 299800,
+  "budget_scope": "pc_only_excluding_peripherals",
+  "total_budget_jpy": 370000,
+  "peripheral_budget_jpy": 67800,
+  "pc_budget_jpy": 302200,
+  "note": "10/15/20/25/30% scenarios are planning bands, not probabilities; budget_jpy is the PC-only target price.",
   "rows": [
+    {
+      "id": "desktop-gtune-dg-i7g70-5070",
+      "name": "G TUNE DG-I7G70",
+      "form_factor": "desktop",
+      "current_price_jpy": 299800,
+      "reference_price_jpy": 299800,
+      "reference_only": false,
+      "required_discount_pct": 0.0,
+      "historical_floor_jpy": 219800,
+      "historical_floor_strength": "same_gpu",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 269800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 254800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 239800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 224800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 209900
+        }
+      ],
+      "first_pc_target_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 269800
+      },
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
     {
       "id": "desktop-gtune-dg-i5g70-5070",
       "name": "G TUNE DG-I5G70",
@@ -37,11 +82,52 @@
           "price_jpy": 195900
         }
       ],
-      "first_280k_scenario": {
+      "first_pc_target_scenario": {
         "discount_pct": 10,
         "price_jpy": 251800
       },
       "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "gtune-p6-13700hx-5070",
+      "name": "G TUNE P6-I7G70BK-B",
+      "form_factor": "laptop",
+      "current_price_jpy": 284700,
+      "reference_price_jpy": 284700,
+      "reference_only": false,
+      "required_discount_pct": 0.0,
+      "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 256200
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 242000
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 227800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 213500
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 199300
+        }
+      ],
+      "first_pc_target_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 256200
+      },
+      "stock_status": "out_of_stock",
       "price_source_mode": "direct_structured",
       "price_validation_status": "validated",
       "dynamic_candidate": false
@@ -78,91 +164,9 @@
           "price_jpy": 136400
         }
       ],
-      "first_280k_scenario": {
+      "first_pc_target_scenario": {
         "discount_pct": 10,
         "price_jpy": 175300
-      },
-      "stock_status": "in_stock",
-      "price_source_mode": "direct_structured",
-      "price_validation_status": "validated",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "gtune-p6-13700hx-5070",
-      "name": "G TUNE P6-I7G70BK-B",
-      "form_factor": "laptop",
-      "current_price_jpy": 284700,
-      "reference_price_jpy": 284700,
-      "reference_only": false,
-      "required_discount_pct": 1.7,
-      "historical_floor_jpy": null,
-      "historical_floor_strength": "none",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 256200
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 242000
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 227800
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 213500
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 199300
-        }
-      ],
-      "first_280k_scenario": {
-        "discount_pct": 10,
-        "price_jpy": 256200
-      },
-      "stock_status": "out_of_stock",
-      "price_source_mode": "direct_structured",
-      "price_validation_status": "validated",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "desktop-gtune-dg-i7g70-5070",
-      "name": "G TUNE DG-I7G70",
-      "form_factor": "desktop",
-      "current_price_jpy": 299800,
-      "reference_price_jpy": 299800,
-      "reference_only": false,
-      "required_discount_pct": 6.6,
-      "historical_floor_jpy": 219800,
-      "historical_floor_strength": "same_gpu",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 269800
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 254800
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 239800
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 224800
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 209900
-        }
-      ],
-      "first_280k_scenario": {
-        "discount_pct": 10,
-        "price_jpy": 269800
       },
       "stock_status": "in_stock",
       "price_source_mode": "direct_structured",
@@ -176,7 +180,7 @@
       "current_price_jpy": 319800,
       "reference_price_jpy": 319800,
       "reference_only": false,
-      "required_discount_pct": 12.4,
+      "required_discount_pct": 6.3,
       "historical_floor_jpy": 219800,
       "historical_floor_strength": "same_gpu",
       "scenario_prices": [
@@ -201,9 +205,9 @@
           "price_jpy": 223900
         }
       ],
-      "first_280k_scenario": {
-        "discount_pct": 15,
-        "price_jpy": 271800
+      "first_pc_target_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 287800
       },
       "stock_status": "in_stock",
       "price_source_mode": "direct_structured",
@@ -217,7 +221,7 @@
       "current_price_jpy": 354865,
       "reference_price_jpy": null,
       "reference_only": false,
-      "required_discount_pct": 21.1,
+      "required_discount_pct": 15.5,
       "historical_floor_jpy": null,
       "historical_floor_strength": "none",
       "scenario_prices": [
@@ -242,9 +246,9 @@
           "price_jpy": 248400
         }
       ],
-      "first_280k_scenario": {
-        "discount_pct": 25,
-        "price_jpy": 266100
+      "first_pc_target_scenario": {
+        "discount_pct": 20,
+        "price_jpy": 283900
       },
       "stock_status": "in_stock",
       "price_source_mode": "direct_structured",
@@ -258,7 +262,7 @@
       "current_price_jpy": 399800,
       "reference_price_jpy": 399800,
       "reference_only": false,
-      "required_discount_pct": 30.0,
+      "required_discount_pct": 25.0,
       "historical_floor_jpy": 299800,
       "historical_floor_strength": "same_gpu",
       "scenario_prices": [
@@ -283,9 +287,9 @@
           "price_jpy": 279900
         }
       ],
-      "first_280k_scenario": {
-        "discount_pct": 30,
-        "price_jpy": 279900
+      "first_pc_target_scenario": {
+        "discount_pct": 25,
+        "price_jpy": 299800
       },
       "stock_status": "in_stock",
       "price_source_mode": "direct_structured",
@@ -299,7 +303,7 @@
       "current_price_jpy": 419800,
       "reference_price_jpy": 329800,
       "reference_only": false,
-      "required_discount_pct": 33.3,
+      "required_discount_pct": 28.6,
       "historical_floor_jpy": null,
       "historical_floor_strength": "none",
       "scenario_prices": [
@@ -324,7 +328,10 @@
           "price_jpy": 293900
         }
       ],
-      "first_280k_scenario": null,
+      "first_pc_target_scenario": {
+        "discount_pct": 30,
+        "price_jpy": 293900
+      },
       "stock_status": "out_of_stock",
       "price_source_mode": "direct_structured",
       "price_validation_status": "validated",
@@ -337,7 +344,7 @@
       "current_price_jpy": 459800,
       "reference_price_jpy": 304800,
       "reference_only": false,
-      "required_discount_pct": 39.1,
+      "required_discount_pct": 34.8,
       "historical_floor_jpy": 219800,
       "historical_floor_strength": "same_gpu",
       "scenario_prices": [
@@ -362,7 +369,7 @@
           "price_jpy": 321900
         }
       ],
-      "first_280k_scenario": null,
+      "first_pc_target_scenario": null,
       "stock_status": "in_stock",
       "price_source_mode": "direct_structured",
       "price_validation_status": "validated",
@@ -375,7 +382,7 @@
       "current_price_jpy": null,
       "reference_price_jpy": 319800,
       "reference_only": true,
-      "required_discount_pct": 12.4,
+      "required_discount_pct": 6.3,
       "historical_floor_jpy": 219800,
       "historical_floor_strength": "same_family",
       "scenario_prices": [
@@ -400,9 +407,9 @@
           "price_jpy": 223900
         }
       ],
-      "first_280k_scenario": {
-        "discount_pct": 15,
-        "price_jpy": 271800
+      "first_pc_target_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 287800
       },
       "stock_status": "unknown",
       "price_source_mode": "public_baseline",
@@ -416,7 +423,7 @@
       "current_price_jpy": null,
       "reference_price_jpy": 329980,
       "reference_only": true,
-      "required_discount_pct": 15.1,
+      "required_discount_pct": 9.1,
       "historical_floor_jpy": null,
       "historical_floor_strength": "none",
       "scenario_prices": [
@@ -441,9 +448,9 @@
           "price_jpy": 231000
         }
       ],
-      "first_280k_scenario": {
-        "discount_pct": 20,
-        "price_jpy": 264000
+      "first_pc_target_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 297000
       },
       "stock_status": "unknown",
       "price_source_mode": "public_baseline",
@@ -457,7 +464,7 @@
       "current_price_jpy": null,
       "reference_price_jpy": 359800,
       "reference_only": true,
-      "required_discount_pct": 22.2,
+      "required_discount_pct": 16.7,
       "historical_floor_jpy": 299800,
       "historical_floor_strength": "same_family",
       "scenario_prices": [
@@ -482,9 +489,9 @@
           "price_jpy": 251900
         }
       ],
-      "first_280k_scenario": {
-        "discount_pct": 25,
-        "price_jpy": 269800
+      "first_pc_target_scenario": {
+        "discount_pct": 20,
+        "price_jpy": 287800
       },
       "stock_status": "unknown",
       "price_source_mode": "public_baseline",
@@ -498,7 +505,7 @@
       "current_price_jpy": null,
       "reference_price_jpy": 359800,
       "reference_only": true,
-      "required_discount_pct": 22.2,
+      "required_discount_pct": 16.7,
       "historical_floor_jpy": 299800,
       "historical_floor_strength": "same_family",
       "scenario_prices": [
@@ -523,9 +530,9 @@
           "price_jpy": 251900
         }
       ],
-      "first_280k_scenario": {
-        "discount_pct": 25,
-        "price_jpy": 269800
+      "first_pc_target_scenario": {
+        "discount_pct": 20,
+        "price_jpy": 287800
       },
       "stock_status": "unknown",
       "price_source_mode": "public_baseline",
@@ -539,7 +546,7 @@
       "current_price_jpy": null,
       "reference_price_jpy": 419800,
       "reference_only": true,
-      "required_discount_pct": 33.3,
+      "required_discount_pct": 28.6,
       "historical_floor_jpy": 299800,
       "historical_floor_strength": "same_gpu",
       "scenario_prices": [
@@ -564,7 +571,10 @@
           "price_jpy": 293900
         }
       ],
-      "first_280k_scenario": null,
+      "first_pc_target_scenario": {
+        "discount_pct": 30,
+        "price_jpy": 293900
+      },
       "stock_status": "out_of_stock",
       "price_source_mode": "public_baseline",
       "price_validation_status": "variant_ambiguous",
@@ -577,7 +587,7 @@
       "current_price_jpy": null,
       "reference_price_jpy": 599800,
       "reference_only": true,
-      "required_discount_pct": 53.3,
+      "required_discount_pct": 50.0,
       "historical_floor_jpy": null,
       "historical_floor_strength": "none",
       "scenario_prices": [
@@ -602,7 +612,7 @@
           "price_jpy": 419900
         }
       ],
-      "first_280k_scenario": null,
+      "first_pc_target_scenario": null,
       "stock_status": "unknown",
       "price_source_mode": "public_baseline",
       "price_validation_status": "reference_only",
@@ -615,7 +625,7 @@
       "current_price_jpy": null,
       "reference_price_jpy": 684800,
       "reference_only": true,
-      "required_discount_pct": 59.1,
+      "required_discount_pct": 56.2,
       "historical_floor_jpy": null,
       "historical_floor_strength": "none",
       "scenario_prices": [
@@ -640,7 +650,7 @@
           "price_jpy": 479400
         }
       ],
-      "first_280k_scenario": null,
+      "first_pc_target_scenario": null,
       "stock_status": "unknown",
       "price_source_mode": "public_baseline",
       "price_validation_status": "reference_only",

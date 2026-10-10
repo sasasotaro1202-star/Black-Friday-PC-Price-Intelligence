@@ -1,37 +1,49 @@
 {
   "schema_version": 1,
-  "generated_at": null,
-  "budget_scope": "No current peripheral prices are assumed until exact product pages are fetched and identity-checked.",
+  "generated_at": "2026-10-10T15:39:00+09:00",
+  "budget_scope": "Peripherals are separate from PC rankings; uncertain coupons/points are not deducted.",
   "tracked_count": 4,
-  "verified_count": 0,
+  "verified_count": 1,
   "products": [
     {
       "id": "main_monitor",
       "name": "AOC Q27G40E/11 27-inch WQHD 180Hz",
       "target_price_jpy": 17500,
+      "monitor_url": "https://www.yodobashi.com/product/100000001009314680/",
+      "purchase_url": "https://www.yodobashi.com/product/100000001009314680/",
+      "retrieval_time": "2026-10-10T15:39:00+09:00",
+      "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
       "price_verified": false,
-      "stock_status": "unknown",
-      "status": "not_collected",
-      "monitor_url": "https://www.yodobashi.com/product/100000001009314680/",
-      "purchase_url": "https://www.yodobashi.com/product/100000001009314680/",
-      "retrieval_time": null,
-      "available_at": null
+      "stock_status": "preorder_or_backorder",
+      "price_source_mode": "none",
+      "price_validation_status": "missing",
+      "identity_verified": true,
+      "status": "price_unverified",
+      "error": "missing_or_implausible_price"
     },
     {
       "id": "speakers",
       "name": "EDIFIER MR5 (high-quality sound priority)",
       "target_price_jpy": 32000,
-      "current_price_jpy": null,
-      "last_valid_price_jpy": null,
-      "price_verified": false,
-      "stock_status": "unknown",
-      "status": "not_collected",
       "monitor_url": "https://www.edifier.jp/products/mr5",
       "purchase_url": "https://www.edifier.jp/products/mr5",
-      "retrieval_time": null,
-      "available_at": null
+      "retrieval_time": "2026-10-10T15:39:00+09:00",
+      "available_at": "2026-10-10T15:39:00+09:00",
+      "current_price_jpy": 39980,
+      "last_valid_price_jpy": 39980,
+      "price_verified": true,
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated_exact_model_page",
+      "identity_verified": true,
+      "status": "verified",
+      "error": null,
+      "target_met": false,
+      "page_title": "EDIFIER MR5",
+      "price_context": null,
+      "coupon_note": "Do not subtract coupons or points unless reliably applied at checkout."
     },
     {
       "id": "keyboard",
@@ -44,36 +56,45 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": null,
-      "available_at": null
+      "retrieval_time": "2026-10-10T15:39:00+09:00",
+      "available_at": null,
+      "price_source_mode": "none"
     },
     {
       "id": "mouse",
       "name": "Logicool G304",
       "target_price_jpy": 3800,
+      "monitor_url": "https://www.yodobashi.com/product/100000001004334450/",
+      "purchase_url": "https://www.yodobashi.com/product/100000001004334450/",
+      "retrieval_time": "2026-10-10T15:39:00+09:00",
+      "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
       "price_verified": false,
-      "stock_status": "unknown",
-      "status": "not_collected",
-      "monitor_url": "https://www.yodobashi.com/product/100000001004334450/",
-      "purchase_url": "https://www.yodobashi.com/product/100000001004334450/",
-      "retrieval_time": null,
-      "available_at": null
+      "stock_status": "preorder_or_backorder",
+      "price_source_mode": "none",
+      "price_validation_status": "missing",
+      "identity_verified": true,
+      "status": "price_unverified",
+      "error": "missing_or_implausible_price"
     },
     {
       "id": "mousepad",
       "name": "SteelSeries QcK Large",
       "target_price_jpy": 2500,
+      "monitor_url": "https://www.yodobashi.com/product/100000001009472873/",
+      "purchase_url": "https://www.yodobashi.com/product/100000001009472873/",
+      "retrieval_time": "2026-10-10T15:39:00+09:00",
+      "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
       "price_verified": false,
-      "stock_status": "unknown",
-      "status": "not_collected",
-      "monitor_url": "https://www.yodobashi.com/product/100000001009472873/",
-      "purchase_url": "https://www.yodobashi.com/product/100000001009472873/",
-      "retrieval_time": null,
-      "available_at": null
+      "stock_status": "preorder_or_backorder",
+      "price_source_mode": "none",
+      "price_validation_status": "missing",
+      "identity_verified": true,
+      "status": "price_unverified",
+      "error": "missing_or_implausible_price"
     },
     {
       "id": "power_strip",
@@ -86,8 +107,9 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": null,
-      "available_at": null
+      "retrieval_time": "2026-10-10T15:39:00+09:00",
+      "available_at": null,
+      "price_source_mode": "none"
     },
     {
       "id": "cables",
@@ -100,8 +122,9 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": null,
-      "available_at": null
+      "retrieval_time": "2026-10-10T15:39:00+09:00",
+      "available_at": null,
+      "price_source_mode": "none"
     },
     {
       "id": "shipping_reserve",
@@ -114,8 +137,9 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": null,
-      "available_at": null
+      "retrieval_time": "2026-10-10T15:39:00+09:00",
+      "available_at": null,
+      "price_source_mode": "none"
     }
   ]
 }
