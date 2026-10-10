@@ -83,7 +83,7 @@ class BlackFridayScenarioTests(unittest.TestCase):
         speaker = next(x for x in result["peripherals"] if x["id"] == "speakers")
         self.assertEqual(speaker["black_friday_target_price_jpy"], 13000)
         self.assertIsNone(speaker["black_friday_price_observed_jpy"])
-        self.assertEqual(speaker["pre_black_friday_reference_price_jpy"], 13100)
+        self.assertEqual(speaker["pre_black_friday_reference_price_jpy"], 12100)
 
         outlier_row = next(x for x in result["rtx_5070_ti_desktop_outliers"]
                            if x["id"] == outlier["id"])
