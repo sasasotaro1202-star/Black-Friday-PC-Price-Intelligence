@@ -83,15 +83,15 @@ class BlackFridayScenarioTests(unittest.TestCase):
         speaker = next(x for x in result["peripherals"] if x["id"] == "speakers")
         self.assertEqual(speaker["black_friday_target_price_jpy"], 12000)
         self.assertIsNone(speaker["black_friday_price_observed_jpy"])
-        self.assertEqual(speaker["pre_black_friday_reference_price_jpy"], 8100)
+        self.assertEqual(speaker["pre_black_friday_reference_price_jpy"], 12100)
 
         outlier_row = next(x for x in result["rtx_5070_ti_desktop_outliers"]
                            if x["id"] == outlier["id"])
         self.assertEqual(outlier_row["black_friday_target_price_jpy"], 312200)
         self.assertEqual(outlier_row["pre_black_friday_reference_price_jpy"], 399800)
         self.assertIsNone(outlier_row["black_friday_price_observed_jpy"])
-        self.assertEqual(outlier_row["discount_needed_to_bf_target_jpy"], 83600)
-        self.assertEqual(outlier_row["discount_needed_to_bf_target_pct"], 20.9)
+        self.assertEqual(outlier_row["discount_needed_to_bf_target_jpy"], 87600)
+        self.assertEqual(outlier_row["discount_needed_to_bf_target_pct"], 21.9)
         bands = {x["discount_pct"]: x["price_jpy"] for x in outlier_row["scenario_prices"]}
         self.assertEqual(bands[25], 299850)
         self.assertTrue(outlier_row["configuration_ready"])
