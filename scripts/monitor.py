@@ -1178,6 +1178,11 @@ def main():
         item["price_source_url_requested"] = (raw or {}).get("price_source_url_requested")
         item["alternate_url_used"] = bool((raw or {}).get("alternate_url_used"))
         for attempt in source_attempts:
+            source_host = (urlparse(attempt.get("url", "")).hostname or "unknown").lower()
+            if attempt.get("status") == "error" and attempt.get("error"):
+                source_reason = str(attempt.get("error")).split(":")[-1][:100]
+                source_key = f"{source_host}|{source_reason}"
+                stats["errors_by_host_reason"][source_key] = stats["errors_by_host_reason"].get(source_key, 0) + 1
             if attempt.get("is_alternate"):
                 stats["alternate_url_attempts"] += 1
                 if attempt.get("status") == "accepted":
@@ -1243,10 +1248,8 @@ def main():
             else:
                 stats["search_fallback_failures"] += 1
 
-            host = (urlparse(entry.get("url", "")).hostname or "unknown").lower()
-            reason = str(request_error or "unknown").split(":")[-1][:100]
-            key = f"{host}|{reason}"
-            stats["errors_by_host_reason"][key] = stats["errors_by_host_reason"].get(key, 0) + 1
+            # Source-level attempts above are counted individually by actual host.
+            # Keep the combined product error on the row but avoid double-counting it.
 
             # Only fall back to stale/reference states when no validated exact-SKU
             # search price was accepted. Keep successfully corroborated prices.
