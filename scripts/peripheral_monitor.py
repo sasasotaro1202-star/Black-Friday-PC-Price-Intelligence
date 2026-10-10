@@ -88,7 +88,17 @@ def local_price_candidate(context):
                 value = int(raw.replace(",", ""))
             except (TypeError, ValueError):
                 continue
-            snippet = text[max(0, match.start()-80):min(len(text), match.end()+80)]
+            snippet = text[max(0, match.start()-100):min(len(text), match.end()+100)]
+            # Exclude numbers that are shipping thresholds, discount amounts or
+            # points/financing rather than the item cash price.
+            lower_snippet = snippet.lower()
+            forbidden_context = (
+                "以上ご購入", "購入で送料無料", "送料無料まで", "送料", "円引き",
+                "off", "オフ", "ポイント", "還元", "月々", "月額", "分割",
+                "最低注文", "あと", "saving", "discount"
+            )
+            if any(token in lower_snippet for token in forbidden_context):
+                continue
             matches.append((match.start(), value, snippet))
     if not matches:
         return None
