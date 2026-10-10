@@ -26,6 +26,31 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertNotIn("  schedule:", text)
         self.assertIn('MONITOR_MAX_URLS: "100"', text)
 
+    def test_watchlist_refresh_detects_missing_catalog_candidates(self):
+        for path in (
+            ROOT / ".github" / "workflows" / "pc-price-monitor.yml",
+            ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml",
+        ):
+            text = path.read_text(encoding="utf-8")
+            self.assertIn("missing_catalog_ids=catalog_ids - watch_ids", text)
+            self.assertIn("or bool(missing_catalog_ids)", text)
+
+    def test_primary_workflow_does_not_cancel_in_progress_collection(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("cancel-in-progress: false", text)
+
+    def test_watchlist_discovery_runs_after_remote_reset_before_collection(self):
+        for path in (
+            ROOT / ".github" / "workflows" / "pc-price-monitor.yml",
+            ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml",
+        ):
+            text = path.read_text(encoding="utf-8")
+            reset_at = text.index("git reset --hard origin/main")
+            discovery_at = text.index("python scripts/discover.py", reset_at)
+            monitor_at = text.index("python scripts/monitor.py", reset_at)
+            self.assertLess(reset_at, discovery_at, str(path))
+            self.assertLess(discovery_at, monitor_at, str(path))
+
     def test_monitor_limit_allows_full_discovered_watchlist(self):
         text = (ROOT / "scripts" / "monitor.py").read_text(encoding="utf-8")
         self.assertIn('MONITOR_MAX_URLS", "100"', text)

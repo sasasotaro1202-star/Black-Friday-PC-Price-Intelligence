@@ -87,6 +87,12 @@ def main():
         for e in (previous.get("urls") or [])
         if isinstance(e, dict) and e.get("id")
     }
+    catalog_data = load(os.path.join(ROOT, "config", "candidate_catalog.json"), {"candidates": []})
+    catalog_items = [
+        x for x in (catalog_data.get("candidates") or [])
+        if isinstance(x, dict) and x.get("id") and x.get("url")
+    ]
+    catalog_by_id = {str(x["id"]): x for x in catalog_items}
     entries, seen_ids, seen_urls = [], set(), set()
 
     def add(entry):
@@ -99,8 +105,13 @@ def main():
         url = entry.get("url", "")
         if not url.startswith("http") or not allowed(url, cfg.get("allowed_domains", [])) or not useful(url):
             return
-        cid = entry.get("id") or stable_discovered_id(url)
-        if cid in seen_ids or url in seen_urls:
+        cid = str(entry.get("id") or stable_discovered_id(url))
+        catalog_item = catalog_by_id.get(cid, {})
+        # A non-exact family page may represent multiple curated SKUs. Keep
+        # each SKU as a separate identity so the monitor can mark it ambiguous
+        # instead of silently omitting it. Search-only results remain URL-deduped.
+        shared_catalog_page = bool(catalog_item) and not bool(catalog_item.get("url_is_exact"))
+        if cid in seen_ids or (url in seen_urls and not shared_catalog_page):
             return
         entry["id"] = cid
         entry.setdefault("query", "")
@@ -111,6 +122,18 @@ def main():
 
     for entry in previous.get("urls", []):
         add(entry)
+
+    # The curated catalog is authoritative for candidate identity/coverage.
+    # Re-add missing catalog entries after stale/corrupt watchlists and allow
+    # multiple distinct SKUs to reference a shared non-exact family page.
+    for item in catalog_items:
+        aliases = item.get("aliases") or []
+        add({
+            "id": str(item["id"]),
+            "url": item["url"],
+            "query": aliases[0] if aliases else (item.get("name") or "curated catalog candidate"),
+            "priority": "high",
+        })
 
     for query in cfg.get("queries", []):
         try:
