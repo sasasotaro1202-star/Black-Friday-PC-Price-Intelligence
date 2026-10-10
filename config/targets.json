@@ -1,5 +1,5 @@
 {
-  "budget_jpy": 299800,
+  "budget_jpy": 317800,
   "target_date": "2026-11-27",
   "monitor_window_start": "2026-11-14T00:00:00+09:00",
   "monitor_window_end": "2026-12-04T23:59:59+09:00",
@@ -101,13 +101,13 @@
   "desktop_note": "Desktop PCs are evaluated in the same integrated purchase-priority ranking as laptops, with desktop-specific GPU/VRAM/CPU factors.",
   "desktop_exact_candidate_count": 6,
   "total_budget_jpy": 370000,
-  "peripheral_budget_jpy": 67800,
-  "pc_target_jpy": 299800,
-  "pc_budget_jpy": 302200,
+  "peripheral_budget_jpy": 49800,
+  "pc_target_jpy": 317800,
+  "pc_budget_jpy": 320200,
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
-  "budget_scope_note": "budget_jpy is the PC-only target, not the full-system budget. Total 370000 JPY includes one monitor, EDIFIER MR5 speakers, keyboard, mouse, mousepad, power strip, required cables and shipping reserve.",
+  "budget_scope_note": "budget_jpy is the PC-only target, not the full-system budget. Total 370000 JPY includes main and secondary monitors, budget Creative Pebble V2 speakers, keyboard, mouse, mousepad, power strip, required cables and shipping reserve.",
   "peripherals": [
     {
       "id": "main_monitor",
@@ -130,25 +130,47 @@
       "target_price_note": "17500円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
     },
     {
-      "id": "speakers",
-      "name": "EDIFIER MR5 (high-quality sound priority)",
-      "target_price_jpy": 32000,
+      "id": "secondary_monitor",
+      "name": "KTC H24V27 24-inch FHD 100Hz VA secondary monitor",
+      "target_price_jpy": 10000,
       "track_current_price": true,
-      "monitor_url": "https://www.edifier.jp/products/mr5",
-      "purchase_url": "https://www.edifier.jp/products/mr5",
+      "monitor_url": "https://kakaku.com/item/K0001775858/",
+      "purchase_url": "https://kakaku.com/item/K0001775858/",
       "identity_terms": [
-        "MR5"
+        "H24V27",
+        "K0001775858"
       ],
       "allowed_hosts": [
-        "www.edifier.jp",
-        "edifier.jp"
+        "kakaku.com",
+        "www.kakaku.com"
       ],
-      "min_price_jpy": 15000,
-      "max_price_jpy": 100000,
+      "min_price_jpy": 7000,
+      "max_price_jpy": 25000,
+      "mandatory": true,
+      "price_target_phase": "black_friday",
+      "target_price_note": "10000円はBF期間中の購入目標。価格比較ページの参考額やBF前の観測をBF実売と混同しない。"
+    },
+    {
+      "id": "speakers_budget",
+      "name": "Creative Pebble V2 compact stereo PC speakers",
+      "target_price_jpy": 4000,
+      "track_current_price": true,
+      "monitor_url": "https://www.yodobashi.com/product/100000001007385571/",
+      "purchase_url": "https://www.yodobashi.com/product/100000001007385571/",
+      "identity_terms": [
+        "Creative Pebble V2",
+        "SP-PBLV2-BKA",
+        "SP-PBLV2-BK"
+      ],
+      "allowed_hosts": [
+        "www.yodobashi.com"
+      ],
+      "min_price_jpy": 2500,
+      "max_price_jpy": 9000,
       "mandatory": true,
       "coupon_policy": "Do not subtract coupons or points unless reliably applied at checkout.",
       "price_target_phase": "black_friday",
-      "target_price_note": "32000円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
+      "target_price_note": "4000円はBF期間中の購入目標。現行観測価格とBF価格を混同しない。"
     },
     {
       "id": "keyboard",
@@ -255,7 +277,7 @@
   ],
   "purchase_strategy": {
     "updated_at": "2026-10-10",
-    "purpose": "総予算37万円の中で、RTX 5070搭載32GB/1TB完成構成と音質重視のEDIFIER MR5を両立する。目標額はBF購入目標であり実売価格の確認とは区別する。",
+    "purpose": "総予算37万円の中で、RTX 5070搭載32GB/1TB完成構成を優先しつつ、メイン＋サブの2画面と低価格スピーカーを含める。目標額はBF購入目標であり実売価格の確認とは区別する。",
     "priority_plans": [
       {
         "candidate_id": "desktop-gtune-dg-i5g70-5070",
@@ -269,9 +291,9 @@
         "price_source_note": "279,800円は16GB/500GB基本構成の監視基準。32GB/1TB完成構成の実価格として扱わない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 299800,
-        "black_friday_planned_hard_cap_jpy": 302200,
-        "black_friday_target_note": "32GB RAM/1TB SSD完成構成のBF購入目標299,800円。279,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費の許容上限は目標価格まで20,000円、計画上限まで22,400円だが、実見積が確認されるまで費用ゼロとは扱わない。"
+        "black_friday_target_price_jpy": 317800,
+        "black_friday_planned_hard_cap_jpy": 320200,
+        "black_friday_target_note": "32GB RAM/1TB SSD完成構成のBF購入目標317,800円、計画上限320,200円。279,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費の許容上限は目標価格まで38,000円、計画上限まで40,400円だが、実見積が確認されるまで費用ゼロとは扱わない。"
       },
       {
         "candidate_id": "desktop-gtune-dg-a7g70-5070",
@@ -283,9 +305,9 @@
         "reference_checked_date": "2026-10-10",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
         "reference_note": "公式ページで確認した参考価格。次の監視サイクルでも現行価格・在庫・SKUを検証する。",
-        "black_friday_target_price_jpy": 299800,
-        "black_friday_planned_hard_cap_jpy": 302200,
-        "black_friday_target_note": "304,800円は2026-10-10に確認した参考掲載額でありBF価格ではない。BF購入目標299,800円、計画上限302,200円。BF期間に価格・在庫・SKU・PITを再確認する。"
+        "black_friday_target_price_jpy": 317800,
+        "black_friday_planned_hard_cap_jpy": 320200,
+        "black_friday_target_note": "304,800円は2026-10-10に確認した参考掲載額でありBF価格ではない。BF目標317,800円、計画上限320,200円。目標内の表示価格でも、BF期間中に価格・在庫・SKU・PITと37万円の総額条件を再確認する。"
       },
       {
         "candidate_id": "desktop-gtune-dg-i7g70-5070",
@@ -300,9 +322,9 @@
         "price_source_note": "299,800円は16GB/500GB基本構成の事前参考価格。32GB/1TB完成構成のBF実売価格ではない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 299800,
-        "black_friday_planned_hard_cap_jpy": 302200,
-        "black_friday_target_note": "CPU重視の大穴候補。16GB/500GBの基本価格だけでは購入判定せず、BF期間中の32GB/1TB完成構成価格・在庫・SKU・PITを確認し、37万円の総額ゲートを通過した場合のみ採用。"
+        "black_friday_target_price_jpy": 317800,
+        "black_friday_planned_hard_cap_jpy": 320200,
+        "black_friday_target_note": "CPU重視の大穴候補。299,800円は16GB/500GB基本構成の事前参考価格。BF完成構成の目標317,800円、計画上限320,200円。32GB/1TB変更費用を含む完成見積を必須とし、在庫・SKU・PIT・周辺機器を含む総額条件が確認できるまで購入許可を出さない。"
       }
     ],
     "outlier_rule": {
@@ -314,7 +336,7 @@
       "maximum_completed_pc_price_uses": "dynamic_pc_cap_jpy",
       "requires_direct_price_stock_exact_identity_and_valid_pit": true,
       "zero_cost_upgrade_assumption_allowed": false,
-      "black_friday_target_cap_jpy": 302200,
+      "black_friday_target_cap_jpy": 320200,
       "price_basis": "completed_build_black_friday_offer_only"
     },
     "score_policy": "説明文にある96/94/95/97点は条件付きの目標イメージであり、実測スコアとして固定しない。実際のスコアはコードが確認済み価格・構成・在庫・性能・データ品質から計算する。",
