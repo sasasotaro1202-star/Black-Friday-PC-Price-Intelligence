@@ -1,5 +1,5 @@
 {
-  "budget_jpy": 312200,
+  "budget_jpy": 311200,
   "target_date": "2026-11-27",
   "monitor_window_start": "2026-11-14T00:00:00+09:00",
   "monitor_window_end": "2026-12-04T23:59:59+09:00",
@@ -101,13 +101,13 @@
   "desktop_note": "Desktop PCs are evaluated in the same integrated purchase-priority ranking as laptops, with desktop-specific GPU/VRAM/CPU factors.",
   "desktop_exact_candidate_count": 6,
   "total_budget_jpy": 370000,
-  "peripheral_budget_jpy": 57800,
-  "pc_target_jpy": 312200,
-  "pc_budget_jpy": 312200,
+  "peripheral_budget_jpy": 58800,
+  "pc_target_jpy": 311200,
+  "pc_budget_jpy": 311200,
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
-  "budget_scope_note": "budget_jpy is the PC-only target, not the full-system budget. Total 370000 JPY includes the 27-inch main monitor, 23.8-inch secondary monitor, value-focused EDIFIER MR3 2.0 studio-monitor speakers, keyboard, mouse, mousepad, power strip, required cables and shipping reserve.",
+  "budget_scope_note": "budget_jpy is the PC-only target, not the full-system budget. Total 370000 JPY includes a 27-inch main monitor, 23.8-inch secondary monitor, value-focused EDIFIER MR3 speakers, keyboard, mouse, mousepad, power strip, required cables and shipping reserve.",
   "peripherals": [
     {
       "id": "main_monitor",
@@ -153,7 +153,7 @@
     {
       "id": "speakers",
       "name": "EDIFIER MR3 2.0 studio-monitor speakers (36W RMS, Bluetooth 5.4)",
-      "target_price_jpy": 12000,
+      "target_price_jpy": 13000,
       "track_current_price": true,
       "monitor_url": "https://www.edifier.jp/products/mr3",
       "purchase_url": "https://www.edifier.jp/products/mr3",
@@ -169,7 +169,7 @@
       "mandatory": true,
       "coupon_policy": "Do not subtract coupons or points unless reliably applied at checkout.",
       "price_target_phase": "black_friday",
-      "target_price_note": "¥12,000 is a stretch Black Friday purchase target, based on the current official listing around ¥14,980 and possible sale pricing; it is not a forecast or a confirmed 2026 price. Recheck the exact MR3 product page, stock and checkout price during the 2026 BF window.",
+      "target_price_note": "13,000円は2026年BF期間中の購入目標。現在の公式掲載額14,980円は開催前の参考価格であり、将来の実売価格ではない。",
       "model_code": "MR3",
       "monitor_urls": [
         "https://www.edifier.jp/products/mr3"
@@ -294,9 +294,9 @@
         "price_source_note": "279,800円は16GB/500GB基本構成の監視基準。32GB/1TB完成構成の実価格として扱わない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 312200,
-        "black_friday_planned_hard_cap_jpy": 312200,
-        "black_friday_target_note": "32GB RAM/1TB SSD完成構成のBF購入目標・計画上限は316,200円。279,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費の許容上限は目標・計画上限まで36,400円だが、実見積が確認されるまで費用ゼロとは扱わない。"
+        "black_friday_target_price_jpy": 311200,
+        "black_friday_planned_hard_cap_jpy": 311200,
+        "black_friday_target_note": "32GB RAM/1TB SSD完成構成のBF購入目標・計画上限は311,200円。279,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費の許容上限は目標・計画上限まで31,400円だが、実見積が確認されるまで費用ゼロとは扱わない。"
       },
       {
         "candidate_id": "desktop-gtune-dg-a7g70-5070",
@@ -308,9 +308,9 @@
         "reference_checked_date": "2026-10-10",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
         "reference_note": "公式ページで確認した参考価格。次の監視サイクルでも現行価格・在庫・SKUを検証する。",
-        "black_friday_target_price_jpy": 312200,
-        "black_friday_planned_hard_cap_jpy": 312200,
-        "black_friday_target_note": "32GB/1TB完成構成のBF購入目標・計画上限は316,200円。304,800円は事前参考掲載額でありBF価格ではない。BF期間中に価格・在庫・SKU・PITを再確認する。"
+        "black_friday_target_price_jpy": 311200,
+        "black_friday_planned_hard_cap_jpy": 311200,
+        "black_friday_target_note": "32GB/1TB完成構成のBF購入目標・計画上限は311,200円。304,800円は事前参考掲載額でありBF価格ではない。BF期間中に価格・在庫・SKU・PITを再確認する。"
       },
       {
         "candidate_id": "desktop-gtune-dg-i7g70-5070",
@@ -325,9 +325,9 @@
         "price_source_note": "299,800円は16GB/500GB基本構成の事前参考価格。32GB/1TB完成構成のBF実売価格ではない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 312200,
-        "black_friday_planned_hard_cap_jpy": 312200,
-        "black_friday_target_note": "CPU重視の大穴候補。32GB/1TB完成構成のBF購入目標・計画上限は316,200円。299,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費は上限まで16,400円以内が条件だが、実見積が確認されるまで費用ゼロとは扱わない。"
+        "black_friday_target_price_jpy": 311200,
+        "black_friday_planned_hard_cap_jpy": 311200,
+        "black_friday_target_note": "CPU重視の大穴候補。32GB/1TB完成構成のBF購入目標・計画上限は311,200円。299,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費は上限まで11,400円以内が条件だが、実見積が確認されるまで費用ゼロとは扱わない。"
       }
     ],
     "outlier_rule": {
@@ -339,19 +339,19 @@
       "maximum_completed_pc_price_uses": "dynamic_pc_cap_jpy",
       "requires_direct_price_stock_exact_identity_and_valid_pit": true,
       "zero_cost_upgrade_assumption_allowed": false,
-      "black_friday_target_cap_jpy": 312200,
+      "black_friday_target_cap_jpy": 311200,
       "price_basis": "completed_build_black_friday_offer_only"
     },
     "score_policy": "説明文にある96/94/95/97点は条件付きの目標イメージであり、実測スコアとして固定しない。実際のスコアはコードが確認済み価格・構成・在庫・性能・データ品質から計算する。",
     "speaker_strategy": {
       "id": "speakers",
       "model": "EDIFIER MR3",
-      "target_price_jpy": 12000,
+      "target_price_jpy": 13000,
       "priority": "best value for sound quality per yen",
-      "rationale": "安価な小型PCスピーカーより音の解像感とステレオ再生に余裕を持たせながら、3〜4万円級の上位モデルに予算を偏らせない選択。合計36W RMS、3.5インチ・ミッドバス＋1インチ・シルクドームツイーター、Bluetooth 5.4、専用アプリのルーム補正に対応し、ゲーム・音楽・動画・作業用途をバランスよくカバーする。",
+      "rationale": "安価な小型PCスピーカーより音の明瞭さとステレオ再生に余裕を持たせつつ、3〜4万円級に予算を偏らせない総合コスパ重視の選択。36W RMS、3.5インチ・ミッドバス、Bluetooth 5.4、専用アプリのルーム補正に対応し、ゲーム・音楽・動画・作業をバランスよくカバーする。",
       "coupon_policy": "クーポンは購入画面で適用対象・最終決済額を確認するまで実質価格から控除しない。",
       "price_target_phase": "black_friday",
-      "target_price_note": "BF目標12,000円。現在の公式掲載額約14,980円を参考にした値下げ目標であり、2026年の価格保証・予測ではない。"
+      "target_price_note": "BF購入目標13,000円。現行の公式掲載額14,980円を比較基準とした目標であり、2026年の価格予測・保証ではない。"
     },
     "price_semantics": {
       "all_configured_target_prices_mean": "black_friday_purchase_targets",
