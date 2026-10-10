@@ -6,11 +6,32 @@ from datetime import datetime, timezone, timedelta
 
 JST = timezone(timedelta(hours=9))
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BUDGET = 280000
-EFFECTIVE_BUDGET = 280000
-EFFECTIVE_SOFT_MAX = 285000
-EFFECTIVE_HARD_MAX = 290000
-CASH_REFERENCE_MAX = 300000
+def _initial_budget_settings():
+    """Read explicit all-in budget settings once at process start."""
+    path = os.path.join(ROOT, "config", "targets.json")
+    try:
+        with open(path, encoding="utf-8") as f:
+            cfg = json.load(f)
+    except Exception:
+        cfg = {}
+    try:
+        total = int(cfg.get("total_budget_jpy", 370000))
+        peripherals = int(cfg.get("peripheral_budget_jpy", 67800))
+        pc_cap = int(cfg.get("pc_budget_jpy", total - peripherals))
+        pc_target = int(cfg.get("pc_target_jpy", min(299800, pc_cap)))
+    except (TypeError, ValueError):
+        total, peripherals, pc_cap, pc_target = 370000, 67800, 302200, 299800
+    if min(total, peripherals, pc_cap, pc_target) < 0 or pc_cap + peripherals != total or pc_target > pc_cap:
+        total, peripherals, pc_cap, pc_target = 370000, 67800, 302200, 299800
+    return total, peripherals, pc_target, pc_cap
+
+TOTAL_BUDGET, PERIPHERAL_BUDGET, BUDGET, PC_BUDGET = _initial_budget_settings()
+EFFECTIVE_BUDGET = BUDGET
+EFFECTIVE_SOFT_MAX = BUDGET
+EFFECTIVE_HARD_MAX = PC_BUDGET
+CASH_REFERENCE_MAX = PC_BUDGET
+MINIMUM_RAM_GB = 32
+MINIMUM_SSD_GB = 1000
 MAX_TRACKED_PRICE = 900000
 ACTIONABLE_MAX_AGE_NORMAL_MINUTES = 60
 ACTIONABLE_MAX_AGE_BF_MINUTES = 30
@@ -121,6 +142,103 @@ def load_json(path, default):
             return json.load(f)
     except Exception:
         return default
+
+def purchase_budget_policy():
+    cfg = load_json(os.path.join(ROOT, "config", "targets.json"), {})
+    peripherals = [x for x in (cfg.get("peripherals") or []) if isinstance(x, dict)]
+    return {
+        "total_budget_jpy": int(cfg.get("total_budget_jpy", TOTAL_BUDGET)),
+        "peripheral_budget_jpy": int(cfg.get("peripheral_budget_jpy", PERIPHERAL_BUDGET)),
+        "pc_target_jpy": int(cfg.get("pc_target_jpy", BUDGET)),
+        "pc_budget_jpy": int(cfg.get("pc_budget_jpy", PC_BUDGET)),
+        "minimum_ram_gb": int(cfg.get("minimum_ram_gb", MINIMUM_RAM_GB)),
+        "minimum_ssd_gb": int(cfg.get("minimum_ssd_gb", MINIMUM_SSD_GB)),
+        "desktop_preferred": bool(cfg.get("desktop_preferred", True)),
+        "peripherals": peripherals,
+    }
+
+def _ssd_capacity_gb(value):
+    text = norm_text(value).replace(",", "")
+    tb = re.search(r"([0-9]+(?:[.][0-9]+)?)\s*tb", text, re.I)
+    if tb:
+        try:
+            return int(float(tb.group(1)) * 1000)
+        except (TypeError, ValueError):
+            return 0
+    gb = re.search(r"([0-9]+)\s*gb", text, re.I)
+    if gb:
+        try:
+            return int(gb.group(1))
+        except (TypeError, ValueError):
+            return 0
+    return 0
+
+def configuration_readiness(item):
+    policy = purchase_budget_policy()
+    spec = item.get("spec") or item.get("parsed_spec") or {}
+    try:
+        ram = int(spec.get("ram_gb") or 0)
+    except (TypeError, ValueError):
+        ram = 0
+    ssd_gb = _ssd_capacity_gb(spec.get("ssd") or "")
+    reasons = []
+    if ram < policy["minimum_ram_gb"]:
+        reasons.append(f"RAM {ram}GB<{policy['minimum_ram_gb']}GB")
+    if ssd_gb < policy["minimum_ssd_gb"]:
+        reasons.append(f"SSD {ssd_gb}GB<{policy['minimum_ssd_gb']}GB")
+    return not reasons, reasons
+
+def peripheral_budget_projection():
+    """Use live verified accessory prices when available; otherwise use target reserves."""
+    policy = purchase_budget_policy()
+    snapshot = load_json(os.path.join(ROOT, "data", "peripheral_prices.json"), {})
+    snapshot_time = parse_dt(snapshot.get("generated_at"))
+    now = now_jst()
+    max_age = actionable_max_age_minutes(now)
+    snapshot_fresh = bool(snapshot_time and 0 <= (now - snapshot_time).total_seconds() / 60.0 <= max_age)
+    by_id = {str(x.get("id")): x for x in (snapshot.get("products") or []) if isinstance(x, dict) and x.get("id")}
+    rows, total_projection, observed_total, unverified = [], 0, 0, []
+    tracked = [p for p in policy["peripherals"] if p.get("track_current_price")]
+    for target in policy["peripherals"]:
+        if not target.get("mandatory", True):
+            continue
+        pid = str(target.get("id") or "")
+        target_price = int(target.get("target_price_jpy") or 0)
+        live = by_id.get(pid, {})
+        price = live.get("current_price_jpy")
+        stock = live.get("stock_status", "unknown")
+        valid = bool(target.get("track_current_price") and live.get("price_verified")
+                     and isinstance(price, int) and price > 0
+                     and stock in ("in_stock", "low_stock") and snapshot_fresh)
+        if valid:
+            selected_cost = price
+            observed_total += price
+        else:
+            selected_cost = target_price
+            if target.get("track_current_price"):
+                unverified.append(pid)
+        total_projection += selected_cost
+        rows.append({
+            "id": pid, "name": target.get("name"), "target_price_jpy": target_price,
+            "current_price_jpy": price if live.get("price_verified") else None,
+            "stock_status": stock, "price_verified": bool(live.get("price_verified")),
+            "budget_cost_jpy": selected_cost,
+            "cost_basis": "observed_verified" if valid else "target_reserve_unverified",
+            "purchase_url": target.get("purchase_url") or target.get("monitor_url"),
+            "track_current_price": bool(target.get("track_current_price")),
+        })
+    cap = max(0, min(policy["pc_budget_jpy"], policy["total_budget_jpy"] - total_projection))
+    return {
+        "total_budget_jpy": policy["total_budget_jpy"], "peripheral_target_budget_jpy": policy["peripheral_budget_jpy"],
+        "peripheral_projection_jpy": total_projection, "observed_verified_peripheral_total_jpy": observed_total,
+        "pc_target_jpy": policy["pc_target_jpy"], "pc_planned_cap_jpy": policy["pc_budget_jpy"],
+        "pc_dynamic_cap_jpy": cap, "snapshot_generated_at": snapshot.get("generated_at"),
+        "snapshot_fresh": snapshot_fresh, "tracked_peripheral_count": len(tracked),
+        "tracked_peripheral_verified_count": len(tracked) - len(set(unverified)),
+        "tracked_peripheral_unverified_ids": sorted(set(unverified)),
+        "budget_data_ready": bool(snapshot_fresh and not unverified and len(tracked) > 0),
+        "peripherals": rows,
+    }
 
 def save_json(path, obj):
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -632,11 +750,9 @@ def timing_score(item, now=None):
     if stock == "low_stock":
         base = min(10, base + 1)
     guidance = (
-        "実質28万円以内。次の値下げより在庫確保を優先" if d <= 0 else
-        "実質28〜28.5万円。小幅な超過で、性能と在庫次第で購入候補" if d <= 1.8 else
-        "実質28.5〜29万円。性能・特典・在庫が明確に優位な場合だけ候補" if d <= 3.5 else
-        "実質29万円超。強い値下げまたは確実な特典が必要" if d <= 7.0 else
-        "大幅特価が必要。価格期待だけで待ち続けない"
+        f"PC目標価格 ¥{EFFECTIVE_BUDGET:,} 以下。次の値下げより在庫確保を優先" if d <= 0 else
+        f"PC目標価格を超過。周辺機器の現行価格と総予算を再確認" if price <= EFFECTIVE_HARD_MAX else
+        f"PC本体上限 ¥{EFFECTIVE_HARD_MAX:,} 超。大幅値下げが必要"
     )
     return base, guidance
 
@@ -797,6 +913,11 @@ def decision_score(item, anchors, events=None):
             "max_actionable_age_minutes": max_age,
         }
 
+    budget_projection = peripheral_budget_projection()
+    dynamic_pc_cap = budget_projection["pc_dynamic_cap_jpy"]
+    dynamic_soft_max = min(EFFECTIVE_SOFT_MAX, dynamic_pc_cap)
+    config_ready, config_reasons = configuration_readiness(item)
+
     perf, gpu = performance_score(item)
     ps_base = price_score(eff)
     value_bonus = bundle_value_score(item)
@@ -818,21 +939,23 @@ def decision_score(item, anchors, events=None):
         status = "UNAVAILABLE"
     elif item.get("price_source_mode") in ("search_snippet", "public_baseline", "stale_previous", "direct_text", "direct_meta"):
         status = "VERIFY_NOW"
-    elif eff <= EFFECTIVE_SOFT_MAX and direct_verified and identity_verified and stock_known and score >= 90:
+    elif not config_ready:
+        status = "NEEDS_CONFIGURATION"
+    elif eff <= dynamic_soft_max and direct_verified and identity_verified and stock_known and score >= 90:
         status = "BUY_NOW"
-    elif eff <= EFFECTIVE_HARD_MAX and direct_verified and identity_verified and stock_known and score >= 94 and perf >= 38:
+    elif dynamic_soft_max < eff <= dynamic_pc_cap and direct_verified and identity_verified and item.get("stock_status") == "in_stock" and score >= 94 and perf >= 38:
         status = "BUY_NOW_NEAR_BUDGET"
-    elif eff <= EFFECTIVE_SOFT_MAX and direct_verified and identity_verified and item.get("stock_status") == "low_stock" and score >= 85:
+    elif eff <= dynamic_soft_max and direct_verified and identity_verified and item.get("stock_status") == "low_stock" and score >= 85:
         status = "BUY_NOW_LOW_STOCK"
     elif (
-        eff > EFFECTIVE_HARD_MAX
+        eff > dynamic_pc_cap
         and item.get("form_factor") == "desktop"
         and perf >= 30
         and value_bonus >= 2
         and eff <= 450000
     ):
         status = "VALUE_WATCH"
-    elif eff > EFFECTIVE_HARD_MAX:
+    elif eff > dynamic_pc_cap:
         status = "WAIT_FOR_DISCOUNT"
     elif score >= 85:
         status = "STRONG_WATCH"
@@ -841,7 +964,7 @@ def decision_score(item, anchors, events=None):
         f"現金支払 ¥{cash_total:,}" if cash_total is not None else "現金支払額未確認",
         f"実質コスト ¥{eff:,}" if eff is not None else "実質コスト未確認",
         f"特典・構成価値 ¥{noncash_benefit_value_jpy(item):,} / 加点 {value_bonus}",
-        f"28万円まで必要値下げ {required_effective_discount(item):.1f}%" if required_effective_discount(item) is not None and eff > EFFECTIVE_BUDGET else "実質目標内",
+        f"PC目標価格 ¥{EFFECTIVE_BUDGET:,} まで必要値下げ {required_effective_discount(item):.1f}%" if required_effective_discount(item) is not None and eff > EFFECTIVE_BUDGET else "PC目標価格内",
         f"在庫 {item.get('stock_status', 'unknown')}",
         f"構成判定 {item.get('variant_match', 'ambiguous')}",
     ]
@@ -888,6 +1011,13 @@ def decision_score(item, anchors, events=None):
         "variant_match": item.get("variant_match"),
         "observation_age_minutes": round(observation_age, 1) if observation_age is not None else None,
         "max_actionable_age_minutes": max_age,
+        "configuration_ready": config_ready,
+        "configuration_reasons": config_reasons,
+        "total_budget_jpy": budget_projection["total_budget_jpy"],
+        "peripheral_projection_jpy": budget_projection["peripheral_projection_jpy"],
+        "pc_dynamic_cap_jpy": dynamic_pc_cap,
+        "budget_data_ready": budget_projection["budget_data_ready"],
+        "peripheral_unverified_ids": budget_projection["tracked_peripheral_unverified_ids"],
     }
     return score, detail
 

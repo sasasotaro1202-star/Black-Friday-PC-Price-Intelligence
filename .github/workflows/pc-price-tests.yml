@@ -28,6 +28,8 @@ jobs:
         run: |
           python -m unittest discover -s tests -p "test_*.py" -v
           python -m py_compile scripts/*.py
+          # Validate the all-in budget policy and tracked accessory schema without network access.
+          python -m unittest discover -s tests -p "test_budget_policy.py" -v
           # Mirror the production normalization stage so committed observation
           # counters and current-price exposure are tested in their final form.
           python scripts/sanitize.py

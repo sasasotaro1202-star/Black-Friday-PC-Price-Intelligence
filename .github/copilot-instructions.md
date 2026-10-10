@@ -1,129 +1,47 @@
 # Black Friday PC Price Intelligence — Project Instructions
 
-## Core objective
-Continuously determine which Japanese-market desktop or laptop PC is the best purchase at each observation time across the full 2026 Black Friday monitoring window.
+## Goal
+Evaluate the best Japanese-market PC purchase throughout the entire 2026 Black Friday window. Desktops are preferred, but do not discard exceptional laptop, outlet, old-stock, or limited-time deals. A bargain is only current when supported by recent source evidence.
 
-Do not optimize for a single backtest, a single lowest price, or a single performance metric. Optimize for robust real-world purchase decisions under uncertainty.
+## Authoritative all-in budget
+config/targets.json is the single source of truth.
 
-## Budget policy
-The primary budget is **effective cost around JPY 280,000**.
+- Total budget: JPY 370,000 for PC + all required peripherals.
+- Peripheral target allocation: JPY 67,800.
+- PC target price: JPY 299,800.
+- PC planned hard cap: JPY 302,200 only when all peripherals stay within their target allocation.
+- Required PC configuration: RAM >= 32GB and SSD >= 1TB.
+- One monitor only; no secondary monitor and no headset.
+- Sound quality is important: EDIFIER MR5 is the preferred speaker target; compare MR4 MKII or other alternatives when appropriate.
+- Include shipping, required fees, cable needs, and multi-store shipping reserve.
+- Track monitor, speakers, mouse and mousepad prices separately from PC prices.
+- Do not subtract coupons, points, lotteries, future rewards, or eligibility-dependent perks until actual checkout applicability is verified.
 
-- Effective cost = mandatory purchase payment + mandatory shipping/fees - only benefits that are verified and reliably realizable.
-- JPY 280,000 or less: preferred purchase band.
-- JPY 280,000–285,000: small overage; still a strong candidate.
-- JPY 285,000–290,000: strong evidence required; performance/stock/benefit advantage must justify the premium.
-- Above JPY 290,000 effective cost: strongly penalize and normally wait.
-- JPY 300,000+: normally reference-only unless an exceptional performance/value case clearly justifies the premium.
-- A higher cash price is acceptable when verified benefits reduce the effective cost.
-- Uncertain, conditional, lottery, future, capped, or eligibility-dependent benefits must not be treated as guaranteed cash-equivalent savings.
-- Never double-count benefits.
-- Free accessories, warranty, support, or insurance are separate value unless their monetary value is explicitly verified and relevant.
+Current prices of tracked peripherals must adjust the dynamic PC cap. Missing/stale price or unknown stock must use the configured target as a planning reserve only and keep the overall purchase gate closed.
 
-Always keep these separate:
-1. cash purchase amount
-2. mandatory fees
-3. verified benefit value
-4. effective cost
-5. uncertain/potential benefits
+## Decision score
+The 100-point score is purchase priority, not probability. Weight: performance 40, price/value 20, historical sale evidence 15, stock/sellout risk 15, timing 10. Include GPU/VRAM, CPU, memory, SSD, cooling, PSU/expandability, configuration, warranty, source quality, data freshness, variant identity and PIT validity.
 
-## Purchase decisions
-A 100-point score is a purchase-priority score, not a probability.
+A PC with fewer than 32GB RAM or less than 1TB SSD must be NEEDS_CONFIGURATION, never BUY_NOW. Never price an unquoted memory/storage upgrade as zero. Use completed configuration cost.
 
-Evaluate:
-- performance and configuration
-- effective cost
-- historical real-sale evidence
-- inventory and sellout risk
-- timing / expected further discount
-- benefit certainty
-- retailer / warranty quality
-- observation freshness
-- PIT validity
-- identity / SKU / configuration correctness
-- source reliability
+## Fail-closed evidence rules
+Fail closed on missing current price, ambiguous SKU, conflicting CPU/GPU/RAM/SSD evidence, unknown stock when purchaseability matters, stale observations, missing/invalid PIT, conflicting structured prices, anomalous prices without independent corroboration, or reference/monthly/installment/discount amounts mistaken for actual sale price.
 
-Desktop and laptop candidates belong in one integrated decision set.
+Keep current price, historical/reference price, mandatory shipping/fees, confirmed cash benefit, conditional benefits and planning targets separate. Fetch failure is not out-of-stock. A historical price is not a current offer. Shared model-family pages are not proof of exact SKU.
 
-## Fail-closed rules
-Never turn uncertainty into a purchase recommendation.
+Preserve event_time, publication_time, available_at, retrieval_time and prediction_time. Unknown event_time remains null. Require available_at <= retrieval_time <= prediction_time; unknown/invalid PIT means no purchase recommendation.
 
-Fail closed on:
-- missing or unverifiable current price
-- ambiguous variant/SKU
-- contradictory CPU/GPU/TGP/RAM/SSD evidence
-- unknown inventory when purchaseability matters
-- stale observations
-- missing/invalid PIT
-- multiple conflicting structured prices
-- anomaly-priced offers without independent corroboration
-- reference/list/monthly/installment/discount-amount values mistaken for sale price
-- fetch failures misclassified as out-of-stock
-
-A fetch failure is not proof of sellout.
-
-## PIT
-For observations, preserve and validate:
-- event_time
-- publication_time
-- available_at
-- retrieval_time
-- prediction_time
-
-Require:
-available_at <= retrieval_time <= prediction_time
-
-Unknown PIT = fail closed.
-
-## Ranking
-Prefer an actually purchasable, well-verified candidate over a theoretically stronger but unavailable or unverified candidate.
-
-Out-of-stock products must not become actionable purchase recommendations.
-
-The system may return:
-- BUY_NOW
-- BUY_NOW_LOW_STOCK
-- BUY_NOW_NEAR_BUDGET
-- STRONG_WATCH
-- WATCH
-- WAIT_FOR_DISCOUNT
-- VERIFY_NOW
-- UNAVAILABLE
-- UNACTIONABLE
-
-BUY_NOW_NEAR_BUDGET is reserved for roughly JPY 285,000–290,000 effective cost and requires especially strong performance, stock, identity, and data-quality evidence.
-
-## Data and monitoring
-Use GitHub Actions as the high-frequency monitoring engine and preserve deterministic snapshots.
-
-Normal monitoring: approximately every 15 minutes.
-Black Friday fast monitoring: approximately every 5 minutes.
-
-Keep observation PIT and ranking/prediction PIT separate.
+## Workflow design
+- Normal monitoring executes about every 15 minutes.
+- Black Friday window monitoring executes about every 5 minutes.
+- Use a single scheduled workflow; keep the fast workflow manual-only to prevent duplicated runs.
+- Monitor PCs and accessories separately; accessory prices must never appear as PC ranking rows.
+- GitHub Actions and Python standard library first. No paid APIs or unknown billing dependencies.
+- Validate budget arithmetic, accessory target sum, complete PC configuration, dynamic all-in PC cap, SKU identity, price source, stock, coverage counters, source snapshot hash, scoring arithmetic and PIT before publishing.
+- Run tests and healthcheck before promoting changes. Never weaken safety gates to force a recommendation.
 
 ## Autonomous improvement
-When a safe, free, reversible defect is found:
-monitor -> diagnose -> research -> implement -> unit/integration/E2E validation -> PIT/leakage audit -> promote or rollback -> re-monitor.
+For each safe/free defect: observe → diagnose → implement → unit/regression tests → PIT/data-quality validation → promote or rollback → monitor again. Report evidence, uncertainty and exact uncompleted work honestly.
 
-Do not weaken safety gates just to produce a ranking.
-
-## Cost policy
-Free-first:
-1. completely free
-2. free tier
-3. free tool
-4. safe alternative
-5. defer
-
-Do not introduce paid services, hidden billing risk, or unknown-cost dependencies.
-
-## Evidence policy
-Never claim success unless the repository contains actual execution evidence.
-Prefer primary sources and reproducible artifacts.
-Separate facts, estimates, and scenarios.
-Never describe an uncertain discount or benefit as guaranteed.
-Never use absolute claims such as “never fails” or “always cheapest”.
-
-## Black Friday window
-2026-11-14 00:00 JST through 2026-12-04 23:59 JST.
-
-Outside the window, do not fabricate a Black Friday purchase decision; continue only necessary preparation and monitoring.
+## Window
+Broad watch window: 2026-11-14 00:00 JST through 2026-12-04 23:59 JST until official retailer-specific dates are independently verified.

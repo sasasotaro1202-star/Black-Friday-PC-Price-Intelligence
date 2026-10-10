@@ -16,6 +16,16 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertIn("regular_due = now.minute % 15 == 0", text)
         self.assertIn('run_now = event != "schedule" or in_bf or regular_due', text)
 
+    def test_primary_workflow_runs_peripheral_observer(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("python scripts/peripheral_monitor.py", text)
+
+    def test_fast_workflow_has_no_duplicate_schedule(self):
+        text = (ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml").read_text(encoding="utf-8")
+        self.assertIn("workflow_dispatch:", text)
+        self.assertNotIn("  schedule:", text)
+        self.assertIn('MONITOR_MAX_URLS: "100"', text)
+
     def test_monitor_limit_allows_full_discovered_watchlist(self):
         text = (ROOT / "scripts" / "monitor.py").read_text(encoding="utf-8")
         self.assertIn('MONITOR_MAX_URLS", "100"', text)

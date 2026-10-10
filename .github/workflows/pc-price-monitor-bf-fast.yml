@@ -2,9 +2,6 @@ name: PC Price Intelligence - Black Friday Season Fast
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "2,7,12,17,22,27,32,37,42,47,52,57 * 13-30 11 *"
-    - cron: "2,7,12,17,22,27,32,37,42,47,52,57 * 1-4 12 *"
 
 permissions:
   contents: write
@@ -63,7 +60,7 @@ jobs:
       - name: Collect, recover, sanitize, score and publish
         if: steps.window.outputs.in_window == 'true'
         env:
-          MONITOR_MAX_URLS: "30"
+          MONITOR_MAX_URLS: "100"
         shell: bash
         run: |
           set -euo pipefail
@@ -71,6 +68,7 @@ jobs:
             git fetch --no-tags origin main
             git reset --hard origin/main
             python scripts/monitor.py
+            python scripts/peripheral_monitor.py
             python scripts/recover.py
             python scripts/sanitize.py
             python scripts/report.py
