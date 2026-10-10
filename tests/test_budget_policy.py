@@ -34,6 +34,19 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(strategy["priority_plans"][1]["last_verified_listing_reference_jpy"], 304800)
         self.assertFalse(strategy["outlier_rule"]["zero_cost_upgrade_assumption_allowed"])
 
+    def test_galleria_64gb_2tb_variant_has_distinct_catalog_identity(self):
+        with (ROOT / "config" / "candidate_catalog.json").open(encoding="utf-8") as f:
+            catalog = json.load(f)["candidates"]
+        candidate = next(x for x in catalog if x["id"] == "galleria-zl9r-r57t-6-64gb-2tb")
+        original = next(x for x in catalog if x["id"] == "galleria-zl9r-9955hx-5070ti")
+        self.assertNotEqual(candidate["id"], original["id"])
+        self.assertEqual(candidate["url"], "https://www.dospara.co.jp/TC143/MC18548-SN3458.html")
+        self.assertEqual(candidate["ram_gb"], 64)
+        self.assertEqual(candidate["ssd"], "2 TB")
+        self.assertEqual(candidate["reference_price_jpy"], 382980)
+        self.assertEqual(original["ram_gb"], 32)
+        self.assertEqual(original["ssd"], "1 TB")
+
     def test_dg_a7g70_catalog_uses_exact_outlet_model_and_completed_specs(self):
         with (ROOT / "config" / "candidate_catalog.json").open(encoding="utf-8") as f:
             catalog = json.load(f)["candidates"]
