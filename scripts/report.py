@@ -304,7 +304,7 @@ def main():
             (f"- 購入リンク: [販売ページ]({sales_url(action)})" if sales_url(action) else "- 購入リンク: 未確認"),
             f"- 買い判断: {d['reason']}",
             f"- 待つリスク: **{d['wait_risk']}**",
-            f"- 実質28万円まで必要値下げ: {d['required_effective_discount_pct']:.1f}%" if d.get("required_effective_discount_pct") is not None else "- 実質28万円まで必要値下げ: 未確認",
+            f"- PC目標価格まで必要値下げ: {d['required_effective_discount_pct']:.1f}%" if d.get("required_effective_discount_pct") is not None else "- PC目標価格まで必要値下げ: 未確認",
             f"- 構成判定: **{d.get('variant_match')}**",
             f"- 価格情報: **{d.get('price_source_mode')} / {d.get('data_confidence')}**",
             "",
@@ -319,6 +319,17 @@ def main():
         ]
 
     lines += [
+        "## 周辺機器の価格監視（サブモニター・ヘッドセットなし）",
+        "",
+        "|項目|目標価格|観測価格|在庫|価格確認|購入ページ|",
+        "|---|---:|---:|---|---|---|",
+        *[
+            f"|{p['name']}|¥{p['target_price_jpy']:,}|{('¥'+format(p['current_price_jpy'],',')) if p.get('current_price_jpy') is not None else '—（目標額で仮計算）'}|{p.get('stock_status','unknown')}|{('確認済み' if p.get('price_verified') else '未確認')}|{('[商品ページ]('+p['purchase_url']+')') if p.get('purchase_url') else '予算枠のみ'}|"
+            for p in peripheral_projection["peripherals"]
+        ],
+        "",
+        f"周辺機器価格確認: {peripheral_projection['tracked_peripheral_verified_count']}/{peripheral_projection['tracked_peripheral_count']}。未確認項目は目標額を試算に使用し、全体購入許可を保留します。",
+        "",
         "## 100点ランキング",
         "",
         "|順位|タイプ|商品|現在価格|現金総額|確定現金特典|実質コスト|非現金価値|価値加点|28万円まで|性能|価格価値|過去根拠|在庫|時期|総合|判定|購入リンク|",
@@ -378,18 +389,19 @@ def main():
         lines.append(f"### {row['rank']}. {row.get('name','')}")
         lines.append(
             " / ".join(f"{x['discount_pct']}%→¥{x['price_jpy']:,}" for x in scenarios)
-            + (f" / 28万円到達→{first['discount_pct']}%" if first else " / 30%でも28万円未到達")
+            + (f" / PC目標価格到達→{first['discount_pct']}%" if first else " / 30%でもPC目標価格未到達")
         )
         lines.append("")
 
     lines += [
         "## 判定ルール",
         "",
-        "- BUY_NOW: 実質コスト28.5万円以下・購入可能・データ品質を通過。",
-        "- BUY_NOW_NEAR_BUDGET: 実質28.5〜29.0万円でも、性能・在庫・データ品質が特に強い場合だけ許可。",
-        "- BUY_NOW_LOW_STOCK: 実質予算内・低在庫。最安値待ちを避ける。",
+        "- BUY_NOW: PC本体の実質コストが、現在の周辺機器予算を反映した動的上限以下で、構成・在庫・データ品質を通過。",
+        "- BUY_NOW_NEAR_BUDGET: 動的上限付近でも、性能・在庫・構成一致・データ品質が特に強い場合だけ許可。",
+        "- BUY_NOW_LOW_STOCK: PC本体の動的上限内かつ低在庫。最安値待ちを避ける。",
+        "- NEEDS_CONFIGURATION: RAM32GBまたはSSD1TBを満たさない基本構成。変更後価格が確認できるまで購入不可。",
         "- STRONG_WATCH: 未到達でも性能・価格距離・過去根拠が強い。",
-        "- VALUE_WATCH: 29万円超でも、デスクトップの性能と確認済み周辺機器/構成特典が強い候補。購入許可ではなく値下げ監視対象。",
+        "- VALUE_WATCH: PC本体の上限超でも、高性能候補として値下げを監視。購入許可ではない。",
         "- WAIT_FOR_DISCOUNT: 大幅値下げ待ち。",
         "- VERIFY_NOW: 検索補完など。購入前に販売ページで再確認。",
         "- UNACTIONABLE: 現行価格を確認できない、または異常値・構成不一致。",
