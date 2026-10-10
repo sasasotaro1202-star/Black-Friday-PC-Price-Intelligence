@@ -65,6 +65,15 @@ def _parse_strategy_dt(value):
         return None
 
 
+def _price_relation(amount, benchmark, label):
+    difference = int(amount) - int(benchmark)
+    if difference > 0:
+        return f"{label}を¥{difference:,}上回っています"
+    if difference < 0:
+        return f"{label}を¥{-difference:,}下回っています"
+    return f"{label}と同額です"
+
+
 def build_purchase_strategy_status(products, strategy, budget, peripheral_projection):
     """Report BF targets separately from pre-sale reference observations."""
     now = now_jst()
@@ -159,8 +168,12 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
                 row["pre_bf_reference_gap_to_planned_cap_jpy"] = max(0, reference - bf_cap) if reference else None
                 row["detail"] = (
                     f"BF目標は¥{bf_target:,}、完成構成の計画上限は¥{bf_cap:,}。"
-                    f"¥{reference:,}は10月の参考掲載額でBF価格ではありません。"
-                    + (f" 参考額からBF目標まで¥{reference-bf_target:,}、計画上限まで¥{reference-bf_cap:,}の差があります。" if reference else "")
+                    f"¥{reference:,}は事前の参考掲載額でBF価格ではありません。"
+                    + (
+                        f" 参考額は{_price_relation(reference, bf_target, 'BF目標')}。"
+                        f"{_price_relation(reference, bf_cap, '計画上限')}。"
+                        if reference else ""
+                    )
                 )
             elif not observation_is_bf:
                 row["status"], row["detail"] = "BF_PRICE_UNVERIFIED", "BF期間中の価格・在庫・SKUを直接確認できていません。"
@@ -578,7 +591,7 @@ def main():
         "",
         purchase_strategy_status["score_policy_note"],
         "",
-        "## 周辺機器の価格監視（サブモニター・ヘッドセットなし）",
+        "## 周辺機器の価格監視（サブモニターあり・ヘッドセットなし）",
         "",
         "|項目|BF購入目標価格|観測価格（BF前は参考）|在庫|価格確認|購入ページ|",
         "|---|---:|---:|---|---|---|",
