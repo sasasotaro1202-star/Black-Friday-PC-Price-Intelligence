@@ -99,6 +99,26 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(len([x for x in self.cfg["peripherals"] if x["id"] == "main_monitor"]), 1)
         self.assertEqual(len([x for x in self.cfg["peripherals"] if x["id"] == "secondary_monitor"]), 1)
 
+    def test_each_accessory_category_has_three_scored_distinct_options(self):
+        primary = self.cfg.get("peripherals", [])
+        alternatives = self.cfg.get("peripheral_alternatives", [])
+        all_items = primary + alternatives
+        categories = self.cfg.get("peripheral_ranking_policy", {}).get("category_order", [])
+        self.assertGreaterEqual(len(categories), 6)
+        all_ids = [str(x.get("id")) for x in all_items if x.get("id")]
+        self.assertEqual(len(all_ids), len(set(all_ids)))
+        for group in categories:
+            category = group["category"]
+            rows = [x for x in all_items if x.get("category") == category]
+            self.assertGreaterEqual(len(rows), 3, category)
+            scores = [x.get("ranking_score_100") for x in rows]
+            self.assertTrue(all(isinstance(s, int) and 0 <= s <= 100 for s in scores), category)
+        g304x = next(x for x in alternatives if x.get("id") == "mouse_alt_logicool_g304_x_superlight")
+        self.assertIn("61g", g304x.get("ranking_reason", ""))
+        g640 = next(x for x in alternatives if x.get("id") == "mousepad_alt_logicool_g640s")
+        self.assertEqual(g640.get("model_code"), "G640")
+        self.assertIn("gaming.logicool.co.jp/ja-jp/shop/p/g640-cloth-gaming-mouse-pad", g640.get("purchase_url", ""))
+
     def test_tracked_peripherals_have_identity_and_host_guard(self):
         tracked = [x for x in self.cfg["peripherals"] if x.get("track_current_price")]
         self.assertGreaterEqual(len(tracked), 4)
