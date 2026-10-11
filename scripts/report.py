@@ -636,6 +636,7 @@ def main():
         "## 周辺機器カテゴリ別ランキング（代替候補を含む）",
         "",
         "各カテゴリから**1商品だけ**選びます。代替候補は価格監視対象ですが、選択しない限り総予算の周辺機器枠には加算しません。",
+        "100点は用途適合35%、予算適合30%、仕様・機能20%、代替性・購入リスク15%のユーザー条件別評価であり、独立した実機ベンチマークではありません。",
         "BF購入目標と観測価格を分け、価格取得失敗は売り切れと扱いません。",
         "",
     ]
@@ -643,8 +644,8 @@ def main():
         peripheral_category_lines += [
             f"### {group_name}",
             "",
-            "|順位|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|商品ページ|",
-            "|---:|---|---:|---:|---|---|---|",
+            "|順位|総合点|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|",
+            "|---:|---:|---|---:|---:|---|---|---|---|",
         ]
         for rank, candidate_id in enumerate(candidate_ids, 1):
             target = all_peripheral_targets.get(candidate_id)
@@ -659,8 +660,11 @@ def main():
             url = target.get("purchase_url") or target.get("monitor_url")
             product_link = f"[商品ページ]({url})" if isinstance(url, str) and url.startswith("https://") else "リンク未設定"
             suffix = "（主予算候補）" if candidate_id in mandatory_ids else "（代替候補）"
+            score = target.get("ranking_score_100")
+            score_text = f"**{int(score)}/100**" if isinstance(score, (int, float)) and not isinstance(score, bool) and 0 <= score <= 100 else "未評価"
+            reason = str(target.get("ranking_reason") or "").replace("|", "/").replace("\\n", " ").strip()
             peripheral_category_lines.append(
-                f"|{rank}|{target.get('name', candidate_id)}{suffix}|¥{target_price:,}|{price_text}|{stock_text}|{verified_text}|{product_link}|"
+                f"|{rank}|{score_text}|{target.get('name', candidate_id)}{suffix}|¥{target_price:,}|{price_text}|{stock_text}|{verified_text}|{reason}|{product_link}|"
             )
         peripheral_category_lines.append("")
     peripheral_category_lines += [
