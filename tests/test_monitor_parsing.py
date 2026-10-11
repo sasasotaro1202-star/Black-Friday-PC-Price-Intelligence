@@ -113,6 +113,22 @@ class MonitorParsingTests(unittest.TestCase):
         self.assertIsNone(parsed["price_jpy"])
         self.assertEqual(parsed["price_ambiguity"], "multiple_structured_prices")
 
+    def test_matching_jsonld_product_without_offer_fails_closed_without_exception(self):
+        html = """
+        <script type="application/ld+json">
+        {"@type":"Product","name":"EDIFIER MR3","description":"Powered speakers"}
+        </script>
+        <div>EDIFIER MR3 Bluetoothスピーカー 在庫あり</div>
+        """
+        parsed = monitor.parse_page(
+            "https://www.edifier.jp/products/mr3",
+            html,
+            expected={"name":"EDIFIER MR3","aliases":["MR3"],"model_code":"MR3"},
+        )
+        self.assertIsNone(parsed["price_jpy"])
+        self.assertEqual(parsed["price_source_mode"], "none")
+        self.assertEqual(parsed["stock_status"], "in_stock")
+
     def test_multiple_availability_states_fail_closed(self):
         html = """
         <script type="application/ld+json">
