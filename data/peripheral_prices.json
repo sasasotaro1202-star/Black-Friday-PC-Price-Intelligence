@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-11T21:44:44+09:00",
+  "generated_at": "2026-10-11T21:51:45+09:00",
   "budget_scope": "Primary peripheral targets affect the mandatory budget. Ranked alternatives are observed but do not affect budget projections unless selected.",
   "primary_target_count": 9,
   "alternative_target_count": 6,
@@ -18,8 +18,8 @@
       "target_price_jpy": 17500,
       "monitor_url": "https://www.yodobashi.com/product/100000001009314680/",
       "purchase_url": "https://www.yodobashi.com/product/100000001009314680/",
-      "retrieval_time": "2026-10-11T21:44:44+09:00",
-      "available_at": "2026-10-11T21:44:44+09:00",
+      "retrieval_time": "2026-10-11T21:51:45+09:00",
+      "available_at": "2026-10-11T21:51:45+09:00",
       "current_price_jpy": 20790,
       "last_valid_price_jpy": 20790,
       "price_verified": true,
@@ -54,7 +54,7 @@
       "target_price_jpy": 10000,
       "monitor_url": "https://www.amazon.co.jp/dp/B0DNDXMLR7",
       "purchase_url": "https://www.amazon.co.jp/dp/B0DNDXMLR7",
-      "retrieval_time": "2026-10-11T21:44:44+09:00",
+      "retrieval_time": "2026-10-11T21:51:45+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
@@ -90,8 +90,8 @@
       "target_price_jpy": 24000,
       "monitor_url": "https://www.edifier.jp/products/mr4-mkii",
       "purchase_url": "https://www.edifier.jp/products/mr4-mkii",
-      "retrieval_time": "2026-10-11T21:44:44+09:00",
-      "available_at": "2026-10-11T21:44:44+09:00",
+      "retrieval_time": "2026-10-11T21:51:45+09:00",
+      "available_at": "2026-10-11T21:51:45+09:00",
       "current_price_jpy": 29980,
       "last_valid_price_jpy": 29980,
       "price_verified": true,
@@ -128,7 +128,7 @@
       "target_price_jpy": 5500,
       "monitor_url": "https://www.biccamera.com/bc/item/9242996/",
       "purchase_url": "https://www.biccamera.com/bc/item/9242996/",
-      "retrieval_time": "2026-10-11T21:44:44+09:00",
+      "retrieval_time": "2026-10-11T21:51:45+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
@@ -169,8 +169,8 @@
       "target_price_jpy": 3800,
       "monitor_url": "https://www.yodobashi.com/product/100000001004334450/",
       "purchase_url": "https://www.yodobashi.com/product/100000001004334450/",
-      "retrieval_time": "2026-10-11T21:44:44+09:00",
-      "available_at": "2026-10-11T21:44:44+09:00",
+      "retrieval_time": "2026-10-11T21:51:45+09:00",
+      "available_at": "2026-10-11T21:51:45+09:00",
       "current_price_jpy": 5350,
       "last_valid_price_jpy": 5350,
       "price_verified": true,
@@ -206,8 +206,8 @@
       "target_price_jpy": 2500,
       "monitor_url": "https://www.yodobashi.com/product/100000001009472873/",
       "purchase_url": "https://www.yodobashi.com/product/100000001009472873/",
-      "retrieval_time": "2026-10-11T21:44:44+09:00",
-      "available_at": "2026-10-11T21:44:44+09:00",
+      "retrieval_time": "2026-10-11T21:51:45+09:00",
+      "available_at": "2026-10-11T21:51:45+09:00",
       "current_price_jpy": 2640,
       "last_valid_price_jpy": 2640,
       "price_verified": true,
@@ -243,7 +243,7 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": "2026-10-11T21:44:44+09:00",
+      "retrieval_time": "2026-10-11T21:51:45+09:00",
       "available_at": null,
       "price_source_mode": "none"
     },
@@ -258,7 +258,7 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": "2026-10-11T21:44:44+09:00",
+      "retrieval_time": "2026-10-11T21:51:45+09:00",
       "available_at": null,
       "price_source_mode": "none"
     },
@@ -273,7 +273,7 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": "2026-10-11T21:44:44+09:00",
+      "retrieval_time": "2026-10-11T21:51:45+09:00",
       "available_at": null,
       "price_source_mode": "none"
     },
@@ -288,7 +288,7 @@
       "target_price_jpy": 20000,
       "monitor_url": "https://kakaku.com/item/K0001690691/",
       "purchase_url": "https://kakaku.com/item/K0001690691/",
-      "retrieval_time": "2026-10-11T21:44:44+09:00",
+      "retrieval_time": "2026-10-11T21:51:45+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
@@ -296,16 +296,22 @@
       "stock_status": "unknown",
       "price_source_mode": "none",
       "price_validation_status": "missing",
-      "identity_verified": false,
-      "status": "error",
-      "error": "https://kakaku.com/item/K0001690691/: ValueError:max() iterable argument is empty",
+      "identity_verified": true,
+      "status": "price_unverified",
+      "error": "https://kakaku.com/item/K0001690691/: missing_or_implausible_price",
       "retrieval_attempts": [
         {
           "url": "https://kakaku.com/item/K0001690691/",
-          "status": "error",
-          "error": "ValueError:max() iterable argument is empty"
+          "final_url": "https://kakaku.com/item/K0001690691/",
+          "status": "price_unverified",
+          "error": "missing_or_implausible_price",
+          "price_candidate_jpy": null
         }
-      ]
+      ],
+      "product_context_excerpt": "msi mag 275qf [27�c���`] ���i��r - ���i.com msi mag 275qf [27�c���`] ���i��r �z�[�� �p�\\�r�� pc���j�^�[�e�t���f�b�x�v���c pc���j�^�[�e�t���f�b�x�v���c �q�[�~���o���j�^�[ msi pc���j�^�[�e�t���f�b�x�v���c msi �q�[�~���o���j�^�[ msi mag 275qf [27�c���`] �@�l�e�l���ǝ���� �p�\\�r���w���������k ���i.com���r�w�l�x�����̃p�\\�r���i�т��t�|�[�g msi mag msi mag 275qf [27�c���`] ���i���ڃo���t ���[�j�[��]�������i�f -�~ 2025�n5��29�� ���� ����؃����l���o - �� (12423�",
+      "page_title": "MAG 275QF [27�C���`]",
+      "unverified_price_candidate_jpy": null,
+      "price_context": null
     },
     {
       "id": "speakers_alt_edifier_mr3",
@@ -318,8 +324,8 @@
       "target_price_jpy": 12000,
       "monitor_url": "https://www.edifier.jp/products/mr3",
       "purchase_url": "https://www.edifier.jp/products/mr3",
-      "retrieval_time": "2026-10-11T21:44:44+09:00",
-      "available_at": "2026-10-11T21:44:44+09:00",
+      "retrieval_time": "2026-10-11T21:51:45+09:00",
+      "available_at": "2026-10-11T21:51:45+09:00",
       "current_price_jpy": 14980,
       "last_valid_price_jpy": 14980,
       "price_verified": true,
@@ -355,8 +361,8 @@
       "target_price_jpy": 32000,
       "monitor_url": "https://www.edifier.jp/products/mr5",
       "purchase_url": "https://www.edifier.jp/products/mr5",
-      "retrieval_time": "2026-10-11T21:44:44+09:00",
-      "available_at": "2026-10-11T21:44:44+09:00",
+      "retrieval_time": "2026-10-11T21:51:45+09:00",
+      "available_at": "2026-10-11T21:51:45+09:00",
       "current_price_jpy": 39980,
       "last_valid_price_jpy": 39980,
       "price_verified": true,
@@ -392,24 +398,30 @@
       "target_price_jpy": 9500,
       "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
       "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
-      "retrieval_time": "2026-10-11T21:44:44+09:00",
+      "retrieval_time": "2026-10-11T21:51:45+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
       "price_verified": false,
-      "stock_status": "unknown",
+      "stock_status": "low_stock",
       "price_source_mode": "none",
       "price_validation_status": "missing",
-      "identity_verified": false,
-      "status": "error",
-      "error": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561: ValueError:max() iterable argument is empty",
+      "identity_verified": true,
+      "status": "price_unverified",
+      "error": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561: missing_or_implausible_price",
       "retrieval_attempts": [
         {
           "url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
-          "status": "error",
-          "error": "ValueError:max() iterable argument is empty"
+          "final_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
+          "status": "price_unverified",
+          "error": "missing_or_implausible_price",
+          "price_candidate_jpy": null
         }
-      ]
+      ],
+      "product_context_excerpt": "g413 seメカニカル ゲーミング キーボード | ロジクールg skip to main content logicool ビジネス 教育 サポート jp,ja 製品を見る 製品を見る カテゴリーごとに見る ゲーミング マウス ゲーミング マウスパッド ゲーミング キーボード ゲーミングヘッドセット &amp; オーディオ レーシングホイール マイク レーシング コンフィギュレーター ゲームパッド＆コントローラー アクセサリー ゲーミング スペアパーツ シリーズごとに見る pro シリーズ pro シリーズ astroシリーズ astroシリーズ g5 シリーズ g5 シリーズ ロジクール g プレイ first person shooter - pro シリーズ first person shooter - g シリーズ サンドボックス サバイバル オープンワールド シミュレーション - フライト 機能を知る 機能を知る イノベーション hits テクノロジー hero 2 pla",
+      "page_title": "G413 SE",
+      "unverified_price_candidate_jpy": null,
+      "price_context": null
     },
     {
       "id": "keyboard_alt_logicool_g413_tkl_se",
@@ -422,24 +434,30 @@
       "target_price_jpy": 8000,
       "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-tkl-se-gaming-keyboard",
       "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-tkl-se-gaming-keyboard",
-      "retrieval_time": "2026-10-11T21:44:44+09:00",
+      "retrieval_time": "2026-10-11T21:51:45+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
       "price_verified": false,
-      "stock_status": "unknown",
+      "stock_status": "low_stock",
       "price_source_mode": "none",
       "price_validation_status": "missing",
-      "identity_verified": false,
-      "status": "error",
-      "error": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-tkl-se-gaming-keyboard: ValueError:max() iterable argument is empty",
+      "identity_verified": true,
+      "status": "price_unverified",
+      "error": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-tkl-se-gaming-keyboard: missing_or_implausible_price",
       "retrieval_attempts": [
         {
           "url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-tkl-se-gaming-keyboard",
-          "status": "error",
-          "error": "ValueError:max() iterable argument is empty"
+          "final_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-tkl-se-gaming-keyboard",
+          "status": "price_unverified",
+          "error": "missing_or_implausible_price",
+          "price_candidate_jpy": null
         }
-      ]
+      ],
+      "product_context_excerpt": "g413 tkl seメカニカル ゲーミング キーボード | ロジクールg skip to main content logicool ビジネス 教育 サポート jp,ja 製品を見る 製品を見る カテゴリーごとに見る ゲーミング マウス ゲーミング マウスパッド ゲーミング キーボード ゲーミングヘッドセット &amp; オーディオ レーシングホイール マイク レーシング コンフィギュレーター ゲームパッド＆コントローラー アクセサリー ゲーミング スペアパーツ シリーズごとに見る pro シリーズ pro シリーズ astroシリーズ astroシリーズ g5 シリーズ g5 シリーズ ロジクール g プレイ first person shooter - pro シリーズ first person shooter - g シリーズ サンドボックス サバイバル オープンワールド シミュレーション - フライト 機能を知る 機能を知る イノベーション hits テクノロジー hero 2",
+      "page_title": "G413 TKL SEメカニカル ゲーミング キーボード",
+      "unverified_price_candidate_jpy": null,
+      "price_context": null
     },
     {
       "id": "mouse_alt_logicool_g304_x_superlight",
@@ -452,7 +470,7 @@
       "target_price_jpy": 10000,
       "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g304-x-superlight",
       "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g304-x-superlight",
-      "retrieval_time": "2026-10-11T21:44:44+09:00",
+      "retrieval_time": "2026-10-11T21:51:45+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
@@ -460,16 +478,22 @@
       "stock_status": "unknown",
       "price_source_mode": "none",
       "price_validation_status": "missing",
-      "identity_verified": false,
-      "status": "error",
-      "error": "https://gaming.logicool.co.jp/ja-jp/shop/p/g304-x-superlight: ValueError:max() iterable argument is empty",
+      "identity_verified": true,
+      "status": "price_unverified",
+      "error": "https://gaming.logicool.co.jp/ja-jp/shop/p/g304-x-superlight: missing_or_implausible_price",
       "retrieval_attempts": [
         {
           "url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g304-x-superlight",
-          "status": "error",
-          "error": "ValueError:max() iterable argument is empty"
+          "final_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g304-x-superlight",
+          "status": "price_unverified",
+          "error": "missing_or_implausible_price",
+          "price_candidate_jpy": null
         }
-      ]
+      ],
+      "product_context_excerpt": "g304 x superlight skip to main content logicool ビジネス 教育 サポート jp,ja 製品を見る 製品を見る カテゴリーごとに見る ゲーミング マウス ゲーミング マウスパッド ゲーミング キーボード ゲーミングヘッドセット &amp; オーディオ レーシングホイール マイク レーシング コンフィギュレーター ゲームパッド＆コントローラー アクセサリー ゲーミング スペアパーツ シリーズごとに見る pro シリーズ pro シリーズ astroシリーズ astroシリーズ g5 シリーズ g5 シリーズ ロジクール g プレイ first person shooter - pro シリーズ first person shooter - g シリーズ サンドボックス サバイバル オープンワールド シミュレーション - フライト 機能を知る 機能を知る イノベーション hits テクノロジー hero 2 playsync lightspeed",
+      "page_title": "G304 X SUPERLIGHT",
+      "unverified_price_candidate_jpy": null,
+      "price_context": null
     }
   ]
 }
