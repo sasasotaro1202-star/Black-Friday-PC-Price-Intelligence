@@ -1,8 +1,8 @@
 # ブラックフライデー期間通算・購入ランキング
 
-更新: 2026-10-11T22:23:54+09:00
-観測スナップショット: 2026-10-11T22:22:52+09:00
-観測スナップショットSHA256: 5cd9603ae5d774502ab83117c8c6dab59355e8944a6bc8b76ede40f665ea3fda
+更新: 2026-10-11T22:30:22+09:00
+観測スナップショット: 2026-10-11T22:29:22+09:00
+観測スナップショットSHA256: acdfeeb7f1af71e4574063f85cd7b16ca96966a373b8d6f14c8db2a9540879bc
 総予算（PC＋周辺機器）: ¥370,000
 周辺機器の目標予算: ¥69,800
 PC本体の目標価格: ¥300,200
@@ -13,9 +13,11 @@ PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥294,2
 全体購入許可: **保留**（critical_candidates_not_fully_verified）
 フェーズ: **通常監視期間**
 
-## 現時点の最優先候補
+## 監視中の最高スコア候補（購入許可とは別判定）
 
-**1位: [desktop] G TUNE DG-I7G70 — 73/100**
+これは現行データでスコアが最も高い監視候補であり、購入推奨や購入許可を意味しません。構成・総額・在庫・重要候補と周辺機器の確認が揃うまで、購入判断は保留です。
+
+**スコア順位1位: [desktop] G TUNE DG-I7G70 — 73/100**
 - 現在価格: ¥299,800
 - 必須費用込み現金総額: ¥299,800
 - 確定特典価値: ¥0
@@ -112,7 +114,7 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 |---:|---:|---|---:|---:|---|---|---|---|
 |1|**92/100**|Logicool G304（主予算候補）|¥3,800|¥5,350|in_stock|確認済み|LIGHTSPEED無線で予算を抑えられる。重量は軽量競技モデルほどではないが、費用対効果が高い。|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
 |2|**90/100**|Logicool G203 LIGHTSYNC wired gaming mouse（代替候補）|¥3,500|未確認|low_stock|未確認|有線で電池交換不要。公式掲載¥4,510、BF目標¥3,500。ワイヤレスにこだわらず価格を抑えたい場合の予備候補。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g203-lightsync-rgb-gaming-mouse.910-005811)|
-|3|**87/100**|Logicool G304 X SUPERLIGHT wireless gaming mouse（代替候補）|¥10,000|未確認|unknown|未確認|軽量約59gの充電式無線モデル。FPSの軽さを重視する上位選択だが、標準G304より大幅に高価なため総合コスパは下げて評価。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g304-x-superlight)|
+|3|**87/100**|Logicool G304 X SUPERLIGHT wireless gaming mouse（代替候補）|¥10,000|未確認|unknown|未確認|メーカー公称59gの充電式無線モデル。FPSで軽さを重視する上位選択だが、標準G304より高価なため、総合コスパは予算条件込みで評価。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g304-x-superlight)|
 
 ### マウスパッド
 
@@ -120,7 +122,7 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 |---:|---:|---|---:|---:|---|---|---|---|
 |1|**93/100**|SteelSeries QcK Large（主予算候補）|¥2,500|¥2,640|low_stock|確認済み|450×400mm級の布面と滑り止めで、FPSに必要な移動幅を低コストで確保。|[商品ページ](https://www.yodobashi.com/product/100000001009472873/)|
 |2|**89/100**|Razer Gigantus V2 Large 450x400mm cloth gaming mouse mat（代替候補）|¥2,200|未確認|unknown|未確認|Lサイズ約450×400mmでQcK Largeと同程度の操作面。公式ページ表示額は送料条件の影響があるため、決済時の配送込み総額で比較する。|[商品ページ](https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1)|
-|3|**87/100**|Logicool G640s large cloth gaming mousepad（代替候補）|¥3,000|未確認|unknown|未確認|公式G640は400×460mmで現行¥3,850。QcK Largeより高価なので、表面の好みとBF価格差が小さい場合のみ選ぶ。|[商品ページ](https://search.kakaku.com/g640s/)|
+|3|**87/100**|Logicool G640 Large cloth gaming mousepad（代替候補）|¥3,000|未確認|in_stock|未確認|Logicool公式のG640は400×460mmの大型クロス面。公式掲載価格は¥3,850でQcK Largeより高価なので、表面の好みとBF価格差が小さい場合に選ぶ。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g640-cloth-gaming-mouse-pad)|
 
 ### 電源タップ（6口・雷ガード）
 
