@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-10-11T21:44:09+09:00
+更新: 2026-10-11T21:45:21+09:00
 価格フェーズ: **PRE_BLACK_FRIDAY_REFERENCE**
 BF監視窓: 2026-11-14T00:00:00+09:00 ～ 2026-12-04T23:59:59+09:00
 総予算: ¥370,000
@@ -43,7 +43,7 @@ BF PC計画上限＋周辺機器目標: ¥370,000
 |G TUNE FG-A7G70|desktop|RTX 5070|¥300,200|¥319,800|未確認|¥19,600|6.1%|¥255,840|¥239,850|¥223,860|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/)|
 |G TUNE P5-I7G70BK-C（ブラック）|laptop|RTX 5070 Laptop GPU|¥300,200|¥329,800|未確認|¥29,600|9.0%|¥263,840|¥247,350|¥230,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/)|
 |GALLERIA ZL9R-R57T-6|laptop|RTX 5070 Ti Laptop GPU|¥300,200|¥329,980|未確認|¥29,780|9.0%|¥263,984|¥247,485|¥230,986|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.dospara.co.jp/TC143/MC17880.html)|
-|Lenovo Legion Pro 5i Gen 10（16型 Intel）|laptop|RTX 5080|¥300,200|¥354,865|未確認|¥54,665|15.4%|¥283,892|¥266,149|¥248,406|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040)|
+|https://www.lenovo.com/jp/ja/p/laptops/legion-la|laptop|RTX 5080|¥300,200|¥354,865|未確認|¥54,665|15.4%|¥283,892|¥266,149|¥248,406|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040)|
 |ROG Strix G16 G614FR-R9X3D5070TI|laptop|RTX 5070 Ti Laptop GPU|¥300,200|¥359,800|未確認|¥59,600|16.6%|¥287,840|¥269,850|¥251,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
 |ROG Strix G16 G614PR-R9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥300,200|¥359,800|未確認|¥59,600|16.6%|¥287,840|¥269,850|¥251,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
 |GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|laptop|RTX 5070 Ti|¥300,200|¥419,800|未確認|¥119,600|28.5%|¥335,840|¥314,850|¥293,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200)|
@@ -70,7 +70,6 @@ BF PC計画上限＋周辺機器目標: ¥370,000
 |G TUNE DG-A7G70|¥304,800|1.5%|¥274,300|¥259,100|¥243,800|¥228,600|¥213,400|10%|same_gpu|
 |G TUNE FG-A7G6T|¥309,800|3.1%|¥278,800|¥263,300|¥247,800|¥232,400|¥216,900|10%|none|
 |G TUNE FG-A7G70|¥319,800|6.1%|¥287,800|¥271,800|¥255,800|¥239,800|¥223,900|10%|same_gpu|
-|Lenovo Legion Pro 5i Gen 10（16型 Intel）|—|15.4%|¥319,400|¥301,600|¥283,900|¥266,100|¥248,400|20%|none|
 |G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|24.9%|¥359,800|¥339,800|¥319,800|¥299,800|¥279,900|25%|same_gpu|
 |G TUNE P5-I7G70BK-C（ブラック）|¥329,800|28.5%|¥377,800|¥356,800|¥335,800|¥314,800|¥293,900|30%|none|
 |ASUS TUF Gaming A16 FA608PP-R9R5070S|¥319,800|6.1%|¥287,800|¥271,800|¥255,800|¥239,800|¥223,900|10%|same_family|
