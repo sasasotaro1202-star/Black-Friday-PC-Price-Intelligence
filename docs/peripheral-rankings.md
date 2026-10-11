@@ -71,7 +71,7 @@
 |---:|---:|---|---:|---:|---|
 | **1** | **92/100** | **Logicool G304** | **3,800円** | **5,350円（ヨドバシ）** | LIGHTSPEED無線。予算を抑えながらVALORANTやApexを始める費用対効果重視案。[購入ページ](https://www.yodobashi.com/product/100000001004334450/) |
 | 2 | 90/100 | Logicool G203 LIGHTSYNC | 3,500円 | 4,510円（公式） | 有線で電池交換不要。無線にこだわらず、初期費用をさらに抑えたい場合。[公式商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g203-lightsync-rgb-gaming-mouse.910-005811) |
-| 3 | 87/100 | Logicool G304 X SUPERLIGHT | 10,000円 | 11,800〜12,980円の掲載例 | 約61gの軽量・充電式無線モデル。軽さを重視するFPS向けだが、標準G304からの追加費用に見合うかBF価格で判断。[公式仕様・販売一覧](https://gaming.logicool.co.jp/ja-jp/shop/c/gaming-mice) |
+| 3 | 87/100 | Logicool G304 X SUPERLIGHT | 10,000円 | 11,800〜12,980円の掲載例 | 約59gの軽量・充電式無線モデル。軽さを重視するFPS向けだが、標準G304からの追加費用に見合うかBF価格で判断。[公式仕様・販売一覧](https://gaming.logicool.co.jp/ja-jp/shop/c/gaming-mice) |
 
 **主予算はG304。** 軽いマウスが好きな場合はG304 X SUPERLIGHTを監視します。DPIの数値だけで順位を決めず、予算・形状・重量・使い方とのバランスを重視します。
 
