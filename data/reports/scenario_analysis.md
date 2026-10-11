@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-10-11T21:59:36+09:00
+更新: 2026-10-11T22:06:10+09:00
 価格フェーズ: **PRE_BLACK_FRIDAY_REFERENCE**
 BF監視窓: 2026-11-14T00:00:00+09:00 ～ 2026-12-04T23:59:59+09:00
 総予算: ¥370,000
@@ -21,7 +21,7 @@ BF PC計画上限＋周辺機器目標: ¥370,000
 |Logicool G213r|¥5,500|未確認|—|unknown|black_friday_target_reserve|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
 |Logicool G304|¥3,800|未確認|¥5,350|in_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
 |SteelSeries QcK Large|¥2,500|未確認|¥2,640|low_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001009472873/)|
-|6-outlet surge-protected power strip|¥1,500|未確認|—|unknown|black_friday_target_reserve|予算枠/見積確認|
+|ELECOM T-K1A-2625BK 6-outlet 2.5m surge-protected power strip|¥1,500|未確認|—|unknown|black_friday_target_reserve|[商品ページ](https://shopping.yahoo.co.jp/products/293aa7c210)|
 |Required cables only; check included monitor/speaker cables first|¥1,000|未確認|—|unknown|black_friday_target_reserve|予算枠/見積確認|
 |Shipping / multi-store purchase reserve|¥4,000|未確認|—|unknown|black_friday_target_reserve|予算枠/見積確認|
 
