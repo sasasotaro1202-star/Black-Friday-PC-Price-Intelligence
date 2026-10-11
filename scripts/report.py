@@ -525,10 +525,26 @@ def main():
     if action:
         d = action["score_detail"]
         price = action["current_price_jpy"]
+        purchase_ready_now = bool(
+            purchase_gate_allowed
+            and d.get("configuration_ready")
+            and d.get("status") in ("BUY_NOW", "BUY_NOW_NEAR_BUDGET", "BUY_NOW_LOW_STOCK")
+        )
+        summary_heading = (
+            "## 現時点の最優先候補"
+            if purchase_ready_now
+            else "## 監視中の最高スコア候補（購入許可とは別判定）"
+        )
         lines += [
-            "## 現時点の最優先候補",
+            summary_heading,
             "",
-            f"**1位: [{action.get('form_factor','unknown')}] {action.get('name','')} — {action['decision_score']}/100**",
+            (
+                "購入ゲートを通過した候補です。決済前に構成・在庫・最終支払額を再確認してください。"
+                if purchase_ready_now
+                else "これは現行データでスコアが最も高い監視候補であり、購入推奨や購入許可を意味しません。構成・総額・在庫・重要候補と周辺機器の確認が揃うまで、購入判断は保留です。"
+            ),
+            "",
+            f"**スコア順位1位: [{action.get('form_factor','unknown')}] {action.get('name','')} — {action['decision_score']}/100**",
             f"- 現在価格: ¥{price:,}",
             f"- 必須費用込み現金総額: ¥{action.get('cash_total_cost_jpy'):,}" if action.get("cash_total_cost_jpy") is not None else "- 必須費用込み現金総額: 未確認",
             f"- 確定特典価値: ¥{action.get('confirmed_benefit_value_jpy', 0):,}",
