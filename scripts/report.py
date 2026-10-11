@@ -630,6 +630,8 @@ def main():
         ("キーボード", ["keyboard", "keyboard_alt_logicool_g413se", "keyboard_alt_logicool_g413_tkl_se"]),
         ("マウス（FPS向け）", ["mouse", "mouse_alt_logicool_g304_x_superlight"]),
         ("マウスパッド", ["mousepad", "mousepad_alt_logicool_g640s"]),
+        ("電源タップ（6口・雷ガード）", ["power_strip", "power_strip_alt_sanwa_tap_sp2116mg2wn"]),
+        ("映像ケーブル（必要な場合のみ）", ["cables", "cables_alt_sanwa_kc_dp1420"]),
     ]
     peripheral_category_lines = [
         "",
