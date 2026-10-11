@@ -133,7 +133,10 @@
       "monitor_urls": [
         "https://kakaku.com/item/K0001706544/",
         "https://www.yodobashi.com/product/100000001009314680/"
-      ]
+      ],
+      "ranking_score_100": 94,
+      "ranking_reason": "WQHDと180Hz、Fast IPSを低価格で両立。FPSと都市ゲームの両方に最も予算を使いやすい。",
+      "best_for": "メイン画面の総合コスパ"
     },
     {
       "id": "secondary_monitor",
@@ -154,7 +157,10 @@
       "mandatory": true,
       "model_code": "24MS500-B",
       "price_target_phase": "black_friday",
-      "target_price_note": "10000円はBF期間中の購入目標。2026-10-11に価格.comで確認した参考最安値10980円とBF価格を混同しない。"
+      "target_price_note": "10000円はBF期間中の購入目標。2026-10-11に価格.comで確認した参考最安値10980円とBF価格を混同しない。",
+      "ranking_score_100": 93,
+      "ranking_reason": "FHD・IPS・100Hzでコード、GitHub、ログ表示に十分。主画面に予算を回せる。",
+      "best_for": "プログラミング用サブ画面"
     },
     {
       "id": "speakers",
@@ -181,7 +187,10 @@
         "https://www.edifier.jp/products/mr4-mkii"
       ],
       "coupon_code_reference": "SLW20",
-      "coupon_observed_date": "2026-10-11"
+      "coupon_observed_date": "2026-10-11",
+      "ranking_score_100": 95,
+      "ranking_reason": "80W RMS、Bluetooth 6.0、XLR/TRS/RCA/AUXなど接続の幅があり、現在の公式クーポンを含めなくても機能と価格目標のバランスがよい。",
+      "best_for": "音質・機能・価格の総合バランス"
     },
     {
       "id": "keyboard",
@@ -207,7 +216,10 @@
       "monitor_urls": [
         "https://www.biccamera.com/bc/item/9242996/",
         "https://item.rakuten.co.jp/logicool/g213r/"
-      ]
+      ],
+      "ranking_score_100": 88,
+      "ranking_reason": "フルサイズ日本語配列、テンキー、パームレスト付き。Python・データ入力・普段使いまで幅広く、目標価格も抑えられる。",
+      "best_for": "ゲームと長時間作業のバランス"
     },
     {
       "id": "mouse",
@@ -227,7 +239,10 @@
       "max_price_jpy": 15000,
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "3800円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
+      "target_price_note": "3800円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。",
+      "ranking_score_100": 92,
+      "ranking_reason": "LIGHTSPEED無線で予算を抑えられる。重量は軽量競技モデルほどではないが、費用対効果が高い。",
+      "best_for": "価格重視のFPS用無線"
     },
     {
       "id": "mousepad",
@@ -247,7 +262,10 @@
       "max_price_jpy": 10000,
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "2500円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
+      "target_price_note": "2500円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。",
+      "ranking_score_100": 93,
+      "ranking_reason": "450×400mm級の布面と滑り止めで、FPSに必要な移動幅を低コストで確保。",
+      "best_for": "低価格の大型布パッド"
     },
     {
       "id": "power_strip",
@@ -424,7 +442,10 @@
       "max_price_jpy": 60000,
       "mandatory": false,
       "price_target_phase": "black_friday",
-      "target_price_note": "Optional main-monitor alternative only; not included in peripheral budget. BF goal is a target, not an observed price."
+      "target_price_note": "Optional main-monitor alternative only; not included in peripheral budget. BF goal is a target, not an observed price.",
+      "ranking_score_100": 90,
+      "ranking_reason": "同じ27型WQHD・180Hzクラス。AOCの在庫切れや価格上昇時に比較する代替。",
+      "best_for": "AOCが高い・在庫切れの場合"
     },
     {
       "id": "speakers_alt_edifier_mr3",
@@ -446,7 +467,10 @@
       "max_price_jpy": 25000,
       "mandatory": false,
       "price_target_phase": "black_friday",
-      "target_price_note": "Lower-cost alternative to MR4 MKII. Not included in mandatory peripheral budget."
+      "target_price_note": "Lower-cost alternative to MR4 MKII. Not included in mandatory peripheral budget.",
+      "ranking_score_100": 91,
+      "ranking_reason": "36W RMSで現行参考価格も低め。費用削減を優先するときの最有力。",
+      "best_for": "予算を下げたい"
     },
     {
       "id": "speakers_alt_edifier_mr5",
@@ -468,7 +492,10 @@
       "max_price_jpy": 55000,
       "mandatory": false,
       "price_target_phase": "black_friday",
-      "target_price_note": "Higher-output premium alternative; only select if the total system remains within budget."
+      "target_price_note": "Higher-output premium alternative; only select if the total system remains within budget.",
+      "ranking_score_100": 87,
+      "ranking_reason": "110W RMS・3ウェイで上位だが、目標32,000円でも予算を圧迫しやすい。",
+      "best_for": "音量・音の厚みを優先"
     },
     {
       "id": "keyboard_alt_logicool_g413se",
@@ -490,7 +517,10 @@
       "max_price_jpy": 18000,
       "mandatory": false,
       "price_target_phase": "black_friday",
-      "target_price_note": "Optional mechanical upgrade; not added to the standard build budget unless chosen."
+      "target_price_note": "Optional mechanical upgrade; not added to the standard build budget unless chosen.",
+      "ranking_score_100": 84,
+      "ranking_reason": "フルサイズのメカニカルでテンキーを残せるが、G213rより予算が必要。",
+      "best_for": "テンキーとメカニカル打鍵感"
     },
     {
       "id": "keyboard_alt_logicool_g413_tkl_se",
@@ -512,7 +542,10 @@
       "max_price_jpy": 16000,
       "mandatory": false,
       "price_target_phase": "black_friday",
-      "target_price_note": "Optional tenkeyless mechanical alternative for more mouse space; not in main budget."
+      "target_price_note": "Optional tenkeyless mechanical alternative for more mouse space; not in main budget.",
+      "ranking_score_100": 86,
+      "ranking_reason": "テンキーレスのメカニカル。マウスの可動域と打鍵感を優先するFPS向け。",
+      "best_for": "FPSの操作スペース"
     },
     {
       "id": "mouse_alt_logicool_g304_x_superlight",
@@ -534,7 +567,10 @@
       "max_price_jpy": 20000,
       "mandatory": false,
       "price_target_phase": "black_friday",
-      "target_price_note": "Optional under-60g wireless mouse upgrade; not in main budget unless chosen."
+      "target_price_note": "Optional under-60g wireless mouse upgrade; not in main budget unless chosen.",
+      "ranking_score_100": 90,
+      "ranking_reason": "約59gの充電式軽量モデル。素早いエイム向けだが、追加費用に見合うかBF価格で判断。",
+      "best_for": "軽さを優先"
     },
     {
       "id": "secondary_monitor_alt_asus_vy249hgr",
@@ -561,7 +597,10 @@
       "monitor_urls": [
         "https://www.amazon.co.jp/dp/B0DNDXMLR7",
         "https://search.kakaku.com/ASUS%20VY249HGR/"
-      ]
+      ],
+      "ranking_score_100": 88,
+      "ranking_reason": "120HzのIPSモデル。LGの価格・在庫条件が悪い場合の代替。",
+      "best_for": "少し高いリフレッシュレート"
     },
     {
       "id": "secondary_monitor_alt_lg_24gs60fb",
@@ -583,7 +622,10 @@
       "max_price_jpy": 40000,
       "mandatory": false,
       "price_target_phase": "black_friday",
-      "target_price_note": "Higher-refresh secondary alternative. Price.com indicated 24980 yen reference; not worth prioritizing over the cheaper main recommendation unless discounted."
+      "target_price_note": "Higher-refresh secondary alternative. Price.com indicated 24980 yen reference; not worth prioritizing over the cheaper main recommendation unless discounted.",
+      "ranking_score_100": 83,
+      "ranking_reason": "180Hzでゲーム用にも使えるが、サブ画面用途では価格分の恩恵が小さい。",
+      "best_for": "サブ画面でもFPSを遊ぶ"
     },
     {
       "id": "mousepad_alt_logicool_g640s",
@@ -605,7 +647,33 @@
       "max_price_jpy": 8000,
       "mandatory": false,
       "price_target_phase": "black_friday",
-      "target_price_note": "Optional large cloth mousepad alternative. Search results indicated around 3500 yen via the official Logicool store; exact retailer/checkout price must be confirmed."
+      "target_price_note": "Optional large cloth mousepad alternative. Search results indicated around 3500 yen via the official Logicool store; exact retailer/checkout price must be confirmed.",
+      "ranking_score_100": 87,
+      "ranking_reason": "大型クロス面の代替。QcK Largeより安くならない場合は主候補を優先。",
+      "best_for": "表面の好みで選ぶ"
     }
-  ]
+  ],
+  "peripheral_ranking_policy": {
+    "score_type": "user-fit and value judgment, not an independent lab benchmark",
+    "scale": 100,
+    "factors": [
+      {
+        "name": "用途適合",
+        "weight_pct": 35
+      },
+      {
+        "name": "価格・総予算との適合",
+        "weight_pct": 30
+      },
+      {
+        "name": "仕様・機能",
+        "weight_pct": 20
+      },
+      {
+        "name": "代替性・購入リスク",
+        "weight_pct": 15
+      }
+    ],
+    "instructions": "Scores rank purchase priority for this user's stated balance of FPS gaming, Cities: Skylines II, Python/GitHub/data work, dual monitors, sound quality and a JPY 370000 all-in cap. They are not measurements of objective product performance or guaranteed BF deal quality. Re-evaluate when actual BF prices and stock are observed."
+  }
 }
