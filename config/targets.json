@@ -115,20 +115,25 @@
       "name": "AOC Q27G40E/11 27-inch WQHD 180Hz",
       "target_price_jpy": 17500,
       "track_current_price": true,
-      "monitor_url": "https://www.yodobashi.com/product/100000001009314680/",
-      "purchase_url": "https://www.yodobashi.com/product/100000001009314680/",
+      "monitor_url": "https://kakaku.com/item/K0001706544/",
+      "purchase_url": "https://kakaku.com/item/K0001706544/",
       "identity_terms": [
         "Q27G40E/11",
         "Q27G40E"
       ],
       "allowed_hosts": [
+        "kakaku.com",
         "www.yodobashi.com"
       ],
       "min_price_jpy": 10000,
       "max_price_jpy": 60000,
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "17500円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
+      "target_price_note": "17,500円はBF目標。価格.comの現行比較掲載（2026-10-11時点の最低掲載価格18,900円）とヨドバシの掲載20,790円はBF価格ではない。比較ページを先に確認し、取得に失敗したらヨドバシで再試行。",
+      "monitor_urls": [
+        "https://kakaku.com/item/K0001706544/",
+        "https://www.yodobashi.com/product/100000001009314680/"
+      ]
     },
     {
       "id": "secondary_monitor",
@@ -545,13 +550,18 @@
       "model_code": "VY249HGR",
       "allowed_hosts": [
         "www.amazon.co.jp",
-        "amazon.co.jp"
+        "amazon.co.jp",
+        "search.kakaku.com"
       ],
       "min_price_jpy": 9000,
       "max_price_jpy": 30000,
       "mandatory": false,
       "price_target_phase": "black_friday",
-      "target_price_note": "Primary alternative with 120Hz(OC). Price.com search results showed around 16800 yen as a reference on 2026-10-11; Amazon exact page price must be independently verified."
+      "target_price_note": "Primary alternative with 120Hz(OC). Price.com search results showed around 16800 yen as a reference on 2026-10-11; Amazon exact page price must be independently verified.",
+      "monitor_urls": [
+        "https://www.amazon.co.jp/dp/B0DNDXMLR7",
+        "https://search.kakaku.com/ASUS%20VY249HGR/"
+      ]
     },
     {
       "id": "secondary_monitor_alt_lg_24gs60fb",
