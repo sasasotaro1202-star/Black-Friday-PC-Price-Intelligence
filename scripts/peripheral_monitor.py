@@ -266,7 +266,18 @@ def run_one(target, previous, retrieved_at):
 
 def main():
     cfg = load_json(TARGETS_PATH, {})
-    targets = [p for p in (cfg.get("peripherals") or []) if isinstance(p, dict)]
+    primary_targets = [p for p in (cfg.get("peripherals") or []) if isinstance(p, dict)]
+    # Ranked alternatives are price-monitored separately. They never enter mandatory
+    # budget arithmetic unless the user explicitly promotes one into peripherals.
+    alternative_targets = [
+        p for p in (cfg.get("peripheral_alternatives") or [])
+        if isinstance(p, dict) and p.get("track_current_price")
+    ]
+    primary_ids = {str(p.get("id")) for p in primary_targets}
+    duplicate_alternative_ids = primary_ids.intersection(str(p.get("id")) for p in alternative_targets)
+    if duplicate_alternative_ids:
+        raise ValueError(f"peripheral alternative IDs overlap primary targets: {sorted(duplicate_alternative_ids)}")
+    targets = primary_targets + alternative_targets
     previous = load_json(OUTPUT_PATH, {"products": []})
     previous_by_id = {str(x.get("id")): x for x in (previous.get("products") or []) if x.get("id")}
     observed_at = iso(now_jst())
@@ -306,7 +317,9 @@ def main():
         })
     out = {
         "schema_version": 1, "generated_at": observed_at,
-        "budget_scope": "Peripherals are separate from PC rankings; uncertain coupons/points are not deducted.",
+        "budget_scope": "Primary peripheral targets affect the mandatory budget. Ranked alternatives are observed but do not affect budget projections unless selected.",
+        "primary_target_count": len(primary_targets),
+        "alternative_target_count": len(alternative_targets),
         "tracked_count": sum(1 for x in targets if x.get("track_current_price")),
         "verified_count": sum(1 for x in rows if x.get("price_verified")), "products": rows,
     }
