@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-11T21:11:58+09:00",
+  "generated_at": "2026-10-11T21:31:47+09:00",
   "urls": [
     {
       "url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
@@ -104,6 +104,12 @@
       "priority": "high"
     },
     {
+      "id": "desktop-gtune-fg-a7g6t-5060ti16",
+      "url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/",
+      "query": "FGA7G6TG8BDDW101DECWA",
+      "priority": "high"
+    },
+    {
       "id": "zephyrus-g16-386h-5070ti",
       "url": "https://store.asus.com/jp/90nr0pc2-m002c0-rog-zephyrus-g16-2026.html",
       "query": "ROG Zephyrus G16 GU606AR-U9R5070TIG32G RTX 5070 Ti 32GB 1TB 日本",
@@ -126,14 +132,16 @@
   "discovery_status": "ok",
   "discovery_error": null,
   "desktop_included": true,
-  "discovered_count": 20,
+  "discovered_count": 21,
   "discovery_stats": {
     "previous_count": 20,
-    "current_count": 20,
-    "newly_discovered_count": 0,
+    "current_count": 21,
+    "newly_discovered_count": 1,
     "retained_count": 20,
     "removed_count": 0,
-    "newly_discovered_ids": [],
+    "newly_discovered_ids": [
+      "desktop-gtune-fg-a7g6t-5060ti16"
+    ],
     "removed_ids": []
   }
 }

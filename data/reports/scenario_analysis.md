@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-10-11T21:12:50+09:00
+更新: 2026-10-11T21:32:39+09:00
 価格フェーズ: **PRE_BLACK_FRIDAY_REFERENCE**
 BF監視窓: 2026-11-14T00:00:00+09:00 ～ 2026-12-04T23:59:59+09:00
 総予算: ¥370,000
@@ -38,6 +38,7 @@ BF PC計画上限＋周辺機器目標: ¥370,000
 |G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|desktop|RTX 5070 Ti|¥300,200|¥399,800|未確認|¥99,600|24.9%|¥319,840|¥299,850|¥279,860|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/)|
 |G TUNE P6-I7G70BK-B|laptop|RTX 5070 Laptop GPU|¥300,200|¥284,700|未確認|¥0|0.0%|¥227,760|¥213,525|¥199,290|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/)|
 |G TUNE DG-A7G70|desktop|RTX 5070|¥300,200|¥304,800|未確認|¥4,600|1.5%|¥243,840|¥228,600|¥213,360|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/)|
+|G TUNE FG-A7G6T|desktop|RTX 5060 Ti 16GB|¥300,200|¥309,800|未確認|¥9,600|3.1%|¥247,840|¥232,350|¥216,860|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/)|
 |ASUS TUF Gaming A16 FA608PP-R9R5070S|laptop|RTX 5070 Laptop GPU|¥300,200|¥319,800|未確認|¥19,600|6.1%|¥255,840|¥239,850|¥223,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gaming-a16-2025.html)|
 |G TUNE FG-A7G70|desktop|RTX 5070|¥300,200|¥319,800|未確認|¥19,600|6.1%|¥255,840|¥239,850|¥223,860|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/)|
 |G TUNE P5-I7G70BK-C（ブラック）|laptop|RTX 5070 Laptop GPU|¥300,200|¥329,800|未確認|¥29,600|9.0%|¥263,840|¥247,350|¥230,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/)|
@@ -67,6 +68,7 @@ BF PC計画上限＋周辺機器目標: ¥370,000
 |G TUNE P6-I7G70BK-B|¥284,700|0.0%|¥256,200|¥242,000|¥227,800|¥213,500|¥199,300|10%|none|
 |G TUNE DG-A5G60|¥194,800|0.0%|¥175,300|¥165,600|¥155,800|¥146,100|¥136,400|10%|none|
 |G TUNE DG-A7G70|¥304,800|1.5%|¥274,300|¥259,100|¥243,800|¥228,600|¥213,400|10%|same_gpu|
+|G TUNE FG-A7G6T|¥309,800|3.1%|¥278,800|¥263,300|¥247,800|¥232,400|¥216,900|10%|none|
 |G TUNE FG-A7G70|¥319,800|6.1%|¥287,800|¥271,800|¥255,800|¥239,800|¥223,900|10%|same_gpu|
 |Lenovo Legion Pro 5i Gen 10（16型 Intel）|—|15.4%|¥319,400|¥301,600|¥283,900|¥266,100|¥248,400|20%|none|
 |G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|24.9%|¥359,800|¥339,800|¥319,800|¥299,800|¥279,900|25%|same_gpu|
