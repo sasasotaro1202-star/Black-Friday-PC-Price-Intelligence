@@ -617,41 +617,59 @@ def main():
     }
     primary_targets = target_config.get("peripherals") or []
     alternative_targets = target_config.get("peripheral_alternatives") or []
-    all_peripheral_targets = {
-        str(item.get("id")): item
-        for item in (primary_targets + alternative_targets)
+    all_peripheral_items = [
+        item for item in (primary_targets + alternative_targets)
         if isinstance(item, dict) and item.get("id")
-    }
-    mandatory_ids = {str(item.get("id")) for item in primary_targets}
-    peripheral_groups = [
-        ("メインモニター（27インチ・WQHD）", ["main_monitor", "main_monitor_alt_msi_mag_275qf"]),
-        ("サブモニター（23.8インチ・FHD）", ["secondary_monitor", "secondary_monitor_alt_asus_vy249hgr", "secondary_monitor_alt_lg_24gs60fb"]),
-        ("スピーカー", ["speakers", "speakers_alt_edifier_mr3", "speakers_alt_edifier_mr5"]),
-        ("キーボード", ["keyboard", "keyboard_alt_logicool_g413se", "keyboard_alt_logicool_g413_tkl_se"]),
-        ("マウス（FPS向け）", ["mouse", "mouse_alt_logicool_g304_x_superlight"]),
-        ("マウスパッド", ["mousepad", "mousepad_alt_logicool_g640s"]),
-        ("電源タップ（6口・雷ガード）", ["power_strip", "power_strip_alt_sanwa_tap_sp2116mg2wn"]),
-        ("映像ケーブル（必要な場合のみ）", ["cables", "cables_alt_sanwa_kc_dp1420"]),
     ]
+    all_peripheral_targets = {str(item.get("id")): item for item in all_peripheral_items}
+    mandatory_ids = {str(item.get("id")) for item in primary_targets}
+    ranking_policy = target_config.get("peripheral_ranking_policy") or {}
+    category_order = ranking_policy.get("category_order") or [
+        {"category": "main_monitor", "label": "メインモニター（27インチ・WQHD）"},
+        {"category": "secondary_monitor", "label": "サブモニター（23.8インチ・FHD）"},
+        {"category": "speakers", "label": "スピーカー"},
+        {"category": "keyboard", "label": "キーボード"},
+        {"category": "mouse", "label": "マウス（FPS向け）"},
+        {"category": "mousepad", "label": "マウスパッド"},
+        {"category": "power_strip", "label": "電源タップ（6口・雷ガード）"},
+        {"category": "cables", "label": "映像ケーブル（必要な場合のみ）"},
+    ]
+    category_ids = {}
+    for item in all_peripheral_items:
+        category = item.get("category")
+        if not category and item.get("family") == "display_cable":
+            category = "cables"
+        if category:
+            category_ids.setdefault(str(category), []).append(str(item.get("id")))
     peripheral_category_lines = [
         "",
-        "## 周辺機器カテゴリ別ランキング（代替候補を含む）",
+        "## 周辺機器カテゴリ別ランキング（カテゴリ別・最大3候補）",
         "",
-        "各カテゴリから**1商品だけ**選びます。代替候補は価格監視対象ですが、選択しない限り総予算の周辺機器枠には加算しません。",
+        "各カテゴリから**1商品だけ**選びます。代替候補は価格監視対象ですが、選択しない限り必須周辺機器の総予算には加算しません。",
         "100点は用途適合35%、予算適合30%、仕様・機能20%、代替性・購入リスク15%のユーザー条件別評価であり、独立した実機ベンチマークではありません。",
-        "BF購入目標と観測価格を分け、価格取得失敗は売り切れと扱いません。",
+        "BF購入目標・BF前の観測価格・在庫・送料込み決済額を分けて扱います。取得失敗は売り切れと見なしません。",
         "",
     ]
-    for group_name, candidate_ids in peripheral_groups:
-        candidate_ids = sorted(
-            candidate_ids,
+    for group in category_order:
+        category = str(group.get("category") or "")
+        group_name = str(group.get("label") or category)
+        candidate_ids = list(dict.fromkeys(category_ids.get(category, [])))
+        candidate_ids = [
+            candidate_id for candidate_id in candidate_ids
+            if candidate_id in all_peripheral_targets
+        ]
+        candidate_ids.sort(
             key=lambda candidate_id: (
-                int(all_peripheral_targets.get(candidate_id, {}).get("ranking_score_100", -1))
-                if isinstance(all_peripheral_targets.get(candidate_id, {}).get("ranking_score_100"), (int, float))
+                int(all_peripheral_targets[candidate_id].get("ranking_score_100", -1))
+                if isinstance(all_peripheral_targets[candidate_id].get("ranking_score_100"), (int, float))
+                   and not isinstance(all_peripheral_targets[candidate_id].get("ranking_score_100"), bool)
                 else -1
             ),
             reverse=True,
         )
+        candidate_ids = candidate_ids[:3]
+        if not candidate_ids:
+            continue
         peripheral_category_lines += [
             f"### {group_name}",
             "",
@@ -659,9 +677,7 @@ def main():
             "|---:|---:|---|---:|---:|---|---|---|---|",
         ]
         for rank, candidate_id in enumerate(candidate_ids, 1):
-            target = all_peripheral_targets.get(candidate_id)
-            if not target:
-                continue
+            target = all_peripheral_targets[candidate_id]
             observation = peripheral_live.get(candidate_id, {})
             observed_price = observation.get("current_price_jpy") if observation.get("price_verified") else None
             price_text = f"¥{int(observed_price):,}" if isinstance(observed_price, int) and not isinstance(observed_price, bool) else "未確認"
@@ -673,7 +689,7 @@ def main():
             suffix = "（主予算候補）" if candidate_id in mandatory_ids else "（代替候補）"
             score = target.get("ranking_score_100")
             score_text = f"**{int(score)}/100**" if isinstance(score, (int, float)) and not isinstance(score, bool) and 0 <= score <= 100 else "未評価"
-            reason = str(target.get("ranking_reason") or "").replace("|", "/").replace("\\n", " ").strip()
+            reason = str(target.get("ranking_reason") or target.get("target_price_note") or "").replace("|", "/").replace("\\n", " ").strip()
             peripheral_category_lines.append(
                 f"|{rank}|{score_text}|{target.get('name', candidate_id)}{suffix}|¥{target_price:,}|{price_text}|{stock_text}|{verified_text}|{reason}|{product_link}|"
             )
