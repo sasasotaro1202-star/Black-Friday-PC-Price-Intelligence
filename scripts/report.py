@@ -607,6 +607,76 @@ def main():
         "|順位|タイプ|商品|観測価格（BF前は参考）|現金総額|確定現金特典|実質コスト|非現金価値|価値加点|PC目標まで|性能|価格価値|過去根拠|在庫|時期|総合|判定|購入リンク|",
         "|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|",
     ]
+    # Insert an explicit, independently ranked accessory comparison before the PC score table.
+    # Alternatives are monitored but do not add to the mandatory all-in budget.
+    peripheral_snapshot = load_json(os.path.join(ROOT, "data", "peripheral_prices.json"), {})
+    peripheral_live = {
+        str(item.get("id")): item
+        for item in (peripheral_snapshot.get("products") or [])
+        if isinstance(item, dict) and item.get("id")
+    }
+    primary_targets = target_config.get("peripherals") or []
+    alternative_targets = target_config.get("peripheral_alternatives") or []
+    all_peripheral_targets = {
+        str(item.get("id")): item
+        for item in (primary_targets + alternative_targets)
+        if isinstance(item, dict) and item.get("id")
+    }
+    mandatory_ids = {str(item.get("id")) for item in primary_targets}
+    peripheral_groups = [
+        ("メインモニター（27インチ・WQHD）", ["main_monitor", "main_monitor_alt_msi_mag_275qf"]),
+        ("サブモニター（23.8インチ・FHD）", ["secondary_monitor", "secondary_monitor_alt_asus_vy249hgr", "secondary_monitor_alt_lg_24gs60fb"]),
+        ("スピーカー", ["speakers", "speakers_alt_edifier_mr3", "speakers_alt_edifier_mr5"]),
+        ("キーボード", ["keyboard", "keyboard_alt_logicool_g413se", "keyboard_alt_logicool_g413_tkl_se"]),
+        ("マウス（FPS向け）", ["mouse", "mouse_alt_logicool_g304_x_superlight"]),
+        ("マウスパッド", ["mousepad"]),
+    ]
+    peripheral_category_lines = [
+        "",
+        "## 周辺機器カテゴリ別ランキング（代替候補を含む）",
+        "",
+        "各カテゴリから**1商品だけ**選びます。代替候補は価格監視対象ですが、選択しない限り総予算の周辺機器枠には加算しません。",
+        "BF購入目標と観測価格を分け、価格取得失敗は売り切れと扱いません。",
+        "",
+    ]
+    for group_name, candidate_ids in peripheral_groups:
+        peripheral_category_lines += [
+            f"### {group_name}",
+            "",
+            "|順位|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|商品ページ|",
+            "|---:|---|---:|---:|---|---|---|",
+        ]
+        for rank, candidate_id in enumerate(candidate_ids, 1):
+            target = all_peripheral_targets.get(candidate_id)
+            if not target:
+                continue
+            observation = peripheral_live.get(candidate_id, {})
+            observed_price = observation.get("current_price_jpy") if observation.get("price_verified") else None
+            price_text = f"¥{int(observed_price):,}" if isinstance(observed_price, int) and not isinstance(observed_price, bool) else "未確認"
+            stock_text = str(observation.get("stock_status") or "unknown")
+            verified_text = "確認済み" if observation.get("price_verified") and observed_price is not None else "未確認"
+            target_price = int(target.get("target_price_jpy") or 0)
+            url = target.get("purchase_url") or target.get("monitor_url")
+            product_link = f"[商品ページ]({url})" if isinstance(url, str) and url.startswith("https://") else "リンク未設定"
+            suffix = "（主予算候補）" if candidate_id in mandatory_ids else "（代替候補）"
+            peripheral_category_lines.append(
+                f"|{rank}|{target.get('name', candidate_id)}{suffix}|¥{target_price:,}|{price_text}|{stock_text}|{verified_text}|{product_link}|"
+            )
+        peripheral_category_lines.append("")
+    peripheral_category_lines += [
+        "### 予算・配線の実用項目",
+        "",
+        "- 電源タップはPC・モニター・スピーカーの同時使用を想定し、定格電力とケーブル長を確認する。",
+        "- DisplayPort/HDMIケーブルは付属品を確認してから、不足分だけ買う。",
+        "- ポイントは現金支払額から控除せず、クーポンも決済画面で適用と最終支払額を確認できた場合だけ反映する。",
+        "",
+    ]
+    if "## 100点ランキング" in lines:
+        insert_index = lines.index("## 100点ランキング")
+        lines[insert_index:insert_index] = peripheral_category_lines
+    else:
+        lines.extend(peripheral_category_lines)
+
     for row in scored[:20]:
         d = row["score_detail"]
         lines.append(
