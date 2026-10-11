@@ -221,5 +221,19 @@ class BudgetPolicyTests(unittest.TestCase):
         )
 
 
+    def test_every_tracked_peripheral_has_rank_score_reason_and_unique_identity(self):
+        all_targets = self.cfg["peripherals"] + self.cfg.get("peripheral_alternatives", [])
+        ids = [x.get("id") for x in all_targets]
+        self.assertEqual(len(ids), len(set(ids)))
+        tracked = [x for x in all_targets if x.get("track_current_price")]
+        self.assertGreaterEqual(len(tracked), 10)
+        for item in tracked:
+            self.assertTrue(0 <= int(item.get("ranking_score_100", -1)) <= 100, item.get("id"))
+            self.assertTrue(item.get("ranking_reason"), item.get("id"))
+            self.assertTrue(item.get("purchase_url") or item.get("monitor_url"), item.get("id"))
+        policy = self.cfg.get("peripheral_ranking_policy", {})
+        self.assertEqual(sum(int(x["weight_pct"]) for x in policy.get("factors", [])), 100)
+        self.assertFalse(next(x for x in self.cfg["peripheral_alternatives"] if x["id"] == "cables_alt_sanwa_kc_dp1420")["mandatory"])
+
 if __name__ == "__main__":
     unittest.main()
