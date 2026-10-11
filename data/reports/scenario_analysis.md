@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-10-11T22:34:15+09:00
+更新: 2026-10-12T02:50:09+09:00
 価格フェーズ: **PRE_BLACK_FRIDAY_REFERENCE**
 BF監視窓: 2026-11-14T00:00:00+09:00 ～ 2026-12-04T23:59:59+09:00
 総予算: ¥370,000
@@ -50,12 +50,12 @@ BF PC計画上限＋周辺機器目標: ¥370,000
 |ROG Zephyrus G16 GU606AR-U9R5070TIG32G|laptop|RTX 5070 Ti Laptop GPU|¥300,200|¥599,800|未確認|¥299,600|49.9%|¥479,840|¥449,850|¥419,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/90nr0pc2-m002c0-rog-zephyrus-g16-2026.html)|
 |ROG Zephyrus G14 GU405AR-U9R5070TIG|laptop|RTX 5070 Ti Laptop GPU|¥300,200|¥684,800|未確認|¥384,600|56.2%|¥547,840|¥513,600|¥479,360|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/90nr0p94-m001d0-rog-zephyrus-g14-2026-gu405.html)|
 |ASUS TUF Gaming F16 FX608|laptop|RTX 5070 Laptop GPU|¥300,200|—|未確認|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://store.asus.com/jp/asus-tuf-gaming-f16-fx608.html?config=90NR0NB1-M00580)|
-|Acer Predator Helios Neo 16 AI|laptop|RTX 5070 Ti Laptop GPU|¥300,200|—|未確認|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1)|
 |G TUNE DG-A5G60|desktop|RTX 5060|¥300,200|¥194,800|未確認|—|—|¥155,840|¥146,100|¥136,360|未達/未確認|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
 |G TUNE DG-I5G70|desktop|RTX 5070|¥300,200|¥279,800|未確認|—|—|¥223,840|¥209,850|¥195,860|未達/未確認|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/)|
 |G TUNE DG-I7G70|desktop|RTX 5070|¥300,200|¥299,800|未確認|—|—|¥239,840|¥224,850|¥209,860|未達/未確認|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/)|
 |ROG Strix G16 G615LR-U9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥300,200|—|未確認|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
 |ROG Strix G18 G815LR-U9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥300,200|—|未確認|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025-g815/)|
+|https://store.acer.com/ja-jp/acer-phn16-i71-n93z|laptop|RTX 5070 Ti Laptop GPU|¥300,200|—|未確認|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1)|
 
 ## 既存の参照価格シナリオ（比較用・確率ではない）
 
