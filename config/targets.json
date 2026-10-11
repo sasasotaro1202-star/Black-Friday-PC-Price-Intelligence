@@ -397,5 +397,139 @@
       "price_basis": "completed_build_black_friday_offer_only",
       "rationale": "Track beside faster RTX 5070 options because 16GB VRAM may better support some local-AI workloads; do not outrank based on VRAM alone."
     }
-  }
+  },
+  "peripheral_alternatives": [
+    {
+      "id": "main_monitor_alt_msi_mag_275qf",
+      "category": "main_monitor",
+      "name": "MSI MAG 275QF 27-inch WQHD 180Hz Rapid IPS",
+      "target_price_jpy": 20000,
+      "track_current_price": true,
+      "monitor_url": "https://kakaku.com/item/K0001690691/",
+      "purchase_url": "https://kakaku.com/item/K0001690691/",
+      "identity_terms": [
+        "MAG 275QF",
+        "K0001690691"
+      ],
+      "model_code": "MAG 275QF",
+      "allowed_hosts": [
+        "kakaku.com"
+      ],
+      "min_price_jpy": 10000,
+      "max_price_jpy": 60000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "Optional main-monitor alternative only; not included in peripheral budget. BF goal is a target, not an observed price."
+    },
+    {
+      "id": "speakers_alt_edifier_mr3",
+      "category": "speakers",
+      "name": "EDIFIER MR3 2.0 powered monitor speakers 36W",
+      "target_price_jpy": 12000,
+      "track_current_price": true,
+      "monitor_url": "https://www.edifier.jp/products/mr3",
+      "purchase_url": "https://www.edifier.jp/products/mr3",
+      "identity_terms": [
+        "EDIFIER MR3",
+        "MR3"
+      ],
+      "model_code": "MR3",
+      "allowed_hosts": [
+        "www.edifier.jp"
+      ],
+      "min_price_jpy": 9000,
+      "max_price_jpy": 25000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "Lower-cost alternative to MR4 MKII. Not included in mandatory peripheral budget."
+    },
+    {
+      "id": "speakers_alt_edifier_mr5",
+      "category": "speakers",
+      "name": "EDIFIER MR5 3-way powered monitor speakers 110W",
+      "target_price_jpy": 32000,
+      "track_current_price": true,
+      "monitor_url": "https://www.edifier.jp/products/mr5",
+      "purchase_url": "https://www.edifier.jp/products/mr5",
+      "identity_terms": [
+        "EDIFIER MR5",
+        "MR5"
+      ],
+      "model_code": "MR5",
+      "allowed_hosts": [
+        "www.edifier.jp"
+      ],
+      "min_price_jpy": 20000,
+      "max_price_jpy": 55000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "Higher-output premium alternative; only select if the total system remains within budget."
+    },
+    {
+      "id": "keyboard_alt_logicool_g413se",
+      "category": "keyboard",
+      "name": "Logicool G413 SE full-size tactile mechanical keyboard",
+      "target_price_jpy": 9500,
+      "track_current_price": true,
+      "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
+      "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
+      "identity_terms": [
+        "G413 SE",
+        "920-010561"
+      ],
+      "model_code": "G413SE",
+      "allowed_hosts": [
+        "gaming.logicool.co.jp"
+      ],
+      "min_price_jpy": 6000,
+      "max_price_jpy": 18000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "Optional mechanical upgrade; not added to the standard build budget unless chosen."
+    },
+    {
+      "id": "keyboard_alt_logicool_g413_tkl_se",
+      "category": "keyboard",
+      "name": "Logicool G413 TKL SE tenkeyless tactile mechanical keyboard",
+      "target_price_jpy": 8000,
+      "track_current_price": true,
+      "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-tkl-se-gaming-keyboard",
+      "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-tkl-se-gaming-keyboard",
+      "identity_terms": [
+        "G413 TKL SE",
+        "G413TKLSE"
+      ],
+      "model_code": "G413TKLSE",
+      "allowed_hosts": [
+        "gaming.logicool.co.jp"
+      ],
+      "min_price_jpy": 5000,
+      "max_price_jpy": 16000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "Optional tenkeyless mechanical alternative for more mouse space; not in main budget."
+    },
+    {
+      "id": "mouse_alt_logicool_g304_x_superlight",
+      "category": "mouse",
+      "name": "Logicool G304 X SUPERLIGHT wireless gaming mouse",
+      "target_price_jpy": 10000,
+      "track_current_price": true,
+      "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g304-x-superlight",
+      "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g304-x-superlight",
+      "identity_terms": [
+        "G304 X SUPERLIGHT",
+        "G304X-SL"
+      ],
+      "model_code": "G304X-SL-BK",
+      "allowed_hosts": [
+        "gaming.logicool.co.jp"
+      ],
+      "min_price_jpy": 6000,
+      "max_price_jpy": 20000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "Optional under-60g wireless mouse upgrade; not in main budget unless chosen."
+    }
+  ]
 }
