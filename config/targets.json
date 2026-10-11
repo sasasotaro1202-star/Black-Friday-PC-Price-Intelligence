@@ -168,13 +168,15 @@
       "min_price_jpy": 18000,
       "max_price_jpy": 40000,
       "mandatory": true,
-      "coupon_policy": "Official page currently displays a 20% coupon offer, but coupons/points are not deducted from the price model unless eligibility and final checkout cash price are confirmed. Do not assume this offer will remain active during Black Friday.",
+      "coupon_policy": "As observed on 2026-10-11, the official EDIFIER MR4 MKII page displayed code SLW20 for 20% off. Do not deduct it from effective cash cost until eligibility, code acceptance, and final checkout cash price are verified. Never assume it remains valid during Black Friday.",
       "price_target_phase": "black_friday",
       "target_price_note": "24,000円は2026年BF期間中の購入目標。公式ページの29,980円はBF前参考価格。表示中のクーポンは決済画面で適用・最終支払額を確認するまでBF価格や確定値引きとして扱わない。",
       "model_code": "MR4 MKII",
       "monitor_urls": [
         "https://www.edifier.jp/products/mr4-mkii"
-      ]
+      ],
+      "coupon_code_reference": "SLW20",
+      "coupon_observed_date": "2026-10-11"
     },
     {
       "id": "keyboard",
