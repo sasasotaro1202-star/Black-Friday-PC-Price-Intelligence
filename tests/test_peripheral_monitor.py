@@ -150,5 +150,35 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertEqual(row["unverified_price_candidate_jpy"], 7000)
 
 
+    def test_each_accessory_category_has_three_scored_ranked_options(self):
+        import json
+        config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        items = [
+            x for x in (config.get("peripherals", []) + config.get("peripheral_alternatives", []))
+            if isinstance(x, dict)
+        ]
+        policy = config.get("peripheral_ranking_policy", {})
+        groups = policy.get("category_order", [])
+        self.assertEqual(len(groups), 8)
+        all_ids = [x.get("id") for x in items]
+        self.assertEqual(len(all_ids), len(set(all_ids)), "peripheral candidate IDs must be unique")
+        for group in groups:
+            category = group["category"]
+            with self.subTest(category=category):
+                members = [x for x in items if x.get("category") == category]
+                self.assertEqual(len(members), 3, f"{category} must have exactly three candidates")
+                scores = [x.get("ranking_score_100") for x in members]
+                self.assertTrue(all(isinstance(x, (int, float)) and not isinstance(x, bool) and 0 <= x <= 100 for x in scores))
+                self.assertEqual(len({x["id"] for x in members}), 3)
+                for candidate in members:
+                    self.assertTrue(candidate.get("purchase_url") or candidate.get("monitor_url"))
+                    self.assertTrue(candidate.get("ranking_reason"))
+                sorted_members = sorted(members, key=lambda x: x["ranking_score_100"], reverse=True)
+                self.assertEqual(sorted(scores, reverse=True), [x["ranking_score_100"] for x in sorted_members])
+        mandatory_total = sum(int(x.get("target_price_jpy", 0)) for x in config["peripherals"] if x.get("mandatory", True))
+        self.assertEqual(mandatory_total, config["peripheral_budget_jpy"])
+        self.assertEqual(config["pc_budget_jpy"] + config["peripheral_budget_jpy"], config["total_budget_jpy"])
+
+
 if __name__ == "__main__":
     unittest.main()
