@@ -171,7 +171,12 @@ class PeripheralMonitorTests(unittest.TestCase):
                 self.assertTrue(all(isinstance(x, (int, float)) and not isinstance(x, bool) and 0 <= x <= 100 for x in scores))
                 self.assertEqual(len({x["id"] for x in members}), 3)
                 for candidate in members:
-                    self.assertTrue(candidate.get("purchase_url") or candidate.get("monitor_url"))
+                    # The first cable option is intentionally a no-purchase policy:
+                    # use the cable included in the monitor box unless it is missing.
+                    if candidate.get("id") != "cables":
+                        self.assertTrue(candidate.get("purchase_url") or candidate.get("monitor_url"))
+                    else:
+                        self.assertEqual(category, "cables")
                     self.assertTrue(candidate.get("ranking_reason"))
                 sorted_members = sorted(members, key=lambda x: x["ranking_score_100"], reverse=True)
                 self.assertEqual(sorted(scores, reverse=True), [x["ranking_score_100"] for x in sorted_members])
