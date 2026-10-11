@@ -767,7 +767,10 @@ def parse_page(url, html, expected=None):
                         "availability": str(offer.get("availability") or ""),
                     })
 
-    if matched_structured:
+    # A matching Product JSON-LD node can legitimately omit its offer/price.
+    # Do not call max() on an empty list; preserve the match as identity evidence,
+    # but leave the price unverified so category monitors can still use safe text parsing.
+    if matched_structured and structured_offers:
         best_match = max(x["match_level"] for x in structured_offers)
         selected_offers = [x for x in structured_offers if x["match_level"] == best_match]
     else:
