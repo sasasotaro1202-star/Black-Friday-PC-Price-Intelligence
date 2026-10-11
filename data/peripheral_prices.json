@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-11T22:09:51+09:00",
+  "generated_at": "2026-10-11T22:21:25+09:00",
   "budget_scope": "Primary peripheral targets affect the mandatory budget. Ranked alternatives are observed but do not affect budget projections unless selected.",
   "primary_target_count": 9,
-  "alternative_target_count": 11,
-  "tracked_count": 18,
-  "verified_count": 7,
+  "alternative_target_count": 16,
+  "tracked_count": 23,
+  "verified_count": 9,
   "products": [
     {
       "id": "main_monitor",
@@ -16,10 +16,10 @@
       ],
       "model_code": null,
       "target_price_jpy": 17500,
-      "monitor_url": "https://kakaku.com/item/K0001706544/",
+      "monitor_url": "https://www.yodobashi.com/product/100000001009314680/",
       "purchase_url": "https://www.yodobashi.com/product/100000001009314680/",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
-      "available_at": "2026-10-11T22:09:51+09:00",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": "2026-10-11T22:21:25+09:00",
       "current_price_jpy": 20790,
       "last_valid_price_jpy": 20790,
       "price_verified": true,
@@ -32,10 +32,8 @@
       "retrieval_attempts": [
         {
           "url": "https://kakaku.com/item/K0001706544/",
-          "final_url": "https://kakaku.com/item/K0001706544/",
-          "status": "price_unverified",
-          "error": "missing_or_implausible_price",
-          "price_candidate_jpy": null
+          "status": "configuration_error",
+          "error": "missing_or_disallowed_product_url"
         },
         {
           "url": "https://www.yodobashi.com/product/100000001009314680/",
@@ -49,7 +47,7 @@
       "coupon_note": null,
       "monitor_url_used": "https://www.yodobashi.com/product/100000001009314680/",
       "source_url": "https://www.yodobashi.com/product/100000001009314680/",
-      "fallback_url_used": true
+      "fallback_url_used": false
     },
     {
       "id": "secondary_monitor",
@@ -62,7 +60,7 @@
       "target_price_jpy": 10000,
       "monitor_url": "https://kakaku.com/item/K0001619930/",
       "purchase_url": "https://kakaku.com/item/K0001619930/",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
@@ -98,8 +96,8 @@
       "target_price_jpy": 24000,
       "monitor_url": "https://www.edifier.jp/products/mr4-mkii",
       "purchase_url": "https://www.edifier.jp/products/mr4-mkii",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
-      "available_at": "2026-10-11T22:09:51+09:00",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": "2026-10-11T22:21:25+09:00",
       "current_price_jpy": 29980,
       "last_valid_price_jpy": 29980,
       "price_verified": true,
@@ -119,7 +117,7 @@
       "target_met": false,
       "page_title": "EDIFIER MR4 MKII",
       "price_context": null,
-      "coupon_note": "As observed on 2026-10-11, the official EDIFIER MR4 MKII page displayed code SLW20 for 20% off. Do not deduct it from effective cash cost until eligibility, code acceptance, and final checkout cash price are verified. Never assume it remains valid during Black Friday.",
+      "coupon_note": "On 2026-10-11 the official MR4 MKII page displayed coupon code SLW20 for 20% off the listed ¥29,980 price. Arithmetic equivalent is ¥23,984 only if the code is eligible and actually applied at checkout. This is not a confirmed final cash price and must not be assumed to remain available during Black Friday.",
       "monitor_url_used": "https://www.edifier.jp/products/mr4-mkii",
       "source_url": "https://www.edifier.jp/products/mr4-mkii",
       "fallback_url_used": false
@@ -136,7 +134,7 @@
       "target_price_jpy": 5500,
       "monitor_url": "https://www.biccamera.com/bc/item/9242996/",
       "purchase_url": "https://www.biccamera.com/bc/item/9242996/",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
@@ -177,8 +175,8 @@
       "target_price_jpy": 3800,
       "monitor_url": "https://www.yodobashi.com/product/100000001004334450/",
       "purchase_url": "https://www.yodobashi.com/product/100000001004334450/",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
-      "available_at": "2026-10-11T22:09:51+09:00",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": "2026-10-11T22:21:25+09:00",
       "current_price_jpy": 5350,
       "last_valid_price_jpy": 5350,
       "price_verified": true,
@@ -214,8 +212,8 @@
       "target_price_jpy": 2500,
       "monitor_url": "https://www.yodobashi.com/product/100000001009472873/",
       "purchase_url": "https://www.yodobashi.com/product/100000001009472873/",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
-      "available_at": "2026-10-11T22:09:51+09:00",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": "2026-10-11T22:21:25+09:00",
       "current_price_jpy": 2640,
       "last_valid_price_jpy": 2640,
       "price_verified": true,
@@ -251,8 +249,8 @@
       "target_price_jpy": 1500,
       "monitor_url": "https://www.askul.co.jp/p/N678805/",
       "purchase_url": "https://www.askul.co.jp/p/N678805/",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
-      "available_at": "2026-10-11T22:09:51+09:00",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": "2026-10-11T22:21:25+09:00",
       "current_price_jpy": 2480,
       "last_valid_price_jpy": 2480,
       "price_verified": true,
@@ -288,7 +286,7 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
       "available_at": null,
       "price_source_mode": "none"
     },
@@ -303,22 +301,58 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
       "available_at": null,
       "price_source_mode": "none"
     },
     {
-      "id": "main_monitor_alt_msi_mag_275qf",
-      "name": "MSI MAG 275QF 27-inch WQHD 180Hz Rapid IPS",
+      "id": "cables_alt_elecom_eccac_dp1420bk",
+      "name": "ELECOM ECCAC-DP1420BK DisplayPort 1.4 cable 2m",
       "identity_terms": [
-        "MAG 275QF",
-        "K0001690691"
+        "ECCAC-DP1420BK"
       ],
-      "model_code": "MAG 275QF",
-      "target_price_jpy": 20000,
-      "monitor_url": "https://kakaku.com/item/K0001690691/",
-      "purchase_url": "https://kakaku.com/item/K0001690691/",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
+      "model_code": "ECCAC-DP1420BK",
+      "target_price_jpy": 2200,
+      "monitor_url": "https://www.elecom.co.jp/products/ECCAC-DP1420BK.html",
+      "purchase_url": "https://www.elecom.co.jp/products/ECCAC-DP1420BK.html",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": "2026-10-11T22:21:25+09:00",
+      "current_price_jpy": 2123,
+      "last_valid_price_jpy": 2123,
+      "price_verified": true,
+      "stock_status": "unknown",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated_exact_model_page",
+      "identity_verified": true,
+      "status": "price_verified_stock_unknown",
+      "error": null,
+      "retrieval_attempts": [
+        {
+          "url": "https://www.elecom.co.jp/products/ECCAC-DP1420BK.html",
+          "final_url": "https://www.elecom.co.jp/products/ECCAC-DP1420BK.html",
+          "status": "verified"
+        }
+      ],
+      "target_met": true,
+      "page_title": "DisplayPort(TM) 1.4ケーブル",
+      "price_context": null,
+      "coupon_note": null,
+      "monitor_url_used": "https://www.elecom.co.jp/products/ECCAC-DP1420BK.html",
+      "source_url": "https://www.elecom.co.jp/products/ECCAC-DP1420BK.html",
+      "fallback_url_used": false
+    },
+    {
+      "id": "cables_alt_sanwa_kc_dp1420",
+      "name": "Sanwa Supply KC-DP1420 VESA-certified DisplayPort 1.4 cable 2m",
+      "identity_terms": [
+        "KC-DP1420",
+        "4969887763407"
+      ],
+      "model_code": "KC-DP1420",
+      "target_price_jpy": 3000,
+      "monitor_url": "https://www.sanwa.co.jp/product/syohin?code=KC-DP1420",
+      "purchase_url": "https://www.sanwa.co.jp/product/syohin?code=KC-DP1420",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
@@ -328,128 +362,18 @@
       "price_validation_status": "missing",
       "identity_verified": true,
       "status": "price_unverified",
-      "error": "https://kakaku.com/item/K0001690691/: missing_or_implausible_price",
+      "error": "https://www.sanwa.co.jp/product/syohin?code=KC-DP1420: missing_or_implausible_price",
       "retrieval_attempts": [
         {
-          "url": "https://kakaku.com/item/K0001690691/",
-          "final_url": "https://kakaku.com/item/K0001690691/",
+          "url": "https://www.sanwa.co.jp/product/syohin?code=KC-DP1420",
+          "final_url": "https://www.sanwa.co.jp/product/syohin?code=KC-DP1420",
           "status": "price_unverified",
           "error": "missing_or_implausible_price",
           "price_candidate_jpy": null
         }
       ],
-      "product_context_excerpt": "msi mag 275qf [27�c���`] ���i��r - ���i.com msi mag 275qf [27�c���`] ���i��r �z�[�� �p�\\�r�� pc���j�^�[�e�t���f�b�x�v���c pc���j�^�[�e�t���f�b�x�v���c �q�[�~���o���j�^�[ msi pc���j�^�[�e�t���f�b�x�v���c msi �q�[�~���o���j�^�[ msi mag 275qf [27�c���`] �@�l�e�l���ǝ���� �p�\\�r���w���������k ���i.com���r�w�l�x�����̃p�\\�r���i�т��t�|�[�g msi mag msi mag 275qf [27�c���`] ���i���ڃo���t ���[�j�[��]�������i�f -�~ 2025�n5��29�� ���� ����؃����l���o - �� (12423�",
-      "page_title": "MAG 275QF [27�C���`]",
-      "unverified_price_candidate_jpy": null,
-      "price_context": null
-    },
-    {
-      "id": "speakers_alt_edifier_mr3",
-      "name": "EDIFIER MR3 2.0 powered monitor speakers 36W",
-      "identity_terms": [
-        "EDIFIER MR3",
-        "MR3"
-      ],
-      "model_code": "MR3",
-      "target_price_jpy": 12000,
-      "monitor_url": "https://www.edifier.jp/products/mr3",
-      "purchase_url": "https://www.edifier.jp/products/mr3",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
-      "available_at": "2026-10-11T22:09:51+09:00",
-      "current_price_jpy": 14980,
-      "last_valid_price_jpy": 14980,
-      "price_verified": true,
-      "stock_status": "in_stock",
-      "price_source_mode": "direct_structured",
-      "price_validation_status": "validated_exact_model_page",
-      "identity_verified": true,
-      "status": "verified",
-      "error": null,
-      "retrieval_attempts": [
-        {
-          "url": "https://www.edifier.jp/products/mr3",
-          "final_url": "https://www.edifier.jp/products/mr3",
-          "status": "verified"
-        }
-      ],
-      "target_met": false,
-      "page_title": "EDIFIER MR3",
-      "price_context": null,
-      "coupon_note": null,
-      "monitor_url_used": "https://www.edifier.jp/products/mr3",
-      "source_url": "https://www.edifier.jp/products/mr3",
-      "fallback_url_used": false
-    },
-    {
-      "id": "speakers_alt_edifier_mr5",
-      "name": "EDIFIER MR5 3-way powered monitor speakers 110W",
-      "identity_terms": [
-        "EDIFIER MR5",
-        "MR5"
-      ],
-      "model_code": "MR5",
-      "target_price_jpy": 32000,
-      "monitor_url": "https://www.edifier.jp/products/mr5",
-      "purchase_url": "https://www.edifier.jp/products/mr5",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
-      "available_at": "2026-10-11T22:09:51+09:00",
-      "current_price_jpy": 39980,
-      "last_valid_price_jpy": 39980,
-      "price_verified": true,
-      "stock_status": "in_stock",
-      "price_source_mode": "direct_structured",
-      "price_validation_status": "validated_exact_model_page",
-      "identity_verified": true,
-      "status": "verified",
-      "error": null,
-      "retrieval_attempts": [
-        {
-          "url": "https://www.edifier.jp/products/mr5",
-          "final_url": "https://www.edifier.jp/products/mr5",
-          "status": "verified"
-        }
-      ],
-      "target_met": false,
-      "page_title": "EDIFIER MR5",
-      "price_context": null,
-      "coupon_note": null,
-      "monitor_url_used": "https://www.edifier.jp/products/mr5",
-      "source_url": "https://www.edifier.jp/products/mr5",
-      "fallback_url_used": false
-    },
-    {
-      "id": "keyboard_alt_logicool_g413se",
-      "name": "Logicool G413 SE full-size tactile mechanical keyboard",
-      "identity_terms": [
-        "G413 SE",
-        "920-010561"
-      ],
-      "model_code": "G413SE",
-      "target_price_jpy": 9500,
-      "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
-      "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
-      "available_at": null,
-      "current_price_jpy": null,
-      "last_valid_price_jpy": null,
-      "price_verified": false,
-      "stock_status": "low_stock",
-      "price_source_mode": "none",
-      "price_validation_status": "missing",
-      "identity_verified": true,
-      "status": "price_unverified",
-      "error": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561: missing_or_implausible_price",
-      "retrieval_attempts": [
-        {
-          "url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
-          "final_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
-          "status": "price_unverified",
-          "error": "missing_or_implausible_price",
-          "price_candidate_jpy": null
-        }
-      ],
-      "product_context_excerpt": "g413 seメカニカル ゲーミング キーボード | ロジクールg skip to main content logicool ビジネス 教育 サポート jp,ja 製品を見る 製品を見る カテゴリーごとに見る ゲーミング マウス ゲーミング マウスパッド ゲーミング キーボード ゲーミングヘッドセット &amp; オーディオ レーシングホイール マイク レーシング コンフィギュレーター ゲームパッド＆コントローラー アクセサリー ゲーミング スペアパーツ シリーズごとに見る pro シリーズ pro シリーズ astroシリーズ astroシリーズ g5 シリーズ g5 シリーズ ロジクール g プレイ first person shooter - pro シリーズ first person shooter - g シリーズ サンドボックス サバイバル オープンワールド シミュレーション - フライト 機能を知る 機能を知る イノベーション hits テクノロジー hero 2 pla",
-      "page_title": "G413 SE",
+      "product_context_excerpt": "kc-dp1420【displayportケーブル 2m（ver1.4)】displayport ver.1.4認証で、8k/60hzに対応したdisplayportケーブル。2m。｜サンワサプライ株式会社 会社情報 採用情報 ダイレクトショップ 製品情報 サポート ダウンロード 対応表 法人向け特集 サンワチャンネル ファニチャー オフィス家具 デスク チェア パーティション・ワークブース 収納・ワゴン・デスク周辺用品 ラック・カート サーバーラック・機器収納ラック パソコンラック・キャスター付作業台 カート・ツールワゴン 映像・モニター関連什器 テレビスタンド・テレビ壁掛金具 プロジェクター台・スクリーン モニターアーム・タブレットアーム モニター台・ノートpcスタンド アクセサリ 収納・保護アクセサリ パソコンバッグ・インナーケース ケース・カバー・保護フィルム 防犯・防災グッズ セキュリティ・盗難防止 防災・耐震グッズ その他アクセサリ シュレッダー・ラミネーター クリーナー・エ",
+      "page_title": "DisplayPortケーブル　2m（Ver1.4)",
       "unverified_price_candidate_jpy": null,
       "price_context": null
     },
@@ -464,7 +388,7 @@
       "target_price_jpy": 8000,
       "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-tkl-se-gaming-keyboard",
       "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-tkl-se-gaming-keyboard",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
@@ -490,6 +414,149 @@
       "price_context": null
     },
     {
+      "id": "keyboard_alt_logicool_g413se",
+      "name": "Logicool G413 SE full-size tactile mechanical keyboard",
+      "identity_terms": [
+        "G413 SE",
+        "920-010561"
+      ],
+      "model_code": "G413SE",
+      "target_price_jpy": 9500,
+      "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
+      "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": null,
+      "current_price_jpy": null,
+      "last_valid_price_jpy": null,
+      "price_verified": false,
+      "stock_status": "low_stock",
+      "price_source_mode": "none",
+      "price_validation_status": "missing",
+      "identity_verified": true,
+      "status": "price_unverified",
+      "error": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561: missing_or_implausible_price",
+      "retrieval_attempts": [
+        {
+          "url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
+          "final_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
+          "status": "price_unverified",
+          "error": "missing_or_implausible_price",
+          "price_candidate_jpy": null
+        }
+      ],
+      "product_context_excerpt": "g413 seメカニカル ゲーミング キーボード | ロジクールg skip to main content logicool ビジネス 教育 サポート jp,ja 製品を見る 製品を見る カテゴリーごとに見る ゲーミング マウス ゲーミング マウスパッド ゲーミング キーボード ゲーミングヘッドセット &amp; オーディオ レーシングホイール マイク レーシング コンフィギュレーター ゲームパッド＆コントローラー アクセサリー ゲーミング スペアパーツ シリーズごとに見る pro シリーズ pro シリーズ astroシリーズ astroシリーズ g5 シリーズ g5 シリーズ ロジクール g プレイ first person shooter - pro シリーズ first person shooter - g シリーズ サンドボックス サバイバル オープンワールド シミュレーション - フライト 機能を知る 機能を知る イノベーション hits テクノロジー hero 2 pla",
+      "page_title": "G413 SE",
+      "unverified_price_candidate_jpy": null,
+      "price_context": null
+    },
+    {
+      "id": "main_monitor_alt_msi_mag_275qf",
+      "name": "MSI MAG 275QF 27-inch WQHD 180Hz Rapid IPS",
+      "identity_terms": [
+        "MAG 275QF",
+        "K0001690691"
+      ],
+      "model_code": "MAG 275QF",
+      "target_price_jpy": 20000,
+      "monitor_url": "https://kakaku.com/item/K0001690691/",
+      "purchase_url": "https://kakaku.com/item/K0001690691/",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": null,
+      "current_price_jpy": null,
+      "last_valid_price_jpy": null,
+      "price_verified": false,
+      "stock_status": "unknown",
+      "price_source_mode": "none",
+      "price_validation_status": "missing",
+      "identity_verified": true,
+      "status": "price_unverified",
+      "error": "https://kakaku.com/item/K0001690691/: missing_or_implausible_price",
+      "retrieval_attempts": [
+        {
+          "url": "https://kakaku.com/item/K0001690691/",
+          "final_url": "https://kakaku.com/item/K0001690691/",
+          "status": "price_unverified",
+          "error": "missing_or_implausible_price",
+          "price_candidate_jpy": null
+        }
+      ],
+      "product_context_excerpt": "msi mag 275qf [27�c���`] ���i��r - ���i.com msi mag 275qf [27�c���`] ���i��r �z�[�� �p�\\�r�� pc���j�^�[�e�t���f�b�x�v���c pc���j�^�[�e�t���f�b�x�v���c �q�[�~���o���j�^�[ msi pc���j�^�[�e�t���f�b�x�v���c msi �q�[�~���o���j�^�[ msi mag 275qf [27�c���`] �@�l�e�l���ǝ���� �p�\\�r���w���������k ���i.com���r�w�l�x�����̃p�\\�r���i�т��t�|�[�g msi mag msi mag 275qf [27�c���`] ���i���ڃo���t ���[�j�[��]�������i�f -�~ 2025�n5��29�� ���� ����؃����l���o - �� (12423�",
+      "page_title": "MAG 275QF [27�C���`]",
+      "unverified_price_candidate_jpy": null,
+      "price_context": null
+    },
+    {
+      "id": "main_monitor_alt_lg_27gs75qb",
+      "name": "LG UltraGear 27GS75Q-B 27-inch WQHD IPS 180Hz",
+      "identity_terms": [
+        "27GS75Q-B"
+      ],
+      "model_code": "27GS75Q-B",
+      "target_price_jpy": 22000,
+      "monitor_url": "https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/",
+      "purchase_url": "https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": null,
+      "current_price_jpy": null,
+      "last_valid_price_jpy": null,
+      "price_verified": false,
+      "stock_status": "preorder_or_backorder",
+      "price_source_mode": "none",
+      "price_validation_status": "missing",
+      "identity_verified": true,
+      "status": "price_unverified",
+      "error": "https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/: missing_or_implausible_price",
+      "retrieval_attempts": [
+        {
+          "url": "https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/",
+          "final_url": "https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/",
+          "status": "price_unverified",
+          "error": "missing_or_implausible_price",
+          "price_candidate_jpy": null
+        }
+      ],
+      "product_context_excerpt": "【公式】27gs75q-b | モニター | lg japan お使いのブラウザでjavascriptが無効になっているようです。lg のサイト、製品、サービスを最大限に活用するため、javascriptを有効にしてください。 about cookies on this site we use cookies, including cookies from third parties, to enhance your user experience and the effectiveness of our marketing activities. these cookies are performance, analytics and advertising cookies, please see our privacy and cookie policy for further information. if you agree to all of our cookies select “a",
+      "page_title": "https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/",
+      "unverified_price_candidate_jpy": null,
+      "price_context": null
+    },
+    {
+      "id": "mouse_alt_logicool_g203",
+      "name": "Logicool G203 LIGHTSYNC wired gaming mouse",
+      "identity_terms": [
+        "G203",
+        "910-005811"
+      ],
+      "model_code": "910-005811",
+      "target_price_jpy": 3500,
+      "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g203-lightsync-rgb-gaming-mouse.910-005811",
+      "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g203-lightsync-rgb-gaming-mouse.910-005811",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": null,
+      "current_price_jpy": null,
+      "last_valid_price_jpy": null,
+      "price_verified": false,
+      "stock_status": "low_stock",
+      "price_source_mode": "none",
+      "price_validation_status": "missing",
+      "identity_verified": true,
+      "status": "price_unverified",
+      "error": "https://gaming.logicool.co.jp/ja-jp/shop/p/g203-lightsync-rgb-gaming-mouse.910-005811: missing_or_implausible_price",
+      "retrieval_attempts": [
+        {
+          "url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g203-lightsync-rgb-gaming-mouse.910-005811",
+          "final_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g203-lightsync-rgb-gaming-mouse.910-005811",
+          "status": "price_unverified",
+          "error": "missing_or_implausible_price",
+          "price_candidate_jpy": null
+        }
+      ],
+      "product_context_excerpt": "ロジクールg203 lightsync rgb 6ボタン ゲーミング マウス | ロジクール g skip to main content logicool ビジネス 教育 サポート jp,ja 製品を見る 製品を見る カテゴリーごとに見る ゲーミング マウス ゲーミング マウスパッド ゲーミング キーボード ゲーミングヘッドセット &amp; オーディオ レーシングホイール マイク レーシング コンフィギュレーター ゲームパッド＆コントローラー アクセサリー ゲーミング スペアパーツ シリーズごとに見る pro シリーズ pro シリーズ astroシリーズ astroシリーズ g5 シリーズ g5 シリーズ ロジクール g プレイ first person shooter - pro シリーズ first person shooter - g シリーズ サンドボックス サバイバル オープンワールド シミュレーション - フライト 機能を知る 機能を知る イノベーション hits テクノロジー ",
+      "page_title": "G203",
+      "unverified_price_candidate_jpy": null,
+      "price_context": null
+    },
+    {
       "id": "mouse_alt_logicool_g304_x_superlight",
       "name": "Logicool G304 X SUPERLIGHT wireless gaming mouse",
       "identity_terms": [
@@ -500,7 +567,7 @@
       "target_price_jpy": 10000,
       "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g304-x-superlight",
       "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g304-x-superlight",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
@@ -526,6 +593,158 @@
       "price_context": null
     },
     {
+      "id": "mousepad_alt_razer_gigantus_v2_l",
+      "name": "Razer Gigantus V2 Large 450x400mm cloth gaming mouse mat",
+      "identity_terms": [
+        "Razer Gigantus V2",
+        "RZ02-03330300"
+      ],
+      "model_code": "RZ02-03330300-R3M1",
+      "target_price_jpy": 2200,
+      "monitor_url": "https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1",
+      "purchase_url": "https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": null,
+      "current_price_jpy": null,
+      "last_valid_price_jpy": null,
+      "price_verified": false,
+      "stock_status": "unknown",
+      "price_source_mode": "none",
+      "price_validation_status": "missing",
+      "identity_verified": true,
+      "status": "price_unverified",
+      "error": "https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1: missing_or_implausible_price",
+      "retrieval_attempts": [
+        {
+          "url": "https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1",
+          "final_url": "https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1",
+          "status": "price_unverified",
+          "error": "missing_or_implausible_price",
+          "price_candidate_jpy": null
+        }
+      ],
+      "product_context_excerpt": "razer gigantus v2 - large mouse mat for gaming | razer 日本 現在 japan サイトにアクセスしています. skip to header skip to main content skip to footer ストア ストア explore razer の最新製品の購入 razer ストア限定商品 explore razer ストア限定商品を購入 razer esports green コレクション razer huntsman signature edition razer naga left-handed razer hyperflux v2 wireless charging system razer hyperpolling wireless dongle razer blackwidow v4 75% barebones razer customs sneki snek apparels explore トップス ボトムス",
+      "page_title": "https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1",
+      "unverified_price_candidate_jpy": null,
+      "price_context": null
+    },
+    {
+      "id": "mousepad_alt_logicool_g640s",
+      "name": "Logicool G640s large cloth gaming mousepad",
+      "identity_terms": [
+        "G640s",
+        "Logicool G ゲーミングマウスパッド"
+      ],
+      "model_code": "G640s",
+      "target_price_jpy": 3000,
+      "monitor_url": "https://search.kakaku.com/g640s/",
+      "purchase_url": "https://search.kakaku.com/g640s/",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": null,
+      "current_price_jpy": null,
+      "last_valid_price_jpy": null,
+      "price_verified": false,
+      "stock_status": "unknown",
+      "price_source_mode": "none",
+      "price_validation_status": "missing",
+      "identity_verified": true,
+      "status": "price_unverified",
+      "error": "https://search.kakaku.com/g640s/: missing_or_implausible_price",
+      "retrieval_attempts": [
+        {
+          "url": "https://search.kakaku.com/g640s/",
+          "final_url": "https://search.kakaku.com/g640s/",
+          "status": "price_unverified",
+          "error": "missing_or_implausible_price",
+          "price_candidate_jpy": null
+        }
+      ],
+      "product_context_excerpt": "「g640s」の人気商品一覧 | 安い商品を通販サイトから探す - 価格.com 検索結果を絞り込む よく絞り込まれている人気カテゴリ ペンタブレット (1) 液晶保護フィルム (17) タブレットケース・カバー (12) その他のバイク用品 (12) その他の工具 (11) カテゴリ すべてのカテゴリ パソコン (47) 自動車・バイク (13) diy・工具 (13) キッチン用品 (2) 住宅設備・リフォーム (1) 価格 〜 円 75 件 絞り込む サイト 楽天市場 (42) amazon.co.jp (20) yahoo!ショッピング (8) 関連するカテゴリページ パソコン ペンタブレット 液晶保護フィルム -pr- 検索結果を絞り込む g640s &nbsp;マウスパッド g640s &nbsp;ロジクール もっと見る 「g640s」の人気商品一覧 | 安い商品を通販サイトから探す 76 件 1〜40件を表示 並べ替え ： - 価格の安い順 価格の高い順 本ページでは掲載する",
+      "page_title": "https://search.kakaku.com/g640s/",
+      "unverified_price_candidate_jpy": null,
+      "price_context": null
+    },
+    {
+      "id": "power_strip_alt_sanwa_tap_sp2116mg2wn",
+      "name": "Sanwa Supply TAP-SP2116MG-2WN 6-outlet 2m surge protector with dust shutters and magnet",
+      "identity_terms": [
+        "TAP-SP2116MG-2WN",
+        "4969887827437"
+      ],
+      "model_code": "TAP-SP2116MG-2WN",
+      "target_price_jpy": 1800,
+      "monitor_url": "https://kakaku.com/item/K0001569733/",
+      "purchase_url": "https://kakaku.com/item/K0001569733/",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": null,
+      "current_price_jpy": null,
+      "last_valid_price_jpy": null,
+      "price_verified": false,
+      "stock_status": "unknown",
+      "price_source_mode": "none",
+      "price_validation_status": "missing",
+      "identity_verified": true,
+      "status": "price_unverified",
+      "error": "https://kakaku.com/item/K0001569733/: missing_or_implausible_price; https://www.sanwa.co.jp/product/syohin?code=TAP-SP2116MG-2WN: missing_or_implausible_price",
+      "retrieval_attempts": [
+        {
+          "url": "https://kakaku.com/item/K0001569733/",
+          "final_url": "https://kakaku.com/item/K0001569733/",
+          "status": "price_unverified",
+          "error": "missing_or_implausible_price",
+          "price_candidate_jpy": null
+        },
+        {
+          "url": "https://www.sanwa.co.jp/product/syohin?code=TAP-SP2116MG-2WN",
+          "final_url": "https://www.sanwa.co.jp/product/syohin?code=TAP-SP2116MG-2WN",
+          "status": "price_unverified",
+          "error": "missing_or_implausible_price",
+          "price_candidate_jpy": null
+        }
+      ],
+      "product_context_excerpt": "tap-sp2116mg-2wn【雷ガードタップ（2p・6個口・2m）】6個口マグネット付き雷ガードタップ。ホコリ防止シャッター、雷ガード確認ランプ付き。2p・6個口・2m。｜サンワサプライ株式会社 会社情報 採用情報 ダイレクトショップ 製品情報 サポート ダウンロード 対応表 法人向け特集 サンワチャンネル ファニチャー オフィス家具 デスク チェア パーティション・ワークブース 収納・ワゴン・デスク周辺用品 ラック・カート サーバーラック・機器収納ラック パソコンラック・キャスター付作業台 カート・ツールワゴン 映像・モニター関連什器 テレビスタンド・テレビ壁掛金具 プロジェクター台・スクリーン モニターアーム・タブレットアーム モニター台・ノートpcスタンド アクセサリ 収納・保護アクセサリ パソコンバッグ・インナーケース ケース・カバー・保護フィルム 防犯・防災グッズ セキュリティ・盗難防止 防災・耐震グッズ その他アクセサリ シュレッダー・ラミネーター クリーナー・エアダスタ",
+      "page_title": "雷ガードタップ（2P・6個口・2m）",
+      "unverified_price_candidate_jpy": null,
+      "price_context": null
+    },
+    {
+      "id": "power_strip_alt_elecom_tk6a2630bk",
+      "name": "ELECOM T-K6A-2630BK 6-outlet 3m surge-protected power strip",
+      "identity_terms": [
+        "T-K6A-2630BK",
+        "4549550131995"
+      ],
+      "model_code": "T-K6A-2630BK",
+      "target_price_jpy": 2500,
+      "monitor_url": "https://www.elecom.co.jp/products/T-K6A-2630BK.html",
+      "purchase_url": "https://www.elecom.co.jp/products/T-K6A-2630BK.html",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": "2026-10-11T22:21:25+09:00",
+      "current_price_jpy": 3993,
+      "last_valid_price_jpy": 3993,
+      "price_verified": true,
+      "stock_status": "unknown",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated_exact_model_page",
+      "identity_verified": true,
+      "status": "price_verified_stock_unknown",
+      "error": null,
+      "retrieval_attempts": [
+        {
+          "url": "https://www.elecom.co.jp/products/T-K6A-2630BK.html",
+          "final_url": "https://www.elecom.co.jp/products/T-K6A-2630BK.html",
+          "status": "verified"
+        }
+      ],
+      "target_met": false,
+      "page_title": "ほこり防止シャッター付　雷ガードタップ",
+      "price_context": null,
+      "coupon_note": null,
+      "monitor_url_used": "https://www.elecom.co.jp/products/T-K6A-2630BK.html",
+      "source_url": "https://www.elecom.co.jp/products/T-K6A-2630BK.html",
+      "fallback_url_used": false
+    },
+    {
       "id": "secondary_monitor_alt_asus_vy249hgr",
       "name": "ASUS VY249HGR 23.8-inch FHD IPS 120Hz secondary monitor",
       "identity_terms": [
@@ -535,7 +754,7 @@
       "target_price_jpy": 13000,
       "monitor_url": "https://www.amazon.co.jp/dp/B0DNDXMLR7",
       "purchase_url": "https://www.amazon.co.jp/dp/B0DNDXMLR7",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
@@ -578,7 +797,7 @@
       "target_price_jpy": 19000,
       "monitor_url": "https://kakaku.com/item/K0001667935/",
       "purchase_url": "https://kakaku.com/item/K0001667935/",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "last_valid_price_jpy": null,
@@ -604,119 +823,78 @@
       "price_context": null
     },
     {
-      "id": "mousepad_alt_logicool_g640s",
-      "name": "Logicool G640s large cloth gaming mousepad",
+      "id": "speakers_alt_edifier_mr3",
+      "name": "EDIFIER MR3 2.0 powered monitor speakers 36W",
       "identity_terms": [
-        "G640s",
-        "Logicool G ゲーミングマウスパッド"
+        "EDIFIER MR3",
+        "MR3"
       ],
-      "model_code": "G640s",
-      "target_price_jpy": 3000,
-      "monitor_url": "https://search.kakaku.com/g640s/",
-      "purchase_url": "https://search.kakaku.com/g640s/",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
-      "available_at": null,
-      "current_price_jpy": null,
-      "last_valid_price_jpy": null,
-      "price_verified": false,
-      "stock_status": "preorder_or_backorder",
-      "price_source_mode": "none",
-      "price_validation_status": "missing",
+      "model_code": "MR3",
+      "target_price_jpy": 12000,
+      "monitor_url": "https://www.edifier.jp/products/mr3",
+      "purchase_url": "https://www.edifier.jp/products/mr3",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": "2026-10-11T22:21:25+09:00",
+      "current_price_jpy": 14980,
+      "last_valid_price_jpy": 14980,
+      "price_verified": true,
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated_exact_model_page",
       "identity_verified": true,
-      "status": "price_unverified",
-      "error": "https://search.kakaku.com/g640s/: missing_or_implausible_price",
+      "status": "verified",
+      "error": null,
       "retrieval_attempts": [
         {
-          "url": "https://search.kakaku.com/g640s/",
-          "final_url": "https://search.kakaku.com/g640s/",
-          "status": "price_unverified",
-          "error": "missing_or_implausible_price",
-          "price_candidate_jpy": null
+          "url": "https://www.edifier.jp/products/mr3",
+          "final_url": "https://www.edifier.jp/products/mr3",
+          "status": "verified"
         }
       ],
-      "product_context_excerpt": "「g640s」の人気商品一覧 | 安い商品を通販サイトから探す - 価格.com 検索結果を絞り込む よく絞り込まれている人気カテゴリ ペンタブレット (1) 液晶保護フィルム (17) タブレットケース・カバー (12) その他のバイク用品 (12) その他の工具 (11) カテゴリ すべてのカテゴリ パソコン (47) 自動車・バイク (13) diy・工具 (13) キッチン用品 (2) 住宅設備・リフォーム (1) 価格 〜 円 75 件 絞り込む サイト 楽天市場 (42) amazon.co.jp (20) yahoo!ショッピング (8) 関連するカテゴリページ パソコン ペンタブレット 液晶保護フィルム -pr- 検索結果を絞り込む g640s &nbsp;マウスパッド g640s &nbsp;ロジクール もっと見る 「g640s」の人気商品一覧 | 安い商品を通販サイトから探す 76 件 1〜40件を表示 並べ替え ： - 価格の安い順 価格の高い順 本ページでは掲載する",
-      "page_title": "https://search.kakaku.com/g640s/",
-      "unverified_price_candidate_jpy": null,
-      "price_context": null
+      "target_met": false,
+      "page_title": "EDIFIER MR3",
+      "price_context": null,
+      "coupon_note": null,
+      "monitor_url_used": "https://www.edifier.jp/products/mr3",
+      "source_url": "https://www.edifier.jp/products/mr3",
+      "fallback_url_used": false
     },
     {
-      "id": "power_strip_alt_sanwa_tap_sp2116mg2wn",
-      "name": "Sanwa Supply TAP-SP2116MG-2WN 6-outlet 2m surge protector with dust shutters and magnet",
+      "id": "speakers_alt_edifier_mr5",
+      "name": "EDIFIER MR5 3-way powered monitor speakers 110W",
       "identity_terms": [
-        "TAP-SP2116MG-2WN",
-        "4969887827437"
+        "EDIFIER MR5",
+        "MR5"
       ],
-      "model_code": "TAP-SP2116MG-2WN",
-      "target_price_jpy": 1800,
-      "monitor_url": "https://kakaku.com/item/K0001569733/",
-      "purchase_url": "https://kakaku.com/item/K0001569733/",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
-      "available_at": null,
-      "current_price_jpy": null,
-      "last_valid_price_jpy": null,
-      "price_verified": false,
-      "stock_status": "unknown",
-      "price_source_mode": "none",
-      "price_validation_status": "missing",
+      "model_code": "MR5",
+      "target_price_jpy": 32000,
+      "monitor_url": "https://www.edifier.jp/products/mr5",
+      "purchase_url": "https://www.edifier.jp/products/mr5",
+      "retrieval_time": "2026-10-11T22:21:25+09:00",
+      "available_at": "2026-10-11T22:21:25+09:00",
+      "current_price_jpy": 39980,
+      "last_valid_price_jpy": 39980,
+      "price_verified": true,
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated_exact_model_page",
       "identity_verified": true,
-      "status": "price_unverified",
-      "error": "https://kakaku.com/item/K0001569733/: missing_or_implausible_price; https://www.sanwa.co.jp/product/syohin?code=TAP-SP2116MG-2WN: missing_or_implausible_price",
+      "status": "verified",
+      "error": null,
       "retrieval_attempts": [
         {
-          "url": "https://kakaku.com/item/K0001569733/",
-          "final_url": "https://kakaku.com/item/K0001569733/",
-          "status": "price_unverified",
-          "error": "missing_or_implausible_price",
-          "price_candidate_jpy": null
-        },
-        {
-          "url": "https://www.sanwa.co.jp/product/syohin?code=TAP-SP2116MG-2WN",
-          "final_url": "https://www.sanwa.co.jp/product/syohin?code=TAP-SP2116MG-2WN",
-          "status": "price_unverified",
-          "error": "missing_or_implausible_price",
-          "price_candidate_jpy": null
+          "url": "https://www.edifier.jp/products/mr5",
+          "final_url": "https://www.edifier.jp/products/mr5",
+          "status": "verified"
         }
       ],
-      "product_context_excerpt": "tap-sp2116mg-2wn【雷ガードタップ（2p・6個口・2m）】6個口マグネット付き雷ガードタップ。ホコリ防止シャッター、雷ガード確認ランプ付き。2p・6個口・2m。｜サンワサプライ株式会社 会社情報 採用情報 ダイレクトショップ 製品情報 サポート ダウンロード 対応表 法人向け特集 サンワチャンネル ファニチャー オフィス家具 デスク チェア パーティション・ワークブース 収納・ワゴン・デスク周辺用品 ラック・カート サーバーラック・機器収納ラック パソコンラック・キャスター付作業台 カート・ツールワゴン 映像・モニター関連什器 テレビスタンド・テレビ壁掛金具 プロジェクター台・スクリーン モニターアーム・タブレットアーム モニター台・ノートpcスタンド アクセサリ 収納・保護アクセサリ パソコンバッグ・インナーケース ケース・カバー・保護フィルム 防犯・防災グッズ セキュリティ・盗難防止 防災・耐震グッズ その他アクセサリ シュレッダー・ラミネーター クリーナー・エアダスタ",
-      "page_title": "雷ガードタップ（2P・6個口・2m）",
-      "unverified_price_candidate_jpy": null,
-      "price_context": null
-    },
-    {
-      "id": "cables_alt_sanwa_kc_dp1420",
-      "name": "Sanwa Supply KC-DP1420 VESA-certified DisplayPort 1.4 cable 2m",
-      "identity_terms": [
-        "KC-DP1420",
-        "4969887763407"
-      ],
-      "model_code": "KC-DP1420",
-      "target_price_jpy": 3000,
-      "monitor_url": "https://www.sanwa.co.jp/product/syohin?code=KC-DP1420",
-      "purchase_url": "https://www.sanwa.co.jp/product/syohin?code=KC-DP1420",
-      "retrieval_time": "2026-10-11T22:09:51+09:00",
-      "available_at": null,
-      "current_price_jpy": null,
-      "last_valid_price_jpy": null,
-      "price_verified": false,
-      "stock_status": "unknown",
-      "price_source_mode": "none",
-      "price_validation_status": "missing",
-      "identity_verified": true,
-      "status": "price_unverified",
-      "error": "https://www.sanwa.co.jp/product/syohin?code=KC-DP1420: missing_or_implausible_price",
-      "retrieval_attempts": [
-        {
-          "url": "https://www.sanwa.co.jp/product/syohin?code=KC-DP1420",
-          "final_url": "https://www.sanwa.co.jp/product/syohin?code=KC-DP1420",
-          "status": "price_unverified",
-          "error": "missing_or_implausible_price",
-          "price_candidate_jpy": null
-        }
-      ],
-      "product_context_excerpt": "kc-dp1420【displayportケーブル 2m（ver1.4)】displayport ver.1.4認証で、8k/60hzに対応したdisplayportケーブル。2m。｜サンワサプライ株式会社 会社情報 採用情報 ダイレクトショップ 製品情報 サポート ダウンロード 対応表 法人向け特集 サンワチャンネル ファニチャー オフィス家具 デスク チェア パーティション・ワークブース 収納・ワゴン・デスク周辺用品 ラック・カート サーバーラック・機器収納ラック パソコンラック・キャスター付作業台 カート・ツールワゴン 映像・モニター関連什器 テレビスタンド・テレビ壁掛金具 プロジェクター台・スクリーン モニターアーム・タブレットアーム モニター台・ノートpcスタンド アクセサリ 収納・保護アクセサリ パソコンバッグ・インナーケース ケース・カバー・保護フィルム 防犯・防災グッズ セキュリティ・盗難防止 防災・耐震グッズ その他アクセサリ シュレッダー・ラミネーター クリーナー・エ",
-      "page_title": "DisplayPortケーブル　2m（Ver1.4)",
-      "unverified_price_candidate_jpy": null,
-      "price_context": null
+      "target_met": false,
+      "page_title": "EDIFIER MR5",
+      "price_context": null,
+      "coupon_note": null,
+      "monitor_url_used": "https://www.edifier.jp/products/mr5",
+      "source_url": "https://www.edifier.jp/products/mr5",
+      "fallback_url_used": false
     }
   ]
 }

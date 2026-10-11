@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-10-11T22:10:49+09:00
+更新: 2026-10-11T22:22:07+09:00
 価格フェーズ: **PRE_BLACK_FRIDAY_REFERENCE**
 BF監視窓: 2026-11-14T00:00:00+09:00 ～ 2026-12-04T23:59:59+09:00
 総予算: ¥370,000
@@ -15,7 +15,7 @@ BF PC計画上限＋周辺機器目標: ¥370,000
 
 |項目|BF購入目標|BF期間内の確認済み価格|BF前参考価格|在庫|費用の扱い|購入ページ|
 |---|---:|---:|---:|---|---|---|
-|AOC Q27G40E/11 27-inch WQHD 180Hz|¥17,500|未確認|¥20,790|low_stock|black_friday_target_reserve|[商品ページ](https://kakaku.com/item/K0001706544/)|
+|AOC Q27G40E/11 27-inch WQHD 180Hz|¥17,500|未確認|¥20,790|low_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
 |LG 24MS500-B 23.8-inch FHD IPS 100Hz secondary monitor|¥10,000|未確認|—|unknown|black_friday_target_reserve|[商品ページ](https://kakaku.com/item/K0001619930/)|
 |EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)|¥24,000|未確認|—|unknown|black_friday_target_reserve|[商品ページ](https://www.edifier.jp/products/mr4-mkii)|
 |Logicool G213r|¥5,500|未確認|—|unknown|black_friday_target_reserve|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
