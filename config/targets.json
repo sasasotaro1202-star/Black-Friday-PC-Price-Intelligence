@@ -584,6 +584,28 @@
       "mandatory": false,
       "price_target_phase": "black_friday",
       "target_price_note": "Higher-refresh secondary alternative. Price.com indicated 24980 yen reference; not worth prioritizing over the cheaper main recommendation unless discounted."
+    },
+    {
+      "id": "mousepad_alt_logicool_g640s",
+      "category": "mousepad",
+      "name": "Logicool G640s large cloth gaming mousepad",
+      "target_price_jpy": 3000,
+      "track_current_price": true,
+      "monitor_url": "https://search.kakaku.com/g640s/",
+      "purchase_url": "https://search.kakaku.com/g640s/",
+      "identity_terms": [
+        "G640s",
+        "Logicool G ゲーミングマウスパッド"
+      ],
+      "model_code": "G640s",
+      "allowed_hosts": [
+        "search.kakaku.com"
+      ],
+      "min_price_jpy": 1800,
+      "max_price_jpy": 8000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "Optional large cloth mousepad alternative. Search results indicated around 3500 yen via the official Logicool store; exact retailer/checkout price must be confirmed."
     }
   ]
 }
