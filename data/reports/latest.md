@@ -1,15 +1,15 @@
 # ブラックフライデー期間通算・購入ランキング
 
-更新: 2026-10-11T22:06:10+09:00
-観測スナップショット: 2026-10-11T22:05:02+09:00
-観測スナップショットSHA256: d33f2517f18cf429937aa9c90bbf3a35a29b22c47fa78d4ac269fdc4a06ec500
+更新: 2026-10-11T22:09:11+09:00
+観測スナップショット: 2026-10-11T22:08:14+09:00
+観測スナップショットSHA256: a2eca22c6a41cac461999e0c00cc455d19ecc5f2e057ba6fc414a97c93098080
 総予算（PC＋周辺機器）: ¥370,000
 周辺機器の目標予算: ¥69,800
 PC本体の目標価格: ¥300,200
 PC本体の計画上限（周辺機器が目標価格の場合）: ¥300,200
-PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥295,220
-周辺機器の現行/目標価格ベース試算: ¥74,780
-周辺機器の価格・在庫確認: 3/7
+PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥294,240
+周辺機器の現行/目標価格ベース試算: ¥75,760
+周辺機器の価格・在庫確認: 4/7
 全体購入許可: **保留**（critical_candidates_not_fully_verified）
 フェーズ: **通常監視期間**
 
@@ -20,8 +20,8 @@ PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥295,2
 - 必須費用込み現金総額: ¥299,800
 - 確定特典価値: ¥0
 - 実質コスト（PC単体）: ¥299,800
-- PC＋周辺機器の参考試算総額（構成変更費未含む）: ¥374,580
-- 参考残額（構成変更費未含む）: ¥-4,580
+- PC＋周辺機器の参考試算総額（構成変更費未含む）: ¥375,560
+- 参考残額（構成変更費未含む）: ¥-5,560
 - PC構成要件: 未達/未確認 (RAM 16GB<32GB, SSD 500GB<1000GB)
 - 参考総価値換算額: ¥299,800（購入許可には不使用）
 - 判定: **NEEDS_CONFIGURATION**
@@ -61,11 +61,11 @@ PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥295,2
 |Logicool G213r|¥5,500|—（目標額で仮計算）|unknown|未確認|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
 |Logicool G304|¥3,800|¥5,350|in_stock|確認済み|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
 |SteelSeries QcK Large|¥2,500|¥2,640|low_stock|確認済み|[商品ページ](https://www.yodobashi.com/product/100000001009472873/)|
-|ELECOM T-K1A-2625BK 6-outlet 2.5m surge-protected power strip|¥1,500|—（目標額で仮計算）|unknown|未確認|[商品ページ](https://shopping.yahoo.co.jp/products/293aa7c210)|
+|ELECOM T-K1A-2625BK 6-outlet 2.5m surge-protected power strip|¥1,500|¥2,480|low_stock|確認済み|[商品ページ](https://www.askul.co.jp/p/N678805/)|
 |Required cables only; check included monitor/speaker cables first|¥1,000|—（目標額で仮計算）|unknown|未確認|予算枠のみ|
 |Shipping / multi-store purchase reserve|¥4,000|—（目標額で仮計算）|unknown|未確認|予算枠のみ|
 
-周辺機器価格確認: 3/7。未確認項目は目標額を試算に使用し、全体購入許可を保留します。
+周辺機器価格確認: 4/7。未確認項目は目標額を試算に使用し、全体購入許可を保留します。
 
 
 ## 周辺機器カテゴリ別ランキング（代替候補を含む）
@@ -102,8 +102,8 @@ BF購入目標と観測価格を分け、価格取得失敗は売り切れと扱
 |順位|総合点|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|
 |---:|---:|---|---:|---:|---|---|---|---|
 |1|**88/100**|Logicool G213r（主予算候補）|¥5,500|未確認|unknown|未確認|フルサイズ日本語配列、テンキー、パームレスト付き。Python・データ入力・普段使いまで幅広く、目標価格も抑えられる。|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
-|2|**84/100**|Logicool G413 SE full-size tactile mechanical keyboard（代替候補）|¥9,500|未確認|low_stock|未確認|フルサイズのメカニカルでテンキーを残せるが、G213rより予算が必要。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561)|
-|3|**86/100**|Logicool G413 TKL SE tenkeyless tactile mechanical keyboard（代替候補）|¥8,000|未確認|low_stock|未確認|テンキーレスのメカニカル。マウスの可動域と打鍵感を優先するFPS向け。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g413-tkl-se-gaming-keyboard)|
+|2|**86/100**|Logicool G413 TKL SE tenkeyless tactile mechanical keyboard（代替候補）|¥8,000|未確認|low_stock|未確認|テンキーレスのメカニカル。マウスの可動域と打鍵感を優先するFPS向け。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g413-tkl-se-gaming-keyboard)|
+|3|**84/100**|Logicool G413 SE full-size tactile mechanical keyboard（代替候補）|¥9,500|未確認|low_stock|未確認|フルサイズのメカニカルでテンキーを残せるが、G213rより予算が必要。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561)|
 
 ### マウス（FPS向け）
 
@@ -117,13 +117,13 @@ BF購入目標と観測価格を分け、価格取得失敗は売り切れと扱
 |順位|総合点|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|
 |---:|---:|---|---:|---:|---|---|---|---|
 |1|**93/100**|SteelSeries QcK Large（主予算候補）|¥2,500|¥2,640|low_stock|確認済み|450×400mm級の布面と滑り止めで、FPSに必要な移動幅を低コストで確保。|[商品ページ](https://www.yodobashi.com/product/100000001009472873/)|
-|2|**87/100**|Logicool G640s large cloth gaming mousepad（代替候補）|¥3,000|未確認|preorder_or_backorder|未確認|大型クロス面の代替。QcK Largeより安くならない場合は主候補を優先。|[商品ページ](https://search.kakaku.com/g640s/)|
+|2|**87/100**|Logicool G640s large cloth gaming mousepad（代替候補）|¥3,000|未確認|unknown|未確認|大型クロス面の代替。QcK Largeより安くならない場合は主候補を優先。|[商品ページ](https://search.kakaku.com/g640s/)|
 
 ### 電源タップ（6口・雷ガード）
 
 |順位|総合点|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|
 |---:|---:|---|---:|---:|---|---|---|---|
-|1|**86/100**|ELECOM T-K1A-2625BK 6-outlet 2.5m surge-protected power strip（主予算候補）|¥1,500|未確認|unknown|未確認|6口・2.5m・雷ガード付き。現行参考価格は目標1,500円を上回るため、取得した実売価格でPC上限を動的に下げる。|[商品ページ](https://shopping.yahoo.co.jp/products/293aa7c210)|
+|1|**86/100**|ELECOM T-K1A-2625BK 6-outlet 2.5m surge-protected power strip（主予算候補）|¥1,500|¥2,480|low_stock|確認済み|6口・2.5m・雷ガード付き。現行参考価格は目標1,500円を上回るため、取得した実売価格でPC上限を動的に下げる。|[商品ページ](https://www.askul.co.jp/p/N678805/)|
 |2|**82/100**|Sanwa Supply TAP-SP2116MG-2WN 6-outlet 2m surge protector with dust shutters and magnet（代替候補）|¥1,800|未確認|unknown|未確認|Dust shutters, surge indicator and magnet provide useful extras, but the observed comparison listing is around ¥2,045 and longer cable variants cost more.|[商品ページ](https://kakaku.com/item/K0001569733/)|
 
 ### 映像ケーブル（必要な場合のみ）
@@ -178,7 +178,7 @@ BF購入目標と観測価格を分け、価格取得失敗は売り切れと扱
 - 取得成功率: 52.4%
 - 価格確認率: 47.6%
 - 検索補完（成功/試行）: 0/10
-- 検索SKU不一致による除外: 61
+- 検索SKU不一致による除外: 67
 - 取得エラー内訳（host|reason）: rog.asus.com|curl_http_404=1, store.acer.com| INTERNAL_ERROR (err 2)=1, store.asus.com|curl_http_403=7, www.dospara.co.jp|curl_http_404=1
 - 未処理候補: なし
 
