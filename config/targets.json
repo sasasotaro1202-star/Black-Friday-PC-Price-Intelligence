@@ -269,15 +269,32 @@
     },
     {
       "id": "power_strip",
-      "name": "6-outlet surge-protected power strip",
+      "name": "ELECOM T-K1A-2625BK 6-outlet 2.5m surge-protected power strip",
       "target_price_jpy": 1500,
-      "track_current_price": false,
-      "monitor_url": null,
-      "purchase_url": null,
-      "identity_terms": [],
+      "track_current_price": true,
+      "monitor_url": "https://shopping.yahoo.co.jp/products/293aa7c210",
+      "purchase_url": "https://shopping.yahoo.co.jp/products/293aa7c210",
+      "identity_terms": [
+        "T-K1A-2625BK",
+        "4953103457027"
+      ],
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "1500円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
+      "target_price_note": "1500円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。",
+      "monitor_urls": [
+        "https://shopping.yahoo.co.jp/products/293aa7c210",
+        "https://kakaku.com/item/K0000766839/"
+      ],
+      "model_code": "T-K1A-2625BK",
+      "allowed_hosts": [
+        "shopping.yahoo.co.jp",
+        "kakaku.com"
+      ],
+      "min_price_jpy": 1000,
+      "max_price_jpy": 6000,
+      "ranking_score_100": 86,
+      "ranking_reason": "6口・2.5m・雷ガード付き。現行参考価格は目標1,500円を上回るため、取得した実売価格でPC上限を動的に下げる。",
+      "best_for": "PCとモニター類を一括接続する安全寄りの最低限構成"
     },
     {
       "id": "cables",
@@ -289,7 +306,10 @@
       "identity_terms": [],
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "1000円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
+      "target_price_note": "1000円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。",
+      "ranking_score_100": 88,
+      "ranking_reason": "モニター付属品を先に確認し、不足分だけ購入することで不要な二重購入を防ぐ。",
+      "best_for": "同梱品を優先し、足りない分だけ買う"
     },
     {
       "id": "shipping_reserve",
@@ -651,10 +671,65 @@
       "ranking_score_100": 87,
       "ranking_reason": "大型クロス面の代替。QcK Largeより安くならない場合は主候補を優先。",
       "best_for": "表面の好みで選ぶ"
+    },
+    {
+      "id": "power_strip_alt_sanwa_tap_sp2116mg2wn",
+      "name": "Sanwa Supply TAP-SP2116MG-2WN 6-outlet 2m surge protector with dust shutters and magnet",
+      "family": "power_strip",
+      "target_price_jpy": 1800,
+      "track_current_price": true,
+      "monitor_url": "https://kakaku.com/item/K0001569733/",
+      "monitor_urls": [
+        "https://kakaku.com/item/K0001569733/",
+        "https://www.sanwa.co.jp/product/syohin?code=TAP-SP2116MG-2WN"
+      ],
+      "purchase_url": "https://kakaku.com/item/K0001569733/",
+      "identity_terms": [
+        "TAP-SP2116MG-2WN",
+        "4969887827437"
+      ],
+      "model_code": "TAP-SP2116MG-2WN",
+      "allowed_hosts": [
+        "kakaku.com",
+        "www.sanwa.co.jp"
+      ],
+      "min_price_jpy": 1000,
+      "max_price_jpy": 7000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "¥1,800 is a Black Friday target, not a current verified offer. Select only if it better matches required cable length/outlet placement.",
+      "ranking_score_100": 82,
+      "ranking_reason": "Dust shutters, surge indicator and magnet provide useful extras, but the observed comparison listing is around ¥2,045 and longer cable variants cost more.",
+      "best_for": "Dust shutters and magnetic desk-side mounting"
+    },
+    {
+      "id": "cables_alt_sanwa_kc_dp1420",
+      "name": "Sanwa Supply KC-DP1420 VESA-certified DisplayPort 1.4 cable 2m",
+      "family": "display_cable",
+      "target_price_jpy": 3000,
+      "track_current_price": true,
+      "monitor_url": "https://www.sanwa.co.jp/product/syohin?code=KC-DP1420",
+      "purchase_url": "https://www.sanwa.co.jp/product/syohin?code=KC-DP1420",
+      "identity_terms": [
+        "KC-DP1420",
+        "4969887763407"
+      ],
+      "model_code": "KC-DP1420",
+      "allowed_hosts": [
+        "www.sanwa.co.jp"
+      ],
+      "min_price_jpy": 500,
+      "max_price_jpy": 10000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "¥3,000 is a Black Friday target only. First check whether the main monitor includes a suitable DisplayPort cable; buy this only if a cable is missing or replacement is required.",
+      "ranking_score_100": 85,
+      "ranking_reason": "VESA-certified DisplayPort 1.4, 2m, appropriate as a known-spec cable for high-refresh WQHD; however, the official reference price is ¥5,280, so target availability must be verified.",
+      "best_for": "A specifically identified DP 1.4 cable if the monitor's included cable is absent"
     }
   ],
   "peripheral_ranking_policy": {
-    "score_type": "user-fit and value judgment, not an independent lab benchmark",
+    "score_type": "User-fit and value judgment, not an independent lab benchmark",
     "scale": 100,
     "factors": [
       {
@@ -674,6 +749,6 @@
         "weight_pct": 15
       }
     ],
-    "instructions": "Scores rank purchase priority for this user's stated balance of FPS gaming, Cities: Skylines II, Python/GitHub/data work, dual monitors, sound quality and a JPY 370000 all-in cap. They are not measurements of objective product performance or guaranteed BF deal quality. Re-evaluate when actual BF prices and stock are observed."
+    "instructions": "Scores rank purchase priority for this user's stated balance of FPS gaming, Cities: Skylines II, Python/GitHub/data work, dual monitors, sound quality and a JPY 370000 all-in cap. They are not measurements of objective product performance or guaranteed BF deal quality. Re-evaluate when actual BF prices and stock are observed. Power-strip current offers are tracked because the ¥1,500 target can be below current street prices. The cable reserve is not a promise to buy a cable: confirm included cables first. The Sanwa DisplayPort alternative replaces the generic cable reserve if selected; do not buy both."
   }
 }
