@@ -114,7 +114,7 @@ class BudgetPolicyTests(unittest.TestCase):
             scores = [x.get("ranking_score_100") for x in rows]
             self.assertTrue(all(isinstance(s, int) and 0 <= s <= 100 for s in scores), category)
         g304x = next(x for x in alternatives if x.get("id") == "mouse_alt_logicool_g304_x_superlight")
-        self.assertIn("61g", g304x.get("ranking_reason", ""))
+        self.assertIn("59g", g304x.get("ranking_reason", ""))
         g640 = next(x for x in alternatives if x.get("id") == "mousepad_alt_logicool_g640s")
         self.assertEqual(g640.get("model_code"), "G640")
         self.assertIn("gaming.logicool.co.jp/ja-jp/shop/p/g640-cloth-gaming-mouse-pad", g640.get("purchase_url", ""))
