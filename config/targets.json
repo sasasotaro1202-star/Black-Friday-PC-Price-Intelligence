@@ -645,9 +645,9 @@
       "max_price_jpy": 20000,
       "mandatory": false,
       "price_target_phase": "black_friday",
-      "target_price_note": "Optional under-60g wireless mouse upgrade; not in main budget unless chosen.",
+      "target_price_note": "Optional under-60g-class wireless mouse upgrade; manufacturer lists 61 g. Not in main budget unless chosen.",
       "ranking_score_100": 87,
-      "ranking_reason": "軽量約59gの充電式無線モデル。FPSの軽さを重視する上位選択だが、標準G304より大幅に高価なため総合コスパは下げて評価。",
+      "ranking_reason": "実測ではなくメーカー公称仕様は約61gの充電式無線モデル。FPSで軽さを重視する上位選択だが、標準G304より高価なため、総合コスパは予算条件込みで評価。",
       "best_for": "軽さを優先"
     },
     {
@@ -678,26 +678,26 @@
     {
       "id": "mousepad_alt_logicool_g640s",
       "category": "mousepad",
-      "name": "Logicool G640s large cloth gaming mousepad",
+      "name": "Logicool G640 Large cloth gaming mousepad",
       "target_price_jpy": 3000,
       "track_current_price": true,
-      "monitor_url": "https://search.kakaku.com/g640s/",
-      "purchase_url": "https://search.kakaku.com/g640s/",
+      "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g640-cloth-gaming-mouse-pad",
+      "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g640-cloth-gaming-mouse-pad",
       "identity_terms": [
-        "G640s",
-        "Logicool G ゲーミングマウスパッド"
+        "G640",
+        "Logicool G640"
       ],
-      "model_code": "G640s",
+      "model_code": "G640",
       "allowed_hosts": [
-        "search.kakaku.com"
+        "gaming.logicool.co.jp"
       ],
-      "min_price_jpy": 1800,
+      "min_price_jpy": 1500,
       "max_price_jpy": 8000,
       "mandatory": false,
       "price_target_phase": "black_friday",
-      "target_price_note": "Optional large cloth mousepad alternative. Search results indicated around 3500 yen via the official Logicool store; exact retailer/checkout price must be confirmed.",
+      "target_price_note": "Optional exact-model alternative. Monitor the official G640 product page and only compare delivery-inclusive cost; do not reuse a G640s or search-page price.",
       "ranking_score_100": 87,
-      "ranking_reason": "公式G640は400×460mmで現行¥3,850。QcK Largeより高価なので、表面の好みとBF価格差が小さい場合のみ選ぶ。",
+      "ranking_reason": "Logicool公式のG640は400×460mmの大型クロス面。公式掲載価格は¥3,850でQcK Largeより高価なので、表面の好みとBF価格差が小さい場合に選ぶ。",
       "best_for": "表面の好みで選ぶ"
     },
     {
