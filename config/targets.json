@@ -1,5 +1,5 @@
 {
-  "budget_jpy": 302200,
+  "budget_jpy": 300200,
   "target_date": "2026-11-27",
   "monitor_window_start": "2026-11-14T00:00:00+09:00",
   "monitor_window_end": "2026-12-04T23:59:59+09:00",
@@ -101,9 +101,9 @@
   "desktop_note": "Desktop PCs are evaluated in the same integrated purchase-priority ranking as laptops, with desktop-specific GPU/VRAM/CPU factors.",
   "desktop_exact_candidate_count": 6,
   "total_budget_jpy": 370000,
-  "peripheral_budget_jpy": 67800,
-  "pc_target_jpy": 302200,
-  "pc_budget_jpy": 302200,
+  "peripheral_budget_jpy": 69800,
+  "pc_target_jpy": 300200,
+  "pc_budget_jpy": 300200,
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
@@ -294,9 +294,9 @@
         "price_source_note": "279,800円は16GB/500GB基本構成の監視基準。32GB/1TB完成構成の実価格として扱わない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 302200,
-        "black_friday_planned_hard_cap_jpy": 302200,
-        "black_friday_target_note": "32GB RAM/1TB SSD完成構成のBF購入目標・計画上限は302,200円。279,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費の許容上限は22,400円だが、実見積が確認されるまで費用ゼロとは扱わない。"
+        "black_friday_target_price_jpy": 300200,
+        "black_friday_planned_hard_cap_jpy": 300200,
+        "black_friday_target_note": "32GB RAM/1TB SSD完成構成のBF購入目標・計画上限は300,200円。279,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費の許容上限は20,400円だが、実見積が確認されるまで費用ゼロとは扱わない。"
       },
       {
         "candidate_id": "desktop-gtune-dg-a7g70-5070",
@@ -308,9 +308,9 @@
         "reference_checked_date": "2026-10-10",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
         "reference_note": "公式ページで確認した参考価格。次の監視サイクルでも現行価格・在庫・SKUを検証する。",
-        "black_friday_target_price_jpy": 302200,
-        "black_friday_planned_hard_cap_jpy": 302200,
-        "black_friday_target_note": "32GB/1TB完成構成のBF購入目標・計画上限は302,200円。304,800円は事前参考掲載額で、計画上限より2,600円高く、BF価格ではない。BF期間中に価格・在庫・SKU・PITを再確認する。"
+        "black_friday_target_price_jpy": 300200,
+        "black_friday_planned_hard_cap_jpy": 300200,
+        "black_friday_target_note": "32GB/1TB完成構成のBF購入目標・計画上限は300,200円。304,800円は事前参考掲載額で、計画上限より4,600円高く、BF価格ではない。BF期間中に価格・在庫・SKU・PITを再確認する。"
       },
       {
         "candidate_id": "desktop-gtune-dg-i7g70-5070",
@@ -325,9 +325,9 @@
         "price_source_note": "299,800円は16GB/500GB基本構成の事前参考価格。32GB/1TB完成構成のBF実売価格ではない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 302200,
-        "black_friday_planned_hard_cap_jpy": 302200,
-        "black_friday_target_note": "CPU重視の大穴候補。32GB/1TB完成構成のBF購入目標・計画上限は302,200円。299,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費は上限まで2,400円以内が条件だが、実見積が確認されるまで費用ゼロとは扱わない。"
+        "black_friday_target_price_jpy": 300200,
+        "black_friday_planned_hard_cap_jpy": 300200,
+        "black_friday_target_note": "CPU重視の大穴候補。32GB/1TB完成構成のBF購入目標・計画上限は300,200円。299,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費は上限まで400円以内が条件だが、実見積が確認されるまで費用ゼロとは扱わない。"
       }
     ],
     "outlier_rule": {
@@ -339,7 +339,7 @@
       "maximum_completed_pc_price_uses": "dynamic_pc_cap_jpy",
       "requires_direct_price_stock_exact_identity_and_valid_pit": true,
       "zero_cost_upgrade_assumption_allowed": false,
-      "black_friday_target_cap_jpy": 302200,
+      "black_friday_target_cap_jpy": 300200,
       "price_basis": "completed_build_black_friday_offer_only"
     },
     "score_policy": "説明文にある96/94/95/97点は条件付きの目標イメージであり、実測スコアとして固定しない。実際のスコアはコードが確認済み価格・構成・在庫・性能・データ品質から計算する。",
