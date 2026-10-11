@@ -643,6 +643,15 @@ def main():
         "",
     ]
     for group_name, candidate_ids in peripheral_groups:
+        candidate_ids = sorted(
+            candidate_ids,
+            key=lambda candidate_id: (
+                int(all_peripheral_targets.get(candidate_id, {}).get("ranking_score_100", -1))
+                if isinstance(all_peripheral_targets.get(candidate_id, {}).get("ranking_score_100"), (int, float))
+                else -1
+            ),
+            reverse=True,
+        )
         peripheral_category_lines += [
             f"### {group_name}",
             "",
