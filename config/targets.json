@@ -135,7 +135,8 @@
       ],
       "ranking_score_100": 94,
       "ranking_reason": "WQHD・180Hz・Fast IPSを比較的低予算で両立。現在の直接確認価格と在庫を監視し、FPSとCities: Skylines IIに予算を振り分けやすい。",
-      "best_for": "メイン画面の総合コスパ"
+      "best_for": "メイン画面の総合コスパ",
+      "category": "main_monitor"
     },
     {
       "id": "secondary_monitor",
@@ -159,7 +160,8 @@
       "target_price_note": "10000円はBF期間中の購入目標。2026-10-11に価格.comで確認した参考最安値10980円とBF価格を混同しない。",
       "ranking_score_100": 93,
       "ranking_reason": "FHD・IPS・100Hzでコード、GitHub、ログ表示に十分。主画面に予算を回せる。",
-      "best_for": "プログラミング用サブ画面"
+      "best_for": "プログラミング用サブ画面",
+      "category": "secondary_monitor"
     },
     {
       "id": "speakers",
@@ -189,7 +191,8 @@
       "coupon_observed_date": "2026-10-11",
       "ranking_score_100": 95,
       "ranking_reason": "80W RMSとBluetooth 6.0、複数の有線入力を備え、音質と接続性のバランスが良い。公式ページのクーポンは決済画面で確認できるまで価格に控除しない。",
-      "best_for": "音質・機能・価格の総合バランス"
+      "best_for": "音質・機能・価格の総合バランス",
+      "category": "speakers"
     },
     {
       "id": "keyboard",
@@ -218,7 +221,8 @@
       ],
       "ranking_score_100": 88,
       "ranking_reason": "フルサイズ日本語配列、テンキー、パームレスト付き。Python・データ入力・普段使いまで幅広く、目標価格も抑えられる。",
-      "best_for": "ゲームと長時間作業のバランス"
+      "best_for": "ゲームと長時間作業のバランス",
+      "category": "keyboard"
     },
     {
       "id": "mouse",
@@ -241,7 +245,8 @@
       "target_price_note": "3800円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。",
       "ranking_score_100": 92,
       "ranking_reason": "LIGHTSPEED無線で予算を抑えられる。重量は軽量競技モデルほどではないが、費用対効果が高い。",
-      "best_for": "価格重視のFPS用無線"
+      "best_for": "価格重視のFPS用無線",
+      "category": "mouse"
     },
     {
       "id": "mousepad",
@@ -264,7 +269,8 @@
       "target_price_note": "2500円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。",
       "ranking_score_100": 93,
       "ranking_reason": "450×400mm級の布面と滑り止めで、FPSに必要な移動幅を低コストで確保。",
-      "best_for": "低価格の大型布パッド"
+      "best_for": "低価格の大型布パッド",
+      "category": "mousepad"
     },
     {
       "id": "power_strip",
@@ -295,7 +301,8 @@
       "max_price_jpy": 6000,
       "ranking_score_100": 86,
       "ranking_reason": "6口・2.5m・雷ガード付き。現行参考価格は目標1,500円を上回るため、取得した実売価格でPC上限を動的に下げる。",
-      "best_for": "PCとモニター類を一括接続する安全寄りの最低限構成"
+      "best_for": "PCとモニター類を一括接続する安全寄りの最低限構成",
+      "category": "power_strip"
     },
     {
       "id": "cables",
@@ -310,7 +317,8 @@
       "target_price_note": "1000円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。",
       "ranking_score_100": 88,
       "ranking_reason": "モニター付属品を先に確認し、不足分だけ購入することで不要な二重購入を防ぐ。",
-      "best_for": "同梱品を優先し、足りない分だけ買う"
+      "best_for": "同梱品を優先し、足りない分だけ買う",
+      "category": "cables"
     },
     {
       "id": "shipping_reserve",
@@ -490,7 +498,8 @@
       "target_price_note": "¥3,000 is a Black Friday target only. First check whether the main monitor includes a suitable DisplayPort cable; buy this only if a cable is missing or replacement is required.",
       "ranking_score_100": 85,
       "ranking_reason": "VESA認証済みDisplayPort 1.4・2m。メーカー標準価格は¥5,280なので、実売が下がった場合だけ。不足がなければ購入しない。",
-      "best_for": "A specifically identified DP 1.4 cable if the monitor's included cable is absent"
+      "best_for": "A specifically identified DP 1.4 cable if the monitor's included cable is absent",
+      "category": "cables"
     },
     {
       "id": "keyboard_alt_logicool_g413_tkl_se",
@@ -719,7 +728,8 @@
       "target_price_note": "¥1,800 is a Black Friday target, not a current verified offer. Select only if it better matches required cable length/outlet placement.",
       "ranking_score_100": 82,
       "ranking_reason": "6口・2m・雷ガードに加えてホコリ防止シャッターやマグネットを備える。配送込みで¥1,800程度になった場合のみ検討。",
-      "best_for": "Dust shutters and magnetic desk-side mounting"
+      "best_for": "Dust shutters and magnetic desk-side mounting",
+      "category": "power_strip"
     },
     {
       "id": "power_strip_alt_elecom_tk6a2630bk",
@@ -873,6 +883,40 @@
         "weight_pct": 15
       }
     ],
-    "instructions": "Category scores are user-fit/relative purchase-priority judgments, not independent lab benchmarks. The report ranks one primary recommendation and up to two alternatives in each category. Alternatives are price-monitored independently but do not enter the mandatory ¥69,800 accessory budget unless selected. Monitor target prices, live observations, stock and delivered total are separate. Current coupons/points do not reduce the budget until final checkout cash payment is confirmed. For speaker coupon, the 2026-10-11 observation of code SLW20 is historical and never implies BF eligibility. Cable purchase is conditional: check included cables first and choose at most one cable if needed."
+    "instructions": "Category scores are user-fit/relative purchase-priority judgments, not independent lab benchmarks. The report ranks one primary recommendation and up to two alternatives in each category. Alternatives are price-monitored independently but do not enter the mandatory ¥69,800 accessory budget unless selected. Monitor target prices, live observations, stock and delivered total are separate. Current coupons/points do not reduce the budget until final checkout cash payment is confirmed. For speaker coupon, the 2026-10-11 observation of code SLW20 is historical and never implies BF eligibility. Cable purchase is conditional: check included cables first and choose at most one cable if needed.",
+    "category_order": [
+      {
+        "category": "main_monitor",
+        "label": "メインモニター（27インチ・WQHD）"
+      },
+      {
+        "category": "secondary_monitor",
+        "label": "サブモニター（23.8インチ・FHD）"
+      },
+      {
+        "category": "speakers",
+        "label": "スピーカー"
+      },
+      {
+        "category": "keyboard",
+        "label": "キーボード"
+      },
+      {
+        "category": "mouse",
+        "label": "マウス（FPS向け）"
+      },
+      {
+        "category": "mousepad",
+        "label": "マウスパッド"
+      },
+      {
+        "category": "power_strip",
+        "label": "電源タップ（6口・雷ガード）"
+      },
+      {
+        "category": "cables",
+        "label": "映像ケーブル（必要な場合のみ）"
+      }
+    ]
   }
 }
