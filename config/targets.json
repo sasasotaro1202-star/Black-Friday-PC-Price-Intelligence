@@ -132,24 +132,24 @@
     },
     {
       "id": "secondary_monitor",
-      "name": "ASUS VY249HGR 23.8-inch FHD IPS 120Hz secondary monitor",
+      "name": "LG 24MS500-B 23.8-inch FHD IPS 100Hz secondary monitor",
       "target_price_jpy": 10000,
       "track_current_price": true,
-      "monitor_url": "https://www.amazon.co.jp/dp/B0DNDXMLR7",
-      "purchase_url": "https://www.amazon.co.jp/dp/B0DNDXMLR7",
+      "monitor_url": "https://kakaku.com/item/K0001619930/",
+      "purchase_url": "https://kakaku.com/item/K0001619930/",
       "identity_terms": [
-        "VY249HGR"
+        "24MS500-B",
+        "K0001619930"
       ],
       "allowed_hosts": [
-        "www.amazon.co.jp",
-        "amazon.co.jp"
+        "kakaku.com"
       ],
-      "min_price_jpy": 6000,
+      "min_price_jpy": 7000,
       "max_price_jpy": 25000,
       "mandatory": true,
-      "model_code": "VY249HGR",
+      "model_code": "24MS500-B",
       "price_target_phase": "black_friday",
-      "target_price_note": "10000円はBF期間中のサブモニター購入目標。現行掲載額は事前参考値であり、BF価格・在庫は期間中に再確認する。"
+      "target_price_note": "10000円はBF期間中の購入目標。2026-10-11に価格.comで確認した参考最安値10980円とBF価格を混同しない。"
     },
     {
       "id": "speakers",
@@ -530,6 +530,50 @@
       "mandatory": false,
       "price_target_phase": "black_friday",
       "target_price_note": "Optional under-60g wireless mouse upgrade; not in main budget unless chosen."
+    },
+    {
+      "id": "secondary_monitor_alt_asus_vy249hgr",
+      "category": "secondary_monitor",
+      "name": "ASUS VY249HGR 23.8-inch FHD IPS 120Hz secondary monitor",
+      "target_price_jpy": 13000,
+      "track_current_price": true,
+      "monitor_url": "https://www.amazon.co.jp/dp/B0DNDXMLR7",
+      "purchase_url": "https://www.amazon.co.jp/dp/B0DNDXMLR7",
+      "identity_terms": [
+        "VY249HGR"
+      ],
+      "model_code": "VY249HGR",
+      "allowed_hosts": [
+        "www.amazon.co.jp",
+        "amazon.co.jp"
+      ],
+      "min_price_jpy": 9000,
+      "max_price_jpy": 30000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "Primary alternative with 120Hz(OC). Price.com search results showed around 16800 yen as a reference on 2026-10-11; Amazon exact page price must be independently verified."
+    },
+    {
+      "id": "secondary_monitor_alt_lg_24gs60fb",
+      "category": "secondary_monitor",
+      "name": "LG UltraGear 24GS60F-B 23.8-inch FHD IPS 180Hz",
+      "target_price_jpy": 19000,
+      "track_current_price": true,
+      "monitor_url": "https://kakaku.com/item/K0001667935/",
+      "purchase_url": "https://kakaku.com/item/K0001667935/",
+      "identity_terms": [
+        "24GS60F-B",
+        "K0001667935"
+      ],
+      "model_code": "24GS60F-B",
+      "allowed_hosts": [
+        "kakaku.com"
+      ],
+      "min_price_jpy": 15000,
+      "max_price_jpy": 40000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "Higher-refresh secondary alternative. Price.com indicated 24980 yen reference; not worth prioritizing over the cheaper main recommendation unless discounted."
     }
   ]
 }
