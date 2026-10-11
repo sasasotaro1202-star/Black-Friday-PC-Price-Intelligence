@@ -629,7 +629,7 @@ def main():
         ("スピーカー", ["speakers", "speakers_alt_edifier_mr3", "speakers_alt_edifier_mr5"]),
         ("キーボード", ["keyboard", "keyboard_alt_logicool_g413se", "keyboard_alt_logicool_g413_tkl_se"]),
         ("マウス（FPS向け）", ["mouse", "mouse_alt_logicool_g304_x_superlight"]),
-        ("マウスパッド", ["mousepad"]),
+        ("マウスパッド", ["mousepad", "mousepad_alt_logicool_g640s"]),
     ]
     peripheral_category_lines = [
         "",
