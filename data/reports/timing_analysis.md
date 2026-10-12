@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-12T18:41:06+09:00
-Source snapshot: 2026-10-12T18:39:52+09:00
-Source snapshot SHA256: bee62943301a437b5f16f9ceb2145e262ff17687b4692ac0a66f8e7ffbb467dd
+Generated: 2026-10-12T18:49:48+09:00
+Source snapshot: 2026-10-12T18:48:38+09:00
+Source snapshot SHA256: a3d35798f9798b4280e47f0b0e1aaff1e5de03e5a1af039c1e567a662a5cdf6a
 Budget: ¥300,200
 Target Black Friday: 2026-11-27
 
