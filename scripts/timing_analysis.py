@@ -96,7 +96,7 @@ def _window_observations(events, item, start, end, include_current):
     product_id = str(item.get("id") or "")
     observations = []
     for event in events:
-        if str(event.get("id") or "") != product_id or event.get("pit_valid") is False:
+        if str(event.get("id") or "") != product_id or event.get("pit_valid") is not True:
             continue
         dt = _event_dt(event)
         price = event.get("new_price_jpy")
@@ -122,7 +122,7 @@ def _window_observations(events, item, start, end, include_current):
 def _window_price_movement(events, candidate_id, start, end):
     changes = []
     for event in events:
-        if str(event.get("id") or "") != str(candidate_id) or event.get("pit_valid") is False:
+        if str(event.get("id") or "") != str(candidate_id) or event.get("pit_valid") is not True:
             continue
         dt = _event_dt(event)
         old_price = event.get("old_price_jpy")
@@ -171,7 +171,12 @@ def build_buy_now_decision(rankings, events, config):
 
     rows = []
     cap = None
-    for item in (rankings.get("products") or []):
+    source_products = (rankings.get("products") or []) + (rankings.get("unavailable_products") or [])
+    seen_ids = set()
+    for item in source_products:
+        if str(item.get("id") or "") in seen_ids:
+            continue
+        seen_ids.add(str(item.get("id") or ""))
         if not isinstance(item, dict) or not item.get("id"):
             continue
         detail = item.get("score_detail") or {}
@@ -305,8 +310,10 @@ def build_buy_now_decision(rankings, events, config):
             status = "PRE_BF_REFERENCE_ONLY" if now < start else "SALE_WINDOW_CLOSED"
         elif not price_verified:
             status = "VERIFY_PRICE_OR_PIT"
+        elif stock == "out_of_stock":
+            status = "OUT_OF_STOCK"
         elif not stock_available:
-            status = "STOCK_UNCONFIRMED_OR_OUT"
+            status = "STOCK_UNCONFIRMED"
         elif not config_ready:
             status = "NEEDS_CONFIGURATION"
         elif not budget_ready or not coverage_complete or not gate_allowed:
@@ -364,7 +371,7 @@ def build_buy_now_decision(rankings, events, config):
         and x.get("gap_to_pc_cap_jpy", 1) == 0 and not x.get("qualified_to_buy")
     ]
     over_budget = [
-        x for x in rows if x.get("price_verified_for_bf") and x.get("configuration_ready")
+        x for x in rows if budget_ready and x.get("price_verified_for_bf") and x.get("configuration_ready")
         and x.get("stock_status") in ("in_stock", "low_stock")
         and isinstance(x.get("cash_total_cost_jpy"), int) and cap is not None
         and x["cash_total_cost_jpy"] > int(cap)
