@@ -31,6 +31,15 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertNotIn("  schedule:", text)
         self.assertIn('MONITOR_MAX_URLS: "100"', text)
 
+    def test_purchase_moment_runs_in_monitoring_and_validation_pipelines(self):
+        for path in (
+            ROOT / ".github" / "workflows" / "pc-price-monitor.yml",
+            ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml",
+            ROOT / ".github" / "workflows" / "pc-price-tests.yml",
+        ):
+            text = path.read_text(encoding="utf-8")
+            self.assertIn("python scripts/purchase_moment.py", text, str(path))
+
     def test_embedded_python_blocks_are_syntactically_valid(self):
         for path in (
             ROOT / ".github" / "workflows" / "pc-price-monitor.yml",
