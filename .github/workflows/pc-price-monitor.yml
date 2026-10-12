@@ -34,25 +34,35 @@ jobs:
         run: |
           python - <<'PY' >> "$GITHUB_OUTPUT"
           from datetime import datetime, timezone, timedelta
-          import os
+          import json, os
           JST=timezone(timedelta(hours=9))
           now=datetime.now(JST)
-          start=datetime(2026,11,14,tzinfo=JST)
-          end=datetime(2026,12,4,23,59,59,tzinfo=JST)
-          in_bf=start <= now <= end
+          config_status="ok"
+          try:
+              with open("config/targets.json", encoding="utf-8") as f:
+                  cfg=json.load(f)
+              start=datetime.fromisoformat(cfg["monitor_window_start"].replace("Z","+00:00")).astimezone(JST)
+              end=datetime.fromisoformat(cfg["monitor_window_end"].replace("Z","+00:00")).astimezone(JST)
+              in_watch_window=start <= now <= end
+          except Exception as exc:
+              # Missing or malformed calendar must never be presented as an
+              # official sale date. Retain normal-cadence monitoring.
+              config_status="error:"+type(exc).__name__
+              in_watch_window=False
           event=os.environ.get("GITHUB_EVENT_NAME","")
           schedule_cron=os.environ.get("SCHEDULE_CRON","")
-          # GitHub scheduled runs can start after the cron minute. Route by the
-          # actual schedule expression, not the runner's start-time minute.
+          # The configured dates only define a provisional broad watch window.
+          # Retailer sale authorization is separately source-verified by Python.
           if event == "schedule":
-              expected_cron = "*/5 * * * *" if in_bf else "*/15 * * * *"
+              expected_cron = "*/5 * * * *" if in_watch_window else "*/15 * * * *"
               run_now = schedule_cron == expected_cron
           else:
               run_now = True
           skip = not run_now
           print(f"skip={str(skip).lower()}")
           print(f"now_jst={now.isoformat()}")
-          print(f"in_bf={str(in_bf).lower()}")
+          print(f"in_watch_window={str(in_watch_window).lower()}")
+          print(f"calendar_config_status={config_status}")
           print(f"schedule_cron={schedule_cron}")
           print(f"run_now={str(run_now).lower()}")
           PY
@@ -110,6 +120,7 @@ jobs:
             python scripts/peripheral_monitor.py
             python scripts/recover.py
             python scripts/sanitize.py
+            python scripts/official_campaign_dates.py
             python scripts/report.py
             python scripts/timing_analysis.py
             python scripts/scenario_analysis.py
