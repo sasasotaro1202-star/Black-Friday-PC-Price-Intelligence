@@ -159,12 +159,12 @@ class BlackFridayScenarioTests(unittest.TestCase):
         self.assertTrue(row["black_friday_offer_verified"])
         self.assertEqual(row["black_friday_price_observed_jpy"], 299800)
         self.assertIsNone(row["pre_black_friday_reference_price_jpy"])
-        self.assertEqual(row["retailer_campaign_status"], "CONFIRMED")
+        self.assertEqual(row["retailer_campaign_status"], "CONFIRMED_ACTIVE")
         speaker = next(x for x in result["peripherals"] if x["id"] == "speakers")
         self.assertTrue(speaker["black_friday_price_verified"])
         self.assertEqual(speaker["black_friday_price_observed_jpy"], 11000)
         self.assertIsNone(speaker["pre_black_friday_reference_price_jpy"])
-        self.assertEqual(speaker["retailer_campaign_status"], "CONFIRMED")
+        self.assertEqual(speaker["retailer_campaign_status"], "CONFIRMED_ACTIVE")
 
     def test_provisional_watch_window_alone_never_claims_black_friday_prices(self):
         now = datetime.fromisoformat("2026-11-20T12:01:00+09:00")
