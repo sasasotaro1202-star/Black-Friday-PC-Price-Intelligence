@@ -1,6 +1,7 @@
 {
-  "generated_at": "2026-10-12T22:18:38.764679+09:00",
-  "checked_at": "2026-10-12T22:18:38.764679+09:00",
+  "generated_at": "2026-10-12T22:28:42.939524+09:00",
+  "checked_at": "2026-10-12T22:28:42.939524+09:00",
+  "scanner_version": 2,
   "configured_sources": {
     "acer": [
       "https://store.acer.com/ja-jp/",
@@ -62,7 +63,7 @@
       "end_jst": null,
       "source_url": "https://www.amazon.co.jp/blackfriday",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -73,13 +74,13 @@
           "explicit_2026_range_found": false
         },
         {
-          "url": "https://www.amazon.co.jp/ax/claim?arb=ec06c49d-da05-4375-9e62-5b1f28e11a8c",
-          "discovered_from": "https://www.amazon.co.jp/blackfriday",
+          "url": "https://www.aboutamazon.jp/news/retail",
+          "discovered_from": null,
           "fetch_status": "OK",
           "explicit_2026_range_found": false
         },
         {
-          "url": "https://www.amazon.co.jp/gp/goldbox?ref_=nav_cs_gb",
+          "url": "https://www.amazon.co.jp/ax/claim?arb=aa0578a6-6540-46a9-9a8e-7cbb65e82e3e",
           "discovered_from": "https://www.amazon.co.jp/blackfriday",
           "fetch_status": "OK",
           "explicit_2026_range_found": false
@@ -92,7 +93,7 @@
       "end_jst": null,
       "source_url": "https://www.lenovo.com/jp/ja/campaigns/black-friday/",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -103,14 +104,14 @@
           "explicit_2026_range_found": false
         },
         {
-          "url": "https://www.lenovo.com/jp/ja/postsales-support/",
-          "discovered_from": "https://www.lenovo.com/jp/ja/campaigns/black-friday/",
+          "url": "https://www.lenovo.com/jp/ja/blackfriday/",
+          "discovered_from": null,
           "fetch_status": "OK",
           "explicit_2026_range_found": false
         },
         {
-          "url": "https://www.lenovo.com/jp/ja/blackfriday/",
-          "discovered_from": null,
+          "url": "https://www.lenovo.com/jp/ja/postsales-support/",
+          "discovered_from": "https://www.lenovo.com/jp/ja/campaigns/black-friday/",
           "fetch_status": "OK",
           "explicit_2026_range_found": false
         }
@@ -122,7 +123,7 @@
       "end_jst": null,
       "source_url": "https://www.asus.com/jp/deals/black-friday/",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -152,7 +153,7 @@
       "end_jst": null,
       "source_url": "https://www.mouse-jp.co.jp/",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -182,7 +183,7 @@
       "end_jst": null,
       "source_url": "https://www.dospara.co.jp/",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -212,7 +213,7 @@
       "end_jst": null,
       "source_url": "https://www.acer.com/jp-ja",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
       "latest_fetch_status": "ERROR",
       "last_check_errors": [
         "https://www.acer.com/jp-ja: The read operation timed out",
@@ -239,7 +240,7 @@
       "end_jst": null,
       "source_url": "https://www.gigabyte.com/jp",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
       "latest_fetch_status": "ERROR",
       "last_check_errors": [
         "https://www.gigabyte.com/jp: HTTP Error 403: Forbidden"
@@ -259,7 +260,7 @@
       "end_jst": null,
       "source_url": "https://www.yodobashi.com/",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
       "latest_fetch_status": "ERROR",
       "last_check_errors": [
         "https://www.yodobashi.com/: The read operation timed out"
@@ -279,7 +280,7 @@
       "end_jst": null,
       "source_url": "https://www.biccamera.com/bc/main/",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
       "latest_fetch_status": "ERROR",
       "last_check_errors": [
         "https://www.biccamera.com/bc/main/: The read operation timed out"
@@ -294,22 +295,26 @@
       ]
     },
     "edifier": {
-      "status": "FETCH_ERROR",
+      "status": "UNCONFIRMED",
       "start_jst": null,
       "end_jst": null,
       "source_url": "https://www.edifier.jp/",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
-      "latest_fetch_status": "ERROR",
-      "last_check_errors": [
-        "https://www.edifier.jp/: HTTP Error 503: Service Unavailable"
-      ],
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
+      "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
+      "last_check_errors": [],
       "sources_checked": [
         {
           "url": "https://www.edifier.jp/",
           "discovered_from": null,
-          "fetch_status": "ERROR",
-          "error": "HTTP Error 503: Service Unavailable"
+          "fetch_status": "OK",
+          "explicit_2026_range_found": false
+        },
+        {
+          "url": "https://www.edifier.jp/pages/halloween-sale-2026",
+          "discovered_from": "https://www.edifier.jp/",
+          "fetch_status": "OK",
+          "explicit_2026_range_found": false
         }
       ]
     },
@@ -319,7 +324,7 @@
       "end_jst": null,
       "source_url": "https://www.askul.co.jp/",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -349,7 +354,7 @@
       "end_jst": null,
       "source_url": "https://www.frontier-direct.jp/",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -379,7 +384,7 @@
       "end_jst": null,
       "source_url": "https://www.ark-pc.co.jp/",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -404,22 +409,32 @@
       ]
     },
     "tsukumo": {
-      "status": "FETCH_ERROR",
+      "status": "UNCONFIRMED",
       "start_jst": null,
       "end_jst": null,
       "source_url": "https://shop.tsukumo.co.jp/",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
-      "latest_fetch_status": "ERROR",
-      "last_check_errors": [
-        "https://shop.tsukumo.co.jp/: Remote end closed connection without response"
-      ],
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
+      "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
+      "last_check_errors": [],
       "sources_checked": [
         {
           "url": "https://shop.tsukumo.co.jp/",
           "discovered_from": null,
-          "fetch_status": "ERROR",
-          "error": "Remote end closed connection without response"
+          "fetch_status": "OK",
+          "explicit_2026_range_found": false
+        },
+        {
+          "url": "https://shop.tsukumo.co.jp/features/",
+          "discovered_from": "https://shop.tsukumo.co.jp/",
+          "fetch_status": "OK",
+          "explicit_2026_range_found": false
+        },
+        {
+          "url": "https://shop.tsukumo.co.jp/features/campaign/",
+          "discovered_from": "https://shop.tsukumo.co.jp/",
+          "fetch_status": "OK",
+          "explicit_2026_range_found": false
         }
       ]
     },
@@ -429,7 +444,7 @@
       "end_jst": null,
       "source_url": "https://www.sycom.co.jp/",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -447,7 +462,7 @@
       "end_jst": null,
       "source_url": "https://www.stormst.com/",
       "evidence": null,
-      "checked_at": "2026-10-12T22:18:38.764679+09:00",
+      "checked_at": "2026-10-12T22:28:42.939524+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -469,7 +484,7 @@
   "summary": {
     "retailer_count": 16,
     "confirmed_count": 0,
-    "unconfirmed_count": 10,
-    "fetch_error_count": 6
+    "unconfirmed_count": 12,
+    "fetch_error_count": 4
   }
 }
