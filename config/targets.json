@@ -1,15 +1,77 @@
 {
   "budget_jpy": 330200,
   "target_date": "2026-11-27",
-  "monitor_window_start": "2026-11-14T00:00:00+09:00",
-  "monitor_window_end": "2026-12-04T23:59:59+09:00",
+  "monitor_window_start": "2026-11-01T00:00:00+09:00",
+  "monitor_window_end": "2026-12-11T23:59:59+09:00",
   "monitor_interval_minutes": 15,
   "black_friday_interval_minutes": 5,
   "official_2026_dates": {
-    "amazon_japan": null,
-    "lenovo": null,
-    "asus": null,
-    "note": "null means not independently verified as an official 2026 campaign date yet; broad watch window remains active."
+    "amazon_japan": {
+      "start_jst": null,
+      "end_jst": null,
+      "status": "UNCONFIRMED",
+      "source_urls": [
+        "https://www.amazon.co.jp/blackfriday",
+        "https://www.aboutamazon.jp/news/retail"
+      ],
+      "note": "公式ページの2026年開催期間が年付き日付範囲で確認できるまでは未確定。暫定監視窓から開催日を推定しない。"
+    },
+    "lenovo": {
+      "start_jst": null,
+      "end_jst": null,
+      "status": "UNCONFIRMED",
+      "source_urls": [
+        "https://www.lenovo.com/jp/ja/campaigns/black-friday/"
+      ],
+      "note": "公式ページの2026年開催期間が年付き日付範囲で確認できるまでは未確定。暫定監視窓から開催日を推定しない。"
+    },
+    "asus": {
+      "start_jst": null,
+      "end_jst": null,
+      "status": "UNCONFIRMED",
+      "source_urls": [
+        "https://www.asus.com/jp/deals/black-friday/"
+      ],
+      "note": "公式ページの2026年開催期間が年付き日付範囲で確認できるまでは未確定。暫定監視窓から開催日を推定しない。"
+    },
+    "mouse_computer": {
+      "start_jst": null,
+      "end_jst": null,
+      "status": "UNCONFIRMED",
+      "source_urls": [
+        "https://www.mouse-jp.co.jp/"
+      ],
+      "note": "公式ページの2026年開催期間が年付き日付範囲で確認できるまでは未確定。暫定監視窓から開催日を推定しない。"
+    },
+    "dospara": {
+      "start_jst": null,
+      "end_jst": null,
+      "status": "UNCONFIRMED",
+      "source_urls": [
+        "https://www.dospara.co.jp/"
+      ],
+      "note": "公式ページの2026年開催期間が年付き日付範囲で確認できるまでは未確定。暫定監視窓から開催日を推定しない。"
+    },
+    "acer": {
+      "start_jst": null,
+      "end_jst": null,
+      "status": "UNCONFIRMED",
+      "source_urls": [
+        "https://www.acer.com/jp-ja",
+        "https://store.acer.com/ja-jp/"
+      ],
+      "note": "公式ページの2026年開催期間が年付き日付範囲で確認できるまでは未確定。暫定監視窓から開催日を推定しない。"
+    },
+    "gigabyte": {
+      "start_jst": null,
+      "end_jst": null,
+      "status": "UNCONFIRMED",
+      "source_urls": [
+        "https://www.gigabyte.com/jp"
+      ],
+      "note": "公式ページの2026年開催期間が年付き日付範囲で確認できるまでは未確定。暫定監視窓から開催日を推定しない。"
+    },
+    "note": "公式カレンダーは販売店ごとに独立して確認する。nullの日程は未発表または未検証であり、11月1日〜12月11日は監視用の暫定期間にすぎない。"
   },
   "brands": [
     "Lenovo",
@@ -918,5 +980,7 @@
         "label": "映像ケーブル（必要な場合のみ）"
       }
     ]
-  }
+  },
+  "monitor_window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
+  "monitor_window_note": "暫定の広域監視窓であり、いずれかの販売店の公式BF開催日を意味しない。各店の2026年公式日程を公式ページから明示的な年付き日付範囲で確認するまで、価格をBF実売として認定せず、買い時判定は購入許可を出さない。過去日程、曜日、年のない月日から開催日を推定しない。"
 }
