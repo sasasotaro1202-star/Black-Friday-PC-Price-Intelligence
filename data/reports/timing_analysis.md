@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-12T18:49:48+09:00
-Source snapshot: 2026-10-12T18:48:38+09:00
-Source snapshot SHA256: a3d35798f9798b4280e47f0b0e1aaff1e5de03e5a1af039c1e567a662a5cdf6a
+Generated: 2026-10-12T20:20:48+09:00
+Source snapshot: 2026-10-12T20:19:43+09:00
+Source snapshot SHA256: c37138690ced7c600215185e57439987e90718cd885ea6659dc0e5d474ada392
 Budget: ¥300,200
 Target Black Friday: 2026-11-27
 
@@ -17,8 +17,9 @@ Target Black Friday: 2026-11-27
 |5|G TUNE DG-A7G70|¥304,800|1.5%|HIGH|rtx 5070|26|direct_structured|
 |6|G TUNE FG-A7G6T|¥309,800|3.1%|HIGH|rtx 5060 ti|28|direct_structured|
 |7|G TUNE FG-A7G70|¥319,800|6.1%|HIGH|rtx 5070|33|direct_structured|
-|8|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|24.9%|AGGRESSIVE|rtx 5070 ti|38|direct_structured|
-|9|G TUNE P5-I7G70BK-C（ブラック）|¥419,800|28.5%|AGGRESSIVE|rtx 5070|32|direct_structured|
+|8|Lenovo Legion Pro 5i Gen 10（16型 Intel）|¥354,865|15.4%|REALISTIC|rtx 5080|40|direct_structured|
+|9|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|24.9%|AGGRESSIVE|rtx 5070 ti|38|direct_structured|
+|10|G TUNE P5-I7G70BK-C（ブラック）|¥419,800|28.5%|AGGRESSIVE|rtx 5070|32|direct_structured|
 
 ## Empirical price-change timing
 
@@ -34,6 +35,13 @@ Target Black Friday: 2026-11-27
 - 2025-11-24 | TUF Gaming A16 RTX 5070 32GB/1TB observed at ¥219,800 ¥219,800 | https://pc.watch.impress.co.jp/docs/news/todays_sales/2067328.html
 - 2025-11-30 | TUF Gaming A16 RTX 5070 32GB/1TB still observed at ¥219,800 ¥219,800 | https://ascii.jp/elem/000/004/356/4356081/
 - 2025-11-14 | Lenovo Black Friday campaign begins | https://www.lenovo.com/jp/ja/campaigns/black-friday/
+
+## Current buy-now decision
+
+- Status: **BF前の監視継続** (PRE_BF_MONITORING)
+- Recommendation: 現在価格は事前参考値です。BF価格と混同せず、開催期間に入ってから実売・在庫・総額を基に買い時を判定します。
+- Full detail: data/reports/buy-now-now.md
+- The timing score is a heuristic priority signal, not a probability forecast.
 
 ## Rules
 - Missing retrieval is not stockout.
