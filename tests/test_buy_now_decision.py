@@ -10,18 +10,18 @@ sys.path.insert(0, "scripts")
 import timing_analysis as timing
 
 JST = timezone(timedelta(hours=9))
-SALE_START = "2026-11-14T00:00:00+09:00"
-SALE_END = "2026-12-04T23:59:59+09:00"
+SALE_START = "2026-11-01T00:00:00+09:00"
+SALE_END = "2026-12-11T23:59:59+09:00"
 
 
-def fixture(now, price=280000, stock="in_stock", rank_status="BUY_NOW", gate_allowed=True, pit_valid=True, retrieved_at=None, budget_ready=True):
+def fixture(now, price=280000, stock="in_stock", rank_status="BUY_NOW", gate_allowed=True, pit_valid=True, retrieved_at=None, budget_ready=True, official_campaign_confirmed=True, campaign_start=SALE_START, campaign_end=SALE_END):
     retrieved_dt = retrieved_at or now
     retrieved = timing.iso(retrieved_dt)
     item = {
         "id": "desktop-test",
         "name": "Test desktop RTX 5070",
         "form_factor": "desktop",
-        "url": "https://example.com/product",
+        "url": "https://www.mouse-jp.co.jp/store/g/test-product",
         "current_price_jpy": price,
         "cash_total_cost_jpy": price,
         "effective_cost_jpy": price,
@@ -33,7 +33,7 @@ def fixture(now, price=280000, stock="in_stock", rank_status="BUY_NOW", gate_all
         "available_at": retrieved,
         "prediction_time": retrieved,
         "pit_valid": pit_valid,
-        "purchase_url": "https://example.com/product",
+        "purchase_url": "https://www.mouse-jp.co.jp/store/g/test-product",
         "spec": {"gpu": "RTX 5070", "ram_gb": 32, "ssd": "1 TB", "form_factor": "desktop"},
         "score_detail": {
             "status": rank_status,
@@ -61,7 +61,20 @@ def fixture(now, price=280000, stock="in_stock", rank_status="BUY_NOW", gate_all
         "products": [item],
         "unavailable_products": [],
     }
-    config = {"monitor_window_start": SALE_START, "monitor_window_end": SALE_END}
+    config = {
+        "monitor_window_start": SALE_START,
+        "monitor_window_end": SALE_END,
+        "monitor_window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
+        "official_2026_dates": {
+            "mouse_computer": {
+                "start_jst": campaign_start if official_campaign_confirmed else None,
+                "end_jst": campaign_end if official_campaign_confirmed else None,
+                "status": "CONFIRMED_MANUAL" if official_campaign_confirmed else "UNCONFIRMED",
+                "source_url": "https://www.mouse-jp.co.jp/",
+                "evidence": "Test fixture: explicitly dated official 2026 range.",
+            }
+        },
+    }
     return rankings, config
 
 
@@ -103,6 +116,30 @@ class BuyNowDecisionTests(unittest.TestCase):
         self.assertEqual(result["status"], "BUY_NOW")
         self.assertTrue(result["chosen_candidate"]["qualified_to_buy"])
         self.assertEqual(result["chosen_candidate"]["price_jpy"], 280000)
+
+    def test_provisional_watch_window_alone_never_authorizes_buy_now(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        result = self.evaluate(now, official_campaign_confirmed=False)
+        row = result["chosen_candidate"]
+        self.assertEqual(result["status"], "WAIT_FOR_OFFICIAL_DATES")
+        self.assertEqual(row["status"], "WAIT_FOR_OFFICIAL_DATES")
+        self.assertFalse(row["price_verified_for_bf"])
+        self.assertFalse(row["qualified_to_buy"])
+        self.assertEqual(row["watch_window_observed_price_jpy"], 280000)
+        self.assertEqual(row["retailer_key"], "mouse_computer")
+
+    def test_confirmed_future_sale_is_not_active_early(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        result = self.evaluate(
+            now,
+            campaign_start="2026-11-21T00:00:00+09:00",
+            campaign_end=SALE_END,
+        )
+        row = result["chosen_candidate"]
+        self.assertEqual(result["status"], "WAIT_FOR_OFFICIAL_DATES")
+        self.assertFalse(row["retailer_campaign_active"])
+        self.assertFalse(row["price_verified_for_bf"])
+        self.assertFalse(row["qualified_to_buy"])
 
     def test_unknown_pit_never_qualifies(self):
         now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
@@ -150,10 +187,10 @@ class BuyNowDecisionTests(unittest.TestCase):
         ]
         result = self.evaluate(now, price_observations=prices)
         row = result["chosen_candidate"]
-        self.assertEqual(row["bf_window_low_observed_jpy"], 270000)
-        self.assertEqual(row["bf_window_low_observed_at"], "2026-11-18T12:00:00+09:00")
-        self.assertEqual(row["bf_window_price_observation_count"], 3)  # two history points + current snapshot
-        self.assertGreater(row["gap_from_observed_window_low_pct"], 0)
+        self.assertEqual(row["watch_window_low_observed_jpy"], 270000)
+        self.assertEqual(row["watch_window_low_observed_at"], "2026-11-18T12:00:00+09:00")
+        self.assertEqual(row["watch_window_price_observation_count"], 3)  # two history points + current snapshot
+        self.assertGreater(row["gap_from_watch_window_low_pct"], 0)
 
     def test_after_sale_price_is_never_mislabeled_as_pre_sale(self):
         now = datetime(2026, 12, 5, 12, 0, tzinfo=JST)
