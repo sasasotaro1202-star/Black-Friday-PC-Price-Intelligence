@@ -48,9 +48,9 @@ def fixture(now, price=280000, stock="in_stock", rank_status="BUY_NOW", gate_all
         "prediction_time": retrieved,
         "source_snapshot_generated_at": retrieved,
         "source_snapshot_sha256": "test-snapshot",
-        "total_budget_jpy": 370000,
-        "pc_target_jpy": 300200,
-        "dynamic_pc_cap_jpy": 300200,
+        "total_budget_jpy": 400000,
+        "pc_target_jpy": 330200,
+        "dynamic_pc_cap_jpy": 330200,
         "peripheral_projection_jpy": 69800,
         "peripheral_budget_data_ready": budget_ready,
         "purchase_gate": {
@@ -120,7 +120,7 @@ class BuyNowDecisionTests(unittest.TestCase):
 
     def test_over_budget_offer_is_not_authorized(self):
         now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
-        result = self.evaluate(now, price=320000, rank_status="WAIT_FOR_DISCOUNT")
+        result = self.evaluate(now, price=340000, rank_status="WAIT_FOR_DISCOUNT")
         self.assertEqual(result["status"], "WAIT_FOR_DISCOUNT")
         self.assertFalse(result["chosen_candidate"]["qualified_to_buy"])
 
