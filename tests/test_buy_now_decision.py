@@ -138,9 +138,21 @@ class BuyNowDecisionTests(unittest.TestCase):
             campaign_end=CAMPAIGN_END,
         )
         row = result["chosen_candidate"]
-        self.assertEqual(result["status"], "WAIT_FOR_OFFICIAL_DATES")
+        self.assertEqual(result["status"], "WAIT_FOR_CAMPAIGN_WINDOW")
         self.assertFalse(row["retailer_campaign_active"])
         self.assertFalse(row["price_verified_for_bf"])
+        self.assertFalse(row["qualified_to_buy"])
+
+    def test_confirmed_active_campaign_with_pre_campaign_price_waits_for_fresh_price(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        retrieved_at = datetime(2026, 11, 14, 12, 0, tzinfo=JST)
+        result = self.evaluate(now, retrieved_at=retrieved_at)
+        row = result["chosen_candidate"]
+        self.assertTrue(row["retailer_campaign_dates_confirmed"])
+        self.assertTrue(row["retailer_campaign_active"])
+        self.assertFalse(row["retailer_campaign_active_at_observation"])
+        self.assertEqual(row["status"], "VERIFY_PRICE_OR_PIT")
+        self.assertNotEqual(result["status"], "WAIT_FOR_OFFICIAL_DATES")
         self.assertFalse(row["qualified_to_buy"])
 
     def test_unknown_pit_never_qualifies(self):
