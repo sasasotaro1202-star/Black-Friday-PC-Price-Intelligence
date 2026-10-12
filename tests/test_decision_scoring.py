@@ -107,7 +107,7 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertIn("完成構成未確認", detail["reason"])
 
     def test_above_pc_target_effective_cost_waits(self):
-        item = self.candidate(price=330000)
+        item = self.candidate(price=350000)
         score, detail = intelligence.decision_score(item, [], [])
         self.assertEqual(detail["status"], "WAIT_FOR_DISCOUNT")
 
