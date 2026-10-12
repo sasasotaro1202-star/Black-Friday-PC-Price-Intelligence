@@ -9,6 +9,7 @@ from intelligence import (
     required_discount, load_json, load_catalog, load_anchors, now_jst, iso,
     parse_dt, actionable_max_age_minutes, configuration_readiness
 )
+from sale_calendar import campaign_window_for_item
 
 JST=timezone(timedelta(hours=9))
 TARGET=datetime(2026,11,27,tzinfo=JST)
@@ -115,7 +116,7 @@ def read_buy_now_observations(start=None, end=None):
 
 
 def append_buy_now_observations(latest, config, now=None):
-    """Persist verified, buyable price observations throughout the configured BF window."""
+    """Persist timestamped, SKU-verified prices in the provisional broad watch window."""
     now = now or now_jst()
     start = parse_dt(config.get("monitor_window_start"))
     end = parse_dt(config.get("monitor_window_end"))
@@ -258,13 +259,13 @@ def _window_price_movement(events, candidate_id, start, end):
     }
 
 
-def build_buy_now_decision(rankings, events, config, price_observations=None):
-    """Create a fail-closed decision for the full sale window from existing ranking evidence."""
+def build_buy_now_decision(rankings, events, config, price_observations=None, official_campaign_dates=None):
+    """Separate provisional observation coverage from source-verified seller campaign windows."""
     now = now_jst()
-    start = parse_dt(config.get("monitor_window_start")) or datetime(now.year, 11, 14, tzinfo=JST)
-    end = parse_dt(config.get("monitor_window_end")) or datetime(now.year, 12, 4, 23, 59, 59, tzinfo=JST)
+    start = parse_dt(config.get("monitor_window_start")) or datetime(now.year, 11, 1, tzinfo=JST)
+    end = parse_dt(config.get("monitor_window_end")) or datetime(now.year, 12, 11, 23, 59, 59, tzinfo=JST)
     in_window = start <= now <= end
-    phase = "PRE_BF" if now < start else "POST_BF" if now > end else "BLACK_FRIDAY_WINDOW"
+    phase = "PRE_WATCH_WINDOW" if now < start else "POST_WATCH_WINDOW" if now > end else "PROVISIONAL_BROAD_WATCH_WINDOW"
     max_age = actionable_max_age_minutes(now)
 
     total_budget = rankings.get("total_budget_jpy")
@@ -309,8 +310,13 @@ def build_buy_now_decision(rankings, events, config, price_observations=None):
             )
             and _is_positive_yen(price) and sku_ok
         )
-        current_is_bf = bool(retrieved and start <= retrieved <= end)
-        price_verified = bool(in_window and current_is_bf and source_ok and fresh and pit_ok)
+        campaign = campaign_window_for_item(item, now, config, official_campaign_dates)
+        current_is_watch_window = bool(retrieved and start <= retrieved <= end)
+        official_sale_active = bool(campaign.get("active_at_observation"))
+        price_verified = bool(
+            in_window and current_is_watch_window and official_sale_active
+            and source_ok and fresh and pit_ok
+        )
 
         config_ready = detail.get("configuration_ready") is True
         config_reasons = detail.get("configuration_reasons") or []
@@ -345,7 +351,14 @@ def build_buy_now_decision(rankings, events, config, price_observations=None):
             and estimated_all_in <= all_in_budget
         )
 
-        observations = _window_observations(events, item, start, end, price_verified, price_observations) if in_window else []
+        # Window history is useful for trend comparisons even before a seller's
+        # campaign dates are confirmed. It is explicitly a watch-window low,
+        # not a claim that the seller's official Black Friday sale was active.
+        observations = _window_observations(
+            events, item, start, end,
+            bool(source_ok and fresh and pit_ok and stock in ("in_stock", "low_stock")),
+            price_observations,
+        ) if in_window else []
         observed_prices = [x["price_jpy"] for x in observations]
         sale_low = min(observed_prices) if observed_prices else None
         sale_low_observation = next((x for x in observations if x.get("price_jpy") == sale_low), None)
@@ -356,7 +369,7 @@ def build_buy_now_decision(rankings, events, config, price_observations=None):
             if price_verified and sale_low and low_is_comparable else None
         )
         movement = _window_price_movement(events, item.get("id"), start, end) if in_window else {
-            "change_count": 0, "label": "BF期間外", "recent_changes": []
+            "change_count": 0, "label": "監視窓外", "recent_changes": []
         }
 
         timing_score = None
@@ -384,8 +397,14 @@ def build_buy_now_decision(rankings, events, config, price_observations=None):
         blockers = []
         if not in_window:
             blockers.append("ブラックフライデー監視期間外。現行価格はBF実売として扱わない")
-        elif not current_is_bf:
-            blockers.append("商品価格の観測時刻がBF期間内ではない")
+        elif not current_is_watch_window:
+            blockers.append("商品価格の観測時刻が暫定の広域監視窓内ではない")
+        if in_window and not official_sale_active:
+            retailer = campaign.get("retailer_key") or "販売店未特定"
+            blockers.append(
+                retailer + "の2026年公式セール期間が未確認、または価格観測時点が公式期間外。"
+                "暫定監視窓だけではBF実売として認定しない"
+            )
         if not source_ok:
             blockers.append("直接取得価格・SKU一致・価格検証の条件未達")
         if not fresh:
@@ -418,10 +437,12 @@ def build_buy_now_decision(rankings, events, config, price_observations=None):
 
         if not in_window:
             status = "PRE_BF_REFERENCE_ONLY" if now < start else "SALE_WINDOW_CLOSED"
-        elif not price_verified:
-            status = "VERIFY_PRICE_OR_PIT"
         elif stock == "out_of_stock":
             status = "OUT_OF_STOCK"
+        elif not official_sale_active:
+            status = "WAIT_FOR_OFFICIAL_DATES"
+        elif not price_verified:
+            status = "VERIFY_PRICE_OR_PIT"
         elif not stock_available:
             status = "STOCK_UNCONFIRMED"
         elif not config_ready:
@@ -442,11 +463,20 @@ def build_buy_now_decision(rankings, events, config, price_observations=None):
             "price_jpy": price if price_verified else None,
             "pre_bf_reference_price_jpy": price if price is not None and retrieved and retrieved < start else None,
             "post_bf_reference_price_jpy": price if price is not None and retrieved and retrieved > end else None,
-            "last_bf_observed_price_jpy": price if price is not None and current_is_bf and not in_window else None,
+            "watch_window_observed_price_jpy": (
+                price if price is not None and current_is_watch_window and source_ok and fresh and pit_ok else None
+            ),
+            "retailer_key": campaign.get("retailer_key"),
+            "retailer_campaign_status": campaign.get("status"),
+            "retailer_campaign_start_jst": campaign.get("start_jst"),
+            "retailer_campaign_end_jst": campaign.get("end_jst"),
+            "retailer_campaign_source_url": campaign.get("source_url"),
+            "retailer_campaign_active": official_sale_active,
             "reference_price_phase": (
                 "PRE_BF_REFERENCE" if price is not None and retrieved and retrieved < start else
                 "POST_BF_REFERENCE" if price is not None and retrieved and retrieved > end else
-                "BF_WINDOW_STALE_OR_EXPIRED" if price is not None and current_is_bf and not price_verified else
+                "OFFICIAL_CAMPAIGN_STALE_OR_EXPIRED" if price is not None and official_sale_active and not price_verified else
+                "PROVISIONAL_WATCH_WINDOW_REFERENCE" if price is not None and current_is_watch_window and not official_sale_active else
                 "UNVERIFIED_REFERENCE" if price is not None and not price_verified else None
             ),
             "cash_total_cost_jpy": cash_cost,
@@ -467,11 +497,11 @@ def build_buy_now_decision(rankings, events, config, price_observations=None):
             "ranking_status": score_status,
             "status": status,
             "qualified_to_buy": qualified,
-            "bf_window_low_observed_jpy": sale_low,
-            "bf_window_low_observed_at": sale_low_at,
-            "bf_window_price_observation_count": len(observations),
-            "bf_window_low_is_comparable": low_is_comparable,
-            "gap_from_observed_window_low_pct": gap_from_low_pct,
+            "watch_window_low_observed_jpy": sale_low,
+            "watch_window_low_observed_at": sale_low_at,
+            "watch_window_price_observation_count": len(observations),
+            "watch_window_low_is_comparable": low_is_comparable,
+            "gap_from_watch_window_low_pct": gap_from_low_pct,
             "price_movement": movement,
             "purchase_url": item.get("purchase_url") if str(item.get("purchase_url") or "").startswith(("https://", "http://")) else None,
             "blockers": list(dict.fromkeys(blockers)),
@@ -500,10 +530,14 @@ def build_buy_now_decision(rankings, events, config, price_observations=None):
     ))
 
     chosen = None
+    any_official_campaign_active = any(x.get("retailer_campaign_active") for x in rows)
     if now < start:
-        status, label = "PRE_BF_MONITORING", "BF前の監視継続"
-        recommendation = "現在価格は事前参考値です。BF価格と混同せず、開催期間に入ってから実売・在庫・総額を基に買い時を判定します。"
-        reasons = ["設定されたBF監視期間はまだ始まっていません。", "本番中は更新ごとに価格・在庫・購入条件を再判定します。"]
+        status, label = "PRE_BF_MONITORING", "事前監視継続・公式日程未確認"
+        recommendation = "現在価格は事前参考値です。設定期間は各社の公式開催日ではありません。公式ページで2026年の日付範囲を確認できるまではBF価格として扱わず、開催日推定に基づく購入推奨を出しません。"
+        reasons = [
+            "暫定の広域監視窓はまだ始まっていません。",
+            "各販売店の公式2026年セール日程は個別に確認します。過去の日程や曜日からは推定しません。",
+        ]
     elif now > end:
         status, label = "SALE_WINDOW_CLOSED", "設定した監視期間は終了"
         recommendation = "期間終了後の価格を2026年BF実売として扱いません。公式の次回セール日程が判明したら監視窓を更新します。"
@@ -524,8 +558,16 @@ def build_buy_now_decision(rankings, events, config, price_observations=None):
         chosen = over_budget[0]
         status, label = "WAIT_FOR_DISCOUNT", "値下げ待ち"
         gap = max(0, chosen["cash_total_cost_jpy"] - int(pc_cap))
-        recommendation = "完成構成の確認価格は本体動的上限を ¥{:,} 超えています。予算超過のまま買わず、目標額到達を監視します。".format(gap)
+        recommendation = "公式セール期間内で確認した完成構成価格が本体動的上限を ¥{:,} 超えています。予算超過のまま買わず、目標額到達を監視します。".format(gap)
         reasons = chosen.get("blockers") or ["PC本体価格が動的上限を超過"]
+    elif in_window and not any_official_campaign_active:
+        status, label = "WAIT_FOR_OFFICIAL_DATES", "公式セール日程の確認待ち"
+        recommendation = "価格監視は継続中ですが、この期間は暫定の広域監視窓です。販売店の2026年公式セール開始・終了日と価格の適用期間が確認できるまで、BF実売としての買い時判定や購入許可は出しません。"
+        reasons = [
+            "各候補の販売元について、公式ページ上の2026年日付範囲が未確認です。",
+            "取得済み価格は広域監視窓の比較材料として保存し、公式BF価格とは区別します。",
+            "購入ゲート: " + str(gate.get("reason") or "未確認"),
+        ]
     elif not budget_ready or not coverage_complete or not gate_allowed:
         status, label = "WAIT_FOR_VERIFICATION", "データ確認が揃うまで判断保留"
         recommendation = "価格・在庫・完成構成・周辺機器込み予算・重要候補の確認が不足しています。取得失敗を売り切れとみなさず、確認できた時点で再判定します。"
@@ -548,10 +590,19 @@ def build_buy_now_decision(rankings, events, config, price_observations=None):
         "recommendation": recommendation,
         "reasons": reasons,
         "sale_phase": phase,
-        "sale_window_start_jst": iso(start),
-        "sale_window_end_jst": iso(end),
-        "sale_window_active": in_window,
-        "remaining_hours": round(hours_left, 1) if hours_left is not None else None,
+        "watch_window_start_jst": iso(start),
+        "watch_window_end_jst": iso(end),
+        "watch_window_active": in_window,
+        "watch_window_type": config.get("monitor_window_type", "PROVISIONAL_BROAD_WATCH_WINDOW"),
+        "official_campaign_dates_summary": {
+            "retailer_count": len((official_campaign_dates or {}).get("sources") or {}),
+            "confirmed_count": sum(
+                1 for entry in ((official_campaign_dates or {}).get("sources") or {}).values()
+                if isinstance(entry, dict) and entry.get("status") == "CONFIRMED"
+            ),
+            "policy": "A provisional monitoring window does not confirm retailer campaign dates.",
+        },
+        "remaining_hours_in_watch_window": round(hours_left, 1) if hours_left is not None else None,
         "total_budget_jpy": total_budget,
         "pc_target_jpy": pc_target,
         "pc_dynamic_cap_jpy": pc_cap,
@@ -575,7 +626,9 @@ def render_buy_now_markdown(decision):
         "",
         "- 更新時刻（JST）: " + str(decision.get("generated_at")),
         "- 判定: **" + str(decision.get("label")) + "** (" + str(decision.get("status")) + ")",
-        "- BF監視期間: " + str(decision.get("sale_window_start_jst")) + " ～ " + str(decision.get("sale_window_end_jst")),
+        "- 暫定の広域監視窓（公式セール日程ではない）: " + str(decision.get("watch_window_start_jst")) + " ～ " + str(decision.get("watch_window_end_jst")),
+        "- 公式日程確認: " + str(decision.get("official_campaign_dates_summary", {}).get("confirmed_count", 0)) + "/" + str(decision.get("official_campaign_dates_summary", {}).get("retailer_count", 0)) + " 店舗",
+        "- 監視窓内の価格を保存して比較しますが、公式日程・価格適用の確認がない価格はBF実売として扱いません。",
         "- 総予算: " + ("¥{:,}".format(decision["total_budget_jpy"]) if decision.get("total_budget_jpy") is not None else "未確認"),
         "- PC本体の動的上限: " + ("¥{:,}".format(decision["pc_dynamic_cap_jpy"]) if decision.get("pc_dynamic_cap_jpy") is not None else "未確認"),
         "- 周辺機器の価格・在庫確認: " + ("完了" if decision.get("peripheral_budget_data_ready") else "未完了"),
@@ -608,12 +661,13 @@ def render_buy_now_markdown(decision):
             "- PC＋周辺機器の総額試算: " + ("¥{:,}".format(chosen["estimated_all_in_jpy"]) if chosen.get("estimated_all_in_jpy") is not None else "未確認"),
             "- 在庫・待つリスク: " + str(chosen.get("stock_status")) + " / " + str(chosen.get("wait_risk")),
             "- RAM32GB/SSD1TB以上: " + ("達成" if chosen.get("configuration_ready") else "未達/未確認"),
-            "- 期間内最低観測価格: " + (
-                "¥{:,}".format(chosen["bf_window_low_observed_jpy"])
-                + ("（" + str(chosen["bf_window_low_observed_at"]) + "）" if chosen.get("bf_window_low_observed_at") else "")
-                if chosen.get("bf_window_low_observed_jpy") is not None else "未観測"
+            "- 暫定監視窓内の最低観測価格（BF公式価格とは限らない）: " + (
+                "¥{:,}".format(chosen["watch_window_low_observed_jpy"])
+                + ("（" + str(chosen["watch_window_low_observed_at"]) + "）" if chosen.get("watch_window_low_observed_at") else "")
+                if chosen.get("watch_window_low_observed_jpy") is not None else "未観測"
             ),
-            "- 期間内の比較可能な観測数: " + str(chosen.get("bf_window_price_observation_count", 0)),
+            "- 監視窓内の比較可能な観測数: " + str(chosen.get("watch_window_price_observation_count", 0)),
+            "- 販売店の2026年公式日程: " + str(chosen.get("retailer_campaign_status") or "UNCONFIRMED"),
             "- 買い時スコア: " + (str(chosen.get("timing_score_100")) + "/100" if chosen.get("timing_score_100") is not None else "未算出"),
             "- 購入リンク: " + ("[販売ページ](" + chosen["purchase_url"] + ")" if chosen.get("purchase_url") else "未確認"),
             "",
@@ -626,30 +680,22 @@ def render_buy_now_markdown(decision):
         "",
         "## 候補一覧",
         "",
-        "|順位|商品|BF期間内価格|総額試算|在庫|構成|期間内最低観測|買い時スコア|判定|商品ページ|",
-        "|---:|---|---:|---:|---|---|---:|---:|---|---|",
+        "|順位|商品|公式期間内の確認価格|暫定監視窓内参考価格|総額試算|在庫|構成|監視窓内最低観測|買い時スコア|判定|商品ページ|",
+        "|---:|---|---:|---:|---:|---|---|---:|---:|---|---|",
     ]
     for index, row in enumerate(decision.get("candidates") or [], 1):
-        if row.get("price_jpy") is not None:
-            price_text = "BF確認 ¥{:,}".format(row["price_jpy"])
-        elif row.get("pre_bf_reference_price_jpy") is not None:
-            price_text = "BF前参考 ¥{:,}".format(row["pre_bf_reference_price_jpy"])
-        elif row.get("post_bf_reference_price_jpy") is not None:
-            price_text = "BF後参考 ¥{:,}".format(row["post_bf_reference_price_jpy"])
-        elif row.get("last_bf_observed_price_jpy") is not None:
-            price_text = "BF最終観測 ¥{:,}".format(row["last_bf_observed_price_jpy"])
-        else:
-            price_text = "未確認"
+        price_text = "¥{:,}".format(row["price_jpy"]) if row.get("price_jpy") is not None else "未確認"
+        watch_price_text = "¥{:,}".format(row["watch_window_observed_price_jpy"]) if row.get("watch_window_observed_price_jpy") is not None else "—"
         all_in = "¥{:,}".format(row["estimated_all_in_jpy"]) if row.get("estimated_all_in_jpy") is not None else "未確認"
         low = (
-            "¥{:,}".format(row["bf_window_low_observed_jpy"])
-            + (" @ " + str(row["bf_window_low_observed_at"]) if row.get("bf_window_low_observed_at") else "")
-            if row.get("bf_window_low_observed_jpy") is not None else "未観測"
+            "¥{:,}".format(row["watch_window_low_observed_jpy"])
+            + (" @ " + str(row["watch_window_low_observed_at"]) if row.get("watch_window_low_observed_at") else "")
+            if row.get("watch_window_low_observed_jpy") is not None else "未観測"
         )
         score = str(row["timing_score_100"]) + "/100" if row.get("timing_score_100") is not None else "—"
         url = "[販売ページ](" + row["purchase_url"] + ")" if row.get("purchase_url") else "未確認"
         lines.append(
-            "|" + str(index) + "|" + str(row.get("name", "")) + "|" + price_text + "|" + all_in + "|"
+            "|" + str(index) + "|" + str(row.get("name", "")) + "|" + price_text + "|" + watch_price_text + "|" + all_in + "|"
             + str(row.get("stock_status")) + "|" + ("達成" if row.get("configuration_ready") else "未達/未確認") + "|"
             + low + "|" + score + "|" + str(row.get("status")) + "|" + url + "|"
         )
@@ -660,9 +706,9 @@ def render_buy_now_markdown(decision):
         "- BUY_NOWはBF期間内の直接価格・SKU・鮮度・PIT・在庫・完成構成・総予算・重要候補カバレッジを全て通過した場合だけ表示します。",
         "- URGENT_BUT_GATE_BLOCKEDは売り切れリスクがあっても、購入ゲートが未通過のため購入許可を出さない状態です。",
         "- 買い時スコアは優先順位の補助であり、値下がり確率ではありません。",
-        "- 期間内最低観測価格は保存されたイベントを基にした観測値で、販売店の全履歴最安値ではありません。",
+        "- 暫定監視窓の最低価格は観測履歴の最小値であり、販売店の全履歴最安値や公式BF価格を意味しません。",
         "- 価格取得失敗は売り切れとは扱いません。ポイントや未適用クーポンを現金値引きに数えません。",
-        "- BF期間外の現在価格は参考情報であり、2026年BF実売価格として表示しません。",
+        "- 監視窓外の現在価格は参考情報であり、2026年BF実売価格として表示しません。",
         "",
     ]
     return "\n".join(lines)
@@ -685,7 +731,7 @@ def append_buy_now_summary_to_latest(decision):
         "",
         "- 更新時刻（JST）: " + str(decision.get("generated_at")),
         "- 判定: **" + str(decision.get("label")) + "** (" + str(decision.get("status")) + ")",
-        "- BF監視期間: " + str(decision.get("sale_window_start_jst")) + " ～ " + str(decision.get("sale_window_end_jst")),
+        "- 暫定の広域監視窓（公式セール日程ではない）: " + str(decision.get("watch_window_start_jst")) + " ～ " + str(decision.get("watch_window_end_jst")),
         "- 総予算: " + ("¥{:,}".format(decision["total_budget_jpy"]) if decision.get("total_budget_jpy") is not None else "未確認"),
         "- PC本体の動的上限: " + ("¥{:,}".format(decision["pc_dynamic_cap_jpy"]) if decision.get("pc_dynamic_cap_jpy") is not None else "未確認"),
         "- 周辺機器の価格・在庫確認: " + ("完了" if decision.get("peripheral_budget_data_ready") else "未完了"),
@@ -710,12 +756,13 @@ def append_buy_now_summary_to_latest(decision):
             "- 注目候補: **" + str(chosen.get("name")) + "**",
             "- 価格: " + chosen_price,
             "- BF後の参考価格: " + ("¥{:,}".format(chosen["post_bf_reference_price_jpy"]) if chosen.get("post_bf_reference_price_jpy") is not None else "—"),
-            "- 期間内最低観測価格: " + (
-                "¥{:,}".format(chosen["bf_window_low_observed_jpy"])
-                + ("（" + str(chosen["bf_window_low_observed_at"]) + "）" if chosen.get("bf_window_low_observed_at") else "")
-                if chosen.get("bf_window_low_observed_jpy") is not None else "未観測"
+            "- 暫定監視窓内の最低観測価格（BF公式価格とは限らない）: " + (
+                "¥{:,}".format(chosen["watch_window_low_observed_jpy"])
+                + ("（" + str(chosen["watch_window_low_observed_at"]) + "）" if chosen.get("watch_window_low_observed_at") else "")
+                if chosen.get("watch_window_low_observed_jpy") is not None else "未観測"
             ),
-            "- 期間内観測件数: " + str(chosen.get("bf_window_price_observation_count", 0)),
+            "- 監視窓内観測件数: " + str(chosen.get("watch_window_price_observation_count", 0)),
+            "- 販売店の2026年公式日程: " + str(chosen.get("retailer_campaign_status") or "UNCONFIRMED"),
             "- 在庫 / 待つリスク: " + str(chosen.get("stock_status")) + " / " + str(chosen.get("wait_risk")),
             "- RAM32GB・SSD1TB以上: " + ("達成" if chosen.get("configuration_ready") else "未達/未確認"),
             "- 買い時スコア: " + (str(chosen.get("timing_score_100")) + "/100" if chosen.get("timing_score_100") is not None else "未算出"),
@@ -783,7 +830,12 @@ def main():
         read_buy_now_observations(window_start, window_end) if window_active else []
     )
     rankings = load_json(os.path.join(ROOT, "data", "decision_rankings.json"), {})
-    decision = build_buy_now_decision(rankings, events, config, price_observations)
+    official_campaign_dates = load_json(
+        os.path.join(ROOT, "data", "official_campaign_dates_status.json"), {}
+    )
+    decision = build_buy_now_decision(
+        rankings, events, config, price_observations, official_campaign_dates
+    )
     out={
         "generated_at":iso(now_jst()),
         "source_snapshot_generated_at":source_snapshot_generated_at,
@@ -798,6 +850,7 @@ def main():
             "path": "data/buy_now_observations.jsonl",
             "appended_this_run": recorded_observations,
             "historical_rows_loaded": len(price_observations),
+            "window_type": config.get("monitor_window_type", "PROVISIONAL_BROAD_WATCH_WINDOW"),
             "window_start_jst": config.get("monitor_window_start"),
             "window_end_jst": config.get("monitor_window_end"),
         },
