@@ -22,7 +22,7 @@ def _initial_budget_settings():
     except (TypeError, ValueError):
         total, peripherals, pc_cap, pc_target = 400000, 69800, 330200, 330200
     if min(total, peripherals, pc_cap, pc_target) < 0 or pc_cap + peripherals != total or pc_target > pc_cap:
-        total, peripherals, pc_cap, pc_target = 370000, 48300, 321700, 321700
+        total, peripherals, pc_cap, pc_target = 400000, 69800, 330200, 330200
     return total, peripherals, pc_target, pc_cap
 
 TOTAL_BUDGET, PERIPHERAL_BUDGET, BUDGET, PC_BUDGET = _initial_budget_settings()
