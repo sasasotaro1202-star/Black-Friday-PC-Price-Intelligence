@@ -53,7 +53,7 @@ def dynamic_change_timing(events):
         new=e.get("new_price_jpy")
         if old is None or new is None or old==new:
             continue
-        if e.get("pit_valid") is False:
+        if e.get("pit_valid") is not True:
             continue
         ts=e.get("observed_at") or e.get("retrieval_time")
         if not ts:
@@ -92,19 +92,109 @@ def _event_dt(event):
     return parse_dt(event.get("observed_at") or event.get("retrieval_time"))
 
 
-def _window_observations(events, item, start, end, include_current):
+
+def read_buy_now_observations():
+    path = os.path.join(ROOT, "data", "buy_now_observations.jsonl")
+    rows = []
+    if not os.path.exists(path):
+        return rows
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            try:
+                row = json.loads(line)
+            except Exception:
+                continue
+            if isinstance(row, dict):
+                rows.append(row)
+    return rows
+
+
+def append_buy_now_observations(latest, config, now=None):
+    """Persist verified, buyable price observations throughout the configured BF window."""
+    now = now or now_jst()
+    start = parse_dt(config.get("monitor_window_start"))
+    end = parse_dt(config.get("monitor_window_end"))
+    if not start or not end or not (start <= now <= end):
+        return 0
+
+    path = os.path.join(ROOT, "data", "buy_now_observations.jsonl")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    count = 0
+    with open(path, "a", encoding="utf-8") as f:
+        for item in latest.get("products") or []:
+            if not isinstance(item, dict) or not item.get("id"):
+                continue
+            price = item.get("current_price_jpy")
+            stock = item.get("stock_status")
+            available = parse_dt(item.get("available_at"))
+            retrieved = parse_dt(item.get("retrieval_time"))
+            valid = bool(
+                _is_positive_yen(price)
+                and stock in ("in_stock", "low_stock")
+                and item.get("price_source_mode") == "direct_structured"
+                and item.get("price_validation_status") in (
+                    "validated", "validated_exact_model_page"
+                )
+                and item.get("variant_match") in ("exact", "trusted_url", "strong")
+                and available and retrieved and start <= retrieved <= end
+                and available <= retrieved <= now
+            )
+            if not valid:
+                continue
+            observation = {
+                "id": str(item.get("id")),
+                "name": item.get("name") or item.get("catalog_name"),
+                "url": item.get("url"),
+                "observed_at": iso(retrieved),
+                "available_at": iso(available),
+                "retrieval_time": iso(retrieved),
+                "price_jpy": int(price),
+                "stock_status": stock,
+                "price_source_mode": item.get("price_source_mode"),
+                "price_validation_status": item.get("price_validation_status"),
+                "variant_match": item.get("variant_match"),
+                "pit_valid": True,
+            }
+            f.write(json.dumps(observation, ensure_ascii=False, separators=(",", ":")) + "\n")
+            count += 1
+    return count
+
+
+def _window_observations(events, item, start, end, include_current, price_observations=None):
     product_id = str(item.get("id") or "")
     observations = []
     for event in events:
         if str(event.get("id") or "") != product_id or event.get("pit_valid") is not True:
             continue
+        if event.get("price_source_mode") != "direct_structured":
+            continue
+        if event.get("price_validation_status") not in ("validated", "validated_exact_model_page"):
+            continue
         dt = _event_dt(event)
         price = event.get("new_price_jpy")
-        if dt and start <= dt <= end and _is_positive_yen(price):
+        if dt and start <= dt <= end and _is_positive_yen(price)
+                and event.get("new_stock_status") in ("in_stock", "low_stock"):
             observations.append({
                 "price_jpy": price,
                 "at": iso(dt),
                 "source": "price_change_event",
+            })
+    for observation in price_observations or []:
+        if str(observation.get("id") or "") != product_id or observation.get("pit_valid") is not True:
+            continue
+        dt = parse_dt(observation.get("observed_at"))
+        price = observation.get("price_jpy")
+        if (
+            dt and start <= dt <= end and _is_positive_yen(price)
+            and observation.get("price_source_mode") == "direct_structured"
+            and observation.get("price_validation_status") in ("validated", "validated_exact_model_page")
+            and observation.get("variant_match") in ("exact", "trusted_url", "strong")
+            and observation.get("stock_status") in ("in_stock", "low_stock")
+        ):
+            observations.append({
+                "price_jpy": price,
+                "at": iso(dt),
+                "source": "verified_window_observation",
             })
     if include_current:
         dt = parse_dt(item.get("retrieval_time"))
@@ -123,6 +213,10 @@ def _window_price_movement(events, candidate_id, start, end):
     changes = []
     for event in events:
         if str(event.get("id") or "") != str(candidate_id) or event.get("pit_valid") is not True:
+            continue
+        if event.get("price_source_mode") != "direct_structured":
+            continue
+        if event.get("price_validation_status") not in ("validated", "validated_exact_model_page"):
             continue
         dt = _event_dt(event)
         old_price = event.get("old_price_jpy")
@@ -151,7 +245,7 @@ def _window_price_movement(events, candidate_id, start, end):
     }
 
 
-def build_buy_now_decision(rankings, events, config):
+def build_buy_now_decision(rankings, events, config, price_observations=None):
     """Create a fail-closed decision for the full sale window from existing ranking evidence."""
     now = now_jst()
     start = parse_dt(config.get("monitor_window_start")) or datetime(now.year, 11, 14, tzinfo=JST)
@@ -238,9 +332,11 @@ def build_buy_now_decision(rankings, events, config):
             and estimated_all_in <= all_in_budget
         )
 
-        observations = _window_observations(events, item, start, end, price_verified) if in_window else []
+        observations = _window_observations(events, item, start, end, price_verified, price_observations) if in_window else []
         observed_prices = [x["price_jpy"] for x in observations]
         sale_low = min(observed_prices) if observed_prices else None
+        sale_low_observation = next((x for x in observations if x.get("price_jpy") == sale_low), None)
+        sale_low_at = sale_low_observation.get("at") if sale_low_observation else None
         low_is_comparable = len(observations) >= 2
         gap_from_low_pct = (
             round((price / sale_low - 1) * 100, 2)
@@ -331,7 +427,15 @@ def build_buy_now_decision(rankings, events, config):
             "name": item.get("name") or item.get("catalog_name") or str(item.get("id")),
             "form_factor": item.get("form_factor") or "unknown",
             "price_jpy": price if price_verified else None,
-            "pre_bf_reference_price_jpy": price if price is not None and not current_is_bf else None,
+            "pre_bf_reference_price_jpy": price if price is not None and retrieved and retrieved < start else None,
+            "post_bf_reference_price_jpy": price if price is not None and retrieved and retrieved > end else None,
+            "last_bf_observed_price_jpy": price if price is not None and current_is_bf and not in_window else None,
+            "reference_price_phase": (
+                "PRE_BF_REFERENCE" if price is not None and retrieved and retrieved < start else
+                "POST_BF_REFERENCE" if price is not None and retrieved and retrieved > end else
+                "BF_WINDOW_STALE_OR_EXPIRED" if price is not None and current_is_bf and not price_verified else
+                "UNVERIFIED_REFERENCE" if price is not None and not price_verified else None
+            ),
             "cash_total_cost_jpy": cash_cost,
             "estimated_all_in_jpy": estimated_all_in,
             "pc_dynamic_cap_jpy": cap,
@@ -351,6 +455,7 @@ def build_buy_now_decision(rankings, events, config):
             "status": status,
             "qualified_to_buy": qualified,
             "bf_window_low_observed_jpy": sale_low,
+            "bf_window_low_observed_at": sale_low_at,
             "bf_window_price_observation_count": len(observations),
             "bf_window_low_is_comparable": low_is_comparable,
             "gap_from_observed_window_low_pct": gap_from_low_pct,
@@ -626,10 +731,11 @@ def main():
     rows.sort(key=lambda x:(x["required_discount_pct"] if x["required_discount_pct"] is not None else 999999, -x["performance_score"]))
     events = read_events()
     dynamic=dynamic_change_timing(events)
+    config = load_json(os.path.join(ROOT, "config", "targets.json"), {})
+    recorded_observations = append_buy_now_observations(latest, config)
+    price_observations = read_buy_now_observations()
     rankings = load_json(os.path.join(ROOT, "data", "decision_rankings.json"), {})
-    decision = build_buy_now_decision(
-        rankings, events, load_json(os.path.join(ROOT, "config", "targets.json"), {})
-    )
+    decision = build_buy_now_decision(rankings, events, config, price_observations)
     out={
         "generated_at":iso(now_jst()),
         "source_snapshot_generated_at":source_snapshot_generated_at,
@@ -640,6 +746,13 @@ def main():
         "historical_events":HISTORY,
         "observed_change_timing":dynamic,
         "buy_now_decision": decision,
+        "price_observation_ledger": {
+            "path": "data/buy_now_observations.jsonl",
+            "appended_this_run": recorded_observations,
+            "historical_rows_loaded": len(price_observations),
+            "window_start_jst": config.get("monitor_window_start"),
+            "window_end_jst": config.get("monitor_window_end"),
+        },
         "interpretation":{
             "important_caveat":"Observed/retrieval time is an upper bound on when this system knew the change, not seller-internal price-change time.",
             "minimum_sample_for_hour_pattern":20
@@ -676,7 +789,12 @@ def main():
     for h in HISTORY:
         p=f" ¥{h['price']:,}" if h.get("price") else ""
         lines.append(f"- {h['date']} | {h['label']}{p} | {h['source']}")
-    lines += ["", "## Current buy-now decision", "",
+    lines += ["", "## BF window observation ledger", "",
+              "- Ledger: data/buy_now_observations.jsonl",
+              "- Rows loaded: {}".format(len(price_observations)),
+              "- Rows appended this run: {}".format(recorded_observations),
+              "- Only in-stock/low-stock, exact-identity, direct-structured and PIT-valid observations are added.",
+              "", "## Current buy-now decision", "",
               "- Status: **{}** ({})".format(decision.get("label"), decision.get("status")),
               "- Recommendation: {}".format(decision.get("recommendation")),
               "- Full detail: data/reports/buy-now-now.md",
