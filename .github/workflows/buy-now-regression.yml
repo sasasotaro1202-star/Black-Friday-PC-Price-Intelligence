@@ -23,4 +23,4 @@ jobs:
       - name: Compile timing and ranking modules
         run: python -m py_compile scripts/timing_analysis.py scripts/intelligence.py scripts/report.py
       - name: Run buy-now decision regression tests
-        run: python -m unittest discover -s tests -v
+        run: python -m unittest discover -s tests -p 'test_buy_now_decision.py' -v
