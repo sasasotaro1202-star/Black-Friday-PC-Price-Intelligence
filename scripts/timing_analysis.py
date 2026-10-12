@@ -93,7 +93,8 @@ def _event_dt(event):
 
 
 
-def read_buy_now_observations():
+def read_buy_now_observations(start=None, end=None):
+    """Read only observations inside the requested window; avoid replaying old season data."""
     path = os.path.join(ROOT, "data", "buy_now_observations.jsonl")
     rows = []
     if not os.path.exists(path):
@@ -104,8 +105,12 @@ def read_buy_now_observations():
                 row = json.loads(line)
             except Exception:
                 continue
-            if isinstance(row, dict):
-                rows.append(row)
+            if not isinstance(row, dict):
+                continue
+            observed = parse_dt(row.get("observed_at"))
+            if not observed or (start and observed < start) or (end and observed > end):
+                continue
+            rows.append(row)
     return rows
 
 
@@ -704,6 +709,13 @@ def append_buy_now_summary_to_latest(decision):
         lines += [
             "- 注目候補: **" + str(chosen.get("name")) + "**",
             "- 価格: " + chosen_price,
+            "- BF後の参考価格: " + ("¥{:,}".format(chosen["post_bf_reference_price_jpy"]) if chosen.get("post_bf_reference_price_jpy") is not None else "—"),
+            "- 期間内最低観測価格: " + (
+                "¥{:,}".format(chosen["bf_window_low_observed_jpy"])
+                + ("（" + str(chosen["bf_window_low_observed_at"]) + "）" if chosen.get("bf_window_low_observed_at") else "")
+                if chosen.get("bf_window_low_observed_jpy") is not None else "未観測"
+            ),
+            "- 期間内観測件数: " + str(chosen.get("bf_window_price_observation_count", 0)),
             "- 在庫 / 待つリスク: " + str(chosen.get("stock_status")) + " / " + str(chosen.get("wait_risk")),
             "- RAM32GB・SSD1TB以上: " + ("達成" if chosen.get("configuration_ready") else "未達/未確認"),
             "- 買い時スコア: " + (str(chosen.get("timing_score_100")) + "/100" if chosen.get("timing_score_100") is not None else "未算出"),
@@ -763,7 +775,13 @@ def main():
     dynamic=dynamic_change_timing(events)
     config = load_json(os.path.join(ROOT, "config", "targets.json"), {})
     recorded_observations = append_buy_now_observations(latest, config)
-    price_observations = read_buy_now_observations()
+    window_start = parse_dt(config.get("monitor_window_start"))
+    window_end = parse_dt(config.get("monitor_window_end"))
+    now = now_jst()
+    window_active = bool(window_start and window_end and window_start <= now <= window_end)
+    price_observations = (
+        read_buy_now_observations(window_start, window_end) if window_active else []
+    )
     rankings = load_json(os.path.join(ROOT, "data", "decision_rankings.json"), {})
     decision = build_buy_now_decision(rankings, events, config, price_observations)
     out={
