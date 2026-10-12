@@ -554,20 +554,21 @@ def build_buy_now_decision(rankings, events, config, price_observations=None, of
         status, label = "URGENT_BUT_GATE_BLOCKED", "売り切れリスクあり・購入ゲート未通過"
         recommendation = "低在庫の条件は見えていますが、購入ゲートが未通過です。予算・カバレッジ・価格情報の不足を解消するまで購入許可は出しません。"
         reasons = chosen.get("blockers") or ["購入ゲート未通過"]
-    elif over_budget:
-        chosen = over_budget[0]
-        status, label = "WAIT_FOR_DISCOUNT", "値下げ待ち"
-        gap = max(0, chosen["cash_total_cost_jpy"] - int(pc_cap))
-        recommendation = "公式セール期間内で確認した完成構成価格が本体動的上限を ¥{:,} 超えています。予算超過のまま買わず、目標額到達を監視します。".format(gap)
-        reasons = chosen.get("blockers") or ["PC本体価格が動的上限を超過"]
     elif in_window and not any_official_campaign_active:
         status, label = "WAIT_FOR_OFFICIAL_DATES", "公式セール日程の確認待ち"
         recommendation = "価格監視は継続中ですが、この期間は暫定の広域監視窓です。販売店の2026年公式セール開始・終了日と価格の適用期間が確認できるまで、BF実売としての買い時判定や購入許可は出しません。"
         reasons = [
             "各候補の販売元について、公式ページ上の2026年日付範囲が未確認です。",
             "取得済み価格は広域監視窓の比較材料として保存し、公式BF価格とは区別します。",
+            "予算超過候補があっても、公式セール期間内の価格と確認できないため、買い時判定は日程確認待ちを優先します。",
             "購入ゲート: " + str(gate.get("reason") or "未確認"),
         ]
+    elif over_budget:
+        chosen = over_budget[0]
+        status, label = "WAIT_FOR_DISCOUNT", "値下げ待ち"
+        gap = max(0, chosen["cash_total_cost_jpy"] - int(pc_cap))
+        recommendation = "公式セール期間内で確認した完成構成価格が本体動的上限を ¥{:,} 超えています。予算超過のまま買わず、目標額到達を監視します。".format(gap)
+        reasons = chosen.get("blockers") or ["PC本体価格が動的上限を超過"]
     elif not budget_ready or not coverage_complete or not gate_allowed:
         status, label = "WAIT_FOR_VERIFICATION", "データ確認が揃うまで判断保留"
         recommendation = "価格・在庫・完成構成・周辺機器込み予算・重要候補の確認が不足しています。取得失敗を売り切れとみなさず、確認できた時点で再判定します。"
@@ -598,7 +599,7 @@ def build_buy_now_decision(rankings, events, config, price_observations=None, of
             "retailer_count": len((official_campaign_dates or {}).get("sources") or {}),
             "confirmed_count": sum(
                 1 for entry in ((official_campaign_dates or {}).get("sources") or {}).values()
-                if isinstance(entry, dict) and entry.get("status") == "CONFIRMED"
+                if isinstance(entry, dict) and entry.get("status") in ("CONFIRMED", "CONFIRMED_MANUAL")
             ),
             "policy": "A provisional monitoring window does not confirm retailer campaign dates.",
         },
