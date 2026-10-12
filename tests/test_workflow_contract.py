@@ -30,12 +30,33 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertLess(calendar_at, timing_at)
 
     def test_watch_window_does_not_hardcode_2026_campaign_dates(self):
-        text = WORKFLOW.read_text(encoding="utf-8")
-        self.assertIn('cfg["monitor_window_start"]', text)
-        self.assertIn('cfg["monitor_window_end"]', text)
-        self.assertIn("in_watch_window", text)
-        self.assertNotIn("start=datetime(2026,11,14", text)
-        self.assertNotIn("end=datetime(2026,12,4", text)
+        paths = (
+            WORKFLOW,
+            ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml",
+            ROOT / "scripts" / "watchdog.py",
+        )
+        for path in paths:
+            text = path.read_text(encoding="utf-8")
+            self.assertNotIn("datetime(2026, 11, 14", text, str(path))
+            self.assertNotIn("datetime(2026,11,14", text, str(path))
+            self.assertNotIn("datetime(2026, 12, 4", text, str(path))
+            self.assertNotIn("datetime(2026,12,4", text, str(path))
+        fast = paths[1].read_text(encoding="utf-8")
+        watchdog = paths[2].read_text(encoding="utf-8")
+        self.assertIn('cfg["monitor_window_start"]', fast)
+        self.assertIn('cfg["monitor_window_end"]', fast)
+        self.assertIn("monitor_window_start", watchdog)
+        self.assertIn("monitor_window_end", watchdog)
+
+    def test_fast_workflow_refreshes_official_dates_before_decision_reports(self):
+        text = (ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml").read_text(encoding="utf-8")
+        self.assertIn("provisional broad watch window", text)
+        self.assertIn("sale_dates_inferred=false", text)
+        calendar_at = text.index("python scripts/official_campaign_dates.py")
+        report_at = text.index("python scripts/report.py")
+        timing_at = text.index("python scripts/timing_analysis.py")
+        self.assertLess(calendar_at, report_at)
+        self.assertLess(calendar_at, timing_at)
 
     def test_primary_workflow_runs_peripheral_observer(self):
         text = WORKFLOW.read_text(encoding="utf-8")

@@ -7,9 +7,27 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def parse_dt(value):
     try:
-        return datetime.fromisoformat(str(value).replace("Z", "+00:00")).astimezone(JST)
+        dt = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=JST)
+        return dt.astimezone(JST)
     except Exception:
         return None
+
+def configured_watch_window(now, config):
+    """Return True/False from config's provisional watch window, or None if invalid.
+
+    This is only an observation-cadence window; it never confirms a retailer sale.
+    """
+    if not isinstance(config, dict):
+        return None
+    start = parse_dt(config.get("monitor_window_start"))
+    end = parse_dt(config.get("monitor_window_end"))
+    if start is None or end is None or end < start:
+        return None
+    if now.tzinfo is None:
+        now = now.replace(tzinfo=JST)
+    return start <= now.astimezone(JST) <= end
 
 def read_json(path):
     with open(path, encoding="utf-8") as f:
@@ -29,10 +47,20 @@ def main():
         problems.append("current_latest_unreadable:" + type(exc).__name__)
 
     generated = parse_dt(latest.get("generated_at"))
-    start = datetime(2026, 11, 14, tzinfo=JST)
-    end = datetime(2026, 12, 4, 23, 59, 59, tzinfo=JST)
-    in_bf = start <= now <= end
-    threshold = timedelta(minutes=20 if in_bf else 45)
+    config_path = os.path.join(ROOT, "config", "targets.json")
+    try:
+        monitor_config = read_json(config_path)
+        provisional_window_active = configured_watch_window(now, monitor_config)
+    except Exception:
+        monitor_config = {}
+        provisional_window_active = None
+    if provisional_window_active is None:
+        # Unknown configuration must not relax freshness checks.
+        problems.append("monitor_window_config_missing_or_invalid")
+        strict_freshness = True
+    else:
+        strict_freshness = provisional_window_active
+    threshold = timedelta(minutes=20 if strict_freshness else 45)
 
     if generated is None:
         problems.append("latest_generated_at_missing")
@@ -53,7 +81,7 @@ def main():
     try:
         peripherals = read_json(peripheral_path)
         peripheral_generated = parse_dt(peripherals.get("generated_at"))
-        peripheral_threshold = timedelta(minutes=20 if in_bf else 45)
+        peripheral_threshold = timedelta(minutes=20 if strict_freshness else 45)
         if peripheral_generated is None:
             problems.append("peripheral_prices_generated_at_missing")
         elif now - peripheral_generated > peripheral_threshold:
@@ -64,7 +92,9 @@ def main():
     result = {
         "status": "PASS" if not problems else "ALERT",
         "checked_at": now.isoformat(),
-        "black_friday_window": in_bf,
+        "provisional_watch_window_active": provisional_window_active,
+        "monitor_window_type": monitor_config.get("monitor_window_type") if isinstance(monitor_config, dict) else None,
+        "monitor_window_config_valid": provisional_window_active is not None,
         "problems": problems,
     }
     print(json.dumps(result, ensure_ascii=False))

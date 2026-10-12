@@ -19,17 +19,38 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Check exact Black Friday season window (JST)
+      - name: Check provisional broad watch window from config (JST; not an official sale date)
         id: window
         shell: bash
         run: |
           python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
           from datetime import datetime, timezone, timedelta
           JST=timezone(timedelta(hours=9))
           now=datetime.now(JST)
-          start=datetime(2026,11,14,tzinfo=JST)
-          end=datetime(2026,12,4,23,59,59,tzinfo=JST)
-          print(f"in_window={str(start <= now <= end).lower()}")
+          config_valid=False
+          in_window=False
+          window_type="UNKNOWN"
+          try:
+              with open("config/targets.json", encoding="utf-8") as f:
+                  cfg=json.load(f)
+              start=datetime.fromisoformat(str(cfg["monitor_window_start"]).replace("Z","+00:00"))
+              end=datetime.fromisoformat(str(cfg["monitor_window_end"]).replace("Z","+00:00"))
+              if start.tzinfo is None: start=start.replace(tzinfo=JST)
+              if end.tzinfo is None: end=end.replace(tzinfo=JST)
+              start=start.astimezone(JST)
+              end=end.astimezone(JST)
+              window_type=str(cfg.get("monitor_window_type") or "UNKNOWN")
+              if end >= start:
+                  config_valid=True
+                  in_window=start <= now <= end
+          except (OSError, ValueError, KeyError, TypeError):
+              config_valid=False
+              in_window=False
+          print(f"in_window={str(in_window).lower()}")
+          print(f"config_valid={str(config_valid).lower()}")
+          print(f"monitor_window_type={window_type}")
+          print("sale_dates_inferred=false")
           print(f"now_jst={now.isoformat()}")
           PY
 
@@ -86,6 +107,7 @@ jobs:
             python scripts/peripheral_monitor.py
             python scripts/recover.py
             python scripts/sanitize.py
+            python scripts/official_campaign_dates.py
             python scripts/report.py
             python scripts/timing_analysis.py
             python scripts/scenario_analysis.py
