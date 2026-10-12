@@ -8,8 +8,6 @@
 - **ローカルAIのVRAM優先：** RTX 5060 Ti 16GB構成も比較対象。RTX 5070よりゲーム性能が必ず高いという意味ではなく、16GBのVRAMを使えることが主な利点です。利用するモデルがGPUメモリに収まるかを先に確認します。
 - **購入後に増設しない方針：** 16GB RAM／500GB SSDの基本構成は、そのまま購入候補として扱いません。32GB RAM／1TB SSD以上にした最終カート価格を確認できるまで `NEEDS_CONFIGURATION` です。可能ならメモリは2枚組のデュアルチャネルを優先します。
 - **Cities: Skylines IIを「快適」にする基準：** 公式推奨GPUはGeForce RTX 3080 10GBまたはRadeon RX 6800 XT 16GBで、メモリ推奨は16GBです。大きな都市・MOD・複数アプリの同時利用まで見込む本プロジェクトでは、32GBを実用上の基準にします。大都市の終盤ではGPUだけでなくCPUのシミュレーション負荷でもフレームレートが下がり得ます。
-- **パワプロ2026-2027：** PC版は公式対応機種として掲載されていません。Nintendo Switch版またはPS4版が必要です。PCの購入予算とコンソールの予算は別物として扱います。
-
 ## 本プロジェクトの予算ガード
 
 総予算は**370,000円（PC本体＋周辺機器）**です。
@@ -51,26 +49,14 @@
 
 この表は設定決定の出発点です。正確なFPSが購入判断の必須条件なら、購入する候補と同じCPU・GPU・RAM構成の独立実測が確認できるまで、固定FPSの約束やベンチマーク点数に置き換えません。
 
-## パワプロ2026-2027は別扱い
-
-KONAMIの公式商品情報では対応機種は**Nintendo Switch／PlayStation 4**で、PC版は記載されていません。公式サイト：[パワフルプロ野球2026-2027](https://www.konami.com/pawa/2026-2027/)
-
-- **PCだけを買う場合：** パワプロ2026-2027をPC上で遊ぶ前提にしません。
-- **PS5を使う場合：** PS5は大多数のPS4ゲームに後方互換がありますが、購入前にPS StoreでPS4版が自分のアカウント・本体で利用できることを確認します。PS5ネイティブ版があるという意味ではありません。公式説明：[PS5のPS4ゲーム後方互換性](https://www.playstation.com/ja-jp/support/games/ps5-backward-compatibility-games/)
-- **PS5の参考価格（税込・公式希望小売価格）：** 日本語専用デジタル版 55,000円、通常デジタル版 89,980円、ディスクドライブ搭載版 97,980円、PS5 Pro 137,980円。パワプロ2026-2027はPS4ダウンロード版なので、パワプロ目的だけなら日本語専用デジタル版が費用を抑えやすい選択肢です。モデル言語・アカウント条件を確認してください。公式価格：[PS5本体ラインナップ](https://www.playstation.com/ja-jp/ps5/buy-now/)／[通常デジタル版](https://www.playstation.com/ja-jp/ps5/buy-now/ps5-digital-edition/)／[ディスク版](https://www.playstation.com/ja-jp/ps5/buy-now/ps5/)
-- **Nintendo Switchを使う場合：** 公式Switch版を購入します。
-- 本体・ゲームの追加費用をPC＋モニター等の37万円予算に含めると、PC本体に割り当てられる金額が下がります。予算を分ける場合はこのガイドのPC予算と混ぜません。
-
 ## 用途別に選ぶなら
 
 1. **FPSとCities: Skylines IIを総合優先：** RTX 5070デスクトップ、RAM 32GB以上、SSD 1TB以上の完成構成を第一に監視。
 2. **ローカルAIのVRAMを重視：** RTX 5060 Ti 16GBを比較候補に残し、実行予定モデルのVRAM要件を確認。GPUメモリ容量だけでAI速度全体を判断しません。
 3. **データ分析・大量の予測プログラムを重視：** RAM容量、CPU、SSD、冷却・拡張性も同時に評価。多くのデータ処理はGPUだけで速くなるわけではありません。予算が許せば64GB RAMの完成構成も比較しますが、購入後に増設する想定は使いません。
-4. **パワプロ2026-2027も必須：** PCとは別にSwitchまたはPS4／互換確認済みPS5の費用を見積もります。
 
 ## 公式根拠
 
 - Cities: Skylines II 公式製品ページ／システム要件：<https://www.paradoxinteractive.com/games/cities-skylines-ii/buy>
-- Apex Legends 公式PC動作環境：<https://www.ea.com/ja/games/apex-legends/apex-legends/system-requirements>
 - パワフルプロ野球2026-2027 公式製品情報：<https://www.konami.com/pawa/2026-2027/>
 - PlayStation 公式PS5後方互換性：<https://www.playstation.com/ja-jp/support/games/ps5-backward-compatibility-games/>
