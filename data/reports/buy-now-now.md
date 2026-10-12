@@ -1,8 +1,8 @@
 # 今この瞬間の買い時判定
 
-- 更新時刻（JST）: 2026-10-12T20:29:08+09:00
+- 更新時刻（JST）: 2026-10-12T20:41:29+09:00
 - 判定: **BF前の監視継続** (PRE_BF_MONITORING)
-- BF監視期間: 2026-11-14T00:00:00+09:00 ～ 2026-12-04T23:59:59+09:00
+- BF監視期間: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 - 総予算: ¥400,000
 - PC本体の動的上限: ¥324,240
 - 周辺機器の価格・在庫確認: 未完了
@@ -50,9 +50,8 @@
 |6|G TUNE DG-A7G70|BF前参考 ¥304,800|¥380,560|in_stock|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/)|
 |7|G TUNE DG-I5G70|BF前参考 ¥279,800|¥355,560|in_stock|未達/未確認|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/)|
 |8|G TUNE P6-I7G70BK-B|BF前参考 ¥284,700|¥360,460|out_of_stock|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/)|
-|9|Acer Predator Helios Neo 16 AI Windows 11 Home Core Ultra 9 290HX Plus RTX 5070 Ti IPS 非光沢 WQXGA 240Hz 3ms G-SYNC DCI-P3 100% 32GBメモリ 1TB SSD 第5世代 AeroBladeファン 有線LAN WiFi 6E 英字キーボード ゲーミングノートパソコン PHN16-I71-N93Z57T/E|BF前参考 ¥547,800|¥623,560|in_stock|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1)|
-|10|G TUNE DG-A5G60|BF前参考 ¥194,800|¥270,560|in_stock|未達/未確認|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
-|11|G TUNE P5-I7G70BK-C（ブラック）|BF前参考 ¥419,800|¥495,560|out_of_stock|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/)|
+|9|G TUNE DG-A5G60|BF前参考 ¥194,800|¥270,560|in_stock|未達/未確認|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
+|10|G TUNE P5-I7G70BK-C（ブラック）|BF前参考 ¥419,800|¥495,560|out_of_stock|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/)|
 
 ## 読み方と安全規則
 
