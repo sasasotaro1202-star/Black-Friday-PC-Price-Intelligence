@@ -80,7 +80,7 @@ FPS・Cities: Skylines IIの快適度、RTX 5070とRTX 5060 Ti 16GBの選び分�
 - data/timing_analysis.json：価格変更時刻の分析。
 - data/buy_now_decision.json：セール全期間の「今買う／値下げ待ち／確認待ち」判定、期間内の観測最低価格、在庫・PIT・完成構成・予算ゲート、購入リンク。
 - data/reports/buy-now-now.md：スマホで確認しやすい最新の買い時レポート。通常時はBF前の参考価格と区別し、BF期間中は更新ごとに候補を再評価。
-- data/reports/latest.md：総予算、周辺機器の価格確認、候補ランキングと購入リンク。
+- data/reports/latest.md：総予算、周辺機器の価格確認、候補ランキング、購入リンクに加えて「今この瞬間の買い時判定」を表示。
 
 ## 取得失敗の診断と検索フォールバック
 
