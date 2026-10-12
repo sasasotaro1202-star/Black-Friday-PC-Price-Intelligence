@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-10-12T20:28:05+09:00
+更新: 2026-10-12T20:29:08+09:00
 価格フェーズ: **PRE_BLACK_FRIDAY_REFERENCE**
 BF監視窓: 2026-11-14T00:00:00+09:00 ～ 2026-12-04T23:59:59+09:00
 総予算: ¥400,000
@@ -47,10 +47,10 @@ BF PC計画上限＋周辺機器目標: ¥400,000
 |ROG Strix G16 G614FR-R9X3D5070TI|laptop|RTX 5070 Ti Laptop GPU|¥330,200|¥359,800|未確認|¥29,600|8.2%|¥287,840|¥269,850|¥251,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
 |ROG Strix G16 G614PR-R9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥330,200|¥359,800|未確認|¥29,600|8.2%|¥287,840|¥269,850|¥251,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
 |GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|laptop|RTX 5070 Ti|¥330,200|¥419,800|未確認|¥89,600|21.3%|¥335,840|¥314,850|¥293,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200)|
+|Acer Predator Helios Neo 16 AI Windows 11 Home C|laptop|RTX 5070 Ti Laptop GPU|¥330,200|¥547,800|未確認|¥217,600|39.7%|¥438,240|¥410,850|¥383,460|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1)|
 |ROG Zephyrus G16 GU606AR-U9R5070TIG32G|laptop|RTX 5070 Ti Laptop GPU|¥330,200|¥599,800|未確認|¥269,600|44.9%|¥479,840|¥449,850|¥419,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/90nr0pc2-m002c0-rog-zephyrus-g16-2026.html)|
 |ROG Zephyrus G14 GU405AR-U9R5070TIG|laptop|RTX 5070 Ti Laptop GPU|¥330,200|¥684,800|未確認|¥354,600|51.8%|¥547,840|¥513,600|¥479,360|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/90nr0p94-m001d0-rog-zephyrus-g14-2026-gu405.html)|
 |ASUS TUF Gaming F16 FX608|laptop|RTX 5070 Laptop GPU|¥330,200|—|未確認|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://store.asus.com/jp/asus-tuf-gaming-f16-fx608.html?config=90NR0NB1-M00580)|
-|Acer Predator Helios Neo 16 AI|laptop|RTX 5070 Ti Laptop GPU|¥330,200|—|未確認|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1)|
 |G TUNE DG-A5G60|desktop|RTX 5060|¥330,200|¥194,800|未確認|—|—|¥155,840|¥146,100|¥136,360|未達/未確認|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
 |G TUNE DG-I5G70|desktop|RTX 5070|¥330,200|¥279,800|未確認|—|—|¥223,840|¥209,850|¥195,860|未達/未確認|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/)|
 |G TUNE DG-I7G70|desktop|RTX 5070|¥330,200|¥299,800|未確認|—|—|¥239,840|¥224,850|¥209,860|未達/未確認|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/)|
@@ -73,6 +73,7 @@ BF PC計画上限＋周辺機器目標: ¥400,000
 |Lenovo Legion Pro 5i Gen 10（16型 Intel）|—|7.0%|¥319,400|¥301,600|¥283,900|¥266,100|¥248,400|10%|none|
 |G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|17.4%|¥359,800|¥339,800|¥319,800|¥299,800|¥279,900|20%|same_gpu|
 |G TUNE P5-I7G70BK-C（ブラック）|¥329,800|21.3%|¥377,800|¥356,800|¥335,800|¥314,800|¥293,900|25%|none|
+|Acer Predator Helios Neo 16 AI Windows 11 Home Cor|—|39.7%|¥493,000|¥465,600|¥438,200|¥410,800|¥383,500|未到達|none|
 |ASUS TUF Gaming A16 FA608PP-R9R5070S|¥319,800|0.0%|¥287,800|¥271,800|¥255,800|¥239,800|¥223,900|10%|same_family|
 |GALLERIA ZL9R-R57T-6|¥329,980|0.0%|¥297,000|¥280,500|¥264,000|¥247,500|¥231,000|10%|none|
 |ROG Strix G16 G614FR-R9X3D5070TI|¥359,800|8.2%|¥323,800|¥305,800|¥287,800|¥269,800|¥251,900|10%|same_family|
