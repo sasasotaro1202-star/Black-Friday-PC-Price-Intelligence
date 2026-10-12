@@ -22,7 +22,7 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(self.cfg["pc_budget_jpy"], 330200)
         self.assertEqual(self.cfg["pc_budget_jpy"] + self.cfg["peripheral_budget_jpy"], self.cfg["total_budget_jpy"])
 
-    def test_purchase_strategy_matches_37man_budget_and_speaker_goal(self):
+    def test_purchase_strategy_matches_40man_budget_and_speaker_goal(self):
         strategy = self.cfg["purchase_strategy"]
         self.assertEqual(self.cfg["total_budget_jpy"], 400000)
         self.assertEqual(self.cfg["peripheral_budget_jpy"], 69800)
