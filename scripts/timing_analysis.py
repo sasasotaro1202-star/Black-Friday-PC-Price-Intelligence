@@ -757,7 +757,7 @@ def append_buy_now_summary_to_latest(decision):
         "- 判定: **" + str(decision.get("label")) + "** (" + str(decision.get("status")) + ")",
         "- 暫定の広域監視窓（公式セール日程ではない）: " + str(decision.get("watch_window_start_jst")) + " ～ " + str(decision.get("watch_window_end_jst")),
         "- 公式日程確認: " + str(decision.get("official_campaign_dates_summary", {}).get("confirmed_count", 0)) + "/" + str(decision.get("official_campaign_dates_summary", {}).get("retailer_count", 0)) + " 店舗（未確認: " + str(decision.get("official_campaign_dates_summary", {}).get("unconfirmed_count", 0)) + "、取得エラー: " + str(decision.get("official_campaign_dates_summary", {}).get("fetch_error_count", 0)) + "）",
-        "- 総予算: " ("¥{:,}".format(decision["total_budget_jpy"]) if decision.get("total_budget_jpy") is not None else "未確認"),
+        "- 総予算: " + ("¥{:,}".format(decision["total_budget_jpy"]) if decision.get("total_budget_jpy") is not None else "未確認"),
         "- PC本体の動的上限: " + ("¥{:,}".format(decision["pc_dynamic_cap_jpy"]) if decision.get("pc_dynamic_cap_jpy") is not None else "未確認"),
         "- 周辺機器の価格・在庫確認: " + ("完了" if decision.get("peripheral_budget_data_ready") else "未完了"),
         "- 全体購入ゲート: " + ("通過" if decision.get("purchase_gate_allowed") else "保留") + " (" + str(decision.get("purchase_gate_reason") or "未確認") + ")",
