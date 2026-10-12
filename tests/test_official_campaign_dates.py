@@ -4,6 +4,7 @@ from datetime import datetime
 
 sys.path.insert(0, "scripts")
 from official_campaign_dates import (
+    SCANNER_VERSION,
     _same_official_site,
     calendar_config_signature,
     discover_campaign_links,
@@ -110,6 +111,7 @@ class OfficialCampaignDateTests(unittest.TestCase):
         signature = calendar_config_signature(one_store)
         old = {
             "checked_at": "2026-10-12T21:30:00+09:00",
+            "scanner_version": SCANNER_VERSION,
             "configured_sources": signature,
             "sources": {"mouse_computer": {"status": "UNCONFIRMED"}},
         }
@@ -127,6 +129,8 @@ class OfficialCampaignDateTests(unittest.TestCase):
         old_without_signature = dict(old)
         old_without_signature.pop("configured_sources")
         self.assertFalse(should_skip_calendar_refresh(old_without_signature, one_store, now))
+        old_scanner = dict(old, scanner_version=SCANNER_VERSION - 1)
+        self.assertFalse(should_skip_calendar_refresh(old_scanner, one_store, now))
         future_checked = dict(old, checked_at="2026-10-12T22:30:00+09:00")
         self.assertFalse(should_skip_calendar_refresh(future_checked, one_store, now))
 
