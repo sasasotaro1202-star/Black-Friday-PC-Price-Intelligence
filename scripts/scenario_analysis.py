@@ -8,6 +8,7 @@ from intelligence import (
     scenario_prices, required_discount, now_jst, iso, purchase_budget_policy,
     actionable_max_age_minutes, parse_dt, configuration_readiness, gpu_key
 )
+from sale_calendar import campaign_window_for_item
 
 JST = timezone(timedelta(hours=9))
 BF_DISCOUNT_BANDS = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45]
@@ -61,8 +62,9 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
     semantics = strategy.get("price_semantics") or {}
     start = parse_dt(semantics.get("window_start_jst"))
     end = parse_dt(semantics.get("window_end_jst"))
-    in_bf_window = bool(start and end and start <= now <= end)
-    phase = "BLACK_FRIDAY_WINDOW" if in_bf_window else ("PRE_BLACK_FRIDAY_REFERENCE" if start and now < start else "POST_BLACK_FRIDAY_REFERENCE")
+    in_watch_window = bool(start and end and start <= now <= end)
+    phase = "PROVISIONAL_BROAD_WATCH_WINDOW" if in_watch_window else ("PRE_BLACK_FRIDAY_REFERENCE" if start and now < start else "POST_BLACK_FRIDAY_REFERENCE")
+    official_dates = load_json(os.path.join(ROOT, "data", "official_campaign_dates_status.json"), {})
 
     live_by_id = {str(x.get("id")): x for x in (latest.get("products") or []) if x.get("id")}
     catalog_by_id = {str(x.get("id")): x for x in (catalog_data.get("candidates") or []) if x.get("id")}
@@ -78,7 +80,9 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
         live = live_by_id.get(cid, {})
         trusted = _price_is_trusted(live, now, cat)
         retrieved_at = parse_dt(live.get("retrieval_time")) if trusted else None
-        is_bf_observation = bool(in_bf_window and retrieved_at and start <= retrieved_at <= end and trusted)
+        inside_watch_observation = bool(in_watch_window and retrieved_at and start <= retrieved_at <= end and trusted)
+        campaign = campaign_window_for_item(live, now, target_config, official_dates)
+        is_bf_observation = bool(inside_watch_observation and campaign.get("active_at_observation"))
         live_price = live.get("current_price_jpy") if trusted else None
         reference = cat.get("reference_price_jpy", cat.get("price_jpy"))
         if reference is None:
@@ -88,7 +92,7 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
             scenario_source = "BLACK_FRIDAY_OBSERVED_PRICE"
         elif live_price is not None:
             scenario_base = live_price
-            scenario_source = "PRE_BLACK_FRIDAY_REFERENCE"
+            scenario_source = "PROVISIONAL_WATCH_WINDOW_REFERENCE" if inside_watch_observation else "PRE_BLACK_FRIDAY_REFERENCE"
         else:
             scenario_base = reference
             scenario_source = "CATALOG_REFERENCE_ONLY" if reference is not None else "NO_PRICE_REFERENCE"
@@ -132,8 +136,14 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
             "black_friday_target_price_jpy": bf_target,
             "black_friday_price_observed_jpy": live_price if is_bf_observation else None,
             "black_friday_offer_verified": is_bf_observation,
-            "pre_black_friday_reference_price_jpy": live_price if trusted and not is_bf_observation else None,
-            "pre_black_friday_reference_at": live.get("retrieval_time") if trusted and not is_bf_observation else None,
+            "retailer_key": campaign.get("retailer_key"),
+            "retailer_campaign_status": campaign.get("status"),
+            "retailer_campaign_start_jst": campaign.get("start_jst"),
+            "retailer_campaign_end_jst": campaign.get("end_jst"),
+            "watch_window_reference_price_jpy": live_price if inside_watch_observation and not is_bf_observation else None,
+            "watch_window_reference_at": live.get("retrieval_time") if inside_watch_observation and not is_bf_observation else None,
+            "pre_black_friday_reference_price_jpy": live_price if trusted and not is_bf_observation and not inside_watch_observation else None,
+            "pre_black_friday_reference_at": live.get("retrieval_time") if trusted and not is_bf_observation and not inside_watch_observation else None,
             "catalog_reference_price_jpy": reference,
             "price_reference_kind": scenario_source,
             "scenario_base_price_jpy": scenario_base,
@@ -194,7 +204,16 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
             and available_at <= retrieved_at <= now
             and 0 <= (now-retrieved_at).total_seconds()/60 <= max_age
         )
-        is_bf = bool(trusted and in_bf_window and start <= retrieved_at <= end)
+        campaign_item = dict(live)
+        campaign_item["purchase_url"] = (
+            live.get("purchase_url") or live.get("url")
+            or target.get("purchase_url") or target.get("monitor_url")
+        )
+        campaign = campaign_window_for_item(campaign_item, now, target_config, official_dates)
+        inside_watch_observation = bool(
+            trusted and in_watch_window and start <= retrieved_at <= end
+        )
+        is_bf = bool(inside_watch_observation and campaign.get("active_at_observation"))
         if target.get("track_current_price"):
             tracked_count += 1
             if is_bf:
@@ -207,9 +226,15 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
             "black_friday_target_price_jpy": goal,
             "black_friday_price_observed_jpy": price if is_bf else None,
             "black_friday_price_verified": is_bf,
-            "pre_black_friday_reference_price_jpy": price if trusted and not is_bf else None,
-            "pre_black_friday_reference_at": live.get("retrieval_time") if trusted and not is_bf else None,
-            "price_reference_kind": "BLACK_FRIDAY_OBSERVED_PRICE" if is_bf else ("PRE_BLACK_FRIDAY_REFERENCE" if trusted else "TARGET_ONLY_UNVERIFIED"),
+            "retailer_key": campaign.get("retailer_key"),
+            "retailer_campaign_status": campaign.get("status"),
+            "retailer_campaign_start_jst": campaign.get("start_jst"),
+            "retailer_campaign_end_jst": campaign.get("end_jst"),
+            "watch_window_reference_price_jpy": price if inside_watch_observation and not is_bf else None,
+            "watch_window_reference_at": live.get("retrieval_time") if inside_watch_observation and not is_bf else None,
+            "pre_black_friday_reference_price_jpy": price if trusted and not is_bf and not inside_watch_observation else None,
+            "pre_black_friday_reference_at": live.get("retrieval_time") if trusted and not is_bf and not inside_watch_observation else None,
+            "price_reference_kind": "OFFICIAL_BLACK_FRIDAY_OBSERVED_PRICE" if is_bf else ("PROVISIONAL_WATCH_WINDOW_REFERENCE" if inside_watch_observation else "PRE_BLACK_FRIDAY_REFERENCE" if trusted else "TARGET_ONLY_UNVERIFIED"),
             "stock_status": live.get("stock_status", "unknown"),
             "target_gap_vs_pre_bf_reference_jpy": max(0, price-goal) if trusted and not is_bf else None,
             "discount_needed_to_target_pct": round(max(0, (price-goal)/price*100), 1) if trusted and not is_bf and price else None,
@@ -219,14 +244,22 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
         })
 
     tracked_all_bf_verified = bool(tracked_count and tracked_bf_verified == tracked_count)
+    official_bf_pc_count = sum(1 for x in pc_rows if x.get("black_friday_offer_verified"))
+    official_bf_peripheral_count = sum(1 for x in peripheral_rows if x.get("black_friday_price_verified"))
+    any_official_bf_price_known = bool(official_bf_pc_count or official_bf_peripheral_count)
     bf_pc_cap = min(int(policy["pc_budget_jpy"]), int(policy["total_budget_jpy"])-projected_bf_cost)
     target_sum_matches = total_target == int(policy["peripheral_budget_jpy"])
     return {
         "pricing_phase": phase,
         "black_friday_window_start_jst": semantics.get("window_start_jst"),
         "black_friday_window_end_jst": semantics.get("window_end_jst"),
-        "black_friday_prices_known": bool(in_bf_window),
-        "future_black_friday_prices_confirmed": False if not in_bf_window else None,
+        "watch_window_start_jst": semantics.get("window_start_jst"),
+        "watch_window_end_jst": semantics.get("window_end_jst"),
+        "watch_window_type": semantics.get("window_type", "PROVISIONAL_BROAD_WATCH_WINDOW"),
+        "official_bf_pc_price_count": official_bf_pc_count,
+        "official_bf_peripheral_price_count": official_bf_peripheral_count,
+        "black_friday_prices_known": any_official_bf_price_known,
+        "future_black_friday_prices_confirmed": False,
         "all_configured_prices_are_bf_targets": True,
         "targets_are_estimates_not_promises": True,
         "discount_scenarios_are_probabilities": False,
@@ -238,7 +271,7 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
         "black_friday_target_buffer_jpy": int(policy["total_budget_jpy"])-int(policy["pc_target_jpy"])-total_target,
         "black_friday_hard_cap_bundle_jpy": int(policy["pc_budget_jpy"])+total_target,
         "black_friday_pc_price_cap_jpy": bf_pc_cap,
-        "black_friday_pc_price_cap_final": bool(in_bf_window and snapshot_fresh and tracked_all_bf_verified),
+        "black_friday_pc_price_cap_final": bool(in_watch_window and snapshot_fresh and tracked_all_bf_verified),
         "peripheral_snapshot_fresh": snapshot_fresh,
         "tracked_peripheral_count": tracked_count,
         "tracked_peripheral_bf_price_verified_count": tracked_bf_verified,
@@ -248,8 +281,8 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
         "pc_candidates": pc_rows,
         "rtx_5070_ti_desktop_outliers": [x for x in pc_rows if x["is_rtx_5070_ti_outlier"]],
         "rules": [
-            "Before the Black Friday window, all live listings are reference prices, not BF prices.",
-            "Only a fresh verified observation retrieved inside the BF window can populate black_friday_price_observed_jpy.",
+            "The provisional broad watch window is not an official retailer sale window.",
+            "Only a fresh verified offer observed while its retailer's source-verified 2026 campaign is active can populate black_friday_price_observed_jpy.",
             "Discount bands are arithmetic what-if scenarios; they are not probabilities or promises.",
             "A baseline build that misses RAM/SSD requirements must include a quoted upgrade cost before budget qualification.",
             "No purchase is authorized until full configuration, stock, PIT, peripheral budget and checkout terms pass the main purchase gate.",
@@ -363,18 +396,18 @@ def main():
 
     lines=["# ブラックフライデー価格・一式購入シナリオ","",f"更新: {out['generated_at']}",
            f"価格フェーズ: **{bf_plan['pricing_phase']}**",
-           f"BF監視窓: {bf_plan['black_friday_window_start_jst']} ～ {bf_plan['black_friday_window_end_jst']}",
+           f"暫定の広域監視窓（公式セール開催期間ではない）: {bf_plan['watch_window_start_jst']} ～ {bf_plan['watch_window_end_jst']}",
            f"総予算: ¥{bf_plan['total_budget_jpy']:,}",
            f"BF PC理想目標: ¥{bf_plan['pc_target_price_jpy']:,} / 計画上限: ¥{bf_plan['pc_planned_hard_cap_jpy']:,}",
            f"BF周辺機器目標合計: ¥{bf_plan['peripheral_target_total_jpy']:,}",
            f"BF PC理想目標＋周辺機器目標: ¥{bf_plan['black_friday_ideal_bundle_target_jpy']:,} (予算残 ¥{bf_plan['black_friday_target_buffer_jpy']:,})",
            f"BF PC計画上限＋周辺機器目標: ¥{bf_plan['black_friday_hard_cap_bundle_jpy']:,}",
            "",
-           "**重要:** BF目標額は購入目標であって実売の保証ではありません。期間前の観測価格は参考値、BF価格は期間中の新しい観測でのみ確定します。割引シナリオは算術上の仮定であり確率ではありません。",
+           "**重要:** BF目標額は購入目標で、実売の保証ではありません。暫定監視窓内の価格でも、販売元の公式2026年開催期間が確認できなければBF実売とは認定しません。割引シナリオは算術上の仮定であり確率ではありません。",
            "",
            "## 全周辺機器のBF購入目標",
            "",
-           "|項目|BF購入目標|BF期間内の確認済み価格|BF前参考価格|在庫|費用の扱い|購入ページ|",
+           "|項目|BF購入目標|公式期間内の確認価格|監視窓内参考価格|セール前参考価格|在庫|費用の扱い|購入ページ|",
            "|---|---:|---:|---:|---|---|---|"]
     for p in bf_plan["peripherals"]:
         bf_price = p.get("black_friday_price_observed_jpy")
@@ -383,6 +416,7 @@ def main():
         lines.append(
             f"|{p['name']}|¥{p['black_friday_target_price_jpy']:,}|"
             f"{('¥'+format(bf_price,',')) if bf_price is not None else '未確認'}|"
+            f"{('¥'+format(p.get('watch_window_reference_price_jpy'),',')) if p.get('watch_window_reference_price_jpy') is not None else '—'}|"
             f"{('¥'+format(ref_price,',')) if ref_price is not None else '—'}|"
             f"{p.get('stock_status','unknown')}|{p['cost_basis']}|{link}|"
         )
@@ -390,7 +424,7 @@ def main():
         "",
         "## 大穴候補（RTX 5070 Ti デスクトップ）",
         "",
-        "|候補|BF目標上限|参照価格/シナリオ基準|BF期間内価格|32GB/1TB|上限まで必要値下げ|必要割引率|シナリオ|状態|購入ページ|",
+        "|候補|BF目標上限|参照価格/シナリオ基準|公式期間内価格|32GB/1TB|上限まで必要値下げ|必要割引率|シナリオ|状態|購入ページ|",
         "|---|---:|---:|---:|---|---:|---:|---|---|---|",
     ]
     for r in bf_plan["rtx_5070_ti_desktop_outliers"]:
@@ -412,7 +446,7 @@ def main():
         "",
         "## BF目標価格に対する全PC候補の割引シナリオ",
         "",
-        "|候補|フォーム|GPU|BF価格目標|参考/計算基準|BF内観測価格|目標まで必要値下げ|必要割引率|20%|25%|30%|構成条件|価格の根拠|購入リンク|",
+        "|候補|フォーム|GPU|BF価格目標|参考/計算基準|公式期間内価格|目標まで必要値下げ|必要割引率|20%|25%|30%|構成条件|価格の根拠|購入リンク|",
         "|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|---|",
     ]
     for r in bf_plan["pc_candidates"]:
@@ -452,7 +486,7 @@ def main():
             f"{str(first['discount_pct'])+'%' if first else '未到達'}|{r['historical_floor_strength']}|"
         )
     lines += ["","## ケース","",
-              "- A: PC目標価格到達＋在庫あり → 即時再評価。",
+              "- A: 公式日程とPC目標価格・在庫を確認 → 即時再評価。",
               "- B: PC目標価格到達＋低在庫 → 最安値待ちを避ける。",
               "- C: 大幅値下げだが未達 → 性能・在庫・次の値下げ余地を再評価。",
               "- D: 売り切れ → 代替候補へ。",
