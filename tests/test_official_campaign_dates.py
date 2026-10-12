@@ -85,6 +85,12 @@ class OfficialCampaignDateTests(unittest.TestCase):
     def test_retailer_domain_mapping_is_exact_suffix_not_substring(self):
         self.assertEqual(retailer_key_for_url("https://www.mouse-jp.co.jp/store/g/sku"), "mouse_computer")
         self.assertEqual(retailer_key_for_url("https://www.lenovo.com/jp/ja/p/item"), "lenovo")
+        self.assertEqual(retailer_key_for_url("https://www.gigabyte.com/jp"), "gigabyte")
+        self.assertEqual(retailer_key_for_url("https://www.frontier-direct.jp/products/sku"), "frontier")
+        self.assertEqual(retailer_key_for_url("https://www.ark-pc.co.jp/item/"), "ark")
+        self.assertEqual(retailer_key_for_url("https://shop.tsukumo.co.jp/goods/"), "tsukumo")
+        self.assertEqual(retailer_key_for_url("https://www.sycom.co.jp/custom/"), "sycom")
+        self.assertEqual(retailer_key_for_url("https://www.stormst.com/pc/"), "storm")
         self.assertIsNone(retailer_key_for_url("https://mouse-jp.co.jp.attacker.example/product"))
         self.assertIsNone(retailer_key_for_url("https://unknown.example/product"))
 
