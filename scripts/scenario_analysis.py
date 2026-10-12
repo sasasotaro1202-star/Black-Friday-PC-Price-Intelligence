@@ -148,11 +148,13 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
             "price_reference_kind": scenario_source,
             "scenario_base_price_jpy": scenario_base,
             "scenario_base_note": (
-                "観測済みBF価格を基準にした算術シナリオ"
+                "公式セール期間内の確認価格を基準にした算術シナリオ"
                 if is_bf_observation else
                 ("基本構成の参考額。RAM/SSD構成変更費を含まないため完成構成のBF目標と比較不可"
                  if base_config_only else
-                 "事前参考額を基準にした仮想割引。BF実売価格・値下げ確率ではない")
+                 ("暫定監視窓内の参考価格を基準にした仮想割引。公式BF実売価格・値下げ確率ではない"
+                  if inside_watch_observation else
+                  "セール前の参考額を基準にした仮想割引。BF実売価格・値下げ確率ではない"))
             ),
             "scenario_prices": price_bands,
             "discount_needed_to_bf_target_jpy": discount_target,
