@@ -269,7 +269,8 @@ def build_buy_now_decision(rankings, events, config):
                 score -= 5
             hours_left = max(0, (end - now).total_seconds() / 3600)
             score += 8 if hours_left <= 48 else 4 if hours_left <= 168 else 0
-            timing_score = max(0, min(100, score))
+            # Raw component maximum is 83; normalize to a true 0-100 comparison scale.
+            timing_score = int(round(max(0, min(83, score)) * 100 / 83))
 
         blockers = []
         if not in_window:
