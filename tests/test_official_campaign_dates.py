@@ -2,7 +2,11 @@ import sys
 import unittest
 
 sys.path.insert(0, "scripts")
-from official_campaign_dates import parse_explicit_2026_range
+from official_campaign_dates import (
+    _same_official_site,
+    discover_campaign_links,
+    parse_explicit_2026_range,
+)
 from sale_calendar import (
     campaign_entry_for_retailer,
     campaign_window_for_item,
@@ -56,6 +60,27 @@ class OfficialCampaignDateTests(unittest.TestCase):
                 "https://shop.example.jp/black-friday/",
             )
         )
+
+    def test_campaign_link_discovery_stays_on_same_retailer_site(self):
+        links = [
+            {"href": "/campaign/black-friday-2026/", "text": "ブラックフライデー"},
+            {"href": "https://attacker.example/black-friday", "text": "ブラックフライデー"},
+            {"href": "https://mouse-jp.co.jp.attacker.example/offer", "text": "Campaign"},
+            {"href": "/support/", "text": "サポート"},
+        ]
+        result = discover_campaign_links(
+            "https://www.mouse-jp.co.jp/",
+            links,
+            already_checked=[],
+            limit=4,
+        )
+        self.assertEqual(result, ["https://www.mouse-jp.co.jp/campaign/black-friday-2026/"])
+
+    def test_same_site_check_does_not_trust_public_suffix_or_lookalike_domain(self):
+        self.assertTrue(_same_official_site("https://www.yodobashi.com/", "https://yodobashi.com/campaign/"))
+        self.assertTrue(_same_official_site("https://mouse-jp.co.jp/", "https://store.mouse-jp.co.jp/campaign/"))
+        self.assertFalse(_same_official_site("https://www.amazon.co.jp/", "https://co.jp/campaign/"))
+        self.assertFalse(_same_official_site("https://www.mouse-jp.co.jp/", "https://mouse-jp.co.jp.attacker.example/campaign/"))
 
     def test_retailer_domain_mapping_is_exact_suffix_not_substring(self):
         self.assertEqual(retailer_key_for_url("https://www.mouse-jp.co.jp/store/g/sku"), "mouse_computer")
