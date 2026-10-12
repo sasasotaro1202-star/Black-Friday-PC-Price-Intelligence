@@ -112,6 +112,8 @@ class OfficialCampaignDateTests(unittest.TestCase):
         old_without_signature = dict(old)
         old_without_signature.pop("configured_sources")
         self.assertFalse(should_skip_calendar_refresh(old_without_signature, one_store, now))
+        future_checked = dict(old, checked_at="2026-10-12T22:30:00+09:00")
+        self.assertFalse(should_skip_calendar_refresh(future_checked, one_store, now))
 
     def test_retailer_domain_mapping_is_exact_suffix_not_substring(self):
         self.assertEqual(retailer_key_for_url("https://www.mouse-jp.co.jp/store/g/sku"), "mouse_computer")
