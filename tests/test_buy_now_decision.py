@@ -98,10 +98,12 @@ def observation(at, price, candidate_id="desktop-test", **overrides):
 
 
 class BuyNowDecisionTests(unittest.TestCase):
-    def evaluate(self, now, price_observations=None, **kwargs):
+    def evaluate(self, now, price_observations=None, official_campaign_dates=None, **kwargs):
         rankings, config = fixture(now, **kwargs)
         with patch.object(timing, "now_jst", return_value=now):
-            return timing.build_buy_now_decision(rankings, [], config, price_observations)
+            return timing.build_buy_now_decision(
+                rankings, [], config, price_observations, official_campaign_dates
+            )
 
     def test_before_sale_never_calls_pre_sale_price_a_buy_now(self):
         now = datetime(2026, 10, 12, 20, 0, tzinfo=JST)
@@ -154,6 +156,34 @@ class BuyNowDecisionTests(unittest.TestCase):
         self.assertEqual(row["status"], "VERIFY_PRICE_OR_PIT")
         self.assertNotEqual(result["status"], "WAIT_FOR_OFFICIAL_DATES")
         self.assertFalse(row["qualified_to_buy"])
+
+    def test_official_date_fetch_errors_are_separate_from_unconfirmed_dates(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        calendar = {
+            "sources": {
+                "mouse_computer": {"status": "UNCONFIRMED"},
+                "acer": {"status": "FETCH_ERROR"},
+                "amazon_japan": {
+                    "status": "CONFIRMED",
+                    "start_jst": CAMPAIGN_START,
+                    "end_jst": CAMPAIGN_END,
+                    "source_url": "https://www.amazon.co.jp/blackfriday",
+                },
+            }
+        }
+        result = self.evaluate(
+            now,
+            official_campaign_dates=calendar,
+            official_campaign_confirmed=False,
+        )
+        summary = result["official_campaign_dates_summary"]
+        self.assertEqual(summary["retailer_count"], 3)
+        self.assertEqual(summary["confirmed_count"], 1)
+        self.assertEqual(summary["unconfirmed_count"], 1)
+        self.assertEqual(summary["fetch_error_count"], 1)
+        text = timing.render_buy_now_markdown(result)
+        self.assertIn("取得エラー: 1", text)
+        self.assertIn("公式期間が確認できない店舗: 1", text)
 
     def test_unknown_pit_never_qualifies(self):
         now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
