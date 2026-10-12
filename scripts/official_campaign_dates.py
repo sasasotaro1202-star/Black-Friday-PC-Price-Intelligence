@@ -10,6 +10,7 @@ import sys
 from datetime import datetime, timezone, timedelta
 from html.parser import HTMLParser
 from urllib.error import HTTPError, URLError
+from urllib.parse import urljoin, urlparse
 from urllib.request import Request, urlopen
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,19 +33,33 @@ class VisibleText(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.parts = []
+        self.links = []
         self.skip = 0
+        self.active_href = None
+        self.active_link_text = []
 
     def handle_starttag(self, tag, attrs):
-        if tag.lower() in ("script", "style", "noscript", "svg"):
+        tag = tag.lower()
+        if tag in ("script", "style", "noscript", "svg"):
             self.skip += 1
+        if tag == "a" and not self.skip:
+            self.active_href = dict(attrs).get("href")
+            self.active_link_text = []
 
     def handle_endtag(self, tag):
-        if tag.lower() in ("script", "style", "noscript", "svg") and self.skip:
+        tag = tag.lower()
+        if tag == "a" and self.active_href:
+            self.links.append({"href": self.active_href, "text": " ".join(self.active_link_text).strip()})
+            self.active_href = None
+            self.active_link_text = []
+        if tag in ("script", "style", "noscript", "svg") and self.skip:
             self.skip -= 1
 
     def handle_data(self, data):
         if not self.skip and data and data.strip():
             self.parts.append(data.strip())
+            if self.active_href:
+                self.active_link_text.append(data.strip())
 
 
 def now_jst():
@@ -65,10 +80,15 @@ def parse_dt(value):
     return dt.astimezone(JST)
 
 
-def visible_text(payload):
+def visible_text_and_links(payload):
     parser = VisibleText()
     parser.feed(payload.decode("utf-8", errors="replace"))
-    return re.sub(r"\s+", " ", " ".join(parser.parts))
+    text = re.sub(r"\s+", " ", " ".join(parser.parts))
+    return text, parser.links
+
+
+def visible_text(payload):
+    return visible_text_and_links(payload)[0]
 
 
 def parse_explicit_2026_range(text, source_url):
@@ -118,7 +138,7 @@ def parse_explicit_2026_range(text, source_url):
     return None
 
 
-def fetch_text(url, timeout=18):
+def fetch_page(url, timeout=8):
     request = Request(
         url,
         headers={
@@ -129,7 +149,49 @@ def fetch_text(url, timeout=18):
     with urlopen(request, timeout=timeout) as response:
         if response.status < 200 or response.status >= 300:
             raise RuntimeError("HTTP status {}".format(response.status))
-        return visible_text(response.read())
+        final_url = response.geturl() or url
+        return visible_text_and_links(response.read()), final_url
+
+
+def _same_official_site(seed_url, candidate_url):
+    try:
+        base = (urlparse(seed_url).hostname or "").lower()
+        host = (urlparse(candidate_url).hostname or "").lower()
+        return bool(
+            urlparse(candidate_url).scheme == "https"
+            and base and host
+            and (host == base or host.endswith("." + base) or base.endswith("." + host))
+        )
+    except Exception:
+        return False
+
+
+def discover_campaign_links(seed_url, links, already_checked, limit=4):
+    """Return a few likely campaign links that stay on the same retailer domain."""
+    candidates = []
+    seen = set(already_checked or [])
+    for link in links or []:
+        href = link.get("href") if isinstance(link, dict) else None
+        label = str(link.get("text") or "") if isinstance(link, dict) else ""
+        if not href:
+            continue
+        absolute = urljoin(seed_url, href).split("#", 1)[0]
+        parsed = urlparse(absolute)
+        if not _same_official_site(seed_url, absolute) or parsed.path.lower().endswith((".pdf", ".jpg", ".png", ".webp", ".jpeg")):
+            continue
+        if absolute in seen or absolute in {x.rstrip("/") for x in seen}:
+            continue
+        target = (absolute + " " + label).lower()
+        # A link must be clearly campaign-oriented; do not crawl a whole catalog.
+        if not re.search(r"black[-_ ]?friday|blackfriday|ブラック\\s*フライデー|campaign|campaigns|sale|セール|特集", target, re.IGNORECASE):
+            continue
+        candidates.append((absolute, label))
+    # Prefer strongly named Black Friday destinations over generic campaign hubs.
+    candidates.sort(key=lambda x: (
+        0 if re.search(r"black[-_ ]?friday|blackfriday|ブラック\\s*フライデー", x[0] + " " + x[1], re.IGNORECASE) else 1,
+        x[0],
+    ))
+    return [url for url, _ in candidates[:max(0, int(limit))]]
 
 
 def load_json(path, fallback):
@@ -176,17 +238,49 @@ def main():
         confirmed = None
         checked_sources = []
         errors = []
-        for url in urls:
-            try:
-                text = fetch_text(url)
-                parsed = parse_explicit_2026_range(text, url)
-                checked_sources.append({"url": url, "fetch_status": "OK", "explicit_2026_range_found": bool(parsed)})
-                if parsed:
-                    confirmed = dict(parsed, source_url=url, status="CONFIRMED", checked_at=iso(now), fetch_status="OK")
-                    break
-            except (HTTPError, URLError, TimeoutError, OSError, RuntimeError, ValueError) as error:
-                errors.append("{}: {}".format(url, str(error)[:240]))
-                checked_sources.append({"url": url, "fetch_status": "ERROR", "error": str(error)[:240]})
+        visited = set()
+        for seed_url in urls:
+            if confirmed or len(visited) >= 3:
+                break
+            queue = [(seed_url, None)]
+            while queue and len(visited) < 3 and not confirmed:
+                url, discovered_from = queue.pop(0)
+                if url in visited:
+                    continue
+                visited.add(url)
+                try:
+                    (page_text, links), final_url = fetch_page(url)
+                    if not _same_official_site(seed_url, final_url):
+                        checked_sources.append({
+                            "url": url, "final_url": final_url, "fetch_status": "REJECTED_CROSS_DOMAIN_REDIRECT",
+                            "explicit_2026_range_found": False,
+                        })
+                        continue
+                    parsed = parse_explicit_2026_range(page_text, final_url)
+                    checked_sources.append({
+                        "url": final_url, "discovered_from": discovered_from,
+                        "fetch_status": "OK", "explicit_2026_range_found": bool(parsed),
+                    })
+                    if parsed:
+                        confirmed = dict(
+                            parsed, source_url=final_url, status="CONFIRMED",
+                            checked_at=iso(now), fetch_status="OK",
+                            discovered_from=discovered_from,
+                        )
+                        break
+                    if len(visited) < 3:
+                        discovered = discover_campaign_links(
+                            final_url, links, visited, limit=4
+                        )
+                        for child in discovered:
+                            if child not in visited and all(item[0] != child for item in queue):
+                                queue.append((child, final_url))
+                except (HTTPError, URLError, TimeoutError, OSError, RuntimeError, ValueError) as error:
+                    errors.append("{}: {}".format(url, str(error)[:240]))
+                    checked_sources.append({
+                        "url": url, "discovered_from": discovered_from,
+                        "fetch_status": "ERROR", "error": str(error)[:240],
+                    })
 
         if confirmed:
             entry = confirmed
