@@ -17,6 +17,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JST = timezone(timedelta(hours=9))
 OUTPUT = os.path.join(ROOT, "data", "official_campaign_dates_status.json")
 CACHE_HOURS = 6
+SCANNER_VERSION = 2
 DATE_RANGE = re.compile(
     r"(?P<year>2026)\s*(?:年|[./-])\s*(?P<month>\d{1,2})\s*(?:月|[./-])\s*(?P<day>\d{1,2})\s*日?"
     r"\s*(?:\([^)]{0,30}\))?\s*(?:(?P<start_hour>\d{1,2}):(?P<start_minute>\d{2}))?\s*"
@@ -238,6 +239,10 @@ def should_skip_calendar_refresh(old, calendar, now, cache_hours=CACHE_HOURS):
     old_checked = parse_dt((old or {}).get("checked_at"))
     old_sources = (old or {}).get("sources") or {}
     expected_signature = calendar_config_signature(calendar)
+    # A fresh timestamp does not make outputs from an older crawler implementation
+    # valid after parsing or crawl-order behavior changes.
+    if (old or {}).get("scanner_version") != SCANNER_VERSION:
+        return False
     if not old_checked:
         return False
     cache_age = now - old_checked
@@ -262,6 +267,7 @@ def main():
     output = {
         "generated_at": iso(now),
         "checked_at": iso(now),
+        "scanner_version": SCANNER_VERSION,
         "configured_sources": signature,
         "policy": "Only official retailer sources with an explicit 2026 date range can set CONFIRMED. Provisional watch-window dates never confirm a retailer campaign.",
         "sources": {},
