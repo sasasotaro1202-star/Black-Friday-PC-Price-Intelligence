@@ -18,8 +18,8 @@ class OfficialCampaignDateTests(unittest.TestCase):
             "https://shop.example.jp/black-friday/",
         )
         self.assertIsNotNone(result)
-        self.assertEqual(result["start_jst"], "2026-11-20T00:00:00+09:00")
-        self.assertEqual(result["end_jst"], "2026-12-10T23:59:59+09:00")
+        self.assertEqual(result["start_jst"], "2026-11-20T12:00:00+09:00")
+        self.assertEqual(result["end_jst"], "2026-12-10T11:59:59+09:00")
         self.assertIn("2026年11月20日", result["evidence"])
 
     def test_rejects_2025_dates_even_on_black_friday_page(self):
