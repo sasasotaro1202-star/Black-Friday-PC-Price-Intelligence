@@ -7,6 +7,7 @@ from official_campaign_dates import (
     _same_official_site,
     calendar_config_signature,
     discover_campaign_links,
+    initial_source_queue,
     parse_explicit_2026_range,
     should_skip_calendar_refresh,
 )
@@ -63,6 +64,19 @@ class OfficialCampaignDateTests(unittest.TestCase):
                 "https://shop.example.jp/black-friday/",
             )
         )
+
+    def test_configured_official_sources_are_queued_before_discovered_links(self):
+        sources = [
+            "https://www.lenovo.com/jp/ja/campaigns/black-friday/",
+            "https://www.lenovo.com/jp/ja/deals/black-friday-sale/",
+        ]
+        queue = initial_source_queue(sources, limit=3)
+        self.assertEqual(queue, [
+            (sources[0], None, sources[0]),
+            (sources[1], None, sources[1]),
+        ])
+        self.assertEqual(initial_source_queue(sources, limit=1), [(sources[0], None, sources[0])])
+        self.assertEqual(initial_source_queue(["http://not-https.example/"], limit=3), [])
 
     def test_campaign_link_discovery_stays_on_same_retailer_site(self):
         links = [
