@@ -312,6 +312,11 @@ def build_buy_now_decision(rankings, events, config, price_observations=None, of
         )
         campaign = campaign_window_for_item(item, now, config, official_campaign_dates)
         current_is_watch_window = bool(retrieved and start <= retrieved <= end)
+        retailer_dates_confirmed = bool(
+            campaign.get("date_status") in ("CONFIRMED", "CONFIRMED_MANUAL")
+            and campaign.get("start_jst") and campaign.get("end_jst")
+        )
+        retailer_campaign_active_now = bool(campaign.get("active_now"))
         official_sale_active = bool(campaign.get("active_at_observation"))
         price_verified = bool(
             in_window and current_is_watch_window and official_sale_active
@@ -399,12 +404,13 @@ def build_buy_now_decision(rankings, events, config, price_observations=None, of
             blockers.append("ブラックフライデー監視期間外。現行価格はBF実売として扱わない")
         elif not current_is_watch_window:
             blockers.append("商品価格の観測時刻が暫定の広域監視窓内ではない")
-        if in_window and not official_sale_active:
+        if in_window and not retailer_dates_confirmed:
             retailer = campaign.get("retailer_key") or "販売店未特定"
-            blockers.append(
-                retailer + "の2026年公式セール期間が未確認、または価格観測時点が公式期間外。"
-                "暫定監視窓だけではBF実売として認定しない"
-            )
+            blockers.append(retailer + "の2026年公式セール日程が未確認。暫定監視窓だけではBF実売として認定しない")
+        elif in_window and not retailer_campaign_active_now:
+            blockers.append("販売店の2026年公式日程は確認済みですが、現在はその公式開催期間外です")
+        elif in_window and not official_sale_active:
+            blockers.append("販売店の公式開催期間は現在有効ですが、価格観測時刻がその公式期間内ではありません。最新価格を取り直す必要があります")
         if not source_ok:
             blockers.append("直接取得価格・SKU一致・価格検証の条件未達")
         if not fresh:
@@ -439,9 +445,11 @@ def build_buy_now_decision(rankings, events, config, price_observations=None, of
             status = "PRE_BF_REFERENCE_ONLY" if now < start else "SALE_WINDOW_CLOSED"
         elif stock == "out_of_stock":
             status = "OUT_OF_STOCK"
-        elif not official_sale_active:
+        elif not retailer_dates_confirmed:
             status = "WAIT_FOR_OFFICIAL_DATES"
-        elif not price_verified:
+        elif not retailer_campaign_active_now:
+            status = "WAIT_FOR_CAMPAIGN_WINDOW"
+        elif not official_sale_active or not price_verified:
             status = "VERIFY_PRICE_OR_PIT"
         elif not stock_available:
             status = "STOCK_UNCONFIRMED"
@@ -468,10 +476,13 @@ def build_buy_now_decision(rankings, events, config, price_observations=None, of
             ),
             "retailer_key": campaign.get("retailer_key"),
             "retailer_campaign_status": campaign.get("status"),
+            "retailer_campaign_date_status": campaign.get("date_status"),
+            "retailer_campaign_dates_confirmed": retailer_dates_confirmed,
             "retailer_campaign_start_jst": campaign.get("start_jst"),
             "retailer_campaign_end_jst": campaign.get("end_jst"),
             "retailer_campaign_source_url": campaign.get("source_url"),
-            "retailer_campaign_active": official_sale_active,
+            "retailer_campaign_active": retailer_campaign_active_now,
+            "retailer_campaign_active_at_observation": official_sale_active,
             "reference_price_phase": (
                 "PRE_BF_REFERENCE" if price is not None and retrieved and retrieved < start else
                 "POST_BF_REFERENCE" if price is not None and retrieved and retrieved > end else
@@ -531,6 +542,7 @@ def build_buy_now_decision(rankings, events, config, price_observations=None, of
 
     chosen = None
     any_official_campaign_active = any(x.get("retailer_campaign_active") for x in rows)
+    any_campaign_dates_confirmed = any(x.get("retailer_campaign_dates_confirmed") for x in rows)
     if now < start:
         status, label = "PRE_BF_MONITORING", "事前監視継続・公式日程未確認"
         recommendation = "現在価格は事前参考値です。設定期間は各社の公式開催日ではありません。公式ページで2026年の日付範囲を確認できるまではBF価格として扱わず、開催日推定に基づく購入推奨を出しません。"
@@ -554,15 +566,18 @@ def build_buy_now_decision(rankings, events, config, price_observations=None, of
         status, label = "URGENT_BUT_GATE_BLOCKED", "売り切れリスクあり・購入ゲート未通過"
         recommendation = "低在庫の条件は見えていますが、購入ゲートが未通過です。予算・カバレッジ・価格情報の不足を解消するまで購入許可は出しません。"
         reasons = chosen.get("blockers") or ["購入ゲート未通過"]
-    elif in_window and not any_official_campaign_active:
+    elif in_window and not any_campaign_dates_confirmed:
         status, label = "WAIT_FOR_OFFICIAL_DATES", "公式セール日程の確認待ち"
-        recommendation = "価格監視は継続中ですが、この期間は暫定の広域監視窓です。販売店の2026年公式セール開始・終了日と価格の適用期間が確認できるまで、BF実売としての買い時判定や購入許可は出しません。"
+        recommendation = "価格監視は継続中ですが、対象販売店の2026年公式セール日程が未確認です。暫定の広域監視窓だけではBF実売として扱わず、公式日付確認前に購入推奨を出しません。"
         reasons = [
             "各候補の販売元について、公式ページ上の2026年日付範囲が未確認です。",
             "取得済み価格は広域監視窓の比較材料として保存し、公式BF価格とは区別します。",
-            "予算超過候補があっても、公式セール期間内の価格と確認できないため、買い時判定は日程確認待ちを優先します。",
             "購入ゲート: " + str(gate.get("reason") or "未確認"),
         ]
+    elif in_window and not any_official_campaign_active:
+        status, label = "WAIT_FOR_CAMPAIGN_WINDOW", "公式セール開催窓の開始待ち"
+        recommendation = "公式の2026年開催日程は確認済みですが、監視対象のいずれの公式開催窓も現在アクティブではありません。対象店舗の期間に入ったら価格・在庫・PITを再確認します。"
+        reasons = ["公式日程は未開始、またはすでに終了しています。"]
     elif over_budget:
         chosen = over_budget[0]
         status, label = "WAIT_FOR_DISCOUNT", "値下げ待ち"
