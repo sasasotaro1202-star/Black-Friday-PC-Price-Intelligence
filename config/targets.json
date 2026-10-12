@@ -490,12 +490,15 @@
     },
     "price_semantics": {
       "all_configured_target_prices_mean": "black_friday_purchase_targets",
-      "window_start_jst": "2026-11-14T00:00:00+09:00",
-      "window_end_jst": "2026-12-04T23:59:59+09:00",
+      "window_start_jst": "2026-11-01T00:00:00+09:00",
+      "window_end_jst": "2026-12-11T23:59:59+09:00",
       "pre_window_observations": "reference_only_not_black_friday_prices",
       "future_black_friday_prices": "unknown_until_actually_observed",
       "target_prices_are_promises": false,
-      "coupon_and_points": "exclude unless final checkout cash price and eligibility are verified"
+      "coupon_and_points": "exclude unless final checkout cash price and eligibility are verified",
+      "window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
+      "official_campaign_dates_required": true,
+      "official_campaign_policy": "A price is a verified 2026 BF offer only if the product's retailer has a source-verified 2026 campaign range and the retrieved offer timestamp lies inside that range. The broad watch window never substitutes for retailer dates."
     },
     "ai_vram_outlier_rule": {
       "label": "RTX 5060 Ti 16GB AI-VRAM dark horse",
