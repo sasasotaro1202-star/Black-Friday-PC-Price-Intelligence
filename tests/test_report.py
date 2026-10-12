@@ -84,8 +84,8 @@ class ReportLinkTests(unittest.TestCase):
             "pit_valid": True,
             "spec": {"gpu": "RTX 5070", "ram_gb": 16, "ssd": "500 GB"},
         }
-        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 69800,
-                  "pc_target_jpy": 330200, "pc_budget_jpy": 330200}
+        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
+                  "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
         projection = {"pc_dynamic_cap_jpy": 302200}
         result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
@@ -123,8 +123,8 @@ class ReportLinkTests(unittest.TestCase):
             "pit_valid": True,
             "spec": {"gpu": "RTX 5070", "ram_gb": 32, "ssd": "1 TB"},
         }
-        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 69800,
-                  "pc_target_jpy": 330200, "pc_budget_jpy": 330200}
+        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
+                  "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
         projection = {"pc_dynamic_cap_jpy": 289240}
         result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
