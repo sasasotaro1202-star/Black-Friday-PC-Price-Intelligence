@@ -58,6 +58,11 @@ class ReportLinkTests(unittest.TestCase):
 
     def test_primary_plan_reports_upgrade_cost_ceiling_without_assuming_it(self):
         strategy = {
+            "price_semantics": {
+                "window_start_jst": "2026-11-01T00:00:00+09:00",
+                "window_end_jst": "2026-12-11T23:59:59+09:00",
+                "window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
+            },
             "priority_plans": [{
                 "candidate_id": "desktop-gtune-dg-i5g70-5070",
                 "role": "primary_configuration_upgrade",
@@ -101,6 +106,11 @@ class ReportLinkTests(unittest.TestCase):
 
     def test_outlet_plan_reports_target_and_live_cap_gaps_separately(self):
         strategy = {
+            "price_semantics": {
+                "window_start_jst": "2026-11-01T00:00:00+09:00",
+                "window_end_jst": "2026-12-11T23:59:59+09:00",
+                "window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
+            },
             "priority_plans": [{
                 "candidate_id": "desktop-gtune-dg-a7g70-5070",
                 "role": "secondary_outlet_complete_configuration",
