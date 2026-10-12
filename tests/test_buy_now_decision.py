@@ -1,4 +1,7 @@
+import json
+import os
 import sys
+import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
 from unittest.mock import patch
@@ -7,14 +10,18 @@ sys.path.insert(0, "scripts")
 import timing_analysis as timing
 
 JST = timezone(timedelta(hours=9))
+SALE_START = "2026-11-14T00:00:00+09:00"
+SALE_END = "2026-12-04T23:59:59+09:00"
 
 
-def fixture(now, price=280000, stock="in_stock", rank_status="BUY_NOW", gate_allowed=True, pit_valid=True):
-    retrieved = timing.iso(now)
+def fixture(now, price=280000, stock="in_stock", rank_status="BUY_NOW", gate_allowed=True, pit_valid=True, retrieved_at=None, budget_ready=True):
+    retrieved_dt = retrieved_at or now
+    retrieved = timing.iso(retrieved_dt)
     item = {
         "id": "desktop-test",
         "name": "Test desktop RTX 5070",
         "form_factor": "desktop",
+        "url": "https://example.com/product",
         "current_price_jpy": price,
         "cash_total_cost_jpy": price,
         "effective_cost_jpy": price,
@@ -45,35 +52,50 @@ def fixture(now, price=280000, stock="in_stock", rank_status="BUY_NOW", gate_all
         "pc_target_jpy": 300200,
         "dynamic_pc_cap_jpy": 300200,
         "peripheral_projection_jpy": 69800,
-        "peripheral_budget_data_ready": True,
+        "peripheral_budget_data_ready": budget_ready,
         "purchase_gate": {
             "allowed": gate_allowed,
             "coverage_status": "COMPLETE",
-            "reason": "all_test_gates_pass",
+            "reason": "all_test_gates_pass" if gate_allowed else "test_gate_blocked",
         },
         "products": [item],
         "unavailable_products": [],
     }
-    config = {
-        "monitor_window_start": "2026-11-14T00:00:00+09:00",
-        "monitor_window_end": "2026-12-04T23:59:59+09:00",
-    }
+    config = {"monitor_window_start": SALE_START, "monitor_window_end": SALE_END}
     return rankings, config
 
 
+def observation(at, price, candidate_id="desktop-test", **overrides):
+    result = {
+        "id": candidate_id,
+        "observed_at": at,
+        "available_at": at,
+        "retrieval_time": at,
+        "price_jpy": price,
+        "stock_status": "in_stock",
+        "price_source_mode": "direct_structured",
+        "price_validation_status": "validated",
+        "variant_match": "exact",
+        "pit_valid": True,
+    }
+    result.update(overrides)
+    return result
+
+
 class BuyNowDecisionTests(unittest.TestCase):
-    def evaluate(self, now, **kwargs):
+    def evaluate(self, now, price_observations=None, **kwargs):
         rankings, config = fixture(now, **kwargs)
         with patch.object(timing, "now_jst", return_value=now):
-            return timing.build_buy_now_decision(rankings, [], config)
+            return timing.build_buy_now_decision(rankings, [], config, price_observations)
 
     def test_before_sale_never_calls_pre_sale_price_a_buy_now(self):
         now = datetime(2026, 10, 12, 20, 0, tzinfo=JST)
         result = self.evaluate(now)
+        row = result["chosen_candidate"]
         self.assertEqual(result["status"], "PRE_BF_MONITORING")
-        self.assertIsNotNone(result["chosen_candidate"]["pre_bf_reference_price_jpy"])
-        self.assertIsNone(result["chosen_candidate"]["price_jpy"])
-        self.assertFalse(result["chosen_candidate"]["qualified_to_buy"])
+        self.assertEqual(row["pre_bf_reference_price_jpy"], 280000)
+        self.assertIsNone(row["price_jpy"])
+        self.assertFalse(row["qualified_to_buy"])
 
     def test_verified_in_budget_offer_can_be_buy_now(self):
         now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
@@ -101,6 +123,65 @@ class BuyNowDecisionTests(unittest.TestCase):
         result = self.evaluate(now, price=320000, rank_status="WAIT_FOR_DISCOUNT")
         self.assertEqual(result["status"], "WAIT_FOR_DISCOUNT")
         self.assertFalse(result["chosen_candidate"]["qualified_to_buy"])
+
+    def test_sold_out_candidate_is_never_authorized(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        result = self.evaluate(now, stock="out_of_stock")
+        self.assertNotEqual(result["status"], "BUY_NOW")
+        self.assertEqual(result["chosen_candidate"]["status"], "OUT_OF_STOCK")
+        self.assertFalse(result["chosen_candidate"]["qualified_to_buy"])
+
+    def test_stale_price_observation_is_not_authorized(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        old = datetime(2026, 11, 20, 10, 0, tzinfo=JST)
+        result = self.evaluate(now, retrieved_at=old)
+        self.assertNotEqual(result["status"], "BUY_NOW")
+        self.assertFalse(result["chosen_candidate"]["price_verified_for_bf"])
+        self.assertIn("価格観測が古いか取得時刻が未確認", result["chosen_candidate"]["blockers"])
+
+    def test_sale_window_low_uses_verified_observations_and_timestamp(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        prices = [
+            observation("2026-11-18T12:00:00+09:00", 270000),
+            observation("2026-11-19T12:00:00+09:00", 275000),
+            observation("2026-11-19T13:00:00+09:00", 99999, pit_valid=False),
+            observation("2026-11-19T14:00:00+09:00", 250000, stock_status="out_of_stock"),
+            observation("2026-11-19T15:00:00+09:00", 260000, price_source_mode="search_snippet"),
+        ]
+        result = self.evaluate(now, price_observations=prices)
+        row = result["chosen_candidate"]
+        self.assertEqual(row["bf_window_low_observed_jpy"], 270000)
+        self.assertEqual(row["bf_window_low_observed_at"], "2026-11-18T12:00:00+09:00")
+        self.assertEqual(row["bf_window_price_observation_count"], 3)  # two history points + current snapshot
+        self.assertGreater(row["gap_from_observed_window_low_pct"], 0)
+
+    def test_after_sale_price_is_never_mislabeled_as_pre_sale(self):
+        now = datetime(2026, 12, 5, 12, 0, tzinfo=JST)
+        result = self.evaluate(now)
+        row = result["chosen_candidate"]
+        self.assertEqual(result["status"], "SALE_WINDOW_CLOSED")
+        self.assertIsNone(row["pre_bf_reference_price_jpy"])
+        self.assertEqual(row["post_bf_reference_price_jpy"], 280000)
+        self.assertFalse(row["qualified_to_buy"])
+
+    def test_observation_ledger_only_records_verified_buyable_offers_in_window(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        rankings, config = fixture(now)
+        snapshot = rankings["products"][0]
+        invalid = dict(snapshot, id="not-verified", price_source_mode="search_snippet")
+        with tempfile.TemporaryDirectory() as root:
+            with patch.object(timing, "ROOT", root):
+                count = timing.append_buy_now_observations({"products": [snapshot, invalid]}, config, now=now)
+                path = os.path.join(root, "data", "buy_now_observations.jsonl")
+                self.assertEqual(count, 1)
+                with open(path, encoding="utf-8") as f:
+                    lines = f.readlines()
+                self.assertEqual(len(lines), 1)
+                saved = json.loads(lines[0])
+                self.assertEqual(saved["price_jpy"], 280000)
+                self.assertTrue(saved["pit_valid"])
+                outside = datetime(2026, 10, 12, 12, 0, tzinfo=JST)
+                self.assertEqual(timing.append_buy_now_observations({"products": [snapshot]}, config, now=outside), 0)
 
 
 if __name__ == "__main__":
