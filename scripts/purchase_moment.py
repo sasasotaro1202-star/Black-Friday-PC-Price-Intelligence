@@ -254,12 +254,12 @@ def evaluate_candidate(item, catalog_item, events, anchors, start, end, now, pha
     elif phase == "PRE_BF":
         candidate_action = "PRE_BF_REFERENCE_ONLY"
         reasons.append("現行価格はセール前参考値。2026年BF実売価格とは扱わない")
-    elif stock == "out_of_stock":
-        candidate_action = "SOLD_OUT"
-        reasons.append("現在の商品ページで在庫切れ")
     elif not trusted:
         candidate_action = "VERIFY_PRICE_FIRST"
         reasons.append(f"価格/PIT確認不可: {trust_reason}")
+    elif stock == "out_of_stock":
+        candidate_action = "SOLD_OUT"
+        reasons.append("有効な新しい観測で在庫切れを確認")
     elif not observed_in_bf:
         candidate_action = "VERIFY_BF_OFFER"
         reasons.append("BF期間内に取得した価格ではない")
