@@ -10,11 +10,13 @@ sys.path.insert(0, "scripts")
 import timing_analysis as timing
 
 JST = timezone(timedelta(hours=9))
-SALE_START = "2026-11-01T00:00:00+09:00"
-SALE_END = "2026-12-11T23:59:59+09:00"
+WATCH_START = "2026-11-01T00:00:00+09:00"
+WATCH_END = "2026-12-11T23:59:59+09:00"
+CAMPAIGN_START = "2026-11-15T00:00:00+09:00"
+CAMPAIGN_END = "2026-11-30T23:59:59+09:00"
 
 
-def fixture(now, price=280000, stock="in_stock", rank_status="BUY_NOW", gate_allowed=True, pit_valid=True, retrieved_at=None, budget_ready=True, official_campaign_confirmed=True, campaign_start=SALE_START, campaign_end=SALE_END):
+def fixture(now, price=280000, stock="in_stock", rank_status="BUY_NOW", gate_allowed=True, pit_valid=True, retrieved_at=None, budget_ready=True, official_campaign_confirmed=True, campaign_start=CAMPAIGN_START, campaign_end=CAMPAIGN_END):
     retrieved_dt = retrieved_at or now
     retrieved = timing.iso(retrieved_dt)
     item = {
@@ -62,8 +64,8 @@ def fixture(now, price=280000, stock="in_stock", rank_status="BUY_NOW", gate_all
         "unavailable_products": [],
     }
     config = {
-        "monitor_window_start": SALE_START,
-        "monitor_window_end": SALE_END,
+        "monitor_window_start": WATCH_START,
+        "monitor_window_end": WATCH_END,
         "monitor_window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
         "official_2026_dates": {
             "mouse_computer": {
@@ -133,7 +135,7 @@ class BuyNowDecisionTests(unittest.TestCase):
         result = self.evaluate(
             now,
             campaign_start="2026-11-21T00:00:00+09:00",
-            campaign_end=SALE_END,
+            campaign_end=CAMPAIGN_END,
         )
         row = result["chosen_candidate"]
         self.assertEqual(result["status"], "WAIT_FOR_OFFICIAL_DATES")
@@ -193,7 +195,7 @@ class BuyNowDecisionTests(unittest.TestCase):
         self.assertGreater(row["gap_from_watch_window_low_pct"], 0)
 
     def test_after_sale_price_is_never_mislabeled_as_pre_sale(self):
-        now = datetime(2026, 12, 5, 12, 0, tzinfo=JST)
+        now = datetime(2026, 12, 12, 12, 0, tzinfo=JST)
         result = self.evaluate(now)
         row = result["chosen_candidate"]
         self.assertEqual(result["status"], "SALE_WINDOW_CLOSED")
