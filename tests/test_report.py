@@ -161,8 +161,8 @@ class ReportLinkTests(unittest.TestCase):
             "pit_valid": True,
             "spec": {"gpu": "RTX 5070 Ti", "ram_gb": 16, "ssd": "1 TB"},
         }
-        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
-                  "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
+        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 69800,
+                  "pc_target_jpy": 330200, "pc_budget_jpy": 330200}
         projection = {"pc_dynamic_cap_jpy": 302200}
         official_calendar = {
             "official_2026_dates": {
@@ -220,11 +220,24 @@ class ReportLinkTests(unittest.TestCase):
             "available_at": "2026-11-20T11:59:00+09:00",
             "spec": {"gpu": "RTX 5070", "ram_gb": 32, "ssd": "1 TB"},
         }
-        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
-                  "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
+        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 69800,
+                  "pc_target_jpy": 330200, "pc_budget_jpy": 330200}
         projection = {"pc_dynamic_cap_jpy": 302200, "budget_data_ready": True}
-        with patch.object(report, "now_jst", return_value=datetime.fromisoformat("2026-11-20T12:01:00+09:00")):
-            result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
+        official_calendar = {
+            "official_2026_dates": {
+                "mouse_computer": {
+                    "status": "CONFIRMED_MANUAL",
+                    "start_jst": "2026-11-15T00:00:00+09:00",
+                    "end_jst": "2026-11-30T23:59:59+09:00",
+                    "source_url": "https://www.mouse-jp.co.jp/",
+                }
+            }
+        }
+        def fake_load_json(path, fallback=None):
+            return official_calendar if str(path).endswith("config/targets.json") else {"sources": {}}
+        with patch.object(report, "load_json", side_effect=fake_load_json):
+            with patch.object(report, "now_jst", return_value=datetime.fromisoformat("2026-11-20T12:01:00+09:00")):
+                result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
         self.assertEqual(result["pricing_phase"], "PROVISIONAL_BROAD_WATCH_WINDOW")
         self.assertTrue(row["black_friday_offer_verified"])
