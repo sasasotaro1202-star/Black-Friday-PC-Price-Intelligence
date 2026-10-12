@@ -122,7 +122,13 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
             "post_black_friday_reference_price_jpy": observed_price if verified and observed_at and bf_end and observed_at > bf_end else None,
             "post_black_friday_reference_at": item.get("retrieval_time") if verified and observed_at and bf_end and observed_at > bf_end else None,
             "observed_price_jpy": observed_price,
-            "observed_price_phase": "OFFICIAL_BLACK_FRIDAY_WINDOW" if observation_is_bf else ("PROVISIONAL_WATCH_WINDOW_REFERENCE" if verified and in_watch_window else "PRE_BLACK_FRIDAY_REFERENCE" if verified else "UNVERIFIED"),
+            "observed_price_phase": (
+                "OFFICIAL_BLACK_FRIDAY_WINDOW" if observation_is_bf else
+                "PROVISIONAL_WATCH_WINDOW_REFERENCE" if verified and inside_watch_observation else
+                "PRE_BLACK_FRIDAY_REFERENCE" if verified and observed_at and bf_start and observed_at < bf_start else
+                "POST_BLACK_FRIDAY_REFERENCE" if verified and observed_at and bf_end and observed_at > bf_end else
+                "TIMESTAMP_UNVERIFIED_REFERENCE" if verified else "UNVERIFIED"
+            ),
             "retailer_key": campaign.get("retailer_key"),
             "retailer_campaign_status": campaign.get("status"),
             "retailer_campaign_start_jst": campaign.get("start_jst"),
