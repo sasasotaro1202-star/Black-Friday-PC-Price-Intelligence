@@ -84,8 +84,8 @@ class ReportLinkTests(unittest.TestCase):
             "pit_valid": True,
             "spec": {"gpu": "RTX 5070", "ram_gb": 16, "ssd": "500 GB"},
         }
-        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
-                  "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
+        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 69800,
+                  "pc_target_jpy": 330200, "pc_budget_jpy": 330200}
         projection = {"pc_dynamic_cap_jpy": 302200}
         result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
@@ -123,8 +123,8 @@ class ReportLinkTests(unittest.TestCase):
             "pit_valid": True,
             "spec": {"gpu": "RTX 5070", "ram_gb": 32, "ssd": "1 TB"},
         }
-        policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
-                  "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
+        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 69800,
+                  "pc_target_jpy": 330200, "pc_budget_jpy": 330200}
         projection = {"pc_dynamic_cap_jpy": 289240}
         result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
@@ -140,8 +140,9 @@ class ReportLinkTests(unittest.TestCase):
         from datetime import datetime
         strategy = {
             "price_semantics": {
-                "window_start_jst": "2026-11-14T00:00:00+09:00",
-                "window_end_jst": "2026-12-04T23:59:59+09:00",
+                "window_start_jst": "2026-11-01T00:00:00+09:00",
+                "window_end_jst": "2026-12-11T23:59:59+09:00",
+                "window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
             },
             "priority_plans": [],
             "outlier_rule": {"gpu": "RTX 5070 Ti", "form_factor": "desktop",
@@ -150,7 +151,7 @@ class ReportLinkTests(unittest.TestCase):
         candidate = {
             "id": "outlier-5070ti-incomplete",
             "name": "RTX 5070 Ti desktop",
-            "url": "https://example.com/5070ti",
+            "url": "https://www.mouse-jp.co.jp/store/g/5070ti",
             "form_factor": "desktop",
             "current_price_jpy": 289800,
             "price_source_mode": "direct_structured",
@@ -163,8 +164,21 @@ class ReportLinkTests(unittest.TestCase):
         policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
                   "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
         projection = {"pc_dynamic_cap_jpy": 302200}
-        with patch.object(report, "now_jst", return_value=datetime.fromisoformat("2026-11-20T12:01:00+09:00")):
-            result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
+        official_calendar = {
+            "official_2026_dates": {
+                "mouse_computer": {
+                    "status": "CONFIRMED_MANUAL",
+                    "start_jst": "2026-11-15T00:00:00+09:00",
+                    "end_jst": "2026-11-30T23:59:59+09:00",
+                    "source_url": "https://www.mouse-jp.co.jp/",
+                }
+            }
+        }
+        def fake_load_json(path, fallback=None):
+            return official_calendar if str(path).endswith("config/targets.json") else {"sources": {}}
+        with patch.object(report, "load_json", side_effect=fake_load_json):
+            with patch.object(report, "now_jst", return_value=datetime.fromisoformat("2026-11-20T12:01:00+09:00")):
+                result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
         self.assertEqual(row["role"], "rtx_5070_ti_outlier")
         self.assertEqual(row["status"], "NO_VERIFIED_COMPLETE_CONFIGURATION")
@@ -175,8 +189,9 @@ class ReportLinkTests(unittest.TestCase):
         from datetime import datetime
         strategy = {
             "price_semantics": {
-                "window_start_jst": "2026-11-14T00:00:00+09:00",
-                "window_end_jst": "2026-12-04T23:59:59+09:00",
+                "window_start_jst": "2026-11-01T00:00:00+09:00",
+                "window_end_jst": "2026-12-11T23:59:59+09:00",
+                "window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
             },
             "priority_plans": [{
                 "candidate_id": "desktop-gtune-dg-a7g70-5070",
@@ -211,7 +226,7 @@ class ReportLinkTests(unittest.TestCase):
         with patch.object(report, "now_jst", return_value=datetime.fromisoformat("2026-11-20T12:01:00+09:00")):
             result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
-        self.assertEqual(result["pricing_phase"], "BLACK_FRIDAY_WINDOW")
+        self.assertEqual(result["pricing_phase"], "PROVISIONAL_BROAD_WATCH_WINDOW")
         self.assertTrue(row["black_friday_offer_verified"])
         self.assertEqual(row["black_friday_price_observed_jpy"], 299800)
         self.assertIsNone(row["pre_black_friday_reference_price_jpy"])
