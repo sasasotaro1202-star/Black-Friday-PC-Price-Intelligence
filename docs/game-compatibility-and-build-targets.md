@@ -57,6 +57,7 @@ KONAMIの公式商品情報では対応機種は**Nintendo Switch／PlayStation 
 
 - **PCだけを買う場合：** パワプロ2026-2027をPC上で遊ぶ前提にしません。
 - **PS5を使う場合：** PS5は大多数のPS4ゲームに後方互換がありますが、購入前にPS StoreでPS4版が自分のアカウント・本体で利用できることを確認します。PS5ネイティブ版があるという意味ではありません。公式説明：[PS5のPS4ゲーム後方互換性](https://www.playstation.com/ja-jp/support/games/ps5-backward-compatibility-games/)
+- **PS5の参考価格（税込・公式希望小売価格）：** 日本語専用デジタル版 55,000円、通常デジタル版 89,980円、ディスクドライブ搭載版 97,980円、PS5 Pro 137,980円。パワプロ2026-2027はPS4ダウンロード版なので、パワプロ目的だけなら日本語専用デジタル版が費用を抑えやすい選択肢です。モデル言語・アカウント条件を確認してください。公式価格：[PS5本体ラインナップ](https://www.playstation.com/ja-jp/ps5/buy-now/)／[通常デジタル版](https://www.playstation.com/ja-jp/ps5/buy-now/ps5-digital-edition/)／[ディスク版](https://www.playstation.com/ja-jp/ps5/buy-now/ps5/)
 - **Nintendo Switchを使う場合：** 公式Switch版を購入します。
 - 本体・ゲームの追加費用をPC＋モニター等の37万円予算に含めると、PC本体に割り当てられる金額が下がります。予算を分ける場合はこのガイドのPC予算と混ぜません。
 
