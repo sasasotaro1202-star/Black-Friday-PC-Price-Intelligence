@@ -10,6 +10,7 @@ from intelligence import (
     now_jst, iso, scenario_prices, purchase_budget_policy, peripheral_budget_projection,
     configuration_readiness, gpu_key
 )
+from sale_calendar import campaign_window_for_item
 
 def sales_url(item):
     """Return only a real HTTP(S) product URL; never fabricate a purchase URL."""
@@ -81,6 +82,8 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
     bf_start = _parse_strategy_dt(phase.get("window_start_jst"))
     bf_end = _parse_strategy_dt(phase.get("window_end_jst"))
     in_bf_window = bool(bf_start and bf_end and bf_start <= now <= bf_end)
+    watch_config = load_json(os.path.join(ROOT, "config", "targets.json"), {})
+    official_dates = load_json(os.path.join(ROOT, "data", "official_campaign_dates_status.json"), {})
     budget_ready = bool(peripheral_projection.get("budget_data_ready"))
     live_cap = int(peripheral_projection.get("pc_dynamic_cap_jpy") or 0)
     planned_bf_cap = min(
@@ -97,7 +100,11 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
         verified = _trusted_live_offer(item)
         observed_price = item.get("current_price_jpy") if verified else None
         observed_at = _parse_strategy_dt(item.get("retrieval_time"))
-        observation_is_bf = bool(verified and in_bf_window and observed_at and bf_start <= observed_at <= bf_end)
+        campaign = campaign_window_for_item(item, now, watch_config, official_dates)
+        observation_is_bf = bool(
+            verified and in_bf_window and observed_at and bf_start <= observed_at <= bf_end
+            and campaign.get("active_at_observation")
+        )
         bf_target = int(plan.get("black_friday_target_price_jpy") or budget["pc_target_jpy"])
         ready, reasons = configuration_readiness(item) if item else (False, ["候補の構成未確認"])
         stock = item.get("stock_status", "unknown")
@@ -111,13 +118,19 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
             "pre_black_friday_reference_price_jpy": observed_price if verified and not observation_is_bf else None,
             "pre_black_friday_reference_at": item.get("retrieval_time") if verified and not observation_is_bf else None,
             "observed_price_jpy": observed_price,
-            "observed_price_phase": "BLACK_FRIDAY_WINDOW" if observation_is_bf else ("PRE_BLACK_FRIDAY_REFERENCE" if verified else "UNVERIFIED"),
+            "observed_price_phase": "OFFICIAL_BLACK_FRIDAY_WINDOW" if observation_is_bf else ("PROVISIONAL_WATCH_WINDOW_REFERENCE" if verified and in_bf_window else "PRE_BLACK_FRIDAY_REFERENCE" if verified else "UNVERIFIED"),
+            "retailer_key": campaign.get("retailer_key"),
+            "retailer_campaign_status": campaign.get("status"),
+            "retailer_campaign_start_jst": campaign.get("start_jst"),
+            "retailer_campaign_end_jst": campaign.get("end_jst"),
+            "retailer_campaign_source_url": campaign.get("source_url"),
+            "retailer_campaign_active": bool(campaign.get("active_at_observation")),
             "price_verified": verified, "stock_status": stock, "configuration_ready": ready,
             "configuration_reasons": reasons, "target_ram_gb": plan.get("target_ram_gb"),
             "target_ssd_gb": plan.get("target_ssd_gb"),
             "current_live_pc_budget_cap_reference_jpy": live_cap,
             "bf_budget_cap_is_final": bool(in_bf_window and budget_ready),
-            "status": "PRE_BF_TARGET_MONITORING" if not in_bf_window else "BF_PRICE_UNVERIFIED",
+            "status": "PRE_BF_TARGET_MONITORING" if not in_bf_window else "WAIT_FOR_OFFICIAL_DATES" if not campaign.get("active_at_observation") else "BF_PRICE_UNVERIFIED",
             "detail": "",
         }
         if role in ("primary_configuration_upgrade", "higher_cpu_configuration_upgrade"):
@@ -148,8 +161,10 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
                     f"計画上限まで¥{row['max_upgrade_cost_to_bf_hard_cap_jpy']:,}以内が条件です。"
                     "これは構成変更費の見積ではありません。32GB/1TB完成構成の確定価格を別途確認します。"
                 )
+            elif not campaign.get("active_at_observation"):
+                row["status"], row["detail"] = "WAIT_FOR_OFFICIAL_DATES", "この広域監視窓は公式開催日ではありません。販売店の2026年公式日付範囲が確認できるまで、観測価格をBF実売として扱いません。"
             elif not observation_is_bf:
-                row["status"], row["detail"] = "BF_PRICE_UNVERIFIED", "BF期間内の完成構成価格を直接確認できていません。事前価格をBF価格に流用しません。"
+                row["status"], row["detail"] = "BF_PRICE_UNVERIFIED", "公式期間内の完成構成価格を直接確認できていません。事前価格をBF価格に流用しません。"
             elif stock == "out_of_stock":
                 row["status"], row["detail"] = "OUT_OF_STOCK", "BF期間中の商品ページで在庫切れを確認。"
             elif stock not in ("in_stock", "low_stock"):
@@ -175,8 +190,10 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
                         if reference else ""
                     )
                 )
+            elif not campaign.get("active_at_observation"):
+                row["status"], row["detail"] = "WAIT_FOR_OFFICIAL_DATES", "広域監視窓だけではBF開催中とみなしません。公式の2026年開催日程を確認します。"
             elif not observation_is_bf:
-                row["status"], row["detail"] = "BF_PRICE_UNVERIFIED", "BF期間中の価格・在庫・SKUを直接確認できていません。"
+                row["status"], row["detail"] = "BF_PRICE_UNVERIFIED", "公式期間内の価格・在庫・SKUを直接確認できていません。"
             elif stock == "out_of_stock":
                 row["status"], row["detail"] = "OUT_OF_STOCK", "BF期間中の商品ページで在庫切れを確認。"
             elif stock not in ("in_stock", "low_stock"):
@@ -184,7 +201,7 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
             elif not ready:
                 row["status"], row["detail"] = "NEEDS_CONFIGURATION", "BF期間中の価格を確認しましたが、32GB/1TB完成構成ではありません。"
             elif not budget_ready:
-                row["status"], row["detail"] = "BF_BUDGET_UNVERIFIED", "PC価格・構成は確認できましたが、BF周辺機器の実売価格/在庫が揃わず、37万円総額の本体上限が未確定です。"
+                row["status"], row["detail"] = "BF_BUDGET_UNVERIFIED", f"PC価格・構成は確認できましたが、BF周辺機器の実売価格/在庫が揃わず、{budget['total_budget_jpy']:,}円総額の本体上限が未確定です。"
             elif observed_price <= bf_cap:
                 row["status"], row["detail"] = "MEETS_BF_PRICE_AND_CONFIGURATION", "BF期間内の直接観測価格・在庫・完成構成が条件内。全体購入ゲートは別途必要です。"
             else:
@@ -206,7 +223,8 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
             continue
         observed_complete.append(item)
         observed_at = _parse_strategy_dt(item.get("retrieval_time"))
-        if in_bf_window and observed_at and bf_start <= observed_at <= bf_end:
+        campaign = campaign_window_for_item(item, now, watch_config, official_dates)
+        if in_bf_window and observed_at and bf_start <= observed_at <= bf_end and campaign.get("active_at_observation"):
             bf_complete.append(item)
             if budget_ready and int(item["current_price_jpy"]) <= bf_cap:
                 eligible.append(item)
@@ -225,15 +243,18 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
     elif bf_complete:
         best = bf_complete[0]
         status, detail = "WAIT_FOR_DISCOUNT", f"BF期間中の完成構成を確認しましたが、本体上限を超過。最安確認価格は¥{best['current_price_jpy']:,}です。"
+    elif in_bf_window and not bf_complete:
+        best = observed_complete[0] if observed_complete else None
+        status, detail = "WAIT_FOR_OFFICIAL_DATES", "RTX 5070 Ti大穴候補について販売店の2026年公式セール期間が未確認です。暫定監視窓の価格はBF実売として扱いません。"
     else:
         best = None
-        status, detail = "NO_VERIFIED_COMPLETE_CONFIGURATION", "BF期間内に価格・在庫・SKU・PITを直接確認できた32GB/1TB以上のRTX 5070 Tiデスクトップは未発見。"
+        status, detail = "NO_VERIFIED_COMPLETE_CONFIGURATION", "販売店の公式2026年期間内に価格・在庫・SKU・PITを直接確認できた32GB/1TB以上のRTX 5070 Tiデスクトップは未発見。"
     rows.append({
         "candidate_id": None, "role": "rtx_5070_ti_outlier", "label": outlier.get("label") or "RTX 5070 Ti 大穴",
         "black_friday_target_price_jpy": int(outlier.get("black_friday_target_cap_jpy") or budget["pc_budget_jpy"]),
-        "black_friday_price_observed_jpy": best.get("current_price_jpy") if best and in_bf_window else None,
-        "pre_black_friday_reference_price_jpy": best.get("current_price_jpy") if best and not in_bf_window else None,
-        "black_friday_offer_verified": bool(best and in_bf_window), "price_verified": bool(best),
+        "black_friday_price_observed_jpy": best.get("current_price_jpy") if best and bf_complete else None,
+        "pre_black_friday_reference_price_jpy": best.get("current_price_jpy") if best and not bf_complete else None,
+        "black_friday_offer_verified": bool(best and bf_complete), "price_verified": bool(best),
         "stock_status": best.get("stock_status", "unknown") if best else "unknown",
         "configuration_ready": bool(eligible), "configuration_reasons": [],
         "target_ram_gb": int(outlier.get("minimum_ram_gb") or 32), "target_ssd_gb": int(outlier.get("minimum_ssd_gb") or 1000),
@@ -584,9 +605,10 @@ def main():
         ]
 
     lines += [
-        "## 37万円・ブラックフライデー購入目標の監視",
+        f"## ¥{budget['total_budget_jpy']:,}・ブラックフライデー購入目標の監視（暫定の広域監視窓）",
         "",
         f"- 価格フェーズ: **{purchase_strategy_status['pricing_phase']}**",
+        "- 監視窓はセールの公式開催日ではありません。販売店ごとの2026年日付範囲を公式ページで確認するまで、観測価格をBF実売に認定しません。",
         "- 以下のBF購入目標価格は開催期間の目標。開催前の表示価格は参考であり、BF価格の確定値ではありません。",
         f"- BF期間: {purchase_strategy_status['black_friday_window_start_jst']} ～ {purchase_strategy_status['black_friday_window_end_jst']}",
         f"- BF本体計画上限: ¥{purchase_strategy_status['pc_planned_cap_jpy']:,}",
