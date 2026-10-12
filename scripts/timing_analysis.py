@@ -616,7 +616,15 @@ def build_buy_now_decision(rankings, events, config, price_observations=None, of
                 1 for entry in ((official_campaign_dates or {}).get("sources") or {}).values()
                 if isinstance(entry, dict) and entry.get("status") in ("CONFIRMED", "CONFIRMED_MANUAL")
             ),
-            "policy": "A provisional monitoring window does not confirm retailer campaign dates.",
+            "unconfirmed_count": sum(
+                1 for entry in ((official_campaign_dates or {}).get("sources") or {}).values()
+                if isinstance(entry, dict) and entry.get("status") == "UNCONFIRMED"
+            ),
+            "fetch_error_count": sum(
+                1 for entry in ((official_campaign_dates or {}).get("sources") or {}).values()
+                if isinstance(entry, dict) and entry.get("status") == "FETCH_ERROR"
+            ),
+            "policy": "A provisional monitoring window does not confirm retailer campaign dates; fetch errors are separate from unconfirmed/no-date findings.",
         },
         "remaining_hours_in_watch_window": round(hours_left, 1) if hours_left is not None else None,
         "total_budget_jpy": total_budget,
@@ -643,7 +651,7 @@ def render_buy_now_markdown(decision):
         "- 更新時刻（JST）: " + str(decision.get("generated_at")),
         "- 判定: **" + str(decision.get("label")) + "** (" + str(decision.get("status")) + ")",
         "- 暫定の広域監視窓（公式セール日程ではない）: " + str(decision.get("watch_window_start_jst")) + " ～ " + str(decision.get("watch_window_end_jst")),
-        "- 公式日程確認: " + str(decision.get("official_campaign_dates_summary", {}).get("confirmed_count", 0)) + "/" + str(decision.get("official_campaign_dates_summary", {}).get("retailer_count", 0)) + " 店舗",
+        "- 公式日程確認: " + str(decision.get("official_campaign_dates_summary", {}).get("confirmed_count", 0)) + "/" + str(decision.get("official_campaign_dates_summary", {}).get("retailer_count", 0)) + " 店舗（公式期間が確認できない店舗: " + str(decision.get("official_campaign_dates_summary", {}).get("unconfirmed_count", 0)) + "、取得エラー: " + str(decision.get("official_campaign_dates_summary", {}).get("fetch_error_count", 0)) + "）",
         "- 監視窓内の価格を保存して比較しますが、公式日程・価格適用の確認がない価格はBF実売として扱いません。",
         "- 総予算: " + ("¥{:,}".format(decision["total_budget_jpy"]) if decision.get("total_budget_jpy") is not None else "未確認"),
         "- PC本体の動的上限: " + ("¥{:,}".format(decision["pc_dynamic_cap_jpy"]) if decision.get("pc_dynamic_cap_jpy") is not None else "未確認"),
@@ -748,7 +756,8 @@ def append_buy_now_summary_to_latest(decision):
         "- 更新時刻（JST）: " + str(decision.get("generated_at")),
         "- 判定: **" + str(decision.get("label")) + "** (" + str(decision.get("status")) + ")",
         "- 暫定の広域監視窓（公式セール日程ではない）: " + str(decision.get("watch_window_start_jst")) + " ～ " + str(decision.get("watch_window_end_jst")),
-        "- 総予算: " + ("¥{:,}".format(decision["total_budget_jpy"]) if decision.get("total_budget_jpy") is not None else "未確認"),
+        "- 公式日程確認: " + str(decision.get("official_campaign_dates_summary", {}).get("confirmed_count", 0)) + "/" + str(decision.get("official_campaign_dates_summary", {}).get("retailer_count", 0)) + " 店舗（未確認: " + str(decision.get("official_campaign_dates_summary", {}).get("unconfirmed_count", 0)) + "、取得エラー: " + str(decision.get("official_campaign_dates_summary", {}).get("fetch_error_count", 0)) + "）",
+        "- 総予算: " ("¥{:,}".format(decision["total_budget_jpy"]) if decision.get("total_budget_jpy") is not None else "未確認"),
         "- PC本体の動的上限: " + ("¥{:,}".format(decision["pc_dynamic_cap_jpy"]) if decision.get("pc_dynamic_cap_jpy") is not None else "未確認"),
         "- 周辺機器の価格・在庫確認: " + ("完了" if decision.get("peripheral_budget_data_ready") else "未完了"),
         "- 全体購入ゲート: " + ("通過" if decision.get("purchase_gate_allowed") else "保留") + " (" + str(decision.get("purchase_gate_reason") or "未確認") + ")",
