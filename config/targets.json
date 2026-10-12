@@ -21,7 +21,8 @@
       "end_jst": null,
       "status": "UNCONFIRMED",
       "source_urls": [
-        "https://www.lenovo.com/jp/ja/campaigns/black-friday/"
+        "https://www.lenovo.com/jp/ja/campaigns/black-friday/",
+        "https://www.lenovo.com/jp/ja/blackfriday/"
       ],
       "note": "公式ページの2026年開催期間が年付き日付範囲で確認できるまでは未確定。暫定監視窓から開催日を推定しない。"
     },
@@ -71,7 +72,43 @@
       ],
       "note": "公式ページの2026年開催期間が年付き日付範囲で確認できるまでは未確定。暫定監視窓から開催日を推定しない。"
     },
-    "note": "公式カレンダーは販売店ごとに独立して確認する。nullの日程は未発表または未検証であり、11月1日〜12月11日は監視用の暫定期間にすぎない。"
+    "note": "販売元ごとの公式カレンダー。監視窓は価格観測用で公式開催日ではない。年月を明記した当年の告知を確認するまで日付はnullのまま。",
+    "yodobashi": {
+      "start_jst": null,
+      "end_jst": null,
+      "status": "UNCONFIRMED",
+      "source_urls": [
+        "https://www.yodobashi.com/"
+      ],
+      "note": "公式ページに2026年の開催期間が明記されるまで未確定。暫定監視窓・前年日程から開催日を推定しない。"
+    },
+    "bic_camera": {
+      "start_jst": null,
+      "end_jst": null,
+      "status": "UNCONFIRMED",
+      "source_urls": [
+        "https://www.biccamera.com/bc/main/"
+      ],
+      "note": "公式ページに2026年の開催期間が明記されるまで未確定。暫定監視窓・前年日程から開催日を推定しない。"
+    },
+    "edifier": {
+      "start_jst": null,
+      "end_jst": null,
+      "status": "UNCONFIRMED",
+      "source_urls": [
+        "https://www.edifier.jp/"
+      ],
+      "note": "公式ページに2026年の開催期間が明記されるまで未確定。暫定監視窓・前年日程から開催日を推定しない。"
+    },
+    "askul": {
+      "start_jst": null,
+      "end_jst": null,
+      "status": "UNCONFIRMED",
+      "source_urls": [
+        "https://www.askul.co.jp/"
+      ],
+      "note": "公式ページに2026年の開催期間が明記されるまで未確定。暫定監視窓・前年日程から開催日を推定しない。"
+    }
   },
   "brands": [
     "Lenovo",
