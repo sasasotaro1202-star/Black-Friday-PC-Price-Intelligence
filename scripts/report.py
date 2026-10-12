@@ -117,10 +117,10 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
             "black_friday_offer_verified": observation_is_bf,
             "watch_window_reference_price_jpy": observed_price if verified and inside_watch_observation and not observation_is_bf else None,
             "watch_window_reference_at": item.get("retrieval_time") if verified and inside_watch_observation and not observation_is_bf else None,
-            "pre_black_friday_reference_price_jpy": observed_price if verified and observed_at and observed_at < bf_start else None,
-            "pre_black_friday_reference_at": item.get("retrieval_time") if verified and observed_at and observed_at < bf_start else None,
-            "post_black_friday_reference_price_jpy": observed_price if verified and observed_at and observed_at > bf_end else None,
-            "post_black_friday_reference_at": item.get("retrieval_time") if verified and observed_at and observed_at > bf_end else None,
+            "pre_black_friday_reference_price_jpy": observed_price if verified and observed_at and bf_start and observed_at < bf_start else None,
+            "pre_black_friday_reference_at": item.get("retrieval_time") if verified and observed_at and bf_start and observed_at < bf_start else None,
+            "post_black_friday_reference_price_jpy": observed_price if verified and observed_at and bf_end and observed_at > bf_end else None,
+            "post_black_friday_reference_at": item.get("retrieval_time") if verified and observed_at and bf_end and observed_at > bf_end else None,
             "observed_price_jpy": observed_price,
             "observed_price_phase": "OFFICIAL_BLACK_FRIDAY_WINDOW" if observation_is_bf else ("PROVISIONAL_WATCH_WINDOW_REFERENCE" if verified and in_watch_window else "PRE_BLACK_FRIDAY_REFERENCE" if verified else "UNVERIFIED"),
             "retailer_key": campaign.get("retailer_key"),
@@ -267,11 +267,11 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
         ) else None,
         "pre_black_friday_reference_price_jpy": best.get("current_price_jpy") if (
             best and _parse_strategy_dt(best.get("retrieval_time"))
-            and _parse_strategy_dt(best.get("retrieval_time")) < bf_start
+            and bf_start and _parse_strategy_dt(best.get("retrieval_time")) < bf_start
         ) else None,
         "post_black_friday_reference_price_jpy": best.get("current_price_jpy") if (
             best and _parse_strategy_dt(best.get("retrieval_time"))
-            and _parse_strategy_dt(best.get("retrieval_time")) > bf_end
+            and bf_end and _parse_strategy_dt(best.get("retrieval_time")) > bf_end
         ) else None,
         "black_friday_offer_verified": bool(best and bf_complete), "price_verified": bool(best),
         "stock_status": best.get("stock_status", "unknown") if best else "unknown",
