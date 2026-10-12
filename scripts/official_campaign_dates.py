@@ -233,7 +233,10 @@ def should_skip_calendar_refresh(old, calendar, now, cache_hours=CACHE_HOURS):
     old_checked = parse_dt((old or {}).get("checked_at"))
     old_sources = (old or {}).get("sources") or {}
     expected_signature = calendar_config_signature(calendar)
-    if not old_checked or now - old_checked >= timedelta(hours=cache_hours):
+    if not old_checked:
+        return False
+    cache_age = now - old_checked
+    if cache_age < timedelta(0) or cache_age >= timedelta(hours=cache_hours):
         return False
     if (old or {}).get("configured_sources") != expected_signature:
         return False
