@@ -170,6 +170,11 @@ def _same_official_site(seed_url, candidate_url):
         return False
 
 
+def initial_source_queue(source_urls, limit=3):
+    """Check configured official URLs before adding any navigation-derived links."""
+    return [(url, None, url) for url in (source_urls or []) if isinstance(url, str) and url.startswith("https://")][:max(0, int(limit))]
+
+
 def discover_campaign_links(seed_url, links, already_checked, limit=4):
     """Return a few likely campaign links that stay on the same retailer domain."""
     candidates = []
@@ -272,48 +277,47 @@ def main():
         checked_sources = []
         errors = []
         visited = set()
-        for seed_url in urls:
-            if confirmed or len(visited) >= 3:
-                break
-            queue = [(seed_url, None)]
-            while queue and len(visited) < 3 and not confirmed:
-                url, discovered_from = queue.pop(0)
-                if url in visited:
+        # Seed all configured official URLs before adding discovered navigation
+        # links, so generic header/footer pages cannot starve a known BF URL.
+        queue = initial_source_queue(urls, limit=3)
+        while queue and len(visited) < 3 and not confirmed:
+            url, discovered_from, seed_url = queue.pop(0)
+            if url in visited:
+                continue
+            visited.add(url)
+            try:
+                (page_text, links), final_url = fetch_page(url)
+                if not _same_official_site(seed_url, final_url):
+                    checked_sources.append({
+                        "url": url, "final_url": final_url, "fetch_status": "REJECTED_CROSS_DOMAIN_REDIRECT",
+                        "explicit_2026_range_found": False,
+                    })
                     continue
-                visited.add(url)
-                try:
-                    (page_text, links), final_url = fetch_page(url)
-                    if not _same_official_site(seed_url, final_url):
-                        checked_sources.append({
-                            "url": url, "final_url": final_url, "fetch_status": "REJECTED_CROSS_DOMAIN_REDIRECT",
-                            "explicit_2026_range_found": False,
-                        })
-                        continue
-                    parsed = parse_explicit_2026_range(page_text, final_url)
-                    checked_sources.append({
-                        "url": final_url, "discovered_from": discovered_from,
-                        "fetch_status": "OK", "explicit_2026_range_found": bool(parsed),
-                    })
-                    if parsed:
-                        confirmed = dict(
-                            parsed, source_url=final_url, status="CONFIRMED",
-                            checked_at=iso(now), fetch_status="OK",
-                            discovered_from=discovered_from,
-                        )
-                        break
-                    if len(visited) < 3:
-                        discovered = discover_campaign_links(
-                            final_url, links, visited, limit=4
-                        )
-                        for child in discovered:
-                            if child not in visited and all(item[0] != child for item in queue):
-                                queue.append((child, final_url))
-                except (HTTPError, URLError, TimeoutError, OSError, RuntimeError, ValueError) as error:
-                    errors.append("{}: {}".format(url, str(error)[:240]))
-                    checked_sources.append({
-                        "url": url, "discovered_from": discovered_from,
-                        "fetch_status": "ERROR", "error": str(error)[:240],
-                    })
+                parsed = parse_explicit_2026_range(page_text, final_url)
+                checked_sources.append({
+                    "url": final_url, "discovered_from": discovered_from,
+                    "fetch_status": "OK", "explicit_2026_range_found": bool(parsed),
+                })
+                if parsed:
+                    confirmed = dict(
+                        parsed, source_url=final_url, status="CONFIRMED",
+                        checked_at=iso(now), fetch_status="OK",
+                        discovered_from=discovered_from,
+                    )
+                    break
+                if len(visited) + len(queue) < 3:
+                    discovered = discover_campaign_links(
+                        final_url, links, visited | {entry[0] for entry in queue}, limit=4
+                    )
+                    for child in discovered:
+                        if child not in visited and all(entry[0] != child for entry in queue):
+                            queue.append((child, final_url, seed_url))
+            except (HTTPError, URLError, TimeoutError, OSError, RuntimeError, ValueError) as error:
+                errors.append("{}: {}".format(url, str(error)[:240]))
+                checked_sources.append({
+                    "url": url, "discovered_from": discovered_from,
+                    "fetch_status": "ERROR", "error": str(error)[:240],
+                })
 
         if confirmed:
             entry = confirmed
