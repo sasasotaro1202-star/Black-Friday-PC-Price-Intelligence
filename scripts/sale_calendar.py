@@ -39,6 +39,7 @@ def retailer_key_for_url(url):
         ("mouse_computer", ("mouse-jp.co.jp", "mouse-computer.co.jp")),
         ("dospara", ("dospara.co.jp",)),
         ("acer", ("acer.com",)),
+        ("gigabyte", ("gigabyte.com",)),
         ("frontier", ("frontier-direct.jp", "frontier-k.co.jp")),
         ("ark", ("ark-pc.co.jp",)),
         ("tsukumo", ("tsukumo.co.jp",)),
