@@ -83,6 +83,8 @@ class ReportLinkTests(unittest.TestCase):
             "stock_status": "in_stock",
             "pit_valid": True,
             "spec": {"gpu": "RTX 5070", "ram_gb": 16, "ssd": "500 GB"},
+            "retrieval_time": "2026-10-10T18:00:00+09:00",
+            "available_at": "2026-10-10T17:59:00+09:00",
         }
         policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
                   "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
@@ -122,6 +124,8 @@ class ReportLinkTests(unittest.TestCase):
             "stock_status": "in_stock",
             "pit_valid": True,
             "spec": {"gpu": "RTX 5070", "ram_gb": 32, "ssd": "1 TB"},
+            "retrieval_time": "2026-10-10T18:00:00+09:00",
+            "available_at": "2026-10-10T17:59:00+09:00",
         }
         policy = {"total_budget_jpy": 370000, "peripheral_budget_jpy": 67800,
                   "pc_target_jpy": 299800, "pc_budget_jpy": 302200}
@@ -244,6 +248,68 @@ class ReportLinkTests(unittest.TestCase):
         self.assertEqual(row["black_friday_price_observed_jpy"], 299800)
         self.assertIsNone(row["pre_black_friday_reference_price_jpy"])
         self.assertEqual(row["status"], "MEETS_BF_PRICE_AND_CONFIGURATION")
+
+    def test_watch_window_reference_is_not_mislabelled_pre_sale_or_official_bf(self):
+        from datetime import datetime
+        strategy = {
+            "price_semantics": {
+                "window_start_jst": "2026-11-01T00:00:00+09:00",
+                "window_end_jst": "2026-12-11T23:59:59+09:00",
+                "window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
+            },
+            "priority_plans": [{
+                "candidate_id": "desktop-gtune-dg-a7g70-5070",
+                "role": "secondary_outlet_complete_configuration",
+                "label": "DG-A7G70 outlet",
+                "target_ram_gb": 32,
+                "target_ssd_gb": 1000,
+                "black_friday_target_price_jpy": 299800,
+                "last_verified_listing_reference_jpy": 304800,
+            }],
+            "outlier_rule": {"gpu": "RTX 5070 Ti", "form_factor": "desktop",
+                             "minimum_ram_gb": 32, "minimum_ssd_gb": 1000},
+        }
+        candidate = {
+            "id": "desktop-gtune-dg-a7g70-5070",
+            "name": "G TUNE DG-A7G70",
+            "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
+            "form_factor": "desktop",
+            "current_price_jpy": 299800,
+            "price_source_mode": "direct_structured",
+            "price_validation_status": "validated",
+            "variant_match": "exact",
+            "stock_status": "in_stock",
+            "pit_valid": True,
+            "retrieval_time": "2026-11-20T12:00:00+09:00",
+            "available_at": "2026-11-20T11:59:00+09:00",
+            "spec": {"gpu": "RTX 5070", "ram_gb": 32, "ssd": "1 TB"},
+        }
+        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 69800,
+                  "pc_target_jpy": 330200, "pc_budget_jpy": 330200}
+        projection = {"pc_dynamic_cap_jpy": 302200, "budget_data_ready": True}
+        official_calendar = {
+            "official_2026_dates": {
+                "mouse_computer": {
+                    "status": "UNCONFIRMED",
+                    "start_jst": None,
+                    "end_jst": None,
+                    "source_url": "https://www.mouse-jp.co.jp/",
+                }
+            }
+        }
+        def fake_load_json(path, fallback=None):
+            return official_calendar if str(path).endswith("config/targets.json") else {"sources": {}}
+        with patch.object(report, "load_json", side_effect=fake_load_json):
+            with patch.object(report, "now_jst", return_value=datetime.fromisoformat("2026-11-20T12:01:00+09:00")):
+                result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
+        row = result["rows"][0]
+        self.assertEqual(result["pricing_phase"], "PROVISIONAL_BROAD_WATCH_WINDOW")
+        self.assertFalse(row["black_friday_offer_verified"])
+        self.assertIsNone(row["black_friday_price_observed_jpy"])
+        self.assertIsNone(row["pre_black_friday_reference_price_jpy"])
+        self.assertEqual(row["watch_window_reference_price_jpy"], 299800)
+        self.assertEqual(row["status"], "WAIT_FOR_OFFICIAL_DATES")
+
 
     def test_file_sha256_is_stable_for_same_bytes(self):
         import tempfile
