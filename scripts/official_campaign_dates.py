@@ -157,10 +157,14 @@ def _same_official_site(seed_url, candidate_url):
     try:
         base = (urlparse(seed_url).hostname or "").lower()
         host = (urlparse(candidate_url).hostname or "").lower()
+        # Normalize only a leading www.; never treat a shared public suffix
+        # such as co.jp as evidence that two unrelated domains are the same site.
+        base = base[4:] if base.startswith("www.") else base
+        host = host[4:] if host.startswith("www.") else host
         return bool(
             urlparse(candidate_url).scheme == "https"
             and base and host
-            and (host == base or host.endswith("." + base) or base.endswith("." + host))
+            and (host == base or host.endswith("." + base))
         )
     except Exception:
         return False
