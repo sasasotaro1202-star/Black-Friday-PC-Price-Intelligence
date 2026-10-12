@@ -59,4 +59,3 @@
 
 - Cities: Skylines II 公式製品ページ／システム要件：<https://www.paradoxinteractive.com/games/cities-skylines-ii/buy>
 - パワフルプロ野球2026-2027 公式製品情報：<https://www.konami.com/pawa/2026-2027/>
-- PlayStation 公式PS5後方互換性：<https://www.playstation.com/ja-jp/support/games/ps5-backward-compatibility-games/>
