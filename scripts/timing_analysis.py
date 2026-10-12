@@ -172,8 +172,10 @@ def _window_observations(events, item, start, end, include_current, price_observ
             continue
         dt = _event_dt(event)
         price = event.get("new_price_jpy")
-        if dt and start <= dt <= end and _is_positive_yen(price)
-                and event.get("new_stock_status") in ("in_stock", "low_stock"):
+        if (
+            dt and start <= dt <= end and _is_positive_yen(price)
+            and event.get("new_stock_status") in ("in_stock", "low_stock")
+        ):
             observations.append({
                 "price_jpy": price,
                 "at": iso(dt),
@@ -199,7 +201,13 @@ def _window_observations(events, item, start, end, include_current, price_observ
     if include_current:
         dt = parse_dt(item.get("retrieval_time"))
         price = item.get("current_price_jpy")
-        if dt and start <= dt <= end and _is_positive_yen(price):
+        if (
+            dt and start <= dt <= end and _is_positive_yen(price)
+            and item.get("price_source_mode") == "direct_structured"
+            and item.get("price_validation_status") in ("validated", "validated_exact_model_page")
+            and item.get("variant_match") in ("exact", "trusted_url", "strong")
+            and item.get("stock_status") in ("in_stock", "low_stock")
+        ):
             observations.append({
                 "price_jpy": price,
                 "at": iso(dt),
