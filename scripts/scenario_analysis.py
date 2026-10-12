@@ -446,12 +446,13 @@ def main():
         "",
         "## BF目標価格に対する全PC候補の割引シナリオ",
         "",
-        "|候補|フォーム|GPU|BF価格目標|参考/計算基準|公式期間内価格|目標まで必要値下げ|必要割引率|20%|25%|30%|構成条件|価格の根拠|購入リンク|",
-        "|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|---|",
+        "|候補|フォーム|GPU|BF価格目標|公式期間内価格|監視窓内参考価格|セール前/カタログ参考|計算基準価格|目標まで必要値下げ|必要割引率|20%|25%|30%|構成条件|価格の根拠|購入リンク|",
+        "|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|---|",
     ]
     for r in bf_plan["pc_candidates"]:
         bands={x["discount_pct"]:x["price_jpy"] for x in r.get("scenario_prices",[])}
         ref=r.get("pre_black_friday_reference_price_jpy")
+        watch_ref=r.get("watch_window_reference_price_jpy")
         catalog_ref=r.get("catalog_reference_price_jpy")
         base=r.get("scenario_base_price_jpy")
         bf_price=r.get("black_friday_price_observed_jpy")
@@ -461,8 +462,10 @@ def main():
         lines.append(
             f"|{(r.get('name') or r['id'])[:48]}|{r['form_factor']}|{r.get('gpu') or '—'}|"
             f"¥{r['black_friday_target_price_jpy']:,}|"
-            f"{('¥'+format(ref,',')) if ref is not None else (('¥'+format(catalog_ref,',')) if catalog_ref is not None else '—')}|"
             f"{('¥'+format(bf_price,',')) if bf_price is not None else '未確認'}|"
+            f"{('¥'+format(watch_ref,',')) if watch_ref is not None else '—'}|"
+            f"{('¥'+format(ref,',')) if ref is not None else (('¥'+format(catalog_ref,',')) if catalog_ref is not None else '—')}|"
+            f"{('¥'+format(base,',')) if base is not None else '—'}|"
             f"{('¥'+format(gap,',')) if gap is not None else '—'}|"
             f"{(format(pct,'.1f')+'%') if pct is not None else '—'}|"
             f"{('¥'+format(bands[20],',')) if 20 in bands else '—'}|"
