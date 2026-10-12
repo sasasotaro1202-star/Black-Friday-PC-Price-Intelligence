@@ -706,25 +706,20 @@ def stock_score(item, anchors):
     return min(15, base)
 
 def season_phase(now=None):
+    """Describe the broad watch phase without inferring retailer campaign dates."""
     now = now or now_jst()
     cfg = load_json(os.path.join(ROOT, "config", "targets.json"), {})
-    start = parse_dt(cfg.get("monitor_window_start")) or datetime(now.year, 11, 14, tzinfo=JST)
-    end = parse_dt(cfg.get("monitor_window_end")) or datetime(now.year, 12, 4, 23, 59, 59, tzinfo=JST)
+    start = parse_dt(cfg.get("monitor_window_start")) or datetime(now.year, 11, 1, tzinfo=JST)
+    end = parse_dt(cfg.get("monitor_window_end")) or datetime(now.year, 12, 11, 23, 59, 59, tzinfo=JST)
     if not (start <= now <= end):
         return "通常監視期間"
-    windows = [
-        (11,14,20,"メーカー予告/先行"),
-        (11,21,23,"先行セール/サプライズ"),
-        (11,24,27,"本番前半/BF当日"),
-        (11,28,30,"本番後半/Cyber Monday周辺"),
-        (12,1,4,"セール末期/在庫処分"),
-    ]
-    for sm, sd, ed, label in windows:
-        a = datetime(now.year, sm, sd, tzinfo=JST)
-        b = datetime(now.year, sm, ed, 23, 59, 59, tzinfo=JST)
-        if a <= now <= b:
-            return label
-    return "ブラックフライデー監視期間"
+    # These are only reporting buckets for the broad watch window. They are not
+    # claims that any retailer has started a promotion or changed prices.
+    if now.month == 11 and now.day < 27:
+        return "広域監視前半（各店の公式日程は未確認）"
+    if now.month == 11 and now.day <= 30:
+        return "Black Friday暦週（各店の公式日程は別確認）"
+    return "延長セール観測（各店の公式終了日は別確認）"
 
 def actionable_max_age_minutes(now=None):
     now = now or now_jst()
@@ -751,8 +746,8 @@ def timing_score(item, now=None):
         3 if d <= 40 else
         1
     )
-    if "本番" in phase or "先行" in phase:
-        base = min(10, base + 1 if d <= 20 else base)
+    # Do not boost a product merely because a speculative calendar bucket says
+    # "early sale" or "main sale"; timing is determined from verified price/stock evidence.
     if stock == "low_stock":
         base = min(10, base + 1)
     guidance = (
