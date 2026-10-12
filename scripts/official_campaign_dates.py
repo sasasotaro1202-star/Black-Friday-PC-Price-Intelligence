@@ -187,12 +187,12 @@ def discover_campaign_links(seed_url, links, already_checked, limit=4):
             continue
         target = (absolute + " " + label).lower()
         # A link must be clearly campaign-oriented; do not crawl a whole catalog.
-        if not re.search(r"black[-_ ]?friday|blackfriday|ブラック\\s*フライデー|campaign|campaigns|sale|セール|特集", target, re.IGNORECASE):
+        if not re.search(r"black[-_ ]?friday|blackfriday|ブラック\s*フライデー|campaign|campaigns|sale|セール|特集", target, re.IGNORECASE):
             continue
         candidates.append((absolute, label))
     # Prefer strongly named Black Friday destinations over generic campaign hubs.
     candidates.sort(key=lambda x: (
-        0 if re.search(r"black[-_ ]?friday|blackfriday|ブラック\\s*フライデー", x[0] + " " + x[1], re.IGNORECASE) else 1,
+        0 if re.search(r"black[-_ ]?friday|blackfriday|ブラック\s*フライデー", x[0] + " " + x[1], re.IGNORECASE) else 1,
         x[0],
     ))
     return [url for url, _ in candidates[:max(0, int(limit))]]
