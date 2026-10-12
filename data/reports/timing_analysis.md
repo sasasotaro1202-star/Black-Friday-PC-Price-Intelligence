@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-12T20:41:29+09:00
-Source snapshot: 2026-10-12T20:40:30+09:00
-Source snapshot SHA256: 0baf2171593b1cc5ee7a85f8d7c123c66d0dd788223478bc24685ab6f70e4bb6
+Generated: 2026-10-12T20:56:03+09:00
+Source snapshot: 2026-10-12T20:54:25+09:00
+Source snapshot SHA256: 8c8019223e82285b3d00b9d5270b0702936fd7dc642e108d8748a4aaf51f28f2
 Budget: ¥330,200
 Target Black Friday: 2026-11-27
 
@@ -45,8 +45,8 @@ Target Black Friday: 2026-11-27
 
 ## Current buy-now decision
 
-- Status: **BF前の監視継続** (PRE_BF_MONITORING)
-- Recommendation: 現在価格は事前参考値です。BF価格と混同せず、開催期間に入ってから実売・在庫・総額を基に買い時を判定します。
+- Status: **事前監視継続・公式日程未確認** (PRE_BF_MONITORING)
+- Recommendation: 現在価格は事前参考値です。設定期間は各社の公式開催日ではありません。公式ページで2026年の日付範囲を確認できるまではBF価格として扱わず、開催日推定に基づく購入推奨を出しません。
 - Full detail: data/reports/buy-now-now.md
 - The timing score is a heuristic priority signal, not a probability forecast.
 

@@ -1,0 +1,147 @@
+{
+  "generated_at": "2026-10-12T20:55:24.278085+09:00",
+  "checked_at": "2026-10-12T20:55:24.278085+09:00",
+  "policy": "Only official retailer sources with an explicit 2026 date range can set CONFIRMED. Provisional watch-window dates never confirm a retailer campaign.",
+  "sources": {
+    "amazon_japan": {
+      "status": "UNCONFIRMED",
+      "start_jst": null,
+      "end_jst": null,
+      "source_url": "https://www.amazon.co.jp/blackfriday",
+      "evidence": null,
+      "checked_at": "2026-10-12T20:55:24.278085+09:00",
+      "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
+      "last_check_errors": [],
+      "sources_checked": [
+        {
+          "url": "https://www.amazon.co.jp/blackfriday",
+          "fetch_status": "OK",
+          "explicit_2026_range_found": false
+        },
+        {
+          "url": "https://www.aboutamazon.jp/news/retail",
+          "fetch_status": "OK",
+          "explicit_2026_range_found": false
+        }
+      ]
+    },
+    "lenovo": {
+      "status": "UNCONFIRMED",
+      "start_jst": null,
+      "end_jst": null,
+      "source_url": "https://www.lenovo.com/jp/ja/campaigns/black-friday/",
+      "evidence": null,
+      "checked_at": "2026-10-12T20:55:24.278085+09:00",
+      "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
+      "last_check_errors": [],
+      "sources_checked": [
+        {
+          "url": "https://www.lenovo.com/jp/ja/campaigns/black-friday/",
+          "fetch_status": "OK",
+          "explicit_2026_range_found": false
+        }
+      ]
+    },
+    "asus": {
+      "status": "UNCONFIRMED",
+      "start_jst": null,
+      "end_jst": null,
+      "source_url": "https://www.asus.com/jp/deals/black-friday/",
+      "evidence": null,
+      "checked_at": "2026-10-12T20:55:24.278085+09:00",
+      "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
+      "last_check_errors": [],
+      "sources_checked": [
+        {
+          "url": "https://www.asus.com/jp/deals/black-friday/",
+          "fetch_status": "OK",
+          "explicit_2026_range_found": false
+        }
+      ]
+    },
+    "mouse_computer": {
+      "status": "UNCONFIRMED",
+      "start_jst": null,
+      "end_jst": null,
+      "source_url": "https://www.mouse-jp.co.jp/",
+      "evidence": null,
+      "checked_at": "2026-10-12T20:55:24.278085+09:00",
+      "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
+      "last_check_errors": [],
+      "sources_checked": [
+        {
+          "url": "https://www.mouse-jp.co.jp/",
+          "fetch_status": "OK",
+          "explicit_2026_range_found": false
+        }
+      ]
+    },
+    "dospara": {
+      "status": "UNCONFIRMED",
+      "start_jst": null,
+      "end_jst": null,
+      "source_url": "https://www.dospara.co.jp/",
+      "evidence": null,
+      "checked_at": "2026-10-12T20:55:24.278085+09:00",
+      "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
+      "last_check_errors": [],
+      "sources_checked": [
+        {
+          "url": "https://www.dospara.co.jp/",
+          "fetch_status": "OK",
+          "explicit_2026_range_found": false
+        }
+      ]
+    },
+    "acer": {
+      "status": "FETCH_ERROR",
+      "start_jst": null,
+      "end_jst": null,
+      "source_url": "https://www.acer.com/jp-ja",
+      "evidence": null,
+      "checked_at": "2026-10-12T20:55:24.278085+09:00",
+      "latest_fetch_status": "ERROR",
+      "last_check_errors": [
+        "https://www.acer.com/jp-ja: The read operation timed out",
+        "https://store.acer.com/ja-jp/: The read operation timed out"
+      ],
+      "sources_checked": [
+        {
+          "url": "https://www.acer.com/jp-ja",
+          "fetch_status": "ERROR",
+          "error": "The read operation timed out"
+        },
+        {
+          "url": "https://store.acer.com/ja-jp/",
+          "fetch_status": "ERROR",
+          "error": "The read operation timed out"
+        }
+      ]
+    },
+    "gigabyte": {
+      "status": "FETCH_ERROR",
+      "start_jst": null,
+      "end_jst": null,
+      "source_url": "https://www.gigabyte.com/jp",
+      "evidence": null,
+      "checked_at": "2026-10-12T20:55:24.278085+09:00",
+      "latest_fetch_status": "ERROR",
+      "last_check_errors": [
+        "https://www.gigabyte.com/jp: HTTP Error 403: Forbidden"
+      ],
+      "sources_checked": [
+        {
+          "url": "https://www.gigabyte.com/jp",
+          "fetch_status": "ERROR",
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "retailer_count": 7,
+    "confirmed_count": 0,
+    "unconfirmed_count": 5,
+    "fetch_error_count": 2
+  }
+}
