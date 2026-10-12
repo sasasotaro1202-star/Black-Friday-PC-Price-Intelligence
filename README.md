@@ -57,7 +57,7 @@ PC候補のランキングにモニター・スピーカー・マウス等を混
 
 ## ゲーム適性と完成PCの選定基準
 
-遊びたいゲーム別の快適度、RTX 5070とRTX 5060 Ti 16GBの選び分け、Cities: Skylines IIの要件、パワプロ2026-2027のPC非対応、動的予算上限をまとめた [ゲーム適性・完成PCガイド](docs/game-compatibility-and-build-targets.md) を追加しています。ここでの性能評価は実測FPSの保証ではなく、公式要件と構成クラスに基づく目安です。
+FPS・Cities: Skylines IIの快適度、RTX 5070とRTX 5060 Ti 16GBの選び分け、AI・大規模予測プログラム向けの構成、動的予算上限をまとめた [ゲーム適性・完成PCガイド](docs/game-compatibility-and-build-targets.md) を追加しています。ここでの性能評価は実測FPSの保証ではなく、公式要件と構成クラスに基づく目安です。
 
 ## GitHub Actions
 
