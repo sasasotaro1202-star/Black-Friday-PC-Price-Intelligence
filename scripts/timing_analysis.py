@@ -401,7 +401,7 @@ def build_buy_now_decision(rankings, events, config, price_observations=None, of
 
         blockers = []
         if not in_window:
-            blockers.append("ブラックフライデー監視期間外。現行価格はBF実売として扱わない")
+            blockers.append("暫定の広域監視窓外。現行価格はBF実売として扱わない")
         elif not current_is_watch_window:
             blockers.append("商品価格の観測時刻が暫定の広域監視窓内ではない")
         if in_window and not retailer_dates_confirmed:
