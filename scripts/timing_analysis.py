@@ -174,11 +174,11 @@ def build_buy_now_decision(rankings, events, config):
     source_products = (rankings.get("products") or []) + (rankings.get("unavailable_products") or [])
     seen_ids = set()
     for item in source_products:
+        if not isinstance(item, dict) or not item.get("id"):
+            continue
         if str(item.get("id") or "") in seen_ids:
             continue
         seen_ids.add(str(item.get("id") or ""))
-        if not isinstance(item, dict) or not item.get("id"):
-            continue
         detail = item.get("score_detail") or {}
         price = item.get("current_price_jpy")
         cash_cost = item.get("cash_total_cost_jpy")
@@ -531,6 +531,62 @@ def render_buy_now_markdown(decision):
     return "\n".join(lines)
 
 
+
+def append_buy_now_summary_to_latest(decision):
+    """Make the action visible in the main report as well as the detailed timing report."""
+    path = os.path.join(ROOT, "data", "reports", "latest.md")
+    if not os.path.exists(path):
+        return False
+    with open(path, encoding="utf-8") as f:
+        content = f.read()
+    marker = "## 今この瞬間の買い時判定"
+    if marker in content:
+        content = content.split(marker, 1)[0].rstrip()
+
+    lines = [
+        marker,
+        "",
+        "- 更新時刻（JST）: " + str(decision.get("generated_at")),
+        "- 判定: **" + str(decision.get("label")) + "** (" + str(decision.get("status")) + ")",
+        "- BF監視期間: " + str(decision.get("sale_window_start_jst")) + " ～ " + str(decision.get("sale_window_end_jst")),
+        "- 総予算: " + ("¥{:,}".format(decision["total_budget_jpy"]) if decision.get("total_budget_jpy") is not None else "未確認"),
+        "- PC本体の動的上限: " + ("¥{:,}".format(decision["pc_dynamic_cap_jpy"]) if decision.get("pc_dynamic_cap_jpy") is not None else "未確認"),
+        "- 周辺機器の価格・在庫確認: " + ("完了" if decision.get("peripheral_budget_data_ready") else "未完了"),
+        "- 全体購入ゲート: " + ("通過" if decision.get("purchase_gate_allowed") else "保留") + " (" + str(decision.get("purchase_gate_reason") or "未確認") + ")",
+        "",
+        str(decision.get("recommendation") or ""),
+        "",
+    ]
+    chosen = decision.get("chosen_candidate")
+    if chosen:
+        if chosen.get("price_jpy") is not None:
+            chosen_price = "¥{:,}".format(chosen["price_jpy"]) + "（BF期間内の確認価格）"
+        elif chosen.get("pre_bf_reference_price_jpy") is not None:
+            chosen_price = "¥{:,}".format(chosen["pre_bf_reference_price_jpy"]) + "（BF前の参考価格・購入判断には不使用）"
+        else:
+            chosen_price = "未確認"
+        lines += [
+            "- 注目候補: **" + str(chosen.get("name")) + "**",
+            "- 価格: " + chosen_price,
+            "- 在庫 / 待つリスク: " + str(chosen.get("stock_status")) + " / " + str(chosen.get("wait_risk")),
+            "- RAM32GB・SSD1TB以上: " + ("達成" if chosen.get("configuration_ready") else "未達/未確認"),
+            "- 買い時スコア: " + (str(chosen.get("timing_score_100")) + "/100" if chosen.get("timing_score_100") is not None else "未算出"),
+            "- 購入リンク: " + ("[販売ページ](" + chosen["purchase_url"] + ")" if chosen.get("purchase_url") else "未確認"),
+        ]
+        if chosen.get("blockers"):
+            lines.append("- 主な未解決条件: " + "；".join(str(x) for x in chosen["blockers"][:4]))
+        lines.append("")
+    lines += [
+        "詳細レポート: [今この瞬間の買い時判定](buy-now-now.md)",
+        "",
+        "買い時スコアは優先順位の補助指標です。値下がり確率の予測ではありません。価格取得失敗は売り切れ扱いせず、BF前の価格はBF実売と区別します。",
+        "",
+    ]
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(content.rstrip() + "\n\n" + "\n".join(lines))
+    return True
+
+
 def main():
     latest_path=os.path.join(ROOT,"data","current_latest.json")
     latest=load_json(latest_path,{"products":[]})
@@ -595,6 +651,7 @@ def main():
         json.dump(decision,f,ensure_ascii=False,indent=2)
     with open(os.path.join(ROOT,"data","reports","buy-now-now.md"),"w",encoding="utf-8") as f:
         f.write(render_buy_now_markdown(decision))
+    append_buy_now_summary_to_latest(decision)
     lines=[
         "# Black Friday price timing analysis","",
         f"Generated: {out['generated_at']}",
