@@ -184,6 +184,7 @@ class BlackFridayScenarioTests(unittest.TestCase):
         self.assertFalse(result["black_friday_prices_known"])
         self.assertFalse(row["black_friday_offer_verified"])
         self.assertEqual(row["price_reference_kind"], "PROVISIONAL_WATCH_WINDOW_REFERENCE")
+        self.assertEqual(row["scenario_base_note"], "暫定監視窓内の参考価格を基準にした仮想割引。公式BF実売価格・値下げ確率ではない")
         self.assertEqual(row["watch_window_reference_price_jpy"], 299800)
         self.assertIsNone(row["pre_black_friday_reference_price_jpy"])
 
