@@ -17,9 +17,25 @@ class WorkflowContractTests(unittest.TestCase):
     def test_schedule_gate_uses_cron_expression_not_runner_start_minute(self):
         text = WORKFLOW.read_text(encoding="utf-8")
         self.assertIn("SCHEDULE_CRON: ${{ github.event.schedule }}", text)
-        self.assertIn('expected_cron = "*/5 * * * *" if in_bf else "*/15 * * * *"', text)
+        self.assertIn('expected_cron = "*/5 * * * *" if in_watch_window else "*/15 * * * *"', text)
         self.assertIn("run_now = schedule_cron == expected_cron", text)
         self.assertNotIn("regular_due = now.minute % 15 == 0", text)
+
+    def test_campaign_calendar_runs_before_price_strategy_reports(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        calendar_at = text.index("python scripts/official_campaign_dates.py")
+        report_at = text.index("python scripts/report.py")
+        timing_at = text.index("python scripts/timing_analysis.py")
+        self.assertLess(calendar_at, report_at)
+        self.assertLess(calendar_at, timing_at)
+
+    def test_watch_window_does_not_hardcode_2026_campaign_dates(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn('cfg["monitor_window_start"]', text)
+        self.assertIn('cfg["monitor_window_end"]', text)
+        self.assertIn("in_watch_window", text)
+        self.assertNotIn("start=datetime(2026,11,14", text)
+        self.assertNotIn("end=datetime(2026,12,4", text)
 
     def test_primary_workflow_runs_peripheral_observer(self):
         text = WORKFLOW.read_text(encoding="utf-8")
