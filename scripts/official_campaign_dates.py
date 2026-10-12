@@ -215,20 +215,46 @@ def save_json(path, data):
     os.replace(temporary, path)
 
 
+def calendar_config_signature(calendar):
+    """Stable signature that invalidates cached status when retailers or URLs change."""
+    result = {}
+    for key, configured in (calendar or {}).items():
+        if key == "note" or not isinstance(configured, dict):
+            continue
+        urls = configured.get("source_urls") or ([configured.get("source_url")] if configured.get("source_url") else [])
+        result[str(key)] = sorted(set(
+            url.strip() for url in urls
+            if isinstance(url, str) and url.strip().startswith("https://")
+        ))
+    return dict(sorted(result.items()))
+
+
+def should_skip_calendar_refresh(old, calendar, now, cache_hours=CACHE_HOURS):
+    old_checked = parse_dt((old or {}).get("checked_at"))
+    old_sources = (old or {}).get("sources") or {}
+    expected_signature = calendar_config_signature(calendar)
+    if not old_checked or now - old_checked >= timedelta(hours=cache_hours):
+        return False
+    if (old or {}).get("configured_sources") != expected_signature:
+        return False
+    return set(old_sources) == set(expected_signature)
+
+
 def main():
     config = load_json(os.path.join(ROOT, "config", "targets.json"), {})
     calendar = config.get("official_2026_dates") or {}
     old = load_json(OUTPUT, {})
     now = now_jst()
-    old_checked = parse_dt(old.get("checked_at"))
     old_sources = old.get("sources") or {}
-    if old_checked and now - old_checked < timedelta(hours=CACHE_HOURS):
-        print("Official campaign calendar check skipped: cache is fresh.")
+    signature = calendar_config_signature(calendar)
+    if should_skip_calendar_refresh(old, calendar, now):
+        print("Official campaign calendar check skipped: matching configuration cache is fresh.")
         return 0
 
     output = {
         "generated_at": iso(now),
         "checked_at": iso(now),
+        "configured_sources": signature,
         "policy": "Only official retailer sources with an explicit 2026 date range can set CONFIRMED. Provisional watch-window dates never confirm a retailer campaign.",
         "sources": {},
     }
