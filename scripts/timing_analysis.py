@@ -170,6 +170,7 @@ def build_buy_now_decision(rankings, events, config):
     coverage_complete = gate.get("coverage_status") == "COMPLETE"
 
     rows = []
+    cap = None
     for item in (rankings.get("products") or []):
         if not isinstance(item, dict) or not item.get("id"):
             continue
@@ -326,6 +327,7 @@ def build_buy_now_decision(rankings, events, config):
             "cash_total_cost_jpy": cash_cost,
             "estimated_all_in_jpy": estimated_all_in,
             "pc_dynamic_cap_jpy": cap,
+            "gap_to_pc_cap_jpy": max(0, cash_cost - cap) if isinstance(cash_cost, int) and cap is not None else None,
             "stock_status": stock,
             "wait_risk": wait_risk,
             "configuration_ready": config_ready,
