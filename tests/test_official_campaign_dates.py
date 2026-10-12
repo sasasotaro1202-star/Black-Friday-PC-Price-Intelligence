@@ -4,8 +4,10 @@ import unittest
 sys.path.insert(0, "scripts")
 from official_campaign_dates import (
     _same_official_site,
+    calendar_config_signature,
     discover_campaign_links,
     parse_explicit_2026_range,
+    should_skip_calendar_refresh,
 )
 from sale_calendar import (
     campaign_entry_for_retailer,
@@ -81,6 +83,35 @@ class OfficialCampaignDateTests(unittest.TestCase):
         self.assertTrue(_same_official_site("https://mouse-jp.co.jp/", "https://store.mouse-jp.co.jp/campaign/"))
         self.assertFalse(_same_official_site("https://www.amazon.co.jp/", "https://co.jp/campaign/"))
         self.assertFalse(_same_official_site("https://www.mouse-jp.co.jp/", "https://mouse-jp.co.jp.attacker.example/campaign/"))
+
+    def test_calendar_cache_invalidates_when_retailers_or_urls_change(self):
+        now = datetime.fromisoformat("2026-10-12T22:00:00+09:00")
+        one_store = {
+            "mouse_computer": {
+                "source_urls": ["https://www.mouse-jp.co.jp/"],
+                "status": "UNCONFIRMED",
+            }
+        }
+        signature = calendar_config_signature(one_store)
+        old = {
+            "checked_at": "2026-10-12T21:30:00+09:00",
+            "configured_sources": signature,
+            "sources": {"mouse_computer": {"status": "UNCONFIRMED"}},
+        }
+        self.assertTrue(should_skip_calendar_refresh(old, one_store, now))
+        two_stores = dict(one_store, yodobashi={
+            "source_urls": ["https://www.yodobashi.com/"],
+        })
+        self.assertFalse(should_skip_calendar_refresh(old, two_stores, now))
+        changed_url = {
+            "mouse_computer": {
+                "source_urls": ["https://www.mouse-jp.co.jp/campaign/"],
+            }
+        }
+        self.assertFalse(should_skip_calendar_refresh(old, changed_url, now))
+        old_without_signature = dict(old)
+        old_without_signature.pop("configured_sources")
+        self.assertFalse(should_skip_calendar_refresh(old_without_signature, one_store, now))
 
     def test_retailer_domain_mapping_is_exact_suffix_not_substring(self):
         self.assertEqual(retailer_key_for_url("https://www.mouse-jp.co.jp/store/g/sku"), "mouse_computer")
