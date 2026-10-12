@@ -131,21 +131,61 @@ class BlackFridayScenarioTests(unittest.TestCase):
             })
         snapshot = {"generated_at": retrieved, "products": peripheral_products}
 
-        result = scenario_analysis.build_black_friday_price_plan(
-            self.targets, self.catalog_data, latest, snapshot, now=now
-        )
-        self.assertEqual(result["pricing_phase"], "BLACK_FRIDAY_WINDOW")
+        targets = dict(self.targets)
+        targets["official_2026_dates"] = dict(self.targets.get("official_2026_dates") or {})
+        targets["official_2026_dates"].update({
+            "mouse_computer": {
+                "status": "CONFIRMED_MANUAL",
+                "start_jst": "2026-11-15T00:00:00+09:00",
+                "end_jst": "2026-11-30T23:59:59+09:00",
+                "source_url": "https://www.mouse-jp.co.jp/",
+            },
+            "edifier": {
+                "status": "CONFIRMED_MANUAL",
+                "start_jst": "2026-11-15T00:00:00+09:00",
+                "end_jst": "2026-11-30T23:59:59+09:00",
+                "source_url": "https://www.edifier.jp/",
+            },
+        })
+        with patch.object(scenario_analysis, "load_json", return_value={"sources": {}}):
+            result = scenario_analysis.build_black_friday_price_plan(
+                targets, self.catalog_data, latest, snapshot, now=now
+            )
+        self.assertEqual(result["pricing_phase"], "PROVISIONAL_BROAD_WATCH_WINDOW")
         self.assertTrue(result["black_friday_prices_known"])
-        self.assertTrue(result["black_friday_pc_price_cap_final"])
+        self.assertFalse(result["black_friday_pc_price_cap_final"])
         self.assertFalse(result["all_in_checkout_total_final"])
         row = next(x for x in result["pc_candidates"] if x["id"] == outlet["id"])
         self.assertTrue(row["black_friday_offer_verified"])
         self.assertEqual(row["black_friday_price_observed_jpy"], 299800)
         self.assertIsNone(row["pre_black_friday_reference_price_jpy"])
+        self.assertEqual(row["retailer_campaign_status"], "CONFIRMED")
         speaker = next(x for x in result["peripherals"] if x["id"] == "speakers")
         self.assertTrue(speaker["black_friday_price_verified"])
         self.assertEqual(speaker["black_friday_price_observed_jpy"], 11000)
         self.assertIsNone(speaker["pre_black_friday_reference_price_jpy"])
+        self.assertEqual(speaker["retailer_campaign_status"], "CONFIRMED")
+
+    def test_provisional_watch_window_alone_never_claims_black_friday_prices(self):
+        now = datetime.fromisoformat("2026-11-20T12:01:00+09:00")
+        retrieved = "2026-11-20T12:00:00+09:00"
+        available = "2026-11-20T11:59:00+09:00"
+        outlet = self.catalog["desktop-gtune-dg-a7g70-5070"]
+        latest = {"generated_at": retrieved, "products": [
+            offer(outlet, 299800, retrieved, available),
+        ]}
+        snapshot = {"generated_at": retrieved, "products": []}
+        with patch.object(scenario_analysis, "load_json", return_value={"sources": {}}):
+            result = scenario_analysis.build_black_friday_price_plan(
+                self.targets, self.catalog_data, latest, snapshot, now=now
+            )
+        row = next(x for x in result["pc_candidates"] if x["id"] == outlet["id"])
+        self.assertEqual(result["pricing_phase"], "PROVISIONAL_BROAD_WATCH_WINDOW")
+        self.assertFalse(result["black_friday_prices_known"])
+        self.assertFalse(row["black_friday_offer_verified"])
+        self.assertEqual(row["price_reference_kind"], "PROVISIONAL_WATCH_WINDOW_REFERENCE")
+        self.assertEqual(row["watch_window_reference_price_jpy"], 299800)
+        self.assertIsNone(row["pre_black_friday_reference_price_jpy"])
 
     def test_unavailable_or_stale_data_never_becomes_bf_observed_price(self):
         now = datetime.fromisoformat("2026-11-20T12:10:00+09:00")
