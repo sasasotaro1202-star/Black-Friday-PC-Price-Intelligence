@@ -591,13 +591,23 @@ def render_buy_now_markdown(decision):
             "",
             "- 商品: **" + str(chosen.get("name")) + "**",
             "- 商品判定: " + str(chosen.get("status")),
-            "- BF期間内の確認価格: " + ("¥{:,}".format(chosen["price_jpy"]) if chosen.get("price_jpy") is not None else "未確認（BF前の参考価格と区別）"),
+            "- 価格区分: " + (
+                "BF期間内の確認価格 ¥{:,}".format(chosen["price_jpy"]) if chosen.get("price_jpy") is not None else
+                "BF前の参考価格 ¥{:,}".format(chosen["pre_bf_reference_price_jpy"]) if chosen.get("pre_bf_reference_price_jpy") is not None else
+                "BF後の参考価格 ¥{:,}".format(chosen["post_bf_reference_price_jpy"]) if chosen.get("post_bf_reference_price_jpy") is not None else
+                "BF期間内の最終観測 ¥{:,}（現在価格ではない）".format(chosen["last_bf_observed_price_jpy"]) if chosen.get("last_bf_observed_price_jpy") is not None else
+                "未確認"
+            ),
             "- BF前の参考価格: " + ("¥{:,}".format(chosen["pre_bf_reference_price_jpy"]) if chosen.get("pre_bf_reference_price_jpy") is not None else "—"),
             "- PC本体動的上限: " + ("¥{:,}".format(chosen["pc_dynamic_cap_jpy"]) if chosen.get("pc_dynamic_cap_jpy") is not None else "未確認"),
             "- PC＋周辺機器の総額試算: " + ("¥{:,}".format(chosen["estimated_all_in_jpy"]) if chosen.get("estimated_all_in_jpy") is not None else "未確認"),
             "- 在庫・待つリスク: " + str(chosen.get("stock_status")) + " / " + str(chosen.get("wait_risk")),
             "- RAM32GB/SSD1TB以上: " + ("達成" if chosen.get("configuration_ready") else "未達/未確認"),
-            "- 期間内最低観測価格: " + ("¥{:,}".format(chosen["bf_window_low_observed_jpy"]) if chosen.get("bf_window_low_observed_jpy") is not None else "未観測"),
+            "- 期間内最低観測価格: " + (
+                "¥{:,}".format(chosen["bf_window_low_observed_jpy"])
+                + ("（" + str(chosen["bf_window_low_observed_at"]) + "）" if chosen.get("bf_window_low_observed_at") else "")
+                if chosen.get("bf_window_low_observed_jpy") is not None else "未観測"
+            ),
             "- 期間内の比較可能な観測数: " + str(chosen.get("bf_window_price_observation_count", 0)),
             "- 買い時スコア: " + (str(chosen.get("timing_score_100")) + "/100" if chosen.get("timing_score_100") is not None else "未算出"),
             "- 購入リンク: " + ("[販売ページ](" + chosen["purchase_url"] + ")" if chosen.get("purchase_url") else "未確認"),
@@ -616,13 +626,21 @@ def render_buy_now_markdown(decision):
     ]
     for index, row in enumerate(decision.get("candidates") or [], 1):
         if row.get("price_jpy") is not None:
-            price_text = "¥{:,}".format(row["price_jpy"])
+            price_text = "BF確認 ¥{:,}".format(row["price_jpy"])
         elif row.get("pre_bf_reference_price_jpy") is not None:
-            price_text = "事前参考 ¥{:,}".format(row["pre_bf_reference_price_jpy"])
+            price_text = "BF前参考 ¥{:,}".format(row["pre_bf_reference_price_jpy"])
+        elif row.get("post_bf_reference_price_jpy") is not None:
+            price_text = "BF後参考 ¥{:,}".format(row["post_bf_reference_price_jpy"])
+        elif row.get("last_bf_observed_price_jpy") is not None:
+            price_text = "BF最終観測 ¥{:,}".format(row["last_bf_observed_price_jpy"])
         else:
             price_text = "未確認"
         all_in = "¥{:,}".format(row["estimated_all_in_jpy"]) if row.get("estimated_all_in_jpy") is not None else "未確認"
-        low = "¥{:,}".format(row["bf_window_low_observed_jpy"]) if row.get("bf_window_low_observed_jpy") is not None else "未観測"
+        low = (
+            "¥{:,}".format(row["bf_window_low_observed_jpy"])
+            + (" @ " + str(row["bf_window_low_observed_at"]) if row.get("bf_window_low_observed_at") else "")
+            if row.get("bf_window_low_observed_jpy") is not None else "未観測"
+        )
         score = str(row["timing_score_100"]) + "/100" if row.get("timing_score_100") is not None else "—"
         url = "[販売ページ](" + row["purchase_url"] + ")" if row.get("purchase_url") else "未確認"
         lines.append(
@@ -677,6 +695,10 @@ def append_buy_now_summary_to_latest(decision):
             chosen_price = "¥{:,}".format(chosen["price_jpy"]) + "（BF期間内の確認価格）"
         elif chosen.get("pre_bf_reference_price_jpy") is not None:
             chosen_price = "¥{:,}".format(chosen["pre_bf_reference_price_jpy"]) + "（BF前の参考価格・購入判断には不使用）"
+        elif chosen.get("post_bf_reference_price_jpy") is not None:
+            chosen_price = "¥{:,}".format(chosen["post_bf_reference_price_jpy"]) + "（BF後の参考価格・購入判断には不使用）"
+        elif chosen.get("last_bf_observed_price_jpy") is not None:
+            chosen_price = "¥{:,}".format(chosen["last_bf_observed_price_jpy"]) + "（BF期間内の最終観測・現在価格ではない）"
         else:
             chosen_price = "未確認"
         lines += [
