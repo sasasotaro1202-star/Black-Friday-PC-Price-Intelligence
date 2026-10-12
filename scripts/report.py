@@ -215,7 +215,11 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
     token = str(outlier.get("gpu") or "RTX 5070 Ti").lower().replace("rtx ", "")
     candidates = [x for x in products if x.get("form_factor") == outlier.get("form_factor", "desktop") and token in gpu_key(x).lower()]
     observed_complete, bf_complete, eligible = [], [], []
+    outlier_official_campaign_active = False
     for item in candidates:
+        campaign = campaign_window_for_item(item, now, watch_config, official_dates)
+        if campaign.get("active_now"):
+            outlier_official_campaign_active = True
         if not _trusted_live_offer(item) or item.get("stock_status") not in ("in_stock", "low_stock"):
             continue
         ready, _ = configuration_readiness(item)
@@ -223,7 +227,6 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
             continue
         observed_complete.append(item)
         observed_at = _parse_strategy_dt(item.get("retrieval_time"))
-        campaign = campaign_window_for_item(item, now, watch_config, official_dates)
         if in_watch_window and observed_at and bf_start <= observed_at <= bf_end and campaign.get("active_at_observation"):
             bf_complete.append(item)
             if budget_ready and int(item["current_price_jpy"]) <= bf_cap:
@@ -243,11 +246,11 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
     elif bf_complete:
         best = bf_complete[0]
         status, detail = "WAIT_FOR_DISCOUNT", f"BF期間中の完成構成を確認しましたが、本体上限を超過。最安確認価格は¥{best['current_price_jpy']:,}です。"
-    elif in_watch_window and not bf_complete:
-        best = observed_complete[0] if observed_complete else None
-        status, detail = "WAIT_FOR_OFFICIAL_DATES", "RTX 5070 Ti大穴候補について販売店の2026年公式セール期間が未確認です。暫定監視窓の価格はBF実売として扱いません。"
+    elif in_watch_window and not outlier_official_campaign_active:
+        best = observed_complete[0] if observed_complete else (candidates[0] if candidates else None)
+        status, detail = "WAIT_FOR_OFFICIAL_DATES", "RTX 5070 Ti大穴候補について販売店の2026年公式セール期間が未確認、または未開始です。暫定監視窓の価格はBF実売として扱いません。"
     else:
-        best = None
+        best = observed_complete[0] if observed_complete else None
         status, detail = "NO_VERIFIED_COMPLETE_CONFIGURATION", "販売店の公式2026年期間内に価格・在庫・SKU・PITを直接確認できた32GB/1TB以上のRTX 5070 Tiデスクトップは未発見。"
     rows.append({
         "candidate_id": None, "role": "rtx_5070_ti_outlier", "label": outlier.get("label") or "RTX 5070 Ti 大穴",
