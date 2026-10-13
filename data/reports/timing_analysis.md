@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-14T07:02:06+09:00
-Source snapshot: 2026-10-14T07:00:04+09:00
-Source snapshot SHA256: 2952cc8b50fd02b322933ba87fd234495d0397a7430a3b77c6532e2ab38feb8d
+Generated: 2026-10-14T08:57:54+09:00
+Source snapshot: 2026-10-14T08:56:58+09:00
+Source snapshot SHA256: 624176c6421ec6814d4b092bd562a4ccccee2b93a7bdf4c689e9f28ef5ac2516
 Budget: ¥330,200
 Target Black Friday: 2026-11-27
 
@@ -17,8 +17,10 @@ Target Black Friday: 2026-11-27
 |5|G TUNE DG-A7G70|¥304,800|0.0%|HIGH|rtx 5070|26|direct_structured|
 |6|G TUNE DG-I5G70|¥279,800|0.0%|HIGH|rtx 5070|22|direct_structured|
 |7|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
-|8|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|17.4%|REALISTIC|rtx 5070 ti|38|direct_structured|
-|9|G TUNE P5-I7G70BK-C（ブラック）|¥419,800|21.3%|AGGRESSIVE|rtx 5070|32|direct_structured|
+|8|Lenovo Legion Pro 5i Gen 10（16型 Intel）|¥354,865|7.0%|HIGH|rtx 5080|40|direct_structured|
+|9|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|17.4%|REALISTIC|rtx 5070 ti|38|direct_structured|
+|10|G TUNE P5-I7G70BK-C（ブラック）|¥419,800|21.3%|AGGRESSIVE|rtx 5070|32|direct_structured|
+|11|Acer Predator Helios Neo 16 AI Windows 11 Home Core Ult|¥547,800|39.7%|LOW|rtx 5070 ti|40|direct_structured|
 
 ## Empirical price-change timing
 
