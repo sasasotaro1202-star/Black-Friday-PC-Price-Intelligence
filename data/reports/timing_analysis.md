@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-13T07:57:03+09:00
-Source snapshot: 2026-10-13T07:54:56+09:00
-Source snapshot SHA256: f8b2498033f736132d1a825b27f6b8c3edee96460fa5ec8746b9b9b8aac24d54
+Generated: 2026-10-13T09:27:45+09:00
+Source snapshot: 2026-10-13T09:26:47+09:00
+Source snapshot SHA256: c8ae81375089d4eb8b0b957f79955216844f6842269c61f08721d2223ccd55ca
 Budget: ¥330,200
 Target Black Friday: 2026-11-27
 
@@ -20,7 +20,6 @@ Target Black Friday: 2026-11-27
 |8|Lenovo Legion Pro 5i Gen 10（16型 Intel）|¥354,865|7.0%|HIGH|rtx 5080|40|direct_structured|
 |9|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|17.4%|REALISTIC|rtx 5070 ti|38|direct_structured|
 |10|G TUNE P5-I7G70BK-C（ブラック）|¥419,800|21.3%|AGGRESSIVE|rtx 5070|32|direct_structured|
-|11|Acer Predator Helios Neo 16 AI Windows 11 Home Core Ult|¥547,800|39.7%|LOW|rtx 5070 ti|40|direct_structured|
 
 ## Empirical price-change timing
 
