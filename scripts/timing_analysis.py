@@ -323,8 +323,11 @@ def build_component_timing_rows(components, observations=None, watch_config=None
         target = part.get("target_price_jpy")
         if not live_trusted:
             live_price = None
-            status = "REFERENCE_UNVERIFIED" if part.get("track_price") else "MANUAL_REFERENCE_ONLY"
-            label = "参考価格未確認" if part.get("track_price") else "手動参考値・未追跡"
+            if display_only_reference:
+                status, label = "DISPLAY_ONLY_SEARCH_REFERENCE", "検索ページ表示値のみ（検証価格なし）"
+            else:
+                status = "REFERENCE_UNVERIFIED" if part.get("track_price") else "MANUAL_REFERENCE_ONLY"
+                label = "参考価格未確認" if part.get("track_price") else "手動参考値・未追跡"
             gap = None
             drop_pct = None
         else:
