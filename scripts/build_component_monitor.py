@@ -434,7 +434,72 @@ def _normalized_text_span(text, term):
     return original_positions[start], original_positions[start + len(needle) - 1] + 1
 
 
-def parse_component_direct_text_price(part, html_body):
+def component_primary_identity_anchor(part, html_body, raw=None):
+    """Prove the requested SKU from a primary page title, not recommendations/footer text."""
+    title_candidates = []
+    raw_name = str((raw or {}).get("name") or "").strip()
+    if raw_name and not raw_name.startswith(("http://", "https://")):
+        title_candidates.append(raw_name)
+
+    try:
+        parser = _KakakuSearchTreeParser()
+        parser.feed(str(html_body or ""))
+        parser.close()
+    except Exception:
+        parser = None
+
+    if parser is not None:
+        for node in parser.nodes:
+            attrs = node.attrs or {}
+            candidate = ""
+            if node.tag in ("h1", "title") or str(attrs.get("itemprop") or "").lower() == "name":
+                candidate = _kakaku_node_text(node)
+            elif node.tag == "meta":
+                property_name = str(attrs.get("property") or attrs.get("name") or "").lower()
+                if property_name in ("og:title", "twitter:title", "product:name", "title"):
+                    candidate = str(attrs.get("content") or "").strip()
+            if candidate and len(candidate) <= 700:
+                title_candidates.append(candidate)
+
+    results = []
+    seen = set()
+    for title in title_candidates:
+        key = normalized(title)
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        anchor = component_search_identity_anchor({"title": title, "snippet": ""}, part)
+        if not anchor:
+            continue
+        model_code = normalized(part.get("model_code"))
+        exact_model_code = bool(model_code and normalized(anchor) == model_code)
+        results.append((
+            0 if exact_model_code else 1,
+            -len(normalized(anchor)),
+            len(title),
+            anchor,
+        ))
+    if not results:
+        return None
+    results.sort()
+    return results[0][3]
+
+
+def stock_from_component_context(text):
+    """Interpret stock only from the directly associated title/price context."""
+    value = str(text or "")
+    if re.search(r"在庫切れ|品切れ|売り切れ|在庫なし|out of stock|sold out", value, re.I):
+        return "out_of_stock"
+    if re.search(r"残りわずか|残り1|low stock|only 1|only one", value, re.I):
+        return "low_stock"
+    if re.search(r"取り寄せ|予約|preorder|back order", value, re.I):
+        return "preorder_or_backorder"
+    if re.search(r"在庫あり|在庫有|即納|in stock|お取り寄せ可能", value, re.I):
+        return "in_stock"
+    return "unknown"
+
+
+def parse_component_direct_text_price(part, html_body, identity_anchor=None):
     """Extract an identity-local price using the part-specific yen bounds.
 
     The shared PC parser deliberately filters sub-¥50k prices so accessories do
@@ -451,17 +516,21 @@ def parse_component_direct_text_price(part, html_body):
     page_text = _kakaku_node_text(parser.root)
     if not page_text:
         return None
-    anchor = component_search_identity_anchor({"title": page_text, "snippet": ""}, part)
+    anchor = identity_anchor or component_primary_identity_anchor(part, html_body)
     if not anchor:
         return None
     span = _normalized_text_span(page_text, anchor)
     if not span:
         return None
 
-    window_start = max(0, span[0] - 1800)
-    window_end = min(len(page_text), span[1] + 5200)
+    # A neighboring result/recommendation may mention the requested SKU elsewhere
+    # on the page. Use only the price area near the primary product heading.
+    window_start = max(0, span[0] - 450)
+    window_end = min(len(page_text), span[1] + 1800)
     local_text = page_text[window_start:window_end]
-    anchor_center = ((span[0] + span[1]) // 2) - window_start
+    anchor_start = span[0] - window_start
+    anchor_end = span[1] - window_start
+    anchor_center = (anchor_start + anchor_end) // 2
     minimum = int(part.get("min_price_jpy") or 1)
     maximum = int(part.get("max_price_jpy") or 10**9)
     pattern = re.compile(
@@ -482,6 +551,10 @@ def parse_component_direct_text_price(part, html_body):
         except (TypeError, ValueError):
             continue
         if not minimum <= value <= maximum:
+            continue
+        # The listing price must appear next to the primary product title, not
+        # an arbitrary related item elsewhere on the page.
+        if match.start() < anchor_start - 400 or match.start() > anchor_end + 1500:
             continue
         before = local_text[max(0, match.start() - 42):match.start()]
         context = local_text[max(0, match.start() - 90):min(len(local_text), match.end() + 90)]
@@ -748,24 +821,27 @@ def verify_retailer_listing(part, candidate_url, domains):
         if final_host == "kakaku.com" or final_host.endswith(".kakaku.com"):
             return None
         raw = parse_page(final_url, html, expected=part)
-        anchor = component_search_identity_anchor({
-            "title": raw.get("name") or "",
-            "snippet": raw.get("page_text_excerpt") or "",
-        }, part)
+        anchor = component_primary_identity_anchor(part, html, raw)
         if not anchor:
             return None
         price = raw.get("price_jpy")
         source_mode = raw.get("price_source_mode")
         price_context = raw.get("price_context")
-        # The shared PC parser intentionally filters out sub-¥50k prices.
-        # Retry with a part-specific bound and the exact product's local text.
-        if price is None or source_mode not in ("direct_structured", "direct_meta", "direct_text"):
-            direct = parse_component_direct_text_price(part, html)
+        # Always reparse direct-text amounts near the main product title. The
+        # shared parser may select a related-product price elsewhere on the page.
+        # Also retry when the shared PC parser filters out a valid sub-¥50k part.
+        if price is None or source_mode == "direct_text" or source_mode not in (
+            "direct_structured", "direct_meta", "direct_text"
+        ):
+            direct = parse_component_direct_text_price(part, html, anchor)
             if direct:
                 price = direct["price_jpy"]
                 source_mode = direct["price_source_mode"]
                 price_context = direct.get("price_context")
                 anchor = direct.get("identity_anchor") or anchor
+            elif source_mode == "direct_text":
+                price = None
+                source_mode = "none"
         minimum = int(part.get("min_price_jpy") or 1)
         maximum = int(part.get("max_price_jpy") or 10**9)
         if isinstance(price, bool) or not isinstance(price, int) or not minimum <= price <= maximum:
@@ -775,10 +851,13 @@ def verify_retailer_listing(part, candidate_url, domains):
         retrieved = iso(now_jst())
         return {
             "url": final_url,
-            "title": raw.get("name") or part.get("name"),
+            "title": raw.get("name") if component_search_identity_anchor({"title": raw.get("name") or "", "snippet": ""}, part) else anchor,
             "price_jpy": price,
             "price_source_mode": source_mode,
-            "stock_status": raw.get("stock_status") or "unknown",
+            "stock_status": (
+                raw.get("stock_status") if source_mode == "direct_structured"
+                else stock_from_component_context(price_context)
+            ),
             "identity_anchor": anchor,
             "identity_match": True,
             "source_role": "direct_retailer_listing_reference",

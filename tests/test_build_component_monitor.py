@@ -285,6 +285,54 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertEqual(offer["stock_status"], "in_stock")
         self.assertEqual(offer["source_role"], "direct_retailer_listing_reference")
 
+    def test_direct_retailer_listing_rejects_identity_found_only_in_related_products(self):
+        part = {
+            "id": "gpu-test", "category": "gpu",
+            "name": "PNY GeForce RTX 5060 Ti 16GB OC",
+            "model_code": "VCG5060T16DFXPB1-O",
+            "aliases": ["PNY GeForce RTX 5060 Ti 16GB", "VCG5060T16DFXPB1-O"],
+            "identity_terms": ["PNY GeForce RTX 5060 Ti 16GB", "VCG5060T16DFXPB1-O"],
+            "min_price_jpy": 85000, "max_price_jpy": 260000,
+        }
+        html = (
+            "<html><head><title>Other graphics card</title></head><body>"
+            "<h1>Radeon RX 9070 XT Steel Legend</h1><p>販売価格 139,800円</p>"
+            "<section class='recommendations'><h2>関連商品</h2>"
+            "<p>PNY GeForce RTX 5060 Ti 16GB VCG5060T16DFXPB1-O</p></section>"
+            "</body></html>"
+        )
+        raw = {
+            "name": "https://www.rakuten.co.jp/other-item/",
+            "page_text_excerpt": "Radeon RX 9070 XT Steel Legend 139,800円 PNY GeForce RTX 5060 Ti 16GB VCG5060T16DFXPB1-O",
+            "price_jpy": 139800, "price_source_mode": "direct_text",
+            "stock_status": "unknown",
+        }
+        with patch.object(bcm, "fetch", return_value=(html, "https://www.rakuten.co.jp/other-item/", {})), \
+             patch.object(bcm, "parse_page", return_value=raw):
+            offer = bcm.verify_retailer_listing(
+                part, "https://www.rakuten.co.jp/other-item/", ("rakuten.co.jp",)
+            )
+        self.assertIsNone(offer)
+
+    def test_component_direct_text_parser_ignores_distant_recommendation_price(self):
+        part = {
+            "id": "motherboard-test", "name": "ASRock B850M Pro RS WiFi",
+            "model_code": "B850M Pro RS WiFi",
+            "aliases": ["ASRock B850M Pro RS WiFi"],
+            "identity_terms": ["B850M Pro RS WiFi"],
+            "min_price_jpy": 12000, "max_price_jpy": 50000,
+        }
+        html = (
+            "<html><body><h1>ASRock B850M Pro RS WiFi</h1>"
+            "<div><span>販売価格（税込）</span><strong>23,780円</strong></div>"
+            + ("<p>関連商品と説明を含む長いページ本文</p>" * 180)
+            + "<section><h2>関連商品</h2><p>別製品 19,800円</p></section>"
+            "</body></html>"
+        )
+        price = bcm.parse_component_direct_text_price(part, html)
+        self.assertIsNotNone(price)
+        self.assertEqual(price["price_jpy"], 23780)
+
     def test_direct_retailer_listing_requires_page_identity_and_plausible_price(self):
         html = "<html><title>PNY GeForce RTX 5070 12GB OC SLIM</title></html>"
         raw = {
