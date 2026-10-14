@@ -544,10 +544,33 @@ def parse_component_direct_text_price(part, html_body, identity_anchor=None):
         return None
     span = _normalized_text_span(page_text, anchor)
     if not span:
+        # Some retailers render a long product heading in a slightly different
+        # order/with merchant suffixes, so the full heading alias may not be
+        # present byte-for-byte in flattened HTML. The verifier has already
+        # required that the primary H1/title matched this product. Fall back only
+        # to a configured exact SKU or identity term to localize the price around
+        # that same item, never to a generic page-wide nearest-price guess.
+        fallback_terms = []
+        model_code = str(part.get("model_code") or "").strip()
+        if model_code:
+            fallback_terms.append(model_code)
+        fallback_terms.extend(str(term).strip() for term in (
+            part.get("aliases") or []
+        ) if str(term).strip())
+        fallback_terms.extend(str(term).strip() for term in (
+            part.get("identity_terms") or []
+        ) if str(term).strip())
+        for term in fallback_terms:
+            candidate_span = _normalized_text_span(page_text, term)
+            if candidate_span:
+                span = candidate_span
+                break
+    if not span:
         return None
 
     # A neighboring result/recommendation may mention the requested SKU elsewhere
-    # on the page. Use only the price area near the primary product heading.
+    # on the page. Use only the price area near the verified primary product or
+    # its exact model code, not an arbitrary page-wide nearest-price guess.
     window_start = max(0, span[0] - 450)
     window_end = min(len(page_text), span[1] + 1800)
     local_text = page_text[window_start:window_end]
