@@ -24,7 +24,7 @@
     "fixed_part_ids": [
       "cpu-ryzen7-9700x",
       "motherboard-asrock-b850m-pro-rs-wifi",
-      "memory-teamgroup-ddr5-32gb-6000",
+      "memory-crucial-pro-ddr5-32gb-6000",
       "ssd-crucial-p3-plus-1tb",
       "psu-corsair-rm850e-2025",
       "case-fractal-pop-air-tg",
@@ -292,7 +292,7 @@
     {
       "id": "memory-teamgroup-ddr5-32gb-6000",
       "category": "memory",
-      "role": "required_fixed_part",
+      "role": "price_monitored_alternative",
       "name": "TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)",
       "model_code": "CTCWD532G6000HC38ADC01",
       "aliases": [
@@ -320,12 +320,46 @@
         "speed_mts": 6000,
         "profile": "EXPO"
       },
-      "notes": "16GB×2のデュアルチャネル。メモリ市況の急変はBF目標に反映し、価格を推測しない。 YMallの型番一致候補ページを直接監視。正確な型番・価格・販売状態を実ページで確認できなければ未検証のまま保持する。 メーカー公式ページで型番・32GB(16GB×2)・DDR5-6000・CL38を再照合。YMallは販売可否を実行時検証し、在庫/価格が取得不能なら未確認を維持。 Amazonの型番候補も第二監視先として追加。主商品見出し・SKU・直接価格・商品固有在庫が一致しない場合は未検証のまま保持する。 YMallの実主商品見出し（TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応）を、同一仕様確認用の別名として登録。価格と在庫は別途直接検証する。",
+      "notes": "16GB×2のデュアルチャネル。メモリ市況の急変はBF目標に反映し、価格を推測しない。 YMallの型番一致候補ページを直接監視。正確な型番・価格・販売状態を実ページで確認できなければ未検証のまま保持する。 メーカー公式ページで型番・32GB(16GB×2)・DDR5-6000・CL38を再照合。YMallは販売可否を実行時検証し、在庫/価格が取得不能なら未確認を維持。 Amazonの型番候補も第二監視先として追加。主商品見出し・SKU・直接価格・商品固有在庫が一致しない場合は未検証のまま保持する。 YMallの実主商品見出し（TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応）を、同一仕様確認用の別名として登録。価格と在庫は別途直接検証する。 2026-10-14に代替候補へ変更。主構成は価格.comに表示された現在価格が高いため、Crucial Pro CP2K16G60C36U5Wを一次候補とし、こちらは¥40,000のBF目標を持つ代替として継続監視する。主構成へ採用する場合もモデル一致価格・在庫・マザーボードQVLを再確認する。",
       "direct_retailer_urls": [
         "https://ymall.jp/store/mlymall/b0chf9th1b-20260811/",
         "https://www.amazon.co.jp/dp/B0CHF9TH1B"
       ],
       "spec_source_url": "https://www.teamgroupinc.com/jp/product-detail/memory/T-CREATE/expert-u-dimm-ddr5-white/expert-u-dimm-ddr5-white-CTCWD532G6000HC38ADC01/",
+      "spec_source_verified_at": "2026-10-14"
+    },
+    {
+      "id": "memory-crucial-pro-ddr5-32gb-6000",
+      "category": "memory",
+      "role": "required_fixed_part",
+      "name": "Crucial Pro DDR5-6000 32GB (16GBx2)",
+      "model_code": "CP2K16G60C36U5W",
+      "aliases": [
+        "Crucial Pro DDR5-6000 32GB (16GBx2)",
+        "Crucial Pro 32GB Kit DDR5-6000",
+        "CP2K16G60C36U5W"
+      ],
+      "identity_terms": [
+        "CP2K16G60C36U5W",
+        "Crucial Pro DDR5-6000 32GB (16GBx2)"
+      ],
+      "monitor_url": "https://kakaku.com/item/K0001633533/",
+      "purchase_url": "https://kakaku.com/item/K0001633533/",
+      "track_price": true,
+      "target_price_jpy": 60000,
+      "min_price_jpy": 20000,
+      "max_price_jpy": 150000,
+      "specs": {
+        "memory_type": "DDR5",
+        "capacity_gb": 32,
+        "modules": 2,
+        "module_size_gb": 16,
+        "speed_mts": 6000,
+        "profile": "EXPO/XMP"
+      },
+      "notes": "主構成用の代替メモリ候補。型番CP2K16G60C36U5W、32GB (16GBx2)、DDR5-6000として価格比較ページを確認。2026-10-14時点の比較サイト表示84,500円は市場参考値のみで、直接店頭価格・在庫・BF実売ではない。BF目標60,000円は希望額であり価格予測ではない。ASRock B850M Pro RS WiFiとのメーカーQVL・BIOS・実際のEXPO安定性は未確定のため購入前に確認する。TeamGroup T-CREATE EXPERTも代替候補として継続監視する。",
+      "spec_source_url": "https://kakaku.com/item/K0001633533/",
+      "spec_source_role": "comparison_site_product_identity_only",
       "spec_source_verified_at": "2026-10-14"
     },
     {
