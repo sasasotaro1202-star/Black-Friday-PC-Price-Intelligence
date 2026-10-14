@@ -243,6 +243,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
             "https://www.joshinweb.jp/item-a",
             "https://www.sofmap.com/item-b",
             "https://shop.tsukumo.co.jp/goods/0751492812151/",
+            "https://www.amazon.co.jp/dp/B0GSXJPTLN",
         ]
         stamp = "2026-11-20T12:00:00+09:00"
         offers = [
@@ -264,7 +265,15 @@ class BuildComponentMonitorTests(unittest.TestCase):
             },
             {
                 "url": part["direct_retailer_urls"][2], "title": "PNY RTX 5070",
-                "price_jpy": 138800, "price_source_mode": "direct_structured",
+                "price_jpy": 190800, "price_source_mode": "direct_structured",
+                "stock_status": "in_stock", "identity_anchor": "VCG507012DFSXPB1-O",
+                "identity_match": True, "source_role": "direct_retailer_listing_reference",
+                "available_at": stamp, "retrieval_time": stamp, "pit_valid": True,
+                "bf_actual_authorized": False,
+            },
+            {
+                "url": part["direct_retailer_urls"][3], "title": "PNY RTX 5070",
+                "price_jpy": 145800, "price_source_mode": "direct_structured",
                 "stock_status": "in_stock", "identity_anchor": "VCG507012DFSXPB1-O",
                 "identity_match": True, "source_role": "direct_retailer_listing_reference",
                 "available_at": stamp, "retrieval_time": stamp, "pit_valid": True,
@@ -274,12 +283,12 @@ class BuildComponentMonitorTests(unittest.TestCase):
         with patch.object(bcm, "verify_retailer_listing", side_effect=offers) as verify, \
              patch.object(bcm, "fetch") as fetcher, \
              patch.object(bcm, "build_retailer_search_urls") as rotate:
-            result = bcm.search_comparison_snippet(part, ("joshinweb.jp", "sofmap.com", "tsukumo.co.jp"))
-        self.assertEqual(verify.call_count, 3)
-        self.assertEqual(result["retailer_listing_offer"]["url"], part["direct_retailer_urls"][2])
-        self.assertEqual(result["retailer_listing_offer"]["price_jpy"], 138800)
+            result = bcm.search_comparison_snippet(part, ("joshinweb.jp", "sofmap.com", "tsukumo.co.jp", "amazon.co.jp"))
+        self.assertEqual(verify.call_count, 4)
+        self.assertEqual(result["retailer_listing_offer"]["url"], part["direct_retailer_urls"][3])
+        self.assertEqual(result["retailer_listing_offer"]["price_jpy"], 145800)
         self.assertEqual(result["retailer_listing_offer"]["stock_status"], "in_stock")
-        self.assertEqual(len(result["retailer_listing_offers"]), 3)
+        self.assertEqual(len(result["retailer_listing_offers"]), 4)
         fetcher.assert_not_called()
         rotate.assert_not_called()
 
