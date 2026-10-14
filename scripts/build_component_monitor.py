@@ -225,7 +225,7 @@ def _kakaku_card_prices(text, minimum, maximum):
     return sorted(set(prices))
 
 
-def parse_kakaku_search_page_reference(part, html_body, source_url):
+def parse_kakaku_search_page_reference(part, html_body, source_url, diagnostics=None):
     """Extract a display-only reference only when SKU and one price share a product card.
 
     A page-wide nearest-price heuristic is unsafe: a price from an adjacent SKU can
@@ -233,26 +233,48 @@ def parse_kakaku_search_page_reference(part, html_body, source_url):
     structural card (article/li/known item/result/card class), a curated identity
     phrase in that card, and exactly one distinct plausible yen price in that card.
     """
+    metrics = {
+        "product_card_count": 0,
+        "identity_card_count": 0,
+        "single_price_identity_card_count": 0,
+        "ambiguous_price_card_count": 0,
+        "extraction_reason": "unclassified",
+    }
+
+    def finish(value, reason):
+        metrics["extraction_reason"] = reason
+        if isinstance(diagnostics, dict):
+            diagnostics.update(metrics)
+        return value
+
     try:
         parsed = urlparse(str(source_url or ""))
         if parsed.scheme != "https" or (parsed.hostname or "").lower() != "search.kakaku.com":
-            return None
+            return finish(None, "source_host_rejected")
     except Exception:
-        return None
+        return finish(None, "source_url_invalid")
 
     try:
         parser = _KakakuSearchTreeParser()
         parser.feed(str(html_body or ""))
         parser.close()
     except Exception:
-        return None
+        return finish(None, "html_parse_error")
+
+    card_nodes = [
+        node for node in parser.nodes
+        if node is not parser.root and _kakaku_is_product_card(node)
+    ]
+    metrics["product_card_count"] = len(card_nodes)
+    if not card_nodes:
+        return finish(None, "no_product_card_nodes")
 
     minimum = int(part.get("min_price_jpy") or 1)
     maximum = int(part.get("max_price_jpy") or 10**9)
     candidates = []
-    for node in parser.nodes:
-        if node is parser.root or not _kakaku_is_product_card(node):
-            continue
+    found_identity = False
+    found_any_in_range_price = False
+    for node in card_nodes:
         text = _kakaku_node_text(node)
         # A card is small enough to represent one result, not a whole result list.
         if not text or len(text) > 1800:
@@ -260,11 +282,18 @@ def parse_kakaku_search_page_reference(part, html_body, source_url):
         anchor = component_search_identity_anchor({"title": text, "snippet": ""}, part)
         if not anchor:
             continue
+        found_identity = True
+        metrics["identity_card_count"] += 1
         prices = _kakaku_card_prices(text, minimum, maximum)
+        if prices:
+            found_any_in_range_price = True
         # Price ranges, new/used offers, installment rates, or more than one offer
         # within the card remain ambiguous and are not rendered as a reference.
         if len(prices) != 1:
+            if len(prices) > 1:
+                metrics["ambiguous_price_card_count"] += 1
             continue
+        metrics["single_price_identity_card_count"] += 1
         price = prices[0]
         context = text[:500]
         normalized_anchor = normalized(anchor)
@@ -287,7 +316,16 @@ def parse_kakaku_search_page_reference(part, html_body, source_url):
         }))
 
     if not candidates:
-        return None
+        if not found_identity:
+            reason = "sku_identity_not_found_in_product_card"
+        elif metrics["ambiguous_price_card_count"]:
+            reason = "ambiguous_multiple_prices_in_product_card"
+        elif not found_any_in_range_price:
+            reason = "matching_product_card_has_no_in_range_price"
+        else:
+            reason = "matching_product_card_price_unusable"
+        return finish(None, reason)
+
     candidates.sort(key=lambda row: (-row[0], row[1], row[2]["price_jpy"]))
     # If equally strong product cards disagree on price, keep the reference unknown.
     best_priority = candidates[0][0]
@@ -295,8 +333,8 @@ def parse_kakaku_search_page_reference(part, html_body, source_url):
     top = [row[2] for row in candidates if row[0] == best_priority and row[1] == best_size]
     distinct_prices = {row["price_jpy"] for row in top}
     if len(distinct_prices) != 1:
-        return None
-    return top[0]
+        return finish(None, "conflicting_equally_specific_product_cards")
+    return finish(top[0], "display_only_price_from_single_product_card")
 
 def parse_search_snippet_reference(part, results, domains=DEFAULT_DOMAINS):
     """Use a search snippet only as display-only context, never as a direct/live price."""
@@ -512,20 +550,24 @@ def search_comparison_snippet(part, domains):
         if kakaku_url and allowed_url(kakaku_url, domains):
             try:
                 body, final_url, _headers = fetch(kakaku_url, timeout=6)
-                reference = parse_kakaku_search_page_reference(part, body, final_url)
+                page_metrics = {}
+                reference = parse_kakaku_search_page_reference(part, body, final_url, page_metrics)
                 diagnostics.append({
                     "provider": "kakaku_search_page",
                     "query_index": 0,
                     "query": search_term,
                     "status": "ok",
                     "error": None,
-                    "result_count": 1,
+                    "result_count": page_metrics.get("product_card_count", 0),
+                    "page_fetch_count": 1,
                     "allowed_reference_host_count": 1,
                     "rejected_host_samples": [],
                     "rejected_url_samples": [],
                     "same_comparison_item_path_count": 0,
-                    "identity_anchor_count": 1 if reference else 0,
-                    "in_range_price_count": 1 if reference else 0,
+                    "identity_anchor_count": page_metrics.get("identity_card_count", 0),
+                    "in_range_price_count": page_metrics.get("single_price_identity_card_count", 0),
+                    "ambiguous_price_card_count": page_metrics.get("ambiguous_price_card_count", 0),
+                    "extraction_reason": page_metrics.get("extraction_reason", "unclassified"),
                     "direct_retailer_fetch_attempt_count": 0,
                     "verified_retailer_listing_count": 0,
                     "source_role": "comparison_site_search_snippet_reference",
