@@ -109,7 +109,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertIn("VCG5070T16TFXXPB1-O", dark["spec_source_url"])
 
         instructions = read_text(".github/copilot-instructions.md")
-        self.assertIn("Exact model/SKU evidence", instructions)
+        self.assertIn("exact model/SKU evidence", instructions)
         self.assertIn("direct_retailer_urls", read_text("scripts/build_component_monitor.py"))
         self.assertIn("shopping.yahoo.co.jp", self.profile["allowed_search_reference_domains"])
 
