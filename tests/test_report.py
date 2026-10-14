@@ -24,6 +24,41 @@ class ReportLinkTests(unittest.TestCase):
         self.assertEqual(policy["bto_role"], "REFERENCE_BENCHMARK_ONLY")
         self.assertFalse(policy["completed_pc_purchase_actionable"])
 
+    def test_completed_pc_gate_reason_is_scoped_away_from_diy(self):
+        self_build_reason = report.purchase_gate_reason(
+            self_build_primary=True,
+            critical_unverified=[],
+            peripheral_budget_ready=False,
+            action=None,
+            dynamic_pc_cap_jpy=0,
+            purchase_gate_allowed=False,
+        )
+        self.assertEqual(self_build_reason, "completed_pc_candidates_reference_only")
+
+    def test_completed_pc_gate_reports_actual_blocker_when_bto_is_in_scope(self):
+        self.assertEqual(
+            report.purchase_gate_reason(
+                self_build_primary=False,
+                critical_unverified=["gpu"],
+                peripheral_budget_ready=False,
+                action=None,
+                dynamic_pc_cap_jpy=0,
+                purchase_gate_allowed=False,
+            ),
+            "critical_candidates_not_fully_verified",
+        )
+        self.assertEqual(
+            report.purchase_gate_reason(
+                self_build_primary=False,
+                critical_unverified=[],
+                peripheral_budget_ready=False,
+                action=None,
+                dynamic_pc_cap_jpy=0,
+                purchase_gate_allowed=False,
+            ),
+            "peripheral_prices_or_availability_unverified",
+        )
+
     def test_sales_url_accepts_http_url(self):
         self.assertEqual(
             report.sales_url({"url": "https://example.com/product"}),

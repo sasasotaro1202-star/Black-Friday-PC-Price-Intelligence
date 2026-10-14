@@ -258,6 +258,14 @@ class BuyNowDecisionTests(unittest.TestCase):
         self.assertFalse(result["purchase_gate_allowed"])
         self.assertEqual(result["purchase_method_policy"]["primary_method"], "SELF_BUILD")
         self.assertFalse(result["purchase_method_policy"]["completed_pc_purchase_actionable"])
+        self.assertIn(
+            "完成品PC参考候補の購入ゲートは自作PCの購入可否とは別管理です。",
+            result["reasons"],
+        )
+        self.assertNotIn(
+            "既存購入ゲートの理由: self_build_primary_method_required",
+            result["reasons"],
+        )
 
     def test_self_build_purchase_gate_reason_reflects_current_blocker(self):
         cases = [
@@ -315,6 +323,7 @@ class BuyNowDecisionTests(unittest.TestCase):
         self.assertEqual(result["status"], "WAIT_FOR_COMPONENT_REFERENCES")
         self.assertFalse(result["purchase_allowed"])
         self.assertFalse(result["bf_actual_authorized"])
+        self.assertNotIn("既存の全体購入ゲートが保留", result["blockers"])
         self.assertEqual(result["target_all_in_jpy"], 369800)
         self.assertEqual(result["verified_market_reference_count"], 0)
         self.assertEqual(result["verified_checkout_offer_count"], 0)

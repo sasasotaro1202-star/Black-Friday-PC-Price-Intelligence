@@ -52,6 +52,28 @@ def file_sha256(path):
     return h.hexdigest()
 
 
+def purchase_gate_reason(
+    self_build_primary,
+    critical_unverified,
+    peripheral_budget_ready,
+    action,
+    dynamic_pc_cap_jpy,
+    purchase_gate_allowed,
+):
+    """Explain the completed-PC shortlist gate without conflating it with DIY authorization."""
+    if self_build_primary:
+        return "completed_pc_candidates_reference_only"
+    if critical_unverified:
+        return "critical_candidates_not_fully_verified"
+    if not peripheral_budget_ready:
+        return "peripheral_prices_or_availability_unverified"
+    if action and action.get("effective_cost_jpy", 10**12) > (dynamic_pc_cap_jpy or 0):
+        return "all_in_cost_exceeds_total_budget"
+    if not purchase_gate_allowed:
+        return "no_buy_now_candidate"
+    return "all_critical_and_peripheral_candidates_verified"
+
+
 def suppress_current_price(row):
     """Convert a non-actionable row into reference-only evidence."""
     out = dict(row)
@@ -580,13 +602,14 @@ def main():
             "allowed": purchase_gate_allowed,
             "coverage_status": coverage_status,
             "critical_unverified_ids": critical_unverified,
-            "reason": (
-                "self_build_primary_method_required" if self_build_primary_method else
-                "critical_candidates_not_fully_verified" if critical_unverified else
-                "peripheral_prices_or_availability_unverified" if not peripheral_projection.get("budget_data_ready") else
-                "all_in_cost_exceeds_total_budget" if action and action.get("effective_cost_jpy", 10**12) > peripheral_projection.get("pc_dynamic_cap_jpy", 0) else
-                "no_buy_now_candidate" if not purchase_gate_allowed else
-                "all_critical_and_peripheral_candidates_verified"
+            "scope": "completed_pc_candidates_only",
+            "reason": purchase_gate_reason(
+                self_build_primary_method,
+                critical_unverified,
+                peripheral_projection.get("budget_data_ready") is True,
+                action,
+                peripheral_projection.get("pc_dynamic_cap_jpy", 0),
+                purchase_gate_allowed,
             ),
         },
         "purchase_method_policy": method_policy,
@@ -636,7 +659,7 @@ def main():
         f"PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥{peripheral_projection['pc_dynamic_cap_jpy']:,}",
         f"周辺機器の現行/目標価格ベース試算: ¥{peripheral_projection['peripheral_projection_jpy']:,}",
         f"周辺機器の価格・在庫確認: {peripheral_projection['tracked_peripheral_verified_count']}/{peripheral_projection['tracked_peripheral_count']}",
-        f"全体購入許可: **{'許可' if purchase_gate_allowed else '保留'}**（{out['purchase_gate']['reason']}）",
+        f"完成品PC参考候補の購入ゲート: **{'通過' if purchase_gate_allowed else '保留'}**（{out['purchase_gate']['reason']}）。自作PCの購入判定は別途、部品別互換性・実売・在庫・総額で評価します。",
         f"フェーズ: **{out['season_phase']}**",
         "",
     ]
@@ -742,7 +765,7 @@ def main():
             for p in peripheral_projection["peripherals"]
         ],
         "",
-        f"周辺機器価格確認: {peripheral_projection['tracked_peripheral_verified_count']}/{peripheral_projection['tracked_peripheral_count']}。未確認項目は目標額を試算に使用し、全体購入許可を保留します。",
+        f"周辺機器価格確認: {peripheral_projection['tracked_peripheral_verified_count']}/{peripheral_projection['tracked_peripheral_count']}。未確認項目は目標額を試算に使用し、自作PCを含む総額の購入判断は保留します。",
         "",
         "## 100点ランキング",
         "",

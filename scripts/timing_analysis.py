@@ -705,8 +705,8 @@ def build_buy_now_decision(rankings, events, config, price_observations=None, of
             blockers.append("既存ランキングの判定は " + score_status)
         if not coverage_complete:
             blockers.append("重要候補の価格・在庫カバレッジが未完了")
-        if not gate_allowed:
-            blockers.append("既存の全体購入ゲートが保留")
+        if not gate_allowed and not self_build_primary:
+            blockers.append("完成品PC参考候補の購入ゲートが保留")
 
         individual_ok = bool(
             in_window and price_verified and stock_available and config_ready
@@ -862,7 +862,11 @@ def build_buy_now_decision(rankings, events, config, price_observations=None, of
         status, label = "WAIT_FOR_VERIFICATION", "データ確認が揃うまで判断保留"
         recommendation = "価格・在庫・完成構成・周辺機器込み予算・重要候補の確認が不足しています。取得失敗を売り切れとみなさず、確認できた時点で再判定します。"
         reasons = [
-            "既存購入ゲートの理由: " + str(gate.get("reason") or "未確認"),
+            (
+                "完成品PC参考候補の購入ゲートは自作PCの購入可否とは別管理です。"
+                if self_build_primary
+                else "既存購入ゲートの理由: " + str(gate.get("reason") or "未確認")
+            ),
             "在庫切れと取得失敗を区別し、未確認情報では購入許可を出しません。",
         ]
     else:
