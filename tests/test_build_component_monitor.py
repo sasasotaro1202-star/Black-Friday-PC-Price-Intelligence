@@ -53,6 +53,36 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertTrue(bcm.allowed_url("https://www.dospara.co.jp/item/123", ("dospara.co.jp",)))
         self.assertFalse(bcm.allowed_url("http://www.dospara.co.jp/item/123", ("dospara.co.jp",)))
 
+    def test_kakaku_search_page_price_is_display_only_and_identity_anchored(self):
+        html = (
+            "<html><body><article><h2>PNY GeForce RTX 5070 12GB OC SLIM</h2>"
+            "<p>最安価格(税込) ¥139,800</p></article></body></html>"
+        )
+        reference = bcm.parse_kakaku_search_page_reference(
+            self.part, html, "https://search.kakaku.com/PNY%20GeForce%20RTX%205070/"
+        )
+        self.assertIsNotNone(reference)
+        self.assertEqual(reference["price_jpy"], 139800)
+        self.assertEqual(reference["search_provider"], "kakaku_search_page")
+        self.assertEqual(reference["source_role"], "comparison_site_search_snippet_reference")
+        self.assertFalse(reference["bf_actual_authorized"])
+
+    def test_kakaku_search_page_rejects_untrusted_host_wrong_identity_and_bad_price(self):
+        html = (
+            "<html><body><article><h2>Different graphics card</h2>"
+            "<p>¥139,800</p></article></body></html>"
+        )
+        self.assertIsNone(bcm.parse_kakaku_search_page_reference(
+            self.part, html, "https://untrusted.example/search/"
+        ))
+        self.assertIsNone(bcm.parse_kakaku_search_page_reference(
+            self.part, html, "https://search.kakaku.com/different/"
+        ))
+        bad_price = html.replace("Different graphics card", "PNY GeForce RTX 5070 12GB OC SLIM").replace("139,800", "39,800")
+        self.assertIsNone(bcm.parse_kakaku_search_page_reference(
+            self.part, bad_price, "https://search.kakaku.com/PNY/"
+        ))
+
     def test_rotating_retailer_domain_is_deterministic_for_a_five_minute_slot(self):
         from datetime import datetime
         from zoneinfo import ZoneInfo
