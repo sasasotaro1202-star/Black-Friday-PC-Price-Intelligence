@@ -355,7 +355,7 @@ class BuyNowDecisionTests(unittest.TestCase):
         })
         self.assertIn("検索ページ表示専用値（不採用）", report)
         self.assertIn("39,980", report)
-        self.assertIn("検索結果ページの表示専用値", report)
+        self.assertIn("近傍テキストから得た参考情報", report)
 
     def test_self_build_waits_for_checkout_offers_even_when_reference_prices_are_complete(self):
         plan = {
