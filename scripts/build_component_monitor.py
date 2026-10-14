@@ -802,63 +802,162 @@ def build_component_search_queries(part, domains=DEFAULT_DOMAINS, now=None):
     return unique[:3]
 
 
-def verify_retailer_listing(part, candidate_url, domains):
-    """Fetch an allowlisted seller page and verify identity, direct price and stock.
+def verify_retailer_listing(part, candidate_url, domains, diagnostic_out=None):
+    """Fetch and verify a direct seller listing with explicit failure diagnostics.
 
-    Search snippets are discovery hints only. A listing is emitted as a current
-    retailer reference only after the page itself parses a plausible price and
-    the configured exact product identity is present in the fetched page.
+    Search results are hints only. The page itself must prove the requested
+    exact model, a plausible directly parsed price, and valid point-in-time
+    evidence. Inventory is tracked separately from price/identity validity.
     """
-    if not allowed_url(candidate_url, domains):
+    diagnostic = diagnostic_out if isinstance(diagnostic_out, dict) else {}
+
+    def fail(reason_code, **details):
+        diagnostic.update({
+            "status": "unverified",
+            "reason_code": reason_code,
+            **details,
+        })
         return None
+
+    diagnostic.update({
+        "provider": "direct_listing_verifier",
+        "candidate_url": str(candidate_url or "")[:240],
+        "final_url": None,
+        "retailer_domain": (urlparse(str(candidate_url or "")).hostname or "").lower(),
+        "identity_anchor": None,
+        "page_name": None,
+        "price_source_mode": None,
+        "parsed_price_jpy": None,
+        "price_context_excerpt": None,
+        "stock_status": "unknown",
+        "structured_stock_status": None,
+        "text_stock_status": None,
+    })
+    if not allowed_url(candidate_url, domains):
+        return fail("candidate_url_host_not_allowlisted")
     candidate_host = (urlparse(candidate_url).hostname or "").lower()
     if candidate_host == "kakaku.com" or candidate_host.endswith(".kakaku.com"):
-        return None
+        return fail("comparison_site_is_not_direct_retailer")
     try:
-        html, final_url, _headers = fetch(candidate_url, timeout=11)
-        if not allowed_url(final_url, domains):
-            return None
+        try:
+            html, final_url, _headers = fetch(candidate_url, timeout=11)
+        except Exception as exc:
+            return fail(
+                "fetch_error",
+                error_type=type(exc).__name__,
+                error_message=str(exc)[:180],
+            )
+        diagnostic["final_url"] = str(final_url or "")[:240]
         final_host = (urlparse(final_url).hostname or "").lower()
+        diagnostic["final_host"] = final_host
+        if not allowed_url(final_url, domains):
+            return fail("redirect_left_allowlist")
         if final_host == "kakaku.com" or final_host.endswith(".kakaku.com"):
-            return None
-        raw = parse_page(final_url, html, expected=part)
-        anchor = component_primary_identity_anchor(part, html, raw)
+            return fail("comparison_site_redirect_not_retailer")
+
+        try:
+            raw = parse_page(final_url, html, expected=part)
+        except Exception as exc:
+            return fail(
+                "page_parse_error",
+                error_type=type(exc).__name__,
+                error_message=str(exc)[:180],
+            )
+        diagnostic.update({
+            "page_name": str(raw.get("name") or "")[:180] or None,
+            "price_source_mode": raw.get("price_source_mode"),
+            "parsed_price_jpy": raw.get("price_jpy"),
+            "raw_stock_status": raw.get("stock_status"),
+            "structured_stock_status": raw.get("structured_stock_status"),
+            "text_stock_status": raw.get("text_stock_status"),
+            "stock_ambiguity": raw.get("stock_ambiguity"),
+            "structured_identity_match": raw.get("structured_identity_match"),
+        })
+
+        try:
+            anchor = component_primary_identity_anchor(part, html, raw)
+        except Exception as exc:
+            return fail(
+                "identity_parse_error",
+                error_type=type(exc).__name__,
+                error_message=str(exc)[:180],
+            )
         if not anchor:
-            return None
+            excerpt = str(raw.get("page_text_excerpt") or "")
+            return fail(
+                "exact_model_identity_not_found_in_primary_page",
+                page_text_excerpt=excerpt[:220] or None,
+            )
+        diagnostic["identity_anchor"] = str(anchor)[:180]
+
         price = raw.get("price_jpy")
         source_mode = raw.get("price_source_mode")
         price_context = raw.get("price_context")
-        # Always reparse direct-text amounts near the main product title. The
-        # shared parser may select a related-product price elsewhere on the page.
-        # Also retry when the shared PC parser filters out a valid sub-¥50k part.
+        # Reparse direct-text prices around the primary product heading. The
+        # shared PC parser has a higher minimum price and may select a related
+        # product amount from an accessory page.
         if price is None or source_mode == "direct_text" or source_mode not in (
             "direct_structured", "direct_meta", "direct_text"
         ):
-            direct = parse_component_direct_text_price(part, html, anchor)
+            try:
+                direct = parse_component_direct_text_price(part, html, anchor)
+            except Exception as exc:
+                direct = None
+                diagnostic["direct_text_parse_error"] = type(exc).__name__ + ":" + str(exc)[:140]
             if direct:
                 price = direct["price_jpy"]
                 source_mode = direct["price_source_mode"]
                 price_context = direct.get("price_context")
                 anchor = direct.get("identity_anchor") or anchor
+                diagnostic.update({
+                    "identity_anchor": str(anchor)[:180],
+                    "price_source_mode": source_mode,
+                    "parsed_price_jpy": price,
+                })
             elif source_mode == "direct_text":
                 price = None
                 source_mode = "none"
+                diagnostic.update({"price_source_mode": source_mode, "parsed_price_jpy": None})
+
         minimum = int(part.get("min_price_jpy") or 1)
         maximum = int(part.get("max_price_jpy") or 10**9)
-        if isinstance(price, bool) or not isinstance(price, int) or not minimum <= price <= maximum:
-            return None
+        diagnostic["price_context_excerpt"] = str(price_context or "")[:220] or None
+        if isinstance(price, bool) or not isinstance(price, int) or price <= 0:
+            return fail("direct_price_missing_or_not_integer")
+        if not minimum <= price <= maximum:
+            return fail(
+                "direct_price_outside_configured_range",
+                minimum_price_jpy=minimum,
+                maximum_price_jpy=maximum,
+            )
         if source_mode not in ("direct_structured", "direct_meta", "direct_text"):
-            return None
+            return fail("price_source_mode_not_directly_parsed")
+
+        # Stock proof must relate to the exact product. If parse_page found
+        # JSON-LD offers for the exact Product node, trust that scoped signal,
+        # not store-wide text that may mention unrelated sold-out branches.
+        if source_mode == "direct_structured":
+            if "structured_stock_status" in raw:
+                stock_status = raw.get("structured_stock_status") or "unknown"
+                if stock_status == "unknown":
+                    stock_status = stock_from_component_context(price_context)
+            else:
+                # Backwards-compatible for callers/tests mocking the older
+                # parser schema. Live parse_page now emits the scoped field.
+                stock_status = raw.get("stock_status") or "unknown"
+        else:
+            stock_status = stock_from_component_context(price_context)
+        diagnostic["stock_status"] = stock_status
+
         retrieved = iso(now_jst())
-        return {
+        offer = {
             "url": final_url,
-            "title": raw.get("name") if component_search_identity_anchor({"title": raw.get("name") or "", "snippet": ""}, part) else anchor,
+            "title": raw.get("name") if component_search_identity_anchor(
+                {"title": raw.get("name") or "", "snippet": ""}, part
+            ) else anchor,
             "price_jpy": price,
             "price_source_mode": source_mode,
-            "stock_status": (
-                raw.get("stock_status") if source_mode == "direct_structured"
-                else stock_from_component_context(price_context)
-            ),
+            "stock_status": stock_status,
             "identity_anchor": anchor,
             "identity_match": True,
             "source_role": "direct_retailer_listing_reference",
@@ -868,9 +967,17 @@ def verify_retailer_listing(part, candidate_url, domains):
             "bf_actual_authorized": False,
             "price_context": price_context,
         }
-    except Exception:
-        return None
-
+        diagnostic.update({
+            "status": "verified",
+            "reason_code": "exact_identity_direct_price_and_pit_verified",
+        })
+        return offer
+    except Exception as exc:
+        return fail(
+            "verification_exception",
+            error_type=type(exc).__name__,
+            error_message=str(exc)[:180],
+        )
 
 def search_comparison_snippet(part, domains):
     """Search approved sites, verify seller-page offers directly, and keep snippets display-only.
@@ -930,7 +1037,8 @@ def search_comparison_snippet(part, domains):
             })
             continue
         direct_fetch_attempts += 1
-        offer = verify_retailer_listing(part, url, domains)
+        verification = {}
+        offer = verify_retailer_listing(part, url, domains, diagnostic_out=verification)
         if offer and offer.get("url") not in {x.get("url") for x in verified_offers}:
             verified_offers.append(offer)
         diagnostics.append({
@@ -938,7 +1046,19 @@ def search_comparison_snippet(part, domains):
             "retailer_domain": host,
             "url": url[:240],
             "status": "verified" if offer else "unverified",
-            "error": None if offer else "direct_page_failed_identity_price_stock_or_pit_validation",
+            "error": verification.get("reason_code") if not offer else None,
+            "validation": {
+                key: verification.get(key)
+                for key in (
+                    "reason_code", "final_url", "final_host", "identity_anchor",
+                    "page_name", "price_source_mode", "parsed_price_jpy",
+                    "price_context_excerpt", "raw_stock_status",
+                    "structured_stock_status", "text_stock_status",
+                    "stock_ambiguity", "structured_identity_match",
+                    "error_type", "error_message", "page_text_excerpt",
+                )
+                if verification.get(key) is not None
+            },
             "result_count": 1 if offer else 0,
             "page_fetch_count": 1,
             "allowed_reference_host_count": 1,
@@ -946,7 +1066,7 @@ def search_comparison_snippet(part, domains):
             "in_range_price_count": 1 if offer else 0,
             "direct_retailer_fetch_attempt_count": direct_fetch_attempts - fetch_before,
             "verified_retailer_listing_count": len(verified_offers) - offers_before,
-            "stock_status": (offer or {}).get("stock_status") or "unknown",
+            "stock_status": (offer or verification).get("stock_status") or "unknown",
             "source_role": "direct_retailer_listing_reference",
         })
         if offer and offer.get("stock_status") == "in_stock":
@@ -1127,9 +1247,22 @@ def search_comparison_snippet(part, domains):
                 # lightweight while checking a bounded number of imperfect search results.
                 if not is_comparison_site and direct_fetch_attempts < 4:
                     direct_fetch_attempts += 1
-                    offer = verify_retailer_listing(part, url, domains)
+                    verification = {}
+                    offer = verify_retailer_listing(part, url, domains, diagnostic_out=verification)
                     if offer and offer.get("url") not in {x.get("url") for x in verified_offers}:
                         verified_offers.append(offer)
+                    if len(rejected_url_samples) < 3:
+                        # Keep search diagnostics compact; only retain reason
+                        # categories and a few exact identity/stock fields.
+                        rejected_url_samples.append(json.dumps({
+                            "url": str(url)[:160],
+                            "reason_code": verification.get("reason_code"),
+                            "identity_anchor": verification.get("identity_anchor"),
+                            "price_source_mode": verification.get("price_source_mode"),
+                            "parsed_price_jpy": verification.get("parsed_price_jpy"),
+                            "stock_status": verification.get("stock_status"),
+                            "error_type": verification.get("error_type"),
+                        }, ensure_ascii=False)[:480])
 
                 blob = str(result.get("title") or "") + " " + str(result.get("snippet") or "")
                 candidate = parse_snippet_price(
