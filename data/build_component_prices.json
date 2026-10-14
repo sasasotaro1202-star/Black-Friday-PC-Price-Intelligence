@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T18:28:35+09:00",
+  "generated_at": "2026-10-14T18:34:22+09:00",
   "schema_version": 1,
   "source_role": "comparison_site_reference",
   "policy": "These prices are comparison-site market references only; never seller checkout prices or official BF actuals.",
@@ -36,10 +36,12 @@
           "provider": "duckduckgo",
           "query_index": 1,
           "query": "site:kakaku.com/item/k0001630332 100-100001404WOF 価格",
-          "status": "ok",
-          "error": null,
+          "status": "error",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -48,10 +50,12 @@
           "provider": "duckduckgo",
           "query_index": 2,
           "query": "\"AMD Ryzen 7 9700X BOX\" 100-100001404WOF 価格 在庫",
-          "status": "ok",
-          "error": null,
+          "status": "error",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -64,6 +68,18 @@
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "en.wikipedia.org",
+            "pluto.tv",
+            "www.youtube.com",
+            "www.primevideo.com",
+            "www.justwatch.com"
+          ],
+          "rejected_url_samples": [
+            "https://en.wikipedia.org/wiki/The_100_(TV_series)",
+            "https://pluto.tv/us/shows/the-100-ptv3/?msockid=07dbd898661f6b361400cf6a671b6a43",
+            "https://www.youtube.com/watch?v=aDrsItJ_HU4"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -76,13 +92,25 @@
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.amd.com",
+            "finance.yahoo.com",
+            "en.wikipedia.org",
+            "www.techspot.com",
+            "www.marketwatch.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.amd.com/en.html",
+            "https://www.amd.com/en/support/download/drivers.html",
+            "https://finance.yahoo.com/quote/AMD/"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:28:30+09:00",
+      "retrieval_time": "2026-10-14T18:33:24+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -117,10 +145,12 @@
           "provider": "duckduckgo",
           "query_index": 1,
           "query": "site:kakaku.com/item/k0001798041 VCG507012DFXPB1-O 価格",
-          "status": "ok",
-          "error": null,
+          "status": "error",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -129,10 +159,12 @@
           "provider": "duckduckgo",
           "query_index": 2,
           "query": "\"PNY GeForce RTX 5070 12GB OC SLIM\" VCG507012DFXPB1-O 価格 在庫",
-          "status": "ok",
-          "error": null,
+          "status": "error",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -143,8 +175,20 @@
           "query": "site:kakaku.com/item/k0001798041 VCG507012DFXPB1-O 価格",
           "status": "ok",
           "error": null,
-          "result_count": 0,
+          "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.bls.gov",
+            "job-outlook.careerplanner.com",
+            "www.zippia.com",
+            "www.raise.me",
+            "www.masscarepartners.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm",
+            "https://job-outlook.careerplanner.com/Animal-Care-and-Service-Workers.cfm",
+            "https://www.zippia.com/animal-care-service-worker-jobs/trends/"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -157,17 +201,29 @@
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.pny.com",
+            "en.wikipedia.org",
+            "pny.us.com",
+            "www.amazon.com",
+            "proconfig.pny.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.pny.com/",
+            "https://www.pny.com/consumer",
+            "https://en.wikipedia.org/wiki/PNY"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:28:30+09:00",
+      "retrieval_time": "2026-10-14T18:33:24+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
       "identity_match": true,
       "identity_matches": [
         "pnygeforcertx507012gboc",
@@ -199,10 +255,12 @@
           "provider": "duckduckgo",
           "query_index": 1,
           "query": "site:kakaku.com/item/k0001696163 VCG5060T16DFXPB1-O 価格",
-          "status": "ok",
-          "error": null,
+          "status": "error",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -211,10 +269,12 @@
           "provider": "duckduckgo",
           "query_index": 2,
           "query": "\"PNY GeForce RTX 5060 Ti 16GB OC\" VCG5060T16DFXPB1-O 価格 在庫",
-          "status": "ok",
-          "error": null,
+          "status": "error",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -227,6 +287,8 @@
           "error": null,
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -239,13 +301,25 @@
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.pny.com",
+            "en.wikipedia.org",
+            "pny.us.com",
+            "www.amazon.com",
+            "proconfig.pny.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.pny.com/",
+            "https://www.pny.com/consumer",
+            "https://en.wikipedia.org/wiki/PNY"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:28:30+09:00",
+      "retrieval_time": "2026-10-14T18:33:24+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -282,10 +356,12 @@
           "provider": "duckduckgo",
           "query_index": 1,
           "query": "site:kakaku.com/item/k0001696164 VCG5070T16TFXPB1-O 価格",
-          "status": "ok",
-          "error": null,
+          "status": "error",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -294,10 +370,12 @@
           "provider": "duckduckgo",
           "query_index": 2,
           "query": "\"PNY GeForce RTX 5070 Ti 16GB ARGB\" VCG5070T16TFXPB1-O 価格 在庫",
-          "status": "ok",
-          "error": null,
+          "status": "error",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -310,6 +388,8 @@
           "error": null,
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -322,13 +402,25 @@
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.pny.com",
+            "en.wikipedia.org",
+            "pny.us.com",
+            "www.amazon.com",
+            "proconfig.pny.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.pny.com/",
+            "https://www.pny.com/consumer",
+            "https://en.wikipedia.org/wiki/PNY"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:28:30+09:00",
+      "retrieval_time": "2026-10-14T18:33:24+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -365,9 +457,11 @@
           "query_index": 1,
           "query": "site:kakaku.com/item/k0001669878 B850M Pro RS WiFi 価格",
           "status": "error",
-          "error": "HTTPError:HTTP Error 403: Forbidden",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -377,9 +471,11 @@
           "query_index": 2,
           "query": "\"ASRock B850M Pro RS WiFi\" B850M Pro RS WiFi 価格 在庫",
           "status": "error",
-          "error": "HTTPError:HTTP Error 403: Forbidden",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -390,8 +486,20 @@
           "query": "site:kakaku.com/item/k0001669878 B850M Pro RS WiFi 価格",
           "status": "ok",
           "error": null,
-          "result_count": 0,
+          "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.gigabyte.com",
+            "www.asus.com",
+            "www.asrock.com",
+            "www.msi.com",
+            "us.msi.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.gigabyte.com/Motherboard/B850M-C",
+            "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b850m-plus-wifi7/",
+            "https://www.gigabyte.com/Motherboard/B850M-AORUS-STEALTH"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -402,19 +510,21 @@
           "query": "\"ASRock B850M Pro RS WiFi\" B850M Pro RS WiFi 価格 在庫",
           "status": "ok",
           "error": null,
-          "result_count": 10,
+          "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:28:31+09:00",
+      "retrieval_time": "2026-10-14T18:33:43+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced; bing:0 results / 0 allowed host / 0 identity / 0 priced",
       "identity_match": true,
       "identity_matches": [
         "b850mprorswifi",
@@ -446,10 +556,12 @@
           "provider": "duckduckgo",
           "query_index": 1,
           "query": "site:kakaku.com/item/k0001610896 CTCWD532G6000HC38ADC01 価格",
-          "status": "ok",
-          "error": null,
+          "status": "error",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -459,9 +571,11 @@
           "query_index": 2,
           "query": "\"TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)\" CTCWD532G6000HC38ADC01 価格 在庫",
           "status": "error",
-          "error": "HTTPError:HTTP Error 403: Forbidden",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -474,6 +588,18 @@
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "suumo.jp",
+            "www.athome.co.jp",
+            "www.homes.co.jp",
+            "www.century21.jp",
+            "myhome.nifty.com"
+          ],
+          "rejected_url_samples": [
+            "https://suumo.jp/ikkodate/gifu/sc_hashima/?msockid=00d7f815934f696a2009efe792f46837",
+            "https://www.athome.co.jp/kodate/gifu/hashima-city/list/",
+            "https://www.homes.co.jp/kodate/shinchiku/gifu/hashima-city/list/?msockid=00d7f815934f696a2009efe792f46837"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -486,13 +612,25 @@
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.teamgroupinc.com",
+            "support.teamgroupinc.com",
+            "event.teamgroupinc.com",
+            "www.amazon.com",
+            "www.reddit.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.teamgroupinc.com/en/",
+            "https://www.teamgroupinc.com/en/product-brand/ssd/TEAMGROUP/",
+            "https://support.teamgroupinc.com/en/"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:28:31+09:00",
+      "retrieval_time": "2026-10-14T18:33:43+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -528,9 +666,11 @@
           "query_index": 1,
           "query": "site:kakaku.com/item/k0001466997 CT1000P3PSSD8JP 価格",
           "status": "error",
-          "error": "HTTPError:HTTP Error 403: Forbidden",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -540,9 +680,11 @@
           "query_index": 2,
           "query": "\"Crucial P3 Plus CT1000P3PSSD8JP 1TB\" CT1000P3PSSD8JP 価格 在庫",
           "status": "error",
-          "error": "HTTPError:HTTP Error 403: Forbidden",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -555,6 +697,8 @@
           "error": null,
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -567,13 +711,25 @@
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.crucial.com",
+            "qa-cloud.crucial.com",
+            "www.merriam-webster.com",
+            "eu.crucial.com",
+            "en.wikipedia.org"
+          ],
+          "rejected_url_samples": [
+            "https://www.crucial.com/",
+            "https://www.crucial.com/upgrades",
+            "https://qa-cloud.crucial.com/store/systemscanner"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:28:31+09:00",
+      "retrieval_time": "2026-10-14T18:33:44+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -609,9 +765,11 @@
           "query_index": 1,
           "query": "site:kakaku.com/item/k0001671441 CP-9020296-JP 価格",
           "status": "error",
-          "error": "HTTPError:HTTP Error 403: Forbidden",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -621,9 +779,11 @@
           "query_index": 2,
           "query": "\"Corsair RM850e 2025 850W ATX 3.1 Gold\" CP-9020296-JP 価格 在庫",
           "status": "error",
-          "error": "HTTPError:HTTP Error 403: Forbidden",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -636,6 +796,18 @@
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.reddit.com",
+            "my.clevelandclinic.org",
+            "en.m.wikipedia.org",
+            "cp24.com",
+            "kidshealth.org"
+          ],
+          "rejected_url_samples": [
+            "https://www.reddit.com/r/TooAfraidToAsk/comments/115rarh/i_found_a_website_that_has_literal_cp_with/",
+            "https://my.clevelandclinic.org/health/diseases/8717-cerebral-palsy",
+            "https://en.m.wikipedia.org/wiki/CP"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -648,13 +820,25 @@
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.corsair.com",
+            "help.corsair.com",
+            "en.wikipedia.org",
+            "www.amazon.com",
+            "www.flycorsair.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.corsair.com/us/en",
+            "https://www.corsair.com/us/en/s/downloads",
+            "https://help.corsair.com/hc/en-us"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:28:31+09:00",
+      "retrieval_time": "2026-10-14T18:33:44+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -691,9 +875,11 @@
           "query_index": 1,
           "query": "site:kakaku.com/item/j0000039064 FD-C-POA1A-02 価格",
           "status": "error",
-          "error": "HTTPError:HTTP Error 403: Forbidden",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -703,9 +889,11 @@
           "query_index": 2,
           "query": "\"Fractal Design Pop Air TG\" FD-C-POA1A-02 価格 在庫",
           "status": "error",
-          "error": "HTTPError:HTTP Error 403: Forbidden",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -718,6 +906,18 @@
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.formulad.com",
+            "www.youtube.com",
+            "en.wikipedia.org",
+            "www.acronymfinder.com",
+            "abbreviationfinder.org"
+          ],
+          "rejected_url_samples": [
+            "https://www.formulad.com/",
+            "https://www.youtube.com/c/formuladrift",
+            "https://en.wikipedia.org/wiki/FD"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -730,13 +930,25 @@
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "en.wikipedia.org",
+            "www.fractal-design.com",
+            "fractal.garden",
+            "fractalfoundation.org",
+            "fractal.us"
+          ],
+          "rejected_url_samples": [
+            "https://en.wikipedia.org/wiki/Fractal",
+            "https://www.fractal-design.com/",
+            "https://fractal.garden/"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:28:32+09:00",
+      "retrieval_time": "2026-10-14T18:34:02+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -773,9 +985,11 @@
           "query_index": 1,
           "query": "site:kakaku.com/item/k0001789043 Peerless Assassin 120 SE V3 価格",
           "status": "error",
-          "error": "HTTPError:HTTP Error 403: Forbidden",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -785,9 +999,11 @@
           "query_index": 2,
           "query": "\"Thermalright Peerless Assassin 120 SE V3\" Peerless Assassin 120 SE V3 価格 在庫",
           "status": "error",
-          "error": "HTTPError:HTTP Error 403: Forbidden",
+          "error": "URLError:<urlopen error timed out>",
           "result_count": 0,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -798,8 +1014,20 @@
           "query": "site:kakaku.com/item/k0001789043 Peerless Assassin 120 SE V3 価格",
           "status": "ok",
           "error": null,
-          "result_count": 7,
+          "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.peerlessfaucet.com",
+            "www.peerless-av.com",
+            "peerlesschain.com",
+            "www.merriam-webster.com",
+            "www.peerlessboilers.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.peerlessfaucet.com/",
+            "https://www.peerless-av.com/collections/mounting-solutions/display-and-tv-wall-mounts",
+            "https://www.peerless-av.com/"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -812,17 +1040,28 @@
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.thermalright.com",
+            "thermalright.pro",
+            "www.amazon.com",
+            "en.wikipedia.org"
+          ],
+          "rejected_url_samples": [
+            "https://www.thermalright.com/",
+            "https://www.thermalright.com/support/download/",
+            "https://thermalright.pro/"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:28:33+09:00",
+      "retrieval_time": "2026-10-14T18:34:03+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:7 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
       "identity_match": true,
       "identity_matches": [
         "peerlessassassin120sev3",
