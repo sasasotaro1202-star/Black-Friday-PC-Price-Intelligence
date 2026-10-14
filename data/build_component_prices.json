@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T18:50:40+09:00",
+  "generated_at": "2026-10-14T18:52:17+09:00",
   "schema_version": 1,
   "source_role": "comparison_site_reference",
   "policy": "References may be direct comparison-site prices or directly fetched retailer product listings after identity and price checks; neither proves final checkout price or official BF actuals.",
@@ -36,7 +36,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "\"100-100001404WOF\" 価格",
+          "query": "\"100-100001404WOF\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -52,7 +52,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"AMD Ryzen 7 9700X BOX\" 価格 最安値",
+          "query": "\"AMD Ryzen 7 9700X BOX\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -68,7 +68,7 @@
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "\"100-100001404WOF\" 価格",
+          "query": "\"100-100001404WOF\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -82,7 +82,7 @@
           ],
           "rejected_url_samples": [
             "https://en.wikipedia.org/wiki/The_100_(TV_series)",
-            "https://pluto.tv/us/shows/the-100-ptv3/?msockid=267a7717e8fc6c9f26c560e5e95c6d18",
+            "https://pluto.tv/us/shows/the-100-ptv3/?msockid=11b48ff92b196cba0dc2980b2a4e6d11",
             "https://www.youtube.com/watch?v=aDrsItJ_HU4"
           ],
           "same_comparison_item_path_count": 0,
@@ -94,7 +94,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"AMD Ryzen 7 9700X BOX\" 価格 最安値",
+          "query": "\"AMD Ryzen 7 9700X BOX\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -123,7 +123,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:50:37+09:00",
+      "retrieval_time": "2026-10-14T18:52:14+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -157,7 +157,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "\"VCG507012DFXPB1-O\" 価格",
+          "query": "\"VCG507012DFXPB1-O\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -173,7 +173,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"PNY GeForce RTX 5070 12GB OC SLIM\" 価格 最安値",
+          "query": "\"PNY GeForce RTX 5070 12GB OC SLIM\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -189,7 +189,7 @@
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "\"VCG507012DFXPB1-O\" 価格",
+          "query": "\"VCG507012DFXPB1-O\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -205,7 +205,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"PNY GeForce RTX 5070 12GB OC SLIM\" 価格 最安値",
+          "query": "\"PNY GeForce RTX 5070 12GB OC SLIM\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -234,7 +234,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:50:37+09:00",
+      "retrieval_time": "2026-10-14T18:52:14+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -269,7 +269,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "\"VCG5060T16DFXPB1-O\" 価格",
+          "query": "\"VCG5060T16DFXPB1-O\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -285,7 +285,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"PNY GeForce RTX 5060 Ti 16GB OC\" 価格 最安値",
+          "query": "\"PNY GeForce RTX 5060 Ti 16GB OC\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -301,7 +301,7 @@
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "\"VCG5060T16DFXPB1-O\" 価格",
+          "query": "\"VCG5060T16DFXPB1-O\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -317,7 +317,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"PNY GeForce RTX 5060 Ti 16GB OC\" 価格 最安値",
+          "query": "\"PNY GeForce RTX 5060 Ti 16GB OC\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -346,7 +346,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:50:37+09:00",
+      "retrieval_time": "2026-10-14T18:52:14+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -382,7 +382,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "\"VCG5070T16TFXPB1-O\" 価格",
+          "query": "\"VCG5070T16TFXPB1-O\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -398,7 +398,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"PNY GeForce RTX 5070 Ti 16GB ARGB\" 価格 最安値",
+          "query": "\"PNY GeForce RTX 5070 Ti 16GB ARGB\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -414,7 +414,7 @@
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "\"VCG5070T16TFXPB1-O\" 価格",
+          "query": "\"VCG5070T16TFXPB1-O\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -430,7 +430,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"PNY GeForce RTX 5070 Ti 16GB ARGB\" 価格 最安値",
+          "query": "\"PNY GeForce RTX 5070 Ti 16GB ARGB\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -459,7 +459,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:50:37+09:00",
+      "retrieval_time": "2026-10-14T18:52:14+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -494,7 +494,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "\"B850M Pro RS WiFi\" 価格",
+          "query": "\"B850M Pro RS WiFi\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -510,7 +510,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"ASRock B850M Pro RS WiFi\" 価格 最安値",
+          "query": "\"ASRock B850M Pro RS WiFi\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -526,7 +526,7 @@
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "\"B850M Pro RS WiFi\" 価格",
+          "query": "\"B850M Pro RS WiFi\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -552,7 +552,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"ASRock B850M Pro RS WiFi\" 価格 最安値",
+          "query": "\"ASRock B850M Pro RS WiFi\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -571,7 +571,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:50:38+09:00",
+      "retrieval_time": "2026-10-14T18:52:15+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -606,7 +606,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "\"CTCWD532G6000HC38ADC01\" 価格",
+          "query": "\"CTCWD532G6000HC38ADC01\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -622,7 +622,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)\" 価格 最安値",
+          "query": "\"TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -638,7 +638,7 @@
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "\"CTCWD532G6000HC38ADC01\" 価格",
+          "query": "\"CTCWD532G6000HC38ADC01\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -654,7 +654,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)\" 価格 最安値",
+          "query": "\"TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -683,7 +683,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:50:38+09:00",
+      "retrieval_time": "2026-10-14T18:52:15+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -717,7 +717,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "\"CT1000P3PSSD8JP\" 価格",
+          "query": "\"CT1000P3PSSD8JP\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -733,7 +733,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"Crucial P3 Plus CT1000P3PSSD8JP 1TB\" 価格 最安値",
+          "query": "\"Crucial P3 Plus CT1000P3PSSD8JP 1TB\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -749,7 +749,7 @@
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "\"CT1000P3PSSD8JP\" 価格",
+          "query": "\"CT1000P3PSSD8JP\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -765,13 +765,23 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"Crucial P3 Plus CT1000P3PSSD8JP 1TB\" 価格 最安値",
+          "query": "\"Crucial P3 Plus CT1000P3PSSD8JP 1TB\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
-          "result_count": 0,
+          "result_count": 10,
           "allowed_reference_host_count": 0,
-          "rejected_host_samples": [],
-          "rejected_url_samples": [],
+          "rejected_host_samples": [
+            "www.crucial.com",
+            "qa-cloud.crucial.com",
+            "www.merriam-webster.com",
+            "eu.crucial.com",
+            "en.wikipedia.org"
+          ],
+          "rejected_url_samples": [
+            "https://www.crucial.com/",
+            "https://www.crucial.com/upgrades",
+            "https://qa-cloud.crucial.com/store/systemscanner"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0,
@@ -784,11 +794,11 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:50:38+09:00",
+      "retrieval_time": "2026-10-14T18:52:15+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:0 results / ",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:10 results /",
       "identity_match": true,
       "identity_matches": [
         "ct1000p3pssd8jp"
@@ -818,7 +828,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "\"CP-9020296-JP\" 価格",
+          "query": "\"CP-9020296-JP\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -834,7 +844,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"Corsair RM850e 2025 850W ATX 3.1 Gold\" 価格 最安値",
+          "query": "\"Corsair RM850e 2025 850W ATX 3.1 Gold\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -850,7 +860,7 @@
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "\"CP-9020296-JP\" 価格",
+          "query": "\"CP-9020296-JP\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -876,7 +886,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"Corsair RM850e 2025 850W ATX 3.1 Gold\" 価格 最安値",
+          "query": "\"Corsair RM850e 2025 850W ATX 3.1 Gold\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -905,7 +915,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:50:38+09:00",
+      "retrieval_time": "2026-10-14T18:52:15+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -940,7 +950,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "\"FD-C-POA1A-02\" 価格",
+          "query": "\"FD-C-POA1A-02\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -956,7 +966,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"Fractal Design Pop Air TG\" 価格 最安値",
+          "query": "\"Fractal Design Pop Air TG\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -972,17 +982,13 @@
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "\"FD-C-POA1A-02\" 価格",
+          "query": "\"FD-C-POA1A-02\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
-          "result_count": 1,
+          "result_count": 0,
           "allowed_reference_host_count": 0,
-          "rejected_host_samples": [
-            "blogs.microsoft.com"
-          ],
-          "rejected_url_samples": [
-            "https://blogs.microsoft.com/blog/2023/03/21/create-images-with-your-words-bing-image-creator-comes-to-the-new-bing/"
-          ],
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0,
@@ -992,7 +998,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"Fractal Design Pop Air TG\" 価格 最安値",
+          "query": "\"Fractal Design Pop Air TG\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -1021,11 +1027,11 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:50:39+09:00",
+      "retrieval_time": "2026-10-14T18:52:16+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:1 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:10 results /",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:10 results /",
       "identity_match": true,
       "identity_matches": [
         "fdcpoa1a02",
@@ -1056,7 +1062,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "\"Peerless Assassin 120 SE V3\" 価格",
+          "query": "\"Peerless Assassin 120 SE V3\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -1072,7 +1078,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"Thermalright Peerless Assassin 120 SE V3\" 価格 最安値",
+          "query": "\"Thermalright Peerless Assassin 120 SE V3\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -1088,7 +1094,7 @@
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "\"Peerless Assassin 120 SE V3\" 価格",
+          "query": "\"Peerless Assassin 120 SE V3\" 価格 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -1114,7 +1120,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"Thermalright Peerless Assassin 120 SE V3\" 価格 最安値",
+          "query": "\"Thermalright Peerless Assassin 120 SE V3\" 価格 最安値 (site:kakaku.com OR site:amazon.co.jp OR site:rakuten.co.jp OR site:yodobashi.com OR site:biccamera.com OR site:dospara.co.jp OR site:tsukumo.co.jp OR site:mouse-jp.co.jp OR site:pc-koubou.jp OR site:sofmap.com OR site:joshinweb.jp OR site:ark-pc.co.jp OR site:frontier-direct.jp OR site:sycom.co.jp OR site:stormst.com OR site:edion.com OR site:ksdenki.com OR site:nojima.co.jp OR site:yamada-denkiweb.com)",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -1142,7 +1148,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:50:39+09:00",
+      "retrieval_time": "2026-10-14T18:52:16+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
