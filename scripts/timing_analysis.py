@@ -313,6 +313,13 @@ def build_component_timing_rows(components, observations=None, watch_config=None
             part.get("trusted_for_market_estimate") is True
             and _is_positive_yen(live_price)
         )
+        display_only_price = part.get("display_reference_price_jpy")
+        display_only_reference = bool(
+            not live_trusted
+            and part.get("price_status") == "search_snippet_reference_only"
+            and _is_positive_yen(display_only_price)
+            and part.get("source_role") == "comparison_site_reference"
+        )
         target = part.get("target_price_jpy")
         if not live_trusted:
             live_price = None
@@ -343,6 +350,10 @@ def build_component_timing_rows(components, observations=None, watch_config=None
             "current_market_reference_price_jpy": live_price,
             "current_reference_status": part.get("price_status") or "not_observed",
             "reference_age_minutes": part.get("reference_age_minutes"),
+            "display_only_reference_price_jpy": display_only_price if display_only_reference else None,
+            "display_only_reference_url": part.get("search_snippet_reference_url") if display_only_reference else None,
+            "display_only_reference_title": part.get("search_snippet_reference_title") if display_only_reference else None,
+            "display_only_reference_is_estimate_eligible": False,
             "target_gap_jpy": gap, "required_drop_pct": drop_pct,
             "history_low_reference_price_jpy": low,
             "history_sample_count": len(valid_history),
@@ -407,6 +418,10 @@ def build_self_build_timing_summary(build_plan, build_config=None, component_obs
     reference_count = sum(1 for x in tracked
         if x.get("trusted_for_market_estimate") is True
         and _is_positive_yen(x.get("market_reference_price_jpy")))
+    display_only_reference_count = sum(1 for x in tracked
+        if x.get("price_status") == "search_snippet_reference_only"
+        and _is_positive_yen(x.get("display_reference_price_jpy"))
+        and x.get("source_role") == "comparison_site_reference")
     checkout_count = sum(1 for x in components
         if x.get("source_role") == "retailer_checkout_offer"
         and x.get("checkout_price_verified") is True
@@ -461,10 +476,11 @@ def build_self_build_timing_summary(build_plan, build_config=None, component_obs
         "market_reference_estimate_is_checkout_price": False,
         "tracked_component_count": len(tracked),
         "verified_market_reference_count": reference_count,
+        "display_only_search_reference_count": display_only_reference_count,
         "component_count": len(components), "verified_checkout_offer_count": checkout_count,
         "missing_or_untrusted_market_reference_ids": missing_ids,
         "component_timing": component_timing,
-        "component_timing_policy": "価格目標との距離と保存済み比較サイト参考履歴・直接取得した販売店掲載価格のみを示す。最終決済額・送料・BF実売確定ではなく、買い許可は出さない。",
+        "component_timing_policy": "確認済み比較参考値・保存済み履歴と、検索結果ページの表示専用参考値を別々に示す。表示専用参考値は価格目標との差・市場推定・購入判定に使用しない。最終決済額・送料・BF実売確定ではなく、買い許可は出さない。",
         "blockers": blockers,
         "purchase_decision_factors": profile.get("purchase_decision_factors") or [],
     }
@@ -897,7 +913,8 @@ def render_buy_now_markdown(decision):
         "- 周辺機器込みBF購入目標: " + ("¥{:,}".format(diy["target_all_in_jpy"]) if diy.get("target_all_in_jpy") is not None else "未確認"),
         "- 目標上の総予算残額: " + ("¥{:,}".format(diy["target_remaining_budget_jpy"]) if diy.get("target_remaining_budget_jpy") is not None else "未確認"),
         "- 互換性判定: " + str(diy.get("compatibility_status") or "未確認"),
-        "- 比較参考価格を確認できた部品: " + str(diy.get("verified_market_reference_count", 0)) + "/" + str(diy.get("tracked_component_count", 0)),
+        "- 検証済み比較参考価格: " + str(diy.get("verified_market_reference_count", 0)) + "/" + str(diy.get("tracked_component_count", 0)),
+        "- 検索ページ表示専用の参考価格（推定・購入判定には不使用）: " + str(diy.get("display_only_search_reference_count", 0)) + "/" + str(diy.get("tracked_component_count", 0)),
         "- 確認済み店舗決済オファー: " + str(diy.get("verified_checkout_offer_count", 0)) + "/" + str(diy.get("component_count", 0)),
         "- 自作購入判定: **" + str(diy.get("status") or "SELF_BUILD_DATA_UNAVAILABLE") + "**",
         "- 購入許可: **出していません**（BF目標・比較サイト参考価格では購入許可しない）",
@@ -911,14 +928,17 @@ def render_buy_now_markdown(decision):
         "",
         "### 部品別のBF購入目標・比較参考値・値下がり履歴",
         "",
-        "ここでいう現在値と履歴は、型番一致・取得条件を満たした比較サイト参考値です。販売店の最終決済額や公式BF実売を示すものではなく、表のどの状態でも単独で購入許可は出しません。",
+        "検証済み比較参考値と検索ページ表示専用値は別列です。表示専用値は近傍テキストから得た参考情報で、販売店掲載・在庫・最終決済価格を証明しません。目標との差や買い時判定、購入許可には使用しません。",
         "",
-        "|部品|BF購入目標|現在の比較参考値|目標までの差|履歴内参考最安|監視窓内参考最安|履歴件数 / 監視窓件数|判定|価格確認ページ|",
-        "|---|---:|---:|---:|---:|---:|---:|---|---|",
+        "|部品|BF購入目標|検証済み比較参考値|検索ページ表示専用値（不採用）|目標までの差|履歴内参考最安|監視窓内参考最安|履歴件数 / 監視窓件数|判定|価格確認ページ|",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---|---|",
     ]
     for part in diy.get("component_timing") or []:
         target_text = "¥{:,}".format(part["target_price_jpy"]) if part.get("target_price_jpy") is not None else "—"
         current_text = "¥{:,}".format(part["current_market_reference_price_jpy"]) if part.get("current_market_reference_price_jpy") is not None else "未確認"
+        display_only_text = "¥{:,}".format(part["display_only_reference_price_jpy"]) if part.get("display_only_reference_price_jpy") is not None else "—"
+        if part.get("display_only_reference_url"):
+            display_only_text += " ([検索結果](" + str(part["display_only_reference_url"]) + "))"
         gap_text = "¥{:,}".format(part["target_gap_jpy"]) if part.get("target_gap_jpy") is not None else "—"
         if part.get("required_drop_pct") is not None:
             gap_text += " (" + str(part["required_drop_pct"]) + "%)"
@@ -928,7 +948,7 @@ def render_buy_now_markdown(decision):
         url = part.get("purchase_url")
         link_text = "[比較・仕様ページ](" + url + ")" if url and str(url).startswith(("https://", "http://")) else "未確認"
         diy_lines.append(
-            "|" + str(part.get("name") or part.get("id")) + "|" + target_text + "|" + current_text + "|"
+            "|" + str(part.get("name") or part.get("id")) + "|" + target_text + "|" + current_text + "|" + display_only_text + "|"
             + gap_text + "|" + low_text + "|" + window_low_text + "|" + sample_text + "|"
             + str(part.get("status_label") or part.get("status")) + "|" + link_text + "|"
         )
