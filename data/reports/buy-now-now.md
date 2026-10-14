@@ -1,6 +1,6 @@
 # 今この瞬間の買い時判定
 
-- 更新時刻（JST）: 2026-10-15T07:23:11+09:00
+- 更新時刻（JST）: 2026-10-15T08:13:38+09:00
 - 判定: **事前監視継続・公式日程未確認** (PRE_BF_MONITORING)
 - 暫定の広域監視窓（公式セール日程ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 - 公式日程確認: 0/16 店舗（公式期間が確認できない店舗: 12、取得エラー: 4）
@@ -22,9 +22,9 @@
 - 周辺機器込みBF購入目標: ¥370,400
 - 目標上の総予算残額: ¥29,600
 - 互換性判定: REVIEW
-- 検証済み比較参考価格: 4/9
-- 直接掲載価格を取得したが在庫条件未達（推定・購入判定には不使用）: 5/9
-- 検索ページ表示専用の参考価格（推定・購入判定には不使用）: 4/9
+- 検証済み比較参考価格: 3/9
+- 直接掲載価格を取得したが在庫条件未達（推定・購入判定には不使用）: 6/9
+- 検索ページ表示専用の参考価格（推定・購入判定には不使用）: 5/9
 - 確認済み店舗決済オファー: 0/9
 - 自作購入判定: **WAIT_FOR_COMPATIBILITY_REVIEW**
 - 購入許可: **出していません**（BF目標・比較サイト参考価格では購入許可しない）
@@ -34,7 +34,7 @@
 - GPUの正確な型番寸法・補助電源など未確認の互換性項目を解消する。
 - BF購入目標額は希望価格であり、確認済み実売価格ではない。
 - 比較サイト価格は購入店舗の最終決済価格・在庫・送料を証明しない。
-- **明示ステータス:** 検索ページ表示値のみ（検証価格なし） — 4件。商品詳細ページの直接価格・在庫を検証できていないため、相場推定・目標差・購入判定には使いません。
+- **明示ステータス:** 検索ページ表示値のみ（検証価格なし） — 5件。商品詳細ページの直接価格・在庫を検証できていないため、相場推定・目標差・購入判定には使いません。
 
 ### 部品別のBF購入目標・比較参考値・値下がり履歴
 
@@ -42,15 +42,15 @@
 
 |部品|BF購入目標|検証済み比較参考値|直接掲載価格（在庫条件未達・推定不採用）|検索ページ表示専用値（不採用）|目標までの差|履歴内参考最安|監視窓内参考最安|履歴件数 / 監視窓件数|判定|価格確認ページ|
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
-|AMD Ryzen 7 9700X BOX|¥38,000|¥47,800|—|—|¥9,800 (20.5%)|¥47,800|未観測|17 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://shop.tsukumo.co.jp/goods/0730143315593/)|
+|AMD Ryzen 7 9700X BOX|¥38,000|未確認|¥53,110（在庫未確認） ([直接掲載](https://www.yodobashi.com/product/100000001008661707/))|¥67,890 ([検索結果](https://search.kakaku.com/AMD%20Ryzen%207%209700X%20BOX/))|—|¥47,800|未観測|17 / 0|直接掲載価格あり（在庫未確認・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001630332/)|
 |ASRock B850M Pro RS WiFi|¥20,000|未確認|¥21,380（在庫未確認） ([直接掲載](https://www.sofmap.com/product_detail.aspx?sku=101393495))|¥23,780 ([検索結果](https://search.kakaku.com/ASRock%20B850M%20Pro%20RS%20WiFi/))|—|¥21,380|未観測|8 / 0|直接掲載価格あり（在庫未確認・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001669878/)|
 |Crucial P3 Plus CT1000P3PSSD8JP 1TB|¥18,000|未確認|¥32,769（在庫未確認） ([直接掲載](https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094))|¥33,600 ([検索結果](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/))|—|未観測|未観測|0 / 0|直接掲載価格あり（在庫未確認・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001466997/)|
-|Corsair RM850e 2025 850W ATX 3.1 Gold|¥14,000|¥14,980|—|—|¥980 (6.5%)|¥14,980|未観測|31 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.dospara.co.jp/SBR83/IC519918.html)|
-|Fractal Design Pop Air TG|¥12,000|¥13,180|—|—|¥1,180 (9.0%)|¥13,180|未観測|28 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.dospara.co.jp/SBR1959/IC480986.html)|
+|Corsair RM850e 2025 850W ATX 3.1 Gold|¥14,000|¥14,980|—|—|¥980 (6.5%)|¥14,980|未観測|32 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.dospara.co.jp/SBR83/IC519918.html)|
+|Fractal Design Pop Air TG|¥12,000|¥13,180|—|—|¥1,180 (9.0%)|¥13,180|未観測|29 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.dospara.co.jp/SBR1959/IC480986.html)|
 |Thermalright Peerless Assassin 120 SE V3|¥5,000|未確認|¥4,980（在庫切れ） ([直接掲載](https://www.dospara.co.jp/SBR1968/IC645423.html))|¥4,980 ([検索結果](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/))|—|未観測|未観測|0 / 0|直接掲載価格あり（在庫切れ・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001789043/)|
-|Microsoft Windows 11 Home 日本語版 パッケージ版|¥14,800|¥16,230|—|—|¥1,430 (8.8%)|¥16,230|未観測|26 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.yodobashi.com/product/100000001006975270/)|
+|Microsoft Windows 11 Home 日本語版 パッケージ版|¥14,800|¥16,230|—|—|¥1,430 (8.8%)|¥16,230|未観測|27 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.yodobashi.com/product/100000001006975270/)|
 |TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)|¥40,000|未確認|¥113,938（在庫未確認） ([直接掲載](https://ymall.jp/store/mlymall/b0chf9th1b-20260811/))|—|—|未観測|未観測|0 / 0|直接掲載価格あり（在庫未確認・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001610896/)|
-|PNY GeForce RTX 5070 12GB OC SLIM|¥129,800|未確認|¥190,800（在庫未確認） ([直接掲載](https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom))|¥190,800 ([検索結果](https://search.kakaku.com/PNY%20GeForce%20RTX%205070%2012GB%20OC%20SLIM/))|—|未観測|未観測|0 / 0|直接掲載価格あり（在庫未確認・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001798041/)|
+|PNY GeForce RTX 5070 12GB OC SLIM|¥129,800|未確認|¥190,800（在庫切れ） ([直接掲載](https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845))|¥190,800 ([検索結果](https://search.kakaku.com/PNY%20GeForce%20RTX%205070%2012GB%20OC%20SLIM/))|—|未観測|未観測|0 / 0|直接掲載価格あり（在庫切れ・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001798041/)|
 
 ## 判定根拠
 
@@ -89,11 +89,12 @@
 |3|Lenovo Legion Pro 5i Gen 10（16型 Intel）|未確認|—|¥436,605|in_stock|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040)|
 |4|G TUNE DG-I7G70|未確認|—|¥381,540|in_stock|未達/未確認|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/)|
 |5|G TUNE DG-I5G70|未確認|—|¥361,540|in_stock|未達/未確認|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/)|
-|6|G TUNE FG-A7G6T|未確認|—|¥381,741|unknown|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/)|
-|7|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|未確認|—|¥481,540|out_of_stock|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/)|
-|8|G TUNE P5-I7G70BK-C（ブラック）|未確認|—|¥501,540|in_stock|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/)|
-|9|G TUNE DG-A5G60|未確認|—|¥276,540|in_stock|未達/未確認|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
-|10|G TUNE DG-A7G70|未確認|—|¥381,741|unknown|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/)|
+|6|Acer Predator Helios Neo 16 AI Windows 11 Home Core Ultra 9 290HX Plus RTX 5070 Ti IPS 非光沢 WQXGA 240Hz 3ms G-SYNC DCI-P3 100% 32GBメモリ 1TB SSD 第5世代 AeroBladeファン 有線LAN WiFi 6E 英字キーボード ゲーミングノートパソコン PHN16-I71-N93Z57T/E|未確認|—|¥629,540|in_stock|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1)|
+|7|G TUNE FG-A7G6T|未確認|—|¥381,741|unknown|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/)|
+|8|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|未確認|—|¥481,540|out_of_stock|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/)|
+|9|G TUNE P5-I7G70BK-C（ブラック）|未確認|—|¥501,540|in_stock|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/)|
+|10|G TUNE DG-A5G60|未確認|—|¥276,540|in_stock|未達/未確認|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
+|11|G TUNE DG-A7G70|未確認|—|¥381,741|unknown|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/)|
 
 ## 読み方と安全規則
 
