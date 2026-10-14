@@ -556,10 +556,10 @@
       "maximum_completed_pc_price_uses": "dynamic_pc_cap_jpy",
       "requires_direct_price_stock_exact_identity_and_valid_pit": true,
       "zero_cost_upgrade_assumption_allowed": false,
-      "black_friday_target_cap_jpy": 310200,
+      "black_friday_target_cap_jpy": 330200,
       "price_basis": "completed_build_black_friday_offer_only",
       "include_in_final_ranking": true,
-      "over_target_policy": "SHOW_AS_STRETCH_CANDIDATE_WITH_OVERRUN_AND_COMPATIBILITY_BLOCKERS"
+      "over_target_policy": "KEEP_IN_RANKING; DISPLAY_ANY_ACTUAL_OVERRUN_OR_REMAINING_BUFFER_AND_COMPATIBILITY_BLOCKERS"
     },
     "score_policy": "説明文にある96/94/95/97点は条件付きの目標イメージであり、実測スコアとして固定しない。実際のスコアはコードが確認済み価格・構成・在庫・性能・データ品質から計算する。",
     "speaker_strategy": {

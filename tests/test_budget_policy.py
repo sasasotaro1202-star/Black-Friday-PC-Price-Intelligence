@@ -68,17 +68,17 @@ class BudgetPolicyTests(unittest.TestCase):
             [item],
             strategy,
             {
-                "total_budget_jpy": 380000,
+                "total_budget_jpy": 400000,
                 "peripheral_budget_jpy": 69800,
-                "pc_target_jpy": 310200,
-                "pc_budget_jpy": 310200,
+                "pc_target_jpy": 330200,
+                "pc_budget_jpy": 330200,
             },
             {"budget_data_ready": False, "pc_dynamic_cap_jpy": 0},
         )
         row = next(x for x in result["rows"] if x.get("candidate_id") == "desktop-gtune-dg-i7g70-5070")
         self.assertEqual(row["upgrade_headroom_basis_price_jpy"], 260000)
-        self.assertEqual(row["max_upgrade_cost_to_bf_target_jpy"], 50200)
-        self.assertEqual(row["max_upgrade_cost_to_bf_hard_cap_jpy"], 50200)
+        self.assertEqual(row["max_upgrade_cost_to_bf_target_jpy"], 70200)
+        self.assertEqual(row["max_upgrade_cost_to_bf_hard_cap_jpy"], 70200)
         self.assertFalse(row["configuration_ready"])
 
     def test_dg_a7g70_catalog_uses_exact_outlet_model_and_completed_specs(self):
@@ -148,10 +148,10 @@ class BudgetPolicyTests(unittest.TestCase):
         from datetime import datetime
         strategy = self.cfg["purchase_strategy"]
         policy = {
-            "total_budget_jpy": 380000,
+            "total_budget_jpy": 400000,
             "peripheral_budget_jpy": 69800,
-            "pc_target_jpy": 310200,
-            "pc_budget_jpy": 310200,
+            "pc_target_jpy": 330200,
+            "pc_budget_jpy": 330200,
         }
         with patch.object(report, "now_jst", return_value=datetime.fromisoformat("2026-10-10T10:00:00+09:00")):
             result = report.build_purchase_strategy_status(
@@ -161,7 +161,7 @@ class BudgetPolicyTests(unittest.TestCase):
                 {"budget_data_ready": False, "pc_dynamic_cap_jpy": 0},
             )
         row = next(x for x in result["rows"] if x.get("role") == "secondary_outlet_complete_configuration")
-        self.assertIn("BF目標を¥5,400下回っています", row["detail"])
+        self.assertIn("BF目標を¥25,400下回っています", row["detail"])
         self.assertNotIn("¥-", row["detail"])
 
     def test_cached_price_for_previous_speaker_model_is_not_reused(self):
