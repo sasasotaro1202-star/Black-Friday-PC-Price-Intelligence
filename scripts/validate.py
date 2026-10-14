@@ -287,8 +287,12 @@ def main():
         if rankings.get("purchase_method_policy", {}).get("assembly_time_penalty_points") != 0:
             errors.append("decision rankings must not penalize assembly time")
         ranking_gate = rankings.get("purchase_gate") or {}
-        if ranking_gate.get("allowed") is not False or ranking_gate.get("reason") != "self_build_primary_method_required":
-            errors.append("BTO reference ranking must not authorize primary purchase when self-build is required")
+        if (
+            ranking_gate.get("allowed") is not False
+            or ranking_gate.get("scope") != "completed_pc_candidates_only"
+            or ranking_gate.get("reason") != "completed_pc_candidates_reference_only"
+        ):
+            errors.append("completed-PC reference gate must stay closed and be clearly scoped when self-build is primary")
 
         buy_now = load_json(os.path.join(ROOT, "data", "buy_now_decision.json"), {})
         if not buy_now:
