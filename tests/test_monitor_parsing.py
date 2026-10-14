@@ -148,6 +148,49 @@ class MonitorParsingTests(unittest.TestCase):
         self.assertIsNone(parsed["price_jpy"])
         self.assertEqual(parsed["price_ambiguity"], "multiple_structured_prices")
 
+    def test_exact_jsonld_stock_overrides_unrelated_store_level_out_of_stock_text(self):
+        html = """
+        <script type="application/ld+json">
+        {"@type":"Product","name":"PNY GeForce RTX 5070 Ti 16GB ARGB Overclocked Triple Fan VCG5070T16TFXXPB1-O",
+         "sku":"VCG5070T16TFXXPB1-O",
+         "offers":{"price":"207700","priceCurrency":"JPY","availability":"https://schema.org/InStock"}}
+        </script>
+        <h1>PNY GeForce RTX 5070 Ti 16GB ARGB Overclocked Triple Fan VCG5070T16TFXXPB1-O</h1>
+        <div>オンライン在庫あり カートに入れる 207,700円</div>
+        <section>店舗在庫: 天神店 在庫なし / 博多店 在庫切れ</section>
+        """
+        expected = {
+            "name": "PNY GeForce RTX 5070 Ti 16GB ARGB",
+            "aliases": ["VCG5070T16TFXXPB1-O"],
+            "model_code": "VCG5070T16TFXXPB1-O",
+        }
+        parsed = monitor.parse_page("https://www.dospara.co.jp/SBR1892/IC634895.html", html, expected=expected)
+        self.assertEqual(parsed["price_jpy"], 207700)
+        self.assertEqual(parsed["structured_stock_status"], "in_stock")
+        self.assertEqual(parsed["text_stock_status"], "out_of_stock")
+        self.assertEqual(parsed["stock_status"], "in_stock")
+
+    def test_expected_model_does_not_borrow_jsonld_offer_from_related_product(self):
+        html = """
+        <script type="application/ld+json">
+        {"@type":"Product","name":"Requested product without offer"}
+        </script>
+        <script type="application/ld+json">
+        {"@type":"Product","name":"Other unrelated product",
+         "offers":{"price":"207700","priceCurrency":"JPY","availability":"https://schema.org/InStock"}}
+        </script>
+        <h1>Requested product without offer</h1>
+        """
+        parsed = monitor.parse_page(
+            "https://example.com/product",
+            html,
+            expected={"name":"Requested product without offer","aliases":[],"model_code":"requested-123"},
+        )
+        self.assertIsNone(parsed["price_jpy"])
+        self.assertEqual(parsed["price_source_mode"], "none")
+        self.assertEqual(parsed["structured_stock_status"], "unknown")
+        self.assertEqual(parsed["structured_identity_match"], True)
+
     def test_matching_jsonld_product_without_offer_fails_closed_without_exception(self):
         html = """
         <script type="application/ld+json">
