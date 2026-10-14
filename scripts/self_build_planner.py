@@ -346,11 +346,20 @@ def compatibility_checks(parts, profile, gpu_id):
     psu_w = psu.get("wattage_w")
     add("psu_wattage", "PASS" if isinstance(psu_w, int) and isinstance(gpu_psu, int) and psu_w >= gpu_psu else "FAIL",
         "PSU {}W / GPU recommendation {}W".format(psu_w or "unknown", gpu_psu or "unknown"))
-    if gpu.get("connector") == "model_specific":
+    connector = str(gpu.get("connector") or "model_specific")
+    if connector == "model_specific":
         add("gpu_power_connector", "REVIEW", "Confirm exact GPU auxiliary connector and included PSU cable against the exact model")
-    else:
-        add("gpu_power_connector", "PASS" if psu.get("connector_12v2x6") and gpu.get("connector") == "12V-2x6" else "FAIL",
+    elif connector == "12V-2x6":
+        connector_ok = psu.get("connector_12v2x6") is True
+        add("gpu_power_connector", "PASS" if connector_ok else "FAIL",
             "PSU ATX 3.1 native 12V-2x6 cable")
+    elif connector in ("8-pin PCIe", "PCIe 8-pin", "8-pin"):
+        connector_ok = psu.get("connector_pcie_8pin") is True
+        add("gpu_power_connector", "PASS" if connector_ok else "FAIL",
+            "PSU PCIe 8-pin (6+2) cable available")
+    else:
+        add("gpu_power_connector", "REVIEW",
+            "Unrecognized GPU connector type {}; verify exact cable and manufacturer requirement".format(connector))
     add("os_license", "PASS" if "os-windows11-home" in parts else "FAIL",
         "Windows 11 Home license budgeted unless an existing transferable license is confirmed")
 
