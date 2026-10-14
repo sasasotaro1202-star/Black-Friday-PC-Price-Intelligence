@@ -74,6 +74,17 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(main["compatibility_status"], "PASS")
         self.assertFalse(main["buy_now_authorized"])
 
+    def test_malformed_memory_choice_list_falls_back_to_valid_primary_not_missing_ram(self):
+        bad_config = json.loads(json.dumps(self.config))
+        bad_config["profile"]["memory_choice_ids"] = ["not-a-configured-memory-kit"]
+        plan = planner.build_plan(bad_config, {"products":[]}, now=NOW)
+        main = next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")
+        memory = [component for component in main["components"] if component["category"] == "memory"]
+        self.assertEqual(len(memory), 1)
+        self.assertEqual(memory[0]["id"], "memory-crucial-pro-ddr5-32gb-6000")
+        self.assertEqual(main["selected_memory_id"], "memory-crucial-pro-ddr5-32gb-6000")
+        self.assertEqual(main["target_pc_total_jpy"], 320600)
+
     def test_no_trusted_memory_reference_keeps_crucial_primary(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         main = next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")
