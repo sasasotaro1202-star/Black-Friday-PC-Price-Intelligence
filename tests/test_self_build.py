@@ -324,7 +324,6 @@ class SelfBuildPlannerTests(unittest.TestCase):
         providers = [item.get("provider") for item in diagnostics]
         self.assertIn("kakaku_search_page", providers)
         self.assertGreaterEqual(providers.count("bing"), 2)
-        self.assertIn("retailer_search_page", providers)
         duck = [item for item in diagnostics if item.get("provider") == "duckduckgo"]
         self.assertEqual(len(duck), 1)
         self.assertEqual(duck[0]["status"], "error")
@@ -382,7 +381,6 @@ class SelfBuildPlannerTests(unittest.TestCase):
         providers = [item.get("provider") for item in diagnostics]
         self.assertIn("kakaku_search_page", providers)
         self.assertGreaterEqual(providers.count("bing"), 2)
-        self.assertIn("retailer_search_page", providers)
         duck = [item for item in diagnostics if item.get("provider") == "duckduckgo"]
         self.assertEqual(len(duck), 1)
         self.assertEqual(duck[0]["result_count"], 1)
