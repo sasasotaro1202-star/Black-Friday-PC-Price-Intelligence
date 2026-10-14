@@ -793,6 +793,10 @@ def parse_page(url, html, expected=None):
             match_level = _jsonld_match_level(product_name)
             if match_level:
                 matched_structured = True
+            # With an expected SKU, a structured offer from a related product
+            # must never supply price or inventory for the requested item.
+            if expected is not None and match_level == 0:
+                continue
             offers = obj.get("offers")
             offers_list = offers if isinstance(offers, list) else [offers] if isinstance(offers, dict) else []
             for offer in offers_list:
@@ -858,7 +862,14 @@ def parse_page(url, html, expected=None):
             picked = {"price_jpy": raw["price_jpy"], "source": "direct_text", "context": raw["context"]}
 
     text_stock = stock_from_text(text_html)
-    if len(all_availability_states) > 1:
+    # When the exact requested Product node states availability, prefer that
+    # SKU-scoped evidence over page-wide text. Retailer pages often include
+    # unrelated store-by-store inventory lists that mention sold-out branches.
+    if matched_structured and selected_states and len(all_availability_states) > 1:
+        final_stock = "unknown"
+    elif matched_structured and selected_states and structured_stock != "unknown":
+        final_stock = structured_stock
+    elif len(all_availability_states) > 1:
         final_stock = "unknown"
     elif text_stock in ("out_of_stock", "low_stock", "preorder_or_backorder"):
         final_stock = text_stock
@@ -875,6 +886,10 @@ def parse_page(url, html, expected=None):
         "name": name or url,
         "price_jpy": picked["price_jpy"] if picked else None,
         "stock_status": final_stock,
+        "structured_stock_status": structured_stock,
+        "structured_availability_states": sorted(all_availability_states),
+        "structured_identity_match": matched_structured,
+        "text_stock_status": text_stock,
         "stock_ambiguity": "multiple_offer_availability" if len(all_availability_states) > 1 else None,
         "parsed_spec": specs,
         "page_text_excerpt": text_html[:12000],
