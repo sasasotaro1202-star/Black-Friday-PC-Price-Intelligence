@@ -14,7 +14,7 @@ if SCRIPTS not in sys.path:
     sys.path.insert(0, SCRIPTS)
 
 from intelligence import load_json, save_json, now_jst, iso, parse_dt
-from monitor import fetch, parse_page
+from monitor import fetch, parse_page, ddg_search, bing_search, search_identity_anchor, pick_price
 
 JST = timezone(timedelta(hours=9))
 CONFIG_PATH = os.path.join(ROOT, "config", "build_components.json")
@@ -82,6 +82,51 @@ def last_by_id(rows):
     return out
 
 
+def parse_search_snippet_reference(part, results, domains=DEFAULT_DOMAINS):
+    """Use a search snippet only as display-only context, never as a direct/live price."""
+    expected_path = urlparse(str(part.get("monitor_url") or "")).path.rstrip("/").lower()
+    minimum = int(part.get("min_price_jpy") or 1)
+    maximum = int(part.get("max_price_jpy") or 10**9)
+    for result in results or []:
+        url = str(result.get("url") or "")
+        if not allowed_url(url, domains):
+            continue
+        path = urlparse(url).path.rstrip("/").lower()
+        if not expected_path or path != expected_path:
+            continue
+        anchor = search_identity_anchor(result, part)
+        if not anchor:
+            continue
+        blob = str(result.get("title") or "") + " " + str(result.get("snippet") or "")
+        candidate = pick_price(blob)
+        price = candidate.get("price_jpy") if isinstance(candidate, dict) else None
+        if isinstance(price, bool) or not isinstance(price, int) or not minimum <= price <= maximum:
+            continue
+        return {
+            "url": url, "title": result.get("title") or "",
+            "snippet": result.get("snippet") or "", "price_jpy": price,
+            "identity_anchor": anchor,
+            "source_role": "comparison_site_search_snippet_reference",
+            "bf_actual_authorized": False
+        }
+    return None
+
+
+def search_comparison_snippet(part, domains):
+    query = "{} {} 価格.com 最安価格".format(part.get("name") or "", part.get("model_code") or "")
+    for provider, search_fn in (("duckduckgo", ddg_search), ("bing", bing_search)):
+        try:
+            results = search_fn(query, timeout=9)
+        except Exception:
+            continue
+        found = parse_search_snippet_reference(part, results, domains)
+        if found:
+            found["search_provider"] = provider
+            found["query"] = query
+            return found
+    return None
+
+
 def fetch_part(part, domains):
     result = {
         "id": part["id"], "category": part["category"], "name": part["name"],
@@ -90,7 +135,9 @@ def fetch_part(part, domains):
         "role": part.get("role"), "target_price_jpy": part.get("target_price_jpy"),
         "source_role": "comparison_site_reference", "bf_actual_authorized": False,
         "price_source_mode": "none", "price_validation_status": "missing",
-        "market_reference_price_jpy": None, "comparison_stock_signal": "unknown",
+        "market_reference_price_jpy": None, "search_snippet_reference_price_jpy": None,
+        "search_snippet_reference_url": None, "search_snippet_reference_title": None,
+        "search_snippet_identity_anchor": None, "comparison_stock_signal": "unknown",
         "retrieval_time": None, "available_at": None, "pit_valid": False,
         "fetch_status": "error", "last_fetch_error": None, "identity_match": False,
         "identity_matches": []
@@ -139,6 +186,24 @@ def fetch_part(part, domains):
             result["data_confidence"] = raw.get("data_confidence") or "medium"
             result["page_name"] = raw.get("name")
             result["price_context"] = raw.get("price_context")
+
+        # Some comparison pages render their price table client-side. When the
+        # exact page/model was found but the parser could not read a price, use
+        # a model-anchored search snippet for display only, never as a total.
+        if identity_ok and price is None:
+            snippet = search_comparison_snippet(part, domains)
+            if snippet:
+                result["search_snippet_reference_price_jpy"] = int(snippet["price_jpy"])
+                result["search_snippet_reference_url"] = snippet["url"]
+                result["search_snippet_reference_title"] = snippet["title"]
+                result["search_snippet_identity_anchor"] = snippet["identity_anchor"]
+                result["search_provider"] = snippet.get("search_provider")
+                result["search_query"] = snippet.get("query")
+                result["available_at"] = retrieval
+                result["pit_valid"] = True
+                result["price_source_mode"] = "search_snippet"
+                result["price_validation_status"] = "search_snippet_reference"
+                result["last_fetch_error"] = "direct price unavailable; snippet reference is display-only and excluded from estimates"
     except Exception as exc:
         result["fetch_status"] = "error"
         result["last_fetch_error"] = type(exc).__name__ + ":" + str(exc)[:180]
@@ -167,13 +232,15 @@ def collect_component_prices(config=None):
                     "purchase_url": part.get("purchase_url"), "target_price_jpy": part.get("target_price_jpy"),
                     "source_role": "comparison_site_reference", "bf_actual_authorized": False,
                     "price_source_mode": "none", "price_validation_status": "missing",
-                    "market_reference_price_jpy": None, "comparison_stock_signal": "unknown",
+                    "market_reference_price_jpy": None, "search_snippet_reference_price_jpy": None,
+                    "search_snippet_reference_url": None, "search_snippet_reference_title": None,
+                    "search_snippet_identity_anchor": None, "comparison_stock_signal": "unknown",
                     "retrieval_time": None, "available_at": None, "pit_valid": False,
                     "fetch_status": "error", "last_fetch_error": type(exc).__name__ + ":" + str(exc)[:180],
                     "identity_match": False, "identity_matches": []
                 }
     output_rows, observations, events = [], [], []
-    counts = {"verified_market_reference": 0, "identity_unverified": 0, "fetch_error": 0, "unverified_or_missing": 0}
+    counts = {"verified_market_reference": 0, "search_snippet_reference": 0, "identity_unverified": 0, "fetch_error": 0, "unverified_or_missing": 0}
     for part in parts:
         row = results[part["id"]]
         previous = prior_by_id.get(part["id"]) or {}
@@ -202,6 +269,19 @@ def collect_component_prices(config=None):
                     "source_role": "comparison_site_reference", "bf_actual_authorized": False,
                     "source_url": row.get("final_url") or row.get("monitor_url")
                 })
+        elif row.get("price_validation_status") == "search_snippet_reference" and isinstance(row.get("search_snippet_reference_price_jpy"), int):
+            counts["search_snippet_reference"] += 1
+            observations.append({
+                "id": row["id"], "category": row["category"], "model_code": row.get("model_code"),
+                "search_snippet_reference_price_jpy": row["search_snippet_reference_price_jpy"],
+                "source_role": "comparison_site_search_snippet_reference",
+                "source_url": row.get("search_snippet_reference_url"),
+                "retrieval_time": row.get("retrieval_time"), "available_at": row.get("available_at"),
+                "observed_at": row.get("retrieval_time"), "pit_valid": row.get("pit_valid") is True,
+                "identity_match": row.get("identity_match") is True,
+                "search_snippet_identity_anchor": row.get("search_snippet_identity_anchor"),
+                "bf_actual_authorized": False
+            })
         elif row.get("price_validation_status") == "identity_unverified":
             counts["identity_unverified"] += 1
         else:

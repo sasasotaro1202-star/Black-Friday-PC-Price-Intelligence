@@ -7,6 +7,7 @@ from datetime import datetime, timezone, timedelta
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import self_build_planner as planner
+import build_component_monitor as component_monitor
 
 JST = timezone(timedelta(hours=9))
 NOW = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
@@ -85,6 +86,26 @@ class SelfBuildPlannerTests(unittest.TestCase):
         by_id["psu-corsair-rm850e-2025"]["specs"]["wattage_w"] = 500
         plan = planner.build_plan(bad, {"products":[]}, now=NOW)
         self.assertEqual(next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")["compatibility_status"], "FAIL")
+
+    def test_search_snippet_requires_exact_model_and_exact_product_url(self):
+        part = self.parts["cpu-ryzen7-9700x"]
+        wrong_page = {"url":"https://kakaku.com/item/K0009999999/","title":"AMD Ryzen 7 9700X BOX","snippet":"最安価格 ¥39,980"}
+        wrong_identity = {"url":part["monitor_url"],"title":"Generic CPU component","snippet":"最安価格 ¥39,980"}
+        retailer_url = {"url":"https://example.com/item/K0001630332/","title":"AMD Ryzen 7 9700X BOX","snippet":"最安価格 ¥39,980"}
+        self.assertIsNone(component_monitor.parse_search_snippet_reference(part,[wrong_page]))
+        self.assertIsNone(component_monitor.parse_search_snippet_reference(part,[wrong_identity]))
+        self.assertIsNone(component_monitor.parse_search_snippet_reference(part,[retailer_url]))
+        valid = {"url":part["monitor_url"],"title":"AMD Ryzen 7 9700X BOX 価格比較","snippet":"型番 100-100001404WOF 最安価格 ¥39,980"}
+        parsed = component_monitor.parse_search_snippet_reference(part,[valid])
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["price_jpy"],39980)
+        self.assertFalse(parsed["bf_actual_authorized"])
+        self.assertEqual(parsed["source_role"],"comparison_site_search_snippet_reference")
+
+    def test_search_snippet_price_outside_part_range_is_rejected(self):
+        part = self.parts["cpu-ryzen7-9700x"]
+        bad = {"url":part["monitor_url"],"title":"AMD Ryzen 7 9700X BOX 100-100001404WOF","snippet":"最安価格 ¥1,000"}
+        self.assertIsNone(component_monitor.parse_search_snippet_reference(part,[bad]))
 
     def test_reference_prices_never_claim_to_be_bf_actual_or_buy_now(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)

@@ -62,17 +62,30 @@ def component_price(part, by_id, now, max_age):
         }
     row = by_id.get(str(part.get("id") or "")) or {}
     trusted = trusted_market_reference(row, now, max_age)
+    age = age_minutes(row.get("retrieval_time"), now)
+    snippet_price = row.get("search_snippet_reference_price_jpy")
+    snippet_only = bool(
+        not trusted and row.get("price_validation_status") == "search_snippet_reference"
+        and row.get("identity_match") is True and row.get("search_snippet_identity_anchor")
+        and isinstance(snippet_price, int) and not isinstance(snippet_price, bool) and snippet_price > 0
+        and age is not None and age <= max_age
+        and row.get("source_role") == "comparison_site_reference"
+        and row.get("bf_actual_authorized") is False
+    )
+    display = row.get("market_reference_price_jpy") if trusted else snippet_price if snippet_only else None
+    status = row.get("price_validation_status") if trusted else (
+        "search_snippet_reference_only" if snippet_only else
+        "stale_market_reference" if row.get("market_reference_price_jpy") is not None or isinstance(snippet_price, int)
+        else row.get("price_validation_status") or "not_observed"
+    )
     return {
         "market_reference_price_jpy": row.get("market_reference_price_jpy") if trusted else None,
-        "display_reference_price_jpy": row.get("market_reference_price_jpy") if trusted else None,
-        "price_status": row.get("price_validation_status") if trusted else (
-            "stale_market_reference" if row.get("market_reference_price_jpy") is not None
-            else row.get("price_validation_status") or "not_observed"
-        ),
+        "display_reference_price_jpy": display,
+        "price_status": status,
         "trusted_for_market_estimate": trusted,
-        "source_role": row.get("source_role") or "comparison_site_reference",
+        "source_role": "comparison_site_reference",
         "retrieval_time": row.get("retrieval_time"),
-        "reference_age_minutes": age_minutes(row.get("retrieval_time"), now),
+        "reference_age_minutes": age,
         "purchase_url": part.get("purchase_url") or part.get("monitor_url")
     }
 
@@ -310,8 +323,10 @@ def render_plan_markdown(plan):
           "|---|---|---:|---:|---|---|"])
         for part in build.get("components") or []:
             p = part.get("display_reference_price_jpy")
-            if part.get("track_price") and part.get("market_reference_price_jpy") is None:
+            if part.get("track_price") and part.get("market_reference_price_jpy") is None and p is None:
                 price_text = "未取得"
+            elif part.get("price_status") == "search_snippet_reference_only":
+                price_text = money(p) + "（検索スニペット参考のみ）"
             else:
                 price_text = money(p)
             url = part.get("purchase_url")
