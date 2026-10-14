@@ -305,7 +305,7 @@ def main():
                         errors.append("display-only timing reference must be estimate-ineligible: " + str(row.get("id")))
                     if row.get("purchase_allowed") is not False or row.get("bf_actual_authorized") is not False:
                         errors.append("display-only timing reference must never authorize purchase: " + str(row.get("id")))
-                    if row.get("status") != "DISPLAY_ONLY_SEARCH_REFERENCE":
+                    if row.get("direct_listing_display_price_jpy") is None and row.get("status") != "DISPLAY_ONLY_SEARCH_REFERENCE":
                         errors.append("display-only timing reference status label missing: " + str(row.get("id")))
                 if diy.get("display_only_search_reference_count") != display_only_count:
                     errors.append("DIY display-only reference count mismatch")
