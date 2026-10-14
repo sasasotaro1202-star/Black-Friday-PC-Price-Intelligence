@@ -98,6 +98,9 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(vram["specs"]["connector"], "8-pin PCIe")
         self.assertEqual(vram["specs"]["minimum_psu_w"], 600)
         self.assertIn("ask-corp.jp", vram["spec_source_url"])
+        self.assertTrue(vram.get("direct_retailer_urls"))
+        self.assertIn("dospara.co.jp", vram["direct_retailer_urls"][0])
+        self.assertIn("dospara.co.jp", self.profile["allowed_search_reference_domains"])
 
         dark = parts_by_id["gpu-rtx5070ti-16gb"]
         self.assertEqual(dark["model_code"], "VCG5070T16TFXXPB1-O")
