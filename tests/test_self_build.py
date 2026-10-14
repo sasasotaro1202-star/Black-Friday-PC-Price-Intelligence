@@ -25,10 +25,10 @@ class SelfBuildPlannerTests(unittest.TestCase):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         builds = {x["gpu_choice_id"]:x for x in plan["builds"]}
         self.assertEqual(builds["gpu-rtx5070-12gb"]["target_pc_total_jpy"], 300600)
-        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_pc_total_jpy"], 300600)
+        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_pc_total_jpy"], 280600)
         self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_pc_total_jpy"], 324800)
         self.assertEqual(builds["gpu-rtx5070-12gb"]["target_all_in_jpy"], 370400)
-        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_all_in_jpy"], 370400)
+        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_all_in_jpy"], 350400)
         self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_all_in_jpy"], 394600)
         self.assertFalse(builds["gpu-rtx5070ti-16gb"]["target_within_pc_budget"])
         self.assertFalse(builds["gpu-rtx5070ti-16gb"]["target_within_total_budget"])
