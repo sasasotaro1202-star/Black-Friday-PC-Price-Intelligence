@@ -1,6 +1,6 @@
 # 今この瞬間の買い時判定
 
-- 更新時刻（JST）: 2026-10-14T21:39:05+09:00
+- 更新時刻（JST）: 2026-10-14T21:44:18+09:00
 - 判定: **事前監視継続・公式日程未確認** (PRE_BF_MONITORING)
 - 暫定の広域監視窓（公式セール日程ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 - 公式日程確認: 0/16 店舗（公式期間が確認できない店舗: 10、取得エラー: 6）
@@ -42,14 +42,14 @@
 |部品|BF購入目標|検証済み比較参考値|直接掲載価格（在庫条件未達・推定不採用）|検索ページ表示専用値（不採用）|目標までの差|履歴内参考最安|監視窓内参考最安|履歴件数 / 監視窓件数|判定|価格確認ページ|
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
 |AMD Ryzen 7 9700X BOX|¥38,000|未確認|—|¥67,890 ([検索結果](https://search.kakaku.com/AMD%20Ryzen%207%209700X%20BOX/))|—|未観測|未観測|0 / 0|検索ページ表示値のみ（検証価格なし）|[比較・仕様ページ](https://kakaku.com/item/K0001630332/)|
-|ASRock B850M Pro RS WiFi|¥20,000|未確認|¥26,990（在庫未確認） ([直接掲載](https://www.yodobashi.com/product/100000001008871801/))|¥23,780 ([検索結果](https://search.kakaku.com/ASRock%20B850M%20Pro%20RS%20WiFi/))|—|未観測|未観測|0 / 0|直接掲載価格あり（在庫未確認・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001669878/)|
+|ASRock B850M Pro RS WiFi|¥20,000|未確認|—|¥23,780 ([検索結果](https://search.kakaku.com/ASRock%20B850M%20Pro%20RS%20WiFi/))|—|未観測|未観測|0 / 0|検索ページ表示値のみ（検証価格なし）|[比較・仕様ページ](https://kakaku.com/item/K0001669878/)|
 |TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)|¥40,000|未確認|—|—|—|未観測|未観測|0 / 0|参考価格未確認|[比較・仕様ページ](https://kakaku.com/item/K0001610896/)|
 |Crucial P3 Plus CT1000P3PSSD8JP 1TB|¥18,000|未確認|—|¥33,600 ([検索結果](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/))|—|未観測|未観測|0 / 0|検索ページ表示値のみ（検証価格なし）|[比較・仕様ページ](https://kakaku.com/item/K0001466997/)|
 |Corsair RM850e 2025 850W ATX 3.1 Gold|¥14,000|未確認|—|¥17,580 ([検索結果](https://search.kakaku.com/Corsair%20RM850e%202025%20850W%20ATX%203.1%20Gold/))|—|未観測|未観測|0 / 0|検索ページ表示値のみ（検証価格なし）|[比較・仕様ページ](https://kakaku.com/item/K0001671441/)|
 |Fractal Design Pop Air TG|¥12,000|未確認|—|¥13,311 ([検索結果](https://search.kakaku.com/Fractal%20Design%20Pop%20Air%20TG/))|—|未観測|未観測|0 / 0|検索ページ表示値のみ（検証価格なし）|[比較・仕様ページ](https://kakaku.com/item/J0000039064/)|
 |Thermalright Peerless Assassin 120 SE V3|¥5,000|未確認|—|¥4,980 ([検索結果](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/))|—|未観測|未観測|0 / 0|検索ページ表示値のみ（検証価格なし）|[比較・仕様ページ](https://kakaku.com/item/K0001789043/)|
 |Windows 11 Home official retail license reference|¥19,360|未確認|—|—|—|未観測|未観測|0 / 0|手動参考値・未追跡|[比較・仕様ページ](https://www.microsoft.com/ja-jp/d/windows-11-home/dg7gmgf0krt0)|
-|PNY GeForce RTX 5070 12GB OC SLIM|¥129,800|未確認|—|¥190,800 ([検索結果](https://search.kakaku.com/PNY%20GeForce%20RTX%205070%2012GB%20OC%20SLIM/))|—|未観測|未観測|0 / 0|検索ページ表示値のみ（検証価格なし）|[比較・仕様ページ](https://kakaku.com/item/K0001798041/)|
+|PNY GeForce RTX 5070 12GB OC SLIM|¥129,800|未確認|¥190,800（在庫切れ） ([直接掲載](https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845))|¥190,800 ([検索結果](https://search.kakaku.com/PNY%20GeForce%20RTX%205070%2012GB%20OC%20SLIM/))|—|未観測|未観測|0 / 0|直接掲載価格あり（在庫切れ・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001798041/)|
 
 ## 判定根拠
 
