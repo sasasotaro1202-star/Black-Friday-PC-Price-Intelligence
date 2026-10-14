@@ -1,12 +1,13 @@
 """Collect component comparison prices as non-actionable market references."""
 import hashlib
+import html as html_lib
 import json
 import os
 import re
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import timezone, timedelta
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCRIPTS = os.path.join(ROOT, "scripts")
@@ -111,6 +112,104 @@ def parse_snippet_price(text, minimum, maximum):
     _, _, _, price, context = candidates[0]
     return {"price_jpy": price, "context": context}
 
+
+
+def parse_kakaku_search_page_reference(part, html_body, source_url):
+    """Extract a nearby product-price pair from Kakaku search results as display-only data.
+
+    This path never becomes a verified market/retailer price. It requires the
+    search.kakaku.com host, an allowlisted product identity phrase, and a yen
+    amount within the part-specific range near that identity.
+    """
+    try:
+        parsed = urlparse(str(source_url or ""))
+        if parsed.scheme != "https" or (parsed.hostname or "").lower() != "search.kakaku.com":
+            return None
+    except Exception:
+        return None
+
+    page = re.sub(r"<script[^>]*>.*?</script>", " ", str(html_body or ""), flags=re.I | re.S)
+    page = re.sub(r"<style[^>]*>.*?</style>", " ", page, flags=re.I | re.S)
+    page = re.sub(r"</(?:li|article)>", " ", page, flags=re.I)
+    text = html_lib.unescape(re.sub(r"<[^>]+>", " ", page))
+    text = re.sub(r"\s+", " ", text).strip()
+    if not text:
+        return None
+
+    minimum = int(part.get("min_price_jpy") or 1)
+    maximum = int(part.get("max_price_jpy") or 10**9)
+    generic = {
+        "rtx507012gb", "rtx5060ti16gb", "rtx5070ti16gb",
+        "ddr5600032gb", "windows11home", "ryzen79700x",
+    }
+    anchor_candidates = []
+    model_code = str(part.get("model_code") or "").strip()
+    name = str(part.get("name") or "").strip()
+    if model_code:
+        anchor_candidates.append((1000, model_code))
+    if name:
+        anchor_candidates.append((850, name))
+    for term in list(part.get("aliases") or []) + list(part.get("identity_terms") or []):
+        term = str(term or "").strip()
+        term_norm = normalized(term)
+        if len(term_norm) >= 9 and term_norm not in generic:
+            anchor_candidates.append((700 + min(len(term_norm), 80), term))
+
+    unique = {}
+    for priority, term in anchor_candidates:
+        key = normalized(term)
+        if key and key not in unique:
+            unique[key] = (priority, term)
+    yen_pattern = re.compile(
+        r"(?:[¥￥]\s*([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})(?:\s*円)?|"
+        r"(?<![0-9])([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\s*円)"
+    )
+    excluded_prefix = re.compile(r"割引|値引|クーポン|ポイント|還元|月額|毎月|分割|off", re.I)
+    candidates = []
+    for priority, term in unique.values():
+        pieces = [re.escape(piece) for piece in re.split(r"\s+", term) if piece]
+        if not pieces:
+            continue
+        pattern = re.compile(r"\s+".join(pieces), re.I)
+        for anchor in pattern.finditer(text):
+            left = max(0, anchor.start() - 180)
+            right = min(len(text), anchor.end() + 500)
+            for price_match in yen_pattern.finditer(text, left, right):
+                raw_price = price_match.group(1) or price_match.group(2)
+                try:
+                    price = int(raw_price.replace(",", ""))
+                except (TypeError, ValueError):
+                    continue
+                if not minimum <= price <= maximum:
+                    continue
+                prefix = text[max(0, price_match.start() - 32):price_match.start()]
+                if excluded_prefix.search(prefix[-24:]):
+                    continue
+                # Prices far from the identity are likely from an adjacent item.
+                distance = min(
+                    abs(price_match.start() - anchor.end()),
+                    abs(anchor.start() - price_match.end()),
+                )
+                if distance > 380:
+                    continue
+                context = text[max(0, price_match.start() - 70):min(len(text), price_match.end() + 45)]
+                candidates.append((priority, -distance, {
+                    "url": str(source_url),
+                    "title": term,
+                    "snippet": context,
+                    "price_jpy": price,
+                    "price_context": context,
+                    "identity_anchor": term,
+                    "source_role": "comparison_site_search_snippet_reference",
+                    "bf_actual_authorized": False,
+                    "search_provider": "kakaku_search_page",
+                    "query": term,
+                    "same_comparison_item_path": False,
+                }))
+    if not candidates:
+        return None
+    candidates.sort(key=lambda row: (-row[0], -row[1], row[2]["price_jpy"]))
+    return candidates[0][2]
 
 def parse_search_snippet_reference(part, results, domains=DEFAULT_DOMAINS):
     """Use a search snippet only as display-only context, never as a direct/live price."""
@@ -315,6 +414,56 @@ def search_comparison_snippet(part, domains):
     all_snippet_candidates = []
     verified_offers = []
     direct_fetch_attempts = 0
+
+    # Kakaku's product page often loads its price table client-side. Try its own
+    # search-results page as a weaker display-only source before external search.
+    # It does not count as direct retailer evidence and never authorizes buying.
+    monitor = urlparse(str(part.get("monitor_url") or ""))
+    if (monitor.hostname or "").lower().removeprefix("www.") == "kakaku.com":
+        search_term = str(part.get("name") or part.get("model_code") or "").strip()
+        kakaku_url = "https://search.kakaku.com/{}/".format(quote(search_term, safe="")) if search_term else ""
+        if kakaku_url and allowed_url(kakaku_url, domains):
+            try:
+                body, final_url, _headers = fetch(kakaku_url, timeout=8)
+                reference = parse_kakaku_search_page_reference(part, body, final_url)
+                diagnostics.append({
+                    "provider": "kakaku_search_page",
+                    "query_index": 0,
+                    "query": search_term,
+                    "status": "ok",
+                    "error": None,
+                    "result_count": 1,
+                    "allowed_reference_host_count": 1,
+                    "rejected_host_samples": [],
+                    "rejected_url_samples": [],
+                    "same_comparison_item_path_count": 0,
+                    "identity_anchor_count": 1 if reference else 0,
+                    "in_range_price_count": 1 if reference else 0,
+                    "direct_retailer_fetch_attempt_count": 0,
+                    "verified_retailer_listing_count": 0,
+                    "source_role": "comparison_site_search_snippet_reference",
+                })
+                if reference:
+                    all_snippet_candidates.append(reference)
+            except Exception as exc:
+                diagnostics.append({
+                    "provider": "kakaku_search_page",
+                    "query_index": 0,
+                    "query": search_term,
+                    "status": "error",
+                    "error": type(exc).__name__ + ":" + str(exc)[:140],
+                    "result_count": 0,
+                    "allowed_reference_host_count": 0,
+                    "rejected_host_samples": [],
+                    "rejected_url_samples": [],
+                    "same_comparison_item_path_count": 0,
+                    "identity_anchor_count": 0,
+                    "in_range_price_count": 0,
+                    "direct_retailer_fetch_attempt_count": 0,
+                    "verified_retailer_listing_count": 0,
+                    "source_role": "comparison_site_search_snippet_reference",
+                })
+
     for provider, search_fn in (("duckduckgo", ddg_search), ("bing", bing_search)):
         for query_index, query in enumerate(queries, 1):
             try:
