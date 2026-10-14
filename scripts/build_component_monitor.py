@@ -205,11 +205,20 @@ def search_comparison_snippet(part, domains):
             same_item_count = 0
             identity_count = 0
             price_count = 0
+            rejected_host_samples = []
+            rejected_url_samples = []
             chosen = None
             candidates = []
             for result in results:
                 url = str(result.get("url") or "")
                 if not allowed_url(url, domains):
+                    parsed_rejected = urlparse(url)
+                    rejected_host = (parsed_rejected.hostname or "").lower()
+                    if rejected_host and rejected_host not in rejected_host_samples and len(rejected_host_samples) < 5:
+                        rejected_host_samples.append(rejected_host)
+                    if url and len(rejected_url_samples) < 3:
+                        # Diagnostic URLs are truncated and are not treated as evidence.
+                        rejected_url_samples.append(url[:180])
                     continue
                 domain_count += 1
                 parsed_url = urlparse(url)
@@ -246,6 +255,8 @@ def search_comparison_snippet(part, domains):
                 "error": error,
                 "result_count": len(results),
                 "allowed_reference_host_count": domain_count,
+                "rejected_host_samples": rejected_host_samples,
+                "rejected_url_samples": rejected_url_samples,
                 "same_comparison_item_path_count": same_item_count,
                 "identity_anchor_count": identity_count,
                 "in_range_price_count": price_count,
