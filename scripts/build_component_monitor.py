@@ -424,7 +424,7 @@ def search_comparison_snippet(part, domains):
         kakaku_url = "https://search.kakaku.com/{}/".format(quote(search_term, safe="")) if search_term else ""
         if kakaku_url and allowed_url(kakaku_url, domains):
             try:
-                body, final_url, _headers = fetch(kakaku_url, timeout=8)
+                body, final_url, _headers = fetch(kakaku_url, timeout=6)
                 reference = parse_kakaku_search_page_reference(part, body, final_url)
                 diagnostics.append({
                     "provider": "kakaku_search_page",
@@ -464,10 +464,16 @@ def search_comparison_snippet(part, domains):
                     "source_role": "comparison_site_search_snippet_reference",
                 })
 
-    for provider, search_fn in (("duckduckgo", ddg_search), ("bing", bing_search)):
-        for query_index, query in enumerate(queries, 1):
+    # Bing is the primary free search path. DuckDuckGo's HTML endpoint has
+    # frequently returned an empty/blocked document in runners, so only repeat
+    # the broad unscoped discovery query there instead of doubling every request.
+    search_jobs = [("bing", bing_search, query, index) for index, query in enumerate(queries, 1)]
+    if queries:
+        search_jobs.append(("duckduckgo", ddg_search, queries[-1], len(queries)))
+
+    for provider, search_fn, query, query_index in search_jobs:
             try:
-                results = search_fn(query, timeout=9) or []
+                results = search_fn(query, timeout=7) or []
                 error = None
             except Exception as exc:
                 results = []
@@ -504,8 +510,8 @@ def search_comparison_snippet(part, domains):
                 host = (parsed_url.hostname or "").lower()
                 is_comparison_site = host == "kakaku.com" or host.endswith(".kakaku.com")
                 # Bound direct seller-page fetches so each scheduled run remains
-                # lightweight while checking more than one imperfect search result.
-                if not is_comparison_site and direct_fetch_attempts < 3:
+                # lightweight while checking a bounded number of imperfect search results.
+                if not is_comparison_site and direct_fetch_attempts < 2:
                     direct_fetch_attempts += 1
                     offer = verify_retailer_listing(part, url, domains)
                     if offer and offer.get("url") not in {x.get("url") for x in verified_offers}:
