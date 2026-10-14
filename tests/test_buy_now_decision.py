@@ -259,6 +259,26 @@ class BuyNowDecisionTests(unittest.TestCase):
         self.assertEqual(result["purchase_method_policy"]["primary_method"], "SELF_BUILD")
         self.assertFalse(result["purchase_method_policy"]["completed_pc_purchase_actionable"])
 
+    def test_self_build_purchase_gate_reason_reflects_current_blocker(self):
+        cases = [
+            ("WAIT_FOR_COMPONENT_REFERENCES", "self_build_wait_for_component_references"),
+            ("WAIT_FOR_COMPATIBILITY_REVIEW", "self_build_wait_for_compatibility_review"),
+            ("OVER_BUDGET_TARGET", "self_build_target_over_budget"),
+            ("WAIT_FOR_OFFICIAL_COMPONENT_OFFERS", "self_build_wait_for_official_component_offers"),
+            ("WAIT_FOR_FINAL_COMPATIBILITY_AND_BUDGET_GATE", "self_build_wait_for_final_checkout_gate"),
+            ("BLOCKED_COMPATIBILITY", "self_build_compatibility_failed"),
+        ]
+        for status, expected in cases:
+            with self.subTest(status=status):
+                self.assertEqual(
+                    timing.self_build_purchase_gate_reason({"status": status}),
+                    expected,
+                )
+        self.assertEqual(
+            timing.self_build_purchase_gate_reason({"status": "unexpected"}),
+            "self_build_purchase_authorization_not_ready",
+        )
+
     def test_self_build_timing_does_not_authorize_from_targets_or_reference_prices(self):
         plan = {
             "total_budget_jpy": 400000, "pc_budget_jpy": 330200,

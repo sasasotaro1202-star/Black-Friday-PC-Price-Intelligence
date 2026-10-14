@@ -126,7 +126,10 @@
         "package_power_w": 65,
         "cooler_included": false
       },
-      "notes": "BOXモデル。AM5。CPUクーラーは別途必要。比較サイト掲載額は決済価格ではない。"
+      "notes": "BOXモデル。AM5。CPUクーラーは別途必要。比較サイト掲載額は決済価格ではない。 ヨドバシの型番一致商品ページも直接監視。",
+      "direct_retailer_urls": [
+        "https://www.yodobashi.com/product/100000001008661707/"
+      ]
     },
     {
       "id": "gpu-rtx5070-12gb",
@@ -160,12 +163,13 @@
         "connector": "12V-2x6",
         "card_thickness_slots": 2
       },
-      "notes": "正確な型番VCG507012DFSXPB1-OをPNY公式仕様と照合済み。寸法290×128×40mm、250W、16ピン入力、推奨PSU650W。BF目標129,800円は値下げ希望額であり、予測・確定価格ではない。Joshinの正確な型番ページを直接再取得して価格・在庫を検証する。",
+      "notes": "正確な型番VCG507012DFSXPB1-OをPNY公式仕様と照合済み。寸法290×128×40mm、250W、16ピン入力、推奨PSU650W。BF目標129,800円は値下げ希望額であり、予測・確定価格ではない。Joshinの正確な型番ページを直接再取得して価格・在庫を検証する。 追加監視: TSUKUMOのJAN一致商品ページ。販売ページ価格と在庫は実行時に直接再取得して検証し、検索掲載だけでは購入可能と扱わない。",
       "spec_source_url": "https://www.pny.com/en-eu/geforce-rtx-5070-slim-models?sku=VCG507012DFSXPB1-O",
       "spec_source_verified_at": "2026-10-14",
       "direct_retailer_urls": [
         "https://joshinweb.jp/kaden/73259/0751492812151.html",
-        "https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845"
+        "https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845",
+        "https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom"
       ]
     },
     {
@@ -274,7 +278,10 @@
         "m2_nvme_slots": 3,
         "wifi": true
       },
-      "notes": "AM5・DDR5・MicroATX。CPU対応BIOS、QVL、M.2レーン共有は購入前に再確認。"
+      "notes": "AM5・DDR5・MicroATX。CPU対応BIOS、QVL、M.2レーン共有は購入前に再確認。 ヨドバシの型番一致商品ページも直接監視。",
+      "direct_retailer_urls": [
+        "https://www.yodobashi.com/product/100000001008871801/"
+      ]
     },
     {
       "id": "memory-teamgroup-ddr5-32gb-6000",
@@ -363,9 +370,13 @@
         "connector_12v2x6": true,
         "connector_pcie_8pin": true
       },
-      "notes": "ネイティブ12V-2x6ケーブルが付属する型番を確認。実際のリビジョン・付属品も再確認。",
+      "notes": "ネイティブ12V-2x6ケーブルが付属する型番を確認。実際のリビジョン・付属品も再確認。 ドスパラとパソコン工房の型番一致商品ページを直接監視。",
       "spec_source_url": "https://www.corsair.com/jp/ja/p/psu/cp-9020296-jp/rme-series-rm850e-fully-modular-low-noise-atx-power-supply-jp-cp-9020296-jp",
-      "spec_source_verified_at": "2026-10-14"
+      "spec_source_verified_at": "2026-10-14",
+      "direct_retailer_urls": [
+        "https://www.dospara.co.jp/SBR83/IC519918.html",
+        "https://www.pc-koubou.jp/products/detail.php?product_id=1128703"
+      ]
     },
     {
       "id": "case-fractal-pop-air-tg",
@@ -396,7 +407,10 @@
         "gpu_clearance_mm": 405,
         "cooler_clearance_mm": 170
       },
-      "notes": "エアフロー優先。ケース正確な型番、付属ファンとクリアランスを購入直前に再確認。"
+      "notes": "エアフロー優先。ケース正確な型番、付属ファンとクリアランスを購入直前に再確認。 ヨドバシの型番一致商品ページも直接監視。取寄せ表示は購入可能在庫として扱わない。",
+      "direct_retailer_urls": [
+        "https://www.yodobashi.com/product/100000001007195271/"
+      ]
     },
     {
       "id": "cooler-thermalright-pa120-se-v3",
@@ -424,7 +438,10 @@
         "cooler_height_mm": 157,
         "included_thermal_paste": true
       },
-      "notes": "AM5取付金具とケース高、RAM干渉を確認。"
+      "notes": "AM5取付金具とケース高、RAM干渉を確認。 ドスパラの型番一致商品ページも直接監視。",
+      "direct_retailer_urls": [
+        "https://www.dospara.co.jp/SBR1968/IC645423.html"
+      ]
     },
     {
       "id": "os-windows11-home",

@@ -88,10 +88,22 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(main["model_code"], "VCG507012DFSXPB1-O")
         self.assertEqual(main["specs"]["card_length_mm"], 290)
         self.assertTrue(main.get("direct_retailer_urls"))
-        self.assertEqual(len(main["direct_retailer_urls"]), 2)
+        self.assertEqual(len(main["direct_retailer_urls"]), 3)
         self.assertIn("joshinweb.jp", main["direct_retailer_urls"][0])
         self.assertIn("sofmap.com", main["direct_retailer_urls"][1])
+        self.assertIn("tsukumo.co.jp", main["direct_retailer_urls"][2])
         self.assertIn("sofmap.com", self.profile["allowed_search_reference_domains"])
+        self.assertIn("tsukumo.co.jp", self.profile["allowed_search_reference_domains"])
+
+        for part_id, host in (
+            ("cpu-ryzen7-9700x", "yodobashi.com"),
+            ("motherboard-asrock-b850m-pro-rs-wifi", "yodobashi.com"),
+            ("psu-corsair-rm850e-2025", "dospara.co.jp"),
+            ("case-fractal-pop-air-tg", "yodobashi.com"),
+            ("cooler-thermalright-pa120-se-v3", "dospara.co.jp"),
+        ):
+            self.assertTrue(parts_by_id[part_id].get("direct_retailer_urls"), part_id)
+            self.assertIn(host, parts_by_id[part_id]["direct_retailer_urls"][0], part_id)
         self.assertIn("VCG507012DFSXPB1-O", main["spec_source_url"])
 
         vram = parts_by_id["gpu-rtx5060ti-16gb"]

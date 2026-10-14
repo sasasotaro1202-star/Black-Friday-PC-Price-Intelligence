@@ -996,7 +996,7 @@ def search_comparison_snippet(part, domains):
     # pages when rotating search markup consistently hides the item link.
     # They remain untrusted until this same verifier confirms identity, price,
     # inventory state and point-in-time evidence.
-    for candidate_url in (part.get("direct_retailer_urls") or [])[:2]:
+    for candidate_url in (part.get("direct_retailer_urls") or [])[:3]:
         url = str(candidate_url or "").strip()
         parsed = urlparse(url)
         host = (parsed.hostname or "").lower()
@@ -1069,18 +1069,21 @@ def search_comparison_snippet(part, domains):
             "stock_status": (offer or verification).get("stock_status") or "unknown",
             "source_role": "direct_retailer_listing_reference",
         })
-        if offer and offer.get("stock_status") == "in_stock":
-            verified_offers.sort(key=lambda item: (
-                0 if item.get("stock_status") == "in_stock" else 1,
-                item.get("price_jpy", 10**12),
-                0 if item.get("price_source_mode") == "direct_structured" else 1,
-                0 if item.get("identity_anchor") == str(part.get("model_code") or "") else 1,
-            ))
-            return {
-                "retailer_listing_offer": verified_offers[0],
-                "retailer_listing_offers": verified_offers,
-                "search_diagnostics": diagnostics,
-            }
+    # Evaluate every configured candidate before selecting; returning at the
+    # first in-stock seller biases the ranking toward configuration order and
+    # can miss a cheaper exact-SKU offer at the next retailer.
+    if any(item.get("stock_status") == "in_stock" for item in verified_offers):
+        verified_offers.sort(key=lambda item: (
+            0 if item.get("stock_status") == "in_stock" else 1,
+            item.get("price_jpy", 10**12),
+            0 if item.get("price_source_mode") == "direct_structured" else 1,
+            0 if item.get("identity_anchor") == str(part.get("model_code") or "") else 1,
+        ))
+        return {
+            "retailer_listing_offer": verified_offers[0],
+            "retailer_listing_offers": verified_offers,
+            "search_diagnostics": diagnostics,
+        }
 
     # Kakaku's product page often loads its price table client-side. Try its own
     # search-results page as a weaker display-only source before external search.
