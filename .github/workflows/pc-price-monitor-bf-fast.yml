@@ -105,12 +105,14 @@ jobs:
             fi
             python scripts/monitor.py
             python scripts/peripheral_monitor.py
+            python scripts/build_component_monitor.py
             python scripts/recover.py
             python scripts/sanitize.py
             python scripts/official_campaign_dates.py
             python scripts/report.py
             python scripts/timing_analysis.py
             python scripts/scenario_analysis.py
+            python scripts/self_build_planner.py
             python scripts/healthcheck.py
             python scripts/validate.py
             git diff --check

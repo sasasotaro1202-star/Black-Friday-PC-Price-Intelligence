@@ -171,6 +171,52 @@ def main():
     if rankings.get("quality", {}).get("pit_unknown", 0) != 0:
         errors.append("reported PIT unknown != 0")
 
+    build_plan = load_json(os.path.join(ROOT, "data", "self_build_plan.json"), {})
+    if not build_plan:
+        errors.append("self_build_plan_missing")
+    else:
+        if build_plan.get("bf_actual_authorized") is not False or build_plan.get("buy_now_authorized") is not False:
+            errors.append("self_build_plan must never authorize purchase from target/comparison prices")
+        if build_plan.get("budget_arithmetic_valid") is not True:
+            errors.append("self_build_plan budget arithmetic invalid")
+        pc_budget, periph_budget, total_budget = build_plan.get("pc_budget_jpy"), build_plan.get("peripheral_budget_jpy"), build_plan.get("total_budget_jpy")
+        if not all(isinstance(x, int) and x >= 0 for x in (pc_budget, periph_budget, total_budget)) or pc_budget + periph_budget != total_budget:
+            errors.append("self_build_plan total/PC/peripheral budget mismatch")
+        builds = build_plan.get("builds") or []
+        if len(builds) != 3:
+            errors.append("self_build_plan should contain exactly three mutually exclusive GPU alternatives")
+        seen_build_ids = set()
+        for build in builds:
+            bid = str(build.get("id") or "")
+            if not bid or bid in seen_build_ids:
+                errors.append("self_build_plan id missing or duplicated")
+            seen_build_ids.add(bid)
+            if build.get("bf_actual_authorized") is not False or build.get("buy_now_authorized") is not False:
+                errors.append("self_build_plan build purchase authorization invalid: " + bid)
+            components = build.get("components") or []
+            component_ids = [str(p.get("id") or "") for p in components]
+            categories = [str(p.get("category") or "") for p in components]
+            if len(component_ids) != len(set(component_ids)) or len(categories) != len(set(categories)):
+                errors.append("self_build_plan duplicate component/category: " + bid)
+            if sum(int(p.get("target_price_jpy") or 0) for p in components) != build.get("target_parts_subtotal_jpy"):
+                errors.append("self_build_plan part target subtotal mismatch: " + bid)
+            if build.get("target_pc_total_jpy") != build.get("target_parts_subtotal_jpy", 0) + build.get("build_shipping_reserve_jpy", 0) + build.get("small_parts_reserve_jpy", 0):
+                errors.append("self_build_plan PC total mismatch: " + bid)
+            if build.get("target_all_in_jpy") != build.get("target_pc_total_jpy", 0) + periph_budget:
+                errors.append("self_build_plan all-in total mismatch: " + bid)
+            statuses = [c.get("status") for c in (build.get("compatibility_checks") or [])]
+            expected_status = "FAIL" if "FAIL" in statuses else "REVIEW" if "REVIEW" in statuses else "PASS"
+            if build.get("compatibility_status") != expected_status:
+                errors.append("self_build_plan compatibility status mismatch: " + bid)
+            for part in components:
+                if part.get("bf_actual_authorized") is not False:
+                    errors.append("self_build_plan component BF authorization invalid: " + bid + ":" + str(part.get("id")))
+                if part.get("track_price") and part.get("market_reference_price_jpy") is not None and part.get("trusted_for_market_estimate") is not True:
+                    errors.append("self_build_plan exposed untrusted component price: " + bid + ":" + str(part.get("id")))
+            if build.get("market_reference_estimate_jpy") is not None:
+                if build.get("market_reference_coverage_complete") is not True or build.get("market_reference_estimate_is_checkout_price") is not False:
+                    errors.append("self_build_plan market estimate lacks complete reference coverage/caveat: " + bid)
+
     if errors:
         for e in errors:
             print(" -", e)

@@ -1,0 +1,380 @@
+{
+  "schema_version": 1,
+  "purpose": "DIY/self-build desktop part pricing, separated from the prebuilt BTO and laptop catalog.",
+  "profile": {
+    "build_type": "DIY_PC",
+    "currency": "JPY",
+    "total_budget_jpy": 400000,
+    "peripheral_budget_jpy": 69800,
+    "pc_budget_jpy": 330200,
+    "minimum_ram_gb": 32,
+    "minimum_memory_modules": 2,
+    "minimum_ssd_gb": 1000,
+    "required_categories": [
+      "cpu",
+      "gpu",
+      "motherboard",
+      "memory",
+      "storage",
+      "psu",
+      "case",
+      "cpu_cooler",
+      "os_license"
+    ],
+    "fixed_part_ids": [
+      "cpu-ryzen7-9700x",
+      "motherboard-asrock-b850m-pro-rs-wifi",
+      "memory-teamgroup-ddr5-32gb-6000",
+      "ssd-crucial-p3-plus-1tb",
+      "psu-corsair-rm850e-2025",
+      "case-fractal-pop-air-tg",
+      "cooler-thermalright-pa120-se-v3",
+      "os-windows11-home"
+    ],
+    "gpu_choice_ids": [
+      "gpu-rtx5070-12gb",
+      "gpu-rtx5060ti-16gb",
+      "gpu-rtx5070ti-16gb"
+    ],
+    "primary_gpu_choice_id": "gpu-rtx5070-12gb",
+    "build_shipping_reserve_jpy": 6000,
+    "small_parts_reserve_jpy": 3000,
+    "market_reference_max_age_minutes": 360,
+    "allowed_comparison_domains": [
+      "kakaku.com"
+    ],
+    "policy": "BF targets are aspirational. Comparison-site prices are market references, not checkout prices, stock confirmation, or official BF actuals. No purchase is authorized from this data."
+  },
+  "parts": [
+    {
+      "id": "cpu-ryzen7-9700x",
+      "category": "cpu",
+      "role": "required_fixed_part",
+      "name": "AMD Ryzen 7 9700X BOX",
+      "model_code": "100-100001404WOF",
+      "aliases": [
+        "Ryzen 7 9700X",
+        "100-100001404WOF"
+      ],
+      "identity_terms": [
+        "Ryzen 7 9700X",
+        "100-100001404WOF"
+      ],
+      "monitor_url": "https://kakaku.com/item/K0001630332/",
+      "purchase_url": "https://kakaku.com/item/K0001630332/",
+      "track_price": true,
+      "target_price_jpy": 38000,
+      "min_price_jpy": 25000,
+      "max_price_jpy": 80000,
+      "specs": {
+        "socket": "AM5",
+        "cores": 8,
+        "threads": 16,
+        "package_power_w": 65,
+        "cooler_included": false
+      },
+      "notes": "BOXモデル。AM5。CPUクーラーは別途必要。比較サイト掲載額は決済価格ではない。"
+    },
+    {
+      "id": "gpu-rtx5070-12gb",
+      "category": "gpu",
+      "role": "primary_balanced",
+      "name": "PNY GeForce RTX 5070 12GB OC SLIM",
+      "model_code": "VCG507012DFXPB1-O",
+      "aliases": [
+        "PNY GeForce RTX 5070 12GB OC",
+        "VCG507012DFXPB1-O"
+      ],
+      "identity_terms": [
+        "PNY GeForce RTX 5070 12GB OC",
+        "VCG507012DFXPB1-O",
+        "RTX 5070 12GB"
+      ],
+      "monitor_url": "https://kakaku.com/item/K0001798041/",
+      "purchase_url": "https://kakaku.com/item/K0001798041/",
+      "track_price": true,
+      "target_price_jpy": 145000,
+      "min_price_jpy": 100000,
+      "max_price_jpy": 330000,
+      "specs": {
+        "gpu": "GeForce RTX 5070",
+        "vram_gb": 12,
+        "board_power_w": 250,
+        "minimum_psu_w": 650,
+        "card_length_mm": 290,
+        "card_width_mm": 128,
+        "card_thickness_mm": 40,
+        "connector": "12V-2x6"
+      },
+      "notes": "ゲーム全体の本命。正確な型番・寸法・電源接続は注文前にメーカー資料で確認。"
+    },
+    {
+      "id": "gpu-rtx5060ti-16gb",
+      "category": "gpu",
+      "role": "local_ai_vram_alternative",
+      "name": "PNY GeForce RTX 5060 Ti 16GB OC",
+      "model_code": "VCG5060T16DFXPB1-O",
+      "aliases": [
+        "PNY GeForce RTX 5060 Ti 16GB",
+        "RTX 5060 Ti 16GB",
+        "VCG5060T16DFXPB1-O"
+      ],
+      "identity_terms": [
+        "PNY GeForce RTX 5060 Ti 16GB",
+        "RTX 5060 Ti 16GB",
+        "VCG5060T16DFXPB1-O"
+      ],
+      "monitor_url": "https://kakaku.com/item/K0001696163/",
+      "purchase_url": "https://kakaku.com/item/K0001696163/",
+      "track_price": true,
+      "target_price_jpy": 120000,
+      "min_price_jpy": 85000,
+      "max_price_jpy": 260000,
+      "specs": {
+        "gpu": "GeForce RTX 5060 Ti",
+        "vram_gb": 16,
+        "board_power_w": 180,
+        "minimum_psu_w": 650,
+        "card_length_mm": null,
+        "card_width_mm": null,
+        "card_thickness_mm": null,
+        "connector": "model_specific"
+      },
+      "notes": "ローカルAI用VRAMを重視する代替。正確なカード寸法・補助電源が未検証のため互換性はREVIEW。"
+    },
+    {
+      "id": "gpu-rtx5070ti-16gb",
+      "category": "gpu",
+      "role": "stretch_dark_horse",
+      "name": "PNY GeForce RTX 5070 Ti 16GB ARGB",
+      "model_code": "VCG5070T16TFXPB1-O",
+      "aliases": [
+        "PNY GeForce RTX 5070 Ti 16GB",
+        "RTX 5070 Ti 16GB",
+        "VCG5070T16TFXPB1-O"
+      ],
+      "identity_terms": [
+        "PNY GeForce RTX 5070 Ti 16GB",
+        "RTX 5070 Ti 16GB",
+        "VCG5070T16TFXPB1-O"
+      ],
+      "monitor_url": "https://kakaku.com/item/K0001696164/",
+      "purchase_url": "https://kakaku.com/item/K0001696164/",
+      "track_price": true,
+      "target_price_jpy": 154000,
+      "min_price_jpy": 140000,
+      "max_price_jpy": 450000,
+      "specs": {
+        "gpu": "GeForce RTX 5070 Ti",
+        "vram_gb": 16,
+        "board_power_w": 300,
+        "minimum_psu_w": 750,
+        "card_length_mm": null,
+        "card_width_mm": null,
+        "card_thickness_mm": null,
+        "connector": "12V-2x6"
+      },
+      "notes": "大穴。目標価格は非常に厳しい値下げ目標。カード寸法・コネクタと総額の確認まで購入許可なし。"
+    },
+    {
+      "id": "motherboard-asrock-b850m-pro-rs-wifi",
+      "category": "motherboard",
+      "role": "required_fixed_part",
+      "name": "ASRock B850M Pro RS WiFi",
+      "model_code": "B850M Pro RS WiFi",
+      "aliases": [
+        "ASRock B850M Pro RS WiFi",
+        "B850M Pro RS WiFi"
+      ],
+      "identity_terms": [
+        "ASRock B850M Pro RS WiFi",
+        "B850M Pro RS WiFi"
+      ],
+      "monitor_url": "https://kakaku.com/item/K0001669878/",
+      "purchase_url": "https://kakaku.com/item/K0001669878/",
+      "track_price": true,
+      "target_price_jpy": 20000,
+      "min_price_jpy": 12000,
+      "max_price_jpy": 50000,
+      "specs": {
+        "socket": "AM5",
+        "memory_type": "DDR5",
+        "form_factor": "MicroATX",
+        "m2_nvme_slots": 3,
+        "wifi": true
+      },
+      "notes": "AM5・DDR5・MicroATX。CPU対応BIOS、QVL、M.2レーン共有は購入前に再確認。"
+    },
+    {
+      "id": "memory-teamgroup-ddr5-32gb-6000",
+      "category": "memory",
+      "role": "required_fixed_part",
+      "name": "TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)",
+      "model_code": "CTCWD532G6000HC38ADC01",
+      "aliases": [
+        "T-CREATE EXPERT White 32GB",
+        "CTCWD532G6000HC38ADC01",
+        "DDR5-6000 32GB"
+      ],
+      "identity_terms": [
+        "T-CREATE EXPERT White 32GB",
+        "CTCWD532G6000HC38ADC01"
+      ],
+      "monitor_url": "https://kakaku.com/item/K0001610896/",
+      "purchase_url": "https://kakaku.com/item/K0001610896/",
+      "track_price": true,
+      "target_price_jpy": 40000,
+      "min_price_jpy": 20000,
+      "max_price_jpy": 120000,
+      "specs": {
+        "memory_type": "DDR5",
+        "capacity_gb": 32,
+        "modules": 2,
+        "module_size_gb": 16,
+        "speed_mts": 6000,
+        "profile": "EXPO"
+      },
+      "notes": "16GB×2のデュアルチャネル。メモリ市況の急変はBF目標に反映し、価格を推測しない。"
+    },
+    {
+      "id": "ssd-crucial-p3-plus-1tb",
+      "category": "storage",
+      "role": "required_fixed_part",
+      "name": "Crucial P3 Plus CT1000P3PSSD8JP 1TB",
+      "model_code": "CT1000P3PSSD8JP",
+      "aliases": [
+        "Crucial P3 Plus 1TB",
+        "CT1000P3PSSD8JP"
+      ],
+      "identity_terms": [
+        "Crucial P3 Plus 1TB",
+        "CT1000P3PSSD8JP"
+      ],
+      "monitor_url": "https://kakaku.com/item/K0001466997/",
+      "purchase_url": "https://kakaku.com/item/K0001466997/",
+      "track_price": true,
+      "target_price_jpy": 18000,
+      "min_price_jpy": 8000,
+      "max_price_jpy": 60000,
+      "specs": {
+        "capacity_gb": 1000,
+        "interface": "NVMe PCIe 4.0",
+        "form_factor": "M.2 2280"
+      },
+      "notes": "最初から1TB。OS・開発環境・ゲーム用途を想定。"
+    },
+    {
+      "id": "psu-corsair-rm850e-2025",
+      "category": "psu",
+      "role": "required_fixed_part",
+      "name": "Corsair RM850e 2025 850W ATX 3.1 Gold",
+      "model_code": "CP-9020296-JP",
+      "aliases": [
+        "Corsair RM850e 2025",
+        "CP-9020296-JP",
+        "RM850e 850W"
+      ],
+      "identity_terms": [
+        "Corsair RM850e 2025",
+        "CP-9020296-JP"
+      ],
+      "monitor_url": "https://kakaku.com/item/K0001671441/",
+      "purchase_url": "https://kakaku.com/item/K0001671441/",
+      "track_price": true,
+      "target_price_jpy": 14000,
+      "min_price_jpy": 9000,
+      "max_price_jpy": 35000,
+      "specs": {
+        "wattage_w": 850,
+        "form_factor": "ATX",
+        "standard": "ATX 3.1",
+        "efficiency": "Gold",
+        "connector_12v2x6": true
+      },
+      "notes": "ネイティブ12V-2x6ケーブルが付属する型番を確認。実際のリビジョン・付属品も再確認。"
+    },
+    {
+      "id": "case-fractal-pop-air-tg",
+      "category": "case",
+      "role": "required_fixed_part",
+      "name": "Fractal Design Pop Air TG",
+      "model_code": "FD-C-POA1A-02",
+      "aliases": [
+        "Fractal Design Pop Air TG",
+        "FD-C-POA1A-02"
+      ],
+      "identity_terms": [
+        "Fractal Design Pop Air TG",
+        "FD-C-POA1A-02"
+      ],
+      "monitor_url": "https://kakaku.com/item/J0000039064/",
+      "purchase_url": "https://kakaku.com/item/J0000039064/",
+      "track_price": true,
+      "target_price_jpy": 12000,
+      "min_price_jpy": 8000,
+      "max_price_jpy": 30000,
+      "specs": {
+        "supported_motherboard_form_factors": [
+          "ATX",
+          "MicroATX",
+          "MiniITX"
+        ],
+        "gpu_clearance_mm": 405,
+        "cooler_clearance_mm": 170
+      },
+      "notes": "エアフロー優先。ケース正確な型番、付属ファンとクリアランスを購入直前に再確認。"
+    },
+    {
+      "id": "cooler-thermalright-pa120-se-v3",
+      "category": "cpu_cooler",
+      "role": "required_fixed_part",
+      "name": "Thermalright Peerless Assassin 120 SE V3",
+      "model_code": "Peerless Assassin 120 SE V3",
+      "aliases": [
+        "Thermalright Peerless Assassin 120 SE V3",
+        "Peerless Assassin 120 SE V3"
+      ],
+      "identity_terms": [
+        "Peerless Assassin 120 SE V3"
+      ],
+      "monitor_url": "https://kakaku.com/item/K0001789043/",
+      "purchase_url": "https://kakaku.com/item/K0001789043/",
+      "track_price": true,
+      "target_price_jpy": 5000,
+      "min_price_jpy": 2500,
+      "max_price_jpy": 12000,
+      "specs": {
+        "supported_sockets": [
+          "AM5"
+        ],
+        "cooler_height_mm": 157,
+        "included_thermal_paste": true
+      },
+      "notes": "AM5取付金具とケース高、RAM干渉を確認。"
+    },
+    {
+      "id": "os-windows11-home",
+      "category": "os_license",
+      "role": "required_fixed_part",
+      "name": "Windows 11 Home official retail license reference",
+      "model_code": "Windows 11 Home",
+      "aliases": [
+        "Windows 11 Home"
+      ],
+      "identity_terms": [
+        "Windows 11 Home"
+      ],
+      "monitor_url": null,
+      "purchase_url": "https://www.microsoft.com/ja-jp/d/windows-11-home/dg7gmgf0krt0",
+      "track_price": false,
+      "target_price_jpy": 19360,
+      "reference_price_jpy": 19360,
+      "price_source_role": "official_store_manual_reference",
+      "specs": {
+        "license_type": "retail_license",
+        "optional_if_existing_transferable_license": true
+      },
+      "notes": "19,360円は公式ストアの参考表示額。自動で価格・在庫を再確認していない。既存の移行可能ライセンスがあれば除外可能。"
+    }
+  ]
+}

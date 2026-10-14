@@ -41,6 +41,25 @@ def main():
     if sum(int(p.get("target_price_jpy") or 0) for p in budget_policy["peripherals"] if p.get("mandatory", True)) != budget_policy["peripheral_budget_jpy"]:
         errors.append("peripheral target budget mismatch")
 
+    self_build_plan = load_json(os.path.join(ROOT, "data", "self_build_plan.json"), {})
+    if not self_build_plan:
+        errors.append("self-build plan is missing")
+    else:
+        if self_build_plan.get("bf_actual_authorized") is not False or self_build_plan.get("buy_now_authorized") is not False:
+            errors.append("self-build plan unexpectedly authorizes a purchase")
+        if self_build_plan.get("budget_arithmetic_valid") is not True:
+            errors.append("self-build plan budget arithmetic invalid")
+        self_builds = self_build_plan.get("builds") or []
+        if len(self_builds) != 3:
+            errors.append("self-build plan must contain three exclusive GPU builds")
+        for build in self_builds:
+            statuses = [x.get("status") for x in (build.get("compatibility_checks") or [])]
+            expected_status = "FAIL" if "FAIL" in statuses else "REVIEW" if "REVIEW" in statuses else "PASS"
+            if build.get("compatibility_status") != expected_status:
+                errors.append("self-build compatibility status mismatch:" + str(build.get("id")))
+            if build.get("buy_now_authorized") is not False or build.get("bf_actual_authorized") is not False:
+                errors.append("self-build candidate has invalid purchase authorization:" + str(build.get("id")))
+
     # Catalog integrity
     catalog = load_json(os.path.join(ROOT, "config", "candidate_catalog.json"), {})
     catalog_items = catalog.get("candidates", [])
