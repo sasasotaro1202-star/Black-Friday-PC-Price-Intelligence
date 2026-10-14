@@ -74,13 +74,23 @@ class ProjectConfigurationContractTests(unittest.TestCase):
             + int(self.profile["build_shipping_reserve_jpy"])
             + int(self.profile["small_parts_reserve_jpy"])
         )
-        self.assertEqual(components_subtotal, 296160)
-        self.assertEqual(pc_total, 305160)
+        self.assertEqual(components_subtotal, 291600)
+        self.assertEqual(pc_total, 300600)
         self.assertEqual(
             pc_total + int(self.profile["peripheral_budget_jpy"]),
-            374960,
+            370400,
         )
-        self.assertLessEqual(374960, int(self.profile["total_budget_jpy"]))
+        self.assertLessEqual(370400, int(self.profile["total_budget_jpy"]))
+
+    def test_windows_retail_package_is_live_tracked_and_exact_model_identified(self):
+        parts_by_id = {item["id"]: item for item in self.build["parts"]}
+        os_part = parts_by_id["os-windows11-home"]
+        self.assertTrue(os_part["track_price"])
+        self.assertEqual(os_part["model_code"], "HAJ-00094")
+        self.assertEqual(os_part["target_price_jpy"], 14800)
+        self.assertEqual(os_part["monitor_url"], "https://kakaku.com/item/K0001432816/")
+        self.assertIn("yodobashi.com", os_part["direct_retailer_urls"][0])
+        self.assertIsNone(os_part["reference_price_jpy"])
 
     def test_gpu_skus_and_dimensions_are_source_backed_and_specific(self):
         parts_by_id = {item["id"]: item for item in self.build["parts"]}
@@ -88,11 +98,11 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(main["model_code"], "VCG507012DFSXPB1-O")
         self.assertEqual(main["specs"]["card_length_mm"], 290)
         self.assertTrue(main.get("direct_retailer_urls"))
-        self.assertEqual(len(main["direct_retailer_urls"]), 4)
+        self.assertEqual(len(main["direct_retailer_urls"]), 3)
         self.assertIn("joshinweb.jp", main["direct_retailer_urls"][0])
         self.assertIn("sofmap.com", main["direct_retailer_urls"][1])
         self.assertIn("tsukumo.co.jp", main["direct_retailer_urls"][2])
-        self.assertIn("amazon.co.jp/dp/B0GSXJPTLN", main["direct_retailer_urls"][3])
+        self.assertNotIn("B0GSXJPTLN", " ".join(main["direct_retailer_urls"]))
         self.assertIn("sofmap.com", self.profile["allowed_search_reference_domains"])
         self.assertIn("tsukumo.co.jp", self.profile["allowed_search_reference_domains"])
         self.assertIn("amazon.co.jp", self.profile["allowed_search_reference_domains"])
@@ -135,13 +145,23 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertIn("shopping.yahoo.co.jp", self.profile["allowed_search_reference_domains"])
         self.assertIn("ymall.jp", self.profile["allowed_search_reference_domains"])
         self.assertIn("ymall.jp", parts_by_id["memory-teamgroup-ddr5-32gb-6000"]["direct_retailer_urls"][0])
+        self.assertIn("amazon.co.jp", parts_by_id["memory-teamgroup-ddr5-32gb-6000"]["direct_retailer_urls"][1])
         self.assertIn("teamgroupinc.com", parts_by_id["memory-teamgroup-ddr5-32gb-6000"]["spec_source_url"])
         self.assertIn("CTCWD532G6000HC38ADC01", parts_by_id["memory-teamgroup-ddr5-32gb-6000"]["spec_source_url"])
-        self.assertEqual(len(parts_by_id["ssd-crucial-p3-plus-1tb"]["direct_retailer_urls"]), 2)
+        self.assertIn("kaago.com", self.profile["allowed_search_reference_domains"])
+        self.assertEqual(len(parts_by_id["ssd-crucial-p3-plus-1tb"]["direct_retailer_urls"]), 3)
         self.assertIn("tsukumo.co.jp", parts_by_id["ssd-crucial-p3-plus-1tb"]["direct_retailer_urls"][0])
         self.assertIn("dospara.co.jp", parts_by_id["ssd-crucial-p3-plus-1tb"]["direct_retailer_urls"][1])
+        self.assertIn("kaago.com", parts_by_id["ssd-crucial-p3-plus-1tb"]["direct_retailer_urls"][2])
         self.assertEqual(len(parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"]), 2)
         self.assertIn("dospara.co.jp", parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"][1])
+        os_part = parts_by_id["os-windows11-home"]
+        self.assertTrue(os_part["track_price"])
+        self.assertEqual(os_part["model_code"], "HAJ-00094")
+        self.assertEqual(os_part["target_price_jpy"], 14800)
+        self.assertEqual(os_part["monitor_url"], "https://kakaku.com/item/K0001432816/")
+        self.assertIn("yodobashi.com", os_part["direct_retailer_urls"][0])
+        self.assertIsNone(os_part["reference_price_jpy"])
 
     def test_readme_copilot_instructions_and_peripheral_guide_match_current_plan(self):
         readme = read_text("README.md")
