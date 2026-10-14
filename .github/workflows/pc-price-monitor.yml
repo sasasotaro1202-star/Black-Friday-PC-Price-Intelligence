@@ -101,7 +101,7 @@ jobs:
           print(f"catalog_url_mismatch_count={len(catalog_url_mismatch_ids)}")
           PY
 
-      - name: Collect, recover, sanitize, score and publish
+      - name: Collect, preserve, quality-check and publish evidence
         if: steps.gate.outputs.skip != 'true'
         env:
           MONITOR_MAX_URLS: "100"
@@ -122,6 +122,9 @@ jobs:
             python scripts/recover.py
             python scripts/sanitize.py
             python scripts/official_campaign_dates.py
+            # Derived reports/scores below are internal indexes and quality diagnostics only.
+            # The final user-facing ranking is produced in ChatGPT when the user asks,
+            # using the freshest repository data plus independent live-source checks.
             python scripts/report.py
             # Build the current DIY plan before rendering build-level buy timing.
             python scripts/self_build_planner.py
