@@ -254,7 +254,8 @@ class BuyNowDecisionTests(unittest.TestCase):
             "assembly_time_penalty_points": 0,
             "bto_role": "REFERENCE_BENCHMARK_ONLY",
         }
-        result = timing.build_buy_now_decision(rankings, [], config)
+        with patch.object(timing, "now_jst", return_value=now):
+            result = timing.build_buy_now_decision(rankings, [], config)
         self.assertFalse(result["purchase_gate_allowed"])
         self.assertEqual(result["purchase_method_policy"]["primary_method"], "SELF_BUILD")
         self.assertFalse(result["purchase_method_policy"]["completed_pc_purchase_actionable"])
