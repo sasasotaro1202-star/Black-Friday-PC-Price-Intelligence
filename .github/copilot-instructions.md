@@ -84,6 +84,7 @@ Unknown prices must stay null/unknown—not ¥0. Fetch failure is not out-of-sto
 - Preserve source URL, exact model/SKU evidence, retrieval time, availability time, publication/event times when known, inventory state, data age, validation reason, and source snapshot hashes.
 - Require valid PIT ordering: `available_at <= retrieval_time <= prediction_time`. If PIT is unknown or invalid, fail closed.
 - Direct retailer listings and comparison-site results are different evidence classes; a search-result snippet is display-only unless exact-model identity and other validation rules pass.
+- For Ryzen 7 9700X, monitor both Yodobashi and the exact TSUKUMO item page (SKU 100-100001404WOF). For ASRock B850M Pro RS WiFi, monitor both Yodobashi and PC4U. Direct price and inventory are re-fetched on every run; indexed values are never automatically promoted.
 - Show retrieval coverage, failed hosts/reasons, rejected SKU matches, unverified prices, and unknown inventory explicitly. Do not improve apparent coverage by loosening identity, stock, freshness, or PIT rules.
 
 ## 6. Ranking and decision quality
