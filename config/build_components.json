@@ -4,9 +4,9 @@
   "profile": {
     "build_type": "DIY_PC",
     "currency": "JPY",
-    "total_budget_jpy": 400000,
+    "total_budget_jpy": 380000,
     "peripheral_budget_jpy": 69800,
-    "pc_budget_jpy": 330200,
+    "pc_budget_jpy": 310200,
     "minimum_ram_gb": 32,
     "minimum_memory_modules": 2,
     "minimum_ssd_gb": 1000,
@@ -103,7 +103,7 @@
       "memory-crucial-pro-ddr5-32gb-6000",
       "memory-teamgroup-ddr5-32gb-6000"
     ],
-    "primary_memory_choice_id": "memory-crucial-pro-ddr5-32gb-6000"
+    "primary_memory_choice_id": "memory-teamgroup-ddr5-32gb-6000"
   },
   "parts": [
     {
@@ -252,7 +252,7 @@
         "connector": "12V-2x6",
         "card_thickness_slots": 2.98
       },
-      "notes": "PNY公式のARGB Overclocked Triple Fan型番VCG5070T16TFXXPB1-Oに一致。公称約300×120×60mm、2.98スロット、300W、16ピン入力、推奨PSU750W。2026-10-14時点のドスパラ表示例は207,700円。154,000円は40万円枠に収めるための極端な予算上限目標で、値下がり予測ではない。直接販売ページの価格・在庫とケース内の厚さクリアランスを再確認する。",
+      "notes": "PNY公式のARGB Overclocked Triple Fan型番VCG5070T16TFXXPB1-Oに一致。公称約300×120×60mm、2.98スロット、300W、16ピン入力、推奨PSU750W。2026-10-14時点のドスパラ表示例は207,700円。154,000円は38万円枠での極端な購入目標で、値下がり予測ではない。TeamGroupメモリ目標を採用しても全体目標394,600円となり14,600円超過。直接販売ページの価格・在庫とケース内の厚さクリアランスを再確認する。",
       "spec_source_url": "https://www.pny.com/geforce-rtx-5070-ti-models?sku=VCG5070T16TFXXPB1-O",
       "spec_source_verified_at": "2026-10-14",
       "direct_retailer_urls": [
