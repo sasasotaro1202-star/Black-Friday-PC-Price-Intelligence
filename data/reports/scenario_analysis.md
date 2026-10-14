@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-10-14T10:11:40+09:00
+更新: 2026-10-14T13:37:12+09:00
 価格フェーズ: **PRE_BLACK_FRIDAY_REFERENCE**
 暫定の広域監視窓（公式セール開催期間ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 総予算: ¥400,000
@@ -29,13 +29,13 @@ BF PC計画上限＋周辺機器目標: ¥400,000
 
 |候補|BF目標上限|参照価格/シナリオ基準|公式期間内価格|32GB/1TB|上限まで必要値下げ|必要割引率|シナリオ|状態|購入ページ|
 |---|---:|---:|---:|---|---:|---:|---|---|---|
-|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥330,200|¥399,800|未確認|達成|¥69,600|17.4%|20% ¥319,840 / 25% ¥299,850 / 30% ¥279,860|PRE_BLACK_FRIDAY_REFERENCE|[商品ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/)|
+|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥330,200|¥399,800|未確認|達成|¥69,600|17.4%|20% ¥319,840 / 25% ¥299,850 / 30% ¥279,860|CATALOG_REFERENCE_ONLY|[商品ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/)|
 
 ## BF目標価格に対する全PC候補の割引シナリオ
 
 |候補|フォーム|GPU|BF価格目標|公式期間内価格|監視窓内参考価格|セール前/カタログ参考|計算基準価格|目標まで必要値下げ|必要割引率|20%|25%|30%|構成条件|価格の根拠|購入リンク|
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|---|
-|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|desktop|RTX 5070 Ti|¥330,200|未確認|—|¥399,800|¥399,800|¥69,600|17.4%|¥319,840|¥299,850|¥279,860|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/)|
+|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|desktop|RTX 5070 Ti|¥330,200|未確認|—|¥399,800|¥399,800|¥69,600|17.4%|¥319,840|¥299,850|¥279,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/)|
 |ASUS TUF Gaming A16 FA608PP-R9R5070S|laptop|RTX 5070 Laptop GPU|¥330,200|未確認|—|¥319,800|¥319,800|¥0|0.0%|¥255,840|¥239,850|¥223,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gaming-a16-2025.html)|
 |G TUNE DG-A7G70|desktop|RTX 5070|¥330,200|未確認|—|¥304,800|¥304,800|¥0|0.0%|¥243,840|¥228,600|¥213,360|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/)|
 |G TUNE FG-A7G6T|desktop|RTX 5060 Ti 16GB|¥330,200|未確認|—|¥309,800|¥309,800|¥0|0.0%|¥247,840|¥232,350|¥216,860|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/)|
@@ -47,7 +47,6 @@ BF PC計画上限＋周辺機器目標: ¥400,000
 |ROG Strix G16 G614FR-R9X3D5070TI|laptop|RTX 5070 Ti Laptop GPU|¥330,200|未確認|—|¥359,800|¥359,800|¥29,600|8.2%|¥287,840|¥269,850|¥251,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
 |ROG Strix G16 G614PR-R9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥330,200|未確認|—|¥359,800|¥359,800|¥29,600|8.2%|¥287,840|¥269,850|¥251,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
 |GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|laptop|RTX 5070 Ti|¥330,200|未確認|—|¥419,800|¥419,800|¥89,600|21.3%|¥335,840|¥314,850|¥293,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200)|
-|https://store.acer.com/ja-jp/acer-phn16-i71-n93z|laptop|RTX 5070 Ti Laptop GPU|¥330,200|未確認|—|¥547,800|¥547,800|¥217,600|39.7%|¥438,240|¥410,850|¥383,460|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1)|
 |ROG Zephyrus G16 GU606AR-U9R5070TIG32G|laptop|RTX 5070 Ti Laptop GPU|¥330,200|未確認|—|¥599,800|¥599,800|¥269,600|44.9%|¥479,840|¥449,850|¥419,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/90nr0pc2-m002c0-rog-zephyrus-g16-2026.html)|
 |ROG Zephyrus G14 GU405AR-U9R5070TIG|laptop|RTX 5070 Ti Laptop GPU|¥330,200|未確認|—|¥684,800|¥684,800|¥354,600|51.8%|¥547,840|¥513,600|¥479,360|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/90nr0p94-m001d0-rog-zephyrus-g14-2026-gu405.html)|
 |ASUS TUF Gaming F16 FX608|laptop|RTX 5070 Laptop GPU|¥330,200|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://store.asus.com/jp/asus-tuf-gaming-f16-fx608.html?config=90NR0NB1-M00580)|
@@ -56,6 +55,7 @@ BF PC計画上限＋周辺機器目標: ¥400,000
 |G TUNE DG-I7G70|desktop|RTX 5070|¥330,200|未確認|—|¥299,800|¥299,800|—|—|¥239,840|¥224,850|¥209,860|未達/未確認|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/)|
 |ROG Strix G16 G615LR-U9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥330,200|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
 |ROG Strix G18 G815LR-U9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥330,200|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025-g815/)|
+|https://store.acer.com/ja-jp/acer-phn16-i71-n93z|laptop|RTX 5070 Ti Laptop GPU|¥330,200|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1)|
 
 ## 既存の参照価格シナリオ（比較用・確率ではない）
 
