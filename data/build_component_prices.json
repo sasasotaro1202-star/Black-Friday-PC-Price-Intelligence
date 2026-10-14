@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T18:36:03+09:00",
+  "generated_at": "2026-10-14T18:46:06+09:00",
   "schema_version": 1,
   "source_role": "comparison_site_reference",
   "policy": "These prices are comparison-site market references only; never seller checkout prices or official BF actuals.",
@@ -69,16 +69,16 @@
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
-            "en.wikipedia.org",
+            "en.m.wikipedia.org",
             "pluto.tv",
             "www.youtube.com",
-            "www.primevideo.com",
-            "www.justwatch.com"
+            "m.youtube.com",
+            "www.primevideo.com"
           ],
           "rejected_url_samples": [
-            "https://en.wikipedia.org/wiki/The_100_(TV_series)",
-            "https://pluto.tv/us/shows/the-100-ptv3/?msockid=07c8ed355f5f6820184dfac75e0e6917",
-            "https://www.youtube.com/watch?v=aDrsItJ_HU4"
+            "https://en.m.wikipedia.org/wiki/The_100_(TV_series)",
+            "https://pluto.tv/us/shows/the-100-ptv3/?msockid=1a955284bc2d627b1d994576bdcd6332",
+            "https://www.youtube.com/playlist?list=PLfrisy2KXzkfUMpf-Op9--p0GpNs2dmr2"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -97,7 +97,7 @@
             "finance.yahoo.com",
             "en.wikipedia.org",
             "www.techspot.com",
-            "www.marketwatch.com"
+            "shop-us-en.amd.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en.html",
@@ -110,7 +110,7 @@
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:35:59+09:00",
+      "retrieval_time": "2026-10-14T18:46:03+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -209,7 +209,7 @@
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:35:59+09:00",
+      "retrieval_time": "2026-10-14T18:46:03+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -275,10 +275,20 @@
           "query": "site:kakaku.com/item/k0001696163 VCG5060T16DFXPB1-O 価格",
           "status": "ok",
           "error": null,
-          "result_count": 0,
+          "result_count": 10,
           "allowed_reference_host_count": 0,
-          "rejected_host_samples": [],
-          "rejected_url_samples": [],
+          "rejected_host_samples": [
+            "www.bing.com",
+            "microsoftedge.microsoft.com",
+            "ja.m.wikipedia.org",
+            "addons.mozilla.org",
+            "news.mynavi.jp"
+          ],
+          "rejected_url_samples": [
+            "https://www.bing.com/version",
+            "https://www.bing.com/RelatedSearch",
+            "https://microsoftedge.microsoft.com/addons/search/bing+related+search+version"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -309,11 +319,11 @@
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:35:59+09:00",
+      "retrieval_time": "2026-10-14T18:46:03+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
       "identity_match": true,
       "identity_matches": [
         "vcg5060t16dfxpb1o",
@@ -376,16 +386,10 @@
           "query": "site:kakaku.com/item/k0001696164 VCG5070T16TFXPB1-O 価格",
           "status": "ok",
           "error": null,
-          "result_count": 10,
+          "result_count": 0,
           "allowed_reference_host_count": 0,
-          "rejected_host_samples": [
-            "support.google.com"
-          ],
-          "rejected_url_samples": [
-            "https://support.google.com/maps/answer/3273406?hl=en-GB&co=GENIE.Platform=iOS",
-            "https://support.google.com/chrome/answer/95346?hl=ru&co=GENIE.Platform=Desktop",
-            "https://support.google.com/mail/answer/7436150?hl=de"
-          ],
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -416,11 +420,11 @@
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:35:59+09:00",
+      "retrieval_time": "2026-10-14T18:46:03+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
       "identity_match": true,
       "identity_matches": [
         "pnygeforcertx5070ti16gb",
@@ -485,16 +489,16 @@
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
-            "www.gigabyte.com",
-            "www.asus.com",
-            "www.asrock.com",
-            "www.msi.com",
-            "us.msi.com"
+            "www.indeed.com",
+            "www.trouvr.com",
+            "dev.to",
+            "blog.theinterviewguys.com",
+            "wp.dreamshift.net"
           ],
           "rejected_url_samples": [
-            "https://www.gigabyte.com/Motherboard/B850M-C",
-            "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b850m-plus-wifi7/",
-            "https://www.gigabyte.com/Motherboard/B850M-AORUS-STEALTH"
+            "https://www.indeed.com/news/releases/ghost-jobs-explained",
+            "https://www.trouvr.com/guides/ghost-jobs-on-indeed",
+            "https://dev.to/goofypluto999/how-to-spot-a-ghost-job-in-30-seconds-the-indeed-problem-in-2026-57c9"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -506,21 +510,31 @@
           "query": "\"ASRock B850M Pro RS WiFi\" B850M Pro RS WiFi 価格 在庫",
           "status": "ok",
           "error": null,
-          "result_count": 0,
+          "result_count": 10,
           "allowed_reference_host_count": 0,
-          "rejected_host_samples": [],
-          "rejected_url_samples": [],
+          "rejected_host_samples": [
+            "www.asrock.com",
+            "en.wikipedia.org",
+            "asrock.com",
+            "www.asrockrack.com",
+            "pg.asrock.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.asrock.com/",
+            "https://www.asrock.com/support/index.asp",
+            "https://en.wikipedia.org/wiki/ASRock"
+          ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:36:00+09:00",
+      "retrieval_time": "2026-10-14T18:46:04+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced; bing:0 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
       "identity_match": true,
       "identity_matches": [
         "b850mprorswifi",
@@ -582,19 +596,15 @@
           "query": "site:kakaku.com/item/k0001610896 CTCWD532G6000HC38ADC01 価格",
           "status": "ok",
           "error": null,
-          "result_count": 10,
+          "result_count": 4,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
-            "www.bing.com",
-            "microsoftedge.microsoft.com",
-            "news.mynavi.jp",
-            "addons.mozilla.org",
-            "microsoft-bing-search.en.softonic.com"
+            "www.answers.com"
           ],
           "rejected_url_samples": [
-            "https://www.bing.com/version",
-            "https://microsoftedge.microsoft.com/addons/search/bing+related+search+version",
-            "https://www.bing.com/RelatedSearch"
+            "https://www.answers.com/accounting/What_is_the_difference_between_board_of_director_and_board_of_governors",
+            "https://www.answers.com/natural-sciences/What_is_an_optimal_scale",
+            "https://www.answers.com/english-language-arts/Is_it_i_red_a_book_or_i_read_a_book"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -609,16 +619,12 @@
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
-            "www.teamgroupinc.com",
-            "support.teamgroupinc.com",
-            "event.teamgroupinc.com",
-            "www.amazon.com",
-            "www.reddit.com"
+            "www.target.com"
           ],
           "rejected_url_samples": [
-            "https://www.teamgroupinc.com/en/",
-            "https://www.teamgroupinc.com/en/product-brand/ssd/TEAMGROUP/",
-            "https://support.teamgroupinc.com/en/"
+            "https://www.target.com/",
+            "https://www.target.com/sl/liberty/1455",
+            "https://www.target.com/sl/lynnwood/338"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -626,11 +632,11 @@
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:36:00+09:00",
+      "retrieval_time": "2026-10-14T18:46:04+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:4 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
       "identity_match": true,
       "identity_matches": [
         "ctcwd532g6000hc38adc01"
@@ -691,20 +697,10 @@
           "query": "site:kakaku.com/item/k0001466997 CT1000P3PSSD8JP 価格",
           "status": "ok",
           "error": null,
-          "result_count": 10,
+          "result_count": 0,
           "allowed_reference_host_count": 0,
-          "rejected_host_samples": [
-            "www.cnbc.com",
-            "worldpopulationreview.com",
-            "www.expatfocus.com",
-            "www.globalcitizensolutions.com",
-            "www.cntraveler.com"
-          ],
-          "rejected_url_samples": [
-            "https://www.cnbc.com/2025/09/17/best-countries-for-expats-internations-expat-survey.html?msockid=201fd27b41f66a2e07e6c589405a6b1c",
-            "https://worldpopulationreview.com/country-rankings/best-countries-for-expats",
-            "https://www.expatfocus.com/articles/the-top-10-best-countries-for-expats-in-2025"
-          ],
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0
@@ -719,15 +715,14 @@
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.crucial.com",
-            "qa-cloud.crucial.com",
             "www.merriam-webster.com",
             "eu.crucial.com",
-            "en.wikipedia.org"
+            "www.amazon.com"
           ],
           "rejected_url_samples": [
             "https://www.crucial.com/",
-            "https://www.crucial.com/upgrades",
-            "https://qa-cloud.crucial.com/store/systemscanner"
+            "https://www.crucial.com/store/systemscanner",
+            "https://www.merriam-webster.com/dictionary/crucial"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -735,11 +730,11 @@
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:36:00+09:00",
+      "retrieval_time": "2026-10-14T18:46:04+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
       "identity_match": true,
       "identity_matches": [
         "ct1000p3pssd8jp"
@@ -805,14 +800,14 @@
           "rejected_host_samples": [
             "www.reddit.com",
             "my.clevelandclinic.org",
-            "en.m.wikipedia.org",
-            "cp24.com",
-            "kidshealth.org"
+            "en.wikipedia.org",
+            "www.mayoclinic.org",
+            "www.allacronyms.com"
           ],
           "rejected_url_samples": [
             "https://www.reddit.com/r/TooAfraidToAsk/comments/115rarh/i_found_a_website_that_has_literal_cp_with/",
             "https://my.clevelandclinic.org/health/diseases/8717-cerebral-palsy",
-            "https://en.m.wikipedia.org/wiki/CP"
+            "https://en.wikipedia.org/wiki/CP"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -831,11 +826,11 @@
             "help.corsair.com",
             "en.wikipedia.org",
             "www.amazon.com",
-            "www.flycorsair.com"
+            "www.newegg.com"
           ],
           "rejected_url_samples": [
             "https://www.corsair.com/us/en",
-            "https://www.corsair.com/us/en/s/downloads",
+            "https://www.corsair.com/us/en/s/icue",
             "https://help.corsair.com/hc/en-us"
           ],
           "same_comparison_item_path_count": 0,
@@ -844,7 +839,7 @@
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:36:00+09:00",
+      "retrieval_time": "2026-10-14T18:46:04+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -914,15 +909,15 @@
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.formulad.com",
-            "www.youtube.com",
-            "en.wikipedia.org",
             "www.acronymfinder.com",
-            "abbreviationfinder.org"
+            "www.youtube.com",
+            "www.fd.org",
+            "en.wikipedia.org"
           ],
           "rejected_url_samples": [
             "https://www.formulad.com/",
-            "https://www.youtube.com/c/formuladrift",
-            "https://en.wikipedia.org/wiki/FD"
+            "https://www.acronymfinder.com/FD.html",
+            "https://www.youtube.com/c/formuladrift"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -937,14 +932,14 @@
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
-            "en.wikipedia.org",
+            "en.m.wikipedia.org",
             "www.fractal-design.com",
             "fractal.garden",
             "fractalfoundation.org",
-            "fractal.us"
+            "www.fractalaudio.com"
           ],
           "rejected_url_samples": [
-            "https://en.wikipedia.org/wiki/Fractal",
+            "https://en.m.wikipedia.org/wiki/Fractal",
             "https://www.fractal-design.com/",
             "https://fractal.garden/"
           ],
@@ -954,7 +949,7 @@
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:36:01+09:00",
+      "retrieval_time": "2026-10-14T18:46:05+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -1020,14 +1015,14 @@
           "query": "site:kakaku.com/item/k0001789043 Peerless Assassin 120 SE V3 価格",
           "status": "ok",
           "error": null,
-          "result_count": 10,
+          "result_count": 7,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.peerlessfaucet.com",
             "www.peerless-av.com",
             "peerlesschain.com",
-            "www.merriam-webster.com",
-            "www.peerlessboilers.com"
+            "www.peerlesscoffee.com",
+            "www.merriam-webster.com"
           ],
           "rejected_url_samples": [
             "https://www.peerlessfaucet.com/",
@@ -1063,11 +1058,11 @@
         }
       ],
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:36:01+09:00",
+      "retrieval_time": "2026-10-14T18:46:05+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:7 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
       "identity_match": true,
       "identity_matches": [
         "peerlessassassin120sev3",
