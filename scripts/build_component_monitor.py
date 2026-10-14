@@ -144,18 +144,76 @@ def parse_search_snippet_reference(part, results, domains=DEFAULT_DOMAINS):
 
 
 def search_comparison_snippet(part, domains):
-    query = "{} {} 価格.com 最安価格".format(part.get("name") or "", part.get("model_code") or "")
+    """Search free providers with diagnostics; only the exact Kakaku SKU can qualify."""
+    model_code = str(part.get("model_code") or "").strip()
+    name = str(part.get("name") or "").strip()
+    product_path = urlparse(str(part.get("monitor_url") or "")).path.rstrip("/").lower()
+    queries = [
+        "site:kakaku.com{} {} 価格".format(product_path, model_code).strip(),
+        "{} {} 価格.com 最安価格".format(name, model_code).strip(),
+    ]
+    diagnostics = []
     for provider, search_fn in (("duckduckgo", ddg_search), ("bing", bing_search)):
-        try:
-            results = search_fn(query, timeout=9)
-        except Exception:
-            continue
-        found = parse_search_snippet_reference(part, results, domains)
-        if found:
-            found["search_provider"] = provider
-            found["query"] = query
-            return found
-    return None
+        for query_index, query in enumerate(queries, 1):
+            try:
+                results = search_fn(query, timeout=9) or []
+                error = None
+            except Exception as exc:
+                results = []
+                error = type(exc).__name__ + ":" + str(exc)[:140]
+            domain_count = 0
+            exact_path_count = 0
+            identity_count = 0
+            price_count = 0
+            chosen = None
+            for result in results:
+                url = str(result.get("url") or "")
+                if not allowed_url(url, domains):
+                    continue
+                domain_count += 1
+                path = urlparse(url).path.rstrip("/").lower()
+                # Allow tabs under the same Kakaku item path, but not another SKU.
+                if not product_path or not (path == product_path or path.startswith(product_path + "/")):
+                    continue
+                exact_path_count += 1
+                anchor = search_identity_anchor(result, part)
+                if not anchor:
+                    continue
+                identity_count += 1
+                blob = str(result.get("title") or "") + " " + str(result.get("snippet") or "")
+                candidate = parse_snippet_price(blob, part.get("min_price_jpy") or 1, part.get("max_price_jpy") or 10**9)
+                if not candidate:
+                    continue
+                price_count += 1
+                chosen = {
+                    "url": url,
+                    "title": result.get("title") or "",
+                    "snippet": result.get("snippet") or "",
+                    "price_jpy": candidate["price_jpy"],
+                    "price_context": candidate.get("context"),
+                    "identity_anchor": anchor,
+                    "source_role": "comparison_site_search_snippet_reference",
+                    "bf_actual_authorized": False,
+                    "search_provider": provider,
+                    "query": query
+                }
+                break
+            diagnostics.append({
+                "provider": provider,
+                "query_index": query_index,
+                "query": query,
+                "status": "error" if error else "ok",
+                "error": error,
+                "result_count": len(results),
+                "allowed_domain_result_count": domain_count,
+                "exact_product_path_count": exact_path_count,
+                "identity_anchor_count": identity_count,
+                "in_range_price_count": price_count
+            })
+            if chosen:
+                chosen["search_diagnostics"] = diagnostics
+                return chosen
+    return {"search_diagnostics": diagnostics} if diagnostics else None
 
 
 def fetch_part(part, domains):
@@ -168,8 +226,9 @@ def fetch_part(part, domains):
         "price_source_mode": "none", "price_validation_status": "missing",
         "market_reference_price_jpy": None, "search_snippet_reference_price_jpy": None,
         "search_snippet_reference_url": None, "search_snippet_reference_title": None,
-        "search_snippet_identity_anchor": None, "comparison_stock_signal": "unknown",
-        "retrieval_time": None, "available_at": None, "pit_valid": False,
+        "search_snippet_identity_anchor": None, "search_diagnostics": [],
+        "comparison_stock_signal": "unknown", "retrieval_time": None,
+        "available_at": None, "pit_valid": False,
         "fetch_status": "error", "last_fetch_error": None, "identity_match": False,
         "identity_matches": []
     }
@@ -224,6 +283,8 @@ def fetch_part(part, domains):
         if identity_ok and price is None:
             snippet = search_comparison_snippet(part, domains)
             if snippet:
+                result["search_diagnostics"] = snippet.get("search_diagnostics") or []
+            if snippet and isinstance(snippet.get("price_jpy"), int):
                 result["search_snippet_reference_price_jpy"] = int(snippet["price_jpy"])
                 result["search_snippet_reference_url"] = snippet["url"]
                 result["search_snippet_reference_title"] = snippet["title"]
@@ -235,6 +296,15 @@ def fetch_part(part, domains):
                 result["price_source_mode"] = "search_snippet"
                 result["price_validation_status"] = "search_snippet_reference"
                 result["last_fetch_error"] = "direct price unavailable; snippet reference is display-only and excluded from estimates"
+            else:
+                counts = [
+                    "{}:{} results / {} exact SKU / {} identity / {} priced".format(
+                        item.get("provider"), item.get("result_count", 0),
+                        item.get("exact_product_path_count", 0),
+                        item.get("identity_anchor_count", 0), item.get("in_range_price_count", 0)
+                    ) for item in result["search_diagnostics"]
+                ]
+                result["last_fetch_error"] = "price_or_point_in_time_missing; search diagnostic: " + "; ".join(counts)[:260]
     except Exception as exc:
         result["fetch_status"] = "error"
         result["last_fetch_error"] = type(exc).__name__ + ":" + str(exc)[:180]
@@ -265,8 +335,9 @@ def collect_component_prices(config=None):
                     "price_source_mode": "none", "price_validation_status": "missing",
                     "market_reference_price_jpy": None, "search_snippet_reference_price_jpy": None,
                     "search_snippet_reference_url": None, "search_snippet_reference_title": None,
-                    "search_snippet_identity_anchor": None, "comparison_stock_signal": "unknown",
-                    "retrieval_time": None, "available_at": None, "pit_valid": False,
+                    "search_snippet_identity_anchor": None, "search_diagnostics": [],
+                    "comparison_stock_signal": "unknown", "retrieval_time": None,
+                    "available_at": None, "pit_valid": False,
                     "fetch_status": "error", "last_fetch_error": type(exc).__name__ + ":" + str(exc)[:180],
                     "identity_match": False, "identity_matches": []
                 }
