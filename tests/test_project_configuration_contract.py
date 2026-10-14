@@ -74,24 +74,44 @@ class ProjectConfigurationContractTests(unittest.TestCase):
             + int(self.profile["build_shipping_reserve_jpy"])
             + int(self.profile["small_parts_reserve_jpy"])
         )
-        self.assertEqual(components_subtotal, 311360)
-        self.assertEqual(pc_total, 320360)
+        self.assertEqual(components_subtotal, 296160)
+        self.assertEqual(pc_total, 305160)
         self.assertEqual(
             pc_total + int(self.profile["peripheral_budget_jpy"]),
-            390160,
+            374960,
         )
-        self.assertLessEqual(390160, int(self.profile["total_budget_jpy"]))
+        self.assertLessEqual(374960, int(self.profile["total_budget_jpy"]))
 
-    def test_unknown_alternative_gpu_dimensions_remain_explicitly_unverified(self):
+    def test_gpu_skus_and_dimensions_are_source_backed_and_specific(self):
         parts_by_id = {item["id"]: item for item in self.build["parts"]}
-        for part_id in ("gpu-rtx5060ti-16gb", "gpu-rtx5070ti-16gb"):
-            specs = parts_by_id[part_id]["specs"]
-            self.assertIsNone(specs.get("card_length_mm"), part_id)
-            self.assertIsNone(specs.get("card_width_mm"), part_id)
-            self.assertIsNone(specs.get("card_thickness_mm"), part_id)
+        main = parts_by_id["gpu-rtx5070-12gb"]
+        self.assertEqual(main["model_code"], "VCG507012DFSXPB1-O")
+        self.assertEqual(main["specs"]["card_length_mm"], 290)
+        self.assertTrue(main.get("direct_retailer_urls"))
+        self.assertIn("VCG507012DFSXPB1-O", main["spec_source_url"])
+
+        vram = parts_by_id["gpu-rtx5060ti-16gb"]
+        self.assertEqual(vram["model_code"], "VCG5060T16DFXPB1-O")
+        self.assertEqual(vram["specs"]["card_length_mm"], 245)
+        self.assertEqual(vram["specs"]["card_width_mm"], 120)
+        self.assertEqual(vram["specs"]["card_thickness_mm"], 39.9)
+        self.assertEqual(vram["specs"]["connector"], "8-pin PCIe")
+        self.assertEqual(vram["specs"]["minimum_psu_w"], 600)
+        self.assertIn("ask-corp.jp", vram["spec_source_url"])
+
+        dark = parts_by_id["gpu-rtx5070ti-16gb"]
+        self.assertEqual(dark["model_code"], "VCG5070T16TFXXPB1-O")
+        self.assertEqual(dark["specs"]["card_length_mm"], 300)
+        self.assertEqual(dark["specs"]["card_width_mm"], 120)
+        self.assertEqual(dark["specs"]["card_thickness_mm"], 60)
+        self.assertEqual(dark["specs"]["card_thickness_slots"], 2.98)
+        self.assertTrue(dark.get("direct_retailer_urls"))
+        self.assertIn("VCG5070T16TFXXPB1-O", dark["spec_source_url"])
+
         instructions = read_text(".github/copilot-instructions.md")
-        self.assertIn("Do not inherit the RTX 5070's dimensions", instructions)
-        self.assertIn("Unknown details mean REVIEW, not PASS", instructions)
+        self.assertIn("Exact model/SKU evidence", instructions)
+        self.assertIn("direct_retailer_urls", read_text("scripts/build_component_monitor.py"))
+        self.assertIn("shopping.yahoo.co.jp", self.profile["allowed_search_reference_domains"])
 
     def test_readme_copilot_instructions_and_peripheral_guide_match_current_plan(self):
         readme = read_text("README.md")
