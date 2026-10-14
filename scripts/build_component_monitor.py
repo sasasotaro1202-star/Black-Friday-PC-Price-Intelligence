@@ -8,6 +8,7 @@ import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import timezone, timedelta
 from urllib.parse import quote, urlparse
+from html.parser import HTMLParser
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCRIPTS = os.path.join(ROOT, "scripts")
@@ -114,12 +115,120 @@ def parse_snippet_price(text, minimum, maximum):
 
 
 
-def parse_kakaku_search_page_reference(part, html_body, source_url):
-    """Extract a nearby product-price pair from Kakaku search results as display-only data.
 
-    This path never becomes a verified market/retailer price. It requires the
-    search.kakaku.com host, an allowlisted product identity phrase, and a yen
-    amount within the part-specific range near that identity.
+class _KakakuNode:
+    __slots__ = ("tag", "attrs", "children", "parent")
+
+    def __init__(self, tag, attrs, parent=None):
+        self.tag = tag
+        self.attrs = dict(attrs or [])
+        self.children = []
+        self.parent = parent
+
+
+class _KakakuSearchTreeParser(HTMLParser):
+    """Small standard-library HTML tree builder; no third-party parser required."""
+
+    VOID_TAGS = {
+        "area", "base", "br", "col", "embed", "hr", "img", "input", "link",
+        "meta", "param", "source", "track", "wbr",
+    }
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.root = _KakakuNode("document", {})
+        self.stack = [self.root]
+        self.nodes = [self.root]
+
+    def handle_starttag(self, tag, attrs):
+        parent = self.stack[-1]
+        node = _KakakuNode(tag.lower(), attrs, parent)
+        parent.children.append(node)
+        self.nodes.append(node)
+        if tag.lower() not in self.VOID_TAGS:
+            self.stack.append(node)
+
+    def handle_startendtag(self, tag, attrs):
+        parent = self.stack[-1]
+        node = _KakakuNode(tag.lower(), attrs, parent)
+        parent.children.append(node)
+        self.nodes.append(node)
+
+    def handle_endtag(self, tag):
+        tag = tag.lower()
+        for index in range(len(self.stack) - 1, 0, -1):
+            if self.stack[index].tag == tag:
+                del self.stack[index:]
+                return
+
+    def handle_data(self, data):
+        if not self.stack:
+            return
+        if any(node.tag in ("script", "style", "noscript", "template") for node in self.stack):
+            return
+        value = str(data or "").strip()
+        if value:
+            self.stack[-1].children.append(value)
+
+
+def _kakaku_node_text(node):
+    pieces = []
+    for child in node.children:
+        pieces.append(child if isinstance(child, str) else _kakaku_node_text(child))
+    return re.sub(r"\s+", " ", " ".join(pieces)).strip()
+
+
+def _kakaku_is_product_card(node):
+    if node.tag in ("article", "li"):
+        return True
+    attrs = node.attrs or {}
+    if str(attrs.get("role") or "").lower() == "listitem":
+        return True
+    classes = [str(x).lower() for x in str(attrs.get("class") or "").split()]
+    for token in classes:
+        compact = re.sub(r"[^a-z0-9]+", "", token)
+        if compact in {
+            "item", "result", "card", "productitem", "productcard",
+            "searchresultitem", "productlistitem", "searchresultcard",
+        }:
+            return True
+        if re.search(r"(?:^|[-_])(?:item|result|card)(?:$|[-_])", token):
+            return True
+        if compact.endswith(("productitem", "resultitem", "productcard", "resultcard")):
+            return True
+    return False
+
+
+def _kakaku_card_prices(text, minimum, maximum):
+    """Return distinct in-range yen values within one structural product card."""
+    pattern = re.compile(
+        r"(?:[¥￥]\s*([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})(?:\s*円)?|"
+        r"(?<![0-9])([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\s*円)"
+    )
+    excluded_prefix = re.compile(r"割引|値引|クーポン|ポイント|還元|月額|毎月|分割|off", re.I)
+    prices = []
+    for match in pattern.finditer(text):
+        raw = match.group(1) or match.group(2)
+        try:
+            price = int(raw.replace(",", ""))
+        except (TypeError, ValueError):
+            continue
+        if not minimum <= price <= maximum:
+            continue
+        prefix = text[max(0, match.start() - 36):match.start()]
+        if excluded_prefix.search(prefix[-24:]):
+            continue
+        prices.append(price)
+    return sorted(set(prices))
+
+
+def parse_kakaku_search_page_reference(part, html_body, source_url):
+    """Extract a display-only reference only when SKU and one price share a product card.
+
+    A page-wide nearest-price heuristic is unsafe: a price from an adjacent SKU can
+    appear close to a product title in flattened HTML. This parser requires a bounded
+    structural card (article/li/known item/result/card class), a curated identity
+    phrase in that card, and exactly one distinct plausible yen price in that card.
     """
     try:
         parsed = urlparse(str(source_url or ""))
@@ -128,88 +237,63 @@ def parse_kakaku_search_page_reference(part, html_body, source_url):
     except Exception:
         return None
 
-    page = re.sub(r"<script[^>]*>.*?</script>", " ", str(html_body or ""), flags=re.I | re.S)
-    page = re.sub(r"<style[^>]*>.*?</style>", " ", page, flags=re.I | re.S)
-    page = re.sub(r"</(?:li|article)>", " ", page, flags=re.I)
-    text = html_lib.unescape(re.sub(r"<[^>]+>", " ", page))
-    text = re.sub(r"\s+", " ", text).strip()
-    if not text:
+    try:
+        parser = _KakakuSearchTreeParser()
+        parser.feed(str(html_body or ""))
+        parser.close()
+    except Exception:
         return None
 
     minimum = int(part.get("min_price_jpy") or 1)
     maximum = int(part.get("max_price_jpy") or 10**9)
-    generic = {
-        "rtx507012gb", "rtx5060ti16gb", "rtx5070ti16gb",
-        "ddr5600032gb", "windows11home", "ryzen79700x",
-    }
-    anchor_candidates = []
-    model_code = str(part.get("model_code") or "").strip()
-    name = str(part.get("name") or "").strip()
-    if model_code:
-        anchor_candidates.append((1000, model_code))
-    if name:
-        anchor_candidates.append((850, name))
-    for term in list(part.get("aliases") or []) + list(part.get("identity_terms") or []):
-        term = str(term or "").strip()
-        term_norm = normalized(term)
-        if len(term_norm) >= 9 and term_norm not in generic:
-            anchor_candidates.append((700 + min(len(term_norm), 80), term))
-
-    unique = {}
-    for priority, term in anchor_candidates:
-        key = normalized(term)
-        if key and key not in unique:
-            unique[key] = (priority, term)
-    yen_pattern = re.compile(
-        r"(?:[¥￥]\s*([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})(?:\s*円)?|"
-        r"(?<![0-9])([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\s*円)"
-    )
-    excluded_prefix = re.compile(r"割引|値引|クーポン|ポイント|還元|月額|毎月|分割|off", re.I)
     candidates = []
-    for priority, term in unique.values():
-        pieces = [re.escape(piece) for piece in re.split(r"\s+", term) if piece]
-        if not pieces:
+    for node in parser.nodes:
+        if node is parser.root or not _kakaku_is_product_card(node):
             continue
-        pattern = re.compile(r"\s+".join(pieces), re.I)
-        for anchor in pattern.finditer(text):
-            left = max(0, anchor.start() - 180)
-            right = min(len(text), anchor.end() + 500)
-            for price_match in yen_pattern.finditer(text, left, right):
-                raw_price = price_match.group(1) or price_match.group(2)
-                try:
-                    price = int(raw_price.replace(",", ""))
-                except (TypeError, ValueError):
-                    continue
-                if not minimum <= price <= maximum:
-                    continue
-                prefix = text[max(0, price_match.start() - 32):price_match.start()]
-                if excluded_prefix.search(prefix[-24:]):
-                    continue
-                # Prices far from the identity are likely from an adjacent item.
-                distance = min(
-                    abs(price_match.start() - anchor.end()),
-                    abs(anchor.start() - price_match.end()),
-                )
-                if distance > 380:
-                    continue
-                context = text[max(0, price_match.start() - 70):min(len(text), price_match.end() + 45)]
-                candidates.append((priority, -distance, {
-                    "url": str(source_url),
-                    "title": term,
-                    "snippet": context,
-                    "price_jpy": price,
-                    "price_context": context,
-                    "identity_anchor": term,
-                    "source_role": "comparison_site_search_snippet_reference",
-                    "bf_actual_authorized": False,
-                    "search_provider": "kakaku_search_page",
-                    "query": term,
-                    "same_comparison_item_path": False,
-                }))
+        text = _kakaku_node_text(node)
+        # A card is small enough to represent one result, not a whole result list.
+        if not text or len(text) > 1800:
+            continue
+        anchor = component_search_identity_anchor({"title": text, "snippet": ""}, part)
+        if not anchor:
+            continue
+        prices = _kakaku_card_prices(text, minimum, maximum)
+        # Price ranges, new/used offers, installment rates, or more than one offer
+        # within the card remain ambiguous and are not rendered as a reference.
+        if len(prices) != 1:
+            continue
+        price = prices[0]
+        context = text[:500]
+        normalized_anchor = normalized(anchor)
+        # Prefer exact SKU/model-code evidence; otherwise prefer the smallest card.
+        identity_priority = 3 if normalized_anchor == normalized(part.get("model_code")) else (
+            2 if normalized_anchor == normalized(part.get("name")) else 1
+        )
+        candidates.append((identity_priority, len(text), {
+            "url": str(source_url),
+            "title": anchor,
+            "snippet": context,
+            "price_jpy": price,
+            "price_context": context,
+            "identity_anchor": anchor,
+            "source_role": "comparison_site_search_snippet_reference",
+            "bf_actual_authorized": False,
+            "search_provider": "kakaku_search_page",
+            "query": str(part.get("name") or part.get("model_code") or ""),
+            "same_comparison_item_path": False,
+        }))
+
     if not candidates:
         return None
-    candidates.sort(key=lambda row: (-row[0], -row[1], row[2]["price_jpy"]))
-    return candidates[0][2]
+    candidates.sort(key=lambda row: (-row[0], row[1], row[2]["price_jpy"]))
+    # If equally strong product cards disagree on price, keep the reference unknown.
+    best_priority = candidates[0][0]
+    best_size = candidates[0][1]
+    top = [row[2] for row in candidates if row[0] == best_priority and row[1] == best_size]
+    distinct_prices = {row["price_jpy"] for row in top}
+    if len(distinct_prices) != 1:
+        return None
+    return top[0]
 
 def parse_search_snippet_reference(part, results, domains=DEFAULT_DOMAINS):
     """Use a search snippet only as display-only context, never as a direct/live price."""
