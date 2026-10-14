@@ -180,6 +180,47 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertIn("BF目標を¥25,400下回っています", row["detail"])
         self.assertNotIn("¥-", row["detail"])
 
+    def test_verified_price_with_unknown_stock_is_budgeted_but_not_actionable(self):
+        now_text = intelligence.iso(intelligence.now_jst())
+        products = []
+        for target in self.cfg["peripherals"]:
+            if not target.get("track_current_price"):
+                continue
+            products.append({
+                "id": target["id"],
+                "name": target["name"],
+                "current_price_jpy": target["target_price_jpy"],
+                "last_valid_price_jpy": target["target_price_jpy"],
+                "price_verified": True,
+                "identity_verified": True,
+                "stock_status": "in_stock",
+                "retrieval_time": now_text,
+                "available_at": now_text,
+            })
+        speaker = next(x for x in products if x["id"] == "speakers")
+        speaker["current_price_jpy"] = 29980
+        speaker["last_valid_price_jpy"] = 29980
+        speaker["stock_status"] = "unknown"
+        snapshot = {"generated_at": now_text, "products": products}
+        original_load_json = intelligence.load_json
+
+        def deterministic_load_json(path, default):
+            if str(path).endswith("data/peripheral_prices.json"):
+                return snapshot
+            return original_load_json(path, default)
+
+        with patch.object(intelligence, "load_json", side_effect=deterministic_load_json):
+            projection = intelligence.peripheral_budget_projection()
+
+        speaker_row = next(x for x in projection["peripherals"] if x["id"] == "speakers")
+        self.assertEqual(projection["peripheral_projection_jpy"], 75780)
+        self.assertEqual(projection["pc_dynamic_cap_jpy"], 324220)
+        self.assertIn("speakers", projection["tracked_peripheral_unverified_ids"])
+        self.assertFalse(projection["budget_data_ready"])
+        self.assertEqual(speaker_row["current_price_jpy"], 29980)
+        self.assertEqual(speaker_row["budget_cost_jpy"], 29980)
+        self.assertEqual(speaker_row["cost_basis"], "observed_price_stock_unconfirmed")
+
     def test_cached_price_for_previous_speaker_model_is_not_reused(self):
         now_text = intelligence.iso(intelligence.now_jst())
         products = []
