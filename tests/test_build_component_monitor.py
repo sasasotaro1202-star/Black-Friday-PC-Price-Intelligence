@@ -83,6 +83,49 @@ class BuildComponentMonitorTests(unittest.TestCase):
             self.part, bad_price, "https://search.kakaku.com/PNY/"
         ))
 
+    def test_kakaku_search_page_pairs_price_only_with_matching_structural_card(self):
+        html = (
+            "<html><body><div class='product-list'>"
+            "<article><h2>Other GPU model</h2><p>最安価格 ¥129,800</p></article>"
+            "<article><h2>PNY GeForce RTX 5070 12GB OC SLIM</h2><p>最安価格 ¥139,800</p></article>"
+            "</div></body></html>"
+        )
+        reference = bcm.parse_kakaku_search_page_reference(
+            self.part, html, "https://search.kakaku.com/PNY/"
+        )
+        self.assertIsNotNone(reference)
+        self.assertEqual(reference["price_jpy"], 139800)
+        self.assertEqual(reference["identity_anchor"], "PNY GeForce RTX 5070 12GB OC SLIM")
+
+    def test_kakaku_search_page_does_not_borrow_price_from_adjacent_card(self):
+        html = (
+            "<html><body><div class='product-list'>"
+            "<article><h2>PNY GeForce RTX 5070 12GB OC SLIM</h2><p>在庫確認中</p></article>"
+            "<article><h2>Other GPU model</h2><p>最安価格 ¥139,800</p></article>"
+            "</div></body></html>"
+        )
+        self.assertIsNone(bcm.parse_kakaku_search_page_reference(
+            self.part, html, "https://search.kakaku.com/PNY/"
+        ))
+
+    def test_kakaku_search_page_rejects_multiple_distinct_prices_in_one_card(self):
+        html = (
+            "<html><body><article><h2>PNY GeForce RTX 5070 12GB OC SLIM</h2>"
+            "<p>新品 ¥139,800 中古 ¥129,800</p></article></body></html>"
+        )
+        self.assertIsNone(bcm.parse_kakaku_search_page_reference(
+            self.part, html, "https://search.kakaku.com/PNY/"
+        ))
+
+    def test_kakaku_search_page_requires_a_product_card_not_page_wide_proximity(self):
+        html = (
+            "<html><body><h2>PNY GeForce RTX 5070 12GB OC SLIM</h2>"
+            "<p>最安価格 ¥139,800</p></body></html>"
+        )
+        self.assertIsNone(bcm.parse_kakaku_search_page_reference(
+            self.part, html, "https://search.kakaku.com/PNY/"
+        ))
+
     def test_rotating_retailer_domain_is_deterministic_for_a_five_minute_slot(self):
         from datetime import datetime
         from zoneinfo import ZoneInfo
