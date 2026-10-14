@@ -123,9 +123,10 @@ jobs:
             python scripts/sanitize.py
             python scripts/official_campaign_dates.py
             python scripts/report.py
+            # Build the current DIY plan before rendering build-level buy timing.
+            python scripts/self_build_planner.py
             python scripts/timing_analysis.py
             python scripts/scenario_analysis.py
-            python scripts/self_build_planner.py
             python scripts/healthcheck.py
             python scripts/validate.py
             git diff --check
