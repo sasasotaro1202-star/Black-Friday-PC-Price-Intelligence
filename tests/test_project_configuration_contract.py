@@ -184,6 +184,21 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertIn("2026-12-11 23:59 JST", peripherals)
         self.assertIn("公式開催日程", peripherals)
 
+        # Explicit alternative-build totals and compatibility descriptions must
+        # stay aligned with the authoritative component target configuration.
+        self.assertIn("PC本体280,600円、周辺機器込み350,400円", readme)
+        self.assertIn("PC本体324,800円、周辺機器込み394,600円", readme)
+        self.assertNotIn("PC本体295,360円", readme)
+        self.assertNotIn("PC本体329,360円", readme)
+        self.assertIn("| VRAM重視 | RTX 5060 Ti 16GB | ¥280,600 | ¥350,400 |", peripherals if False else read_text("docs/self-build-assembly-guide.md"))
+        self.assertIn("| 大穴 | RTX 5070 Ti 16GB | ¥324,800 | ¥394,600 |", read_text("docs/self-build-assembly-guide.md"))
+        guide = read_text("docs/self-build-assembly-guide.md")
+        self.assertNotIn("正確なカード寸法・補助電源の確認が未完了", guide)
+        self.assertNotIn("¥295,360", guide)
+        self.assertNotIn("¥365,160", guide)
+        self.assertNotIn("¥329,360", guide)
+        self.assertNotIn("¥399,160", guide)
+
     def test_monitor_workflow_has_one_cadence_switch_and_fast_workflow_is_manual(self):
         regular = read_text(".github/workflows/pc-price-monitor.yml")
         fast = read_text(".github/workflows/pc-price-monitor-bf-fast.yml")
