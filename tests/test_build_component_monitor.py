@@ -515,6 +515,43 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertEqual(offer["price_source_mode"], "direct_text")
         self.assertEqual(offer["identity_anchor"], anchor)
 
+    def test_direct_price_uses_later_exact_sku_span_when_long_primary_title_is_far_away(self):
+        part = {
+            "id": "memory-teamgroup-ddr5-32gb-6000",
+            "category": "memory",
+            "name": "TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)",
+            "model_code": "CTCWD532G6000HC38ADC01",
+            "aliases": [
+                "T-CREATE EXPERT White 32GB",
+                "CTCWD532G6000HC38ADC01",
+                "DDR5-6000 32GB",
+                "TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応",
+            ],
+            "identity_terms": [
+                "T-CREATE EXPERT White 32GB",
+                "CTCWD532G6000HC38ADC01",
+                "TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応",
+            ],
+            "min_price_jpy": 20000,
+            "max_price_jpy": 120000,
+        }
+        title = "TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応"
+        filler = "商品説明と配送案内 " * 160
+        html = """
+        <html><head><title>YMALL 商品ページ</title></head><body>
+          <h1>TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応：[MLYモール]</h1>
+          <div>""" + filler + """</div>
+          <div>商品番号：CTCWD532G6000HC38ADC01-A 商品内容：16GBx2枚 色：T-CREATE EXPERT ホワイト 商品タイプ：DDR5 6000MHz CL38</div>
+          <div>販売価格 113,938円 (税込) ポイント 1% 1,140円相当 送料無料</div>
+        </body></html>
+        """
+        anchor = bcm.component_primary_identity_anchor(part, html)
+        self.assertEqual(anchor, title)
+        offer = bcm.parse_component_direct_text_price(part, html, anchor)
+        self.assertIsNotNone(offer)
+        self.assertEqual(offer["price_jpy"], 113938)
+        self.assertEqual(offer["price_source_mode"], "direct_text")
+
     def test_primary_h1_mismatch_cannot_be_overridden_by_matching_og_title(self):
         html = """
         <html><head>
