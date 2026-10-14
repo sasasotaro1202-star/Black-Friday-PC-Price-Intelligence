@@ -113,7 +113,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertNotIn("Creative Pebble X at JPY 10,000", instructions)
         self.assertIn("2026-11-01 00:00 JST", peripherals)
         self.assertIn("2026-12-11 23:59 JST", peripherals)
-        self.assertIn("公式開催期間", peripherals)
+        self.assertIn("公式開催日程", peripherals)
 
     def test_monitor_workflow_has_one_cadence_switch_and_fast_workflow_is_manual(self):
         regular = read_text(".github/workflows/pc-price-monitor.yml")
