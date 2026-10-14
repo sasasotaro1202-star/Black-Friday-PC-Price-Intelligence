@@ -90,12 +90,15 @@ class BuildComponentMonitorTests(unittest.TestCase):
             "<article><h2>PNY GeForce RTX 5070 12GB OC SLIM</h2><p>最安価格 ¥139,800</p></article>"
             "</div></body></html>"
         )
+        diagnostic = {}
         reference = bcm.parse_kakaku_search_page_reference(
-            self.part, html, "https://search.kakaku.com/PNY/"
+            self.part, html, "https://search.kakaku.com/PNY/", diagnostic
         )
         self.assertIsNotNone(reference)
         self.assertEqual(reference["price_jpy"], 139800)
         self.assertEqual(reference["identity_anchor"], "PNY GeForce RTX 5070 12GB OC SLIM")
+        self.assertEqual(diagnostic["extraction_reason"], "display_only_price_from_single_product_card")
+        self.assertEqual(diagnostic["identity_card_count"], 1)
 
     def test_kakaku_search_page_recognizes_search_item_class_cards(self):
         html = (
@@ -116,9 +119,11 @@ class BuildComponentMonitorTests(unittest.TestCase):
             "<article><h2>Other GPU model</h2><p>最安価格 ¥139,800</p></article>"
             "</div></body></html>"
         )
+        diagnostic = {}
         self.assertIsNone(bcm.parse_kakaku_search_page_reference(
-            self.part, html, "https://search.kakaku.com/PNY/"
+            self.part, html, "https://search.kakaku.com/PNY/", diagnostic
         ))
+        self.assertEqual(diagnostic["extraction_reason"], "sku_identity_not_found_in_product_card")
 
     def test_kakaku_search_page_rejects_multiple_distinct_prices_in_one_card(self):
         html = (
