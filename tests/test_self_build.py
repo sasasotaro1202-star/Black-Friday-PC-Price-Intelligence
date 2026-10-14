@@ -24,14 +24,34 @@ class SelfBuildPlannerTests(unittest.TestCase):
     def test_target_totals_and_all_in_budget(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         builds = {x["gpu_choice_id"]:x for x in plan["builds"]}
-        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_pc_total_jpy"], 300600)
-        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_pc_total_jpy"], 280600)
-        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_pc_total_jpy"], 324800)
-        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_all_in_jpy"], 370400)
-        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_all_in_jpy"], 350400)
-        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_all_in_jpy"], 394600)
+        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_pc_total_jpy"], 320600)
+        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_pc_total_jpy"], 300600)
+        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_pc_total_jpy"], 344800)
+        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_all_in_jpy"], 390400)
+        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_all_in_jpy"], 370400)
+        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_all_in_jpy"], 414600)
+        self.assertFalse(builds["gpu-rtx5070ti-16gb"]["target_within_pc_budget"])
+        self.assertFalse(builds["gpu-rtx5070ti-16gb"]["target_within_total_budget"])
+        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_remaining_budget_jpy"], -14600)
+        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["decision"], "OVER_BUDGET_TARGET")
         self.assertTrue(plan["budget_arithmetic_valid"])
         self.assertFalse(plan["buy_now_authorized"])
+
+    def test_primary_build_selects_the_tracked_crucial_kit_and_keeps_teamgroup_as_alternative(self):
+        plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
+        builds = {x["gpu_choice_id"]:x for x in plan["builds"]}
+        main = builds["gpu-rtx5070-12gb"]
+        memory = [x for x in main["components"] if x["category"] == "memory"]
+        self.assertEqual(len(memory), 1)
+        self.assertEqual(memory[0]["id"], "memory-crucial-pro-ddr5-32gb-6000")
+        self.assertEqual(memory[0]["target_price_jpy"], 60000)
+        self.assertNotIn("memory-teamgroup-ddr5-32gb-6000", [x["id"] for x in main["components"]])
+        self.assertEqual(main["compatibility_status"], "PASS")
+        self.assertIn("memory-teamgroup-ddr5-32gb-6000", {x["id"] for x in self.config["parts"]})
+        self.assertEqual(
+            next(x for x in self.config["parts"] if x["id"] == "memory-teamgroup-ddr5-32gb-6000")["role"],
+            "price_monitored_alternative",
+        )
 
     def test_diy_is_primary_and_assembly_time_has_zero_penalty(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)

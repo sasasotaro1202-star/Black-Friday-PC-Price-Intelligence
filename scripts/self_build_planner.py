@@ -322,7 +322,15 @@ def compatibility_checks(parts, profile, gpu_id):
 
     cpu = spec("cpu-ryzen7-9700x")
     board = spec("motherboard-asrock-b850m-pro-rs-wifi")
-    memory = spec("memory-teamgroup-ddr5-32gb-6000")
+    fixed_ids = profile.get("fixed_part_ids") or []
+    memory_part_id = next(
+        (
+            str(part_id) for part_id in fixed_ids
+            if (parts.get(str(part_id)) or {}).get("category") == "memory"
+        ),
+        "memory-teamgroup-ddr5-32gb-6000",
+    )
+    memory = spec(memory_part_id)
     storage = spec("ssd-crucial-p3-plus-1tb")
     psu = spec("psu-corsair-rm850e-2025")
     case = spec("case-fractal-pop-air-tg")
