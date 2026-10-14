@@ -314,6 +314,53 @@ class BuildComponentMonitorTests(unittest.TestCase):
             )
             mocked.assert_not_called()
 
+    def test_direct_listing_verifier_reports_fetch_errors(self):
+        diagnostic = {}
+        with patch.object(bcm, "fetch", side_effect=RuntimeError("HTTP 403 blocked")):
+            offer = bcm.verify_retailer_listing(
+                self.part, "https://www.dospara.co.jp/item/123", ("dospara.co.jp",),
+                diagnostic_out=diagnostic,
+            )
+        self.assertIsNone(offer)
+        self.assertEqual(diagnostic["reason_code"], "fetch_error")
+        self.assertEqual(diagnostic["error_type"], "RuntimeError")
+        self.assertIn("403", diagnostic["error_message"])
+
+    def test_direct_listing_verifier_reports_identity_and_price_failures_separately(self):
+        no_identity = {}
+        with patch.object(bcm, "fetch", return_value=(
+            "<html><title>Other GPU</title></html>",
+            "https://www.dospara.co.jp/item/123", {}
+        )), patch.object(bcm, "parse_page", return_value={
+            "name": "Other GPU", "price_jpy": 139900,
+            "price_source_mode": "direct_structured", "stock_status": "in_stock",
+            "page_text_excerpt": "Other GPU",
+        }):
+            offer = bcm.verify_retailer_listing(
+                self.part, "https://www.dospara.co.jp/item/123", ("dospara.co.jp",),
+                diagnostic_out=no_identity,
+            )
+        self.assertIsNone(offer)
+        self.assertEqual(no_identity["reason_code"], "exact_model_identity_not_found_in_primary_page")
+
+        no_price = {}
+        html = "<html><title>PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFSXPB1-O</title></html>"
+        raw = {
+            "name": "PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFSXPB1-O",
+            "page_text_excerpt": "PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFSXPB1-O",
+            "price_jpy": None, "price_source_mode": "none", "stock_status": "unknown",
+        }
+        with patch.object(bcm, "fetch", return_value=(html, "https://www.dospara.co.jp/item/123", {})), \
+             patch.object(bcm, "parse_page", return_value=raw), \
+             patch.object(bcm, "parse_component_direct_text_price", return_value=None):
+            offer = bcm.verify_retailer_listing(
+                self.part, "https://www.dospara.co.jp/item/123", ("dospara.co.jp",),
+                diagnostic_out=no_price,
+            )
+        self.assertIsNone(offer)
+        self.assertEqual(no_price["reason_code"], "direct_price_missing_or_not_integer")
+        self.assertEqual(no_price["identity_anchor"], "PNY GeForce RTX 5070 12GB OC SLIM")
+
     def test_direct_retailer_listing_accepts_sub_50000_component_price(self):
         part = {
             "id": "motherboard-test", "category": "motherboard",
