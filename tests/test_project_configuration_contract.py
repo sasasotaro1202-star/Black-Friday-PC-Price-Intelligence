@@ -88,12 +88,14 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(main["model_code"], "VCG507012DFSXPB1-O")
         self.assertEqual(main["specs"]["card_length_mm"], 290)
         self.assertTrue(main.get("direct_retailer_urls"))
-        self.assertEqual(len(main["direct_retailer_urls"]), 3)
+        self.assertEqual(len(main["direct_retailer_urls"]), 4)
         self.assertIn("joshinweb.jp", main["direct_retailer_urls"][0])
         self.assertIn("sofmap.com", main["direct_retailer_urls"][1])
         self.assertIn("tsukumo.co.jp", main["direct_retailer_urls"][2])
+        self.assertIn("amazon.co.jp/dp/B0GSXJPTLN", main["direct_retailer_urls"][3])
         self.assertIn("sofmap.com", self.profile["allowed_search_reference_domains"])
         self.assertIn("tsukumo.co.jp", self.profile["allowed_search_reference_domains"])
+        self.assertIn("amazon.co.jp", self.profile["allowed_search_reference_domains"])
 
         for part_id, host in (
             ("cpu-ryzen7-9700x", "yodobashi.com"),
