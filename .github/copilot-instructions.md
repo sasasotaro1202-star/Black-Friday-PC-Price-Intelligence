@@ -108,3 +108,9 @@ Tests should be network-independent where possible and cover:
 - current README, Copilot instructions and peripheral guide staying aligned with the authoritative config.
 
 Run `python -m unittest discover -s tests -p "test_*.py" -v`, Python compile checks, `scripts/self_build_planner.py`, report/timing/scenario generation, `scripts/healthcheck.py`, `scripts/validate.py`, and `git diff --check` before promoting relevant changes. Report actual verification results; do not claim a test passed until its CI run confirms it.
+
+
+## 2026-10-14 additional exact-source coverage
+- The TeamGroup memory specification source is its official exact-model page. Keep the YMall seller page untrusted unless model identity, direct price, stock and PIT pass.
+- The Crucial P3 Plus 1TB is monitored at TSUKUMO and Dospara. Dospara's page can show a price while out of stock; that remains reference-only.
+- Fractal Pop Air is now monitored at Yodobashi and Dospara; stock/dispatch conditions must come from the fetched seller page.
