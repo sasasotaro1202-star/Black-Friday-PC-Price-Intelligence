@@ -158,7 +158,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertIn("kaago.com", parts_by_id["ssd-crucial-p3-plus-1tb"]["direct_retailer_urls"][2])
         self.assertIn("kaago.com", self.profile["allowed_search_reference_domains"])
         self.assertTrue(parts_by_id["memory-teamgroup-ddr5-32gb-6000"]["direct_retailer_urls"][1].startswith("https://www.amazon.co.jp/"))
-        self.assertIn("TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応", parts_by_id["memory-teamgroup-ddr5-6000"]["aliases"])
+        self.assertIn("TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応", parts_by_id["memory-teamgroup-ddr5-32gb-6000"]["aliases"])
         self.assertIn("CTCWD532G6000HC38ADC01", parts_by_id["memory-teamgroup-ddr5-32gb-6000"]["identity_terms"])
         self.assertEqual(len(parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"]), 2)
         self.assertIn("dospara.co.jp", parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"][1])
