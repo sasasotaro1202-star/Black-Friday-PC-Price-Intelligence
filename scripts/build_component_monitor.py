@@ -7,7 +7,7 @@ import re
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import timezone, timedelta
-from urllib.parse import quote, urlparse
+from urllib.parse import quote, urlparse, urljoin
 from html.parser import HTMLParser
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,6 +24,19 @@ OUTPUT_PATH = os.path.join(ROOT, "data", "build_component_prices.json")
 OBSERVATIONS_PATH = os.path.join(ROOT, "data", "build_component_observations.jsonl")
 EVENTS_PATH = os.path.join(ROOT, "data", "build_component_change_events.jsonl")
 DEFAULT_DOMAINS = ("kakaku.com",)
+
+RETAILER_SEARCH_TEMPLATES = {
+    "amazon.co.jp": "https://www.amazon.co.jp/s?k={query}",
+    "rakuten.co.jp": "https://search.rakuten.co.jp/search/mall/{query}/",
+    "yodobashi.com": "https://www.yodobashi.com/?word={query}",
+    "biccamera.com": "https://www.biccamera.com/bc/category/?q={query}",
+    "dospara.co.jp": "https://www.dospara.co.jp/search?q={query}",
+    "tsukumo.co.jp": "https://shop.tsukumo.co.jp/search/?keyword={query}",
+    "pc-koubou.jp": "https://www.pc-koubou.jp/products/list.php?name={query}",
+    "sofmap.com": "https://www.sofmap.com/search_result.aspx?keyword={query}",
+    "joshinweb.jp": "https://joshinweb.jp/search.html?KEYWORD={query}",
+    "ark-pc.co.jp": "https://www.ark-pc.co.jp/search/?key={query}",
+}
 
 
 def normalized(value):
@@ -402,6 +415,248 @@ def component_search_identity_anchor(result, part):
     return matches[0][1]
 
 
+
+def _normalized_text_span(text, term):
+    """Find a normalized identity term while retaining original text positions."""
+    output_chars = []
+    original_positions = []
+    for index, char in enumerate(str(text or "")):
+        normalized_char = normalized(char)
+        for normalized_item in normalized_char:
+            output_chars.append(normalized_item)
+            original_positions.append(index)
+    haystack = "".join(output_chars)
+    needle = normalized(term)
+    if not needle:
+        return None
+    start = haystack.find(needle)
+    if start < 0:
+        return None
+    return original_positions[start], original_positions[start + len(needle) - 1] + 1
+
+
+def parse_component_direct_text_price(part, html_body):
+    """Extract an identity-local price using the part-specific yen bounds.
+
+    The shared PC parser deliberately filters sub-¥50k prices so accessories do
+    not become PC prices. Reusing it for DIY parts meant that motherboards, SSDs,
+    PSUs, cases and CPU coolers could never become direct listing references.
+    """
+    try:
+        parser = _KakakuSearchTreeParser()
+        parser.feed(str(html_body or ""))
+        parser.close()
+    except Exception:
+        return None
+
+    page_text = _kakaku_node_text(parser.root)
+    if not page_text:
+        return None
+    anchor = component_search_identity_anchor({"title": page_text, "snippet": ""}, part)
+    if not anchor:
+        return None
+    span = _normalized_text_span(page_text, anchor)
+    if not span:
+        return None
+
+    window_start = max(0, span[0] - 1800)
+    window_end = min(len(page_text), span[1] + 5200)
+    local_text = page_text[window_start:window_end]
+    anchor_center = ((span[0] + span[1]) // 2) - window_start
+    minimum = int(part.get("min_price_jpy") or 1)
+    maximum = int(part.get("max_price_jpy") or 10**9)
+    pattern = re.compile(
+        r"(?:[¥￥]\s*([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})(?:\s*円)?|"
+        r"(?<![0-9])([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\s*円)"
+    )
+    excluded = re.compile(
+        r"クーポン|ポイント|還元|割引|値引|円OFF|OFF|月額|毎月|分割|送料分|買取",
+        re.I,
+    )
+    current_label = re.compile(r"販売価格|税込価格|価格|price|amount", re.I)
+    non_current_label = re.compile(r"通常価格|参考価格|希望小売価格|メーカー希望|定価|旧価格|値下げ前", re.I)
+    candidates = []
+    for match in pattern.finditer(local_text):
+        raw_price = match.group(1) or match.group(2)
+        try:
+            value = int(raw_price.replace(",", ""))
+        except (TypeError, ValueError):
+            continue
+        if not minimum <= value <= maximum:
+            continue
+        before = local_text[max(0, match.start() - 42):match.start()]
+        context = local_text[max(0, match.start() - 90):min(len(local_text), match.end() + 90)]
+        if excluded.search(before[-28:]):
+            continue
+        score = 0
+        if current_label.search(before) or current_label.search(context[:90]):
+            score += 8
+        if "¥" in match.group(0) or "￥" in match.group(0):
+            score += 2
+        if non_current_label.search(before):
+            score -= 8
+        if re.search(r"カートに入れる|在庫あり|購入する|add to cart", context, re.I):
+            score += 1
+        distance = abs(anchor_center - match.start())
+        score -= min(5, distance // 900)
+        candidates.append({
+            "price_jpy": value, "score": score,
+            "context": context[:260], "identity_anchor": anchor,
+        })
+    if not candidates:
+        return None
+    best_score = max(item["score"] for item in candidates)
+    best = [item for item in candidates if item["score"] == best_score]
+    best_values = {item["price_jpy"] for item in best}
+    if len(best_values) != 1:
+        return None
+    chosen = sorted(best, key=lambda item: len(item["context"]))[0]
+    return {
+        "price_jpy": chosen["price_jpy"],
+        "price_source_mode": "direct_text",
+        "price_context": chosen["context"],
+        "identity_anchor": chosen["identity_anchor"],
+    }
+
+
+def build_retailer_search_urls(part, domains, now=None, limit=2):
+    """Build free retailer-site search URLs from the explicit allowlist."""
+    now = now or now_jst()
+    allowed = set(str(domain or "").lower().strip(".") for domain in (domains or ()))
+    available = [domain for domain in RETAILER_SEARCH_TEMPLATES if domain in allowed]
+    if not available:
+        return []
+    terms = [str(part.get("name") or "").strip(), str(part.get("model_code") or "").strip()]
+    query = " ".join(term for term in terms if term)
+    if not query:
+        query = next((str(term).strip() for term in (part.get("aliases") or []) if str(term).strip()), "")
+    if not query:
+        return []
+    offset = sum(ord(ch) for ch in str(part.get("id") or query))
+    slot = now.hour * 12 + now.minute // 5 + offset
+    count = min(max(1, int(limit)), len(available))
+    chosen = [available[(slot + index) % len(available)] for index in range(count)]
+    encoded_query = quote(query, safe="")
+    return [
+        {
+            "provider": "retailer_search_page",
+            "retailer_domain": domain,
+            "query": query,
+            "url": RETAILER_SEARCH_TEMPLATES[domain].format(query=encoded_query),
+        }
+        for domain in chosen
+    ]
+
+
+def _is_descendant_node(node, ancestor):
+    current = getattr(node, "parent", None)
+    while current is not None:
+        if current is ancestor:
+            return True
+        current = getattr(current, "parent", None)
+    return False
+
+
+def parse_retailer_search_page(part, html_body, source_url, domains, retailer_domain):
+    """Find exact-identity product-detail links; never trust search-card price as live."""
+    metrics = {
+        "product_card_count": 0,
+        "identity_card_count": 0,
+        "price_unambiguous_card_count": 0,
+        "detail_link_count": 0,
+        "extraction_reason": "unclassified",
+    }
+
+    def finish(links, reason):
+        metrics["extraction_reason"] = reason
+        return links, metrics
+
+    if not allowed_url(source_url, domains) or not allowed_url(source_url, (retailer_domain,)):
+        return finish([], "search_page_host_rejected")
+    try:
+        parser = _KakakuSearchTreeParser()
+        parser.feed(str(html_body or ""))
+        parser.close()
+    except Exception:
+        return finish([], "html_parse_error")
+
+    cards = [
+        node for node in parser.nodes
+        if node is not parser.root and _kakaku_is_product_card(node)
+    ]
+    metrics["product_card_count"] = len(cards)
+    if not cards:
+        return finish([], "no_product_card_nodes")
+
+    minimum = int(part.get("min_price_jpy") or 1)
+    maximum = int(part.get("max_price_jpy") or 10**9)
+    links_out = []
+    seen = set()
+    for card in cards:
+        card_text = _kakaku_node_text(card)
+        if not card_text or len(card_text) > 2400:
+            continue
+        identity = component_search_identity_anchor({"title": card_text, "snippet": ""}, part)
+        if not identity:
+            continue
+        metrics["identity_card_count"] += 1
+        card_prices = _kakaku_card_prices(card_text, minimum, maximum)
+        if len(card_prices) != 1:
+            continue
+        metrics["price_unambiguous_card_count"] += 1
+
+        anchors = [
+            node for node in parser.nodes
+            if node.tag == "a" and _is_descendant_node(node, card)
+        ]
+        exact_identity_urls = set()
+        unique_allowed_urls = set()
+        for anchor_node in anchors:
+            href = str((anchor_node.attrs or {}).get("href") or "").strip()
+            if not href or href.startswith(("#", "javascript:", "mailto:")):
+                continue
+            destination = urljoin(source_url, href)
+            parsed_destination = urlparse(destination)
+            if not allowed_url(destination, domains) or not allowed_url(destination, (retailer_domain,)):
+                continue
+            path_lower = parsed_destination.path.lower()
+            if any(token in path_lower for token in (
+                "/cart", "/login", "/wishlist", "/favorite", "/review", "/compare",
+                "/search", "/category", "/ranking", "/support", "/help",
+            )):
+                continue
+            if destination.rstrip("/") == source_url.rstrip("/"):
+                continue
+            unique_allowed_urls.add(destination)
+            link_text = _kakaku_node_text(anchor_node)
+            if component_search_identity_anchor({"title": link_text, "snippet": ""}, part):
+                exact_identity_urls.add(destination)
+
+        preferred = sorted(exact_identity_urls) if exact_identity_urls else (
+            sorted(unique_allowed_urls) if len(unique_allowed_urls) == 1 else []
+        )
+        for destination in preferred:
+            if destination in seen:
+                continue
+            seen.add(destination)
+            links_out.append({
+                "url": destination,
+                "identity_anchor": identity,
+                "card_price_jpy": card_prices[0],
+                "source_url": source_url,
+            })
+    metrics["detail_link_count"] = len(links_out)
+    if links_out:
+        return finish(links_out[:3], "exact_identity_detail_link_found")
+    if metrics["identity_card_count"] == 0:
+        reason = "sku_identity_not_found_in_product_card"
+    elif metrics["price_unambiguous_card_count"] == 0:
+        reason = "matching_product_card_price_ambiguous_or_missing"
+    else:
+        reason = "no_allowed_product_detail_link"
+    return finish([], reason)
+
+
 def build_component_search_queries(part, domains=DEFAULT_DOMAINS, now=None):
     """Create a comparison-item query, a rotating retailer query, and a broad discovery fallback.
 
@@ -501,11 +756,21 @@ def verify_retailer_listing(part, candidate_url, domains):
         if not anchor:
             return None
         price = raw.get("price_jpy")
+        source_mode = raw.get("price_source_mode")
+        price_context = raw.get("price_context")
+        # The shared PC parser intentionally filters out sub-¥50k prices.
+        # Retry with a part-specific bound and the exact product's local text.
+        if price is None or source_mode not in ("direct_structured", "direct_meta", "direct_text"):
+            direct = parse_component_direct_text_price(part, html)
+            if direct:
+                price = direct["price_jpy"]
+                source_mode = direct["price_source_mode"]
+                price_context = direct.get("price_context")
+                anchor = direct.get("identity_anchor") or anchor
         minimum = int(part.get("min_price_jpy") or 1)
         maximum = int(part.get("max_price_jpy") or 10**9)
         if isinstance(price, bool) or not isinstance(price, int) or not minimum <= price <= maximum:
             return None
-        source_mode = raw.get("price_source_mode")
         if source_mode not in ("direct_structured", "direct_meta", "direct_text"):
             return None
         retrieved = iso(now_jst())
@@ -522,6 +787,7 @@ def verify_retailer_listing(part, candidate_url, domains):
             "retrieval_time": retrieved,
             "pit_valid": True,
             "bf_actual_authorized": False,
+            "price_context": price_context,
         }
     except Exception:
         return None
@@ -592,6 +858,69 @@ def search_comparison_snippet(part, domains):
                     "verified_retailer_listing_count": 0,
                     "source_role": "comparison_site_search_snippet_reference",
                 })
+
+    # Search a rotating set of allowlisted retailer pages directly. Search-card
+    # prices only identify candidate listings; each detail URL is fetched again.
+    for search in build_retailer_search_urls(part, domains, limit=2):
+        page_metrics = {}
+        search_url = search["url"]
+        retailer_domain = search["retailer_domain"]
+        links = []
+        page_status = "error"
+        page_error = None
+        direct_before = direct_fetch_attempts
+        offer_before = len(verified_offers)
+        try:
+            body, final_url, _headers = fetch(search_url, timeout=6)
+            if not allowed_url(final_url, domains) or not allowed_url(final_url, (retailer_domain,)):
+                raise RuntimeError("retailer_search_redirect_left_allowlist")
+            links, page_metrics = parse_retailer_search_page(
+                part, body, final_url, domains, retailer_domain
+            )
+            page_status = "ok"
+            for link in links[:2]:
+                if direct_fetch_attempts >= 4:
+                    break
+                direct_fetch_attempts += 1
+                offer = verify_retailer_listing(part, link["url"], domains)
+                if offer and offer.get("url") not in {x.get("url") for x in verified_offers}:
+                    verified_offers.append(offer)
+        except Exception as exc:
+            page_status = "error"
+            page_error = type(exc).__name__ + ":" + str(exc)[:140]
+        diagnostics.append({
+            "provider": "retailer_search_page",
+            "query_index": 0,
+            "query": search.get("query"),
+            "retailer_domain": retailer_domain,
+            "status": page_status,
+            "error": page_error,
+            "result_count": page_metrics.get("product_card_count", 0),
+            "page_fetch_count": 1,
+            "allowed_reference_host_count": 1 if page_status == "ok" else 0,
+            "rejected_host_samples": [],
+            "rejected_url_samples": [],
+            "identity_anchor_count": page_metrics.get("identity_card_count", 0),
+            "in_range_price_count": page_metrics.get("price_unambiguous_card_count", 0),
+            "detail_link_count": page_metrics.get("detail_link_count", 0),
+            "extraction_reason": page_metrics.get("extraction_reason", "fetch_failed"),
+            "direct_retailer_fetch_attempt_count": direct_fetch_attempts - direct_before,
+            "verified_retailer_listing_count": len(verified_offers) - offer_before,
+            "source_role": "direct_retailer_listing_reference",
+        })
+
+    if any(item.get("stock_status") == "in_stock" for item in verified_offers):
+        verified_offers.sort(key=lambda item: (
+            0 if item.get("stock_status") == "in_stock" else 1,
+            item.get("price_jpy", 10**12),
+            0 if item.get("price_source_mode") == "direct_structured" else 1,
+            0 if item.get("identity_anchor") == str(part.get("model_code") or "") else 1,
+        ))
+        return {
+            "retailer_listing_offer": verified_offers[0],
+            "retailer_listing_offers": verified_offers,
+            "search_diagnostics": diagnostics,
+        }
 
     # Bing is the primary free search path. DuckDuckGo's HTML endpoint has
     # frequently returned an empty/blocked document in runners, so only repeat

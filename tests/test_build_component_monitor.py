@@ -143,6 +143,72 @@ class BuildComponentMonitorTests(unittest.TestCase):
             self.part, html, "https://search.kakaku.com/PNY/"
         ))
 
+    def test_retailer_search_urls_are_built_only_for_allowlisted_domains(self):
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        now = datetime(2026, 10, 14, 12, 0, tzinfo=ZoneInfo("Asia/Tokyo"))
+        urls = bcm.build_retailer_search_urls(
+            self.part, ("kakaku.com", "amazon.co.jp", "rakuten.co.jp", "dospara.co.jp"),
+            now=now, limit=2,
+        )
+        self.assertEqual(len(urls), 2)
+        self.assertEqual(len({x["retailer_domain"] for x in urls}), 2)
+        for item in urls:
+            self.assertTrue(bcm.allowed_url(item["url"], (item["retailer_domain"],)))
+            self.assertIn("VCG507012DFXPB1-O", item["url"])
+        self.assertEqual(bcm.build_retailer_search_urls(self.part, ("kakaku.com",), now=now), [])
+
+    def test_retailer_search_page_returns_same_card_allowlisted_detail_link(self):
+        html = (
+            "<html><body><ul class='product-list'>"
+            "<li class='product-item'><a href='/item/other'>Other GPU item</a><span>¥129,800</span></li>"
+            "<li class='product-item'><a href='/item/123'>PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFXPB1-O</a>"
+            "<span>最安価格 ¥139,800</span></li></ul></body></html>"
+        )
+        links, diag = bcm.parse_retailer_search_page(
+            self.part, html, "https://www.dospara.co.jp/search?q=PNY",
+            ("dospara.co.jp",), "dospara.co.jp",
+        )
+        self.assertEqual(len(links), 1)
+        self.assertEqual(links[0]["url"], "https://www.dospara.co.jp/item/123")
+        self.assertEqual(links[0]["card_price_jpy"], 139800)
+        self.assertEqual(diag["extraction_reason"], "exact_identity_detail_link_found")
+
+    def test_component_direct_text_parser_accepts_sub_50000_part_price_near_identity(self):
+        part = {
+            "id": "motherboard-test", "name": "ASRock B850M Pro RS WiFi",
+            "model_code": "B850M Pro RS WiFi",
+            "aliases": ["ASRock B850M Pro RS WiFi"],
+            "identity_terms": ["B850M Pro RS WiFi"],
+            "min_price_jpy": 12000, "max_price_jpy": 50000,
+        }
+        html = (
+            "<html><body><h1>ASRock B850M Pro RS WiFi</h1>"
+            "<div class='price-box'><span>販売価格（税込）</span><strong>23,780円</strong></div>"
+            "<section><h2>関連商品</h2><p>別のGPU 190,800円</p></section></body></html>"
+        )
+        price = bcm.parse_component_direct_text_price(part, html)
+        self.assertIsNotNone(price)
+        self.assertEqual(price["price_jpy"], 23780)
+        self.assertEqual(price["price_source_mode"], "direct_text")
+
+    def test_component_direct_text_parser_rejects_missing_identity_and_ambiguous_prices(self):
+        part = {
+            "id": "motherboard-test", "name": "ASRock B850M Pro RS WiFi",
+            "model_code": "B850M Pro RS WiFi",
+            "aliases": ["ASRock B850M Pro RS WiFi"],
+            "identity_terms": ["B850M Pro RS WiFi"],
+            "min_price_jpy": 12000, "max_price_jpy": 50000,
+        }
+        self.assertIsNone(bcm.parse_component_direct_text_price(
+            part, "<html><body><h1>Other motherboard</h1><p>23,780円</p></body></html>"
+        ))
+        ambiguous = (
+            "<html><body><h1>ASRock B850M Pro RS WiFi</h1>"
+            "<p>販売価格 23,780円</p><p>販売価格 21,980円</p></body></html>"
+        )
+        self.assertIsNone(bcm.parse_component_direct_text_price(part, ambiguous))
+
     def test_rotating_retailer_domain_is_deterministic_for_a_five_minute_slot(self):
         from datetime import datetime
         from zoneinfo import ZoneInfo
@@ -162,6 +228,34 @@ class BuildComponentMonitorTests(unittest.TestCase):
                 bcm.verify_retailer_listing(self.part, "https://untrusted.example/item/1", ("dospara.co.jp",))
             )
             mocked.assert_not_called()
+
+    def test_direct_retailer_listing_accepts_sub_50000_component_price(self):
+        part = {
+            "id": "motherboard-test", "category": "motherboard",
+            "name": "ASRock B850M Pro RS WiFi", "model_code": "B850M Pro RS WiFi",
+            "aliases": ["ASRock B850M Pro RS WiFi"],
+            "identity_terms": ["B850M Pro RS WiFi"],
+            "min_price_jpy": 12000, "max_price_jpy": 50000,
+        }
+        html = (
+            "<html><body><h1>ASRock B850M Pro RS WiFi</h1>"
+            "<div class='price-box'><span>販売価格（税込）</span><strong>23,780円</strong></div>"
+            "<p>在庫あり</p></body></html>"
+        )
+        raw = {
+            "name": "ASRock B850M Pro RS WiFi",
+            "page_text_excerpt": "ASRock B850M Pro RS WiFi 販売価格（税込）23,780円 在庫あり",
+            "price_jpy": None, "price_source_mode": "none", "stock_status": "in_stock",
+        }
+        with patch.object(bcm, "fetch", return_value=(html, "https://www.dospara.co.jp/item/1", {})), patch.object(bcm, "parse_page", return_value=raw):
+            offer = bcm.verify_retailer_listing(
+                part, "https://www.dospara.co.jp/item/1", ("dospara.co.jp",)
+            )
+        self.assertIsNotNone(offer)
+        self.assertEqual(offer["price_jpy"], 23780)
+        self.assertEqual(offer["price_source_mode"], "direct_text")
+        self.assertEqual(offer["stock_status"], "in_stock")
+        self.assertEqual(offer["source_role"], "direct_retailer_listing_reference")
 
     def test_direct_retailer_listing_requires_page_identity_and_plausible_price(self):
         html = "<html><title>PNY GeForce RTX 5070 12GB OC SLIM</title></html>"
