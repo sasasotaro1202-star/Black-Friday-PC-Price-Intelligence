@@ -24,12 +24,12 @@ class SelfBuildPlannerTests(unittest.TestCase):
     def test_target_totals_and_all_in_budget(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         builds = {x["gpu_choice_id"]:x for x in plan["builds"]}
-        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_pc_total_jpy"], 305160)
-        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_pc_total_jpy"], 285160)
-        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_pc_total_jpy"], 329360)
-        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_all_in_jpy"], 374960)
-        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_all_in_jpy"], 354960)
-        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_all_in_jpy"], 399160)
+        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_pc_total_jpy"], 300600)
+        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_pc_total_jpy"], 280600)
+        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_pc_total_jpy"], 324800)
+        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_all_in_jpy"], 370400)
+        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_all_in_jpy"], 350400)
+        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_all_in_jpy"], 394600)
         self.assertTrue(plan["budget_arithmetic_valid"])
         self.assertFalse(plan["buy_now_authorized"])
 
@@ -191,36 +191,29 @@ class SelfBuildPlannerTests(unittest.TestCase):
             for part in config["parts"] if part.get("track_price")
         ]
 
-    def test_manual_os_reference_cannot_be_mixed_into_live_market_estimate(self):
-        rows = self._verified_hardware_rows(self.config)
+    def test_os_component_is_not_zero_filled_when_direct_price_is_missing(self):
+        rows = [
+            row for row in self._verified_hardware_rows(self.config)
+            if row["id"] != "os-windows11-home"
+        ]
         plan = planner.build_plan(
             self.config, {"generated_at": NOW.isoformat(), "products": rows}, now=NOW
         )
         build = next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")
-        self.assertIsNone(build["market_reference_estimate_jpy"])
-        self.assertFalse(build["market_reference_coverage_complete"])
-        self.assertIn("os-windows11-home", build["missing_or_untrusted_market_reference_ids"])
         self.assertEqual(build["market_reference_coverage_count"], 8)
         os_row = next(x for x in build["components"] if x["id"] == "os-windows11-home")
         self.assertIsNone(os_row["market_reference_price_jpy"])
-        self.assertEqual(os_row["display_reference_price_jpy"], 19360)
-        self.assertEqual(os_row["price_status"], "manual_reference_unverified")
+        self.assertIsNone(os_row["display_reference_price_jpy"])
+        self.assertEqual(os_row["price_status"], "not_observed")
         self.assertFalse(os_row["trusted_for_market_estimate"])
         report = planner.render_plan_markdown(plan)
-        self.assertIn("19,360（手動参考・現行未確認）", report)
+        self.assertIn("14,800", report)
+        self.assertNotIn("19,360（手動参考・現行未確認）", report)
 
-    def test_fresh_identity_verified_manual_reference_can_complete_estimate(self):
-        config = json.loads(json.dumps(self.config))
-        os_part = next(x for x in config["parts"] if x["id"] == "os-windows11-home")
-        os_part.update({
-            "reference_price_is_current_verified": True,
-            "reference_price_identity_verified": True,
-            "reference_price_checked_at": NOW.isoformat(),
-            "reference_price_url": "https://www.microsoft.com/ja-jp/store/",
-        })
-        rows = self._verified_hardware_rows(config)
+    def test_fresh_verified_os_market_reference_can_complete_estimate(self):
+        rows = self._verified_hardware_rows(self.config)
         plan = planner.build_plan(
-            config, {"generated_at": NOW.isoformat(), "products": rows}, now=NOW
+            self.config, {"generated_at": NOW.isoformat(), "products": rows}, now=NOW
         )
         build = next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")
         self.assertEqual(build["market_reference_estimate_jpy"], build["target_pc_total_jpy"])
@@ -228,7 +221,7 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(build["market_reference_coverage_count"], 9)
         self.assertNotIn("os-windows11-home", build["missing_or_untrusted_market_reference_ids"])
         os_row = next(x for x in build["components"] if x["id"] == "os-windows11-home")
-        self.assertEqual(os_row["price_status"], "verified_manual_reference")
+        self.assertEqual(os_row["price_status"], "verified_market_reference")
         self.assertTrue(os_row["trusted_for_market_estimate"])
 
     def test_future_dated_direct_retailer_listing_is_never_trusted(self):
