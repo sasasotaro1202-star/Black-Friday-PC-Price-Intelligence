@@ -50,9 +50,9 @@ def fixture(now, price=280000, stock="in_stock", rank_status="BUY_NOW", gate_all
         "prediction_time": retrieved,
         "source_snapshot_generated_at": retrieved,
         "source_snapshot_sha256": "test-snapshot",
-        "total_budget_jpy": 400000,
-        "pc_target_jpy": 330200,
-        "dynamic_pc_cap_jpy": 330200,
+        "total_budget_jpy": 380000,
+        "pc_target_jpy": 310200,
+        "dynamic_pc_cap_jpy": 310200,
         "peripheral_projection_jpy": 69800,
         "peripheral_budget_data_ready": budget_ready,
         "purchase_gate": {
@@ -281,7 +281,7 @@ class BuyNowDecisionTests(unittest.TestCase):
 
     def test_self_build_timing_does_not_authorize_from_targets_or_reference_prices(self):
         plan = {
-            "total_budget_jpy": 400000, "pc_budget_jpy": 330200,
+            "total_budget_jpy": 380000, "pc_budget_jpy": 310200,
             "peripheral_budget_jpy": 69800,
             "purchase_method_policy": {
                 "primary_method": "SELF_BUILD",
@@ -291,9 +291,9 @@ class BuyNowDecisionTests(unittest.TestCase):
             "builds": [{
                 "rank": 1, "id": "diy-primary", "gpu_choice_id": "gpu-rtx5070-12gb",
                 "name": "DIY Ryzen + RTX 5070",
-                "target_pc_total_jpy": 320000, "target_all_in_jpy": 389800,
+                "target_pc_total_jpy": 300000, "target_all_in_jpy": 369800,
                 "target_remaining_budget_jpy": 10200, "target_within_total_budget": True,
-                "target_parts_subtotal_jpy": 311000,
+                "target_parts_subtotal_jpy": 291000,
                 "compatibility_status": "PASS",
                 "market_reference_estimate_jpy": None,
                 "market_reference_all_in_estimate_jpy": None,
@@ -315,7 +315,7 @@ class BuyNowDecisionTests(unittest.TestCase):
         self.assertEqual(result["status"], "WAIT_FOR_COMPONENT_REFERENCES")
         self.assertFalse(result["purchase_allowed"])
         self.assertFalse(result["bf_actual_authorized"])
-        self.assertEqual(result["target_all_in_jpy"], 389800)
+        self.assertEqual(result["target_all_in_jpy"], 369800)
         self.assertEqual(result["verified_market_reference_count"], 0)
         self.assertEqual(result["verified_checkout_offer_count"], 0)
         self.assertFalse(result["assembly_time_is_constraint"])
@@ -324,7 +324,7 @@ class BuyNowDecisionTests(unittest.TestCase):
     def test_display_only_search_reference_is_visible_but_never_used_for_estimate_or_buy_gate(self):
         now = datetime(2026, 10, 14, 12, 0, tzinfo=JST)
         plan = {
-            "total_budget_jpy": 400000, "pc_budget_jpy": 330200,
+            "total_budget_jpy": 380000, "pc_budget_jpy": 310200,
             "peripheral_budget_jpy": 69800,
             "purchase_method_policy": {
                 "primary_method": "SELF_BUILD",
@@ -333,9 +333,9 @@ class BuyNowDecisionTests(unittest.TestCase):
             },
             "builds": [{
                 "rank": 1, "id": "diy-primary", "gpu_choice_id": "g1", "name": "DIY test build",
-                "target_pc_total_jpy": 320000, "target_all_in_jpy": 389800,
+                "target_pc_total_jpy": 300000, "target_all_in_jpy": 369800,
                 "target_remaining_budget_jpy": 10200, "target_within_total_budget": True,
-                "target_parts_subtotal_jpy": 311000, "compatibility_status": "PASS",
+                "target_parts_subtotal_jpy": 291000, "compatibility_status": "PASS",
                 "market_reference_estimate_jpy": None, "market_reference_all_in_estimate_jpy": None,
                 "missing_or_untrusted_market_reference_ids": ["cpu-x"],
                 "components": [{
@@ -421,8 +421,8 @@ class BuyNowDecisionTests(unittest.TestCase):
                                                 "unconfirmed_count": 0, "fetch_error_count": 0},
             "purchase_method_policy": {"primary_method": "SELF_BUILD"},
             "self_build_purchase_timing": {
-                "selected_build_name": "DIY test build", "target_pc_total_jpy": 320000,
-                "target_all_in_jpy": 389800, "target_remaining_budget_jpy": 10200,
+                "selected_build_name": "DIY test build", "target_pc_total_jpy": 300000,
+                "target_all_in_jpy": 369800, "target_remaining_budget_jpy": 10200,
                 "compatibility_status": "PASS", "verified_market_reference_count": 0,
                 "display_only_search_reference_count": 0, "direct_listing_display_count": 1,
                 "tracked_component_count": 1, "verified_checkout_offer_count": 0,
@@ -438,13 +438,13 @@ class BuyNowDecisionTests(unittest.TestCase):
 
     def test_self_build_waits_for_checkout_offers_even_when_reference_prices_are_complete(self):
         plan = {
-            "total_budget_jpy": 400000, "pc_budget_jpy": 330200, "peripheral_budget_jpy": 69800,
+            "total_budget_jpy": 380000, "pc_budget_jpy": 310200, "peripheral_budget_jpy": 69800,
             "purchase_method_policy": {"assembly_time_is_constraint": False, "assembly_time_penalty_points": 0},
             "builds": [{
                 "rank": 1, "id": "diy-primary", "gpu_choice_id": "g1", "name": "DIY build",
-                "target_pc_total_jpy": 320000, "target_all_in_jpy": 389800,
+                "target_pc_total_jpy": 300000, "target_all_in_jpy": 369800,
                 "target_remaining_budget_jpy": 10200, "target_within_total_budget": True,
-                "target_parts_subtotal_jpy": 311000, "compatibility_status": "PASS",
+                "target_parts_subtotal_jpy": 291000, "compatibility_status": "PASS",
                 "market_reference_estimate_jpy": 300000, "market_reference_all_in_estimate_jpy": 369800,
                 "missing_or_untrusted_market_reference_ids": [],
                 "components": [{

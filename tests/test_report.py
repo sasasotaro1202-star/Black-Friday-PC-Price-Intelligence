@@ -105,15 +105,15 @@ class ReportLinkTests(unittest.TestCase):
             "retrieval_time": "2026-10-10T18:00:00+09:00",
             "available_at": "2026-10-10T17:59:00+09:00",
         }
-        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 69800,
-                  "pc_target_jpy": 330200, "pc_budget_jpy": 330200}
+        policy = {"total_budget_jpy": 380000, "peripheral_budget_jpy": 69800,
+                  "pc_target_jpy": 310200, "pc_budget_jpy": 310200}
         projection = {"pc_dynamic_cap_jpy": 302200}
         result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
         self.assertEqual(row["status"], "PRE_BF_TARGET_MONITORING")
-        self.assertEqual(row["max_upgrade_cost_to_bf_target_jpy"], 50400)
-        self.assertEqual(row["max_upgrade_cost_to_bf_hard_cap_jpy"], 50400)
-        self.assertEqual(row["black_friday_target_price_jpy"], 330200)
+        self.assertEqual(row["max_upgrade_cost_to_bf_target_jpy"], 30400)
+        self.assertEqual(row["max_upgrade_cost_to_bf_hard_cap_jpy"], 30400)
+        self.assertEqual(row["black_friday_target_price_jpy"], 310200)
         self.assertIsNone(row["black_friday_price_observed_jpy"])
         self.assertEqual(row["pre_black_friday_reference_price_jpy"], 279800)
         self.assertIn("BF価格ではありません", row["detail"])
@@ -151,8 +151,8 @@ class ReportLinkTests(unittest.TestCase):
             "retrieval_time": "2026-10-10T18:00:00+09:00",
             "available_at": "2026-10-10T17:59:00+09:00",
         }
-        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 69800,
-                  "pc_target_jpy": 320200, "pc_budget_jpy": 330200}
+        policy = {"total_budget_jpy": 380000, "peripheral_budget_jpy": 69800,
+                  "pc_target_jpy": 320200, "pc_budget_jpy": 310200}
         projection = {"pc_dynamic_cap_jpy": 289240}
         result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
@@ -160,9 +160,9 @@ class ReportLinkTests(unittest.TestCase):
         self.assertEqual(row["black_friday_target_price_jpy"], 320200)
         self.assertIsNone(row["black_friday_price_observed_jpy"])
         self.assertEqual(row["pre_black_friday_reference_price_jpy"], 330000)
-        self.assertEqual(row["black_friday_price_cap_jpy"], 330200)
+        self.assertEqual(row["black_friday_price_cap_jpy"], 310200)
         self.assertEqual(row["pre_bf_reference_gap_to_target_jpy"], 9800)
-        self.assertEqual(row["pre_bf_reference_gap_to_planned_cap_jpy"], 0)
+        self.assertEqual(row["pre_bf_reference_gap_to_planned_cap_jpy"], 19800)
 
     def test_rtx_5070_ti_outlier_requires_verified_complete_configuration(self):
         from datetime import datetime
@@ -189,8 +189,8 @@ class ReportLinkTests(unittest.TestCase):
             "pit_valid": True,
             "spec": {"gpu": "RTX 5070 Ti", "ram_gb": 16, "ssd": "1 TB"},
         }
-        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 69800,
-                  "pc_target_jpy": 330200, "pc_budget_jpy": 330200}
+        policy = {"total_budget_jpy": 380000, "peripheral_budget_jpy": 69800,
+                  "pc_target_jpy": 310200, "pc_budget_jpy": 310200}
         projection = {"pc_dynamic_cap_jpy": 302200}
         official_calendar = {
             "official_2026_dates": {
@@ -248,8 +248,8 @@ class ReportLinkTests(unittest.TestCase):
             "available_at": "2026-11-20T11:59:00+09:00",
             "spec": {"gpu": "RTX 5070", "ram_gb": 32, "ssd": "1 TB"},
         }
-        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 69800,
-                  "pc_target_jpy": 330200, "pc_budget_jpy": 330200}
+        policy = {"total_budget_jpy": 380000, "peripheral_budget_jpy": 69800,
+                  "pc_target_jpy": 310200, "pc_budget_jpy": 310200}
         projection = {"pc_dynamic_cap_jpy": 302200, "budget_data_ready": True}
         official_calendar = {
             "official_2026_dates": {
@@ -308,8 +308,8 @@ class ReportLinkTests(unittest.TestCase):
             "available_at": "2026-11-20T11:59:00+09:00",
             "spec": {"gpu": "RTX 5070", "ram_gb": 32, "ssd": "1 TB"},
         }
-        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 69800,
-                  "pc_target_jpy": 330200, "pc_budget_jpy": 330200}
+        policy = {"total_budget_jpy": 380000, "peripheral_budget_jpy": 69800,
+                  "pc_target_jpy": 310200, "pc_budget_jpy": 310200}
         projection = {"pc_dynamic_cap_jpy": 302200, "budget_data_ready": True}
         official_calendar = {
             "official_2026_dates": {

@@ -36,8 +36,8 @@ class DecisionScoringTests(unittest.TestCase):
         }
 
     def test_budget_discount(self):
-        self.assertEqual(intelligence.required_discount(330200), 0)
-        self.assertAlmostEqual(intelligence.required_discount(350000), (350000 - 330200) / 350000 * 100, places=6)
+        self.assertEqual(intelligence.required_discount(310200), 0)
+        self.assertAlmostEqual(intelligence.required_discount(350000), (350000 - 310200) / 350000 * 100, places=6)
 
     def test_effective_cost_uses_confirmed_benefit_only(self):
         item = self.candidate(price=289000)
@@ -112,9 +112,9 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertEqual(detail["status"], "WAIT_FOR_DISCOUNT")
 
     def test_scenario_prices(self):
-        s = intelligence.scenario_prices(400000)
-        self.assertEqual(s[0]["price_jpy"], 360000)
-        self.assertEqual(s[-1]["price_jpy"], 280000)
+        s = intelligence.scenario_prices(380000)
+        self.assertEqual(s[0]["price_jpy"], 342000)
+        self.assertEqual(s[-1]["price_jpy"], 266000)
 
     def test_price_parser_rejects_monthly_context(self):
         picked = intelligence.pick_price("月々9,000円 / 販売価格 289,800円(税込)")

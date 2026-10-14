@@ -15,8 +15,8 @@ The user's intended workflow is explicit:
 Read `config/targets.json` and `config/build_components.json` before changing budgets, targets, parts, or schedules. They are the authoritative machine-readable configuration; do not reintroduce stale values in prose or code.
 
 The current user-selected plan is:
-- **Total cash budget: ¥400,000** for the DIY desktop plus every required peripheral.
-- **Peripheral planning target: ¥69,800**; **PC-only planning target/cap: ¥330,200** before any conservative dynamic adjustment for verified delivered peripheral costs. These values sum to ¥400,000.
+- **Total-system planning target: around ¥380,000** for the DIY desktop plus every required peripheral. Treat this as the center target, not a reason to omit dark horses from rankings; list any overrun explicitly.
+- **Peripheral planning target: ¥69,800**; **PC-only planning frame: ¥310,200** before the conservative dynamic adjustment for verified delivered peripheral costs. These target values sum to ¥380,000.
 - Two monitors are required: AOC Q27G40E/11, 27-inch WQHD 180Hz main monitor, and LG 24MS500-B, 23.8-inch FHD IPS 100Hz secondary monitor.
 - Speaker target: EDIFIER MR4 MKII. Do not substitute Creative Pebble X or the more expensive MR5 as the main plan without a deliberate, budget-checked update.
 - Also budget for Logicool G213r keyboard, Logicool G304 mouse, SteelSeries QcK Large mousepad, ELECOM T-K1A-2625BK power strip, only-needed cables, and shipping/incidentals.
@@ -33,17 +33,17 @@ Primary component target:
 - CPU: AMD Ryzen 7 9700X BOX — BF target ¥38,000.
 - GPU: PNY GeForce RTX 5070 12GB OC SLIM (exact SKU VCG507012DFSXPB1-O) — BF target ¥129,800; primary balanced gaming target.
 - Motherboard: ASRock B850M Pro RS WiFi — ¥20,000.
-- Primary memory: Crucial Pro DDR5-6000 32GB (2×16GB), model CP2K16G60C36U5W — aspirational BF target ¥60,000; the current comparison-page price is reference-only and motherboard QVL is not yet verified. Keep TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (2×16GB), target ¥40,000, as a separately monitored alternative, not the selected primary part.
+- Primary budget-fit memory target: TeamGroup T-CREATE EXPERT DDR5-6000 32GB (2×16GB), target ¥40,000. Keep Crucial Pro DDR5-6000 32GB (2×16GB), model CP2K16G60C36U5W, at a ¥60,000 BF target as a separately tracked alternative. Select between them only on fresh exact-item evidence and verified final configuration; the exact motherboard QVL/BIOS remains a pre-purchase gate.
 - SSD: Crucial P3 Plus 1TB NVMe — ¥18,000.
 - PSU: Corsair RM850e 2025, 850W ATX 3.1 Gold — ¥14,000.
 - Case: Fractal Design Pop Air TG — ¥12,000.
 - CPU cooler: Thermalright Peerless Assassin 120 SE V3 — ¥5,000.
 - Windows 11 Home Japanese boxed retail package (SKU HAJ-00094) — BF target ¥14,800; monitor the direct Yodobashi offer and the exact comparison item. Do not use a stale manual ¥19,360 amount as a live market price.
-- Component BF target subtotal: ¥311,600; shipping reserve ¥6,000 + small-parts reserve ¥3,000 = **PC target ¥320,600**. With ¥69,800 peripherals, all-in target = **¥390,400**, leaving ¥9,600 against the ¥400,000 target budget. BF targets are aspirational, not forecasts or verified prices.
+- TeamGroup-based component BF target subtotal: ¥291,600; shipping reserve ¥6,000 + small-parts reserve ¥3,000 = **PC target ¥300,600**. With ¥69,800 peripherals, all-in target = **¥370,400**, leaving a planned ¥9,600 buffer against the around-¥380,000 target. A Crucial-memory version is ¥320,600 PC / ¥390,400 all-in and must be labelled as ¥10,400 over target. These are desired BF prices, not forecasts or verified prices.
 
 Keep these alternatives separate and visible:
-- **VRAM-focused alternative:** RTX 5060 Ti 16GB exact SKU VCG5060T16DFXPB1-O, source-backed 245×120×39.9mm and 8-pin PCIe connector — BF target ¥109,800; projected all-in target ¥354,960 using the same other targets. Prefer it only when its 16GB VRAM benefits the intended local-AI workload more than the RTX 5070's gaming performance.
-- **Dark horse:** RTX 5070 Ti 16GB ARGB (exact SKU VCG5070T16TFXXPB1-O) target ¥154,000; projected all-in target **¥414,600** using the current memory target, exceeding the ¥400,000 budget by ¥14,600. Keep it monitored as an outlier but mark it budget-infeasible until verified price reductions elsewhere restore the cap; its 2.98-slot clearance also remains REVIEW. The target is an affordability threshold, not a price forecast. Keep purchase authorization closed until live seller price/stock, case clearance for the 2.98-slot card, and final all-in total are verified.
+- **VRAM-focused alternative:** RTX 5060 Ti 16GB exact SKU VCG5060T16DFXPB1-O — with the ¥40,000 TeamGroup memory target, projected PC cost ¥280,600 / all-in target ¥350,400. If the Crucial kit is chosen instead, the all-in target is ¥370,400. Keep the local-AI 16GB VRAM advantage distinct from gaming-performance comparisons; re-check the exact GPU's dimensions, connector and completed build.
+- **Dark horse:** RTX 5070 Ti 16GB ARGB (exact SKU VCG5070T16TFXXPB1-O), BF GPU target ¥154,000. With TeamGroup memory, projected PC cost is ¥324,800 / all-in target **¥394,600**, exceeding the ¥380,000 center target by ¥14,600; with Crucial memory, all-in target is ¥414,600. **Always include it in final rankings as a stretch candidate**, show the overrun and price reduction needed, and keep case clearance for its 2.98-slot thickness as REVIEW. A target is not a price forecast. Do not authorize purchase until live seller price/stock, case clearance, compatibility and final all-in cash total are verified.
 - Do not assume an unquoted RAM/SSD upgrade costs ¥0. Add direct retailer monitor URLs for memory and SSD when an exact-item page is available, and keep unknown/out-of-stock readings explicitly untrusted. The quoted completed configuration must meet **RAM ≥32GB and SSD ≥1TB at purchase**; do not rely on a planned post-purchase upgrade.
 
 The build supports the user's stated mix of Apex Legends, VALORANT, other FPS games, Cities: Skylines II, Python/data analysis, AI-assisted work, and large sports/stock/BTC prediction programs. Explain limits honestly: actual FPS, simulation speed, model capacity and training time depend on settings, datasets and workloads; do not promise specific benchmark results without evidence. Treat GPU VRAM, CPU performance, memory capacity, storage capacity, cooling, power delivery and upgradeability as separate factors.
@@ -66,9 +66,9 @@ Exact PNY GPU model codes and dimensions must be maintained from the linked sour
 
 `config/targets.json` is the budget source of truth; `config/build_components.json` is the DIY component source of truth. Preserve this invariant:
 
-`total_budget_jpy = peripheral_budget_jpy + pc_target_jpy`
+`total_budget_jpy = peripheral_budget_jpy + pc_target_jpy` (the configured center target is ¥380,000; keep over-target candidates in comparisons but do not silently approve spending above the target).
 
-The peripheral BF targets should total ¥69,800. Primary DIY parts, shipping reserve and small-parts reserve should total ¥320,600. The main DIY all-in target is ¥390,400. The selected primary memory is Crucial Pro CP2K16G60C36U5W at an aspirational ¥60,000 BF target, while TeamGroup T-CREATE EXPERT at ¥40,000 remains an alternative to be checked for exact-item price, stock and QVL. Dynamic PC spending cap may be reduced based on **fresh, model-matched, in-stock, delivered peripheral prices**. A missing/stale/unknown peripheral price or inventory status is not evidence of a deal: use configured targets only as a planning estimate, mark readiness incomplete and keep the overall purchase gate closed.
+The peripheral BF targets should total ¥69,800. The TeamGroup-based main DIY parts, shipping and small-parts target should total ¥300,600, producing a ¥370,400 all-in planning target. Crucial Pro CP2K16G60C36U5W at ¥60,000 remains an alternative with a ¥390,400 all-in target. Keep RTX 5070 Ti at ¥394,600 all-in with TeamGroup as an over-target stretch candidate. Rankings must preserve these options and show deltas; purchase authorization remains fail-closed until fresh price, stock, compatibility and checkout evidence pass.
 
 Every price must be labelled as one of:
 - **BF purchase target**: desired price, not a forecast and not observed.
