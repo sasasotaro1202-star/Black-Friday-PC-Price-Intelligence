@@ -1,76 +1,109 @@
 # Black Friday PC Price Intelligence — Project Instructions
 
-## Goal
-Evaluate the best Japanese-market PC purchase throughout the entire 2026 Black Friday window. Desktops are preferred, but do not discard exceptional laptop, outlet, old-stock, or limited-time deals. A bargain is only current when supported by recent source evidence.
+## 1. Authoritative configuration and user goal
 
-## Authoritative all-in budget
-config/targets.json is the single source of truth.
+Read `config/targets.json` and `config/build_components.json` before changing budgets, targets, parts, or schedules. They are the authoritative machine-readable configuration; do not reintroduce stale values in prose or code.
 
-- Total budget: JPY 370,000 for PC + all required peripherals.
-- Peripheral target allocation: JPY 45,800.
-- PC target price: JPY 321,800.
-- PC planned hard cap: JPY 324,200 only when all peripherals stay within their target allocation.
-- Required PC configuration: RAM >= 32GB and SSD >= 1TB.
-- One monitor only; no secondary monitor and no headset.
-- Speaker quality is a secondary priority: target a sensible-budget Creative Pebble X at JPY 10,000 BF target price. Do not overpay for audiophile/monitor-speaker performance; reallocate the former JPY 22,000 MR5 premium allocation to PC performance.
-- Include shipping, required fees, cable needs, and multi-store shipping reserve.
-- Track monitor, speakers, mouse and mousepad prices separately from PC prices.
-- Do not subtract coupons, points, lotteries, future rewards, or eligibility-dependent perks until actual checkout applicability is verified.
+The current user-selected plan is:
+- **Total cash budget: ¥400,000** for the DIY desktop plus every required peripheral.
+- **Peripheral planning target: ¥69,800**; **PC-only planning target/cap: ¥330,200** before any conservative dynamic adjustment for verified delivered peripheral costs. These values sum to ¥400,000.
+- Two monitors are required: AOC Q27G40E/11, 27-inch WQHD 180Hz main monitor, and LG 24MS500-B, 23.8-inch FHD IPS 100Hz secondary monitor.
+- Speaker target: EDIFIER MR4 MKII. Do not substitute Creative Pebble X or the more expensive MR5 as the main plan without a deliberate, budget-checked update.
+- Also budget for Logicool G213r keyboard, Logicool G304 mouse, SteelSeries QcK Large mousepad, ELECOM T-K1A-2625BK power strip, only-needed cables, and shipping/incidentals.
+- No headset is in the current purchase list.
+- Never count alternate products as simultaneous purchases. Select at most one product per peripheral category, and purchase cables only if included cables are insufficient.
 
-## Black Friday price semantics — mandatory
+If a user later explicitly changes their total budget or preferred equipment, update the single source of truth and the dependent reports/docs/tests together. Do not silently revert to an older ¥370,000 / one-monitor plan.
 
-- All purchase target prices in the 37万円 strategy and peripheral targets mean **prices targeted for purchase during the Black Friday window**, not today's prices.
-- Window: 2026-11-14 00:00 JST through 2026-12-04 23:59 JST.
-- Before the window, listings are `PRE_BLACK_FRIDAY_REFERENCE`; they must not populate `black_friday_price_observed_jpy` or be described as BF sale prices.
-- A BF-period observation requires source retrieval inside the window, verified current price, SKU identity, valid PIT, and confirmed stock.
-- Show BF target price, pre-window reference price, and observed BF-window price separately. Never present a future sale price as confirmed.
-- ¥321,800 PC target, ¥324,200 planned cap and ¥10,000 Creative Pebble X target are BF purchase goals. Use actual peripheral prices to adjust the PC cap only during the BF window and when the accessory snapshot is fresh and verified.
+## 2. Build method and target configuration
 
-## 37万円購入戦略
+**The primary desktop recommendation must be a self-built DIY PC.** Assembly time and effort are not constraints and receive no penalty. A BTO desktop or laptop may remain in the comparison catalog as a clearly labelled reference benchmark, but must not replace the primary DIY recommendation merely because it avoids assembly.
 
-- Primary conditional target: `desktop-gtune-dg-i5g70-5070`. Its 279,800 JPY listing is only the 16 GB / 500 GB baseline. Never mark it purchase-ready until a 32 GB / 1 TB completed configuration and checkout price are verified. For a 279,800 JPY baseline, the max upgrade allowance is 42,000 JPY to reach the 321,800 JPY PC target or 44,400 JPY to reach the 324,200 JPY planning cap; these are arithmetic ceilings, not quoted upgrade prices.
-- Secondary complete-build watch: the exact outlet SKU `DGA7G70B5BBDW101DECWA`, official URL `https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/`. The 2026-10-10 observed listing reference was 304,800 JPY with Ryzen 7 5700X, RTX 5070, 32 GB RAM and 1 TB SSD. Always refresh price, inventory and SKU identity before treating it as current.
-- Outlier watch: RTX 5070 Ti desktop with at least 32 GB RAM / 1 TB SSD is eligible only if its directly verified completed build price is within the live dynamic PC cap. No assumed-zero upgrade costs.
-- Keep Creative Pebble X at a 10,000 JPY BF target. Sound quality is intentionally not a premium requirement; prioritize the PC build. Coupons are not deducted until final checkout applicability is verified.
-- Do not hardcode the illustrative 96/94/95/97 scores. Compute the actual priority score from validated live evidence, and keep purchase gates closed whenever completed configuration or price is unknown.
+Primary component target:
+- CPU: AMD Ryzen 7 9700X BOX — BF target ¥38,000.
+- GPU: PNY GeForce RTX 5070 12GB OC SLIM — BF target ¥145,000; primary balanced gaming target.
+- Motherboard: ASRock B850M Pro RS WiFi — ¥20,000.
+- Memory: TeamGroup T-CREATE EXPERT White DDR5-6000, 32GB (2×16GB) — ¥40,000.
+- SSD: Crucial P3 Plus 1TB NVMe — ¥18,000.
+- PSU: Corsair RM850e 2025, 850W ATX 3.1 Gold — ¥14,000.
+- Case: Fractal Design Pop Air TG — ¥12,000.
+- CPU cooler: Thermalright Peerless Assassin 120 SE V3 — ¥5,000.
+- Windows 11 Home retail-license planning allowance — ¥19,360 unless a transferable valid license is explicitly confirmed.
+- Component BF target subtotal: ¥311,360; shipping reserve ¥6,000 + small-parts reserve ¥3,000 = **PC target ¥320,360**. With ¥69,800 peripherals, all-in target = **¥390,160**, leaving ¥9,840 against the ¥400,000 target budget.
 
-Current prices of tracked peripherals must adjust the dynamic PC cap. Missing/stale price or unknown stock must use the configured target as a planning reserve only and keep the overall purchase gate closed.
+Keep these alternatives separate and visible:
+- **VRAM-focused alternative:** RTX 5060 Ti 16GB target ¥120,000; projected all-in target ¥365,160 using the same other targets. Prefer it only when its 16GB VRAM benefits the intended local-AI workload more than the RTX 5070's gaming performance.
+- **Dark horse:** RTX 5070 Ti 16GB target ¥154,000; projected all-in target ¥399,160. This is a tight budget case, with only ¥840 target headroom. Exact model dimensions, connector, power limits, delivery costs, and full-build compatibility are unresolved until verified; keep it in REVIEW / not purchase-authorized until then.
+- Do not assume an unquoted RAM/SSD upgrade costs ¥0. The quoted completed configuration must meet **RAM ≥32GB and SSD ≥1TB at purchase**; do not rely on a planned post-purchase upgrade.
 
-## Decision score
-The 100-point score is purchase priority, not probability. Weight: performance 40, price/value 20, historical sale evidence 15, stock/sellout risk 15, timing 10. Include GPU/VRAM, CPU, memory, SSD, cooling, PSU/expandability, configuration, warranty, source quality, data freshness, variant identity and PIT validity.
+The build supports the user's stated mix of Apex Legends, VALORANT, other FPS games, Cities: Skylines II, Python/data analysis, AI-assisted work, and large sports/stock/BTC prediction programs. Explain limits honestly: actual FPS, simulation speed, model capacity and training time depend on settings, datasets and workloads; do not promise specific benchmark results without evidence. Treat GPU VRAM, CPU performance, memory capacity, storage capacity, cooling, power delivery and upgradeability as separate factors.
 
-A PC with fewer than 32GB RAM or less than 1TB SSD must be NEEDS_CONFIGURATION, never BUY_NOW. Never price an unquoted memory/storage upgrade as zero. Use completed configuration cost.
+## 3. Component compatibility and purchasing gate
 
-## Fail-closed evidence rules
-Fail closed on missing current price, ambiguous SKU, conflicting CPU/GPU/RAM/SSD evidence, unknown stock when purchaseability matters, stale observations, missing/invalid PIT, conflicting structured prices, anomalous prices without independent corroboration, or reference/monthly/installment/discount amounts mistaken for actual sale price.
+Keep DIY component prices separate from BTO/laptop offers and peripheral prices. Before marking a build compatible, validate:
+- CPU socket and exact board support/BIOS for the selected CPU;
+- DDR5 type, 2-stick arrangement, capacity, speed/profile and motherboard memory support/QVL;
+- NVMe form factor/interface and M.2 slot constraints;
+- motherboard form factor and case support;
+- exact GPU SKU dimensions, slot thickness, connector, power draw, PSU capacity/connectors and case clearance;
+- CPU cooler socket support and height versus case clearance;
+- PSU form factor and required connectors;
+- Windows license, shipping, required small parts, and the final complete configuration total.
 
-Keep current price, historical/reference price, mandatory shipping/fees, confirmed cash benefit, conditional benefits and planning targets separate. Fetch failure is not out-of-stock. A historical price is not a current offer. Shared model-family pages are not proof of exact SKU.
+The RTX 5060 Ti and RTX 5070 Ti entries currently have model-specific dimensions marked unknown in configuration. Do not inherit the RTX 5070's dimensions for either alternative. Unknown details mean REVIEW, not PASS. Even if an automated mechanical check says PASS, verify manufacturer documentation for the exact SKU and the retailer's final basket immediately before purchase.
 
-Preserve event_time, publication_time, available_at, retrieval_time and prediction_time. Unknown event_time remains null. Require available_at <= retrieval_time <= prediction_time; unknown/invalid PIT means no purchase recommendation.
+## 4. Budget and price semantics
 
-## Workflow design
-- Normal monitoring executes about every 15 minutes.
-- Black Friday window monitoring executes about every 5 minutes.
-- Use a single scheduled workflow; keep the fast workflow manual-only to prevent duplicated runs.
-- Never cancel an in-progress price collection when a newer cron tick arrives; use `cancel-in-progress: false` for the shared writer concurrency group.
-- Run `scripts/discover.py` only after syncing/resetting to the latest `origin/main` inside the publish retry loop; otherwise the reset discards the newly discovered watchlist.
-- Monitor PCs and accessories separately; accessory prices must never appear as PC ranking rows.
-- GitHub Actions and Python standard library first. No paid APIs or unknown billing dependencies.
-- Validate budget arithmetic, accessory target sum, complete PC configuration, dynamic all-in PC cap, SKU identity, price source, stock, coverage counters, source snapshot hash, scoring arithmetic and PIT before publishing.
-- Run tests and healthcheck before promoting changes. Never weaken safety gates to force a recommendation.
+`config/targets.json` is the budget source of truth; `config/build_components.json` is the DIY component source of truth. Preserve this invariant:
 
-## Autonomous improvement
-For each safe/free defect: observe → diagnose → implement → unit/regression tests → PIT/data-quality validation → promote or rollback → monitor again. Report evidence, uncertainty and exact uncompleted work honestly.
+`total_budget_jpy = peripheral_budget_jpy + pc_target_jpy`
 
-## Window
-Broad watch window: 2026-11-14 00:00 JST through 2026-12-04 23:59 JST until official retailer-specific dates are independently verified.
+The peripheral BF targets should total ¥69,800. Primary DIY parts, shipping reserve and small-parts reserve should total ¥320,360. The main DIY all-in target is ¥390,160. Dynamic PC spending cap may be reduced based on **fresh, model-matched, in-stock, delivered peripheral prices**. A missing/stale/unknown peripheral price or inventory status is not evidence of a deal: use configured targets only as a planning estimate, mark readiness incomplete and keep the overall purchase gate closed.
 
+Every price must be labelled as one of:
+- **BF purchase target**: desired price, not a forecast and not observed.
+- **Pre-BF/current reference**: reference only; not a BF actual.
+- **Verified market reference**: comparison-site listing, not a checkout offer.
+- **Direct retailer listing reference**: exact-model page price, but still not necessarily in-stock or final checkout price.
+- **Verified checkout cash price**: seller, exact SKU, configuration, stock, shipping/mandatory fees, discounts and final cash amount checked.
+- **Verified BF-period price**: eligible only when the retailer's official 2026 campaign dates are confirmed, the observation falls inside that retailer's official period, exact product/configuration and stock are verified, checkout terms are clear, and point-in-time (PIT) evidence is valid.
 
-## Free source resilience and diagnostics
+Do not call a price “BF actual” just because it was observed in the broad watch window or within the initial planning focus of 2026-11-14 through 2026-12-04. The configured broad observation window is **2026-11-01 00:00 JST to 2026-12-11 23:59:59 JST**; this is not a retailer's official BF period. That initial focus range is a planning horizon only. Resolve each retailer's actual 2026 sale interval independently from official, year-specific evidence; never infer it from 2025 dates, weekday patterns or month/day text without a year.
 
-- Use free public search providers in sequence when a direct page request fails; do not require API keys or paid services.
-- A search result's price is usable only when that result title/snippet contains a catalogued exact SKU/model alias, the URL host is on the allowlist, the price passes bounds validation, and the source is preserved for audit. Never infer SKU identity solely from the canonical product URL.
-- Preserve request failure details (HTTP status, curl exit/status code, timeout/connect reason), grouped by host and reason. Do not treat transport errors as stockout or a sale.
-- Keep search attempts, accepted fallback observations and rejected SKU matches separate in the report.
-- Limit concurrent requests to avoid raising merchant-side throttling. Do not improve metrics by weakening the identity, stock, freshness, or PIT gates.
-- For any PC missing 32 GB RAM or 1 TB SSD, leave the completed-build discount percentage uncomputed until the completed configuration price is known.
+Unknown prices must stay null/unknown—not ¥0. Fetch failure is not out-of-stock. Keep listed price, reference price, checkout cash amount, delivery, fees, coupons, points, lottery benefits and future rewards separate. Deduct only benefits confirmed applicable at checkout from the immediate cash total.
+
+## 5. Monitoring, data integrity and free operation
+
+- Normal scheduled monitoring: about every 15 minutes.
+- During the configured provisional broad watch window: about every 5 minutes.
+- `.github/workflows/pc-price-monitor.yml` owns scheduled price collection. It routes between the 5-minute and 15-minute cron events according to the configured window; keep the gate and intervals consistent with `config/targets.json`.
+- `.github/workflows/pc-price-monitor-bf-fast.yml` is manual-only, shares the single writer concurrency group, and must not create a second scheduled collection loop.
+- Use GitHub Actions and the Python standard library first. No paid API or service may be required. Do not add hidden paid dependencies, keys, or usage-based services.
+- Keep PC offers, DIY component observations, and peripherals in separate streams. Never rank a monitor/speaker/mouse as a PC.
+- Preserve source URL, exact model/SKU evidence, retrieval time, availability time, publication/event times when known, inventory state, data age, validation reason, and source snapshot hashes.
+- Require valid PIT ordering: `available_at <= retrieval_time <= prediction_time`. If PIT is unknown or invalid, fail closed.
+- Direct retailer listings and comparison-site results are different evidence classes; a search-result snippet is display-only unless exact-model identity and other validation rules pass.
+- Show retrieval coverage, failed hosts/reasons, rejected SKU matches, unverified prices, and unknown inventory explicitly. Do not improve apparent coverage by loosening identity, stock, freshness, or PIT rules.
+
+## 6. Ranking and decision quality
+
+The 100-point score is **purchase priority, not probability**. Use the configured weighting: performance 40, price/value 20, historical sale evidence 15, stock/sellout risk 15, and timing 10. Never describe this score as the probability of a discount, a price fall, or winning a deal.
+
+A recommendation must consider the **full PC + peripheral all-in cost**, the exact completed configuration, real stock, return/warranty risk, part quality, cooling, noise where evidence exists, upgradeability, source quality, and observed-data freshness. A build can remain a monitored candidate while its purchase gate is closed. Do not issue purchase authorization if price, model identity, stock, official sale dates, completed RAM/SSD configuration, compatibility, or all-in cash total is unresolved.
+
+The output must make the current decision easy to read on a phone: leading DIY build, 16GB-VRAM alternative, RTX 5070 Ti dark horse, PC-only total, accessory total, all-in total, remaining budget, target versus latest verified evidence, inventory/compatibility blockers, and a clear BUY / WAIT / REVIEW decision. Never imply that a BF target is already available today.
+
+## 7. Development and autonomous improvement
+
+For each safe/free defect: observe → diagnose → implement → add/adjust regression tests → validate data and PIT → check generated reports → merge/promote only when checks pass → monitor again. Prefer a branch and pull request rather than unreviewed direct edits to `main`. Do not weaken a gate simply to force a BUY_NOW answer.
+
+Tests should be network-independent where possible and cover:
+- all-in budget arithmetic and accessory target totals;
+- config/build-profile agreement and one-GPU-only subtotal logic;
+- RAM/SSD minimums and model-specific unknown compatibility;
+- target/reference/checkout/BF price separation;
+- official campaign date and PIT fail-closed behavior;
+- the cron gate's 5-minute/15-minute routing and manual-only fast workflow;
+- current README, Copilot instructions and peripheral guide staying aligned with the authoritative config.
+
+Run `python -m unittest discover -s tests -p "test_*.py" -v`, Python compile checks, `scripts/self_build_planner.py`, report/timing/scenario generation, `scripts/healthcheck.py`, `scripts/validate.py`, and `git diff --check` before promoting relevant changes. Report actual verification results; do not claim a test passed until its CI run confirms it.
