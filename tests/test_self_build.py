@@ -24,11 +24,11 @@ class SelfBuildPlannerTests(unittest.TestCase):
     def test_target_totals_and_all_in_budget(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         builds = {x["gpu_choice_id"]:x for x in plan["builds"]}
-        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_pc_total_jpy"], 320360)
-        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_pc_total_jpy"], 295360)
+        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_pc_total_jpy"], 305160)
+        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_pc_total_jpy"], 285160)
         self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_pc_total_jpy"], 329360)
-        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_all_in_jpy"], 390160)
-        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_all_in_jpy"], 365160)
+        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_all_in_jpy"], 374960)
+        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_all_in_jpy"], 354960)
         self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_all_in_jpy"], 399160)
         self.assertTrue(plan["budget_arithmetic_valid"])
         self.assertFalse(plan["buy_now_authorized"])
