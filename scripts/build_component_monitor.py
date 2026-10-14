@@ -179,15 +179,16 @@ def component_search_identity_anchor(result, part):
 
 
 def build_component_search_queries(part, domains=DEFAULT_DOMAINS, now=None):
-    """Use one exact comparison-item search plus one rotating single-retailer search.
+    """Create a comparison-item query, a rotating retailer query, and a broad discovery fallback.
 
-    Bing can ignore a long OR-list of site: operators. Each query therefore
-    scopes to exactly one allowlisted host. The seller rotates every five-minute
-    slot so repeated runs eventually cover the configured component retailers
-    without multiplying the number of requests per scheduled run.
+    Strict site-scoped queries can return no results when an engine ignores a site
+    operator or the exact SKU is absent from the index. The final query is therefore
+    intentionally unscoped; every returned URL is still host-allowlisted and seller
+    candidates must be fetched and verified before becoming a trusted price.
     """
     model_code = str(part.get("model_code") or "").strip()
     name = str(part.get("name") or "").strip()
+    aliases = [str(x).strip() for x in (part.get("aliases") or []) if str(x).strip()]
     safe_domains = []
     for raw_domain in domains or DEFAULT_DOMAINS:
         domain = str(raw_domain or "").strip().lower().strip(".")
@@ -199,7 +200,7 @@ def build_component_search_queries(part, domains=DEFAULT_DOMAINS, now=None):
     retailer_priority = (
         "amazon.co.jp", "rakuten.co.jp", "yodobashi.com", "biccamera.com",
         "dospara.co.jp", "tsukumo.co.jp", "pc-koubou.jp", "sofmap.com",
-        "joshinweb.jp", "ark-pc.co.jp", "edion.com", "ksdenki.com",
+        "joshinweb.jp", "ark-pc.co.jp", "edion.co.jp", "ksdenki.com",
         "nojima.co.jp", "yamada-denkiweb.com",
     )
     seller_domains = [d for d in retailer_priority if d in safe_domains]
@@ -210,38 +211,43 @@ def build_component_search_queries(part, domains=DEFAULT_DOMAINS, now=None):
     now = now or now_jst()
     queries = []
 
-    # Query the exact configured comparison item; don't accept its search
-    # snippet as a verified live price, but retain it as an explicitly weaker
-    # display-only fallback if no direct seller page can be verified.
+    # Query the canonical comparison item by visible product name rather than
+    # SKU alone: comparison-site snippets often index the product title but not
+    # the manufacturer's complete model code.
     monitor_url = str(part.get("monitor_url") or "")
     monitor = urlparse(monitor_url)
     if (monitor.hostname or "").lower().removeprefix("www.") == "kakaku.com":
-        path_match = re.match(r"^/item/K[0-9]+", monitor.path, re.I)
+        path_match = re.match(r"^/item/[A-Za-z0-9]+", monitor.path, re.I)
         item_scope = path_match.group(0) if path_match else ""
-        term = model_code or name
+        term = name or model_code
         if term:
-            queries.append('"{}" site:kakaku.com{}'.format(term, item_scope))
+            queries.append('site:kakaku.com{} "{}"'.format(item_scope, term))
     elif model_code:
         queries.append('"{}" 価格 site:kakaku.com'.format(model_code))
 
     if seller_domains:
-        # Stable part-specific offset + current 5-minute slot; time stays in
-        # JST, while the chosen site itself is always allowlisted.
+        # Stable part-specific offset + current 5-minute slot; the seller rotates
+        # so the free monitor spreads traffic across configured retailers.
         part_offset = sum(ord(ch) for ch in str(part.get("id") or name))
         slot = now.hour * 12 + (now.minute // 5) + part_offset
         seller_domain = seller_domains[slot % len(seller_domains)]
-        term = name or model_code
+        term = (aliases[0] if aliases else name) or model_code
         if term:
             queries.append('"{}" 価格 site:{}'.format(term, seller_domain))
-    elif model_code:
-        queries.append('"{}" 価格'.format(model_code))
+
+    # Important fallback: don't let an unsupported/ignored site: operator make
+    # all candidates disappear. URLs are still checked against the configured
+    # allowlist, and no search snippet is promoted to a current/checkout price.
+    discovery_term = (aliases[0] if aliases else name) or model_code
+    if discovery_term:
+        queries.append("{} 価格 最安値".format(discovery_term))
 
     unique = []
     for query in queries:
-        query = re.sub(r"\s+", " ", query).strip()
+        query = re.sub(r"\\s+", " ", query).strip()
         if query and query not in unique:
             unique.append(query)
-    return unique[:2]
+    return unique[:3]
 
 
 def verify_retailer_listing(part, candidate_url, domains):
@@ -349,8 +355,8 @@ def search_comparison_snippet(part, domains):
                 host = (parsed_url.hostname or "").lower()
                 is_comparison_site = host == "kakaku.com" or host.endswith(".kakaku.com")
                 # Bound direct seller-page fetches so each scheduled run remains
-                # lightweight and does not hammer retailer sites.
-                if not is_comparison_site and direct_fetch_attempts < 2:
+                # lightweight while checking more than one imperfect search result.
+                if not is_comparison_site and direct_fetch_attempts < 3:
                     direct_fetch_attempts += 1
                     offer = verify_retailer_listing(part, url, domains)
                     if offer and offer.get("url") not in {x.get("url") for x in verified_offers}:
