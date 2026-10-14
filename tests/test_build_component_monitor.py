@@ -123,7 +123,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertIsNone(bcm.parse_kakaku_search_page_reference(
             self.part, html, "https://search.kakaku.com/PNY/", diagnostic
         ))
-        self.assertEqual(diagnostic["extraction_reason"], "sku_identity_not_found_in_product_card")
+        self.assertEqual(diagnostic["extraction_reason"], "matching_product_card_has_no_in_range_price")
 
     def test_kakaku_search_page_rejects_multiple_distinct_prices_in_one_card(self):
         html = (
