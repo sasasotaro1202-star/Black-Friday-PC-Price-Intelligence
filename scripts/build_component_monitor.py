@@ -82,6 +82,36 @@ def last_by_id(rows):
     return out
 
 
+def parse_snippet_price(text, minimum, maximum):
+    """Extract an explicit currency amount under component-specific price bounds."""
+    text = re.sub(r"\s+", " ", str(text or ""))
+    patterns = [
+        re.compile(r"(?:¥|￥)\s*([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})(?:\s*円)?"),
+        re.compile(r"(?<![0-9])([0-9]{1,3}(?:,[0-9]{3})+|[0-9]{4,7})\s*円")
+    ]
+    candidates = []
+    excluded_prefix = re.compile(r"割引|値引|クーポン|ポイント|還元|月額|毎月|分割|off", re.IGNORECASE)
+    for pattern in patterns:
+        for match in pattern.finditer(text):
+            try:
+                price = int(match.group(1).replace(",", ""))
+            except (TypeError, ValueError):
+                continue
+            if not int(minimum) <= price <= int(maximum):
+                continue
+            prefix = text[max(0, match.start() - 36):match.start()]
+            if excluded_prefix.search(prefix[-24:]):
+                continue
+            context = text[max(0, match.start() - 70):min(len(text), match.end() + 35)]
+            score = 10 if "最安価格" in prefix else 5 if "価格" in prefix else 0
+            candidates.append((score, -price, match.start(), price, context))
+    if not candidates:
+        return None
+    candidates.sort(reverse=True)
+    _, _, _, price, context = candidates[0]
+    return {"price_jpy": price, "context": context}
+
+
 def parse_search_snippet_reference(part, results, domains=DEFAULT_DOMAINS):
     """Use a search snippet only as display-only context, never as a direct/live price."""
     expected_path = urlparse(str(part.get("monitor_url") or "")).path.rstrip("/").lower()
@@ -98,13 +128,14 @@ def parse_search_snippet_reference(part, results, domains=DEFAULT_DOMAINS):
         if not anchor:
             continue
         blob = str(result.get("title") or "") + " " + str(result.get("snippet") or "")
-        candidate = pick_price(blob)
+        candidate = parse_snippet_price(blob, minimum, maximum)
         price = candidate.get("price_jpy") if isinstance(candidate, dict) else None
         if isinstance(price, bool) or not isinstance(price, int) or not minimum <= price <= maximum:
             continue
         return {
             "url": url, "title": result.get("title") or "",
             "snippet": result.get("snippet") or "", "price_jpy": price,
+            "price_context": candidate.get("context") if isinstance(candidate, dict) else None,
             "identity_anchor": anchor,
             "source_role": "comparison_site_search_snippet_reference",
             "bf_actual_authorized": False
