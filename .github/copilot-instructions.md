@@ -50,7 +50,7 @@ Keep DIY component prices separate from BTO/laptop offers and peripheral prices.
 - PSU form factor and required connectors;
 - Windows license, shipping, required small parts, and the final complete configuration total.
 
-Exact PNY GPU model codes and dimensions must be maintained from the linked source page; do not reuse one model's specifications for another. Unknown details mean REVIEW, not PASS. Curated `direct_retailer_urls` are still discovery inputs only: only the existing direct-page identity, price, stock and PIT verifier can mark a listing verified. Even if an automated mechanical check says PASS, verify manufacturer documentation for the exact SKU and the retailer's final basket immediately before purchase.
+Exact PNY GPU model codes and dimensions must be maintained from the linked source page; do not reuse one model's specifications for another. Unknown details mean REVIEW, not PASS. Curated `direct_retailer_urls` are still discovery inputs only: the monitor checks up to three configured seller pages, compares every successful in-stock offer, then selects the lowest eligible price; only the direct-page identity, price, stock and PIT verifier can mark a listing verified. When a DIY purchase gate is blocked, its reason must describe the actual blocker (component references, compatibility, budget or checkout validation), not merely repeat that DIY is the selected method. Even if an automated mechanical check says PASS, verify manufacturer documentation for the exact SKU and the retailer's final basket immediately before purchase.
 
 ## 4. Budget and price semantics
 
