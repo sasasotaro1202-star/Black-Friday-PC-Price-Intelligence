@@ -243,7 +243,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
             "https://www.joshinweb.jp/item-a",
             "https://www.sofmap.com/item-b",
             "https://shop.tsukumo.co.jp/goods/0751492812151/",
-            "https://www.amazon.co.jp/dp/B0GSXJPTLN",
+            "https://www.pc-koubou.jp/item/mock-rtx5070",
         ]
         stamp = "2026-11-20T12:00:00+09:00"
         offers = [
@@ -283,7 +283,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
         with patch.object(bcm, "verify_retailer_listing", side_effect=offers) as verify, \
              patch.object(bcm, "fetch") as fetcher, \
              patch.object(bcm, "build_retailer_search_urls") as rotate:
-            result = bcm.search_comparison_snippet(part, ("joshinweb.jp", "sofmap.com", "tsukumo.co.jp", "amazon.co.jp"))
+            result = bcm.search_comparison_snippet(part, ("joshinweb.jp", "sofmap.com", "tsukumo.co.jp", "pc-koubou.jp"))
         self.assertEqual(verify.call_count, 4)
         self.assertEqual(result["retailer_listing_offer"]["url"], part["direct_retailer_urls"][3])
         self.assertEqual(result["retailer_listing_offer"]["price_jpy"], 145800)
@@ -448,6 +448,39 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertEqual(offer["price_source_mode"], "direct_text")
         self.assertEqual(offer["stock_status"], "in_stock")
         self.assertEqual(offer["source_role"], "direct_retailer_listing_reference")
+
+    def test_primary_h1_mismatch_cannot_be_overridden_by_matching_og_title(self):
+        html = """
+        <html><head>
+          <title>ASUS PRIME GeForce RTX 5060 Ti OC 8GB</title>
+          <meta property="og:title" content="PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFSXPB1-O">
+        </head><body>
+          <h1>ASUS PRIME-RTX5060TI-O8G GeForce RTX 5060 Ti</h1>
+          <section><h2>おすすめ商品</h2>
+            <p>PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFSXPB1-O</p>
+          </section>
+        </body></html>
+        """
+        self.assertIsNone(
+            bcm.component_primary_identity_anchor(self.part, html, {
+                "name": "https://www.amazon.co.jp/dp/B0GSXJPTLN",
+                "structured_identity_match": False,
+            })
+        )
+
+    def test_gpu_direct_text_price_rejects_adjacent_other_gpu_model(self):
+        html = """
+        <html><head><title>PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFSXPB1-O</title></head>
+        <body>
+          <h1>PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFSXPB1-O</h1>
+          <section class="recommendations">
+            <h2>おすすめ商品</h2>
+            <div>ASUS PRIME-RTX5060TI-O8G 国内正規代理店品
+              販売価格 ￥99,942 参考: ￥121,010 残り11点</div>
+          </section>
+        </body></html>
+        """
+        self.assertIsNone(bcm.parse_component_direct_text_price(self.part, html))
 
     def test_direct_retailer_listing_rejects_identity_found_only_in_related_products(self):
         part = {
