@@ -200,7 +200,7 @@ def build_component_search_queries(part, domains=DEFAULT_DOMAINS, now=None):
     retailer_priority = (
         "amazon.co.jp", "rakuten.co.jp", "yodobashi.com", "biccamera.com",
         "dospara.co.jp", "tsukumo.co.jp", "pc-koubou.jp", "sofmap.com",
-        "joshinweb.jp", "ark-pc.co.jp", "edion.co.jp", "ksdenki.com",
+        "joshinweb.jp", "ark-pc.co.jp", "edion.com", "ksdenki.com",
         "nojima.co.jp", "yamada-denkiweb.com",
     )
     seller_domains = [d for d in retailer_priority if d in safe_domains]
@@ -244,7 +244,7 @@ def build_component_search_queries(part, domains=DEFAULT_DOMAINS, now=None):
 
     unique = []
     for query in queries:
-        query = re.sub(r"\\s+", " ", query).strip()
+        query = re.sub(r"\s+", " ", query).strip()
         if query and query not in unique:
             unique.append(query)
     return unique[:3]
