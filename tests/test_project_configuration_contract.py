@@ -210,6 +210,24 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(len(parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"]), 2)
         self.assertIn("dospara.co.jp", parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"][1])
 
+    def test_primary_ranked_products_have_explicit_image_sources(self):
+        targets = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        build = json.loads((ROOT / "config" / "build_components.json").read_text(encoding="utf-8"))
+        peripheral_by_id = {item["id"]: item for item in targets["peripherals"]}
+        for item_id in ("main_monitor", "secondary_monitor", "speakers", "keyboard", "mouse", "mousepad"):
+            item = peripheral_by_id[item_id]
+            self.assertTrue(str(item.get("image_url", "")).startswith("https://"), item_id)
+            self.assertTrue(str(item.get("image_source_url", "")).startswith("https://"), item_id)
+        build_by_id = {item["id"]: item for item in build["parts"]}
+        for item_id in ("gpu-rtx5070-12gb", "gpu-rtx5060ti-16gb", "gpu-rtx5070ti-16gb",
+                        "cpu-ryzen7-9700x", "motherboard-asrock-b850m-pro-rs-wifi",
+                        "memory-teamgroup-ddr5-32gb-6000", "ssd-crucial-p3-plus-1tb",
+                        "psu-corsair-rm850e-2025", "case-fractal-pop-air-tg",
+                        "cooler-thermalright-pa120-se-v3", "os-windows11-home"):
+            item = build_by_id[item_id]
+            self.assertTrue(str(item.get("image_url", "")).startswith("https://"), item_id)
+            self.assertTrue(str(item.get("image_source_url", "")).startswith("https://"), item_id)
+
     def test_readme_copilot_instructions_and_peripheral_guide_match_current_plan(self):
         readme = read_text("README.md")
         instructions = read_text(".github/copilot-instructions.md")
