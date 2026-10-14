@@ -18,6 +18,32 @@ def sales_url(item):
     return url if url.startswith(("https://", "http://")) else None
 
 
+def build_purchase_method_policy(profile):
+    """Make the intended PC purchase method explicit and testable."""
+    profile = profile if isinstance(profile, dict) else {}
+    self_build_primary = (
+        profile.get("pc_build_method_preference")
+        == "SELF_BUILD_REQUIRED_FOR_PRIMARY_RECOMMENDATION"
+    )
+    try:
+        assembly_penalty = max(0, int(profile.get("assembly_time_penalty_points", 0)))
+    except (TypeError, ValueError):
+        assembly_penalty = 0
+    assembly_time_is_constraint = bool(profile.get("assembly_time_is_constraint", False))
+    if not assembly_time_is_constraint:
+        assembly_penalty = 0
+    return {
+        "primary_method": "SELF_BUILD" if self_build_primary else "RANKED_COMPLETE_PC",
+        "assembly_time_is_constraint": assembly_time_is_constraint,
+        "assembly_time_penalty_points": assembly_penalty,
+        "bto_role": profile.get("bto_role", "REFERENCE_BENCHMARK_ONLY"),
+        "selection_policy": profile.get("selection_policy") or (
+            "Prioritize self-build; assembly time is not a negative factor."
+        ),
+        "completed_pc_purchase_actionable": not self_build_primary,
+    }
+
+
 def file_sha256(path):
     h = hashlib.sha256()
     with open(path, "rb") as f:
@@ -407,12 +433,8 @@ def main():
     strategy_config = target_config.get("purchase_strategy") or {}
     build_config = load_json(os.path.join(ROOT, "config", "build_components.json"), {})
     build_profile = build_config.get("profile") or {}
-    self_build_primary_method = (
-        build_profile.get("pc_build_method_preference")
-        == "SELF_BUILD_REQUIRED_FOR_PRIMARY_RECOMMENDATION"
-    )
-    assembly_time_is_constraint = bool(build_profile.get("assembly_time_is_constraint", False))
-    assembly_time_penalty_points = int(build_profile.get("assembly_time_penalty_points", 0))
+    method_policy = build_purchase_method_policy(build_profile)
+    self_build_primary_method = method_policy["primary_method"] == "SELF_BUILD"
 
     source_snapshot_generated_at = latest.get("generated_at")
     source_snapshot_sha256 = file_sha256(latest_path) if os.path.exists(latest_path) else None
@@ -482,7 +504,7 @@ def main():
     ]
     coverage_status = "COMPLETE" if not critical_unverified else "PARTIAL"
     purchase_gate_allowed = bool(
-        not self_build_primary_method
+        method_policy["completed_pc_purchase_actionable"]
         and action
         and coverage_status == "COMPLETE"
         and peripheral_projection.get("budget_data_ready")
@@ -567,13 +589,7 @@ def main():
                 "all_critical_and_peripheral_candidates_verified"
             ),
         },
-        "purchase_method_policy": {
-            "primary_method": "SELF_BUILD" if self_build_primary_method else "RANKED_COMPLETE_PC",
-            "assembly_time_is_constraint": assembly_time_is_constraint,
-            "assembly_time_penalty_points": assembly_time_penalty_points,
-            "bto_role": build_profile.get("bto_role", "REFERENCE_BENCHMARK_ONLY"),
-            "selection_policy": build_profile.get("selection_policy"),
-        },
+        "purchase_method_policy": method_policy,
         "top_recommendation": {
             "id": action.get("id") if action else None,
             "name": action.get("name") if action else None,
@@ -581,7 +597,7 @@ def main():
             "status": action.get("score_detail", {}).get("status") if action else "NO_VERIFIED_CANDIDATE",
             "purchase_url": sales_url(action) if action else None,
             "role": "REFERENCE_BENCHMARK_ONLY" if self_build_primary_method else "RANKED_PURCHASE_CANDIDATE",
-            "purchase_actionable": bool(action and purchase_gate_allowed and not self_build_primary_method),
+            "purchase_actionable": bool(action and purchase_gate_allowed and method_policy["completed_pc_purchase_actionable"]),
         },
         "quality": quality,
         "coverage": latest.get("coverage") or {},
