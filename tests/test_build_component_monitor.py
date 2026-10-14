@@ -97,6 +97,18 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertEqual(reference["price_jpy"], 139800)
         self.assertEqual(reference["identity_anchor"], "PNY GeForce RTX 5070 12GB OC SLIM")
 
+    def test_kakaku_search_page_recognizes_search_item_class_cards(self):
+        html = (
+            "<html><body><div class='search-results'>"
+            "<div class='c-searchItem'><span>PNY GeForce RTX 5070 12GB OC SLIM</span>"
+            "<span>最安価格 ¥139,800</span></div></div></body></html>"
+        )
+        reference = bcm.parse_kakaku_search_page_reference(
+            self.part, html, "https://search.kakaku.com/PNY/"
+        )
+        self.assertIsNotNone(reference)
+        self.assertEqual(reference["price_jpy"], 139800)
+
     def test_kakaku_search_page_does_not_borrow_price_from_adjacent_card(self):
         html = (
             "<html><body><div class='product-list'>"
