@@ -246,7 +246,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
             self.assertRegex(text, r"(?i)(internal diagnostic|診断情報|中間的な診断)")
             self.assertRegex(text, r"(?i)(freshest|latest|最新)")
         self.assertIn("最終的なおすすめ順位", readme)
-        self.assertIn("the final ranking is produced in ChatGPT only when the user asks", instructions)
+        self.assertIn("The final ranking is produced in ChatGPT only when the user asks.", instructions)
         self.assertIn("data/build_component_observations.jsonl", guide)
         self.assertIn("data/peripheral_change_events.jsonl", guide)
         self.assertIn("公式キャンペーン期間内の確認済み価格", guide)
