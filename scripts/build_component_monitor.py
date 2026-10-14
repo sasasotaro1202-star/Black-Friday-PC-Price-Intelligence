@@ -996,7 +996,7 @@ def search_comparison_snippet(part, domains):
     # pages when rotating search markup consistently hides the item link.
     # They remain untrusted until this same verifier confirms identity, price,
     # inventory state and point-in-time evidence.
-    for candidate_url in (part.get("direct_retailer_urls") or [])[:3]:
+    for candidate_url in (part.get("direct_retailer_urls") or [])[:4]:
         url = str(candidate_url or "").strip()
         parsed = urlparse(url)
         host = (parsed.hostname or "").lower()
@@ -1019,13 +1019,13 @@ def search_comparison_snippet(part, domains):
                 "source_role": "direct_retailer_listing_reference",
             })
             continue
-        if direct_fetch_attempts >= 4:
+        if direct_fetch_attempts >= 5:
             diagnostics.append({
                 "provider": "configured_direct_retailer",
                 "retailer_domain": host,
                 "url": url[:240],
                 "status": "skipped",
-                "error": "per_part_direct_fetch_budget_reached",
+                "error": "per_part_direct_fetch_budget_reached_after_five_attempts",
                 "result_count": 0,
                 "page_fetch_count": 0,
                 "allowed_reference_host_count": 1,
@@ -1158,7 +1158,7 @@ def search_comparison_snippet(part, domains):
             )
             page_status = "ok"
             for link in links[:2]:
-                if direct_fetch_attempts >= 4:
+                if direct_fetch_attempts >= 5:
                     break
                 direct_fetch_attempts += 1
                 offer = verify_retailer_listing(part, link["url"], domains)
