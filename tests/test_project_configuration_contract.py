@@ -62,6 +62,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
     def test_primary_build_subtotal_counts_one_gpu_only(self):
         parts_by_id = {item["id"]: item for item in self.build["parts"]}
         selected_ids = list(self.profile["fixed_part_ids"]) + [
+            "memory-crucial-pro-ddr5-32gb-6000",
             self.profile["primary_gpu_choice_id"]
         ]
         self.assertEqual(len(selected_ids), len(set(selected_ids)))
@@ -169,7 +170,15 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(primary_memory["specs"]["modules"], 2)
         self.assertEqual(primary_memory["specs"]["speed_mts"], 6000)
         self.assertEqual(primary_memory["monitor_url"], "https://kakaku.com/item/K0001633533/")
-        self.assertIn("memory-crucial-pro-ddr5-32gb-6000", self.profile["fixed_part_ids"])
+        self.assertEqual(
+            self.profile["primary_memory_choice_id"],
+            "memory-crucial-pro-ddr5-32gb-6000",
+        )
+        self.assertEqual(
+            set(self.profile["memory_choice_ids"]),
+            {"memory-crucial-pro-ddr5-32gb-6000", "memory-teamgroup-ddr5-32gb-6000"},
+        )
+        self.assertNotIn("memory-crucial-pro-ddr5-32gb-6000", self.profile["fixed_part_ids"])
         self.assertNotIn("memory-teamgroup-ddr5-32gb-6000", self.profile["fixed_part_ids"])
         self.assertEqual(
             parts_by_id["memory-teamgroup-ddr5-32gb-6000"]["role"],
