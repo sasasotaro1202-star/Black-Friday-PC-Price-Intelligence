@@ -25,6 +25,28 @@ class MonitorParsingTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "curl_exit_35.*SSL connect error"):
                 monitor.fetch("https://example.com/product", timeout=1)
 
+    def test_bing_redirect_unpack_handles_a1_base64_url(self):
+        import base64
+        target = "https://www.dospara.co.jp/TC30/MC12904.html"
+        encoded = "a1" + base64.urlsafe_b64encode(target.encode("utf-8")).decode("ascii").rstrip("=")
+        url = "https://www.bing.com/ck/a?u=" + encoded
+        self.assertEqual(monitor._unpack_bing_url(url), target)
+
+    def test_bing_redirect_unpack_handles_plain_base64_destination(self):
+        import base64
+        target = "https://www.tsukumo.co.jp/bto/pc/"
+        encoded = base64.urlsafe_b64encode(target.encode("utf-8")).decode("ascii").rstrip("=")
+        url = "https://www.bing.com/ck/a?u=" + encoded
+        self.assertEqual(monitor._unpack_bing_url(url), target)
+
+    def test_bing_redirect_unpack_handles_url_encoded_target_and_rejects_bing_loop(self):
+        from urllib.parse import quote
+        target = "https://www.yodobashi.com/product/100000001008/"
+        url = "https://www.bing.com/redirect?url=" + quote(target, safe="")
+        self.assertEqual(monitor._unpack_bing_url(url), target)
+        unresolved = "https://www.bing.com/ck/a?u=unknown"
+        self.assertEqual(monitor._unpack_bing_url(unresolved), unresolved)
+
     def test_bing_parser_extracts_organic_model_and_snippet(self):
         html = """
         <ol id="b_results">
