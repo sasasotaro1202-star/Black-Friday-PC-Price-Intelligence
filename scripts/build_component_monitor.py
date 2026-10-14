@@ -521,8 +521,8 @@ def direct_price_context_conflicts_with_selected_gpu(part, context):
     ))
     value = str(context or "")
     patterns = (
-        re.compile(r"\\b(?:RTX|GTX)\\s*\\d{3,4}\\s*(?:TI|SUPER)?\\b", re.I),
-        re.compile(r"\\bRX\\s*\\d{4}\\s*(?:XT|XTX)?\\b", re.I),
+        re.compile(r"\b(?:RTX|GTX)\s*\d{3,4}\s*(?:TI|SUPER)?\b", re.I),
+        re.compile(r"\bRX\s*\d{4}\s*(?:XT|XTX)?\b", re.I),
     )
     for pattern in patterns:
         for match in pattern.finditer(value):
@@ -530,7 +530,6 @@ def direct_price_context_conflicts_with_selected_gpu(part, context):
             if token and token not in expected:
                 return True
     return False
-
 
 def stock_from_component_context(text):
     """Interpret stock only from the directly associated title/price context."""
