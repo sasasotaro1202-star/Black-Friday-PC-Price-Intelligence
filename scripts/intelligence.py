@@ -213,23 +213,35 @@ def peripheral_budget_projection():
             str(live.get("name") or "").strip()
             and str(live.get("name") or "").strip() == str(target.get("name") or "").strip()
         )
-        valid = bool(target.get("track_current_price") and identity_matches and live.get("price_verified")
-                     and isinstance(price, int) and not isinstance(price, bool) and price > 0
-                     and stock in ("in_stock", "low_stock") and snapshot_fresh)
+        # Keep price validity separate from inventory/actionability. A fresh,
+        # exact-item direct price remains useful for a conservative budget even
+        # when stock is unknown; that uncertainty still blocks purchase readiness.
+        price_verified = bool(
+            target.get("track_current_price") and identity_matches and live.get("price_verified")
+            and isinstance(price, int) and not isinstance(price, bool) and price > 0
+            and snapshot_fresh
+        )
+        valid = bool(price_verified and stock in ("in_stock", "low_stock"))
         if valid:
             selected_cost = price
+            cost_basis = "observed_verified"
             observed_total += price
+        elif price_verified:
+            selected_cost = max(target_price, price)
+            cost_basis = "observed_price_stock_unconfirmed"
+            unverified.append(pid)
         else:
             selected_cost = target_price
+            cost_basis = "target_reserve_unverified"
             if target.get("track_current_price"):
                 unverified.append(pid)
         total_projection += selected_cost
         rows.append({
             "id": pid, "name": target.get("name"), "target_price_jpy": target_price,
-            "current_price_jpy": price if live.get("price_verified") and identity_matches else None,
-            "stock_status": stock, "price_verified": bool(live.get("price_verified") and identity_matches),
+            "current_price_jpy": price if price_verified else None,
+            "stock_status": stock, "price_verified": price_verified,
             "budget_cost_jpy": selected_cost,
-            "cost_basis": "observed_verified" if valid else "target_reserve_unverified",
+            "cost_basis": cost_basis,
             "purchase_url": target.get("purchase_url") or target.get("monitor_url"),
             "track_current_price": bool(target.get("track_current_price")),
         })
