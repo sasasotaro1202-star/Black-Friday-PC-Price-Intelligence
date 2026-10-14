@@ -202,6 +202,18 @@ class BuildComponentMonitorTests(unittest.TestCase):
                          "https://www.pc-koubou.jp/user_data/search.php")
         self.assertIn("?q=", urls[0]["url"])
 
+    def test_yahoo_shopping_retailer_search_url_uses_allowlisted_free_endpoint(self):
+        urls = bcm.build_retailer_search_urls(
+            self.part, ("shopping.yahoo.co.jp",), limit=1
+        )
+        self.assertEqual(len(urls), 1)
+        self.assertTrue(bcm.allowed_url(urls[0]["url"], ("shopping.yahoo.co.jp",)))
+        self.assertEqual(
+            urls[0]["url"].split("?")[0],
+            "https://shopping.yahoo.co.jp/search",
+        )
+        self.assertIn("VCG507012DFXPB1-O", urls[0]["url"])
+
     def test_component_direct_text_parser_accepts_sub_50000_part_price_near_identity(self):
         part = {
             "id": "motherboard-test", "name": "ASRock B850M Pro RS WiFi",
