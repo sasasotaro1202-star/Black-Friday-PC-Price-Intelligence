@@ -2,6 +2,7 @@
 import hashlib
 import json
 import os
+from urllib.parse import urlparse
 from intelligence import ROOT, now_jst, iso, parse_dt, load_json, save_json
 
 CONFIG_PATH = os.path.join(ROOT, "config", "build_components.json")
@@ -49,7 +50,37 @@ def trusted_market_reference(row, now, max_age):
     )
 
 
-def component_price(part, by_id, now, max_age):
+def trusted_retailer_listing_reference(row, now, max_age, allowed_domains=()):
+    """Validate a fresh, directly parsed retailer listing separately from checkout offers."""
+    offer = row.get("retailer_listing_offer") if isinstance(row, dict) else None
+    price = row.get("retailer_listing_reference_price_jpy") if isinstance(row, dict) else None
+    age = age_minutes(row.get("retrieval_time"), now) if isinstance(row, dict) else None
+    available = parse_dt(row.get("available_at")) if isinstance(row, dict) else None
+    retrieved = parse_dt(row.get("retrieval_time")) if isinstance(row, dict) else None
+    url = str((offer or {}).get("url") or "")
+    host = (urlparse(url).hostname or "").lower()
+    domains = tuple(str(x).lower() for x in (allowed_domains or ()))
+    host_allowed = bool(host and any(host == d or host.endswith("." + d) for d in domains))
+    comparison_host = host == "kakaku.com" or host.endswith(".kakaku.com")
+    return bool(
+        isinstance(price, int) and not isinstance(price, bool) and price > 0
+        and row.get("price_validation_status") == "verified_retailer_listing_reference"
+        and row.get("identity_match") is True and row.get("pit_valid") is True
+        and row.get("bf_actual_authorized") is False
+        and isinstance(offer, dict)
+        and offer.get("source_role") == "direct_retailer_listing_reference"
+        and offer.get("price_jpy") == price
+        and offer.get("identity_match") is True and offer.get("identity_anchor")
+        and offer.get("stock_status") == "in_stock"
+        and offer.get("bf_actual_authorized") is False
+        and offer.get("price_source_mode") in ("direct_structured", "direct_meta", "direct_text")
+        and host_allowed and not comparison_host and url.startswith("https://")
+        and age is not None and age <= max_age
+        and available is not None and retrieved is not None and available <= retrieved
+    )
+
+
+def component_price(part, by_id, now, max_age, allowed_domains=()):
     if not part.get("track_price"):
         ref = part.get("reference_price_jpy")
         return {
@@ -61,8 +92,24 @@ def component_price(part, by_id, now, max_age):
             "retrieval_time": None, "reference_age_minutes": None
         }
     row = by_id.get(str(part.get("id") or "")) or {}
-    trusted = trusted_market_reference(row, now, max_age)
+    trusted_comparison = trusted_market_reference(row, now, max_age)
+    trusted_retailer = trusted_retailer_listing_reference(row, now, max_age, allowed_domains)
+    trusted = trusted_comparison or trusted_retailer
     age = age_minutes(row.get("retrieval_time"), now)
+    retailer_offer = row.get("retailer_listing_offer") if trusted_retailer else None
+    reference_price = (
+        row.get("market_reference_price_jpy") if trusted_comparison
+        else row.get("retailer_listing_reference_price_jpy") if trusted_retailer else None
+    )
+    reference_source_url = (
+        (row.get("final_url") or row.get("monitor_url")) if trusted_comparison
+        else retailer_offer.get("url") if trusted_retailer else None
+    )
+    reference_source_role = (
+        "comparison_site_reference" if trusted_comparison
+        else "direct_retailer_listing_reference" if trusted_retailer
+        else "comparison_site_reference"
+    )
     snippet_price = row.get("search_snippet_reference_price_jpy")
     snippet_only = bool(
         not trusted and row.get("price_validation_status") == "search_snippet_reference"
@@ -72,21 +119,30 @@ def component_price(part, by_id, now, max_age):
         and row.get("source_role") == "comparison_site_reference"
         and row.get("bf_actual_authorized") is False
     )
-    display = row.get("market_reference_price_jpy") if trusted else snippet_price if snippet_only else None
+    display = reference_price if trusted else snippet_price if snippet_only else None
     status = row.get("price_validation_status") if trusted else (
         "search_snippet_reference_only" if snippet_only else
-        "stale_market_reference" if row.get("market_reference_price_jpy") is not None or isinstance(snippet_price, int)
+        "stale_market_reference" if (
+            row.get("market_reference_price_jpy") is not None
+            or row.get("retailer_listing_reference_price_jpy") is not None
+            or isinstance(snippet_price, int)
+        )
         else row.get("price_validation_status") or "not_observed"
     )
     return {
-        "market_reference_price_jpy": row.get("market_reference_price_jpy") if trusted else None,
+        "market_reference_price_jpy": reference_price if trusted else None,
         "display_reference_price_jpy": display,
         "price_status": status,
         "trusted_for_market_estimate": trusted,
-        "source_role": "comparison_site_reference",
+        "source_role": reference_source_role,
+        "reference_source_url": reference_source_url,
+        "reference_source_label": (
+            "販売店ページ直接取得・掲載価格（決済未確認）" if trusted_retailer
+            else "価格比較サイト参考値" if trusted_comparison else None
+        ),
         "retrieval_time": row.get("retrieval_time"),
         "reference_age_minutes": age,
-        "purchase_url": part.get("purchase_url") or part.get("monitor_url"),
+        "purchase_url": reference_source_url or part.get("purchase_url") or part.get("monitor_url"),
         "search_snippet_reference_url": row.get("search_snippet_reference_url") if snippet_only else None,
         "search_snippet_reference_title": row.get("search_snippet_reference_title") if snippet_only else None
     }
@@ -196,7 +252,10 @@ def build_plan(config=None, price_snapshot=None, now=None):
             target = part.get("target_price_jpy")
             if isinstance(target, int) and not isinstance(target, bool):
                 target_parts += target
-            price = component_price(part, by_id, now, max_age)
+            price = component_price(
+                part, by_id, now, max_age,
+                allowed_domains=profile.get("allowed_search_reference_domains") or profile.get("allowed_comparison_domains") or []
+            )
             component = {
                 "id": cid, "category": part.get("category"), "name": part.get("name"),
                 "model_code": part.get("model_code"), "role": part.get("role"),
@@ -207,7 +266,9 @@ def build_plan(config=None, price_snapshot=None, now=None):
                 "trusted_for_market_estimate": price["trusted_for_market_estimate"],
                 "source_role": price["source_role"], "retrieval_time": price["retrieval_time"],
                 "reference_age_minutes": price["reference_age_minutes"],
-                "monitor_url": part.get("monitor_url"), "purchase_url": part.get("purchase_url") or part.get("monitor_url"),
+                "monitor_url": part.get("monitor_url"), "purchase_url": price.get("purchase_url") or part.get("purchase_url") or part.get("monitor_url"),
+                "reference_source_url": price.get("reference_source_url"),
+                "reference_source_label": price.get("reference_source_label"),
                 "search_snippet_reference_url": price.get("search_snippet_reference_url"),
                 "search_snippet_reference_title": price.get("search_snippet_reference_title"),
                 "track_price": bool(part.get("track_price")), "specs": part.get("specs") or {},

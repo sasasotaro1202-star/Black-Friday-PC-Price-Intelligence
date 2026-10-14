@@ -178,21 +178,89 @@ def component_search_identity_anchor(result, part):
     return matches[0][1]
 
 
-def search_comparison_snippet(part, domains):
-    """Use approved shop search snippets only as display-only references.
-
-    Result URLs do not need to be on the comparison site's exact product path,
-    but the host must be allowlisted and the result itself must contain a
-    model-specific identity anchor and a plausible, explicitly marked price.
-    """
+def build_component_search_queries(part):
+    """Use diversified SKU/name searches instead of forcing an indexed comparison URL path."""
     model_code = str(part.get("model_code") or "").strip()
     name = str(part.get("name") or "").strip()
-    product_path = urlparse(str(part.get("monitor_url") or "")).path.rstrip("/").lower()
-    queries = [
-        "site:kakaku.com{} {} 価格".format(product_path, model_code).strip(),
-        '"{}" {} 価格 在庫'.format(name, model_code).strip(),
-    ]
+    queries = []
+    if model_code:
+        queries.append('"{}" 価格'.format(model_code))
+    if name:
+        queries.append('"{}" 価格'.format(name))
+        queries.append("{} 最安値".format(name))
+    unique = []
+    for query in queries:
+        query = re.sub(r"\s+", " ", query).strip()
+        if query and query not in unique:
+            unique.append(query)
+    return unique[:3]
+
+
+def verify_retailer_listing(part, candidate_url, domains):
+    """Fetch an allowlisted seller page and verify identity, direct price and stock.
+
+    Search snippets are discovery hints only. A listing is emitted as a current
+    retailer reference only after the page itself parses a plausible price and
+    the configured exact product identity is present in the fetched page.
+    """
+    if not allowed_url(candidate_url, domains):
+        return None
+    candidate_host = (urlparse(candidate_url).hostname or "").lower()
+    if candidate_host == "kakaku.com" or candidate_host.endswith(".kakaku.com"):
+        return None
+    try:
+        html, final_url, _headers = fetch(candidate_url, timeout=11)
+        if not allowed_url(final_url, domains):
+            return None
+        final_host = (urlparse(final_url).hostname or "").lower()
+        if final_host == "kakaku.com" or final_host.endswith(".kakaku.com"):
+            return None
+        raw = parse_page(final_url, html, expected=part)
+        anchor = component_search_identity_anchor({
+            "title": raw.get("name") or "",
+            "snippet": raw.get("page_text_excerpt") or "",
+        }, part)
+        if not anchor:
+            return None
+        price = raw.get("price_jpy")
+        minimum = int(part.get("min_price_jpy") or 1)
+        maximum = int(part.get("max_price_jpy") or 10**9)
+        if isinstance(price, bool) or not isinstance(price, int) or not minimum <= price <= maximum:
+            return None
+        source_mode = raw.get("price_source_mode")
+        if source_mode not in ("direct_structured", "direct_meta", "direct_text"):
+            return None
+        retrieved = iso(now_jst())
+        return {
+            "url": final_url,
+            "title": raw.get("name") or part.get("name"),
+            "price_jpy": price,
+            "price_source_mode": source_mode,
+            "stock_status": raw.get("stock_status") or "unknown",
+            "identity_anchor": anchor,
+            "identity_match": True,
+            "source_role": "direct_retailer_listing_reference",
+            "available_at": retrieved,
+            "retrieval_time": retrieved,
+            "pit_valid": True,
+            "bf_actual_authorized": False,
+        }
+    except Exception:
+        return None
+
+
+def search_comparison_snippet(part, domains):
+    """Search approved sites, verify seller-page offers directly, and keep snippets display-only.
+
+    Result URLs are untrusted until their host is allowlisted. Seller prices are
+    accepted only after re-fetching the listing and validating identity, a
+    plausible directly parsed price, and an in-stock signal.
+    """
+    queries = build_component_search_queries(part)
     diagnostics = []
+    all_snippet_candidates = []
+    verified_offers = []
+    direct_fetch_attempts = 0
     for provider, search_fn in (("duckduckgo", ddg_search), ("bing", bing_search)):
         for query_index, query in enumerate(queries, 1):
             try:
@@ -207,8 +275,8 @@ def search_comparison_snippet(part, domains):
             price_count = 0
             rejected_host_samples = []
             rejected_url_samples = []
-            chosen = None
-            candidates = []
+            local_fetch_start = direct_fetch_attempts
+            local_offer_start = len(verified_offers)
             for result in results:
                 url = str(result.get("url") or "")
                 if not allowed_url(url, domains):
@@ -217,61 +285,76 @@ def search_comparison_snippet(part, domains):
                     if rejected_host and rejected_host not in rejected_host_samples and len(rejected_host_samples) < 5:
                         rejected_host_samples.append(rejected_host)
                     if url and len(rejected_url_samples) < 3:
-                        # Diagnostic URLs are truncated and are not treated as evidence.
                         rejected_url_samples.append(url[:180])
                     continue
                 domain_count += 1
                 parsed_url = urlparse(url)
                 path = parsed_url.path.rstrip("/").lower()
+                anchor = component_search_identity_anchor(result, part)
+                product_path = urlparse(str(part.get("monitor_url") or "")).path.rstrip("/").lower()
                 same_item_path = bool(product_path and (path == product_path or path.startswith(product_path + "/")))
                 same_item_count += int(same_item_path)
-                anchor = component_search_identity_anchor(result, part)
                 if not anchor:
                     continue
                 identity_count += 1
+
+                host = (parsed_url.hostname or "").lower()
+                is_comparison_site = host == "kakaku.com" or host.endswith(".kakaku.com")
+                # Bound direct seller-page fetches so each scheduled run remains
+                # lightweight and does not hammer retailer sites.
+                if not is_comparison_site and direct_fetch_attempts < 2:
+                    direct_fetch_attempts += 1
+                    offer = verify_retailer_listing(part, url, domains)
+                    if offer and offer.get("url") not in {x.get("url") for x in verified_offers}:
+                        verified_offers.append(offer)
+
                 blob = str(result.get("title") or "") + " " + str(result.get("snippet") or "")
-                candidate = parse_snippet_price(blob, part.get("min_price_jpy") or 1, part.get("max_price_jpy") or 10**9)
+                candidate = parse_snippet_price(
+                    blob, part.get("min_price_jpy") or 1, part.get("max_price_jpy") or 10**9
+                )
                 if not candidate:
                     continue
                 price_count += 1
-                candidates.append({
-                    "url": url,
-                    "title": result.get("title") or "",
-                    "snippet": result.get("snippet") or "",
-                    "price_jpy": candidate["price_jpy"],
-                    "price_context": candidate.get("context"),
-                    "identity_anchor": anchor,
+                all_snippet_candidates.append({
+                    "url": url, "title": result.get("title") or "",
+                    "snippet": result.get("snippet") or "", "price_jpy": candidate["price_jpy"],
+                    "price_context": candidate.get("context"), "identity_anchor": anchor,
                     "source_role": "comparison_site_search_snippet_reference",
-                    "bf_actual_authorized": False,
-                    "search_provider": provider,
-                    "query": query,
+                    "bf_actual_authorized": False, "search_provider": provider, "query": query,
                     "same_comparison_item_path": same_item_path,
                 })
             diagnostics.append({
-                "provider": provider,
-                "query_index": query_index,
-                "query": query,
-                "status": "error" if error else "ok",
-                "error": error,
-                "result_count": len(results),
-                "allowed_reference_host_count": domain_count,
-                "rejected_host_samples": rejected_host_samples,
-                "rejected_url_samples": rejected_url_samples,
+                "provider": provider, "query_index": query_index, "query": query,
+                "status": "error" if error else "ok", "error": error,
+                "result_count": len(results), "allowed_reference_host_count": domain_count,
+                "rejected_host_samples": rejected_host_samples, "rejected_url_samples": rejected_url_samples,
                 "same_comparison_item_path_count": same_item_count,
-                "identity_anchor_count": identity_count,
-                "in_range_price_count": price_count,
+                "identity_anchor_count": identity_count, "in_range_price_count": price_count,
+                "direct_retailer_fetch_attempt_count": direct_fetch_attempts - local_fetch_start,
+                "verified_retailer_listing_count": len(verified_offers) - local_offer_start,
             })
-            if candidates:
-                candidates.sort(key=lambda item: (
-                    1 if item["same_comparison_item_path"] else 0,
-                    1 if item["search_provider"] == "bing" else 0,
-                    item["identity_anchor"] == model_code,
-                ), reverse=True)
-                chosen = candidates[0]
-                chosen["search_diagnostics"] = diagnostics
-                return chosen
+            if verified_offers:
+                verified_offers.sort(key=lambda item: (
+                    0 if item.get("stock_status") == "in_stock" else 1,
+                    item.get("price_jpy", 10**12),
+                    0 if item.get("price_source_mode") == "direct_structured" else 1,
+                    0 if item.get("identity_anchor") == str(part.get("model_code") or "") else 1,
+                ))
+                return {
+                    "retailer_listing_offer": verified_offers[0],
+                    "retailer_listing_offers": verified_offers,
+                    "search_diagnostics": diagnostics,
+                }
+    if all_snippet_candidates:
+        all_snippet_candidates.sort(key=lambda item: (
+            1 if item.get("same_comparison_item_path") else 0,
+            1 if item.get("search_provider") == "bing" else 0,
+            item.get("identity_anchor") == str(part.get("model_code") or ""),
+        ), reverse=True)
+        chosen = all_snippet_candidates[0]
+        chosen["search_diagnostics"] = diagnostics
+        return chosen
     return {"search_diagnostics": diagnostics} if diagnostics else None
-
 
 def fetch_part(part, domains, search_domains=None):
     # Search fallback hosts are explicitly configured; default to the direct
@@ -287,6 +370,8 @@ def fetch_part(part, domains, search_domains=None):
         "market_reference_price_jpy": None, "search_snippet_reference_price_jpy": None,
         "search_snippet_reference_url": None, "search_snippet_reference_title": None,
         "search_snippet_identity_anchor": None, "search_diagnostics": [],
+        "retailer_listing_offer": None, "retailer_listing_offers": [],
+        "retailer_listing_reference_price_jpy": None, "retailer_listing_reference_url": None,
         "comparison_stock_signal": "unknown", "retrieval_time": None,
         "available_at": None, "pit_valid": False,
         "fetch_status": "error", "last_fetch_error": None, "identity_match": False,
@@ -344,27 +429,47 @@ def fetch_part(part, domains, search_domains=None):
             snippet = search_comparison_snippet(part, search_domains)
             if snippet:
                 result["search_diagnostics"] = snippet.get("search_diagnostics") or []
-            if snippet and isinstance(snippet.get("price_jpy"), int):
-                result["search_snippet_reference_price_jpy"] = int(snippet["price_jpy"])
-                result["search_snippet_reference_url"] = snippet["url"]
-                result["search_snippet_reference_title"] = snippet["title"]
-                result["search_snippet_identity_anchor"] = snippet["identity_anchor"]
-                result["search_provider"] = snippet.get("search_provider")
-                result["search_query"] = snippet.get("query")
-                result["available_at"] = retrieval
-                result["pit_valid"] = True
-                result["price_source_mode"] = "search_snippet"
-                result["price_validation_status"] = "search_snippet_reference"
-                result["last_fetch_error"] = "direct price unavailable; snippet reference is display-only and excluded from estimates"
-            else:
-                counts = [
-                    "{}:{} results / {} allowed host / {} identity / {} priced".format(
-                        item.get("provider"), item.get("result_count", 0),
-                        item.get("allowed_reference_host_count", 0),
-                        item.get("identity_anchor_count", 0), item.get("in_range_price_count", 0)
-                    ) for item in result["search_diagnostics"]
-                ]
-                result["last_fetch_error"] = "price_or_point_in_time_missing; search diagnostic: " + "; ".join(counts)[:260]
+                offers = snippet.get("retailer_listing_offers") or []
+                best_offer = snippet.get("retailer_listing_offer")
+                result["retailer_listing_offers"] = offers or ([best_offer] if best_offer else [])
+                if best_offer:
+                    result["retailer_listing_offer"] = best_offer
+                    result["retailer_listing_reference_url"] = best_offer.get("url")
+                    if best_offer.get("stock_status") == "in_stock":
+                        result["retailer_listing_reference_price_jpy"] = int(best_offer["price_jpy"])
+                        result["available_at"] = best_offer.get("available_at") or retrieval
+                        result["retrieval_time"] = best_offer.get("retrieval_time") or retrieval
+                        result["pit_valid"] = best_offer.get("pit_valid") is True
+                        result["price_validation_status"] = "verified_retailer_listing_reference"
+                        result["price_source_mode"] = best_offer.get("price_source_mode")
+                        result["identity_match"] = best_offer.get("identity_match") is True
+                        result["identity_matches"] = [best_offer.get("identity_anchor")]
+                        result["last_fetch_error"] = (
+                            "Direct retailer listing verified; final checkout price, delivery cost and final-cart stock remain unconfirmed."
+                        )
+            if result["price_validation_status"] != "verified_retailer_listing_reference":
+                if snippet and isinstance(snippet.get("price_jpy"), int):
+                    result["search_snippet_reference_price_jpy"] = int(snippet["price_jpy"])
+                    result["search_snippet_reference_url"] = snippet["url"]
+                    result["search_snippet_reference_title"] = snippet["title"]
+                    result["search_snippet_identity_anchor"] = snippet["identity_anchor"]
+                    result["search_provider"] = snippet.get("search_provider")
+                    result["search_query"] = snippet.get("query")
+                    result["available_at"] = retrieval
+                    result["pit_valid"] = True
+                    result["price_source_mode"] = "search_snippet"
+                    result["price_validation_status"] = "search_snippet_reference"
+                    result["last_fetch_error"] = "direct price unavailable; snippet reference is display-only and excluded from estimates"
+                else:
+                    counts = [
+                        "{}:{} results / {} allowed host / {} identity / {} priced / {} seller listings".format(
+                            item.get("provider"), item.get("result_count", 0),
+                            item.get("allowed_reference_host_count", 0),
+                            item.get("identity_anchor_count", 0), item.get("in_range_price_count", 0),
+                            item.get("verified_retailer_listing_count", 0)
+                        ) for item in result["search_diagnostics"]
+                    ]
+                    result["last_fetch_error"] = "price_or_point_in_time_missing; search diagnostic: " + "; ".join(counts)[:260]
     except Exception as exc:
         result["fetch_status"] = "error"
         result["last_fetch_error"] = type(exc).__name__ + ":" + str(exc)[:180]
@@ -403,7 +508,7 @@ def collect_component_prices(config=None):
                     "identity_match": False, "identity_matches": []
                 }
     output_rows, observations, events = [], [], []
-    counts = {"verified_market_reference": 0, "search_snippet_reference": 0, "identity_unverified": 0, "fetch_error": 0, "unverified_or_missing": 0}
+    counts = {"verified_market_reference": 0, "verified_retailer_listing_reference": 0, "search_snippet_reference": 0, "identity_unverified": 0, "fetch_error": 0, "unverified_or_missing": 0}
     for part in parts:
         row = results[part["id"]]
         previous = prior_by_id.get(part["id"]) or {}
@@ -432,6 +537,31 @@ def collect_component_prices(config=None):
                     "source_role": "comparison_site_reference", "bf_actual_authorized": False,
                     "source_url": row.get("final_url") or row.get("monitor_url")
                 })
+        elif row.get("price_validation_status") == "verified_retailer_listing_reference" and isinstance(row.get("retailer_listing_reference_price_jpy"), int):
+            counts["verified_retailer_listing_reference"] += 1
+            offer = row.get("retailer_listing_offer") or {}
+            retail_price = int(row["retailer_listing_reference_price_jpy"])
+            observations.append({
+                "id": row["id"], "category": row["category"], "model_code": row.get("model_code"),
+                "market_reference_price_jpy": retail_price, "source_role": "direct_retailer_listing_reference",
+                "source_url": offer.get("url") or row.get("retailer_listing_reference_url"),
+                "available_at": row.get("available_at"), "retrieval_time": row.get("retrieval_time"),
+                "observed_at": row.get("retrieval_time"), "pit_valid": row.get("pit_valid") is True,
+                "identity_match": row.get("identity_match") is True,
+                "price_validation_status": "verified_retailer_listing_reference",
+                "stock_signal": offer.get("stock_status"), "bf_actual_authorized": False
+            })
+            previous_retail_price = previous.get("retailer_listing_reference_price_jpy")
+            if isinstance(previous_retail_price, int) and previous_retail_price != retail_price:
+                events.append({
+                    "id": row["id"], "category": row["category"], "model_code": row.get("model_code"),
+                    "observed_at": row.get("retrieval_time"), "available_at": row.get("available_at"),
+                    "retrieval_time": row.get("retrieval_time"), "prediction_time": row.get("retrieval_time"),
+                    "pit_valid": row.get("pit_valid") is True, "old_market_reference_price_jpy": previous_retail_price,
+                    "new_market_reference_price_jpy": retail_price, "delta_jpy": retail_price-previous_retail_price,
+                    "source_role": "direct_retailer_listing_reference", "bf_actual_authorized": False,
+                    "source_url": offer.get("url") or row.get("retailer_listing_reference_url")
+                })
         elif row.get("price_validation_status") == "search_snippet_reference" and isinstance(row.get("search_snippet_reference_price_jpy"), int):
             counts["search_snippet_reference"] += 1
             observations.append({
@@ -457,7 +587,7 @@ def collect_component_prices(config=None):
     output = {
         "generated_at": iso(now_jst()), "schema_version": 1,
         "source_role": "comparison_site_reference",
-        "policy": "These prices are comparison-site market references only; never seller checkout prices or official BF actuals.",
+        "policy": "References may be direct comparison-site prices or directly fetched retailer product listings after identity and price checks; neither proves final checkout price or official BF actuals.",
         "bf_actual_authorized": False,
         "coverage": {"tracked_part_count": len(parts), **counts},
         "products": output_rows

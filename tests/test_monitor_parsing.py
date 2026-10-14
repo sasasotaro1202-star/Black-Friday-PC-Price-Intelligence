@@ -47,6 +47,18 @@ class MonitorParsingTests(unittest.TestCase):
         unresolved = "https://www.bing.com/ck/a?u=unknown"
         self.assertEqual(monitor._unpack_bing_url(unresolved), unresolved)
 
+    def test_duckduckgo_parser_keeps_result_without_snippet(self):
+        html = """
+          <div class="result">
+            <a class="result__a" href="https://www.dospara.co.jp/item/123">Ryzen 7 9700X BOX</a>
+          </div>
+        """
+        results = monitor.parse_duckduckgo_results(html)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["url"], "https://www.dospara.co.jp/item/123")
+        self.assertEqual(results[0]["title"], "Ryzen 7 9700X BOX")
+        self.assertEqual(results[0]["snippet"], "")
+
     def test_bing_parser_extracts_organic_model_and_snippet(self):
         html = """
         <ol id="b_results">

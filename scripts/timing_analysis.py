@@ -266,10 +266,18 @@ def _valid_component_observation(row, now=None):
     available = parse_dt(row.get("available_at"))
     retrieved = parse_dt(row.get("retrieval_time"))
     now = now or now_jst()
+    source_role = row.get("source_role")
+    validation_status = row.get("price_validation_status")
+    source_status_valid = (
+        source_role == "comparison_site_reference" and validation_status == "verified_market_reference"
+    ) or (
+        source_role == "direct_retailer_listing_reference"
+        and validation_status == "verified_retailer_listing_reference"
+        and row.get("stock_signal") == "in_stock"
+    )
     return bool(
         _is_positive_yen(price)
-        and row.get("price_validation_status") == "verified_market_reference"
-        and row.get("source_role") == "comparison_site_reference"
+        and source_status_valid
         and row.get("identity_match") is True
         and row.get("pit_valid") is True
         and row.get("bf_actual_authorized") is False
@@ -341,6 +349,9 @@ def build_component_timing_rows(components, observations=None, watch_config=None
             "history_latest_at": last_at,
             "watch_window_low_reference_price_jpy": window_low,
             "watch_window_sample_count": len(window_values),
+            "reference_source_url": part.get("reference_source_url"),
+            "reference_source_role": part.get("source_role"),
+            "reference_source_label": part.get("reference_source_label"),
             "status": status, "status_label": label,
             "purchase_allowed": False, "bf_actual_authorized": False,
             "purchase_url": purchase_url,
@@ -453,7 +464,7 @@ def build_self_build_timing_summary(build_plan, build_config=None, component_obs
         "component_count": len(components), "verified_checkout_offer_count": checkout_count,
         "missing_or_untrusted_market_reference_ids": missing_ids,
         "component_timing": component_timing,
-        "component_timing_policy": "価格目標との距離と保存済み比較サイト参考履歴のみを示す。購入店のBF実売・決済額ではなく、買い許可は出さない。",
+        "component_timing_policy": "価格目標との距離と保存済み比較サイト参考履歴・直接取得した販売店掲載価格のみを示す。最終決済額・送料・BF実売確定ではなく、買い許可は出さない。",
         "blockers": blockers,
         "purchase_decision_factors": profile.get("purchase_decision_factors") or [],
     }

@@ -112,9 +112,19 @@ def fetch(url, timeout=18):
     raise RuntimeError("curl_no_response")
 
 class SearchParser(HTMLParser):
+    """Parse classic DuckDuckGo result cards, retaining results without snippets."""
     def __init__(self):
         super().__init__()
         self.results = []
+        self.current = None
+        self.capture = None
+        self.buf = []
+
+    def flush_current(self):
+        if self.current and self.current.get("title"):
+            row = dict(self.current)
+            row.setdefault("snippet", "")
+            self.results.append(row)
         self.current = None
         self.capture = None
         self.buf = []
@@ -123,7 +133,10 @@ class SearchParser(HTMLParser):
         d = dict(attrs)
         cls = d.get("class", "")
         if tag == "a" and "result__a" in cls:
-            self.current = {"url": d.get("href", ""), "title": ""}
+            # Some result cards omit snippets; do not lose the previous result
+            # when the next result title starts.
+            self.flush_current()
+            self.current = {"url": d.get("href", ""), "title": "", "snippet": ""}
             self.capture = "title"
             self.buf = []
         elif tag in ("a", "div", "span") and "result__snippet" in cls and self.current:
@@ -135,16 +148,34 @@ class SearchParser(HTMLParser):
             text = " ".join("".join(self.buf).split())
             if self.capture == "title" and self.current:
                 self.current["title"] = text
+                self.capture = None
+                self.buf = []
             elif self.capture == "snippet" and self.current:
                 self.current["snippet"] = text
-                self.results.append(self.current)
-                self.current = None
-            self.capture = None
-            self.buf = []
+                self.flush_current()
 
     def handle_data(self, data):
         if self.capture:
             self.buf.append(data)
+
+
+def parse_duckduckgo_results(html):
+    parser = SearchParser()
+    parser.feed(str(html or ""))
+    parser.flush_current()
+    output = []
+    for item in parser.results:
+        url = str(item.get("url") or "")
+        parsed = urlparse(url)
+        params = parse_qs(parsed.query)
+        for key in ("uddg", "url", "target"):
+            candidate = (params.get(key) or [""])[0]
+            if candidate.startswith(("https://", "http://")):
+                url = unquote(candidate)
+                break
+        if url.startswith(("https://", "http://")):
+            output.append({**item, "url": url})
+    return output
 
 def ddg_search(query, timeout=20):
     if not query:
@@ -156,19 +187,7 @@ def ddg_search(query, timeout=20):
     with urlopen(req, timeout=timeout) as r:
         enc = r.headers.get_content_charset() or "utf-8"
         html = r.read().decode(enc, errors="replace")
-    p = SearchParser()
-    p.feed(html)
-    out = []
-    for item in p.results:
-        h = item.get("url", "")
-        if "uddg=" in h:
-            u = parse_qs(urlparse(h).query).get("uddg")
-            if u:
-                h = u[0]
-        if h.startswith("http"):
-            item["url"] = h
-            out.append(item)
-    return out
+    return parse_duckduckgo_results(html)
 
 
 class BingSearchParser(HTMLParser):
