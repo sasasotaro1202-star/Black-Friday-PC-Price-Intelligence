@@ -133,6 +133,9 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertIn("exact model/SKU evidence", instructions)
         self.assertIn("direct_retailer_urls", read_text("scripts/build_component_monitor.py"))
         self.assertIn("shopping.yahoo.co.jp", self.profile["allowed_search_reference_domains"])
+        self.assertIn("ymall.jp", self.profile["allowed_search_reference_domains"])
+        self.assertIn("ymall.jp", parts_by_id["memory-teamgroup-ddr5-32gb-6000"]["direct_retailer_urls"][0])
+        self.assertIn("tsukumo.co.jp", parts_by_id["ssd-crucial-p3-plus-1tb"]["direct_retailer_urls"][0])
 
     def test_readme_copilot_instructions_and_peripheral_guide_match_current_plan(self):
         readme = read_text("README.md")

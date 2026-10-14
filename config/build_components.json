@@ -49,6 +49,7 @@
       "amazon.co.jp",
       "rakuten.co.jp",
       "shopping.yahoo.co.jp",
+      "ymall.jp",
       "yodobashi.com",
       "biccamera.com",
       "dospara.co.jp",
@@ -313,7 +314,10 @@
         "speed_mts": 6000,
         "profile": "EXPO"
       },
-      "notes": "16GB×2のデュアルチャネル。メモリ市況の急変はBF目標に反映し、価格を推測しない。"
+      "notes": "16GB×2のデュアルチャネル。メモリ市況の急変はBF目標に反映し、価格を推測しない。 YMallの型番一致候補ページを直接監視。正確な型番・価格・販売状態を実ページで確認できなければ未検証のまま保持する。",
+      "direct_retailer_urls": [
+        "https://ymall.jp/store/mlymall/b0chf9th1b-20260811/"
+      ]
     },
     {
       "id": "ssd-crucial-p3-plus-1tb",
@@ -340,7 +344,10 @@
         "interface": "NVMe PCIe 4.0",
         "form_factor": "M.2 2280"
       },
-      "notes": "最初から1TB。OS・開発環境・ゲーム用途を想定。"
+      "notes": "最初から1TB。OS・開発環境・ゲーム用途を想定。 TSUKUMOの型番一致商品ページを直接監視。在庫切れや完売の表示価格は市場参考値・購入可能価格として使用しない。",
+      "direct_retailer_urls": [
+        "https://shop.tsukumo.co.jp/goods/0649528918970/"
+      ]
     },
     {
       "id": "psu-corsair-rm850e-2025",
