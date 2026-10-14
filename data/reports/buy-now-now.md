@@ -1,6 +1,6 @@
 # 今この瞬間の買い時判定
 
-- 更新時刻（JST）: 2026-10-14T20:09:25+09:00
+- 更新時刻（JST）: 2026-10-14T20:50:40+09:00
 - 判定: **事前監視継続・公式日程未確認** (PRE_BF_MONITORING)
 - 暫定の広域監視窓（公式セール日程ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 - 公式日程確認: 0/16 店舗（公式期間が確認できない店舗: 10、取得エラー: 6）
@@ -31,7 +31,7 @@
 
 ### 自作本命の未解決条件
 
-- 比較参考価格の確認が完了していない部品がある: case-fractal-pop-air-tg, cooler-thermalright-pa120-se-v3, cpu-ryzen7-9700x, gpu-rtx5070-12gb, memory-teamgroup-ddr5-32gb-6000, motherboard-asrock-b850m-pro-rs-wifi, psu-corsair-rm850e-2025, ssd-crucial-p3-plus-1tb
+- 比較参考価格の確認が完了していない部品がある: case-fractal-pop-air-tg, cooler-thermalright-pa120-se-v3, cpu-ryzen7-9700x, gpu-rtx5070-12gb, memory-teamgroup-ddr5-32gb-6000, motherboard-asrock-b850m-pro-rs-wifi, os-windows11-home, psu-corsair-rm850e-2025, ssd-crucial-p3-plus-1tb
 - BF購入目標額は希望価格であり、確認済み実売価格ではない。
 - 比較サイト価格は購入店舗の最終決済価格・在庫・送料を証明しない。
 
