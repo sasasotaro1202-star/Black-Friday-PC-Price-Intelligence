@@ -237,6 +237,27 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertNotIn("¥329,360", guide)
         self.assertNotIn("¥399,160", guide)
 
+    def test_github_is_collector_and_chatgpt_produces_final_on_demand_ranking(self):
+        readme = read_text("README.md")
+        instructions = read_text(".github/copilot-instructions.md")
+        guide = read_text("docs/chatgpt-on-demand-analysis.md")
+        for text in (readme, instructions, guide):
+            self.assertRegex(text.lower(), r"chatgpt")
+            self.assertRegex(text, r"(?i)(internal diagnostic|診断情報|中間的な診断)")
+            self.assertRegex(text, r"(?i)(freshest|latest|最新)")
+        self.assertIn("最終的なおすすめ順位", readme)
+        self.assertIn("the final ranking is produced in ChatGPT only when the user asks", instructions)
+        self.assertIn("data/build_component_observations.jsonl", guide)
+        self.assertIn("data/peripheral_change_events.jsonl", guide)
+        self.assertIn("公式キャンペーン期間内の確認済み価格", guide)
+        for path in (
+            ".github/workflows/pc-price-monitor.yml",
+            ".github/workflows/pc-price-monitor-bf-fast.yml",
+        ):
+            workflow = read_text(path)
+            self.assertIn("Collect, preserve, quality-check and publish evidence", workflow)
+            self.assertIn("internal indexes and quality diagnostics only", workflow)
+
     def test_monitor_workflow_has_one_cadence_switch_and_fast_workflow_is_manual(self):
         regular = read_text(".github/workflows/pc-price-monitor.yml")
         fast = read_text(".github/workflows/pc-price-monitor-bf-fast.yml")
