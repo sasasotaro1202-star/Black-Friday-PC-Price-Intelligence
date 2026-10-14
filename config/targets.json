@@ -1,5 +1,5 @@
 {
-  "budget_jpy": 330200,
+  "budget_jpy": 310200,
   "target_date": "2026-11-27",
   "monitor_window_start": "2026-11-01T00:00:00+09:00",
   "monitor_window_end": "2026-12-11T23:59:59+09:00",
@@ -245,14 +245,14 @@
   "desktop_enabled": true,
   "desktop_note": "Desktop PCs are evaluated in the same integrated purchase-priority ranking as laptops. Include an RTX 5060 Ti 16GB/32GB/1TB desktop alternative for the gaming-versus-local-AI-VRAM trade-off; all BTO memory configuration costs must be verified.",
   "desktop_exact_candidate_count": 7,
-  "total_budget_jpy": 400000,
+  "total_budget_jpy": 380000,
   "peripheral_budget_jpy": 69800,
-  "pc_target_jpy": 330200,
-  "pc_budget_jpy": 330200,
+  "pc_target_jpy": 310200,
+  "pc_budget_jpy": 310200,
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
-  "budget_scope_note": "budget_jpy is the PC-only target, not the full-system budget. Total 400000 JPY includes a 27-inch main monitor, 23.8-inch secondary monitor, value-focused EDIFIER MR4 MKII speakers, keyboard, mouse, mousepad, power strip, required cables and shipping reserve.",
+  "budget_scope_note": "budget_jpy is the PC-only target, not the full-system budget. Total 380000 JPY includes a 27-inch main monitor, 23.8-inch secondary monitor, value-focused EDIFIER MR4 MKII speakers, keyboard, mouse, mousepad, power strip, required cables and shipping reserve.",
   "peripherals": [
     {
       "id": "main_monitor",
@@ -479,7 +479,7 @@
   ],
   "purchase_strategy": {
     "updated_at": "2026-10-12",
-    "purpose": "総予算40万円の中で、RTX 5070搭載32GB/1TB完成構成を優先し、27型メイン＋23.8型サブモニターと、音質・出力・入力機能・価格のバランスが良いEDIFIER MR4 MKIIを含む実用的な環境を組む。目標額はBF購入目標であり実売価格の確認とは区別する。",
+    "purpose": "総予算38万円の中で、RTX 5070搭載32GB/1TB完成構成を優先し、27型メイン＋23.8型サブモニターと、音質・出力・入力機能・価格のバランスが良いEDIFIER MR4 MKIIを含む実用的な環境を組む。目標額はBF購入目標であり実売価格の確認とは区別する。",
     "priority_plans": [
       {
         "candidate_id": "desktop-gtune-dg-i5g70-5070",
@@ -493,9 +493,9 @@
         "price_source_note": "279,800円は16GB/500GB基本構成の監視基準。32GB/1TB完成構成の実価格として扱わない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 330200,
-        "black_friday_planned_hard_cap_jpy": 330200,
-        "black_friday_target_note": "32GB RAM/1TB SSD完成構成のBF購入目標・計画上限は330,200円。279,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費の許容上限は50,400円だが、実見積が確認されるまで費用ゼロとは扱わない。"
+        "black_friday_target_price_jpy": 310200,
+        "black_friday_planned_hard_cap_jpy": 310200,
+        "black_friday_target_note": "32GB RAM/1TB SSD完成構成のBF購入目標・計画上限は310,200円。279,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費の許容上限は30,400円だが、実見積が確認されるまで費用ゼロとは扱わない。"
       },
       {
         "candidate_id": "desktop-gtune-dg-a7g70-5070",
@@ -507,9 +507,9 @@
         "reference_checked_date": "2026-10-10",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
         "reference_note": "公式ページで確認した参考価格。次の監視サイクルでも現行価格・在庫・SKUを検証する。",
-        "black_friday_target_price_jpy": 330200,
-        "black_friday_planned_hard_cap_jpy": 330200,
-        "black_friday_target_note": "32GB/1TB完成構成のBF購入目標・計画上限は330,200円。304,800円は事前参考掲載額で、BF購入目標330,200円を25,400円下回っていますが、BF実売価格ではありません。BF期間中に価格・在庫・SKU・PITを再確認する。"
+        "black_friday_target_price_jpy": 310200,
+        "black_friday_planned_hard_cap_jpy": 310200,
+        "black_friday_target_note": "32GB/1TB完成構成のBF購入目標・計画上限は310,200円。304,800円は事前参考掲載額で、BF購入目標310,200円を5,400円下回っていますが、BF実売価格ではありません。BF期間中に価格・在庫・SKU・PITを再確認する。"
       },
       {
         "candidate_id": "desktop-gtune-dg-i7g70-5070",
@@ -524,9 +524,9 @@
         "price_source_note": "299,800円は16GB/500GB基本構成の事前参考価格。32GB/1TB完成構成のBF実売価格ではない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 330200,
-        "black_friday_planned_hard_cap_jpy": 330200,
-        "black_friday_target_note": "CPU重視の大穴候補。32GB/1TB完成構成のBF購入目標・計画上限は330,200円。299,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費は上限まで30,400円以内が条件だが、実見積が確認されるまで費用ゼロとは扱わない。"
+        "black_friday_target_price_jpy": 310200,
+        "black_friday_planned_hard_cap_jpy": 310200,
+        "black_friday_target_note": "CPU重視の大穴候補。32GB/1TB完成構成のBF購入目標・計画上限は310,200円。299,800円は16GB/500GB基本構成の事前参考価格でありBF価格ではない。構成変更費は上限まで10,400円以内が条件だが、実見積が確認されるまで費用ゼロとは扱わない。"
       },
       {
         "candidate_id": "desktop-gtune-fg-a7g6t-5060ti16",
@@ -541,9 +541,9 @@
         "price_source_note": "309,800円は2026-10-11に公式ページで確認した事前参考掲載額。ブラックフライデー実売価格ではない。",
         "required_quote": "32GB RAM・1TB SSD完成構成の最終カート価格。可能なら16GB×2のデュアルチャネル構成を出荷時カスタマイズで指定し、追加費用を含めて確認。",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 330200,
-        "black_friday_planned_hard_cap_jpy": 330200,
-        "black_friday_target_note": "AI用VRAMを優先する大穴候補。公式仕様はRTX 5060 Ti 16GB・Ryzen 7 7700・32GB×1・1TB。完成構成のBF目標/計画上限は330,200円。事前参考掲載額309,800円はBF購入目標330,200円を下回りますが、BF実売価格ではありません。デュアルチャネル変更費を含む最終見積で判断します。予測価格・値下げ確率とはみなさない。",
+        "black_friday_target_price_jpy": 310200,
+        "black_friday_planned_hard_cap_jpy": 310200,
+        "black_friday_target_note": "AI用VRAMを優先する大穴候補。公式仕様はRTX 5060 Ti 16GB・Ryzen 7 7700・32GB×1・1TB。完成構成のBF目標/計画上限は310,200円。事前参考掲載額309,800円はBF購入目標310,200円を400円下回りますが、BF実売価格ではありません。デュアルチャネル変更費を含む最終見積で判断します。予測価格・値下げ確率とはみなさない。",
         "ai_tradeoff": "RTX 5070候補よりゲーム描画性能は控えめになり得る一方、16GB VRAMは12GBのRTX 5070よりローカルAIモデルやGPUメモリ負荷で余裕が出る場合がある。CPU/RAM/SSD中心の大規模予測プログラムではGPU単体だけで性能は決まらない。"
       }
     ],
@@ -556,7 +556,7 @@
       "maximum_completed_pc_price_uses": "dynamic_pc_cap_jpy",
       "requires_direct_price_stock_exact_identity_and_valid_pit": true,
       "zero_cost_upgrade_assumption_allowed": false,
-      "black_friday_target_cap_jpy": 330200,
+      "black_friday_target_cap_jpy": 310200,
       "price_basis": "completed_build_black_friday_offer_only"
     },
     "score_policy": "説明文にある96/94/95/97点は条件付きの目標イメージであり、実測スコアとして固定しない。実際のスコアはコードが確認済み価格・構成・在庫・性能・データ品質から計算する。",
@@ -592,7 +592,7 @@
       "requires_direct_price_stock_exact_identity_and_valid_pit": true,
       "requires_final_configuration_quote": true,
       "zero_cost_upgrade_assumption_allowed": false,
-      "black_friday_target_cap_jpy": 330200,
+      "black_friday_target_cap_jpy": 310200,
       "price_basis": "completed_build_black_friday_offer_only",
       "rationale": "Track beside faster RTX 5070 options because 16GB VRAM may better support some local-AI workloads; do not outrank based on VRAM alone."
     }
