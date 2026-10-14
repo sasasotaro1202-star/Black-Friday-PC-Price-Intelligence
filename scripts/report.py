@@ -405,6 +405,14 @@ def main():
     peripheral_projection = peripheral_budget_projection()
     target_config = load_json(os.path.join(ROOT, "config", "targets.json"), {})
     strategy_config = target_config.get("purchase_strategy") or {}
+    build_config = load_json(os.path.join(ROOT, "config", "build_components.json"), {})
+    build_profile = build_config.get("profile") or {}
+    self_build_primary_method = (
+        build_profile.get("pc_build_method_preference")
+        == "SELF_BUILD_REQUIRED_FOR_PRIMARY_RECOMMENDATION"
+    )
+    assembly_time_is_constraint = bool(build_profile.get("assembly_time_is_constraint", False))
+    assembly_time_penalty_points = int(build_profile.get("assembly_time_penalty_points", 0))
 
     source_snapshot_generated_at = latest.get("generated_at")
     source_snapshot_sha256 = file_sha256(latest_path) if os.path.exists(latest_path) else None
@@ -474,7 +482,8 @@ def main():
     ]
     coverage_status = "COMPLETE" if not critical_unverified else "PARTIAL"
     purchase_gate_allowed = bool(
-        action
+        not self_build_primary_method
+        and action
         and coverage_status == "COMPLETE"
         and peripheral_projection.get("budget_data_ready")
         and action.get("score_detail", {}).get("status") in ("BUY_NOW", "BUY_NOW_LOW_STOCK", "BUY_NOW_NEAR_BUDGET")
@@ -550,6 +559,7 @@ def main():
             "coverage_status": coverage_status,
             "critical_unverified_ids": critical_unverified,
             "reason": (
+                "self_build_primary_method_required" if self_build_primary_method else
                 "critical_candidates_not_fully_verified" if critical_unverified else
                 "peripheral_prices_or_availability_unverified" if not peripheral_projection.get("budget_data_ready") else
                 "all_in_cost_exceeds_total_budget" if action and action.get("effective_cost_jpy", 10**12) > peripheral_projection.get("pc_dynamic_cap_jpy", 0) else
@@ -557,12 +567,21 @@ def main():
                 "all_critical_and_peripheral_candidates_verified"
             ),
         },
+        "purchase_method_policy": {
+            "primary_method": "SELF_BUILD" if self_build_primary_method else "RANKED_COMPLETE_PC",
+            "assembly_time_is_constraint": assembly_time_is_constraint,
+            "assembly_time_penalty_points": assembly_time_penalty_points,
+            "bto_role": build_profile.get("bto_role", "REFERENCE_BENCHMARK_ONLY"),
+            "selection_policy": build_profile.get("selection_policy"),
+        },
         "top_recommendation": {
             "id": action.get("id") if action else None,
             "name": action.get("name") if action else None,
             "decision_score": action.get("decision_score") if action else None,
             "status": action.get("score_detail", {}).get("status") if action else "NO_VERIFIED_CANDIDATE",
             "purchase_url": sales_url(action) if action else None,
+            "role": "REFERENCE_BENCHMARK_ONLY" if self_build_primary_method else "RANKED_PURCHASE_CANDIDATE",
+            "purchase_actionable": bool(action and purchase_gate_allowed and not self_build_primary_method),
         },
         "quality": quality,
         "coverage": latest.get("coverage") or {},
@@ -610,20 +629,24 @@ def main():
         d = action["score_detail"]
         price = action["current_price_jpy"]
         purchase_ready_now = bool(
-            purchase_gate_allowed
+            not self_build_primary_method
+            and purchase_gate_allowed
             and d.get("configuration_ready")
             and d.get("status") in ("BUY_NOW", "BUY_NOW_NEAR_BUDGET", "BUY_NOW_LOW_STOCK")
         )
         summary_heading = (
-            "## 現時点の最優先候補"
-            if purchase_ready_now
+            "## 完成品PCの参考ベンチマーク（自作PC本命とは別枠）"
+            if self_build_primary_method
+            else "## 現時点の最優先候補" if purchase_ready_now
             else "## 監視中の最高スコア候補（購入許可とは別判定）"
         )
         lines += [
             summary_heading,
             "",
             (
-                "購入ゲートを通過した候補です。決済前に構成・在庫・最終支払額を再確認してください。"
+                "自作PCを正式な購入方式として最適化しています。組み立て時間・作業時間は減点しません。この完成品PCは同等仕様の価格・性能・部品品質・保証を比較するための参考候補であり、購入推薦ではありません。"
+                if self_build_primary_method
+                else "購入ゲートを通過した候補です。決済前に構成・在庫・最終支払額を再確認してください。"
                 if purchase_ready_now
                 else "これは現行データでスコアが最も高い監視候補であり、購入推奨や購入許可を意味しません。構成・総額・在庫・重要候補と周辺機器の確認が揃うまで、購入判断は保留です。"
             ),
