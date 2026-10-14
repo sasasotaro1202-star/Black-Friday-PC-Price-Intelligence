@@ -217,6 +217,54 @@ def main():
                 if build.get("market_reference_coverage_complete") is not True or build.get("market_reference_estimate_is_checkout_price") is not False:
                     errors.append("self_build_plan market estimate lacks complete reference coverage/caveat: " + bid)
 
+    build_config = load_json(os.path.join(ROOT, "config", "build_components.json"), {})
+    build_profile = build_config.get("profile") or {}
+    self_build_required = build_profile.get("pc_build_method_preference") == "SELF_BUILD_REQUIRED_FOR_PRIMARY_RECOMMENDATION"
+    if self_build_required:
+        expected_policy = build_plan.get("purchase_method_policy") or {}
+        if expected_policy.get("primary_method") != "SELF_BUILD":
+            errors.append("self_build_plan primary_method must be SELF_BUILD")
+        if expected_policy.get("assembly_time_is_constraint") is not False:
+            errors.append("self_build_plan must not treat assembly time as a constraint")
+        if expected_policy.get("assembly_time_penalty_points") != 0:
+            errors.append("self_build_plan assembly-time penalty must be zero")
+        if expected_policy.get("bto_role") != "REFERENCE_BENCHMARK_ONLY":
+            errors.append("self_build_plan must label BTO as reference benchmark only")
+
+        if rankings.get("purchase_method_policy", {}).get("primary_method") != "SELF_BUILD":
+            errors.append("decision rankings must keep SELF_BUILD as primary method")
+        if rankings.get("purchase_method_policy", {}).get("assembly_time_penalty_points") != 0:
+            errors.append("decision rankings must not penalize assembly time")
+        ranking_gate = rankings.get("purchase_gate") or {}
+        if ranking_gate.get("allowed") is not False or ranking_gate.get("reason") != "self_build_primary_method_required":
+            errors.append("BTO reference ranking must not authorize primary purchase when self-build is required")
+
+        buy_now = load_json(os.path.join(ROOT, "data", "buy_now_decision.json"), {})
+        if not buy_now:
+            errors.append("buy_now_decision missing after timing analysis")
+        else:
+            buy_policy = buy_now.get("purchase_method_policy") or {}
+            if buy_policy.get("primary_method") != "SELF_BUILD":
+                errors.append("buy-now decision must keep SELF_BUILD as primary method")
+            if buy_policy.get("completed_pc_purchase_actionable") is not False:
+                errors.append("BTO completed-PC benchmark must not be purchase-actionable")
+            if buy_now.get("purchase_gate_allowed") is not False:
+                errors.append("buy-now decision must keep overall gate closed while DIY is primary")
+            if buy_now.get("status") == "BUY_NOW":
+                errors.append("BTO reference candidate must never produce BUY_NOW under self-build-first policy")
+            if (buy_now.get("chosen_candidate") or {}).get("qualified_to_buy") is True:
+                errors.append("BTO reference candidate cannot be marked qualified_to_buy under self-build-first policy")
+            diy = buy_now.get("self_build_purchase_timing")
+            if not isinstance(diy, dict):
+                errors.append("DIY build-level timing summary missing")
+            else:
+                if diy.get("primary_method") != "SELF_BUILD":
+                    errors.append("DIY build-level timing summary primary method mismatch")
+                if diy.get("purchase_allowed") is not False or diy.get("bf_actual_authorized") is not False:
+                    errors.append("DIY plan must not authorize from target/reference-only observations")
+                if diy.get("assembly_time_is_constraint") is not False or diy.get("assembly_time_penalty_points") != 0:
+                    errors.append("DIY timing summary must ignore assembly time")
+
     if errors:
         for e in errors:
             print(" -", e)
