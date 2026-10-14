@@ -207,7 +207,7 @@ class SelfBuildPlannerTests(unittest.TestCase):
         os_row = next(x for x in build["components"] if x["id"] == "os-windows11-home")
         self.assertIsNone(os_row["market_reference_price_jpy"])
         self.assertIsNone(os_row["display_reference_price_jpy"])
-        self.assertEqual(os_row["price_status"], "missing")
+        self.assertEqual(os_row["price_status"], "not_observed")
         self.assertFalse(os_row["trusted_for_market_estimate"])
         report = planner.render_plan_markdown(plan)
         self.assertIn("¥14,800", report)
