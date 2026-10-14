@@ -301,6 +301,62 @@ class BuyNowDecisionTests(unittest.TestCase):
         self.assertFalse(result["assembly_time_is_constraint"])
         self.assertEqual(result["assembly_time_penalty_points"], 0)
 
+    def test_display_only_search_reference_is_visible_but_never_used_for_estimate_or_buy_gate(self):
+        now = datetime(2026, 10, 14, 12, 0, tzinfo=JST)
+        plan = {
+            "total_budget_jpy": 400000, "pc_budget_jpy": 330200,
+            "peripheral_budget_jpy": 69800,
+            "purchase_method_policy": {
+                "primary_method": "SELF_BUILD",
+                "assembly_time_is_constraint": False,
+                "assembly_time_penalty_points": 0,
+            },
+            "builds": [{
+                "rank": 1, "id": "diy-primary", "gpu_choice_id": "g1", "name": "DIY test build",
+                "target_pc_total_jpy": 320000, "target_all_in_jpy": 389800,
+                "target_remaining_budget_jpy": 10200, "target_within_total_budget": True,
+                "target_parts_subtotal_jpy": 311000, "compatibility_status": "PASS",
+                "market_reference_estimate_jpy": None, "market_reference_all_in_estimate_jpy": None,
+                "missing_or_untrusted_market_reference_ids": ["cpu-x"],
+                "components": [{
+                    "id": "cpu-x", "name": "CPU test", "category": "cpu", "model_code": "CPU-12345",
+                    "track_price": True, "target_price_jpy": 40000,
+                    "trusted_for_market_estimate": False, "market_reference_price_jpy": None,
+                    "display_reference_price_jpy": 39980,
+                    "price_status": "search_snippet_reference_only",
+                    "source_role": "comparison_site_reference",
+                    "reference_age_minutes": 2,
+                    "search_snippet_reference_url": "https://search.kakaku.com/CPU-12345/",
+                    "search_snippet_reference_title": "CPU-12345",
+                    "purchase_url": "https://kakaku.com/item/K0001234567/",
+                }],
+            }],
+        }
+        config = {"profile": {"primary_gpu_choice_id": "g1"}}
+        result = timing.build_self_build_timing_summary(plan, config, now=now)
+        self.assertEqual(result["status"], "WAIT_FOR_COMPONENT_REFERENCES")
+        self.assertEqual(result["verified_market_reference_count"], 0)
+        self.assertEqual(result["display_only_search_reference_count"], 1)
+        row = result["component_timing"][0]
+        self.assertIsNone(row["current_market_reference_price_jpy"])
+        self.assertEqual(row["display_only_reference_price_jpy"], 39980)
+        self.assertFalse(row["display_only_reference_is_estimate_eligible"])
+        self.assertIsNone(row["target_gap_jpy"])
+        self.assertFalse(result["purchase_allowed"])
+
+        report = timing.render_buy_now_markdown({
+            "generated_at": timing.iso(now),
+            "label": "事前監視継続", "status": "PRE_BF_MONITORING",
+            "watch_window_start_jst": WATCH_START, "watch_window_end_jst": WATCH_END,
+            "official_campaign_dates_summary": {"confirmed_count": 0, "retailer_count": 0,
+                                                "unconfirmed_count": 0, "fetch_error_count": 0},
+            "purchase_method_policy": {"primary_method": "SELF_BUILD"},
+            "self_build_purchase_timing": result,
+        })
+        self.assertIn("検索ページ表示専用値（不採用）", report)
+        self.assertIn("39,980", report)
+        self.assertIn("検索結果ページの表示専用値", report)
+
     def test_self_build_waits_for_checkout_offers_even_when_reference_prices_are_complete(self):
         plan = {
             "total_budget_jpy": 400000, "pc_budget_jpy": 330200, "peripheral_budget_jpy": 69800,
