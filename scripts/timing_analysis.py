@@ -514,6 +514,22 @@ def build_self_build_timing_summary(build_plan, build_config=None, component_obs
     }
 
 
+def self_build_purchase_gate_reason(self_build_timing):
+    """Explain the current DIY gate blocker without ever opening the gate."""
+    summary = self_build_timing if isinstance(self_build_timing, dict) else {}
+    status = str(summary.get("status") or "SELF_BUILD_DATA_UNAVAILABLE")
+    reasons = {
+        "SELF_BUILD_DATA_UNAVAILABLE": "self_build_data_unavailable",
+        "BLOCKED_COMPATIBILITY": "self_build_compatibility_failed",
+        "WAIT_FOR_COMPATIBILITY_REVIEW": "self_build_wait_for_compatibility_review",
+        "OVER_BUDGET_TARGET": "self_build_target_over_budget",
+        "WAIT_FOR_COMPONENT_REFERENCES": "self_build_wait_for_component_references",
+        "WAIT_FOR_OFFICIAL_COMPONENT_OFFERS": "self_build_wait_for_official_component_offers",
+        "WAIT_FOR_FINAL_COMPATIBILITY_AND_BUDGET_GATE": "self_build_wait_for_final_checkout_gate",
+    }
+    return reasons.get(status, "self_build_purchase_authorization_not_ready")
+
+
 def build_buy_now_decision(rankings, events, config, price_observations=None, official_campaign_dates=None):
     """Separate provisional observation coverage from source-verified seller campaign windows."""
     now = now_jst()
@@ -1218,8 +1234,11 @@ def main():
         "completed_pc_purchase_actionable": False,
     }
     if decision["purchase_method_policy"].get("primary_method") == "SELF_BUILD":
+        # The global BTO candidate gate intentionally stays closed for DIY-first
+        # selection. Report the actual DIY blocker instead of the stale/misleading
+        # "self-build required" reason when self-build is already the selected method.
         decision["purchase_gate_allowed"] = False
-        decision["purchase_gate_reason"] = "self_build_primary_method_required"
+        decision["purchase_gate_reason"] = self_build_purchase_gate_reason(self_build_timing)
     out={
         "generated_at":iso(now_jst()),
         "source_snapshot_generated_at":source_snapshot_generated_at,
