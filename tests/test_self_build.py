@@ -33,6 +33,17 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertTrue(plan["budget_arithmetic_valid"])
         self.assertFalse(plan["buy_now_authorized"])
 
+    def test_diy_is_primary_and_assembly_time_has_zero_penalty(self):
+        plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
+        policy = plan["purchase_method_policy"]
+        self.assertEqual(policy["primary_method"], "SELF_BUILD")
+        self.assertFalse(policy["assembly_time_is_constraint"])
+        self.assertEqual(policy["assembly_time_penalty_points"], 0)
+        self.assertEqual(policy["bto_role"], "REFERENCE_BENCHMARK_ONLY")
+        rendered = planner.render_plan_markdown(plan)
+        self.assertIn("自作PCを正式な本命", rendered)
+        self.assertIn("組み立て時間・作業時間は減点しません", rendered)
+
     def test_gpu_options_are_mutually_exclusive_and_categories_unique(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         for build in plan["builds"]:
