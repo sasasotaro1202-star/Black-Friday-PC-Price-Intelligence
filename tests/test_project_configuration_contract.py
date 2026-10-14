@@ -171,6 +171,18 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(primary_memory["specs"]["speed_mts"], 6000)
         self.assertEqual(primary_memory["monitor_url"], "https://kakaku.com/item/K0001633533/")
         self.assertEqual(
+            primary_memory["direct_retailer_urls"],
+            [
+                "https://shop.tsukumo.co.jp/goods/0649528943019/",
+                "https://www.dospara.co.jp/SBR1534/IC512079.html",
+                "https://www.pc4u.co.jp/view/item/000000090356?category_page_id=ct824",
+                "https://www.yodobashi.com/product/100000001009315413/",
+            ],
+        )
+        for retailer_url in primary_memory["direct_retailer_urls"]:
+            self.assertTrue(retailer_url.startswith("https://"))
+
+        self.assertEqual(
             self.profile["primary_memory_choice_id"],
             "memory-crucial-pro-ddr5-32gb-6000",
         )
