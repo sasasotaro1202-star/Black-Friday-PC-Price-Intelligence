@@ -1,5 +1,6 @@
 """Build a transparent DIY component plan; never authorize a buy from target/comparison prices."""
 import hashlib
+import html
 import json
 import os
 import re
@@ -579,6 +580,8 @@ def build_plan(config=None, price_snapshot=None, now=None):
                 "direct_listing_display_is_estimate_eligible": False,
                 "direct_listing_display_purchase_allowed": False,
                 "track_price": bool(part.get("track_price")), "specs": part.get("specs") or {},
+                "image_url": part.get("image_url"), "image_source_url": part.get("image_source_url"),
+                "image_note": part.get("image_note"), "image_checked_at": part.get("image_checked_at"),
                 "notes": part.get("notes"), "bf_actual_authorized": False
             }
             components.append(component)
@@ -719,8 +722,8 @@ def render_plan_markdown(plan):
           "- 周辺機器込み目標: " + money(build.get("target_all_in_jpy")) + " / 残額 " + money(build.get("target_remaining_budget_jpy")),
           "- 現在の比較参考合計: " + (money(build.get("market_reference_estimate_jpy")) + "（決済見積ではない）" if build.get("market_reference_estimate_jpy") is not None else "未算出。部品価格の欠落・不一致・古さを0円補完しない"),
           "- 互換性: " + str(build.get("compatibility_status")) + " / 判定: " + str(build.get("decision")), "",
-          "|部品|型番|BF目標|検証済み/表示専用参考値|直接掲載価格（在庫条件未達・推定不採用）|確認状態|直接取得診断|リンク|",
-          "|---|---|---:|---:|---|---|---|---|"])
+          "|画像|部品|型番|BF目標|検証済み/表示専用参考値|直接掲載価格（在庫条件未達・推定不採用）|確認状態|直接取得診断|リンク|",
+          "|---|---|---|---:|---:|---|---|---|---|---|"])
         for part in build.get("components") or []:
             p = part.get("display_reference_price_jpy")
             if part.get("price_status") == "manual_reference_unverified":
@@ -745,6 +748,16 @@ def render_plan_markdown(plan):
             if search_url and search_url != url:
                 links.append("[検索ページ参考元](" + search_url + ")")
             link = " / ".join(links) if links else "—"
+            image_url = part.get("image_url")
+            image_source_url = part.get("image_source_url")
+            image_alt = html.escape(str(part.get("name") or "PCパーツ画像"), quote=True)
+            image_html = (
+                '<a href="{}"><img src="{}" alt="{}" width="92"></a>'.format(
+                    html.escape(str(image_source_url or url or "#"), quote=True),
+                    html.escape(str(image_url), quote=True), image_alt
+                )
+                if isinstance(image_url, str) and image_url.startswith("https://") else "画像未確認"
+            )
             diagnostic_texts = []
             for diagnostic in part.get("direct_listing_validation_diagnostics") or []:
                 status = str(diagnostic.get("status") or "unknown")
@@ -762,8 +775,8 @@ def render_plan_markdown(plan):
                     re.sub(r"\\s+", " ", detail).replace("|", "/")[:260]
                 )
             diagnostic_text = "; ".join(diagnostic_texts) if diagnostic_texts else "—"
-            lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|".format(
-                part.get("name"), part.get("model_code") or "—",
+            lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
+                image_html, part.get("name"), part.get("model_code") or "—",
                 money(part.get("target_price_jpy")), price_text, direct_text,
                 part.get("price_status"), diagnostic_text, link
             ))
