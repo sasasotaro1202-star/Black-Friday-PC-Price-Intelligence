@@ -64,6 +64,37 @@
       "ksdenki.com",
       "nojima.co.jp",
       "yamada-denkiweb.com"
+    ],
+    "assembly_time_is_constraint": false,
+    "assembly_time_penalty_points": 0,
+    "pc_build_method_preference": "SELF_BUILD_REQUIRED_FOR_PRIMARY_RECOMMENDATION",
+    "bto_role": "REFERENCE_BENCHMARK_ONLY",
+    "selection_policy": "Prioritize self-build for the actual desktop recommendation. Assembly time and assembly effort are not negative factors. Compare BTO only as a reference benchmark on equivalent final specification, total cash price, part quality and warranty; do not switch the primary recommendation to BTO merely for convenience.",
+    "purchase_decision_factors": [
+      {
+        "name": "performance_for_user_workloads",
+        "priority": 1
+      },
+      {
+        "name": "total_all_in_cash_cost",
+        "priority": 2
+      },
+      {
+        "name": "component_quality_and_reliability",
+        "priority": 3
+      },
+      {
+        "name": "compatibility_and_thermal_headroom",
+        "priority": 4
+      },
+      {
+        "name": "warranty_and_return_risk",
+        "priority": 5
+      },
+      {
+        "name": "future_upgradeability",
+        "priority": 6
+      }
     ]
   },
   "parts": [
