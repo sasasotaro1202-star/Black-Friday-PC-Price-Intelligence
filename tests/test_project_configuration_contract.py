@@ -39,9 +39,9 @@ class ProjectConfigurationContractTests(unittest.TestCase):
             if item.get("mandatory", True)
         )
         self.assertEqual(mandatory_peripheral_target, targets["peripheral_budget_jpy"])
-        self.assertEqual(targets["total_budget_jpy"], 380000)
+        self.assertEqual(targets["total_budget_jpy"], 400000)
         self.assertEqual(targets["peripheral_budget_jpy"], 69800)
-        self.assertEqual(targets["pc_target_jpy"], 310200)
+        self.assertEqual(targets["pc_target_jpy"], 330200)
 
     def test_diy_profile_matches_budget_and_never_penalizes_assembly_time(self):
         profile = self.profile
@@ -217,7 +217,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
 
         for text in (readme, instructions, peripherals):
             with self.subTest(document="budget and speaker", text_length=len(text)):
-                self.assertRegex(text, r"(?:¥\s?380,000|380,000円)")
+                self.assertRegex(text, r"(?:¥\s?400,000|400,000円)")
                 self.assertRegex(text, r"(?:¥\s?69,800|69,800円)")
                 self.assertIn("EDIFIER MR4 MKII", text)
 
