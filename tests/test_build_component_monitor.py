@@ -224,7 +224,12 @@ class BuildComponentMonitorTests(unittest.TestCase):
              patch.object(bcm, "fetch") as fetcher, \
              patch.object(bcm, "build_retailer_search_urls") as rotate:
             result = bcm.search_comparison_snippet(part, ("dospara.co.jp",))
-        verify.assert_called_once_with(part, part["direct_retailer_urls"][0], ("dospara.co.jp",))
+        verify.assert_called_once()
+        self.assertEqual(
+            verify.call_args.args[:3],
+            (part, part["direct_retailer_urls"][0], ("dospara.co.jp",)),
+        )
+        self.assertIn("diagnostic_out", verify.call_args.kwargs)
         fetcher.assert_not_called()
         rotate.assert_not_called()
         self.assertEqual(result["retailer_listing_offer"]["price_jpy"], 138800)
@@ -359,7 +364,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
             )
         self.assertIsNone(offer)
         self.assertEqual(no_price["reason_code"], "direct_price_missing_or_not_integer")
-        self.assertEqual(no_price["identity_anchor"], "PNY GeForce RTX 5070 12GB OC SLIM")
+        self.assertEqual(no_price["identity_anchor"], "VCG507012DFSXPB1-O")
 
     def test_direct_retailer_listing_accepts_sub_50000_component_price(self):
         part = {
