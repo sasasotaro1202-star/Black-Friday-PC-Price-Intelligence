@@ -283,6 +283,14 @@ def build_plan(config=None, price_snapshot=None, now=None):
     return {
         "generated_at": iso(now), "schema_version": 1, "project": "DIY_PC",
         "source_policy": "Comparison-site prices are market references only. This plan never authorizes a purchase; official seller-specific BF price evidence is missing.",
+        "purchase_method_policy": {
+            "primary_method": "SELF_BUILD",
+            "assembly_time_is_constraint": bool(profile.get("assembly_time_is_constraint", False)),
+            "assembly_time_penalty_points": int(profile.get("assembly_time_penalty_points", 0)),
+            "bto_role": profile.get("bto_role", "REFERENCE_BENCHMARK_ONLY"),
+            "selection_policy": profile.get("selection_policy") or "Prioritize self-build; do not penalize assembly time."
+        },
+        "selection_factors": profile.get("purchase_decision_factors") or [],
         "total_budget_jpy": all_budget, "peripheral_budget_jpy": peripheral_budget, "pc_budget_jpy": pc_budget,
         "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
         "budget_arithmetic_valid": pc_budget + peripheral_budget == all_budget,
@@ -304,6 +312,8 @@ def render_plan_markdown(plan):
         "# 自作PCパーツ構成・価格監視", "",
         "更新: " + str(plan.get("generated_at")),
         "予算: PC本体 " + money(plan.get("pc_budget_jpy")) + " / 周辺機器 " + money(plan.get("peripheral_budget_jpy")) + " / 総額 " + money(plan.get("total_budget_jpy")),
+        "",
+        "**購入方式:** 自作PCを正式な本命として最適化します。組み立て時間・作業時間は減点しません。BTOは同等仕様での総額・部品品質・保証のベンチマークとして比較し、便利さだけを理由に自作から切り替えません。",
         "",
         "**注意:** BF購入目標は購入希望額です。比較サイト価格は市場参考値であり、店舗の決済価格・在庫・公式BF実売価格ではありません。現在のデータから購入許可は出しません。",
         "",
