@@ -171,6 +171,25 @@ def main():
     if rankings.get("quality", {}).get("pit_unknown", 0) != 0:
         errors.append("reported PIT unknown != 0")
 
+    component_snapshot = load_json(os.path.join(ROOT, "data", "build_component_prices.json"), {})
+    component_rows = component_snapshot.get("products") or []
+    for component_row in component_rows:
+        cid = str(component_row.get("id") or "")
+        if component_row.get("bf_actual_authorized") is not False:
+            errors.append("component reference must never authorize BF actual: " + cid)
+        if component_row.get("price_validation_status") == "search_snippet_reference":
+            snippet_price = component_row.get("search_snippet_reference_price_jpy")
+            if component_row.get("market_reference_price_jpy") is not None:
+                errors.append("search snippet exposed as trusted market price: " + cid)
+            if component_row.get("retailer_listing_reference_price_jpy") is not None:
+                errors.append("search snippet exposed as direct retailer price: " + cid)
+            if component_row.get("source_role") != "comparison_site_reference":
+                errors.append("search snippet source role mismatch: " + cid)
+            if not isinstance(snippet_price, int) or isinstance(snippet_price, bool) or snippet_price <= 0:
+                errors.append("search snippet reference missing positive display-only price: " + cid)
+            if not component_row.get("search_snippet_identity_anchor"):
+                errors.append("search snippet reference missing identity anchor: " + cid)
+
     build_plan = load_json(os.path.join(ROOT, "data", "self_build_plan.json"), {})
     if not build_plan:
         errors.append("self_build_plan_missing")
@@ -209,10 +228,19 @@ def main():
             if build.get("compatibility_status") != expected_status:
                 errors.append("self_build_plan compatibility status mismatch: " + bid)
             for part in components:
+                pid = str(part.get("id") or "")
                 if part.get("bf_actual_authorized") is not False:
-                    errors.append("self_build_plan component BF authorization invalid: " + bid + ":" + str(part.get("id")))
+                    errors.append("self_build_plan component BF authorization invalid: " + bid + ":" + pid)
                 if part.get("track_price") and part.get("market_reference_price_jpy") is not None and part.get("trusted_for_market_estimate") is not True:
-                    errors.append("self_build_plan exposed untrusted component price: " + bid + ":" + str(part.get("id")))
+                    errors.append("self_build_plan exposed untrusted component price: " + bid + ":" + pid)
+                if part.get("price_status") == "search_snippet_reference_only":
+                    display_price = part.get("display_reference_price_jpy")
+                    if part.get("market_reference_price_jpy") is not None or part.get("trusted_for_market_estimate") is not False:
+                        errors.append("search snippet leaked into market estimate: " + bid + ":" + pid)
+                    if not isinstance(display_price, int) or isinstance(display_price, bool) or display_price <= 0:
+                        errors.append("search snippet display reference missing positive value: " + bid + ":" + pid)
+                    if part.get("source_role") != "comparison_site_reference":
+                        errors.append("search snippet display reference source mismatch: " + bid + ":" + pid)
             if build.get("market_reference_estimate_jpy") is not None:
                 if build.get("market_reference_coverage_complete") is not True or build.get("market_reference_estimate_is_checkout_price") is not False:
                     errors.append("self_build_plan market estimate lacks complete reference coverage/caveat: " + bid)
@@ -264,6 +292,34 @@ def main():
                     errors.append("DIY plan must not authorize from target/reference-only observations")
                 if diy.get("assembly_time_is_constraint") is not False or diy.get("assembly_time_penalty_points") != 0:
                     errors.append("DIY timing summary must ignore assembly time")
+                display_only_count = 0
+                for row in (diy.get("component_timing") or []):
+                    if row.get("display_only_reference_price_jpy") is None:
+                        continue
+                    display_only_count += 1
+                    if row.get("current_market_reference_price_jpy") is not None:
+                        errors.append("display-only timing price exposed as market reference: " + str(row.get("id")))
+                    if row.get("target_gap_jpy") is not None or row.get("required_drop_pct") is not None:
+                        errors.append("display-only timing price used for target-gap calculation: " + str(row.get("id")))
+                    if row.get("display_only_reference_is_estimate_eligible") is not False:
+                        errors.append("display-only timing reference must be estimate-ineligible: " + str(row.get("id")))
+                    if row.get("purchase_allowed") is not False or row.get("bf_actual_authorized") is not False:
+                        errors.append("display-only timing reference must never authorize purchase: " + str(row.get("id")))
+                    if row.get("status") != "DISPLAY_ONLY_SEARCH_REFERENCE":
+                        errors.append("display-only timing reference status label missing: " + str(row.get("id")))
+                if diy.get("display_only_search_reference_count") != display_only_count:
+                    errors.append("DIY display-only reference count mismatch")
+
+                report_path = os.path.join(ROOT, "data", "reports", "buy-now-now.md")
+                try:
+                    with open(report_path, encoding="utf-8") as report_stream:
+                        buy_now_markdown = report_stream.read()
+                    if "検索ページ表示専用値（不採用）" not in buy_now_markdown:
+                        errors.append("buy-now report missing separate display-only reference column")
+                    if display_only_count and "検索ページ表示値のみ（検証価格なし）" not in buy_now_markdown:
+                        errors.append("buy-now report missing display-only status label")
+                except OSError:
+                    errors.append("buy-now report missing after timing analysis")
 
     if errors:
         for e in errors:
