@@ -21,7 +21,7 @@ If a user later explicitly changes their total budget or preferred equipment, up
 
 Primary component target:
 - CPU: AMD Ryzen 7 9700X BOX — BF target ¥38,000.
-- GPU: PNY GeForce RTX 5070 12GB OC SLIM — BF target ¥145,000; primary balanced gaming target.
+- GPU: PNY GeForce RTX 5070 12GB OC SLIM (exact SKU VCG507012DFSXPB1-O) — BF target ¥129,800; primary balanced gaming target.
 - Motherboard: ASRock B850M Pro RS WiFi — ¥20,000.
 - Memory: TeamGroup T-CREATE EXPERT White DDR5-6000, 32GB (2×16GB) — ¥40,000.
 - SSD: Crucial P3 Plus 1TB NVMe — ¥18,000.
@@ -29,10 +29,10 @@ Primary component target:
 - Case: Fractal Design Pop Air TG — ¥12,000.
 - CPU cooler: Thermalright Peerless Assassin 120 SE V3 — ¥5,000.
 - Windows 11 Home retail-license planning allowance — ¥19,360 unless a transferable valid license is explicitly confirmed.
-- Component BF target subtotal: ¥311,360; shipping reserve ¥6,000 + small-parts reserve ¥3,000 = **PC target ¥320,360**. With ¥69,800 peripherals, all-in target = **¥390,160**, leaving ¥9,840 against the ¥400,000 target budget.
+- Component BF target subtotal: ¥296,160; shipping reserve ¥6,000 + small-parts reserve ¥3,000 = **PC target ¥305,160**. With ¥69,800 peripherals, all-in target = **¥374,960**, leaving ¥25,040 against the ¥400,000 target budget.
 
 Keep these alternatives separate and visible:
-- **VRAM-focused alternative:** RTX 5060 Ti 16GB target ¥120,000; projected all-in target ¥365,160 using the same other targets. Prefer it only when its 16GB VRAM benefits the intended local-AI workload more than the RTX 5070's gaming performance.
+- **VRAM-focused alternative:** RTX 5060 Ti 16GB exact SKU VCG5060T16DFXPB1-O, source-backed 245×120×39.9mm and 8-pin PCIe connector — BF target ¥109,800; projected all-in target ¥354,960 using the same other targets. Prefer it only when its 16GB VRAM benefits the intended local-AI workload more than the RTX 5070's gaming performance.
 - **Dark horse:** RTX 5070 Ti 16GB target ¥154,000; projected all-in target ¥399,160. This is a tight budget case, with only ¥840 target headroom. Exact model dimensions, connector, power limits, delivery costs, and full-build compatibility are unresolved until verified; keep it in REVIEW / not purchase-authorized until then.
 - Do not assume an unquoted RAM/SSD upgrade costs ¥0. The quoted completed configuration must meet **RAM ≥32GB and SSD ≥1TB at purchase**; do not rely on a planned post-purchase upgrade.
 
@@ -50,7 +50,7 @@ Keep DIY component prices separate from BTO/laptop offers and peripheral prices.
 - PSU form factor and required connectors;
 - Windows license, shipping, required small parts, and the final complete configuration total.
 
-The RTX 5060 Ti and RTX 5070 Ti entries currently have model-specific dimensions marked unknown in configuration. Do not inherit the RTX 5070's dimensions for either alternative. Unknown details mean REVIEW, not PASS. Even if an automated mechanical check says PASS, verify manufacturer documentation for the exact SKU and the retailer's final basket immediately before purchase.
+Exact PNY GPU model codes and dimensions must be maintained from the linked source page; do not reuse one model's specifications for another. Unknown details mean REVIEW, not PASS. Curated `direct_retailer_urls` are still discovery inputs only: only the existing direct-page identity, price, stock and PIT verifier can mark a listing verified. Even if an automated mechanical check says PASS, verify manufacturer documentation for the exact SKU and the retailer's final basket immediately before purchase.
 
 ## 4. Budget and price semantics
 
@@ -58,7 +58,7 @@ The RTX 5060 Ti and RTX 5070 Ti entries currently have model-specific dimensions
 
 `total_budget_jpy = peripheral_budget_jpy + pc_target_jpy`
 
-The peripheral BF targets should total ¥69,800. Primary DIY parts, shipping reserve and small-parts reserve should total ¥320,360. The main DIY all-in target is ¥390,160. Dynamic PC spending cap may be reduced based on **fresh, model-matched, in-stock, delivered peripheral prices**. A missing/stale/unknown peripheral price or inventory status is not evidence of a deal: use configured targets only as a planning estimate, mark readiness incomplete and keep the overall purchase gate closed.
+The peripheral BF targets should total ¥69,800. Primary DIY parts, shipping reserve and small-parts reserve should total ¥305,160. The main DIY all-in target is ¥374,960. Dynamic PC spending cap may be reduced based on **fresh, model-matched, in-stock, delivered peripheral prices**. A missing/stale/unknown peripheral price or inventory status is not evidence of a deal: use configured targets only as a planning estimate, mark readiness incomplete and keep the overall purchase gate closed.
 
 Every price must be labelled as one of:
 - **BF purchase target**: desired price, not a forecast and not observed.
