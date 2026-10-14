@@ -259,7 +259,96 @@ def _window_price_movement(events, candidate_id, start, end):
     }
 
 
-def build_self_build_timing_summary(build_plan, build_config=None):
+def _valid_component_observation(row, now=None):
+    if not isinstance(row, dict):
+        return False
+    price = row.get("market_reference_price_jpy")
+    available = parse_dt(row.get("available_at"))
+    retrieved = parse_dt(row.get("retrieval_time"))
+    now = now or now_jst()
+    return bool(
+        _is_positive_yen(price)
+        and row.get("price_validation_status") == "verified_market_reference"
+        and row.get("source_role") == "comparison_site_reference"
+        and row.get("identity_match") is True
+        and row.get("pit_valid") is True
+        and row.get("bf_actual_authorized") is False
+        and available and retrieved and available <= retrieved <= now
+    )
+
+
+def build_component_timing_rows(components, observations=None, watch_config=None, now=None):
+    """Expose component-level reference-vs-target gaps without issuing buy-now claims."""
+    now = now or now_jst()
+    observations = observations or []
+    watch_config = watch_config or {}
+    window_start = parse_dt(watch_config.get("monitor_window_start"))
+    window_end = parse_dt(watch_config.get("monitor_window_end"))
+    history_by_id = {}
+    for row in observations:
+        if not _valid_component_observation(row, now):
+            continue
+        cid = str(row.get("id") or "")
+        if not cid:
+            continue
+        stamp = parse_dt(row.get("retrieval_time"))
+        history_by_id.setdefault(cid, []).append((stamp, row))
+    for values in history_by_id.values():
+        values.sort(key=lambda item: item[0])
+
+    output = []
+    for part in components:
+        cid = str(part.get("id") or "")
+        valid_history = history_by_id.get(cid, [])
+        live_price = part.get("market_reference_price_jpy")
+        live_trusted = bool(
+            part.get("trusted_for_market_estimate") is True
+            and _is_positive_yen(live_price)
+        )
+        target = part.get("target_price_jpy")
+        if not live_trusted:
+            live_price = None
+            status = "REFERENCE_UNVERIFIED" if part.get("track_price") else "MANUAL_REFERENCE_ONLY"
+            label = "参考価格未確認" if part.get("track_price") else "手動参考値・未追跡"
+            gap = None
+            drop_pct = None
+        else:
+            gap = max(0, int(live_price) - int(target)) if isinstance(target, int) else None
+            drop_pct = round((gap / live_price) * 100, 1) if gap is not None and live_price else None
+            if gap == 0:
+                status, label = "TARGET_LEVEL_REFERENCE_ONLY", "目標水準以下の比較参考値（実売未確認）"
+            elif drop_pct is not None and drop_pct <= 3:
+                status, label = "NEAR_TARGET_REFERENCE_ONLY", "目標に近い比較参考値（実売未確認）"
+            else:
+                status, label = "WAIT_FOR_TARGET", "目標まで値下がり待ち"
+        low = min((int(row["market_reference_price_jpy"]) for _, row in valid_history), default=None)
+        window_values = [
+            (stamp, row) for stamp, row in valid_history
+            if window_start and window_end and window_start <= stamp <= window_end
+        ]
+        window_low = min((int(row["market_reference_price_jpy"]) for _, row in window_values), default=None)
+        last_at = valid_history[-1][0].isoformat() if valid_history else None
+        purchase_url = part.get("purchase_url") or part.get("monitor_url")
+        output.append({
+            "id": cid, "name": part.get("name"), "category": part.get("category"),
+            "model_code": part.get("model_code"), "target_price_jpy": target,
+            "current_market_reference_price_jpy": live_price,
+            "current_reference_status": part.get("price_status") or "not_observed",
+            "reference_age_minutes": part.get("reference_age_minutes"),
+            "target_gap_jpy": gap, "required_drop_pct": drop_pct,
+            "history_low_reference_price_jpy": low,
+            "history_sample_count": len(valid_history),
+            "history_latest_at": last_at,
+            "watch_window_low_reference_price_jpy": window_low,
+            "watch_window_sample_count": len(window_values),
+            "status": status, "status_label": label,
+            "purchase_allowed": False, "bf_actual_authorized": False,
+            "purchase_url": purchase_url,
+        })
+    return output
+
+
+def build_self_build_timing_summary(build_plan, build_config=None, component_observations=None, watch_config=None, now=None):
     """Summarize DIY-first selection without treating target/reference prices as checkout offers."""
     build_plan = build_plan if isinstance(build_plan, dict) else {}
     build_config = build_config if isinstance(build_config, dict) else {}
@@ -270,6 +359,23 @@ def build_self_build_timing_summary(build_plan, build_config=None):
     if chosen is None:
         chosen = next((x for x in builds if x.get("rank") == 1), None)
     policy = build_plan.get("purchase_method_policy") or {}
+    if component_observations is None:
+        observation_path = os.path.join(ROOT, "data", "build_component_observations.jsonl")
+        component_observations = []
+        try:
+            with open(observation_path, encoding="utf-8") as stream:
+                for line in stream:
+                    try:
+                        item = json.loads(line)
+                        if isinstance(item, dict):
+                            component_observations.append(item)
+                    except (TypeError, ValueError):
+                        continue
+        except OSError:
+            pass
+    if watch_config is None:
+        watch_config = load_json(os.path.join(ROOT, "config", "targets.json"), {})
+    timing_now = now or now_jst()
     if not chosen:
         return {
             "primary_method": "SELF_BUILD",
@@ -285,6 +391,7 @@ def build_self_build_timing_summary(build_plan, build_config=None):
         }
 
     components = [x for x in (chosen.get("components") or []) if isinstance(x, dict)]
+    component_timing = build_component_timing_rows(components, component_observations, watch_config, timing_now)
     tracked = [x for x in components if x.get("track_price")]
     reference_count = sum(1 for x in tracked
         if x.get("trusted_for_market_estimate") is True
@@ -345,6 +452,8 @@ def build_self_build_timing_summary(build_plan, build_config=None):
         "verified_market_reference_count": reference_count,
         "component_count": len(components), "verified_checkout_offer_count": checkout_count,
         "missing_or_untrusted_market_reference_ids": missing_ids,
+        "component_timing": component_timing,
+        "component_timing_policy": "価格目標との距離と保存済み比較サイト参考履歴のみを示す。購入店のBF実売・決済額ではなく、買い許可は出さない。",
         "blockers": blockers,
         "purchase_decision_factors": profile.get("purchase_decision_factors") or [],
     }
