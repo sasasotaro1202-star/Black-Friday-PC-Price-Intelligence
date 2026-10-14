@@ -324,6 +324,60 @@ class BuyNowDecisionTests(unittest.TestCase):
         self.assertEqual(result["verified_checkout_offer_count"], 0)
         self.assertFalse(result["purchase_allowed"])
 
+    def test_component_timing_uses_pit_valid_reference_history_and_calculates_target_gap(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        part = {
+            "id": "cpu-test", "name": "CPU test", "category": "cpu", "model_code": "CPU-12345",
+            "target_price_jpy": 40000, "track_price": True,
+            "market_reference_price_jpy": 45000, "trusted_for_market_estimate": True,
+            "price_status": "verified_market_reference", "reference_age_minutes": 3,
+            "purchase_url": "https://kakaku.com/item/K0001234567/",
+        }
+        def obs(price, at):
+            return {
+                "id": "cpu-test", "market_reference_price_jpy": price,
+                "price_validation_status": "verified_market_reference",
+                "source_role": "comparison_site_reference", "identity_match": True,
+                "pit_valid": True, "bf_actual_authorized": False,
+                "available_at": at, "retrieval_time": at, "observed_at": at,
+            }
+        history = [
+            obs(50000, "2026-11-02T12:00:00+09:00"),
+            obs(45000, "2026-11-15T12:00:00+09:00"),
+        ]
+        rows = timing.build_component_timing_rows(
+            [part], history,
+            {"monitor_window_start": WATCH_START, "monitor_window_end": WATCH_END},
+            now=now,
+        )
+        row = rows[0]
+        self.assertEqual(row["current_market_reference_price_jpy"], 45000)
+        self.assertEqual(row["target_gap_jpy"], 5000)
+        self.assertEqual(row["required_drop_pct"], 11.1)
+        self.assertEqual(row["history_low_reference_price_jpy"], 45000)
+        self.assertEqual(row["history_sample_count"], 2)
+        self.assertEqual(row["watch_window_sample_count"], 2)
+        self.assertEqual(row["status"], "WAIT_FOR_TARGET")
+        self.assertFalse(row["purchase_allowed"])
+        self.assertFalse(row["bf_actual_authorized"])
+
+    def test_component_timing_rejects_snippet_only_reference_as_live_price(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        part = {
+            "id": "gpu-test", "name": "GPU test", "category": "gpu",
+            "target_price_jpy": 120000, "track_price": True,
+            "market_reference_price_jpy": None, "display_reference_price_jpy": 125000,
+            "trusted_for_market_estimate": False, "price_status": "search_snippet_reference_only",
+            "purchase_url": "https://kakaku.com/item/K0001234567/",
+        }
+        rows = timing.build_component_timing_rows([part], [], {
+            "monitor_window_start": WATCH_START, "monitor_window_end": WATCH_END,
+        }, now=now)
+        self.assertIsNone(rows[0]["current_market_reference_price_jpy"])
+        self.assertIsNone(rows[0]["target_gap_jpy"])
+        self.assertEqual(rows[0]["status"], "REFERENCE_UNVERIFIED")
+        self.assertFalse(rows[0]["purchase_allowed"])
+
     def test_buy_now_report_shows_diy_first_policy_and_component_gate(self):
         now = datetime(2026, 10, 14, 12, 0, tzinfo=JST)
         result = self.evaluate(now)
