@@ -896,6 +896,29 @@ def render_buy_now_markdown(decision):
     ]
     for blocker in diy.get("blockers") or []:
         diy_lines.append("- " + str(blocker))
+    diy_lines += [
+        "",
+        "### 部品別のBF購入目標・比較参考値・値下がり履歴",
+        "",
+        "ここでいう現在値と履歴は、型番一致・取得条件を満たした比較サイト参考値です。販売店の最終決済額や公式BF実売を示すものではなく、表のどの状態でも単独で購入許可は出しません。",
+        "",
+        "|部品|BF購入目標|現在の比較参考値|目標までの差|履歴内参考最安|履歴件数|判定|価格確認ページ|",
+        "|---|---:|---:|---:|---:|---:|---|---|",
+    ]
+    for part in diy.get("component_timing") or []:
+        target_text = "¥{:,}".format(part["target_price_jpy"]) if part.get("target_price_jpy") is not None else "—"
+        current_text = "¥{:,}".format(part["current_market_reference_price_jpy"]) if part.get("current_market_reference_price_jpy") is not None else "未確認"
+        gap_text = "¥{:,}".format(part["target_gap_jpy"]) if part.get("target_gap_jpy") is not None else "—"
+        if part.get("required_drop_pct") is not None:
+            gap_text += " (" + str(part["required_drop_pct"]) + "%)"
+        low_text = "¥{:,}".format(part["history_low_reference_price_jpy"]) if part.get("history_low_reference_price_jpy") is not None else "未観測"
+        url = part.get("purchase_url")
+        link_text = "[比較・仕様ページ](" + url + ")" if url and str(url).startswith(("https://", "http://")) else "未確認"
+        diy_lines.append(
+            "|" + str(part.get("name") or part.get("id")) + "|" + target_text + "|" + current_text + "|"
+            + gap_text + "|" + low_text + "|" + str(part.get("history_sample_count", 0)) + "|"
+            + str(part.get("status_label") or part.get("status")) + "|" + link_text + "|"
+        )
     diy_lines.append("")
     try:
         reason_index = lines.index("## 判定根拠")
