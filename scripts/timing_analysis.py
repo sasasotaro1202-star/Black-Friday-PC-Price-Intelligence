@@ -764,6 +764,36 @@ def render_buy_now_markdown(decision):
         "## 判定根拠",
         "",
     ]
+    diy = decision.get("self_build_purchase_timing") or {}
+    method = decision.get("purchase_method_policy") or {}
+    diy_lines = [
+        "## 自作PC本命の買い時",
+        "",
+        "- 正式な購入方式: **自作PC**",
+        "- 組み立て時間を考慮するか: " + ("はい" if method.get("assembly_time_is_constraint") else "いいえ（減点なし）"),
+        "- BTOの位置付け: 価格・性能・部品品質・保証の比較ベンチマークのみ",
+        "- 本命構成: " + str(diy.get("selected_build_name") or "未確認"),
+        "- PC本体のBF購入目標（送料・小物予備費込み）: " + ("¥{:,}".format(diy["target_pc_total_jpy"]) if diy.get("target_pc_total_jpy") is not None else "未確認"),
+        "- 周辺機器込みBF購入目標: " + ("¥{:,}".format(diy["target_all_in_jpy"]) if diy.get("target_all_in_jpy") is not None else "未確認"),
+        "- 目標上の総予算残額: " + ("¥{:,}".format(diy["target_remaining_budget_jpy"]) if diy.get("target_remaining_budget_jpy") is not None else "未確認"),
+        "- 互換性判定: " + str(diy.get("compatibility_status") or "未確認"),
+        "- 比較参考価格を確認できた部品: " + str(diy.get("verified_market_reference_count", 0)) + "/" + str(diy.get("tracked_component_count", 0)),
+        "- 確認済み店舗決済オファー: " + str(diy.get("verified_checkout_offer_count", 0)) + "/" + str(diy.get("component_count", 0)),
+        "- 自作購入判定: **" + str(diy.get("status") or "SELF_BUILD_DATA_UNAVAILABLE") + "**",
+        "- 購入許可: **出していません**（BF目標・比較サイト参考価格では購入許可しない）",
+        "",
+        "### 自作本命の未解決条件",
+        "",
+    ]
+    for blocker in diy.get("blockers") or []:
+        diy_lines.append("- " + str(blocker))
+    diy_lines.append("")
+    try:
+        reason_index = lines.index("## 判定根拠")
+        lines[reason_index:reason_index] = diy_lines
+    except ValueError:
+        lines.extend(diy_lines)
+
     for reason in decision.get("reasons") or []:
         lines.append("- " + str(reason))
     chosen = decision.get("chosen_candidate")
@@ -897,7 +927,22 @@ def append_buy_now_summary_to_latest(decision):
         if chosen.get("blockers"):
             lines.append("- 主な未解決条件: " + "；".join(str(x) for x in chosen["blockers"][:4]))
         lines.append("")
+    diy = decision.get("self_build_purchase_timing") or {}
+    method = decision.get("purchase_method_policy") or {}
     lines += [
+        "",
+        "## 自作PC本命の買い時",
+        "",
+        "- 正式な購入方式: **自作PC**。組み立て時間・作業時間は減点しません。",
+        "- BTO: 価格・性能・部品品質・保証の比較ベンチマークのみ。",
+        "- 本命構成: " + str(diy.get("selected_build_name") or "未確認"),
+        "- PC本体BF購入目標: " + ("¥{:,}".format(diy["target_pc_total_jpy"]) if diy.get("target_pc_total_jpy") is not None else "未確認"),
+        "- 周辺機器込みBF購入目標: " + ("¥{:,}".format(diy["target_all_in_jpy"]) if diy.get("target_all_in_jpy") is not None else "未確認"),
+        "- 互換性 / 部品の比較参考価格 / 店舗決済オファー: " + str(diy.get("compatibility_status") or "未確認") + " / " + str(diy.get("verified_market_reference_count", 0)) + "/" + str(diy.get("tracked_component_count", 0)) + " / " + str(diy.get("verified_checkout_offer_count", 0)) + "/" + str(diy.get("component_count", 0)),
+        "- 自作の買い時判定: **" + str(diy.get("status") or "SELF_BUILD_DATA_UNAVAILABLE") + "**",
+        "- 購入許可: **保留**。購入目標や比較価格は確定実売ではありません。",
+        "- 主な未解決条件: " + "；".join(str(x) for x in (diy.get("blockers") or [])[:3]),
+        "",
         "詳細レポート: [今この瞬間の買い時判定](buy-now-now.md)",
         "",
         "買い時スコアは優先順位の補助指標です。値下がり確率の予測ではありません。価格取得失敗は売り切れ扱いせず、BF前の価格はBF実売と区別します。",
@@ -962,6 +1007,20 @@ def main():
     decision = build_buy_now_decision(
         rankings, events, config, price_observations, official_campaign_dates
     )
+    build_config = load_json(os.path.join(ROOT, "config", "build_components.json"), {})
+    build_plan = load_json(os.path.join(ROOT, "data", "self_build_plan.json"), {})
+    self_build_timing = build_self_build_timing_summary(build_plan, build_config)
+    decision["self_build_purchase_timing"] = self_build_timing
+    decision["purchase_method_policy"] = decision.get("purchase_method_policy") or {
+        "primary_method": "SELF_BUILD",
+        "assembly_time_is_constraint": False,
+        "assembly_time_penalty_points": 0,
+        "bto_role": "REFERENCE_BENCHMARK_ONLY",
+        "completed_pc_purchase_actionable": False,
+    }
+    if decision["purchase_method_policy"].get("primary_method") == "SELF_BUILD":
+        decision["purchase_gate_allowed"] = False
+        decision["purchase_gate_reason"] = "self_build_primary_method_required"
     out={
         "generated_at":iso(now_jst()),
         "source_snapshot_generated_at":source_snapshot_generated_at,
