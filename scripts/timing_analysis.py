@@ -357,6 +357,16 @@ def build_component_timing_rows(components, observations=None, watch_config=None
             "display_only_reference_url": part.get("search_snippet_reference_url") if display_only_reference else None,
             "display_only_reference_title": part.get("search_snippet_reference_title") if display_only_reference else None,
             "display_only_reference_is_estimate_eligible": False,
+            "direct_listing_display_price_jpy": part.get("direct_listing_display_price_jpy"),
+            "direct_listing_display_url": part.get("direct_listing_display_url"),
+            "direct_listing_display_title": part.get("direct_listing_display_title"),
+            "direct_listing_display_stock_status": part.get("direct_listing_display_stock_status"),
+            "direct_listing_display_stock_label": part.get("direct_listing_display_stock_label"),
+            "direct_listing_display_source_mode": part.get("direct_listing_display_source_mode"),
+            "direct_listing_display_observed_at": part.get("direct_listing_display_observed_at"),
+            "direct_listing_display_age_minutes": part.get("direct_listing_display_age_minutes"),
+            "direct_listing_display_is_estimate_eligible": False,
+            "direct_listing_display_purchase_allowed": False,
             "target_gap_jpy": gap, "required_drop_pct": drop_pct,
             "history_low_reference_price_jpy": low,
             "history_sample_count": len(valid_history),
@@ -425,6 +435,10 @@ def build_self_build_timing_summary(build_plan, build_config=None, component_obs
         if x.get("price_status") == "search_snippet_reference_only"
         and _is_positive_yen(x.get("display_reference_price_jpy"))
         and x.get("source_role") == "comparison_site_reference")
+    direct_listing_display_count = sum(1 for x in tracked
+        if _is_positive_yen(x.get("direct_listing_display_price_jpy"))
+        and x.get("direct_listing_display_is_estimate_eligible") is False
+        and x.get("direct_listing_display_purchase_allowed") is False)
     checkout_count = sum(1 for x in components
         if x.get("source_role") == "retailer_checkout_offer"
         and x.get("checkout_price_verified") is True
@@ -480,10 +494,11 @@ def build_self_build_timing_summary(build_plan, build_config=None, component_obs
         "tracked_component_count": len(tracked),
         "verified_market_reference_count": reference_count,
         "display_only_search_reference_count": display_only_reference_count,
+        "direct_listing_display_count": direct_listing_display_count,
         "component_count": len(components), "verified_checkout_offer_count": checkout_count,
         "missing_or_untrusted_market_reference_ids": missing_ids,
         "component_timing": component_timing,
-        "component_timing_policy": "確認済み比較参考値・保存済み履歴と、検索結果ページの表示専用参考値を別々に示す。表示専用参考値は価格目標との差・市場推定・購入判定に使用しない。最終決済額・送料・BF実売確定ではなく、買い許可は出さない。",
+        "component_timing_policy": "検証済み比較参考値・直接掲載価格（在庫条件未達）・検索ページ表示専用価格を別々に示す。直接掲載の在庫未確認/在庫切れ/予約価格と検索表示価格は目標差・市場推定・購入判定に使用しない。最終決済額・送料・BF実売確定ではなく、買い許可は出さない。",
         "blockers": blockers,
         "purchase_decision_factors": profile.get("purchase_decision_factors") or [],
     }
@@ -917,6 +932,7 @@ def render_buy_now_markdown(decision):
         "- 目標上の総予算残額: " + ("¥{:,}".format(diy["target_remaining_budget_jpy"]) if diy.get("target_remaining_budget_jpy") is not None else "未確認"),
         "- 互換性判定: " + str(diy.get("compatibility_status") or "未確認"),
         "- 検証済み比較参考価格: " + str(diy.get("verified_market_reference_count", 0)) + "/" + str(diy.get("tracked_component_count", 0)),
+        "- 直接掲載価格を取得したが在庫条件未達（推定・購入判定には不使用）: " + str(diy.get("direct_listing_display_count", 0)) + "/" + str(diy.get("tracked_component_count", 0)),
         "- 検索ページ表示専用の参考価格（推定・購入判定には不使用）: " + str(diy.get("display_only_search_reference_count", 0)) + "/" + str(diy.get("tracked_component_count", 0)),
         "- 確認済み店舗決済オファー: " + str(diy.get("verified_checkout_offer_count", 0)) + "/" + str(diy.get("component_count", 0)),
         "- 自作購入判定: **" + str(diy.get("status") or "SELF_BUILD_DATA_UNAVAILABLE") + "**",
@@ -931,14 +947,19 @@ def render_buy_now_markdown(decision):
         "",
         "### 部品別のBF購入目標・比較参考値・値下がり履歴",
         "",
-        "検証済み比較参考値と検索ページ表示専用値は別列です。表示専用値は近傍テキストから得た参考情報で、販売店掲載・在庫・最終決済価格を証明しません。目標との差や買い時判定、購入許可には使用しません。",
+        "検証済み比較参考値、商品詳細ページから直接取得したが在庫条件を満たさない価格、検索ページ表示専用値は別列です。後者2つは推定・目標差・購入判定に使用せず、最終決済価格も証明しません。",
         "",
-        "|部品|BF購入目標|検証済み比較参考値|検索ページ表示専用値（不採用）|目標までの差|履歴内参考最安|監視窓内参考最安|履歴件数 / 監視窓件数|判定|価格確認ページ|",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---|---|",
+        "|部品|BF購入目標|検証済み比較参考値|直接掲載価格（在庫条件未達・推定不採用）|検索ページ表示専用値（不採用）|目標までの差|履歴内参考最安|監視窓内参考最安|履歴件数 / 監視窓件数|判定|価格確認ページ|",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|",
     ]
     for part in diy.get("component_timing") or []:
         target_text = "¥{:,}".format(part["target_price_jpy"]) if part.get("target_price_jpy") is not None else "—"
         current_text = "¥{:,}".format(part["current_market_reference_price_jpy"]) if part.get("current_market_reference_price_jpy") is not None else "未確認"
+        direct_listing_text = "¥{:,}".format(part["direct_listing_display_price_jpy"]) if part.get("direct_listing_display_price_jpy") is not None else "—"
+        if part.get("direct_listing_display_stock_label"):
+            direct_listing_text += "（" + str(part["direct_listing_display_stock_label"]) + "）"
+        if part.get("direct_listing_display_url"):
+            direct_listing_text += " ([直接掲載](" + str(part["direct_listing_display_url"]) + "))"
         display_only_text = "¥{:,}".format(part["display_only_reference_price_jpy"]) if part.get("display_only_reference_price_jpy") is not None else "—"
         if part.get("display_only_reference_url"):
             display_only_text += " ([検索結果](" + str(part["display_only_reference_url"]) + "))"
@@ -951,7 +972,7 @@ def render_buy_now_markdown(decision):
         url = part.get("purchase_url")
         link_text = "[比較・仕様ページ](" + url + ")" if url and str(url).startswith(("https://", "http://")) else "未確認"
         diy_lines.append(
-            "|" + str(part.get("name") or part.get("id")) + "|" + target_text + "|" + current_text + "|" + display_only_text + "|"
+            "|" + str(part.get("name") or part.get("id")) + "|" + target_text + "|" + current_text + "|" + direct_listing_text + "|" + display_only_text + "|"
             + gap_text + "|" + low_text + "|" + window_low_text + "|" + sample_text + "|"
             + str(part.get("status_label") or part.get("status")) + "|" + link_text + "|"
         )

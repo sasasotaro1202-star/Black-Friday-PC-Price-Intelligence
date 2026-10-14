@@ -52,6 +52,53 @@ class SelfBuildPlannerTests(unittest.TestCase):
             self.assertEqual(len(categories), len(set(categories)))
             self.assertTrue(set(self.config["profile"]["required_categories"]).issubset(categories))
 
+    def test_direct_listing_with_unavailable_stock_is_displayed_but_not_trusted(self):
+        part = self.parts["motherboard-asrock-b850m-pro-rs-wifi"]
+        stamp = "2026-11-20T11:58:00+09:00"
+        offer = {
+            "url": "https://www.ark-pc.co.jp/i/12201558/",
+            "title": "B850M Pro RS WiFi", "price_jpy": 21380,
+            "price_source_mode": "direct_structured",
+            "stock_status": "preorder_or_backorder",
+            "identity_anchor": "B850M Pro RS WiFi", "identity_match": True,
+            "source_role": "direct_retailer_listing_reference",
+            "available_at": stamp, "retrieval_time": stamp,
+            "pit_valid": True, "bf_actual_authorized": False,
+        }
+        row = {
+            "id": part["id"], "price_validation_status": "search_snippet_reference",
+            "source_role": "comparison_site_reference",
+            "search_snippet_reference_price_jpy": 23780,
+            "search_snippet_reference_url": "https://search.kakaku.com/B850M/",
+            "search_snippet_reference_title": "ASRock B850M Pro RS WiFi",
+            "search_snippet_identity_anchor": "B850M Pro RS WiFi",
+            "identity_match": True, "pit_valid": True, "bf_actual_authorized": False,
+            "available_at": stamp, "retrieval_time": stamp,
+            "retailer_listing_offer": None, "retailer_listing_offers": [offer],
+        }
+        result = planner.component_price(
+            part, {part["id"]: row}, NOW, 360, ["ark-pc.co.jp"]
+        )
+        self.assertIsNone(result["market_reference_price_jpy"])
+        self.assertFalse(result["trusted_for_market_estimate"])
+        self.assertEqual(result["display_reference_price_jpy"], 23780)
+        self.assertEqual(result["direct_listing_display_price_jpy"], 21380)
+        self.assertEqual(result["direct_listing_display_stock_status"], "preorder_or_backorder")
+        self.assertEqual(result["direct_listing_display_stock_label"], "取寄せ/予約")
+        self.assertFalse(result["direct_listing_display_is_estimate_eligible"])
+        self.assertFalse(result["direct_listing_display_purchase_allowed"])
+
+        plan = planner.build_plan(self.config, {"generated_at": stamp, "products": [row]}, now=NOW)
+        build = next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")
+        component = next(x for x in build["components"] if x["id"] == part["id"])
+        self.assertEqual(component["direct_listing_display_price_jpy"], 21380)
+        self.assertIsNone(build["market_reference_estimate_jpy"])
+        self.assertFalse(build["buy_now_authorized"])
+        report = planner.render_plan_markdown(plan)
+        self.assertIn("直接掲載価格（在庫条件未達・推定不採用）", report)
+        self.assertIn("21,380", report)
+        self.assertIn("取寄せ/予約", report)
+
     def test_unknown_price_is_never_zero_filled_or_authorized(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         for build in plan["builds"]:

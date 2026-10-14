@@ -310,6 +310,23 @@ def main():
                 if diy.get("display_only_search_reference_count") != display_only_count:
                     errors.append("DIY display-only reference count mismatch")
 
+                direct_listing_display_count = 0
+                for row in (diy.get("component_timing") or []):
+                    direct_price = row.get("direct_listing_display_price_jpy")
+                    if direct_price is None:
+                        continue
+                    direct_listing_display_count += 1
+                    if row.get("current_market_reference_price_jpy") is not None:
+                        errors.append("direct listing display price exposed as market reference: " + str(row.get("id")))
+                    if row.get("target_gap_jpy") is not None or row.get("required_drop_pct") is not None:
+                        errors.append("direct listing display price used in target-gap calculation: " + str(row.get("id")))
+                    if row.get("direct_listing_display_is_estimate_eligible") is not False:
+                        errors.append("direct listing display price must be estimate-ineligible: " + str(row.get("id")))
+                    if row.get("direct_listing_display_purchase_allowed") is not False or row.get("purchase_allowed") is not False:
+                        errors.append("direct listing display price must never authorize purchase: " + str(row.get("id")))
+                if diy.get("direct_listing_display_count") != direct_listing_display_count:
+                    errors.append("DIY direct-listing display count mismatch")
+
                 report_path = os.path.join(ROOT, "data", "reports", "buy-now-now.md")
                 try:
                     with open(report_path, encoding="utf-8") as report_stream:
@@ -318,6 +335,8 @@ def main():
                         errors.append("buy-now report missing separate display-only reference column")
                     if display_only_count and "検索ページ表示値のみ（検証価格なし）" not in buy_now_markdown:
                         errors.append("buy-now report missing display-only status label")
+                    if direct_listing_display_count and "直接掲載価格（在庫条件未達・推定不採用）" not in buy_now_markdown:
+                        errors.append("buy-now report missing direct listing display column")
                 except OSError:
                     errors.append("buy-now report missing after timing analysis")
 

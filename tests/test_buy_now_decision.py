@@ -359,6 +359,58 @@ class BuyNowDecisionTests(unittest.TestCase):
         self.assertIn("39,980", report)
         self.assertIn("近傍テキストから得た参考情報", report)
 
+    def test_direct_listing_stock_blocked_price_is_visible_but_never_used_for_gap_or_purchase(self):
+        now = datetime(2026, 10, 14, 12, 0, tzinfo=JST)
+        part = {
+            "id": "board-test", "name": "Test motherboard", "category": "motherboard",
+            "target_price_jpy": 20000, "track_price": True,
+            "market_reference_price_jpy": None, "trusted_for_market_estimate": False,
+            "display_reference_price_jpy": None, "price_status": "not_observed",
+            "source_role": "comparison_site_reference", "reference_age_minutes": 2,
+            "direct_listing_display_price_jpy": 21380,
+            "direct_listing_display_url": "https://www.ark-pc.co.jp/i/12201558/",
+            "direct_listing_display_stock_status": "preorder_or_backorder",
+            "direct_listing_display_stock_label": "取寄せ/予約",
+            "direct_listing_display_is_estimate_eligible": False,
+            "direct_listing_display_purchase_allowed": False,
+            "purchase_url": "https://kakaku.com/item/K0001669878/",
+        }
+        rows = timing.build_component_timing_rows(
+            [part], [],
+            {"monitor_window_start": WATCH_START, "monitor_window_end": WATCH_END},
+            now=now,
+        )
+        row = rows[0]
+        self.assertIsNone(row["current_market_reference_price_jpy"])
+        self.assertIsNone(row["target_gap_jpy"])
+        self.assertEqual(row["direct_listing_display_price_jpy"], 21380)
+        self.assertEqual(row["direct_listing_display_stock_label"], "取寄せ/予約")
+        self.assertFalse(row["direct_listing_display_is_estimate_eligible"])
+        self.assertFalse(row["direct_listing_display_purchase_allowed"])
+
+        result = {
+            "generated_at": timing.iso(now), "label": "事前監視継続",
+            "status": "PRE_BF_MONITORING", "watch_window_start_jst": WATCH_START,
+            "watch_window_end_jst": WATCH_END,
+            "official_campaign_dates_summary": {"confirmed_count": 0, "retailer_count": 0,
+                                                "unconfirmed_count": 0, "fetch_error_count": 0},
+            "purchase_method_policy": {"primary_method": "SELF_BUILD"},
+            "self_build_purchase_timing": {
+                "selected_build_name": "DIY test build", "target_pc_total_jpy": 320000,
+                "target_all_in_jpy": 389800, "target_remaining_budget_jpy": 10200,
+                "compatibility_status": "PASS", "verified_market_reference_count": 0,
+                "display_only_search_reference_count": 0, "direct_listing_display_count": 1,
+                "tracked_component_count": 1, "verified_checkout_offer_count": 0,
+                "component_count": 1, "status": "WAIT_FOR_COMPONENT_REFERENCES",
+                "blockers": ["stock gate remains closed"], "component_timing": [row],
+            },
+        }
+        report = timing.render_buy_now_markdown(result)
+        self.assertIn("直接掲載価格（在庫条件未達・推定不採用）", report)
+        self.assertIn("21,380", report)
+        self.assertIn("取寄せ/予約", report)
+        self.assertIn("直接掲載価格を取得したが在庫条件未達", report)
+
     def test_self_build_waits_for_checkout_offers_even_when_reference_prices_are_complete(self):
         plan = {
             "total_budget_jpy": 400000, "pc_budget_jpy": 330200, "peripheral_budget_jpy": 69800,

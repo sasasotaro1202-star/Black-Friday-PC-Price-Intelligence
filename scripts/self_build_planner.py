@@ -2,6 +2,7 @@
 import hashlib
 import json
 import os
+import re
 from urllib.parse import urlparse
 from intelligence import ROOT, now_jst, iso, parse_dt, load_json, save_json
 
@@ -80,6 +81,89 @@ def trusted_retailer_listing_reference(row, now, max_age, allowed_domains=()):
     )
 
 
+def direct_listing_offer_for_display(row, part, now, max_age, allowed_domains=()):
+    """Keep fresh, identity-anchored detail-page prices visible when stock blocks trust.
+
+    This is a display-only observation. It is never a trusted market estimate or
+    a checkout offer; stock must separately be confirmed before promotion.
+    """
+    if not isinstance(row, dict):
+        return None
+    values = []
+    raw_offers = [row.get("retailer_listing_offer")] + list(row.get("retailer_listing_offers") or [])
+    for offer in raw_offers:
+        if not isinstance(offer, dict):
+            continue
+        price = offer.get("price_jpy")
+        if isinstance(price, bool) or not isinstance(price, int) or price <= 0:
+            continue
+        minimum = int(part.get("min_price_jpy") or 1)
+        maximum = int(part.get("max_price_jpy") or 10**9)
+        if not minimum <= price <= maximum:
+            continue
+        if offer.get("source_role") != "direct_retailer_listing_reference":
+            continue
+        if offer.get("identity_match") is not True or not offer.get("identity_anchor"):
+            continue
+        identity = re.sub(r"[^0-9a-zぁ-んァ-ヶ一-龠]+", "", str(offer.get("identity_anchor") or "").lower())
+        curated = [
+            part.get("model_code"), part.get("name"),
+            *(part.get("aliases") or []), *(part.get("identity_terms") or []),
+        ]
+        curated = {
+            re.sub(r"[^0-9a-zぁ-んァ-ヶ一-龠]+", "", str(term or "").lower())
+            for term in curated if term
+        }
+        if not identity or identity not in curated:
+            continue
+        if offer.get("bf_actual_authorized") is not False or offer.get("pit_valid") is not True:
+            continue
+        if offer.get("price_source_mode") not in ("direct_structured", "direct_meta", "direct_text"):
+            continue
+        url = str(offer.get("url") or "")
+        parsed = urlparse(url)
+        host = (parsed.hostname or "").lower()
+        allowed = tuple(str(domain or "").lower().strip(".") for domain in (allowed_domains or ()))
+        if not url.startswith("https://") or not any(host == d or host.endswith("." + d) for d in allowed):
+            continue
+        if host == "kakaku.com" or host.endswith(".kakaku.com"):
+            continue
+        available = parse_dt(offer.get("available_at"))
+        retrieved = parse_dt(offer.get("retrieval_time"))
+        if not available or not retrieved or available > retrieved or retrieved > now:
+            continue
+        age = (now - retrieved).total_seconds() / 60.0
+        if age < 0 or age > max_age:
+            continue
+        item = dict(offer)
+        item["display_age_minutes"] = round(age, 1)
+        values.append(item)
+
+    if not values:
+        return None
+    stock_rank = {
+        "in_stock": 0, "low_stock": 1, "preorder_or_backorder": 2,
+        "unknown": 3, "out_of_stock": 4,
+    }
+    values.sort(key=lambda offer: (
+        stock_rank.get(str(offer.get("stock_status") or "unknown"), 3),
+        0 if offer.get("price_source_mode") == "direct_structured" else 1,
+        offer.get("display_age_minutes", 10**9),
+        offer.get("price_jpy", 10**12),
+    ))
+    return values[0]
+
+
+def direct_listing_stock_label(status):
+    return {
+        "in_stock": "在庫あり（直接掲載・購入ゲート別）",
+        "low_stock": "在庫少（購入ゲート未通過）",
+        "preorder_or_backorder": "取寄せ/予約",
+        "out_of_stock": "在庫切れ",
+        "unknown": "在庫未確認",
+    }.get(str(status or "unknown"), "在庫未確認")
+
+
 def component_price(part, by_id, now, max_age, allowed_domains=()):
     if not part.get("track_price"):
         ref = part.get("reference_price_jpy")
@@ -97,6 +181,10 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
     trusted = trusted_comparison or trusted_retailer
     age = age_minutes(row.get("retrieval_time"), now)
     retailer_offer = row.get("retailer_listing_offer") if trusted_retailer else None
+    direct_display_offer = (
+        direct_listing_offer_for_display(row, part, now, max_age, allowed_domains)
+        if not trusted else None
+    )
     reference_price = (
         row.get("market_reference_price_jpy") if trusted_comparison
         else row.get("retailer_listing_reference_price_jpy") if trusted_retailer else None
@@ -144,7 +232,19 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
         "reference_age_minutes": age,
         "purchase_url": reference_source_url or part.get("purchase_url") or part.get("monitor_url"),
         "search_snippet_reference_url": row.get("search_snippet_reference_url") if snippet_only else None,
-        "search_snippet_reference_title": row.get("search_snippet_reference_title") if snippet_only else None
+        "search_snippet_reference_title": row.get("search_snippet_reference_title") if snippet_only else None,
+        "direct_listing_display_price_jpy": direct_display_offer.get("price_jpy") if direct_display_offer else None,
+        "direct_listing_display_url": direct_display_offer.get("url") if direct_display_offer else None,
+        "direct_listing_display_title": (direct_display_offer.get("title") or direct_display_offer.get("identity_anchor")) if direct_display_offer else None,
+        "direct_listing_display_identity_anchor": direct_display_offer.get("identity_anchor") if direct_display_offer else None,
+        "direct_listing_display_stock_status": (direct_display_offer.get("stock_status") or "unknown") if direct_display_offer else None,
+        "direct_listing_display_stock_label": direct_listing_stock_label(direct_display_offer.get("stock_status")) if direct_display_offer else None,
+        "direct_listing_display_source_mode": direct_display_offer.get("price_source_mode") if direct_display_offer else None,
+        "direct_listing_display_observed_at": direct_display_offer.get("retrieval_time") if direct_display_offer else None,
+        "direct_listing_display_age_minutes": direct_display_offer.get("display_age_minutes") if direct_display_offer else None,
+        "direct_listing_display_price_context": direct_display_offer.get("price_context") if direct_display_offer else None,
+        "direct_listing_display_is_estimate_eligible": False,
+        "direct_listing_display_purchase_allowed": False
     }
 
 
@@ -271,6 +371,18 @@ def build_plan(config=None, price_snapshot=None, now=None):
                 "reference_source_label": price.get("reference_source_label"),
                 "search_snippet_reference_url": price.get("search_snippet_reference_url"),
                 "search_snippet_reference_title": price.get("search_snippet_reference_title"),
+                "direct_listing_display_price_jpy": price.get("direct_listing_display_price_jpy"),
+                "direct_listing_display_url": price.get("direct_listing_display_url"),
+                "direct_listing_display_title": price.get("direct_listing_display_title"),
+                "direct_listing_display_identity_anchor": price.get("direct_listing_display_identity_anchor"),
+                "direct_listing_display_stock_status": price.get("direct_listing_display_stock_status"),
+                "direct_listing_display_stock_label": price.get("direct_listing_display_stock_label"),
+                "direct_listing_display_source_mode": price.get("direct_listing_display_source_mode"),
+                "direct_listing_display_observed_at": price.get("direct_listing_display_observed_at"),
+                "direct_listing_display_age_minutes": price.get("direct_listing_display_age_minutes"),
+                "direct_listing_display_price_context": price.get("direct_listing_display_price_context"),
+                "direct_listing_display_is_estimate_eligible": False,
+                "direct_listing_display_purchase_allowed": False,
                 "track_price": bool(part.get("track_price")), "specs": part.get("specs") or {},
                 "notes": part.get("notes"), "bf_actual_authorized": False
             }
@@ -394,8 +506,8 @@ def render_plan_markdown(plan):
           "- 周辺機器込み目標: " + money(build.get("target_all_in_jpy")) + " / 残額 " + money(build.get("target_remaining_budget_jpy")),
           "- 現在の比較参考合計: " + (money(build.get("market_reference_estimate_jpy")) + "（決済見積ではない）" if build.get("market_reference_estimate_jpy") is not None else "未算出。部品価格の欠落・不一致・古さを0円補完しない"),
           "- 互換性: " + str(build.get("compatibility_status")) + " / 判定: " + str(build.get("decision")), "",
-          "|部品|型番|BF目標|比較サイト参考価格|確認状態|リンク|",
-          "|---|---|---:|---:|---|---|"])
+          "|部品|型番|BF目標|検証済み/表示専用参考値|直接掲載価格（在庫条件未達・推定不採用）|確認状態|リンク|",
+          "|---|---|---:|---:|---|---|---|"])
         for part in build.get("components") or []:
             p = part.get("display_reference_price_jpy")
             if part.get("track_price") and part.get("market_reference_price_jpy") is None and p is None:
@@ -404,13 +516,25 @@ def render_plan_markdown(plan):
                 price_text = money(p) + "（検索スニペット参考のみ）"
             else:
                 price_text = money(p)
+            direct_price = part.get("direct_listing_display_price_jpy")
+            direct_text = money(direct_price) if isinstance(direct_price, int) else "—"
+            stock_label = part.get("direct_listing_display_stock_label")
+            if stock_label:
+                direct_text += "（" + str(stock_label) + "）"
             url = part.get("purchase_url")
             links = ["[価格比較ページ](" + url + ")"] if url else []
+            direct_url = part.get("direct_listing_display_url")
+            if direct_url:
+                links.append("[直接掲載ページ](" + str(direct_url) + ")")
             search_url = part.get("search_snippet_reference_url")
             if search_url and search_url != url:
-                links.append("[検索スニペット参考元](" + search_url + ")")
+                links.append("[検索ページ参考元](" + search_url + ")")
             link = " / ".join(links) if links else "—"
-            lines.append("|{}|{}|{}|{}|{}|{}|".format(part.get("name"), part.get("model_code") or "—", money(part.get("target_price_jpy")), price_text, part.get("price_status"), link))
+            lines.append("|{}|{}|{}|{}|{}|{}|{}|".format(
+                part.get("name"), part.get("model_code") or "—",
+                money(part.get("target_price_jpy")), price_text, direct_text,
+                part.get("price_status"), link
+            ))
         lines.extend(["", "互換性チェック:", ""])
         for check in build.get("compatibility_checks") or []:
             lines.append("- **{}**: {} — {}".format(check.get("status"), check.get("check"), check.get("detail")))
