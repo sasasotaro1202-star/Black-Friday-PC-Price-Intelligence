@@ -422,6 +422,10 @@
       "target_price_jpy": 19360,
       "reference_price_jpy": 19360,
       "price_source_role": "official_store_manual_reference",
+      "reference_price_is_current_verified": false,
+      "reference_price_identity_verified": false,
+      "reference_price_checked_at": null,
+      "reference_price_url": null,
       "specs": {
         "license_type": "retail_license",
         "optional_if_existing_transferable_license": true

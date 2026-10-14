@@ -31,8 +31,12 @@ def money(value):
 
 
 def age_minutes(value, now):
+    """Return None for missing or future-dated observations instead of hiding clock/PIT errors."""
     dt = parse_dt(value)
-    return max(0.0, (now - dt).total_seconds() / 60.0) if dt else None
+    if dt is None:
+        return None
+    age = (now - dt).total_seconds() / 60.0
+    return age if age >= 0 else None
 
 
 def trusted_market_reference(row, now, max_age):
@@ -47,7 +51,25 @@ def trusted_market_reference(row, now, max_age):
         and row.get("source_role") == "comparison_site_reference"
         and row.get("bf_actual_authorized") is False
         and age is not None and age <= max_age
-        and available is not None and retrieved is not None and available <= retrieved
+        and available is not None and retrieved is not None
+        and available <= retrieved <= now
+    )
+
+
+def trusted_manual_reference(part, now, max_age):
+    """Accept a manually maintained reference only with fresh, explicit evidence."""
+    price = part.get("reference_price_jpy")
+    checked_at = parse_dt(part.get("reference_price_checked_at"))
+    age = age_minutes(part.get("reference_price_checked_at"), now)
+    url = str(part.get("reference_price_url") or "")
+    return bool(
+        isinstance(price, int) and not isinstance(price, bool) and price > 0
+        and part.get("price_source_role") == "official_store_manual_reference"
+        and part.get("reference_price_is_current_verified") is True
+        and part.get("reference_price_identity_verified") is True
+        and url.startswith("https://")
+        and checked_at is not None and checked_at <= now
+        and age is not None and age <= max_age
     )
 
 
@@ -58,6 +80,8 @@ def trusted_retailer_listing_reference(row, now, max_age, allowed_domains=()):
     age = age_minutes(row.get("retrieval_time"), now) if isinstance(row, dict) else None
     available = parse_dt(row.get("available_at")) if isinstance(row, dict) else None
     retrieved = parse_dt(row.get("retrieval_time")) if isinstance(row, dict) else None
+    offer_available = parse_dt((offer or {}).get("available_at")) if isinstance(offer, dict) else None
+    offer_retrieved = parse_dt((offer or {}).get("retrieval_time")) if isinstance(offer, dict) else None
     url = str((offer or {}).get("url") or "")
     host = (urlparse(url).hostname or "").lower()
     domains = tuple(str(x).lower() for x in (allowed_domains or ()))
@@ -77,7 +101,10 @@ def trusted_retailer_listing_reference(row, now, max_age, allowed_domains=()):
         and offer.get("price_source_mode") in ("direct_structured", "direct_meta", "direct_text")
         and host_allowed and not comparison_host and url.startswith("https://")
         and age is not None and age <= max_age
-        and available is not None and retrieved is not None and available <= retrieved
+        and available is not None and retrieved is not None and available <= retrieved <= now
+        and offer_available is not None and offer_retrieved is not None
+        and offer_available == available and offer_retrieved == retrieved
+        and offer_available <= offer_retrieved <= now
     )
 
 
@@ -167,13 +194,26 @@ def direct_listing_stock_label(status):
 def component_price(part, by_id, now, max_age, allowed_domains=()):
     if not part.get("track_price"):
         ref = part.get("reference_price_jpy")
+        trusted_manual = trusted_manual_reference(part, now, max_age)
+        ref_is_positive = isinstance(ref, int) and not isinstance(ref, bool) and ref > 0
+        checked_at = parse_dt(part.get("reference_price_checked_at")) if trusted_manual else None
         return {
-            "market_reference_price_jpy": None,
-            "display_reference_price_jpy": ref if isinstance(ref, int) else None,
-            "price_status": "manual_official_store_reference" if isinstance(ref, int) else "not_tracked",
-            "trusted_for_market_estimate": False,
+            "market_reference_price_jpy": ref if trusted_manual else None,
+            "display_reference_price_jpy": ref if ref_is_positive else None,
+            "price_status": (
+                "verified_manual_reference" if trusted_manual else
+                "manual_reference_unverified" if ref_is_positive else "not_tracked"
+            ),
+            "trusted_for_market_estimate": trusted_manual,
             "source_role": part.get("price_source_role") or "manual_reference",
-            "retrieval_time": None, "reference_age_minutes": None
+            "reference_source_url": part.get("reference_price_url") if trusted_manual else None,
+            "reference_source_label": (
+                "公式ストア手動参照（確認時刻・商品一致を検証）" if trusted_manual else
+                "手動記録の参考価格（現行価格・商品一致は未確認）" if ref_is_positive else None
+            ),
+            "retrieval_time": iso(checked_at) if checked_at else None,
+            "reference_age_minutes": age_minutes(part.get("reference_price_checked_at"), now),
+            "purchase_url": part.get("reference_price_url") if trusted_manual else None,
         }
     row = by_id.get(str(part.get("id") or "")) or {}
     trusted_comparison = trusted_market_reference(row, now, max_age)
@@ -341,13 +381,13 @@ def build_plan(config=None, price_snapshot=None, now=None):
     for rank, gpu_id in enumerate(gpu_ids, 1):
         selected_ids = fixed_ids + [gpu_id]
         components, missing, market_subtotal = [], [], 0
-        all_tracked_fresh = True
+        all_parts_referenced = True
         target_parts = 0
         for cid in selected_ids:
             part = parts.get(cid)
             if not part:
                 missing.append(cid)
-                all_tracked_fresh = False
+                all_parts_referenced = False
                 continue
             target = part.get("target_price_jpy")
             if isinstance(target, int) and not isinstance(target, bool):
@@ -391,20 +431,23 @@ def build_plan(config=None, price_snapshot=None, now=None):
                 if price["trusted_for_market_estimate"] and isinstance(price["market_reference_price_jpy"], int):
                     market_subtotal += price["market_reference_price_jpy"]
                 else:
-                    all_tracked_fresh = False
+                    all_parts_referenced = False
                     missing.append(cid)
             else:
-                reference = part.get("reference_price_jpy")
-                if isinstance(reference, int) and reference > 0:
-                    market_subtotal += reference
+                # A configured/manual price remains display-only unless it has
+                # a fresh timestamp, exact-item identity evidence, and an HTTPS
+                # source URL. Never blend a static sticker price into a live
+                # market subtotal.
+                if price["trusted_for_market_estimate"] and isinstance(price["market_reference_price_jpy"], int):
+                    market_subtotal += price["market_reference_price_jpy"]
                 else:
-                    all_tracked_fresh = False
+                    all_parts_referenced = False
                     missing.append(cid)
 
         compat, checks = compatibility_checks(parts, profile, gpu_id)
         target_pc = target_parts + shipping + small_parts
         target_all_in = target_pc + peripheral_budget
-        market_estimate = market_subtotal + shipping + small_parts if all_tracked_fresh and not missing else None
+        market_estimate = market_subtotal + shipping + small_parts if all_parts_referenced and not missing else None
         all_in_market = market_estimate + peripheral_budget if market_estimate is not None else None
         gpu_part = parts.get(gpu_id) or {}
         gpu_live = by_id.get(gpu_id) or {}
@@ -510,7 +553,9 @@ def render_plan_markdown(plan):
           "|---|---|---:|---:|---|---|---|"])
         for part in build.get("components") or []:
             p = part.get("display_reference_price_jpy")
-            if part.get("track_price") and part.get("market_reference_price_jpy") is None and p is None:
+            if part.get("price_status") == "manual_reference_unverified":
+                price_text = money(p) + "（手動参考・現行未確認）" if isinstance(p, int) else "未確認"
+            elif part.get("track_price") and part.get("market_reference_price_jpy") is None and p is None:
                 price_text = "未取得"
             elif part.get("price_status") == "search_snippet_reference_only":
                 price_text = money(p) + "（検索スニペット参考のみ）"

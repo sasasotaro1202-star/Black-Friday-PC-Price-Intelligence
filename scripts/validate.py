@@ -231,8 +231,19 @@ def main():
                 pid = str(part.get("id") or "")
                 if part.get("bf_actual_authorized") is not False:
                     errors.append("self_build_plan component BF authorization invalid: " + bid + ":" + pid)
-                if part.get("track_price") and part.get("market_reference_price_jpy") is not None and part.get("trusted_for_market_estimate") is not True:
+                if part.get("market_reference_price_jpy") is not None and part.get("trusted_for_market_estimate") is not True:
                     errors.append("self_build_plan exposed untrusted component price: " + bid + ":" + pid)
+                if part.get("trusted_for_market_estimate") is True:
+                    trusted_price = part.get("market_reference_price_jpy")
+                    if not isinstance(trusted_price, int) or isinstance(trusted_price, bool) or trusted_price <= 0:
+                        errors.append("self_build_plan trusted component lacks positive integer reference: " + bid + ":" + pid)
+                    retrieved = parse_dt(part.get("retrieval_time"))
+                    planned = parse_dt(build_plan.get("generated_at"))
+                    if retrieved is None or planned is None or retrieved > planned:
+                        errors.append("self_build_plan trusted component observation is missing/future-dated: " + bid + ":" + pid)
+                if part.get("price_status") == "manual_reference_unverified":
+                    if part.get("market_reference_price_jpy") is not None or part.get("trusted_for_market_estimate") is not False:
+                        errors.append("unverified manual reference leaked into market estimate: " + bid + ":" + pid)
                 if part.get("price_status") == "search_snippet_reference_only":
                     display_price = part.get("display_reference_price_jpy")
                     if part.get("market_reference_price_jpy") is not None or part.get("trusted_for_market_estimate") is not False:
@@ -241,9 +252,21 @@ def main():
                         errors.append("search snippet display reference missing positive value: " + bid + ":" + pid)
                     if part.get("source_role") != "comparison_site_reference":
                         errors.append("search snippet display reference source mismatch: " + bid + ":" + pid)
+            missing_market_refs = set(build.get("missing_or_untrusted_market_reference_ids") or [])
+            expected_reference_count = build.get("market_reference_required_count")
+            observed_reference_count = build.get("market_reference_coverage_count")
+            if isinstance(expected_reference_count, int) and isinstance(observed_reference_count, int):
+                if observed_reference_count + len(missing_market_refs) != expected_reference_count:
+                    errors.append("self_build_plan market-reference coverage count mismatch: " + bid)
+            if missing_market_refs and build.get("market_reference_estimate_jpy") is not None:
+                errors.append("self_build_plan market estimate includes missing/untrusted references: " + bid)
             if build.get("market_reference_estimate_jpy") is not None:
-                if build.get("market_reference_coverage_complete") is not True or build.get("market_reference_estimate_is_checkout_price") is not False:
+                if build.get("market_reference_coverage_complete") is not True or build.get("market_reference_estimate_is_checkout_price") is not False or missing_market_refs:
                     errors.append("self_build_plan market estimate lacks complete reference coverage/caveat: " + bid)
+            if build.get("market_reference_coverage_complete") is not (build.get("market_reference_estimate_jpy") is not None):
+                errors.append("self_build_plan market-reference completeness flag mismatch: " + bid)
+            if build.get("market_reference_estimate_jpy") is None and isinstance(expected_reference_count, int) and isinstance(observed_reference_count, int) and observed_reference_count == expected_reference_count:
+                errors.append("self_build_plan missing market estimate despite complete-reference count: " + bid)
 
     build_config = load_json(os.path.join(ROOT, "config", "build_components.json"), {})
     build_profile = build_config.get("profile") or {}

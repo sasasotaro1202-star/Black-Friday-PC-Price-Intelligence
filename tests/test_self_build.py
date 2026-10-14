@@ -114,7 +114,8 @@ class SelfBuildPlannerTests(unittest.TestCase):
         for extra, stamp in [
             ({"identity_match":True,"pit_valid":True},"2026-10-14T00:00:00+09:00"),
             ({"identity_match":False,"pit_valid":True},"2026-11-20T12:00:00+09:00"),
-            ({"identity_match":True,"pit_valid":False},"2026-11-20T12:00:00+09:00")
+            ({"identity_match":True,"pit_valid":False},"2026-11-20T12:00:00+09:00"),
+            ({"identity_match":True,"pit_valid":True},"2026-11-20T12:01:00+09:00")
         ]:
             row = {"id":cpu["id"],"market_reference_price_jpy":40000,
                 "price_validation_status":"verified_market_reference","source_role":"comparison_site_reference",
@@ -126,6 +127,98 @@ class SelfBuildPlannerTests(unittest.TestCase):
             part = next(x for x in build["components"] if x["id"] == cpu["id"])
             self.assertFalse(part["trusted_for_market_estimate"])
             self.assertFalse(build["market_reference_coverage_complete"])
+
+    def _verified_hardware_rows(self, config, stamp=None):
+        stamp = stamp or NOW.isoformat()
+        return [
+            {
+                "id": part["id"],
+                "market_reference_price_jpy": part["target_price_jpy"],
+                "price_validation_status": "verified_market_reference",
+                "source_role": "comparison_site_reference",
+                "identity_match": True,
+                "pit_valid": True,
+                "bf_actual_authorized": False,
+                "available_at": stamp,
+                "retrieval_time": stamp,
+            }
+            for part in config["parts"] if part.get("track_price")
+        ]
+
+    def test_manual_os_reference_cannot_be_mixed_into_live_market_estimate(self):
+        rows = self._verified_hardware_rows(self.config)
+        plan = planner.build_plan(
+            self.config, {"generated_at": NOW.isoformat(), "products": rows}, now=NOW
+        )
+        build = next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")
+        self.assertIsNone(build["market_reference_estimate_jpy"])
+        self.assertFalse(build["market_reference_coverage_complete"])
+        self.assertIn("os-windows11-home", build["missing_or_untrusted_market_reference_ids"])
+        self.assertEqual(build["market_reference_coverage_count"], 8)
+        os_row = next(x for x in build["components"] if x["id"] == "os-windows11-home")
+        self.assertIsNone(os_row["market_reference_price_jpy"])
+        self.assertEqual(os_row["display_reference_price_jpy"], 19360)
+        self.assertEqual(os_row["price_status"], "manual_reference_unverified")
+        self.assertFalse(os_row["trusted_for_market_estimate"])
+        report = planner.render_plan_markdown(plan)
+        self.assertIn("19,360（手動参考・現行未確認）", report)
+
+    def test_fresh_identity_verified_manual_reference_can_complete_estimate(self):
+        config = json.loads(json.dumps(self.config))
+        os_part = next(x for x in config["parts"] if x["id"] == "os-windows11-home")
+        os_part.update({
+            "reference_price_is_current_verified": True,
+            "reference_price_identity_verified": True,
+            "reference_price_checked_at": NOW.isoformat(),
+            "reference_price_url": "https://www.microsoft.com/ja-jp/store/",
+        })
+        rows = self._verified_hardware_rows(config)
+        plan = planner.build_plan(
+            config, {"generated_at": NOW.isoformat(), "products": rows}, now=NOW
+        )
+        build = next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")
+        self.assertEqual(build["market_reference_estimate_jpy"], build["target_pc_total_jpy"])
+        self.assertTrue(build["market_reference_coverage_complete"])
+        self.assertEqual(build["market_reference_coverage_count"], 9)
+        self.assertNotIn("os-windows11-home", build["missing_or_untrusted_market_reference_ids"])
+        os_row = next(x for x in build["components"] if x["id"] == "os-windows11-home")
+        self.assertEqual(os_row["price_status"], "verified_manual_reference")
+        self.assertTrue(os_row["trusted_for_market_estimate"])
+
+    def test_future_dated_direct_retailer_listing_is_never_trusted(self):
+        part = self.parts["motherboard-asrock-b850m-pro-rs-wifi"]
+        future = "2026-11-20T12:01:00+09:00"
+        offer = {
+            "url": "https://www.ark-pc.co.jp/i/12201558/",
+            "title": "B850M Pro RS WiFi",
+            "price_jpy": 21380,
+            "price_source_mode": "direct_structured",
+            "stock_status": "in_stock",
+            "identity_anchor": "B850M Pro RS WiFi",
+            "identity_match": True,
+            "source_role": "direct_retailer_listing_reference",
+            "available_at": future,
+            "retrieval_time": future,
+            "pit_valid": True,
+            "bf_actual_authorized": False,
+        }
+        row = {
+            "id": part["id"],
+            "price_validation_status": "verified_retailer_listing_reference",
+            "source_role": "direct_retailer_listing_reference",
+            "retailer_listing_offer": offer,
+            "retailer_listing_offers": [offer],
+            "retailer_listing_reference_price_jpy": 21380,
+            "identity_match": True,
+            "pit_valid": True,
+            "bf_actual_authorized": False,
+            "available_at": future,
+            "retrieval_time": future,
+        }
+        result = planner.component_price(part, {part["id"]: row}, NOW, 360, ["ark-pc.co.jp"])
+        self.assertFalse(result["trusted_for_market_estimate"])
+        self.assertIsNone(result["market_reference_price_jpy"])
+        self.assertIsNone(result["direct_listing_display_price_jpy"])
 
     def test_primary_known_geometry_passes_but_other_gpu_sizes_need_review(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
