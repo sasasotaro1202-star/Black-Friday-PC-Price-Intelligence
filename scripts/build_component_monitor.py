@@ -416,8 +416,8 @@ def component_search_identity_anchor(result, part):
 
 
 
-def _normalized_text_span(text, term):
-    """Find a normalized identity term while retaining original text positions."""
+def _normalized_text_spans(text, term):
+    """Find all normalized occurrences while retaining source positions."""
     output_chars = []
     original_positions = []
     for index, char in enumerate(str(text or "")):
@@ -428,11 +428,25 @@ def _normalized_text_span(text, term):
     haystack = "".join(output_chars)
     needle = normalized(term)
     if not needle:
-        return None
-    start = haystack.find(needle)
-    if start < 0:
-        return None
-    return original_positions[start], original_positions[start + len(needle) - 1] + 1
+        return []
+
+    spans = []
+    start = 0
+    while True:
+        start = haystack.find(needle, start)
+        if start < 0:
+            break
+        end_index = start + len(needle) - 1
+        spans.append((original_positions[start], original_positions[end_index] + 1))
+        start += max(1, len(needle))
+    return spans
+
+
+def _normalized_text_span(text, term):
+    """Find the first normalized identity term while retaining original positions."""
+    spans = _normalized_text_spans(text, term)
+    return spans[0] if spans else None
+
 
 
 def component_primary_identity_anchor(part, html_body, raw=None):
@@ -523,11 +537,12 @@ def stock_from_component_context(text):
 
 
 def parse_component_direct_text_price(part, html_body, identity_anchor=None):
-    """Extract an identity-local price using the part-specific yen bounds.
+    """Extract an identity-local price from the verified primary product page.
 
-    The shared PC parser deliberately filters sub-¥50k prices so accessories do
-    not become PC prices. Reusing it for DIY parts meant that motherboards, SSDs,
-    PSUs, cases and CPU coolers could never become direct listing references.
+    Price candidates are evaluated around every occurrence of the verified primary
+    title, exact model code and sufficiently-specific identity terms. This handles
+    retailer markup that repeats a very long title far away from the item number,
+    without falling back to a page-wide nearest-price heuristic.
     """
     try:
         parser = _KakakuSearchTreeParser()
@@ -542,41 +557,52 @@ def parse_component_direct_text_price(part, html_body, identity_anchor=None):
     anchor = identity_anchor or component_primary_identity_anchor(part, html_body)
     if not anchor:
         return None
-    span = _normalized_text_span(page_text, anchor)
-    if not span:
-        # Some retailers render a long product heading in a slightly different
-        # order/with merchant suffixes, so the full heading alias may not be
-        # present byte-for-byte in flattened HTML. The verifier has already
-        # required that the primary H1/title matched this product. Fall back only
-        # to a configured exact SKU or identity term to localize the price around
-        # that same item, never to a generic page-wide nearest-price guess.
-        fallback_terms = []
-        model_code = str(part.get("model_code") or "").strip()
-        if model_code:
-            fallback_terms.append(model_code)
-        fallback_terms.extend(str(term).strip() for term in (
-            part.get("aliases") or []
-        ) if str(term).strip())
-        fallback_terms.extend(str(term).strip() for term in (
-            part.get("identity_terms") or []
-        ) if str(term).strip())
-        for term in fallback_terms:
-            candidate_span = _normalized_text_span(page_text, term)
-            if candidate_span:
-                span = candidate_span
-                break
-    if not span:
+
+    # Prefer the verified primary title and then the exact model code. Longer
+    # curated aliases are permitted for localizing price but generic class names
+    # such as "DDR5-6000 32GB" are deliberately excluded from this secondary path.
+    anchor_terms = []
+    def add_anchor_term(term, priority):
+        term = str(term or "").strip()
+        if not term:
+            return
+        key = normalized(term)
+        if not key or any(existing_key == key for existing_key, _term, _priority in anchor_terms):
+            return
+        anchor_terms.append((key, term, priority))
+
+    add_anchor_term(anchor, 6)
+    add_anchor_term(part.get("model_code"), 8)
+    for term in (part.get("identity_terms") or []) + (part.get("aliases") or []):
+        if len(normalized(term)) >= 16:
+            add_anchor_term(term, 3)
+
+    # Generate compact windows around all reliable identity anchors, not just
+    # the first matching phrase. The direct verifier has already rejected a
+    # conflicting primary H1/title before calling this parser.
+    windows = []
+    seen_windows = set()
+    for _key, term, priority in anchor_terms:
+        for span in _normalized_text_spans(page_text, term):
+            window_start = max(0, span[0] - 450)
+            window_end = min(len(page_text), span[1] + 1800)
+            signature = (window_start, window_end)
+            if signature in seen_windows:
+                continue
+            seen_windows.add(signature)
+            windows.append({
+                "text": page_text[window_start:window_end],
+                "global_start": window_start,
+                "global_end": window_end,
+                "anchor_start": span[0] - window_start,
+                "anchor_end": span[1] - window_start,
+                "anchor_center": ((span[0] - window_start) + (span[1] - window_start)) // 2,
+                "priority": priority,
+                "term": term,
+            })
+    if not windows:
         return None
 
-    # A neighboring result/recommendation may mention the requested SKU elsewhere
-    # on the page. Use only the price area near the verified primary product or
-    # its exact model code, not an arbitrary page-wide nearest-price guess.
-    window_start = max(0, span[0] - 450)
-    window_end = min(len(page_text), span[1] + 1800)
-    local_text = page_text[window_start:window_end]
-    anchor_start = span[0] - window_start
-    anchor_end = span[1] - window_start
-    anchor_center = (anchor_start + anchor_end) // 2
     minimum = int(part.get("min_price_jpy") or 1)
     maximum = int(part.get("max_price_jpy") or 10**9)
     pattern = re.compile(
@@ -590,40 +616,47 @@ def parse_component_direct_text_price(part, html_body, identity_anchor=None):
     current_label = re.compile(r"販売価格|税込価格|価格|price|amount", re.I)
     non_current_label = re.compile(r"通常価格|参考価格|希望小売価格|メーカー希望|定価|旧価格|値下げ前", re.I)
     candidates = []
-    for match in pattern.finditer(local_text):
-        raw_price = match.group(1) or match.group(2)
-        try:
-            value = int(raw_price.replace(",", ""))
-        except (TypeError, ValueError):
-            continue
-        if not minimum <= value <= maximum:
-            continue
-        # The listing price must appear next to the primary product title, not
-        # an arbitrary related item elsewhere on the page.
-        if match.start() < anchor_start - 400 or match.start() > anchor_end + 1500:
-            continue
-        before = local_text[max(0, match.start() - 42):match.start()]
-        context = local_text[max(0, match.start() - 90):min(len(local_text), match.end() + 90)]
-        if excluded.search(before[-28:]):
-            continue
-        # Do not borrow the amount from an adjacent/recommended GPU model.
-        if direct_price_context_conflicts_with_selected_gpu(part, context):
-            continue
-        score = 0
-        if current_label.search(before) or current_label.search(context[:90]):
-            score += 8
-        if "¥" in match.group(0) or "￥" in match.group(0):
-            score += 2
-        if non_current_label.search(before):
-            score -= 8
-        if re.search(r"カートに入れる|在庫あり|購入する|add to cart", context, re.I):
-            score += 1
-        distance = abs(anchor_center - match.start())
-        score -= min(5, distance // 900)
-        candidates.append({
-            "price_jpy": value, "score": score,
-            "context": context[:260], "identity_anchor": anchor,
-        })
+    for window in windows:
+        local_text = window["text"]
+        anchor_start = window["anchor_start"]
+        anchor_end = window["anchor_end"]
+        anchor_center = window["anchor_center"]
+        for match in pattern.finditer(local_text):
+            raw_price = match.group(1) or match.group(2)
+            try:
+                value = int(raw_price.replace(",", ""))
+            except (TypeError, ValueError):
+                continue
+            if not minimum <= value <= maximum:
+                continue
+            # Require the amount to be adjacent to the identity anchor being
+            # considered, not merely somewhere on a long seller landing page.
+            if match.start() < anchor_start - 400 or match.start() > anchor_end + 1500:
+                continue
+            before = local_text[max(0, match.start() - 42):match.start()]
+            context = local_text[max(0, match.start() - 90):min(len(local_text), match.end() + 90)]
+            if excluded.search(before[-28:]):
+                continue
+            if direct_price_context_conflicts_with_selected_gpu(part, context):
+                continue
+            score = window["priority"]
+            if current_label.search(before) or current_label.search(context[:90]):
+                score += 8
+            if "¥" in match.group(0) or "￥" in match.group(0):
+                score += 2
+            if non_current_label.search(before):
+                score -= 8
+            if re.search(r"カートに入れる|在庫あり|購入する|add to cart", context, re.I):
+                score += 1
+            distance = abs(anchor_center - match.start())
+            score -= min(5, distance // 900)
+            candidates.append({
+                "price_jpy": value,
+                "score": score,
+                "context": context[:260],
+                "identity_anchor": anchor,
+                "matched_anchor_term": window["term"],
+            })
     if not candidates:
         return None
     best_score = max(item["score"] for item in candidates)
@@ -631,13 +664,14 @@ def parse_component_direct_text_price(part, html_body, identity_anchor=None):
     best_values = {item["price_jpy"] for item in best}
     if len(best_values) != 1:
         return None
-    chosen = sorted(best, key=lambda item: len(item["context"]))[0]
+    chosen = sorted(best, key=lambda item: (len(item["context"]), item["matched_anchor_term"]))[0]
     return {
         "price_jpy": chosen["price_jpy"],
         "price_source_mode": "direct_text",
         "price_context": chosen["context"],
         "identity_anchor": chosen["identity_anchor"],
     }
+
 
 
 def build_retailer_search_urls(part, domains, now=None, limit=2):
