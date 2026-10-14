@@ -80,7 +80,7 @@ FPS・Cities: Skylines IIの快適度、RTX 5070とRTX 5060 Ti 16GBの選び分�
 - 通常時：実データ取得は約15分ごと。暫定広域監視窓：実データ取得は約5分ごと。監視窓の値は `config/targets.json` が唯一の設定元です。手動の高速監視と watchdog も同じ設定を参照し、11月14日などの固定日付を公式開催日として扱いません。高速監視も公式日程チェッカーを先に更新してから判定レポートを生成します。
 - メイン監視ワークフローだけが定時起動を担当し、同時書き込みは直列化します。Python標準ライブラリとGitHub Actions中心で無料運用し、有料APIを必須にしません。
 
-処理順序：monitor → peripheral_monitor → recover → sanitize → official_campaign_dates → report → timing → scenario → healthcheck → validate → commit/push。
+処理順序：monitor → peripheral_monitor → build_component_monitor → recover → sanitize → official_campaign_dates → report → self_build_planner → timing → scenario → healthcheck → validate → commit/push。自作の部品価格と構成を買い時レポートより先に更新します。
 
 ## 主な出力
 
