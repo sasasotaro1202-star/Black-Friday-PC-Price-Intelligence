@@ -493,8 +493,8 @@
         "price_source_note": "279,800円は16GB/500GB基本構成の監視基準。32GB/1TB完成構成の実価格として扱わない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 310200,
-        "black_friday_planned_hard_cap_jpy": 310200,
+        "black_friday_target_price_jpy": 330200,
+        "black_friday_planned_hard_cap_jpy": 330200,
         "black_friday_target_note": "RAM 32GB/SSD 1TBの完成構成に対するBF購入目標310,200円。279,800円は16GB/500GB基本構成の事前参考値でありBF価格ではない。構成変更費・送料込みで目標に収まるか、最終見積で確認する。"
       },
       {
@@ -507,8 +507,8 @@
         "reference_checked_date": "2026-10-10",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
         "reference_note": "公式ページで確認した参考価格。次の監視サイクルでも現行価格・在庫・SKUを検証する。",
-        "black_friday_target_price_jpy": 310200,
-        "black_friday_planned_hard_cap_jpy": 310200,
+        "black_friday_target_price_jpy": 330200,
+        "black_friday_planned_hard_cap_jpy": 330200,
         "black_friday_target_note": "32GB/1TB完成構成のBF購入目標310,200円。304,800円は2026-10-10時点の事前参考掲載額でありBF実売ではない。目標までの差は5,400円だが、セール期間・在庫・SKU・PITを再確認する。"
       },
       {
@@ -524,8 +524,8 @@
         "price_source_note": "299,800円は16GB/500GB基本構成の事前参考価格。32GB/1TB完成構成のBF実売価格ではない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 310200,
-        "black_friday_planned_hard_cap_jpy": 310200,
+        "black_friday_target_price_jpy": 330200,
+        "black_friday_planned_hard_cap_jpy": 330200,
         "black_friday_target_note": "CPU重視の大穴候補。完成構成のBF購入目標310,200円。299,800円は16GB/500GB基本構成の事前参考値で、構成変更費・送料込みの残り目安は10,400円に限られる。RAM32GB/SSD1TBへの最終見積を確認し、アップグレード費用を0円と仮定しない。目標超過でもランキング上は大穴として比較し、超過額を明示する。"
       },
       {
@@ -541,8 +541,8 @@
         "price_source_note": "309,800円は2026-10-11に公式ページで確認した事前参考掲載額。ブラックフライデー実売価格ではない。",
         "required_quote": "32GB RAM・1TB SSD完成構成の最終カート価格。可能なら16GB×2のデュアルチャネル構成を出荷時カスタマイズで指定し、追加費用を含めて確認。",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 310200,
-        "black_friday_planned_hard_cap_jpy": 310200,
+        "black_friday_target_price_jpy": 330200,
+        "black_friday_planned_hard_cap_jpy": 330200,
         "black_friday_target_note": "AI用VRAMを重視する大穴候補。RTX 5060 Ti 16GB、32GB×1・1TBの事前参考掲載額309,800円はBF実売ではない。購入目標310,200円との差は400円のみで、16GB×2デュアルチャネルへの変更費・送料を含む見積が必要。目標超過でもランキング上は残し、VRAM容量とゲーム性能のトレードオフを明示する。",
         "ai_tradeoff": "RTX 5070候補よりゲーム描画性能は控えめになり得る一方、16GB VRAMは12GBのRTX 5070よりローカルAIモデルやGPUメモリ負荷で余裕が出る場合がある。CPU/RAM/SSD中心の大規模予測プログラムではGPU単体だけで性能は決まらない。"
       }
