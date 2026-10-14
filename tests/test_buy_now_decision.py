@@ -340,6 +340,8 @@ class BuyNowDecisionTests(unittest.TestCase):
         row = result["component_timing"][0]
         self.assertIsNone(row["current_market_reference_price_jpy"])
         self.assertEqual(row["display_only_reference_price_jpy"], 39980)
+        self.assertEqual(row["status"], "DISPLAY_ONLY_SEARCH_REFERENCE")
+        self.assertEqual(row["status_label"], "検索ページ表示値のみ（検証価格なし）")
         self.assertFalse(row["display_only_reference_is_estimate_eligible"])
         self.assertIsNone(row["target_gap_jpy"])
         self.assertFalse(result["purchase_allowed"])
