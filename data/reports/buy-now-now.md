@@ -1,6 +1,6 @@
 # 今この瞬間の買い時判定
 
-- 更新時刻（JST）: 2026-10-14T23:52:13+09:00
+- 更新時刻（JST）: 2026-10-15T00:00:28+09:00
 - 判定: **事前監視継続・公式日程未確認** (PRE_BF_MONITORING)
 - 暫定の広域監視窓（公式セール日程ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 - 公式日程確認: 0/16 店舗（公式期間が確認できない店舗: 10、取得エラー: 6）
@@ -42,13 +42,13 @@
 
 |部品|BF購入目標|検証済み比較参考値|直接掲載価格（在庫条件未達・推定不採用）|検索ページ表示専用値（不採用）|目標までの差|履歴内参考最安|監視窓内参考最安|履歴件数 / 監視窓件数|判定|価格確認ページ|
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
-|AMD Ryzen 7 9700X BOX|¥38,000|¥47,800|—|—|¥9,800 (20.5%)|¥47,800|未観測|10 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://shop.tsukumo.co.jp/goods/0730143315593/)|
+|AMD Ryzen 7 9700X BOX|¥38,000|¥47,800|—|—|¥9,800 (20.5%)|¥47,800|未観測|11 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://shop.tsukumo.co.jp/goods/0730143315593/)|
 |ASRock B850M Pro RS WiFi|¥20,000|未確認|¥21,380（在庫未確認） ([直接掲載](https://www.sofmap.com/product_detail.aspx?sku=101393495))|¥23,780 ([検索結果](https://search.kakaku.com/ASRock%20B850M%20Pro%20RS%20WiFi/))|—|¥21,380|未観測|7 / 0|直接掲載価格あり（在庫未確認・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001669878/)|
-|Crucial P3 Plus CT1000P3PSSD8JP 1TB|¥18,000|未確認|¥10,210（在庫未確認） ([直接掲載](https://www.yodobashi.com/product/100000001007390887/))|¥33,600 ([検索結果](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/))|—|未観測|未観測|0 / 0|直接掲載価格あり（在庫未確認・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001466997/)|
-|Corsair RM850e 2025 850W ATX 3.1 Gold|¥14,000|¥14,980|—|—|¥980 (6.5%)|¥14,980|未観測|21 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.dospara.co.jp/SBR83/IC519918.html)|
-|Fractal Design Pop Air TG|¥12,000|¥13,180|—|—|¥1,180 (9.0%)|¥13,180|未観測|18 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.dospara.co.jp/SBR1959/IC480986.html)|
-|Thermalright Peerless Assassin 120 SE V3|¥5,000|未確認|¥5,470（取寄せ/予約） ([直接掲載](https://www.yodobashi.com/product/100000001009948470/))|¥4,980 ([検索結果](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/))|—|未観測|未観測|0 / 0|直接掲載価格あり（取寄せ/予約・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001789043/)|
-|Microsoft Windows 11 Home 日本語版 パッケージ版|¥14,800|¥16,230|—|—|¥1,430 (8.8%)|¥16,230|未観測|16 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.yodobashi.com/product/100000001006975270/)|
+|Crucial P3 Plus CT1000P3PSSD8JP 1TB|¥18,000|未確認|¥32,769（在庫未確認） ([直接掲載](https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094))|¥33,600 ([検索結果](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/))|—|未観測|未観測|0 / 0|直接掲載価格あり（在庫未確認・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001466997/)|
+|Corsair RM850e 2025 850W ATX 3.1 Gold|¥14,000|¥14,980|—|—|¥980 (6.5%)|¥14,980|未観測|22 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.dospara.co.jp/SBR83/IC519918.html)|
+|Fractal Design Pop Air TG|¥12,000|¥13,180|—|—|¥1,180 (9.0%)|¥13,180|未観測|19 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.dospara.co.jp/SBR1959/IC480986.html)|
+|Thermalright Peerless Assassin 120 SE V3|¥5,000|未確認|¥4,980（在庫切れ） ([直接掲載](https://www.dospara.co.jp/SBR1968/IC645423.html))|¥4,980 ([検索結果](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/))|—|未観測|未観測|0 / 0|直接掲載価格あり（在庫切れ・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001789043/)|
+|Microsoft Windows 11 Home 日本語版 パッケージ版|¥14,800|¥16,230|—|—|¥1,430 (8.8%)|¥16,230|未観測|17 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.yodobashi.com/product/100000001006975270/)|
 |TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)|¥40,000|未確認|¥113,938（在庫未確認） ([直接掲載](https://ymall.jp/store/mlymall/b0chf9th1b-20260811/))|—|—|未観測|未観測|0 / 0|直接掲載価格あり（在庫未確認・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001610896/)|
 |PNY GeForce RTX 5070 12GB OC SLIM|¥129,800|未確認|¥190,800（在庫未確認） ([直接掲載](https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom))|¥190,800 ([検索結果](https://search.kakaku.com/PNY%20GeForce%20RTX%205070%2012GB%20OC%20SLIM/))|—|未観測|未観測|0 / 0|直接掲載価格あり（在庫未確認・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001798041/)|
 
@@ -79,7 +79,6 @@
 - 周辺機器の価格・在庫が揃わず、本体動的上限が確定していない
 - 既存ランキングの判定は WATCH
 - 重要候補の価格・在庫カバレッジが未完了
-- 既存の全体購入ゲートが保留
 
 ## 候補一覧
 
