@@ -245,6 +245,111 @@ class BuyNowDecisionTests(unittest.TestCase):
         self.assertEqual(row["post_bf_reference_price_jpy"], 280000)
         self.assertFalse(row["qualified_to_buy"])
 
+    def test_self_build_policy_blocks_bto_buy_now_even_if_legacy_gate_says_allowed(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        rankings, config = fixture(now, gate_allowed=True)
+        rankings["purchase_method_policy"] = {
+            "primary_method": "SELF_BUILD",
+            "assembly_time_is_constraint": False,
+            "assembly_time_penalty_points": 0,
+            "bto_role": "REFERENCE_BENCHMARK_ONLY",
+        }
+        result = timing.build_buy_now_decision(rankings, [], config)
+        self.assertFalse(result["purchase_gate_allowed"])
+        self.assertEqual(result["purchase_method_policy"]["primary_method"], "SELF_BUILD")
+        self.assertFalse(result["purchase_method_policy"]["completed_pc_purchase_actionable"])
+
+    def test_self_build_timing_does_not_authorize_from_targets_or_reference_prices(self):
+        plan = {
+            "total_budget_jpy": 400000, "pc_budget_jpy": 330200,
+            "peripheral_budget_jpy": 69800,
+            "purchase_method_policy": {
+                "primary_method": "SELF_BUILD",
+                "assembly_time_is_constraint": False,
+                "assembly_time_penalty_points": 0,
+            },
+            "builds": [{
+                "rank": 1, "id": "diy-primary", "gpu_choice_id": "gpu-rtx5070-12gb",
+                "name": "DIY Ryzen + RTX 5070",
+                "target_pc_total_jpy": 320000, "target_all_in_jpy": 389800,
+                "target_remaining_budget_jpy": 10200, "target_within_total_budget": True,
+                "target_parts_subtotal_jpy": 311000,
+                "compatibility_status": "PASS",
+                "market_reference_estimate_jpy": None,
+                "market_reference_all_in_estimate_jpy": None,
+                "missing_or_untrusted_market_reference_ids": ["cpu-x"],
+                "components": [{
+                    "id": "cpu-x", "track_price": True,
+                    "trusted_for_market_estimate": False, "market_reference_price_jpy": None,
+                    "source_role": "comparison_site_reference",
+                }],
+            }],
+        }
+        config = {"profile": {
+            "primary_gpu_choice_id": "gpu-rtx5070-12gb",
+            "assembly_time_is_constraint": False,
+            "assembly_time_penalty_points": 0,
+        }}
+        result = timing.build_self_build_timing_summary(plan, config)
+        self.assertEqual(result["primary_method"], "SELF_BUILD")
+        self.assertEqual(result["status"], "WAIT_FOR_COMPONENT_REFERENCES")
+        self.assertFalse(result["purchase_allowed"])
+        self.assertFalse(result["bf_actual_authorized"])
+        self.assertEqual(result["target_all_in_jpy"], 389800)
+        self.assertEqual(result["verified_market_reference_count"], 0)
+        self.assertEqual(result["verified_checkout_offer_count"], 0)
+        self.assertFalse(result["assembly_time_is_constraint"])
+        self.assertEqual(result["assembly_time_penalty_points"], 0)
+
+    def test_self_build_waits_for_checkout_offers_even_when_reference_prices_are_complete(self):
+        plan = {
+            "total_budget_jpy": 400000, "pc_budget_jpy": 330200, "peripheral_budget_jpy": 69800,
+            "purchase_method_policy": {"assembly_time_is_constraint": False, "assembly_time_penalty_points": 0},
+            "builds": [{
+                "rank": 1, "id": "diy-primary", "gpu_choice_id": "g1", "name": "DIY build",
+                "target_pc_total_jpy": 320000, "target_all_in_jpy": 389800,
+                "target_remaining_budget_jpy": 10200, "target_within_total_budget": True,
+                "target_parts_subtotal_jpy": 311000, "compatibility_status": "PASS",
+                "market_reference_estimate_jpy": 300000, "market_reference_all_in_estimate_jpy": 369800,
+                "missing_or_untrusted_market_reference_ids": [],
+                "components": [{
+                    "id": "cpu-x", "track_price": True, "trusted_for_market_estimate": True,
+                    "market_reference_price_jpy": 40000, "source_role": "comparison_site_reference",
+                }],
+            }],
+        }
+        result = timing.build_self_build_timing_summary(plan, {"profile": {"primary_gpu_choice_id": "g1"}})
+        self.assertEqual(result["status"], "WAIT_FOR_OFFICIAL_COMPONENT_OFFERS")
+        self.assertEqual(result["verified_market_reference_count"], 1)
+        self.assertEqual(result["verified_checkout_offer_count"], 0)
+        self.assertFalse(result["purchase_allowed"])
+
+    def test_buy_now_report_shows_diy_first_policy_and_component_gate(self):
+        now = datetime(2026, 10, 14, 12, 0, tzinfo=JST)
+        result = self.evaluate(now)
+        result["purchase_method_policy"] = {
+            "primary_method": "SELF_BUILD",
+            "assembly_time_is_constraint": False,
+            "assembly_time_penalty_points": 0,
+            "bto_role": "REFERENCE_BENCHMARK_ONLY",
+            "completed_pc_purchase_actionable": False,
+        }
+        result["self_build_purchase_timing"] = {
+            "selected_build_name": "自作 Ryzen 7 9700X + RTX 5070",
+            "target_pc_total_jpy": 320360, "target_all_in_jpy": 390160,
+            "target_remaining_budget_jpy": 9840, "compatibility_status": "PASS",
+            "verified_market_reference_count": 0, "tracked_component_count": 9,
+            "verified_checkout_offer_count": 0, "component_count": 9,
+            "status": "WAIT_FOR_COMPONENT_REFERENCES",
+            "blockers": ["部品参考価格が不足", "最終決済価格を未確認"],
+        }
+        rendered = timing.render_buy_now_markdown(result)
+        self.assertIn("自作PC本命の買い時", rendered)
+        self.assertIn("組み立て時間を考慮するか: いいえ（減点なし）", rendered)
+        self.assertIn("320,360", rendered)
+        self.assertIn("WAIT_FOR_COMPONENT_REFERENCES", rendered)
+        self.assertIn("BTOの位置付け: 価格・性能・部品品質・保証の比較ベンチマークのみ", rendered)
+
     def test_observation_ledger_only_records_verified_buyable_offers_in_window(self):
         now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
         rankings, config = fixture(now)
