@@ -65,7 +65,8 @@
       "edion.com",
       "ksdenki.com",
       "nojima.co.jp",
-      "yamada-denkiweb.com"
+      "yamada-denkiweb.com",
+      "kaago.com"
     ],
     "assembly_time_is_constraint": false,
     "assembly_time_penalty_points": 0,
@@ -164,14 +165,13 @@
         "connector": "12V-2x6",
         "card_thickness_slots": 2
       },
-      "notes": "正確な型番VCG507012DFSXPB1-OをPNY公式仕様と照合済み。寸法290×128×40mm、250W、16ピン入力、推奨PSU650W。BF目標129,800円は値下げ希望額であり、予測・確定価格ではない。Joshinの正確な型番ページを直接再取得して価格・在庫を検証する。 追加監視: TSUKUMOのJAN一致商品ページ。販売ページ価格と在庫は実行時に直接再取得して検証し、検索掲載だけでは購入可能と扱わない。 Amazonの直接ページも監視候補に追加。ASIN B0GSXJPTLNは価格.comの当該SKUショップリンク先から取得したURL。掲載値・在庫はAmazonページを直接取得して型番一致を検証するまで未確認。",
+      "notes": "正確な型番VCG507012DFSXPB1-OをPNY公式仕様と照合済み。寸法290×128×40mm、250W、16ピン入力、推奨PSU650W。BF目標129,800円は値下げ希望額であり、予測・確定価格ではない。Joshinの正確な型番ページを直接再取得して価格・在庫を検証する。 追加監視: TSUKUMOのJAN一致商品ページ。販売ページ価格と在庫は実行時に直接再取得して検証し、検索掲載だけでは購入可能と扱わない。 Amazonの直接ページも監視候補に追加。ASIN B0GSXJPTLNは価格.comの当該SKUショップリンク先から取得したURL。掲載値・在庫はAmazonページを直接取得して型番一致を検証するまで未確認。 AmazonのB0GSXJPTLN候補は、取得ページにASUS RTX 5060 Tiの価格が出る一方で対象PNY RTX 5070の価格を検証できなかったため監視候補から除外。",
       "spec_source_url": "https://www.pny.com/en-eu/geforce-rtx-5070-slim-models?sku=VCG507012DFSXPB1-O",
       "spec_source_verified_at": "2026-10-14",
       "direct_retailer_urls": [
         "https://joshinweb.jp/kaden/73259/0751492812151.html",
         "https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845",
-        "https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom",
-        "https://www.amazon.co.jp/dp/B0GSXJPTLN"
+        "https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom"
       ]
     },
     {
@@ -314,9 +314,10 @@
         "speed_mts": 6000,
         "profile": "EXPO"
       },
-      "notes": "16GB×2のデュアルチャネル。メモリ市況の急変はBF目標に反映し、価格を推測しない。 YMallの型番一致候補ページを直接監視。正確な型番・価格・販売状態を実ページで確認できなければ未検証のまま保持する。 メーカー公式ページで型番・32GB(16GB×2)・DDR5-6000・CL38を再照合。YMallは販売可否を実行時検証し、在庫/価格が取得不能なら未確認を維持。",
+      "notes": "16GB×2のデュアルチャネル。メモリ市況の急変はBF目標に反映し、価格を推測しない。 YMallの型番一致候補ページを直接監視。正確な型番・価格・販売状態を実ページで確認できなければ未検証のまま保持する。 メーカー公式ページで型番・32GB(16GB×2)・DDR5-6000・CL38を再照合。YMallは販売可否を実行時検証し、在庫/価格が取得不能なら未確認を維持。 Amazonの型番候補も第二監視先として追加。主商品見出し・SKU・直接価格・商品固有在庫が一致しない場合は未検証のまま保持する。",
       "direct_retailer_urls": [
-        "https://ymall.jp/store/mlymall/b0chf9th1b-20260811/"
+        "https://ymall.jp/store/mlymall/b0chf9th1b-20260811/",
+        "https://www.amazon.co.jp/dp/B0CHF9TH1B"
       ],
       "spec_source_url": "https://www.teamgroupinc.com/jp/product-detail/memory/T-CREATE/expert-u-dimm-ddr5-white/expert-u-dimm-ddr5-white-CTCWD532G6000HC38ADC01/",
       "spec_source_verified_at": "2026-10-14"
@@ -346,10 +347,11 @@
         "interface": "NVMe PCIe 4.0",
         "form_factor": "M.2 2280"
       },
-      "notes": "最初から1TB。OS・開発環境・ゲーム用途を想定。 TSUKUMOの型番一致商品ページを直接監視。在庫切れや完売の表示価格は市場参考値・購入可能価格として使用しない。 TSUKUMOとドスパラの型番一致商品ページを直接監視。ドスパラ掲載は現在在庫なしの参考なので、購入可能価格に格上げしない。",
+      "notes": "最初から1TB。OS・開発環境・ゲーム用途を想定。 TSUKUMOの型番一致商品ページを直接監視。在庫切れや完売の表示価格は市場参考値・購入可能価格として使用しない。 TSUKUMOとドスパラの型番一致商品ページを直接監視。ドスパラ掲載は現在在庫なしの参考なので、購入可能価格に格上げしない。 Kaago/Excellarの型番一致候補を追加。直接価格・在庫の検証が通るまでは購入可能と扱わない。",
       "direct_retailer_urls": [
         "https://shop.tsukumo.co.jp/goods/0649528918970/",
-        "https://www.dospara.co.jp/SBR1144/IC481159.html"
+        "https://www.dospara.co.jp/SBR1144/IC481159.html",
+        "https://kaago.com/excellar/?itemcode=0001000033094"
       ]
     },
     {
@@ -459,20 +461,23 @@
       "id": "os-windows11-home",
       "category": "os_license",
       "role": "required_fixed_part",
-      "name": "Windows 11 Home official retail license reference",
-      "model_code": "Windows 11 Home",
+      "name": "Microsoft Windows 11 Home 日本語版 パッケージ版",
+      "model_code": "HAJ-00094",
       "aliases": [
-        "Windows 11 Home"
+        "Windows 11 Home 日本語版",
+        "Windows 11 Home",
+        "HAJ-00094"
       ],
       "identity_terms": [
-        "Windows 11 Home"
+        "Windows 11 Home 日本語版",
+        "HAJ-00094"
       ],
-      "monitor_url": null,
-      "purchase_url": "https://www.microsoft.com/ja-jp/d/windows-11-home/dg7gmgf0krt0",
-      "track_price": false,
-      "target_price_jpy": 19360,
-      "reference_price_jpy": 19360,
-      "price_source_role": "official_store_manual_reference",
+      "monitor_url": "https://kakaku.com/item/K0001432816/",
+      "purchase_url": "https://kakaku.com/item/K0001432816/",
+      "track_price": true,
+      "target_price_jpy": 14800,
+      "reference_price_jpy": null,
+      "price_source_role": "comparison_site_reference",
       "reference_price_is_current_verified": false,
       "reference_price_identity_verified": false,
       "reference_price_checked_at": null,
@@ -481,7 +486,12 @@
         "license_type": "retail_license",
         "optional_if_existing_transferable_license": true
       },
-      "notes": "19,360円は公式ストアの参考表示額。自動で価格・在庫を再確認していない。既存の移行可能ライセンスがあれば除外可能。"
+      "notes": "HAJ-00094、USBメモリとシリアルキーカード付属の正規Windows 11 Home日本語パッケージ版を追跡。ヨドバシ実売ページの掲載例は2026-10-14時点16,230円・在庫ありだが、ライブ更新で再確認する。BF目標14,800円は希望価格であり予測ではない。既に移行可能なライセンスがあれば購入対象から除外可能。",
+      "min_price_jpy": 10000,
+      "max_price_jpy": 50000,
+      "direct_retailer_urls": [
+        "https://www.yodobashi.com/product/100000001006975270/"
+      ]
     }
   ]
 }
