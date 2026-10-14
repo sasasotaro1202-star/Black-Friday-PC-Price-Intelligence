@@ -24,7 +24,6 @@
     "fixed_part_ids": [
       "cpu-ryzen7-9700x",
       "motherboard-asrock-b850m-pro-rs-wifi",
-      "memory-crucial-pro-ddr5-32gb-6000",
       "ssd-crucial-p3-plus-1tb",
       "psu-corsair-rm850e-2025",
       "case-fractal-pop-air-tg",
@@ -99,7 +98,12 @@
         "name": "future_upgradeability",
         "priority": 6
       }
-    ]
+    ],
+    "memory_choice_ids": [
+      "memory-crucial-pro-ddr5-32gb-6000",
+      "memory-teamgroup-ddr5-32gb-6000"
+    ],
+    "primary_memory_choice_id": "memory-crucial-pro-ddr5-32gb-6000"
   },
   "parts": [
     {

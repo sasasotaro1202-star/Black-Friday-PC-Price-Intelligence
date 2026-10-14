@@ -311,7 +311,7 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
     }
 
 
-def compatibility_checks(parts, profile, gpu_id):
+def compatibility_checks(parts, profile, gpu_id, memory_part_id=None):
     """Checks known socket/memory/storage/size/power constraints, fail-closed."""
     checks = []
     def add(name, status, detail):
@@ -323,7 +323,7 @@ def compatibility_checks(parts, profile, gpu_id):
     cpu = spec("cpu-ryzen7-9700x")
     board = spec("motherboard-asrock-b850m-pro-rs-wifi")
     fixed_ids = profile.get("fixed_part_ids") or []
-    memory_part_id = next(
+    memory_part_id = memory_part_id or profile.get("primary_memory_choice_id") or next(
         (
             str(part_id) for part_id in fixed_ids
             if (parts.get(str(part_id)) or {}).get("category") == "memory"
@@ -424,6 +424,69 @@ def build_plan(config=None, price_snapshot=None, now=None):
     max_age = int(profile.get("market_reference_max_age_minutes", 360))
     fixed_ids = list(profile.get("fixed_part_ids") or [])
     gpu_ids = list(profile.get("gpu_choice_ids") or [])
+    memory_choice_ids = [
+        str(mid) for mid in (profile.get("memory_choice_ids") or [])
+        if str(mid) in parts and (parts[str(mid)].get("category") == "memory")
+    ]
+    if not memory_choice_ids:
+        memory_choice_ids = [
+            str(cid) for cid in fixed_ids
+            if (parts.get(str(cid)) or {}).get("category") == "memory"
+        ]
+    primary_memory_id = profile.get("primary_memory_choice_id")
+    if primary_memory_id not in memory_choice_ids:
+        primary_memory_id = memory_choice_ids[0] if memory_choice_ids else None
+    fixed_ids = [str(cid) for cid in fixed_ids if str(cid) not in memory_choice_ids]
+    allowed_price_domains = profile.get("allowed_search_reference_domains") or profile.get("allowed_comparison_domains") or []
+    memory_price_by_id = {}
+    memory_candidates = []
+    for memory_id in memory_choice_ids:
+        memory_part = parts.get(memory_id) or {}
+        memory_price = component_price(
+            memory_part, by_id, now, max_age, allowed_domains=allowed_price_domains
+        )
+        memory_price_by_id[memory_id] = memory_price
+        trusted = bool(
+            memory_price.get("trusted_for_market_estimate")
+            and isinstance(memory_price.get("market_reference_price_jpy"), int)
+        )
+        memory_candidates.append({
+            "id": memory_id,
+            "name": memory_part.get("name"),
+            "model_code": memory_part.get("model_code"),
+            "target_price_jpy": memory_part.get("target_price_jpy"),
+            "market_reference_price_jpy": memory_price.get("market_reference_price_jpy"),
+            "price_status": memory_price.get("price_status"),
+            "trusted_for_market_estimate": trusted,
+            "purchase_url": memory_price.get("purchase_url") or memory_part.get("purchase_url") or memory_part.get("monitor_url"),
+        })
+    trusted_memory_candidates = [
+        candidate for candidate in memory_candidates
+        if candidate["trusted_for_market_estimate"]
+        and isinstance(candidate["market_reference_price_jpy"], int)
+    ]
+    if trusted_memory_candidates:
+        chosen_memory = min(
+            trusted_memory_candidates,
+            key=lambda candidate: (
+                candidate["market_reference_price_jpy"],
+                candidate["target_price_jpy"] if isinstance(candidate["target_price_jpy"], int) else 10**12,
+                candidate["id"],
+            ),
+        )
+        selected_memory_id = chosen_memory["id"]
+        memory_selection_method = "lowest_fresh_verified_market_reference"
+    else:
+        selected_memory_id = primary_memory_id
+        memory_selection_method = "primary_memory_fallback_no_verified_market_reference"
+    selected_memory = parts.get(selected_memory_id) or {}
+    memory_choice_selection = {
+        "selected_id": selected_memory_id,
+        "selected_name": selected_memory.get("name"),
+        "selection_method": memory_selection_method,
+        "candidates": memory_candidates,
+        "rule": "Choose the lowest fresh, exact-item trusted market reference. If none is available, retain the configured primary kit. Market references are not checkout prices and never authorize purchase."
+    }
     pc_budget = int(profile.get("pc_budget_jpy", 330200))
     all_budget = int(profile.get("total_budget_jpy", 400000))
     peripheral_budget = int(profile.get("peripheral_budget_jpy", 69800))
@@ -432,7 +495,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
     builds = []
 
     for rank, gpu_id in enumerate(gpu_ids, 1):
-        selected_ids = fixed_ids + [gpu_id]
+        selected_ids = fixed_ids + ([selected_memory_id] if selected_memory_id else []) + [gpu_id]
         components, missing, market_subtotal = [], [], 0
         all_parts_referenced = True
         target_parts = 0
@@ -445,9 +508,8 @@ def build_plan(config=None, price_snapshot=None, now=None):
             target = part.get("target_price_jpy")
             if isinstance(target, int) and not isinstance(target, bool):
                 target_parts += target
-            price = component_price(
-                part, by_id, now, max_age,
-                allowed_domains=profile.get("allowed_search_reference_domains") or profile.get("allowed_comparison_domains") or []
+            price = memory_price_by_id[cid] if cid in memory_price_by_id else component_price(
+                part, by_id, now, max_age, allowed_domains=allowed_price_domains
             )
             component = {
                 "id": cid, "category": part.get("category"), "name": part.get("name"),
@@ -498,7 +560,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
                     all_parts_referenced = False
                     missing.append(cid)
 
-        compat, checks = compatibility_checks(parts, profile, gpu_id)
+        compat, checks = compatibility_checks(parts, profile, gpu_id, selected_memory_id)
         target_pc = target_parts + shipping + small_parts
         target_all_in = target_pc + peripheral_budget
         market_estimate = market_subtotal + shipping + small_parts if all_parts_referenced and not missing else None
@@ -526,6 +588,9 @@ def build_plan(config=None, price_snapshot=None, now=None):
         }.get(gpu_id, "DIY build " + gpu_id)
         builds.append({
             "rank": rank, "id": "self-build-" + gpu_id, "name": name, "gpu_choice_id": gpu_id,
+            "selected_memory_id": selected_memory_id,
+            "memory_choice_method": memory_selection_method,
+            "memory_choice_candidates": memory_candidates,
             "components": components, "target_parts_subtotal_jpy": target_parts,
             "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
             "target_pc_total_jpy": target_pc, "pc_budget_jpy": pc_budget,
@@ -565,6 +630,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
         "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
         "budget_arithmetic_valid": pc_budget + peripheral_budget == all_budget,
         "required_categories": profile.get("required_categories") or [],
+        "memory_choice_selection": memory_choice_selection,
         "component_coverage": {
             "configured_component_count": len(parts_list),
             "tracked_hardware_part_count": sum(1 for x in parts_list if x.get("track_price")),
@@ -586,6 +652,17 @@ def render_plan_markdown(plan):
         "**購入方式:** 自作PCを正式な本命として最適化します。組み立て時間・作業時間は減点しません。BTOは同等仕様での総額・部品品質・保証のベンチマークとして比較し、便利さだけを理由に自作から切り替えません。",
         "",
         "**注意:** BF購入目標は購入希望額です。比較サイト価格は市場参考値であり、店舗の決済価格・在庫・公式BF実売価格ではありません。現在のデータから購入許可は出しません。",
+        "",
+        "**メモリ選択:** " + str((plan.get("memory_choice_selection") or {}).get("selected_name") or "未選定"),
+        "選定方法: " + str((plan.get("memory_choice_selection") or {}).get("selection_method") or "未確認"),
+        "価格・型番・鮮度・PIT条件を満たした比較参考値があれば、その最安候補を採用します。信頼できる比較参考値がなければCrucial Proを主候補として維持します。比較参考値は決済価格ではなく、購入許可も意味しません。",
+        "",
+        *(["- {} / BF目標 {} / 比較参考 {} / 状態 {} / {}".format(
+            item.get("name"), money(item.get("target_price_jpy")),
+            money(item.get("market_reference_price_jpy")) if item.get("trusted_for_market_estimate") else "未検証",
+            item.get("price_status"),
+            "[商品ページ]({})".format(item.get("purchase_url")) if item.get("purchase_url") else "リンク未確認"
+        ) for item in (plan.get("memory_choice_selection") or {}).get("candidates", [])]),
         "",
         "|順位|構成|部品目標小計|PC本体目標総額|周辺機器込み目標|目標残額|比較参考合計|互換性|判定|",
         "|---:|---|---:|---:|---:|---:|---:|---|---|"
