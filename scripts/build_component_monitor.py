@@ -436,54 +436,76 @@ def _normalized_text_span(text, term):
 
 
 def component_primary_identity_anchor(part, html_body, raw=None):
-    """Prove the requested SKU from a primary page title, not recommendations/footer text."""
-    title_candidates = []
-    raw_name = str((raw or {}).get("name") or "").strip()
-    if raw_name and not raw_name.startswith(("http://", "https://")):
-        title_candidates.append(raw_name)
-
+    """Prove the exact SKU from the primary H1/title, never from related/meta-only text."""
     try:
         parser = _KakakuSearchTreeParser()
         parser.feed(str(html_body or ""))
         parser.close()
     except Exception:
-        parser = None
+        return None
 
-    if parser is not None:
-        for node in parser.nodes:
-            attrs = node.attrs or {}
-            candidate = ""
-            if node.tag in ("h1", "title") or str(attrs.get("itemprop") or "").lower() == "name":
-                candidate = _kakaku_node_text(node)
-            elif node.tag == "meta":
-                property_name = str(attrs.get("property") or attrs.get("name") or "").lower()
-                if property_name in ("og:title", "twitter:title", "product:name", "title"):
-                    candidate = str(attrs.get("content") or "").strip()
-            if candidate and len(candidate) <= 700:
-                title_candidates.append(candidate)
+    def exact_anchor(candidate):
+        candidate = str(candidate or "").strip()
+        if not candidate or len(candidate) > 700:
+            return None
+        return component_search_identity_anchor({"title": candidate, "snippet": ""}, part)
 
-    results = []
-    seen = set()
-    for title in title_candidates:
-        key = normalized(title)
-        if not key or key in seen:
+    h1_candidates = []
+    title_candidates = []
+    for node in parser.nodes:
+        if node.tag not in ("h1", "title"):
             continue
-        seen.add(key)
-        anchor = component_search_identity_anchor({"title": title, "snippet": ""}, part)
+        candidate = _kakaku_node_text(node)
+        if not candidate or len(candidate) > 700:
+            continue
+        (h1_candidates if node.tag == "h1" else title_candidates).append(candidate)
+
+    # If H1 exists, it is decisive. Do not rescue a different main product with
+    # a matching OG tag, HTML title, recommendation, or related-product card.
+    primary_candidates = h1_candidates if h1_candidates else title_candidates
+    if not primary_candidates:
+        return None
+
+    matches = []
+    for title in primary_candidates:
+        anchor = exact_anchor(title)
         if not anchor:
             continue
         model_code = normalized(part.get("model_code"))
         exact_model_code = bool(model_code and normalized(anchor) == model_code)
-        results.append((
+        matches.append((
             0 if exact_model_code else 1,
             -len(normalized(anchor)),
             len(title),
             anchor,
         ))
-    if not results:
+    if not matches:
         return None
-    results.sort()
-    return results[0][3]
+    matches.sort()
+    return matches[0][3]
+
+
+def direct_price_context_conflicts_with_selected_gpu(part, context):
+    """Reject a GPU price context that names a different GPU model/SKU."""
+    if str(part.get("category") or "").lower() != "gpu":
+        return False
+    expected = normalized(" ".join(
+        [str(part.get("name") or ""), str(part.get("model_code") or "")]
+        + [str(x) for x in (part.get("aliases") or [])]
+        + [str(x) for x in (part.get("identity_terms") or [])]
+    ))
+    value = str(context or "")
+    patterns = (
+        re.compile(r"\b(?:RTX|GTX)\s*\d{3,4}\s*(?:TI|SUPER)?\b", re.I),
+        re.compile(r"\bRX\s*\d{4}\s*(?:XT|XTX)?\b", re.I),
+    )
+    for pattern in patterns:
+        for match in pattern.finditer(value):
+            token = normalized(match.group(0))
+            if token and token not in expected:
+                return True
+    return False
+
 
 
 def stock_from_component_context(text):
@@ -560,6 +582,9 @@ def parse_component_direct_text_price(part, html_body, identity_anchor=None):
         before = local_text[max(0, match.start() - 42):match.start()]
         context = local_text[max(0, match.start() - 90):min(len(local_text), match.end() + 90)]
         if excluded.search(before[-28:]):
+            continue
+        # Do not borrow the amount from an adjacent/recommended GPU model.
+        if direct_price_context_conflicts_with_selected_gpu(part, context):
             continue
         score = 0
         if current_label.search(before) or current_label.search(context[:90]):
