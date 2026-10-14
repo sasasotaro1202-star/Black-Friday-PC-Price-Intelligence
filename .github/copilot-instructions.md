@@ -1,5 +1,15 @@
 # Black Friday PC Price Intelligence — Project Instructions
 
+## 0. Product operating contract: GitHub collects evidence; ChatGPT gives the final answer
+
+The user's intended workflow is explicit:
+- GitHub Actions is the continuous, free-first **collection, history, verification, and data-quality system**. Collect evidence in advance so it is available when the user returns.
+- Generated rankings, scores, buy-timing opinions, build plans and Markdown reports are **internal diagnostic/index artifacts**, not the final user-facing recommendation. Do not treat them as authoritative just because they were generated successfully.
+- When the user asks for a ranking or detailed advice in ChatGPT, use the newest committed data, inspect timestamps/coverage/error logs, and independently verify decision-critical prices, stock, exact SKU, current offers, and official campaign dates with fresh sources where possible. Build the final comparison for the budget and preferences in the latest user request.
+- Preserve historical observations, exact item identity, merchant/source URL, price semantics, stock state, retrieved/available/published times, PIT validity, and rejection/error diagnostics. Unknown is a valid state; invented completeness is not.
+- A site can block retrieval or omit fields. Define “complete data” as broad tracked coverage with explicit gaps, retries, and source-quality evidence—not a promise that every retailer will always be readable.
+- Never present a GitHub-produced 100-point priority score as a discount probability or as the finished answer. On-demand ChatGPT output should explain what evidence changed the ranking and distinguish target thresholds from verified BF offers and final checkout cash amounts.
+
 ## 1. Authoritative configuration and user goal
 
 Read `config/targets.json` and `config/build_components.json` before changing budgets, targets, parts, or schedules. They are the authoritative machine-readable configuration; do not reintroduce stale values in prose or code.
@@ -87,13 +97,16 @@ Unknown prices must stay null/unknown—not ¥0. Fetch failure is not out-of-sto
 - For Ryzen 7 9700X, monitor both Yodobashi and the exact TSUKUMO item page (SKU 100-100001404WOF). For ASRock B850M Pro RS WiFi, monitor both Yodobashi and PC4U. Direct price and inventory are re-fetched on every run; indexed values are never automatically promoted.
 - Show retrieval coverage, failed hosts/reasons, rejected SKU matches, unverified prices, and unknown inventory explicitly. Do not improve apparent coverage by loosening identity, stock, freshness, or PIT rules.
 
-## 6. Ranking and decision quality
+## 6. Data products versus final on-demand ranking
 
-The 100-point score is **purchase priority, not probability**. Use the configured weighting: performance 40, price/value 20, historical sale evidence 15, stock/sellout risk 15, and timing 10. Never describe this score as the probability of a discount, a price fall, or winning a deal.
+The 100-point score is **an internal purchase-priority index, not a probability and not the user's final recommendation**. Use the configured weighting for diagnostics only: performance 40, price/value 20, historical sale evidence 15, stock/sellout risk 15, and timing 10. Never describe it as the probability of a discount or price fall.
 
-A recommendation must consider the **full PC + peripheral all-in cost**, the exact completed configuration, real stock, return/warranty risk, part quality, cooling, noise where evidence exists, upgradeability, source quality, and observed-data freshness. A build can remain a monitored candidate while its purchase gate is closed. Do not issue purchase authorization if price, model identity, stock, official sale dates, completed RAM/SSD configuration, compatibility, or all-in cash total is unresolved.
-
-The output must make the current decision easy to read on a phone: leading DIY build, 16GB-VRAM alternative, RTX 5070 Ti dark horse, PC-only total, accessory total, all-in total, remaining budget, target versus latest verified evidence, inventory/compatibility blockers, and a clear BUY / WAIT / REVIEW decision. Never imply that a BF target is already available today.
+The monitoring pipeline may build internal data views to test consistency and expose gaps. The final ranking is produced in ChatGPT only when the user asks. At that time:
+- Start with the user's latest explicit budget/preferences, not an older README target if the conversation has changed them.
+- Read source data and generation/retrieval timestamps before relying on any derived JSON or Markdown ranking.
+- Verify critical current seller pages, exact SKU, stock, final cash price, shipping, coupon eligibility and official campaign dates independently where possible. Do not represent pre-BF snapshots or comparison-site references as observed BF prices.
+- Produce all relevant requested rankings separately: overall PC/build options, individual DIY component alternatives, each peripheral category, and outliers/dark horses. Include direct product links, budget arithmetic, what is confirmed versus target-only, sellout risk, and compatibility gaps.
+- Consider the **full PC + peripheral all-in cost**, exact configuration, real stock, warranty/return risk, part quality, cooling, upgradeability, source quality and freshness. If any gating evidence is unresolved, label the item for monitoring/review rather than authorizing purchase.
 
 ## 7. Development and autonomous improvement
 
