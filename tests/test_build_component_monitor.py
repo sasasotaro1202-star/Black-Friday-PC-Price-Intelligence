@@ -19,9 +19,9 @@ class BuildComponentMonitorTests(unittest.TestCase):
             "id": "gpu-rtx5070-12gb",
             "category": "gpu",
             "name": "PNY GeForce RTX 5070 12GB OC SLIM",
-            "model_code": "VCG507012DFXPB1-O",
-            "aliases": ["PNY GeForce RTX 5070 12GB OC", "VCG507012DFXPB1-O"],
-            "identity_terms": ["PNY GeForce RTX 5070 12GB OC", "VCG507012DFXPB1-O", "RTX 5070 12GB"],
+            "model_code": "VCG507012DFSXPB1-O",
+            "aliases": ["PNY GeForce RTX 5070 12GB OC", "VCG507012DFSXPB1-O"],
+            "identity_terms": ["PNY GeForce RTX 5070 12GB OC", "VCG507012DFSXPB1-O", "RTX 5070 12GB"],
             "monitor_url": "https://kakaku.com/item/K0001798041/",
             "min_price_jpy": 100000,
             "max_price_jpy": 330000,
@@ -155,14 +155,14 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertEqual(len({x["retailer_domain"] for x in urls}), 2)
         for item in urls:
             self.assertTrue(bcm.allowed_url(item["url"], (item["retailer_domain"],)))
-            self.assertIn("VCG507012DFXPB1-O", item["url"])
+            self.assertIn("VCG507012DFSXPB1-O", item["url"])
         self.assertEqual(bcm.build_retailer_search_urls(self.part, ("kakaku.com",), now=now), [])
 
     def test_retailer_search_page_returns_same_card_allowlisted_detail_link(self):
         html = (
             "<html><body><ul class='product-list'>"
             "<li class='product-item'><a href='/item/other'>Other GPU item</a><span>¥129,800</span></li>"
-            "<li class='product-item'><a href='/item/123'>PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFXPB1-O</a>"
+            "<li class='product-item'><a href='/item/123'>PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFSXPB1-O</a>"
             "<span>最安価格 ¥139,800</span></li></ul></body></html>"
         )
         links, diag = bcm.parse_retailer_search_page(
@@ -178,7 +178,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
         html = (
             "<html><body><ul class='product-list'>"
             "<li class='product-item'><a href='/item/123'>"
-            "PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFXPB1-O</a>"
+            "PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFSXPB1-O</a>"
             "<span>価格は商品ページでご確認ください</span></li>"
             "</ul></body></html>"
         )
@@ -202,6 +202,51 @@ class BuildComponentMonitorTests(unittest.TestCase):
                          "https://www.pc-koubou.jp/user_data/search.php")
         self.assertIn("?q=", urls[0]["url"])
 
+    def test_curated_direct_retailer_url_is_checked_before_general_search(self):
+        part = dict(self.part)
+        part["direct_retailer_urls"] = ["https://www.dospara.co.jp/item/exact-sku"]
+        stamp = "2026-11-20T12:00:00+09:00"
+        offer = {
+            "url": part["direct_retailer_urls"][0],
+            "title": "PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFSXPB1-O",
+            "price_jpy": 138800,
+            "price_source_mode": "direct_structured",
+            "stock_status": "in_stock",
+            "identity_anchor": "VCG507012DFSXPB1-O",
+            "identity_match": True,
+            "source_role": "direct_retailer_listing_reference",
+            "available_at": stamp,
+            "retrieval_time": stamp,
+            "pit_valid": True,
+            "bf_actual_authorized": False,
+        }
+        with patch.object(bcm, "verify_retailer_listing", return_value=offer) as verify, \
+             patch.object(bcm, "fetch") as fetcher, \
+             patch.object(bcm, "build_retailer_search_urls") as rotate:
+            result = bcm.search_comparison_snippet(part, ("dospara.co.jp",))
+        verify.assert_called_once_with(part, part["direct_retailer_urls"][0], ("dospara.co.jp",))
+        fetcher.assert_not_called()
+        rotate.assert_not_called()
+        self.assertEqual(result["retailer_listing_offer"]["price_jpy"], 138800)
+        self.assertEqual(result["retailer_listing_offer"]["stock_status"], "in_stock")
+        self.assertEqual(result["search_diagnostics"][0]["provider"], "configured_direct_retailer")
+        self.assertEqual(result["search_diagnostics"][0]["status"], "verified")
+
+    def test_curated_direct_retailer_url_rejects_non_allowlisted_host_without_fetch(self):
+        part = dict(self.part)
+        part["direct_retailer_urls"] = ["https://evil.example/fake-product"]
+        with patch.object(bcm, "verify_retailer_listing") as verify, \
+             patch.object(bcm, "fetch") as fetcher, \
+             patch.object(bcm, "build_retailer_search_urls") as rotate, \
+             patch.object(bcm, "bing_search", return_value=[]), \
+             patch.object(bcm, "ddg_search", return_value=[]):
+            result = bcm.search_comparison_snippet(part, ("dospara.co.jp",))
+        verify.assert_not_called()
+        fetcher.assert_not_called()
+        rotate.assert_called_once()
+        self.assertEqual(result["search_diagnostics"][0]["status"], "rejected")
+        self.assertEqual(result["search_diagnostics"][0]["error"], "configured_direct_url_host_not_allowlisted")
+
     def test_yahoo_shopping_retailer_search_url_uses_allowlisted_free_endpoint(self):
         urls = bcm.build_retailer_search_urls(
             self.part, ("shopping.yahoo.co.jp",), limit=1
@@ -212,7 +257,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
             urls[0]["url"].split("?")[0],
             "https://shopping.yahoo.co.jp/search",
         )
-        self.assertIn("VCG507012DFXPB1-O", urls[0]["url"])
+        self.assertIn("VCG507012DFSXPB1-O", urls[0]["url"])
 
     def test_component_direct_text_parser_accepts_sub_50000_part_price_near_identity(self):
         part = {
@@ -349,7 +394,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
         html = "<html><title>PNY GeForce RTX 5070 12GB OC SLIM</title></html>"
         raw = {
             "name": "PNY GeForce RTX 5070 12GB OC SLIM",
-            "page_text_excerpt": "VCG507012DFXPB1-O PNY GeForce RTX 5070 12GB OC SLIM",
+            "page_text_excerpt": "VCG507012DFSXPB1-O PNY GeForce RTX 5070 12GB OC SLIM",
             "price_jpy": 139900,
             "price_source_mode": "direct_structured",
             "stock_status": "in_stock",
@@ -412,7 +457,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
             "price_jpy": 139900,
             "price_source_mode": "direct_structured",
             "stock_status": "in_stock",
-            "identity_anchor": "VCG507012DFXPB1-O",
+            "identity_anchor": "VCG507012DFSXPB1-O",
             "identity_match": True,
             "source_role": "direct_retailer_listing_reference",
             "available_at": retrieved,

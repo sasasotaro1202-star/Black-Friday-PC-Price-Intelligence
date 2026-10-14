@@ -133,20 +133,20 @@
       "category": "gpu",
       "role": "primary_balanced",
       "name": "PNY GeForce RTX 5070 12GB OC SLIM",
-      "model_code": "VCG507012DFXPB1-O",
+      "model_code": "VCG507012DFSXPB1-O",
       "aliases": [
-        "PNY GeForce RTX 5070 12GB OC",
-        "VCG507012DFXPB1-O"
+        "PNY GeForce RTX 5070 12GB OC SLIM",
+        "VCG507012DFSXPB1-O"
       ],
       "identity_terms": [
-        "PNY GeForce RTX 5070 12GB OC",
-        "VCG507012DFXPB1-O",
-        "RTX 5070 12GB"
+        "VCG507012DFSXPB1-O",
+        "PNY GeForce RTX 5070 12GB OC SLIM",
+        "PNY GeForce RTX 5070 12GB OC"
       ],
       "monitor_url": "https://kakaku.com/item/K0001798041/",
       "purchase_url": "https://kakaku.com/item/K0001798041/",
       "track_price": true,
-      "target_price_jpy": 145000,
+      "target_price_jpy": 129800,
       "min_price_jpy": 100000,
       "max_price_jpy": 330000,
       "specs": {
@@ -157,9 +157,15 @@
         "card_length_mm": 290,
         "card_width_mm": 128,
         "card_thickness_mm": 40,
-        "connector": "12V-2x6"
+        "connector": "12V-2x6",
+        "card_thickness_slots": 2
       },
-      "notes": "ゲーム全体の本命。正確な型番・寸法・電源接続は注文前にメーカー資料で確認。"
+      "notes": "正確な型番VCG507012DFSXPB1-OをPNY公式仕様と照合済み。寸法290×128×40mm、250W、16ピン入力、推奨PSU650W。BF目標129,800円は値下げ希望額であり、予測・確定価格ではない。Joshinの正確な型番ページを直接再取得して価格・在庫を検証する。",
+      "spec_source_url": "https://www.pny.com/en-eu/geforce-rtx-5070-slim-models?sku=VCG507012DFSXPB1-O",
+      "spec_source_verified_at": "2026-10-14",
+      "direct_retailer_urls": [
+        "https://joshinweb.jp/kaden/73259/0751492812151.html"
+      ]
     },
     {
       "id": "gpu-rtx5060ti-16gb",
@@ -180,36 +186,38 @@
       "monitor_url": "https://kakaku.com/item/K0001696163/",
       "purchase_url": "https://kakaku.com/item/K0001696163/",
       "track_price": true,
-      "target_price_jpy": 120000,
+      "target_price_jpy": 109800,
       "min_price_jpy": 85000,
       "max_price_jpy": 260000,
       "specs": {
         "gpu": "GeForce RTX 5060 Ti",
         "vram_gb": 16,
         "board_power_w": 180,
-        "minimum_psu_w": 650,
-        "card_length_mm": null,
-        "card_width_mm": null,
-        "card_thickness_mm": null,
-        "connector": "model_specific"
+        "minimum_psu_w": 600,
+        "card_length_mm": 245,
+        "card_width_mm": 120,
+        "card_thickness_mm": 39.9,
+        "connector": "8-pin PCIe",
+        "card_thickness_slots": 2
       },
-      "notes": "ローカルAI用VRAMを重視する代替。正確なカード寸法・補助電源が未検証のため互換性はREVIEW。"
+      "notes": "国内正規代理店アスクの型番一致仕様で寸法245×120×39.9mm、8ピン補助電源、最大180W、推奨PSU600Wを確認。BF目標109,800円は希望額であり値下がり予測ではない。",
+      "spec_source_url": "https://www.ask-corp.jp/products/pny/graphicsboard/geforce-rtx-5060-ti/pny-geforce-rtx-5060-ti-16gb-overclocked-dual-fan.html",
+      "spec_source_verified_at": "2026-10-14"
     },
     {
       "id": "gpu-rtx5070ti-16gb",
       "category": "gpu",
       "role": "stretch_dark_horse",
       "name": "PNY GeForce RTX 5070 Ti 16GB ARGB",
-      "model_code": "VCG5070T16TFXPB1-O",
+      "model_code": "VCG5070T16TFXXPB1-O",
       "aliases": [
-        "PNY GeForce RTX 5070 Ti 16GB",
-        "RTX 5070 Ti 16GB",
-        "VCG5070T16TFXPB1-O"
+        "PNY GeForce RTX 5070 Ti 16GB ARGB Overclocked Triple Fan",
+        "VCG5070T16TFXXPB1-O"
       ],
       "identity_terms": [
-        "PNY GeForce RTX 5070 Ti 16GB",
-        "RTX 5070 Ti 16GB",
-        "VCG5070T16TFXPB1-O"
+        "VCG5070T16TFXXPB1-O",
+        "PNY GeForce RTX 5070 Ti 16GB ARGB",
+        "RTX 5070 Ti 16GB ARGB"
       ],
       "monitor_url": "https://kakaku.com/item/K0001696164/",
       "purchase_url": "https://kakaku.com/item/K0001696164/",
@@ -222,12 +230,18 @@
         "vram_gb": 16,
         "board_power_w": 300,
         "minimum_psu_w": 750,
-        "card_length_mm": null,
-        "card_width_mm": null,
-        "card_thickness_mm": null,
-        "connector": "12V-2x6"
+        "card_length_mm": 300,
+        "card_width_mm": 120,
+        "card_thickness_mm": 60,
+        "connector": "12V-2x6",
+        "card_thickness_slots": 2.98
       },
-      "notes": "大穴。目標価格は非常に厳しい値下げ目標。カード寸法・コネクタと総額の確認まで購入許可なし。"
+      "notes": "PNY公式のARGB Overclocked Triple Fan型番VCG5070T16TFXXPB1-Oに一致。公称約300×120×60mm、2.98スロット、300W、16ピン入力、推奨PSU750W。2026-10-14時点のドスパラ表示例は207,700円。154,000円は40万円枠に収めるための極端な予算上限目標で、値下がり予測ではない。直接販売ページの価格・在庫とケース内の厚さクリアランスを再確認する。",
+      "spec_source_url": "https://www.pny.com/geforce-rtx-5070-ti-models?sku=VCG5070T16TFXXPB1-O",
+      "spec_source_verified_at": "2026-10-14",
+      "direct_retailer_urls": [
+        "https://www.dospara.co.jp/SBR1892/IC634895.html"
+      ]
     },
     {
       "id": "motherboard-asrock-b850m-pro-rs-wifi",
@@ -342,9 +356,12 @@
         "form_factor": "ATX",
         "standard": "ATX 3.1",
         "efficiency": "Gold",
-        "connector_12v2x6": true
+        "connector_12v2x6": true,
+        "connector_pcie_8pin": true
       },
-      "notes": "ネイティブ12V-2x6ケーブルが付属する型番を確認。実際のリビジョン・付属品も再確認。"
+      "notes": "ネイティブ12V-2x6ケーブルが付属する型番を確認。実際のリビジョン・付属品も再確認。",
+      "spec_source_url": "https://www.corsair.com/jp/ja/p/psu/cp-9020296-jp/rme-series-rm850e-fully-modular-low-noise-atx-power-supply-jp-cp-9020296-jp",
+      "spec_source_verified_at": "2026-10-14"
     },
     {
       "id": "case-fractal-pop-air-tg",

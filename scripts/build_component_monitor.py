@@ -885,6 +885,83 @@ def search_comparison_snippet(part, domains):
     verified_offers = []
     direct_fetch_attempts = 0
 
+    # Some exact retailer detail URLs are curated from official seller/product
+    # pages when rotating search markup consistently hides the item link.
+    # They remain untrusted until this same verifier confirms identity, price,
+    # inventory state and point-in-time evidence.
+    for candidate_url in (part.get("direct_retailer_urls") or [])[:2]:
+        url = str(candidate_url or "").strip()
+        parsed = urlparse(url)
+        host = (parsed.hostname or "").lower()
+        fetch_before = direct_fetch_attempts
+        offers_before = len(verified_offers)
+        if not allowed_url(url, domains):
+            diagnostics.append({
+                "provider": "configured_direct_retailer",
+                "retailer_domain": host or None,
+                "url": url[:240] or None,
+                "status": "rejected",
+                "error": "configured_direct_url_host_not_allowlisted",
+                "result_count": 0,
+                "page_fetch_count": 0,
+                "allowed_reference_host_count": 0,
+                "identity_anchor_count": 0,
+                "in_range_price_count": 0,
+                "direct_retailer_fetch_attempt_count": 0,
+                "verified_retailer_listing_count": 0,
+                "source_role": "direct_retailer_listing_reference",
+            })
+            continue
+        if direct_fetch_attempts >= 4:
+            diagnostics.append({
+                "provider": "configured_direct_retailer",
+                "retailer_domain": host,
+                "url": url[:240],
+                "status": "skipped",
+                "error": "per_part_direct_fetch_budget_reached",
+                "result_count": 0,
+                "page_fetch_count": 0,
+                "allowed_reference_host_count": 1,
+                "identity_anchor_count": 0,
+                "in_range_price_count": 0,
+                "direct_retailer_fetch_attempt_count": 0,
+                "verified_retailer_listing_count": 0,
+                "source_role": "direct_retailer_listing_reference",
+            })
+            continue
+        direct_fetch_attempts += 1
+        offer = verify_retailer_listing(part, url, domains)
+        if offer and offer.get("url") not in {x.get("url") for x in verified_offers}:
+            verified_offers.append(offer)
+        diagnostics.append({
+            "provider": "configured_direct_retailer",
+            "retailer_domain": host,
+            "url": url[:240],
+            "status": "verified" if offer else "unverified",
+            "error": None if offer else "direct_page_failed_identity_price_stock_or_pit_validation",
+            "result_count": 1 if offer else 0,
+            "page_fetch_count": 1,
+            "allowed_reference_host_count": 1,
+            "identity_anchor_count": 1 if offer and offer.get("identity_match") else 0,
+            "in_range_price_count": 1 if offer else 0,
+            "direct_retailer_fetch_attempt_count": direct_fetch_attempts - fetch_before,
+            "verified_retailer_listing_count": len(verified_offers) - offers_before,
+            "stock_status": (offer or {}).get("stock_status") or "unknown",
+            "source_role": "direct_retailer_listing_reference",
+        })
+        if offer and offer.get("stock_status") == "in_stock":
+            verified_offers.sort(key=lambda item: (
+                0 if item.get("stock_status") == "in_stock" else 1,
+                item.get("price_jpy", 10**12),
+                0 if item.get("price_source_mode") == "direct_structured" else 1,
+                0 if item.get("identity_anchor") == str(part.get("model_code") or "") else 1,
+            ))
+            return {
+                "retailer_listing_offer": verified_offers[0],
+                "retailer_listing_offers": verified_offers,
+                "search_diagnostics": diagnostics,
+            }
+
     # Kakaku's product page often loads its price table client-side. Try its own
     # search-results page as a weaker display-only source before external search.
     # It does not count as direct retailer evidence and never authorizes buying.

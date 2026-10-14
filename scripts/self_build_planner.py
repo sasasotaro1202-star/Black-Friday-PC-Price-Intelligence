@@ -324,11 +324,24 @@ def compatibility_checks(parts, profile, gpu_id):
         "Board {} / case supports {}".format(board_form or "unknown", ", ".join(supported) or "unknown"))
 
     gpu_length, gpu_clearance = gpu.get("card_length_mm"), case.get("gpu_clearance_mm")
-    if not isinstance(gpu_length, int) or not isinstance(gpu_clearance, int):
+    if not isinstance(gpu_length, (int, float)) or not isinstance(gpu_clearance, (int, float)):
         add("gpu_case_clearance", "REVIEW", "Exact GPU retail-card length or case clearance must be verified before ordering")
     else:
         add("gpu_case_clearance", "PASS" if gpu_length <= gpu_clearance else "FAIL",
             "GPU {}mm / case limit {}mm".format(gpu_length, gpu_clearance))
+
+    # The case publishes maximum card length but not an explicit thickness-slot
+    # limit. Standard 2-slot cards can be planned against the normal expansion
+    # layout; near-3-slot cards need a manual adjacent-slot/header/cable clearance
+    # check rather than inheriting a PASS from length alone.
+    gpu_slots = gpu.get("card_thickness_slots")
+    if not isinstance(gpu_slots, (int, float)):
+        add("gpu_slot_thickness", "REVIEW", "Exact GPU slot thickness is not source-backed")
+    elif gpu_slots > 2.5:
+        add("gpu_slot_thickness", "REVIEW",
+            "GPU occupies {} slots; confirm case expansion-slot, motherboard-header and cable clearance".format(gpu_slots))
+    else:
+        add("gpu_slot_thickness", "PASS", "GPU occupies {} slots; no additional adjacent-card requirement is configured".format(gpu_slots))
 
     sockets = cooler.get("supported_sockets") or []
     cooler_height, case_height = cooler.get("cooler_height_mm"), case.get("cooler_clearance_mm")
@@ -346,11 +359,20 @@ def compatibility_checks(parts, profile, gpu_id):
     psu_w = psu.get("wattage_w")
     add("psu_wattage", "PASS" if isinstance(psu_w, int) and isinstance(gpu_psu, int) and psu_w >= gpu_psu else "FAIL",
         "PSU {}W / GPU recommendation {}W".format(psu_w or "unknown", gpu_psu or "unknown"))
-    if gpu.get("connector") == "model_specific":
+    connector = str(gpu.get("connector") or "model_specific")
+    if connector == "model_specific":
         add("gpu_power_connector", "REVIEW", "Confirm exact GPU auxiliary connector and included PSU cable against the exact model")
-    else:
-        add("gpu_power_connector", "PASS" if psu.get("connector_12v2x6") and gpu.get("connector") == "12V-2x6" else "FAIL",
+    elif connector == "12V-2x6":
+        connector_ok = psu.get("connector_12v2x6") is True
+        add("gpu_power_connector", "PASS" if connector_ok else "FAIL",
             "PSU ATX 3.1 native 12V-2x6 cable")
+    elif connector in ("8-pin PCIe", "PCIe 8-pin", "8-pin"):
+        connector_ok = psu.get("connector_pcie_8pin") is True
+        add("gpu_power_connector", "PASS" if connector_ok else "FAIL",
+            "PSU PCIe 8-pin (6+2) cable available")
+    else:
+        add("gpu_power_connector", "REVIEW",
+            "Unrecognized GPU connector type {}; verify exact cable and manufacturer requirement".format(connector))
     add("os_license", "PASS" if "os-windows11-home" in parts else "FAIL",
         "Windows 11 Home license budgeted unless an existing transferable license is confirmed")
 
