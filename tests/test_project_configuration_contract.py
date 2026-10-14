@@ -74,13 +74,13 @@ class ProjectConfigurationContractTests(unittest.TestCase):
             + int(self.profile["build_shipping_reserve_jpy"])
             + int(self.profile["small_parts_reserve_jpy"])
         )
-        self.assertEqual(components_subtotal, 291600)
-        self.assertEqual(pc_total, 300600)
+        self.assertEqual(components_subtotal, 311600)
+        self.assertEqual(pc_total, 320600)
         self.assertEqual(
             pc_total + int(self.profile["peripheral_budget_jpy"]),
-            370400,
+            390400,
         )
-        self.assertLessEqual(370400, int(self.profile["total_budget_jpy"]))
+        self.assertLessEqual(390400, int(self.profile["total_budget_jpy"]))
 
     def test_windows_retail_package_is_live_tracked_and_exact_model_identified(self):
         parts_by_id = {item["id"]: item for item in self.build["parts"]}
