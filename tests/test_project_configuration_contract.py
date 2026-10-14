@@ -99,8 +99,8 @@ class ProjectConfigurationContractTests(unittest.TestCase):
 
         for text in (readme, instructions, peripherals):
             with self.subTest(document="budget and speaker", text_length=len(text)):
-                self.assertRegex(text, r"(?:¥\\s?400,000|400,000円)")
-                self.assertRegex(text, r"(?:¥\\s?69,800|69,800円)")
+                self.assertRegex(text, r"(?:¥\s?400,000|400,000円)")
+                self.assertRegex(text, r"(?:¥\s?69,800|69,800円)")
                 self.assertIn("EDIFIER MR4 MKII", text)
 
         self.assertIn("AOC Q27G40E/11", instructions)
