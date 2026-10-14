@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T19:12:53+09:00",
+  "generated_at": "2026-10-14T19:35:09+09:00",
   "schema_version": 1,
   "source_role": "comparison_site_reference",
   "policy": "References may be direct comparison-site prices or directly fetched retailer product listings after identity and price checks; neither proves final checkout price or official BF actuals.",
@@ -28,7 +28,7 @@
       "price_source_mode": "search_snippet",
       "price_validation_status": "search_snippet_reference",
       "market_reference_price_jpy": null,
-      "search_snippet_reference_price_jpy": 51400,
+      "search_snippet_reference_price_jpy": 67890,
       "search_snippet_reference_url": "https://search.kakaku.com/AMD%20Ryzen%207%209700X%20BOX/",
       "search_snippet_reference_title": "100-100001404WOF",
       "search_snippet_identity_anchor": "100-100001404WOF",
@@ -39,13 +39,16 @@
           "query": "AMD Ryzen 7 9700X BOX",
           "status": "ok",
           "error": null,
-          "result_count": 1,
+          "result_count": 268,
+          "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
-          "identity_anchor_count": 1,
-          "in_range_price_count": 1,
+          "identity_anchor_count": 47,
+          "in_range_price_count": 22,
+          "ambiguous_price_card_count": 0,
+          "extraction_reason": "display_only_price_from_single_product_card",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "comparison_site_search_snippet_reference"
@@ -60,15 +63,15 @@
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.amd.com",
-            "finance.yahoo.com",
-            "shop-us-en.amd.com",
             "en.wikipedia.org",
-            "www.amdgaming.com"
+            "finance.yahoo.com",
+            "www.techspot.com",
+            "shop-us-en.amd.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en.html",
             "https://www.amd.com/en/support/download/drivers.html",
-            "https://finance.yahoo.com/quote/AMD/"
+            "https://en.wikipedia.org/wiki/AMD"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -79,7 +82,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:frontier-direct.jp \"Ryzen 7 9700X\" 価格",
+          "query": "site:yodobashi.com \"Ryzen 7 9700X\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -88,13 +91,13 @@
             "www.amd.com",
             "en.wikipedia.org",
             "www.ofzenandcomputing.com",
-            "shop-us-en.amd.com",
-            "www.amazon.com"
+            "www.amazon.com",
+            "shop-us-en.amd.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en/products/processors/desktops/ryzen.html",
-            "https://en.wikipedia.org/wiki/Ryzen",
-            "https://www.amd.com/en/products/software/ryzen-master.html"
+            "https://www.amd.com/en/products/software/ryzen-master.html",
+            "https://en.wikipedia.org/wiki/Ryzen"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -114,13 +117,13 @@
             "www.amd.com",
             "en.wikipedia.org",
             "www.ofzenandcomputing.com",
-            "shop-us-en.amd.com",
-            "www.amazon.com"
+            "www.amazon.com",
+            "shop-us-en.amd.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en/products/processors/desktops/ryzen.html",
-            "https://en.wikipedia.org/wiki/Ryzen",
-            "https://www.amd.com/en/products/software/ryzen-master.html"
+            "https://www.amd.com/en/products/software/ryzen-master.html",
+            "https://en.wikipedia.org/wiki/Ryzen"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -150,8 +153,8 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T19:12:48+09:00",
-      "available_at": "2026-10-14T19:12:48+09:00",
+      "retrieval_time": "2026-10-14T19:35:05+09:00",
+      "available_at": "2026-10-14T19:35:05+09:00",
       "pit_valid": true,
       "fetch_status": "ok",
       "last_fetch_error": "direct price unavailable; snippet reference is display-only and excluded from estimates",
@@ -161,7 +164,7 @@
       ],
       "final_url": "https://kakaku.com/item/K0001630332/",
       "search_provider": "kakaku_search_page",
-      "search_query": "100-100001404WOF",
+      "search_query": "AMD Ryzen 7 9700X BOX",
       "last_valid_market_reference_jpy": null
     },
     {
@@ -189,13 +192,16 @@
           "query": "PNY GeForce RTX 5070 12GB OC SLIM",
           "status": "ok",
           "error": null,
-          "result_count": 1,
+          "result_count": 116,
+          "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
-          "identity_anchor_count": 1,
-          "in_range_price_count": 1,
+          "identity_anchor_count": 17,
+          "in_range_price_count": 6,
+          "ambiguous_price_card_count": 2,
+          "extraction_reason": "display_only_price_from_single_product_card",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "comparison_site_search_snippet_reference"
@@ -229,7 +235,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:nojima.co.jp \"PNY GeForce RTX 5070 12GB OC\" 価格",
+          "query": "site:stormst.com \"PNY GeForce RTX 5070 12GB OC\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -300,8 +306,8 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T19:12:48+09:00",
-      "available_at": "2026-10-14T19:12:48+09:00",
+      "retrieval_time": "2026-10-14T19:35:05+09:00",
+      "available_at": "2026-10-14T19:35:05+09:00",
       "pit_valid": true,
       "fetch_status": "ok",
       "last_fetch_error": "direct price unavailable; snippet reference is display-only and excluded from estimates",
@@ -340,13 +346,16 @@
           "query": "PNY GeForce RTX 5060 Ti 16GB OC",
           "status": "ok",
           "error": null,
-          "result_count": 1,
+          "result_count": 136,
+          "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
-          "identity_anchor_count": 1,
-          "in_range_price_count": 1,
+          "identity_anchor_count": 22,
+          "in_range_price_count": 8,
+          "ambiguous_price_card_count": 2,
+          "extraction_reason": "display_only_price_from_single_product_card",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "comparison_site_search_snippet_reference"
@@ -380,7 +389,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:yodobashi.com \"PNY GeForce RTX 5060 Ti 16GB\" 価格",
+          "query": "site:sofmap.com \"PNY GeForce RTX 5060 Ti 16GB\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -451,8 +460,8 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T19:12:48+09:00",
-      "available_at": "2026-10-14T19:12:48+09:00",
+      "retrieval_time": "2026-10-14T19:35:05+09:00",
+      "available_at": "2026-10-14T19:35:05+09:00",
       "pit_valid": true,
       "fetch_status": "ok",
       "last_fetch_error": "direct price unavailable; snippet reference is display-only and excluded from estimates",
@@ -464,7 +473,7 @@
       ],
       "final_url": "https://kakaku.com/item/K0001696163/",
       "search_provider": "kakaku_search_page",
-      "search_query": "VCG5060T16DFXPB1-O",
+      "search_query": "PNY GeForce RTX 5060 Ti 16GB OC",
       "last_valid_market_reference_jpy": null
     },
     {
@@ -481,7 +490,7 @@
       "price_source_mode": "search_snippet",
       "price_validation_status": "search_snippet_reference",
       "market_reference_price_jpy": null,
-      "search_snippet_reference_price_jpy": 216800,
+      "search_snippet_reference_price_jpy": 428800,
       "search_snippet_reference_url": "https://search.kakaku.com/PNY%20GeForce%20RTX%205070%20Ti%2016GB%20ARGB/",
       "search_snippet_reference_title": "PNY GeForce RTX 5070 Ti 16GB ARGB",
       "search_snippet_identity_anchor": "PNY GeForce RTX 5070 Ti 16GB ARGB",
@@ -492,13 +501,16 @@
           "query": "PNY GeForce RTX 5070 Ti 16GB ARGB",
           "status": "ok",
           "error": null,
-          "result_count": 1,
+          "result_count": 108,
+          "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
-          "identity_anchor_count": 1,
-          "in_range_price_count": 1,
+          "identity_anchor_count": 13,
+          "in_range_price_count": 4,
+          "ambiguous_price_card_count": 2,
+          "extraction_reason": "display_only_price_from_single_product_card",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "comparison_site_search_snippet_reference"
@@ -532,7 +544,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:biccamera.com \"PNY GeForce RTX 5070 Ti 16GB\" 価格",
+          "query": "site:joshinweb.jp \"PNY GeForce RTX 5070 Ti 16GB\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -603,8 +615,8 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T19:12:48+09:00",
-      "available_at": "2026-10-14T19:12:48+09:00",
+      "retrieval_time": "2026-10-14T19:35:05+09:00",
+      "available_at": "2026-10-14T19:35:05+09:00",
       "pit_valid": true,
       "fetch_status": "ok",
       "last_fetch_error": "direct price unavailable; snippet reference is display-only and excluded from estimates",
@@ -643,13 +655,16 @@
           "query": "ASRock B850M Pro RS WiFi",
           "status": "ok",
           "error": null,
-          "result_count": 1,
+          "result_count": 306,
+          "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
-          "identity_anchor_count": 1,
-          "in_range_price_count": 1,
+          "identity_anchor_count": 66,
+          "in_range_price_count": 30,
+          "ambiguous_price_card_count": 0,
+          "extraction_reason": "display_only_price_from_single_product_card",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "comparison_site_search_snippet_reference"
@@ -660,18 +675,18 @@
           "query": "site:kakaku.com/item/K0001669878 \"ASRock B850M Pro RS WiFi\"",
           "status": "ok",
           "error": null,
-          "result_count": 7,
+          "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.asrock.com",
-            "www.amazon.com",
-            "www.newegg.com",
-            "www.techreviewer.com"
+            "oc.asrock.com",
+            "en.wikipedia.org",
+            "pg.asrock.com"
           ],
           "rejected_url_samples": [
-            "https://www.asrock.com/mb/AMD/B850M Pro RS WiFi/index.asp",
-            "https://www.asrock.com/mb/AMD/B850 Pro RS WiFi/index.asp",
-            "https://www.amazon.com/ASRock-B850M-Pro-WiFi-Motherboard/dp/B0DRTWM32Q"
+            "https://www.asrock.com/",
+            "https://www.asrock.com/support/index.asp",
+            "https://oc.asrock.com/support/index.us.asp?cat=BIOS"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -682,22 +697,21 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:sycom.co.jp \"ASRock B850M Pro RS WiFi\" 価格",
+          "query": "site:biccamera.com \"ASRock B850M Pro RS WiFi\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.asrock.com",
+            "oc.asrock.com",
             "en.wikipedia.org",
-            "asrock.com",
-            "pg.asrock.com",
-            "www.asrockrack.com"
+            "pg.asrock.com"
           ],
           "rejected_url_samples": [
             "https://www.asrock.com/",
             "https://www.asrock.com/support/index.asp",
-            "https://en.wikipedia.org/wiki/ASRock"
+            "https://oc.asrock.com/support/index.us.asp?cat=BIOS"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -715,15 +729,14 @@
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.asrock.com",
+            "oc.asrock.com",
             "en.wikipedia.org",
-            "asrock.com",
-            "pg.asrock.com",
-            "www.asrockrack.com"
+            "pg.asrock.com"
           ],
           "rejected_url_samples": [
             "https://www.asrock.com/",
             "https://www.asrock.com/support/index.asp",
-            "https://en.wikipedia.org/wiki/ASRock"
+            "https://oc.asrock.com/support/index.us.asp?cat=BIOS"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -753,8 +766,8 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T19:12:50+09:00",
-      "available_at": "2026-10-14T19:12:50+09:00",
+      "retrieval_time": "2026-10-14T19:35:06+09:00",
+      "available_at": "2026-10-14T19:35:06+09:00",
       "pit_valid": true,
       "fetch_status": "ok",
       "last_fetch_error": "direct price unavailable; snippet reference is display-only and excluded from estimates",
@@ -765,7 +778,7 @@
       ],
       "final_url": "https://kakaku.com/item/K0001669878/",
       "search_provider": "kakaku_search_page",
-      "search_query": "B850M Pro RS WiFi",
+      "search_query": "ASRock B850M Pro RS WiFi",
       "last_valid_market_reference_jpy": null
     },
     {
@@ -823,22 +836,22 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:pc-koubou.jp \"T-CREATE EXPERT White 32GB\" 価格",
+          "query": "site:ksdenki.com \"T-CREATE EXPERT White 32GB\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.tiktok.com",
-            "finance.yahoo.com",
             "en.wikipedia.org",
-            "www.att.com",
-            "stockanalysis.com"
+            "www.t-mobile.com",
+            "finance.yahoo.com",
+            "account.t-mobile.com"
           ],
           "rejected_url_samples": [
             "https://www.tiktok.com/",
-            "https://finance.yahoo.com/quote/T/",
-            "https://en.wikipedia.org/wiki/T"
+            "https://en.wikipedia.org/wiki/T",
+            "https://www.t-mobile.com/?msockid=3d7069389e1360a01d9e7eca9f5c61c7"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -856,15 +869,15 @@
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.tiktok.com",
-            "finance.yahoo.com",
             "en.wikipedia.org",
-            "www.att.com",
-            "stockanalysis.com"
+            "www.t-mobile.com",
+            "finance.yahoo.com",
+            "account.t-mobile.com"
           ],
           "rejected_url_samples": [
             "https://www.tiktok.com/",
-            "https://finance.yahoo.com/quote/T/",
-            "https://en.wikipedia.org/wiki/T"
+            "https://en.wikipedia.org/wiki/T",
+            "https://www.t-mobile.com/?msockid=0725e663768367a6134cf19177c866e8"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -894,7 +907,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T19:12:50+09:00",
+      "retrieval_time": "2026-10-14T19:35:06+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -931,13 +944,16 @@
           "query": "Crucial P3 Plus CT1000P3PSSD8JP 1TB",
           "status": "ok",
           "error": null,
-          "result_count": 1,
+          "result_count": 111,
+          "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
-          "identity_anchor_count": 1,
-          "in_range_price_count": 1,
+          "identity_anchor_count": 30,
+          "in_range_price_count": 10,
+          "ambiguous_price_card_count": 0,
+          "extraction_reason": "display_only_price_from_single_product_card",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "comparison_site_search_snippet_reference"
@@ -952,14 +968,14 @@
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.crucial.com",
-            "eu.crucial.com",
             "www.merriam-webster.com",
-            "www.amazon.com"
+            "eu.crucial.com",
+            "en.wikipedia.org"
           ],
           "rejected_url_samples": [
             "https://www.crucial.com/",
             "https://www.crucial.com/store/systemscanner",
-            "https://eu.crucial.com/products/gaming-products"
+            "https://www.merriam-webster.com/dictionary/crucial"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -970,21 +986,21 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:stormst.com \"Crucial P3 Plus 1TB\" 価格",
+          "query": "site:dospara.co.jp \"Crucial P3 Plus 1TB\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.crucial.com",
-            "eu.crucial.com",
             "www.merriam-webster.com",
-            "www.amazon.com"
+            "eu.crucial.com",
+            "en.wikipedia.org"
           ],
           "rejected_url_samples": [
             "https://www.crucial.com/",
             "https://www.crucial.com/store/systemscanner",
-            "https://eu.crucial.com/products/gaming-products"
+            "https://www.merriam-webster.com/dictionary/crucial"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -1002,14 +1018,14 @@
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.crucial.com",
-            "eu.crucial.com",
             "www.merriam-webster.com",
-            "www.amazon.com"
+            "eu.crucial.com",
+            "en.wikipedia.org"
           ],
           "rejected_url_samples": [
             "https://www.crucial.com/",
             "https://www.crucial.com/store/systemscanner",
-            "https://eu.crucial.com/products/gaming-products"
+            "https://www.merriam-webster.com/dictionary/crucial"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -1039,8 +1055,8 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T19:12:50+09:00",
-      "available_at": "2026-10-14T19:12:50+09:00",
+      "retrieval_time": "2026-10-14T19:35:06+09:00",
+      "available_at": "2026-10-14T19:35:06+09:00",
       "pit_valid": true,
       "fetch_status": "ok",
       "last_fetch_error": "direct price unavailable; snippet reference is display-only and excluded from estimates",
@@ -1050,7 +1066,7 @@
       ],
       "final_url": "https://kakaku.com/item/K0001466997/",
       "search_provider": "kakaku_search_page",
-      "search_query": "CT1000P3PSSD8JP",
+      "search_query": "Crucial P3 Plus CT1000P3PSSD8JP 1TB",
       "last_valid_market_reference_jpy": null
     },
     {
@@ -1078,13 +1094,16 @@
           "query": "Corsair RM850e 2025 850W ATX 3.1 Gold",
           "status": "ok",
           "error": null,
-          "result_count": 1,
+          "result_count": 255,
+          "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
-          "identity_anchor_count": 1,
-          "in_range_price_count": 1,
+          "identity_anchor_count": 38,
+          "in_range_price_count": 16,
+          "ambiguous_price_card_count": 0,
+          "extraction_reason": "display_only_price_from_single_product_card",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "comparison_site_search_snippet_reference"
@@ -1100,13 +1119,13 @@
           "rejected_host_samples": [
             "www.corsair.com",
             "help.corsair.com",
+            "www.flycorsair.com",
             "en.wikipedia.org",
-            "www.amazon.com",
-            "www.newegg.com"
+            "zh.wikipedia.org"
           ],
           "rejected_url_samples": [
             "https://www.corsair.com/us/en",
-            "https://www.corsair.com/us/en/s/icue",
+            "https://www.corsair.com/us/en/s/downloads",
             "https://help.corsair.com/hc/en-us"
           ],
           "same_comparison_item_path_count": 0,
@@ -1118,7 +1137,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:dospara.co.jp \"Corsair RM850e 2025\" 価格",
+          "query": "site:ark-pc.co.jp \"Corsair RM850e 2025\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -1126,13 +1145,13 @@
           "rejected_host_samples": [
             "www.corsair.com",
             "help.corsair.com",
+            "www.flycorsair.com",
             "en.wikipedia.org",
-            "www.amazon.com",
-            "www.newegg.com"
+            "zh.wikipedia.org"
           ],
           "rejected_url_samples": [
             "https://www.corsair.com/us/en",
-            "https://www.corsair.com/us/en/s/icue",
+            "https://www.corsair.com/us/en/s/downloads",
             "https://help.corsair.com/hc/en-us"
           ],
           "same_comparison_item_path_count": 0,
@@ -1152,13 +1171,13 @@
           "rejected_host_samples": [
             "www.corsair.com",
             "help.corsair.com",
+            "www.flycorsair.com",
             "en.wikipedia.org",
-            "www.amazon.com",
-            "www.newegg.com"
+            "zh.wikipedia.org"
           ],
           "rejected_url_samples": [
             "https://www.corsair.com/us/en",
-            "https://www.corsair.com/us/en/s/icue",
+            "https://www.corsair.com/us/en/s/downloads",
             "https://help.corsair.com/hc/en-us"
           ],
           "same_comparison_item_path_count": 0,
@@ -1189,8 +1208,8 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T19:12:50+09:00",
-      "available_at": "2026-10-14T19:12:50+09:00",
+      "retrieval_time": "2026-10-14T19:35:07+09:00",
+      "available_at": "2026-10-14T19:35:07+09:00",
       "pit_valid": true,
       "fetch_status": "ok",
       "last_fetch_error": "direct price unavailable; snippet reference is display-only and excluded from estimates",
@@ -1201,7 +1220,7 @@
       ],
       "final_url": "https://kakaku.com/item/K0001671441/",
       "search_provider": "kakaku_search_page",
-      "search_query": "CP-9020296-JP",
+      "search_query": "Corsair RM850e 2025 850W ATX 3.1 Gold",
       "last_valid_market_reference_jpy": null
     },
     {
@@ -1229,13 +1248,16 @@
           "query": "Fractal Design Pop Air TG",
           "status": "ok",
           "error": null,
-          "result_count": 1,
+          "result_count": 689,
+          "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
-          "identity_anchor_count": 1,
-          "in_range_price_count": 1,
+          "identity_anchor_count": 15,
+          "in_range_price_count": 6,
+          "ambiguous_price_card_count": 0,
+          "extraction_reason": "display_only_price_from_single_product_card",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "comparison_site_search_snippet_reference"
@@ -1249,16 +1271,16 @@
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
-            "en.m.wikipedia.org",
-            "fractal.garden",
+            "en.wikipedia.org",
             "www.fractal-design.com",
-            "fractal.us",
+            "fractal.garden",
+            "www.fractalaudio.com",
             "fractalfoundation.org"
           ],
           "rejected_url_samples": [
-            "https://en.m.wikipedia.org/wiki/Fractal",
-            "https://fractal.garden/",
-            "https://www.fractal-design.com/"
+            "https://en.wikipedia.org/wiki/Fractal",
+            "https://www.fractal-design.com/",
+            "https://fractal.garden/"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -1269,22 +1291,22 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:yamada-denkiweb.com \"Fractal Design Pop Air TG\" 価格",
+          "query": "site:amazon.co.jp \"Fractal Design Pop Air TG\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
-            "en.m.wikipedia.org",
-            "fractal.garden",
+            "en.wikipedia.org",
             "www.fractal-design.com",
-            "fractal.us",
+            "fractal.garden",
+            "www.fractalaudio.com",
             "fractalfoundation.org"
           ],
           "rejected_url_samples": [
-            "https://en.m.wikipedia.org/wiki/Fractal",
-            "https://fractal.garden/",
-            "https://www.fractal-design.com/"
+            "https://en.wikipedia.org/wiki/Fractal",
+            "https://www.fractal-design.com/",
+            "https://fractal.garden/"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -1301,16 +1323,16 @@
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
-            "en.m.wikipedia.org",
-            "fractal.garden",
+            "en.wikipedia.org",
             "www.fractal-design.com",
-            "fractal.us",
+            "fractal.garden",
+            "www.fractalaudio.com",
             "fractalfoundation.org"
           ],
           "rejected_url_samples": [
-            "https://en.m.wikipedia.org/wiki/Fractal",
-            "https://fractal.garden/",
-            "https://www.fractal-design.com/"
+            "https://en.wikipedia.org/wiki/Fractal",
+            "https://www.fractal-design.com/",
+            "https://fractal.garden/"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -1340,8 +1362,8 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T19:12:51+09:00",
-      "available_at": "2026-10-14T19:12:51+09:00",
+      "retrieval_time": "2026-10-14T19:35:07+09:00",
+      "available_at": "2026-10-14T19:35:07+09:00",
       "pit_valid": true,
       "fetch_status": "ok",
       "last_fetch_error": "direct price unavailable; snippet reference is display-only and excluded from estimates",
@@ -1352,7 +1374,7 @@
       ],
       "final_url": "https://kakaku.com/item/J0000039064/",
       "search_provider": "kakaku_search_page",
-      "search_query": "FD-C-POA1A-02",
+      "search_query": "Fractal Design Pop Air TG",
       "last_valid_market_reference_jpy": null
     },
     {
@@ -1380,13 +1402,16 @@
           "query": "Thermalright Peerless Assassin 120 SE V3",
           "status": "ok",
           "error": null,
-          "result_count": 1,
+          "result_count": 156,
+          "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
-          "identity_anchor_count": 1,
-          "in_range_price_count": 1,
+          "identity_anchor_count": 32,
+          "in_range_price_count": 12,
+          "ambiguous_price_card_count": 2,
+          "extraction_reason": "display_only_price_from_single_product_card",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "comparison_site_search_snippet_reference"
@@ -1419,7 +1444,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:joshinweb.jp \"Thermalright Peerless Assassin 120 SE V3\" 価格",
+          "query": "site:yamada-denkiweb.com \"Thermalright Peerless Assassin 120 SE V3\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -1488,8 +1513,8 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T19:12:51+09:00",
-      "available_at": "2026-10-14T19:12:51+09:00",
+      "retrieval_time": "2026-10-14T19:35:08+09:00",
+      "available_at": "2026-10-14T19:35:08+09:00",
       "pit_valid": true,
       "fetch_status": "ok",
       "last_fetch_error": "direct price unavailable; snippet reference is display-only and excluded from estimates",
@@ -1500,7 +1525,7 @@
       ],
       "final_url": "https://kakaku.com/item/K0001789043/",
       "search_provider": "kakaku_search_page",
-      "search_query": "Peerless Assassin 120 SE V3",
+      "search_query": "Thermalright Peerless Assassin 120 SE V3",
       "last_valid_market_reference_jpy": null
     }
   ]

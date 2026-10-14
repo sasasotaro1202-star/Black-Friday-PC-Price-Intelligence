@@ -1,6 +1,6 @@
 # 自作PCパーツ構成・価格監視
 
-更新: 2026-10-14T19:12:54+09:00
+更新: 2026-10-14T19:35:10+09:00
 予算: PC本体 ¥330,200 / 周辺機器 ¥69,800 / 総額 ¥400,000
 
 **購入方式:** 自作PCを正式な本命として最適化します。組み立て時間・作業時間は減点しません。BTOは同等仕様での総額・部品品質・保証のベンチマークとして比較し、便利さだけを理由に自作から切り替えません。
@@ -22,7 +22,7 @@
 
 |部品|型番|BF目標|比較サイト参考価格|確認状態|リンク|
 |---|---|---:|---:|---|---|
-|AMD Ryzen 7 9700X BOX|100-100001404WOF|¥38,000|¥51,400（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001630332/) / [検索スニペット参考元](https://search.kakaku.com/AMD%20Ryzen%207%209700X%20BOX/)|
+|AMD Ryzen 7 9700X BOX|100-100001404WOF|¥38,000|¥67,890（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001630332/) / [検索スニペット参考元](https://search.kakaku.com/AMD%20Ryzen%207%209700X%20BOX/)|
 |ASRock B850M Pro RS WiFi|B850M Pro RS WiFi|¥20,000|¥23,780（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001669878/) / [検索スニペット参考元](https://search.kakaku.com/ASRock%20B850M%20Pro%20RS%20WiFi/)|
 |TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)|CTCWD532G6000HC38ADC01|¥40,000|未取得|missing|[価格比較ページ](https://kakaku.com/item/K0001610896/)|
 |Crucial P3 Plus CT1000P3PSSD8JP 1TB|CT1000P3PSSD8JP|¥18,000|¥33,600（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001466997/) / [検索スニペット参考元](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/)|
@@ -54,7 +54,7 @@
 
 |部品|型番|BF目標|比較サイト参考価格|確認状態|リンク|
 |---|---|---:|---:|---|---|
-|AMD Ryzen 7 9700X BOX|100-100001404WOF|¥38,000|¥51,400（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001630332/) / [検索スニペット参考元](https://search.kakaku.com/AMD%20Ryzen%207%209700X%20BOX/)|
+|AMD Ryzen 7 9700X BOX|100-100001404WOF|¥38,000|¥67,890（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001630332/) / [検索スニペット参考元](https://search.kakaku.com/AMD%20Ryzen%207%209700X%20BOX/)|
 |ASRock B850M Pro RS WiFi|B850M Pro RS WiFi|¥20,000|¥23,780（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001669878/) / [検索スニペット参考元](https://search.kakaku.com/ASRock%20B850M%20Pro%20RS%20WiFi/)|
 |TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)|CTCWD532G6000HC38ADC01|¥40,000|未取得|missing|[価格比較ページ](https://kakaku.com/item/K0001610896/)|
 |Crucial P3 Plus CT1000P3PSSD8JP 1TB|CT1000P3PSSD8JP|¥18,000|¥33,600（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001466997/) / [検索スニペット参考元](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/)|
@@ -86,7 +86,7 @@
 
 |部品|型番|BF目標|比較サイト参考価格|確認状態|リンク|
 |---|---|---:|---:|---|---|
-|AMD Ryzen 7 9700X BOX|100-100001404WOF|¥38,000|¥51,400（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001630332/) / [検索スニペット参考元](https://search.kakaku.com/AMD%20Ryzen%207%209700X%20BOX/)|
+|AMD Ryzen 7 9700X BOX|100-100001404WOF|¥38,000|¥67,890（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001630332/) / [検索スニペット参考元](https://search.kakaku.com/AMD%20Ryzen%207%209700X%20BOX/)|
 |ASRock B850M Pro RS WiFi|B850M Pro RS WiFi|¥20,000|¥23,780（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001669878/) / [検索スニペット参考元](https://search.kakaku.com/ASRock%20B850M%20Pro%20RS%20WiFi/)|
 |TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)|CTCWD532G6000HC38ADC01|¥40,000|未取得|missing|[価格比較ページ](https://kakaku.com/item/K0001610896/)|
 |Crucial P3 Plus CT1000P3PSSD8JP 1TB|CT1000P3PSSD8JP|¥18,000|¥33,600（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001466997/) / [検索スニペット参考元](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/)|
@@ -94,7 +94,7 @@
 |Fractal Design Pop Air TG|FD-C-POA1A-02|¥12,000|¥13,311（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/J0000039064/) / [検索スニペット参考元](https://search.kakaku.com/Fractal%20Design%20Pop%20Air%20TG/)|
 |Thermalright Peerless Assassin 120 SE V3|Peerless Assassin 120 SE V3|¥5,000|¥4,980（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001789043/) / [検索スニペット参考元](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/)|
 |Windows 11 Home official retail license reference|Windows 11 Home|¥19,360|¥19,360|manual_official_store_reference|[価格比較ページ](https://www.microsoft.com/ja-jp/d/windows-11-home/dg7gmgf0krt0)|
-|PNY GeForce RTX 5070 Ti 16GB ARGB|VCG5070T16TFXPB1-O|¥154,000|¥216,800（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001696164/) / [検索スニペット参考元](https://search.kakaku.com/PNY%20GeForce%20RTX%205070%20Ti%2016GB%20ARGB/)|
+|PNY GeForce RTX 5070 Ti 16GB ARGB|VCG5070T16TFXPB1-O|¥154,000|¥428,800（検索スニペット参考のみ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001696164/) / [検索スニペット参考元](https://search.kakaku.com/PNY%20GeForce%20RTX%205070%20Ti%2016GB%20ARGB/)|
 
 互換性チェック:
 
