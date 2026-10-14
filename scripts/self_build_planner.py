@@ -466,6 +466,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
                 "direct_listing_display_observed_at": price.get("direct_listing_display_observed_at"),
                 "direct_listing_display_age_minutes": price.get("direct_listing_display_age_minutes"),
                 "direct_listing_display_price_context": price.get("direct_listing_display_price_context"),
+                "direct_listing_validation_diagnostics": price.get("direct_listing_validation_diagnostics") or [],
                 "direct_listing_display_is_estimate_eligible": False,
                 "direct_listing_display_purchase_allowed": False,
                 "track_price": bool(part.get("track_price")), "specs": part.get("specs") or {},
