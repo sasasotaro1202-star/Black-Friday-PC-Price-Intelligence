@@ -27,17 +27,33 @@ class BuildComponentMonitorTests(unittest.TestCase):
             "max_price_jpy": 330000,
         }
 
-    def test_search_queries_scope_two_variants_to_allowlisted_sites(self):
+    def test_search_queries_scope_each_search_to_one_allowlisted_host(self):
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
         domains = ("kakaku.com", "amazon.co.jp", "dospara.co.jp")
-        queries = bcm.build_component_search_queries(self.part, domains)
+        fixed_now = datetime(2026, 10, 14, 12, 0, tzinfo=ZoneInfo("Asia/Tokyo"))
+        queries = bcm.build_component_search_queries(self.part, domains, now=fixed_now)
         self.assertEqual(len(queries), 2)
-        self.assertTrue(any("VCG507012DFXPB1-O" in q for q in queries))
-        self.assertTrue(any("PNY GeForce RTX 5070 12GB OC SLIM" in q for q in queries))
-        self.assertTrue(all("site:kakaku.com" in q for q in queries))
-        self.assertTrue(all("site:amazon.co.jp" in q for q in queries))
-        self.assertTrue(all("site:dospara.co.jp" in q for q in queries))
-        self.assertFalse(any("/item/K0001798041" in q for q in queries))
+        self.assertIn('"VCG507012DFXPB1-O" site:kakaku.com/item/K0001798041', queries[0])
+        self.assertIn('"PNY GeForce RTX 5070 12GB OC SLIM" 価格 site:', queries[1])
+        self.assertFalse(any(" OR site:" in q for q in queries))
+        seller_host = queries[1].rsplit("site:", 1)[1]
+        self.assertIn(seller_host, domains)
+        self.assertNotEqual(seller_host, "kakaku.com")
         self.assertFalse(any("site:untrusted.example" in q for q in queries))
+
+    def test_rotating_retailer_domain_is_deterministic_for_a_five_minute_slot(self):
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        domains = ("kakaku.com", "amazon.co.jp", "rakuten.co.jp", "dospara.co.jp")
+        first = datetime(2026, 10, 14, 12, 0, tzinfo=ZoneInfo("Asia/Tokyo"))
+        same_slot = datetime(2026, 10, 14, 12, 4, tzinfo=ZoneInfo("Asia/Tokyo"))
+        next_slot = datetime(2026, 10, 14, 12, 5, tzinfo=ZoneInfo("Asia/Tokyo"))
+        a = bcm.build_component_search_queries(self.part, domains, now=first)
+        b = bcm.build_component_search_queries(self.part, domains, now=same_slot)
+        c = bcm.build_component_search_queries(self.part, domains, now=next_slot)
+        self.assertEqual(a, b)
+        self.assertNotEqual(a[1], c[1])
 
     def test_direct_retailer_listing_requires_allowlisted_https_host(self):
         with patch.object(bcm, "fetch") as mocked:

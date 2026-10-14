@@ -178,8 +178,14 @@ def component_search_identity_anchor(result, part):
     return matches[0][1]
 
 
-def build_component_search_queries(part, domains=DEFAULT_DOMAINS):
-    """Build two bounded, allowlist-scoped searches so broad Bing results aren't wasted."""
+def build_component_search_queries(part, domains=DEFAULT_DOMAINS, now=None):
+    """Use one exact comparison-item search plus one rotating single-retailer search.
+
+    Bing can ignore a long OR-list of site: operators. Each query therefore
+    scopes to exactly one allowlisted host. The seller rotates every five-minute
+    slot so repeated runs eventually cover the configured component retailers
+    without multiplying the number of requests per scheduled run.
+    """
     model_code = str(part.get("model_code") or "").strip()
     name = str(part.get("name") or "").strip()
     safe_domains = []
@@ -189,14 +195,47 @@ def build_component_search_queries(part, domains=DEFAULT_DOMAINS):
             safe_domains.append(domain)
     if not safe_domains:
         safe_domains = list(DEFAULT_DOMAINS)
-    # Explicit site operators increase recall within the configured Japanese
-    # retailers and comparison sites instead of returning broad, unrelated pages.
-    site_scope = "(" + " OR ".join("site:" + domain for domain in safe_domains) + ")"
+
+    retailer_priority = (
+        "amazon.co.jp", "rakuten.co.jp", "yodobashi.com", "biccamera.com",
+        "dospara.co.jp", "tsukumo.co.jp", "pc-koubou.jp", "sofmap.com",
+        "joshinweb.jp", "ark-pc.co.jp", "edion.com", "ksdenki.com",
+        "nojima.co.jp", "yamada-denkiweb.com",
+    )
+    seller_domains = [d for d in retailer_priority if d in safe_domains]
+    seller_domains.extend(
+        d for d in safe_domains
+        if d != "kakaku.com" and d not in seller_domains
+    )
+    now = now or now_jst()
     queries = []
-    if model_code:
-        queries.append('"{}" 価格 {}'.format(model_code, site_scope))
-    if name:
-        queries.append('"{}" 価格 最安値 {}'.format(name, site_scope))
+
+    # Query the exact configured comparison item; don't accept its search
+    # snippet as a verified live price, but retain it as an explicitly weaker
+    # display-only fallback if no direct seller page can be verified.
+    monitor_url = str(part.get("monitor_url") or "")
+    monitor = urlparse(monitor_url)
+    if (monitor.hostname or "").lower().removeprefix("www.") == "kakaku.com":
+        path_match = re.match(r"^/item/K[0-9]+", monitor.path, re.I)
+        item_scope = path_match.group(0) if path_match else ""
+        term = model_code or name
+        if term:
+            queries.append('"{}" site:kakaku.com{}'.format(term, item_scope))
+    elif model_code:
+        queries.append('"{}" 価格 site:kakaku.com'.format(model_code))
+
+    if seller_domains:
+        # Stable part-specific offset + current 5-minute slot; time stays in
+        # JST, while the chosen site itself is always allowlisted.
+        part_offset = sum(ord(ch) for ch in str(part.get("id") or name))
+        slot = now.hour * 12 + (now.minute // 5) + part_offset
+        seller_domain = seller_domains[slot % len(seller_domains)]
+        term = name or model_code
+        if term:
+            queries.append('"{}" 価格 site:{}'.format(term, seller_domain))
+    elif model_code:
+        queries.append('"{}" 価格'.format(model_code))
+
     unique = []
     for query in queries:
         query = re.sub(r"\s+", " ", query).strip()
