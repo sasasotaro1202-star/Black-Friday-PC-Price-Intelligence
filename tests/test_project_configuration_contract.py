@@ -203,13 +203,13 @@ class ProjectConfigurationContractTests(unittest.TestCase):
 
         # Explicit alternative-build totals and compatibility descriptions must
         # stay aligned with the authoritative component target configuration.
-        self.assertIn("PC本体280,600円、周辺機器込み350,400円", readme)
-        self.assertIn("PC本体324,800円、周辺機器込み394,600円", readme)
+        self.assertIn("PC本体300,600円、周辺機器込み370,400円", readme)
+        self.assertIn("PC本体344,800円、周辺機器込み414,600円", readme)
         self.assertNotIn("PC本体295,360円", readme)
         self.assertNotIn("PC本体329,360円", readme)
         guide = read_text("docs/self-build-assembly-guide.md")
-        self.assertIn("| VRAM重視 | RTX 5060 Ti 16GB | ¥280,600 | ¥350,400 |", guide)
-        self.assertIn("| 大穴 | RTX 5070 Ti 16GB | ¥324,800 | ¥394,600 |", guide)
+        self.assertIn("| VRAM重視 | RTX 5060 Ti 16GB | ¥300,600 | ¥370,400 |", guide)
+        self.assertIn("| 大穴 | RTX 5070 Ti 16GB | ¥344,800 | ¥414,600 |", guide)
         self.assertNotIn("正確なカード寸法・補助電源の確認が未完了", guide)
         self.assertNotIn("¥295,360", guide)
         self.assertNotIn("¥365,160", guide)
