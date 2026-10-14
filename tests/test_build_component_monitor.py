@@ -27,20 +27,29 @@ class BuildComponentMonitorTests(unittest.TestCase):
             "max_price_jpy": 330000,
         }
 
-    def test_search_queries_scope_each_search_to_one_allowlisted_host(self):
+    def test_search_queries_include_allowlisted_scoped_and_broad_fallbacks(self):
         from datetime import datetime
         from zoneinfo import ZoneInfo
         domains = ("kakaku.com", "amazon.co.jp", "dospara.co.jp")
         fixed_now = datetime(2026, 10, 14, 12, 0, tzinfo=ZoneInfo("Asia/Tokyo"))
         queries = bcm.build_component_search_queries(self.part, domains, now=fixed_now)
-        self.assertEqual(len(queries), 2)
-        self.assertIn('"VCG507012DFXPB1-O" site:kakaku.com/item/K0001798041', queries[0])
-        self.assertIn('"PNY GeForce RTX 5070 12GB OC SLIM" 価格 site:', queries[1])
-        self.assertFalse(any(" OR site:" in q for q in queries))
+        self.assertEqual(len(queries), 3)
+        self.assertIn('site:kakaku.com/item/K0001798041', queries[0])
+        self.assertIn('"PNY GeForce RTX 5070 12GB OC SLIM"', queries[0])
+        self.assertIn('"PNY GeForce RTX 5070 12GB OC"', queries[1])
+        self.assertIn('site:', queries[1])
         seller_host = queries[1].rsplit("site:", 1)[1]
         self.assertIn(seller_host, domains)
         self.assertNotEqual(seller_host, "kakaku.com")
+        self.assertNotIn("site:", queries[2])
+        self.assertIn("価格 最安値", queries[2])
+        self.assertFalse(any(" OR site:" in q for q in queries))
         self.assertFalse(any("site:untrusted.example" in q for q in queries))
+
+    def test_broad_discovery_results_still_require_allowlisted_hosts(self):
+        self.assertFalse(bcm.allowed_url("https://www.pny.com/", ("amazon.co.jp", "dospara.co.jp")))
+        self.assertTrue(bcm.allowed_url("https://www.dospara.co.jp/item/123", ("dospara.co.jp",)))
+        self.assertFalse(bcm.allowed_url("http://www.dospara.co.jp/item/123", ("dospara.co.jp",)))
 
     def test_rotating_retailer_domain_is_deterministic_for_a_five_minute_slot(self):
         from datetime import datetime
