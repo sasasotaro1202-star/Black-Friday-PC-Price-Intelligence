@@ -10,6 +10,20 @@ spec.loader.exec_module(report)
 
 
 class ReportLinkTests(unittest.TestCase):
+    def test_self_build_policy_ignores_assembly_time_and_keeps_bto_reference_only(self):
+        policy = report.build_purchase_method_policy({
+            "pc_build_method_preference": "SELF_BUILD_REQUIRED_FOR_PRIMARY_RECOMMENDATION",
+            "assembly_time_is_constraint": False,
+            "assembly_time_penalty_points": 30,
+            "bto_role": "REFERENCE_BENCHMARK_ONLY",
+            "selection_policy": "self-build first",
+        })
+        self.assertEqual(policy["primary_method"], "SELF_BUILD")
+        self.assertFalse(policy["assembly_time_is_constraint"])
+        self.assertEqual(policy["assembly_time_penalty_points"], 0)
+        self.assertEqual(policy["bto_role"], "REFERENCE_BENCHMARK_ONLY")
+        self.assertFalse(policy["completed_pc_purchase_actionable"])
+
     def test_sales_url_accepts_http_url(self):
         self.assertEqual(
             report.sales_url({"url": "https://example.com/product"}),
