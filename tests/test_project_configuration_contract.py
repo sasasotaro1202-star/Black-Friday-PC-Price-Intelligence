@@ -39,9 +39,9 @@ class ProjectConfigurationContractTests(unittest.TestCase):
             if item.get("mandatory", True)
         )
         self.assertEqual(mandatory_peripheral_target, targets["peripheral_budget_jpy"])
-        self.assertEqual(targets["total_budget_jpy"], 400000)
+        self.assertEqual(targets["total_budget_jpy"], 380000)
         self.assertEqual(targets["peripheral_budget_jpy"], 69800)
-        self.assertEqual(targets["pc_target_jpy"], 330200)
+        self.assertEqual(targets["pc_target_jpy"], 310200)
 
     def test_diy_profile_matches_budget_and_never_penalizes_assembly_time(self):
         profile = self.profile
@@ -62,7 +62,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
     def test_primary_build_subtotal_counts_one_gpu_only(self):
         parts_by_id = {item["id"]: item for item in self.build["parts"]}
         selected_ids = list(self.profile["fixed_part_ids"]) + [
-            "memory-crucial-pro-ddr5-32gb-6000",
+            self.profile["primary_memory_choice_id"],
             self.profile["primary_gpu_choice_id"]
         ]
         self.assertEqual(len(selected_ids), len(set(selected_ids)))
@@ -75,13 +75,13 @@ class ProjectConfigurationContractTests(unittest.TestCase):
             + int(self.profile["build_shipping_reserve_jpy"])
             + int(self.profile["small_parts_reserve_jpy"])
         )
-        self.assertEqual(components_subtotal, 311600)
-        self.assertEqual(pc_total, 320600)
+        self.assertEqual(components_subtotal, 291600)
+        self.assertEqual(pc_total, 300600)
         self.assertEqual(
             pc_total + int(self.profile["peripheral_budget_jpy"]),
-            390400,
+            370400,
         )
-        self.assertLessEqual(390400, int(self.profile["total_budget_jpy"]))
+        self.assertLessEqual(370400, int(self.profile["total_budget_jpy"]))
 
     def test_windows_retail_package_is_live_tracked_and_exact_model_identified(self):
         parts_by_id = {item["id"]: item for item in self.build["parts"]}
@@ -184,7 +184,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
 
         self.assertEqual(
             self.profile["primary_memory_choice_id"],
-            "memory-crucial-pro-ddr5-32gb-6000",
+            "memory-teamgroup-ddr5-32gb-6000",
         )
         self.assertEqual(
             set(self.profile["memory_choice_ids"]),
@@ -194,7 +194,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertNotIn("memory-teamgroup-ddr5-32gb-6000", self.profile["fixed_part_ids"])
         self.assertEqual(
             parts_by_id["memory-teamgroup-ddr5-32gb-6000"]["role"],
-            "price_monitored_alternative",
+            "primary_budget_fit",
         )
         self.assertEqual(len(parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"]), 2)
         self.assertIn("dospara.co.jp", parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"][1])
@@ -206,7 +206,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
 
         for text in (readme, instructions, peripherals):
             with self.subTest(document="budget and speaker", text_length=len(text)):
-                self.assertRegex(text, r"(?:¥\s?400,000|400,000円)")
+                self.assertRegex(text, r"(?:¥\s?380,000|380,000円)")
                 self.assertRegex(text, r"(?:¥\s?69,800|69,800円)")
                 self.assertIn("EDIFIER MR4 MKII", text)
 
@@ -225,12 +225,12 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         # Explicit alternative-build totals and compatibility descriptions must
         # stay aligned with the authoritative component target configuration.
         self.assertIn("PC本体300,600円、周辺機器込み370,400円", readme)
-        self.assertIn("PC本体344,800円、周辺機器込み414,600円", readme)
+        self.assertIn("PC本体324,800円、周辺機器込み394,600円", readme)
         self.assertNotIn("PC本体295,360円", readme)
         self.assertNotIn("PC本体329,360円", readme)
         guide = read_text("docs/self-build-assembly-guide.md")
-        self.assertIn("| VRAM重視 | RTX 5060 Ti 16GB | ¥300,600 | ¥370,400 |", guide)
-        self.assertIn("| 大穴 | RTX 5070 Ti 16GB | ¥344,800 | ¥414,600 |", guide)
+        self.assertIn("| VRAM重視 | RTX 5060 Ti 16GB | ¥280,600 | ¥350,400 |", guide)
+        self.assertIn("| 大穴 | RTX 5070 Ti 16GB | ¥324,800 | ¥394,600 |", guide)
         self.assertNotIn("正確なカード寸法・補助電源の確認が未完了", guide)
         self.assertNotIn("¥295,360", guide)
         self.assertNotIn("¥365,160", guide)
