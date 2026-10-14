@@ -233,7 +233,7 @@ def build_component_search_queries(part, domains=DEFAULT_DOMAINS, now=None):
         seller_domain = seller_domains[slot % len(seller_domains)]
         term = (aliases[0] if aliases else name) or model_code
         if term:
-            queries.append('"{}" 価格 site:{}'.format(term, seller_domain))
+            queries.append('site:{} "{}" 価格'.format(seller_domain, term))
 
     # Important fallback: don't let an unsupported/ignored site: operator make
     # all candidates disappear. URLs are still checked against the configured
