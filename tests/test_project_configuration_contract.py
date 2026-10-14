@@ -135,7 +135,13 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertIn("shopping.yahoo.co.jp", self.profile["allowed_search_reference_domains"])
         self.assertIn("ymall.jp", self.profile["allowed_search_reference_domains"])
         self.assertIn("ymall.jp", parts_by_id["memory-teamgroup-ddr5-32gb-6000"]["direct_retailer_urls"][0])
+        self.assertIn("teamgroupinc.com", parts_by_id["memory-teamgroup-ddr5-32gb-6000"]["spec_source_url"])
+        self.assertIn("CTCWD532G6000HC38ADC01", parts_by_id["memory-teamgroup-ddr5-32gb-6000"]["spec_source_url"])
+        self.assertEqual(len(parts_by_id["ssd-crucial-p3-plus-1tb"]["direct_retailer_urls"]), 2)
         self.assertIn("tsukumo.co.jp", parts_by_id["ssd-crucial-p3-plus-1tb"]["direct_retailer_urls"][0])
+        self.assertIn("dospara.co.jp", parts_by_id["ssd-crucial-p3-plus-1tb"]["direct_retailer_urls"][1])
+        self.assertEqual(len(parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"]), 2)
+        self.assertIn("dospara.co.jp", parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"][1])
 
     def test_readme_copilot_instructions_and_peripheral_guide_match_current_plan(self):
         readme = read_text("README.md")
