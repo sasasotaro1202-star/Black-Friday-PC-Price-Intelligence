@@ -220,12 +220,17 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertIsNone(result["market_reference_price_jpy"])
         self.assertIsNone(result["direct_listing_display_price_jpy"])
 
-    def test_primary_known_geometry_passes_but_other_gpu_sizes_need_review(self):
+    def test_two_slot_gpus_pass_geometry_but_near_three_slot_dark_horse_needs_review(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         by_gpu = {x["gpu_choice_id"]:x for x in plan["builds"]}
         self.assertEqual(by_gpu["gpu-rtx5070-12gb"]["compatibility_status"], "PASS")
-        self.assertEqual(by_gpu["gpu-rtx5060ti-16gb"]["compatibility_status"], "REVIEW")
+        self.assertEqual(by_gpu["gpu-rtx5060ti-16gb"]["compatibility_status"], "PASS")
         self.assertEqual(by_gpu["gpu-rtx5070ti-16gb"]["compatibility_status"], "REVIEW")
+        for gpu_id in ("gpu-rtx5070-12gb", "gpu-rtx5060ti-16gb"):
+            checks = {x["check"]: x["status"] for x in by_gpu[gpu_id]["compatibility_checks"]}
+            self.assertEqual(checks["gpu_slot_thickness"], "PASS")
+        dark_checks = {x["check"]: x["status"] for x in by_gpu["gpu-rtx5070ti-16gb"]["compatibility_checks"]}
+        self.assertEqual(dark_checks["gpu_slot_thickness"], "REVIEW")
 
     def test_socket_and_power_mismatches_fail_closed(self):
         bad = json.loads(json.dumps(self.config))
