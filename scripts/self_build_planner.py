@@ -324,11 +324,24 @@ def compatibility_checks(parts, profile, gpu_id):
         "Board {} / case supports {}".format(board_form or "unknown", ", ".join(supported) or "unknown"))
 
     gpu_length, gpu_clearance = gpu.get("card_length_mm"), case.get("gpu_clearance_mm")
-    if not isinstance(gpu_length, int) or not isinstance(gpu_clearance, int):
+    if not isinstance(gpu_length, (int, float)) or not isinstance(gpu_clearance, (int, float)):
         add("gpu_case_clearance", "REVIEW", "Exact GPU retail-card length or case clearance must be verified before ordering")
     else:
         add("gpu_case_clearance", "PASS" if gpu_length <= gpu_clearance else "FAIL",
             "GPU {}mm / case limit {}mm".format(gpu_length, gpu_clearance))
+
+    # The case publishes maximum card length but not an explicit thickness-slot
+    # limit. Standard 2-slot cards can be planned against the normal expansion
+    # layout; near-3-slot cards need a manual adjacent-slot/header/cable clearance
+    # check rather than inheriting a PASS from length alone.
+    gpu_slots = gpu.get("card_thickness_slots")
+    if not isinstance(gpu_slots, (int, float)):
+        add("gpu_slot_thickness", "REVIEW", "Exact GPU slot thickness is not source-backed")
+    elif gpu_slots > 2.5:
+        add("gpu_slot_thickness", "REVIEW",
+            "GPU occupies {} slots; confirm case expansion-slot, motherboard-header and cable clearance".format(gpu_slots))
+    else:
+        add("gpu_slot_thickness", "PASS", "GPU occupies {} slots; no additional adjacent-card requirement is configured".format(gpu_slots))
 
     sockets = cooler.get("supported_sockets") or []
     cooler_height, case_height = cooler.get("cooler_height_mm"), case.get("cooler_clearance_mm")
