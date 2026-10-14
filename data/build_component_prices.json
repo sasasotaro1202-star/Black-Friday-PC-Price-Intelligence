@@ -1,12 +1,13 @@
 {
-  "generated_at": "2026-10-14T18:46:06+09:00",
+  "generated_at": "2026-10-14T18:48:54+09:00",
   "schema_version": 1,
   "source_role": "comparison_site_reference",
-  "policy": "These prices are comparison-site market references only; never seller checkout prices or official BF actuals.",
+  "policy": "References may be direct comparison-site prices or directly fetched retailer product listings after identity and price checks; neither proves final checkout price or official BF actuals.",
   "bf_actual_authorized": false,
   "coverage": {
     "tracked_part_count": 10,
     "verified_market_reference": 0,
+    "verified_retailer_listing_reference": 0,
     "search_snippet_reference": 0,
     "identity_unverified": 0,
     "fetch_error": 0,
@@ -35,7 +36,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001630332 100-100001404WOF 価格",
+          "query": "\"100-100001404WOF\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -44,12 +45,14 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"AMD Ryzen 7 9700X BOX\" 100-100001404WOF 価格 在庫",
+          "query": "\"AMD Ryzen 7 9700X BOX\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -58,63 +61,115 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "duckduckgo",
+          "query_index": 3,
+          "query": "AMD Ryzen 7 9700X BOX 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 0,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001630332 100-100001404WOF 価格",
+          "query": "\"100-100001404WOF\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
-            "en.m.wikipedia.org",
-            "pluto.tv",
             "www.youtube.com",
-            "m.youtube.com",
-            "www.primevideo.com"
+            "en.wikipedia.org",
+            "www.100percent.com",
+            "mega100fm.iheart.com",
+            "www.imdb.com"
           ],
           "rejected_url_samples": [
-            "https://en.m.wikipedia.org/wiki/The_100_(TV_series)",
-            "https://pluto.tv/us/shows/the-100-ptv3/?msockid=1a955284bc2d627b1d994576bdcd6332",
-            "https://www.youtube.com/playlist?list=PLfrisy2KXzkfUMpf-Op9--p0GpNs2dmr2"
+            "https://www.youtube.com/watch?v=0TgLtF3PMOc",
+            "https://en.wikipedia.org/wiki/The_100_(TV_series)",
+            "https://en.wikipedia.org/wiki/United_States_one-hundred-dollar_bill"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"AMD Ryzen 7 9700X BOX\" 100-100001404WOF 価格 在庫",
+          "query": "\"AMD Ryzen 7 9700X BOX\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.amd.com",
-            "finance.yahoo.com",
+            "zh.wikipedia.org",
+            "baike.baidu.com",
             "en.wikipedia.org",
-            "www.techspot.com",
-            "shop-us-en.amd.com"
+            "shop.amd.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en.html",
-            "https://www.amd.com/en/support/download/drivers.html",
-            "https://finance.yahoo.com/quote/AMD/"
+            "https://www.amd.com/zh-cn.html",
+            "https://zh.wikipedia.org/wiki/AMD"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "bing",
+          "query_index": 3,
+          "query": "AMD Ryzen 7 9700X BOX 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 10,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.amd.com",
+            "zh.wikipedia.org",
+            "baike.baidu.com",
+            "en.wikipedia.org",
+            "shop.amd.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.amd.com/en.html",
+            "https://www.amd.com/zh-cn.html",
+            "https://zh.wikipedia.org/wiki/AMD"
+          ],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         }
       ],
+      "retailer_listing_offer": null,
+      "retailer_listing_offers": [],
+      "retailer_listing_reference_price_jpy": null,
+      "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:46:03+09:00",
+      "retrieval_time": "2026-10-14T18:48:50+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:10 res",
       "identity_match": true,
       "identity_matches": [
         "ryzen79700x"
@@ -144,7 +199,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001798041 VCG507012DFXPB1-O 価格",
+          "query": "\"VCG507012DFXPB1-O\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -153,12 +208,14 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"PNY GeForce RTX 5070 12GB OC SLIM\" VCG507012DFXPB1-O 価格 在庫",
+          "query": "\"PNY GeForce RTX 5070 12GB OC SLIM\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -167,12 +224,30 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "duckduckgo",
+          "query_index": 3,
+          "query": "PNY GeForce RTX 5070 12GB OC SLIM 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 0,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001798041 VCG507012DFXPB1-O 価格",
+          "query": "\"VCG507012DFXPB1-O\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -181,12 +256,14 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"PNY GeForce RTX 5070 12GB OC SLIM\" VCG507012DFXPB1-O 価格 在庫",
+          "query": "\"PNY GeForce RTX 5070 12GB OC SLIM\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -205,15 +282,47 @@
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "bing",
+          "query_index": 3,
+          "query": "PNY GeForce RTX 5070 12GB OC SLIM 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 10,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.pny.com",
+            "en.wikipedia.org",
+            "pny.us.com",
+            "www.amazon.com",
+            "proconfig.pny.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.pny.com/",
+            "https://www.pny.com/consumer",
+            "https://en.wikipedia.org/wiki/PNY"
+          ],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         }
       ],
+      "retailer_listing_offer": null,
+      "retailer_listing_offers": [],
+      "retailer_listing_reference_price_jpy": null,
+      "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:46:03+09:00",
+      "retrieval_time": "2026-10-14T18:48:50+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:0 resu",
       "identity_match": true,
       "identity_matches": [
         "pnygeforcertx507012gboc",
@@ -244,7 +353,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001696163 VCG5060T16DFXPB1-O 価格",
+          "query": "\"VCG5060T16DFXPB1-O\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -253,12 +362,14 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"PNY GeForce RTX 5060 Ti 16GB OC\" VCG5060T16DFXPB1-O 価格 在庫",
+          "query": "\"PNY GeForce RTX 5060 Ti 16GB OC\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -267,36 +378,46 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "duckduckgo",
+          "query_index": 3,
+          "query": "PNY GeForce RTX 5060 Ti 16GB OC 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 0,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001696163 VCG5060T16DFXPB1-O 価格",
+          "query": "\"VCG5060T16DFXPB1-O\" 価格",
           "status": "ok",
           "error": null,
-          "result_count": 10,
+          "result_count": 0,
           "allowed_reference_host_count": 0,
-          "rejected_host_samples": [
-            "www.bing.com",
-            "microsoftedge.microsoft.com",
-            "ja.m.wikipedia.org",
-            "addons.mozilla.org",
-            "news.mynavi.jp"
-          ],
-          "rejected_url_samples": [
-            "https://www.bing.com/version",
-            "https://www.bing.com/RelatedSearch",
-            "https://microsoftedge.microsoft.com/addons/search/bing+related+search+version"
-          ],
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"PNY GeForce RTX 5060 Ti 16GB OC\" VCG5060T16DFXPB1-O 価格 在庫",
+          "query": "\"PNY GeForce RTX 5060 Ti 16GB OC\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -315,15 +436,47 @@
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "bing",
+          "query_index": 3,
+          "query": "PNY GeForce RTX 5060 Ti 16GB OC 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 10,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.pny.com",
+            "en.wikipedia.org",
+            "pny.us.com",
+            "www.amazon.com",
+            "proconfig.pny.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.pny.com/",
+            "https://www.pny.com/consumer",
+            "https://en.wikipedia.org/wiki/PNY"
+          ],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         }
       ],
+      "retailer_listing_offer": null,
+      "retailer_listing_offers": [],
+      "retailer_listing_reference_price_jpy": null,
+      "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:46:03+09:00",
+      "retrieval_time": "2026-10-14T18:48:50+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:0 resu",
       "identity_match": true,
       "identity_matches": [
         "vcg5060t16dfxpb1o",
@@ -355,7 +508,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001696164 VCG5070T16TFXPB1-O 価格",
+          "query": "\"VCG5070T16TFXPB1-O\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -364,12 +517,14 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"PNY GeForce RTX 5070 Ti 16GB ARGB\" VCG5070T16TFXPB1-O 価格 在庫",
+          "query": "\"PNY GeForce RTX 5070 Ti 16GB ARGB\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -378,12 +533,30 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "duckduckgo",
+          "query_index": 3,
+          "query": "PNY GeForce RTX 5070 Ti 16GB ARGB 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 0,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001696164 VCG5070T16TFXPB1-O 価格",
+          "query": "\"VCG5070T16TFXPB1-O\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -392,12 +565,14 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"PNY GeForce RTX 5070 Ti 16GB ARGB\" VCG5070T16TFXPB1-O 価格 在庫",
+          "query": "\"PNY GeForce RTX 5070 Ti 16GB ARGB\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -416,15 +591,47 @@
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "bing",
+          "query_index": 3,
+          "query": "PNY GeForce RTX 5070 Ti 16GB ARGB 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 10,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.pny.com",
+            "en.wikipedia.org",
+            "pny.us.com",
+            "www.amazon.com",
+            "proconfig.pny.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.pny.com/",
+            "https://www.pny.com/consumer",
+            "https://en.wikipedia.org/wiki/PNY"
+          ],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         }
       ],
+      "retailer_listing_offer": null,
+      "retailer_listing_offers": [],
+      "retailer_listing_reference_price_jpy": null,
+      "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:46:03+09:00",
+      "retrieval_time": "2026-10-14T18:48:50+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:0 resu",
       "identity_match": true,
       "identity_matches": [
         "pnygeforcertx5070ti16gb",
@@ -455,7 +662,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001669878 B850M Pro RS WiFi 価格",
+          "query": "\"B850M Pro RS WiFi\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -464,12 +671,14 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"ASRock B850M Pro RS WiFi\" B850M Pro RS WiFi 価格 在庫",
+          "query": "\"ASRock B850M Pro RS WiFi\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -478,63 +687,103 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "duckduckgo",
+          "query_index": 3,
+          "query": "ASRock B850M Pro RS WiFi 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 0,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001669878 B850M Pro RS WiFi 価格",
+          "query": "\"B850M Pro RS WiFi\" 価格",
           "status": "ok",
           "error": null,
-          "result_count": 10,
+          "result_count": 0,
           "allowed_reference_host_count": 0,
-          "rejected_host_samples": [
-            "www.indeed.com",
-            "www.trouvr.com",
-            "dev.to",
-            "blog.theinterviewguys.com",
-            "wp.dreamshift.net"
-          ],
-          "rejected_url_samples": [
-            "https://www.indeed.com/news/releases/ghost-jobs-explained",
-            "https://www.trouvr.com/guides/ghost-jobs-on-indeed",
-            "https://dev.to/goofypluto999/how-to-spot-a-ghost-job-in-30-seconds-the-indeed-problem-in-2026-57c9"
-          ],
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"ASRock B850M Pro RS WiFi\" B850M Pro RS WiFi 価格 在庫",
+          "query": "\"ASRock B850M Pro RS WiFi\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.asrock.com",
+            "oc.asrock.com",
             "en.wikipedia.org",
-            "asrock.com",
-            "www.asrockrack.com",
             "pg.asrock.com"
           ],
           "rejected_url_samples": [
             "https://www.asrock.com/",
             "https://www.asrock.com/support/index.asp",
-            "https://en.wikipedia.org/wiki/ASRock"
+            "https://oc.asrock.com/support/index.us.asp?cat=BIOS"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "bing",
+          "query_index": 3,
+          "query": "ASRock B850M Pro RS WiFi 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 10,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.asrock.com",
+            "oc.asrock.com",
+            "en.wikipedia.org",
+            "pg.asrock.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.asrock.com/",
+            "https://www.asrock.com/support/index.asp",
+            "https://oc.asrock.com/support/index.us.asp?cat=BIOS"
+          ],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         }
       ],
+      "retailer_listing_offer": null,
+      "retailer_listing_offers": [],
+      "retailer_listing_reference_price_jpy": null,
+      "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:46:04+09:00",
+      "retrieval_time": "2026-10-14T18:48:52+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:0 resu",
       "identity_match": true,
       "identity_matches": [
         "b850mprorswifi",
@@ -565,7 +814,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001610896 CTCWD532G6000HC38ADC01 価格",
+          "query": "\"CTCWD532G6000HC38ADC01\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -574,12 +823,14 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)\" CTCWD532G6000HC38ADC01 価格 在庫",
+          "query": "\"TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -588,55 +839,95 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "duckduckgo",
+          "query_index": 3,
+          "query": "TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2) 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 0,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001610896 CTCWD532G6000HC38ADC01 価格",
+          "query": "\"CTCWD532G6000HC38ADC01\" 価格",
           "status": "ok",
           "error": null,
-          "result_count": 4,
+          "result_count": 0,
           "allowed_reference_host_count": 0,
-          "rejected_host_samples": [
-            "www.answers.com"
-          ],
-          "rejected_url_samples": [
-            "https://www.answers.com/accounting/What_is_the_difference_between_board_of_director_and_board_of_governors",
-            "https://www.answers.com/natural-sciences/What_is_an_optimal_scale",
-            "https://www.answers.com/english-language-arts/Is_it_i_red_a_book_or_i_read_a_book"
-          ],
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)\" CTCWD532G6000HC38ADC01 価格 在庫",
+          "query": "\"TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
-            "www.target.com"
+            "www.web.nhk",
+            "www.nhk.jp",
+            "terukosan.com",
+            "aimusic.tv",
+            "nuts-club.com"
           ],
           "rejected_url_samples": [
-            "https://www.target.com/",
-            "https://www.target.com/sl/liberty/1455",
-            "https://www.target.com/sl/lynnwood/338"
+            "https://www.web.nhk/tv/pl/series-tep-345Y8ZQ39Y/list",
+            "https://www.web.nhk/tv/pl/series-tep-345Y8ZQ39Y",
+            "https://www.nhk.jp/g/ts/345Y8ZQ39Y/"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "bing",
+          "query_index": 3,
+          "query": "TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2) 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 0,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         }
       ],
+      "retailer_listing_offer": null,
+      "retailer_listing_offers": [],
+      "retailer_listing_reference_price_jpy": null,
+      "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:46:04+09:00",
+      "retrieval_time": "2026-10-14T18:48:52+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:4 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:0 resu",
       "identity_match": true,
       "identity_matches": [
         "ctcwd532g6000hc38adc01"
@@ -666,7 +957,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001466997 CT1000P3PSSD8JP 価格",
+          "query": "\"CT1000P3PSSD8JP\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -675,12 +966,14 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"Crucial P3 Plus CT1000P3PSSD8JP 1TB\" CT1000P3PSSD8JP 価格 在庫",
+          "query": "\"Crucial P3 Plus CT1000P3PSSD8JP 1TB\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -689,12 +982,30 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "duckduckgo",
+          "query_index": 3,
+          "query": "Crucial P3 Plus CT1000P3PSSD8JP 1TB 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 0,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001466997 CT1000P3PSSD8JP 価格",
+          "query": "\"CT1000P3PSSD8JP\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -703,12 +1014,14 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"Crucial P3 Plus CT1000P3PSSD8JP 1TB\" CT1000P3PSSD8JP 価格 在庫",
+          "query": "\"Crucial P3 Plus CT1000P3PSSD8JP 1TB\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -717,7 +1030,7 @@
             "www.crucial.com",
             "www.merriam-webster.com",
             "eu.crucial.com",
-            "www.amazon.com"
+            "en.wikipedia.org"
           ],
           "rejected_url_samples": [
             "https://www.crucial.com/",
@@ -726,15 +1039,46 @@
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "bing",
+          "query_index": 3,
+          "query": "Crucial P3 Plus CT1000P3PSSD8JP 1TB 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 10,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.crucial.com",
+            "www.merriam-webster.com",
+            "eu.crucial.com",
+            "en.wikipedia.org"
+          ],
+          "rejected_url_samples": [
+            "https://www.crucial.com/",
+            "https://www.crucial.com/store/systemscanner",
+            "https://www.merriam-webster.com/dictionary/crucial"
+          ],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         }
       ],
+      "retailer_listing_offer": null,
+      "retailer_listing_offers": [],
+      "retailer_listing_reference_price_jpy": null,
+      "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:46:04+09:00",
+      "retrieval_time": "2026-10-14T18:48:52+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:0 resu",
       "identity_match": true,
       "identity_matches": [
         "ct1000p3pssd8jp"
@@ -764,7 +1108,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001671441 CP-9020296-JP 価格",
+          "query": "\"CP-9020296-JP\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -773,12 +1117,14 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"Corsair RM850e 2025 850W ATX 3.1 Gold\" CP-9020296-JP 価格 在庫",
+          "query": "\"Corsair RM850e 2025 850W ATX 3.1 Gold\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -787,12 +1133,30 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "duckduckgo",
+          "query_index": 3,
+          "query": "Corsair RM850e 2025 850W ATX 3.1 Gold 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 0,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001671441 CP-9020296-JP 価格",
+          "query": "\"CP-9020296-JP\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -801,22 +1165,24 @@
             "www.reddit.com",
             "my.clevelandclinic.org",
             "en.wikipedia.org",
-            "www.mayoclinic.org",
-            "www.allacronyms.com"
+            "www.allacronyms.com",
+            "www.mayoclinic.org"
           ],
           "rejected_url_samples": [
             "https://www.reddit.com/r/TooAfraidToAsk/comments/115rarh/i_found_a_website_that_has_literal_cp_with/",
             "https://my.clevelandclinic.org/health/diseases/8717-cerebral-palsy",
-            "https://en.wikipedia.org/wiki/CP"
+            "https://en.wikipedia.org/wiki/Cerebral_palsy"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"Corsair RM850e 2025 850W ATX 3.1 Gold\" CP-9020296-JP 価格 在庫",
+          "query": "\"Corsair RM850e 2025 850W ATX 3.1 Gold\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -824,26 +1190,58 @@
           "rejected_host_samples": [
             "www.corsair.com",
             "help.corsair.com",
+            "www.smc.edu",
             "en.wikipedia.org",
-            "www.amazon.com",
-            "www.newegg.com"
+            "www.amazon.com"
           ],
           "rejected_url_samples": [
             "https://www.corsair.com/us/en",
-            "https://www.corsair.com/us/en/s/icue",
+            "https://www.corsair.com/us/en/s/downloads",
             "https://help.corsair.com/hc/en-us"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "bing",
+          "query_index": 3,
+          "query": "Corsair RM850e 2025 850W ATX 3.1 Gold 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 10,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.corsair.com",
+            "help.corsair.com",
+            "www.smc.edu",
+            "en.wikipedia.org",
+            "www.amazon.com"
+          ],
+          "rejected_url_samples": [
+            "https://www.corsair.com/us/en",
+            "https://www.corsair.com/us/en/s/downloads",
+            "https://help.corsair.com/hc/en-us"
+          ],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         }
       ],
+      "retailer_listing_offer": null,
+      "retailer_listing_offers": [],
+      "retailer_listing_reference_price_jpy": null,
+      "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:46:04+09:00",
+      "retrieval_time": "2026-10-14T18:48:52+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:10 res",
       "identity_match": true,
       "identity_matches": [
         "cp9020296jp",
@@ -874,7 +1272,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "site:kakaku.com/item/j0000039064 FD-C-POA1A-02 価格",
+          "query": "\"FD-C-POA1A-02\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -883,12 +1281,14 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"Fractal Design Pop Air TG\" FD-C-POA1A-02 価格 在庫",
+          "query": "\"Fractal Design Pop Air TG\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -897,63 +1297,115 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "duckduckgo",
+          "query_index": 3,
+          "query": "Fractal Design Pop Air TG 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 0,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "site:kakaku.com/item/j0000039064 FD-C-POA1A-02 価格",
+          "query": "\"FD-C-POA1A-02\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.formulad.com",
-            "www.acronymfinder.com",
             "www.youtube.com",
-            "www.fd.org",
-            "en.wikipedia.org"
+            "en.wikipedia.org",
+            "www.acronymfinder.com",
+            "github.com"
           ],
           "rejected_url_samples": [
             "https://www.formulad.com/",
-            "https://www.acronymfinder.com/FD.html",
-            "https://www.youtube.com/c/formuladrift"
+            "https://www.youtube.com/c/formuladrift",
+            "https://en.wikipedia.org/wiki/FD"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"Fractal Design Pop Air TG\" FD-C-POA1A-02 価格 在庫",
+          "query": "\"Fractal Design Pop Air TG\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
-            "en.m.wikipedia.org",
+            "en.wikipedia.org",
             "www.fractal-design.com",
             "fractal.garden",
-            "fractalfoundation.org",
-            "www.fractalaudio.com"
+            "www.fractalaudio.com",
+            "fractalfoundation.org"
           ],
           "rejected_url_samples": [
-            "https://en.m.wikipedia.org/wiki/Fractal",
+            "https://en.wikipedia.org/wiki/Fractal",
             "https://www.fractal-design.com/",
             "https://fractal.garden/"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "bing",
+          "query_index": 3,
+          "query": "Fractal Design Pop Air TG 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 10,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "en.wikipedia.org",
+            "www.fractal-design.com",
+            "fractal.garden",
+            "www.fractalaudio.com",
+            "fractalfoundation.org"
+          ],
+          "rejected_url_samples": [
+            "https://en.wikipedia.org/wiki/Fractal",
+            "https://www.fractal-design.com/",
+            "https://fractal.garden/"
+          ],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         }
       ],
+      "retailer_listing_offer": null,
+      "retailer_listing_offers": [],
+      "retailer_listing_reference_price_jpy": null,
+      "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:46:05+09:00",
+      "retrieval_time": "2026-10-14T18:48:53+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:10 res",
       "identity_match": true,
       "identity_matches": [
         "fdcpoa1a02",
@@ -984,7 +1436,7 @@
         {
           "provider": "duckduckgo",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001789043 Peerless Assassin 120 SE V3 価格",
+          "query": "\"Peerless Assassin 120 SE V3\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -993,12 +1445,14 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "duckduckgo",
           "query_index": 2,
-          "query": "\"Thermalright Peerless Assassin 120 SE V3\" Peerless Assassin 120 SE V3 価格 在庫",
+          "query": "\"Thermalright Peerless Assassin 120 SE V3\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -1007,22 +1461,40 @@
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "duckduckgo",
+          "query_index": 3,
+          "query": "Thermalright Peerless Assassin 120 SE V3 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 0,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 1,
-          "query": "site:kakaku.com/item/k0001789043 Peerless Assassin 120 SE V3 価格",
+          "query": "\"Peerless Assassin 120 SE V3\" 価格",
           "status": "ok",
           "error": null,
-          "result_count": 7,
+          "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.peerlessfaucet.com",
             "www.peerless-av.com",
             "peerlesschain.com",
-            "www.peerlesscoffee.com",
-            "www.merriam-webster.com"
+            "www.merriam-webster.com",
+            "www.peerlessboilers.com"
           ],
           "rejected_url_samples": [
             "https://www.peerlessfaucet.com/",
@@ -1031,12 +1503,14 @@
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         },
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "\"Thermalright Peerless Assassin 120 SE V3\" Peerless Assassin 120 SE V3 価格 在庫",
+          "query": "\"Thermalright Peerless Assassin 120 SE V3\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -1054,15 +1528,46 @@
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
-          "in_range_price_count": 0
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
+        },
+        {
+          "provider": "bing",
+          "query_index": 3,
+          "query": "Thermalright Peerless Assassin 120 SE V3 最安値",
+          "status": "ok",
+          "error": null,
+          "result_count": 10,
+          "allowed_reference_host_count": 0,
+          "rejected_host_samples": [
+            "www.thermalright.com",
+            "thermalright.pro",
+            "www.amazon.com",
+            "en.wikipedia.org"
+          ],
+          "rejected_url_samples": [
+            "https://www.thermalright.com/",
+            "https://www.thermalright.com/support/download/",
+            "https://thermalright.pro/"
+          ],
+          "same_comparison_item_path_count": 0,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0
         }
       ],
+      "retailer_listing_offer": null,
+      "retailer_listing_offers": [],
+      "retailer_listing_reference_price_jpy": null,
+      "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-14T18:46:05+09:00",
+      "retrieval_time": "2026-10-14T18:48:53+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
-      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced; bing:7 results / 0 allowed host / 0 identity / 0 priced; bing:10 results / 0 allowed host / 0 identity / 0 priced",
+      "last_fetch_error": "price_or_point_in_time_missing; search diagnostic: duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; duckduckgo:0 results / 0 allowed host / 0 identity / 0 priced / 0 seller listings; bing:10 res",
       "identity_match": true,
       "identity_matches": [
         "peerlessassassin120sev3",
