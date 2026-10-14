@@ -245,14 +245,14 @@
   "desktop_enabled": true,
   "desktop_note": "Desktop PCs are evaluated in the same integrated purchase-priority ranking as laptops. Include an RTX 5060 Ti 16GB/32GB/1TB desktop alternative for the gaming-versus-local-AI-VRAM trade-off; all BTO memory configuration costs must be verified.",
   "desktop_exact_candidate_count": 7,
-  "total_budget_jpy": 380000,
+  "total_budget_jpy": 400000,
   "peripheral_budget_jpy": 69800,
-  "pc_target_jpy": 310200,
-  "pc_budget_jpy": 310200,
+  "pc_target_jpy": 330200,
+  "pc_budget_jpy": 330200,
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
-  "budget_scope_note": "budget_jpy is the PC-only planning target, not the full-system budget. The overall planning target is around 380000 JPY for the DIY desktop plus two monitors, EDIFIER MR4 MKII speakers, keyboard, mouse, mousepad, power strip, needed cables, shipping and incidentals. Keep over-target dark horses in comparison rankings, but label the overrun and do not authorize purchase without verified final cost and compatibility.",
+  "budget_scope_note": "budget_jpy is the PC-only planning target, not the full-system budget. The overall planning target is JPY 400,000 for the DIY desktop plus two monitors, EDIFIER MR4 MKII speakers, keyboard, mouse, mousepad, power strip, needed cables, shipping and incidentals. Keep over-target dark horses in comparison rankings, but label any overrun and never authorize purchase without verified final cost and compatibility.",
   "peripherals": [
     {
       "id": "main_monitor",
@@ -1072,5 +1072,5 @@
   "monitor_window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
   "monitor_window_note": "暫定の広域監視窓であり、いずれかの販売店の公式BF開催日を意味しない。各店の2026年公式日程を公式ページから明示的な年付き日付範囲で確認するまで、価格をBF実売として認定せず、買い時判定は購入許可を出さない。過去日程、曜日、年のない月日から開催日を推定しない。",
   "budget_mode": "SOFT_TARGET",
-  "budget_target_note": "総額380,000円程度を中心目標とする。候補ランキングから目標超過の大穴を除外せず、超過額・必要条件・値下げ根拠を明示する。購入許可は型番・在庫・互換性・最終決済額を再確認し、ユーザーが明示した予算条件を満たすまで出さない。"
+  "budget_target_note": "総額400,000円程度（PC本体＋周辺機器）を中心目標とする。PC本体の計画上限は330,200円、周辺機器目標は69,800円。候補ランキングから目標超過の大穴を除外せず、超過額・必要条件・値下げ根拠を明示する。購入許可は型番・在庫・互換性・最終決済額を再確認し、ユーザーの予算条件を満たすまで出さない。"
 }
