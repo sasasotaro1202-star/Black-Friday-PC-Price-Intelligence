@@ -79,6 +79,7 @@ Unknown prices must stay null/unknown—not ¥0. Fetch failure is not out-of-sto
 - `.github/workflows/pc-price-monitor.yml` owns scheduled price collection. It routes between the 5-minute and 15-minute cron events according to the configured window; keep the gate and intervals consistent with `config/targets.json`.
 - `.github/workflows/pc-price-monitor-bf-fast.yml` is manual-only, shares the single writer concurrency group, and must not create a second scheduled collection loop.
 - Use GitHub Actions and the Python standard library first. No paid API or service may be required. Do not add hidden paid dependencies, keys, or usage-based services.
+- Include Yahoo! Shopping (`shopping.yahoo.co.jp`) among allowlisted retailer search fallbacks; treat search-result prices as discovery-only until the exact seller item page is independently fetched and validated.
 - Keep PC offers, DIY component observations, and peripherals in separate streams. Never rank a monitor/speaker/mouse as a PC.
 - Preserve source URL, exact model/SKU evidence, retrieval time, availability time, publication/event times when known, inventory state, data age, validation reason, and source snapshot hashes.
 - Require valid PIT ordering: `available_at <= retrieval_time <= prediction_time`. If PIT is unknown or invalid, fail closed.
