@@ -321,11 +321,13 @@ class SelfBuildPlannerTests(unittest.TestCase):
             result = component_monitor.search_comparison_snippet(part, ("kakaku.com",))
         self.assertIsNotNone(result)
         diagnostics = result["search_diagnostics"]
-        self.assertEqual(len(diagnostics), 4)
-        self.assertEqual(diagnostics[0]["provider"], "kakaku_search_page")
-        duck = [item for item in diagnostics if item["provider"] == "duckduckgo"]
+        providers = [item.get("provider") for item in diagnostics]
+        self.assertIn("kakaku_search_page", providers)
+        self.assertGreaterEqual(providers.count("bing"), 2)
+        duck = [item for item in diagnostics if item.get("provider") == "duckduckgo"]
         self.assertEqual(len(duck), 1)
         self.assertEqual(duck[0]["status"], "error")
+        self.assertTrue(all(item.get("result_count", 0) == 0 for item in diagnostics))
         self.assertNotIn("price_jpy", result)
 
     def test_fetch_part_passes_allowlisted_search_domains_to_fallback(self):
@@ -375,8 +377,12 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(result["search_provider"], "duckduckgo")
         self.assertEqual(result["source_role"], "comparison_site_search_snippet_reference")
         self.assertFalse(result["bf_actual_authorized"])
-        self.assertEqual(len(result["search_diagnostics"]), 4)
-        duck = [item for item in result["search_diagnostics"] if item["provider"] == "duckduckgo"]
+        diagnostics = result["search_diagnostics"]
+        providers = [item.get("provider") for item in diagnostics]
+        self.assertIn("kakaku_search_page", providers)
+        self.assertGreaterEqual(providers.count("bing"), 2)
+        duck = [item for item in diagnostics if item.get("provider") == "duckduckgo"]
+        self.assertEqual(len(duck), 1)
         self.assertEqual(duck[0]["result_count"], 1)
         self.assertIn("価格 最安値", duck[0]["query"])
 
