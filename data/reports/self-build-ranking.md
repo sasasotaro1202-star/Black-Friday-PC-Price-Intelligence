@@ -1,6 +1,6 @@
 # 自作PCパーツ構成・価格監視
 
-更新: 2026-10-14T21:35:46+09:00
+更新: 2026-10-14T21:39:05+09:00
 予算: PC本体 ¥330,200 / 周辺機器 ¥69,800 / 総額 ¥400,000
 
 **購入方式:** 自作PCを正式な本命として最適化します。組み立て時間・作業時間は減点しません。BTOは同等仕様での総額・部品品質・保証のベンチマークとして比較し、便利さだけを理由に自作から切り替えません。
@@ -63,7 +63,7 @@
 |Fractal Design Pop Air TG|FD-C-POA1A-02|¥12,000|¥13,311（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/J0000039064/) / [検索ページ参考元](https://search.kakaku.com/Fractal%20Design%20Pop%20Air%20TG/)|
 |Thermalright Peerless Assassin 120 SE V3|Peerless Assassin 120 SE V3|¥5,000|¥4,980（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001789043/) / [検索ページ参考元](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/)|
 |Windows 11 Home official retail license reference|Windows 11 Home|¥19,360|¥19,360（手動参考・現行未確認）|—|manual_reference_unverified|[価格比較ページ](https://www.microsoft.com/ja-jp/d/windows-11-home/dg7gmgf0krt0)|
-|PNY GeForce RTX 5060 Ti 16GB OC|VCG5060T16DFXPB1-O|¥109,800|¥134,800（検索スニペット参考のみ）|¥137,800（在庫切れ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001696163/) / [直接掲載ページ](https://www.dospara.co.jp/SBR1892/IC625088.html) / [検索ページ参考元](https://search.kakaku.com/PNY%20GeForce%20RTX%205060%20Ti%2016GB%20OC/)|
+|PNY GeForce RTX 5060 Ti 16GB OC|VCG5060T16DFXPB1-O|¥109,800|¥137,800|—|verified_retailer_listing_reference|[価格比較ページ](https://www.dospara.co.jp/SBR1892/IC625088.html)|
 
 互換性チェック:
 
@@ -96,7 +96,7 @@
 |Fractal Design Pop Air TG|FD-C-POA1A-02|¥12,000|¥13,311（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/J0000039064/) / [検索ページ参考元](https://search.kakaku.com/Fractal%20Design%20Pop%20Air%20TG/)|
 |Thermalright Peerless Assassin 120 SE V3|Peerless Assassin 120 SE V3|¥5,000|¥4,980（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001789043/) / [検索ページ参考元](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/)|
 |Windows 11 Home official retail license reference|Windows 11 Home|¥19,360|¥19,360（手動参考・現行未確認）|—|manual_reference_unverified|[価格比較ページ](https://www.microsoft.com/ja-jp/d/windows-11-home/dg7gmgf0krt0)|
-|PNY GeForce RTX 5070 Ti 16GB ARGB|VCG5070T16TFXXPB1-O|¥154,000|¥216,800（検索スニペット参考のみ）|¥216,800（在庫切れ）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001696164/) / [直接掲載ページ](https://www.dospara.co.jp/SBR1892/IC634895.html) / [検索ページ参考元](https://search.kakaku.com/PNY%20GeForce%20RTX%205070%20Ti%2016GB%20ARGB/)|
+|PNY GeForce RTX 5070 Ti 16GB ARGB|VCG5070T16TFXXPB1-O|¥154,000|¥216,800|—|verified_retailer_listing_reference|[価格比較ページ](https://www.dospara.co.jp/SBR1892/IC634895.html)|
 
 互換性チェック:
 
