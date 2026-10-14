@@ -113,9 +113,10 @@ jobs:
             # The final user-facing ranking is produced in ChatGPT when the user asks,
             # using the freshest repository data plus independent live-source checks.
             python scripts/report.py
+            # Refresh the DIY plan before any timing/scenario summaries use it.
+            python scripts/self_build_planner.py
             python scripts/timing_analysis.py
             python scripts/scenario_analysis.py
-            python scripts/self_build_planner.py
             python scripts/healthcheck.py
             python scripts/validate.py
             git diff --check

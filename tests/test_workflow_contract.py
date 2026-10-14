@@ -62,6 +62,19 @@ class WorkflowContractTests(unittest.TestCase):
         text = WORKFLOW.read_text(encoding="utf-8")
         self.assertIn("python scripts/peripheral_monitor.py", text)
 
+    def test_diy_planner_runs_before_derived_timing_and_scenarios(self):
+        for path in (
+            ROOT / ".github" / "workflows" / "pc-price-monitor.yml",
+            ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml",
+            ROOT / ".github" / "workflows" / "pc-price-tests.yml",
+        ):
+            text = path.read_text(encoding="utf-8")
+            planner_at = text.index("python scripts/self_build_planner.py")
+            timing_at = text.index("python scripts/timing_analysis.py")
+            scenario_at = text.index("python scripts/scenario_analysis.py")
+            self.assertLess(planner_at, timing_at, str(path))
+            self.assertLess(planner_at, scenario_at, str(path))
+
     def test_fast_workflow_has_no_duplicate_schedule(self):
         text = (ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml").read_text(encoding="utf-8")
         self.assertIn("workflow_dispatch:", text)
