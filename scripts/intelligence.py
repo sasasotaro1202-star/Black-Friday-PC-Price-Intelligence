@@ -15,14 +15,14 @@ def _initial_budget_settings():
     except Exception:
         cfg = {}
     try:
-        total = int(cfg.get("total_budget_jpy", 400000))
+        total = int(cfg.get("total_budget_jpy", 380000))
         peripherals = int(cfg.get("peripheral_budget_jpy", 69800))
         pc_cap = int(cfg.get("pc_budget_jpy", total - peripherals))
-        pc_target = int(cfg.get("pc_target_jpy", min(330200, pc_cap)))
+        pc_target = int(cfg.get("pc_target_jpy", min(310200, pc_cap)))
     except (TypeError, ValueError):
-        total, peripherals, pc_cap, pc_target = 400000, 69800, 330200, 330200
+        total, peripherals, pc_cap, pc_target = 380000, 69800, 310200, 310200
     if min(total, peripherals, pc_cap, pc_target) < 0 or pc_cap + peripherals != total or pc_target > pc_cap:
-        total, peripherals, pc_cap, pc_target = 400000, 69800, 330200, 330200
+        total, peripherals, pc_cap, pc_target = 380000, 69800, 310200, 310200
     return total, peripherals, pc_target, pc_cap
 
 TOTAL_BUDGET, PERIPHERAL_BUDGET, BUDGET, PC_BUDGET = _initial_budget_settings()
