@@ -123,14 +123,18 @@ class SelfBuildPlannerTests(unittest.TestCase):
 
     def test_search_fallback_records_provider_errors_and_zero_exact_matches(self):
         part = self.parts["cpu-ryzen7-9700x"]
-        with patch.object(component_monitor, "ddg_search", side_effect=TimeoutError("blocked")), patch.object(component_monitor, "bing_search", return_value=[]):
+        with patch.object(component_monitor, "fetch", side_effect=TimeoutError("fixture: no live Kakaku page")), \
+             patch.object(component_monitor, "ddg_search", side_effect=TimeoutError("blocked")), \
+             patch.object(component_monitor, "bing_search", return_value=[]):
             result = component_monitor.search_comparison_snippet(part, ("kakaku.com",))
         self.assertIsNotNone(result)
         diagnostics = result["search_diagnostics"]
-        self.assertEqual(len(diagnostics), 4)
-        self.assertEqual(diagnostics[0]["status"], "error")
-        self.assertEqual(diagnostics[0]["provider"], "duckduckgo")
-        self.assertEqual(diagnostics[1]["result_count"], 0)
+        self.assertEqual(len(diagnostics), 5)
+        self.assertEqual(diagnostics[0]["provider"], "kakaku_search_page")
+        duck = [item for item in diagnostics if item["provider"] == "duckduckgo"]
+        self.assertEqual(len(duck), 2)
+        self.assertEqual(duck[0]["status"], "error")
+        self.assertEqual(duck[1]["result_count"], 0)
         self.assertNotIn("price_jpy", result)
 
     def test_fetch_part_passes_allowlisted_search_domains_to_fallback(self):
@@ -171,15 +175,18 @@ class SelfBuildPlannerTests(unittest.TestCase):
             "title": "AMD Ryzen 7 9700X BOX 価格比較",
             "snippet": "型番 100-100001404WOF 最安価格 ¥39,980",
         }
-        with patch.object(component_monitor, "ddg_search", side_effect=[[], [result_row]]), patch.object(component_monitor, "bing_search", return_value=[]):
+        with patch.object(component_monitor, "fetch", side_effect=TimeoutError("fixture: no live Kakaku page")), \
+             patch.object(component_monitor, "ddg_search", side_effect=[[], [result_row]]), \
+             patch.object(component_monitor, "bing_search", return_value=[]):
             result = component_monitor.search_comparison_snippet(part, ("kakaku.com",))
         self.assertEqual(result["price_jpy"], 39980)
         self.assertEqual(result["search_provider"], "duckduckgo")
         self.assertEqual(result["source_role"], "comparison_site_search_snippet_reference")
         self.assertFalse(result["bf_actual_authorized"])
-        self.assertEqual(len(result["search_diagnostics"]), 4)
-        self.assertEqual(result["search_diagnostics"][0]["result_count"], 0)
-        self.assertEqual(result["search_diagnostics"][1]["result_count"], 1)
+        self.assertEqual(len(result["search_diagnostics"]), 5)
+        duck = [item for item in result["search_diagnostics"] if item["provider"] == "duckduckgo"]
+        self.assertEqual(duck[0]["result_count"], 0)
+        self.assertEqual(duck[1]["result_count"], 1)
 
     def test_search_snippet_can_reference_allowlisted_seller_with_exact_model_name(self):
         part = self.parts["cpu-ryzen7-9700x"]
@@ -188,7 +195,8 @@ class SelfBuildPlannerTests(unittest.TestCase):
             "title": "AMD Ryzen 7 9700X BOX",
             "snippet": "100-100001404WOF 最安価格 ¥39,980",
         }
-        with patch.object(component_monitor, "ddg_search", side_effect=[[], [seller_result]]), \
+        with patch.object(component_monitor, "fetch", side_effect=TimeoutError("fixture: no live Kakaku page")), \
+             patch.object(component_monitor, "ddg_search", side_effect=[[], [seller_result]]), \
              patch.object(component_monitor, "bing_search", return_value=[]), \
              patch.object(component_monitor, "verify_retailer_listing", return_value=None):
             found = component_monitor.search_comparison_snippet(part, ("kakaku.com", "dospara.co.jp"))
