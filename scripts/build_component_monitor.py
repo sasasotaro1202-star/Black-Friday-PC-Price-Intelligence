@@ -30,9 +30,8 @@ RETAILER_SEARCH_TEMPLATES = {
     "rakuten.co.jp": "https://search.rakuten.co.jp/search/mall/{query}/",
     "yodobashi.com": "https://www.yodobashi.com/?word={query}",
     "biccamera.com": "https://www.biccamera.com/bc/category/?q={query}",
-    "dospara.co.jp": "https://www.dospara.co.jp/search?q={query}",
     "tsukumo.co.jp": "https://shop.tsukumo.co.jp/search/?keyword={query}",
-    "pc-koubou.jp": "https://www.pc-koubou.jp/products/list.php?name={query}",
+    "pc-koubou.jp": "https://www.pc-koubou.jp/user_data/search.php?q={query}",
     "sofmap.com": "https://www.sofmap.com/search_result.aspx?keyword={query}",
     "joshinweb.jp": "https://joshinweb.jp/search.html?KEYWORD={query}",
     "ark-pc.co.jp": "https://www.ark-pc.co.jp/search/?key={query}",
@@ -601,9 +600,11 @@ def parse_retailer_search_page(part, html_body, source_url, domains, retailer_do
             continue
         metrics["identity_card_count"] += 1
         card_prices = _kakaku_card_prices(card_text, minimum, maximum)
-        if len(card_prices) != 1:
-            continue
-        metrics["price_unambiguous_card_count"] += 1
+        if len(card_prices) == 1:
+            metrics["price_unambiguous_card_count"] += 1
+        # Search-card price is never trusted as the listing price. Keep following
+        # the same-card product link even if search markup has no price or several
+        # prices; the detail page must independently verify identity, price and stock.
 
         anchors = [
             node for node in parser.nodes
@@ -642,7 +643,7 @@ def parse_retailer_search_page(part, html_body, source_url, domains, retailer_do
             links_out.append({
                 "url": destination,
                 "identity_anchor": identity,
-                "card_price_jpy": card_prices[0],
+                "card_price_jpy": card_prices[0] if len(card_prices) == 1 else None,
                 "source_url": source_url,
             })
     metrics["detail_link_count"] = len(links_out)
@@ -650,8 +651,6 @@ def parse_retailer_search_page(part, html_body, source_url, domains, retailer_do
         return finish(links_out[:3], "exact_identity_detail_link_found")
     if metrics["identity_card_count"] == 0:
         reason = "sku_identity_not_found_in_product_card"
-    elif metrics["price_unambiguous_card_count"] == 0:
-        reason = "matching_product_card_price_ambiguous_or_missing"
     else:
         reason = "no_allowed_product_detail_link"
     return finish([], reason)
@@ -969,7 +968,7 @@ def search_comparison_snippet(part, domains):
                 is_comparison_site = host == "kakaku.com" or host.endswith(".kakaku.com")
                 # Bound direct seller-page fetches so each scheduled run remains
                 # lightweight while checking a bounded number of imperfect search results.
-                if not is_comparison_site and direct_fetch_attempts < 2:
+                if not is_comparison_site and direct_fetch_attempts < 4:
                     direct_fetch_attempts += 1
                     offer = verify_retailer_listing(part, url, domains)
                     if offer and offer.get("url") not in {x.get("url") for x in verified_offers}:

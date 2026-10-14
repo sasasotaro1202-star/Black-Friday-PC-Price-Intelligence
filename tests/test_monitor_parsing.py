@@ -21,9 +21,10 @@ class MonitorParsingTests(unittest.TestCase):
         )
         with patch.object(monitor, "urlopen", side_effect=URLError("blocked")), \
              patch.object(monitor.time, "sleep"), \
-             patch.object(monitor.subprocess, "run", return_value=fake):
+             patch.object(monitor.subprocess, "run", return_value=fake) as mocked_run:
             with self.assertRaisesRegex(RuntimeError, "curl_exit_35.*SSL connect error"):
                 monitor.fetch("https://example.com/product", timeout=1)
+        self.assertIn("--http1.1", mocked_run.call_args.args[0])
 
     def test_bing_redirect_unpack_handles_a1_base64_url(self):
         import base64

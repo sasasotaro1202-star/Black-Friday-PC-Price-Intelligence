@@ -174,6 +174,34 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertEqual(links[0]["card_price_jpy"], 139800)
         self.assertEqual(diag["extraction_reason"], "exact_identity_detail_link_found")
 
+    def test_retailer_search_page_follows_identity_link_even_when_search_price_is_ambiguous(self):
+        html = (
+            "<html><body><ul class='product-list'>"
+            "<li class='product-item'><a href='/item/123'>"
+            "PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFXPB1-O</a>"
+            "<span>価格は商品ページでご確認ください</span></li>"
+            "</ul></body></html>"
+        )
+        links, diag = bcm.parse_retailer_search_page(
+            self.part, html, "https://www.sofmap.com/search_result.aspx?keyword=PNY",
+            ("sofmap.com",), "sofmap.com",
+        )
+        self.assertEqual(len(links), 1)
+        self.assertEqual(links[0]["url"], "https://www.sofmap.com/item/123")
+        self.assertIsNone(links[0]["card_price_jpy"])
+        self.assertEqual(diag["identity_card_count"], 1)
+        self.assertEqual(diag["price_unambiguous_card_count"], 0)
+        self.assertEqual(diag["extraction_reason"], "exact_identity_detail_link_found")
+
+    def test_pc_koubou_retailer_search_url_uses_official_search_endpoint(self):
+        urls = bcm.build_retailer_search_urls(
+            self.part, ("pc-koubou.jp",), limit=1
+        )
+        self.assertEqual(len(urls), 1)
+        self.assertEqual(urls[0]["url"].split("?")[0],
+                         "https://www.pc-koubou.jp/user_data/search.php")
+        self.assertIn("?q=", urls[0]["url"])
+
     def test_component_direct_text_parser_accepts_sub_50000_part_price_near_identity(self):
         part = {
             "id": "motherboard-test", "name": "ASRock B850M Pro RS WiFi",

@@ -74,7 +74,7 @@ def fetch(url, timeout=18):
     # transport fallback; candidate URLs still come exclusively from the
     # curated watchlist/catalog.
     cmd = [
-        "curl", "-L", "--compressed", "-sS",
+        "curl", "-L", "--http1.1", "--compressed", "-sS",
         "--connect-timeout", str(min(10, timeout)),
         "--max-time", str(timeout),
         "-A", (
