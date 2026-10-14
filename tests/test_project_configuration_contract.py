@@ -57,6 +57,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
             "SELF_BUILD_REQUIRED_FOR_PRIMARY_RECOMMENDATION",
         )
         self.assertEqual(profile["bto_role"], "REFERENCE_BENCHMARK_ONLY")
+        self.assertIn("shopping.yahoo.co.jp", profile["allowed_search_reference_domains"])
 
     def test_primary_build_subtotal_counts_one_gpu_only(self):
         parts_by_id = {item["id"]: item for item in self.build["parts"]}
