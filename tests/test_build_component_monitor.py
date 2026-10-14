@@ -237,7 +237,9 @@ class BuildComponentMonitorTests(unittest.TestCase):
         part["direct_retailer_urls"] = ["https://evil.example/fake-product"]
         with patch.object(bcm, "verify_retailer_listing") as verify, \
              patch.object(bcm, "fetch") as fetcher, \
-             patch.object(bcm, "build_retailer_search_urls") as rotate:
+             patch.object(bcm, "build_retailer_search_urls") as rotate, \
+             patch.object(bcm, "bing_search", return_value=[]), \
+             patch.object(bcm, "ddg_search", return_value=[]):
             result = bcm.search_comparison_snippet(part, ("dospara.co.jp",))
         verify.assert_not_called()
         fetcher.assert_not_called()
