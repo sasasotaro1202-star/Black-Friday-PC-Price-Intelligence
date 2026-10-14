@@ -449,6 +449,36 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertEqual(offer["stock_status"], "in_stock")
         self.assertEqual(offer["source_role"], "direct_retailer_listing_reference")
 
+    def test_teamgroup_ram_ymall_primary_title_matches_exact_kit_alias(self):
+        part = {
+            "id": "memory-teamgroup-ddr5-32gb-6000",
+            "category": "memory",
+            "name": "TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)",
+            "model_code": "CTCWD532G6000HC38ADC01",
+            "aliases": [
+                "T-CREATE EXPERT White 32GB",
+                "CTCWD532G6000HC38ADC01",
+                "DDR5-6000 32GB",
+                "TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応",
+            ],
+            "identity_terms": [
+                "T-CREATE EXPERT White 32GB",
+                "CTCWD532G6000HC38ADC01",
+                "TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応",
+            ],
+        }
+        html = """
+        <html><head><title>YMALL 商品ページ</title></head><body>
+          <h1>TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応：[MLYモール]</h1>
+          <div>販売価格（税込）113,938円</div>
+        </body></html>
+        """
+        anchor = bcm.component_primary_identity_anchor(part, html)
+        self.assertEqual(
+            anchor,
+            "TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応",
+        )
+
     def test_primary_h1_mismatch_cannot_be_overridden_by_matching_og_title(self):
         html = """
         <html><head>
