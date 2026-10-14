@@ -433,6 +433,13 @@ def build_plan(config=None, price_snapshot=None, now=None):
             str(cid) for cid in fixed_ids
             if (parts.get(str(cid)) or {}).get("category") == "memory"
         ]
+    # If a new/malformed memory-choice list omits every candidate, retain the
+    # configured primary only when its exact part ID exists and is a memory kit.
+    # Never produce a complete PC plan with RAM silently omitted.
+    if not memory_choice_ids:
+        configured_primary_id = str(profile.get("primary_memory_choice_id") or "")
+        if configured_primary_id in parts and parts[configured_primary_id].get("category") == "memory":
+            memory_choice_ids = [configured_primary_id]
     primary_memory_id = profile.get("primary_memory_choice_id")
     if primary_memory_id not in memory_choice_ids:
         primary_memory_id = memory_choice_ids[0] if memory_choice_ids else None
