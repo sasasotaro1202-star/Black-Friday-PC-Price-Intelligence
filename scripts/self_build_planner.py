@@ -214,6 +214,7 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
             "retrieval_time": iso(checked_at) if checked_at else None,
             "reference_age_minutes": age_minutes(part.get("reference_price_checked_at"), now),
             "purchase_url": part.get("reference_price_url") if trusted_manual else None,
+            "direct_listing_validation_diagnostics": [],
         }
     row = by_id.get(str(part.get("id") or "")) or {}
     trusted_comparison = trusted_market_reference(row, now, max_age)
@@ -239,6 +240,27 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
         else "comparison_site_reference"
     )
     snippet_price = row.get("search_snippet_reference_price_jpy")
+    direct_diagnostics = []
+    for item in (row.get("search_diagnostics") or []):
+        if not isinstance(item, dict) or item.get("provider") != "configured_direct_retailer":
+            continue
+        validation = item.get("validation") if isinstance(item.get("validation"), dict) else {}
+        direct_diagnostics.append({
+            "url": str(item.get("url") or "")[:240] or None,
+            "status": str(item.get("status") or "unknown"),
+            "reason_code": (
+                item.get("error") or validation.get("reason_code")
+                or ("exact_identity_direct_price_and_pit_verified" if item.get("status") == "verified" else None)
+            ),
+            "page_name": str(validation.get("page_name") or "")[:160] or None,
+            "price_source_mode": validation.get("price_source_mode"),
+            "parsed_price_jpy": validation.get("parsed_price_jpy"),
+            "stock_status": item.get("stock_status") or validation.get("stock_status") or "unknown",
+            "structured_stock_status": validation.get("structured_stock_status"),
+            "text_stock_status": validation.get("text_stock_status"),
+            "error_type": validation.get("error_type"),
+            "error_message": str(validation.get("error_message") or "")[:180] or None,
+        })
     snippet_only = bool(
         not trusted and row.get("price_validation_status") == "search_snippet_reference"
         and row.get("identity_match") is True and row.get("search_snippet_identity_anchor")
@@ -284,7 +306,8 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
         "direct_listing_display_age_minutes": direct_display_offer.get("display_age_minutes") if direct_display_offer else None,
         "direct_listing_display_price_context": direct_display_offer.get("price_context") if direct_display_offer else None,
         "direct_listing_display_is_estimate_eligible": False,
-        "direct_listing_display_purchase_allowed": False
+        "direct_listing_display_purchase_allowed": False,
+        "direct_listing_validation_diagnostics": direct_diagnostics,
     }
 
 
@@ -571,8 +594,8 @@ def render_plan_markdown(plan):
           "- 周辺機器込み目標: " + money(build.get("target_all_in_jpy")) + " / 残額 " + money(build.get("target_remaining_budget_jpy")),
           "- 現在の比較参考合計: " + (money(build.get("market_reference_estimate_jpy")) + "（決済見積ではない）" if build.get("market_reference_estimate_jpy") is not None else "未算出。部品価格の欠落・不一致・古さを0円補完しない"),
           "- 互換性: " + str(build.get("compatibility_status")) + " / 判定: " + str(build.get("decision")), "",
-          "|部品|型番|BF目標|検証済み/表示専用参考値|直接掲載価格（在庫条件未達・推定不採用）|確認状態|リンク|",
-          "|---|---|---:|---:|---|---|---|"])
+          "|部品|型番|BF目標|検証済み/表示専用参考値|直接掲載価格（在庫条件未達・推定不採用）|確認状態|直接取得診断|リンク|",
+          "|---|---|---:|---:|---|---|---|---|"])
         for part in build.get("components") or []:
             p = part.get("display_reference_price_jpy")
             if part.get("price_status") == "manual_reference_unverified":
@@ -597,10 +620,27 @@ def render_plan_markdown(plan):
             if search_url and search_url != url:
                 links.append("[検索ページ参考元](" + search_url + ")")
             link = " / ".join(links) if links else "—"
-            lines.append("|{}|{}|{}|{}|{}|{}|{}|".format(
+            diagnostic_texts = []
+            for diagnostic in part.get("direct_listing_validation_diagnostics") or []:
+                status = str(diagnostic.get("status") or "unknown")
+                reason = str(diagnostic.get("reason_code") or "reason_unavailable")
+                detail = status + ": " + reason
+                stock = diagnostic.get("stock_status")
+                if stock:
+                    detail += " / stock=" + str(stock)
+                if diagnostic.get("error_type"):
+                    detail += " / " + str(diagnostic["error_type"])
+                if diagnostic.get("error_message"):
+                    detail += " / " + str(diagnostic["error_message"])
+                # Keep the Markdown table valid and mobile-readable.
+                diagnostic_texts.append(
+                    re.sub(r"\\s+", " ", detail).replace("|", "/")[:260]
+                )
+            diagnostic_text = "; ".join(diagnostic_texts) if diagnostic_texts else "—"
+            lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|".format(
                 part.get("name"), part.get("model_code") or "—",
                 money(part.get("target_price_jpy")), price_text, direct_text,
-                part.get("price_status"), link
+                part.get("price_status"), diagnostic_text, link
             ))
         lines.extend(["", "互換性チェック:", ""])
         for check in build.get("compatibility_checks") or []:
