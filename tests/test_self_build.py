@@ -53,6 +53,35 @@ class SelfBuildPlannerTests(unittest.TestCase):
             "price_monitored_alternative",
         )
 
+    def test_cheapest_fresh_verified_memory_reference_is_selected(self):
+        rows = self._verified_hardware_rows(self.config)
+        rows_by_id = {row["id"]: row for row in rows}
+        crucial_id = "memory-crucial-pro-ddr5-32gb-6000"
+        teamgroup_id = "memory-teamgroup-ddr5-32gb-6000"
+        rows_by_id[crucial_id]["market_reference_price_jpy"] = 82000
+        rows_by_id[teamgroup_id]["market_reference_price_jpy"] = 72000
+        plan = planner.build_plan(
+            self.config, {"generated_at": NOW.isoformat(), "products": rows}, now=NOW
+        )
+        main = next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")
+        components = {component["id"]: component for component in main["components"]}
+        self.assertIn(teamgroup_id, components)
+        self.assertNotIn(crucial_id, components)
+        self.assertEqual(main["selected_memory_id"], teamgroup_id)
+        self.assertEqual(main["memory_choice_method"], "lowest_fresh_verified_market_reference")
+        self.assertEqual(main["target_pc_total_jpy"], 300600)
+        self.assertEqual(main["target_all_in_jpy"], 370400)
+        self.assertEqual(main["compatibility_status"], "PASS")
+        self.assertFalse(main["buy_now_authorized"])
+
+    def test_no_trusted_memory_reference_keeps_crucial_primary(self):
+        plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
+        main = next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")
+        self.assertEqual(main["selected_memory_id"], "memory-crucial-pro-ddr5-32gb-6000")
+        self.assertEqual(main["memory_choice_method"], "primary_memory_fallback_no_verified_market_reference")
+        self.assertEqual(main["target_pc_total_jpy"], 320600)
+        self.assertFalse(main["buy_now_authorized"])
+
     def test_diy_is_primary_and_assembly_time_has_zero_penalty(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         policy = plan["purchase_method_policy"]
