@@ -1,4 +1,5 @@
 import hashlib
+import html
 import json
 import os
 from datetime import datetime
@@ -16,6 +17,21 @@ def sales_url(item):
     """Return only a real HTTP(S) product URL; never fabricate a purchase URL."""
     url = str(item.get("url") or "").strip()
     return url if url.startswith(("https://", "http://")) else None
+
+
+def image_markup(item, fallback_url=None, width=88):
+    """Render only explicitly configured HTTPS product images; never guess image URLs."""
+    item = item if isinstance(item, dict) else {}
+    image_url = str(item.get("image_url") or "").strip()
+    if not image_url.startswith("https://"):
+        return "画像未確認"
+    source_url = str(item.get("image_source_url") or fallback_url or "#").strip()
+    if not source_url.startswith("https://"):
+        source_url = "#"
+    alt = html.escape(str(item.get("name") or "商品画像"), quote=True)
+    return '<a href="{}"><img src="{}" alt="{}" width="{}"></a>'.format(
+        html.escape(source_url, quote=True), html.escape(image_url, quote=True), alt, int(width)
+    )
 
 
 def build_purchase_method_policy(profile):
@@ -758,10 +774,10 @@ def main():
         "",
         "## 周辺機器の価格監視（サブモニターあり・ヘッドセットなし）",
         "",
-        "|項目|BF購入目標価格|観測価格（BF前は参考）|在庫|価格確認|購入ページ|",
-        "|---|---:|---:|---|---|---|",
+        "|画像|項目|BF購入目標価格|観測価格（BF前は参考）|在庫|価格確認|購入ページ|",
+        "|---|---|---:|---:|---|---|---|",
         *[
-            f"|{p['name']}|¥{p['target_price_jpy']:,}|{('¥'+format(p['current_price_jpy'],',')) if p.get('current_price_jpy') is not None else '—（目標額で仮計算）'}|{p.get('stock_status','unknown')}|{('確認済み' if p.get('price_verified') else '未確認')}|{('[商品ページ]('+p['purchase_url']+')') if p.get('purchase_url') else '予算枠のみ'}|"
+            f"|{image_markup(next((t for t in (target_config.get('peripherals') or []) if str(t.get('id')) == str(p.get('id'))), {}), p.get('purchase_url'), 84)}|{p['name']}|¥{p['target_price_jpy']:,}|{('¥'+format(p['current_price_jpy'],',')) if p.get('current_price_jpy') is not None else '—（目標額で仮計算）'}|{p.get('stock_status','unknown')}|{('確認済み' if p.get('price_verified') else '未確認')}|{('[商品ページ]('+p['purchase_url']+')') if p.get('purchase_url') else '予算枠のみ'}|"
             for p in peripheral_projection["peripherals"]
         ],
         "",
@@ -838,8 +854,8 @@ def main():
         peripheral_category_lines += [
             f"### {group_name}",
             "",
-            "|順位|総合点|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|",
-            "|---:|---:|---|---:|---:|---|---|---|---|",
+            "|順位|総合点|画像|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|",
+            "|---:|---:|---|---|---:|---:|---|---|---|---|",
         ]
         for rank, candidate_id in enumerate(candidate_ids, 1):
             target = all_peripheral_targets[candidate_id]
@@ -851,12 +867,13 @@ def main():
             target_price = int(target.get("target_price_jpy") or 0)
             url = target.get("purchase_url") or target.get("monitor_url")
             product_link = f"[商品ページ]({url})" if isinstance(url, str) and url.startswith("https://") else "リンク未設定"
+            image_html = image_markup(target, url, 88)
             suffix = "（主予算候補）" if candidate_id in mandatory_ids else "（代替候補）"
             score = target.get("ranking_score_100")
             score_text = f"**{int(score)}/100**" if isinstance(score, (int, float)) and not isinstance(score, bool) and 0 <= score <= 100 else "未評価"
             reason = str(target.get("ranking_reason") or target.get("target_price_note") or "").replace("|", "/").replace("\\n", " ").strip()
             peripheral_category_lines.append(
-                f"|{rank}|{score_text}|{target.get('name', candidate_id)}{suffix}|¥{target_price:,}|{price_text}|{stock_text}|{verified_text}|{reason}|{product_link}|"
+                f"|{rank}|{score_text}|{image_html}|{target.get('name', candidate_id)}{suffix}|¥{target_price:,}|{price_text}|{stock_text}|{verified_text}|{reason}|{product_link}|"
             )
         peripheral_category_lines.append("")
     peripheral_category_lines += [
