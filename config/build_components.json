@@ -314,10 +314,12 @@
         "speed_mts": 6000,
         "profile": "EXPO"
       },
-      "notes": "16GB×2のデュアルチャネル。メモリ市況の急変はBF目標に反映し、価格を推測しない。 YMallの型番一致候補ページを直接監視。正確な型番・価格・販売状態を実ページで確認できなければ未検証のまま保持する。",
+      "notes": "16GB×2のデュアルチャネル。メモリ市況の急変はBF目標に反映し、価格を推測しない。 YMallの型番一致候補ページを直接監視。正確な型番・価格・販売状態を実ページで確認できなければ未検証のまま保持する。 メーカー公式ページで型番・32GB(16GB×2)・DDR5-6000・CL38を再照合。YMallは販売可否を実行時検証し、在庫/価格が取得不能なら未確認を維持。",
       "direct_retailer_urls": [
         "https://ymall.jp/store/mlymall/b0chf9th1b-20260811/"
-      ]
+      ],
+      "spec_source_url": "https://www.teamgroupinc.com/jp/product-detail/memory/T-CREATE/expert-u-dimm-ddr5-white/expert-u-dimm-ddr5-white-CTCWD532G6000HC38ADC01/",
+      "spec_source_verified_at": "2026-10-14"
     },
     {
       "id": "ssd-crucial-p3-plus-1tb",
@@ -344,9 +346,10 @@
         "interface": "NVMe PCIe 4.0",
         "form_factor": "M.2 2280"
       },
-      "notes": "最初から1TB。OS・開発環境・ゲーム用途を想定。 TSUKUMOの型番一致商品ページを直接監視。在庫切れや完売の表示価格は市場参考値・購入可能価格として使用しない。",
+      "notes": "最初から1TB。OS・開発環境・ゲーム用途を想定。 TSUKUMOの型番一致商品ページを直接監視。在庫切れや完売の表示価格は市場参考値・購入可能価格として使用しない。 TSUKUMOとドスパラの型番一致商品ページを直接監視。ドスパラ掲載は現在在庫なしの参考なので、購入可能価格に格上げしない。",
       "direct_retailer_urls": [
-        "https://shop.tsukumo.co.jp/goods/0649528918970/"
+        "https://shop.tsukumo.co.jp/goods/0649528918970/",
+        "https://www.dospara.co.jp/SBR1144/IC481159.html"
       ]
     },
     {
@@ -415,9 +418,10 @@
         "gpu_clearance_mm": 405,
         "cooler_clearance_mm": 170
       },
-      "notes": "エアフロー優先。ケース正確な型番、付属ファンとクリアランスを購入直前に再確認。 ヨドバシの型番一致商品ページも直接監視。取寄せ表示は購入可能在庫として扱わない。",
+      "notes": "エアフロー優先。ケース正確な型番、付属ファンとクリアランスを購入直前に再確認。 ヨドバシの型番一致商品ページも直接監視。取寄せ表示は購入可能在庫として扱わない。 ヨドバシに加えてドスパラの型番一致商品ページを直接監視し、在庫あり・送料・出荷表示を再検証する。",
       "direct_retailer_urls": [
-        "https://www.yodobashi.com/product/100000001007195271/"
+        "https://www.yodobashi.com/product/100000001007195271/",
+        "https://www.dospara.co.jp/SBR1959/IC480986.html"
       ]
     },
     {
