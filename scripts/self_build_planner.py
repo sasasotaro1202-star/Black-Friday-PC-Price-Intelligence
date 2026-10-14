@@ -347,14 +347,16 @@ def section_from_plan(plan):
 def insert_section(report, section):
     start, end = report.find(START_MARKER), report.find(END_MARKER)
     if start >= 0 and end >= start:
-        report = report[:start] + report[end+len(END_MARKER):]
+        # Strip the generated block and normalize surrounding newlines.
+        left = report[:start].rstrip()
+        right = report[end + len(END_MARKER):].lstrip("\n")
+        report = left + ("\n\n" if left and right else "\n" if left else "") + right
     heading = "## 監視中の最高スコア候補"
     if heading in report:
         at = report.index(heading)
         return report[:at] + section + "\n\n" + report[at:]
     first_h2 = report.find("\n## ")
     return report[:first_h2+1] + section + "\n\n" + report[first_h2+1:] if first_h2 >= 0 else report.rstrip()+"\n\n"+section+"\n"
-
 
 def main():
     config = load_json(CONFIG_PATH, {})
