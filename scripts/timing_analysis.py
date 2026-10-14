@@ -969,6 +969,16 @@ def render_buy_now_markdown(decision):
     ]
     for blocker in diy.get("blockers") or []:
         diy_lines.append("- " + str(blocker))
+    try:
+        display_only_count = int(diy.get("display_only_search_reference_count", 0) or 0)
+    except (TypeError, ValueError):
+        display_only_count = 0
+    if display_only_count > 0:
+        diy_lines.append(
+            "- **明示ステータス:** 検索ページ表示値のみ（検証価格なし） — "
+            + str(display_only_count)
+            + "件。商品詳細ページの直接価格・在庫を検証できていないため、相場推定・目標差・購入判定には使いません。"
+        )
     diy_lines += [
         "",
         "### 部品別のBF購入目標・比較参考値・値下がり履歴",
