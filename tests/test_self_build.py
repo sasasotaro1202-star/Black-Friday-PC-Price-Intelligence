@@ -133,6 +133,37 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(diagnostics[1]["result_count"], 0)
         self.assertNotIn("price_jpy", result)
 
+    def test_fetch_part_passes_allowlisted_search_domains_to_fallback(self):
+        part = self.parts["cpu-ryzen7-9700x"]
+        html = "<html>fixture</html>"
+        raw = {
+            "name": part["name"],
+            "page_text_excerpt": "100-100001404WOF",
+            "price_jpy": None,
+            "stock_status": "unknown",
+            "price_source_mode": "none",
+        }
+        snippet = {
+            "price_jpy": 39980,
+            "url": part["monitor_url"],
+            "title": "AMD Ryzen 7 9700X BOX",
+            "identity_anchor": "100-100001404WOF",
+            "search_provider": "duckduckgo",
+            "query": "AMD Ryzen 7 9700X BOX 100-100001404WOF",
+            "search_diagnostics": [{"provider": "duckduckgo", "result_count": 1}],
+        }
+        search_domains = ("kakaku.com", "dospara.co.jp")
+        with patch.object(component_monitor, "fetch", return_value=(html, part["monitor_url"], {})), \
+             patch.object(component_monitor, "parse_page", return_value=raw), \
+             patch.object(component_monitor, "search_comparison_snippet", return_value=snippet) as search:
+            result = component_monitor.fetch_part(part, ("kakaku.com",), search_domains)
+        search.assert_called_once_with(part, search_domains)
+        self.assertEqual(result["price_validation_status"], "search_snippet_reference")
+        self.assertEqual(result["search_snippet_reference_price_jpy"], 39980)
+        self.assertEqual(result["search_snippet_reference_url"], part["monitor_url"])
+        self.assertFalse(result["bf_actual_authorized"])
+        self.assertEqual(result["source_role"], "comparison_site_reference")
+
     def test_search_fallback_tries_alternate_query_and_preserves_display_only_source(self):
         part = self.parts["cpu-ryzen7-9700x"]
         result_row = {
