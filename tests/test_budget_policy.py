@@ -36,6 +36,22 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(strategy["priority_plans"][1]["last_verified_listing_reference_jpy"], 304800)
         self.assertFalse(strategy["outlier_rule"]["zero_cost_upgrade_assumption_allowed"])
 
+    def test_budget_notes_and_dark_horse_caps_match_40man_policy(self):
+        strategy = self.cfg["purchase_strategy"]
+        self.assertIn("40万円", strategy["purpose"])
+        self.assertNotIn("38万円", strategy["purpose"])
+        self.assertEqual(strategy["outlier_rule"]["black_friday_target_cap_jpy"], self.cfg["pc_target_jpy"])
+        self.assertEqual(strategy["ai_vram_outlier_rule"]["black_friday_target_cap_jpy"], self.cfg["pc_target_jpy"])
+        for plan in strategy["priority_plans"]:
+            self.assertEqual(plan["black_friday_target_price_jpy"], self.cfg["pc_target_jpy"])
+            self.assertEqual(plan["black_friday_planned_hard_cap_jpy"], self.cfg["pc_target_jpy"])
+            self.assertIn("330,200円", plan["black_friday_target_note"])
+            self.assertNotIn("310,200円", plan["black_friday_target_note"])
+        notes_by_candidate = {x["candidate_id"]: x["black_friday_target_note"] for x in strategy["priority_plans"]}
+        self.assertIn("目標までの差は25,400円", notes_by_candidate["desktop-gtune-dg-a7g70-5070"])
+        self.assertIn("残り目安は30,400円", notes_by_candidate["desktop-gtune-dg-i7g70-5070"])
+        self.assertIn("差は20,400円", notes_by_candidate["desktop-gtune-fg-a7g6t-5060ti16"])
+
     def test_dg_i7g70_high_cpu_outlier_is_explicitly_tracked(self):
         strategy = self.cfg["purchase_strategy"]
         plan = next(x for x in strategy["priority_plans"] if x["candidate_id"] == "desktop-gtune-dg-i7g70-5070")
