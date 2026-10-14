@@ -261,6 +261,17 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertIn("data/build_component_observations.jsonl", guide)
         self.assertIn("data/peripheral_change_events.jsonl", guide)
         self.assertIn("公式キャンペーン期間内の確認済み価格", guide)
+        for required in (
+            "ランキング依頼時の必須出力契約",
+            "確認時刻（JST）",
+            "RTX 5070 Ti 16GB",
+            "電源タップ",
+            "BF期間内の確認済み価格",
+            "最終決済額",
+            "候補としての比較を分けます",
+            "画像",
+        ):
+            self.assertIn(required, guide)
         for path in (
             ".github/workflows/pc-price-monitor.yml",
             ".github/workflows/pc-price-monitor-bf-fast.yml",
