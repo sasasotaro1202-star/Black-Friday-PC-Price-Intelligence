@@ -7,7 +7,7 @@ import subprocess
 import time
 import base64
 from html.parser import HTMLParser
-from urllib.parse import quote, parse_qs, urlparse
+from urllib.parse import quote, parse_qs, urlparse, unquote
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -222,22 +222,46 @@ class BingSearchParser(HTMLParser):
 
 
 def _unpack_bing_url(url):
-    """Resolve Bing's base64 redirect parameter when present; otherwise keep the URL."""
+    """Resolve common Bing redirect formats while refusing malformed destinations."""
+    original = str(url or "")
     try:
-        parsed = urlparse(url)
-        if not (parsed.hostname or "").lower().endswith("bing.com"):
-            return url
-        params = parse_qs(parsed.query)
+        parsed = urlparse(original)
+        host = (parsed.hostname or "").lower()
+        if not (host == "bing.com" or host.endswith(".bing.com")):
+            return original
+        params = parse_qs(parsed.query, keep_blank_values=True)
+
+        # Current organic result redirects commonly use u=a1 + URL-safe base64.
         encoded = (params.get("u") or [""])[0]
-        if encoded.startswith("a1"):
-            raw = encoded[2:]
-            raw += "=" * ((4 - len(raw) % 4) % 4)
-            decoded = base64.urlsafe_b64decode(raw.encode("ascii")).decode("utf-8", errors="replace")
-            if decoded.startswith(("https://", "http://")):
-                return decoded
+        if encoded:
+            variants = [encoded[2:]] if encoded.startswith("a1") else [encoded]
+            for candidate in variants:
+                if not candidate:
+                    continue
+                try:
+                    raw = candidate + "=" * ((4 - len(candidate) % 4) % 4)
+                    decoded = base64.urlsafe_b64decode(raw.encode("ascii")).decode("utf-8", errors="replace")
+                    decoded = unquote(decoded).strip()
+                    decoded_host = (urlparse(decoded).hostname or "").lower()
+                    if decoded.startswith(("https://", "http://")) and decoded_host and not (
+                        decoded_host == "bing.com" or decoded_host.endswith(".bing.com")
+                    ):
+                        return decoded
+                except Exception:
+                    continue
+
+        # Some Bing layouts use ordinary URL-encoded redirect keys.
+        for key in ("url", "target", "r", "redirect", "ru"):
+            for candidate in params.get(key) or []:
+                decoded = unquote(candidate).strip()
+                decoded_host = (urlparse(decoded).hostname or "").lower()
+                if decoded.startswith(("https://", "http://")) and decoded_host and not (
+                    decoded_host == "bing.com" or decoded_host.endswith(".bing.com")
+                ):
+                    return decoded
     except Exception:
         pass
-    return url
+    return original
 
 
 def bing_search(query, timeout=9):
