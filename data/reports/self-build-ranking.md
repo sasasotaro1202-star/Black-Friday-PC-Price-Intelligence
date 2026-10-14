@@ -1,6 +1,6 @@
 # 自作PCパーツ構成・価格監視
 
-更新: 2026-10-14T22:33:02+09:00
+更新: 2026-10-14T22:35:57+09:00
 予算: PC本体 ¥330,200 / 周辺機器 ¥69,800 / 総額 ¥400,000
 
 **購入方式:** 自作PCを正式な本命として最適化します。組み立て時間・作業時間は減点しません。BTOは同等仕様での総額・部品品質・保証のベンチマークとして比較し、便利さだけを理由に自作から切り替えません。
@@ -9,14 +9,14 @@
 
 |順位|構成|部品目標小計|PC本体目標総額|周辺機器込み目標|目標残額|比較参考合計|互換性|判定|
 |---:|---|---:|---:|---:|---:|---:|---|---|
-|1|自作本命：Ryzen 7 9700X + RTX 5070 12GB|¥296,160|¥305,160|¥374,960|¥25,040|未確認|PASS|WAIT_FOR_MARKET_REFERENCE|
-|2|自作VRAM案：Ryzen 7 9700X + RTX 5060 Ti 16GB|¥276,160|¥285,160|¥354,960|¥45,040|未確認|PASS|WAIT_FOR_MARKET_REFERENCE|
-|3|自作大穴：Ryzen 7 9700X + RTX 5070 Ti 16GB|¥320,360|¥329,360|¥399,160|¥840|未確認|REVIEW|WAIT_FOR_COMPATIBILITY_REVIEW|
+|1|自作本命：Ryzen 7 9700X + RTX 5070 12GB|¥291,600|¥300,600|¥370,400|¥29,600|未確認|PASS|WAIT_FOR_MARKET_REFERENCE|
+|2|自作VRAM案：Ryzen 7 9700X + RTX 5060 Ti 16GB|¥271,600|¥280,600|¥350,400|¥49,600|未確認|PASS|WAIT_FOR_MARKET_REFERENCE|
+|3|自作大穴：Ryzen 7 9700X + RTX 5070 Ti 16GB|¥315,800|¥324,800|¥394,600|¥5,400|未確認|REVIEW|WAIT_FOR_COMPATIBILITY_REVIEW|
 
 ## 自作本命：Ryzen 7 9700X + RTX 5070 12GB
 
-- PC本体目標（送料・小物予備費込み）: ¥305,160
-- 周辺機器込み目標: ¥374,960 / 残額 ¥25,040
+- PC本体目標（送料・小物予備費込み）: ¥300,600
+- 周辺機器込み目標: ¥370,400 / 残額 ¥29,600
 - 現在の比較参考合計: 未算出。部品価格の欠落・不一致・古さを0円補完しない
 - 互換性: PASS / 判定: WAIT_FOR_MARKET_REFERENCE
 
@@ -24,13 +24,13 @@
 |---|---|---:|---:|---|---|---|---|
 |AMD Ryzen 7 9700X BOX|100-100001404WOF|¥38,000|¥67,890（検索スニペット参考のみ）|¥53,110（在庫未確認）|search_snippet_reference_only|verified: exact_identity_direct_price_and_pit_verified / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001630332/) / [直接掲載ページ](https://www.yodobashi.com/product/100000001008661707/) / [検索ページ参考元](https://search.kakaku.com/AMD%20Ryzen%207%209700X%20BOX/)|
 |ASRock B850M Pro RS WiFi|B850M Pro RS WiFi|¥20,000|¥23,780（検索スニペット参考のみ）|¥26,990（在庫未確認）|search_snippet_reference_only|verified: exact_identity_direct_price_and_pit_verified / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001669878/) / [直接掲載ページ](https://www.yodobashi.com/product/100000001008871801/) / [検索ページ参考元](https://search.kakaku.com/ASRock%20B850M%20Pro%20RS%20WiFi/)|
-|TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)|CTCWD532G6000HC38ADC01|¥40,000|未取得|—|missing|unverified: exact_model_identity_not_found_in_primary_page / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001610896/)|
-|Crucial P3 Plus CT1000P3PSSD8JP 1TB|CT1000P3PSSD8JP|¥18,000|¥33,600（検索スニペット参考のみ）|¥9,300（在庫切れ）|search_snippet_reference_only|unverified: fetch_error / stock=unknown / RemoteDisconnected / Remote end closed connection without response; verified: exact_identity_direct_price_and_pit_verified / stock=out_of_stock|[価格比較ページ](https://kakaku.com/item/K0001466997/) / [直接掲載ページ](https://www.dospara.co.jp/SBR1144/IC481159.html) / [検索ページ参考元](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/)|
+|TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)|CTCWD532G6000HC38ADC01|¥40,000|未取得|—|missing|unverified: exact_model_identity_not_found_in_primary_page / stock=unknown; unverified: direct_price_missing_or_not_integer / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001610896/)|
+|Crucial P3 Plus CT1000P3PSSD8JP 1TB|CT1000P3PSSD8JP|¥18,000|¥33,600（検索スニペット参考のみ）|¥32,769（在庫未確認）|search_snippet_reference_only|unverified: fetch_error / stock=unknown / RemoteDisconnected / Remote end closed connection without response; verified: exact_identity_direct_price_and_pit_verified / stock=out_of_stock; verified: exact_identity_direct_price_and_pit_verified / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001466997/) / [直接掲載ページ](https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094) / [検索ページ参考元](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/)|
 |Corsair RM850e 2025 850W ATX 3.1 Gold|CP-9020296-JP|¥14,000|¥14,980|—|verified_retailer_listing_reference|verified: exact_identity_direct_price_and_pit_verified / stock=in_stock; unverified: direct_price_missing_or_not_integer / stock=unknown|[価格比較ページ](https://www.dospara.co.jp/SBR83/IC519918.html)|
 |Fractal Design Pop Air TG|FD-C-POA1A-02|¥12,000|¥13,180|—|verified_retailer_listing_reference|verified: exact_identity_direct_price_and_pit_verified / stock=preorder_or_backorder; verified: exact_identity_direct_price_and_pit_verified / stock=in_stock|[価格比較ページ](https://www.dospara.co.jp/SBR1959/IC480986.html)|
 |Thermalright Peerless Assassin 120 SE V3|Peerless Assassin 120 SE V3|¥5,000|¥4,980（検索スニペット参考のみ）|¥4,980（在庫切れ）|search_snippet_reference_only|verified: exact_identity_direct_price_and_pit_verified / stock=out_of_stock|[価格比較ページ](https://kakaku.com/item/K0001789043/) / [直接掲載ページ](https://www.dospara.co.jp/SBR1968/IC645423.html) / [検索ページ参考元](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/)|
-|Windows 11 Home official retail license reference|Windows 11 Home|¥19,360|¥19,360（手動参考・現行未確認）|—|manual_reference_unverified|—|[価格比較ページ](https://www.microsoft.com/ja-jp/d/windows-11-home/dg7gmgf0krt0)|
-|PNY GeForce RTX 5070 12GB OC SLIM|VCG507012DFSXPB1-O|¥129,800|¥190,800（検索スニペット参考のみ）|¥190,800（在庫切れ）|search_snippet_reference_only|unverified: fetch_error / stock=unknown / RuntimeError / curl_http_403; verified: exact_identity_direct_price_and_pit_verified / stock=out_of_stock; unverified: fetch_error / stock=unknown / RemoteDisconnected / Remote end closed connection without response; unverified: direct_price_missing_or_not_integer / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001798041/) / [直接掲載ページ](https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845) / [検索ページ参考元](https://search.kakaku.com/PNY%20GeForce%20RTX%205070%2012GB%20OC%20SLIM/)|
+|Microsoft Windows 11 Home 日本語版 パッケージ版|HAJ-00094|¥14,800|¥16,230|—|verified_retailer_listing_reference|verified: exact_identity_direct_price_and_pit_verified / stock=in_stock|[価格比較ページ](https://www.yodobashi.com/product/100000001006975270/)|
+|PNY GeForce RTX 5070 12GB OC SLIM|VCG507012DFSXPB1-O|¥129,800|¥190,800（検索スニペット参考のみ）|¥190,800（在庫切れ）|search_snippet_reference_only|unverified: fetch_error / stock=unknown / RuntimeError / curl_http_403; verified: exact_identity_direct_price_and_pit_verified / stock=out_of_stock; unverified: fetch_error / stock=unknown / RemoteDisconnected / Remote end closed connection without response|[価格比較ページ](https://kakaku.com/item/K0001798041/) / [直接掲載ページ](https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845) / [検索ページ参考元](https://search.kakaku.com/PNY%20GeForce%20RTX%205070%2012GB%20OC%20SLIM/)|
 
 互換性チェック:
 
@@ -48,8 +48,8 @@
 
 ## 自作VRAM案：Ryzen 7 9700X + RTX 5060 Ti 16GB
 
-- PC本体目標（送料・小物予備費込み）: ¥285,160
-- 周辺機器込み目標: ¥354,960 / 残額 ¥45,040
+- PC本体目標（送料・小物予備費込み）: ¥280,600
+- 周辺機器込み目標: ¥350,400 / 残額 ¥49,600
 - 現在の比較参考合計: 未算出。部品価格の欠落・不一致・古さを0円補完しない
 - 互換性: PASS / 判定: WAIT_FOR_MARKET_REFERENCE
 
@@ -57,12 +57,12 @@
 |---|---|---:|---:|---|---|---|---|
 |AMD Ryzen 7 9700X BOX|100-100001404WOF|¥38,000|¥67,890（検索スニペット参考のみ）|¥53,110（在庫未確認）|search_snippet_reference_only|verified: exact_identity_direct_price_and_pit_verified / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001630332/) / [直接掲載ページ](https://www.yodobashi.com/product/100000001008661707/) / [検索ページ参考元](https://search.kakaku.com/AMD%20Ryzen%207%209700X%20BOX/)|
 |ASRock B850M Pro RS WiFi|B850M Pro RS WiFi|¥20,000|¥23,780（検索スニペット参考のみ）|¥26,990（在庫未確認）|search_snippet_reference_only|verified: exact_identity_direct_price_and_pit_verified / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001669878/) / [直接掲載ページ](https://www.yodobashi.com/product/100000001008871801/) / [検索ページ参考元](https://search.kakaku.com/ASRock%20B850M%20Pro%20RS%20WiFi/)|
-|TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)|CTCWD532G6000HC38ADC01|¥40,000|未取得|—|missing|unverified: exact_model_identity_not_found_in_primary_page / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001610896/)|
-|Crucial P3 Plus CT1000P3PSSD8JP 1TB|CT1000P3PSSD8JP|¥18,000|¥33,600（検索スニペット参考のみ）|¥9,300（在庫切れ）|search_snippet_reference_only|unverified: fetch_error / stock=unknown / RemoteDisconnected / Remote end closed connection without response; verified: exact_identity_direct_price_and_pit_verified / stock=out_of_stock|[価格比較ページ](https://kakaku.com/item/K0001466997/) / [直接掲載ページ](https://www.dospara.co.jp/SBR1144/IC481159.html) / [検索ページ参考元](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/)|
+|TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)|CTCWD532G6000HC38ADC01|¥40,000|未取得|—|missing|unverified: exact_model_identity_not_found_in_primary_page / stock=unknown; unverified: direct_price_missing_or_not_integer / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001610896/)|
+|Crucial P3 Plus CT1000P3PSSD8JP 1TB|CT1000P3PSSD8JP|¥18,000|¥33,600（検索スニペット参考のみ）|¥32,769（在庫未確認）|search_snippet_reference_only|unverified: fetch_error / stock=unknown / RemoteDisconnected / Remote end closed connection without response; verified: exact_identity_direct_price_and_pit_verified / stock=out_of_stock; verified: exact_identity_direct_price_and_pit_verified / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001466997/) / [直接掲載ページ](https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094) / [検索ページ参考元](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/)|
 |Corsair RM850e 2025 850W ATX 3.1 Gold|CP-9020296-JP|¥14,000|¥14,980|—|verified_retailer_listing_reference|verified: exact_identity_direct_price_and_pit_verified / stock=in_stock; unverified: direct_price_missing_or_not_integer / stock=unknown|[価格比較ページ](https://www.dospara.co.jp/SBR83/IC519918.html)|
 |Fractal Design Pop Air TG|FD-C-POA1A-02|¥12,000|¥13,180|—|verified_retailer_listing_reference|verified: exact_identity_direct_price_and_pit_verified / stock=preorder_or_backorder; verified: exact_identity_direct_price_and_pit_verified / stock=in_stock|[価格比較ページ](https://www.dospara.co.jp/SBR1959/IC480986.html)|
 |Thermalright Peerless Assassin 120 SE V3|Peerless Assassin 120 SE V3|¥5,000|¥4,980（検索スニペット参考のみ）|¥4,980（在庫切れ）|search_snippet_reference_only|verified: exact_identity_direct_price_and_pit_verified / stock=out_of_stock|[価格比較ページ](https://kakaku.com/item/K0001789043/) / [直接掲載ページ](https://www.dospara.co.jp/SBR1968/IC645423.html) / [検索ページ参考元](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/)|
-|Windows 11 Home official retail license reference|Windows 11 Home|¥19,360|¥19,360（手動参考・現行未確認）|—|manual_reference_unverified|—|[価格比較ページ](https://www.microsoft.com/ja-jp/d/windows-11-home/dg7gmgf0krt0)|
+|Microsoft Windows 11 Home 日本語版 パッケージ版|HAJ-00094|¥14,800|¥16,230|—|verified_retailer_listing_reference|verified: exact_identity_direct_price_and_pit_verified / stock=in_stock|[価格比較ページ](https://www.yodobashi.com/product/100000001006975270/)|
 |PNY GeForce RTX 5060 Ti 16GB OC|VCG5060T16DFXPB1-O|¥109,800|¥137,800|—|verified_retailer_listing_reference|verified: exact_identity_direct_price_and_pit_verified / stock=in_stock|[価格比較ページ](https://www.dospara.co.jp/SBR1892/IC625088.html)|
 
 互換性チェック:
@@ -81,8 +81,8 @@
 
 ## 自作大穴：Ryzen 7 9700X + RTX 5070 Ti 16GB
 
-- PC本体目標（送料・小物予備費込み）: ¥329,360
-- 周辺機器込み目標: ¥399,160 / 残額 ¥840
+- PC本体目標（送料・小物予備費込み）: ¥324,800
+- 周辺機器込み目標: ¥394,600 / 残額 ¥5,400
 - 現在の比較参考合計: 未算出。部品価格の欠落・不一致・古さを0円補完しない
 - 互換性: REVIEW / 判定: WAIT_FOR_COMPATIBILITY_REVIEW
 
@@ -90,12 +90,12 @@
 |---|---|---:|---:|---|---|---|---|
 |AMD Ryzen 7 9700X BOX|100-100001404WOF|¥38,000|¥67,890（検索スニペット参考のみ）|¥53,110（在庫未確認）|search_snippet_reference_only|verified: exact_identity_direct_price_and_pit_verified / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001630332/) / [直接掲載ページ](https://www.yodobashi.com/product/100000001008661707/) / [検索ページ参考元](https://search.kakaku.com/AMD%20Ryzen%207%209700X%20BOX/)|
 |ASRock B850M Pro RS WiFi|B850M Pro RS WiFi|¥20,000|¥23,780（検索スニペット参考のみ）|¥26,990（在庫未確認）|search_snippet_reference_only|verified: exact_identity_direct_price_and_pit_verified / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001669878/) / [直接掲載ページ](https://www.yodobashi.com/product/100000001008871801/) / [検索ページ参考元](https://search.kakaku.com/ASRock%20B850M%20Pro%20RS%20WiFi/)|
-|TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)|CTCWD532G6000HC38ADC01|¥40,000|未取得|—|missing|unverified: exact_model_identity_not_found_in_primary_page / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001610896/)|
-|Crucial P3 Plus CT1000P3PSSD8JP 1TB|CT1000P3PSSD8JP|¥18,000|¥33,600（検索スニペット参考のみ）|¥9,300（在庫切れ）|search_snippet_reference_only|unverified: fetch_error / stock=unknown / RemoteDisconnected / Remote end closed connection without response; verified: exact_identity_direct_price_and_pit_verified / stock=out_of_stock|[価格比較ページ](https://kakaku.com/item/K0001466997/) / [直接掲載ページ](https://www.dospara.co.jp/SBR1144/IC481159.html) / [検索ページ参考元](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/)|
+|TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)|CTCWD532G6000HC38ADC01|¥40,000|未取得|—|missing|unverified: exact_model_identity_not_found_in_primary_page / stock=unknown; unverified: direct_price_missing_or_not_integer / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001610896/)|
+|Crucial P3 Plus CT1000P3PSSD8JP 1TB|CT1000P3PSSD8JP|¥18,000|¥33,600（検索スニペット参考のみ）|¥32,769（在庫未確認）|search_snippet_reference_only|unverified: fetch_error / stock=unknown / RemoteDisconnected / Remote end closed connection without response; verified: exact_identity_direct_price_and_pit_verified / stock=out_of_stock; verified: exact_identity_direct_price_and_pit_verified / stock=unknown|[価格比較ページ](https://kakaku.com/item/K0001466997/) / [直接掲載ページ](https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094) / [検索ページ参考元](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/)|
 |Corsair RM850e 2025 850W ATX 3.1 Gold|CP-9020296-JP|¥14,000|¥14,980|—|verified_retailer_listing_reference|verified: exact_identity_direct_price_and_pit_verified / stock=in_stock; unverified: direct_price_missing_or_not_integer / stock=unknown|[価格比較ページ](https://www.dospara.co.jp/SBR83/IC519918.html)|
 |Fractal Design Pop Air TG|FD-C-POA1A-02|¥12,000|¥13,180|—|verified_retailer_listing_reference|verified: exact_identity_direct_price_and_pit_verified / stock=preorder_or_backorder; verified: exact_identity_direct_price_and_pit_verified / stock=in_stock|[価格比較ページ](https://www.dospara.co.jp/SBR1959/IC480986.html)|
 |Thermalright Peerless Assassin 120 SE V3|Peerless Assassin 120 SE V3|¥5,000|¥4,980（検索スニペット参考のみ）|¥4,980（在庫切れ）|search_snippet_reference_only|verified: exact_identity_direct_price_and_pit_verified / stock=out_of_stock|[価格比較ページ](https://kakaku.com/item/K0001789043/) / [直接掲載ページ](https://www.dospara.co.jp/SBR1968/IC645423.html) / [検索ページ参考元](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/)|
-|Windows 11 Home official retail license reference|Windows 11 Home|¥19,360|¥19,360（手動参考・現行未確認）|—|manual_reference_unverified|—|[価格比較ページ](https://www.microsoft.com/ja-jp/d/windows-11-home/dg7gmgf0krt0)|
+|Microsoft Windows 11 Home 日本語版 パッケージ版|HAJ-00094|¥14,800|¥16,230|—|verified_retailer_listing_reference|verified: exact_identity_direct_price_and_pit_verified / stock=in_stock|[価格比較ページ](https://www.yodobashi.com/product/100000001006975270/)|
 |PNY GeForce RTX 5070 Ti 16GB ARGB|VCG5070T16TFXXPB1-O|¥154,000|¥216,800|—|verified_retailer_listing_reference|verified: exact_identity_direct_price_and_pit_verified / stock=in_stock|[価格比較ページ](https://www.dospara.co.jp/SBR1892/IC634895.html)|
 
 互換性チェック:
