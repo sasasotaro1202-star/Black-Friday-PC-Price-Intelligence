@@ -259,6 +259,97 @@ def _window_price_movement(events, candidate_id, start, end):
     }
 
 
+def build_self_build_timing_summary(build_plan, build_config=None):
+    """Summarize DIY-first selection without treating target/reference prices as checkout offers."""
+    build_plan = build_plan if isinstance(build_plan, dict) else {}
+    build_config = build_config if isinstance(build_config, dict) else {}
+    profile = build_config.get("profile") if isinstance(build_config.get("profile"), dict) else {}
+    builds = [x for x in (build_plan.get("builds") or []) if isinstance(x, dict)]
+    wanted_gpu = profile.get("primary_gpu_choice_id")
+    chosen = next((x for x in builds if x.get("gpu_choice_id") == wanted_gpu), None)
+    if chosen is None:
+        chosen = next((x for x in builds if x.get("rank") == 1), None)
+    policy = build_plan.get("purchase_method_policy") or {}
+    if not chosen:
+        return {
+            "primary_method": "SELF_BUILD",
+            "assembly_time_is_constraint": False,
+            "assembly_time_penalty_points": 0,
+            "status": "SELF_BUILD_DATA_UNAVAILABLE",
+            "purchase_allowed": False, "bf_actual_authorized": False,
+            "blockers": ["data/self_build_plan.json と config/build_components.json を確認する"],
+            "target_pc_total_jpy": None, "target_all_in_jpy": None,
+            "market_reference_estimate_jpy": None,
+            "tracked_component_count": 0, "verified_market_reference_count": 0,
+            "verified_checkout_offer_count": 0,
+        }
+
+    components = [x for x in (chosen.get("components") or []) if isinstance(x, dict)]
+    tracked = [x for x in components if x.get("track_price")]
+    reference_count = sum(1 for x in tracked
+        if x.get("trusted_for_market_estimate") is True
+        and _is_positive_yen(x.get("market_reference_price_jpy")))
+    checkout_count = sum(1 for x in components
+        if x.get("source_role") == "retailer_checkout_offer"
+        and x.get("checkout_price_verified") is True
+        and _is_positive_yen(x.get("checkout_price_jpy")))
+    target_pc, target_all = chosen.get("target_pc_total_jpy"), chosen.get("target_all_in_jpy")
+    total_budget, pc_budget = build_plan.get("total_budget_jpy"), build_plan.get("pc_budget_jpy")
+    remaining = total_budget - target_all if isinstance(total_budget, int) and isinstance(target_all, int) else None
+    missing_ids = list(chosen.get("missing_or_untrusted_market_reference_ids") or [])
+    compatibility = chosen.get("compatibility_status") or "REVIEW"
+    blockers = [
+        "BF購入目標額は希望価格であり、確認済み実売価格ではない。",
+        "比較サイト価格は購入店舗の最終決済価格・在庫・送料を証明しない。",
+    ]
+    if compatibility == "FAIL":
+        status = "BLOCKED_COMPATIBILITY"
+        blockers.insert(0, "互換性チェックにFAILがある。該当パーツを修正するまで購入不可。")
+    elif compatibility == "REVIEW":
+        status = "WAIT_FOR_COMPATIBILITY_REVIEW"
+        blockers.insert(0, "GPUの正確な型番寸法・補助電源など未確認の互換性項目を解消する。")
+    elif isinstance(target_pc, int) and isinstance(pc_budget, int) and target_pc > pc_budget:
+        status = "OVER_BUDGET_TARGET"
+        blockers.insert(0, "PC本体の購入目標がPC予算を超過している。")
+    elif isinstance(target_all, int) and isinstance(total_budget, int) and target_all > total_budget:
+        status = "OVER_BUDGET_TARGET"
+        blockers.insert(0, "周辺機器込みの購入目標が総予算を超過している。")
+    elif reference_count < len(tracked):
+        status = "WAIT_FOR_COMPONENT_REFERENCES"
+        blockers.insert(0, "比較参考価格の確認が完了していない部品がある: " + (", ".join(missing_ids) or "未確認の部品"))
+    elif checkout_count < len(components):
+        status = "WAIT_FOR_OFFICIAL_COMPONENT_OFFERS"
+        blockers.insert(0, "全構成部品の購入店舗・公式セール期間・在庫・送料込み決済価格がそろっていない。")
+    else:
+        status = "WAIT_FOR_FINAL_COMPATIBILITY_AND_BUDGET_GATE"
+        blockers.insert(0, "全パーツを同じ完成構成として最終互換性・送料込み総額で再検証する。")
+
+    return {
+        "primary_method": "SELF_BUILD",
+        "assembly_time_is_constraint": bool(policy.get("assembly_time_is_constraint", False)),
+        "assembly_time_penalty_points": int(policy.get("assembly_time_penalty_points", 0) or 0),
+        "bto_role": "REFERENCE_BENCHMARK_ONLY",
+        "selected_build_id": chosen.get("id"), "selected_build_name": chosen.get("name"),
+        "gpu_choice_id": chosen.get("gpu_choice_id"),
+        "status": status, "label": "自作PC本命：部品価格・購入条件の確認継続",
+        "purchase_allowed": False, "bf_actual_authorized": False,
+        "compatibility_status": compatibility,
+        "target_parts_subtotal_jpy": chosen.get("target_parts_subtotal_jpy"),
+        "target_pc_total_jpy": target_pc, "target_all_in_jpy": target_all,
+        "total_budget_jpy": total_budget, "target_remaining_budget_jpy": remaining,
+        "target_within_total_budget": chosen.get("target_within_total_budget") is True,
+        "market_reference_estimate_jpy": chosen.get("market_reference_estimate_jpy"),
+        "market_reference_all_in_estimate_jpy": chosen.get("market_reference_all_in_estimate_jpy"),
+        "market_reference_estimate_is_checkout_price": False,
+        "tracked_component_count": len(tracked),
+        "verified_market_reference_count": reference_count,
+        "component_count": len(components), "verified_checkout_offer_count": checkout_count,
+        "missing_or_untrusted_market_reference_ids": missing_ids,
+        "blockers": blockers,
+        "purchase_decision_factors": profile.get("purchase_decision_factors") or [],
+    }
+
+
 def build_buy_now_decision(rankings, events, config, price_observations=None, official_campaign_dates=None):
     """Separate provisional observation coverage from source-verified seller campaign windows."""
     now = now_jst()
@@ -274,7 +365,10 @@ def build_buy_now_decision(rankings, events, config, price_observations=None, of
     peripheral_cost = rankings.get("peripheral_projection_jpy")
     budget_ready = rankings.get("peripheral_budget_data_ready") is True
     gate = rankings.get("purchase_gate") or {}
-    gate_allowed = gate.get("allowed") is True
+    method_policy = rankings.get("purchase_method_policy") or {}
+    self_build_primary = method_policy.get("primary_method") == "SELF_BUILD"
+    # Never let a BTO benchmark authorize a purchase when DIY is the primary method.
+    gate_allowed = gate.get("allowed") is True and not self_build_primary
     coverage_complete = gate.get("coverage_status") == "COMPLETE"
 
     rows = []
@@ -601,6 +695,13 @@ def build_buy_now_decision(rankings, events, config, price_observations=None, of
     hours_left = max(0, (end - now).total_seconds() / 3600) if in_window else None
     return {
         "generated_at": iso(now),
+        "purchase_method_policy": {
+            "primary_method": "SELF_BUILD" if self_build_primary else method_policy.get("primary_method", "RANKED_COMPLETE_PC"),
+            "assembly_time_is_constraint": bool(method_policy.get("assembly_time_is_constraint", False)),
+            "assembly_time_penalty_points": int(method_policy.get("assembly_time_penalty_points", 0) or 0),
+            "bto_role": method_policy.get("bto_role", "REFERENCE_BENCHMARK_ONLY" if self_build_primary else "RANKED_COMPLETE_PC"),
+            "completed_pc_purchase_actionable": not self_build_primary,
+        },
         "status": status,
         "label": label,
         "recommendation": recommendation,
