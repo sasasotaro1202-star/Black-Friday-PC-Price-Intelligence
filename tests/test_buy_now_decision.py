@@ -378,6 +378,8 @@ class BuyNowDecisionTests(unittest.TestCase):
         self.assertIn("検索ページ表示専用値（不採用）", report)
         self.assertIn("39,980", report)
         self.assertIn("検索ページ表示専用値は別列です", report)
+        self.assertIn("検索ページ表示値のみ（検証価格なし）", report)
+        self.assertIn("商品詳細ページの直接価格・在庫を検証できていない", report)
 
     def test_direct_listing_stock_blocked_price_is_visible_but_never_used_for_gap_or_purchase(self):
         now = datetime(2026, 10, 14, 12, 0, tzinfo=JST)
