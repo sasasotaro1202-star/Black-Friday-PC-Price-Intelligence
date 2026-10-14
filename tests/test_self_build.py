@@ -313,7 +313,8 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(parsed["source_role"],"comparison_site_search_snippet_reference")
 
     def test_search_fallback_records_provider_errors_and_zero_exact_matches(self):
-        part = self.parts["cpu-ryzen7-9700x"]
+        part = dict(self.parts["cpu-ryzen7-9700x"])
+        part["direct_retailer_urls"] = []
         with patch.object(component_monitor, "fetch", side_effect=TimeoutError("fixture: no live Kakaku page")), \
              patch.object(component_monitor, "ddg_search", side_effect=TimeoutError("blocked")), \
              patch.object(component_monitor, "bing_search", return_value=[]):
@@ -359,7 +360,8 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(result["source_role"], "comparison_site_reference")
 
     def test_search_fallback_tries_alternate_query_and_preserves_display_only_source(self):
-        part = self.parts["cpu-ryzen7-9700x"]
+        part = dict(self.parts["cpu-ryzen7-9700x"])
+        part["direct_retailer_urls"] = []
         result_row = {
             "url": part["monitor_url"],
             "title": "AMD Ryzen 7 9700X BOX 価格比較",
