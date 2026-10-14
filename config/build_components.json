@@ -64,7 +64,8 @@
       "edion.com",
       "ksdenki.com",
       "nojima.co.jp",
-      "yamada-denkiweb.com"
+      "yamada-denkiweb.com",
+      "kaago.com"
     ],
     "assembly_time_is_constraint": false,
     "assembly_time_penalty_points": 0,
@@ -163,14 +164,13 @@
         "connector": "12V-2x6",
         "card_thickness_slots": 2
       },
-      "notes": "正確な型番VCG507012DFSXPB1-OをPNY公式仕様と照合済み。寸法290×128×40mm、250W、16ピン入力、推奨PSU650W。BF目標129,800円は値下げ希望額であり、予測・確定価格ではない。Joshinの正確な型番ページを直接再取得して価格・在庫を検証する。 追加監視: TSUKUMOのJAN一致商品ページ。販売ページ価格と在庫は実行時に直接再取得して検証し、検索掲載だけでは購入可能と扱わない。 Amazonの直接ページも監視候補に追加。ASIN B0GSXJPTLNは価格.comの当該SKUショップリンク先から取得したURL。掲載値・在庫はAmazonページを直接取得して型番一致を検証するまで未確認。",
+      "notes": "正確な型番VCG507012DFSXPB1-OをPNY公式仕様と照合済み。寸法290×128×40mm、250W、16ピン入力、推奨PSU650W。BF目標129,800円は値下げ希望額であり、予測・確定価格ではない。Joshinの正確な型番ページを直接再取得して価格・在庫を検証する。 追加監視: TSUKUMOのJAN一致商品ページ。販売ページ価格と在庫は実行時に直接再取得して検証し、検索掲載だけでは購入可能と扱わない。 Amazonの直接ページも監視候補に追加。ASIN B0GSXJPTLNは価格.comの当該SKUショップリンク先から取得したURL。掲載値・在庫はAmazonページを直接取得して型番一致を検証するまで未確認。 AmazonのB0GSXJPTLN候補はページ内容に別型番のASUS RTX 5060 Tiの価格・在庫しか確認できず、正確なRTX 5070商品ページと確認できなかったため監視候補から除外。",
       "spec_source_url": "https://www.pny.com/en-eu/geforce-rtx-5070-slim-models?sku=VCG507012DFSXPB1-O",
       "spec_source_verified_at": "2026-10-14",
       "direct_retailer_urls": [
         "https://joshinweb.jp/kaden/73259/0751492812151.html",
         "https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845",
-        "https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom",
-        "https://www.amazon.co.jp/dp/B0GSXJPTLN"
+        "https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom"
       ]
     },
     {
@@ -313,7 +313,10 @@
         "speed_mts": 6000,
         "profile": "EXPO"
       },
-      "notes": "16GB×2のデュアルチャネル。メモリ市況の急変はBF目標に反映し、価格を推測しない。"
+      "notes": "16GB×2のデュアルチャネル。メモリ市況の急変はBF目標に反映し、価格を推測しない。 価格.comの型番一致ページから取得したAmazon候補を直接監視。Amazonページの主商品タイトル・型番・価格・在庫が一致しない場合は不採用。",
+      "direct_retailer_urls": [
+        "https://www.amazon.co.jp/dp/B0CHF9TH1B"
+      ]
     },
     {
       "id": "ssd-crucial-p3-plus-1tb",
@@ -340,7 +343,10 @@
         "interface": "NVMe PCIe 4.0",
         "form_factor": "M.2 2280"
       },
-      "notes": "最初から1TB。OS・開発環境・ゲーム用途を想定。"
+      "notes": "最初から1TB。OS・開発環境・ゲーム用途を想定。 価格.comの型番一致ページから確認したエクセラー直販の商品リンクを監視。最終販売ページでSKU・価格・在庫を再確認する。",
+      "direct_retailer_urls": [
+        "https://kaago.com/excellar/?itemcode=0001000033094"
+      ]
     },
     {
       "id": "psu-corsair-rm850e-2025",
@@ -448,20 +454,23 @@
       "id": "os-windows11-home",
       "category": "os_license",
       "role": "required_fixed_part",
-      "name": "Windows 11 Home official retail license reference",
-      "model_code": "Windows 11 Home",
+      "name": "Microsoft Windows 11 Home 日本語版 パッケージ版",
+      "model_code": "HAJ-00094",
       "aliases": [
-        "Windows 11 Home"
+        "Windows 11 Home 日本語版",
+        "Windows 11 Home",
+        "HAJ-00094"
       ],
       "identity_terms": [
-        "Windows 11 Home"
+        "Windows 11 Home 日本語版",
+        "HAJ-00094"
       ],
-      "monitor_url": null,
-      "purchase_url": "https://www.microsoft.com/ja-jp/d/windows-11-home/dg7gmgf0krt0",
-      "track_price": false,
-      "target_price_jpy": 19360,
-      "reference_price_jpy": 19360,
-      "price_source_role": "official_store_manual_reference",
+      "monitor_url": "https://kakaku.com/item/K0001432816/",
+      "purchase_url": "https://kakaku.com/item/K0001432816/",
+      "track_price": true,
+      "target_price_jpy": 14800,
+      "reference_price_jpy": null,
+      "price_source_role": "comparison_site_reference",
       "reference_price_is_current_verified": false,
       "reference_price_identity_verified": false,
       "reference_price_checked_at": null,
@@ -470,7 +479,12 @@
         "license_type": "retail_license",
         "optional_if_existing_transferable_license": true
       },
-      "notes": "19,360円は公式ストアの参考表示額。自動で価格・在庫を再確認していない。既存の移行可能ライセンスがあれば除外可能。"
+      "notes": "HAJ-00094、USBメモリとシリアルキーカード付属の正規Windows 11 Home日本語パッケージ版を追跡。ヨドバシ実売ページの表示例は2026-10-14時点16,230円・在庫あり。BF目標14,800円は希望価格であり予測ではない。移行可能な既存ライセンスが確認された場合は購入対象から除外可能。",
+      "min_price_jpy": 10000,
+      "max_price_jpy": 50000,
+      "direct_retailer_urls": [
+        "https://www.yodobashi.com/product/100000001006975270/"
+      ]
     }
   ]
 }
