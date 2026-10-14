@@ -27,6 +27,7 @@ DEFAULT_DOMAINS = ("kakaku.com",)
 
 RETAILER_SEARCH_TEMPLATES = {
     "amazon.co.jp": "https://www.amazon.co.jp/s?k={query}",
+    "shopping.yahoo.co.jp": "https://shopping.yahoo.co.jp/search?p={query}",
     "rakuten.co.jp": "https://search.rakuten.co.jp/search/mall/{query}/",
     "yodobashi.com": "https://www.yodobashi.com/?word={query}",
     "biccamera.com": "https://www.biccamera.com/bc/category/?q={query}",
@@ -749,7 +750,7 @@ def build_component_search_queries(part, domains=DEFAULT_DOMAINS, now=None):
         safe_domains = list(DEFAULT_DOMAINS)
 
     retailer_priority = (
-        "amazon.co.jp", "rakuten.co.jp", "yodobashi.com", "biccamera.com",
+        "amazon.co.jp", "shopping.yahoo.co.jp", "rakuten.co.jp", "yodobashi.com", "biccamera.com",
         "dospara.co.jp", "tsukumo.co.jp", "pc-koubou.jp", "sofmap.com",
         "joshinweb.jp", "ark-pc.co.jp", "edion.com", "ksdenki.com",
         "nojima.co.jp", "yamada-denkiweb.com",
