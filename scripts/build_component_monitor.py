@@ -262,7 +262,10 @@ def search_comparison_snippet(part, domains):
     return {"search_diagnostics": diagnostics} if diagnostics else None
 
 
-def fetch_part(part, domains):
+def fetch_part(part, domains, search_domains=None):
+    # Search fallback hosts are explicitly configured; default to the direct
+    # comparison allowlist for standalone/test calls rather than an undefined name.
+    search_domains = tuple(search_domains or domains)
     result = {
         "id": part["id"], "category": part["category"], "name": part["name"],
         "model_code": part.get("model_code"), "monitor_url": part.get("monitor_url"),
@@ -368,7 +371,7 @@ def collect_component_prices(config=None):
     previous_events = last_by_id(read_jsonl(EVENTS_PATH))
     results = {}
     with ThreadPoolExecutor(max_workers=min(4, max(1, len(parts)))) as pool:
-        futures = {pool.submit(fetch_part, part, domains): part for part in parts}
+        futures = {pool.submit(fetch_part, part, domains, search_domains): part for part in parts}
         for future in as_completed(futures):
             part = futures[future]
             try:
