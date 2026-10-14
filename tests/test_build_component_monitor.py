@@ -37,8 +37,9 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertIn('site:kakaku.com/item/K0001798041', queries[0])
         self.assertIn('"PNY GeForce RTX 5070 12GB OC SLIM"', queries[0])
         self.assertIn('"PNY GeForce RTX 5070 12GB OC"', queries[1])
-        self.assertIn('site:', queries[1])
-        seller_host = queries[1].rsplit("site:", 1)[1]
+        self.assertTrue(queries[1].startswith("site:"))
+        self.assertIn('"PNY GeForce RTX 5070 12GB OC" 価格', queries[1])
+        seller_host = queries[1].split("site:", 1)[1].split()[0]
         self.assertIn(seller_host, domains)
         self.assertNotEqual(seller_host, "kakaku.com")
         self.assertNotIn("site:", queries[2])
