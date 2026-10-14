@@ -45,6 +45,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertIn("価格 最安値", queries[2])
         self.assertFalse(any(" OR site:" in q for q in queries))
         self.assertFalse(any("site:untrusted.example" in q for q in queries))
+        self.assertFalse(any("  " in q for q in queries))
 
     def test_broad_discovery_results_still_require_allowlisted_hosts(self):
         self.assertFalse(bcm.allowed_url("https://www.pny.com/", ("amazon.co.jp", "dospara.co.jp")))
