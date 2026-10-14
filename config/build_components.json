@@ -282,10 +282,11 @@
         "m2_nvme_slots": 3,
         "wifi": true
       },
-      "notes": "AM5・DDR5・MicroATX。CPU対応BIOS、QVL、M.2レーン共有は購入前に再確認。 ヨドバシの型番一致商品ページも直接監視。 PC4Uの正規代理店品個別ページも第二監視先として追加。2026-10-14時点の検索表示は32,080円・在庫ありだが、監視時に直接価格と在庫を再取得する。",
+      "notes": "AM5・DDR5・MicroATX。CPU対応BIOS、QVL、M.2レーン共有は購入前に再確認。 ヨドバシの型番一致商品ページも直接監視。 PC4Uの正規代理店品個別ページも第二監視先として追加。2026-10-14時点の検索表示は32,080円・在庫ありだが、監視時に直接価格と在庫を再取得する。 ソフマップの型番一致商品ページ（sku=101393495）を第三の直接監視先として追加。価格表示・在庫情報は検索結果の転載ではなく、本番監視で直接再取得して検証する。",
       "direct_retailer_urls": [
         "https://www.yodobashi.com/product/100000001008871801/",
-        "https://www.pc4u.co.jp/view/item/000000092844"
+        "https://www.pc4u.co.jp/view/item/000000092844",
+        "https://www.sofmap.com/product_detail.aspx?sku=101393495"
       ]
     },
     {
