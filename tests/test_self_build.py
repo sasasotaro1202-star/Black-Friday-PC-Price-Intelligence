@@ -2,6 +2,7 @@ import json
 import pathlib
 import sys
 import unittest
+from unittest.mock import patch
 from datetime import datetime, timezone, timedelta
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -101,6 +102,34 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(parsed["price_jpy"],39980)
         self.assertFalse(parsed["bf_actual_authorized"])
         self.assertEqual(parsed["source_role"],"comparison_site_search_snippet_reference")
+
+    def test_search_fallback_records_provider_errors_and_zero_exact_matches(self):
+        part = self.parts["cpu-ryzen7-9700x"]
+        with patch.object(component_monitor, "ddg_search", side_effect=TimeoutError("blocked")), patch.object(component_monitor, "bing_search", return_value=[]):
+            result = component_monitor.search_comparison_snippet(part, ("kakaku.com",))
+        self.assertIsNotNone(result)
+        diagnostics = result["search_diagnostics"]
+        self.assertEqual(len(diagnostics), 4)
+        self.assertEqual(diagnostics[0]["status"], "error")
+        self.assertEqual(diagnostics[0]["provider"], "duckduckgo")
+        self.assertEqual(diagnostics[1]["result_count"], 0)
+        self.assertNotIn("price_jpy", result)
+
+    def test_search_fallback_tries_alternate_query_and_preserves_display_only_source(self):
+        part = self.parts["cpu-ryzen7-9700x"]
+        result_row = {
+            "url": part["monitor_url"],
+            "title": "AMD Ryzen 7 9700X BOX 価格比較",
+            "snippet": "型番 100-100001404WOF 最安価格 ¥39,980",
+        }
+        with patch.object(component_monitor, "ddg_search", side_effect=[[], [result_row]]), patch.object(component_monitor, "bing_search", return_value=[]):
+            result = component_monitor.search_comparison_snippet(part, ("kakaku.com",))
+        self.assertEqual(result["price_jpy"], 39980)
+        self.assertEqual(result["search_provider"], "duckduckgo")
+        self.assertEqual(result["source_role"], "comparison_site_search_snippet_reference")
+        self.assertFalse(result["bf_actual_authorized"])
+        self.assertEqual(len(result["search_diagnostics"]), 2)
+        self.assertEqual(result["search_diagnostics"][0]["result_count"], 0)
 
     def test_search_snippet_price_outside_part_range_is_rejected(self):
         part = self.parts["cpu-ryzen7-9700x"]
