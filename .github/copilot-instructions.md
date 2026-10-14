@@ -115,3 +115,7 @@ Run `python -m unittest discover -s tests -p "test_*.py" -v`, Python compile che
 - TeamGroup DDR5-6000 32GB exact model CTCWD532G6000HC38ADC01 must use the linked official manufacturer page for specification identity, not as a price source. Keep YMall as an untrusted seller candidate unless exact SKU, direct price, stock and PIT verify.
 - Crucial P3 Plus CT1000P3PSSD8JP 1TB is monitored at TSUKUMO and Dospara; Dospara may list a price while out-of-stock, which remains reference-only.
 - Fractal Pop Air FD-C-POA1A-02 is monitored at Yodobashi and Dospara. Use the direct fetched product page to verify stock and shipping; never infer buyability from search-card text.
+
+
+## Motherboard direct-price fallback — 2026-10-14
+- ASRock B850M Pro RS WiFi has a third exact-model seller page at Sofmap `https://www.sofmap.com/product_detail.aspx?sku=101393495`. A listing found in search showed ¥21,380 and an in-stock/24-hour dispatch label; these are discovery evidence, not a verified current checkout price. The scheduled direct-page monitor must independently validate the actual SKU, price, stock, and PIT before promotion.

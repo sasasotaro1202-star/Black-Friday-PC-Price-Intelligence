@@ -118,9 +118,11 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(len(parts_by_id["cpu-ryzen7-9700x"]["direct_retailer_urls"]), 2)
         self.assertIn("tsukumo.co.jp", parts_by_id["cpu-ryzen7-9700x"]["direct_retailer_urls"][1])
         self.assertIn("tsukumo.co.jp", self.profile["allowed_search_reference_domains"])
-        self.assertEqual(len(parts_by_id["motherboard-asrock-b850m-pro-rs-wifi"]["direct_retailer_urls"]), 2)
+        self.assertEqual(len(parts_by_id["motherboard-asrock-b850m-pro-rs-wifi"]["direct_retailer_urls"]), 3)
         self.assertIn("pc4u.co.jp", parts_by_id["motherboard-asrock-b850m-pro-rs-wifi"]["direct_retailer_urls"][1])
+        self.assertIn("sofmap.com/product_detail.aspx?sku=101393495", parts_by_id["motherboard-asrock-b850m-pro-rs-wifi"]["direct_retailer_urls"][2])
         self.assertIn("pc4u.co.jp", self.profile["allowed_search_reference_domains"])
+        self.assertIn("sofmap.com", self.profile["allowed_search_reference_domains"])
         self.assertIn("VCG507012DFSXPB1-O", main["spec_source_url"])
 
         vram = parts_by_id["gpu-rtx5060ti-16gb"]
