@@ -43,7 +43,28 @@
     "allowed_comparison_domains": [
       "kakaku.com"
     ],
-    "policy": "BF targets are aspirational. Comparison-site prices are market references, not checkout prices, stock confirmation, or official BF actuals. No purchase is authorized from this data."
+    "policy": "BF targets are aspirational. Comparison-site prices are market references, not checkout prices, stock confirmation, or official BF actuals. No purchase is authorized from this data.",
+    "allowed_search_reference_domains": [
+      "kakaku.com",
+      "amazon.co.jp",
+      "rakuten.co.jp",
+      "yodobashi.com",
+      "biccamera.com",
+      "dospara.co.jp",
+      "tsukumo.co.jp",
+      "mouse-jp.co.jp",
+      "pc-koubou.jp",
+      "sofmap.com",
+      "joshinweb.jp",
+      "ark-pc.co.jp",
+      "frontier-direct.jp",
+      "sycom.co.jp",
+      "stormst.com",
+      "edion.com",
+      "ksdenki.com",
+      "nojima.co.jp",
+      "yamada-denkiweb.com"
+    ]
   },
   "parts": [
     {

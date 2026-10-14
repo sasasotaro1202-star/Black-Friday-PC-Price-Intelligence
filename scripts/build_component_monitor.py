@@ -143,14 +143,54 @@ def parse_search_snippet_reference(part, results, domains=DEFAULT_DOMAINS):
     return None
 
 
+def component_search_identity_anchor(result, part):
+    """Prefer exact model codes and full product identities over generic spec labels."""
+    title = str((result or {}).get("title") or "")
+    snippet = str((result or {}).get("snippet") or "")
+    blob = normalized(title + " " + snippet)
+    generic = {
+        "rtx507012gb", "rtx5060ti16gb", "rtx5070ti16gb",
+        "ddr5600032gb", "windows11home", "ryzen79700x"
+    }
+    candidates = []
+    model_code = str(part.get("model_code") or "")
+    if model_code:
+        candidates.append((1000, model_code))
+    for term in (part.get("name"), *(part.get("identity_terms") or []), *(part.get("aliases") or [])):
+        value = str(term or "").strip()
+        normalized_term = normalized(value)
+        if len(normalized_term) < 9 or normalized_term in generic:
+            continue
+        # Broad GPU/memory capacity names are insufficient to prove the selected
+        # retail SKU; require a branded/model-specific phrase instead.
+        if normalized_term in generic:
+            continue
+        candidates.append((len(normalized_term), value))
+    unique = {}
+    for score, term in candidates:
+        key = normalized(term)
+        if key and key not in unique:
+            unique[key] = (score, term)
+    matches = [item for key, item in unique.items() if key in blob]
+    if not matches:
+        return None
+    matches.sort(key=lambda x: (-x[0], x[1]))
+    return matches[0][1]
+
+
 def search_comparison_snippet(part, domains):
-    """Search free providers with diagnostics; only the exact Kakaku SKU can qualify."""
+    """Use approved shop search snippets only as display-only references.
+
+    Result URLs do not need to be on the comparison site's exact product path,
+    but the host must be allowlisted and the result itself must contain a
+    model-specific identity anchor and a plausible, explicitly marked price.
+    """
     model_code = str(part.get("model_code") or "").strip()
     name = str(part.get("name") or "").strip()
     product_path = urlparse(str(part.get("monitor_url") or "")).path.rstrip("/").lower()
     queries = [
         "site:kakaku.com{} {} 価格".format(product_path, model_code).strip(),
-        "{} {} 価格.com 最安価格".format(name, model_code).strip(),
+        '"{}" {} 価格 在庫'.format(name, model_code).strip(),
     ]
     diagnostics = []
     for provider, search_fn in (("duckduckgo", ddg_search), ("bing", bing_search)):
@@ -162,21 +202,21 @@ def search_comparison_snippet(part, domains):
                 results = []
                 error = type(exc).__name__ + ":" + str(exc)[:140]
             domain_count = 0
-            exact_path_count = 0
+            same_item_count = 0
             identity_count = 0
             price_count = 0
             chosen = None
+            candidates = []
             for result in results:
                 url = str(result.get("url") or "")
                 if not allowed_url(url, domains):
                     continue
                 domain_count += 1
-                path = urlparse(url).path.rstrip("/").lower()
-                # Allow tabs under the same Kakaku item path, but not another SKU.
-                if not product_path or not (path == product_path or path.startswith(product_path + "/")):
-                    continue
-                exact_path_count += 1
-                anchor = search_identity_anchor(result, part)
+                parsed_url = urlparse(url)
+                path = parsed_url.path.rstrip("/").lower()
+                same_item_path = bool(product_path and (path == product_path or path.startswith(product_path + "/")))
+                same_item_count += int(same_item_path)
+                anchor = component_search_identity_anchor(result, part)
                 if not anchor:
                     continue
                 identity_count += 1
@@ -185,7 +225,7 @@ def search_comparison_snippet(part, domains):
                 if not candidate:
                     continue
                 price_count += 1
-                chosen = {
+                candidates.append({
                     "url": url,
                     "title": result.get("title") or "",
                     "snippet": result.get("snippet") or "",
@@ -195,9 +235,9 @@ def search_comparison_snippet(part, domains):
                     "source_role": "comparison_site_search_snippet_reference",
                     "bf_actual_authorized": False,
                     "search_provider": provider,
-                    "query": query
-                }
-                break
+                    "query": query,
+                    "same_comparison_item_path": same_item_path,
+                })
             diagnostics.append({
                 "provider": provider,
                 "query_index": query_index,
@@ -205,12 +245,18 @@ def search_comparison_snippet(part, domains):
                 "status": "error" if error else "ok",
                 "error": error,
                 "result_count": len(results),
-                "allowed_domain_result_count": domain_count,
-                "exact_product_path_count": exact_path_count,
+                "allowed_reference_host_count": domain_count,
+                "same_comparison_item_path_count": same_item_count,
                 "identity_anchor_count": identity_count,
-                "in_range_price_count": price_count
+                "in_range_price_count": price_count,
             })
-            if chosen:
+            if candidates:
+                candidates.sort(key=lambda item: (
+                    1 if item["same_comparison_item_path"] else 0,
+                    1 if item["search_provider"] == "bing" else 0,
+                    item["identity_anchor"] == model_code,
+                ), reverse=True)
+                chosen = candidates[0]
                 chosen["search_diagnostics"] = diagnostics
                 return chosen
     return {"search_diagnostics": diagnostics} if diagnostics else None
@@ -281,7 +327,7 @@ def fetch_part(part, domains):
         # exact page/model was found but the parser could not read a price, use
         # a model-anchored search snippet for display only, never as a total.
         if identity_ok and price is None:
-            snippet = search_comparison_snippet(part, domains)
+            snippet = search_comparison_snippet(part, search_domains)
             if snippet:
                 result["search_diagnostics"] = snippet.get("search_diagnostics") or []
             if snippet and isinstance(snippet.get("price_jpy"), int):
@@ -298,9 +344,9 @@ def fetch_part(part, domains):
                 result["last_fetch_error"] = "direct price unavailable; snippet reference is display-only and excluded from estimates"
             else:
                 counts = [
-                    "{}:{} results / {} exact SKU / {} identity / {} priced".format(
+                    "{}:{} results / {} allowed host / {} identity / {} priced".format(
                         item.get("provider"), item.get("result_count", 0),
-                        item.get("exact_product_path_count", 0),
+                        item.get("allowed_reference_host_count", 0),
                         item.get("identity_anchor_count", 0), item.get("in_range_price_count", 0)
                     ) for item in result["search_diagnostics"]
                 ]
@@ -315,6 +361,7 @@ def collect_component_prices(config=None):
     config = config or load_json(CONFIG_PATH, {})
     profile = config.get("profile") or {}
     domains = tuple(profile.get("allowed_comparison_domains") or DEFAULT_DOMAINS)
+    search_domains = tuple(profile.get("allowed_search_reference_domains") or domains)
     parts = [x for x in (config.get("parts") or []) if isinstance(x, dict) and x.get("track_price")]
     prior = load_json(OUTPUT_PATH, {})
     prior_by_id = last_by_id(prior.get("products") or [])

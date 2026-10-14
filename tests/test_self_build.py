@@ -88,6 +88,13 @@ class SelfBuildPlannerTests(unittest.TestCase):
         plan = planner.build_plan(bad, {"products":[]}, now=NOW)
         self.assertEqual(next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")["compatibility_status"], "FAIL")
 
+    def test_search_anchor_rejects_generic_gpu_class_without_selected_model_identity(self):
+        part = self.parts["gpu-rtx5070-12gb"]
+        generic = {"title": "GeForce RTX 5070 12GB", "snippet": "最安価格 ¥149,800"}
+        branded = {"title": "PNY GeForce RTX 5070 12GB OC SLIM", "snippet": "VCG507012DFXPB1-O 最安価格 ¥149,800"}
+        self.assertIsNone(component_monitor.component_search_identity_anchor(generic, part))
+        self.assertIsNotNone(component_monitor.component_search_identity_anchor(branded, part))
+
     def test_search_snippet_requires_exact_model_and_exact_product_url(self):
         part = self.parts["cpu-ryzen7-9700x"]
         wrong_page = {"url":"https://kakaku.com/item/K0009999999/","title":"AMD Ryzen 7 9700X BOX","snippet":"最安価格 ¥39,980"}
@@ -130,6 +137,21 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertFalse(result["bf_actual_authorized"])
         self.assertEqual(len(result["search_diagnostics"]), 2)
         self.assertEqual(result["search_diagnostics"][0]["result_count"], 0)
+
+    def test_search_snippet_can_reference_allowlisted_seller_with_exact_model_name(self):
+        part = self.parts["cpu-ryzen7-9700x"]
+        seller_result = {
+            "url": "https://www.dospara.co.jp/TC30/MC12904.html",
+            "title": "AMD Ryzen 7 9700X BOX",
+            "snippet": "100-100001404WOF 最安価格 ¥39,980",
+        }
+        with patch.object(component_monitor, "ddg_search", side_effect=[[], [seller_result]]), patch.object(component_monitor, "bing_search", return_value=[]):
+            found = component_monitor.search_comparison_snippet(part, ("kakaku.com", "dospara.co.jp"))
+        self.assertEqual(found["price_jpy"], 39980)
+        self.assertEqual(found["url"], seller_result["url"])
+        self.assertFalse(found["bf_actual_authorized"])
+        self.assertFalse(found["same_comparison_item_path"])
+        self.assertEqual(found["source_role"], "comparison_site_search_snippet_reference")
 
     def test_search_snippet_price_outside_part_range_is_rejected(self):
         part = self.parts["cpu-ryzen7-9700x"]

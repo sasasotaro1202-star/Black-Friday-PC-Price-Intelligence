@@ -86,7 +86,9 @@ def component_price(part, by_id, now, max_age):
         "source_role": "comparison_site_reference",
         "retrieval_time": row.get("retrieval_time"),
         "reference_age_minutes": age,
-        "purchase_url": part.get("purchase_url") or part.get("monitor_url")
+        "purchase_url": part.get("purchase_url") or part.get("monitor_url"),
+        "search_snippet_reference_url": row.get("search_snippet_reference_url") if snippet_only else None,
+        "search_snippet_reference_title": row.get("search_snippet_reference_title") if snippet_only else None
     }
 
 
@@ -206,6 +208,8 @@ def build_plan(config=None, price_snapshot=None, now=None):
                 "source_role": price["source_role"], "retrieval_time": price["retrieval_time"],
                 "reference_age_minutes": price["reference_age_minutes"],
                 "monitor_url": part.get("monitor_url"), "purchase_url": part.get("purchase_url") or part.get("monitor_url"),
+                "search_snippet_reference_url": price.get("search_snippet_reference_url"),
+                "search_snippet_reference_title": price.get("search_snippet_reference_title"),
                 "track_price": bool(part.get("track_price")), "specs": part.get("specs") or {},
                 "notes": part.get("notes"), "bf_actual_authorized": False
             }
@@ -330,7 +334,11 @@ def render_plan_markdown(plan):
             else:
                 price_text = money(p)
             url = part.get("purchase_url")
-            link = "[確認ページ](" + url + ")" if url else "—"
+            links = ["[価格比較ページ](" + url + ")"] if url else []
+            search_url = part.get("search_snippet_reference_url")
+            if search_url and search_url != url:
+                links.append("[検索スニペット参考元](" + search_url + ")")
+            link = " / ".join(links) if links else "—"
             lines.append("|{}|{}|{}|{}|{}|{}|".format(part.get("name"), part.get("model_code") or "—", money(part.get("target_price_jpy")), price_text, part.get("price_status"), link))
         lines.extend(["", "互換性チェック:", ""])
         for check in build.get("compatibility_checks") or []:
