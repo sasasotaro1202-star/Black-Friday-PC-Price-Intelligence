@@ -339,6 +339,29 @@ def compatibility_checks(parts, profile, gpu_id, memory_part_id=None):
 
     add("cpu_motherboard_socket", "PASS" if cpu.get("socket") and cpu.get("socket") == board.get("socket") else "FAIL",
         "CPU socket {} / board socket {}".format(cpu.get("socket", "unknown"), board.get("socket", "unknown")))
+
+    minimum_bios = board.get("minimum_bios_for_ryzen7_9700x")
+    observed_bios = board.get("observed_bios_version")
+    cpu_support_verified = board.get("cpu_support_list_verified_for_ryzen7_9700x") is True
+    def version_tuple(value):
+        pieces = re.findall(r"\d+", str(value or ""))
+        return tuple(int(piece) for piece in pieces) if pieces else None
+    required_bios_tuple = version_tuple(minimum_bios)
+    observed_bios_tuple = version_tuple(observed_bios)
+    if not cpu_support_verified or required_bios_tuple is None:
+        bios_status = "REVIEW"
+        bios_detail = "Exact CPU support-list entry or minimum BIOS version has not been verified from the manufacturer."
+    elif observed_bios_tuple is None:
+        bios_status = "REVIEW"
+        bios_detail = "ASRock support list requires BIOS {}; the exact board's shipped/installed BIOS is unobserved. Verify it and use BIOS Flashback/update if needed.".format(minimum_bios)
+    elif observed_bios_tuple < required_bios_tuple:
+        bios_status = "REVIEW"
+        bios_detail = "Observed BIOS {} is older than the required {}; update before using this CPU.".format(observed_bios, minimum_bios)
+    else:
+        bios_status = "PASS"
+        bios_detail = "Observed BIOS {} meets the manufacturer minimum {} for Ryzen 7 9700X.".format(observed_bios, minimum_bios)
+    add("cpu_bios_support", bios_status, bios_detail)
+
     memory_ok = (
         memory.get("memory_type") == board.get("memory_type")
         and isinstance(memory.get("capacity_gb"), int) and memory["capacity_gb"] >= int(profile.get("minimum_ram_gb", 32))
@@ -346,6 +369,15 @@ def compatibility_checks(parts, profile, gpu_id, memory_part_id=None):
     )
     add("memory_type_capacity_dual_channel", "PASS" if memory_ok else "FAIL",
         "DDR type, >= {}GB, >= {} DIMMs".format(profile.get("minimum_ram_gb", 32), profile.get("minimum_memory_modules", 2)))
+    qvl_verified = memory.get("qvl_verified_with_asrock_b850m_pro_rs_wifi") is True
+    add(
+        "memory_qvl",
+        "PASS" if qvl_verified else "REVIEW",
+        "Exact kit {} QVL entry for ASRock B850M Pro RS WiFi: {}".format(
+            memory_part_id,
+            "verified" if qvl_verified else "unconfirmed; DDR5/EXPO support alone is not proof of exact-kit QVL compatibility",
+        ),
+    )
     storage_ok = isinstance(storage.get("capacity_gb"), int) and storage["capacity_gb"] >= int(profile.get("minimum_ssd_gb", 1000)) and "NVMe" in str(storage.get("interface", ""))
     add("storage_capacity_interface", "PASS" if storage_ok else "FAIL",
         "NVMe SSD {}GB / minimum {}GB".format(storage.get("capacity_gb", "unknown"), profile.get("minimum_ssd_gb", 1000)))

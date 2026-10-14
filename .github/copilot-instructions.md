@@ -51,8 +51,8 @@ The build supports the user's stated mix of Apex Legends, VALORANT, other FPS ga
 ## 3. Component compatibility and purchasing gate
 
 Keep DIY component prices separate from BTO/laptop offers and peripheral prices. Before marking a build compatible, validate:
-- CPU socket and exact board support/BIOS for the selected CPU;
-- DDR5 type, 2-stick arrangement, capacity, speed/profile and motherboard memory support/QVL;
+- CPU socket, exact manufacturer CPU-support-list entry, required BIOS version and the actual shipped/installed board BIOS;
+- DDR5 type, 2-stick arrangement, capacity, speed/profile and the exact memory kit's motherboard QVL entry;
 - NVMe form factor/interface and M.2 slot constraints;
 - motherboard form factor and case support;
 - exact GPU SKU dimensions, slot thickness, connector, power draw, PSU capacity/connectors and case clearance;
@@ -60,7 +60,7 @@ Keep DIY component prices separate from BTO/laptop offers and peripheral prices.
 - PSU form factor and required connectors;
 - Windows license, shipping, required small parts, and the final complete configuration total.
 
-Exact PNY GPU model codes and dimensions must be maintained from the linked source page; do not reuse one model's specifications for another. Unknown details mean REVIEW, not PASS. Curated `direct_retailer_urls` are still discovery inputs only: the monitor checks each configured exact seller page (the primary RTX 5070 currently has Joshin, Sofmap and TSUKUMO candidates), compares every successful in-stock offer, then selects the lowest eligible price; do not keep a seller URL whose primary page title/product identity mismatches the intended SKU. only the direct-page identity, price, stock and PIT verifier can mark a listing verified. When a DIY purchase gate is blocked, its reason must describe the actual blocker (component references, compatibility, budget or checkout validation), not merely repeat that DIY is the selected method. Even if an automated mechanical check says PASS, verify manufacturer documentation for the exact SKU and the retailer's final basket immediately before purchase.
+Exact PNY GPU model codes and dimensions must be maintained from the linked source page; do not reuse one model's specifications for another. Unknown details mean REVIEW, not PASS. The current default build must remain REVIEW until the B850M Pro RS WiFi's actual BIOS is checked against the official Ryzen 7 9700X minimum BIOS (3.12) and the exact selected memory kit is confirmed in the motherboard QVL. General socket support and DDR5/EXPO support do not substitute for those checks. Curated `direct_retailer_urls` are still discovery inputs only: the monitor checks each configured exact seller page (the primary RTX 5070 currently has Joshin, Sofmap and TSUKUMO candidates), compares every successful in-stock offer, then selects the lowest eligible price; do not keep a seller URL whose primary page title/product identity mismatches the intended SKU. only the direct-page identity, price, stock and PIT verifier can mark a listing verified. When a DIY purchase gate is blocked, its reason must describe the actual blocker (component references, compatibility, budget or checkout validation), not merely repeat that DIY is the selected method. Even if an automated mechanical check says PASS, verify manufacturer documentation for the exact SKU and the retailer's final basket immediately before purchase.
 
 ## 4. Budget and price semantics
 

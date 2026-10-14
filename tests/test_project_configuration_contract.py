@@ -50,6 +50,13 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(profile["pc_budget_jpy"], self.targets["pc_target_jpy"])
         self.assertEqual(profile["minimum_ram_gb"], 32)
         self.assertEqual(profile["minimum_ssd_gb"], 1000)
+        board_specs = next(x for x in self.build["parts"] if x["id"] == "motherboard-asrock-b850m-pro-rs-wifi")["specs"]
+        self.assertTrue(board_specs["cpu_support_list_verified_for_ryzen7_9700x"])
+        self.assertEqual(board_specs["minimum_bios_for_ryzen7_9700x"], "3.12")
+        self.assertIsNone(board_specs["observed_bios_version"])
+        selected_memory = next(x for x in self.build["parts"] if x["id"] == profile["primary_memory_choice_id"])
+        self.assertFalse(selected_memory["specs"]["qvl_verified_with_asrock_b850m_pro_rs_wifi"])
+        self.assertEqual(selected_memory["specs"]["qvl_verification_status"], "UNCONFIRMED")
         self.assertEqual(profile["assembly_time_is_constraint"], False)
         self.assertEqual(profile["assembly_time_penalty_points"], 0)
         self.assertEqual(

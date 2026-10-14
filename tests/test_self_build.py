@@ -46,7 +46,7 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(memory[0]["id"], "memory-teamgroup-ddr5-32gb-6000")
         self.assertEqual(memory[0]["target_price_jpy"], 40000)
         self.assertNotIn("memory-crucial-pro-ddr5-32gb-6000", [x["id"] for x in main["components"]])
-        self.assertEqual(main["compatibility_status"], "PASS")
+        self.assertEqual(main["compatibility_status"], "REVIEW")
         self.assertIn("memory-teamgroup-ddr5-32gb-6000", {x["id"] for x in self.config["parts"]})
         self.assertEqual(
             next(x for x in self.config["parts"] if x["id"] == "memory-teamgroup-ddr5-32gb-6000")["role"],
@@ -71,7 +71,7 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(main["memory_choice_method"], "lowest_fresh_verified_market_reference")
         self.assertEqual(main["target_pc_total_jpy"], 300600)
         self.assertEqual(main["target_all_in_jpy"], 370400)
-        self.assertEqual(main["compatibility_status"], "PASS")
+        self.assertEqual(main["compatibility_status"], "REVIEW")
         self.assertFalse(main["buy_now_authorized"])
 
     def test_malformed_memory_choice_list_falls_back_to_valid_primary_not_missing_ram(self):
@@ -325,14 +325,33 @@ class SelfBuildPlannerTests(unittest.TestCase):
     def test_two_slot_gpus_pass_geometry_but_near_three_slot_dark_horse_needs_review(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         by_gpu = {x["gpu_choice_id"]:x for x in plan["builds"]}
-        self.assertEqual(by_gpu["gpu-rtx5070-12gb"]["compatibility_status"], "PASS")
-        self.assertEqual(by_gpu["gpu-rtx5060ti-16gb"]["compatibility_status"], "PASS")
+        self.assertEqual(by_gpu["gpu-rtx5070-12gb"]["compatibility_status"], "REVIEW")
+        self.assertEqual(by_gpu["gpu-rtx5060ti-16gb"]["compatibility_status"], "REVIEW")
         self.assertEqual(by_gpu["gpu-rtx5070ti-16gb"]["compatibility_status"], "REVIEW")
         for gpu_id in ("gpu-rtx5070-12gb", "gpu-rtx5060ti-16gb"):
             checks = {x["check"]: x["status"] for x in by_gpu[gpu_id]["compatibility_checks"]}
             self.assertEqual(checks["gpu_slot_thickness"], "PASS")
+            self.assertEqual(checks["cpu_bios_support"], "REVIEW")
+            self.assertEqual(checks["memory_qvl"], "REVIEW")
         dark_checks = {x["check"]: x["status"] for x in by_gpu["gpu-rtx5070ti-16gb"]["compatibility_checks"]}
         self.assertEqual(dark_checks["gpu_slot_thickness"], "REVIEW")
+        self.assertEqual(dark_checks["cpu_bios_support"], "REVIEW")
+        self.assertEqual(dark_checks["memory_qvl"], "REVIEW")
+
+    def test_verified_bios_and_exact_memory_qvl_can_clear_the_review_checks(self):
+        verified = json.loads(json.dumps(self.config))
+        parts = {x["id"]: x for x in verified["parts"]}
+        parts["motherboard-asrock-b850m-pro-rs-wifi"]["specs"]["observed_bios_version"] = "4.60"
+        parts["memory-teamgroup-ddr5-32gb-6000"]["specs"]["qvl_verified_with_asrock_b850m_pro_rs_wifi"] = True
+        plan = planner.build_plan(verified, {"products":[]}, now=NOW)
+        builds = {x["gpu_choice_id"]:x for x in plan["builds"]}
+        main = builds["gpu-rtx5070-12gb"]
+        statuses = {x["check"]:x["status"] for x in main["compatibility_checks"]}
+        self.assertEqual(statuses["cpu_bios_support"], "PASS")
+        self.assertEqual(statuses["memory_qvl"], "PASS")
+        self.assertEqual(main["compatibility_status"], "PASS")
+        self.assertFalse(main["buy_now_authorized"])
+        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["compatibility_status"], "REVIEW")
 
     def test_socket_and_power_mismatches_fail_closed(self):
         bad = json.loads(json.dumps(self.config))
