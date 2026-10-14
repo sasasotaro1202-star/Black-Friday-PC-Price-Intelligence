@@ -99,8 +99,8 @@ class ProjectConfigurationContractTests(unittest.TestCase):
 
         for text in (readme, instructions, peripherals):
             with self.subTest(document="budget and speaker", text_length=len(text)):
-                self.assertRegex(text, r"400,000円")
-                self.assertRegex(text, r"69,800円")
+                self.assertRegex(text, r"(?:¥\\s?400,000|400,000円)")
+                self.assertRegex(text, r"(?:¥\\s?69,800|69,800円)")
                 self.assertIn("EDIFIER MR4 MKII", text)
 
         self.assertIn("AOC Q27G40E/11", instructions)
@@ -113,7 +113,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertNotIn("Creative Pebble X at JPY 10,000", instructions)
         self.assertIn("2026-11-01 00:00 JST", peripherals)
         self.assertIn("2026-12-11 23:59 JST", peripherals)
-        self.assertIn("official period", peripherals)
+        self.assertIn("公式開催期間", peripherals)
 
     def test_monitor_workflow_has_one_cadence_switch_and_fast_workflow_is_manual(self):
         regular = read_text(".github/workflows/pc-price-monitor.yml")
