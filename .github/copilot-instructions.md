@@ -108,3 +108,9 @@ Tests should be network-independent where possible and cover:
 - current README, Copilot instructions and peripheral guide staying aligned with the authoritative config.
 
 Run `python -m unittest discover -s tests -p "test_*.py" -v`, Python compile checks, `scripts/self_build_planner.py`, report/timing/scenario generation, `scripts/healthcheck.py`, `scripts/validate.py`, and `git diff --check` before promoting relevant changes. Report actual verification results; do not claim a test passed until its CI run confirms it.
+
+
+## Direct seller coverage refresh — 2026-10-14
+- TeamGroup DDR5-6000 32GB exact model CTCWD532G6000HC38ADC01 must use the linked official manufacturer page for specification identity, not as a price source. Keep YMall as an untrusted seller candidate unless exact SKU, direct price, stock and PIT verify.
+- Crucial P3 Plus CT1000P3PSSD8JP 1TB is monitored at TSUKUMO and Dospara; Dospara may list a price while out-of-stock, which remains reference-only.
+- Fractal Pop Air FD-C-POA1A-02 is monitored at Yodobashi and Dospara. Use the direct fetched product page to verify stock and shipping; never infer buyability from search-card text.
