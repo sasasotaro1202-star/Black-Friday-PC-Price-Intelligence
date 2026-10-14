@@ -36,8 +36,9 @@ jobs:
           # Regenerate derived ranking artifacts with the current scoring schema
           # before healthcheck; otherwise stale committed JSON can fail a valid code change.
           python scripts/report.py
+          # Generate the current DIY plan before its build-level timing summary.
+          python scripts/self_build_planner.py
           python scripts/timing_analysis.py
           python scripts/scenario_analysis.py
-          python scripts/self_build_planner.py
           python scripts/healthcheck.py
           python scripts/validate.py
