@@ -200,9 +200,12 @@
         "connector": "8-pin PCIe",
         "card_thickness_slots": 2
       },
-      "notes": "国内正規代理店アスクの型番一致仕様で寸法245×120×39.9mm、8ピン補助電源、最大180W、推奨PSU600Wを確認。BF目標109,800円は希望額であり値下がり予測ではない。",
+      "notes": "国内正規代理店アスクの型番一致仕様で寸法245×120×39.9mm、8ピン補助電源、最大180W、推奨PSU600Wを確認。BF目標109,800円は希望額であり値下がり予測ではない。 ドスパラの当該型番の個別商品ページも直接監視し、表示価格・在庫は実行ごとに再取得して検証する。",
       "spec_source_url": "https://www.ask-corp.jp/products/pny/graphicsboard/geforce-rtx-5060-ti/pny-geforce-rtx-5060-ti-16gb-overclocked-dual-fan.html",
-      "spec_source_verified_at": "2026-10-14"
+      "spec_source_verified_at": "2026-10-14",
+      "direct_retailer_urls": [
+        "https://www.dospara.co.jp/SBR1892/IC625088.html"
+      ]
     },
     {
       "id": "gpu-rtx5070ti-16gb",
