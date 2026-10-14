@@ -194,7 +194,10 @@ def _kakaku_is_product_card(node):
             return True
         if re.search(r"(?:^|[-_])(?:item|result|card)(?:$|[-_])", token):
             return True
-        if compact.endswith(("productitem", "resultitem", "productcard", "resultcard")):
+        if compact.endswith((
+            "productitem", "resultitem", "searchitem", "listitem", "catalogitem",
+            "searchresult", "productresult", "productcard", "resultcard", "searchresultcard",
+        )):
             return True
     return False
 
