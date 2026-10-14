@@ -66,7 +66,8 @@
       "ksdenki.com",
       "nojima.co.jp",
       "yamada-denkiweb.com",
-      "kaago.com"
+      "kaago.com",
+      "pc4u.co.jp"
     ],
     "assembly_time_is_constraint": false,
     "assembly_time_penalty_points": 0,
@@ -128,9 +129,10 @@
         "package_power_w": 65,
         "cooler_included": false
       },
-      "notes": "BOXモデル。AM5。CPUクーラーは別途必要。比較サイト掲載額は決済価格ではない。 ヨドバシの型番一致商品ページも直接監視。",
+      "notes": "BOXモデル。AM5。CPUクーラーは別途必要。比較サイト掲載額は決済価格ではない。 ヨドバシの型番一致商品ページも直接監視。 TSUKUMOの型番一致ページも第二監視先として追加。2026-10-14時点の検索表示は46,800円・在庫ありだが、監視時に直接価格と在庫を再取得する。",
       "direct_retailer_urls": [
-        "https://www.yodobashi.com/product/100000001008661707/"
+        "https://www.yodobashi.com/product/100000001008661707/",
+        "https://shop.tsukumo.co.jp/goods/0730143315593/"
       ]
     },
     {
@@ -280,9 +282,10 @@
         "m2_nvme_slots": 3,
         "wifi": true
       },
-      "notes": "AM5・DDR5・MicroATX。CPU対応BIOS、QVL、M.2レーン共有は購入前に再確認。 ヨドバシの型番一致商品ページも直接監視。",
+      "notes": "AM5・DDR5・MicroATX。CPU対応BIOS、QVL、M.2レーン共有は購入前に再確認。 ヨドバシの型番一致商品ページも直接監視。 PC4Uの正規代理店品個別ページも第二監視先として追加。2026-10-14時点の検索表示は32,080円・在庫ありだが、監視時に直接価格と在庫を再取得する。",
       "direct_retailer_urls": [
-        "https://www.yodobashi.com/product/100000001008871801/"
+        "https://www.yodobashi.com/product/100000001008871801/",
+        "https://www.pc4u.co.jp/view/item/000000092844"
       ]
     },
     {
