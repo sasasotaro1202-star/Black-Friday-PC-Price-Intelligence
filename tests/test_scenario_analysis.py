@@ -44,7 +44,7 @@ class BlackFridayScenarioTests(unittest.TestCase):
         cls.catalog_data = read_json("config/candidate_catalog.json")
         cls.catalog = {x["id"]: x for x in cls.catalog_data["candidates"]}
 
-    def test_pre_bf_prices_are_reference_only_and_targets_sum_to_40man(self):
+    def test_pre_bf_prices_are_reference_only_and_targets_sum_to_38man(self):
         now = datetime.fromisoformat("2026-10-10T18:00:00+09:00")
         ts = "2026-10-10T17:59:00+09:00"
         outlier = self.catalog["desktop-gtune-fg-a7g7t-5070ti"]
@@ -73,11 +73,11 @@ class BlackFridayScenarioTests(unittest.TestCase):
         )
         self.assertEqual(result["pricing_phase"], "PRE_BLACK_FRIDAY_REFERENCE")
         self.assertFalse(result["black_friday_prices_known"])
-        self.assertEqual(result["total_budget_jpy"], 400000)
+        self.assertEqual(result["total_budget_jpy"], 380000)
         self.assertEqual(result["peripheral_target_total_jpy"], 69800)
-        self.assertEqual(result["black_friday_ideal_bundle_target_jpy"], 400000)
+        self.assertEqual(result["black_friday_ideal_bundle_target_jpy"], 380000)
         self.assertEqual(result["black_friday_target_buffer_jpy"], 0)
-        self.assertEqual(result["black_friday_hard_cap_bundle_jpy"], 400000)
+        self.assertEqual(result["black_friday_hard_cap_bundle_jpy"], 380000)
         self.assertFalse(result["all_in_checkout_total_final"])
 
         speaker = next(x for x in result["peripherals"] if x["id"] == "speakers")
@@ -87,11 +87,11 @@ class BlackFridayScenarioTests(unittest.TestCase):
 
         outlier_row = next(x for x in result["rtx_5070_ti_desktop_outliers"]
                            if x["id"] == outlier["id"])
-        self.assertEqual(outlier_row["black_friday_target_price_jpy"], 330200)
+        self.assertEqual(outlier_row["black_friday_target_price_jpy"], 310200)
         self.assertEqual(outlier_row["pre_black_friday_reference_price_jpy"], 399800)
         self.assertIsNone(outlier_row["black_friday_price_observed_jpy"])
-        self.assertEqual(outlier_row["discount_needed_to_bf_target_jpy"], 69600)
-        self.assertEqual(outlier_row["discount_needed_to_bf_target_pct"], 17.4)
+        self.assertEqual(outlier_row["discount_needed_to_bf_target_jpy"], 89600)
+        self.assertEqual(outlier_row["discount_needed_to_bf_target_pct"], 22.4)
         bands = {x["discount_pct"]: x["price_jpy"] for x in outlier_row["scenario_prices"]}
         self.assertEqual(bands[25], 299850)
         self.assertTrue(outlier_row["configuration_ready"])
