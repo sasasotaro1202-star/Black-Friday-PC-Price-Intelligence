@@ -324,6 +324,11 @@ def main():
                         errors.append("direct listing display price must be estimate-ineligible: " + str(row.get("id")))
                     if row.get("direct_listing_display_purchase_allowed") is not False or row.get("purchase_allowed") is not False:
                         errors.append("direct listing display price must never authorize purchase: " + str(row.get("id")))
+                    if row.get("status") != "DIRECT_LISTING_DISPLAY_ONLY":
+                        errors.append("direct listing display price status label mismatch: " + str(row.get("id")))
+                    stock_label = str(row.get("direct_listing_display_stock_label") or "")
+                    if stock_label and stock_label not in str(row.get("status_label") or ""):
+                        errors.append("direct listing stock label missing from status text: " + str(row.get("id")))
                 if diy.get("direct_listing_display_count") != direct_listing_display_count:
                     errors.append("DIY direct-listing display count mismatch")
 

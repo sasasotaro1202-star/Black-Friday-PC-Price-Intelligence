@@ -320,10 +320,20 @@ def build_component_timing_rows(components, observations=None, watch_config=None
             and _is_positive_yen(display_only_price)
             and part.get("source_role") == "comparison_site_reference"
         )
+        direct_listing_display = bool(
+            not live_trusted
+            and _is_positive_yen(part.get("direct_listing_display_price_jpy"))
+            and part.get("direct_listing_display_is_estimate_eligible") is False
+            and part.get("direct_listing_display_purchase_allowed") is False
+        )
         target = part.get("target_price_jpy")
         if not live_trusted:
             live_price = None
-            if display_only_reference:
+            if direct_listing_display:
+                stock_label = str(part.get("direct_listing_display_stock_label") or "在庫未確認")
+                status = "DIRECT_LISTING_DISPLAY_ONLY"
+                label = "直接掲載価格あり（" + stock_label + "・購入許可なし）"
+            elif display_only_reference:
                 status, label = "DISPLAY_ONLY_SEARCH_REFERENCE", "検索ページ表示値のみ（検証価格なし）"
             else:
                 status = "REFERENCE_UNVERIFIED" if part.get("track_price") else "MANUAL_REFERENCE_ONLY"

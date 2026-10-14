@@ -385,6 +385,9 @@ class BuyNowDecisionTests(unittest.TestCase):
         self.assertIsNone(row["target_gap_jpy"])
         self.assertEqual(row["direct_listing_display_price_jpy"], 21380)
         self.assertEqual(row["direct_listing_display_stock_label"], "取寄せ/予約")
+        self.assertEqual(row["status"], "DIRECT_LISTING_DISPLAY_ONLY")
+        self.assertIn("取寄せ/予約", row["status_label"])
+        self.assertIn("購入許可なし", row["status_label"])
         self.assertFalse(row["direct_listing_display_is_estimate_eligible"])
         self.assertFalse(row["direct_listing_display_purchase_allowed"])
 
