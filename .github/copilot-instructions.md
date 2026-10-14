@@ -15,8 +15,8 @@ The user's intended workflow is explicit:
 Read `config/targets.json` and `config/build_components.json` before changing budgets, targets, parts, or schedules. They are the authoritative machine-readable configuration; do not reintroduce stale values in prose or code.
 
 The current user-selected plan is:
-- **Total-system planning target: around ¥380,000** for the DIY desktop plus every required peripheral. Treat this as the center target, not a reason to omit dark horses from rankings; list any overrun explicitly.
-- **Peripheral planning target: ¥69,800**; **PC-only planning frame: ¥310,200** before the conservative dynamic adjustment for verified delivered peripheral costs. These target values sum to ¥380,000.
+- **Total-system planning target: around ¥400,000** for the DIY desktop plus every required peripheral. Treat this as the center target, not a reason to omit dark horses from rankings; list any overrun explicitly.
+- **Peripheral planning target: ¥69,800**; **PC-only planning frame: ¥330,200** before the conservative dynamic adjustment for verified delivered peripheral costs. These target values sum to ¥400,000.
 - Two monitors are required: AOC Q27G40E/11, 27-inch WQHD 180Hz main monitor, and LG 24MS500-B, 23.8-inch FHD IPS 100Hz secondary monitor.
 - Speaker target: EDIFIER MR4 MKII. Do not substitute Creative Pebble X or the more expensive MR5 as the main plan without a deliberate, budget-checked update.
 - Also budget for Logicool G213r keyboard, Logicool G304 mouse, SteelSeries QcK Large mousepad, ELECOM T-K1A-2625BK power strip, only-needed cables, and shipping/incidentals.
@@ -39,11 +39,11 @@ Primary component target:
 - Case: Fractal Design Pop Air TG — ¥12,000.
 - CPU cooler: Thermalright Peerless Assassin 120 SE V3 — ¥5,000.
 - Windows 11 Home Japanese boxed retail package (SKU HAJ-00094) — BF target ¥14,800; monitor the direct Yodobashi offer and the exact comparison item. Do not use a stale manual ¥19,360 amount as a live market price.
-- TeamGroup-based component BF target subtotal: ¥291,600; shipping reserve ¥6,000 + small-parts reserve ¥3,000 = **PC target ¥300,600**. With ¥69,800 peripherals, all-in target = **¥370,400**, leaving a planned ¥9,600 buffer against the around-¥380,000 target. A Crucial-memory version is ¥320,600 PC / ¥390,400 all-in and must be labelled as ¥10,400 over target. These are desired BF prices, not forecasts or verified prices.
+- TeamGroup-based component BF target subtotal: ¥291,600; shipping reserve ¥6,000 + small-parts reserve ¥3,000 = **PC target ¥300,600**. With ¥69,800 peripherals, all-in target = **¥370,400**, leaving a planned ¥29,600 buffer against the around-¥400,000 target. A Crucial-memory version is ¥320,600 PC / ¥390,400 all-in, leaving ¥9,600 under the ¥400,000 target. These are desired BF prices, not forecasts or verified prices.
 
 Keep these alternatives separate and visible:
 - **VRAM-focused alternative:** RTX 5060 Ti 16GB exact SKU VCG5060T16DFXPB1-O — with the ¥40,000 TeamGroup memory target, projected PC cost ¥280,600 / all-in target ¥350,400. If the Crucial kit is chosen instead, the all-in target is ¥370,400. Keep the local-AI 16GB VRAM advantage distinct from gaming-performance comparisons; re-check the exact GPU's dimensions, connector and completed build.
-- **Dark horse:** RTX 5070 Ti 16GB ARGB (exact SKU VCG5070T16TFXXPB1-O), BF GPU target ¥154,000. With TeamGroup memory, projected PC cost is ¥324,800 / all-in target **¥394,600**, exceeding the ¥380,000 center target by ¥14,600; with Crucial memory, all-in target is ¥414,600. **Always include it in final rankings as a stretch candidate**, show the overrun and price reduction needed, and keep case clearance for its 2.98-slot thickness as REVIEW. A target is not a price forecast. Do not authorize purchase until live seller price/stock, case clearance, compatibility and final all-in cash total are verified.
+- **Dark horse:** RTX 5070 Ti 16GB ARGB (exact SKU VCG5070T16TFXXPB1-O), BF GPU target ¥154,000. With TeamGroup memory, projected PC cost is ¥324,800 / all-in target **¥394,600**, leaving ¥5,400 under the ¥400,000 center target; with Crucial memory, all-in target is ¥414,600. **Always include it in final rankings as a stretch candidate**, show the overrun and price reduction needed, and keep case clearance for its 2.98-slot thickness as REVIEW. A target is not a price forecast. Do not authorize purchase until live seller price/stock, case clearance, compatibility and final all-in cash total are verified.
 - Do not assume an unquoted RAM/SSD upgrade costs ¥0. Add direct retailer monitor URLs for memory and SSD when an exact-item page is available, and keep unknown/out-of-stock readings explicitly untrusted. The quoted completed configuration must meet **RAM ≥32GB and SSD ≥1TB at purchase**; do not rely on a planned post-purchase upgrade.
 
 The build supports the user's stated mix of Apex Legends, VALORANT, other FPS games, Cities: Skylines II, Python/data analysis, AI-assisted work, and large sports/stock/BTC prediction programs. Explain limits honestly: actual FPS, simulation speed, model capacity and training time depend on settings, datasets and workloads; do not promise specific benchmark results without evidence. Treat GPU VRAM, CPU performance, memory capacity, storage capacity, cooling, power delivery and upgradeability as separate factors.
@@ -66,7 +66,7 @@ Exact PNY GPU model codes and dimensions must be maintained from the linked sour
 
 `config/targets.json` is the budget source of truth; `config/build_components.json` is the DIY component source of truth. Preserve this invariant:
 
-`total_budget_jpy = peripheral_budget_jpy + pc_target_jpy` (the configured center target is ¥380,000; keep over-target candidates in comparisons but do not silently approve spending above the target).
+`total_budget_jpy = peripheral_budget_jpy + pc_target_jpy` (the configured center target is ¥400,000; keep over-target candidates in comparisons but do not silently approve spending above the target).
 
 The peripheral BF targets should total ¥69,800. The TeamGroup-based main DIY parts, shipping and small-parts target should total ¥300,600, producing a ¥370,400 all-in planning target. Crucial Pro CP2K16G60C36U5W at ¥60,000 remains an alternative with a ¥390,400 all-in target. Keep RTX 5070 Ti at ¥394,600 all-in with TeamGroup as an over-target stretch candidate. Rankings must preserve these options and show deltas; purchase authorization remains fail-closed until fresh price, stock, compatibility and checkout evidence pass.
 
