@@ -1,6 +1,6 @@
 # 自作PCパーツ構成・価格監視
 
-更新: 2026-10-14T20:50:40+09:00
+更新: 2026-10-14T21:09:51+09:00
 予算: PC本体 ¥330,200 / 周辺機器 ¥69,800 / 総額 ¥400,000
 
 **購入方式:** 自作PCを正式な本命として最適化します。組み立て時間・作業時間は減点しません。BTOは同等仕様での総額・部品品質・保証のベンチマークとして比較し、便利さだけを理由に自作から切り替えません。
@@ -28,7 +28,7 @@
 |Crucial P3 Plus CT1000P3PSSD8JP 1TB|CT1000P3PSSD8JP|¥18,000|¥33,600（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001466997/) / [検索ページ参考元](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/)|
 |Corsair RM850e 2025 850W ATX 3.1 Gold|CP-9020296-JP|¥14,000|¥17,580（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001671441/) / [検索ページ参考元](https://search.kakaku.com/Corsair%20RM850e%202025%20850W%20ATX%203.1%20Gold/)|
 |Fractal Design Pop Air TG|FD-C-POA1A-02|¥12,000|¥13,311（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/J0000039064/) / [検索ページ参考元](https://search.kakaku.com/Fractal%20Design%20Pop%20Air%20TG/)|
-|Thermalright Peerless Assassin 120 SE V3|Peerless Assassin 120 SE V3|¥5,000|¥4,980（検索スニペット参考のみ）|¥5,470（取寄せ/予約）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001789043/) / [直接掲載ページ](https://www.yodobashi.com/product/100000001009948470/) / [検索ページ参考元](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/)|
+|Thermalright Peerless Assassin 120 SE V3|Peerless Assassin 120 SE V3|¥5,000|¥4,980（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001789043/) / [検索ページ参考元](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/)|
 |Windows 11 Home official retail license reference|Windows 11 Home|¥19,360|¥19,360（手動参考・現行未確認）|—|manual_reference_unverified|[価格比較ページ](https://www.microsoft.com/ja-jp/d/windows-11-home/dg7gmgf0krt0)|
 |PNY GeForce RTX 5070 12GB OC SLIM|VCG507012DFXPB1-O|¥145,000|¥190,800（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001798041/) / [検索ページ参考元](https://search.kakaku.com/PNY%20GeForce%20RTX%205070%2012GB%20OC%20SLIM/)|
 
@@ -60,7 +60,7 @@
 |Crucial P3 Plus CT1000P3PSSD8JP 1TB|CT1000P3PSSD8JP|¥18,000|¥33,600（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001466997/) / [検索ページ参考元](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/)|
 |Corsair RM850e 2025 850W ATX 3.1 Gold|CP-9020296-JP|¥14,000|¥17,580（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001671441/) / [検索ページ参考元](https://search.kakaku.com/Corsair%20RM850e%202025%20850W%20ATX%203.1%20Gold/)|
 |Fractal Design Pop Air TG|FD-C-POA1A-02|¥12,000|¥13,311（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/J0000039064/) / [検索ページ参考元](https://search.kakaku.com/Fractal%20Design%20Pop%20Air%20TG/)|
-|Thermalright Peerless Assassin 120 SE V3|Peerless Assassin 120 SE V3|¥5,000|¥4,980（検索スニペット参考のみ）|¥5,470（取寄せ/予約）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001789043/) / [直接掲載ページ](https://www.yodobashi.com/product/100000001009948470/) / [検索ページ参考元](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/)|
+|Thermalright Peerless Assassin 120 SE V3|Peerless Assassin 120 SE V3|¥5,000|¥4,980（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001789043/) / [検索ページ参考元](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/)|
 |Windows 11 Home official retail license reference|Windows 11 Home|¥19,360|¥19,360（手動参考・現行未確認）|—|manual_reference_unverified|[価格比較ページ](https://www.microsoft.com/ja-jp/d/windows-11-home/dg7gmgf0krt0)|
 |PNY GeForce RTX 5060 Ti 16GB OC|VCG5060T16DFXPB1-O|¥120,000|¥134,800（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001696163/) / [検索ページ参考元](https://search.kakaku.com/PNY%20GeForce%20RTX%205060%20Ti%2016GB%20OC/)|
 
@@ -92,7 +92,7 @@
 |Crucial P3 Plus CT1000P3PSSD8JP 1TB|CT1000P3PSSD8JP|¥18,000|¥33,600（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001466997/) / [検索ページ参考元](https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/)|
 |Corsair RM850e 2025 850W ATX 3.1 Gold|CP-9020296-JP|¥14,000|¥17,580（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001671441/) / [検索ページ参考元](https://search.kakaku.com/Corsair%20RM850e%202025%20850W%20ATX%203.1%20Gold/)|
 |Fractal Design Pop Air TG|FD-C-POA1A-02|¥12,000|¥13,311（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/J0000039064/) / [検索ページ参考元](https://search.kakaku.com/Fractal%20Design%20Pop%20Air%20TG/)|
-|Thermalright Peerless Assassin 120 SE V3|Peerless Assassin 120 SE V3|¥5,000|¥4,980（検索スニペット参考のみ）|¥5,470（取寄せ/予約）|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001789043/) / [直接掲載ページ](https://www.yodobashi.com/product/100000001009948470/) / [検索ページ参考元](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/)|
+|Thermalright Peerless Assassin 120 SE V3|Peerless Assassin 120 SE V3|¥5,000|¥4,980（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001789043/) / [検索ページ参考元](https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/)|
 |Windows 11 Home official retail license reference|Windows 11 Home|¥19,360|¥19,360（手動参考・現行未確認）|—|manual_reference_unverified|[価格比較ページ](https://www.microsoft.com/ja-jp/d/windows-11-home/dg7gmgf0krt0)|
 |PNY GeForce RTX 5070 Ti 16GB ARGB|VCG5070T16TFXPB1-O|¥154,000|¥428,800（検索スニペット参考のみ）|—|search_snippet_reference_only|[価格比較ページ](https://kakaku.com/item/K0001696164/) / [検索ページ参考元](https://search.kakaku.com/PNY%20GeForce%20RTX%205070%20Ti%2016GB%20ARGB/)|
 
