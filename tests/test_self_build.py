@@ -99,6 +99,52 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertIn("21,380", report)
         self.assertIn("取寄せ/予約", report)
 
+    def test_direct_listing_failure_diagnostics_are_visible_in_part_report(self):
+        gpu = self.parts["gpu-rtx5070-12gb"]
+        stamp = NOW.isoformat()
+        row = {
+            "id": gpu["id"],
+            "price_validation_status": "search_snippet_reference",
+            "source_role": "comparison_site_reference",
+            "search_snippet_reference_price_jpy": 190800,
+            "search_snippet_reference_url": "https://search.kakaku.com/PNY/",
+            "search_snippet_reference_title": "VCG507012DFSXPB1-O",
+            "search_snippet_identity_anchor": "VCG507012DFSXPB1-O",
+            "identity_match": True,
+            "pit_valid": True,
+            "bf_actual_authorized": False,
+            "available_at": stamp,
+            "retrieval_time": stamp,
+            "retailer_listing_offer": None,
+            "retailer_listing_offers": [],
+            "search_diagnostics": [{
+                "provider": "configured_direct_retailer",
+                "url": "https://joshinweb.jp/kaden/73259/0751492812151.html",
+                "status": "unverified",
+                "error": "fetch_error",
+                "stock_status": "unknown",
+                "validation": {
+                    "reason_code": "fetch_error",
+                    "error_type": "HTTPError",
+                    "error_message": "HTTP 403 blocked",
+                    "price_source_mode": "none",
+                    "stock_status": "unknown",
+                },
+            }],
+        }
+        plan = planner.build_plan(self.config, {"generated_at": stamp, "products": [row]}, now=NOW)
+        build = next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")
+        component = next(x for x in build["components"] if x["id"] == gpu["id"])
+        diag = component["direct_listing_validation_diagnostics"][0]
+        self.assertEqual(diag["reason_code"], "fetch_error")
+        self.assertEqual(diag["error_message"], "HTTP 403 blocked")
+        report = planner.render_plan_markdown(plan)
+        self.assertIn("直接取得診断", report)
+        self.assertIn("fetch_error", report)
+        self.assertIn("HTTP 403 blocked", report)
+        self.assertIn("search_snippet_reference_only", report)
+        self.assertFalse(build["buy_now_authorized"])
+
     def test_unknown_price_is_never_zero_filled_or_authorized(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         for build in plan["builds"]:
