@@ -27,12 +27,17 @@ class BuildComponentMonitorTests(unittest.TestCase):
             "max_price_jpy": 330000,
         }
 
-    def test_search_queries_do_not_force_comparison_item_path(self):
-        queries = bcm.build_component_search_queries(self.part)
-        self.assertGreaterEqual(len(queries), 2)
+    def test_search_queries_scope_two_variants_to_allowlisted_sites(self):
+        domains = ("kakaku.com", "amazon.co.jp", "dospara.co.jp")
+        queries = bcm.build_component_search_queries(self.part, domains)
+        self.assertEqual(len(queries), 2)
         self.assertTrue(any("VCG507012DFXPB1-O" in q for q in queries))
         self.assertTrue(any("PNY GeForce RTX 5070 12GB OC SLIM" in q for q in queries))
+        self.assertTrue(all("site:kakaku.com" in q for q in queries))
+        self.assertTrue(all("site:amazon.co.jp" in q for q in queries))
+        self.assertTrue(all("site:dospara.co.jp" in q for q in queries))
         self.assertFalse(any("/item/K0001798041" in q for q in queries))
+        self.assertFalse(any("site:untrusted.example" in q for q in queries))
 
     def test_direct_retailer_listing_requires_allowlisted_https_host(self):
         with patch.object(bcm, "fetch") as mocked:

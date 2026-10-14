@@ -178,21 +178,31 @@ def component_search_identity_anchor(result, part):
     return matches[0][1]
 
 
-def build_component_search_queries(part):
-    """Use diversified SKU/name searches instead of forcing an indexed comparison URL path."""
+def build_component_search_queries(part, domains=DEFAULT_DOMAINS):
+    """Build two bounded, allowlist-scoped searches so broad Bing results aren't wasted."""
     model_code = str(part.get("model_code") or "").strip()
     name = str(part.get("name") or "").strip()
+    safe_domains = []
+    for raw_domain in domains or DEFAULT_DOMAINS:
+        domain = str(raw_domain or "").strip().lower().strip(".")
+        if re.fullmatch(r"[a-z0-9.-]+", domain) and "." in domain and domain not in safe_domains:
+            safe_domains.append(domain)
+    if not safe_domains:
+        safe_domains = list(DEFAULT_DOMAINS)
+    # Explicit site operators increase recall within the configured Japanese
+    # retailers and comparison sites instead of returning broad, unrelated pages.
+    site_scope = "(" + " OR ".join("site:" + domain for domain in safe_domains) + ")"
     queries = []
     if model_code:
-        queries.append('"{}" 価格'.format(model_code))
+        queries.append('"{}" 価格 {}'.format(model_code, site_scope))
     if name:
-        queries.append('"{}" 価格 最安値'.format(name))
+        queries.append('"{}" 価格 最安値 {}'.format(name, site_scope))
     unique = []
     for query in queries:
         query = re.sub(r"\s+", " ", query).strip()
         if query and query not in unique:
             unique.append(query)
-    return unique[:3]
+    return unique[:2]
 
 
 def verify_retailer_listing(part, candidate_url, domains):
@@ -255,7 +265,7 @@ def search_comparison_snippet(part, domains):
     accepted only after re-fetching the listing and validating identity, a
     plausible directly parsed price, and an in-stock signal.
     """
-    queries = build_component_search_queries(part)
+    queries = build_component_search_queries(part, domains)
     diagnostics = []
     all_snippet_candidates = []
     verified_offers = []
