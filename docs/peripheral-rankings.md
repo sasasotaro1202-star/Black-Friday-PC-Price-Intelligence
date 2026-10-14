@@ -16,6 +16,19 @@
 - ケーブル：付属品を確認し、不足分だけ購入
 - 送料などの予備費：4,000円
 
+## 商品画像（主予算の候補）
+
+各画像は商品の外観確認用です。価格・在庫は画像から判断せず、直近の監視データと購入ページで確認します。
+
+| 商品 | 画像 | 商品ページ |
+|---|---|---|
+| AOC Q27G40E/11 メインモニター | <a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E monitor" width="140"></a> | [購入ページ](https://www.yodobashi.com/product/100000001009314680/) |
+| LG 24MS500-B サブモニター | <a href="https://www.lg.com/id/monitor/fhd-qhd/24ms500-b/"><img src="https://www.lg.com/content/dam/channel/wcms/id/monitor/fhd-qhd/24ms500/gallery/02-gallery/fhd-24ms500-gallery-01-2010.jpg" alt="LG 24MS500-B monitor" width="140"></a> | [価格比較](https://kakaku.com/item/K0001619930/) |
+| EDIFIER MR4 MKII スピーカー | <a href="https://www.yohohongkong.com/zh-hk/product/434786-Edifier-MR4-MKII-%E9%9B%99%E5%8A%9F%E6%94%BE%E9%8C%84%E5%AE%A4%E7%9B%A3%E8%81%BD%E5%96%87%E5%8F%AD-%E9%BB%91%E8%89%B2-%E9%A6%99%E6%B8%AF%E8%A1%8C%E8%B2%A8"><img src="https://www1.yohohongkong.com/images/202606/goods_img/434786_P_1780969137592.png" alt="EDIFIER MR4 MKII black speakers" width="140"></a> | [公式商品ページ](https://www.edifier.jp/products/mr4-mkii) |
+| Logicool G213r キーボード | <a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r keyboard" width="140"></a> | [購入ページ](https://www.biccamera.com/bc/item/9242996/) |
+| Logicool G304 マウス | <a href="https://shopee.ph/Logitech-Gaming-Mouse-G304-LIGHTSPEED-Wireless-12-000-DPI-Hero-Sensor-Lightweight-i.470352549.26121376846"><img src="https://down-ph.img.susercontent.com/file/sg-11134202-7rfh8-m43f6xs2o7yb73" alt="Logicool G304 mouse" width="140"></a> | [購入ページ](https://www.yodobashi.com/product/100000001004334450/) |
+| SteelSeries QcK Large マウスパッド | <a href="https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad"><img src="https://files.pccasegear.com/images/SS-63003-thumb.jpg" alt="SteelSeries QcK Large mousepad" width="140"></a> | [購入ページ](https://www.yodobashi.com/product/100000001009472873/) |
+
 ## 価格・スコアの読み方
 
 - 総額の中心目標は**400,000円程度**。主予算構成の周辺機器BF購入目標は69,800円、PC本体に残す計画枠は330,200円です。大穴を含む全候補は目標超過でも比較し、超過額を明示します。
