@@ -186,8 +186,7 @@ def build_component_search_queries(part):
     if model_code:
         queries.append('"{}" 価格'.format(model_code))
     if name:
-        queries.append('"{}" 価格'.format(name))
-        queries.append("{} 最安値".format(name))
+        queries.append('"{}" 価格 最安値'.format(name))
     unique = []
     for query in queries:
         query = re.sub(r"\s+", " ", query).strip()
@@ -333,7 +332,7 @@ def search_comparison_snippet(part, domains):
                 "direct_retailer_fetch_attempt_count": direct_fetch_attempts - local_fetch_start,
                 "verified_retailer_listing_count": len(verified_offers) - local_offer_start,
             })
-            if verified_offers:
+            if any(item.get("stock_status") == "in_stock" for item in verified_offers):
                 verified_offers.sort(key=lambda item: (
                     0 if item.get("stock_status") == "in_stock" else 1,
                     item.get("price_jpy", 10**12),
@@ -353,7 +352,20 @@ def search_comparison_snippet(part, domains):
         ), reverse=True)
         chosen = all_snippet_candidates[0]
         chosen["search_diagnostics"] = diagnostics
+        chosen["retailer_listing_offers"] = verified_offers
         return chosen
+    if verified_offers:
+        verified_offers.sort(key=lambda item: (
+            0 if item.get("stock_status") == "in_stock" else 1,
+            item.get("price_jpy", 10**12),
+            0 if item.get("price_source_mode") == "direct_structured" else 1,
+            0 if item.get("identity_anchor") == str(part.get("model_code") or "") else 1,
+        ))
+        return {
+            "retailer_listing_offer": verified_offers[0],
+            "retailer_listing_offers": verified_offers,
+            "search_diagnostics": diagnostics,
+        }
     return {"search_diagnostics": diagnostics} if diagnostics else None
 
 def fetch_part(part, domains, search_domains=None):

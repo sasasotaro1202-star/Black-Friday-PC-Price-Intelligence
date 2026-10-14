@@ -177,8 +177,9 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(result["search_provider"], "duckduckgo")
         self.assertEqual(result["source_role"], "comparison_site_search_snippet_reference")
         self.assertFalse(result["bf_actual_authorized"])
-        self.assertEqual(len(result["search_diagnostics"]), 2)
+        self.assertEqual(len(result["search_diagnostics"]), 4)
         self.assertEqual(result["search_diagnostics"][0]["result_count"], 0)
+        self.assertEqual(result["search_diagnostics"][1]["result_count"], 1)
 
     def test_search_snippet_can_reference_allowlisted_seller_with_exact_model_name(self):
         part = self.parts["cpu-ryzen7-9700x"]
@@ -187,7 +188,9 @@ class SelfBuildPlannerTests(unittest.TestCase):
             "title": "AMD Ryzen 7 9700X BOX",
             "snippet": "100-100001404WOF 最安価格 ¥39,980",
         }
-        with patch.object(component_monitor, "ddg_search", side_effect=[[], [seller_result]]), patch.object(component_monitor, "bing_search", return_value=[]):
+        with patch.object(component_monitor, "ddg_search", side_effect=[[], [seller_result]]), \
+             patch.object(component_monitor, "bing_search", return_value=[]), \
+             patch.object(component_monitor, "verify_retailer_listing", return_value=None):
             found = component_monitor.search_comparison_snippet(part, ("kakaku.com", "dospara.co.jp"))
         self.assertEqual(found["price_jpy"], 39980)
         self.assertEqual(found["url"], seller_result["url"])
