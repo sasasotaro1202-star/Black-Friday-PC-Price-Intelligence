@@ -290,7 +290,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "bicamera_tenjin_1",
+        "biccamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "store_price_jpy": null,
@@ -303,30 +303,18 @@
       "store_evidence_notes": null,
       "store_inventory_checks": [
         {
-          "store_id": "bicamera_tenjin_1",
+          "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "branch_match_terms": [
-            "ビックカメラ天神1号館",
-            "天神1号館"
-          ],
-          "source_type": "official_branch_stock_page",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14369301",
           "allowed_hosts": [
             "www.biccamera.com"
           ],
-          "url": "https://www.biccamera.com/bc/item/14369301/"
-        },
-        {
-          "store_id": "yodobashi_hakata",
-          "store_name": "ヨドバシカメラ マルチメディア博多",
           "branch_match_terms": [
-            "ヨドバシカメラ マルチメディア博多",
-            "マルチメディア博多"
+            "ビックカメラ 天神１号館",
+            "ビックカメラ天神1号館",
+            "Tenjin 1st Store"
           ],
-          "source_type": "official_branch_stock_page",
-          "allowed_hosts": [
-            "www.yodobashi.com"
-          ],
-          "url": "https://www.yodobashi.com/product/100000001009314680/"
+          "source_type": "official_branch_stock_page"
         }
       ]
     },
@@ -404,7 +392,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "bicamera_tenjin_1",
+        "biccamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "store_price_jpy": null,
@@ -417,30 +405,18 @@
       "store_evidence_notes": null,
       "store_inventory_checks": [
         {
-          "store_id": "bicamera_tenjin_1",
+          "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "branch_match_terms": [
-            "ビックカメラ天神1号館",
-            "天神1号館"
-          ],
-          "source_type": "official_branch_stock_page",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=15313369",
           "allowed_hosts": [
             "www.biccamera.com"
           ],
-          "url": "https://www.biccamera.com/bc/item/15313369/"
-        },
-        {
-          "store_id": "yodobashi_hakata",
-          "store_name": "ヨドバシカメラ マルチメディア博多",
           "branch_match_terms": [
-            "ヨドバシカメラ マルチメディア博多",
-            "マルチメディア博多"
+            "ビックカメラ 天神１号館",
+            "ビックカメラ天神1号館",
+            "Tenjin 1st Store"
           ],
-          "source_type": "official_branch_stock_page",
-          "allowed_hosts": [
-            "www.yodobashi.com"
-          ],
-          "url": "https://www.yodobashi.com/product/100000001009991946/"
+          "source_type": "official_branch_stock_page"
         }
       ]
     },
@@ -481,7 +457,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "bicamera_tenjin_1",
+        "biccamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "store_price_jpy": null,
@@ -494,17 +470,18 @@
       "store_evidence_notes": null,
       "store_inventory_checks": [
         {
-          "store_id": "bicamera_tenjin_1",
+          "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "branch_match_terms": [
-            "ビックカメラ天神1号館",
-            "天神1号館"
-          ],
-          "source_type": "official_branch_stock_page",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=9242996",
           "allowed_hosts": [
             "www.biccamera.com"
           ],
-          "url": "https://www.biccamera.com/bc/item/9242996/"
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "ビックカメラ天神1号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
         }
       ]
     },
@@ -540,7 +517,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "bicamera_tenjin_1",
+        "biccamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "monitor_urls": [
@@ -557,30 +534,18 @@
       "store_evidence_notes": null,
       "store_inventory_checks": [
         {
-          "store_id": "bicamera_tenjin_1",
+          "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "branch_match_terms": [
-            "ビックカメラ天神1号館",
-            "天神1号館"
-          ],
-          "source_type": "official_branch_stock_page",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=6566291",
           "allowed_hosts": [
             "www.biccamera.com"
           ],
-          "url": "https://www.biccamera.com/bc/item/6566291/"
-        },
-        {
-          "store_id": "yodobashi_hakata",
-          "store_name": "ヨドバシカメラ マルチメディア博多",
           "branch_match_terms": [
-            "ヨドバシカメラ マルチメディア博多",
-            "マルチメディア博多"
+            "ビックカメラ 天神１号館",
+            "ビックカメラ天神1号館",
+            "Tenjin 1st Store"
           ],
-          "source_type": "official_branch_stock_page",
-          "allowed_hosts": [
-            "www.yodobashi.com"
-          ],
-          "url": "https://www.yodobashi.com/product/100000001004334450/"
+          "source_type": "official_branch_stock_page"
         }
       ]
     },
@@ -910,7 +875,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "bicamera_tenjin_1",
+        "biccamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "store_price_jpy": null,
@@ -951,7 +916,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "bicamera_tenjin_1",
+        "biccamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "store_price_jpy": null,
@@ -992,7 +957,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "bicamera_tenjin_1",
+        "biccamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "store_price_jpy": null,
@@ -1032,7 +997,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "bicamera_tenjin_1",
+        "biccamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "store_price_jpy": null,
@@ -1073,7 +1038,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "bicamera_tenjin_1",
+        "biccamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "store_price_jpy": null,
@@ -1114,7 +1079,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "bicamera_tenjin_1",
+        "biccamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "store_price_jpy": null,
@@ -1339,7 +1304,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "bicamera_tenjin_1",
+        "biccamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "store_price_jpy": null,
@@ -1353,30 +1318,18 @@
       "store_evidence_notes": null,
       "store_inventory_checks": [
         {
-          "store_id": "bicamera_tenjin_1",
+          "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "branch_match_terms": [
-            "ビックカメラ天神1号館",
-            "天神1号館"
-          ],
-          "source_type": "official_branch_stock_page",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=13719866",
           "allowed_hosts": [
             "www.biccamera.com"
           ],
-          "url": "https://www.biccamera.com/bc/item/13719866/"
-        },
-        {
-          "store_id": "yodobashi_hakata",
-          "store_name": "ヨドバシカメラ マルチメディア博多",
           "branch_match_terms": [
-            "ヨドバシカメラ マルチメディア博多",
-            "マルチメディア博多"
+            "ビックカメラ 天神１号館",
+            "ビックカメラ天神1号館",
+            "Tenjin 1st Store"
           ],
-          "source_type": "official_branch_stock_page",
-          "allowed_hosts": [
-            "www.yodobashi.com"
-          ],
-          "url": "https://www.yodobashi.com/product/100000001008849809/"
+          "source_type": "official_branch_stock_page"
         }
       ]
     },
@@ -1410,7 +1363,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "bicamera_tenjin_1",
+        "biccamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "purchase_channel": "physical_store",
@@ -1424,17 +1377,18 @@
       "store_evidence_notes": null,
       "store_inventory_checks": [
         {
-          "store_id": "bicamera_tenjin_1",
+          "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "branch_match_terms": [
-            "ビックカメラ天神1号館",
-            "天神1号館"
-          ],
-          "source_type": "official_branch_stock_page",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14119746",
           "allowed_hosts": [
             "www.biccamera.com"
           ],
-          "url": "https://www.biccamera.com/bc/item/14119746/"
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "ビックカメラ天神1号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
         }
       ]
     }
@@ -1520,7 +1474,7 @@
     ],
     "physical_store_candidates": [
       {
-        "id": "bicamera_tenjin_1",
+        "id": "biccamera_tenjin_1",
         "name": "ビックカメラ天神1号館",
         "address": "〒810-0021 福岡県福岡市中央区今泉1-25-1",
         "hours": "10:00〜21:00（公式店舗ページの現在表示。来店前に再確認）",
