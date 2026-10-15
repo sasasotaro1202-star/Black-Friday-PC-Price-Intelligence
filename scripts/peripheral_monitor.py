@@ -4,7 +4,7 @@ import json
 import os
 import re
 from urllib.parse import urlparse
-from intelligence import ROOT, iso, now_jst, load_json, save_json, norm_text
+from intelligence import ROOT, iso, now_jst, load_json, save_json, norm_text, store_observation_validation
 from monitor import fetch, parse_page, stock_from_text
 
 TARGETS_PATH = os.path.join(ROOT, "config", "targets.json")
@@ -132,6 +132,9 @@ def run_one(target, previous, retrieved_at):
         "purchase_url": target.get("purchase_url") or primary_url,
         "retrieval_time": retrieved_at, "available_at": None,
         "current_price_jpy": None,
+        "online_comparison_price_jpy": None,
+        "online_reference_price_verified": False,
+        **store_observation_validation(target, retrieved_at),
         "last_valid_price_jpy": (previous.get("current_price_jpy") or previous.get("last_valid_price_jpy")) if previous_matches_target(previous, target) else None,
         "price_verified": False, "stock_status": "unknown",
         "price_source_mode": "none", "price_validation_status": "missing",
@@ -224,6 +227,8 @@ def run_one(target, previous, retrieved_at):
             stock = local_product_stock(context, parsed.get("stock_status") or "unknown")
             row.update({
                 "current_price_jpy": price,
+                "online_comparison_price_jpy": price,
+                "online_reference_price_verified": True,
                 "last_valid_price_jpy": price,
                 "price_verified": True,
                 "stock_status": stock,
@@ -296,6 +301,8 @@ def main():
                 "online_price_is_comparison_only": bool(target.get("online_price_is_comparison_only", False)),
                 "physical_store_candidate_ids": target.get("physical_store_candidate_ids") or [],
                 "current_price_jpy": None, "last_valid_price_jpy": old.get("last_valid_price_jpy"),
+                "online_comparison_price_jpy": None, "online_reference_price_verified": False,
+                **store_observation_validation(target, observed_at),
                 "price_verified": False, "stock_status": "unknown", "status": "target_only",
                 "monitor_url": None, "purchase_url": target.get("purchase_url"),
                 "retrieval_time": observed_at, "available_at": None, "price_source_mode": "none",
@@ -308,7 +315,15 @@ def main():
         before = old.get(str(item.get("id")), {})
         old_price, new_price = before.get("current_price_jpy"), item.get("current_price_jpy")
         old_stock, new_stock = before.get("stock_status"), item.get("stock_status")
-        if old_price == new_price and old_stock == new_stock:
+        old_store_signature = (
+            before.get("store_price_jpy"), before.get("store_stock_status"),
+            before.get("store_observation_status"), before.get("store_observation_store_id"),
+        )
+        new_store_signature = (
+            item.get("store_price_jpy"), item.get("store_stock_status"),
+            item.get("store_observation_status"), item.get("store_observation_store_id"),
+        )
+        if old_price == new_price and old_stock == new_stock and old_store_signature == new_store_signature:
             continue
         if new_price is None and new_stock in (None, "unknown") and not before:
             continue
@@ -320,6 +335,12 @@ def main():
             "pit_valid": bool(item.get("available_at") and item.get("available_at") <= observed_at),
             "url": item.get("source_url") or item.get("monitor_url"), "old_price_jpy": old_price, "new_price_jpy": new_price,
             "old_stock_status": old_stock, "new_stock_status": new_stock,
+            "old_store_price_jpy": before.get("store_price_jpy"),
+            "new_store_price_jpy": item.get("store_price_jpy"),
+            "old_store_stock_status": before.get("store_stock_status"),
+            "new_store_stock_status": item.get("store_stock_status"),
+            "store_observation_status": item.get("store_observation_status"),
+            "store_observation_store_id": item.get("store_observation_store_id"),
             "price_source_mode": item.get("price_source_mode"),
             "price_verified": item.get("price_verified", False), "status": item.get("status"),
         })

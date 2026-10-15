@@ -185,5 +185,72 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertEqual(config["pc_budget_jpy"] + config["peripheral_budget_jpy"], config["total_budget_jpy"])
 
 
+    def test_store_observation_requires_branch_exact_model_freshness_and_audit_evidence(self):
+        import json
+        from intelligence import store_observation_validation
+
+        config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        target = dict(next(x for x in config["peripherals"] if x["id"] == "main_monitor"))
+        stores = {x["id"]: x for x in config["purchase_channels"]["physical_store_candidates"]}
+        target.update({
+            "store_price_jpy": 19980,
+            "store_price_checked_at": "2026-10-15T11:50:00+09:00",
+            "store_stock_status": "in_stock",
+            "store_confirmation_url": stores["biccamera_tenjin_1"]["official_store_url"],
+            "store_model_match": True,
+            "store_observation_store_id": "biccamera_tenjin_1",
+            "store_evidence_type": "store_phone_confirmation",
+            "store_evidence_notes": "店頭担当者に型番Q27G40E/11、税込価格、在庫を確認した。",
+        })
+        now = "2026-10-15T12:00:00+09:00"
+        valid = store_observation_validation(target, now)
+        self.assertTrue(valid["store_price_confirmed"])
+        self.assertEqual(valid["store_price_jpy"], 19980)
+        self.assertEqual(valid["store_observation_status"], "PRICE_VERIFIED")
+        self.assertEqual(valid["store_stock_status"], "in_stock")
+
+        invalid_variants = [
+            ({"store_observation_store_id": "unlisted_store"}, "BRANCH_UNVERIFIED"),
+            ({"store_evidence_type": None}, "EVIDENCE_TYPE_UNVERIFIED"),
+            ({"store_evidence_notes": ""}, "EVIDENCE_NOTES_MISSING"),
+            ({"store_model_match": False}, "EXACT_MODEL_UNVERIFIED"),
+            ({"store_confirmation_url": "https://example.com/store"}, "SOURCE_URL_UNVERIFIED"),
+            ({"store_price_checked_at": "2026-10-15T10:00:00+09:00"}, "FUTURE_OR_STALE"),
+        ]
+        for changes, expected_status in invalid_variants:
+            with self.subTest(expected_status=expected_status):
+                candidate = dict(target)
+                candidate.update(changes)
+                result = store_observation_validation(candidate, now)
+                self.assertFalse(result["store_price_confirmed"])
+                self.assertIsNone(result["store_price_jpy"])
+                self.assertEqual(result["store_observation_status"], expected_status)
+
+    def test_online_listing_for_store_purchase_is_never_mislabelled_as_store_price(self):
+        target = dict(self.target)
+        target.update({
+            "purchase_channel": "physical_store",
+            "store_inventory_required_before_purchase": True,
+            "online_price_is_comparison_only": True,
+            "physical_store_candidate_ids": ["biccamera_tenjin_1", "yodobashi_hakata"],
+        })
+        parsed = {
+            "page_text_excerpt": "AOC Q27G40E/11 ￥20,790 在庫あり",
+            "price_jpy": None,
+            "price_source_mode": "none",
+            "price_context": None,
+            "stock_status": "in_stock",
+            "name": "AOC Q27G40E/11",
+        }
+        with patch.object(peripheral_monitor, "fetch", return_value=("<html></html>", self.target["monitor_url"], {})), patch.object(peripheral_monitor, "parse_page", return_value=parsed):
+            row = peripheral_monitor.run_one(target, {}, "2026-10-15T12:00:00+09:00")
+        self.assertTrue(row["price_verified"])
+        self.assertEqual(row["online_comparison_price_jpy"], 20790)
+        self.assertTrue(row["online_reference_price_verified"])
+        self.assertIsNone(row["store_price_jpy"])
+        self.assertFalse(row["store_price_confirmed"])
+        self.assertEqual(row["store_stock_status"], "unknown")
+
+
 if __name__ == "__main__":
     unittest.main()

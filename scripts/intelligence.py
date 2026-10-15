@@ -3,6 +3,7 @@ import math
 import os
 import re
 from datetime import datetime, timezone, timedelta
+from urllib.parse import urlparse
 
 JST = timezone(timedelta(hours=9))
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -188,6 +189,114 @@ def configuration_readiness(item):
         reasons.append(f"SSD {ssd_gb}GB<{policy['minimum_ssd_gb']}GB")
     return not reasons, reasons
 
+def store_observation_validation(target, now=None):
+    """Fail closed unless a fresh, exact-model, branch-specific store observation is evidenced.
+
+    Website prices alone are never sufficient to verify a physical-store price. For a
+    physical-store target, a record must identify one configured branch, use an
+    approved evidence type, include an audit note, and link to that branch's official
+    store page on the same host. Price evidence and stock confirmation remain distinct.
+    """
+    required = bool(
+        target.get("purchase_channel") == "physical_store"
+        and target.get("store_inventory_required_before_purchase")
+    )
+    empty = {
+        "store_price_jpy": None,
+        "store_price_checked_at": None,
+        "store_price_confirmed": False,
+        "store_stock_status": "unknown" if required else None,
+        "store_confirmation_url": None,
+        "store_model_match": False,
+        "store_observation_store_id": None,
+        "store_evidence_type": None,
+        "store_evidence_notes": None,
+        "store_observation_status": "UNCONFIRMED" if required else "NOT_REQUIRED",
+        "store_observation_age_minutes": None,
+    }
+    if not required:
+        return empty
+
+    current = parse_dt(now) if isinstance(now, str) else now
+    current = current or now_jst()
+    cfg = load_json(os.path.join(ROOT, "config", "targets.json"), {})
+    configured_stores = (
+        (cfg.get("purchase_channels") or {}).get("physical_store_candidates") or []
+    )
+    stores_by_id = {
+        str(item.get("id")): item
+        for item in configured_stores
+        if isinstance(item, dict) and item.get("id")
+    }
+
+    price = target.get("store_price_jpy")
+    checked_raw = target.get("store_price_checked_at")
+    checked = parse_dt(checked_raw)
+    age_minutes = (current - checked).total_seconds() / 60.0 if checked else None
+    store_id = str(target.get("store_observation_store_id") or "")
+    store = stores_by_id.get(store_id)
+    candidate_ids = {str(x) for x in (target.get("physical_store_candidate_ids") or [])}
+    evidence_type = str(target.get("store_evidence_type") or "")
+    evidence_notes = str(target.get("store_evidence_notes") or "").strip()
+    confirmation_url = str(target.get("store_confirmation_url") or "")
+    stock = str(target.get("store_stock_status") or "unknown")
+    model_match = target.get("store_model_match") is True
+
+    allowed_evidence_types = {
+        "in_store_check",
+        "store_phone_confirmation",
+        "official_branch_stock_page",
+    }
+    official_store_url = str((store or {}).get("official_store_url") or "")
+    expected_host = urlparse(official_store_url).netloc.lower()
+    source = urlparse(confirmation_url)
+    source_host_matches = bool(
+        confirmation_url
+        and source.scheme == "https"
+        and source.netloc
+        and expected_host
+        and source.netloc.lower() == expected_host
+    )
+
+    max_age = actionable_max_age_minutes(current)
+    if not isinstance(price, int) or isinstance(price, bool) or price <= 0:
+        reason = "MISSING_OR_INVALID_PRICE"
+    elif checked is None or age_minutes is None:
+        reason = "MISSING_OR_INVALID_TIMESTAMP"
+    elif age_minutes < 0 or age_minutes > max_age:
+        reason = "FUTURE_OR_STALE"
+    elif not store or store_id not in candidate_ids:
+        reason = "BRANCH_UNVERIFIED"
+    elif evidence_type not in allowed_evidence_types:
+        reason = "EVIDENCE_TYPE_UNVERIFIED"
+    elif not evidence_notes:
+        reason = "EVIDENCE_NOTES_MISSING"
+    elif not model_match:
+        reason = "EXACT_MODEL_UNVERIFIED"
+    elif not source_host_matches:
+        reason = "SOURCE_URL_UNVERIFIED"
+    else:
+        reason = "PRICE_VERIFIED"
+
+    verified = reason == "PRICE_VERIFIED"
+    valid_stock = stock if stock in {
+        "in_stock", "low_stock", "out_of_stock", "unknown"
+    } else "unknown"
+    return {
+        "store_price_jpy": int(price) if verified else None,
+        "store_price_checked_at": str(checked_raw) if verified else None,
+        "store_price_confirmed": verified,
+        "store_stock_status": valid_stock if verified else "unknown",
+        "store_confirmation_url": confirmation_url if verified else None,
+        "store_model_match": bool(model_match and verified),
+        "store_observation_store_id": store_id if verified else None,
+        "store_evidence_type": evidence_type if verified else None,
+        "store_evidence_notes": evidence_notes if verified else None,
+        "store_observation_status": "PRICE_VERIFIED" if verified else reason,
+        "store_observation_age_minutes": round(age_minutes, 1) if verified else None,
+    }
+
+
 def peripheral_budget_projection():
     """Use live verified accessory prices when available; otherwise use target reserves."""
     policy = purchase_budget_policy()
@@ -222,24 +331,13 @@ def peripheral_budget_projection():
         )
         stock = online_stock
         online_comparison_price = price if online_price_verified else None
-        store_price = target.get("store_price_jpy") if store_channel else None
-        store_checked_at = target.get("store_price_checked_at") if store_channel else None
-        store_stock = target.get("store_stock_status", "unknown") if store_channel else None
-        store_url = target.get("store_confirmation_url") if store_channel else None
-        store_model_match = target.get("store_model_match") is True if store_channel else False
-        store_dt = parse_dt(store_checked_at) if store_checked_at else None
-        store_age_minutes = (
-            (now - store_dt).total_seconds() / 60.0
-            if store_dt is not None else None
-        )
-        store_price_verified = bool(
-            store_channel
-            and isinstance(store_price, int) and not isinstance(store_price, bool) and store_price > 0
-            and store_dt is not None and store_age_minutes is not None
-            and 0 <= store_age_minutes <= max_age
-            and store_model_match
-            and isinstance(store_url, str) and store_url.startswith("https://")
-        )
+        store_observation = store_observation_validation(target, now)
+        store_price = store_observation["store_price_jpy"]
+        store_checked_at = store_observation["store_price_checked_at"]
+        store_stock = store_observation["store_stock_status"]
+        store_url = store_observation["store_confirmation_url"]
+        store_model_match = store_observation["store_model_match"]
+        store_price_verified = store_observation["store_price_confirmed"]
 
         if store_channel:
             # A retailer website price can guide the reserve, but cannot prove a
@@ -306,6 +404,11 @@ def peripheral_budget_projection():
             "store_model_match": bool(store_model_match),
             "store_stock_status": stock if store_channel else None,
             "store_confirmation_url": store_url if store_channel else None,
+            "store_observation_store_id": store_observation.get("store_observation_store_id"),
+            "store_evidence_type": store_observation.get("store_evidence_type"),
+            "store_evidence_notes": store_observation.get("store_evidence_notes"),
+            "store_observation_status": store_observation.get("store_observation_status"),
+            "store_observation_age_minutes": store_observation.get("store_observation_age_minutes"),
             "stock_status": stock, "online_stock_status": online_stock,
             "budget_cost_jpy": selected_cost,
             "cost_basis": cost_basis,
