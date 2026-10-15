@@ -1,8 +1,8 @@
 # ブラックフライデー期間通算・購入ランキング
 
-更新: 2026-10-15T12:59:29+09:00
-観測スナップショット: 2026-10-15T12:56:09+09:00
-観測スナップショットSHA256: 672b3dbd967e0724d4fcaa725156f38df94052bc0d49a3e313ca6232d0bc2563
+更新: 2026-10-15T13:14:54+09:00
+観測スナップショット: 2026-10-15T13:09:23+09:00
+観測スナップショットSHA256: 6c912b8a9b16be145efd10c87845ff8071f0480cb79fe0ec801175f06652050d
 総予算（PC＋周辺機器）: ¥400,000
 周辺機器の目標予算: ¥69,800
 PC本体の目標価格: ¥330,200
@@ -76,11 +76,11 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 
 |画像|項目|購入方法|BF購入目標価格|観測価格（BF前は参考）|在庫（購入先）|価格確認|商品/比較ページ|
 |---|---|---|---:|---|---|---|---|
-|<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="84"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz|実店舗|¥17,500|店頭未確認・Web参考 ¥20,790|unknown|未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001009314680/)|
+|<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="84"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz|実店舗|¥17,500|店頭価格未確認・Web参考 ¥20,790|支店別在庫未確認|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001009314680/)|
 |<a href="https://www.lg.com/id/monitor/fhd-qhd/24ms500-b/"><img src="https://www.lg.com/content/dam/channel/wcms/id/monitor/fhd-qhd/24ms500/gallery/02-gallery/fhd-24ms500-gallery-01-2010.jpg" alt="LG 24MS500-B 23.8-inch FHD IPS 100Hz secondary monitor" width="84"></a>|LG 24MS500-B 23.8-inch FHD IPS 100Hz secondary monitor|ネット|¥10,000|—（目標額で仮計算）|unknown|未確認|[商品/比較ページ](https://kakaku.com/item/K0001619930/)|
-|<a href="https://www.yohohongkong.com/zh-hk/product/434786-Edifier-MR4-MKII-%E9%9B%99%E5%8A%9F%E6%94%BE%E9%8C%84%E5%AE%A4%E7%9B%A3%E8%81%BD%E5%96%87%E5%8F%AD-%E9%BB%91%E8%89%B2-%E9%A6%99%E6%B8%AF%E8%A1%8C%E8%B2%A8"><img src="https://www1.yohohongkong.com/images/202606/goods_img/434786_P_1780969137592.png" alt="EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)" width="84"></a>|EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)|実店舗|¥24,000|店頭未確認・Web参考 ¥33,320|unknown|未確認|[商品/比較ページ](https://www.edifier.jp/products/mr4-mkii)|
-|<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="84"></a>|Logicool G213r|実店舗|¥5,500|店頭未確認・目標額で仮計算|unknown|未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/9242996/)|
-|<a href="https://shopee.ph/Logitech-Gaming-Mouse-G304-LIGHTSPEED-Wireless-12-000-DPI-Hero-Sensor-Lightweight-i.470352549.26121376846"><img src="https://down-ph.img.susercontent.com/file/sg-11134202-7rfh8-m43f6xs2o7yb73" alt="Logicool G304" width="84"></a>|Logicool G304|実店舗|¥3,800|店頭未確認・Web参考 ¥5,350|unknown|未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001004334450/)|
+|<a href="https://www.yohohongkong.com/zh-hk/product/434786-Edifier-MR4-MKII-%E9%9B%99%E5%8A%9F%E6%94%BE%E9%8C%84%E5%AE%A4%E7%9B%A3%E8%81%BD%E5%96%87%E5%8F%AD-%E9%BB%91%E8%89%B2-%E9%A6%99%E6%B8%AF%E8%A1%8C%E8%B2%A8"><img src="https://www1.yohohongkong.com/images/202606/goods_img/434786_P_1780969137592.png" alt="EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)" width="84"></a>|EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)|実店舗|¥24,000|店頭価格未確認・Web参考 ¥33,320|支店別在庫未確認|店頭価格未確認|[商品/比較ページ](https://www.edifier.jp/products/mr4-mkii)|
+|<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="84"></a>|Logicool G213r|実店舗|¥5,500|店頭価格未確認・目標額で仮計算|支店別在庫未確認|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/9242996/)|
+|<a href="https://shopee.ph/Logitech-Gaming-Mouse-G304-LIGHTSPEED-Wireless-12-000-DPI-Hero-Sensor-Lightweight-i.470352549.26121376846"><img src="https://down-ph.img.susercontent.com/file/sg-11134202-7rfh8-m43f6xs2o7yb73" alt="Logicool G304" width="84"></a>|Logicool G304|実店舗|¥3,800|店頭価格未確認・Web参考 ¥5,350|支店別在庫未確認|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001004334450/)|
 |<a href="https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad"><img src="https://files.pccasegear.com/images/SS-63003-thumb.jpg" alt="SteelSeries QcK Large" width="84"></a>|SteelSeries QcK Large|ネット|¥2,500|¥2,640|low_stock|確認済み|[商品/比較ページ](https://www.yodobashi.com/product/100000001009472873/)|
 |画像未確認|ELECOM T-K1A-2625BK 6-outlet 2.5m surge-protected power strip|ネット|¥1,500|¥2,480|low_stock|確認済み|[商品/比較ページ](https://www.askul.co.jp/p/N678805/)|
 |画像未確認|Required cables only; check included monitor/speaker cables first|ネット|¥1,000|—（目標額で仮計算）|unknown|未確認|予算枠のみ|
@@ -89,76 +89,90 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 周辺機器価格確認: 2/7。未確認項目は目標額を試算に使用し、自作PCを含む総額の購入判断は保留します。
 
 
+## 過去のブラックフライデー実績（参考資料）
+
+開催期間の記録：**25件**（2022, 2023, 2024, 2025） / 商品価格の観測：**49件**。
+[過去BFの詳細レポート](historical-bf-analysis.md) ・ [開催日程データ](../historical_bf_campaigns.json) ・ [商品価格CSV](../historical_bf_deals.csv)
+
+この資料は公開記事・公式告知で確認できた事例の集合であり、各店・各日の全価格履歴ではありません。過去の割引率は同じ型番・同等構成の2026年値下がり確率を意味しません。
+2026年のBF実売として採用するには、販売元の2026年公式キャンペーン期間と、期間内の同一商品の確認価格が必要です。BTO実績は自作PCパーツの合計額と分けて扱います。
+
+記録内で見つかった条件近似のBTO例（RTX 5070・RAM 32GB以上・SSD 1TB以上）：**¥267,800** — G-GEAR GE7J-K257/BH（secondary）。
+[出典](https://premium.gamepedia.jp/shopping/archives/54417)。BTO実例であり、自作PCの同額達成や2026年の値下がりを保証しません。
+
+**値下げ確率：未算出。** 同じ商品/構成の独立した履歴が不足しているため、見せかけの確率や平均値は出しません。
+
+
 ## 周辺機器カテゴリ別ランキング（カテゴリ別・最大3候補）
 
 各カテゴリから**1商品だけ**選びます。代替候補は価格監視対象ですが、選択しない限り必須周辺機器の総予算には加算しません。
 100点は用途適合35%、予算適合30%、仕様・機能20%、代替性・購入リスク15%のユーザー条件別評価であり、独立した実機ベンチマークではありません。
 BF購入目標・BF前の観測価格・在庫・送料込み決済額を分けて扱います。取得失敗は売り切れと見なしません。
-購入ルート：PC本体（自作パーツ）はネット注文。メインモニター・マウス・キーボード・スピーカーは実店舗購入。これら4カテゴリのWeb価格は比較参考で、店頭価格・支店在庫として扱いません。
+購入ルート：PC本体（自作パーツ）はネット注文。メインモニター・マウス・キーボード・スピーカーは実店舗購入。これら4カテゴリのWeb価格は比較参考で、店頭価格・支店在庫として扱いません。自動で読めた支店別取置き在庫は「確認時点」の参考表示であり、店頭価格や棚在庫の保証ではありません。
 
 ### メインモニター（27インチ・WQHD）
 
-|順位|総合点|画像|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|
-|---:|---:|---|---|---:|---:|---|---|---|---|
-|1|**94/100**|<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="88"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz（主予算候補）|¥17,500|¥20,790|low_stock|確認済み|WQHD・180Hz・Fast IPSを比較的低予算で両立。現在の直接確認価格と在庫を監視し、FPSとCities: Skylines IIに予算を振り分けやすい。|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
-|2|**90/100**|画像未確認|MSI MAG 275QF 27-inch WQHD 180Hz Rapid IPS（代替候補）|¥20,000|未確認|unknown|未確認|27型WQHD・180Hzの直接的な代替候補。AOCの在庫切れ・目標未達時に、配送込み総額と高さ調整の有無を比較する。|[商品ページ](https://kakaku.com/item/K0001690691/)|
-|3|**87/100**|画像未確認|LG UltraGear 27GS75Q-B 27-inch WQHD IPS 180Hz（代替候補）|¥22,000|未確認|preorder_or_backorder|未確認|高さ調整・ピボット対応スタンドが必要な場合の有力候補。AOCのBF価格や在庫が悪い場合だけ比較し、目標価格は¥22,000。|[商品ページ](https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/)|
+|順位|総合点|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|
+|---:|---:|---|---|---|---:|---:|---|---|---|---|
+|1|**94/100**|<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="88"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz（主予算候補）|実店舗|¥17,500|Web参考 ¥20,790（店頭価格未確認）|支店別在庫未確認|店頭価格未確認|WQHD・180Hz・Fast IPSを比較的低予算で両立。現在の直接確認価格と在庫を監視し、FPSとCities: Skylines IIに予算を振り分けやすい。|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
+|2|**90/100**|画像未確認|MSI MAG 275QF 27-inch WQHD 180Hz Rapid IPS（代替候補）|実店舗|¥20,000|店頭価格未確認|支店別在庫未確認|店頭価格未確認|27型WQHD・180Hzの直接的な代替候補。AOCの在庫切れ・目標未達時に、配送込み総額と高さ調整の有無を比較する。|[商品ページ](https://kakaku.com/item/K0001690691/)|
+|3|**87/100**|画像未確認|LG UltraGear 27GS75Q-B 27-inch WQHD IPS 180Hz（代替候補）|実店舗|¥22,000|店頭価格未確認|支店別在庫未確認|店頭価格未確認|高さ調整・ピボット対応スタンドが必要な場合の有力候補。AOCのBF価格や在庫が悪い場合だけ比較し、目標価格は¥22,000。|[商品ページ](https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/)|
 
 ### サブモニター（23.8インチ・FHD）
 
-|順位|総合点|画像|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|
-|---:|---:|---|---|---:|---:|---|---|---|---|
-|1|**93/100**|<a href="https://www.lg.com/id/monitor/fhd-qhd/24ms500-b/"><img src="https://www.lg.com/content/dam/channel/wcms/id/monitor/fhd-qhd/24ms500/gallery/02-gallery/fhd-24ms500-gallery-01-2010.jpg" alt="LG 24MS500-B 23.8-inch FHD IPS 100Hz secondary monitor" width="88"></a>|LG 24MS500-B 23.8-inch FHD IPS 100Hz secondary monitor（主予算候補）|¥10,000|未確認|unknown|未確認|FHD・IPS・100Hzでコード、GitHub、ログ表示に十分。主画面に予算を回せる。|[商品ページ](https://kakaku.com/item/K0001619930/)|
-|2|**88/100**|画像未確認|ASUS VY249HGR 23.8-inch FHD IPS 120Hz secondary monitor（代替候補）|¥13,000|未確認|unknown|未確認|IPS・120Hz(OC)でサブ画面でも滑らかさを重視できる。価格未確認ならLG 24MS500-Bの方を優先。|[商品ページ](https://www.amazon.co.jp/dp/B0DNDXMLR7)|
-|3|**83/100**|画像未確認|LG UltraGear 24GS60F-B 23.8-inch FHD IPS 180Hz（代替候補）|¥19,000|未確認|unknown|未確認|180Hzでサブ画面でもゲーム向きだが、コード表示用途には高コスト。大きなBF値引きがある場合だけ候補。|[商品ページ](https://kakaku.com/item/K0001667935/)|
+|順位|総合点|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|
+|---:|---:|---|---|---|---:|---:|---|---|---|---|
+|1|**93/100**|<a href="https://www.lg.com/id/monitor/fhd-qhd/24ms500-b/"><img src="https://www.lg.com/content/dam/channel/wcms/id/monitor/fhd-qhd/24ms500/gallery/02-gallery/fhd-24ms500-gallery-01-2010.jpg" alt="LG 24MS500-B 23.8-inch FHD IPS 100Hz secondary monitor" width="88"></a>|LG 24MS500-B 23.8-inch FHD IPS 100Hz secondary monitor（主予算候補）|ネット|¥10,000|未確認|unknown|未確認|FHD・IPS・100Hzでコード、GitHub、ログ表示に十分。主画面に予算を回せる。|[商品ページ](https://kakaku.com/item/K0001619930/)|
+|2|**88/100**|画像未確認|ASUS VY249HGR 23.8-inch FHD IPS 120Hz secondary monitor（代替候補）|ネット|¥13,000|未確認|unknown|未確認|IPS・120Hz(OC)でサブ画面でも滑らかさを重視できる。価格未確認ならLG 24MS500-Bの方を優先。|[商品ページ](https://www.amazon.co.jp/dp/B0DNDXMLR7)|
+|3|**83/100**|画像未確認|LG UltraGear 24GS60F-B 23.8-inch FHD IPS 180Hz（代替候補）|ネット|¥19,000|未確認|unknown|未確認|180Hzでサブ画面でもゲーム向きだが、コード表示用途には高コスト。大きなBF値引きがある場合だけ候補。|[商品ページ](https://kakaku.com/item/K0001667935/)|
 
 ### スピーカー
 
-|順位|総合点|画像|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|
-|---:|---:|---|---|---:|---:|---|---|---|---|
-|1|**95/100**|<a href="https://www.yohohongkong.com/zh-hk/product/434786-Edifier-MR4-MKII-%E9%9B%99%E5%8A%9F%E6%94%BE%E9%8C%84%E5%AE%A4%E7%9B%A3%E8%81%BD%E5%96%87%E5%8F%AD-%E9%BB%91%E8%89%B2-%E9%A6%99%E6%B8%AF%E8%A1%8C%E8%B2%A8"><img src="https://www1.yohohongkong.com/images/202606/goods_img/434786_P_1780969137592.png" alt="EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)" width="88"></a>|EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)（主予算候補）|¥24,000|¥33,320|low_stock|確認済み|80W RMSとBluetooth 6.0、複数の有線入力を備え、音質と接続性のバランスが良い。公式ページのクーポンは決済画面で確認できるまで価格に控除しない。|[商品ページ](https://www.edifier.jp/products/mr4-mkii)|
-|2|**91/100**|画像未確認|EDIFIER MR3 2.0 powered monitor speakers 36W（代替候補）|¥12,000|¥16,650|low_stock|確認済み|36W powered monitor speakers, TRS/RCA/AUX/Bluetooth inputs; current major-retailer web references around ¥16,650. Physical branch price/stock is unconfirmed; ¥12,000 is the BF target, not a current offer.|[商品ページ](https://www.biccamera.com/bc/item/13719866/)|
-|3|**82/100**|画像未確認|Creative Pebble Pro 2.0 PC speakers (USB-C/USB-A/Bluetooth/3.5mm)（代替候補）|¥8,000|未確認|unknown|未確認|Compact USB/Bluetooth/analog speaker set currently listed around ¥9,980 online. Kept as a lower-cost comparison only; not the main sound-quality recommendation.|[商品ページ](https://www.biccamera.com/bc/item/14119746/)|
+|順位|総合点|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|
+|---:|---:|---|---|---|---:|---:|---|---|---|---|
+|1|**95/100**|<a href="https://www.yohohongkong.com/zh-hk/product/434786-Edifier-MR4-MKII-%E9%9B%99%E5%8A%9F%E6%94%BE%E9%8C%84%E5%AE%A4%E7%9B%A3%E8%81%BD%E5%96%87%E5%8F%AD-%E9%BB%91%E8%89%B2-%E9%A6%99%E6%B8%AF%E8%A1%8C%E8%B2%A8"><img src="https://www1.yohohongkong.com/images/202606/goods_img/434786_P_1780969137592.png" alt="EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)" width="88"></a>|EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)（主予算候補）|実店舗|¥24,000|Web参考 ¥33,320（店頭価格未確認）|支店別在庫未確認|店頭価格未確認|80W RMSとBluetooth 6.0、複数の有線入力を備え、音質と接続性のバランスが良い。公式ページのクーポンは決済画面で確認できるまで価格に控除しない。|[商品ページ](https://www.edifier.jp/products/mr4-mkii)|
+|2|**91/100**|画像未確認|EDIFIER MR3 2.0 powered monitor speakers 36W（代替候補）|実店舗|¥12,000|Web参考 ¥16,650（店頭価格未確認）|支店別在庫未確認|店頭価格未確認|36W powered monitor speakers, TRS/RCA/AUX/Bluetooth inputs; current major-retailer web references around ¥16,650. Physical branch price/stock is unconfirmed; ¥12,000 is the BF target, not a current offer.|[商品ページ](https://www.biccamera.com/bc/item/13719866/)|
+|3|**82/100**|画像未確認|Creative Pebble Pro 2.0 PC speakers (USB-C/USB-A/Bluetooth/3.5mm)（代替候補）|実店舗|¥8,000|店頭価格未確認|支店別在庫未確認|店頭価格未確認|Compact USB/Bluetooth/analog speaker set currently listed around ¥9,980 online. Kept as a lower-cost comparison only; not the main sound-quality recommendation.|[商品ページ](https://www.biccamera.com/bc/item/14119746/)|
 
 ### キーボード
 
-|順位|総合点|画像|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|
-|---:|---:|---|---|---:|---:|---|---|---|---|
-|1|**88/100**|<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="88"></a>|Logicool G213r（主予算候補）|¥5,500|未確認|unknown|未確認|フルサイズ日本語配列、テンキー、パームレスト付き。Python・データ入力・普段使いまで幅広く、目標価格も抑えられる。|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
-|2|**86/100**|画像未確認|Logicool G413 TKL SE tenkeyless tactile mechanical keyboard（代替候補）|¥8,000|未確認|low_stock|未確認|テンキーレスのメカニカル。マウススペースを優先するFPS向けだが、現在¥11,000参考価格より大幅に下がる場合に検討。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g413-tkl-se-gaming-keyboard)|
-|3|**84/100**|画像未確認|Logicool G413 SE full-size tactile mechanical keyboard（代替候補）|¥9,500|未確認|low_stock|未確認|フルサイズのメカニカルでテンキーを残せるが、現在¥12,320参考価格のためBF目標¥9,500以下が条件。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561)|
+|順位|総合点|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|
+|---:|---:|---|---|---|---:|---:|---|---|---|---|
+|1|**88/100**|<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="88"></a>|Logicool G213r（主予算候補）|実店舗|¥5,500|店頭価格未確認|支店別在庫未確認|店頭価格未確認|フルサイズ日本語配列、テンキー、パームレスト付き。Python・データ入力・普段使いまで幅広く、目標価格も抑えられる。|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
+|2|**86/100**|画像未確認|Logicool G413 TKL SE tenkeyless tactile mechanical keyboard（代替候補）|実店舗|¥8,000|店頭価格未確認|支店別在庫未確認|店頭価格未確認|テンキーレスのメカニカル。マウススペースを優先するFPS向けだが、現在¥11,000参考価格より大幅に下がる場合に検討。|[商品ページ](https://www.biccamera.com/bc/item/10326363/)|
+|3|**84/100**|画像未確認|Logicool G413 SE full-size tactile mechanical keyboard（代替候補）|実店舗|¥9,500|店頭価格未確認|支店別在庫未確認|店頭価格未確認|フルサイズのメカニカルでテンキーを残せるが、現在¥12,320参考価格のためBF目標¥9,500以下が条件。|[商品ページ](https://www.biccamera.com/bc/item/10326362/)|
 
 ### マウス（FPS向け）
 
-|順位|総合点|画像|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|
-|---:|---:|---|---|---:|---:|---|---|---|---|
-|1|**92/100**|<a href="https://shopee.ph/Logitech-Gaming-Mouse-G304-LIGHTSPEED-Wireless-12-000-DPI-Hero-Sensor-Lightweight-i.470352549.26121376846"><img src="https://down-ph.img.susercontent.com/file/sg-11134202-7rfh8-m43f6xs2o7yb73" alt="Logicool G304" width="88"></a>|Logicool G304（主予算候補）|¥3,800|¥5,350|in_stock|確認済み|LIGHTSPEED無線で予算を抑えられる。重量は軽量競技モデルほどではないが、費用対効果が高い。|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
-|2|**90/100**|画像未確認|Logicool G203 LIGHTSYNC wired gaming mouse（代替候補）|¥3,500|未確認|unknown|未確認|有線で電池交換不要。公式掲載¥4,510、BF目標¥3,500。ワイヤレスにこだわらず価格を抑えたい場合の予備候補。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g203-lightsync-rgb-gaming-mouse.910-005811)|
-|3|**87/100**|画像未確認|Logicool G304 X SUPERLIGHT wireless gaming mouse（代替候補）|¥10,000|未確認|unknown|未確認|メーカー公称59gの充電式無線モデル。FPSで軽さを重視する上位選択だが、標準G304より高価なため、総合コスパは予算条件込みで評価。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g304-x-superlight)|
+|順位|総合点|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|
+|---:|---:|---|---|---|---:|---:|---|---|---|---|
+|1|**92/100**|<a href="https://shopee.ph/Logitech-Gaming-Mouse-G304-LIGHTSPEED-Wireless-12-000-DPI-Hero-Sensor-Lightweight-i.470352549.26121376846"><img src="https://down-ph.img.susercontent.com/file/sg-11134202-7rfh8-m43f6xs2o7yb73" alt="Logicool G304" width="88"></a>|Logicool G304（主予算候補）|実店舗|¥3,800|Web参考 ¥5,350（店頭価格未確認）|支店別在庫未確認|店頭価格未確認|LIGHTSPEED無線で予算を抑えられる。重量は軽量競技モデルほどではないが、費用対効果が高い。|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
+|2|**90/100**|画像未確認|Logicool G203 LIGHTSYNC wired gaming mouse（代替候補）|実店舗|¥3,500|店頭価格未確認|支店別在庫未確認|店頭価格未確認|有線で電池交換不要。公式掲載¥4,510、BF目標¥3,500。ワイヤレスにこだわらず価格を抑えたい場合の予備候補。|[商品ページ](https://www.biccamera.com/bc/item/8019882/)|
+|3|**87/100**|画像未確認|Logicool G304 X SUPERLIGHT wireless gaming mouse（代替候補）|実店舗|¥10,000|店頭価格未確認|支店別在庫未確認|店頭価格未確認|メーカー公称59gの充電式無線モデル。FPSで軽さを重視する上位選択だが、標準G304より高価なため、総合コスパは予算条件込みで評価。|[商品ページ](https://www.biccamera.com/bc/item/15216264/)|
 
 ### マウスパッド
 
-|順位|総合点|画像|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|
-|---:|---:|---|---|---:|---:|---|---|---|---|
-|1|**93/100**|<a href="https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad"><img src="https://files.pccasegear.com/images/SS-63003-thumb.jpg" alt="SteelSeries QcK Large" width="88"></a>|SteelSeries QcK Large（主予算候補）|¥2,500|¥2,640|low_stock|確認済み|450×400mm級の布面と滑り止めで、FPSに必要な移動幅を低コストで確保。|[商品ページ](https://www.yodobashi.com/product/100000001009472873/)|
-|2|**89/100**|画像未確認|Razer Gigantus V2 Large 450x400mm cloth gaming mouse mat（代替候補）|¥2,200|未確認|unknown|未確認|Lサイズ約450×400mmでQcK Largeと同程度の操作面。公式ページ表示額は送料条件の影響があるため、決済時の配送込み総額で比較する。|[商品ページ](https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1)|
-|3|**87/100**|画像未確認|Logicool G640 Large cloth gaming mousepad（代替候補）|¥3,000|未確認|in_stock|未確認|Logicool公式のG640は400×460mmの大型クロス面。公式掲載価格は¥3,850でQcK Largeより高価なので、表面の好みとBF価格差が小さい場合に選ぶ。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g640-cloth-gaming-mouse-pad)|
+|順位|総合点|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|
+|---:|---:|---|---|---|---:|---:|---|---|---|---|
+|1|**93/100**|<a href="https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad"><img src="https://files.pccasegear.com/images/SS-63003-thumb.jpg" alt="SteelSeries QcK Large" width="88"></a>|SteelSeries QcK Large（主予算候補）|ネット|¥2,500|¥2,640|low_stock|確認済み|450×400mm級の布面と滑り止めで、FPSに必要な移動幅を低コストで確保。|[商品ページ](https://www.yodobashi.com/product/100000001009472873/)|
+|2|**89/100**|画像未確認|Razer Gigantus V2 Large 450x400mm cloth gaming mouse mat（代替候補）|ネット|¥2,200|未確認|unknown|未確認|Lサイズ約450×400mmでQcK Largeと同程度の操作面。公式ページ表示額は送料条件の影響があるため、決済時の配送込み総額で比較する。|[商品ページ](https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1)|
+|3|**87/100**|画像未確認|Logicool G640 Large cloth gaming mousepad（代替候補）|ネット|¥3,000|未確認|in_stock|未確認|Logicool公式のG640は400×460mmの大型クロス面。公式掲載価格は¥3,850でQcK Largeより高価なので、表面の好みとBF価格差が小さい場合に選ぶ。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g640-cloth-gaming-mouse-pad)|
 
 ### 電源タップ（6口・雷ガード）
 
-|順位|総合点|画像|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|
-|---:|---:|---|---|---:|---:|---|---|---|---|
-|1|**86/100**|画像未確認|ELECOM T-K1A-2625BK 6-outlet 2.5m surge-protected power strip（主予算候補）|¥1,500|¥2,480|low_stock|確認済み|6口・2.5m・雷ガード付き。現行参考価格は目標1,500円を上回るため、取得した実売価格でPC上限を動的に下げる。|[商品ページ](https://www.askul.co.jp/p/N678805/)|
-|2|**82/100**|画像未確認|Sanwa Supply TAP-SP2116MG-2WN 6-outlet 2m surge protector with dust shutters and magnet（代替候補）|¥1,800|未確認|unknown|未確認|6口・2m・雷ガードに加えてホコリ防止シャッターやマグネットを備える。配送込みで¥1,800程度になった場合のみ検討。|[商品ページ](https://kakaku.com/item/K0001569733/)|
-|3|**76/100**|画像未確認|ELECOM T-K6A-2630BK 6-outlet 3m surge-protected power strip（代替候補）|¥2,500|未確認|unknown|未確認|3mが必要な場合の代替。公式掲載額は¥3,993で高いため、標準2.5mタップより優先しない。|[商品ページ](https://www.elecom.co.jp/products/T-K6A-2630BK.html)|
+|順位|総合点|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|
+|---:|---:|---|---|---|---:|---:|---|---|---|---|
+|1|**86/100**|画像未確認|ELECOM T-K1A-2625BK 6-outlet 2.5m surge-protected power strip（主予算候補）|ネット|¥1,500|¥2,480|low_stock|確認済み|6口・2.5m・雷ガード付き。現行参考価格は目標1,500円を上回るため、取得した実売価格でPC上限を動的に下げる。|[商品ページ](https://www.askul.co.jp/p/N678805/)|
+|2|**82/100**|画像未確認|Sanwa Supply TAP-SP2116MG-2WN 6-outlet 2m surge protector with dust shutters and magnet（代替候補）|ネット|¥1,800|未確認|unknown|未確認|6口・2m・雷ガードに加えてホコリ防止シャッターやマグネットを備える。配送込みで¥1,800程度になった場合のみ検討。|[商品ページ](https://kakaku.com/item/K0001569733/)|
+|3|**76/100**|画像未確認|ELECOM T-K6A-2630BK 6-outlet 3m surge-protected power strip（代替候補）|ネット|¥2,500|未確認|unknown|未確認|3mが必要な場合の代替。公式掲載額は¥3,993で高いため、標準2.5mタップより優先しない。|[商品ページ](https://www.elecom.co.jp/products/T-K6A-2630BK.html)|
 
 ### 映像ケーブル（必要な場合のみ）
 
-|順位|総合点|画像|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|
-|---:|---:|---|---|---:|---:|---|---|---|---|
-|1|**88/100**|画像未確認|Required cables only; check included monitor/speaker cables first（主予算候補）|¥1,000|未確認|unknown|未確認|モニター付属品を先に確認し、不足分だけ購入することで不要な二重購入を防ぐ。|リンク未設定|
-|2|**85/100**|画像未確認|Sanwa Supply KC-DP1420 VESA-certified DisplayPort 1.4 cable 2m（代替候補）|¥3,000|未確認|unknown|未確認|VESA認証済みDisplayPort 1.4・2m。メーカー標準価格は¥5,280なので、実売が下がった場合だけ。不足がなければ購入しない。|[商品ページ](https://www.sanwa.co.jp/product/syohin?code=KC-DP1420)|
-|3|**82/100**|画像未確認|ELECOM ECCAC-DP1420BK DisplayPort 1.4 cable 2m（代替候補）|¥2,200|未確認|unknown|未確認|2m・DisplayPort 1.4準拠の代替。モニター付属品の有無を確認し、不足分だけ購入する。|[商品ページ](https://www.elecom.co.jp/products/ECCAC-DP1420BK.html)|
+|順位|総合点|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|
+|---:|---:|---|---|---|---:|---:|---|---|---|---|
+|1|**88/100**|画像未確認|Required cables only; check included monitor/speaker cables first（主予算候補）|ネット|¥1,000|未確認|unknown|未確認|モニター付属品を先に確認し、不足分だけ購入することで不要な二重購入を防ぐ。|リンク未設定|
+|2|**85/100**|画像未確認|Sanwa Supply KC-DP1420 VESA-certified DisplayPort 1.4 cable 2m（代替候補）|ネット|¥3,000|未確認|unknown|未確認|VESA認証済みDisplayPort 1.4・2m。メーカー標準価格は¥5,280なので、実売が下がった場合だけ。不足がなければ購入しない。|[商品ページ](https://www.sanwa.co.jp/product/syohin?code=KC-DP1420)|
+|3|**82/100**|画像未確認|ELECOM ECCAC-DP1420BK DisplayPort 1.4 cable 2m（代替候補）|ネット|¥2,200|未確認|unknown|未確認|2m・DisplayPort 1.4準拠の代替。モニター付属品の有無を確認し、不足分だけ購入する。|[商品ページ](https://www.elecom.co.jp/products/ECCAC-DP1420BK.html)|
 
 ### 予算・配線の実用項目
 
@@ -206,7 +220,7 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 - 取得成功率: 57.1%
 - 価格確認率: 47.6%
 - 検索補完（成功/試行）: 0/9
-- 検索SKU不一致による除外: 48
+- 検索SKU不一致による除外: 53
 - 取得エラー内訳（host|reason）: rog.asus.com|curl_http_404=1, store.asus.com|curl_http_403=7, www.dospara.co.jp|curl_http_404=1
 - 未処理候補: なし
 
@@ -266,7 +280,7 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 
 ## 今この瞬間の買い時判定
 
-- 更新時刻（JST）: 2026-10-15T12:59:29+09:00
+- 更新時刻（JST）: 2026-10-15T13:14:54+09:00
 - 判定: **事前監視継続・公式日程未確認** (PRE_BF_MONITORING)
 - 暫定の広域監視窓（公式セール日程ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 - 公式日程確認: 0/16 店舗（未確認: 12、取得エラー: 4）
@@ -297,7 +311,7 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 - 本命構成: 自作本命：Ryzen 7 9700X + RTX 5070 12GB
 - PC本体BF購入目標: ¥300,600
 - 周辺機器込みBF購入目標: ¥370,400
-- 互換性 / 部品の比較参考価格 / 店舗決済オファー: REVIEW / 5/9 / 0/9
+- 互換性 / 部品の比較参考価格 / 店舗決済オファー: REVIEW / 3/9 / 0/9
 - 自作の買い時判定: **WAIT_FOR_COMPATIBILITY_REVIEW**
 - 購入許可: **保留**。購入目標や比較価格は確定実売ではありません。
 - 主な未解決条件: GPUの正確な型番寸法・補助電源など未確認の互換性項目を解消する。；BF購入目標額は希望価格であり、確認済み実売価格ではない。；比較サイト価格は購入店舗の最終決済価格・在庫・送料を証明しない。
