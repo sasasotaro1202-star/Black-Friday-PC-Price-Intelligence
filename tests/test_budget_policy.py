@@ -223,6 +223,61 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(speaker_row["budget_cost_jpy"], 29980)
         self.assertEqual(speaker_row["cost_basis"], "online_reference_store_price_unconfirmed")
 
+    def test_branch_inventory_is_separate_from_verified_store_cash_price(self):
+        now_text = intelligence.iso(intelligence.now_jst())
+        main_target = next(x for x in self.cfg["peripherals"] if x["id"] == "main_monitor")
+        check = main_target["store_inventory_checks"][0]
+        product_rows = []
+        for target in self.cfg["peripherals"]:
+            if not target.get("track_current_price"):
+                continue
+            product = {
+                "id": target["id"],
+                "name": target["name"],
+                "current_price_jpy": target["target_price_jpy"],
+                "last_valid_price_jpy": target["target_price_jpy"],
+                "price_verified": True,
+                "identity_verified": True,
+                "stock_status": "in_stock",
+                "retrieval_time": now_text,
+                "available_at": now_text,
+                "store_inventory_observations": [],
+            }
+            if target["id"] == "main_monitor":
+                product["current_price_jpy"] = 20790
+                product["last_valid_price_jpy"] = 20790
+                product["store_inventory_observations"] = [{
+                    "store_id": "bicamera_tenjin_1",
+                    "store_name": "ビックカメラ天神1号館",
+                    "checked_at": now_text,
+                    "check_url": check["url"],
+                    "source_url": check["url"],
+                    "source_type": "official_branch_stock_page",
+                    "status": "low_stock",
+                    "verified": True,
+                    "branch_match": True,
+                    "model_match": True,
+                    "evidence_notes": "Example fixture: branch pickup inventory only; no store cash price.",
+                }]
+            product_rows.append(product)
+        snapshot = {"generated_at": now_text, "products": product_rows}
+        original_load_json = intelligence.load_json
+
+        def deterministic_load_json(path, default):
+            if str(path).endswith("data/peripheral_prices.json"):
+                return snapshot
+            return original_load_json(path, default)
+
+        with patch.object(intelligence, "load_json", side_effect=deterministic_load_json):
+            projection = intelligence.peripheral_budget_projection()
+        row = next(x for x in projection["peripherals"] if x["id"] == "main_monitor")
+        self.assertEqual(row["store_inventory_status"], "low_stock")
+        self.assertTrue(row["store_inventory_verified"])
+        self.assertIsNone(row["current_price_jpy"])
+        self.assertEqual(row["online_comparison_price_jpy"], 20790)
+        self.assertFalse(row["store_price_confirmed"])
+        self.assertFalse(projection["budget_data_ready"])
+
     def test_cached_price_for_previous_speaker_model_is_not_reused(self):
         now_text = intelligence.iso(intelligence.now_jst())
         products = []
