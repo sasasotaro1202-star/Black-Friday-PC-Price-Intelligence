@@ -1113,29 +1113,38 @@
       "best_for": "予算を下げたい"
     },
     {
-      "id": "speakers_alt_edifier_mr5",
+      "id": "speakers_alt_creative_pebble_pro",
+      "name": "Creative Pebble Pro 2.0 PC speakers (USB-C/USB-A/Bluetooth/3.5mm)",
       "category": "speakers",
-      "name": "EDIFIER MR5 3-way powered monitor speakers 110W",
-      "target_price_jpy": 32000,
       "track_current_price": true,
-      "monitor_url": "https://www.edifier.jp/products/mr5",
-      "purchase_url": "https://www.edifier.jp/products/mr5",
-      "identity_terms": [
-        "EDIFIER MR5",
-        "MR5"
-      ],
-      "model_code": "MR5",
-      "allowed_hosts": [
-        "www.edifier.jp"
-      ],
-      "min_price_jpy": 20000,
-      "max_price_jpy": 55000,
       "mandatory": false,
+      "target_price_jpy": 8000,
+      "purchase_url": "https://www.biccamera.com/bc/item/14119746/",
+      "monitor_url": "https://www.biccamera.com/bc/item/14119746/",
+      "monitor_urls": [
+        "https://www.biccamera.com/bc/item/14119746/"
+      ],
+      "identity_terms": [
+        "SP-PBLPRO-BKA",
+        "Pebble Pro",
+        "SPPBLPROBKA"
+      ],
+      "model_code": "SP-PBLPRO-BKA",
+      "allowed_hosts": [
+        "www.biccamera.com"
+      ],
+      "min_price_jpy": 6000,
+      "max_price_jpy": 15000,
+      "ranking_score_100": 82,
+      "ranking_reason": "Compact USB/Bluetooth/analog speaker set currently listed around ¥9,980 online. Kept as a lower-cost comparison only; not the main sound-quality recommendation.",
+      "best_for": "Compact desk setup and strong cost control",
       "price_target_phase": "black_friday",
-      "target_price_note": "Higher-output premium alternative; only select if the total system remains within budget.",
-      "ranking_score_100": 87,
-      "ranking_reason": "110W RMSの3ウェイ構成で上位だが、¥39,980参考価格は予算を圧迫。音量・低域を優先するときだけ検討。",
-      "best_for": "音量・音の厚みを優先"
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     }
   ],
   "peripheral_ranking_policy": {
@@ -1159,7 +1168,7 @@
         "weight_pct": 15
       }
     ],
-    "instructions": "Category scores are user-fit/relative purchase-priority judgments, not independent lab benchmarks. The report ranks one primary recommendation and up to two alternatives in each category. Alternatives are price-monitored independently but do not enter the mandatory ¥69,800 accessory budget unless selected. Monitor target prices, live observations, stock and delivered total are separate. Current coupons/points do not reduce the budget until final checkout cash payment is confirmed. For speaker coupon, the 2026-10-11 observation of code SLW20 is historical and never implies BF eligibility. Cable purchase is conditional: check included cables first and choose at most one cable if needed. Purchase-channel contract: PC-body DIY parts are ordered online. Main monitor, mouse, keyboard, and speakers are purchased in physical stores. Web-listed prices for those four categories are comparison references only, never proof of local branch shelf stock or in-store price. Verify exact SKU/color, Fukuoka branch stock/reservation, and checkout cash price before marking any item purchase-ready. Secondary monitor and remaining accessories stay online unless separately changed.",
+    "instructions": "Category scores are user-fit/relative purchase-priority judgments, not independent lab benchmarks. The report ranks one primary recommendation and up to two alternatives in each category. Alternatives are price-monitored independently but do not enter the mandatory ¥69,800 accessory budget unless selected. Monitor target prices, live observations, stock and delivered total are separate. Current coupons/points do not reduce the budget until final checkout cash payment is confirmed. For speaker coupon, the 2026-10-11 observation of code SLW20 is historical and never implies BF eligibility. Cable purchase is conditional: check included cables first and choose at most one cable if needed. Purchase-channel contract: PC-body DIY parts are ordered online. Main monitor, mouse, keyboard, and speakers are purchased in physical stores. Web-listed prices for those four categories are comparison references only, never proof of local branch shelf stock or in-store price. Verify exact SKU/color, Fukuoka branch stock/reservation, and checkout cash price before marking any item purchase-ready. Secondary monitor and remaining accessories stay online unless separately changed. Speaker ranking includes the chosen MR4 MKII objective, MR3 as a serious lower-cost active-monitor alternative, and Pebble Pro only as a compact budget comparison. MR5 is removed from active shortlist because it was previously judged too expensive. Do not label online prices as branch prices.",
     "category_order": [
       {
         "category": "main_monitor",
