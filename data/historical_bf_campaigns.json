@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-15T00:00:00+09:00",
+  "policy": "Historical records document announced campaign periods, not a forecast for 2026. Unknown exact start dates remain null. Online and physical-store periods are separate.",
+  "campaigns": [
+    {
+      "year": 2023,
+      "retailer": "Amazon Japan",
+      "channel": "online_main",
+      "start_jst": "2023-11-24T00:00:00+09:00",
+      "end_jst": "2023-12-01T23:59:00+09:00",
+      "source_grade": "official",
+      "source_url": "https://www.aboutamazon.jp/news/guide/six-key-points-to-make-your-shopping-at-amazon-black-friday-more-affordable-and-convenient",
+      "notes": "Official main event; 8 days."
+    },
+    {
+      "year": 2023,
+      "retailer": "Amazon Japan",
+      "channel": "online_early",
+      "start_jst": "2023-11-22",
+      "end_jst": "2023-11-23",
+      "source_grade": "official",
+      "source_url": "https://www.aboutamazon.jp/news/guide/six-key-points-to-make-your-shopping-at-amazon-black-friday-more-affordable-and-convenient",
+      "notes": "Early-sale window; date precision is date-only."
+    },
+    {
+      "year": 2024,
+      "retailer": "Amazon Japan",
+      "channel": "online_main",
+      "start_jst": "2024-11-29T00:00:00+09:00",
+      "end_jst": "2024-12-06T23:59:00+09:00",
+      "source_grade": "official",
+      "source_url": "https://www.aboutamazon.jp/news/retail/amazon-black-friday-2024",
+      "notes": "Official 8-day main event. Early sale reported from Nov 27."
+    },
+    {
+      "year": 2024,
+      "retailer": "Amazon Japan",
+      "channel": "online_early",
+      "start_jst": "2024-11-27",
+      "end_jst": "2024-11-28",
+      "source_grade": "press",
+      "source_url": "https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/1642405.html",
+      "notes": "Early sale dates supported by contemporaneous press coverage; exact product timing differs."
+    },
+    {
+      "year": 2025,
+      "retailer": "Amazon Japan",
+      "channel": "online_main",
+      "start_jst": "2025-11-24T00:00:00+09:00",
+      "end_jst": "2025-12-01T23:59:00+09:00",
+      "source_grade": "official",
+      "source_url": "https://www.aboutamazon.jp/news/retail/amazon-black-friday-2025",
+      "notes": "Official 8-day main event."
+    },
+    {
+      "year": 2025,
+      "retailer": "Amazon Japan",
+      "channel": "online_early",
+      "start_jst": "2025-11-21",
+      "end_jst": "2025-11-23",
+      "source_grade": "official",
+      "source_url": "https://www.aboutamazon.jp/news/retail/amazon-black-friday-2025",
+      "notes": "Official 3-day early-sale window."
+    },
+    {
+      "year": 2023,
+      "retailer": "Dospara",
+      "channel": "online",
+      "start_jst": "2023-11-17T11:00:00+09:00",
+      "end_jst": "2023-12-01T10:59:00+09:00",
+      "source_grade": "official",
+      "source_url": "https://www.dospara.co.jp/event/black-friday-2023-entry.html",
+      "notes": "Membership points lottery campaign; not a universal cash markdown."
+    },
+    {
+      "year": 2023,
+      "retailer": "Dospara",
+      "channel": "physical_store",
+      "start_jst": "2023-11-17",
+      "end_jst": "2023-11-30",
+      "source_grade": "official",
+      "source_url": "https://www.dospara.co.jp/event/black-friday-2023-entry.html",
+      "notes": "Store period is separate from online cutoff."
+    },
+    {
+      "year": 2024,
+      "retailer": "Dospara",
+      "channel": "online",
+      "start_jst": "2024-11-22T11:00:00+09:00",
+      "end_jst": "2024-12-02T10:59:00+09:00",
+      "source_grade": "secondary",
+      "source_url": "https://gamewith.jp/gaming-pc/531110",
+      "notes": "Secondary source; online window."
+    },
+    {
+      "year": 2024,
+      "retailer": "Dospara",
+      "channel": "physical_store",
+      "start_jst": "2024-11-22",
+      "end_jst": "2024-12-01",
+      "source_grade": "secondary",
+      "source_url": "https://gamewith.jp/gaming-pc/531110",
+      "notes": "Secondary source; store period."
+    },
+    {
+      "year": 2023,
+      "retailer": "PC Koubou",
+      "channel": "online",
+      "start_jst": "2023-11-21",
+      "end_jst": "2023-12-04T10:59:00+09:00",
+      "source_grade": "official",
+      "source_url": "https://www.iiyama-pc.jp/info/2023112101.php",
+      "notes": "Official release says the sale was already running on Nov 21; exact start is not inferred beyond the announcement date."
+    },
+    {
+      "year": 2024,
+      "retailer": "PC Koubou",
+      "channel": "online",
+      "start_jst": "2024-11-19",
+      "end_jst": "2024-12-02T16:59:00+09:00",
+      "source_grade": "official",
+      "source_url": "https://www.iiyama-pc.jp/info/20241119.php",
+      "notes": "Advertised BTO discounts up to ¥50,000; maximum reduction is not typical reduction."
+    },
+    {
+      "year": 2024,
+      "retailer": "PC Koubou",
+      "channel": "physical_store",
+      "start_jst": "2024-11-22",
+      "end_jst": "2024-11-29",
+      "source_grade": "official",
+      "source_url": "https://www.iiyama-pc.jp/info/2024112102.php",
+      "notes": "Separate store-only campaign period."
+    },
+    {
+      "year": 2025,
+      "retailer": "PC Koubou",
+      "channel": "online",
+      "start_jst": null,
+      "end_jst": "2025-12-02T17:00:00+09:00",
+      "first_reported_on": "2025-11-20",
+      "source_grade": "press",
+      "source_url": "https://pc.watch.impress.co.jp/docs/news/2065065.html",
+      "notes": "Contemporaneous article says campaign was ongoing; exact start omitted here rather than inferred."
+    },
+    {
+      "year": 2025,
+      "retailer": "PC Koubou",
+      "channel": "physical_store",
+      "start_jst": "2025-11-22",
+      "end_jst": "2025-11-28",
+      "source_grade": "press",
+      "source_url": "https://pc.watch.impress.co.jp/docs/news/2065588.html",
+      "notes": "Physical store promotion with daily deals; SKU details vary by day."
+    },
+    {
+      "year": 2024,
+      "retailer": "Mouse Computer",
+      "channel": "online",
+      "start_jst": "2024-11-13",
+      "end_jst": "2024-12-04T10:59:00+09:00",
+      "source_grade": "press",
+      "source_url": "https://www.itmedia.co.jp/pcuser/spv/2411/13/news158.html",
+      "notes": "Official sale announcement covered by ITmedia; online campaign."
+    },
+    {
+      "year": 2024,
+      "retailer": "Lenovo Japan",
+      "channel": "online",
+      "start_jst": "2024-11-15",
+      "end_jst": "2024-11-28",
+      "source_grade": "official",
+      "source_url": "https://www.lenovo.com/jp/ja/blackfriday/",
+      "notes": "Archived campaign page shows monitor/mouse/keyboard discounts; date range is historical."
+    },
+    {
+      "year": 2025,
+      "retailer": "Lenovo Japan",
+      "channel": "online",
+      "start_jst": "2025-11-14",
+      "end_jst": "2025-12-04",
+      "source_grade": "official",
+      "source_url": "https://www.lenovo.com/jp/ja/campaigns/black-friday/",
+      "notes": "Official campaign period."
+    },
+    {
+      "year": 2025,
+      "retailer": "TSUKUMO",
+      "channel": "online_bto",
+      "start_jst": "2025-11-21T10:00:00+09:00",
+      "end_jst": "2025-12-02T10:00:00+09:00",
+      "source_grade": "secondary",
+      "source_url": "https://pc-para.jp/tsukumo/tsukumo-black-friday/",
+      "notes": "Secondary reporting of TSUKUMO BTO BF sale; retailer/source confirmation should be sought where possible."
+    },
+    {
+      "year": 2025,
+      "retailer": "TSUKUMO",
+      "channel": "physical_store",
+      "start_jst": "2025-11-22",
+      "end_jst": "2025-11-28",
+      "source_grade": "secondary",
+      "source_url": "https://pc-para.jp/tsukumo/tsukumo-black-friday/",
+      "notes": "Secondary reporting of store period."
+    }
+  ]
+}
