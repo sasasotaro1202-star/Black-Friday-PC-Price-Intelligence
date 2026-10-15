@@ -5,6 +5,26 @@
   "campaigns": [
     {
       "year": 2022,
+      "retailer": "Amazon Japan",
+      "channel": "online_main",
+      "start_jst": "2022-11-25T00:00:00+09:00",
+      "end_jst": "2022-12-01T23:59:00+09:00",
+      "source_grade": "official",
+      "source_url": "https://www.aboutamazon.jp/news/retail/end-of-the-year-big-sale-amazon-black-friday",
+      "notes": "Amazon official announcement: seven-day event."
+    },
+    {
+      "year": 2022,
+      "retailer": "GIGABYTE / Amazon",
+      "channel": "online",
+      "start_jst": "2022-11-25",
+      "end_jst": "2022-12-01",
+      "source_grade": "manufacturer_press_release",
+      "source_url": "https://news.mynavi.jp/article/20221125-2522234/",
+      "notes": "Manufacturer/distributor announcement of GIGABYTE gaming PC and monitor offers in the Amazon sale; date range follows the stated event."
+    },
+    {
+      "year": 2022,
       "retailer": "Mouse Computer",
       "channel": "online",
       "start_jst": "2022-11-16",
@@ -12,6 +32,16 @@
       "source_grade": "press",
       "source_url": "https://www.itmedia.co.jp/pcuser/articles/2211/16/news105.html",
       "notes": "Contemporaneous coverage lists G-Tune/DAIV model discounts through Nov 30; exact day/time details may be model-specific."
+    },
+    {
+      "year": 2022,
+      "retailer": "PC Koubou",
+      "channel": "online",
+      "start_jst": "2022-11-24",
+      "end_jst": "2022-12-01T13:59:00+09:00",
+      "source_grade": "press",
+      "source_url": "https://pc.watch.impress.co.jp/docs/news/todays_sales/1458087.html",
+      "notes": "PC Watch reports BF sale ongoing and gives an end time; announcement date is used as the observed date, not guaranteed exact retailer start time."
     },
     {
       "year": 2023,
