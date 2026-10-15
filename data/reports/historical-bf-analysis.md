@@ -47,7 +47,7 @@
 |2024|Lenovo・モニター|D24-40 / 23.8型 FHD|¥13,200|¥19,800|約33.3%|[Lenovoキャンペーン](https://www.lenovo.com/jp/ja/blackfriday/)。個別製品の公式セール表記。|
 |2024|Lenovo・モニター|L27i-4A / 27型 FHD 100Hz|¥15,800|¥17,820|約11.3%|[Lenovoキャンペーン](https://www.lenovo.com/jp/ja/blackfriday/)。WQHDではない。|
 |2024|Lenovo・マウス|Yoga Pro Mouse|¥3,999|¥5,500|約27.3%|[Lenovoキャンペーン](https://www.lenovo.com/jp/ja/blackfriday/)。オフィス用途の製品でG304とは別モデル。|
-|2024|Lenovo・キーボード|ThinkPad TrackPoint Keyboard|¥10,890|¥15,950|約31.7%|[Lenovoキャンペーン](https://www.lenovo.com/jp/ja/blackfriday/)。ポイント付与は現金値引きに算入しない。|
+|2024|Lenovo・キーボード|Lenovo keyboard (model not recorded)|¥10,890|¥15,950|約31.7%|[Lenovoキャンペーン](https://www.lenovo.com/jp/ja/blackfriday/)。ポイント付与は現金値引きに算入しない。|
 |2025|GRAPHT・オンライン/店頭|GR2724ML-BK ゲーミングモニター|¥34,980|¥54,980|約36.4%|[メーカー告知](https://grapht.tokyo/news/grapht_blackfriday_2025)。販路別の取扱いに差がある。|
 |2025|GRAPHT・オンライン/店頭|GRAPHT Omni マウスパッド|¥2,970|¥3,960|25.0%|[メーカー告知](https://grapht.tokyo/news/grapht_blackfriday_2025)。現行候補のマウスパッドとは別商品。|
 
