@@ -853,15 +853,16 @@
       "name": "Logicool G413 TKL SE tenkeyless tactile mechanical keyboard",
       "target_price_jpy": 8000,
       "track_current_price": true,
-      "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-tkl-se-gaming-keyboard",
-      "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-tkl-se-gaming-keyboard",
+      "monitor_url": "https://www.biccamera.com/bc/item/10326363/",
+      "purchase_url": "https://www.biccamera.com/bc/item/10326363/",
       "identity_terms": [
         "G413 TKL SE",
         "G413TKLSE"
       ],
       "model_code": "G413TKLSE",
       "allowed_hosts": [
-        "gaming.logicool.co.jp"
+        "gaming.logicool.co.jp",
+        "www.biccamera.com"
       ],
       "min_price_jpy": 5000,
       "max_price_jpy": 16000,
@@ -875,7 +876,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "biccamera_tenjin_1",
+        "bicamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "store_price_jpy": null,
@@ -886,7 +887,25 @@
       "store_observation_store_id": null,
       "store_evidence_type": null,
       "store_evidence_notes": null,
-      "store_inventory_checks": []
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "branch_match_terms": [
+            "ビックカメラ天神1号館",
+            "天神1号館"
+          ],
+          "source_type": "official_branch_stock_page",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "url": "https://www.biccamera.com/bc/item/10326363/"
+        }
+      ],
+      "monitor_urls": [
+        "https://www.biccamera.com/bc/item/10326363/"
+      ],
+      "inventory_monitoring_note": "ビックカメラの商品ページを利用した店頭在庫チェック対象。通販価格は比較用で、支店在庫はチェック実行後に確定する。"
     },
     {
       "id": "keyboard_alt_logicool_g413se",
@@ -894,15 +913,16 @@
       "name": "Logicool G413 SE full-size tactile mechanical keyboard",
       "target_price_jpy": 9500,
       "track_current_price": true,
-      "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
-      "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g413-se-gaming-keyboard.920-010561",
+      "monitor_url": "https://www.biccamera.com/bc/item/10326362/",
+      "purchase_url": "https://www.biccamera.com/bc/item/10326362/",
       "identity_terms": [
         "G413 SE",
         "920-010561"
       ],
       "model_code": "G413SE",
       "allowed_hosts": [
-        "gaming.logicool.co.jp"
+        "gaming.logicool.co.jp",
+        "www.biccamera.com"
       ],
       "min_price_jpy": 6000,
       "max_price_jpy": 18000,
@@ -916,7 +936,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "biccamera_tenjin_1",
+        "bicamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "store_price_jpy": null,
@@ -927,7 +947,25 @@
       "store_observation_store_id": null,
       "store_evidence_type": null,
       "store_evidence_notes": null,
-      "store_inventory_checks": []
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "branch_match_terms": [
+            "ビックカメラ天神1号館",
+            "天神1号館"
+          ],
+          "source_type": "official_branch_stock_page",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "url": "https://www.biccamera.com/bc/item/10326362/"
+        }
+      ],
+      "monitor_urls": [
+        "https://www.biccamera.com/bc/item/10326362/"
+      ],
+      "inventory_monitoring_note": "ビックカメラの商品ページを利用した店頭在庫チェック対象。通販価格は比較用で、支店在庫はチェック実行後に確定する。"
     },
     {
       "id": "main_monitor_alt_msi_mag_275qf",
@@ -1016,15 +1054,16 @@
       "name": "Logicool G203 LIGHTSYNC wired gaming mouse",
       "target_price_jpy": 3500,
       "track_current_price": true,
-      "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g203-lightsync-rgb-gaming-mouse.910-005811",
-      "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g203-lightsync-rgb-gaming-mouse.910-005811",
+      "monitor_url": "https://www.biccamera.com/bc/item/8019882/",
+      "purchase_url": "https://www.biccamera.com/bc/item/8019882/",
       "identity_terms": [
         "G203",
         "910-005811"
       ],
       "model_code": "910-005811",
       "allowed_hosts": [
-        "gaming.logicool.co.jp"
+        "gaming.logicool.co.jp",
+        "www.biccamera.com"
       ],
       "min_price_jpy": 2500,
       "max_price_jpy": 9000,
@@ -1038,7 +1077,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "biccamera_tenjin_1",
+        "bicamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "store_price_jpy": null,
@@ -1049,7 +1088,25 @@
       "store_observation_store_id": null,
       "store_evidence_type": null,
       "store_evidence_notes": null,
-      "store_inventory_checks": []
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "branch_match_terms": [
+            "ビックカメラ天神1号館",
+            "天神1号館"
+          ],
+          "source_type": "official_branch_stock_page",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "url": "https://www.biccamera.com/bc/item/8019882/"
+        }
+      ],
+      "monitor_urls": [
+        "https://www.biccamera.com/bc/item/8019882/"
+      ],
+      "inventory_monitoring_note": "ビックカメラの商品ページを利用した店頭在庫チェック対象。通販価格は比較用で、支店在庫はチェック実行後に確定する。"
     },
     {
       "id": "mouse_alt_logicool_g304_x_superlight",
@@ -1057,15 +1114,16 @@
       "name": "Logicool G304 X SUPERLIGHT wireless gaming mouse",
       "target_price_jpy": 10000,
       "track_current_price": true,
-      "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g304-x-superlight",
-      "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g304-x-superlight",
+      "monitor_url": "https://www.biccamera.com/bc/item/15216264/",
+      "purchase_url": "https://www.biccamera.com/bc/item/15216264/",
       "identity_terms": [
         "G304 X SUPERLIGHT",
         "G304X-SL"
       ],
       "model_code": "G304X-SL-BK",
       "allowed_hosts": [
-        "gaming.logicool.co.jp"
+        "gaming.logicool.co.jp",
+        "www.biccamera.com"
       ],
       "min_price_jpy": 6000,
       "max_price_jpy": 20000,
@@ -1079,7 +1137,7 @@
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "biccamera_tenjin_1",
+        "bicamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "store_price_jpy": null,
@@ -1090,7 +1148,25 @@
       "store_observation_store_id": null,
       "store_evidence_type": null,
       "store_evidence_notes": null,
-      "store_inventory_checks": []
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "branch_match_terms": [
+            "ビックカメラ天神1号館",
+            "天神1号館"
+          ],
+          "source_type": "official_branch_stock_page",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "url": "https://www.biccamera.com/bc/item/15216264/"
+        }
+      ],
+      "monitor_urls": [
+        "https://www.biccamera.com/bc/item/15216264/"
+      ],
+      "inventory_monitoring_note": "ビックカメラの商品ページを利用した店頭在庫チェック対象。通販価格は比較用で、支店在庫はチェック実行後に確定する。"
     },
     {
       "id": "mousepad_alt_razer_gigantus_v2_l",
