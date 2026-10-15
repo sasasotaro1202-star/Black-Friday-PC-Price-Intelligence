@@ -266,7 +266,8 @@
         "Q27G40E"
       ],
       "allowed_hosts": [
-        "www.yodobashi.com"
+        "www.yodobashi.com",
+        "www.biccamera.com"
       ],
       "min_price_jpy": 10000,
       "max_price_jpy": 60000,
@@ -274,8 +275,8 @@
       "price_target_phase": "black_friday",
       "target_price_note": "17,500円はBF目標。価格.comの現行比較掲載（2026-10-11時点の最低掲載価格18,900円）とヨドバシの掲載20,790円はBF価格ではない。比較ページを先に確認し、取得に失敗したらヨドバシで再試行。",
       "monitor_urls": [
-        "https://kakaku.com/item/K0001706544/",
-        "https://www.yodobashi.com/product/100000001009314680/"
+        "https://www.yodobashi.com/product/100000001009314680/",
+        "https://www.biccamera.com/bc/item/14369301/"
       ],
       "ranking_score_100": 94,
       "ranking_reason": "WQHD・180Hz・Fast IPSを比較的低予算で両立。現在の直接確認価格と在庫を監視し、FPSとCities: Skylines IIに予算を振り分けやすい。",
@@ -284,7 +285,14 @@
       "image_url": "https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png",
       "image_source_url": "https://www.aoc.com/jp/gaming/monitors/q27g40e_11",
       "image_note": "Q27G40Eシリーズの製品画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "secondary_monitor",
@@ -313,7 +321,10 @@
       "image_url": "https://www.lg.com/content/dam/channel/wcms/id/monitor/fhd-qhd/24ms500/gallery/02-gallery/fhd-24ms500-gallery-01-2010.jpg",
       "image_source_url": "https://www.lg.com/id/monitor/fhd-qhd/24ms500-b/",
       "image_note": "型番24MS500-Bの製品画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "purchase_channel": "online",
+      "store_inventory_required_before_purchase": false,
+      "online_price_is_comparison_only": false
     },
     {
       "id": "speakers",
@@ -327,7 +338,9 @@
         "EDIFIER MR4 MKII"
       ],
       "allowed_hosts": [
-        "www.edifier.jp"
+        "www.edifier.jp",
+        "www.yodobashi.com",
+        "www.biccamera.com"
       ],
       "min_price_jpy": 18000,
       "max_price_jpy": 40000,
@@ -337,6 +350,8 @@
       "target_price_note": "24,000円は2026年BF期間中の購入目標。公式ページの29,980円はBF前参考価格。表示中のクーポンは決済画面で適用・最終支払額を確認するまでBF価格や確定値引きとして扱わない。",
       "model_code": "MR4 MKII",
       "monitor_urls": [
+        "https://www.yodobashi.com/product/100000001009991946/",
+        "https://www.biccamera.com/bc/item/15313369/",
         "https://www.edifier.jp/products/mr4-mkii"
       ],
       "coupon_code_reference": "SLW20",
@@ -348,7 +363,14 @@
       "image_url": "https://www1.yohohongkong.com/images/202606/goods_img/434786_P_1780969137592.png",
       "image_source_url": "https://www.yohohongkong.com/zh-hk/product/434786-Edifier-MR4-MKII-%E9%9B%99%E5%8A%9F%E6%94%BE%E9%8C%84%E5%AE%A4%E7%9B%A3%E8%81%BD%E5%96%87%E5%8F%AD-%E9%BB%91%E8%89%B2-%E9%A6%99%E6%B8%AF%E8%A1%8C%E8%B2%A8",
       "image_note": "型番MR4 MKIIの製品画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "keyboard",
@@ -382,7 +404,14 @@
       "image_url": "https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg",
       "image_source_url": "https://item.rakuten.co.jp/logicool/g213r/",
       "image_note": "Logicool公式ストアの製品画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "mouse",
@@ -396,7 +425,8 @@
         "G304"
       ],
       "allowed_hosts": [
-        "www.yodobashi.com"
+        "www.yodobashi.com",
+        "www.biccamera.com"
       ],
       "min_price_jpy": 1000,
       "max_price_jpy": 15000,
@@ -410,7 +440,18 @@
       "image_url": "https://down-ph.img.susercontent.com/file/sg-11134202-7rfh8-m43f6xs2o7yb73",
       "image_source_url": "https://shopee.ph/Logitech-Gaming-Mouse-G304-LIGHTSPEED-Wireless-12-000-DPI-Hero-Sensor-Lightweight-i.470352549.26121376846",
       "image_note": "型番G304の製品画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ],
+      "monitor_urls": [
+        "https://www.yodobashi.com/product/100000001004334450/",
+        "https://www.biccamera.com/bc/item/6566291/"
+      ]
     },
     {
       "id": "mousepad",
@@ -438,7 +479,10 @@
       "image_url": "https://files.pccasegear.com/images/SS-63003-thumb.jpg",
       "image_source_url": "https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad",
       "image_note": "型番SteelSeries QcK Largeの製品画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "purchase_channel": "online",
+      "store_inventory_required_before_purchase": false,
+      "online_price_is_comparison_only": false
     },
     {
       "id": "power_strip",
@@ -470,7 +514,10 @@
       "ranking_score_100": 86,
       "ranking_reason": "6口・2.5m・雷ガード付き。現行参考価格は目標1,500円を上回るため、取得した実売価格でPC上限を動的に下げる。",
       "best_for": "PCとモニター類を一括接続する安全寄りの最低限構成",
-      "category": "power_strip"
+      "category": "power_strip",
+      "purchase_channel": "online",
+      "store_inventory_required_before_purchase": false,
+      "online_price_is_comparison_only": false
     },
     {
       "id": "cables",
@@ -486,7 +533,10 @@
       "ranking_score_100": 88,
       "ranking_reason": "モニター付属品を先に確認し、不足分だけ購入することで不要な二重購入を防ぐ。",
       "best_for": "同梱品を優先し、足りない分だけ買う",
-      "category": "cables"
+      "category": "cables",
+      "purchase_channel": "online",
+      "store_inventory_required_before_purchase": false,
+      "online_price_is_comparison_only": false
     },
     {
       "id": "shipping_reserve",
@@ -498,7 +548,10 @@
       "identity_terms": [],
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "4000円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。"
+      "target_price_note": "4000円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。",
+      "purchase_channel": "online",
+      "store_inventory_required_before_purchase": false,
+      "online_price_is_comparison_only": false
     }
   ],
   "purchase_strategy": {
@@ -622,6 +675,23 @@
       "price_basis": "completed_build_black_friday_offer_only",
       "rationale": "Track beside faster RTX 5070 options because 16GB VRAM may better support some local-AI workloads; do not outrank based on VRAM alone.",
       "include_in_final_ranking": true
+    },
+    "purchase_channel_policy": {
+      "pc_body": "online",
+      "physical_store_categories": [
+        "main_monitor",
+        "mouse",
+        "keyboard",
+        "speakers"
+      ],
+      "online_categories": [
+        "secondary_monitor",
+        "mousepad",
+        "power_strip",
+        "cables"
+      ],
+      "store_inventory_must_be_verified": true,
+      "online_price_is_store_price": false
     }
   },
   "peripheral_alternatives": [
@@ -1057,7 +1127,7 @@
         "weight_pct": 15
       }
     ],
-    "instructions": "Category scores are user-fit/relative purchase-priority judgments, not independent lab benchmarks. The report ranks one primary recommendation and up to two alternatives in each category. Alternatives are price-monitored independently but do not enter the mandatory ¥69,800 accessory budget unless selected. Monitor target prices, live observations, stock and delivered total are separate. Current coupons/points do not reduce the budget until final checkout cash payment is confirmed. For speaker coupon, the 2026-10-11 observation of code SLW20 is historical and never implies BF eligibility. Cable purchase is conditional: check included cables first and choose at most one cable if needed.",
+    "instructions": "Category scores are user-fit/relative purchase-priority judgments, not independent lab benchmarks. The report ranks one primary recommendation and up to two alternatives in each category. Alternatives are price-monitored independently but do not enter the mandatory ¥69,800 accessory budget unless selected. Monitor target prices, live observations, stock and delivered total are separate. Current coupons/points do not reduce the budget until final checkout cash payment is confirmed. For speaker coupon, the 2026-10-11 observation of code SLW20 is historical and never implies BF eligibility. Cable purchase is conditional: check included cables first and choose at most one cable if needed. Purchase-channel contract: PC-body DIY parts are ordered online. Main monitor, mouse, keyboard, and speakers are purchased in physical stores. Web-listed prices for those four categories are comparison references only, never proof of local branch shelf stock or in-store price. Verify exact SKU/color, Fukuoka branch stock/reservation, and checkout cash price before marking any item purchase-ready. Secondary monitor and remaining accessories stay online unless separately changed.",
     "category_order": [
       {
         "category": "main_monitor",
@@ -1096,5 +1166,57 @@
   "monitor_window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
   "monitor_window_note": "暫定の広域監視窓であり、いずれかの販売店の公式BF開催日を意味しない。各店の2026年公式日程を公式ページから明示的な年付き日付範囲で確認するまで、価格をBF実売として認定せず、買い時判定は購入許可を出さない。過去日程、曜日、年のない月日から開催日を推定しない。",
   "budget_mode": "SOFT_TARGET",
-  "budget_target_note": "総額400,000円程度（PC本体＋周辺機器）を中心目標とする。PC本体の計画上限は330,200円、周辺機器目標は69,800円。候補ランキングから目標超過の大穴を除外せず、超過額・必要条件・値下げ根拠を明示する。購入許可は型番・在庫・互換性・最終決済額を再確認し、ユーザーの予算条件を満たすまで出さない。"
+  "budget_target_note": "総額400,000円程度（PC本体＋周辺機器）を中心目標とする。PC本体の計画上限は330,200円、周辺機器目標は69,800円。候補ランキングから目標超過の大穴を除外せず、超過額・必要条件・値下げ根拠を明示する。購入許可は型番・在庫・互換性・最終決済額を再確認し、ユーザーの予算条件を満たすまで出さない。",
+  "purchase_channels": {
+    "pc_body": {
+      "channel": "online",
+      "policy": "自作PCは各パーツをオンライン購入。部品ごとの型番・販売元・送料・納期・返品条件・在庫・決済価格を確認し、QVL/BIOS/GPU寸法/電源容量の互換性を満たしてから注文する。",
+      "include_shipping_and_small_parts": true
+    },
+    "physical_store_categories": [
+      "main_monitor",
+      "mouse",
+      "keyboard",
+      "speakers"
+    ],
+    "online_categories": [
+      "secondary_monitor",
+      "mousepad",
+      "power_strip",
+      "cables"
+    ],
+    "physical_store_candidates": [
+      {
+        "id": "biccamera_tenjin_1",
+        "name": "ビックカメラ天神1号館",
+        "address": "〒810-0021 福岡県福岡市中央区今泉1-25-1",
+        "hours": "10:00〜21:00（公式店舗ページの現在表示。来店前に再確認）",
+        "official_store_url": "https://www.biccamera.com/bc/i/shop/shoplist/shop026.jsp",
+        "floor_guide_note": "AフロアにPCスピーカー等、Bフロアにパソコン・液晶モニター・ゲーミングデバイス・マウス・キーボード等の案内あり。",
+        "suitable_categories": [
+          "main_monitor",
+          "mouse",
+          "keyboard",
+          "speakers"
+        ]
+      },
+      {
+        "id": "yodobashi_hakata",
+        "name": "ヨドバシカメラ マルチメディア博多",
+        "address": "〒812-0012 福岡県福岡市博多区博多駅中央街6-12",
+        "hours": "9:30〜22:00（公式店舗ページの現在表示。来店前に再確認）",
+        "official_store_url": "https://www.yodobashi.com/ec/store/0088/",
+        "floor_guide_url": "https://www.yodobashi.com/ec/store/floor/0088/",
+        "floor_guide_note": "PC周辺機器・モニター・マウス・キーボード・ゲーミング製品の取扱フロア案内あり。スピーカーを含む各商品の当日店頭在庫は事前確認が必要。",
+        "suitable_categories": [
+          "main_monitor",
+          "mouse",
+          "keyboard",
+          "speakers"
+        ]
+      }
+    ],
+    "store_stock_rule": "全国オンライン在庫・オンライン価格は当該店舗の店頭在庫・店頭決済価格を証明しない。購入判断前に、同一型番/色、対象店舗の店頭在庫または取り置き、店頭での現金支払総額（ポイントは別記）を確認する。店頭在庫が未確認なら購入許可は保留する。",
+    "online_price_handling": "物理店舗購入カテゴリに記録されたウェブ価格は比較参考値であり、実店頭価格として扱わない。"
+  }
 }
