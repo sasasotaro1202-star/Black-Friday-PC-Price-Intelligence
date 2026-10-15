@@ -34,6 +34,31 @@ def image_markup(item, fallback_url=None, width=88):
     )
 
 
+def peripheral_is_physical_store(item, target_config):
+    item = item if isinstance(item, dict) else {}
+    policy = (target_config or {}).get("purchase_channels") or {}
+    physical_categories = set(policy.get("physical_store_categories") or [])
+    return item.get("purchase_channel") == "physical_store" or item.get("category") in physical_categories
+
+
+def inventory_status_label(item):
+    item = item if isinstance(item, dict) else {}
+    if item.get("store_inventory_verified"):
+        status = item.get("store_inventory_status")
+        store_name = item.get("store_inventory_store_name") or "指定店舗"
+        labels = {
+            "in_stock": "取置き在庫あり（確認時点）",
+            "low_stock": "取置き在庫少（確認時点）",
+            "out_of_stock": "在庫なし（確認時点）",
+            "preorder_or_backorder": "取寄せ表示（即時在庫ではない）",
+        }
+        if status in labels:
+            return f"{store_name}: {labels[status]}"
+    if item.get("store_inventory_status") == "unknown":
+        return "支店別在庫未確認"
+    return "支店別在庫未確認"
+
+
 def build_purchase_method_policy(profile):
     """Make the intended PC purchase method explicit and testable."""
     profile = profile if isinstance(profile, dict) else {}
@@ -777,7 +802,7 @@ def main():
         "|画像|項目|購入方法|BF購入目標価格|観測価格（BF前は参考）|在庫（購入先）|価格確認|商品/比較ページ|",
         "|---|---|---|---:|---|---|---|---|",
         *[
-            f"|{image_markup(next((t for t in (target_config.get('peripherals') or []) if str(t.get('id')) == str(p.get('id'))), {}), p.get('purchase_url'), 84)}|{p['name']}|{'実店舗' if p.get('purchase_channel') == 'physical_store' else 'ネット'}|¥{p['target_price_jpy']:,}|{('店頭未確認・Web参考 ¥'+format(p['online_comparison_price_jpy'],',')) if p.get('purchase_channel') == 'physical_store' and p.get('online_comparison_price_jpy') is not None else ('店頭未確認・目標額で仮計算' if p.get('purchase_channel') == 'physical_store' else (('¥'+format(p['current_price_jpy'],',')) if p.get('current_price_jpy') is not None else '—（目標額で仮計算）'))}|{p.get('stock_status','unknown')}|{('確認済み' if p.get('price_verified') else '未確認')}|{('[商品/比較ページ]('+p['purchase_url']+')') if p.get('purchase_url') else '予算枠のみ'}|"
+            f"|{image_markup(next((t for t in (target_config.get('peripherals') or []) if str(t.get('id')) == str(p.get('id'))), {}), p.get('purchase_url'), 84)}|{p['name']}|{'実店舗' if p.get('purchase_channel') == 'physical_store' else 'ネット'}|¥{p['target_price_jpy']:,}|{('店頭価格未確認・Web参考 ¥'+format(p['online_comparison_price_jpy'],',')) if p.get('purchase_channel') == 'physical_store' and p.get('online_comparison_price_jpy') is not None else ('店頭価格未確認・目標額で仮計算' if p.get('purchase_channel') == 'physical_store' else (('¥'+format(p['current_price_jpy'],',')) if p.get('current_price_jpy') is not None else '—（目標額で仮計算）'))}|{inventory_status_label(p) if p.get('purchase_channel') == 'physical_store' else p.get('stock_status','unknown')}|{('店頭価格未確認' if p.get('purchase_channel') == 'physical_store' else ('確認済み' if p.get('price_verified') else '未確認'))}|{('[商品/比較ページ]('+p['purchase_url']+')') if p.get('purchase_url') else '予算枠のみ'}|"
             for p in peripheral_projection["peripherals"]
         ],
         "",
@@ -829,7 +854,7 @@ def main():
         "各カテゴリから**1商品だけ**選びます。代替候補は価格監視対象ですが、選択しない限り必須周辺機器の総予算には加算しません。",
         "100点は用途適合35%、予算適合30%、仕様・機能20%、代替性・購入リスク15%のユーザー条件別評価であり、独立した実機ベンチマークではありません。",
         "BF購入目標・BF前の観測価格・在庫・送料込み決済額を分けて扱います。取得失敗は売り切れと見なしません。",
-        "購入ルート：PC本体（自作パーツ）はネット注文。メインモニター・マウス・キーボード・スピーカーは実店舗購入。これら4カテゴリのWeb価格は比較参考で、店頭価格・支店在庫として扱いません。",
+        "購入ルート：PC本体（自作パーツ）はネット注文。メインモニター・マウス・キーボード・スピーカーは実店舗購入。これら4カテゴリのWeb価格は比較参考で、店頭価格・支店在庫として扱いません。自動で読めた支店別取置き在庫は「確認時点」の参考表示であり、店頭価格や棚在庫の保証ではありません。",
         "",
     ]
     for group in category_order:
@@ -855,16 +880,27 @@ def main():
         peripheral_category_lines += [
             f"### {group_name}",
             "",
-            "|順位|総合点|画像|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|",
-            "|---:|---:|---|---|---:|---:|---|---|---|---|",
+            "|順位|総合点|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|",
+            "|---:|---:|---|---|---|---:|---:|---|---|---|---|",
         ]
         for rank, candidate_id in enumerate(candidate_ids, 1):
             target = all_peripheral_targets[candidate_id]
             observation = peripheral_live.get(candidate_id, {})
-            observed_price = observation.get("current_price_jpy") if observation.get("price_verified") else None
-            price_text = f"¥{int(observed_price):,}" if isinstance(observed_price, int) and not isinstance(observed_price, bool) else "未確認"
-            stock_text = str(observation.get("stock_status") or "unknown")
-            verified_text = "確認済み" if observation.get("price_verified") and observed_price is not None else "未確認"
+            physical_store = peripheral_is_physical_store(target, target_config)
+            observed_price = (
+                observation.get("online_comparison_price_jpy")
+                if physical_store and observation.get("online_comparison_price_jpy") is not None
+                else observation.get("current_price_jpy") if observation.get("price_verified") else None
+            )
+            if physical_store:
+                price_text = f"Web参考 ¥{int(observed_price):,}（店頭価格未確認）" if isinstance(observed_price, int) and not isinstance(observed_price, bool) else "店頭価格未確認"
+                stock_text = inventory_status_label(observation)
+                verified_text = "店頭価格未確認"
+            else:
+                price_text = f"¥{int(observed_price):,}" if isinstance(observed_price, int) and not isinstance(observed_price, bool) else "未確認"
+                stock_text = str(observation.get("stock_status") or "unknown")
+                verified_text = "確認済み" if observation.get("price_verified") and observed_price is not None else "未確認"
+            purchase_method_text = "実店舗" if physical_store else "ネット"
             target_price = int(target.get("target_price_jpy") or 0)
             url = target.get("purchase_url") or target.get("monitor_url")
             product_link = f"[商品ページ]({url})" if isinstance(url, str) and url.startswith("https://") else "リンク未設定"
@@ -874,7 +910,7 @@ def main():
             score_text = f"**{int(score)}/100**" if isinstance(score, (int, float)) and not isinstance(score, bool) and 0 <= score <= 100 else "未評価"
             reason = str(target.get("ranking_reason") or target.get("target_price_note") or "").replace("|", "/").replace("\\n", " ").strip()
             peripheral_category_lines.append(
-                f"|{rank}|{score_text}|{image_html}|{target.get('name', candidate_id)}{suffix}|¥{target_price:,}|{price_text}|{stock_text}|{verified_text}|{reason}|{product_link}|"
+                f"|{rank}|{score_text}|{image_html}|{target.get('name', candidate_id)}{suffix}|{purchase_method_text}|¥{target_price:,}|{price_text}|{stock_text}|{verified_text}|{reason}|{product_link}|"
             )
         peripheral_category_lines.append("")
     peripheral_category_lines += [
