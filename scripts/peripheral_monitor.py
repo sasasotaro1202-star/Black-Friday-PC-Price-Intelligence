@@ -122,6 +122,10 @@ def run_one(target, previous, retrieved_at):
     configured_urls = target.get("monitor_urls") or ([primary_url] if primary_url else [])
     row = {
         "id": target["id"], "name": target.get("name"),
+        "purchase_channel": target.get("purchase_channel", "online"),
+        "store_inventory_required_before_purchase": bool(target.get("store_inventory_required_before_purchase", False)),
+        "online_price_is_comparison_only": bool(target.get("online_price_is_comparison_only", False)),
+        "physical_store_candidate_ids": target.get("physical_store_candidate_ids") or [],
         "identity_terms": target.get("identity_terms") or [], "model_code": target.get("model_code"),
         "target_price_jpy": int(target.get("target_price_jpy") or 0),
         "monitor_url": primary_url,
@@ -287,6 +291,10 @@ def main():
             old = previous_by_id.get(target["id"], {})
             rows.append({
                 "id": target["id"], "name": target.get("name"), "target_price_jpy": int(target.get("target_price_jpy") or 0),
+                "purchase_channel": target.get("purchase_channel", "online"),
+                "store_inventory_required_before_purchase": bool(target.get("store_inventory_required_before_purchase", False)),
+                "online_price_is_comparison_only": bool(target.get("online_price_is_comparison_only", False)),
+                "physical_store_candidate_ids": target.get("physical_store_candidate_ids") or [],
                 "current_price_jpy": None, "last_valid_price_jpy": old.get("last_valid_price_jpy"),
                 "price_verified": False, "stock_status": "unknown", "status": "target_only",
                 "monitor_url": None, "purchase_url": target.get("purchase_url"),
