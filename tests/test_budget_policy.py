@@ -247,7 +247,7 @@ class BudgetPolicyTests(unittest.TestCase):
                 product["current_price_jpy"] = 20790
                 product["last_valid_price_jpy"] = 20790
                 product["store_inventory_observations"] = [{
-                    "store_id": "bicamera_tenjin_1",
+                    "store_id": "biccamera_tenjin_1",
                     "store_name": "ビックカメラ天神1号館",
                     "checked_at": now_text,
                     "check_url": check["url"],
