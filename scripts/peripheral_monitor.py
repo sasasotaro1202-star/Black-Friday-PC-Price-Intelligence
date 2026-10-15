@@ -101,6 +101,7 @@ def observe_store_inventory(target, retrieved_at):
             "store_id": store_id,
             "store_name": store_name,
             "checked_at": retrieved_at,
+            "check_url": url,
             "source_url": None,
             "source_type": check.get("source_type") or "official_branch_stock_page",
             "status": "unknown",
