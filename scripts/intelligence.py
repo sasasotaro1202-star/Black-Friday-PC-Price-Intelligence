@@ -376,7 +376,7 @@ def store_observation_validation(target, now=None):
 
     verified = reason == "PRICE_VERIFIED"
     valid_stock = stock if stock in {
-        "in_stock", "low_stock", "out_of_stock", "unknown"
+        "in_stock", "low_stock", "out_of_stock", "unknown", "preorder_or_backorder"
     } else "unknown"
     return {
         "store_price_jpy": int(price) if verified else None,
