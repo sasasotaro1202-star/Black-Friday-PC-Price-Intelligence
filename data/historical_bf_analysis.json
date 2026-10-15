@@ -1,0 +1,485 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-15T03:48:11.343Z",
+  "source_policy": "Campaign dates are taken from retailer official sources where available; secondary sources are flagged. Sale-price samples are source-dated observations, not guarantees of historical lowest price. No 2026 price probability is inferred from this sparse, heterogeneous sample.",
+  "campaign_years_covered": [
+    2023,
+    2024,
+    2025
+  ],
+  "campaign_record_count": 20,
+  "retailer_year_channel_records": {
+    "Amazon Japan / 2023": [
+      {
+        "channel": "online_main",
+        "start_jst": "2023-11-24T00:00:00+09:00",
+        "end_jst": "2023-12-01T23:59:00+09:00",
+        "source_grade": "official",
+        "source_url": "https://www.aboutamazon.jp/news/guide/six-key-points-to-make-your-shopping-at-amazon-black-friday-more-affordable-and-convenient"
+      },
+      {
+        "channel": "online_early",
+        "start_jst": "2023-11-22",
+        "end_jst": "2023-11-23",
+        "source_grade": "official",
+        "source_url": "https://www.aboutamazon.jp/news/guide/six-key-points-to-make-your-shopping-at-amazon-black-friday-more-affordable-and-convenient"
+      }
+    ],
+    "Amazon Japan / 2024": [
+      {
+        "channel": "online_main",
+        "start_jst": "2024-11-29T00:00:00+09:00",
+        "end_jst": "2024-12-06T23:59:00+09:00",
+        "source_grade": "official_press_release",
+        "source_url": "https://prtimes.jp/main/html/rd/p/000001943.000004612.html"
+      },
+      {
+        "channel": "online_early",
+        "start_jst": "2024-11-27",
+        "end_jst": "2024-11-28",
+        "source_grade": "official_press_release",
+        "source_url": "https://prtimes.jp/main/html/rd/p/000001943.000004612.html"
+      }
+    ],
+    "Amazon Japan / 2025": [
+      {
+        "channel": "online_main",
+        "start_jst": "2025-11-24T00:00:00+09:00",
+        "end_jst": "2025-12-01T23:59:00+09:00",
+        "source_grade": "official",
+        "source_url": "https://www.aboutamazon.jp/news/retail/amazon-black-friday-2025"
+      },
+      {
+        "channel": "online_early",
+        "start_jst": "2025-11-21",
+        "end_jst": "2025-11-23",
+        "source_grade": "official",
+        "source_url": "https://www.aboutamazon.jp/news/retail/amazon-black-friday-2025"
+      }
+    ],
+    "Dospara / 2023": [
+      {
+        "channel": "online",
+        "start_jst": "2023-11-17T11:00:00+09:00",
+        "end_jst": "2023-12-01T10:59:00+09:00",
+        "source_grade": "official",
+        "source_url": "https://www.dospara.co.jp/event/black-friday-2023-entry.html"
+      },
+      {
+        "channel": "physical_store",
+        "start_jst": "2023-11-17",
+        "end_jst": "2023-11-30",
+        "source_grade": "official",
+        "source_url": "https://www.dospara.co.jp/event/black-friday-2023-entry.html"
+      }
+    ],
+    "Dospara / 2024": [
+      {
+        "channel": "online",
+        "start_jst": "2024-11-22T11:00:00+09:00",
+        "end_jst": "2024-12-02T10:59:00+09:00",
+        "source_grade": "secondary",
+        "source_url": "https://gamewith.jp/gaming-pc/531110"
+      },
+      {
+        "channel": "physical_store",
+        "start_jst": "2024-11-22",
+        "end_jst": "2024-12-01",
+        "source_grade": "secondary",
+        "source_url": "https://gamewith.jp/gaming-pc/531110"
+      }
+    ],
+    "PC Koubou / 2023": [
+      {
+        "channel": "online",
+        "start_jst": "2023-11-21",
+        "end_jst": "2023-12-04T10:59:00+09:00",
+        "source_grade": "official",
+        "source_url": "https://www.iiyama-pc.jp/info/2023112101.php"
+      }
+    ],
+    "PC Koubou / 2024": [
+      {
+        "channel": "online",
+        "start_jst": "2024-11-19",
+        "end_jst": "2024-12-02T16:59:00+09:00",
+        "source_grade": "official",
+        "source_url": "https://www.iiyama-pc.jp/info/20241119.php"
+      },
+      {
+        "channel": "physical_store",
+        "start_jst": "2024-11-22",
+        "end_jst": "2024-11-29",
+        "source_grade": "official",
+        "source_url": "https://www.iiyama-pc.jp/info/2024112102.php"
+      }
+    ],
+    "PC Koubou / 2025": [
+      {
+        "channel": "online",
+        "start_jst": null,
+        "end_jst": "2025-12-02T17:00:00+09:00",
+        "source_grade": "press",
+        "source_url": "https://pc.watch.impress.co.jp/docs/news/2065065.html"
+      },
+      {
+        "channel": "physical_store",
+        "start_jst": "2025-11-22",
+        "end_jst": "2025-11-28",
+        "source_grade": "press",
+        "source_url": "https://pc.watch.impress.co.jp/docs/news/2065588.html"
+      }
+    ],
+    "Mouse Computer / 2024": [
+      {
+        "channel": "online",
+        "start_jst": "2024-11-13",
+        "end_jst": "2024-12-04T10:59:00+09:00",
+        "source_grade": "press",
+        "source_url": "https://www.itmedia.co.jp/pcuser/spv/2411/13/news158.html"
+      }
+    ],
+    "Lenovo Japan / 2024": [
+      {
+        "channel": "online",
+        "start_jst": "2024-11-15",
+        "end_jst": "2024-11-28",
+        "source_grade": "official",
+        "source_url": "https://www.lenovo.com/jp/ja/blackfriday/"
+      }
+    ],
+    "Lenovo Japan / 2025": [
+      {
+        "channel": "online",
+        "start_jst": "2025-11-14",
+        "end_jst": "2025-12-04",
+        "source_grade": "official",
+        "source_url": "https://www.lenovo.com/jp/ja/campaigns/black-friday/"
+      }
+    ],
+    "TSUKUMO / 2025": [
+      {
+        "channel": "online_bto",
+        "start_jst": "2025-11-21T10:00:00+09:00",
+        "end_jst": "2025-12-02T10:00:00+09:00",
+        "source_grade": "secondary",
+        "source_url": "https://pc-para.jp/tsukumo/tsukumo-black-friday/"
+      },
+      {
+        "channel": "physical_store",
+        "start_jst": "2025-11-22",
+        "end_jst": "2025-11-28",
+        "source_grade": "secondary",
+        "source_url": "https://pc-para.jp/tsukumo/tsukumo-black-friday/"
+      }
+    ]
+  },
+  "historical_deal_record_count": 27,
+  "source_grade_counts": {
+    "press": 15,
+    "secondary": 4,
+    "official": 6,
+    "manufacturer_press_release": 2
+  },
+  "categories": {
+    "desktop_bto": {
+      "records": 8,
+      "with_reference_price": 4,
+      "discount_examples": [
+        {
+          "year": 2024,
+          "retailer": "PC Koubou",
+          "product": "LEVEL-R77A-LC147KF-UTX RGB Build",
+          "sale_price_jpy": 337800,
+          "reference_price_jpy": 387800,
+          "discount_pct": 12.9,
+          "source_grade": "official",
+          "source_url": "https://www.iiyama-pc.jp/info/20241119.php",
+          "notes": "Official announcement advertises ¥50,000 reduction. 16GB RAM fails user's minimum; reduction is item-specific.",
+          "comparability_group": "not_eligible_ram16"
+        },
+        {
+          "year": 2024,
+          "retailer": "Amazon / Mouse Computer",
+          "product": "G-Tune DGA7G6TB3SJW103AZ",
+          "sale_price_jpy": 194800,
+          "reference_price_jpy": 229900,
+          "discount_pct": 15.3,
+          "source_grade": "press",
+          "source_url": "https://dengekionline.com/article/202411/25843",
+          "notes": "Published MSRP/standard web reference versus Amazon BF sale; detailed RAM/SSD/GPU not recorded here.",
+          "comparability_group": "unknown_config"
+        },
+        {
+          "year": 2024,
+          "retailer": "Mouse Computer / G-Tune",
+          "product": "G-Tune DG-I5G60 white",
+          "sale_price_jpy": 197600,
+          "reference_price_jpy": 237600,
+          "discount_pct": 16.8,
+          "source_grade": "press",
+          "source_url": "https://www.itmedia.co.jp/pcuser/spv/2411/13/news158.html",
+          "notes": "2024 sale list; exact RAM/SSD configuration is not established in this record.",
+          "comparability_group": "older_gpu_generation"
+        },
+        {
+          "year": 2025,
+          "retailer": "PC Koubou",
+          "product": "LEVEL-M5A6-R97X-TKX RGB Build",
+          "sale_price_jpy": 249800,
+          "reference_price_jpy": 299800,
+          "discount_pct": 16.7,
+          "source_grade": "press",
+          "source_url": "https://pc.watch.impress.co.jp/docs/news/2065065.html",
+          "notes": "¥50,000 off is advertised; reference price is sale + advertised saving, not independently verified normal street price. 16GB RAM fails user's 32GB minimum.",
+          "comparability_group": "not_eligible_ram16"
+        }
+      ],
+      "source_grades": {
+        "press": 3,
+        "secondary": 4,
+        "official": 1
+      },
+      "comparability_groups": {
+        "not_eligible_ram16": 2,
+        "older_gpu_generation": 1,
+        "unknown_config": 1
+      },
+      "sale_price_range_jpy": {
+        "min": 194800,
+        "max": 379800
+      },
+      "comparable_discount_sample_count": 0,
+      "comparable_discount_median_pct": null
+    },
+    "laptop": {
+      "records": 1,
+      "with_reference_price": 1,
+      "discount_examples": [
+        {
+          "year": 2024,
+          "retailer": "PC Koubou",
+          "product": "SENSE-17FH126-i7-UX1X",
+          "sale_price_jpy": 149800,
+          "reference_price_jpy": 166800,
+          "discount_pct": 10.2,
+          "source_grade": "official",
+          "source_url": "https://www.iiyama-pc.jp/info/20241119.php",
+          "notes": "32GB/1TB listing; not comparable to a gaming desktop.",
+          "comparability_group": "not_gaming_pc"
+        }
+      ],
+      "source_grades": {
+        "official": 1
+      },
+      "comparability_groups": {
+        "not_gaming_pc": 1
+      },
+      "sale_price_range_jpy": {
+        "min": 149800,
+        "max": 149800
+      },
+      "comparable_discount_sample_count": 0,
+      "comparable_discount_median_pct": null
+    },
+    "monitor": {
+      "records": 11,
+      "with_reference_price": 4,
+      "discount_examples": [
+        {
+          "year": 2024,
+          "retailer": "Lenovo",
+          "product": "Lenovo L27i-4A",
+          "sale_price_jpy": 15800,
+          "reference_price_jpy": 17820,
+          "discount_pct": 11.3,
+          "source_grade": "official",
+          "source_url": "https://www.lenovo.com/jp/ja/blackfriday/",
+          "notes": "Historical official campaign page shows ¥17,820 to ¥15,800.",
+          "comparability_group": "monitor_fhd_100hz_27"
+        },
+        {
+          "year": 2024,
+          "retailer": "Amazon",
+          "product": "MSI PRO MP2412",
+          "sale_price_jpy": 9980,
+          "reference_price_jpy": 14800,
+          "discount_pct": 32.6,
+          "source_grade": "press",
+          "source_url": "https://game.watch.impress.co.jp/docs/news/1642353.html",
+          "notes": "MSI listed around ¥14,800 MSRP; BF early-sale observed at ¥9,980. Model is 23.8-inch FHD 100Hz VA, not a 27-inch WQHD gaming monitor.",
+          "comparability_group": "monitor_fhd_100hz"
+        },
+        {
+          "year": 2024,
+          "retailer": "Lenovo",
+          "product": "Lenovo D24-40",
+          "sale_price_jpy": 13200,
+          "reference_price_jpy": 19800,
+          "discount_pct": 33.3,
+          "source_grade": "official",
+          "source_url": "https://www.lenovo.com/jp/ja/blackfriday/",
+          "notes": "Historical official campaign page shows ¥19,800 to ¥13,200.",
+          "comparability_group": "monitor_fhd_75hz"
+        },
+        {
+          "year": 2025,
+          "retailer": "GRAPHT",
+          "product": "GRAPHT Gaming Monitor GR2724ML-BK",
+          "sale_price_jpy": 34980,
+          "reference_price_jpy": 54980,
+          "discount_pct": 36.4,
+          "source_grade": "manufacturer_press_release",
+          "source_url": "https://grapht.tokyo/news/grapht_blackfriday_2025",
+          "notes": "Manufacturer BF release gives MSRP ¥54,980 and sale ¥34,980; sales channels vary by product/store.",
+          "comparability_group": "monitor_qhd_miniled"
+        }
+      ],
+      "source_grades": {
+        "press": 8,
+        "manufacturer_press_release": 1,
+        "official": 2
+      },
+      "comparability_groups": {
+        "monitor_fhd_100hz": 1,
+        "monitor_qhd_miniled": 1,
+        "monitor_fhd_75hz": 1,
+        "monitor_fhd_100hz_27": 1
+      },
+      "sale_price_range_jpy": {
+        "min": 9980,
+        "max": 44800
+      },
+      "comparable_discount_sample_count": 0,
+      "comparable_discount_median_pct": null
+    },
+    "mousepad": {
+      "records": 1,
+      "with_reference_price": 1,
+      "discount_examples": [
+        {
+          "year": 2025,
+          "retailer": "GRAPHT",
+          "product": "GRAPHT Omni Black",
+          "sale_price_jpy": 2970,
+          "reference_price_jpy": 3960,
+          "discount_pct": 25,
+          "source_grade": "manufacturer_press_release",
+          "source_url": "https://grapht.tokyo/news/grapht_blackfriday_2025",
+          "notes": "Manufacturer BF release; store assortments vary.",
+          "comparability_group": "mousepad"
+        }
+      ],
+      "source_grades": {
+        "manufacturer_press_release": 1
+      },
+      "comparability_groups": {
+        "mousepad": 1
+      },
+      "sale_price_range_jpy": {
+        "min": 2970,
+        "max": 2970
+      },
+      "comparable_discount_sample_count": 0,
+      "comparable_discount_median_pct": null
+    },
+    "mouse": {
+      "records": 2,
+      "with_reference_price": 1,
+      "discount_examples": [
+        {
+          "year": 2024,
+          "retailer": "Lenovo",
+          "product": "Lenovo Yoga Pro Mouse",
+          "sale_price_jpy": 3999,
+          "reference_price_jpy": 5500,
+          "discount_pct": 27.3,
+          "source_grade": "official",
+          "source_url": "https://www.lenovo.com/jp/ja/blackfriday/",
+          "notes": "Historical campaign page shows ¥5,500 to ¥3,999.",
+          "comparability_group": "mouse_office"
+        }
+      ],
+      "source_grades": {
+        "official": 1,
+        "press": 1
+      },
+      "comparability_groups": {
+        "mouse_office": 1
+      },
+      "sale_price_range_jpy": {
+        "min": 1980,
+        "max": 3999
+      },
+      "comparable_discount_sample_count": 0,
+      "comparable_discount_median_pct": null
+    },
+    "keyboard": {
+      "records": 2,
+      "with_reference_price": 1,
+      "discount_examples": [
+        {
+          "year": 2024,
+          "retailer": "Lenovo",
+          "product": "Lenovo ThinkPad TrackPoint Keyboard",
+          "sale_price_jpy": 10890,
+          "reference_price_jpy": 15950,
+          "discount_pct": 31.7,
+          "source_grade": "official",
+          "source_url": "https://www.lenovo.com/jp/ja/blackfriday/",
+          "notes": "Discount rate uses cash sale price only. Page also advertises points; points are excluded from discount computation.",
+          "comparability_group": "keyboard_office"
+        }
+      ],
+      "source_grades": {
+        "official": 1,
+        "press": 1
+      },
+      "comparability_groups": {
+        "keyboard_office": 1
+      },
+      "sale_price_range_jpy": {
+        "min": 8980,
+        "max": 10890
+      },
+      "comparable_discount_sample_count": 0,
+      "comparable_discount_median_pct": null
+    },
+    "gpu": {
+      "records": 1,
+      "with_reference_price": 0,
+      "discount_examples": [],
+      "source_grades": {
+        "press": 1
+      },
+      "comparability_groups": {},
+      "sale_price_range_jpy": {
+        "min": 34980,
+        "max": 34980
+      },
+      "comparable_discount_sample_count": 0,
+      "comparable_discount_median_pct": null
+    },
+    "power_supply": {
+      "records": 1,
+      "with_reference_price": 0,
+      "discount_examples": [],
+      "source_grades": {
+        "press": 1
+      },
+      "comparability_groups": {},
+      "sale_price_range_jpy": {
+        "min": 9980,
+        "max": 9980
+      },
+      "comparable_discount_sample_count": 0,
+      "comparable_discount_median_pct": null
+    }
+  },
+  "forecast_policy": {
+    "2026_official_dates_inferred": false,
+    "probability_model_enabled": false,
+    "typical_discount_only_if_like_for_like_n_at_least": 3,
+    "why_not_forecast": "The historical set mixes generations, SKUs, BTO vs DIY, list prices vs observations, and source types. It supports price ranges and purchase timing context, not a calibrated probability of a specific 2026 price."
+  }
+}
