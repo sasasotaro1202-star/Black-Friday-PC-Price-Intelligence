@@ -26,7 +26,7 @@ class HistoricalBFAnalysisTests(unittest.TestCase):
         campaigns, deals = MOD.load_records()
         row = next(d for d in deals if d["model"] == "LEVEL-M5A6-R97X-TKX")
         self.assertEqual(row["ram_gb"], 16)
-        self.assertEqual(row["compare"], "not_eligible_ram16")
+        self.assertEqual(row["comparability_group"], "not_eligible_ram16")
 
 if __name__ == "__main__":
     unittest.main()
