@@ -189,6 +189,102 @@ def configuration_readiness(item):
         reasons.append(f"SSD {ssd_gb}GB<{policy['minimum_ssd_gb']}GB")
     return not reasons, reasons
 
+def validate_live_store_inventory(target, live, now=None):
+    """Validate branch stock evidence independently of cash price evidence."""
+    required = bool(
+        target.get("purchase_channel") == "physical_store"
+        and target.get("store_inventory_required_before_purchase")
+    )
+    empty = {
+        "store_inventory_status": "unknown",
+        "store_inventory_verified": False,
+        "store_inventory_checked_at": None,
+        "store_inventory_source_url": None,
+        "store_inventory_store_id": None,
+        "store_inventory_store_name": None,
+        "store_inventory_evidence_notes": None,
+        "store_inventory_age_minutes": None,
+        "store_inventory_store_ids_available": [],
+    }
+    if not required:
+        return empty
+    current = parse_dt(now) if isinstance(now, str) else now
+    current = current or now_jst()
+    max_age = actionable_max_age_minutes(current)
+    candidate_ids = {str(x) for x in (target.get("physical_store_candidate_ids") or [])}
+    checks = {
+        (str(x.get("store_id") or ""), str(x.get("url") or "")): x
+        for x in (target.get("store_inventory_checks") or [])
+        if isinstance(x, dict)
+    }
+    cfg = load_json(os.path.join(ROOT, "config", "targets.json"), {})
+    store_rows = (cfg.get("purchase_channels") or {}).get("physical_store_candidates") or []
+    stores = {str(x.get("id")): x for x in store_rows if isinstance(x, dict) and x.get("id")}
+    status_order = {"in_stock": 0, "low_stock": 1, "preorder_or_backorder": 2, "unknown": 3, "out_of_stock": 4}
+    valid = []
+    for obs in live.get("store_inventory_observations") or []:
+        if not isinstance(obs, dict):
+            continue
+        store_id = str(obs.get("store_id") or "")
+        check_url = str(obs.get("check_url") or "")
+        check = checks.get((store_id, check_url))
+        store = stores.get(store_id)
+        source_url = str(obs.get("source_url") or "")
+        source = urlparse(source_url)
+        checked = parse_dt(obs.get("checked_at"))
+        age_minutes = (current - checked).total_seconds() / 60.0 if checked else None
+        check_hosts = [str(x).lower() for x in (check or {}).get("allowed_hosts", [])]
+        official_host = urlparse(str((store or {}).get("official_store_url") or "")).netloc.lower()
+        page_host_ok = bool(
+            source.scheme == "https"
+            and source.netloc.lower() in check_hosts
+            and source.netloc.lower() == official_host
+        )
+        status = str(obs.get("status") or "unknown")
+        if (
+            not check
+            or store_id not in candidate_ids
+            or not store
+            or not page_host_ok
+            or obs.get("verified") is not True
+            or obs.get("branch_match") is not True
+            or obs.get("model_match") is not True
+            or checked is None
+            or age_minutes is None
+            or age_minutes < 0
+            or age_minutes > max_age
+            or status not in status_order
+        ):
+            continue
+        valid.append({
+            "store_id": store_id,
+            "store_name": str(obs.get("store_name") or (store or {}).get("name") or store_id),
+            "checked_at": str(obs.get("checked_at")),
+            "source_url": source_url,
+            "status": status,
+            "evidence_notes": str(obs.get("evidence_notes") or ""),
+            "age_minutes": round(age_minutes, 1),
+        })
+    available_ids = sorted({x["store_id"] for x in valid if x["status"] in ("in_stock", "low_stock")})
+    if not valid:
+        return empty
+    # Prefer an explicitly available branch. Never infer out-of-stock from a missing page/row.
+    valid.sort(key=lambda x: status_order.get(x["status"], 3))
+    usable = [x for x in valid if x["status"] != "unknown"]
+    chosen = usable[0] if usable else valid[0]
+    return {
+        "store_inventory_status": chosen["status"],
+        "store_inventory_verified": chosen["status"] != "unknown",
+        "store_inventory_checked_at": chosen["checked_at"],
+        "store_inventory_source_url": chosen["source_url"],
+        "store_inventory_store_id": chosen["store_id"],
+        "store_inventory_store_name": chosen["store_name"],
+        "store_inventory_evidence_notes": chosen["evidence_notes"],
+        "store_inventory_age_minutes": chosen["age_minutes"],
+        "store_inventory_store_ids_available": available_ids,
+    }
+
+
 def store_observation_validation(target, now=None):
     """Fail closed unless a fresh, exact-model, branch-specific store observation is evidenced.
 
@@ -332,6 +428,7 @@ def peripheral_budget_projection():
         stock = online_stock
         online_comparison_price = price if online_price_verified else None
         store_observation = store_observation_validation(target, now)
+        live_store_inventory = validate_live_store_inventory(target, live, now)
         store_price = store_observation["store_price_jpy"]
         store_checked_at = store_observation["store_price_checked_at"]
         store_stock = store_observation["store_stock_status"]
@@ -341,9 +438,15 @@ def peripheral_budget_projection():
 
         if store_channel:
             # A retailer website price can guide the reserve, but cannot prove a
-            # physical branch's shelf price or availability. Only a recent,
-            # exact-model, source-backed branch observation becomes an actual price.
-            stock = store_stock or "unknown"
+            # physical branch's cash price. Stock-page evidence is tracked separately.
+            # Only a recent exact-model store-price record can become a purchase price.
+            stock = (
+                store_stock or "unknown"
+                if store_price_verified
+                else live_store_inventory["store_inventory_status"]
+                if live_store_inventory["store_inventory_verified"]
+                else "unknown"
+            )
             if store_price_verified:
                 selected_cost = int(store_price)
                 exposed_price = int(store_price)
@@ -409,6 +512,15 @@ def peripheral_budget_projection():
             "store_evidence_notes": store_observation.get("store_evidence_notes"),
             "store_observation_status": store_observation.get("store_observation_status"),
             "store_observation_age_minutes": store_observation.get("store_observation_age_minutes"),
+            "store_inventory_status": live_store_inventory["store_inventory_status"],
+            "store_inventory_verified": live_store_inventory["store_inventory_verified"],
+            "store_inventory_checked_at": live_store_inventory["store_inventory_checked_at"],
+            "store_inventory_source_url": live_store_inventory["store_inventory_source_url"],
+            "store_inventory_store_id": live_store_inventory["store_inventory_store_id"],
+            "store_inventory_store_name": live_store_inventory["store_inventory_store_name"],
+            "store_inventory_evidence_notes": live_store_inventory["store_inventory_evidence_notes"],
+            "store_inventory_age_minutes": live_store_inventory["store_inventory_age_minutes"],
+            "store_inventory_store_ids_available": live_store_inventory["store_inventory_store_ids_available"],
             "stock_status": stock, "online_stock_status": online_stock,
             "budget_cost_jpy": selected_cost,
             "cost_basis": cost_basis,
