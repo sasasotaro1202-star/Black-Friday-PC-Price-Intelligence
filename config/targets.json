@@ -300,7 +300,22 @@
       "store_model_match": false,
       "store_observation_store_id": null,
       "store_evidence_type": null,
-      "store_evidence_notes": null
+      "store_evidence_notes": null,
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14369301",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
+        }
+      ]
     },
     {
       "id": "secondary_monitor",
@@ -386,7 +401,22 @@
       "store_model_match": false,
       "store_observation_store_id": null,
       "store_evidence_type": null,
-      "store_evidence_notes": null
+      "store_evidence_notes": null,
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=15313369",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
+        }
+      ]
     },
     {
       "id": "keyboard",
@@ -435,7 +465,22 @@
       "store_model_match": false,
       "store_observation_store_id": null,
       "store_evidence_type": null,
-      "store_evidence_notes": null
+      "store_evidence_notes": null,
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=9242996",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
+        }
+      ]
     },
     {
       "id": "mouse",
@@ -483,7 +528,22 @@
       "store_model_match": false,
       "store_observation_store_id": null,
       "store_evidence_type": null,
-      "store_evidence_notes": null
+      "store_evidence_notes": null,
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=6566291",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
+        }
+      ]
     },
     {
       "id": "mousepad",
@@ -749,7 +809,10 @@
       "target_price_note": "Official specification page confirms DisplayPort 1.4 and 2m length; price was not confirmed. Purchase only if the monitor does not include a suitable DP cable.",
       "ranking_score_100": 82,
       "ranking_reason": "2m・DisplayPort 1.4準拠の代替。モニター付属品の有無を確認し、不足分だけ購入する。",
-      "best_for": "付属ケーブルが不足した場合"
+      "best_for": "付属ケーブルが不足した場合",
+      "purchase_channel": "online",
+      "store_inventory_required_before_purchase": false,
+      "online_price_is_comparison_only": false
     },
     {
       "id": "cables_alt_sanwa_kc_dp1420",
@@ -775,7 +838,10 @@
       "ranking_score_100": 85,
       "ranking_reason": "VESA認証済みDisplayPort 1.4・2m。メーカー標準価格は¥5,280なので、実売が下がった場合だけ。不足がなければ購入しない。",
       "best_for": "A specifically identified DP 1.4 cable if the monitor's included cable is absent",
-      "category": "cables"
+      "category": "cables",
+      "purchase_channel": "online",
+      "store_inventory_required_before_purchase": false,
+      "online_price_is_comparison_only": false
     },
     {
       "id": "keyboard_alt_logicool_g413_tkl_se",
@@ -800,7 +866,23 @@
       "target_price_note": "Optional tenkeyless mechanical alternative for more mouse space; not in main budget.",
       "ranking_score_100": 86,
       "ranking_reason": "テンキーレスのメカニカル。マウススペースを優先するFPS向けだが、現在¥11,000参考価格より大幅に下がる場合に検討。",
-      "best_for": "FPSの操作スペース"
+      "best_for": "FPSの操作スペース",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ],
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": []
     },
     {
       "id": "keyboard_alt_logicool_g413se",
@@ -825,7 +907,23 @@
       "target_price_note": "Optional mechanical upgrade; not added to the standard build budget unless chosen.",
       "ranking_score_100": 84,
       "ranking_reason": "フルサイズのメカニカルでテンキーを残せるが、現在¥12,320参考価格のためBF目標¥9,500以下が条件。",
-      "best_for": "テンキーとメカニカル打鍵感"
+      "best_for": "テンキーとメカニカル打鍵感",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ],
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": []
     },
     {
       "id": "main_monitor_alt_msi_mag_275qf",
@@ -850,7 +948,23 @@
       "target_price_note": "Optional main-monitor alternative only; not included in peripheral budget. BF goal is a target, not an observed price.",
       "ranking_score_100": 90,
       "ranking_reason": "27型WQHD・180Hzの直接的な代替候補。AOCの在庫切れ・目標未達時に、配送込み総額と高さ調整の有無を比較する。",
-      "best_for": "AOCが高い・在庫切れの場合"
+      "best_for": "AOCが高い・在庫切れの場合",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ],
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": []
     },
     {
       "id": "main_monitor_alt_lg_27gs75qb",
@@ -874,7 +988,23 @@
       "target_price_note": "Official specifications confirmed: 27-inch WQHD IPS, 180Hz (DisplayPort), 100x100mm VESA. ¥22,000 is a BF target only; current checkout price is not verified here.",
       "ranking_score_100": 87,
       "ranking_reason": "高さ調整・ピボット対応スタンドが必要な場合の有力候補。AOCのBF価格や在庫が悪い場合だけ比較し、目標価格は¥22,000。",
-      "best_for": "高さ調整・ピボットの必要性が高い場合"
+      "best_for": "高さ調整・ピボットの必要性が高い場合",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ],
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": []
     },
     {
       "id": "mouse_alt_logicool_g203",
@@ -899,7 +1029,23 @@
       "target_price_note": "Official price observed 2026-10-11: ¥4,510. The ¥3,500 BF target is aspirational; the page showed low stock at observation time.",
       "ranking_score_100": 90,
       "ranking_reason": "有線で電池交換不要。公式掲載¥4,510、BF目標¥3,500。ワイヤレスにこだわらず価格を抑えたい場合の予備候補。",
-      "best_for": "価格優先・有線で問題ない場合"
+      "best_for": "価格優先・有線で問題ない場合",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ],
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": []
     },
     {
       "id": "mouse_alt_logicool_g304_x_superlight",
@@ -924,7 +1070,23 @@
       "target_price_note": "Optional 59 g-class wireless mouse upgrade; manufacturer lists 59 g. Not in main budget unless chosen.",
       "ranking_score_100": 87,
       "ranking_reason": "メーカー公称59gの充電式無線モデル。FPSで軽さを重視する上位選択だが、標準G304より高価なため、総合コスパは予算条件込みで評価。",
-      "best_for": "軽さを優先"
+      "best_for": "軽さを優先",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ],
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": []
     },
     {
       "id": "mousepad_alt_razer_gigantus_v2_l",
@@ -949,7 +1111,10 @@
       "target_price_note": "Official L-size page was opened on 2026-10-11; the page displayed ¥1,888 before final delivery/checkout confirmation. Shipping options vary, so only compare the final delivered cost.",
       "ranking_score_100": 89,
       "ranking_reason": "Lサイズ約450×400mmでQcK Largeと同程度の操作面。公式ページ表示額は送料条件の影響があるため、決済時の配送込み総額で比較する。",
-      "best_for": "大型布製パッドを安く確保したい場合"
+      "best_for": "大型布製パッドを安く確保したい場合",
+      "purchase_channel": "online",
+      "store_inventory_required_before_purchase": false,
+      "online_price_is_comparison_only": false
     },
     {
       "id": "mousepad_alt_logicool_g640s",
@@ -974,7 +1139,10 @@
       "target_price_note": "Optional exact-model alternative. Monitor the official G640 product page and only compare delivery-inclusive cost; do not reuse a G640s or search-page price.",
       "ranking_score_100": 87,
       "ranking_reason": "Logicool公式のG640は400×460mmの大型クロス面。公式掲載価格は¥3,850でQcK Largeより高価なので、表面の好みとBF価格差が小さい場合に選ぶ。",
-      "best_for": "表面の好みで選ぶ"
+      "best_for": "表面の好みで選ぶ",
+      "purchase_channel": "online",
+      "store_inventory_required_before_purchase": false,
+      "online_price_is_comparison_only": false
     },
     {
       "id": "power_strip_alt_sanwa_tap_sp2116mg2wn",
@@ -1005,7 +1173,10 @@
       "ranking_score_100": 82,
       "ranking_reason": "6口・2m・雷ガードに加えてホコリ防止シャッターやマグネットを備える。配送込みで¥1,800程度になった場合のみ検討。",
       "best_for": "Dust shutters and magnetic desk-side mounting",
-      "category": "power_strip"
+      "category": "power_strip",
+      "purchase_channel": "online",
+      "store_inventory_required_before_purchase": false,
+      "online_price_is_comparison_only": false
     },
     {
       "id": "power_strip_alt_elecom_tk6a2630bk",
@@ -1030,7 +1201,10 @@
       "target_price_note": "Official store listing observed 2026-10-11 at ¥3,993; ¥2,500 is a BF target, not a current offer. Choose only if a 3m cable is needed.",
       "ranking_score_100": 76,
       "ranking_reason": "3mが必要な場合の代替。公式掲載額は¥3,993で高いため、標準2.5mタップより優先しない。",
-      "best_for": "コンセントまで距離がある設置場所"
+      "best_for": "コンセントまで距離がある設置場所",
+      "purchase_channel": "online",
+      "store_inventory_required_before_purchase": false,
+      "online_price_is_comparison_only": false
     },
     {
       "id": "secondary_monitor_alt_asus_vy249hgr",
@@ -1060,7 +1234,10 @@
       ],
       "ranking_score_100": 88,
       "ranking_reason": "IPS・120Hz(OC)でサブ画面でも滑らかさを重視できる。価格未確認ならLG 24MS500-Bの方を優先。",
-      "best_for": "少し高いリフレッシュレート"
+      "best_for": "少し高いリフレッシュレート",
+      "purchase_channel": "online",
+      "store_inventory_required_before_purchase": false,
+      "online_price_is_comparison_only": false
     },
     {
       "id": "secondary_monitor_alt_lg_24gs60fb",
@@ -1085,7 +1262,10 @@
       "target_price_note": "Higher-refresh secondary alternative. Price.com indicated 24980 yen reference; not worth prioritizing over the cheaper main recommendation unless discounted.",
       "ranking_score_100": 83,
       "ranking_reason": "180Hzでサブ画面でもゲーム向きだが、コード表示用途には高コスト。大きなBF値引きがある場合だけ候補。",
-      "best_for": "サブ画面でもFPSを遊ぶ"
+      "best_for": "サブ画面でもFPSを遊ぶ",
+      "purchase_channel": "online",
+      "store_inventory_required_before_purchase": false,
+      "online_price_is_comparison_only": false
     },
     {
       "id": "speakers_alt_edifier_mr3",
@@ -1127,7 +1307,26 @@
       "store_price_checked_at": null,
       "store_stock_status": "unknown",
       "store_confirmation_url": null,
-      "store_model_match": false
+      "store_model_match": false,
+      "purchase_channel": "physical_store",
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=13719866",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
+        }
+      ]
     },
     {
       "id": "speakers_alt_creative_pebble_pro",
@@ -1167,7 +1366,25 @@
       "store_price_checked_at": null,
       "store_stock_status": "unknown",
       "store_confirmation_url": null,
-      "store_model_match": false
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14119746",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
+        }
+      ]
     }
   ],
   "peripheral_ranking_policy": {
