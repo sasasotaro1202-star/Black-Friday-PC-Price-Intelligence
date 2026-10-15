@@ -1093,24 +1093,41 @@
       "name": "EDIFIER MR3 2.0 powered monitor speakers 36W",
       "target_price_jpy": 12000,
       "track_current_price": true,
-      "monitor_url": "https://www.edifier.jp/products/mr3",
-      "purchase_url": "https://www.edifier.jp/products/mr3",
+      "monitor_url": "https://www.biccamera.com/bc/item/13719866/",
+      "purchase_url": "https://www.biccamera.com/bc/item/13719866/",
       "identity_terms": [
+        "ED-MR3-BK",
         "EDIFIER MR3",
-        "MR3"
+        "EDMR3BK"
       ],
-      "model_code": "MR3",
+      "model_code": "ED-MR3-BK",
       "allowed_hosts": [
-        "www.edifier.jp"
+        "www.yodobashi.com",
+        "www.biccamera.com"
       ],
-      "min_price_jpy": 9000,
+      "min_price_jpy": 10000,
       "max_price_jpy": 25000,
       "mandatory": false,
       "price_target_phase": "black_friday",
       "target_price_note": "Lower-cost alternative to MR4 MKII. Not included in mandatory peripheral budget.",
       "ranking_score_100": 91,
-      "ranking_reason": "36W RMS・Bluetooth 5.4対応。費用削減を重視する場合の有力候補で、現行公式掲載価格は¥14,980。",
-      "best_for": "予算を下げたい"
+      "ranking_reason": "36W powered monitor speakers, TRS/RCA/AUX/Bluetooth inputs; current major-retailer web references around ¥16,650. Physical branch price/stock is unconfirmed; ¥12,000 is the BF target, not a current offer.",
+      "best_for": "Lower-cost active monitor-speaker alternative with stereo pair and multiple inputs",
+      "monitor_urls": [
+        "https://www.yodobashi.com/product/100000001008849809/",
+        "https://www.biccamera.com/bc/item/13719866/"
+      ],
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ],
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false
     },
     {
       "id": "speakers_alt_creative_pebble_pro",
@@ -1144,7 +1161,13 @@
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
-      ]
+      ],
+      "purchase_channel": "physical_store",
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false
     }
   ],
   "peripheral_ranking_policy": {
