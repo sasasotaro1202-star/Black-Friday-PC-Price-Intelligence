@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-16T00:11:45+09:00
-Source snapshot: 2026-10-16T00:05:41+09:00
-Source snapshot SHA256: 9284ea09302d07e421088379557bbb40f6312f8bacb8b1591c09a584adfa5a9f
+Generated: 2026-10-16T04:17:49+09:00
+Source snapshot: 2026-10-16T04:09:34+09:00
+Source snapshot SHA256: 7c3ec620f19204c2207abd50d6f0cabc3e7bc3b7c827d7c81d183cb3953565b8
 Budget: ¥330,200
 Target Black Friday: 2026-11-27
 
@@ -17,13 +17,13 @@ Target Black Friday: 2026-11-27
 |5|G TUNE DG-A7G70|¥300,001|0.0%|HIGH|rtx 5070|26|direct_text|
 |6|G TUNE DG-I5G70|¥279,800|0.0%|HIGH|rtx 5070|22|direct_structured|
 |7|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
-|8|Lenovo Legion Pro 5i Gen 10（16型 Intel）|¥354,865|7.0%|HIGH|rtx 5080|40|direct_structured|
+|8|Lenovo Legion Pro 5i Gen 10（16型 Intel）|¥337,240|2.1%|HIGH|rtx 5080|40|direct_structured|
 |9|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|17.4%|REALISTIC|rtx 5070 ti|38|direct_structured|
 |10|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|26.4%|AGGRESSIVE|rtx 5070|32|direct_structured|
 
 ## Empirical price-change timing
 
-- Meaningful change sample: **6**
+- Meaningful change sample: **7**
 - **観測不足:** 20件未満なので時間帯の傾向は作りません。
 
 ## Historical anchors
