@@ -5,6 +5,10 @@ on:
     branches: ["main"]
     paths-ignore:
       - "data/**"
+      - "docs/**"
+      - "tests/**"
+      - "README.md"
+      - ".github/copilot-instructions.md"
   workflow_dispatch:
   schedule:
     - cron: "*/5 * * * *"
@@ -14,7 +18,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: pc-price-intelligence-writer
+  group: pc-price-intelligence-writer-v2
   cancel-in-progress: false
 
 jobs:
