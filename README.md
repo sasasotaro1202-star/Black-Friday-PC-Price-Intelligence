@@ -120,7 +120,7 @@ FPS・Cities: Skylines IIの快適度、RTX 5070とRTX 5060 Ti 16GBの選び分�
 
 - 過去の開催日：`data/historical_bf_campaigns.json` に2023〜2025年のAmazon、ドスパラ、パソコン工房、マウス、Lenovo、TSUKUMOなどのオンライン/店頭開催期間を出典付きで記録します。公式日程と二次資料を区別し、開始日が確定できないものは不明のままです。
 - 過去の商品価格：`data/historical_bf_deals.csv` に27件の公開価格観測（2023〜2025年）を収録。販売価格、確認できる通常/参考価格、構成（CPU/GPU/RAM/SSD）、出典、比較可否を分けます。
-- 自動集計：`scripts/historical_bf_analysis.py` が `data/historical_bf_analysis.json` と `data/reports/historical-bf-analysis.md` を生成します。価格の異なる商品や構成を同列に混ぜて架空の平均割引率や値下げ確率を作らず、同条件の事例が足りない場合は典型値を算出しません。
+- 自動集計：[過去BF分析レポート](data/reports/historical-bf-analysis.md) と [集計JSON](data/historical_bf_analysis.json) は `scripts/historical_bf_analysis.py` が生成・更新します。価格の異なる商品や構成を同列に混ぜて架空の平均割引率や値下げ確率を作らず、同条件の事例が足りない場合は典型値を算出しません。
 - PC本体の自作パーツは**ネット購入**。**メインモニター、マウス、キーボード、スピーカーは実店舗購入**を優先し、オンライン掲載価格は比較用とします。
 - 実店舗候補はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多。住所・公式店舗案内は `docs/peripheral-rankings.md` に掲載。店頭在庫と当日価格が確認できない間は、オンライン在庫で代用せず購入ゲートを保留します。
 - `config/targets.json` の `purchase_channels` を購入ルートの単一設定として扱い、価格目標・予算配分・32GB RAM/1TB SSD条件は変更しません。
