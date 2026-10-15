@@ -4,14 +4,14 @@
   "policy": "Historical records document announced campaign periods, not a forecast for 2026. Unknown exact start dates remain null. Online and physical-store periods are separate.",
   "campaigns": [
     {
-      "year": 2023,
-      "retailer": "Amazon Japan",
-      "channel": "online_main",
-      "start_jst": "2023-11-24T00:00:00+09:00",
-      "end_jst": "2023-12-01T23:59:00+09:00",
-      "source_grade": "official",
-      "source_url": "https://www.aboutamazon.jp/news/guide/six-key-points-to-make-your-shopping-at-amazon-black-friday-more-affordable-and-convenient",
-      "notes": "Official main event; 8 days."
+      "year": 2022,
+      "retailer": "Mouse Computer",
+      "channel": "online",
+      "start_jst": "2022-11-16",
+      "end_jst": "2022-11-30",
+      "source_grade": "press",
+      "source_url": "https://www.itmedia.co.jp/pcuser/articles/2211/16/news105.html",
+      "notes": "Contemporaneous coverage lists G-Tune/DAIV model discounts through Nov 30; exact day/time details may be model-specific."
     },
     {
       "year": 2023,
@@ -24,44 +24,14 @@
       "notes": "Early-sale window; date precision is date-only."
     },
     {
-      "year": 2024,
+      "year": 2023,
       "retailer": "Amazon Japan",
       "channel": "online_main",
-      "start_jst": "2024-11-29T00:00:00+09:00",
-      "end_jst": "2024-12-06T23:59:00+09:00",
-      "source_grade": "official_press_release",
-      "source_url": "https://prtimes.jp/main/html/rd/p/000001943.000004612.html",
-      "notes": "Official 8-day main event. Early sale reported from Nov 27. Source is Amazon Japan's own press release syndicated via PR TIMES."
-    },
-    {
-      "year": 2024,
-      "retailer": "Amazon Japan",
-      "channel": "online_early",
-      "start_jst": "2024-11-27",
-      "end_jst": "2024-11-28",
-      "source_grade": "official_press_release",
-      "source_url": "https://prtimes.jp/main/html/rd/p/000001943.000004612.html",
-      "notes": "Early sale dates supported by contemporaneous press coverage; exact product timing differs. Source is Amazon Japan's own press release syndicated via PR TIMES."
-    },
-    {
-      "year": 2025,
-      "retailer": "Amazon Japan",
-      "channel": "online_main",
-      "start_jst": "2025-11-24T00:00:00+09:00",
-      "end_jst": "2025-12-01T23:59:00+09:00",
+      "start_jst": "2023-11-24T00:00:00+09:00",
+      "end_jst": "2023-12-01T23:59:00+09:00",
       "source_grade": "official",
-      "source_url": "https://www.aboutamazon.jp/news/retail/amazon-black-friday-2025",
-      "notes": "Official 8-day main event."
-    },
-    {
-      "year": 2025,
-      "retailer": "Amazon Japan",
-      "channel": "online_early",
-      "start_jst": "2025-11-21",
-      "end_jst": "2025-11-23",
-      "source_grade": "official",
-      "source_url": "https://www.aboutamazon.jp/news/retail/amazon-black-friday-2025",
-      "notes": "Official 3-day early-sale window."
+      "source_url": "https://www.aboutamazon.jp/news/guide/six-key-points-to-make-your-shopping-at-amazon-black-friday-more-affordable-and-convenient",
+      "notes": "Official main event; 8 days."
     },
     {
       "year": 2023,
@@ -84,6 +54,46 @@
       "notes": "Store period is separate from online cutoff."
     },
     {
+      "year": 2023,
+      "retailer": "Mouse Computer",
+      "channel": "online",
+      "start_jst": "2023-11-22T11:00:00+09:00",
+      "end_jst": "2023-12-06T10:59:00+09:00",
+      "source_grade": "press",
+      "source_url": "https://www.itmedia.co.jp/pcuser/articles/2311/22/news126.html",
+      "notes": "Black Friday campaign in direct online store; maximum advertised discount is not a typical discount."
+    },
+    {
+      "year": 2023,
+      "retailer": "PC Koubou",
+      "channel": "online",
+      "start_jst": "2023-11-21",
+      "end_jst": "2023-12-04T10:59:00+09:00",
+      "source_grade": "official",
+      "source_url": "https://www.iiyama-pc.jp/info/2023112101.php",
+      "notes": "Official release says the sale was already running on Nov 21; exact start is not inferred beyond the announcement date."
+    },
+    {
+      "year": 2024,
+      "retailer": "Amazon Japan",
+      "channel": "online_early",
+      "start_jst": "2024-11-27",
+      "end_jst": "2024-11-28",
+      "source_grade": "official_press_release",
+      "source_url": "https://prtimes.jp/main/html/rd/p/000001943.000004612.html",
+      "notes": "Early sale dates supported by contemporaneous press coverage; exact product timing differs. Source is Amazon Japan's own press release syndicated via PR TIMES."
+    },
+    {
+      "year": 2024,
+      "retailer": "Amazon Japan",
+      "channel": "online_main",
+      "start_jst": "2024-11-29T00:00:00+09:00",
+      "end_jst": "2024-12-06T23:59:00+09:00",
+      "source_grade": "official_press_release",
+      "source_url": "https://prtimes.jp/main/html/rd/p/000001943.000004612.html",
+      "notes": "Official 8-day main event. Early sale reported from Nov 27. Source is Amazon Japan's own press release syndicated via PR TIMES."
+    },
+    {
       "year": 2024,
       "retailer": "Dospara",
       "channel": "online",
@@ -104,14 +114,24 @@
       "notes": "Secondary source; store period."
     },
     {
-      "year": 2023,
-      "retailer": "PC Koubou",
+      "year": 2024,
+      "retailer": "Lenovo Japan",
       "channel": "online",
-      "start_jst": "2023-11-21",
-      "end_jst": "2023-12-04T10:59:00+09:00",
+      "start_jst": "2024-11-15",
+      "end_jst": "2024-11-28",
       "source_grade": "official",
-      "source_url": "https://www.iiyama-pc.jp/info/2023112101.php",
-      "notes": "Official release says the sale was already running on Nov 21; exact start is not inferred beyond the announcement date."
+      "source_url": "https://www.lenovo.com/jp/ja/blackfriday/",
+      "notes": "Archived campaign page shows monitor/mouse/keyboard discounts; date range is historical."
+    },
+    {
+      "year": 2024,
+      "retailer": "Mouse Computer",
+      "channel": "online",
+      "start_jst": "2024-11-13",
+      "end_jst": "2024-12-04T10:59:00+09:00",
+      "source_grade": "press",
+      "source_url": "https://www.itmedia.co.jp/pcuser/spv/2411/13/news158.html",
+      "notes": "Official sale announcement covered by ITmedia; online campaign."
     },
     {
       "year": 2024,
@@ -135,6 +155,36 @@
     },
     {
       "year": 2025,
+      "retailer": "Amazon Japan",
+      "channel": "online_early",
+      "start_jst": "2025-11-21",
+      "end_jst": "2025-11-23",
+      "source_grade": "official",
+      "source_url": "https://www.aboutamazon.jp/news/retail/amazon-black-friday-2025",
+      "notes": "Official 3-day early-sale window."
+    },
+    {
+      "year": 2025,
+      "retailer": "Amazon Japan",
+      "channel": "online_main",
+      "start_jst": "2025-11-24T00:00:00+09:00",
+      "end_jst": "2025-12-01T23:59:00+09:00",
+      "source_grade": "official",
+      "source_url": "https://www.aboutamazon.jp/news/retail/amazon-black-friday-2025",
+      "notes": "Official 8-day main event."
+    },
+    {
+      "year": 2025,
+      "retailer": "Lenovo Japan",
+      "channel": "online",
+      "start_jst": "2025-11-14",
+      "end_jst": "2025-12-04",
+      "source_grade": "official",
+      "source_url": "https://www.lenovo.com/jp/ja/campaigns/black-friday/",
+      "notes": "Official campaign period."
+    },
+    {
+      "year": 2025,
       "retailer": "PC Koubou",
       "channel": "online",
       "start_jst": null,
@@ -153,36 +203,6 @@
       "source_grade": "press",
       "source_url": "https://pc.watch.impress.co.jp/docs/news/2065588.html",
       "notes": "Physical store promotion with daily deals; SKU details vary by day."
-    },
-    {
-      "year": 2024,
-      "retailer": "Mouse Computer",
-      "channel": "online",
-      "start_jst": "2024-11-13",
-      "end_jst": "2024-12-04T10:59:00+09:00",
-      "source_grade": "press",
-      "source_url": "https://www.itmedia.co.jp/pcuser/spv/2411/13/news158.html",
-      "notes": "Official sale announcement covered by ITmedia; online campaign."
-    },
-    {
-      "year": 2024,
-      "retailer": "Lenovo Japan",
-      "channel": "online",
-      "start_jst": "2024-11-15",
-      "end_jst": "2024-11-28",
-      "source_grade": "official",
-      "source_url": "https://www.lenovo.com/jp/ja/blackfriday/",
-      "notes": "Archived campaign page shows monitor/mouse/keyboard discounts; date range is historical."
-    },
-    {
-      "year": 2025,
-      "retailer": "Lenovo Japan",
-      "channel": "online",
-      "start_jst": "2025-11-14",
-      "end_jst": "2025-12-04",
-      "source_grade": "official",
-      "source_url": "https://www.lenovo.com/jp/ja/campaigns/black-friday/",
-      "notes": "Official campaign period."
     },
     {
       "year": 2025,
