@@ -885,10 +885,62 @@ def main():
         "- ポイントは現金支払額から控除せず、クーポンも決済画面で適用と最終支払額を確認できた場合だけ反映する。",
         "",
     ]
+    # Surface historical BF evidence in the main report, but never turn sparse,
+    # heterogeneous observations into a fake discount probability.
+    historical = load_json(os.path.join(ROOT, "data", "historical_bf_analysis.json"), {})
+    historical_observations = historical.get("price_observations") or []
+    same_tier_rtx5070_bto = [
+        item for item in historical_observations
+        if item.get("category") == "desktop_bto"
+        and "rtx 5070" in str(item.get("gpu") or "").lower()
+        and "5070 ti" not in str(item.get("gpu") or "").lower()
+        and isinstance(item.get("ram_gb"), int) and item.get("ram_gb") >= 32
+        and isinstance(item.get("ssd_gb"), int) and item.get("ssd_gb") >= 1000
+        and isinstance(item.get("sale_price_jpy"), int) and item.get("sale_price_jpy") > 0
+    ]
+    history_lines = [
+        "",
+        "## 過去のブラックフライデー実績（参考資料）",
+        "",
+        f"開催期間の記録：**{int(historical.get('campaign_record_count') or 0)}件**（{', '.join(str(y) for y in (historical.get('campaign_years_covered') or [])) or '年未集計'}） / "
+        f"商品価格の観測：**{int(historical.get('historical_deal_record_count') or 0)}件**。",
+        "[過去BFの詳細レポート](historical-bf-analysis.md) ・ "
+        "[開催日程データ](../historical_bf_campaigns.json) ・ "
+        "[商品価格CSV](../historical_bf_deals.csv)",
+        "",
+        "この資料は公開記事・公式告知で確認できた事例の集合であり、各店・各日の全価格履歴ではありません。過去の割引率は同じ型番・同等構成の2026年値下がり確率を意味しません。",
+        "2026年のBF実売として採用するには、販売元の2026年公式キャンペーン期間と、期間内の同一商品の確認価格が必要です。BTO実績は自作PCパーツの合計額と分けて扱います。",
+        "",
+    ]
+    if same_tier_rtx5070_bto:
+        best_example = min(same_tier_rtx5070_bto, key=lambda x: int(x["sale_price_jpy"]))
+        source_url = str(best_example.get("source_url") or "")
+        source_grade = str(best_example.get("source_grade") or "source quality unknown")
+        product_name = str(best_example.get("product") or best_example.get("model") or "model unknown")
+        history_lines += [
+            f"記録内で見つかった条件近似のBTO例（RTX 5070・RAM 32GB以上・SSD 1TB以上）："
+            f"**¥{int(best_example['sale_price_jpy']):,}** — {product_name}（{source_grade}）。",
+            f"[出典]({source_url})。BTO実例であり、自作PCの同額達成や2026年の値下がりを保証しません。",
+            "",
+        ]
+    else:
+        history_lines += [
+            "記録内に、RTX 5070・RAM 32GB以上・SSD 1TB以上の価格比較に使えるBTO実例はありません。構成要件が欠ける価格を同条件の実績に流用しません。",
+            "",
+        ]
+    if historical.get("forecast_policy", {}).get("probability_model_enabled") is not True:
+        history_lines += [
+            "**値下げ確率：未算出。** 同じ商品/構成の独立した履歴が不足しているため、見せかけの確率や平均値は出しません。",
+            "",
+        ]
+
     if "## 100点ランキング" in lines:
+        insert_index = lines.index("## 100点ランキング")
+        lines[insert_index:insert_index] = history_lines
         insert_index = lines.index("## 100点ランキング")
         lines[insert_index:insert_index] = peripheral_category_lines
     else:
+        lines.extend(history_lines)
         lines.extend(peripheral_category_lines)
 
     for row in scored[:20]:
