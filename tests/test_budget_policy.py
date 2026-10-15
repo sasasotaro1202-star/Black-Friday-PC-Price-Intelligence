@@ -217,9 +217,11 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(projection["pc_dynamic_cap_jpy"], 324220)
         self.assertIn("speakers", projection["tracked_peripheral_unverified_ids"])
         self.assertFalse(projection["budget_data_ready"])
-        self.assertEqual(speaker_row["current_price_jpy"], 29980)
+        self.assertIsNone(speaker_row["current_price_jpy"])
+        self.assertEqual(speaker_row["online_comparison_price_jpy"], 29980)
+        self.assertFalse(speaker_row["store_price_confirmed"])
         self.assertEqual(speaker_row["budget_cost_jpy"], 29980)
-        self.assertEqual(speaker_row["cost_basis"], "observed_price_stock_unconfirmed")
+        self.assertEqual(speaker_row["cost_basis"], "online_reference_store_price_unconfirmed")
 
     def test_cached_price_for_previous_speaker_model_is_not_reused(self):
         now_text = intelligence.iso(intelligence.now_jst())
@@ -260,7 +262,7 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertIsNone(speaker_row["current_price_jpy"])
         self.assertFalse(speaker_row["price_verified"])
         self.assertEqual(speaker_row["budget_cost_jpy"], 24000)
-        self.assertEqual(speaker_row["cost_basis"], "target_reserve_unverified")
+        self.assertEqual(speaker_row["cost_basis"], "target_reserve_store_price_unconfirmed")
 
     def test_unverified_peripheral_snapshot_fails_purchase_readiness(self):
         tracked_ids = [
