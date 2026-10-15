@@ -1,15 +1,15 @@
 # ブラックフライデー期間通算・購入ランキング
 
-更新: 2026-10-15T09:46:17+09:00
-観測スナップショット: 2026-10-15T09:44:15+09:00
-観測スナップショットSHA256: 932d5dbd31afb96275b1488dd59038ed71b8171d99ce5ae8cdef0baa9b4d4481
+更新: 2026-10-15T12:59:29+09:00
+観測スナップショット: 2026-10-15T12:56:09+09:00
+観測スナップショットSHA256: 672b3dbd967e0724d4fcaa725156f38df94052bc0d49a3e313ca6232d0bc2563
 総予算（PC＋周辺機器）: ¥400,000
 周辺機器の目標予算: ¥69,800
 PC本体の目標価格: ¥330,200
 PC本体の計画上限（周辺機器が目標価格の場合）: ¥330,200
-PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥318,260
-周辺機器の現行/目標価格ベース試算: ¥81,740
-周辺機器の価格・在庫確認: 4/7
+PC本体の動的上限（店頭価格未確認分はWeb参考値/目標額で保守的に試算）: ¥314,920
+周辺機器の予算試算（店頭4項目はWeb参考値。店頭価格は未確認）: ¥85,080
+周辺機器の価格・購入先在庫確認: 2/7
 完成品PC参考候補の購入ゲート: **保留**（completed_pc_candidates_reference_only）。自作PCの購入判定は別途、部品別互換性・実売・在庫・総額で評価します。
 フェーズ: **通常監視期間**
 
@@ -40,8 +40,8 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 - 必須費用込み現金総額: ¥284,700
 - 確定特典価値: ¥0
 - 実質コスト（PC単体）: ¥284,700
-- PC＋周辺機器の試算総額: ¥366,440
-- 総予算の残額（試算）: ¥33,560
+- PC＋周辺機器の試算総額: ¥369,780
+- 総予算の残額（試算）: ¥30,220
 - PC構成要件: 達成
 - 参考総価値換算額: ¥284,700（購入許可には不使用）
 - 判定: **WATCH**
@@ -74,19 +74,19 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 
 ## 周辺機器の価格監視（サブモニターあり・ヘッドセットなし）
 
-|画像|項目|BF購入目標価格|観測価格（BF前は参考）|在庫|価格確認|購入ページ|
-|---|---|---:|---:|---|---|---|
-|<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="84"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz|¥17,500|¥20,790|low_stock|確認済み|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
-|<a href="https://www.lg.com/id/monitor/fhd-qhd/24ms500-b/"><img src="https://www.lg.com/content/dam/channel/wcms/id/monitor/fhd-qhd/24ms500/gallery/02-gallery/fhd-24ms500-gallery-01-2010.jpg" alt="LG 24MS500-B 23.8-inch FHD IPS 100Hz secondary monitor" width="84"></a>|LG 24MS500-B 23.8-inch FHD IPS 100Hz secondary monitor|¥10,000|—（目標額で仮計算）|unknown|未確認|[商品ページ](https://kakaku.com/item/K0001619930/)|
-|<a href="https://www.yohohongkong.com/zh-hk/product/434786-Edifier-MR4-MKII-%E9%9B%99%E5%8A%9F%E6%94%BE%E9%8C%84%E5%AE%A4%E7%9B%A3%E8%81%BD%E5%96%87%E5%8F%AD-%E9%BB%91%E8%89%B2-%E9%A6%99%E6%B8%AF%E8%A1%8C%E8%B2%A8"><img src="https://www1.yohohongkong.com/images/202606/goods_img/434786_P_1780969137592.png" alt="EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)" width="84"></a>|EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)|¥24,000|¥29,980|unknown|確認済み|[商品ページ](https://www.edifier.jp/products/mr4-mkii)|
-|<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="84"></a>|Logicool G213r|¥5,500|—（目標額で仮計算）|unknown|未確認|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
-|<a href="https://shopee.ph/Logitech-Gaming-Mouse-G304-LIGHTSPEED-Wireless-12-000-DPI-Hero-Sensor-Lightweight-i.470352549.26121376846"><img src="https://down-ph.img.susercontent.com/file/sg-11134202-7rfh8-m43f6xs2o7yb73" alt="Logicool G304" width="84"></a>|Logicool G304|¥3,800|¥5,350|in_stock|確認済み|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
-|<a href="https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad"><img src="https://files.pccasegear.com/images/SS-63003-thumb.jpg" alt="SteelSeries QcK Large" width="84"></a>|SteelSeries QcK Large|¥2,500|¥2,640|low_stock|確認済み|[商品ページ](https://www.yodobashi.com/product/100000001009472873/)|
-|画像未確認|ELECOM T-K1A-2625BK 6-outlet 2.5m surge-protected power strip|¥1,500|¥2,480|low_stock|確認済み|[商品ページ](https://www.askul.co.jp/p/N678805/)|
-|画像未確認|Required cables only; check included monitor/speaker cables first|¥1,000|—（目標額で仮計算）|unknown|未確認|予算枠のみ|
-|画像未確認|Shipping / multi-store purchase reserve|¥4,000|—（目標額で仮計算）|unknown|未確認|予算枠のみ|
+|画像|項目|購入方法|BF購入目標価格|観測価格（BF前は参考）|在庫（購入先）|価格確認|商品/比較ページ|
+|---|---|---|---:|---|---|---|---|
+|<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="84"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz|実店舗|¥17,500|店頭未確認・Web参考 ¥20,790|unknown|未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001009314680/)|
+|<a href="https://www.lg.com/id/monitor/fhd-qhd/24ms500-b/"><img src="https://www.lg.com/content/dam/channel/wcms/id/monitor/fhd-qhd/24ms500/gallery/02-gallery/fhd-24ms500-gallery-01-2010.jpg" alt="LG 24MS500-B 23.8-inch FHD IPS 100Hz secondary monitor" width="84"></a>|LG 24MS500-B 23.8-inch FHD IPS 100Hz secondary monitor|ネット|¥10,000|—（目標額で仮計算）|unknown|未確認|[商品/比較ページ](https://kakaku.com/item/K0001619930/)|
+|<a href="https://www.yohohongkong.com/zh-hk/product/434786-Edifier-MR4-MKII-%E9%9B%99%E5%8A%9F%E6%94%BE%E9%8C%84%E5%AE%A4%E7%9B%A3%E8%81%BD%E5%96%87%E5%8F%AD-%E9%BB%91%E8%89%B2-%E9%A6%99%E6%B8%AF%E8%A1%8C%E8%B2%A8"><img src="https://www1.yohohongkong.com/images/202606/goods_img/434786_P_1780969137592.png" alt="EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)" width="84"></a>|EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)|実店舗|¥24,000|店頭未確認・Web参考 ¥33,320|unknown|未確認|[商品/比較ページ](https://www.edifier.jp/products/mr4-mkii)|
+|<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="84"></a>|Logicool G213r|実店舗|¥5,500|店頭未確認・目標額で仮計算|unknown|未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/9242996/)|
+|<a href="https://shopee.ph/Logitech-Gaming-Mouse-G304-LIGHTSPEED-Wireless-12-000-DPI-Hero-Sensor-Lightweight-i.470352549.26121376846"><img src="https://down-ph.img.susercontent.com/file/sg-11134202-7rfh8-m43f6xs2o7yb73" alt="Logicool G304" width="84"></a>|Logicool G304|実店舗|¥3,800|店頭未確認・Web参考 ¥5,350|unknown|未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001004334450/)|
+|<a href="https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad"><img src="https://files.pccasegear.com/images/SS-63003-thumb.jpg" alt="SteelSeries QcK Large" width="84"></a>|SteelSeries QcK Large|ネット|¥2,500|¥2,640|low_stock|確認済み|[商品/比較ページ](https://www.yodobashi.com/product/100000001009472873/)|
+|画像未確認|ELECOM T-K1A-2625BK 6-outlet 2.5m surge-protected power strip|ネット|¥1,500|¥2,480|low_stock|確認済み|[商品/比較ページ](https://www.askul.co.jp/p/N678805/)|
+|画像未確認|Required cables only; check included monitor/speaker cables first|ネット|¥1,000|—（目標額で仮計算）|unknown|未確認|予算枠のみ|
+|画像未確認|Shipping / multi-store purchase reserve|ネット|¥4,000|—（目標額で仮計算）|unknown|未確認|予算枠のみ|
 
-周辺機器価格確認: 4/7。未確認項目は目標額を試算に使用し、自作PCを含む総額の購入判断は保留します。
+周辺機器価格確認: 2/7。未確認項目は目標額を試算に使用し、自作PCを含む総額の購入判断は保留します。
 
 
 ## 周辺機器カテゴリ別ランキング（カテゴリ別・最大3候補）
@@ -94,6 +94,7 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 各カテゴリから**1商品だけ**選びます。代替候補は価格監視対象ですが、選択しない限り必須周辺機器の総予算には加算しません。
 100点は用途適合35%、予算適合30%、仕様・機能20%、代替性・購入リスク15%のユーザー条件別評価であり、独立した実機ベンチマークではありません。
 BF購入目標・BF前の観測価格・在庫・送料込み決済額を分けて扱います。取得失敗は売り切れと見なしません。
+購入ルート：PC本体（自作パーツ）はネット注文。メインモニター・マウス・キーボード・スピーカーは実店舗購入。これら4カテゴリのWeb価格は比較参考で、店頭価格・支店在庫として扱いません。
 
 ### メインモニター（27インチ・WQHD）
 
@@ -115,9 +116,9 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 
 |順位|総合点|画像|商品|BF購入目標|現行観測（BF前参考）|在庫|価格確認|選ぶ理由|商品ページ|
 |---:|---:|---|---|---:|---:|---|---|---|---|
-|1|**95/100**|<a href="https://www.yohohongkong.com/zh-hk/product/434786-Edifier-MR4-MKII-%E9%9B%99%E5%8A%9F%E6%94%BE%E9%8C%84%E5%AE%A4%E7%9B%A3%E8%81%BD%E5%96%87%E5%8F%AD-%E9%BB%91%E8%89%B2-%E9%A6%99%E6%B8%AF%E8%A1%8C%E8%B2%A8"><img src="https://www1.yohohongkong.com/images/202606/goods_img/434786_P_1780969137592.png" alt="EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)" width="88"></a>|EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)（主予算候補）|¥24,000|¥29,980|unknown|確認済み|80W RMSとBluetooth 6.0、複数の有線入力を備え、音質と接続性のバランスが良い。公式ページのクーポンは決済画面で確認できるまで価格に控除しない。|[商品ページ](https://www.edifier.jp/products/mr4-mkii)|
-|2|**91/100**|画像未確認|EDIFIER MR3 2.0 powered monitor speakers 36W（代替候補）|¥12,000|¥14,980|in_stock|確認済み|36W RMS・Bluetooth 5.4対応。費用削減を重視する場合の有力候補で、現行公式掲載価格は¥14,980。|[商品ページ](https://www.edifier.jp/products/mr3)|
-|3|**87/100**|画像未確認|EDIFIER MR5 3-way powered monitor speakers 110W（代替候補）|¥32,000|¥39,980|in_stock|確認済み|110W RMSの3ウェイ構成で上位だが、¥39,980参考価格は予算を圧迫。音量・低域を優先するときだけ検討。|[商品ページ](https://www.edifier.jp/products/mr5)|
+|1|**95/100**|<a href="https://www.yohohongkong.com/zh-hk/product/434786-Edifier-MR4-MKII-%E9%9B%99%E5%8A%9F%E6%94%BE%E9%8C%84%E5%AE%A4%E7%9B%A3%E8%81%BD%E5%96%87%E5%8F%AD-%E9%BB%91%E8%89%B2-%E9%A6%99%E6%B8%AF%E8%A1%8C%E8%B2%A8"><img src="https://www1.yohohongkong.com/images/202606/goods_img/434786_P_1780969137592.png" alt="EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)" width="88"></a>|EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)（主予算候補）|¥24,000|¥33,320|low_stock|確認済み|80W RMSとBluetooth 6.0、複数の有線入力を備え、音質と接続性のバランスが良い。公式ページのクーポンは決済画面で確認できるまで価格に控除しない。|[商品ページ](https://www.edifier.jp/products/mr4-mkii)|
+|2|**91/100**|画像未確認|EDIFIER MR3 2.0 powered monitor speakers 36W（代替候補）|¥12,000|¥16,650|low_stock|確認済み|36W powered monitor speakers, TRS/RCA/AUX/Bluetooth inputs; current major-retailer web references around ¥16,650. Physical branch price/stock is unconfirmed; ¥12,000 is the BF target, not a current offer.|[商品ページ](https://www.biccamera.com/bc/item/13719866/)|
+|3|**82/100**|画像未確認|Creative Pebble Pro 2.0 PC speakers (USB-C/USB-A/Bluetooth/3.5mm)（代替候補）|¥8,000|未確認|unknown|未確認|Compact USB/Bluetooth/analog speaker set currently listed around ¥9,980 online. Kept as a lower-cost comparison only; not the main sound-quality recommendation.|[商品ページ](https://www.biccamera.com/bc/item/14119746/)|
 
 ### キーボード
 
@@ -174,11 +175,10 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 |3|laptop|Lenovo Legion Pro 5i Gen 10（16型 Intel）|¥354,865|¥354,865|¥0|¥354,865|¥0|+0|7.0%|40/40|18/20|0/15|11/15|9/10|**74/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040)|
 |4|desktop|G TUNE DG-I7G70|¥299,800|¥299,800|¥0|¥299,800|¥0|+0|未算出|32/40|20/20|0/15|11/15|10/10|**73/100**|NEEDS_CONFIGURATION|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/)|
 |5|desktop|G TUNE DG-I5G70|¥279,800|¥279,800|¥0|¥279,800|¥0|+0|未算出|22/40|20/20|0/15|11/15|10/10|**63/100**|NEEDS_CONFIGURATION|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/)|
-|6|laptop|Acer Predator Helios Neo 16 AI Windows 11 Home Core Ult|¥547,800|¥547,800|¥0|¥547,800|¥0|+1|39.7%|40/40|5/20|0/15|11/15|3/10|**59/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1)|
-|7|desktop|G TUNE FG-A7G6T|¥300,001|¥300,001|¥0|¥300,001|¥0|+0|0.0%|28/40|20/20|0/15|3/15|7/10|**58/100**|VERIFY_NOW|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/)|
-|8|laptop|G TUNE P5-I7G70BK-C（ブラック）|¥419,800|¥419,800|¥0|¥419,800|¥0|+0|21.3%|32/40|10/20|0/15|11/15|5/10|**58/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/)|
-|9|desktop|G TUNE DG-A5G60|¥194,800|¥194,800|¥0|¥194,800|¥0|+0|未算出|15/40|20/20|0/15|11/15|10/10|**56/100**|NEEDS_CONFIGURATION|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
-|10|desktop|G TUNE DG-A7G70|¥300,001|¥300,001|¥0|¥300,001|¥0|+0|0.0%|26/40|20/20|0/15|3/15|7/10|**56/100**|VERIFY_NOW|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/)|
+|6|desktop|G TUNE FG-A7G6T|¥300,001|¥300,001|¥0|¥300,001|¥0|+0|0.0%|28/40|20/20|0/15|3/15|7/10|**58/100**|VERIFY_NOW|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/)|
+|7|desktop|G TUNE DG-A5G60|¥194,800|¥194,800|¥0|¥194,800|¥0|+0|未算出|15/40|20/20|0/15|11/15|10/10|**56/100**|NEEDS_CONFIGURATION|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
+|8|desktop|G TUNE DG-A7G70|¥300,001|¥300,001|¥0|¥300,001|¥0|+0|0.0%|26/40|20/20|0/15|3/15|7/10|**56/100**|VERIFY_NOW|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/)|
+|9|laptop|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|¥448,800|¥0|¥448,800|¥0|+0|26.4%|32/40|7/20|0/15|11/15|5/10|**55/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/)|
 
 ## データ品質
 
@@ -191,20 +191,20 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 - 重要候補: 5
 - 重要候補の未確認: 4
 - カバレッジ: PARTIAL
-- 現行価格を使える候補: 10
-- 参照情報のみ: 10
+- 現行価格を使える候補: 9
+- 参照情報のみ: 11
 - 自動発見候補: 0
-- 直接確認: 11
+- 直接確認: 10
 - 検索補完: 0
 - 異常価格棄却: 0
 - 構成不明: 2
-- 在庫不明: 11
+- 在庫不明: 12
 - 売り切れ確認: 2
 - PIT失敗: 0
 - 処理対象: 21 / 21
 - 処理率: 100.0%
 - 取得成功率: 57.1%
-- 価格確認率: 52.4%
+- 価格確認率: 47.6%
 - 検索補完（成功/試行）: 0/9
 - 検索SKU不一致による除外: 48
 - 取得エラー内訳（host|reason）: rog.asus.com|curl_http_404=1, store.asus.com|curl_http_403=7, www.dospara.co.jp|curl_http_404=1
@@ -227,20 +227,17 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 ### 5. G TUNE DG-I5G70
 10%→¥251,800 / 15%→¥237,800 / 20%→¥223,800 / 25%→¥209,800 / 30%→¥195,900 / PC目標価格到達→10%
 
-### 6. Acer Predator Helios Neo 16 AI Windows 11 Home Core Ultra 9 290HX Plus RTX 5070 Ti IPS 非光沢 WQXGA 240Hz 3ms G-SYNC DCI-P3 100% 32GBメモリ 1TB SSD 第5世代 AeroBladeファン 有線LAN WiFi 6E 英字キーボード ゲーミングノートパソコン PHN16-I71-N93Z57T/E
-10%→¥493,000 / 15%→¥465,600 / 20%→¥438,200 / 25%→¥410,800 / 30%→¥383,500 / 30%でもPC目標価格未到達
-
-### 7. G TUNE FG-A7G6T
+### 6. G TUNE FG-A7G6T
 10%→¥270,000 / 15%→¥255,000 / 20%→¥240,000 / 25%→¥225,000 / 30%→¥210,000 / PC目標価格到達→10%
 
-### 8. G TUNE P5-I7G70BK-C（ブラック）
-10%→¥377,800 / 15%→¥356,800 / 20%→¥335,800 / 25%→¥314,800 / 30%→¥293,900 / PC目標価格到達→25%
-
-### 9. G TUNE DG-A5G60
+### 7. G TUNE DG-A5G60
 10%→¥175,300 / 15%→¥165,600 / 20%→¥155,800 / 25%→¥146,100 / 30%→¥136,400 / PC目標価格到達→10%
 
-### 10. G TUNE DG-A7G70
+### 8. G TUNE DG-A7G70
 10%→¥270,000 / 15%→¥255,000 / 20%→¥240,000 / 25%→¥225,000 / 30%→¥210,000 / PC目標価格到達→10%
+
+### 9. G TUNE P5-I7G70BK-C（ブラック）
+10%→¥403,900 / 15%→¥381,500 / 20%→¥359,000 / 25%→¥336,600 / 30%→¥314,200 / PC目標価格到達→30%
 
 ## 判定ルール
 
@@ -269,12 +266,12 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 
 ## 今この瞬間の買い時判定
 
-- 更新時刻（JST）: 2026-10-15T09:46:17+09:00
+- 更新時刻（JST）: 2026-10-15T12:59:29+09:00
 - 判定: **事前監視継続・公式日程未確認** (PRE_BF_MONITORING)
 - 暫定の広域監視窓（公式セール日程ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 - 公式日程確認: 0/16 店舗（未確認: 12、取得エラー: 4）
 - 総予算: ¥400,000
-- PC本体の動的上限: ¥318,260
+- PC本体の動的上限: ¥314,920
 - 周辺機器の価格・在庫確認: 未完了
 - 全体購入ゲート: 保留 (self_build_wait_for_compatibility_review)
 
@@ -300,7 +297,7 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 - 本命構成: 自作本命：Ryzen 7 9700X + RTX 5070 12GB
 - PC本体BF購入目標: ¥300,600
 - 周辺機器込みBF購入目標: ¥370,400
-- 互換性 / 部品の比較参考価格 / 店舗決済オファー: REVIEW / 3/9 / 0/9
+- 互換性 / 部品の比較参考価格 / 店舗決済オファー: REVIEW / 5/9 / 0/9
 - 自作の買い時判定: **WAIT_FOR_COMPATIBILITY_REVIEW**
 - 購入許可: **保留**。購入目標や比較価格は確定実売ではありません。
 - 主な未解決条件: GPUの正確な型番寸法・補助電源など未確認の互換性項目を解消する。；BF購入目標額は希望価格であり、確認済み実売価格ではない。；比較サイト価格は購入店舗の最終決済価格・在庫・送料を証明しない。

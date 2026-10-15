@@ -1,62 +1,131 @@
-# 過去のブラックフライデー資料：値下げ幅と時期の参考
+# 過去のブラックフライデー資料：観測値と買い時の目安
 
-> 初期集計版。出典付きのキャンペーン20記録・商品価格27件（2023〜2025年）をまとめる。通常価格の裏付けが弱い例、構成が要件に足りない例、二次資料は注記し、2026年の値下げ確率や確定価格へ読み替えない。内容は `scripts/historical_bf_analysis.py` により監視サイクルで再集計する。
+更新：2026-10-15T12:59:29+09:00（JST）
 
-## まず分かること
+収録キャンペーン記録：22件 / 商品価格記録：40件
+対象年：2022, 2023, 2024, 2025
 
-- Amazonの本セールは2023〜2025年の公式記録で、いずれも11月末〜12月初めの8日間。先行セールは2023/2024年が2日、2025年が3日と違いがある。
-- PC専門店のセールは、オンラインと店頭で日程がずれる場合がある。店頭の目玉商品は日替わり・数量限定の報道例もあり、来店時点の型番・在庫・値段確認が必要。
-- 2025年のRTX 5070 BTOで、¥249,800の報道例はメモリ16GBで今回の32GB条件を満たさない。一方、TSUKUMOのRTX 5070・32GB/1TB BTOが¥267,800という二次報道もある。いずれもBTOの実例であって、自作パーツ価格の合計や2026年の価格予測ではない。
-- 公表通常価格とセール価格が分かる個別例では、モニターやマウスに約11〜36%の差が見える。ただしモデルも販売チャネルも異なるため、この割合を今回狙う型番の値下げ確率・期待値として使わない。
-- 2026年は、各店の「2026年と明記された公式期間」と、その期間に取れた同一SKUの実売価格が揃うまで、セール前参考価格を「BF実売」と扱わない。
+## ここから読み取れること
 
-## 開催期間の履歴
+- Amazonの本セールは2023〜2025年の記録では、いずれも11月末〜12月初めに8日間実施。先行セールの日数・開始日は年によって違うため、2026年の開催日を過去の曜日だけで決めない。
+- PC専門店のキャンペーンは、オンラインと店頭で期間が違う例がある。PC工房は店頭日替わり特価を実施した実績もあるため、店頭4カテゴリは店舗の在庫・価格を別途確認する。
+- 2025年のRTX 5070搭載BTOには¥249,800の例があるが、RAM 16GBのため今回の32GB条件を満たさない。32GB/1TBのRTX 5070 BTOで¥267,800という二次報道もあるが、自作パーツ合計や2026年の実売価格として扱わない。
+- 2024年のMSI PRO MP2412は¥9,980、メーカー公称価格目安¥14,800という記録（約32.6%差）。別モデルの値引き率を今回のAOC WQHDモデルにそのまま当てはめない。
+- Lenovoの2024年公式セール例ではモニター約11〜33%引き、マウス約27%引きの個別事例がある。ただし製品クラス・販売チャネルが異なるため、今回の特定型番の値下げ確率ではない。
 
-|販売元・チャネル|年|確認できた開催期間|根拠|注記|
-|---|---:|---|---|---|
-|Amazon オンライン本セール|2023|11/24〜12/1|[Amazon公式](https://www.aboutamazon.jp/news/guide/six-key-points-to-make-your-shopping-at-amazon-black-friday-more-affordable-and-convenient)|8日間|
-|Amazon 先行セール|2023|11/22〜11/23|[Amazon公式](https://www.aboutamazon.jp/news/guide/six-key-points-to-make-your-shopping-at-amazon-black-friday-more-affordable-and-convenient)|日付単位で保存|
-|Amazon オンライン本セール|2024|11/29〜12/6|[Amazon Japan発表](https://prtimes.jp/main/html/rd/p/000001943.000004612.html)|8日間|
-|Amazon 先行セール|2024|11/27〜11/28|[Amazon Japan発表](https://prtimes.jp/main/html/rd/p/000001952.000004612.html)|商品によって露出時刻は異なる|
-|Amazon オンライン本セール|2025|11/24〜12/1|[Amazon公式](https://www.aboutamazon.jp/news/retail/amazon-black-friday-2025)|8日間|
-|Amazon 先行セール|2025|11/21〜11/23|[Amazon公式](https://www.aboutamazon.jp/news/retail/amazon-black-friday-2025)|3日間|
-|ドスパラ オンライン|2023|11/17 11:00〜12/1 10:59|[ドスパラ公式](https://www.dospara.co.jp/event/black-friday-2023-entry.html)|ポイント抽選キャンペーンを含む|
-|ドスパラ 店舗|2023|11/17開店〜11/30閉店|[ドスパラ公式](https://www.dospara.co.jp/event/black-friday-2023-entry.html)|通販と別期間|
-|ドスパラ オンライン/店舗|2024|11/22〜12/2（通販）／11/22〜12/1（店頭）|[GameWith（二次資料）](https://gamewith.jp/gaming-pc/531110)|公式日付の二次資料|
-|パソコン工房 オンライン|2023|11/21〜12/4 10:59|[パソコン工房公式](https://www.iiyama-pc.jp/info/2023112101.php)|公式リリースで実施期間を確認|
-|パソコン工房 オンライン|2024|11/19〜12/2 16:59|[パソコン工房公式](https://www.iiyama-pc.jp/info/20241119.php)|対象BTO最大5万円引き。最大額は平均ではない|
-|パソコン工房 店舗|2024|11/22〜11/29|[パソコン工房公式](https://www.iiyama-pc.jp/info/2024112102.php)|店頭キャンペーン|
-|パソコン工房 オンライン|2025|開始日は未確定、12/2 17:00終了と報道|[PC Watch](https://pc.watch.impress.co.jp/docs/news/2065065.html)|記事が掲載された日を開始日と断定しない|
-|パソコン工房 店舗|2025|11/22〜11/28|[PC Watch](https://pc.watch.impress.co.jp/docs/news/2065588.html)|日替わり特価の報道|
-|マウスコンピューター オンライン|2024|11/13〜12/4 10:59|[ITmedia PC USER](https://www.itmedia.co.jp/pcuser/spv/2411/13/news158.html)|モデルごとに値引き幅が異なる|
-|Lenovo オンライン|2024|11/15〜11/28|[Lenovoのキャンペーンページ](https://www.lenovo.com/jp/ja/blackfriday/)|過去ページの掲載期間|
-|Lenovo オンライン|2025|11/14〜12/4|[Lenovo公式](https://www.lenovo.com/jp/ja/campaigns/black-friday/)|期間は年度によって変わる|
-|TSUKUMO BTO|2025|11/21 10:00〜12/2 10:00|[PC-Para（二次資料）](https://pc-para.jp/tsukumo/tsukumo-black-friday/)|公式の個別掲載を優先して再確認|
-|TSUKUMO 店舗|2025|11/22〜11/28|[PC-Para（二次資料）](https://pc-para.jp/tsukumo/tsukumo-black-friday/)|店頭・BTOで期間が違う|
+## 商品カテゴリごとの収録状況
 
-## 具体的な価格履歴の例
+|カテゴリ|記録件数|販売価格レンジ|値引き率付き事例|同一条件の典型値|
+|---|---:|---:|---:|---|
+|desktop_bto|12|¥194,800〜¥379,800|8|算出不可（同一条件n不足）|
+|gpu|1|¥34,980〜¥34,980|0|算出不可（同一条件n不足）|
+|keyboard|2|¥8,980〜¥10,890|1|算出不可（同一条件n不足）|
+|laptop|1|¥149,800〜¥149,800|1|算出不可（同一条件n不足）|
+|monitor|19|¥9,980〜¥45,790|7|算出不可（同一条件n不足）|
+|mouse|3|¥1,980〜¥8,800|2|算出不可（同一条件n不足）|
+|mousepad|1|¥2,970〜¥2,970|1|算出不可（同一条件n不足）|
+|power_supply|1|¥9,980〜¥9,980|0|算出不可（同一条件n不足）|
 
-|年|販売チャネル|商品・構成|確認価格|比較参考価格|算術上の差|判断上の注意|
-|---:|---|---|---:|---:|---:|---|
-|2025|PC工房・オンラインBTO|Ryzen 7 9700X / RTX 5070 / 16GB / 1TB|¥249,800|¥299,800（¥50,000オフの逆算）|約16.7%|[PC Watch](https://pc.watch.impress.co.jp/docs/news/2065065.html)。参考価格は逆算値で、独立確認した通常価格ではない。RAM16GBのため今回の条件不適合。|
-|2025|TSUKUMO・オンラインBTO|Core Ultra 7 265KF / RTX 5070 / 32GB / 1TB|¥267,800|未確認|—|[Gamepedia](https://premium.gamepedia.jp/shopping/archives/54417)などの二次報道。BTO価格であり自作価格ではない。|
-|2025|TSUKUMO・オンラインBTO|Ryzen 7 7800X3D / RTX 5080 / 32GB / 1TB|¥349,800|未確認|—|[PC-Para](https://pc-para.jp/tsukumo/tsukumo-black-friday/)。GPU/CPUが異なり直接比較不可。|
-|2025|TSUKUMO・オンラインBTO|Ryzen 9 9900X3D / RTX 5070 Ti / 64GB / 2TB|¥379,800|未確認|—|[PC-Para](https://pc-para.jp/tsukumo/tsukumo-black-friday/)。大穴の参考で、今回のDIY同等構成価格ではない。|
-|2024|PC工房・オンラインBTO|Core i7-14700KF / RTX 4070 Ti SUPER / 16GB / 1TB|¥337,800|¥387,800|約12.9%|[PC工房公式](https://www.iiyama-pc.jp/info/20241119.php)。RAM16GBのため今回の条件不適合。|
-|2024|Amazon・モニター|MSI PRO MP2412 / 23.8型 FHD 100Hz|¥9,980|¥14,800（メーカーの発売時価格目安）|約32.6%|[Game Watch](https://game.watch.impress.co.jp/docs/news/1642353.html)。今回の27型WQHDゲーミングモニターとは別クラス。|
-|2024|Lenovo・モニター|D24-40 / 23.8型 FHD|¥13,200|¥19,800|約33.3%|[Lenovoキャンペーン](https://www.lenovo.com/jp/ja/blackfriday/)。個別製品の公式セール表記。|
-|2024|Lenovo・モニター|L27i-4A / 27型 FHD 100Hz|¥15,800|¥17,820|約11.3%|[Lenovoキャンペーン](https://www.lenovo.com/jp/ja/blackfriday/)。WQHDではない。|
-|2024|Lenovo・マウス|Yoga Pro Mouse|¥3,999|¥5,500|約27.3%|[Lenovoキャンペーン](https://www.lenovo.com/jp/ja/blackfriday/)。オフィス用途の製品でG304とは別モデル。|
-|2024|Lenovo・キーボード|Lenovo keyboard (model not recorded)|¥10,890|¥15,950|約31.7%|[Lenovoキャンペーン](https://www.lenovo.com/jp/ja/blackfriday/)。ポイント付与は現金値引きに算入しない。|
-|2025|GRAPHT・オンライン/店頭|GR2724ML-BK ゲーミングモニター|¥34,980|¥54,980|約36.4%|[メーカー告知](https://grapht.tokyo/news/grapht_blackfriday_2025)。販路別の取扱いに差がある。|
-|2025|GRAPHT・オンライン/店頭|GRAPHT Omni マウスパッド|¥2,970|¥3,960|25.0%|[メーカー告知](https://grapht.tokyo/news/grapht_blackfriday_2025)。現行候補のマウスパッドとは別商品。|
+## 値引きの確認できた具体例
 
-さらに価格記録には、2024年AmazonのI-O Data FHD/WQHDモニター、2025年AmazonのBenQ MOBIUZとI-O Dataモニター、2025年PC工房店頭の型番未特定キーボード/マウス/電源/Radeon GPUを収録している。型番不明の店頭品は、今回買うG213r/G304/AOCなどの同一製品実績とは見なさない。
+|年|販売元|商品|参考価格|観測セール価格|差率|根拠|注意事項|
+|---:|---|---|---:|---:|---:|---|---|
+|2022|Mouse Computer / G-Tune|G-Tune EN-Z|¥264,800|¥239,800|9.4%|[press](https://www.itmedia.co.jp/pcuser/articles/2211/16/news105.html)|2022 BF price-list example; exact configuration not captured and hardware generation differs from 2026 target.|
+|2022|Mouse Computer / G-Tune|G-Tune P5-RT|¥229,900|¥212,800|7.4%|[press](https://www.itmedia.co.jp/pcuser/articles/2211/16/news105.html)|2022 BF price-list example; exact CPU/GPU/RAM/SSD configuration not captured.|
+|2023|Amazon / ASUS|ASUS Eye Care VZ27EHE|¥23,737|¥16,000|32.6%|[press](https://www.itmedia.co.jp/pcuser/articles/2311/22/news094.html)|27-inch general-purpose FHD monitor, not a high-refresh gaming monitor.|
+|2023|Amazon / ASUS|ASUS ProArt PA279CV-J|¥61,001|¥45,790|24.9%|[press](https://www.itmedia.co.jp/pcuser/articles/2311/22/news094.html)|27-inch 4K creator monitor; not directly comparable to the gaming monitor target.|
+|2023|Amazon / ASUS|ASUS ROG Keris Wireless Aimpoint|¥12,700|¥8,800|30.7%|[press](https://www.itmedia.co.jp/pcuser/articles/2311/22/news094.html)|Tri-mode wireless gaming mouse; historical price example, not the current G304 SKU.|
+|2023|Amazon / ASUS|ASUS TUF Gaming VG249QM1A|¥31,111|¥19,840|36.2%|[press](https://www.itmedia.co.jp/pcuser/articles/2311/22/news094.html)|23.8-inch FHD 270Hz monitor; reported discount ~36.2%. Different class from 27-inch WQHD target.|
+|2023|Amazon / Thirdwave|GALLERIA XA7C-R47|¥285,680|¥229,480|19.7%|[press](https://pc.watch.impress.co.jp/docs/news/todays_sales/1549774.html)|RTX 4070 / Core i7-13700F / 32GB / 1TB; ¥56,200 reduction reported. Baseline is derived from sale + stated reduction, not a current 2026 comparator.|
+|2023|Mouse Computer / G-Tune|G-Tune FZ-A7G7T|¥379,800|¥304,800|19.7%|[press](https://www.itmedia.co.jp/pcuser/articles/2311/22/news126.html)|G-Tune published ¥379,800 → ¥304,800 Black Friday price. Exact CPU/GPU/RAM/SSD configuration not captured; not eligible for direct 2026 comparison.|
+|2024|Amazon|MSI PRO MP2412|¥14,800|¥9,980|32.6%|[press](https://game.watch.impress.co.jp/docs/news/1642353.html)|MSI listed around ¥14,800 MSRP; BF early-sale observed at ¥9,980. Model is 23.8-inch FHD 100Hz VA, not a 27-inch WQHD gaming monitor.|
+|2024|Amazon / Mouse Computer|G-Tune DGA7G6TB3SJW103AZ|¥229,900|¥194,800|15.3%|[press](https://dengekionline.com/article/202411/25843)|Published MSRP/standard web reference versus Amazon BF sale; detailed RAM/SSD/GPU not recorded here.|
+|2024|Lenovo|Lenovo D24-40|¥19,800|¥13,200|33.3%|[official](https://www.lenovo.com/jp/ja/blackfriday/)|Historical official campaign page shows ¥19,800 to ¥13,200.|
+|2024|Lenovo|Lenovo L27i-4A|¥17,820|¥15,800|11.3%|[official](https://www.lenovo.com/jp/ja/blackfriday/)|Historical official campaign page shows ¥17,820 to ¥15,800.|
+|2024|Lenovo|Lenovo Yoga Pro Mouse|¥5,500|¥3,999|27.3%|[official](https://www.lenovo.com/jp/ja/blackfriday/)|Historical campaign page shows ¥5,500 to ¥3,999.|
+|2024|Lenovo|Lenovo keyboard (exact model not recorded)|¥15,950|¥10,890|31.7%|[official](https://www.lenovo.com/jp/ja/blackfriday/)|Discount rate uses cash sale price only. Page also advertises points; points are excluded from discount computation.|
+|2024|Mouse Computer / G-Tune|G-Tune DG-I5G60 white|¥237,600|¥197,600|16.8%|[press](https://www.itmedia.co.jp/pcuser/spv/2411/13/news158.html)|2024 sale list; exact RAM/SSD configuration is not established in this record.|
+|2024|PC Koubou|LEVEL-R77A-LC147KF-UTX RGB Build|¥387,800|¥337,800|12.9%|[official](https://www.iiyama-pc.jp/info/20241119.php)|Official announcement advertises ¥50,000 reduction. 16GB RAM fails user's minimum; reduction is item-specific.|
+|2024|PC Koubou|SENSE-17FH126-i7-UX1X|¥166,800|¥149,800|10.2%|[official](https://www.iiyama-pc.jp/info/20241119.php)|32GB/1TB listing; not comparable to a gaming desktop.|
+|2025|GRAPHT|GRAPHT Gaming Monitor GR2724ML-BK|¥54,980|¥34,980|36.4%|[manufacturer_press_release](https://grapht.tokyo/news/grapht_blackfriday_2025)|Manufacturer BF release gives MSRP ¥54,980 and sale ¥34,980; sales channels vary by product/store.|
+|2025|GRAPHT|GRAPHT Omni Black|¥3,960|¥2,970|25.0%|[manufacturer_press_release](https://grapht.tokyo/news/grapht_blackfriday_2025)|Manufacturer BF release; store assortments vary.|
+|2025|PC Koubou|LEVEL-M5A6-R97X-TKX RGB Build|¥299,800|¥249,800|16.7%|[press](https://pc.watch.impress.co.jp/docs/news/2065065.html)|¥50,000 off is advertised; reference price is sale + advertised saving, not independently verified normal street price. 16GB RAM fails user's 32GB minimum.|
 
-## どのように2026年の判断に使うか
+## セール価格の全観測一覧（参考情報）
 
-1. **時期の判断**：過去のキャンペーン期間は監視窓を組む参考にするだけ。2026年の開始日/終了日は各社の公式発表で確認する。
-2. **価格の判断**：同一SKUのBF前直接価格、BF期間中に確認した価格、セール後価格を別々に記録する。検索スニペットや違う構成の値段を現在価格やBF実売として扱わない。
-3. **目標値の判断**：過去の類似クラスは目安にするが、構成・世代・RAM/SSD・販売方式が揃わない値段から「今年は何%下がる」とは断定しない。
-4. **買い時の判断**：Web購入のPCパーツは最終カート価格・送料・在庫・互換性で判定。店頭購入のメインモニター、マウス、キーボード、スピーカーは、福岡の支店在庫・店頭レジ価格を確認するまで「店頭購入可能」と判定しない。
-5. **値下がり率・確率**：比較可能な同一製品/同等構成の観測が少ないため、現時点で統計的な「値下げ確率」や典型割引率は出さない。収録点数だけ増やすのではなく、出典・型番・メモリ/SSD・販売チャネルの完全性を重視する。
+通常価格を確認できないものも含め、公開記事で確認できた価格全体を掲載する。空欄を0円や値引きなしと解釈せず、通常価格不明の価格から値引き率は計算しない。
+
+|日付|販売チャネル|販売元|カテゴリ|商品・構成|セール観測価格|比較参考価格|確認できた差率|構成情報|根拠|注意事項|
+|---|---|---|---|---|---:|---:|---:|---|---|---|
+|2022-11-16|online|Mouse Computer / G-Tune|desktop_bto|G-Tune EN-Z|¥239,800|¥264,800|9.4%|未確認|[press](https://www.itmedia.co.jp/pcuser/articles/2211/16/news105.html)|2022 BF price-list example; exact configuration not captured and hardware generation differs from 2026 target.|
+|2022-11-16|online|Mouse Computer / G-Tune|desktop_bto|G-Tune P5-RT|¥212,800|¥229,900|7.4%|未確認|[press](https://www.itmedia.co.jp/pcuser/articles/2211/16/news105.html)|2022 BF price-list example; exact CPU/GPU/RAM/SSD configuration not captured.|
+|2023-11-22|online|Amazon / ASUS|monitor|ASUS Eye Care VZ27EHE|¥16,000|¥23,737|32.6%|未確認|[press](https://www.itmedia.co.jp/pcuser/articles/2311/22/news094.html)|27-inch general-purpose FHD monitor, not a high-refresh gaming monitor.|
+|2023-11-22|online|Amazon / ASUS|monitor|ASUS ProArt PA279CV-J|¥45,790|¥61,001|24.9%|未確認|[press](https://www.itmedia.co.jp/pcuser/articles/2311/22/news094.html)|27-inch 4K creator monitor; not directly comparable to the gaming monitor target.|
+|2023-11-22|online|Amazon / ASUS|mouse|ASUS ROG Keris Wireless Aimpoint|¥8,800|¥12,700|30.7%|未確認|[press](https://www.itmedia.co.jp/pcuser/articles/2311/22/news094.html)|Tri-mode wireless gaming mouse; historical price example, not the current G304 SKU.|
+|2023-11-22|online|Amazon / ASUS|monitor|ASUS TUF Gaming VG249QM1A|¥19,840|¥31,111|36.2%|未確認|[press](https://www.itmedia.co.jp/pcuser/articles/2311/22/news094.html)|23.8-inch FHD 270Hz monitor; reported discount ~36.2%. Different class from 27-inch WQHD target.|
+|2023-11-24|online|Mouse Computer / G-Tune|desktop_bto|G-Tune FZ-A7G7T|¥304,800|¥379,800|19.7%|未確認|[press](https://www.itmedia.co.jp/pcuser/articles/2311/22/news126.html)|G-Tune published ¥379,800 → ¥304,800 Black Friday price. Exact CPU/GPU/RAM/SSD configuration not captured; not eligible for direct 2026 comparison.|
+|2023-11-25|online|Amazon / Thirdwave|desktop_bto|GALLERIA XA7C-R47|¥229,480|¥285,680|19.7%|Core i7-13700F, RTX 4070, 32GB RAM, 1000GB SSD|[press](https://pc.watch.impress.co.jp/docs/news/todays_sales/1549774.html)|RTX 4070 / Core i7-13700F / 32GB / 1TB; ¥56,200 reduction reported. Baseline is derived from sale + stated reduction, not a current 2026 comparator.|
+|2024-11-13|online|Mouse Computer / G-Tune|desktop_bto|G-Tune DG-I5G60 white|¥197,600|¥237,600|16.8%|RTX 4060 class (confirm exact SKU)|[press](https://www.itmedia.co.jp/pcuser/spv/2411/13/news158.html)|2024 sale list; exact RAM/SSD configuration is not established in this record.|
+|2024-11-15|online|Lenovo|monitor|Lenovo D24-40|¥13,200|¥19,800|33.3%|未確認|[official](https://www.lenovo.com/jp/ja/blackfriday/)|Historical official campaign page shows ¥19,800 to ¥13,200.|
+|2024-11-15|online|Lenovo|monitor|Lenovo L27i-4A|¥15,800|¥17,820|11.3%|未確認|[official](https://www.lenovo.com/jp/ja/blackfriday/)|Historical official campaign page shows ¥17,820 to ¥15,800.|
+|2024-11-15|online|Lenovo|mouse|Lenovo Yoga Pro Mouse|¥3,999|¥5,500|27.3%|未確認|[official](https://www.lenovo.com/jp/ja/blackfriday/)|Historical campaign page shows ¥5,500 to ¥3,999.|
+|2024-11-15|online|Lenovo|keyboard|Lenovo keyboard (exact model not recorded)|¥10,890|¥15,950|31.7%|未確認|[official](https://www.lenovo.com/jp/ja/blackfriday/)|Discount rate uses cash sale price only. Page also advertises points; points are excluded from discount computation.|
+|2024-11-19|online|PC Koubou|desktop_bto|LEVEL-R77A-LC147KF-UTX RGB Build|¥337,800|¥387,800|12.9%|Core i7-14700KF, RTX 4070 Ti SUPER 16GB, 16GB RAM, 1000GB SSD|[official](https://www.iiyama-pc.jp/info/20241119.php)|Official announcement advertises ¥50,000 reduction. 16GB RAM fails user's minimum; reduction is item-specific.|
+|2024-11-19|online|PC Koubou|laptop|SENSE-17FH126-i7-UX1X|¥149,800|¥166,800|10.2%|Core i7-13700H, Iris Xe integrated, 32GB RAM, 1000GB SSD|[official](https://www.iiyama-pc.jp/info/20241119.php)|32GB/1TB listing; not comparable to a gaming desktop.|
+|2024-11-26|online|Amazon|monitor|MSI PRO MP2412|¥9,980|¥14,800|32.6%|未確認|[press](https://game.watch.impress.co.jp/docs/news/1642353.html)|MSI listed around ¥14,800 MSRP; BF early-sale observed at ¥9,980. Model is 23.8-inch FHD 100Hz VA, not a 27-inch WQHD gaming monitor.|
+|2024-11-27|online|Amazon|monitor|I-O Data EX-GD241JD|¥19,980|不明|算出不可|未確認|[press](https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/1642405.html)|23.8-inch FHD 180Hz; sale price published during early sale.|
+|2024-11-27|online|Amazon|monitor|I-O Data EX-GD271JD|¥24,980|不明|算出不可|未確認|[press](https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/1642405.html)|27-inch FHD 180Hz; sale price published during early sale.|
+|2024-11-27|online|Amazon|monitor|I-O Data EX-GDQ271JA|¥34,800|不明|算出不可|未確認|[press](https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/1642405.html)|27-inch WQHD 180Hz; sale price published during early sale.|
+|2024-11-27|online_early|Amazon / Acer|monitor|Acer KG241YP3bmipx|¥17,980|不明|算出不可|未確認|[press](https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/1642409.html)|23.8-inch FHD 180Hz VA monitor; sale observation only; reference price not stated.|
+|2024-11-27|online_early|Amazon / Acer|monitor|Acer SH272UEbmiphux|¥31,280|不明|算出不可|未確認|[press](https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/1642409.html)|27-inch QHD IPS monitor; refresh tier/reference price not given in cited report.|
+|2024-11-27|online_early|Amazon / Acer|monitor|Acer VG240YM3bmiipx|¥18,680|不明|算出不可|未確認|[press](https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/1642409.html)|23.8-inch FHD 180Hz IPS monitor; sale observation only; reference price not stated.|
+|2024-11-28|online_early|Amazon / LG|monitor|LG UltraGear 24GS50FX-B|¥16,900|不明|算出不可|未確認|[press](https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/1642371.html)|23.7-inch FHD 180Hz gaming monitor; BF early-sale price only.|
+|2024-11-28|online_early|Amazon / LG|monitor|LG UltraGear 27GS60F-B|¥23,500|不明|算出不可|未確認|[press](https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/1642371.html)|27-inch IPS gaming monitor; BF early-sale price only.|
+|2024-11-29|online|Amazon / Mouse Computer|desktop_bto|G-Tune DGA7G6TB3SJW103AZ|¥194,800|¥229,900|15.3%|未確認|[press](https://dengekionline.com/article/202411/25843)|Published MSRP/standard web reference versus Amazon BF sale; detailed RAM/SSD/GPU not recorded here.|
+|2025-11-19|online_and_physical|GRAPHT|monitor|GRAPHT Gaming Monitor GR2724ML-BK|¥34,980|¥54,980|36.4%|未確認|[manufacturer_press_release](https://grapht.tokyo/news/grapht_blackfriday_2025)|Manufacturer BF release gives MSRP ¥54,980 and sale ¥34,980; sales channels vary by product/store.|
+|2025-11-19|online_and_physical|GRAPHT|mousepad|GRAPHT Omni Black|¥2,970|¥3,960|25.0%|未確認|[manufacturer_press_release](https://grapht.tokyo/news/grapht_blackfriday_2025)|Manufacturer BF release; store assortments vary.|
+|2025-11-21|online|Amazon|monitor|BenQ MOBIUZ EX251|¥24,800|不明|算出不可|未確認|[press](https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/2065023.html)|24.5-inch FHD 220Hz; BF early-sale price only, no MSRP discount inference.|
+|2025-11-21|online|Amazon|monitor|BenQ MOBIUZ EX271|¥29,800|不明|算出不可|未確認|[press](https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/2065023.html)|27-inch; BF early-sale price only.|
+|2025-11-21|online|Amazon|monitor|BenQ MOBIUZ EX271Q|¥44,800|不明|算出不可|未確認|[press](https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/2065023.html)|27-inch WQHD 180Hz; no MSRP reduction computed.|
+|2025-11-21|online|PC Koubou|desktop_bto|LEVEL-M5A6-R97X-TKX RGB Build|¥249,800|¥299,800|16.7%|Ryzen 7 9700X, RTX 5070, 16GB RAM, 1000GB SSD|[press](https://pc.watch.impress.co.jp/docs/news/2065065.html)|¥50,000 off is advertised; reference price is sale + advertised saving, not independently verified normal street price. 16GB RAM fails user's 32GB minimum.|
+|2025-11-21|online_bto|TSUKUMO|desktop_bto|Creator PC WA7J-G253/B|¥244,800|不明|算出不可|Core Ultra 7 265KF, RTX 5060 Ti 16GB, 32GB RAM, 1000GB SSD|[secondary](https://pc-para.jp/tsukumo/tsukumo-black-friday/)|Secondary reported BTO price; 16GB VRAM and 32GB/1TB.|
+|2025-11-21|online_bto|TSUKUMO|desktop_bto|G-GEAR GE7A-J256/BH|¥349,800|不明|算出不可|Ryzen 7 7800X3D, RTX 5080, 32GB RAM, 1000GB SSD|[secondary](https://pc-para.jp/tsukumo/tsukumo-black-friday/)|BTO price reported secondarily; 32GB/1TB.|
+|2025-11-21|online_bto|TSUKUMO|desktop_bto|G-GEAR GE7J-K257/BH|¥267,800|不明|算出不可|Core Ultra 7 265KF, RTX 5070, 32GB RAM, 1000GB SSD|[secondary](https://premium.gamepedia.jp/shopping/archives/54417)|Secondary report states 32GB/1TB; BTO price, not DIY part cost. Same or similar configuration needs model-specific verification.|
+|2025-11-21|online_bto|TSUKUMO|desktop_bto|G-GEAR GE9A-M257/BH|¥379,800|不明|算出不可|Ryzen 9 9900X3D, RTX 5070 Ti, 64GB RAM, 2000GB SSD|[secondary](https://pc-para.jp/tsukumo/tsukumo-black-friday/)|BTO price reported secondarily; 64GB/2TB differs from target DIY build.|
+|2025-11-22|online|Amazon|monitor|I-O Data EX-GD251UH|¥14,980|不明|算出不可|未確認|[press](https://akiba-pc.watch.impress.co.jp/docs/sale/online_shopping/2065208.html)|24.5-inch FHD 240Hz; sale price is a dated observation, not a guaranteed current offer.|
+|2025-11-22|physical_store|PC Koubou|power_supply|850W PSU (exact SKU unreported)|¥9,980|不明|算出不可|未確認|[press](https://pc.watch.impress.co.jp/docs/news/2065588.html)|In-store daily deal; exact brand/model unavailable.|
+|2025-11-22|physical_store|PC Koubou|gpu|Radeon RX 7600 (exact SKU unreported)|¥34,980|不明|算出不可|Radeon RX 7600|[press](https://pc.watch.impress.co.jp/docs/news/2065588.html)|In-store daily deal. Exact vendor/SKU not in article, so not comparable to a specific GPU model.|
+|2025-11-23|physical_store|PC Koubou|mouse|Elecom gaming mouse (exact SKU unreported)|¥1,980|不明|算出不可|未確認|[press](https://pc.watch.impress.co.jp/docs/news/2065588.html)|In-store daily deal; model not reported.|
+|2025-11-23|physical_store|PC Koubou|keyboard|HyperX tenkeyless keyboard (exact SKU unreported)|¥8,980|不明|算出不可|未確認|[press](https://pc.watch.impress.co.jp/docs/news/2065588.html)|In-store daily deal; model not reported.|
+
+## 集計上の制限
+
+- この表は公開記事・公式告知で見つかった観測値の集合で、各店・各日の全価格履歴ではない。
+- 商品が違う、構成が違う、通常価格が独立検証されていない、ポイントが現金値引きではない等の場合は、単純な平均値を「通常の値下げ幅」として出さない。
+- 過去の最低価格に合わせることを2026年の目標や予測にせず、今年の同一SKUについて、セール前の直接価格、価格履歴、現在の在庫、完成構成・店頭価格を別に比較する。
+- 2026年公式日程が見つかるまでは、観測日をBF実売と認定しない。
+
+## 収録した公式・報道ソース一覧
+
+- Mouse Computer / 2022 / online: 2022-11-16〜2022-11-30 (press) [https://www.itmedia.co.jp/pcuser/articles/2211/16/news105.html](https://www.itmedia.co.jp/pcuser/articles/2211/16/news105.html)
+- Amazon Japan / 2023 / online_early: 2023-11-22〜2023-11-23 (official) [https://www.aboutamazon.jp/news/guide/six-key-points-to-make-your-shopping-at-amazon-black-friday-more-affordable-and-convenient](https://www.aboutamazon.jp/news/guide/six-key-points-to-make-your-shopping-at-amazon-black-friday-more-affordable-and-convenient)
+- Amazon Japan / 2023 / online_main: 2023-11-24T00:00:00+09:00〜2023-12-01T23:59:00+09:00 (official) [https://www.aboutamazon.jp/news/guide/six-key-points-to-make-your-shopping-at-amazon-black-friday-more-affordable-and-convenient](https://www.aboutamazon.jp/news/guide/six-key-points-to-make-your-shopping-at-amazon-black-friday-more-affordable-and-convenient)
+- Dospara / 2023 / online: 2023-11-17T11:00:00+09:00〜2023-12-01T10:59:00+09:00 (official) [https://www.dospara.co.jp/event/black-friday-2023-entry.html](https://www.dospara.co.jp/event/black-friday-2023-entry.html)
+- Dospara / 2023 / physical_store: 2023-11-17〜2023-11-30 (official) [https://www.dospara.co.jp/event/black-friday-2023-entry.html](https://www.dospara.co.jp/event/black-friday-2023-entry.html)
+- Mouse Computer / 2023 / online: 2023-11-22T11:00:00+09:00〜2023-12-06T10:59:00+09:00 (press) [https://www.itmedia.co.jp/pcuser/articles/2311/22/news126.html](https://www.itmedia.co.jp/pcuser/articles/2311/22/news126.html)
+- PC Koubou / 2023 / online: 2023-11-21〜2023-12-04T10:59:00+09:00 (official) [https://www.iiyama-pc.jp/info/2023112101.php](https://www.iiyama-pc.jp/info/2023112101.php)
+- Amazon Japan / 2024 / online_early: 2024-11-27〜2024-11-28 (official_press_release) [https://prtimes.jp/main/html/rd/p/000001943.000004612.html](https://prtimes.jp/main/html/rd/p/000001943.000004612.html)
+- Amazon Japan / 2024 / online_main: 2024-11-29T00:00:00+09:00〜2024-12-06T23:59:00+09:00 (official_press_release) [https://prtimes.jp/main/html/rd/p/000001943.000004612.html](https://prtimes.jp/main/html/rd/p/000001943.000004612.html)
+- Dospara / 2024 / online: 2024-11-22T11:00:00+09:00〜2024-12-02T10:59:00+09:00 (secondary) [https://gamewith.jp/gaming-pc/531110](https://gamewith.jp/gaming-pc/531110)
+- Dospara / 2024 / physical_store: 2024-11-22〜2024-12-01 (secondary) [https://gamewith.jp/gaming-pc/531110](https://gamewith.jp/gaming-pc/531110)
+- Lenovo Japan / 2024 / online: 2024-11-15〜2024-11-28 (official) [https://www.lenovo.com/jp/ja/blackfriday/](https://www.lenovo.com/jp/ja/blackfriday/)
+- Mouse Computer / 2024 / online: 2024-11-13〜2024-12-04T10:59:00+09:00 (press) [https://www.itmedia.co.jp/pcuser/spv/2411/13/news158.html](https://www.itmedia.co.jp/pcuser/spv/2411/13/news158.html)
+- PC Koubou / 2024 / online: 2024-11-19〜2024-12-02T16:59:00+09:00 (official) [https://www.iiyama-pc.jp/info/20241119.php](https://www.iiyama-pc.jp/info/20241119.php)
+- PC Koubou / 2024 / physical_store: 2024-11-22〜2024-11-29 (official) [https://www.iiyama-pc.jp/info/2024112102.php](https://www.iiyama-pc.jp/info/2024112102.php)
+- Amazon Japan / 2025 / online_early: 2025-11-21〜2025-11-23 (official) [https://www.aboutamazon.jp/news/retail/amazon-black-friday-2025](https://www.aboutamazon.jp/news/retail/amazon-black-friday-2025)
+- Amazon Japan / 2025 / online_main: 2025-11-24T00:00:00+09:00〜2025-12-01T23:59:00+09:00 (official) [https://www.aboutamazon.jp/news/retail/amazon-black-friday-2025](https://www.aboutamazon.jp/news/retail/amazon-black-friday-2025)
+- Lenovo Japan / 2025 / online: 2025-11-14〜2025-12-04 (official) [https://www.lenovo.com/jp/ja/campaigns/black-friday/](https://www.lenovo.com/jp/ja/campaigns/black-friday/)
+- PC Koubou / 2025 / online: 開始日未確定〜2025-12-02T17:00:00+09:00 (press) [https://pc.watch.impress.co.jp/docs/news/2065065.html](https://pc.watch.impress.co.jp/docs/news/2065065.html)
+- PC Koubou / 2025 / physical_store: 2025-11-22〜2025-11-28 (press) [https://pc.watch.impress.co.jp/docs/news/2065588.html](https://pc.watch.impress.co.jp/docs/news/2065588.html)
+- TSUKUMO / 2025 / online_bto: 2025-11-21T10:00:00+09:00〜2025-12-02T10:00:00+09:00 (secondary) [https://pc-para.jp/tsukumo/tsukumo-black-friday/](https://pc-para.jp/tsukumo/tsukumo-black-friday/)
+- TSUKUMO / 2025 / physical_store: 2025-11-22〜2025-11-28 (secondary) [https://pc-para.jp/tsukumo/tsukumo-black-friday/](https://pc-para.jp/tsukumo/tsukumo-black-friday/)
