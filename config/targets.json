@@ -303,17 +303,30 @@
       "store_evidence_notes": null,
       "store_inventory_checks": [
         {
-          "store_id": "bicamera_tenjin_1",
+          "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14369301",
+          "branch_match_terms": [
+            "ビックカメラ天神1号館",
+            "天神1号館"
+          ],
+          "source_type": "official_branch_stock_page",
           "allowed_hosts": [
             "www.biccamera.com"
           ],
+          "url": "https://www.biccamera.com/bc/item/14369301/"
+        },
+        {
+          "store_id": "yodobashi_hakata",
+          "store_name": "ヨドバシカメラ マルチメディア博多",
           "branch_match_terms": [
-            "ビックカメラ 天神１号館",
-            "Tenjin 1st Store"
+            "ヨドバシカメラ マルチメディア博多",
+            "マルチメディア博多"
           ],
-          "source_type": "official_branch_stock_page"
+          "source_type": "official_branch_stock_page",
+          "allowed_hosts": [
+            "www.yodobashi.com"
+          ],
+          "url": "https://www.yodobashi.com/product/100000001009314680/"
         }
       ]
     },
@@ -404,17 +417,30 @@
       "store_evidence_notes": null,
       "store_inventory_checks": [
         {
-          "store_id": "bicamera_tenjin_1",
+          "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=15313369",
+          "branch_match_terms": [
+            "ビックカメラ天神1号館",
+            "天神1号館"
+          ],
+          "source_type": "official_branch_stock_page",
           "allowed_hosts": [
             "www.biccamera.com"
           ],
+          "url": "https://www.biccamera.com/bc/item/15313369/"
+        },
+        {
+          "store_id": "yodobashi_hakata",
+          "store_name": "ヨドバシカメラ マルチメディア博多",
           "branch_match_terms": [
-            "ビックカメラ 天神１号館",
-            "Tenjin 1st Store"
+            "ヨドバシカメラ マルチメディア博多",
+            "マルチメディア博多"
           ],
-          "source_type": "official_branch_stock_page"
+          "source_type": "official_branch_stock_page",
+          "allowed_hosts": [
+            "www.yodobashi.com"
+          ],
+          "url": "https://www.yodobashi.com/product/100000001009991946/"
         }
       ]
     },
@@ -468,17 +494,17 @@
       "store_evidence_notes": null,
       "store_inventory_checks": [
         {
-          "store_id": "bicamera_tenjin_1",
+          "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=9242996",
+          "branch_match_terms": [
+            "ビックカメラ天神1号館",
+            "天神1号館"
+          ],
+          "source_type": "official_branch_stock_page",
           "allowed_hosts": [
             "www.biccamera.com"
           ],
-          "branch_match_terms": [
-            "ビックカメラ 天神１号館",
-            "Tenjin 1st Store"
-          ],
-          "source_type": "official_branch_stock_page"
+          "url": "https://www.biccamera.com/bc/item/9242996/"
         }
       ]
     },
@@ -531,17 +557,30 @@
       "store_evidence_notes": null,
       "store_inventory_checks": [
         {
-          "store_id": "bicamera_tenjin_1",
+          "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=6566291",
+          "branch_match_terms": [
+            "ビックカメラ天神1号館",
+            "天神1号館"
+          ],
+          "source_type": "official_branch_stock_page",
           "allowed_hosts": [
             "www.biccamera.com"
           ],
+          "url": "https://www.biccamera.com/bc/item/6566291/"
+        },
+        {
+          "store_id": "yodobashi_hakata",
+          "store_name": "ヨドバシカメラ マルチメディア博多",
           "branch_match_terms": [
-            "ビックカメラ 天神１号館",
-            "Tenjin 1st Store"
+            "ヨドバシカメラ マルチメディア博多",
+            "マルチメディア博多"
           ],
-          "source_type": "official_branch_stock_page"
+          "source_type": "official_branch_stock_page",
+          "allowed_hosts": [
+            "www.yodobashi.com"
+          ],
+          "url": "https://www.yodobashi.com/product/100000001004334450/"
         }
       ]
     },
@@ -1314,17 +1353,30 @@
       "store_evidence_notes": null,
       "store_inventory_checks": [
         {
-          "store_id": "bicamera_tenjin_1",
+          "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=13719866",
+          "branch_match_terms": [
+            "ビックカメラ天神1号館",
+            "天神1号館"
+          ],
+          "source_type": "official_branch_stock_page",
           "allowed_hosts": [
             "www.biccamera.com"
           ],
+          "url": "https://www.biccamera.com/bc/item/13719866/"
+        },
+        {
+          "store_id": "yodobashi_hakata",
+          "store_name": "ヨドバシカメラ マルチメディア博多",
           "branch_match_terms": [
-            "ビックカメラ 天神１号館",
-            "Tenjin 1st Store"
+            "ヨドバシカメラ マルチメディア博多",
+            "マルチメディア博多"
           ],
-          "source_type": "official_branch_stock_page"
+          "source_type": "official_branch_stock_page",
+          "allowed_hosts": [
+            "www.yodobashi.com"
+          ],
+          "url": "https://www.yodobashi.com/product/100000001008849809/"
         }
       ]
     },
@@ -1372,17 +1424,17 @@
       "store_evidence_notes": null,
       "store_inventory_checks": [
         {
-          "store_id": "bicamera_tenjin_1",
+          "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14119746",
+          "branch_match_terms": [
+            "ビックカメラ天神1号館",
+            "天神1号館"
+          ],
+          "source_type": "official_branch_stock_page",
           "allowed_hosts": [
             "www.biccamera.com"
           ],
-          "branch_match_terms": [
-            "ビックカメラ 天神１号館",
-            "Tenjin 1st Store"
-          ],
-          "source_type": "official_branch_stock_page"
+          "url": "https://www.biccamera.com/bc/item/14119746/"
         }
       ]
     }
