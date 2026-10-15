@@ -421,14 +421,14 @@
         {
           "year": 2024,
           "retailer": "Lenovo",
-          "product": "Lenovo ThinkPad TrackPoint Keyboard",
+          "product": "Lenovo keyboard (exact model not recorded)",
           "sale_price_jpy": 10890,
           "reference_price_jpy": 15950,
           "discount_pct": 31.7,
           "source_grade": "official",
           "source_url": "https://www.lenovo.com/jp/ja/blackfriday/",
-          "notes": "Discount rate uses cash sale price only. Page also advertises points; points are excluded from discount computation.",
-          "comparability_group": "keyboard_office"
+          "notes": "Discount rate uses cash sale price only. Page also advertises points; points are excluded from discount computation. Exact product SKU/name was not retained in the source capture.",
+          "comparability_group": "keyboard_office_unspecified"
         }
       ],
       "source_grades": {
