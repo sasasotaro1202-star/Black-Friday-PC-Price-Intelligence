@@ -122,6 +122,7 @@ jobs:
             python scripts/recover.py
             python scripts/sanitize.py
             python scripts/official_campaign_dates.py
+            python scripts/historical_bf_analysis.py
             # Derived reports/scores below are internal indexes and quality diagnostics only.
             # The final user-facing ranking is produced in ChatGPT when the user asks,
             # using the freshest repository data plus independent live-source checks.
