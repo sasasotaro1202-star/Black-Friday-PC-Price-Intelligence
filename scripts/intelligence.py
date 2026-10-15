@@ -206,40 +206,107 @@ def peripheral_budget_projection():
         target_price = int(target.get("target_price_jpy") or 0)
         live = by_id.get(pid, {})
         price = live.get("current_price_jpy")
-        stock = live.get("stock_status", "unknown")
-        # A peripheral ID may be reused after the target product changes.
-        # Never let a cached price for a previous model affect the new budget.
+        online_stock = live.get("stock_status", "unknown")
         identity_matches = bool(
             str(live.get("name") or "").strip()
             and str(live.get("name") or "").strip() == str(target.get("name") or "").strip()
         )
-        # Keep price validity separate from inventory/actionability. A fresh,
-        # exact-item direct price remains useful for a conservative budget even
-        # when stock is unknown; that uncertainty still blocks purchase readiness.
-        price_verified = bool(
+        online_price_verified = bool(
             target.get("track_current_price") and identity_matches and live.get("price_verified")
             and isinstance(price, int) and not isinstance(price, bool) and price > 0
             and snapshot_fresh
         )
-        valid = bool(price_verified and stock in ("in_stock", "low_stock"))
-        if valid:
-            selected_cost = price
-            cost_basis = "observed_verified"
-            observed_total += price
-        elif price_verified:
-            selected_cost = max(target_price, price)
-            cost_basis = "observed_price_stock_unconfirmed"
-            unverified.append(pid)
-        else:
-            selected_cost = target_price
-            cost_basis = "target_reserve_unverified"
-            if target.get("track_current_price"):
+        store_channel = bool(
+            target.get("purchase_channel") == "physical_store"
+            and target.get("store_inventory_required_before_purchase")
+        )
+        stock = online_stock
+        online_comparison_price = price if online_price_verified else None
+        store_price = target.get("store_price_jpy") if store_channel else None
+        store_checked_at = target.get("store_price_checked_at") if store_channel else None
+        store_stock = target.get("store_stock_status", "unknown") if store_channel else None
+        store_url = target.get("store_confirmation_url") if store_channel else None
+        store_model_match = target.get("store_model_match") is True if store_channel else False
+        store_dt = parse_dt(store_checked_at) if store_checked_at else None
+        store_age_minutes = (
+            (now - store_dt).total_seconds() / 60.0
+            if store_dt is not None else None
+        )
+        store_price_verified = bool(
+            store_channel
+            and isinstance(store_price, int) and not isinstance(store_price, bool) and store_price > 0
+            and store_dt is not None and store_age_minutes is not None
+            and 0 <= store_age_minutes <= max_age
+            and store_model_match
+            and isinstance(store_url, str) and store_url.startswith("https://")
+        )
+
+        if store_channel:
+            # A retailer website price can guide the reserve, but cannot prove a
+            # physical branch's shelf price or availability. Only a recent,
+            # exact-model, source-backed branch observation becomes an actual price.
+            stock = store_stock or "unknown"
+            if store_price_verified:
+                selected_cost = int(store_price)
+                exposed_price = int(store_price)
+                exposed_price_verified = True
+                cost_basis = (
+                    "verified_store_price_stock_confirmed"
+                    if stock in ("in_stock", "low_stock")
+                    else "verified_store_price_stock_unconfirmed"
+                )
+                if stock in ("in_stock", "low_stock"):
+                    observed_total += int(store_price)
+                else:
+                    unverified.append(pid)
+            else:
+                selected_cost = max(target_price, int(price)) if online_price_verified else target_price
+                exposed_price = None
+                exposed_price_verified = False
+                cost_basis = (
+                    "online_reference_store_price_unconfirmed"
+                    if online_price_verified else "target_reserve_store_price_unconfirmed"
+                )
                 unverified.append(pid)
+        else:
+            store_price_verified = False
+            if online_price_verified and online_stock in ("in_stock", "low_stock"):
+                selected_cost = int(price)
+                exposed_price = int(price)
+                exposed_price_verified = True
+                cost_basis = "observed_verified"
+                observed_total += int(price)
+            elif online_price_verified:
+                selected_cost = max(target_price, int(price))
+                exposed_price = int(price)
+                exposed_price_verified = True
+                cost_basis = "observed_price_stock_unconfirmed"
+                unverified.append(pid)
+            else:
+                selected_cost = target_price
+                exposed_price = None
+                exposed_price_verified = False
+                cost_basis = "target_reserve_unverified"
+                if target.get("track_current_price"):
+                    unverified.append(pid)
+
         total_projection += selected_cost
         rows.append({
             "id": pid, "name": target.get("name"), "target_price_jpy": target_price,
-            "current_price_jpy": price if price_verified else None,
-            "stock_status": stock, "price_verified": price_verified,
+            "current_price_jpy": exposed_price,
+            "price_verified": exposed_price_verified,
+            "online_comparison_price_jpy": online_comparison_price if store_channel else None,
+            "online_reference_price_verified": bool(online_price_verified) if store_channel else False,
+            "purchase_channel": target.get("purchase_channel", "online"),
+            "online_price_is_comparison_only": bool(store_channel),
+            "physical_store_candidate_ids": target.get("physical_store_candidate_ids") or [],
+            "store_price_jpy": int(store_price) if store_price_verified else None,
+            "store_price_checked_at": store_checked_at if store_price_verified else None,
+            "store_price_confirmed": bool(store_price_verified),
+            "store_model_match": bool(store_model_match),
+            "store_stock_status": stock if store_channel else None,
+            "store_confirmation_url": store_url if store_channel else None,
+            "stock_status": stock, "online_stock_status": online_stock,
             "budget_cost_jpy": selected_cost,
             "cost_basis": cost_basis,
             "purchase_url": target.get("purchase_url") or target.get("monitor_url"),
