@@ -252,5 +252,55 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertEqual(row["store_stock_status"], "unknown")
 
 
+    def test_official_tenjin_inventory_page_separates_branch_stock_from_cash_price(self):
+        import json
+        config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        target = next(x for x in config["peripherals"] if x["id"] == "keyboard")
+        check = target["store_inventory_checks"][0]
+        page = """
+        <html><body>
+          <h1>Logicool ゲーミング キーボード G213r</h1>
+          <div>福岡県 ビックカメラ 天神１号館</div>
+          <div>○ 在庫残少 ○ 60分以内にご用意</div>
+        </body></html>
+        """
+        with patch.object(
+            peripheral_monitor, "fetch",
+            return_value=(page, check["url"], {})
+        ):
+            result = peripheral_monitor.observe_store_inventory(target, "2026-10-15T10:00:00+09:00")
+        self.assertTrue(result["store_inventory_verified"])
+        self.assertEqual(result["store_inventory_status"], "low_stock")
+        self.assertEqual(result["store_inventory_store_id"], "bicamera_tenjin_1")
+        self.assertIn(check["url"], result["store_inventory_source_url"])
+        # Stock/online pickup status must never become a store cash price.
+        self.assertNotIn("store_price_jpy", result)
+
+    def test_missing_branch_or_stock_phrase_never_becomes_out_of_stock(self):
+        target = dict(self.target)
+        target.update({
+            "purchase_channel": "physical_store",
+            "store_inventory_required_before_purchase": True,
+            "physical_store_candidate_ids": ["bicamera_tenjin_1"],
+            "store_inventory_checks": [{
+                "store_id": "bicamera_tenjin_1",
+                "store_name": "ビックカメラ天神1号館",
+                "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=9242996",
+                "allowed_hosts": ["www.biccamera.com"],
+                "branch_match_terms": ["ビックカメラ 天神１号館"],
+                "source_type": "official_branch_stock_page",
+            }],
+        })
+        target["allowed_hosts"] = ["www.yodobashi.com"]
+        page = "<html><body>Logicool G213r 別の店舗 在庫状況確認中</body></html>"
+        with patch.object(
+            peripheral_monitor, "fetch",
+            return_value=(page, target["store_inventory_checks"][0]["url"], {})
+        ):
+            result = peripheral_monitor.observe_store_inventory(target, "2026-10-15T10:00:00+09:00")
+        self.assertFalse(result["store_inventory_verified"])
+        self.assertEqual(result["store_inventory_status"], "unknown")
+        self.assertEqual(result["store_inventory_store_ids_available"], [])
+
 if __name__ == "__main__":
     unittest.main()
