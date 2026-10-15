@@ -271,7 +271,7 @@ class PeripheralMonitorTests(unittest.TestCase):
             result = peripheral_monitor.observe_store_inventory(target, "2026-10-15T10:00:00+09:00")
         self.assertTrue(result["store_inventory_verified"])
         self.assertEqual(result["store_inventory_status"], "low_stock")
-        self.assertEqual(result["store_inventory_store_id"], "bicamera_tenjin_1")
+        self.assertEqual(result["store_inventory_store_id"], "biccamera_tenjin_1")
         self.assertIn(check["url"], result["store_inventory_source_url"])
         # Stock/online pickup status must never become a store cash price.
         self.assertNotIn("store_price_jpy", result)
@@ -281,9 +281,9 @@ class PeripheralMonitorTests(unittest.TestCase):
         target.update({
             "purchase_channel": "physical_store",
             "store_inventory_required_before_purchase": True,
-            "physical_store_candidate_ids": ["bicamera_tenjin_1"],
+            "physical_store_candidate_ids": ["biccamera_tenjin_1"],
             "store_inventory_checks": [{
-                "store_id": "bicamera_tenjin_1",
+                "store_id": "biccamera_tenjin_1",
                 "store_name": "ビックカメラ天神1号館",
                 "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=9242996",
                 "allowed_hosts": ["www.biccamera.com"],
