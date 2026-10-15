@@ -33,6 +33,7 @@ jobs:
           # Mirror the production normalization stage so committed observation
           # counters and current-price exposure are tested in their final form.
           python scripts/sanitize.py
+          python scripts/historical_bf_analysis.py
           # Regenerate derived ranking artifacts with the current scoring schema
           # before healthcheck; otherwise stale committed JSON can fail a valid code change.
           python scripts/report.py
