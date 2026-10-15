@@ -672,9 +672,9 @@ def main():
         f"周辺機器の目標予算: ¥{budget['peripheral_budget_jpy']:,}",
         f"PC本体の目標価格: ¥{budget['pc_target_jpy']:,}",
         f"PC本体の計画上限（周辺機器が目標価格の場合）: ¥{budget['pc_budget_jpy']:,}",
-        f"PC本体の動的上限（追跡した周辺機器の実売を反映）: ¥{peripheral_projection['pc_dynamic_cap_jpy']:,}",
-        f"周辺機器の現行/目標価格ベース試算: ¥{peripheral_projection['peripheral_projection_jpy']:,}",
-        f"周辺機器の価格・在庫確認: {peripheral_projection['tracked_peripheral_verified_count']}/{peripheral_projection['tracked_peripheral_count']}",
+        f"PC本体の動的上限（店頭価格未確認分はWeb参考値/目標額で保守的に試算）: ¥{peripheral_projection['pc_dynamic_cap_jpy']:,}",
+        f"周辺機器の予算試算（店頭4項目はWeb参考値。店頭価格は未確認）: ¥{peripheral_projection['peripheral_projection_jpy']:,}",
+        f"周辺機器の価格・購入先在庫確認: {peripheral_projection['tracked_peripheral_verified_count']}/{peripheral_projection['tracked_peripheral_count']}",
         f"完成品PC参考候補の購入ゲート: **{'通過' if purchase_gate_allowed else '保留'}**（{out['purchase_gate']['reason']}）。自作PCの購入判定は別途、部品別互換性・実売・在庫・総額で評価します。",
         f"フェーズ: **{out['season_phase']}**",
         "",
@@ -774,10 +774,10 @@ def main():
         "",
         "## 周辺機器の価格監視（サブモニターあり・ヘッドセットなし）",
         "",
-        "|画像|項目|BF購入目標価格|観測価格（BF前は参考）|在庫|価格確認|購入ページ|",
-        "|---|---|---:|---:|---|---|---|",
+        "|画像|項目|購入方法|BF購入目標価格|観測価格（BF前は参考）|在庫（購入先）|価格確認|商品/比較ページ|",
+        "|---|---|---|---:|---|---|---|---|",
         *[
-            f"|{image_markup(next((t for t in (target_config.get('peripherals') or []) if str(t.get('id')) == str(p.get('id'))), {}), p.get('purchase_url'), 84)}|{p['name']}|¥{p['target_price_jpy']:,}|{('¥'+format(p['current_price_jpy'],',')) if p.get('current_price_jpy') is not None else '—（目標額で仮計算）'}|{p.get('stock_status','unknown')}|{('確認済み' if p.get('price_verified') else '未確認')}|{('[商品ページ]('+p['purchase_url']+')') if p.get('purchase_url') else '予算枠のみ'}|"
+            f"|{image_markup(next((t for t in (target_config.get('peripherals') or []) if str(t.get('id')) == str(p.get('id'))), {}), p.get('purchase_url'), 84)}|{p['name']}|{'実店舗' if p.get('purchase_channel') == 'physical_store' else 'ネット'}|¥{p['target_price_jpy']:,}|{('店頭未確認・Web参考 ¥'+format(p['online_comparison_price_jpy'],',')) if p.get('purchase_channel') == 'physical_store' and p.get('online_comparison_price_jpy') is not None else ('店頭未確認・目標額で仮計算' if p.get('purchase_channel') == 'physical_store' else (('¥'+format(p['current_price_jpy'],',')) if p.get('current_price_jpy') is not None else '—（目標額で仮計算）'))}|{p.get('stock_status','unknown')}|{('確認済み' if p.get('price_verified') else '未確認')}|{('[商品/比較ページ]('+p['purchase_url']+')') if p.get('purchase_url') else '予算枠のみ'}|"
             for p in peripheral_projection["peripherals"]
         ],
         "",
@@ -829,6 +829,7 @@ def main():
         "各カテゴリから**1商品だけ**選びます。代替候補は価格監視対象ですが、選択しない限り必須周辺機器の総予算には加算しません。",
         "100点は用途適合35%、予算適合30%、仕様・機能20%、代替性・購入リスク15%のユーザー条件別評価であり、独立した実機ベンチマークではありません。",
         "BF購入目標・BF前の観測価格・在庫・送料込み決済額を分けて扱います。取得失敗は売り切れと見なしません。",
+        "購入ルート：PC本体（自作パーツ）はネット注文。メインモニター・マウス・キーボード・スピーカーは実店舗購入。これら4カテゴリのWeb価格は比較参考で、店頭価格・支店在庫として扱いません。",
         "",
     ]
     for group in category_order:
