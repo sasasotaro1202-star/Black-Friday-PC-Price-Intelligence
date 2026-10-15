@@ -16,10 +16,16 @@ class HistoricalBFAnalysisTests(unittest.TestCase):
 
     def test_curated_history_validates_and_avoids_false_typical_discount(self):
         campaigns, deals = MOD.load_records()
-        self.assertGreaterEqual(len(campaigns["campaigns"]), 15)
-        self.assertGreaterEqual(len(deals), 20)
+        self.assertGreaterEqual(len(campaigns["campaigns"]), 20)
+        self.assertGreaterEqual(len(deals), 35)
         out = MOD.summarize(campaigns, deals)
         self.assertIn(2025, out["campaign_years_covered"])
+        self.assertIn(2022, out["campaign_years_covered"])
+        self.assertEqual(out["historical_deal_record_count"], len(deals))
+        self.assertEqual(len(out["price_observations"]), len(deals))
+        for row in deals:
+            self.assertTrue(row["source_url"].startswith("https://"))
+            self.assertGreater(row["sale_price_jpy"], 0)
         self.assertFalse(out["forecast_policy"]["probability_model_enabled"])
         self.assertIsNone(out["categories"]["monitor"]["comparable_discount_median_pct"])
 
