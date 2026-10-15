@@ -3,6 +3,8 @@
 import json
 import os
 import re
+import unicodedata
+from html.parser import HTMLParser
 from urllib.parse import urlparse
 from intelligence import ROOT, iso, now_jst, load_json, save_json, norm_text, store_observation_validation
 from monitor import fetch, parse_page, stock_from_text
@@ -15,6 +17,157 @@ EVENTS_PATH = os.path.join(ROOT, "data", "peripheral_change_events.jsonl")
 def allowed_host(url, hosts):
     host = urlparse(url).netloc.lower()
     return any(host == str(h).lower() for h in hosts or [])
+
+
+class VisibleTextParser(HTMLParser):
+    """Extract visible text only; ignore script/style bodies."""
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.parts = []
+        self.hidden_depth = 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag.lower() in ("script", "style", "noscript"):
+            self.hidden_depth += 1
+
+    def handle_endtag(self, tag):
+        if tag.lower() in ("script", "style", "noscript") and self.hidden_depth:
+            self.hidden_depth -= 1
+
+    def handle_data(self, data):
+        if not self.hidden_depth and data and data.strip():
+            self.parts.append(data.strip())
+
+
+def normalized_visible_text(html):
+    parser = VisibleTextParser()
+    parser.feed(str(html or ""))
+    parser.close()
+    text = unicodedata.normalize("NFKC", " ".join(parser.parts)).lower()
+    return re.sub(r"\\s+", " ", text).strip()
+
+
+def _compact(text):
+    return re.sub(r"\\s+", "", unicodedata.normalize("NFKC", str(text or "")).lower())
+
+
+def _branch_stock_status(text):
+    """Interpret explicit branch stock wording; never infer out-of-stock from absence."""
+    compact = _compact(text)
+    if any(token in compact for token in ("在庫切れ", "在庫なし", "在庫ございません")):
+        return "out_of_stock"
+    if "在庫残少" in compact or "残りわずか" in compact:
+        return "low_stock"
+    if "在庫あり" in compact:
+        return "in_stock"
+    if "お取り寄せ" in compact or "取り寄せ" in compact:
+        return "preorder_or_backorder"
+    return "unknown"
+
+
+def observe_store_inventory(target, retrieved_at):
+    """Check product-specific official branch pickup/stock pages separately from store price.
+
+    A positive branch result means the page reports reservation/pickup stock for the
+    named branch. It does not prove the cash register price, shelf stock, or that the
+    item can still be reserved after this observation.
+    """
+    if not (
+        target.get("purchase_channel") == "physical_store"
+        and target.get("store_inventory_required_before_purchase")
+    ):
+        return {
+            "store_inventory_observations": [],
+            "store_inventory_status": "unknown",
+            "store_inventory_verified": False,
+            "store_inventory_checked_at": None,
+            "store_inventory_source_url": None,
+            "store_inventory_store_ids_available": [],
+        }
+
+    checks = target.get("store_inventory_checks") or []
+    candidate_ids = {str(x) for x in (target.get("physical_store_candidate_ids") or [])}
+    identity_terms = [str(x) for x in (target.get("identity_terms") or []) if str(x).strip()]
+    observations = []
+    for check in checks:
+        if not isinstance(check, dict):
+            continue
+        store_id = str(check.get("store_id") or "")
+        url = str(check.get("url") or "")
+        store_name = str(check.get("store_name") or store_id)
+        allowed_hosts = [str(x) for x in (check.get("allowed_hosts") or [])]
+        branch_terms = [str(x) for x in (check.get("branch_match_terms") or []) if str(x).strip()]
+        record = {
+            "store_id": store_id,
+            "store_name": store_name,
+            "checked_at": retrieved_at,
+            "source_url": None,
+            "source_type": check.get("source_type") or "official_branch_stock_page",
+            "status": "unknown",
+            "verified": False,
+            "branch_match": False,
+            "model_match": False,
+            "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
+            "error": None,
+        }
+        if (
+            store_id not in candidate_ids
+            or not url.startswith("https://")
+            or not allowed_host(url, allowed_hosts)
+            or not branch_terms
+            or not identity_terms
+        ):
+            record["error"] = "store_inventory_configuration_invalid"
+            observations.append(record)
+            continue
+        try:
+            html, final_url, _headers = fetch(url, timeout=10)
+            if not allowed_host(final_url, allowed_hosts):
+                raise ValueError("store_inventory_redirected_to_unapproved_host")
+            text = normalized_visible_text(html)
+            compact = _compact(text)
+            matched_branch_term = next(
+                (term for term in branch_terms if _compact(term) in compact),
+                None,
+            )
+            record["branch_match"] = bool(matched_branch_term)
+            record["model_match"] = any(_compact(term) in compact for term in identity_terms)
+            record["source_url"] = final_url
+            if not record["branch_match"]:
+                record["error"] = "configured_branch_not_found_on_product_stock_page"
+            elif not record["model_match"]:
+                record["error"] = "exact_product_identity_not_found_on_stock_page"
+            else:
+                pos = compact.find(_compact(matched_branch_term))
+                local_context = compact[pos:pos + 260]
+                record["status"] = _branch_stock_status(local_context)
+                # A verified page with "unknown" status stays an observed page,
+                # but is never treated as available or unavailable.
+                record["verified"] = True
+        except Exception as exc:
+            record["error"] = f"{type(exc).__name__}:{str(exc)[:180]}"
+        observations.append(record)
+
+    verified = [x for x in observations if x.get("verified")]
+    order = {"in_stock": 0, "low_stock": 1, "preorder_or_backorder": 2, "unknown": 3, "out_of_stock": 4}
+    verified.sort(key=lambda x: order.get(x.get("status"), 3))
+    usable = [x for x in verified if x.get("status") in ("in_stock", "low_stock", "preorder_or_backorder")]
+    chosen = usable[0] if usable else (verified[0] if verified else None)
+    available_ids = sorted({
+        str(x["store_id"]) for x in verified
+        if x.get("status") in ("in_stock", "low_stock")
+    })
+    return {
+        "store_inventory_observations": observations,
+        "store_inventory_status": chosen.get("status", "unknown") if chosen else "unknown",
+        "store_inventory_verified": bool(chosen and chosen.get("verified") and chosen.get("status") != "unknown"),
+        "store_inventory_checked_at": chosen.get("checked_at") if chosen else None,
+        "store_inventory_source_url": chosen.get("source_url") if chosen else None,
+        "store_inventory_store_id": chosen.get("store_id") if chosen else None,
+        "store_inventory_store_name": chosen.get("store_name") if chosen else None,
+        "store_inventory_evidence_notes": chosen.get("evidence_notes") if chosen else None,
+        "store_inventory_store_ids_available": available_ids,
+    }
 
 
 def product_context_excerpt(excerpt, terms, before=80, after=450):
@@ -135,6 +288,7 @@ def run_one(target, previous, retrieved_at):
         "online_comparison_price_jpy": None,
         "online_reference_price_verified": False,
         **store_observation_validation(target, retrieved_at),
+        **observe_store_inventory(target, retrieved_at),
         "last_valid_price_jpy": (previous.get("current_price_jpy") or previous.get("last_valid_price_jpy")) if previous_matches_target(previous, target) else None,
         "price_verified": False, "stock_status": "unknown",
         "price_source_mode": "none", "price_validation_status": "missing",
@@ -318,10 +472,12 @@ def main():
         old_store_signature = (
             before.get("store_price_jpy"), before.get("store_stock_status"),
             before.get("store_observation_status"), before.get("store_observation_store_id"),
+            before.get("store_inventory_status"), before.get("store_inventory_store_id"),
         )
         new_store_signature = (
             item.get("store_price_jpy"), item.get("store_stock_status"),
             item.get("store_observation_status"), item.get("store_observation_store_id"),
+            item.get("store_inventory_status"), item.get("store_inventory_store_id"),
         )
         if old_price == new_price and old_stock == new_stock and old_store_signature == new_store_signature:
             continue
@@ -341,6 +497,10 @@ def main():
             "new_store_stock_status": item.get("store_stock_status"),
             "store_observation_status": item.get("store_observation_status"),
             "store_observation_store_id": item.get("store_observation_store_id"),
+            "store_inventory_status": item.get("store_inventory_status"),
+            "store_inventory_store_id": item.get("store_inventory_store_id"),
+            "store_inventory_source_url": item.get("store_inventory_source_url"),
+            "store_inventory_verified": item.get("store_inventory_verified"),
             "price_source_mode": item.get("price_source_mode"),
             "price_verified": item.get("price_verified", False), "status": item.get("status"),
         })
