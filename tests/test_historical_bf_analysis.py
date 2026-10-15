@@ -42,14 +42,27 @@ class HistoricalBFAnalysisTests(unittest.TestCase):
         self.assertEqual(sum(int(p.get("target_price_jpy") or 0) for p in items if p.get("mandatory", True)),
                          cfg["peripheral_budget_jpy"])
         self.assertEqual(cfg["pc_budget_jpy"] + cfg["peripheral_budget_jpy"], cfg["total_budget_jpy"])
-        for p in items:
+        physical_categories = set(cfg["purchase_channels"]["physical_store_categories"])
+        all_items = items + cfg.get("peripheral_alternatives", [])
+        for p in all_items:
+            if p.get("category") in physical_categories:
+                self.assertEqual(p.get("purchase_channel"), "physical_store", p.get("id"))
+                self.assertTrue(p.get("store_inventory_required_before_purchase"), p.get("id"))
+                self.assertTrue(p.get("online_price_is_comparison_only"), p.get("id"))
+                self.assertTrue(p.get("physical_store_candidate_ids"), p.get("id"))
             if p.get("purchase_channel") == "physical_store":
-                self.assertTrue(p.get("store_inventory_required_before_purchase"))
-                self.assertTrue(p.get("online_price_is_comparison_only"))
-                self.assertTrue(p.get("physical_store_candidate_ids"))
+                checks = p.get("store_inventory_checks") or []
+                for check in checks:
+                    self.assertIn(check.get("store_id"), p.get("physical_store_candidate_ids") or [], p.get("id"))
+                    self.assertTrue(check.get("branch_match_terms"), p.get("id"))
+                    self.assertIn(urlparse(check.get("url", "")).netloc, check.get("allowed_hosts") or [],
+                                  msg=f"Branch stock URL host not allowed for {p.get('id')}: {check.get('url')}")
             for url in p.get("monitor_urls") or []:
                 self.assertIn(urlparse(url).netloc, p.get("allowed_hosts") or [],
                               msg=f"Configured monitoring URL host not allowed for {p.get('id')}: {url}")
+        for required_id in ("main_monitor", "mouse", "keyboard", "speakers"):
+            item = next(x for x in items if x.get("id") == required_id)
+            self.assertTrue(item.get("store_inventory_checks"), required_id)
 
     def test_pc_koubou_sale_does_not_meet_required_ram(self):
         campaigns, deals = MOD.load_records()
