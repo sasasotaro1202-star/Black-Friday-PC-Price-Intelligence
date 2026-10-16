@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: pc-price-intelligence-writer-v2
+  group: pc-price-intelligence-writer-v3
   cancel-in-progress: false
 
 jobs:
