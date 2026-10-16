@@ -16,7 +16,7 @@ def _initial_budget_settings():
     except Exception:
         cfg = {}
     try:
-        total = int(cfg.get("total_budget_jpy", 320000))
+        total = int(cfg.get("total_budget_jpy", 400000))
         peripherals = int(cfg.get("peripheral_budget_jpy", 32000))
         pc_cap = int(cfg.get("pc_budget_jpy", 395000))
         pc_target = int(cfg.get("pc_target_jpy", min(350000, pc_cap)))
@@ -24,14 +24,14 @@ def _initial_budget_settings():
         mode = str(cfg.get("peripheral_budget_mode") or "").upper()
         dynamic_peripherals = mode == "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET" or cfg.get("peripheral_budget_is_hard_cap") is False
     except (TypeError, ValueError):
-        total, peripherals, pc_cap, pc_target, contingency, dynamic_peripherals = 320000, 32000, 395000, 350000, 5000, True
+        total, peripherals, pc_cap, pc_target, contingency, dynamic_peripherals = 400000, 32000, 395000, 350000, 5000, True
     invalid = (
         min(total, peripherals, pc_cap, pc_target, contingency) < 0
         or pc_target > pc_cap
         or (pc_cap + contingency > total if dynamic_peripherals else pc_cap + peripherals + contingency != total)
     )
     if invalid:
-        total, peripherals, pc_cap, pc_target, contingency, dynamic_peripherals = 320000, 32000, 395000, 350000, 5000, True
+        total, peripherals, pc_cap, pc_target, contingency, dynamic_peripherals = 400000, 32000, 395000, 350000, 5000, True
     return total, peripherals, pc_target, pc_cap
 
 TOTAL_BUDGET, PERIPHERAL_BUDGET, BUDGET, PC_BUDGET = _initial_budget_settings()
@@ -64,9 +64,9 @@ GPU_POINTS = {
 
 GPU_FLOORS = {
     "rtx 5090": 300000,
-    "rtx 5080": 232000,
+    "rtx 5080": 240000,
     "rtx 5070 ti": 180000,
-    "rx 7900 xtx": 232000,
+    "rx 7900 xtx": 240000,
     "rtx 5070": 150000,
     "rx 9070 xt": 160000,
     "rx 9070": 150000,
@@ -75,7 +75,7 @@ GPU_FLOORS = {
     "rtx 5060": 100000,
     "rx 9060": 90000,
     "rx 9050": 80000,
-    "rx 7800 xt": 132000,
+    "rx 7800 xt": 140000,
     "rx 7700 xt": 120000,
 }
 
