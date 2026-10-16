@@ -258,13 +258,13 @@
   "desktop_note": "Desktop self-build candidate monitoring must account for gaming, game creation, schoolwork/research/multitasking, Python/data analysis, automated prediction systems and feasible local AI. Keep the total all-in ceiling at ¥400,000, peripherals ¥45,000, PC planning target ¥350,000 and ¥5,000 contingency. Required at purchase: 32GB RAM and 1TB SSD; 64GB/2TB is a preferred complete-build outlier only when exact price and compatibility evidence are available. No post-purchase upgrade assumptions. BTO is a benchmark only.",
   "desktop_exact_candidate_count": 7,
   "total_budget_jpy": 400000,
-  "peripheral_budget_jpy": 62000,
+  "peripheral_budget_jpy": 40000,
   "pc_target_jpy": 350000,
   "pc_budget_jpy": 395000,
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
-  "budget_scope_note": "総額上限400,000円は固定。周辺機器予算は45,000円に固定しない。メインモニター1台に加え、勉強・ゲーム制作・分析用のサブモニターも購入対象。サブモニターは23.8〜24インチ・FHD・IPS・100Hz級を暫定基準とし、型番は福岡の実店舗で確認できる価格・在庫・保証を見て選ぶ。ヘッドセットは現時点で購入対象外。スピーカーは安さだけで妥協せず、音質と価格のバランスを重視する。周辺機器は実店舗購入を基本とし送料を計上しない。PC本体の許容額は周辺機器計画/確認額と総額予備費を差し引いて動的に計算する。",
+  "budget_scope_note": "総額上限400,000円。周辺機器は固定45,000円ではなく、現実に必要な品目と確認済み価格で動的配分する。対象は27インチWQHDのメインモニター1台、必要十分なコスパ重視のスピーカー、キーボード、マウス、マウスパッド、電源タップ、必要ケーブルのみ。サブモニターとヘッドセットは購入対象・候補・費用計算に含めない。周辺機器の送料は計上しない。総額予備費5,000円を確保し、PC本体に使える上限は総額から周辺機器の計画/確認額と予備費を差し引いて動的に算出する。価格目標は確定価格ではなく、購入前に型番・在庫・店頭現金価格を確認する。",
   "peripherals": [
     {
       "id": "main_monitor",
@@ -331,99 +331,53 @@
       ]
     },
     {
-      "id": "secondary_monitor",
-      "category": "secondary_monitor",
-      "name": "サブモニター（23.8〜24インチ FHD IPS。75Hz以上、100Hz級を優先。最終SKUは店頭条件で選定）",
-      "target_price_jpy": 17000,
-      "track_current_price": false,
-      "monitor_url": "https://kakaku.com/pc/lcd-monitor/itemlist.aspx?pdf_Spec107=1&pdf_Spec301=23.8&pdf_Spec311=100-",
-      "purchase_url": "https://kakaku.com/pc/lcd-monitor/itemlist.aspx?pdf_Spec107=1&pdf_Spec301=23.8&pdf_Spec311=100-",
-      "identity_terms": [],
-      "allowed_hosts": [
-        "kakaku.com",
-        "www.yodobashi.com",
-        "www.biccamera.com",
-        "www.lenovo.com"
-      ],
-      "min_price_jpy": 7000,
-      "max_price_jpy": 18000,
+      "id": "speakers",
+      "name": "Creative Pebble Pro 2.0 PC speakers, black (USB-C/USB-A/Bluetooth/3.5mm)",
+      "category": "speakers",
+      "track_current_price": true,
       "mandatory": true,
-      "requires_exact_model_before_purchase": true,
+      "target_price_jpy": 8000,
+      "purchase_url": "https://www.biccamera.com/bc/item/14119746/",
+      "monitor_url": "https://www.yodobashi.com/product/100000001009107289/",
+      "monitor_urls": [
+        "https://www.yodobashi.com/product/100000001009107289/",
+        "https://www.biccamera.com/bc/item/14119746/"
+      ],
+      "identity_terms": [
+        "Pebble Pro",
+        "SP-PBLPRO-BKA"
+      ],
+      "model_code": "SP-PBLPRO-BKA",
+      "allowed_hosts": [
+        "www.yodobashi.com",
+        "www.biccamera.com"
+      ],
+      "min_price_jpy": 6000,
+      "max_price_jpy": 15000,
+      "ranking_score_100": 88,
+      "ranking_reason": "必要十分な音を手頃な価格で確保するコスパ重視の第一候補。高級なモニタースピーカーは必須とせず、ゲーム・動画教材・普段のPC音声が聞き取りやすいことを優先。実店舗で音と接続方法を確認し、8,000円はBF目標であって確定価格ではない。",
+      "best_for": "必要十分な音質と価格のバランス",
       "price_target_phase": "black_friday",
-      "target_price_note": "¥17,000はBF予算試算用の保守的な配分枠であり、確定価格ではない。23.8型FHD IPSの国内量販店掲載例は2026-10-17時点で約¥15,980〜¥20,680（オンライン参考値）だが、店頭現金価格・福岡の支店在庫・BF価格を意味しない。75Hz以上を許容し、100Hz級を優先。選定前は特定SKUではないため購入許可を出さず、代替候補の直接価格と支店在庫を並行監視する。",
-      "ranking_reason": "勉強資料、ブラウザー、IDE、ゲームエンジン、データ分析を別画面に分ける。23.8〜24インチFHD IPSを基準に、75Hz以上・100Hz級を優先。サブ画面に高額なWQHD/高Hzを必須とせず、読みやすさ・端子・スタンド・保証・店頭価格のバランスを重視する。",
-      "best_for": "学校の勉強・ゲーム制作・分析のマルチウィンドウ",
-      "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
       ],
-      "store_price_jpy": null,
-      "store_price_checked_at": null,
-      "store_stock_status": "unknown",
-      "store_confirmation_url": null,
-      "store_model_match": false,
-      "store_observation_store_id": null,
-      "store_evidence_type": null,
-      "store_evidence_notes": null,
-      "store_inventory_checks": [],
-      "ranking_score_100": 85,
-      "model_code": null
-    },
-    {
-      "id": "speakers",
-      "category": "speakers",
-      "name": "EDIFIER MR3 2.0 powered monitor speakers (36W RMS, Bluetooth 5.4)",
-      "target_price_jpy": 12000,
-      "track_current_price": true,
-      "monitor_url": "https://www.biccamera.com/bc/item/13719866/",
-      "purchase_url": "https://www.biccamera.com/bc/item/13719866/",
-      "identity_terms": [
-        "ED-MR3-BK",
-        "EDIFIER MR3",
-        "EDMR3BK"
-      ],
-      "model_code": "ED-MR3-BK",
-      "allowed_hosts": [
-        "www.yodobashi.com",
-        "www.biccamera.com",
-        "www.edifier.jp"
-      ],
-      "min_price_jpy": 10000,
-      "max_price_jpy": 25000,
-      "mandatory": true,
-      "price_target_phase": "black_friday",
-      "target_price_note": "12,000円はBF目標。EDIFIER公式ページの¥14,980表示やオンラインクーポンは参考情報にすぎず、店舗の現金価格・在庫・値引き適用を証明しない。ビックカメラ天神1号館またはヨドバシ博多で同一型番を確認する。",
-      "ranking_score_100": 91,
-      "ranking_reason": "合計36W RMS、Bluetooth 5.4、TRS/RCA/AUX入力を備え、極端な最安品へ妥協せず音質と価格のバランスを取りやすい。予算は固定しないため、MR4 MKIIとの店頭価格差を確認して総額内で判断する。",
-      "best_for": "音質と価格のバランスを優先",
-      "monitor_urls": [
-        "https://www.yodobashi.com/product/100000001008849809/",
-        "https://www.biccamera.com/bc/item/13719866/",
-        "https://www.edifier.jp/products/mr3"
-      ],
-      "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
-      "physical_store_candidate_ids": [
-        "bicamera_tenjin_1",
-        "yodobashi_hakata"
-      ],
-      "store_price_jpy": null,
-      "store_price_checked_at": null,
-      "store_stock_status": "unknown",
-      "store_confirmation_url": null,
-      "store_model_match": false,
       "purchase_channel": "physical_store",
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
       "store_observation_store_id": null,
       "store_evidence_type": null,
       "store_evidence_notes": null,
       "store_inventory_checks": [
         {
-          "store_id": "bicamera_tenjin_1",
+          "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=13719866",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14119746",
           "allowed_hosts": [
             "www.biccamera.com"
           ],
@@ -435,11 +389,7 @@
           "source_type": "official_branch_stock_page"
         }
       ],
-      "image_url": "https://www.edifier.jp/cdn/shop/files/MR3_1_1.jpg?v=1788508256&width=1000",
-      "image_source_url": "https://www.edifier.jp/products/mr3",
-      "image_note": "EDIFIER公式 MR3製品画像",
-      "image_checked_at": "2026-10-17",
-      "inventory_monitoring_note": "支店別取置きページは在庫状況の参考。店頭の税込現金価格と棚在庫は来店前に店舗へ確認する。"
+      "target_price_note": "8,000円はBF購入目標であり、実売・店頭価格の確認値ではない。高級音質は必須とせず、ゲーム・動画・勉強用に必要十分な音とコスパを優先する。ビックカメラ天神1号館またはヨドバシ博多で同一型番の税込現金価格と在庫を確認。"
     },
     {
       "id": "keyboard",
@@ -739,7 +689,7 @@
   ],
   "purchase_strategy": {
     "updated_at": "2026-10-17",
-    "purpose": "総額上限40万円（400,000円）の中でPC本体・周辺機器の配分を動的に最適化する。周辺機器45,000円固定を廃止し、メインモニター＋サブモニター＋品質と価格のバランスを重視したスピーカー＋入力機器を含める。総額予備費5,000円を基準とし、PC本体の許容額は周辺機器の計画/確認額に応じて自動計算する。自作PCを本命とし、RAM 32GB以上/SSD 1TB以上を初期構成で確保する。BF購入目標と実売・最終決済額を厳密に区別する。継続課金なしを基本とし、有料AI/API/クラウドGPUを必須にしない。",
+    "purpose": "総額上限40万円の中でPC本体と周辺機器を動的に最適化する。自作PCを本命とし、RAM 32GB以上/SSD 1TB以上を初期構成で確保する。周辺機器はメインモニター1台のみ、必要十分なコスパ重視のスピーカー、入力機器等。サブモニターとヘッドセットは購入対象に含めない。BF目標と実売・最終決済額を厳密に区別し、購入後の継続費用は原則0円を目指す。",
     "priority_plans": [
       {
         "candidate_id": "desktop-gtune-dg-i5g70-5070",
@@ -824,13 +774,13 @@
     "score_policy": "説明文にある96/94/95/97点は条件付きの目標イメージであり、実測スコアとして固定しない。実際のスコアはコードが確認済み価格・構成・在庫・性能・データ品質から計算する。",
     "speaker_strategy": {
       "id": "speakers",
-      "model": "EDIFIER MR3",
-      "target_price_jpy": 12000,
-      "priority": "good sound quality-to-price balance within the dynamically allocated total-system budget",
-      "rationale": "MR3 is the baseline pair of active monitor speakers with 36W RMS, Bluetooth 5.4 and multiple analog inputs. MR4 MKII remains an optional upgrade only if a verified physical-store price justifies the difference. MR5 is excluded from the main shortlist because it is considered too expensive. Do not downgrade to the cheapest speaker only to preserve an arbitrary fixed peripheral budget.",
+      "model": "Creative Pebble Pro",
+      "target_price_jpy": 8000,
+      "priority": "cost-effective, sufficient everyday sound rather than high-end audio",
+      "rationale": "A practical small speaker set for games, school videos and everyday PC use. High-end studio-monitor sound is not required. Prefer the lower-cost Pebble Pro by default; consider EDIFIER MR3 only if a verified store price difference and actual listening justify it. MR4 MKII remains a higher-cost option only when an unusually attractive store offer makes sense. MR5 is excluded as unnecessarily expensive for this use case.",
       "coupon_policy": "Online coupons and web checkout discounts do not count as physical-store prices. Confirm in-store cash price and stock independently.",
       "price_target_phase": "black_friday",
-      "target_price_note": "BF購入目標12,000円。メーカー公式のWeb表示価格は現行参考情報で、実店舗の現金価格やBF時の確定値引きではない。"
+      "target_price_note": "BF目標8,000円。実際の店頭現金価格・在庫は購入前に確認。"
     },
     "price_semantics": {
       "all_configured_target_prices_mean": "black_friday_purchase_targets",
@@ -1406,66 +1356,6 @@
       ]
     },
     {
-      "id": "speakers_alt_creative_pebble_pro",
-      "name": "Creative Pebble Pro 2.0 PC speakers, black (USB-C/USB-A/Bluetooth/3.5mm)",
-      "category": "speakers",
-      "track_current_price": true,
-      "mandatory": false,
-      "target_price_jpy": 8000,
-      "purchase_url": "https://www.biccamera.com/bc/item/14119746/",
-      "monitor_url": "https://www.yodobashi.com/product/100000001009107289/",
-      "monitor_urls": [
-        "https://www.yodobashi.com/product/100000001009107289/",
-        "https://www.biccamera.com/bc/item/14119746/"
-      ],
-      "identity_terms": [
-        "Pebble Pro",
-        "SP-PBLPRO-BKA"
-      ],
-      "model_code": "SP-PBLPRO-BKA",
-      "allowed_hosts": [
-        "www.yodobashi.com",
-        "www.biccamera.com"
-      ],
-      "min_price_jpy": 6000,
-      "max_price_jpy": 15000,
-      "ranking_score_100": 82,
-      "ranking_reason": "Compact USB/Bluetooth/analog speaker set currently listed around ¥9,980 online. Kept as a lower-cost comparison only; not the main sound-quality recommendation.",
-      "best_for": "Compact desk setup and strong cost control",
-      "price_target_phase": "black_friday",
-      "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
-      "physical_store_candidate_ids": [
-        "biccamera_tenjin_1",
-        "yodobashi_hakata"
-      ],
-      "purchase_channel": "physical_store",
-      "store_price_jpy": null,
-      "store_price_checked_at": null,
-      "store_stock_status": "unknown",
-      "store_confirmation_url": null,
-      "store_model_match": false,
-      "store_observation_store_id": null,
-      "store_evidence_type": null,
-      "store_evidence_notes": null,
-      "store_inventory_checks": [
-        {
-          "store_id": "biccamera_tenjin_1",
-          "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14119746",
-          "allowed_hosts": [
-            "www.biccamera.com"
-          ],
-          "branch_match_terms": [
-            "ビックカメラ 天神１号館",
-            "ビックカメラ天神1号館",
-            "Tenjin 1st Store"
-          ],
-          "source_type": "official_branch_stock_page"
-        }
-      ]
-    },
-    {
       "id": "speakers_alt_edifier_mr4_mkii",
       "name": "EDIFIER MR4 MKII 2.0 active speakers (80W RMS, Bluetooth 6.0)",
       "target_price_jpy": 24000,
@@ -1536,225 +1426,37 @@
       ]
     },
     {
-      "id": "secondary_monitor_alt_msi_pro_mp243w_e14",
-      "category": "secondary_monitor",
-      "name": "MSI PRO MP243W E14 23.8-inch FHD IPS 144Hz",
-      "model_code": "PRO MP243W E14",
-      "target_price_jpy": 13000,
-      "track_current_price": false,
-      "monitor_url": "https://jp.msi.com/Business-Productivity-Monitor/PRO-MP243W-E14",
-      "purchase_url": "https://jp.msi.com/Business-Productivity-Monitor/PRO-MP243W-E14",
+      "id": "speakers_alt_edifier_mr3",
+      "category": "speakers",
+      "name": "EDIFIER MR3 2.0 powered speakers (36W RMS, Bluetooth 5.4)",
+      "target_price_jpy": 12000,
+      "track_current_price": true,
+      "monitor_url": "https://www.biccamera.com/bc/item/13719866/",
+      "purchase_url": "https://www.biccamera.com/bc/item/13719866/",
       "identity_terms": [
-        "PRO MP243W E14",
-        "4711377346368"
+        "ED-MR3-BK",
+        "EDIFIER MR3",
+        "EDMR3BK"
       ],
+      "model_code": "ED-MR3-BK",
       "allowed_hosts": [
-        "jp.msi.com",
-        "jpstore.msi.com"
+        "www.yodobashi.com",
+        "www.biccamera.com",
+        "www.edifier.jp"
       ],
-      "min_price_jpy": 9000,
+      "min_price_jpy": 10000,
       "max_price_jpy": 25000,
       "mandatory": false,
       "price_target_phase": "black_friday",
-      "target_price_note": "¥13,000はBF目標。メーカー仕様ページでは23.8インチFHD・IPS・144Hzが確認できる。現行オンライン価格、BF価格、ビックカメラ天神1号館/ヨドバシ博多の在庫・店頭価格は別途確認が必要。これは任意候補であり、標準のサブモニター予算に自動加算しない。",
-      "ranking_score_100": 82,
-      "ranking_reason": "IPS・FHD・144Hzで、資料表示だけでなく軽いゲーム用途も兼ねられる。一般用途のサブ画面としては過剰な場合があるため、店頭価格が目標に近い場合だけ検討。",
-      "best_for": "仕事用画面とゲーム表示を両立したい場合",
-      "purchase_channel": "physical_store",
-      "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
-      "physical_store_candidate_ids": [
-        "biccamera_tenjin_1",
-        "yodobashi_hakata"
-      ],
-      "inventory_monitoring_note": "型番一致の実店舗在庫・税込現金価格は未確認。購入前に店舗で確認する。"
-    },
-    {
-      "id": "secondary_monitor_alt_japannext_jn_ips238g180q",
-      "category": "secondary_monitor",
-      "name": "JAPANNEXT JN-IPS238G180Q 23.8-inch WQHD IPS 180Hz",
-      "model_code": "JN-IPS238G180Q",
-      "target_price_jpy": 22000,
-      "track_current_price": false,
-      "monitor_url": "https://jp.japannext.com/products/jn-ips238g180q",
-      "purchase_url": "https://jp.japannext.com/products/jn-ips238g180q",
-      "identity_terms": [
-        "JN-IPS238G180Q"
-      ],
-      "allowed_hosts": [
-        "jp.japannext.com"
-      ],
-      "min_price_jpy": 15000,
-      "max_price_jpy": 40000,
-      "mandatory": false,
-      "price_target_phase": "black_friday",
-      "target_price_note": "¥22,000はBF目標で、メーカー公式ページに表示される通常/キャンペーン価格や購入時の決済額とは異なる。23.8インチWQHD IPS・180Hzの仕様候補だが、サブ画面用途として必要以上に高価になる可能性がある。実店舗販売・在庫・現金価格は未確認。",
-      "ranking_score_100": 78,
-      "ranking_reason": "WQHD作業領域と高リフレッシュレートをサブ画面にも求める場合の上位候補。メインモニターと仕様をそろえる価値が、差額に見合うと確認できた場合だけ選ぶ。",
-      "best_for": "高精細な作業領域と高リフレッシュレートをサブ画面にも求める場合",
-      "purchase_channel": "physical_store",
-      "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
-      "physical_store_candidate_ids": [
-        "biccamera_tenjin_1",
-        "yodobashi_hakata"
-      ],
-      "inventory_monitoring_note": "型番一致の実店舗在庫・税込現金価格は未確認。購入前に店舗で確認する。"
-    },
-    {
-      "id": "secondary_monitor_alt_japannext_jn_ips2382fhdr",
-      "category": "secondary_monitor",
-      "name": "JAPANNEXT JN-IPS2382FHDR 23.8-inch FHD IPS 75Hz",
-      "model_code": "JN-IPS2382FHDR",
-      "target_price_jpy": 13000,
-      "track_current_price": true,
-      "monitor_url": "https://www.biccamera.com/bc/item/12625570/",
+      "target_price_note": "12,000円はBF目標で実売価格ではない。Pebble Proからの価格差に価値があると実店舗で判断できる場合だけ選ぶ。店舗の現金価格・在庫を確認する。",
+      "ranking_score_100": 84,
+      "ranking_reason": "Pebble Proより音作り・入力構成を重視したい場合の上位代替。店頭価格差と実際の音を確認し、価値があるときだけ選ぶ。",
+      "best_for": "音質やアナログ入力を少し重視する場合",
       "monitor_urls": [
-        "https://www.biccamera.com/bc/item/12625570/",
-        "https://www.yodobashi.com/product/100000001008279718/"
+        "https://www.yodobashi.com/product/100000001008849809/",
+        "https://www.biccamera.com/bc/item/13719866/",
+        "https://www.edifier.jp/products/mr3"
       ],
-      "purchase_url": "https://www.biccamera.com/bc/item/12625570/",
-      "identity_terms": [
-        "JN-IPS2382FHDR",
-        "12625570",
-        "JAPANNEXT JN-IPS2382FHDR"
-      ],
-      "allowed_hosts": [
-        "www.biccamera.com",
-        "www.yodobashi.com"
-      ],
-      "min_price_jpy": 8000,
-      "max_price_jpy": 30000,
-      "mandatory": false,
-      "price_target_phase": "black_friday",
-      "target_price_note": "¥13,000はBF購入目標。ビックカメラWeb掲載例は2026-10-17に¥15,980（税込）だが、オンライン参考値であり、BF価格・天神1号館の店頭現金価格・支店在庫を証明しない。製品仕様は23.8型FHD IPS、75Hz、HDMI/VGA、2W×2スピーカー、VESA対応。スタンドの高さ調整はないため実物を確認する。",
-      "ranking_score_100": 85,
-      "ranking_reason": "シンプルなFHD IPSの低価格候補。75Hzなので100Hz級より低いが、資料・ブラウザー・IDE用には十分な可能性があり、サブ画面を安く確保したい場合に向く。高さ調整なし。",
-      "best_for": "価格重視の作業用サブ画面",
-      "purchase_channel": "physical_store",
-      "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
-      "physical_store_candidate_ids": [
-        "biccamera_tenjin_1",
-        "yodobashi_hakata"
-      ],
-      "store_price_jpy": null,
-      "store_price_checked_at": null,
-      "store_stock_status": "unknown",
-      "store_confirmation_url": null,
-      "store_model_match": false,
-      "store_inventory_store_id": null,
-      "store_evidence_type": null,
-      "store_evidence_notes": null,
-      "store_inventory_checks": [
-        {
-          "store_id": "biccamera_tenjin_1",
-          "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=12625570",
-          "allowed_hosts": [
-            "www.biccamera.com"
-          ],
-          "branch_match_terms": [
-            "ビックカメラ 天神１号館",
-            "ビックカメラ天神1号館",
-            "Tenjin 1st Store"
-          ],
-          "source_type": "official_branch_stock_page"
-        }
-      ]
-    },
-    {
-      "id": "secondary_monitor_alt_feuvision_ew_fsid24bf0si",
-      "category": "secondary_monitor",
-      "name": "FeuVision EW-FSID24BF0SI 23.8-inch FHD IPS 100Hz",
-      "model_code": "EW-FSID24BF0SI",
-      "target_price_jpy": 14000,
-      "track_current_price": true,
-      "monitor_url": "https://www.biccamera.com/bc/item/15099260/",
-      "monitor_urls": [
-        "https://www.biccamera.com/bc/item/15099260/",
-        "https://www.yodobashi.com/product/100000001009983597/"
-      ],
-      "purchase_url": "https://www.biccamera.com/bc/item/15099260/",
-      "identity_terms": [
-        "EW-FSID24BF0SI",
-        "15099260",
-        "FeuVision FSID24BF0SI"
-      ],
-      "allowed_hosts": [
-        "www.biccamera.com",
-        "www.yodobashi.com"
-      ],
-      "min_price_jpy": 9000,
-      "max_price_jpy": 30000,
-      "mandatory": false,
-      "price_target_phase": "black_friday",
-      "target_price_note": "¥14,000はBF目標。ビックカメラWeb掲載例は¥16,800（税込）。23.8型FHD IPS・100Hz。Web表示は店頭現金価格や店舗別在庫を証明しない。ブランド/スタンド/端子と実際の在庫を店頭で確認してから選ぶ。",
-      "ranking_score_100": 83,
-      "ranking_reason": "100HzとIPSを優先しつつ費用を抑える候補。複数画面の資料閲覧・プログラミング・分析に十分な仕様。現地在庫とメーカーサポート条件を確認する。",
-      "best_for": "FHD IPS・100Hzを予算内で優先",
-      "purchase_channel": "physical_store",
-      "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
-      "physical_store_candidate_ids": [
-        "biccamera_tenjin_1",
-        "yodobashi_hakata"
-      ],
-      "store_price_jpy": null,
-      "store_price_checked_at": null,
-      "store_stock_status": "unknown",
-      "store_confirmation_url": null,
-      "store_model_match": false,
-      "store_inventory_store_id": null,
-      "store_evidence_type": null,
-      "store_evidence_notes": null,
-      "store_inventory_checks": [
-        {
-          "store_id": "bicamera_tenjin_1",
-          "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=15099260",
-          "allowed_hosts": [
-            "www.biccamera.com"
-          ],
-          "branch_match_terms": [
-            "ビックカメラ 天神１号館",
-            "ビックカメラ天神1号館",
-            "Tenjin 1st Store"
-          ],
-          "source_type": "official_branch_stock_page"
-        }
-      ]
-    },
-    {
-      "id": "secondary_monitor_alt_iodata_lcd_d242sax",
-      "category": "secondary_monitor",
-      "name": "I-O DATA LCD-D242SAX 23.8-inch FHD IPS-like 100Hz",
-      "model_code": "LCD-D242SAX",
-      "target_price_jpy": 16500,
-      "track_current_price": true,
-      "monitor_url": "https://www.biccamera.com/bc/item/13987123/",
-      "monitor_urls": [
-        "https://www.biccamera.com/bc/item/13987123/"
-      ],
-      "purchase_url": "https://www.biccamera.com/bc/item/13987123/",
-      "identity_terms": [
-        "LCD-D242SAX",
-        "13987123",
-        "I-O DATA LCD-D242SAX"
-      ],
-      "allowed_hosts": [
-        "www.biccamera.com",
-        "www.iodata.jp"
-      ],
-      "min_price_jpy": 12000,
-      "max_price_jpy": 40000,
-      "mandatory": false,
-      "price_target_phase": "black_friday",
-      "target_price_note": "¥16,500はBF目標。ビックカメラWeb掲載例は2026-10-17時点で¥20,680（税込）。23.8型FHD・100Hz、HDMI/DisplayPort、5年保証の掲載候補。Web表示は天神1号館の店頭現金価格・支店在庫を証明しない。",
-      "ranking_score_100": 88,
-      "ranking_reason": "メーカー保証とHDMI/DisplayPortを重視する上位候補。プログラミングや資料閲覧用の安定した常用画面に向くが、価格差が大きい場合は低価格候補を優先する。",
-      "best_for": "保証・接続端子を重視",
-      "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
@@ -1766,14 +1468,15 @@
       "store_stock_status": "unknown",
       "store_confirmation_url": null,
       "store_model_match": false,
-      "store_inventory_store_id": null,
+      "purchase_channel": "physical_store",
+      "store_observation_store_id": null,
       "store_evidence_type": null,
       "store_evidence_notes": null,
       "store_inventory_checks": [
         {
           "store_id": "bicamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=13987123",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=13719866",
           "allowed_hosts": [
             "www.biccamera.com"
           ],
@@ -1784,7 +1487,12 @@
           ],
           "source_type": "official_branch_stock_page"
         }
-      ]
+      ],
+      "image_url": "https://www.edifier.jp/cdn/shop/files/MR3_1_1.jpg?v=1788508256&width=1000",
+      "image_source_url": "https://www.edifier.jp/products/mr3",
+      "image_note": "EDIFIER公式 MR3製品画像",
+      "image_checked_at": "2026-10-17",
+      "inventory_monitoring_note": "支店別取置きページは在庫状況の参考。店頭の税込現金価格と棚在庫は来店前に店舗へ確認する。"
     }
   ],
   "peripheral_ranking_policy": {
@@ -1808,19 +1516,15 @@
         "weight_pct": 15
       }
     ],
-    "instructions": "各カテゴリから主候補を1商品選び、代替候補を同時購入しない。メインモニターとサブモニターを各1台、スピーカー、キーボード、マウス、マウスパッド、電源タップ、必要ケーブルを対象とする。ヘッドセットは現時点で購入対象外。周辺機器予算45,000円は固定しない。総額400,000円と予備費5,000円を優先し、実際の店頭価格・品質・必要性を元にPC本体との配分を動的に最適化する。サブモニターは23.8〜24インチFHD IPSを基準に75Hz以上、100Hz級を優先する。周辺機器は福岡の実店舗購入を基本とし、送料は計上しない。Web価格は参考値であり、ビックカメラ天神1号館またはヨドバシ博多の店頭価格/在庫を証明しない。型番未確定のサブモニターは比較候補を追跡し、店頭価格・在庫を確認後に正式SKUを選択する。MR3を音質・価格のバランス候補、MR4 MKIIを店頭価格が十分下がった場合の上位代替、Creative Pebble Proを小型・低価格代替とする。ポイント・クーポンは決済条件確認前に値引き扱いしない。",
+    "instructions": "各カテゴリから主候補を1商品選び、代替候補を同時購入しない。対象は27インチWQHDメインモニター1台、必要十分なコスパ重視スピーカー、キーボード、マウス、マウスパッド、電源タップ、必要ケーブル。サブモニターとヘッドセットは購入対象・候補・費用計算に含めない。周辺機器予算は約40,000円の参考配分で固定枠ではなく、総額400,000円と予備費5,000円を優先し、実際の店頭価格・必要性に応じPC本体との配分を動的に最適化する。周辺機器は福岡の実店舗購入を基本とし、送料は計上しない。Web価格は参考値であり、ビックカメラ天神1号館またはヨドバシ博多の店頭価格/在庫を証明しない。スピーカーはCreative Pebble Proを第一候補とし、EDIFIER MR3は価格差に価値がある場合の代替、MR4 MKIIは特に割安な店頭価格の場合のみの上位候補とする。ポイント・クーポンは決済条件確認前に値引き扱いしない。",
     "category_order": [
       {
         "category": "main_monitor",
         "label": "メインモニター（27インチ・WQHD）"
       },
       {
-        "category": "secondary_monitor",
-        "label": "サブモニター（勉強・制作・分析用、23.8〜24型FHD IPS）"
-      },
-      {
         "category": "speakers",
-        "label": "スピーカー"
+        "label": "スピーカー（必要十分・コスパ重視）"
       },
       {
         "category": "keyboard",
@@ -1904,7 +1608,7 @@
     "store_stock_rule": "周辺機器はすべて実店舗購入。全国オンライン在庫・Web価格は当該店舗の店頭在庫・店頭決済価格を証明しない。購入判断前に、同一型番/色、ビックカメラ天神1号館またはヨドバシ博多の店頭在庫または取り置き、店頭税込現金支払総額を確認する。未確認なら購入許可は保留する。",
     "online_price_handling": "オンライン価格は市場比較の参考値に限る。実店舗の価格・在庫として扱わない。"
   },
-  "target_budget_notes": "総額上限400,000円。周辺機器の予算は固定しない。現時点の配分試算はメインモニター18,000円、サブモニター17,000円、スピーカー12,000円、入力機器等と予備費を含む合計62,000円だが必須上限ではない。総額予備費5,000円を基本として、PC本体の許容額は総額から周辺機器の計画/確認額と予備費を差し引く。ヘッドセットなし。周辺機器送料なし。BF目標、事前参考価格、確認済みBF実売価格、最終決済価格を区別し、価格・型番・在庫・互換性の未確認が残る場合は購入許可しない。",
+  "target_budget_notes": "総額上限400,000円。周辺機器は約40,000円の参考配分であり、固定の消費義務やハード上限ではない。メインモニターは1台だけ。サブモニターとヘッドセットを購入対象・ランキング・総額試算に含めない。スピーカーは高級音質を追わず、必要十分な音と価格のバランスを優先し、Creative Pebble Proを第一候補、EDIFIER MR3を価格差に価値がある場合の代替とする。総額予備費5,000円を基本にし、PC本体に使える額を実際の周辺機器費から動的に算出する。周辺機器送料は計上しない。BF目標、事前参考価格、確認済みBF実売価格、最終決済価格を区別し、価格・型番・在庫・互換性の未確認が残る場合は購入許可しない。",
   "target_budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
   "market_risk_policy": {
     "snapshot_date": "2026-10-17",
@@ -1964,7 +1668,7 @@
       "A risk ranking does not automatically authorize a purchase; require exact live price, inventory, complete configuration, compatibility, return terms and final cash total."
     ]
   },
-  "target_budget_note": "undefined 値上がりリスクの定性的優先順位（GPU→CPU→DDR5→SSD）と根拠の種別・出典は market_risk_policy と docs/price-rise-risk-playbook.md に保存する。",
+  "target_budget_note": "総額400,000円を絶対上限とし、周辺機器の固定45,000円枠は設けない。メインモニター1台と、必要十分なスピーカー・入力機器などの実際の必要額/店頭価格からPC本体の許容額を動的に計算する。サブモニター・ヘッドセットは一切購入対象に含めない。総額予備費5,000円を基本にする。",
   "unallocated_contingency_jpy": 5000,
   "user_workload_profile": {
     "priorities": [
