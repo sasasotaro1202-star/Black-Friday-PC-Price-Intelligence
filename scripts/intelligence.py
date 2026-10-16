@@ -310,8 +310,14 @@ def store_observation_validation(target, now=None):
     approved evidence type, include an audit note, and link to that branch's official
     store page on the same host. Price evidence and stock confirmation remain distinct.
     """
+    channel_options = target.get("purchase_channel_options") or []
+    supports_store_route = (
+        target.get("purchase_channel") in ("physical_store", "compare_online_and_store")
+        or "physical_store" in channel_options
+        or "store_pickup" in channel_options
+    )
     required = bool(
-        target.get("purchase_channel") == "physical_store"
+        supports_store_route
         and target.get("store_inventory_required_before_purchase")
     )
     empty = {
