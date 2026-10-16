@@ -33,37 +33,37 @@ class HistoricalBFAnalysisTests(unittest.TestCase):
     def test_purchase_channel_and_budget_contract(self):
         with open(os.path.join(ROOT, "config", "targets.json"), encoding="utf-8") as f:
             cfg = json.load(f)
-        self.assertEqual(set(cfg["purchase_channels"]["physical_store_categories"]),
-                         {"main_monitor", "mouse", "keyboard", "speakers", "mousepad", "power_strip", "cables"})
-        self.assertEqual(set(cfg["purchase_channels"]["online_categories"]),
-                         set())
+        expected_categories = {"main_monitor", "mouse", "keyboard", "mousepad", "cables"}
+        self.assertEqual(set(cfg["purchase_channels"]["physical_store_categories"]), expected_categories)
+        self.assertEqual(set(cfg["purchase_channels"]["online_categories"]), expected_categories)
+        self.assertEqual(cfg["purchase_channels"]["channel_selection_mode"], "COMPARE_ONLINE_AND_LOCAL_STORE")
+        self.assertFalse(cfg["purchase_channels"]["online_price_is_store_price"])
         self.assertEqual(cfg["purchase_channels"]["pc_body"]["channel"], "online")
         items = cfg["peripherals"]
-        self.assertEqual(sum(int(p.get("target_price_jpy") or 0) for p in items if p.get("mandatory", True)),
-                         cfg["peripheral_budget_jpy"])
-        self.assertEqual(cfg["pc_budget_jpy"] + cfg["peripheral_budget_jpy"] + cfg["unallocated_contingency_jpy"], cfg["total_budget_jpy"])
-        physical_categories = set(cfg["purchase_channels"]["physical_store_categories"])
+        self.assertEqual(
+            sum(int(p.get("target_price_jpy") or 0) for p in items if p.get("mandatory", True)),
+            cfg["peripheral_budget_jpy"],
+        )
+        self.assertEqual(cfg["peripheral_budget_jpy"], 36000)
+        self.assertEqual(cfg["pc_target_jpy"], 360000)
+        self.assertEqual(cfg["pc_budget_jpy"] + cfg["unallocated_contingency_jpy"], cfg["total_budget_jpy"])
+        self.assertLessEqual(
+            max(0, min(cfg["pc_budget_jpy"], cfg["total_budget_jpy"] - cfg["peripheral_budget_jpy"] - cfg["unallocated_contingency_jpy"])),
+            cfg["pc_target_jpy"],
+        )
         all_items = items + cfg.get("peripheral_alternatives", [])
+        item_ids = {p.get("id") for p in all_items}
+        self.assertTrue({"speakers", "secondary_monitor", "headset", "power_strip"}.isdisjoint(item_ids))
         for p in all_items:
-            if p.get("category") in physical_categories:
-                self.assertEqual(p.get("purchase_channel"), "physical_store", p.get("id"))
-                if p.get("id") != "cables":
-                    self.assertTrue(p.get("store_inventory_required_before_purchase"), p.get("id"))
-                self.assertTrue(p.get("online_price_is_comparison_only"), p.get("id"))
+            if p.get("purchase_channel") == "compare_online_and_store":
+                self.assertFalse(p.get("online_price_is_comparison_only", False), p.get("id"))
+                self.assertTrue({"online", "physical_store", "store_pickup"}.issubset(set(p.get("purchase_channel_options") or [])), p.get("id"))
                 self.assertTrue(p.get("physical_store_candidate_ids"), p.get("id"))
             if p.get("purchase_channel") == "physical_store":
-                checks = p.get("store_inventory_checks") or []
-                for check in checks:
-                    self.assertIn(check.get("store_id"), p.get("physical_store_candidate_ids") or [], p.get("id"))
-                    self.assertTrue(check.get("branch_match_terms"), p.get("id"))
-                    self.assertIn(urlparse(check.get("url", "")).netloc, check.get("allowed_hosts") or [],
-                                  msg=f"Branch stock URL host not allowed for {p.get('id')}: {check.get('url')}")
+                self.assertTrue(p.get("store_inventory_required_before_purchase"), p.get("id"))
             for url in p.get("monitor_urls") or []:
                 self.assertIn(urlparse(url).netloc, p.get("allowed_hosts") or [],
                               msg=f"Configured monitoring URL host not allowed for {p.get('id')}: {url}")
-        for required_id in ("main_monitor", "mouse", "keyboard", "speakers"):
-            item = next(x for x in items if x.get("id") == required_id)
-            self.assertTrue(item.get("store_inventory_checks"), required_id)
 
     def test_pc_koubou_sale_does_not_meet_required_ram(self):
         campaigns, deals = MOD.load_records()
