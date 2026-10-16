@@ -710,6 +710,21 @@ def peripheral_budget_projection():
     cap = max(0, min(policy["pc_budget_jpy"], policy["total_budget_jpy"] - total_projection - policy.get("unallocated_contingency_jpy", 0)))
     unverified_ids = set(unverified)
     verified_tracked_count = sum(1 for p in tracked if str(p.get("id") or "") not in unverified_ids)
+    channel_comparison_required_ids = {
+        str(p.get("id") or "")
+        for p in tracked
+        if p.get("purchase_channel") == "compare_online_and_store"
+        or (
+            "online" in (p.get("purchase_channel_options") or [])
+            and bool({"physical_store", "store_pickup"} & set(p.get("purchase_channel_options") or []))
+        )
+    }
+    channel_comparison_complete_ids = {
+        str(row.get("id") or "")
+        for row in rows
+        if str(row.get("id") or "") in channel_comparison_required_ids
+        and row.get("channel_comparison_complete")
+    }
     return {
         "total_budget_jpy": policy["total_budget_jpy"],
         "peripheral_target_budget_jpy": policy["peripheral_budget_jpy"],
@@ -726,7 +741,8 @@ def peripheral_budget_projection():
         "channel_comparison_pending_count": len(set(channel_pending)),
         "online_delivery_cost_absorbed_by_flexible_buffer_jpy": flexible_shipping_buffer_used,
         "flexible_reserve_offset_for_shipping_jpy": flexible_buffer_used,
-        "channel_comparison_complete_count": sum(1 for x in rows if x.get("channel_comparison_complete")),
+        "channel_comparison_required_count": len(channel_comparison_required_ids),
+        "channel_comparison_complete_count": len(channel_comparison_complete_ids),
         "budget_data_ready": bool(snapshot_fresh and not unverified_ids and len(tracked) > 0),
         "peripherals": rows,
     }
