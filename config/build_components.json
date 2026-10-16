@@ -802,20 +802,19 @@
       "category": "storage",
       "role": "conditional_storage_replacement",
       "replaces_part_id": "ssd-crucial-p3-plus-1tb",
-      "name": "KIOXIA EXCERIA BASIC SSD-CK2.0N4B/J 2TB",
-      "model_code": "SSD-CK2.0N4B/J",
+      "name": "KIOXIA EXCERIA BASIC SSD-CK2.0N4B/N 2TB",
+      "model_code": "SSD-CK2.0N4B/N",
       "aliases": [
         "KIOXIA EXCERIA BASIC 2TB",
-        "SSD-CK2.0N4B/J",
         "SSD-CK2.0N4B/N"
       ],
       "identity_terms": [
-        "SSD-CK2.0N4B/J",
         "SSD-CK2.0N4B/N",
-        "EXCERIA BASIC 2TB"
+        "EXCERIA BASIC SSD-CK2.0N4B/N",
+        "KIOXIA EXCERIA BASIC 2TB"
       ],
-      "monitor_url": "https://kakaku.com/item/K0001724151/",
-      "purchase_url": "https://kakaku.com/item/K0001724151/",
+      "monitor_url": "https://kakaku.com/item/K0001719361/",
+      "purchase_url": "https://kakaku.com/item/K0001719361/",
       "track_price": true,
       "target_price_jpy": 45000,
       "min_price_jpy": 30000,
@@ -830,11 +829,8 @@
         "tbw": 600
       },
       "spec_source_url": "https://www.kioxia.com/ja-jp/personal/ssd/exceria-basic.html",
-      "notes": "条件付きの1TB SSD置換候補。BF目標45,000円は希望値で、確定価格ではない。2026年10月に価格.comでSSD-CK2.0N4B/Jは61,182円、SSD-CK2.0N4B/Nは68,280円の表示例を確認したが、監視時に同一型番・在庫・決済価格を再確認する。QLC NANDなので長時間の継続書き込み量が大きい用途ではTLC製品とも比較する。1TB品に追加せず、必ず置換として総額を再計算する。",
-      "direct_retailer_urls": [
-        "https://www.yodobashi.com/",
-        "https://shop.tsukumo.co.jp/"
-      ]
+      "notes": "条件付きの1TB SSD置換候補。BF目標45,000円は希望値で、確定価格ではない。2026年10月の価格.com表示例はこの正確な型番で68,280円・掲載店舗1件。監視時に同一型番・在庫・決済価格を再確認する。QLC NANDなので長時間の継続書き込み量が大きい用途ではTLC製品とも比較する。1TB品に追加せず、必ず置換として総額を再計算する。",
+      "direct_retailer_urls": []
     }
   ]
 }
