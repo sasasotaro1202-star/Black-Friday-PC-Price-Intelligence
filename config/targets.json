@@ -215,7 +215,13 @@
     "G TUNE DG-I5G70 DGI5G70B8BGDW102DECRISE 32GB 1TB 追加料金 公式",
     "site:mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa DGA7G70B5BBDW101DECWA RTX 5070 32GB 1TB",
     "RTX 5070 Ti デスクトップPC アウトレット 32GB 1TB 316200円以下",
-    "RTX 5070 Ti ゲーミングPC 32GB 1TB 完成構成 セール 日本"
+    "RTX 5070 Ti ゲーミングPC 32GB 1TB 完成構成 セール 日本",
+    "Ryzen 9 9900X RTX 5070 32GB 1TB ゲーム制作 Unreal Engine 5 デスクトップ",
+    "Ryzen 9 9900X RTX 5070 Ti 32GB 1TB ゲーム開発 デスクトップ",
+    "Ryzen 9 9950X RTX 5070 64GB 2TB ゲーム制作 デスクトップ",
+    "RTX 5070 64GB DDR5 2TB Unity Unreal Engine 5 開発 デスクトップ 日本",
+    "RTX 5060 Ti 16GB 64GB RAM 2TB SSD ゲーム開発 デスクトップ 日本",
+    "12コア 16コア CPU RTX 5070 デスクトップPC ゲーム開発 Unity Unreal Engine 日本"
   ],
   "allowed_domains": [
     "lenovo.com",
@@ -243,7 +249,7 @@
   "max_results_per_query": 8,
   "max_pages_per_run": 50,
   "desktop_enabled": true,
-  "desktop_note": "Desktop PCs are evaluated in the same integrated purchase-priority ranking as laptops. Include an RTX 5060 Ti 16GB/32GB/1TB desktop alternative for the gaming-versus-local-AI-VRAM trade-off; all BTO memory configuration costs must be verified.",
+  "desktop_note": "Desktop PCs are evaluated with gaming AND game creation as high-priority workloads, with AI/data-analysis work also considered. The user's primary purchase method is DIY self-build; completed BTO PCs are reference benchmarks only. Keep RTX 5060 Ti 16GB/32GB/1TB as a VRAM-focused alternative and track higher-core CPU / 64GB RAM / 2TB SSD complete-build outliers only when exact SKU and price evidence are available; never assume after-purchase upgrades. BTO configuration changes must be priced into the final at-purchase configuration.",
   "desktop_exact_candidate_count": 7,
   "total_budget_jpy": 400000,
   "peripheral_budget_jpy": 45000,
@@ -1653,5 +1659,75 @@
     ]
   },
   "target_budget_note": "undefined 値上がりリスクの定性的優先順位（GPU→CPU→DDR5→SSD）と根拠の種別・出典は market_risk_policy と docs/price-rise-risk-playbook.md に保存する。",
-  "unallocated_contingency_jpy": 5000
+  "unallocated_contingency_jpy": 5000,
+  "user_workload_profile": {
+    "priorities": [
+      {
+        "id": "gaming",
+        "priority": 1,
+        "targets": [
+          "Cities: Skylines II",
+          "Apex Legends",
+          "VALORANT",
+          "other FPS games"
+        ],
+        "notes": "Evaluate high-refresh-rate FPS and city-simulation load separately; no guaranteed FPS without matching benchmarks."
+      },
+      {
+        "id": "game_development",
+        "priority": 1,
+        "targets": [
+          "Unreal Engine 5",
+          "Unity",
+          "Godot"
+        ],
+        "project_types": [
+          "2D indie",
+          "3D indie",
+          "FPS prototypes",
+          "city-builder/simulation"
+        ],
+        "concurrent_workloads": [
+          "engine editor",
+          "IDE/debugger",
+          "project builds",
+          "browser/documentation",
+          "tests",
+          "Python/data tools"
+        ],
+        "baseline": {
+          "system_ram_gb": 32,
+          "dedicated_gpu_vram_gb": 8,
+          "primary_ssd_gb": 1000
+        },
+        "preferred_if_budget_allows": {
+          "system_ram_gb": 64,
+          "dedicated_gpu_vram_gb": 12,
+          "primary_ssd_gb": 2000
+        },
+        "note": "This is a cross-workload project baseline, not a universal minimum for every engine. Preferred capacities count only if included in the at-purchase build; do not assume later upgrades."
+      },
+      {
+        "id": "ai_data_analysis",
+        "priority": 2,
+        "targets": [
+          "Python",
+          "GitHub",
+          "sports predictions",
+          "stock/security predictions",
+          "BTC predictions",
+          "local AI where practical"
+        ],
+        "notes": "Consider CPU, RAM, VRAM and storage; not every analysis task benefits from the GPU."
+      }
+    ],
+    "ranking_rules": [
+      "Treat playing games and making games as separate high-priority workloads.",
+      "Evaluate editor, IDE, compile/build, tests and documentation running together—not only game FPS.",
+      "Keep RTX 5060 Ti 16GB as a VRAM-focused comparison and RTX 5070 Ti 16GB as a performance dark horse; do not infer one GPU wins every workload.",
+      "Include higher-core CPU, 64GB RAM and 2TB SSD complete-build outliers in monitoring when exact price and configuration evidence are obtainable; never fabricate target prices or assume post-purchase upgrades.",
+      "Mark full Unreal Engine source compilation without distributed build as a special high-core-count workload; distinguish it from building an ordinary game project.",
+      "Do not claim measured FPS, shader compilation times or project build times without matching independent benchmarks."
+    ]
+  }
 }
