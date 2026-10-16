@@ -36,7 +36,7 @@ def main():
     errors = []
     budget_policy = purchase_budget_policy()
     budget_projection = peripheral_budget_projection()
-    if budget_policy["pc_budget_jpy"] + budget_policy["peripheral_budget_jpy"] != budget_policy["total_budget_jpy"]:
+    if budget_policy["pc_budget_jpy"] + budget_policy["peripheral_budget_jpy"] + budget_policy.get("unallocated_contingency_jpy", 0) != budget_policy["total_budget_jpy"]:
         errors.append("budget arithmetic mismatch")
     if sum(int(p.get("target_price_jpy") or 0) for p in budget_policy["peripherals"] if p.get("mandatory", True)) != budget_policy["peripheral_budget_jpy"]:
         errors.append("peripheral target budget mismatch")
