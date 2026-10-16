@@ -75,7 +75,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
             "game_development",
             "ai_data_analysis",
             "study_research_multitasking",
-            "data_analysis_automation",
+            "data_analysis_automation_ai",
         }.issubset(target_ids))
 
         game_dev = build_workloads["game_development"]
