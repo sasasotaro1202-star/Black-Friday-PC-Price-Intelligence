@@ -15,6 +15,23 @@ class BudgetPolicyTests(unittest.TestCase):
         with (ROOT / "config" / "targets.json").open(encoding="utf-8") as f:
             self.cfg = json.load(f)
 
+    def test_peripheral_report_heading_matches_configured_purchase_items(self):
+        heading = report.peripheral_monitor_section_heading(self.cfg)
+        self.assertIn("メインモニター1台", heading)
+        self.assertIn("サブモニターなし", heading)
+        self.assertIn("ヘッドセットなし", heading)
+
+        with_secondary = dict(self.cfg)
+        with_secondary["peripherals"] = list(self.cfg["peripherals"]) + [{
+            "id": "secondary_monitor",
+            "category": "secondary_monitor",
+            "mandatory": True,
+        }]
+        self.assertIn(
+            "サブモニターあり",
+            report.peripheral_monitor_section_heading(with_secondary),
+        )
+
     def test_all_in_budget_arithmetic(self):
         self.assertEqual(self.cfg["total_budget_jpy"], 400000)
         self.assertEqual(self.cfg["peripheral_budget_jpy"], 45000)
