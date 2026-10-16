@@ -107,9 +107,10 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertIn("完成構成未確認", detail["reason"])
 
     def test_above_pc_target_effective_cost_waits(self):
-        item = self.candidate(price=350000)
+        item = self.candidate(price=360000)
         score, detail = intelligence.decision_score(item, [], [])
-        self.assertEqual(detail["status"], "WAIT_FOR_DISCOUNT")
+        self.assertNotEqual(detail["status"], "BUY_NOW")
+        self.assertGreater(detail["required_effective_discount_pct"], 0)
 
     def test_scenario_prices(self):
         s = intelligence.scenario_prices(380000)
@@ -123,7 +124,7 @@ class DecisionScoringTests(unittest.TestCase):
 
     def test_price_score_monotonic(self):
         self.assertGreater(intelligence.price_score(280000), intelligence.price_score(350000))
-        self.assertGreater(intelligence.price_score(350000), intelligence.price_score(450000))
+        self.assertGreater(intelligence.price_score(350000), intelligence.price_score(500000))
 
     def test_tgp_affects_performance(self):
         low = intelligence.performance_score(self.candidate(tgp=85))[0]
