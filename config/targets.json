@@ -708,7 +708,7 @@
       "black_friday_target_cap_jpy": 350000,
       "price_basis": "completed_build_black_friday_offer_only",
       "include_in_final_ranking": true,
-      "over_target_policy": "KEEP_IN_RANKING; DISPLAY_ANY_ACTUAL_OVERRUN_OR_REMAINING_BUFFER_AND_COMPATIBILITY_BLOCKERS"
+      "over_target_policy": "KEEP_IN_RANKING; SHOW FINAL ACTUAL ALL-IN PRICE, NEEDED DISCOUNT AND BLOCKERS; NEVER ADD EXCLUDED PERIPHERALS"
     },
     "score_policy": "説明文にある96/94/95/97点は条件付きの目標イメージであり、実測スコアとして固定しない。実際のスコアはコードが確認済み価格・構成・在庫・性能・データ品質から計算する。",
     "price_semantics": {
@@ -742,7 +742,6 @@
       "pc_body": "online",
       "physical_store_categories": [
         "main_monitor",
-        "speakers",
         "keyboard",
         "mouse",
         "mousepad",
@@ -1347,7 +1346,6 @@
     },
     "physical_store_categories": [
       "main_monitor",
-      "speakers",
       "keyboard",
       "mouse",
       "mousepad",
@@ -1362,10 +1360,9 @@
         "address": "〒810-0021 福岡県福岡市中央区今泉1-25-1",
         "hours": "10:00〜21:00（公式店舗ページの現在表示。来店前に再確認）",
         "official_store_url": "https://www.biccamera.com/bc/i/shop/shoplist/shop026.jsp",
-        "floor_guide_note": "AフロアにPCスピーカー等、Bフロアにパソコン・液晶モニター・ゲーミングデバイス・マウス・キーボード等の案内あり。",
+        "floor_guide_note": "PC・液晶モニター・ゲーミングデバイス・マウス・キーボード等の取扱フロア案内あり。",
         "suitable_categories": [
           "main_monitor",
-          "speakers",
           "keyboard",
           "mouse",
           "mousepad",
@@ -1380,10 +1377,9 @@
         "hours": "9:30〜22:00（公式店舗ページの現在表示。来店前に再確認）",
         "official_store_url": "https://www.yodobashi.com/ec/store/0088/",
         "floor_guide_url": "https://www.yodobashi.com/ec/store/floor/0088/",
-        "floor_guide_note": "PC周辺機器・モニター・マウス・キーボード・ゲーミング製品の取扱フロア案内あり。スピーカーを含む各商品の当日店頭在庫は事前確認が必要。",
+        "floor_guide_note": "PC周辺機器・モニター・マウス・キーボード・ゲーミング製品の取扱フロア案内あり。各商品の当日店頭在庫は事前確認が必要。",
         "suitable_categories": [
           "main_monitor",
-          "speakers",
           "keyboard",
           "mouse",
           "mousepad",
@@ -1455,7 +1451,7 @@
       "A risk ranking does not automatically authorize a purchase; require exact live price, inventory, complete configuration, compatibility, return terms and final cash total."
     ]
   },
-  "target_budget_note": "総額400,000円を絶対上限とし、周辺機器は約40,000円を参考配分とするが固定枠ではない。メインモニターは1台のみ。サブモニターとヘッドセットは購入対象に含めない。購入後の増設を前提にせず、最初から必要なPC構成を総額内で比較する。",
+  "target_budget_note": "総額400,000円を絶対上限とする。周辺機器は約32,000円の参考配分だが固定枠ではなく、実際の店頭価格と必要性に応じて動的に配分する。対象はメインモニター1台、キーボード、マウス、マウスパッド、電源タップ、必要ケーブルのみ。サブモニター、スピーカー、ヘッドセットは購入対象に含めない。総額予備費5,000円を基本にし、PC本体の許容額は周辺機器実費から動的に計算する。",
   "unallocated_contingency_jpy": 5000,
   "user_workload_profile": {
     "priorities": [
@@ -1569,5 +1565,7 @@
   },
   "peripheral_budget_mode": "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET",
   "peripheral_budget_is_hard_cap": false,
-  "peripheral_allocation_scenario_note": "約32,000円はメインモニター1台と必要な入力機器・電源タップ等の参考配分。スピーカーとサブモニターを含めず、必ず使い切る予算でもハード上限でもない。総額上限400,000円と総額予備費5,000円を維持し、PCに使える額は確認できた実支出から動的に計算する。"
+  "peripheral_allocation_scenario_note": "約32,000円はメインモニター1台と必要な入力機器・電源タップ等の参考配分。スピーカーとサブモニターを含めず、必ず使い切る予算でもハード上限でもない。総額上限400,000円と総額予備費5,000円を維持し、PCに使える額は確認できた実支出から動的に計算する。",
+  "peripheral_allocation_scenario_jpy": 32000,
+  "budget_optimization_policy": "総額40万円を使い切ることを目的にしない。周辺機器は実費ベース。余りが出たときだけ、総額上限を守りながら、ゲーム性能・ゲーム制作・分析を実際に改善するCPU/GPU/RAM/SSDの一回限りの購入候補を再比較。サブモニター、スピーカー、ヘッドセットは購入対象外であり、予算消化のために追加しない。"
 }
