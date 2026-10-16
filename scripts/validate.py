@@ -22,8 +22,13 @@ def main():
     policy = purchase_budget_policy()
     peripheral_projection = peripheral_budget_projection()
     peripheral_snapshot = load_json(os.path.join(ROOT, "data", "peripheral_prices.json"), {})
-    if policy["pc_budget_jpy"] + policy["peripheral_budget_jpy"] + policy.get("unallocated_contingency_jpy", 0) != policy["total_budget_jpy"]:
-        errors.append("budget arithmetic mismatch: PC cap + peripheral target != total budget")
+    # pc_budget_jpy is the absolute PC-side cap before dynamic peripheral allocation.
+    # It therefore balances with the separate contingency, while the actual build
+    # target is checked against peripherals + contingency under the total hard ceiling.
+    if policy["pc_budget_jpy"] + policy.get("unallocated_contingency_jpy", 0) != policy["total_budget_jpy"]:
+        errors.append("budget arithmetic mismatch: PC cap + contingency != total budget")
+    if policy["pc_target_jpy"] + policy["peripheral_budget_jpy"] + policy.get("unallocated_contingency_jpy", 0) > policy["total_budget_jpy"]:
+        errors.append("planned PC target + peripheral allocation + contingency exceeds total budget")
     if policy["pc_target_jpy"] > policy["pc_budget_jpy"]:
         errors.append("PC target exceeds PC cap")
     if sum(int(p.get("target_price_jpy") or 0) for p in policy["peripherals"] if p.get("mandatory", True)) != policy["peripheral_budget_jpy"]:
@@ -199,8 +204,12 @@ def main():
         if build_plan.get("budget_arithmetic_valid") is not True:
             errors.append("self_build_plan budget arithmetic invalid")
         pc_budget, periph_budget, contingency, total_budget = (build_plan.get("pc_budget_jpy"), build_plan.get("peripheral_budget_jpy"), build_plan.get("unallocated_contingency_jpy", policy.get("unallocated_contingency_jpy", 0)), build_plan.get("total_budget_jpy"))
-        if not all(isinstance(x, int) and x >= 0 for x in (pc_budget, periph_budget, contingency, total_budget)) or pc_budget + periph_budget + contingency != total_budget:
-            errors.append("self_build_plan total/PC/peripheral budget mismatch")
+        if not all(isinstance(x, int) and x >= 0 for x in (pc_budget, periph_budget, contingency, total_budget)):
+            errors.append("self_build_plan has invalid budget values")
+        elif pc_budget + contingency != total_budget:
+            errors.append("self_build_plan PC cap + contingency mismatch")
+        elif build_plan.get("pc_target_jpy", policy["pc_target_jpy"]) + periph_budget + contingency > total_budget:
+            errors.append("self_build_plan target + peripherals + contingency exceeds hard ceiling")
         builds = build_plan.get("builds") or []
         if len(builds) != 3:
             errors.append("self_build_plan should contain exactly three mutually exclusive GPU alternatives")
@@ -221,8 +230,10 @@ def main():
                 errors.append("self_build_plan part target subtotal mismatch: " + bid)
             if build.get("target_pc_total_jpy") != build.get("target_parts_subtotal_jpy", 0) + build.get("build_shipping_reserve_jpy", 0) + build.get("small_parts_reserve_jpy", 0):
                 errors.append("self_build_plan PC total mismatch: " + bid)
-            if build.get("target_all_in_jpy") != build.get("target_pc_total_jpy", 0) + periph_budget:
+            if build.get("target_all_in_jpy") != build.get("target_pc_total_jpy", 0) + periph_budget + contingency:
                 errors.append("self_build_plan all-in total mismatch: " + bid)
+            if build.get("target_all_in_jpy", total_budget + 1) > total_budget:
+                errors.append("self_build_plan exceeds total budget: " + bid)
             statuses = [c.get("status") for c in (build.get("compatibility_checks") or [])]
             expected_status = "FAIL" if "FAIL" in statuses else "REVIEW" if "REVIEW" in statuses else "PASS"
             if build.get("compatibility_status") != expected_status:
