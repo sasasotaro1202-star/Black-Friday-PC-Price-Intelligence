@@ -498,7 +498,7 @@ def store_pickup_quote_validation(target, now=None):
     return {
         "store_pickup_checkout_total_jpy": int(price) if verified else None,
         "store_pickup_checkout_total_confirmed": verified,
-        "store_pickup_route_actionable": bool(verified and stocked(stock)),
+        "store_pickup_route_actionable": bool(verified and stock in ("in_stock", "low_stock")),
         "store_pickup_stock_status": stock if verified else "unknown",
         "store_pickup_store_id": store_id if verified else None,
         "store_pickup_checkout_url": confirmation_url if verified else None,
@@ -593,6 +593,26 @@ def peripheral_budget_projection():
             if live_store_inventory.get("store_inventory_verified") and stocked(branch_status):
                 store_stock = branch_status
         store_route_actionable = bool(store_price_verified and stocked(store_stock))
+        store_route_known = bool(
+            store_price_verified
+            and store_stock in ("in_stock", "low_stock", "out_of_stock", "preorder_or_backorder")
+        )
+        store_pickup_observation = store_pickup_quote_validation(target, now)
+        store_pickup_price = store_pickup_observation["store_pickup_checkout_total_jpy"]
+        store_pickup_stock = store_pickup_observation["store_pickup_stock_status"]
+        store_pickup_quote_confirmed = bool(store_pickup_observation["store_pickup_checkout_total_confirmed"])
+        store_pickup_route_actionable = bool(store_pickup_observation["store_pickup_route_actionable"])
+        store_pickup_route_known = bool(
+            store_pickup_quote_confirmed
+            and store_pickup_stock in ("in_stock", "low_stock", "out_of_stock")
+        )
+        online_route_known = bool(
+            online_price_verified
+            and (
+                online_stock == "out_of_stock"
+                or (stocked(online_stock) and shipping_verified)
+            )
+        )
 
         if compare_channels:
             channel_options_available = []
@@ -612,7 +632,17 @@ def peripheral_budget_projection():
                     "url": store_url,
                     "store_id": store_observation.get("store_observation_store_id"),
                 })
-            channel_comparison_complete = bool(online_route_actionable and store_route_actionable)
+            if store_pickup_route_actionable:
+                channel_options_available.append({
+                    "channel": "store_pickup", "cash_total_jpy": int(store_pickup_price),
+                    "stock_status": store_pickup_stock, "shipping_jpy": 0,
+                    "shipping_verified": True,
+                    "url": store_pickup_observation.get("store_pickup_checkout_url"),
+                    "store_id": store_pickup_observation.get("store_pickup_store_id"),
+                })
+            channel_comparison_complete = bool(
+                online_route_known and store_route_known and store_pickup_route_known
+            )
             if not channel_comparison_complete:
                 channel_pending.append(pid)
             if channel_options_available:
@@ -629,18 +659,26 @@ def peripheral_budget_projection():
                 purchase_channel_selected = chosen["channel"]
                 if chosen["channel"] == "physical_store":
                     observed_total += int(store_price)
+                elif chosen["channel"] == "store_pickup":
+                    observed_total += int(store_pickup_price)
                 else:
                     observed_total += int(online_cash_estimate)
                 if not channel_comparison_complete:
-                    channel_status = "ONLINE_VERIFIED_STORE_PENDING" if chosen["channel"] == "online" else "STORE_VERIFIED_ONLINE_PENDING"
+                    channel_status = {
+                        "online": "ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING",
+                        "physical_store": "STORE_CASH_ROUTE_SELECTED_OTHER_ROUTES_PENDING",
+                        "store_pickup": "STORE_PICKUP_ROUTE_SELECTED_OTHER_ROUTES_PENDING",
+                    }[chosen["channel"]]
                 else:
-                    channel_status = "ONLINE_AND_STORE_COMPARED"
-            elif online_price_verified or store_price_verified:
+                    channel_status = "ALL_PURCHASE_ROUTES_VERIFIED"
+            elif online_price_verified or store_price_verified or store_pickup_quote_confirmed:
                 route_estimates = []
                 if online_price_verified:
                     route_estimates.append(int(online_cash_estimate))
                 if store_price_verified and valid_money(store_price):
                     route_estimates.append(int(store_price))
+                if store_pickup_quote_confirmed and store_pickup_stock in ("in_stock", "low_stock"):
+                    route_estimates.append(int(store_pickup_price))
                 selected_cost = max(target_price, min(route_estimates)) if route_estimates else target_price
                 exposed_price = int(price) if online_price_verified else None
                 exposed_price_verified = False
@@ -746,6 +784,18 @@ def peripheral_budget_projection():
             "online_offer_count": int(live.get("online_offer_count") or (1 if online_price_verified else 0)),
             "online_actionable_offer_count": int(live.get("online_actionable_offer_count") or (1 if online_route_actionable else 0)),
             "online_best_offer_url": live.get("online_best_offer_url"),
+            "store_pickup_checkout_total_jpy": store_pickup_observation["store_pickup_checkout_total_jpy"],
+            "store_pickup_checkout_total_confirmed": store_pickup_quote_confirmed,
+            "store_pickup_route_actionable": store_pickup_route_actionable,
+            "store_pickup_quote_stock_status": store_pickup_observation["store_pickup_stock_status"],
+            "store_pickup_quote_status": store_pickup_observation["store_pickup_quote_status"],
+            "store_pickup_checkout_url": store_pickup_observation["store_pickup_checkout_url"],
+            "store_pickup_store_id": store_pickup_observation["store_pickup_store_id"],
+            "store_pickup_evidence_type": store_pickup_observation["store_pickup_evidence_type"],
+            "store_pickup_evidence_notes": store_pickup_observation["store_pickup_evidence_notes"],
+            "store_pickup_quote_age_minutes": store_pickup_observation["store_pickup_quote_age_minutes"],
+            "store_pickup_branch_inventory_status": live_store_inventory["store_inventory_status"],
+            "store_pickup_branch_inventory_verified": live_store_inventory["store_inventory_verified"],
             "purchase_channel": target.get("purchase_channel", "online"),
             "purchase_channel_options": target.get("purchase_channel_options") or [],
             "selected_purchase_channel": purchase_channel_selected,
@@ -776,7 +826,12 @@ def peripheral_budget_projection():
             "store_inventory_store_ids_available": live_store_inventory["store_inventory_store_ids_available"],
             "stock_status": stock, "online_stock_status": online_stock,
             "budget_cost_jpy": selected_cost, "cost_basis": cost_basis,
-            "purchase_url": (live.get("online_best_offer_url") if purchase_channel_selected == "online" else store_url if purchase_channel_selected == "physical_store" else None) or target.get("purchase_url") or target.get("monitor_url"),
+            "purchase_url": (
+                live.get("online_best_offer_url") if purchase_channel_selected == "online"
+                else store_url if purchase_channel_selected == "physical_store"
+                else store_pickup_observation.get("store_pickup_checkout_url") if purchase_channel_selected == "store_pickup"
+                else None
+            ) or target.get("purchase_url") or target.get("monitor_url"),
             "track_current_price": bool(target.get("track_current_price")),
         })
 
