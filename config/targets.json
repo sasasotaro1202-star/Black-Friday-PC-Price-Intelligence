@@ -351,8 +351,8 @@
       "requires_exact_model_before_purchase": true,
       "price_target_phase": "black_friday",
       "target_price_note": "¥10,000はサブモニター1台分の暫定BF目標枠であり、特定型番の価格・BF実売・福岡店舗の現金価格/在庫を意味しない。候補条件は23.8〜24インチ、FHD、IPS、100Hz級。例としてLenovo L24-41はメーカー仕様で23.8インチFHD IPS・100Hzだが、福岡の実店舗での販売/在庫は未確認。購入前に実店舗で型番・現金価格・在庫・保証を確認し、選定後は正確なSKUで価格・在庫の監視対象に置き換える。",
-      "ranking_reason": "勉強資料、ブラウザー、IDE、ゲームエンジン、データ分析を別画面に分けて作業効率を上げる。高リフレッシュレートは必須ではなく、FHD IPSと読みやすさ、安定したスタンド、価格・保証を優先する。",
-      "best_for": "学校の勉強・ゲーム制作・分析のマルチウィンドウ",
+      "ranking_reason": "暫定の価格・仕様基準。勉強用資料、IDE、ゲームエンジン、分析を別画面に分ける用途では、FHD IPS・100Hz級を目安にし、正確なSKU/店頭在庫が分かるまではこの一般仕様を実売商品として扱わない。",
+      "best_for": "最小限の費用で作業用サブ画面を追加",
       "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
@@ -368,7 +368,8 @@
       "store_observation_store_id": null,
       "store_evidence_type": null,
       "store_evidence_notes": null,
-      "store_inventory_checks": []
+      "store_inventory_checks": [],
+      "ranking_score_100": 85
     },
     {
       "id": "speakers",
@@ -1529,6 +1530,72 @@
           "source_type": "official_branch_stock_page"
         }
       ]
+    },
+    {
+      "id": "secondary_monitor_alt_msi_pro_mp243w_e14",
+      "category": "secondary_monitor",
+      "name": "MSI PRO MP243W E14 23.8-inch FHD IPS 144Hz",
+      "model_code": "PRO MP243W E14",
+      "target_price_jpy": 13000,
+      "track_current_price": false,
+      "monitor_url": "https://jp.msi.com/Business-Productivity-Monitor/PRO-MP243W-E14",
+      "purchase_url": "https://jp.msi.com/Business-Productivity-Monitor/PRO-MP243W-E14",
+      "identity_terms": [
+        "PRO MP243W E14",
+        "4711377346368"
+      ],
+      "allowed_hosts": [
+        "jp.msi.com",
+        "jpstore.msi.com"
+      ],
+      "min_price_jpy": 9000,
+      "max_price_jpy": 25000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "¥13,000はBF目標。メーカー仕様ページでは23.8インチFHD・IPS・144Hzが確認できる。現行オンライン価格、BF価格、ビックカメラ天神1号館/ヨドバシ博多の在庫・店頭価格は別途確認が必要。これは任意候補であり、標準のサブモニター予算に自動加算しない。",
+      "ranking_score_100": 82,
+      "ranking_reason": "IPS・FHD・144Hzで、資料表示だけでなく軽いゲーム用途も兼ねられる。一般用途のサブ画面としては過剰な場合があるため、店頭価格が目標に近い場合だけ検討。",
+      "best_for": "仕事用画面とゲーム表示を両立したい場合",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ],
+      "inventory_monitoring_note": "型番一致の実店舗在庫・税込現金価格は未確認。購入前に店舗で確認する。"
+    },
+    {
+      "id": "secondary_monitor_alt_japannext_jn_ips238g180q",
+      "category": "secondary_monitor",
+      "name": "JAPANNEXT JN-IPS238G180Q 23.8-inch WQHD IPS 180Hz",
+      "model_code": "JN-IPS238G180Q",
+      "target_price_jpy": 22000,
+      "track_current_price": false,
+      "monitor_url": "https://jp.japannext.com/products/jn-ips238g180q",
+      "purchase_url": "https://jp.japannext.com/products/jn-ips238g180q",
+      "identity_terms": [
+        "JN-IPS238G180Q"
+      ],
+      "allowed_hosts": [
+        "jp.japannext.com"
+      ],
+      "min_price_jpy": 15000,
+      "max_price_jpy": 40000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "¥22,000はBF目標で、メーカー公式ページに表示される通常/キャンペーン価格や購入時の決済額とは異なる。23.8インチWQHD IPS・180Hzの仕様候補だが、サブ画面用途として必要以上に高価になる可能性がある。実店舗販売・在庫・現金価格は未確認。",
+      "ranking_score_100": 78,
+      "ranking_reason": "WQHD作業領域と高リフレッシュレートをサブ画面にも求める場合の上位候補。メインモニターと仕様をそろえる価値が、差額に見合うと確認できた場合だけ選ぶ。",
+      "best_for": "高精細な作業領域と高リフレッシュレートをサブ画面にも求める場合",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ],
+      "inventory_monitoring_note": "型番一致の実店舗在庫・税込現金価格は未確認。購入前に店舗で確認する。"
     }
   ],
   "peripheral_ranking_policy": {
