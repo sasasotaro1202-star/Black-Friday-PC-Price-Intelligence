@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-17T02:25:49+09:00",
-  "source_snapshot_generated_at": "2026-10-17T02:23:14+09:00",
-  "source_snapshot_sha256": "d82bb4e0b96bee2fed078ae96c7f9f2bcac76eedd9df6e574a6c11d495a4fc0c",
-  "budget_jpy": 350000,
+  "generated_at": "2026-10-17T05:15:26+09:00",
+  "source_snapshot_generated_at": "2026-10-17T05:11:08+09:00",
+  "source_snapshot_sha256": "e8a2ec7f366b6314a93200b63c54774f056107ea341ec7d917caedaa33755581",
+  "budget_jpy": 360000,
   "budget_scope": "pc_only_excluding_peripherals",
   "total_budget_jpy": 400000,
-  "peripheral_budget_jpy": 45000,
-  "pc_budget_jpy": 350000,
+  "peripheral_budget_jpy": 35000,
+  "pc_budget_jpy": 395000,
   "black_friday_purchase_plan": {
     "pricing_phase": "PRE_BLACK_FRIDAY_REFERENCE",
     "black_friday_window_start_jst": "2026-11-01T00:00:00+09:00",
@@ -22,16 +22,16 @@
     "targets_are_estimates_not_promises": true,
     "discount_scenarios_are_probabilities": false,
     "total_budget_jpy": 400000,
-    "pc_target_price_jpy": 350000,
-    "pc_planned_hard_cap_jpy": 350000,
-    "peripheral_target_total_jpy": 45000,
-    "black_friday_ideal_bundle_target_jpy": 395000,
-    "black_friday_target_buffer_jpy": 5000,
-    "black_friday_hard_cap_bundle_jpy": 395000,
-    "black_friday_pc_price_cap_jpy": 350000,
+    "pc_target_price_jpy": 360000,
+    "pc_planned_hard_cap_jpy": 395000,
+    "peripheral_target_total_jpy": 35000,
+    "black_friday_ideal_bundle_target_jpy": 400000,
+    "black_friday_target_buffer_jpy": 0,
+    "black_friday_hard_cap_bundle_jpy": 400000,
+    "black_friday_pc_price_cap_jpy": 360000,
     "black_friday_pc_price_cap_final": false,
     "peripheral_snapshot_fresh": true,
-    "tracked_peripheral_count": 6,
+    "tracked_peripheral_count": 4,
     "tracked_peripheral_bf_price_verified_count": 0,
     "tracked_peripheral_all_bf_prices_verified": false,
     "all_in_checkout_total_final": false,
@@ -40,7 +40,7 @@
         "id": "main_monitor",
         "name": "AOC Q27G40E/11 27-inch WQHD 180Hz",
         "purchase_url": "https://www.yodobashi.com/product/100000001009314680/",
-        "black_friday_target_price_jpy": 18000,
+        "black_friday_target_price_jpy": 22000,
         "black_friday_price_observed_jpy": null,
         "black_friday_price_verified": false,
         "retailer_key": "yodobashi",
@@ -50,35 +50,12 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 20790,
-        "pre_black_friday_reference_at": "2026-10-17T02:23:24+09:00",
+        "pre_black_friday_reference_at": "2026-10-17T05:11:22+09:00",
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "stock_status": "low_stock",
-        "target_gap_vs_pre_bf_reference_jpy": 2790,
-        "discount_needed_to_target_pct": 13.4,
-        "planning_cost_jpy": 18000,
-        "cost_basis": "black_friday_target_reserve",
-        "track_current_price": true
-      },
-      {
-        "id": "speakers",
-        "name": "EDIFIER MR3 2.0 powered monitor speakers (36W RMS, Bluetooth 5.4)",
-        "purchase_url": "https://www.biccamera.com/bc/item/13719866/",
-        "black_friday_target_price_jpy": 12000,
-        "black_friday_price_observed_jpy": null,
-        "black_friday_price_verified": false,
-        "retailer_key": "yodobashi",
-        "retailer_campaign_status": "UNCONFIRMED",
-        "retailer_campaign_start_jst": null,
-        "retailer_campaign_end_jst": null,
-        "watch_window_reference_price_jpy": null,
-        "watch_window_reference_at": null,
-        "pre_black_friday_reference_price_jpy": 16650,
-        "pre_black_friday_reference_at": "2026-10-17T02:23:24+09:00",
-        "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
-        "stock_status": "low_stock",
-        "target_gap_vs_pre_bf_reference_jpy": 4650,
-        "discount_needed_to_target_pct": 27.9,
-        "planning_cost_jpy": 12000,
+        "target_gap_vs_pre_bf_reference_jpy": 0,
+        "discount_needed_to_target_pct": 0,
+        "planning_cost_jpy": 22000,
         "cost_basis": "black_friday_target_reserve",
         "track_current_price": true
       },
@@ -86,7 +63,7 @@
         "id": "keyboard",
         "name": "Logicool G213r",
         "purchase_url": "https://www.biccamera.com/bc/item/9242996/",
-        "black_friday_target_price_jpy": 5000,
+        "black_friday_target_price_jpy": 4500,
         "black_friday_price_observed_jpy": null,
         "black_friday_price_verified": false,
         "retailer_key": "yodobashi",
@@ -96,12 +73,12 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 7330,
-        "pre_black_friday_reference_at": "2026-10-17T02:23:24+09:00",
+        "pre_black_friday_reference_at": "2026-10-17T05:11:22+09:00",
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "stock_status": "in_stock",
-        "target_gap_vs_pre_bf_reference_jpy": 2330,
-        "discount_needed_to_target_pct": 31.8,
-        "planning_cost_jpy": 5000,
+        "target_gap_vs_pre_bf_reference_jpy": 2830,
+        "discount_needed_to_target_pct": 38.6,
+        "planning_cost_jpy": 4500,
         "cost_basis": "black_friday_target_reserve",
         "track_current_price": true
       },
@@ -109,7 +86,7 @@
         "id": "mouse",
         "name": "Logicool G304",
         "purchase_url": "https://www.yodobashi.com/product/100000001004334450/",
-        "black_friday_target_price_jpy": 4000,
+        "black_friday_target_price_jpy": 5000,
         "black_friday_price_observed_jpy": null,
         "black_friday_price_verified": false,
         "retailer_key": "yodobashi",
@@ -119,12 +96,12 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 5350,
-        "pre_black_friday_reference_at": "2026-10-17T02:23:24+09:00",
+        "pre_black_friday_reference_at": "2026-10-17T05:11:22+09:00",
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "stock_status": "in_stock",
-        "target_gap_vs_pre_bf_reference_jpy": 1350,
-        "discount_needed_to_target_pct": 25.2,
-        "planning_cost_jpy": 4000,
+        "target_gap_vs_pre_bf_reference_jpy": 350,
+        "discount_needed_to_target_pct": 6.5,
+        "planning_cost_jpy": 5000,
         "cost_basis": "black_friday_target_reserve",
         "track_current_price": true
       },
@@ -132,29 +109,6 @@
         "id": "mousepad",
         "name": "SteelSeries QcK Large Black 450x400mm (model 63003)",
         "purchase_url": "https://www.biccamera.com/bc/item/1570130/",
-        "black_friday_target_price_jpy": 2000,
-        "black_friday_price_observed_jpy": null,
-        "black_friday_price_verified": false,
-        "retailer_key": "bic_camera",
-        "retailer_campaign_status": "UNCONFIRMED",
-        "retailer_campaign_start_jst": null,
-        "retailer_campaign_end_jst": null,
-        "watch_window_reference_price_jpy": null,
-        "watch_window_reference_at": null,
-        "pre_black_friday_reference_price_jpy": null,
-        "pre_black_friday_reference_at": null,
-        "price_reference_kind": "TARGET_ONLY_UNVERIFIED",
-        "stock_status": "unknown",
-        "target_gap_vs_pre_bf_reference_jpy": null,
-        "discount_needed_to_target_pct": null,
-        "planning_cost_jpy": 2000,
-        "cost_basis": "black_friday_target_reserve",
-        "track_current_price": true
-      },
-      {
-        "id": "power_strip",
-        "name": "ELECOM T-NSLK-2620BK 6-outlet 2m slim surge-protected power strip",
-        "purchase_url": "https://www.biccamera.com/bc/item/3605560/",
         "black_friday_target_price_jpy": 1500,
         "black_friday_price_observed_jpy": null,
         "black_friday_price_verified": false,
@@ -176,7 +130,7 @@
       },
       {
         "id": "cables",
-        "name": "Required cables only; check included monitor/speaker cables first",
+        "name": "Required cables only; check included monitor cables first",
         "purchase_url": null,
         "black_friday_target_price_jpy": 0,
         "black_friday_price_observed_jpy": null,
@@ -199,9 +153,9 @@
       },
       {
         "id": "store_price_buffer",
-        "name": "店頭価格差・ケーブル不足用予備費（商品ではない）",
+        "name": "周辺機器の価格差・必要ケーブル不足用の柔軟な予備枠（商品ではない）",
         "purchase_url": null,
-        "black_friday_target_price_jpy": 2500,
+        "black_friday_target_price_jpy": 2000,
         "black_friday_price_observed_jpy": null,
         "black_friday_price_verified": false,
         "retailer_key": null,
@@ -216,7 +170,7 @@
         "stock_status": "unknown",
         "target_gap_vs_pre_bf_reference_jpy": null,
         "discount_needed_to_target_pct": null,
-        "planning_cost_jpy": 2500,
+        "planning_cost_jpy": 2000,
         "cost_basis": "black_friday_target_reserve",
         "track_current_price": false
       }
@@ -288,8 +242,8 @@
         ],
         "discount_needed_to_bf_target_jpy": 49800,
         "discount_needed_to_bf_target_pct": 12.5,
-        "discount_needed_to_planned_cap_jpy": 49800,
-        "discount_needed_to_planned_cap_pct": 12.5,
+        "discount_needed_to_planned_cap_jpy": 4800,
+        "discount_needed_to_planned_cap_pct": 1.2,
         "is_rtx_5070_ti_outlier": true,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -306,7 +260,7 @@
         "gpu": "RTX 5070 Laptop GPU",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "asus",
@@ -383,7 +337,7 @@
         "gpu": "RTX 5070",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "mouse_computer",
@@ -460,7 +414,7 @@
         "gpu": "RTX 5060 Ti 16GB",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "mouse_computer",
@@ -537,7 +491,7 @@
         "gpu": "RTX 5070",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "mouse_computer",
@@ -547,7 +501,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 319800,
-        "pre_black_friday_reference_at": "2026-10-17T02:23:14+09:00",
+        "pre_black_friday_reference_at": "2026-10-17T05:11:08+09:00",
         "catalog_reference_price_jpy": 319800,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 319800,
@@ -614,7 +568,7 @@
         "gpu": "RTX 5070 Laptop GPU",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "mouse_computer",
@@ -624,7 +578,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 284700,
-        "pre_black_friday_reference_at": "2026-10-17T02:23:14+09:00",
+        "pre_black_friday_reference_at": "2026-10-17T05:11:08+09:00",
         "catalog_reference_price_jpy": 284700,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 284700,
@@ -691,7 +645,7 @@
         "gpu": "RTX 5070 Ti Laptop GPU",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "dospara",
@@ -768,7 +722,7 @@
         "gpu": "RTX 5080",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "lenovo",
@@ -845,7 +799,7 @@
         "gpu": "RTX 5070 Ti Laptop GPU",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "asus",
@@ -902,10 +856,10 @@
             "price_jpy": 197890
           }
         ],
-        "discount_needed_to_bf_target_jpy": 9800,
-        "discount_needed_to_bf_target_pct": 2.7,
-        "discount_needed_to_planned_cap_jpy": 9800,
-        "discount_needed_to_planned_cap_pct": 2.7,
+        "discount_needed_to_bf_target_jpy": 0,
+        "discount_needed_to_bf_target_pct": 0.0,
+        "discount_needed_to_planned_cap_jpy": 0,
+        "discount_needed_to_planned_cap_pct": 0.0,
         "is_rtx_5070_ti_outlier": false,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -922,7 +876,7 @@
         "gpu": "RTX 5070 Ti Laptop GPU",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "asus",
@@ -979,10 +933,10 @@
             "price_jpy": 197890
           }
         ],
-        "discount_needed_to_bf_target_jpy": 9800,
-        "discount_needed_to_bf_target_pct": 2.7,
-        "discount_needed_to_planned_cap_jpy": 9800,
-        "discount_needed_to_planned_cap_pct": 2.7,
+        "discount_needed_to_bf_target_jpy": 0,
+        "discount_needed_to_bf_target_pct": 0.0,
+        "discount_needed_to_planned_cap_jpy": 0,
+        "discount_needed_to_planned_cap_pct": 0.0,
         "is_rtx_5070_ti_outlier": false,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -999,7 +953,7 @@
         "gpu": "RTX 5070 Ti",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "gigabyte",
@@ -1056,10 +1010,10 @@
             "price_jpy": 230890
           }
         ],
-        "discount_needed_to_bf_target_jpy": 69800,
-        "discount_needed_to_bf_target_pct": 16.6,
-        "discount_needed_to_planned_cap_jpy": 69800,
-        "discount_needed_to_planned_cap_pct": 16.6,
+        "discount_needed_to_bf_target_jpy": 59800,
+        "discount_needed_to_bf_target_pct": 14.2,
+        "discount_needed_to_planned_cap_jpy": 24800,
+        "discount_needed_to_planned_cap_pct": 5.9,
         "is_rtx_5070_ti_outlier": false,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -1076,7 +1030,7 @@
         "gpu": "RTX 5070 Laptop GPU",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "mouse_computer",
@@ -1086,7 +1040,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 448800,
-        "pre_black_friday_reference_at": "2026-10-17T02:23:14+09:00",
+        "pre_black_friday_reference_at": "2026-10-17T05:11:08+09:00",
         "catalog_reference_price_jpy": 329800,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 448800,
@@ -1133,10 +1087,10 @@
             "price_jpy": 246840
           }
         ],
-        "discount_needed_to_bf_target_jpy": 98800,
-        "discount_needed_to_bf_target_pct": 22.0,
-        "discount_needed_to_planned_cap_jpy": 98800,
-        "discount_needed_to_planned_cap_pct": 22.0,
+        "discount_needed_to_bf_target_jpy": 88800,
+        "discount_needed_to_bf_target_pct": 19.8,
+        "discount_needed_to_planned_cap_jpy": 53800,
+        "discount_needed_to_planned_cap_pct": 12.0,
         "is_rtx_5070_ti_outlier": false,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -1148,12 +1102,12 @@
       },
       {
         "id": "candidate-5",
-        "name": "Acer Predator Helios Neo 16 AI Windows 11 Home Core Ultra 9 290HX Plus RTX 5070 Ti IPS 非光沢 WQXGA 240Hz 3ms G-SYNC DCI-P3 100% 32GBメモリ 1TB SSD 第5世代 AeroBladeファン 有線LAN WiFi 6E 英字キーボード ゲーミングノートパソコン PHN16-I71-N93Z57T/E",
+        "name": "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1",
         "form_factor": "laptop",
         "gpu": "RTX 5070 Ti Laptop GPU",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "acer",
@@ -1162,10 +1116,10 @@
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
-        "pre_black_friday_reference_price_jpy": 547800,
-        "pre_black_friday_reference_at": "2026-10-17T02:23:14+09:00",
+        "pre_black_friday_reference_price_jpy": null,
+        "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 547800,
-        "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
+        "price_reference_kind": "CATALOG_REFERENCE_ONLY",
         "scenario_base_price_jpy": 547800,
         "scenario_base_note": "セール前の参考額を基準にした仮想割引。BF実売価格・値下げ確率ではない",
         "scenario_prices": [
@@ -1210,17 +1164,17 @@
             "price_jpy": 301290
           }
         ],
-        "discount_needed_to_bf_target_jpy": 197800,
-        "discount_needed_to_bf_target_pct": 36.1,
-        "discount_needed_to_planned_cap_jpy": 197800,
-        "discount_needed_to_planned_cap_pct": 36.1,
+        "discount_needed_to_bf_target_jpy": 187800,
+        "discount_needed_to_bf_target_pct": 34.3,
+        "discount_needed_to_planned_cap_jpy": 152800,
+        "discount_needed_to_planned_cap_pct": 27.9,
         "is_rtx_5070_ti_outlier": false,
         "configuration_ready": true,
         "configuration_reasons": [],
         "catalog_configuration_ready": true,
         "catalog_configuration_reasons": [],
         "complete_build_target_comparable": true,
-        "stock_status": "in_stock",
+        "stock_status": "unknown",
         "purchase_url": "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1"
       },
       {
@@ -1230,7 +1184,7 @@
         "gpu": "RTX 5070 Ti Laptop GPU",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "asus",
@@ -1287,10 +1241,10 @@
             "price_jpy": 329890
           }
         ],
-        "discount_needed_to_bf_target_jpy": 249800,
-        "discount_needed_to_bf_target_pct": 41.6,
-        "discount_needed_to_planned_cap_jpy": 249800,
-        "discount_needed_to_planned_cap_pct": 41.6,
+        "discount_needed_to_bf_target_jpy": 239800,
+        "discount_needed_to_bf_target_pct": 40.0,
+        "discount_needed_to_planned_cap_jpy": 204800,
+        "discount_needed_to_planned_cap_pct": 34.1,
         "is_rtx_5070_ti_outlier": false,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -1307,7 +1261,7 @@
         "gpu": "RTX 5070 Ti Laptop GPU",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "asus",
@@ -1364,10 +1318,10 @@
             "price_jpy": 376640
           }
         ],
-        "discount_needed_to_bf_target_jpy": 334800,
-        "discount_needed_to_bf_target_pct": 48.9,
-        "discount_needed_to_planned_cap_jpy": 334800,
-        "discount_needed_to_planned_cap_pct": 48.9,
+        "discount_needed_to_bf_target_jpy": 324800,
+        "discount_needed_to_bf_target_pct": 47.4,
+        "discount_needed_to_planned_cap_jpy": 289800,
+        "discount_needed_to_planned_cap_pct": 42.3,
         "is_rtx_5070_ti_outlier": false,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -1384,7 +1338,7 @@
         "gpu": "RTX 5070 Laptop GPU",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "asus",
@@ -1420,7 +1374,7 @@
         "gpu": "RTX 5060",
         "ram_gb": 16,
         "ssd": "500 GB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "mouse_computer",
@@ -1430,7 +1384,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 194800,
-        "pre_black_friday_reference_at": "2026-10-17T02:23:14+09:00",
+        "pre_black_friday_reference_at": "2026-10-17T05:11:08+09:00",
         "catalog_reference_price_jpy": 194800,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 194800,
@@ -1503,7 +1457,7 @@
         "gpu": "RTX 5070",
         "ram_gb": 16,
         "ssd": "500 GB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "mouse_computer",
@@ -1513,7 +1467,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 279800,
-        "pre_black_friday_reference_at": "2026-10-17T02:23:14+09:00",
+        "pre_black_friday_reference_at": "2026-10-17T05:11:08+09:00",
         "catalog_reference_price_jpy": 279800,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 279800,
@@ -1586,7 +1540,7 @@
         "gpu": "RTX 5070",
         "ram_gb": 16,
         "ssd": "500 GB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "mouse_computer",
@@ -1596,7 +1550,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 299800,
-        "pre_black_friday_reference_at": "2026-10-17T02:23:14+09:00",
+        "pre_black_friday_reference_at": "2026-10-17T05:11:08+09:00",
         "catalog_reference_price_jpy": 299800,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 299800,
@@ -1669,7 +1623,7 @@
         "gpu": "RTX 5070 Ti Laptop GPU",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "asus",
@@ -1705,7 +1659,7 @@
         "gpu": "RTX 5070 Ti Laptop GPU",
         "ram_gb": 32,
         "ssd": "1 TB",
-        "black_friday_target_price_jpy": 350000,
+        "black_friday_target_price_jpy": 360000,
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "asus",
@@ -1802,8 +1756,8 @@
         ],
         "discount_needed_to_bf_target_jpy": 49800,
         "discount_needed_to_bf_target_pct": 12.5,
-        "discount_needed_to_planned_cap_jpy": 49800,
-        "discount_needed_to_planned_cap_pct": 12.5,
+        "discount_needed_to_planned_cap_jpy": 4800,
+        "discount_needed_to_planned_cap_pct": 1.2,
         "is_rtx_5070_ti_outlier": true,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -2159,7 +2113,7 @@
       "current_price_jpy": 399800,
       "reference_price_jpy": 399800,
       "reference_only": false,
-      "required_discount_pct": 12.5,
+      "required_discount_pct": 10.0,
       "historical_floor_jpy": 299800,
       "historical_floor_strength": "same_gpu",
       "scenario_prices": [
@@ -2185,8 +2139,8 @@
         }
       ],
       "first_pc_target_scenario": {
-        "discount_pct": 15,
-        "price_jpy": 339800
+        "discount_pct": 10,
+        "price_jpy": 359800
       },
       "stock_status": "out_of_stock",
       "price_source_mode": "direct_structured",
@@ -2200,7 +2154,7 @@
       "current_price_jpy": 448800,
       "reference_price_jpy": 329800,
       "reference_only": false,
-      "required_discount_pct": 22.0,
+      "required_discount_pct": 19.8,
       "historical_floor_jpy": null,
       "historical_floor_strength": "none",
       "scenario_prices": [
@@ -2226,47 +2180,9 @@
         }
       ],
       "first_pc_target_scenario": {
-        "discount_pct": 25,
-        "price_jpy": 336600
+        "discount_pct": 20,
+        "price_jpy": 359000
       },
-      "stock_status": "in_stock",
-      "price_source_mode": "direct_structured",
-      "price_validation_status": "validated",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "candidate-5",
-      "name": "Acer Predator Helios Neo 16 AI Windows 11 Home Core Ultra 9 290HX Plus RTX 5070 Ti IPS 非光沢 WQXGA 240Hz 3ms G-SYNC DCI-P3 100% 32GBメモリ 1TB SSD 第5世代 AeroBladeファン 有線LAN WiFi 6E 英字キーボード ゲーミングノートパソコン PHN16-I71-N93Z57T/E",
-      "form_factor": "laptop",
-      "current_price_jpy": 547800,
-      "reference_price_jpy": null,
-      "reference_only": false,
-      "required_discount_pct": 36.1,
-      "historical_floor_jpy": null,
-      "historical_floor_strength": "none",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 493000
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 465600
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 438200
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 410800
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 383500
-        }
-      ],
-      "first_pc_target_scenario": null,
       "stock_status": "in_stock",
       "price_source_mode": "direct_structured",
       "price_validation_status": "validated",
@@ -2307,6 +2223,88 @@
       "first_pc_target_scenario": {
         "discount_pct": 10,
         "price_jpy": 287800
+      },
+      "stock_status": "unknown",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "rog-g16-9955hx3d",
+      "name": "ROG Strix G16 G614FR-R9X3D5070TI",
+      "form_factor": "laptop",
+      "current_price_jpy": null,
+      "reference_price_jpy": 359800,
+      "reference_only": true,
+      "required_discount_pct": 0.0,
+      "historical_floor_jpy": 299800,
+      "historical_floor_strength": "same_family",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 323800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 305800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 287800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 269800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 251900
+        }
+      ],
+      "first_pc_target_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 323800
+      },
+      "stock_status": "unknown",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "rog-g16-8940hx-5070ti",
+      "name": "ROG Strix G16 G614PR-R9R5070TI",
+      "form_factor": "laptop",
+      "current_price_jpy": null,
+      "reference_price_jpy": 359800,
+      "reference_only": true,
+      "required_discount_pct": 0.0,
+      "historical_floor_jpy": 299800,
+      "historical_floor_strength": "same_family",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 323800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 305800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 287800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 269800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 251900
+        }
+      ],
+      "first_pc_target_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 323800
       },
       "stock_status": "unknown",
       "price_source_mode": "public_baseline",
@@ -2355,95 +2353,13 @@
       "dynamic_candidate": false
     },
     {
-      "id": "rog-g16-9955hx3d",
-      "name": "ROG Strix G16 G614FR-R9X3D5070TI",
-      "form_factor": "laptop",
-      "current_price_jpy": null,
-      "reference_price_jpy": 359800,
-      "reference_only": true,
-      "required_discount_pct": 2.7,
-      "historical_floor_jpy": 299800,
-      "historical_floor_strength": "same_family",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 323800
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 305800
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 287800
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 269800
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 251900
-        }
-      ],
-      "first_pc_target_scenario": {
-        "discount_pct": 10,
-        "price_jpy": 323800
-      },
-      "stock_status": "unknown",
-      "price_source_mode": "public_baseline",
-      "price_validation_status": "reference_only",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "rog-g16-8940hx-5070ti",
-      "name": "ROG Strix G16 G614PR-R9R5070TI",
-      "form_factor": "laptop",
-      "current_price_jpy": null,
-      "reference_price_jpy": 359800,
-      "reference_only": true,
-      "required_discount_pct": 2.7,
-      "historical_floor_jpy": 299800,
-      "historical_floor_strength": "same_family",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 323800
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 305800
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 287800
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 269800
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 251900
-        }
-      ],
-      "first_pc_target_scenario": {
-        "discount_pct": 10,
-        "price_jpy": 323800
-      },
-      "stock_status": "unknown",
-      "price_source_mode": "public_baseline",
-      "price_validation_status": "reference_only",
-      "dynamic_candidate": false
-    },
-    {
       "id": "gigabyte-a18-pro-240h-5070ti",
       "name": "GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）",
       "form_factor": "laptop",
       "current_price_jpy": null,
       "reference_price_jpy": 419800,
       "reference_only": true,
-      "required_discount_pct": 16.6,
+      "required_discount_pct": 14.2,
       "historical_floor_jpy": 299800,
       "historical_floor_strength": "same_gpu",
       "scenario_prices": [
@@ -2469,8 +2385,8 @@
         }
       ],
       "first_pc_target_scenario": {
-        "discount_pct": 20,
-        "price_jpy": 335800
+        "discount_pct": 15,
+        "price_jpy": 356800
       },
       "stock_status": "out_of_stock",
       "price_source_mode": "public_baseline",
@@ -2484,7 +2400,7 @@
       "current_price_jpy": null,
       "reference_price_jpy": 599800,
       "reference_only": true,
-      "required_discount_pct": 41.6,
+      "required_discount_pct": 40.0,
       "historical_floor_jpy": null,
       "historical_floor_strength": "none",
       "scenario_prices": [
@@ -2522,7 +2438,7 @@
       "current_price_jpy": null,
       "reference_price_jpy": 684800,
       "reference_only": true,
-      "required_discount_pct": 48.9,
+      "required_discount_pct": 47.4,
       "historical_floor_jpy": null,
       "historical_floor_strength": "none",
       "scenario_prices": [
