@@ -253,7 +253,9 @@ def build_purchase_strategy_status(products, strategy, budget, peripheral_projec
     live_cap = int(peripheral_projection.get("pc_dynamic_cap_jpy") or 0)
     planned_bf_cap = min(
         int(budget["pc_budget_jpy"]),
-        int(budget["total_budget_jpy"]) - int(budget["peripheral_budget_jpy"]),
+        int(budget["total_budget_jpy"])
+        - int(budget["peripheral_budget_jpy"])
+        - int(budget.get("unallocated_contingency_jpy", 0)),
     )
     bf_cap = min(int(budget["pc_budget_jpy"]), live_cap) if in_watch_window and budget_ready else planned_bf_cap
     by_id = {str(x.get("id")): x for x in products if x.get("id")}
