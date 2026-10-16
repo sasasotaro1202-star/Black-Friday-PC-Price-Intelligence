@@ -406,7 +406,13 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertFalse(self.cfg["peripheral_budget_is_hard_cap"])
         self.assertEqual(self.cfg["peripheral_budget_mode"], "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET")
         self.assertEqual(
-            max(0, min(int(self.cfg["pc_budget_jpy"]), int(self.cfg["total_budget_jpy"]) - target_sum - int(self.cfg["unallocated_contingency_jpy"])),
+            max(
+                0,
+                min(
+                    int(self.cfg["pc_budget_jpy"]),
+                    int(self.cfg["total_budget_jpy"]) - target_sum - int(self.cfg["unallocated_contingency_jpy"]),
+                ),
+            ),
             340000,
         )
 
