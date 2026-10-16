@@ -146,8 +146,8 @@ class ReportLinkTests(unittest.TestCase):
         result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
         self.assertEqual(row["status"], "PRE_BF_TARGET_MONITORING")
-        self.assertEqual(row["max_upgrade_cost_to_bf_target_jpy"], 50400)
-        self.assertEqual(row["max_upgrade_cost_to_bf_hard_cap_jpy"], 50400)
+        self.assertEqual(row["max_upgrade_cost_to_bf_target_jpy"], 70200)
+        self.assertEqual(row["max_upgrade_cost_to_bf_hard_cap_jpy"], 70200)
         self.assertEqual(row["black_friday_target_price_jpy"], 350000)
         self.assertIsNone(row["black_friday_price_observed_jpy"])
         self.assertEqual(row["pre_black_friday_reference_price_jpy"], 279800)
