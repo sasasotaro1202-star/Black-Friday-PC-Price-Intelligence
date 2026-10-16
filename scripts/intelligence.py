@@ -416,6 +416,99 @@ def store_observation_validation(target, now=None):
     }
 
 
+
+def store_pickup_quote_validation(target, now=None):
+    """Validate an exact item/variant's checkout total when online-ordered for branch pickup.
+
+    The regular web listing price and a branch inventory result are not a pickup
+    checkout quote. A quote must separately record the final cash total, branch,
+    checked-at time, exact-model match, evidence note and official retailer URL.
+    """
+    options = target.get("purchase_channel_options") or []
+    required = "store_pickup" in options
+    empty = {
+        "store_pickup_checkout_total_jpy": None,
+        "store_pickup_checkout_total_confirmed": False,
+        "store_pickup_route_actionable": False,
+        "store_pickup_stock_status": "unknown",
+        "store_pickup_store_id": None,
+        "store_pickup_checkout_url": None,
+        "store_pickup_evidence_type": None,
+        "store_pickup_evidence_notes": None,
+        "store_pickup_quote_status": "UNCONFIRMED" if required else "NOT_REQUIRED",
+        "store_pickup_quote_age_minutes": None,
+    }
+    if not required:
+        return empty
+
+    current = parse_dt(now) if isinstance(now, str) else now
+    current = current or now_jst()
+    price = target.get("store_pickup_checkout_total_jpy")
+    checked_raw = target.get("store_pickup_quote_checked_at")
+    checked = parse_dt(checked_raw)
+    age_minutes = (current - checked).total_seconds() / 60.0 if checked else None
+    store_id = str(target.get("store_pickup_store_id") or "")
+    candidate_ids = {str(x) for x in (target.get("physical_store_candidate_ids") or [])}
+    store_cfg = load_json(os.path.join(ROOT, "config", "targets.json"), {})
+    store_rows = (store_cfg.get("purchase_channels") or {}).get("physical_store_candidates") or []
+    stores_by_id = {str(x.get("id")): x for x in store_rows if isinstance(x, dict) and x.get("id")}
+    store = stores_by_id.get(store_id)
+    evidence_type = str(target.get("store_pickup_evidence_type") or "")
+    evidence_notes = str(target.get("store_pickup_evidence_notes") or "").strip()
+    confirmation_url = str(target.get("store_pickup_checkout_url") or "")
+    model_match = target.get("store_pickup_model_match") is True
+    stock = str(target.get("store_pickup_stock_status") or "unknown")
+    source = urlparse(confirmation_url)
+    expected_host = urlparse(str((store or {}).get("official_store_url") or "")).netloc.lower()
+    target_allowed_hosts = {str(x).lower() for x in (target.get("allowed_hosts") or [])}
+    source_host_matches = bool(
+        confirmation_url and source.scheme == "https" and source.netloc
+        and source.netloc.lower() == expected_host
+        and source.netloc.lower() in target_allowed_hosts
+    )
+    allowed_evidence_types = {
+        "online_checkout_with_store_pickup",
+        "official_online_pickup_quote",
+        "store_pickup_checkout_screen",
+    }
+    max_age = actionable_max_age_minutes(current)
+
+    if not isinstance(price, int) or isinstance(price, bool) or price <= 0:
+        reason = "PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID"
+    elif checked is None or age_minutes is None:
+        reason = "PICKUP_QUOTE_TIMESTAMP_MISSING_OR_INVALID"
+    elif age_minutes < 0 or age_minutes > max_age:
+        reason = "PICKUP_QUOTE_FUTURE_OR_STALE"
+    elif not store or store_id not in candidate_ids:
+        reason = "PICKUP_BRANCH_UNVERIFIED"
+    elif evidence_type not in allowed_evidence_types:
+        reason = "PICKUP_EVIDENCE_TYPE_UNVERIFIED"
+    elif not evidence_notes:
+        reason = "PICKUP_EVIDENCE_NOTES_MISSING"
+    elif not model_match:
+        reason = "PICKUP_EXACT_MODEL_UNVERIFIED"
+    elif stock not in ("in_stock", "low_stock", "out_of_stock"):
+        reason = "PICKUP_STOCK_UNVERIFIED"
+    elif not source_host_matches:
+        reason = "PICKUP_CHECKOUT_URL_UNVERIFIED"
+    else:
+        reason = "PICKUP_QUOTE_VERIFIED"
+
+    verified = reason == "PICKUP_QUOTE_VERIFIED"
+    return {
+        "store_pickup_checkout_total_jpy": int(price) if verified else None,
+        "store_pickup_checkout_total_confirmed": verified,
+        "store_pickup_route_actionable": bool(verified and stocked(stock)),
+        "store_pickup_stock_status": stock if verified else "unknown",
+        "store_pickup_store_id": store_id if verified else None,
+        "store_pickup_checkout_url": confirmation_url if verified else None,
+        "store_pickup_evidence_type": evidence_type if verified else None,
+        "store_pickup_evidence_notes": evidence_notes if verified else None,
+        "store_pickup_quote_status": reason,
+        "store_pickup_quote_age_minutes": round(age_minutes, 1) if verified else None,
+    }
+
+
 def peripheral_budget_projection():
     """Compare actionable online, in-store and store-pickup routes per exact peripheral.
 
