@@ -548,6 +548,8 @@ def peripheral_budget_projection():
             "track_current_price": bool(target.get("track_current_price")),
         })
     cap = max(0, min(policy["pc_budget_jpy"], policy["total_budget_jpy"] - total_projection - policy.get("unallocated_contingency_jpy", 0)))
+    unverified_ids = set(unverified)
+    verified_tracked_count = sum(1 for p in tracked if str(p.get("id") or "") not in unverified_ids)
     return {
         "total_budget_jpy": policy["total_budget_jpy"],
         "peripheral_target_budget_jpy": policy["peripheral_budget_jpy"],
@@ -557,9 +559,9 @@ def peripheral_budget_projection():
         "pc_target_jpy": policy["pc_target_jpy"], "pc_planned_cap_jpy": policy["pc_budget_jpy"],
         "pc_dynamic_cap_jpy": cap, "snapshot_generated_at": snapshot.get("generated_at"),
         "snapshot_fresh": snapshot_fresh, "tracked_peripheral_count": len(tracked),
-        "tracked_peripheral_verified_count": len(tracked) - len(set(unverified)),
-        "tracked_peripheral_unverified_ids": sorted(set(unverified)),
-        "budget_data_ready": bool(snapshot_fresh and not unverified and len(tracked) > 0),
+        "tracked_peripheral_verified_count": verified_tracked_count,
+        "tracked_peripheral_unverified_ids": sorted(unverified_ids),
+        "budget_data_ready": bool(snapshot_fresh and not unverified_ids and len(tracked) > 0),
         "peripherals": rows,
     }
 
