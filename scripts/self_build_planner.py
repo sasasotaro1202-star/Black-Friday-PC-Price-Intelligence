@@ -527,7 +527,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
         "candidates": memory_candidates,
         "rule": "Choose the lowest fresh, exact-item trusted market reference among available candidates. If no candidate has a trusted reference, retain the memory kit configured as the primary planning fallback. Market references are not checkout prices and never authorize purchase."
     }
-    pc_budget = int(profile.get("pc_budget_jpy", 330200))
+    pc_budget = int(profile.get("pc_budget_jpy", 350000))
     all_budget = int(profile.get("total_budget_jpy", 400000))
     peripheral_budget = int(profile.get("peripheral_budget_jpy", 69800))
     shipping = int(profile.get("build_shipping_reserve_jpy", 0))
