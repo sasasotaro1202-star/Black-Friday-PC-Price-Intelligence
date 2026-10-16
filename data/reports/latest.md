@@ -1,8 +1,8 @@
 # ブラックフライデー期間通算・購入ランキング
 
-更新: 2026-10-16T17:07:05+09:00
-観測スナップショット: 2026-10-16T17:04:33+09:00
-観測スナップショットSHA256: 61f1674e75a45665c86ec453764eba13e34716ce905fbb350bb16378af83562e
+更新: 2026-10-16T18:49:16+09:00
+観測スナップショット: 2026-10-16T18:46:42+09:00
+観測スナップショットSHA256: b678717f47ed36c486f29317681f33ae124ca29daeee15ccd77bef92d4560542
 総予算（PC＋周辺機器）: ¥400,000
 周辺機器の目標予算: ¥69,800
 PC本体の目標価格: ¥330,200
@@ -220,8 +220,8 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 - 取得成功率: 52.4%
 - 価格確認率: 47.6%
 - 検索補完（成功/試行）: 0/10
-- 検索SKU不一致による除外: 59
-- 取得エラー内訳（host|reason）: rog.asus.com|curl_http_404=1, store.acer.com| (28) Operation timed out after 18003 milliseconds with 0 bytes received=1, store.asus.com|curl_http_403=7, www.dospara.co.jp|curl_http_404=1
+- 検索SKU不一致による除外: 60
+- 取得エラー内訳（host|reason）: rog.asus.com|curl_http_404=1, store.acer.com| (28) Operation timed out after 18002 milliseconds with 0 bytes received=1, store.asus.com|curl_http_403=7, www.dospara.co.jp|curl_http_404=1
 - 未処理候補: なし
 
 ## 価格シナリオ
@@ -280,7 +280,7 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 
 ## 今この瞬間の買い時判定
 
-- 更新時刻（JST）: 2026-10-16T17:07:05+09:00
+- 更新時刻（JST）: 2026-10-16T18:49:16+09:00
 - 判定: **事前監視継続・公式日程未確認** (PRE_BF_MONITORING)
 - 暫定の広域監視窓（公式セール日程ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 - 公式日程確認: 0/16 店舗（未確認: 11、取得エラー: 5）
