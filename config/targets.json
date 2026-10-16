@@ -336,7 +336,10 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true
+      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_shipping_reserve_jpy": 1000,
+      "online_shipping_cost_verified": false,
+      "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。"
     },
     {
       "id": "keyboard",
@@ -411,7 +414,10 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true
+      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_shipping_reserve_jpy": 500,
+      "online_shipping_cost_verified": false,
+      "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。"
     },
     {
       "id": "mouse",
@@ -483,7 +489,10 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true
+      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_shipping_reserve_jpy": 500,
+      "online_shipping_cost_verified": false,
+      "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。"
     },
     {
       "id": "mousepad",
@@ -555,7 +564,10 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true
+      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_shipping_reserve_jpy": 500,
+      "online_shipping_cost_verified": false,
+      "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。"
     },
     {
       "id": "cables",
@@ -583,7 +595,10 @@
         "online",
         "physical_store",
         "store_pickup"
-      ]
+      ],
+      "online_shipping_reserve_jpy": 0,
+      "online_shipping_cost_verified": false,
+      "online_shipping_note": "付属品確認後に不足時のみ購入。配送費が必要な場合は決済前に実額を確認。"
     },
     {
       "id": "store_price_buffer",
@@ -792,7 +807,10 @@
       "store_observation_store_id": null,
       "store_evidence_type": null,
       "store_evidence_notes": null,
-      "store_inventory_checks": []
+      "store_inventory_checks": [],
+      "online_shipping_reserve_jpy": 0,
+      "online_shipping_cost_verified": false,
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
     },
     {
       "id": "cables_alt_sanwa_kc_dp1420",
@@ -842,7 +860,10 @@
       "store_observation_store_id": null,
       "store_evidence_type": null,
       "store_evidence_notes": null,
-      "store_inventory_checks": []
+      "store_inventory_checks": [],
+      "online_shipping_reserve_jpy": 0,
+      "online_shipping_cost_verified": false,
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
     },
     {
       "id": "keyboard_alt_logicool_g413_tkl_se",
@@ -912,7 +933,10 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true
+      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_shipping_reserve_jpy": 500,
+      "online_shipping_cost_verified": false,
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
     },
     {
       "id": "keyboard_alt_logicool_g413se",
@@ -982,7 +1006,10 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true
+      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_shipping_reserve_jpy": 500,
+      "online_shipping_cost_verified": false,
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
     },
     {
       "id": "main_monitor_alt_msi_mag_275qf",
@@ -1031,7 +1058,10 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true
+      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_shipping_reserve_jpy": 1000,
+      "online_shipping_cost_verified": false,
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
     },
     {
       "id": "main_monitor_alt_lg_27gs75qb",
@@ -1079,7 +1109,10 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true
+      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_shipping_reserve_jpy": 1000,
+      "online_shipping_cost_verified": false,
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
     },
     {
       "id": "mouse_alt_logicool_g203",
@@ -1150,7 +1183,10 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true
+      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_shipping_reserve_jpy": 500,
+      "online_shipping_cost_verified": false,
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
     },
     {
       "id": "mouse_alt_logicool_g304_x_superlight",
@@ -1218,7 +1254,10 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true
+      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_shipping_reserve_jpy": 500,
+      "online_shipping_cost_verified": false,
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
     },
     {
       "id": "mousepad_alt_razer_gigantus_v2_l",
@@ -1267,7 +1306,10 @@
       "store_observation_store_id": null,
       "store_evidence_type": null,
       "store_evidence_notes": null,
-      "store_inventory_checks": []
+      "store_inventory_checks": [],
+      "online_shipping_reserve_jpy": 500,
+      "online_shipping_cost_verified": false,
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
     },
     {
       "id": "mousepad_alt_logicool_g640s",
@@ -1316,7 +1358,10 @@
       "store_observation_store_id": null,
       "store_evidence_type": null,
       "store_evidence_notes": null,
-      "store_inventory_checks": []
+      "store_inventory_checks": [],
+      "online_shipping_reserve_jpy": 500,
+      "online_shipping_cost_verified": false,
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
     }
   ],
   "peripheral_ranking_policy": {
