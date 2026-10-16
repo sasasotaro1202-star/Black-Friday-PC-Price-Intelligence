@@ -59,6 +59,20 @@ class ReportLinkTests(unittest.TestCase):
             "peripheral_prices_or_availability_unverified",
         )
 
+
+    def test_completed_pc_gate_blocks_cheapest_channel_claim_until_routes_compared(self):
+        reason = report.purchase_gate_reason(
+            self_build_primary=False,
+            critical_unverified=[],
+            peripheral_budget_ready=True,
+            action=None,
+            dynamic_pc_cap_jpy=359000,
+            purchase_gate_allowed=False,
+            peripheral_channel_comparison_pending_count=4,
+        )
+        self.assertEqual(reason, "peripheral_purchase_channel_comparison_incomplete")
+
+
     def test_sales_url_accepts_http_url(self):
         self.assertEqual(
             report.sales_url({"url": "https://example.com/product"}),
