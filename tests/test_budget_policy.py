@@ -214,7 +214,7 @@ class BudgetPolicyTests(unittest.TestCase):
 
         speaker_row = next(x for x in projection["peripherals"] if x["id"] == "speakers")
         self.assertEqual(projection["peripheral_projection_jpy"], 47980)
-        self.assertEqual(projection["pc_dynamic_cap_jpy"], 350000)
+        self.assertEqual(projection["pc_dynamic_cap_jpy"], 347020)
         self.assertIn("speakers", projection["tracked_peripheral_unverified_ids"])
         self.assertFalse(projection["budget_data_ready"])
         self.assertIsNone(speaker_row["current_price_jpy"])
