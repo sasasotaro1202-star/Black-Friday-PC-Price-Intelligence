@@ -4,7 +4,7 @@
 
 ## 結論：周辺機器45,000円程度
 
-**サブモニターなし・ヘッドセットなし・27インチWQHDメインモニター1台**です。周辺機器はすべて実店舗購入、周辺機器送料は0円計上です。福岡の候補店舗はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多。両店のWeb価格は比較用で、店頭価格・支店在庫を証明しません。
+**サブモニターなし・ヘッドセットなし・27インチWQHDメインモニター1台**です。周辺機器はすべて実店舗購入、周辺機器送料は0円計上です。マウスパッドは黒のSteelSeries QcK Large型番63003を候補とし、Web価格は天神1号館の店頭価格・在庫を証明しません。福岡の候補店舗はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多。両店のWeb価格は比較用で、店頭価格・支店在庫を証明しません。
 
 | 項目 | 第一候補 | BF購入目標 | 購入条件 |
 |---|---|---:|---|
@@ -13,7 +13,7 @@
 | キーボード | Logicool G213r | ¥5,000 | 日本語配列・色・税込価格の確認 |
 | マウス | Logicool G304 | ¥4,000 | 色/型番・税込価格・在庫確認 |
 | マウスパッド | SteelSeries QcK Large | ¥2,000 | 実店舗でサイズと表面を確認 |
-| 電源タップ | ELECOM T-K1A-2625BK（6口・2.5m・雷ガード） | ¥1,500 | 口数・コード長・安全仕様を確認 |
+| 電源タップ | ELECOM T-NSLK-2620BK（6口・2m・雷ガード・ほこりシャッター） | ¥1,500 | 口数・コード長・安全仕様を確認 |
 | ケーブル | 付属品を先に確認 | ¥0 | 必要な場合だけ店頭購入 |
 | 店頭価格差・不足品の予備費 | 商品ではない | ¥2,500 | 店頭価格やケーブル不足に備える |
 | **合計** | | **¥45,000** | **送料計上なし** |
@@ -28,8 +28,8 @@
 | EDIFIER MR3 | ![EDIFIER MR3](https://www.edifier.jp/cdn/shop/files/MR3_1_1.jpg?v=1788508256&width=1000) | [ビックカメラ](https://www.biccamera.com/bc/item/13719866/) / [ヨドバシ](https://www.yodobashi.com/product/100000001008849809/) / [メーカー公式](https://www.edifier.jp/products/mr3) |
 | Logicool G213r | ![Logicool G213r](https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg) | [ビックカメラ](https://www.biccamera.com/bc/item/9242996/) / [Logicool公式ストア](https://item.rakuten.co.jp/logicool/g213r/) |
 | Logicool G304 | ![Logicool G304](https://down-ph.img.susercontent.com/file/sg-11134202-7rfh8-m43f6xs2o7yb73) | [ヨドバシ](https://www.yodobashi.com/product/100000001004334450/) / [ビックカメラ](https://www.biccamera.com/bc/item/6566291/) |
-| SteelSeries QcK Large | ![SteelSeries QcK Large](https://files.pccasegear.com/images/SS-63003-thumb.jpg) | [ヨドバシ](https://www.yodobashi.com/product/100000001009472873/) |
-| ELECOM T-K1A-2625BK | 外観未確認 | [ELECOM公式仕様](https://www.elecom.co.jp/products/T-K1A-2625BK.html) |
+| SteelSeries QcK Large | ![SteelSeries QcK Large](https://files.pccasegear.com/images/SS-63003-thumb.jpg) | [ビックカメラ商品ページ（黒・型番63003）](https://www.biccamera.com/bc/item/1570130/) |
+| ELECOM T-NSLK-2620BK | 外観未確認 | [ビックカメラWeb価格・仕様](https://www.biccamera.com/bc/item/3605560/) / [メーカー仕様](https://www.elecom.co.jp/products/T-NSLK-2620BK.html) |
 
 画像は外観の参考です。現在価格・在庫・製品型番の証明には使いません。価格や在庫の最新状態は、リンク先と実店舗で確認します。
 
@@ -75,7 +75,7 @@
 
 | 順位 | スコア | 商品 | BF目標 | 判断 |
 |---:|---:|---|---:|---|
-| **1** | **93/100** | **SteelSeries QcK Large** | **¥2,000** | 大きな操作面を低価格で確保。[ヨドバシ](https://www.yodobashi.com/product/100000001009472873/) |
+| **1** | **93/100** | **SteelSeries QcK Large** | **¥2,000** | 大きな操作面を低価格で確保。[ビックカメラ商品ページ（黒・型番63003）](https://www.biccamera.com/bc/item/1570130/) |
 | 2 | 89/100 | Razer Gigantus V2 L | ¥2,200 | 450×400mm級の代替。表面の感触を比べる。[公式](https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1) |
 | 3 | 87/100 | Logicool G640 | ¥3,000 | 表面の好みで選ぶ候補。[公式](https://gaming.logicool.co.jp/ja-jp/shop/p/g640-cloth-gaming-mouse-pad) |
 
@@ -83,7 +83,7 @@
 
 | 順位 | スコア | 商品 | BF目標 | 判断 |
 |---:|---:|---|---:|---|
-| **1** | **86/100** | **ELECOM T-K1A-2625BK** | **¥1,500** | 6口・2.5m・雷ガード付き。[公式仕様](https://www.elecom.co.jp/products/T-K1A-2625BK.html) |
+| **1** | **86/100** | **ELECOM T-NSLK-2620BK** | **¥1,500** | 6口・2m・雷ガード・ほこりシャッター付き。[ビックカメラWebページ（店舗価格ではない）](https://www.biccamera.com/bc/item/3605560/) / [公式仕様](https://www.elecom.co.jp/products/T-NSLK-2620BK.html) |
 | 2 | 82/100 | Sanwa Supply TAP-SP2116MG-2WN | ¥1,800 | 6口・2m級の代替。[メーカー仕様](https://www.sanwa.co.jp/product/syohin?code=TAP-SP2116MG-2WN) |
 | 3 | 76/100 | ELECOM T-K6A-2630BK | ¥2,500 | 3mコードが必要な場合。[公式仕様](https://www.elecom.co.jp/products/T-K6A-2630BK.html) |
 
