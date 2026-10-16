@@ -230,7 +230,7 @@ class PeripheralMonitorTests(unittest.TestCase):
                 self.assertEqual(sorted(scores, reverse=True), [x["ranking_score_100"] for x in sorted_members])
         mandatory_total = sum(int(x.get("target_price_jpy", 0)) for x in config["peripherals"] if x.get("mandatory", True))
         self.assertEqual(mandatory_total, config["peripheral_budget_jpy"])
-        self.assertEqual(config["pc_budget_jpy"] + config["peripheral_budget_jpy"] + config["unallocated_contingency_jpy"], config["total_budget_jpy"])
+        self.assertEqual(config["pc_budget_jpy"] + config["unallocated_contingency_jpy"], config["total_budget_jpy"])
 
 
     def test_store_observation_requires_branch_exact_model_freshness_and_audit_evidence(self):
