@@ -576,7 +576,11 @@
       "store_model_match": false,
       "store_observation_store_id": null,
       "store_evidence_type": null,
-      "store_evidence_notes": null
+      "store_evidence_notes": null,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "power_strip",
@@ -632,7 +636,11 @@
       "store_model_match": false,
       "store_observation_store_id": null,
       "store_evidence_type": null,
-      "store_evidence_notes": null
+      "store_evidence_notes": null,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "cables",
