@@ -59,8 +59,8 @@ RTX 5060 Ti 16GBはローカルAIの一部用途でVRAM容量を確保したい�
 
 ゲーム・ゲーム制作アセット・ビルド・分析データの保存容量を増やす価値があるため、2TB SSDを1TB SSDの**置き換え候補**として監視します。追加ドライブとして二重計上しません。
 
-- 監視候補：KIOXIA EXCERIA BASIC SSD-CK2.0N4B/J 2TB。メーカー仕様：[公式](https://www.kioxia.com/ja-jp/personal/ssd/exceria-basic.html)。
-- 2026年10月の価格比較ページでは61,182円（/J）および68,280円（/N）の表示例があります。[/J](https://kakaku.com/item/K0001724151/) [/N](https://kakaku.com/item/K0001719361/)。この値は比較参考価格で、BF実売価格ではありません。
+- 監視候補：KIOXIA EXCERIA BASIC SSD-CK2.0N4B/N 2TB。メーカー仕様：[公式](https://www.kioxia.com/ja-jp/personal/ssd/exceria-basic.html)。
+- 2026年10月の価格比較ページでは監視SKU `/N` は68,280円（掲載店舗1件）でした。[/N](https://kakaku.com/item/K0001719361/)。別SKU `/J` の61,182円表示は `/N` の価格として流用しません。[/J](https://kakaku.com/item/K0001724151/)。この値は比較参考価格で、BF実売価格ではありません。
 - 2TBのBF目標45,000円は積極的な目標です。既存1TBのBF目標18,000円に対して差額27,000円。RTX 5070 Ti構成のPC本体目標を324,800円から351,800円へ置き換え、周辺機器40,000円・予備費5,000円込みで396,800円になります。
 - これは**目標価格を達成した場合のシナリオ**です。価格と在庫が届かなければ1TB候補を残し、他の実在する2TB候補も比較します。QLC NANDなので継続的な大容量書き込みではTLCの候補と比較し、読込速度だけで決めません。
 
