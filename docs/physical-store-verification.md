@@ -31,6 +31,21 @@
 - `store_confirmation_url`: 支店の公式URL（HTTPS）
 - `store_model_match`: 完全な型番・バリアントが一致した場合だけ `true`
 
+## 店舗受け取り用の証拠
+
+ネット注文の店舗受け取りは通常のネット配送/店頭現金購入と別ルートとして扱います。`config/targets.json` の候補商品に、実際の受け取り決済を確認した場合だけ次を記録します。
+
+- `store_pickup_checkout_total_jpy`: 正確な型番・バリアントに対し、受け取り支店を選択した最終現金支払額。必須費用を含め、ポイントを現金値引きとして差し引かない。
+- `store_pickup_quote_checked_at`: JSTの確認時刻。ネット販売ページの古い表示時刻や店頭在庫取得時刻で代用しない。
+- `store_pickup_store_id`: 受け取り可能と確認した実店舗候補ID。
+- `store_pickup_stock_status`: `in_stock` / `low_stock` / `out_of_stock` / `unknown`。
+- `store_pickup_checkout_url`: ネットで注文・受け取り支店選択を確認した公式のHTTPS販売ページ。
+- `store_pickup_model_match`: 正確な型番・色が一致した場合だけ `true`。
+- `store_pickup_evidence_type`: `online_checkout_with_store_pickup` / `official_online_pickup_quote` / `store_pickup_checkout_screen`。
+- `store_pickup_evidence_notes`: 型番、受け取り支店、最終支払額、必須費用、確認方法。
+
+通常の商品ページ価格と支店在庫だけでは受け取り決済額の確定証拠になりません。これらの項目が揃わない間は、レポートに店舗受け取りルートの比較保留を明示します。
+
 ネット商品ページしか確認できていない場合は店頭証拠項目を埋めません。同じシリーズの別型番、色違い、取り寄せ表示を店頭在庫ありとみなしません。
 
 ## 価格・在庫の有効期限
