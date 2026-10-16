@@ -235,6 +235,12 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(mouse_row["channel_comparison_status"], "NO_ACTIONABLE_CHANNEL")
         self.assertEqual(projection["peripheral_projection_jpy"], self.cfg["peripheral_budget_jpy"])
         self.assertEqual(projection["flexible_reserve_offset_for_shipping_jpy"], 2500)
+        self.assertEqual(projection["channel_comparison_required_count"], 4)
+        self.assertEqual(projection["channel_comparison_complete_count"], 0)
+        self.assertEqual(
+            set(projection["channel_comparison_pending_ids"]),
+            {"main_monitor", "keyboard", "mouse", "mousepad"},
+        )
         self.assertLessEqual(
             projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"] + self.cfg["unallocated_contingency_jpy"],
             projection["total_budget_jpy"],
