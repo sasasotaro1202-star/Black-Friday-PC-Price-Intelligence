@@ -27,8 +27,13 @@ def main():
     # target is checked against peripherals + contingency under the total hard ceiling.
     if policy["pc_budget_jpy"] + policy.get("unallocated_contingency_jpy", 0) != policy["total_budget_jpy"]:
         errors.append("budget arithmetic mismatch: PC cap + contingency != total budget")
-    if policy["pc_target_jpy"] + policy["peripheral_budget_jpy"] + policy.get("unallocated_contingency_jpy", 0) > policy["total_budget_jpy"]:
-        errors.append("planned PC target + peripheral allocation + contingency exceeds total budget")
+    dynamic_pc_cap = peripheral_projection.get("pc_dynamic_cap_jpy")
+    projected_peripherals = peripheral_projection.get("peripheral_projection_jpy")
+    contingency = policy.get("unallocated_contingency_jpy", 0)
+    if not isinstance(dynamic_pc_cap, int) or not isinstance(projected_peripherals, int):
+        errors.append("dynamic all-in budget projection is missing or invalid")
+    elif dynamic_pc_cap + projected_peripherals + contingency > policy["total_budget_jpy"]:
+        errors.append("dynamic PC cap + projected peripherals + contingency exceeds total budget")
     if policy["pc_target_jpy"] > policy["pc_budget_jpy"]:
         errors.append("PC target exceeds PC cap")
     if sum(int(p.get("target_price_jpy") or 0) for p in policy["peripherals"] if p.get("mandatory", True)) != policy["peripheral_budget_jpy"]:
