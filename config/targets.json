@@ -258,7 +258,7 @@
   "desktop_note": "Desktop self-build candidate monitoring must account for gaming, game creation, schoolwork/research/multitasking, Python/data analysis, automated prediction systems and feasible local AI. Keep the total all-in ceiling at ¥400,000, peripherals ¥45,000, PC planning target ¥350,000 and ¥5,000 contingency. Required at purchase: 32GB RAM and 1TB SSD; 64GB/2TB is a preferred complete-build outlier only when exact price and compatibility evidence are available. No post-purchase upgrade assumptions. BTO is a benchmark only.",
   "desktop_exact_candidate_count": 7,
   "total_budget_jpy": 400000,
-  "peripheral_budget_jpy": 55000,
+  "peripheral_budget_jpy": 62000,
   "pc_target_jpy": 350000,
   "pc_budget_jpy": 395000,
   "minimum_ram_gb": 32,
@@ -333,8 +333,8 @@
     {
       "id": "secondary_monitor",
       "category": "secondary_monitor",
-      "name": "サブモニター（23.8〜24インチ FHD IPS 100Hz級。正確な型番は店頭価格・在庫で選定）",
-      "target_price_jpy": 10000,
+      "name": "サブモニター（23.8〜24インチ FHD IPS。75Hz以上、100Hz級を優先。最終SKUは店頭条件で選定）",
+      "target_price_jpy": 17000,
       "track_current_price": false,
       "monitor_url": "https://kakaku.com/pc/lcd-monitor/itemlist.aspx?pdf_Spec107=1&pdf_Spec301=23.8&pdf_Spec311=100-",
       "purchase_url": "https://kakaku.com/pc/lcd-monitor/itemlist.aspx?pdf_Spec107=1&pdf_Spec301=23.8&pdf_Spec311=100-",
@@ -350,9 +350,9 @@
       "mandatory": true,
       "requires_exact_model_before_purchase": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "¥10,000はサブモニター1台分の暫定BF目標枠であり、特定型番の価格・BF実売・福岡店舗の現金価格/在庫を意味しない。候補条件は23.8〜24インチ、FHD、IPS、100Hz級。例としてLenovo L24-41はメーカー仕様で23.8インチFHD IPS・100Hzだが、福岡の実店舗での販売/在庫は未確認。購入前に実店舗で型番・現金価格・在庫・保証を確認し、選定後は正確なSKUで価格・在庫の監視対象に置き換える。",
-      "ranking_reason": "暫定の価格・仕様基準。勉強用資料、IDE、ゲームエンジン、分析を別画面に分ける用途では、FHD IPS・100Hz級を目安にし、正確なSKU/店頭在庫が分かるまではこの一般仕様を実売商品として扱わない。",
-      "best_for": "最小限の費用で作業用サブ画面を追加",
+      "target_price_note": "¥17,000はBF予算試算用の保守的な配分枠であり、確定価格ではない。23.8型FHD IPSの国内量販店掲載例は2026-10-17時点で約¥15,980〜¥20,680（オンライン参考値）だが、店頭現金価格・福岡の支店在庫・BF価格を意味しない。75Hz以上を許容し、100Hz級を優先。選定前は特定SKUではないため購入許可を出さず、代替候補の直接価格と支店在庫を並行監視する。",
+      "ranking_reason": "勉強資料、ブラウザー、IDE、ゲームエンジン、データ分析を別画面に分ける。23.8〜24インチFHD IPSを基準に、75Hz以上・100Hz級を優先。サブ画面に高額なWQHD/高Hzを必須とせず、読みやすさ・端子・スタンド・保証・店頭価格のバランスを重視する。",
+      "best_for": "学校の勉強・ゲーム制作・分析のマルチウィンドウ",
       "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
@@ -369,7 +369,8 @@
       "store_evidence_type": null,
       "store_evidence_notes": null,
       "store_inventory_checks": [],
-      "ranking_score_100": 85
+      "ranking_score_100": 85,
+      "model_code": null
     },
     {
       "id": "speakers",
@@ -872,7 +873,10 @@
       "online_categories": [],
       "store_inventory_must_be_verified": true,
       "online_price_is_store_price": false
-    }
+    },
+    "peripheral_allocation_scenario_jpy": 62000,
+    "peripheral_allocation_scenario_note": "62,000円はサブモニター17,000円を含む計画シナリオであり、ハード上限ではない。",
+    "budget_formula": "dynamic_pc_cap_jpy = max(0, min(pc_budget_jpy, total_budget_jpy - current_or_reserved_mandatory_peripheral_cost_jpy - unallocated_contingency_jpy))"
   },
   "peripheral_alternatives": [
     {
@@ -1596,6 +1600,191 @@
         "yodobashi_hakata"
       ],
       "inventory_monitoring_note": "型番一致の実店舗在庫・税込現金価格は未確認。購入前に店舗で確認する。"
+    },
+    {
+      "id": "secondary_monitor_alt_japannext_jn_ips2382fhdr",
+      "category": "secondary_monitor",
+      "name": "JAPANNEXT JN-IPS2382FHDR 23.8-inch FHD IPS 75Hz",
+      "model_code": "JN-IPS2382FHDR",
+      "target_price_jpy": 13000,
+      "track_current_price": true,
+      "monitor_url": "https://www.biccamera.com/bc/item/12625570/",
+      "monitor_urls": [
+        "https://www.biccamera.com/bc/item/12625570/",
+        "https://www.yodobashi.com/product/100000001008279718/"
+      ],
+      "purchase_url": "https://www.biccamera.com/bc/item/12625570/",
+      "identity_terms": [
+        "JN-IPS2382FHDR",
+        "12625570",
+        "JAPANNEXT JN-IPS2382FHDR"
+      ],
+      "allowed_hosts": [
+        "www.biccamera.com",
+        "www.yodobashi.com"
+      ],
+      "min_price_jpy": 8000,
+      "max_price_jpy": 30000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "¥13,000はBF購入目標。ビックカメラWeb掲載例は2026-10-17に¥15,980（税込）だが、オンライン参考値であり、BF価格・天神1号館の店頭現金価格・支店在庫を証明しない。製品仕様は23.8型FHD IPS、75Hz、HDMI/VGA、2W×2スピーカー、VESA対応。スタンドの高さ調整はないため実物を確認する。",
+      "ranking_score_100": 85,
+      "ranking_reason": "シンプルなFHD IPSの低価格候補。75Hzなので100Hz級より低いが、資料・ブラウザー・IDE用には十分な可能性があり、サブ画面を安く確保したい場合に向く。高さ調整なし。",
+      "best_for": "価格重視の作業用サブ画面",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ],
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_inventory_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": [
+        {
+          "store_id": "biccamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=12625570",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "ビックカメラ天神1号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
+        }
+      ]
+    },
+    {
+      "id": "secondary_monitor_alt_feuvision_ew_fsid24bf0si",
+      "category": "secondary_monitor",
+      "name": "FeuVision EW-FSID24BF0SI 23.8-inch FHD IPS 100Hz",
+      "model_code": "EW-FSID24BF0SI",
+      "target_price_jpy": 14000,
+      "track_current_price": true,
+      "monitor_url": "https://www.biccamera.com/bc/item/15099260/",
+      "monitor_urls": [
+        "https://www.biccamera.com/bc/item/15099260/",
+        "https://www.yodobashi.com/product/100000001009983597/"
+      ],
+      "purchase_url": "https://www.biccamera.com/bc/item/15099260/",
+      "identity_terms": [
+        "EW-FSID24BF0SI",
+        "15099260",
+        "FeuVision FSID24BF0SI"
+      ],
+      "allowed_hosts": [
+        "www.biccamera.com",
+        "www.yodobashi.com"
+      ],
+      "min_price_jpy": 9000,
+      "max_price_jpy": 30000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "¥14,000はBF目標。ビックカメラWeb掲載例は¥16,800（税込）。23.8型FHD IPS・100Hz。Web表示は店頭現金価格や店舗別在庫を証明しない。ブランド/スタンド/端子と実際の在庫を店頭で確認してから選ぶ。",
+      "ranking_score_100": 83,
+      "ranking_reason": "100HzとIPSを優先しつつ費用を抑える候補。複数画面の資料閲覧・プログラミング・分析に十分な仕様。現地在庫とメーカーサポート条件を確認する。",
+      "best_for": "FHD IPS・100Hzを予算内で優先",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ],
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_inventory_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=15099260",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "ビックカメラ天神1号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
+        }
+      ]
+    },
+    {
+      "id": "secondary_monitor_alt_iodata_lcd_d242sax",
+      "category": "secondary_monitor",
+      "name": "I-O DATA LCD-D242SAX 23.8-inch FHD IPS-like 100Hz",
+      "model_code": "LCD-D242SAX",
+      "target_price_jpy": 16500,
+      "track_current_price": true,
+      "monitor_url": "https://www.biccamera.com/bc/item/13987123/",
+      "monitor_urls": [
+        "https://www.biccamera.com/bc/item/13987123/"
+      ],
+      "purchase_url": "https://www.biccamera.com/bc/item/13987123/",
+      "identity_terms": [
+        "LCD-D242SAX",
+        "13987123",
+        "I-O DATA LCD-D242SAX"
+      ],
+      "allowed_hosts": [
+        "www.biccamera.com",
+        "www.iodata.jp"
+      ],
+      "min_price_jpy": 12000,
+      "max_price_jpy": 40000,
+      "mandatory": false,
+      "price_target_phase": "black_friday",
+      "target_price_note": "¥16,500はBF目標。ビックカメラWeb掲載例は2026-10-17時点で¥20,680（税込）。23.8型FHD・100Hz、HDMI/DisplayPort、5年保証の掲載候補。Web表示は天神1号館の店頭現金価格・支店在庫を証明しない。",
+      "ranking_score_100": 88,
+      "ranking_reason": "メーカー保証とHDMI/DisplayPortを重視する上位候補。プログラミングや資料閲覧用の安定した常用画面に向くが、価格差が大きい場合は低価格候補を優先する。",
+      "best_for": "保証・接続端子を重視",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ],
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_inventory_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=13987123",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "ビックカメラ天神1号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
+        }
+      ]
     }
   ],
   "peripheral_ranking_policy": {
@@ -1619,7 +1808,7 @@
         "weight_pct": 15
       }
     ],
-    "instructions": "各カテゴリから主候補を1商品選び、代替候補を同時購入しない。メインモニターとサブモニターを各1台、スピーカー、キーボード、マウス、マウスパッド、電源タップ、必要ケーブルを対象とする。ヘッドセットは現時点で購入対象外。周辺機器予算45,000円は固定しない。総額400,000円と予備費5,000円を優先し、実際の店頭価格・品質・必要性を元にPC本体との配分を動的に最適化する。周辺機器は福岡の実店舗購入を基本とし、送料は計上しない。Web価格は参考値であり、ビックカメラ天神1号館またはヨドバシ博多の店頭価格/在庫を証明しない。サブモニターの暫定条件は23.8〜24インチ、FHD、IPS、100Hz級。型番は店頭在庫・現金価格・保証を確認してから確定し、型番未確定の予算目標を購入可能価格や在庫確認済みとして扱わない。MR3を音質・価格のバランス候補、MR4 MKIIを店頭価格が十分下がった場合の上位代替、Creative Pebble Proを小型・低価格代替とする。ポイント・クーポンは決済条件確認前に値引き扱いしない。",
+    "instructions": "各カテゴリから主候補を1商品選び、代替候補を同時購入しない。メインモニターとサブモニターを各1台、スピーカー、キーボード、マウス、マウスパッド、電源タップ、必要ケーブルを対象とする。ヘッドセットは現時点で購入対象外。周辺機器予算45,000円は固定しない。総額400,000円と予備費5,000円を優先し、実際の店頭価格・品質・必要性を元にPC本体との配分を動的に最適化する。サブモニターは23.8〜24インチFHD IPSを基準に75Hz以上、100Hz級を優先する。周辺機器は福岡の実店舗購入を基本とし、送料は計上しない。Web価格は参考値であり、ビックカメラ天神1号館またはヨドバシ博多の店頭価格/在庫を証明しない。型番未確定のサブモニターは比較候補を追跡し、店頭価格・在庫を確認後に正式SKUを選択する。MR3を音質・価格のバランス候補、MR4 MKIIを店頭価格が十分下がった場合の上位代替、Creative Pebble Proを小型・低価格代替とする。ポイント・クーポンは決済条件確認前に値引き扱いしない。",
     "category_order": [
       {
         "category": "main_monitor",
@@ -1627,7 +1816,7 @@
       },
       {
         "category": "secondary_monitor",
-        "label": "サブモニター（勉強・制作・分析用）"
+        "label": "サブモニター（勉強・制作・分析用、23.8〜24型FHD IPS）"
       },
       {
         "category": "speakers",
@@ -1658,7 +1847,7 @@
   "monitor_window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
   "monitor_window_note": "暫定の広域監視窓であり、いずれかの販売店の公式BF開催日を意味しない。各店の2026年公式日程を公式ページから明示的な年付き日付範囲で確認するまで、価格をBF実売として認定せず、買い時判定は購入許可を出さない。過去日程、曜日、年のない月日から開催日を推定しない。",
   "budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
-  "budget_target_note": "総額400,000円を絶対上限とする。周辺機器45,000円固定を廃止。メイン＋サブモニター、スピーカー、入力機器などの実際の必要額・店頭価格を見て配分し、PC本体の許容額は総額400,000円－周辺機器の計画/確認額－総額予備費5,000円を基本に動的計算する。55,000円はサブモニターを含めた現時点の配分試算であり、固定予算や実売価格ではない。",
+  "budget_target_note": "総額400,000円を絶対上限とする。周辺機器の配分は固定しない。メイン＋サブモニター、スピーカー、入力機器などの実際の必要額・店頭価格を見て配分し、PC本体の許容額は総額400,000円－周辺機器の計画/確認額－総額予備費5,000円を基本に動的計算する。62,000円は17,000円のサブモニター枠を含む現時点の配分試算であり、固定予算や実売価格ではない。",
   "purchase_channels": {
     "pc_body": {
       "channel": "online",
@@ -1715,7 +1904,7 @@
     "store_stock_rule": "周辺機器はすべて実店舗購入。全国オンライン在庫・Web価格は当該店舗の店頭在庫・店頭決済価格を証明しない。購入判断前に、同一型番/色、ビックカメラ天神1号館またはヨドバシ博多の店頭在庫または取り置き、店頭税込現金支払総額を確認する。未確認なら購入許可は保留する。",
     "online_price_handling": "オンライン価格は市場比較の参考値に限る。実店舗の価格・在庫として扱わない。"
   },
-  "target_budget_notes": "総額上限400,000円。周辺機器45,000円固定を廃止し、メインモニター＋サブモニター＋スピーカー＋入力機器等を用途に合わせて選び、PC本体と周辺機器の配分を動的に最適化する。現時点の配分試算は周辺機器55,000円だが必須上限ではない。総額予備費5,000円を基本として、PC本体の許容額は総額から周辺機器の計画/確認額と予備費を差し引く。ヘッドセットなし。周辺機器送料なし。BF目標、事前参考価格、確認済みBF実売価格、最終決済価格を区別し、価格・型番・在庫・互換性の未確認が残る場合は購入許可しない。",
+  "target_budget_notes": "総額上限400,000円。周辺機器の予算は固定しない。現時点の配分試算はメインモニター18,000円、サブモニター17,000円、スピーカー12,000円、入力機器等と予備費を含む合計62,000円だが必須上限ではない。総額予備費5,000円を基本として、PC本体の許容額は総額から周辺機器の計画/確認額と予備費を差し引く。ヘッドセットなし。周辺機器送料なし。BF目標、事前参考価格、確認済みBF実売価格、最終決済価格を区別し、価格・型番・在庫・互換性の未確認が残る場合は購入許可しない。",
   "target_budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
   "market_risk_policy": {
     "snapshot_date": "2026-10-17",
