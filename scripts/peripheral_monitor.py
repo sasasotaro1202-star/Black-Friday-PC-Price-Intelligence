@@ -299,7 +299,7 @@ def run_one(target, previous, retrieved_at):
         "monitor_url": primary_url,
         "purchase_url": target.get("purchase_url") or primary_url,
         "retrieval_time": retrieved_at, "available_at": None,
-        "current_price_jpy": None, "online_comparison_price_jpy": None,
+        "current_price_jpy": None, "online_comparison_price_jpy": None, "unverified_price_candidate_jpy": None,
         "online_reference_price_verified": False, "online_offers": [],
         "online_offer_count": 0, "online_actionable_offer_count": 0,
         "online_best_offer_url": None, "online_best_offer_stock_status": "unknown",
@@ -381,6 +381,8 @@ def run_one(target, previous, retrieved_at):
             lower = int(target.get("min_price_jpy") or 1)
             upper = int(target.get("max_price_jpy") or 1000000)
             if price is None or price < lower or price > upper:
+                if price is not None:
+                    row["unverified_price_candidate_jpy"] = int(price)
                 row["retrieval_attempts"].append({
                     "url": candidate_url, "final_url": final_url,
                     "status": "price_unverified", "error": "missing_or_implausible_price",
