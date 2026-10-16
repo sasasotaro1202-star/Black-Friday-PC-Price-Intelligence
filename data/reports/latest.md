@@ -1,15 +1,15 @@
 # ブラックフライデー期間通算・購入ランキング
 
-更新: 2026-10-17T07:47:35+09:00
-観測スナップショット: 2026-10-17T07:44:54+09:00
-観測スナップショットSHA256: 7b8e183593893f9e95cc5cd7357dad407adfd21aa06c5844aba361d7960eedca
+更新: 2026-10-17T08:33:45+09:00
+観測スナップショット: 2026-10-17T08:31:50+09:00
+観測スナップショットSHA256: 0b7b9e40deb9ca78b4376a51bf8004b225bf5a9e4b8a5c56e2fc39cb699faa43
 総予算（PC＋周辺機器）: ¥400,000
 周辺機器の目標予算: ¥35,000
 PC本体の目標価格: ¥360,000
 PC本体の計画上限（周辺機器が目標価格の場合）: ¥395,000
-PC本体の動的上限（選択可能な周辺機器ルートの送料・価格を反映。未確認項目は予備額で保守的に試算）: ¥358,030
-周辺機器の予算試算（ネット掲載価格と店頭現金価格は別項目。ネット配送は送料実額または送料予備額を反映）: ¥36,970
-周辺機器の価格・ネット在庫の確認: 3/4
+PC本体の動的上限（選択可能な周辺機器ルートの送料・価格を反映。未確認項目は予備額で保守的に試算）: ¥356,607
+周辺機器の予算試算（ネット掲載価格と店頭現金価格は別項目。ネット配送は送料実額または送料予備額を反映）: ¥38,393
+周辺機器の価格・ネット在庫の確認: 4/4
 周辺機器の全ルート比較: 0/4。比較保留: keyboard, main_monitor, mouse, mousepad
 完成品PC参考候補の購入ゲート: **保留**（completed_pc_candidates_reference_only）。自作PCの購入判定は別途、部品別互換性・実売・在庫・総額で評価します。
 フェーズ: **通常監視期間**
@@ -41,8 +41,8 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 - 必須費用込み現金総額: ¥284,700
 - 確定特典価値: ¥0
 - 実質コスト（PC単体）: ¥284,700
-- PC＋周辺機器の試算総額: ¥321,670
-- 総予算の残額（試算）: ¥78,330
+- PC＋周辺機器の試算総額: ¥323,093
+- 総予算の残額（試算）: ¥76,907
 - PC構成要件: 達成
 - 参考総価値換算額: ¥284,700（購入許可には不使用）
 - 判定: **WATCH**
@@ -77,14 +77,14 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 
 |画像|項目|購入方法|BF購入目標価格|観測価格（BF前は参考）|在庫（購入先）|価格確認|商品/比較ページ|
 |---|---|---|---:|---|---|---|---|
-|<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="84"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz|ネット配送・実店舗・店舗受取を比較|¥22,000|ネット掲載 ¥20,790（送料込み推計 ¥21,790・送料予備 ¥1,000） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|店頭価格・支店在庫を別途確認|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001009314680/)|
-|<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="84"></a>|Logicool G213r|ネット配送・実店舗・店舗受取を比較|¥4,500|ネット掲載 ¥7,330（送料込み推計 ¥7,830・送料予備 ¥500） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|店頭価格・支店在庫を別途確認|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001006099089/)|
-|<a href="https://shopee.ph/Logitech-Gaming-Mouse-G304-LIGHTSPEED-Wireless-12-000-DPI-Hero-Sensor-Lightweight-i.470352549.26121376846"><img src="https://down-ph.img.susercontent.com/file/sg-11134202-7rfh8-m43f6xs2o7yb73" alt="Logicool G304" width="84"></a>|Logicool G304|ネット配送・実店舗・店舗受取を比較|¥5,000|ネット掲載 ¥5,350（送料込み推計 ¥5,850・送料予備 ¥500） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|店頭価格・支店在庫を別途確認|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001004334450/)|
-|<a href="https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad"><img src="https://files.pccasegear.com/images/SS-63003-thumb.jpg" alt="SteelSeries QcK Large Black 450x400mm (model 63003)" width="84"></a>|SteelSeries QcK Large Black 450x400mm (model 63003)|ネット配送・実店舗・店舗受取を比較|¥1,500|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 unknown・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 NO_VERIFIED_PRICE_OR_STOCK|店頭価格・支店在庫を別途確認|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/1570130/)|
+|<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="84"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz|ネット配送・実店舗・店舗受取を比較|¥22,000|ネット掲載 ¥20,790（送料込み推計 ¥21,790・送料予備 ¥1,000） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|店頭価格・支店在庫を別途確認|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/14369301/)|
+|<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="84"></a>|Logicool G213r|ネット配送・実店舗・店舗受取を比較|¥4,500|ネット掲載 ¥7,330（送料込み推計 ¥7,830・送料予備 ¥500） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|店頭価格・支店在庫を別途確認|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/9242996/)|
+|<a href="https://shopee.ph/Logitech-Gaming-Mouse-G304-LIGHTSPEED-Wireless-12-000-DPI-Hero-Sensor-Lightweight-i.470352549.26121376846"><img src="https://down-ph.img.susercontent.com/file/sg-11134202-7rfh8-m43f6xs2o7yb73" alt="Logicool G304" width="84"></a>|Logicool G304|ネット配送・実店舗・店舗受取を比較|¥5,000|ネット掲載 ¥5,350（送料込み推計 ¥5,850・送料予備 ¥500） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|店頭価格・支店在庫を別途確認|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/6566291/)|
+|<a href="https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad"><img src="https://files.pccasegear.com/images/SS-63003-thumb.jpg" alt="SteelSeries QcK Large Black 450x400mm (model 63003)" width="84"></a>|SteelSeries QcK Large Black 450x400mm (model 63003)|ネット配送・実店舗・店舗受取を比較|¥1,500|ネット掲載 ¥2,423（送料込み推計 ¥2,923・送料予備 ¥500） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 unknown・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|店頭価格・支店在庫を別途確認|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/1570130/)|
 |画像未確認|Required cables only; check included monitor cables first|付属ケーブル不足時のみ|¥0|ネット価格未確認 / 比較状態 ONLINE_PRICE_OR_STOCK_UNCONFIRMED|unknown|未確認|予算枠のみ|
 |画像未確認|周辺機器の価格差・必要ケーブル不足用の柔軟な予備枠（商品ではない）|予備枠（商品ではない）|¥2,000|ネット価格未確認 / 比較状態 ONLINE_PRICE_OR_STOCK_UNCONFIRMED|unknown|未確認|予算枠のみ|
 
-周辺機器価格確認: 3/4。未確認項目は目標額を試算に使用し、自作PCを含む総額の購入判断は保留します。
+周辺機器価格確認: 4/4。未確認項目は目標額を試算に使用し、自作PCを含む総額の購入判断は保留します。
 
 
 ## 過去のブラックフライデー実績（参考資料）
@@ -112,7 +112,7 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 
 |順位|総合点|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|
 |---:|---:|---|---|---|---:|---:|---|---|---|---|
-|1|**94/100**|<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="88"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz（主予算候補）|ネット配送・実店舗・店舗受取を比較|¥22,000|ネット掲載 ¥20,790（送料未確認・予備枠¥1,000） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:low_stock / 店頭:ビックカメラ天神1号館: 取置き在庫少（確認時点） / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|27型WQHD・Fast IPS・180Hz。FPSとCities: Skylines IIの画面解像度を両立。店頭で実物と接続端子を確認し、同一型番の現金価格を比較する。|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
+|1|**94/100**|<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="88"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz（主予算候補）|ネット配送・実店舗・店舗受取を比較|¥22,000|ネット掲載 ¥20,790（送料未確認・予備枠¥1,000） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:in_stock / 店頭:ビックカメラ天神1号館: 取置き在庫少（確認時点） / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|27型WQHD・Fast IPS・180Hz。FPSとCities: Skylines IIの画面解像度を両立。店頭で実物と接続端子を確認し、同一型番の現金価格を比較する。|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
 |2|**90/100**|画像未確認|MSI MAG 275QF 27-inch WQHD 180Hz Rapid IPS（代替候補）|ネット配送・実店舗・店舗受取を比較|¥20,000|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:unknown / 店頭:支店別在庫未確認 / 店舗受け取り:unknown|価格・在庫未確認|27型WQHD・180Hzの直接的な代替候補。AOCの在庫切れ・目標未達時に、配送込み総額と高さ調整の有無を比較する。|[商品ページ](https://kakaku.com/item/K0001690691/)|
 |3|**87/100**|画像未確認|LG UltraGear 27GS75Q-B 27-inch WQHD IPS 180Hz（代替候補）|ネット配送・実店舗・店舗受取を比較|¥22,000|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:preorder_or_backorder / 店頭:支店別在庫未確認 / 店舗受け取り:unknown|価格・在庫未確認|高さ調整・ピボット対応スタンドが必要な場合の有力候補。AOCのBF価格や在庫が悪い場合だけ比較し、目標価格は¥22,000。|[商品ページ](https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/)|
 
@@ -122,7 +122,7 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 |---:|---:|---|---|---|---:|---:|---|---|---|---|
 |1|**88/100**|<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="88"></a>|Logicool G213r（主予算候補）|ネット配送・実店舗・店舗受取を比較|¥4,500|ネット掲載 ¥7,330（送料未確認・予備枠¥500） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:in_stock / 店頭:ビックカメラ天神1号館: 取置き在庫少（確認時点） / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|フルサイズ日本語配列、テンキー、パームレスト付き。Python・データ入力・普段使いまで幅広く、目標価格も抑えられる。|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
 |2|**86/100**|画像未確認|Logicool G413 TKL SE tenkeyless tactile mechanical keyboard（代替候補）|ネット配送・実店舗・店舗受取を比較|¥8,000|ネット掲載 ¥10,640（送料未確認・予備枠¥500） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:in_stock / 店頭:支店別在庫未確認 / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|テンキーレスのメカニカル。マウススペースを優先するFPS向けだが、現在¥11,000参考価格より大幅に下がる場合に検討。|[商品ページ](https://www.biccamera.com/bc/item/10326363/)|
-|3|**84/100**|画像未確認|Logicool G413 SE full-size tactile mechanical keyboard（代替候補）|ネット配送・実店舗・店舗受取を比較|¥9,500|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:preorder_or_backorder / 店頭:支店別在庫未確認 / 店舗受け取り:unknown|価格・在庫未確認|フルサイズのメカニカルでテンキーを残せるが、現在¥12,320参考価格のためBF目標¥9,500以下が条件。|[商品ページ](https://www.biccamera.com/bc/item/10326362/)|
+|3|**84/100**|画像未確認|Logicool G413 SE full-size tactile mechanical keyboard（代替候補）|ネット配送・実店舗・店舗受取を比較|¥9,500|ネット掲載 ¥10,360（送料未確認・予備枠¥500） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:in_stock / 店頭:支店別在庫未確認 / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|フルサイズのメカニカルでテンキーを残せるが、現在¥12,320参考価格のためBF目標¥9,500以下が条件。|[商品ページ](https://www.biccamera.com/bc/item/10326362/)|
 
 ### マウス（FPS向け）
 
@@ -136,7 +136,7 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 
 |順位|総合点|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|
 |---:|---:|---|---|---|---:|---:|---|---|---|---|
-|1|**93/100**|<a href="https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad"><img src="https://files.pccasegear.com/images/SS-63003-thumb.jpg" alt="SteelSeries QcK Large Black 450x400mm (model 63003)" width="88"></a>|SteelSeries QcK Large Black 450x400mm (model 63003)（主予算候補）|ネット配送・実店舗・店舗受取を比較|¥1,500|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:unknown / 店頭:ビックカメラ天神1号館: 取置き在庫少（確認時点） / 店舗受け取り:unknown|価格・在庫未確認|450×400mmの黒い大型布面。実店舗でサイズと表面を確認しやすく、FPSの操作幅を低コストで確保。|[商品ページ](https://www.biccamera.com/bc/item/1570130/)|
+|1|**93/100**|<a href="https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad"><img src="https://files.pccasegear.com/images/SS-63003-thumb.jpg" alt="SteelSeries QcK Large Black 450x400mm (model 63003)" width="88"></a>|SteelSeries QcK Large Black 450x400mm (model 63003)（主予算候補）|ネット配送・実店舗・店舗受取を比較|¥1,500|ネット掲載 ¥2,423（送料未確認・予備枠¥500） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:in_stock / 店頭:ビックカメラ天神1号館: 取置き在庫少（確認時点） / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|450×400mmの黒い大型布面。実店舗でサイズと表面を確認しやすく、FPSの操作幅を低コストで確保。|[商品ページ](https://www.biccamera.com/bc/item/1570130/)|
 |2|**89/100**|画像未確認|Razer Gigantus V2 Large 450x400mm cloth gaming mouse mat（代替候補）|ネット配送・実店舗・店舗受取を比較|¥2,200|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:unknown / 店頭:支店別在庫未確認 / 店舗受け取り:unknown|価格・在庫未確認|Lサイズ約450×400mmでQcK Largeと同程度の操作面。公式ページ表示額は送料条件の影響があるため、決済時の配送込み総額で比較する。|[商品ページ](https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1)|
 |3|**87/100**|画像未確認|Logicool G640 Large cloth gaming mousepad（代替候補）|ネット配送・実店舗・店舗受取を比較|¥3,000|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:in_stock / 店頭:支店別在庫未確認 / 店舗受け取り:unknown|価格・在庫未確認|Logicool公式のG640は400×460mmの大型クロス面。公式掲載価格は¥3,850でQcK Largeより高価なので、表面の好みとBF価格差が小さい場合に選ぶ。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g640-cloth-gaming-mouse-pad)|
 
@@ -191,11 +191,11 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 - PIT失敗: 0
 - 処理対象: 21 / 21
 - 処理率: 100.0%
-- 取得成功率: 57.1%
+- 取得成功率: 52.4%
 - 価格確認率: 47.6%
-- 検索補完（成功/試行）: 0/9
-- 検索SKU不一致による除外: 56
-- 取得エラー内訳（host|reason）: rog.asus.com|curl_http_404=1, store.asus.com|curl_http_403=7, www.dospara.co.jp|curl_http_404=1
+- 検索補完（成功/試行）: 0/10
+- 検索SKU不一致による除外: 45
+- 取得エラー内訳（host|reason）: rog.asus.com|curl_http_404=1, store.acer.com| (28) Operation timed out after 18002 milliseconds with 0 bytes received=1, store.asus.com|curl_http_403=7, www.dospara.co.jp|curl_http_404=1
 - 未処理候補: なし
 
 ## 価格シナリオ
@@ -254,13 +254,13 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 
 ## 今この瞬間の買い時判定
 
-- 更新時刻（JST）: 2026-10-17T07:47:35+09:00
+- 更新時刻（JST）: 2026-10-17T08:33:45+09:00
 - 判定: **事前監視継続・公式日程未確認** (PRE_BF_MONITORING)
 - 暫定の広域監視窓（公式セール日程ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 - 公式日程確認: 0/16 店舗（未確認: 12、取得エラー: 4）
 - 総予算: ¥400,000
-- PC本体の動的上限: ¥358,030
-- 周辺機器の価格・在庫確認: 未完了
+- PC本体の動的上限: ¥356,607
+- 周辺機器の価格・在庫確認: 完了
 - 全体購入ゲート: 保留 (self_build_wait_for_compatibility_review)
 
 現在価格は事前参考値です。設定期間は各社の公式開催日ではありません。公式ページで2026年の日付範囲を確認できるまではBF価格として扱わず、開催日推定に基づく購入推奨を出しません。
@@ -275,7 +275,7 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 - RAM32GB・SSD1TB以上: 達成
 - 買い時スコア: 未算出
 - 購入リンク: [販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/)
-- 主な未解決条件: 暫定の広域監視窓外。現行価格はBF実売として扱わない；周辺機器の価格・在庫が揃わず、本体動的上限が確定していない；既存ランキングの判定は WATCH；重要候補の価格・在庫カバレッジが未完了
+- 主な未解決条件: 暫定の広域監視窓外。現行価格はBF実売として扱わない；既存ランキングの判定は WATCH；重要候補の価格・在庫カバレッジが未完了
 
 
 ## 自作PC本命の買い時
