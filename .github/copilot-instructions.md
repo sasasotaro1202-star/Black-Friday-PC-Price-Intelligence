@@ -28,6 +28,14 @@
 - The ¥45,000 peripheral allocation is: monitor ¥18,000 + speakers ¥12,000 + keyboard ¥5,000 + mouse ¥4,000 + mousepad ¥2,000 + power strip ¥1,500 + cable allowance ¥0 + store-price/cable contingency ¥2,500. This is a target budget, not a statement that these items currently sell at those amounts.
 - Main self-built candidate: Ryzen 7 9700X + RTX 5070 12GB. Keep RTX 5060 Ti 16GB as the VRAM-focused alternative and RTX 5070 Ti 16GB as a dark horse, even if a candidate may exceed the target. Show any overrun, required price reduction, and compatibility blockers.
 
+### 勉強・分析・複数作業も必須の用途として扱う
+
+- 評価対象には学校の勉強、PDFや参照資料の閲覧、Web調査、動画教材、文章/発表資料の作成、複数タブ・複数アプリの同時利用を含める。
+- Python、GitHub、ローカルテスト、大規模データ処理/シミュレーション、スポーツ・株式・BTC予測、使える範囲のローカルAIも想定する。
+- CPUの単一/マルチコア、RAM、GPU VRAM、SSD容量/I/O、長時間負荷時の冷却・騒音、IDE/ゲームエンジン/ブラウザー/分析ツールの同時動作を用途別に確認する。全分析がGPUで速くなると仮定しない。
+- 基本の購入時要件は32GB RAM/1TB SSD。64GB RAM/2TB SSDは実際の正確な完成構成価格と互換性が確認でき、総額内に収まる場合の優先候補。購入後の増設は想定しない。
+- 無料・オープンソースを優先し、有料API・クラウドGPU・月額サービスを中核要件にしない。
+
 ### ゲーム制作を必須の用途として扱う
 
 - PC用途はゲームプレイだけでなく、Unreal Engine 5 / Unity / Godotでの2D・3D制作、FPS試作、都市建設・シミュレーション制作を含む。エディター、IDE/デバッガー、ビルド、ブラウザー、テスト、Python/AI・データ分析の同時使用を評価する。
