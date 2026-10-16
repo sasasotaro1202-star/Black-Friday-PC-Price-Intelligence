@@ -400,6 +400,7 @@ class ReportLinkTests(unittest.TestCase):
         self.assertIn("ネット掲載 ¥20,790", summary)
         self.assertIn("送料込み推計 ¥21,790", summary)
         self.assertIn("店頭現金価格未確認", summary)
+        self.assertIn("店舗受け取り: 決済額未確認", summary)
         self.assertIn("ONLINE_OPTIONS_COMPARED_STORE_PENDING", summary)
 
 
