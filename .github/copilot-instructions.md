@@ -22,7 +22,7 @@
 - Baseline keyboard: Logicool G213r, BF target ¥5,000.
 - Baseline FPS mouse: Logicool G304, BF target ¥4,000.
 - Mousepad: SteelSeries QcK Large, BF target ¥2,000.
-- Power strip: ELECOM T-K1A-2625BK, BF target ¥1,500.
+- Power strip: ELECOM T-NSLK-2620BK (6 outlets, 2m, surge protection and dust shutters), BF target ¥1,500. Bic's web listing price is comparison-only; verify exact Tenjin branch stock and in-store cash price.
 - Cable target ¥0. Check included monitor/speaker cables first and buy only if something necessary is missing.
 - Peripherals are to be purchased **in physical stores**. First check Bic Camera Tenjin 1st Store and Yodobashi Camera Multimedia Hakata. Peripheral shipping is **not** budgeted. Web prices are comparison-only and never prove the branch's shelf price or inventory.
 - The ¥45,000 peripheral allocation is: monitor ¥18,000 + speakers ¥12,000 + keyboard ¥5,000 + mouse ¥4,000 + mousepad ¥2,000 + power strip ¥1,500 + cable allowance ¥0 + store-price/cable contingency ¥2,500. This is a target budget, not a statement that these items currently sell at those amounts.
