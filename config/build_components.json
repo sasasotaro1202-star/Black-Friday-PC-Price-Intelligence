@@ -291,7 +291,7 @@
         "If the 2TB target is missed, compare another exact-model 2TB SSD or keep the 1TB baseline; do not exceed the total budget for capacity alone.",
         "The KIOXIA EXCERIA BASIC model uses QLC NAND; evaluate sustained-write workload suitability rather than treating its sequential-speed headline as proof of workstation endurance."
       ],
-      "source_note": "KIOXIA official specs confirm M.2 2280 PCIe 4.0, 2TB, maximum 7,300/6,800 MB/s sequential read/write, 600 TBW and QLC NAND. A price-comparison page showed ¥61,182 for the Japan retail variant and another SKU at ¥68,280 when researched in October 2026. The ¥45,000 BF target is therefore aspirational; do not represent it as a likely or confirmed BF price.",
+      "source_note": "KIOXIA official specs confirm the exact tracked SKU SSD-CK2.0N4B/N as M.2 2280 PCIe 4.0, 2TB, maximum 7,300/6,800 MB/s sequential read/write, 600 TBW and QLC NAND. A price-comparison page showed ¥68,280 for this tracked SKU (one listed shop) when checked in October 2026. A separate /J SKU had a ¥61,182 listing, but that price is not treated as a price for the tracked /N SKU. The ¥45,000 BF target is aspirational; no forecast or confirmed BF price is implied.",
       "source_urls": [
         "https://www.kioxia.com/ja-jp/personal/ssd/exceria-basic.html",
         "https://kakaku.com/item/K0001724151/",
@@ -829,7 +829,7 @@
         "tbw": 600
       },
       "spec_source_url": "https://www.kioxia.com/ja-jp/personal/ssd/exceria-basic.html",
-      "notes": "条件付きの1TB SSD置換候補。BF目標45,000円は希望値で、確定価格ではない。2026年10月の価格.com表示例はこの正確な型番で68,280円・掲載店舗1件。監視時に同一型番・在庫・決済価格を再確認する。QLC NANDなので長時間の継続書き込み量が大きい用途ではTLC製品とも比較する。1TB品に追加せず、必ず置換として総額を再計算する。",
+      "notes": "条件付きの1TB SSD置換候補。監視SKUはSSD-CK2.0N4B/N。BF目標45,000円は希望値で、確定価格ではない。2026年10月の価格.com表示例はこの正確な型番で68,280円・掲載店舗1件。監視時に同一型番・在庫・決済価格を再確認する。QLC NANDなので長時間の継続書き込み量が大きい用途ではTLC製品とも比較する。1TB品に追加せず、必ず置換として総額を再計算する。",
       "direct_retailer_urls": []
     }
   ]
