@@ -32,7 +32,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(targets["pc_budget_jpy"] + targets["unallocated_contingency_jpy"], targets["total_budget_jpy"])
         self.assertEqual(
             max(0, min(targets["pc_budget_jpy"], targets["total_budget_jpy"] - targets["peripheral_budget_jpy"] - targets["unallocated_contingency_jpy"])),
-            359000,
+            360000,
         )
         self.assertEqual(targets["budget_jpy"], targets["pc_target_jpy"])
         mandatory_peripheral_target = sum(
@@ -42,7 +42,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         )
         self.assertEqual(mandatory_peripheral_target, targets["peripheral_budget_jpy"])
         self.assertEqual(targets["total_budget_jpy"], 400000)
-        self.assertEqual(targets["peripheral_budget_jpy"], 36000)
+        self.assertEqual(targets["peripheral_budget_jpy"], 35000)
         self.assertEqual(targets["pc_target_jpy"], 360000)
 
     def test_diy_profile_matches_budget_and_never_penalizes_assembly_time(self):
@@ -121,9 +121,9 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(pc_total, 300600)
         self.assertEqual(
             pc_total + int(self.profile["peripheral_budget_jpy"]),
-            336600,
+            335600,
         )
-        self.assertLessEqual(336600 + int(self.profile["unallocated_contingency_jpy"]), int(self.profile["total_budget_jpy"]))
+        self.assertLessEqual(335600 + int(self.profile["unallocated_contingency_jpy"]), int(self.profile["total_budget_jpy"]))
 
     def test_windows_retail_package_is_live_tracked_and_exact_model_identified(self):
         parts_by_id = {item["id"]: item for item in self.build["parts"]}
@@ -271,7 +271,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         for text in (readme, instructions, peripherals):
             with self.subTest(document="budget and route policy", text_length=len(text)):
                 self.assertRegex(text, r"(?:¥\s?400,000|400,000円)")
-                self.assertTrue("36,000円" in text or "36,000" in text or "36000" in text)
+                self.assertTrue("35,000円" in text or "35,000" in text or "35000" in text)
                 self.assertTrue("ネット" in text or "online" in text.lower())
                 self.assertFalse("Creative Pebble X at JPY 10,000" in text)
 
@@ -289,13 +289,13 @@ class ProjectConfigurationContractTests(unittest.TestCase):
 
         # Explicit alternative-build totals and compatibility descriptions must
         # stay aligned with the authoritative component target configuration.
-        self.assertIn("| バランス本命 | Ryzen 7 9700X + RTX 5070 12GB | 300,600円 | **341,600円** |", readme)
-        self.assertIn("| 性能重視の大穴 | Ryzen 7 9700X + RTX 5070 Ti 16GB | 324,800円 | **365,800円** |", readme)
+        self.assertIn("| バランス本命 | Ryzen 7 9700X + RTX 5070 12GB | 300,600円 | **340,600円** |", readme)
+        self.assertIn("| 性能重視の大穴 | Ryzen 7 9700X + RTX 5070 Ti 16GB | 324,800円 | **364,800円** |", readme)
         self.assertNotIn("PC本体295,360円", readme)
         self.assertNotIn("PC本体329,360円", readme)
         guide = read_text("docs/self-build-assembly-guide.md")
-        self.assertIn("| VRAM重視 | RTX 5060 Ti 16GB＋TeamGroup 32GB | ¥280,600 | ¥321,600 |", guide)
-        self.assertIn("| 大穴（ストレッチ） | RTX 5070 Ti 16GB＋TeamGroup 32GB | ¥324,800 | ¥365,800 |", guide)
+        self.assertIn("| VRAM重視 | RTX 5060 Ti 16GB＋TeamGroup 32GB | ¥280,600 | ¥320,600 |", guide)
+        self.assertIn("| 大穴（ストレッチ） | RTX 5070 Ti 16GB＋TeamGroup 32GB | ¥324,800 | ¥364,800 |", guide)
         self.assertNotIn("正確なカード寸法・補助電源の確認が未完了", guide)
         self.assertNotIn("¥295,360", guide)
         self.assertNotIn("¥365,160", guide)

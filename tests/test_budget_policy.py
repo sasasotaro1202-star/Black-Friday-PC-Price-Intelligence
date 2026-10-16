@@ -27,7 +27,7 @@ class BudgetPolicyTests(unittest.TestCase):
 
     def test_all_in_budget_arithmetic(self):
         self.assertEqual(self.cfg["total_budget_jpy"], 400000)
-        self.assertEqual(self.cfg["peripheral_budget_jpy"], 36000)  # flexible reference allocation, not a hard cap
+        self.assertEqual(self.cfg["peripheral_budget_jpy"], 35000)  # flexible reference allocation, not a hard cap
         self.assertEqual(self.cfg["pc_target_jpy"], 360000)
         self.assertEqual(self.cfg["pc_budget_jpy"], 395000)
         self.assertEqual(self.cfg["unallocated_contingency_jpy"], 5000)
@@ -39,7 +39,7 @@ class BudgetPolicyTests(unittest.TestCase):
             self.cfg["peripheral_budget_jpy"],
         )
         dynamic_cap = max(0, min(self.cfg["pc_budget_jpy"], self.cfg["total_budget_jpy"] - self.cfg["peripheral_budget_jpy"] - self.cfg["unallocated_contingency_jpy"]))
-        self.assertEqual(dynamic_cap, 359000)
+        self.assertEqual(dynamic_cap, 360000)
 
 
     def test_hard_budget_ceiling_and_dynamic_peripheral_allocation_are_distinct(self):
@@ -64,7 +64,7 @@ class BudgetPolicyTests(unittest.TestCase):
     def test_purchase_strategy_matches_40man_target_and_channel_policy(self):
         strategy = self.cfg["purchase_strategy"]
         self.assertEqual(self.cfg["total_budget_jpy"], 400000)
-        self.assertEqual(self.cfg["peripheral_budget_jpy"], 36000)
+        self.assertEqual(self.cfg["peripheral_budget_jpy"], 35000)
         self.assertEqual(self.cfg["pc_target_jpy"], 360000)
         self.assertEqual(self.cfg["pc_budget_jpy"], 395000)
         self.assertEqual(self.cfg["pc_target_jpy"] - 279800, 80200)
@@ -129,7 +129,7 @@ class BudgetPolicyTests(unittest.TestCase):
             strategy,
             {
                 "total_budget_jpy": 400000,
-                "peripheral_budget_jpy": 36000,
+                "peripheral_budget_jpy": 35000,
                 "pc_target_jpy": 350000,
                 "pc_budget_jpy": 350000,
             },
@@ -189,7 +189,7 @@ class BudgetPolicyTests(unittest.TestCase):
 
     def test_intelligence_uses_pc_only_budget(self):
         self.assertEqual(intelligence.TOTAL_BUDGET, 400000)
-        self.assertEqual(intelligence.PERIPHERAL_BUDGET, 36000)
+        self.assertEqual(intelligence.PERIPHERAL_BUDGET, 35000)
         self.assertEqual(intelligence.BUDGET, 360000)
         self.assertEqual(intelligence.PC_BUDGET, 395000)
 
@@ -208,7 +208,7 @@ class BudgetPolicyTests(unittest.TestCase):
         strategy = self.cfg["purchase_strategy"]
         policy = {
             "total_budget_jpy": 400000,
-            "peripheral_budget_jpy": 36000,
+            "peripheral_budget_jpy": 35000,
             "pc_target_jpy": 350000,
             "pc_budget_jpy": 350000,
         }
@@ -455,8 +455,8 @@ class BudgetPolicyTests(unittest.TestCase):
 
         self.assertFalse(projection["budget_data_ready"])
         self.assertEqual(projection["tracked_peripheral_unverified_ids"], sorted(tracked_ids))
-        self.assertEqual(projection["peripheral_projection_jpy"], 36000)
-        self.assertEqual(projection["pc_dynamic_cap_jpy"], 359000)
+        self.assertEqual(projection["peripheral_projection_jpy"], 35000)
+        self.assertEqual(projection["pc_dynamic_cap_jpy"], 360000)
         self.assertLessEqual(
             projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"],
             projection["total_budget_jpy"],
@@ -499,7 +499,7 @@ class BudgetPolicyTests(unittest.TestCase):
                     int(self.cfg["total_budget_jpy"]) - target_sum - int(self.cfg["unallocated_contingency_jpy"]),
                 ),
             ),
-            359000,
+            360000,
         )
 
 

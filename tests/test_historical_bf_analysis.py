@@ -44,7 +44,7 @@ class HistoricalBFAnalysisTests(unittest.TestCase):
             sum(int(p.get("target_price_jpy") or 0) for p in items if p.get("mandatory", True)),
             cfg["peripheral_budget_jpy"],
         )
-        self.assertEqual(cfg["peripheral_budget_jpy"], 36000)
+        self.assertEqual(cfg["peripheral_budget_jpy"], 35000)
         self.assertEqual(cfg["pc_target_jpy"], 360000)
         self.assertEqual(cfg["pc_budget_jpy"] + cfg["unallocated_contingency_jpy"], cfg["total_budget_jpy"])
         self.assertLessEqual(

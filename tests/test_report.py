@@ -66,7 +66,7 @@ class ReportLinkTests(unittest.TestCase):
             critical_unverified=[],
             peripheral_budget_ready=True,
             action=None,
-            dynamic_pc_cap_jpy=359000,
+            dynamic_pc_cap_jpy=360000,
             purchase_gate_allowed=False,
             peripheral_channel_comparison_pending_count=4,
         )
@@ -154,7 +154,7 @@ class ReportLinkTests(unittest.TestCase):
             "retrieval_time": "2026-10-10T18:00:00+09:00",
             "available_at": "2026-10-10T17:59:00+09:00",
         }
-        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 36000,
+        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 35000,
                   "pc_target_jpy": 350000, "pc_budget_jpy": 350000}
         projection = {"pc_dynamic_cap_jpy": 322200}
         result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
@@ -200,7 +200,7 @@ class ReportLinkTests(unittest.TestCase):
             "retrieval_time": "2026-10-10T18:00:00+09:00",
             "available_at": "2026-10-10T17:59:00+09:00",
         }
-        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 36000,
+        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 35000,
                   "pc_target_jpy": 320200, "pc_budget_jpy": 310200}
         projection = {"pc_dynamic_cap_jpy": 289240}
         result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
@@ -238,7 +238,7 @@ class ReportLinkTests(unittest.TestCase):
             "pit_valid": True,
             "spec": {"gpu": "RTX 5070 Ti", "ram_gb": 16, "ssd": "1 TB"},
         }
-        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 36000,
+        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 35000,
                   "pc_target_jpy": 350000, "pc_budget_jpy": 350000}
         projection = {"pc_dynamic_cap_jpy": 322200}
         official_calendar = {
@@ -297,7 +297,7 @@ class ReportLinkTests(unittest.TestCase):
             "available_at": "2026-11-20T11:59:00+09:00",
             "spec": {"gpu": "RTX 5070", "ram_gb": 32, "ssd": "1 TB"},
         }
-        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 36000,
+        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 35000,
                   "pc_target_jpy": 350000, "pc_budget_jpy": 350000}
         projection = {"pc_dynamic_cap_jpy": 322200, "budget_data_ready": True}
         official_calendar = {
@@ -357,7 +357,7 @@ class ReportLinkTests(unittest.TestCase):
             "available_at": "2026-11-20T11:59:00+09:00",
             "spec": {"gpu": "RTX 5070", "ram_gb": 32, "ssd": "1 TB"},
         }
-        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 36000,
+        policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 35000,
                   "pc_target_jpy": 350000, "pc_budget_jpy": 350000}
         projection = {"pc_dynamic_cap_jpy": 322200, "budget_data_ready": True}
         official_calendar = {

@@ -255,16 +255,16 @@
   "max_results_per_query": 8,
   "max_pages_per_run": 50,
   "desktop_enabled": true,
-  "desktop_note": "Desktop self-build monitoring must optimize for gaming, game creation (Unreal Engine/Unity/Godot), schoolwork/research/multitasking, Python/data analysis, automated prediction systems and feasible local AI. Total all-in hard ceiling ¥400,000; PC-body planning target ¥360,000. Reference peripheral allocation: about ¥36,000 for one 27-inch WQHD high-refresh main monitor, keyboard, mouse, mousepad, and a flexible price/cable-shortage buffer; buy an extra cable only if no suitable cable is included. The power strip is already owned and excluded from purchase candidates, monitoring and budget. Speakers, sub-monitor and headset are excluded from purchase candidates, monitoring and all budget calculations. Required at purchase: 32GB RAM and 1TB SSD; 64GB/2TB is preferred only if exact complete-build price and compatibility evidence fit the total cap. No post-purchase upgrade assumptions. BTO is benchmark only.",
+  "desktop_note": "Desktop self-build monitoring must optimize for gaming, game creation (Unreal Engine/Unity/Godot), schoolwork/research/multitasking, Python/data analysis, automated prediction systems and feasible local AI. Total all-in hard ceiling ¥400,000; PC-body planning target ¥360,000. Reference peripheral allocation: about ¥35,000 for one 27-inch WQHD high-refresh main monitor, keyboard, mouse, mousepad, and a flexible price/cable-shortage buffer; buy an extra cable only if no suitable cable is included. The power strip is already owned and excluded from purchase candidates, monitoring and budget. Speakers, sub-monitor and headset are excluded from purchase candidates, monitoring and all budget calculations. Required at purchase: 32GB RAM and 1TB SSD; 64GB/2TB is preferred only if exact complete-build price and compatibility evidence fit the total cap. No post-purchase upgrade assumptions. BTO is benchmark only.",
   "desktop_exact_candidate_count": 7,
   "total_budget_jpy": 400000,
-  "peripheral_budget_jpy": 36000,
+  "peripheral_budget_jpy": 35000,
   "pc_target_jpy": 360000,
   "pc_budget_jpy": 395000,
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
-  "budget_scope_note": "総額上限400,000円、PC本体の基準目標360,000円。周辺機器の計画配分は約36,000円（27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差・ケーブル不足用の柔軟な予備枠）。電源タップは所有済みのため購入候補・価格監視・予算から除外する。スピーカー、サブモニター、ヘッドセットも購入対象・候補・価格監視・予算・総額計算から完全に除外する。周辺機器の送料は計上しない。総額予備費5,000円を別に確保し、PC本体の最終許容額は総額400,000円から実際の必要周辺機器費と予備費を引いて動的に算出する。価格目標は確定値ではなく、購入前に型番・在庫・決済額を確認する。",
+  "budget_scope_note": "総額上限400,000円、PC本体の基準目標360,000円。周辺機器の計画配分は約35,000円（27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差・ケーブル不足用の柔軟な予備枠）。電源タップは所有済みのため購入候補・価格監視・予算から除外する。スピーカー、サブモニター、ヘッドセットも購入対象・候補・価格監視・予算・総額計算から完全に除外する。周辺機器の送料は計上しない。総額予備費5,000円を別に確保し、PC本体の最終許容額は総額400,000円から実際の必要周辺機器費と予備費を引いて動的に算出する。価格目標は確定値ではなく、購入前に型番・在庫・決済額を確認する。",
   "peripherals": [
     {
       "id": "main_monitor",
@@ -640,14 +640,14 @@
       "id": "store_price_buffer",
       "category": "budget_reserve",
       "name": "周辺機器の価格差・必要ケーブル不足用の柔軟な予備枠（商品ではない）",
-      "target_price_jpy": 3000,
+      "target_price_jpy": 2000,
       "track_current_price": false,
       "monitor_url": null,
       "purchase_url": null,
       "identity_terms": [],
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "3,000円は周辺機器計画枠の未配賦分。付属ケーブルを先に確認し、必要な場合だけ使う。余れば使わず、PC本体に動的に戻す。",
+      "target_price_note": "2,000円は価格差・必要ケーブル不足用の柔軟な参考枠。付属ケーブルを先に確認し、必要な場合だけ使う。余れば使わずPC本体の余力として扱う。",
       "purchase_channel": "budget_reserve",
       "store_inventory_required_before_purchase": false,
       "online_price_is_comparison_only": true,
@@ -657,7 +657,7 @@
   ],
   "purchase_strategy": {
     "updated_at": "2026-10-17",
-    "purpose": "総額上限40万円の中でPC本体と必要な周辺機器を動的に最適化する。自作PCを本命とし、購入時にRAM 32GB以上、SSD 1TB以上を確保。周辺機器の計画配分は約36,000円（27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差用の柔軟な予備枠）。電源タップは所有済みのため購入・監視・予算から除外する。スピーカー、サブモニター、ヘッドセットも購入・候補・価格監視・予算計算から除外する。周辺機器はネット配送・実店舗・店舗受け取りを商品ごとに比較し、ネット掲載価格・店頭価格・ポイント・送料・在庫の証拠を混同しない。価格目標と実売・最終決済額を区別し、購入後の継続費用は原則0円を目指す。",
+    "purpose": "総額上限40万円の中でPC本体と必要な周辺機器を動的に最適化する。自作PCを本命とし、購入時にRAM 32GB以上、SSD 1TB以上を確保。周辺機器の計画配分は約35,000円（27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差用の柔軟な予備枠）。電源タップは所有済みのため購入・監視・予算から除外する。スピーカー、サブモニター、ヘッドセットも購入・候補・価格監視・予算計算から除外する。周辺機器はネット配送・実店舗・店舗受け取りを商品ごとに比較し、ネット掲載価格・店頭価格・ポイント・送料・在庫の証拠を混同しない。価格目標と実売・最終決済額を区別し、購入後の継続費用は原則0円を目指す。",
     "priority_plans": [
       {
         "candidate_id": "desktop-gtune-dg-i5g70-5070",
@@ -791,8 +791,8 @@
       "store_pickup_counts_as_online_order_but_requires_separate_stock_confirmation": true,
       "selection_policy": "Choose the purchase route item-by-item. Compare exact-SKU online checkout price including shipping and mandatory fees with verified same-variant local cash price and branch stock. Store pickup is a separate route: verify online checkout price and branch pickup stock. Do not require store evidence to use a verified in-stock online offer; do not call an online price a store price."
     },
-    "peripheral_allocation_scenario_jpy": 36000,
-    "peripheral_allocation_scenario_note": "周辺機器の計画配分は約36,000円（メインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差用の柔軟な予備枠）。電源タップは所有済みで購入・価格監視・予算対象外。スピーカー、サブモニター、ヘッドセットは購入・監視対象外。参考配分を使い切ることは目的ではない。ネット配送・店頭購入・ネット注文の店舗受け取りを同一型番・最終支払額・在庫・保証条件で比較する。総額上限400,000円と別枠予備費5,000円を守り、PCの許容額は確認できた実支出から動的に計算する。",
+    "peripheral_allocation_scenario_jpy": 35000,
+    "peripheral_allocation_scenario_note": "周辺機器の計画配分は約35,000円（メインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差用の柔軟な予備枠）。電源タップは所有済みで購入・価格監視・予算対象外。スピーカー、サブモニター、ヘッドセットは購入・監視対象外。参考配分を使い切ることは目的ではない。ネット配送・店頭購入・ネット注文の店舗受け取りを同一型番・最終支払額・在庫・保証条件で比較する。総額上限400,000円と別枠予備費5,000円を守り、PCの許容額は確認できた実支出から動的に計算する。",
     "budget_formula": "dynamic_pc_cap_jpy = max(0, min(pc_budget_jpy, total_budget_jpy - current_or_reserved_mandatory_peripheral_cost_jpy - unallocated_contingency_jpy))",
     "budget_optimization_policy": "総額40万円を使い切ることを目的にしない。周辺機器は必要なものだけ実費計上し、ネット配送・店頭購入・ネット注文の店舗受け取りを同一型番の最終支払額・送料・在庫・保証・返品条件で比較する。電源タップは所有済みのため買い足さない。余りが出た場合は、総額上限を守りながらゲーム性能・ゲーム制作・勉強・分析を改善するCPU/GPU/RAM/SSD候補を再比較する。スピーカー、サブモニター、ヘッドセットは対象外で予算消化のために追加しない。"
   },
@@ -1521,7 +1521,7 @@
         "weight_pct": 15
       }
     ],
-    "instructions": "各カテゴリから主候補を1商品選び、代替候補を同時購入しない。対象は27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要時のみケーブル。電源タップは所有済みのため購入候補・価格監視・費用計算に含めない。スピーカー、サブモニター、ヘッドセットも購入・価格監視・費用計算に含めない。周辺機器の購入先はネット配送・実店舗・ネット注文の店舗受け取りを商品別に比較し、同一型番、税込現金支払額、送料・手数料、在庫、保証・返品条件を分離記録する。店頭価格をネット価格から推定しない。周辺機器36,000円は計画枠であり固定支出ではなく、総額400,000円と別枠予備費5,000円を優先してPC本体との配分を動的に最適化する。",
+    "instructions": "各カテゴリから主候補を1商品選び、代替候補を同時購入しない。対象は27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要時のみケーブル。電源タップは所有済みのため購入候補・価格監視・費用計算に含めない。スピーカー、サブモニター、ヘッドセットも購入・価格監視・費用計算に含めない。周辺機器の購入先はネット配送・実店舗・ネット注文の店舗受け取りを商品別に比較し、同一型番、税込現金支払額、送料・手数料、在庫、保証・返品条件を分離記録する。店頭価格をネット価格から推定しない。周辺機器35,000円は計画枠であり固定支出ではなく、総額400,000円と別枠予備費5,000円を優先してPC本体との配分を動的に最適化する。",
     "category_order": [
       {
         "category": "main_monitor",
@@ -1548,7 +1548,7 @@
   "monitor_window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
   "monitor_window_note": "暫定の広域監視窓であり、いずれかの販売店の公式BF開催日を意味しない。各店の2026年公式日程を公式ページから明示的な年付き日付範囲で確認するまで、価格をBF実売として認定せず、買い時判定は購入許可を出さない。過去日程、曜日、年のない月日から開催日を推定しない。",
   "budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
-  "budget_target_note": "総額400,000円を絶対上限、PC本体の基準目標360,000円とする。周辺機器36,000円は柔軟な参考配分で固定支出ではない。メインモニターは1台のみ。電源タップは所有済みのため購入・価格監視・予算計算から除外する。スピーカー、サブモニター、ヘッドセットも購入対象・候補・価格監視・費用計算から除外する。周辺機器はネット配送・実店舗・ネット注文の店舗受け取りを同一型番の最終支払額で比較し、PC購入時にRAM 32GB以上、SSD 1TB以上を確保する。",
+  "budget_target_note": "総額400,000円を絶対上限、PC本体の基準目標360,000円とする。周辺機器35,000円は柔軟な参考配分で固定支出ではない。メインモニターは1台のみ。電源タップは所有済みのため購入・価格監視・予算計算から除外する。スピーカー、サブモニター、ヘッドセットも購入対象・候補・価格監視・費用計算から除外する。周辺機器はネット配送・実店舗・ネット注文の店舗受け取りを同一型番の最終支払額で比較し、PC購入時にRAM 32GB以上、SSD 1TB以上を確保する。",
   "purchase_channels": {
     "pc_body": {
       "channel": "online",
@@ -1618,7 +1618,7 @@
     ],
     "online_price_is_store_price": false
   },
-  "target_budget_notes": "総額上限400,000円。PC本体の基準目標360,000円。周辺機器36,000円は参考配分で固定枠ではない。メインモニターは1台だけ。電源タップは所有済みのため購入・監視・予算から除外。スピーカー、サブモニター、ヘッドセットを購入対象・ランキング・価格監視・総額試算に含めない。予備費5,000円を別途確保し、PC本体に使える額は周辺機器の実費から動的に算出する。周辺機器送料は実費・チャネル別に計上し、ポイントは現金支払い額から控除しない。価格目標と実売価格を区別し、未確認が残る場合は購入許可しない。",
+  "target_budget_notes": "総額上限400,000円。PC本体の基準目標360,000円。周辺機器35,000円は参考配分で固定枠ではない。メインモニターは1台だけ。電源タップは所有済みのため購入・監視・予算から除外。スピーカー、サブモニター、ヘッドセットを購入対象・ランキング・価格監視・総額試算に含めない。予備費5,000円を別途確保し、PC本体に使える額は周辺機器の実費から動的に算出する。周辺機器送料は実費・チャネル別に計上し、ポイントは現金支払い額から控除しない。価格目標と実売価格を区別し、未確認が残る場合は購入許可しない。",
   "target_budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
   "market_risk_policy": {
     "snapshot_date": "2026-10-17",
@@ -1678,7 +1678,7 @@
       "A risk ranking does not automatically authorize a purchase; require exact live price, inventory, complete configuration, compatibility, return terms and final cash total."
     ]
   },
-  "target_budget_note": "総額400,000円を絶対上限とし、PC本体の基準目標は360,000円。周辺機器は約36,000円を計画配分として使うが固定枠ではない。メインモニターは1台のみ。電源タップは所有済みで購入・候補・価格監視・予算計算から除外する。スピーカー、サブモニター、ヘッドセットも購入対象・候補・価格監視・予算計算から除外する。PC購入時にRAM 32GB以上、SSD 1TB以上を確保する。",
+  "target_budget_note": "総額400,000円を絶対上限とし、PC本体の基準目標は360,000円。周辺機器は約35,000円を計画配分として使うが固定枠ではない。メインモニターは1台のみ。電源タップは所有済みで購入・候補・価格監視・予算計算から除外する。スピーカー、サブモニター、ヘッドセットも購入対象・候補・価格監視・予算計算から除外する。PC購入時にRAM 32GB以上、SSD 1TB以上を確保する。",
   "unallocated_contingency_jpy": 5000,
   "user_workload_profile": {
     "priorities": [
@@ -1792,7 +1792,7 @@
   },
   "peripheral_budget_mode": "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET",
   "peripheral_budget_is_hard_cap": false,
-  "peripheral_allocation_scenario_note": "周辺機器の計画配分は約36,000円（メインモニター1台、キーボード、マウス、マウスパッド、必要時のみケーブル、不測の価格差用の柔軟な予備枠）。電源タップは所有済みで除外。スピーカー、サブモニター、ヘッドセットも購入・監視対象外。総額上限400,000円と別枠予備費5,000円を維持し、PC許容額は実支出とチャネル選択から動的に計算する。",
-  "peripheral_allocation_scenario_jpy": 36000,
+  "peripheral_allocation_scenario_note": "周辺機器の計画配分は約35,000円（メインモニター1台、キーボード、マウス、マウスパッド、必要時のみケーブル、不測の価格差用の柔軟な予備枠）。電源タップは所有済みで除外。スピーカー、サブモニター、ヘッドセットも購入・監視対象外。総額上限400,000円と別枠予備費5,000円を維持し、PC許容額は実支出とチャネル選択から動的に計算する。",
+  "peripheral_allocation_scenario_jpy": 35000,
   "budget_optimization_policy": "総額40万円を使い切ることを目的にしない。必須周辺機器のみ実費計上する。余りが出たときだけ、総額上限を守りながら、ゲーム性能・ゲーム制作・勉強・分析を実際に改善するCPU/GPU/RAM/SSDを比較する。スピーカー、サブモニター、ヘッドセットは対象外で、予算消化のために追加しない。"
 }

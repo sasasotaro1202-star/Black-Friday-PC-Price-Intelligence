@@ -672,7 +672,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
     }
     pc_budget = int(profile.get("pc_budget_jpy", 395000))
     all_budget = int(profile.get("total_budget_jpy", 400000))
-    peripheral_budget = int(profile.get("peripheral_budget_jpy", 36000))
+    peripheral_budget = int(profile.get("peripheral_budget_jpy", 35000))
     shipping = int(profile.get("build_shipping_reserve_jpy", 0))
     small_parts = int(profile.get("small_parts_reserve_jpy", 0))
     builds = []

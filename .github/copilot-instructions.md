@@ -13,7 +13,7 @@
 
 - Total-system cash ceiling: **¥400,000**.
 - PC planning allowance/target: **¥360,000**; the hard all-in total cap controls the actual permitted amount.
-- Flexible peripheral planning allocation: **¥36,000**; this is not an obligation to spend the whole amount.
+- Flexible peripheral planning allocation: **¥35,000**; this is not an obligation to spend the whole amount.
 - Unallocated total-system contingency: **¥5,000**.
 - Primary purchase method: **self-built DIY PC**. Assembly time is not a constraint and receives no penalty. BTO systems are comparison benchmarks only.
 - PC at purchase: **RAM ≥32GB, SSD ≥1TB**. Do not assume post-purchase upgrades or treat 16GB/500GB basic configurations as compliant.
@@ -24,7 +24,7 @@
 - Mousepad: SteelSeries QcK Large, BF target ¥1,500.
 - Cable budget target ¥0. Check the included monitor cable first and only buy a missing cable if necessary.
 - Compare each peripheral across **online delivery, in-store cash purchase, and online order with store pickup**. Compare the same SKU/variant, direct checkout total including delivery/mandatory fees, stock, warranty and return terms. A web price is not evidence of in-store cash price or branch inventory; points are not cash discounts. Use a provisional delivery-fee reserve until the actual checkout fee is confirmed.
-- The ¥36,000 flexible peripheral planning allocation is: AOC Q27G40E/11 monitor ¥22,000 + Logicool G213r keyboard ¥4,500 + Logicool G304 mouse ¥5,000 + QcK Large mousepad ¥1,500 + cable allowance ¥0 unless missing + ¥3,000 flexible price/delivery/cable reserve. These are BF targets, not verified prices. The power strip is already owned.
+- The ¥35,000 flexible peripheral planning allocation is: AOC Q27G40E/11 monitor ¥22,000 + Logicool G213r keyboard ¥4,500 + Logicool G304 mouse ¥5,000 + QcK Large mousepad ¥1,500 + cable allowance ¥0 unless missing + ¥2,000 flexible price/delivery/cable reserve. These are BF targets, not verified prices. The power strip is already owned.
 - Main self-built candidate: Ryzen 7 9700X + RTX 5070 12GB. Keep RTX 5060 Ti 16GB as the VRAM-focused alternative and RTX 5070 Ti 16GB as a dark horse, even if a candidate may exceed the target. Show any overrun, required price reduction, and compatibility blockers.
 
 ### 勉強・分析・複数作業も必須の用途として扱う
@@ -58,7 +58,7 @@ BF purchase targets are aspirations, not forecasts or executable checkout prices
 - Case: Fractal Design Pop Air TG — ¥12,000.
 - CPU cooler: Thermalright Peerless Assassin 120 SE V3 — ¥5,000.
 - Windows 11 Home Japanese retail package — ¥14,800.
-- Current configured TeamGroup-based target bills: RTX 5070 PC ¥300,600 / all-in with ¥36,000 peripherals and ¥5,000 contingency ¥341,600; RTX 5060 Ti 16GB PC ¥280,600 / all-in ¥321,600; RTX 5070 Ti 16GB PC ¥324,800 / all-in ¥365,800. These sums use aspirational component targets and must not be presented as current purchase quotes.
+- Current configured TeamGroup-based target bills: RTX 5070 PC ¥300,600 / all-in with ¥35,000 peripherals and ¥5,000 contingency ¥340,600; RTX 5060 Ti 16GB PC ¥280,600 / all-in ¥320,600; RTX 5070 Ti 16GB PC ¥324,800 / all-in ¥364,800. These sums use aspirational component targets and must not be presented as current purchase quotes.
 - The PC planning target is ¥360,000, not a requirement to spend the full amount if a lower-cost build meets the user's performance goals.
 
 ## 3. Component compatibility gates

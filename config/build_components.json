@@ -5,7 +5,7 @@
     "build_type": "DIY_PC",
     "currency": "JPY",
     "total_budget_jpy": 400000,
-    "peripheral_budget_jpy": 36000,
+    "peripheral_budget_jpy": 35000,
     "pc_budget_jpy": 395000,
     "minimum_ram_gb": 32,
     "minimum_memory_modules": 2,
@@ -42,7 +42,7 @@
     "allowed_comparison_domains": [
       "kakaku.com"
     ],
-    "policy": "Black Friday target prices are aspirational, not forecasts. Total-system hard ceiling is JPY 400,000. PC planning target is JPY 360,000, while maximum PC spend is dynamically capped by the all-in total. Peripheral allocation is flexible at JPY 36,000, not an obligation to spend the full amount. Include exactly one 27-inch WQHD high-refresh main monitor, keyboard, mouse, and mousepad. The power strip is already owned and excluded from purchase, monitoring, and budget. Buy only necessary cables after checking included cables. Do not include speakers, a sub-monitor, or a headset in candidate lists, monitoring, budgets, or totals. Keep JPY 5,000 as an unallocated contingency. Compare online delivery, in-store cash purchase, and online order with store pickup per item using the exact SKU/variant, direct price, total cash checkout amount including fees, stock, warranty and return terms. Points are not cash discounts. Comparison-site prices and BF targets are not checkout prices or verified BF deals. Include online delivery shipping, but never assume peripheral shipping for in-store purchases. Keep dark-horse candidates in comparisons with explicit overruns; never authorize purchases from target prices alone.",
+    "policy": "Black Friday target prices are aspirational, not forecasts. Total-system hard ceiling is JPY 400,000. PC planning target is JPY 360,000, while maximum PC spend is dynamically capped by the all-in total. Peripheral allocation is flexible at JPY 35,000, not an obligation to spend the full amount. Include exactly one 27-inch WQHD high-refresh main monitor, keyboard, mouse, and mousepad. The power strip is already owned and excluded from purchase, monitoring, and budget. Buy only necessary cables after checking included cables. Do not include speakers, a sub-monitor, or a headset in candidate lists, monitoring, budgets, or totals. Keep JPY 5,000 as an unallocated contingency. Compare online delivery, in-store cash purchase, and online order with store pickup per item using the exact SKU/variant, direct price, total cash checkout amount including fees, stock, warranty and return terms. Points are not cash discounts. Comparison-site prices and BF targets are not checkout prices or verified BF deals. Include online delivery shipping, but never assume peripheral shipping for in-store purchases. Keep dark-horse candidates in comparisons with explicit overruns; never authorize purchases from target prices alone.",
     "allowed_search_reference_domains": [
       "kakaku.com",
       "amazon.co.jp",
@@ -280,10 +280,10 @@
         "gpu_id": "gpu-rtx5070ti-16gb",
         "base_pc_target_jpy": 324800,
         "pc_target_with_2tb_ssd_jpy": 351800,
-        "peripherals_reference_jpy": 36000,
+        "peripherals_reference_jpy": 35000,
         "contingency_jpy": 5000,
-        "all_in_target_jpy": 392800,
-        "remaining_to_hard_ceiling_jpy": 7200
+        "all_in_target_jpy": 391800,
+        "remaining_to_hard_ceiling_jpy": 8200
       },
       "rules": [
         "The 2TB drive replaces the 1TB drive; never add both SSD prices to the same build.",
@@ -314,10 +314,10 @@
         "base_memory_target_jpy": 40000,
         "memory64_target_jpy": 100000,
         "pc_target_with_64gb_jpy": 340600,
-        "peripherals_reference_jpy": 36000,
+        "peripherals_reference_jpy": 35000,
         "contingency_jpy": 5000,
-        "all_in_target_jpy": 381600,
-        "remaining_to_hard_ceiling_jpy": 18400
+        "all_in_target_jpy": 380600,
+        "remaining_to_hard_ceiling_jpy": 19400
       },
       "rules": [
         "The 64GB kit replaces the selected 32GB kit; never add both RAM prices to the same build.",
@@ -487,7 +487,7 @@
         "connector": "12V-2x6",
         "card_thickness_slots": 2.98
       },
-      "notes": "PNY公式のARGB Overclocked Triple Fan型番VCG5070T16TFXXPB1-Oに一致。公称約300×120×60mm、2.98スロット、300W、16ピン入力、推奨PSU750W。2026-10-14時点のドスパラ表示例は207,700円。154,000円は希望するBF購入目標であり値下がり予測ではない。TeamGroupの40,000円メモリ目標でのRTX 5070 Ti構成はPC本体目標324,800円。周辺機器の計画配分36,000円と別枠予備費5,000円込みの総額目標は365,800円。1TB SSDを2TB SSDへ置き換えるBF目標45,000円（1TB目標18,000円との差額27,000円）を達成できた場合は、PC本体目標351,800円、周辺機器36,000円、予備費5,000円込みで392,800円。RTX 5060 Ti 16GB＋64GB RAMの別案も監視対象で、目標PC本体340,600円、周辺機器36,000円、予備費5,000円込み381,600円。これらはBF購入目標の算術シナリオであり、実売価格・値下がり予測ではない。電源タップは所有済み、スピーカー・サブモニター・ヘッドセットは購入対象外。GPUの実売・在庫、ケース干渉、電源コネクタのクリアランスを確認する。",
+      "notes": "PNY公式のARGB Overclocked Triple Fan型番VCG5070T16TFXXPB1-Oに一致。公称約300×120×60mm、2.98スロット、300W、16ピン入力、推奨PSU750W。2026-10-14時点のドスパラ表示例は207,700円。154,000円は希望するBF購入目標であり値下がり予測ではない。TeamGroupの40,000円メモリ目標でのRTX 5070 Ti構成はPC本体目標324,800円。周辺機器の計画配分35,000円と別枠予備費5,000円込みの総額目標は364,800円。1TB SSDを2TB SSDへ置き換えるBF目標45,000円（1TB目標18,000円との差額27,000円）を達成できた場合は、PC本体目標351,800円、周辺機器35,000円、予備費5,000円込みで391,800円。RTX 5060 Ti 16GB＋64GB RAMの別案も監視対象で、目標PC本体340,600円、周辺機器35,000円、予備費5,000円込み380,600円。これらはBF購入目標の算術シナリオであり、実売価格・値下がり予測ではない。電源タップは所有済み、スピーカー・サブモニター・ヘッドセットは購入対象外。GPUの実売・在庫、ケース干渉、電源コネクタのクリアランスを確認する。",
       "spec_source_url": "https://www.pny.com/geforce-rtx-5070-ti-models?sku=VCG5070T16TFXXPB1-O",
       "spec_source_verified_at": "2026-10-14",
       "direct_retailer_urls": [
@@ -902,7 +902,7 @@
         "qvl_verification_status": "UNCONFIRMED"
       },
       "spec_source_url": "https://www.ark-pc.co.jp/i/11650134/",
-      "notes": "32GBメモリキットを置き換える条件付き候補。約100,000円はBF購入目標であり、確認済みBF価格・予測ではない。2026-10-17時点でアーク公式商品ページに表示された期間限定価格は119,990円（通常154,800円、ハロウィンフェアは10/29 23:59まで）。売価は変動するため監視で再取得する。RAM 32GB目標40,000円に対して64GB目標100,000円なら差額60,000円。RTX 5060 Ti 16GB構成に限り、計画PC本体340,600円・周辺機器36,000円・予備費5,000円込み381,600円、40万円まで18,400円となる。他のGPU構成では全額計算し、40万円超過なら採用しない。マザーボードの正確なQVL・EXPO安定性は未確認なので注文前に確認する。32GBキットと同時に加算せず置換として計算する。",
+      "notes": "32GBメモリキットを置き換える条件付き候補。約100,000円はBF購入目標であり、確認済みBF価格・予測ではない。2026-10-17時点でアーク公式商品ページに表示された期間限定価格は119,990円（通常154,800円、ハロウィンフェアは10/29 23:59まで）。売価は変動するため監視で再取得する。RAM 32GB目標40,000円に対して64GB目標100,000円なら差額60,000円。RTX 5060 Ti 16GB構成に限り、計画PC本体340,600円・周辺機器35,000円・予備費5,000円込み380,600円、40万円まで18,400円となる。他のGPU構成では全額計算し、40万円超過なら採用しない。マザーボードの正確なQVL・EXPO安定性は未確認なので注文前に確認する。32GBキットと同時に加算せず置換として計算する。",
       "image_source_url": "https://www.ark-pc.co.jp/i/11650134/",
       "image_note": "アーク公式の型番一致製品画像は商品ページから取得する。"
     }
