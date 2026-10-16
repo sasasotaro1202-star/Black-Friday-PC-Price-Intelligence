@@ -527,9 +527,9 @@ def build_plan(config=None, price_snapshot=None, now=None):
         "candidates": memory_candidates,
         "rule": "Choose the lowest fresh, exact-item trusted market reference among available candidates. If no candidate has a trusted reference, retain the memory kit configured as the primary planning fallback. Market references are not checkout prices and never authorize purchase."
     }
-    pc_budget = int(profile.get("pc_budget_jpy", 330200))
+    pc_budget = int(profile.get("pc_budget_jpy", 350000))
     all_budget = int(profile.get("total_budget_jpy", 400000))
-    peripheral_budget = int(profile.get("peripheral_budget_jpy", 69800))
+    peripheral_budget = int(profile.get("peripheral_budget_jpy", 45000))
     shipping = int(profile.get("build_shipping_reserve_jpy", 0))
     small_parts = int(profile.get("small_parts_reserve_jpy", 0))
     builds = []
@@ -669,8 +669,9 @@ def build_plan(config=None, price_snapshot=None, now=None):
         },
         "selection_factors": profile.get("purchase_decision_factors") or [],
         "total_budget_jpy": all_budget, "peripheral_budget_jpy": peripheral_budget, "pc_budget_jpy": pc_budget,
+        "unallocated_contingency_jpy": int(profile.get("unallocated_contingency_jpy", 0)),
         "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
-        "budget_arithmetic_valid": pc_budget + peripheral_budget == all_budget,
+        "budget_arithmetic_valid": pc_budget + peripheral_budget + int(profile.get("unallocated_contingency_jpy", 0)) == all_budget,
         "required_categories": profile.get("required_categories") or [],
         "memory_choice_selection": memory_choice_selection,
         "component_coverage": {

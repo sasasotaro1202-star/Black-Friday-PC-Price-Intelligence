@@ -29,7 +29,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
     def test_all_in_budget_and_primary_peripheral_targets_balance(self):
         targets = self.targets
         self.assertEqual(
-            targets["pc_target_jpy"] + targets["peripheral_budget_jpy"],
+            targets["pc_target_jpy"] + targets["peripheral_budget_jpy"] + targets["unallocated_contingency_jpy"],
             targets["total_budget_jpy"],
         )
         self.assertEqual(targets["budget_jpy"], targets["pc_target_jpy"])
@@ -40,8 +40,8 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         )
         self.assertEqual(mandatory_peripheral_target, targets["peripheral_budget_jpy"])
         self.assertEqual(targets["total_budget_jpy"], 400000)
-        self.assertEqual(targets["peripheral_budget_jpy"], 69800)
-        self.assertEqual(targets["pc_target_jpy"], 330200)
+        self.assertEqual(targets["peripheral_budget_jpy"], 45000)
+        self.assertEqual(targets["pc_target_jpy"], 350000)
 
     def test_diy_profile_matches_budget_and_never_penalizes_assembly_time(self):
         profile = self.profile
@@ -86,9 +86,9 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(pc_total, 300600)
         self.assertEqual(
             pc_total + int(self.profile["peripheral_budget_jpy"]),
-            370400,
+            345600,
         )
-        self.assertLessEqual(370400, int(self.profile["total_budget_jpy"]))
+        self.assertLessEqual(345600, int(self.profile["total_budget_jpy"]))
 
     def test_windows_retail_package_is_live_tracked_and_exact_model_identified(self):
         parts_by_id = {item["id"]: item for item in self.build["parts"]}
@@ -214,7 +214,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         targets = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
         build = json.loads((ROOT / "config" / "build_components.json").read_text(encoding="utf-8"))
         peripheral_by_id = {item["id"]: item for item in targets["peripherals"]}
-        for item_id in ("main_monitor", "secondary_monitor", "speakers", "keyboard", "mouse", "mousepad"):
+        for item_id in ("main_monitor", "speakers", "keyboard", "mouse", "mousepad"):
             item = peripheral_by_id[item_id]
             self.assertTrue(str(item.get("image_url", "")).startswith("https://"), item_id)
             self.assertTrue(str(item.get("image_source_url", "")).startswith("https://"), item_id)
@@ -236,16 +236,16 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         for text in (readme, instructions, peripherals):
             with self.subTest(document="budget and speaker", text_length=len(text)):
                 self.assertRegex(text, r"(?:¥\s?400,000|400,000円)")
-                self.assertRegex(text, r"(?:¥\s?69,800|69,800円)")
-                self.assertIn("EDIFIER MR4 MKII", text)
+                self.assertRegex(text, r"(?:¥\s?45,000|45,000円)")
+                self.assertIn("EDIFIER MR3", text)
 
         self.assertIn("AOC Q27G40E/11", instructions)
-        self.assertIn("LG 24MS500-B", instructions)
+        self.assertIn("No secondary monitor", instructions)
         self.assertIn("2026-11-01", instructions)
         self.assertIn("2026-12-11", instructions)
         self.assertIn("self-built DIY PC", instructions)
         self.assertNotIn("Total budget: JPY 370,000", instructions)
-        self.assertNotIn("One monitor only; no secondary monitor", instructions)
+        self.assertIn("one main monitor only", instructions)
         self.assertNotIn("Creative Pebble X at JPY 10,000", instructions)
         self.assertIn("2026-11-01 00:00 JST", peripherals)
         self.assertIn("2026-12-11 23:59 JST", peripherals)
@@ -253,13 +253,13 @@ class ProjectConfigurationContractTests(unittest.TestCase):
 
         # Explicit alternative-build totals and compatibility descriptions must
         # stay aligned with the authoritative component target configuration.
-        self.assertIn("PC本体300,600円、周辺機器込み370,400円", readme)
-        self.assertIn("PC本体324,800円、周辺機器込み394,600円", readme)
+        self.assertIn("PC本体300,600円、周辺機器込み345,600円", readme)
+        self.assertIn("PC本体324,800円、周辺機器込み369,800円", readme)
         self.assertNotIn("PC本体295,360円", readme)
         self.assertNotIn("PC本体329,360円", readme)
         guide = read_text("docs/self-build-assembly-guide.md")
-        self.assertIn("| VRAM重視 | RTX 5060 Ti 16GB＋TeamGroup 32GB | ¥280,600 | ¥350,400 |", guide)
-        self.assertIn("| 大穴（ストレッチ） | RTX 5070 Ti 16GB＋TeamGroup 32GB | ¥324,800 | ¥394,600 |", guide)
+        self.assertIn("| VRAM重視 | RTX 5060 Ti 16GB＋TeamGroup 32GB | ¥280,600 | ¥325,600 |", guide)
+        self.assertIn("| 大穴（ストレッチ） | RTX 5070 Ti 16GB＋TeamGroup 32GB | ¥324,800 | ¥369,800 |", guide)
         self.assertNotIn("正確なカード寸法・補助電源の確認が未完了", guide)
         self.assertNotIn("¥295,360", guide)
         self.assertNotIn("¥365,160", guide)

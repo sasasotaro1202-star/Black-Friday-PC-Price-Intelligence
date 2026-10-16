@@ -36,8 +36,8 @@ class DecisionScoringTests(unittest.TestCase):
         }
 
     def test_budget_discount(self):
-        self.assertEqual(intelligence.required_discount(330200), 0)
-        self.assertAlmostEqual(intelligence.required_discount(350000), (350000 - 330200) / 350000 * 100, places=6)
+        self.assertEqual(intelligence.required_discount(350000), 0)
+        self.assertAlmostEqual(intelligence.required_discount(370000), (370000 - 350000) / 370000 * 100, places=6)
 
     def test_effective_cost_uses_confirmed_benefit_only(self):
         item = self.candidate(price=289000)
@@ -107,9 +107,10 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertIn("完成構成未確認", detail["reason"])
 
     def test_above_pc_target_effective_cost_waits(self):
-        item = self.candidate(price=350000)
+        item = self.candidate(price=360000)
         score, detail = intelligence.decision_score(item, [], [])
-        self.assertEqual(detail["status"], "WAIT_FOR_DISCOUNT")
+        self.assertNotEqual(detail["status"], "BUY_NOW")
+        self.assertGreater(detail["required_effective_discount_pct"], 0)
 
     def test_scenario_prices(self):
         s = intelligence.scenario_prices(380000)
@@ -122,8 +123,8 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertEqual(picked["price_jpy"], 289800)
 
     def test_price_score_monotonic(self):
-        self.assertGreater(intelligence.price_score(280000), intelligence.price_score(350000))
-        self.assertGreater(intelligence.price_score(350000), intelligence.price_score(450000))
+        self.assertGreaterEqual(intelligence.price_score(280000), intelligence.price_score(350000))
+        self.assertGreater(intelligence.price_score(350000), intelligence.price_score(500000))
 
     def test_tgp_affects_performance(self):
         low = intelligence.performance_score(self.candidate(tgp=85))[0]

@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 JST = timezone(timedelta(hours=9))
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def _initial_budget_settings():
-    """Read explicit all-in budget settings once at process start."""
+    """Read PC, peripheral and unallocated contingency settings once at process start."""
     path = os.path.join(ROOT, "config", "targets.json")
     try:
         with open(path, encoding="utf-8") as f:
@@ -17,13 +17,14 @@ def _initial_budget_settings():
         cfg = {}
     try:
         total = int(cfg.get("total_budget_jpy", 400000))
-        peripherals = int(cfg.get("peripheral_budget_jpy", 69800))
-        pc_cap = int(cfg.get("pc_budget_jpy", total - peripherals))
-        pc_target = int(cfg.get("pc_target_jpy", min(330200, pc_cap)))
+        peripherals = int(cfg.get("peripheral_budget_jpy", 45000))
+        pc_cap = int(cfg.get("pc_budget_jpy", 350000))
+        pc_target = int(cfg.get("pc_target_jpy", min(350000, pc_cap)))
+        contingency = int(cfg.get("unallocated_contingency_jpy", max(0, total - peripherals - pc_cap)))
     except (TypeError, ValueError):
-        total, peripherals, pc_cap, pc_target = 400000, 69800, 330200, 330200
-    if min(total, peripherals, pc_cap, pc_target) < 0 or pc_cap + peripherals != total or pc_target > pc_cap:
-        total, peripherals, pc_cap, pc_target = 400000, 69800, 330200, 330200
+        total, peripherals, pc_cap, pc_target, contingency = 400000, 45000, 350000, 350000, 5000
+    if min(total, peripherals, pc_cap, pc_target, contingency) < 0 or pc_cap + peripherals + contingency != total or pc_target > pc_cap:
+        total, peripherals, pc_cap, pc_target, contingency = 400000, 45000, 350000, 350000, 5000
     return total, peripherals, pc_target, pc_cap
 
 TOTAL_BUDGET, PERIPHERAL_BUDGET, BUDGET, PC_BUDGET = _initial_budget_settings()
@@ -152,6 +153,7 @@ def purchase_budget_policy():
         "peripheral_budget_jpy": int(cfg.get("peripheral_budget_jpy", PERIPHERAL_BUDGET)),
         "pc_target_jpy": int(cfg.get("pc_target_jpy", BUDGET)),
         "pc_budget_jpy": int(cfg.get("pc_budget_jpy", PC_BUDGET)),
+        "unallocated_contingency_jpy": int(cfg.get("unallocated_contingency_jpy", 0)),
         "minimum_ram_gb": int(cfg.get("minimum_ram_gb", MINIMUM_RAM_GB)),
         "minimum_ssd_gb": int(cfg.get("minimum_ssd_gb", MINIMUM_SSD_GB)),
         "desktop_preferred": bool(cfg.get("desktop_preferred", True)),
@@ -527,7 +529,7 @@ def peripheral_budget_projection():
             "purchase_url": target.get("purchase_url") or target.get("monitor_url"),
             "track_current_price": bool(target.get("track_current_price")),
         })
-    cap = max(0, min(policy["pc_budget_jpy"], policy["total_budget_jpy"] - total_projection))
+    cap = max(0, min(policy["pc_budget_jpy"], policy["total_budget_jpy"] - total_projection - policy.get("unallocated_contingency_jpy", 0)))
     return {
         "total_budget_jpy": policy["total_budget_jpy"], "peripheral_target_budget_jpy": policy["peripheral_budget_jpy"],
         "peripheral_projection_jpy": total_projection, "observed_verified_peripheral_total_jpy": observed_total,

@@ -32,7 +32,7 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertEqual(target["monitor_url"], "https://www.yodobashi.com/product/100000001006099089/")
         self.assertEqual(target["purchase_url"], "https://www.biccamera.com/bc/item/9242996/")
         self.assertIn("https://www.biccamera.com/bc/item/9242996/", target["monitor_urls"])
-        self.assertEqual(target["target_price_jpy"], 5500)
+        self.assertEqual(target["target_price_jpy"], 5000)
         self.assertIn("G213r", target["identity_terms"])
         self.assertIn("www.biccamera.com", target["allowed_hosts"])
         self.assertIn("www.yodobashi.com", target["allowed_hosts"])
@@ -164,7 +164,7 @@ class PeripheralMonitorTests(unittest.TestCase):
         ]
         policy = config.get("peripheral_ranking_policy", {})
         groups = policy.get("category_order", [])
-        self.assertEqual(len(groups), 8)
+        self.assertEqual(len(groups), 7)
         all_ids = [x.get("id") for x in items]
         self.assertEqual(len(all_ids), len(set(all_ids)), "peripheral candidate IDs must be unique")
         for group in groups:
@@ -187,7 +187,7 @@ class PeripheralMonitorTests(unittest.TestCase):
                 self.assertEqual(sorted(scores, reverse=True), [x["ranking_score_100"] for x in sorted_members])
         mandatory_total = sum(int(x.get("target_price_jpy", 0)) for x in config["peripherals"] if x.get("mandatory", True))
         self.assertEqual(mandatory_total, config["peripheral_budget_jpy"])
-        self.assertEqual(config["pc_budget_jpy"] + config["peripheral_budget_jpy"], config["total_budget_jpy"])
+        self.assertEqual(config["pc_budget_jpy"] + config["peripheral_budget_jpy"] + config["unallocated_contingency_jpy"], config["total_budget_jpy"])
 
 
     def test_store_observation_requires_branch_exact_model_freshness_and_audit_evidence(self):

@@ -22,7 +22,7 @@ def main():
     policy = purchase_budget_policy()
     peripheral_projection = peripheral_budget_projection()
     peripheral_snapshot = load_json(os.path.join(ROOT, "data", "peripheral_prices.json"), {})
-    if policy["pc_budget_jpy"] + policy["peripheral_budget_jpy"] != policy["total_budget_jpy"]:
+    if policy["pc_budget_jpy"] + policy["peripheral_budget_jpy"] + policy.get("unallocated_contingency_jpy", 0) != policy["total_budget_jpy"]:
         errors.append("budget arithmetic mismatch: PC cap + peripheral target != total budget")
     if policy["pc_target_jpy"] > policy["pc_budget_jpy"]:
         errors.append("PC target exceeds PC cap")
@@ -198,8 +198,8 @@ def main():
             errors.append("self_build_plan must never authorize purchase from target/comparison prices")
         if build_plan.get("budget_arithmetic_valid") is not True:
             errors.append("self_build_plan budget arithmetic invalid")
-        pc_budget, periph_budget, total_budget = build_plan.get("pc_budget_jpy"), build_plan.get("peripheral_budget_jpy"), build_plan.get("total_budget_jpy")
-        if not all(isinstance(x, int) and x >= 0 for x in (pc_budget, periph_budget, total_budget)) or pc_budget + periph_budget != total_budget:
+        pc_budget, periph_budget, contingency, total_budget = (build_plan.get("pc_budget_jpy"), build_plan.get("peripheral_budget_jpy"), build_plan.get("unallocated_contingency_jpy", policy.get("unallocated_contingency_jpy", 0)), build_plan.get("total_budget_jpy"))
+        if not all(isinstance(x, int) and x >= 0 for x in (pc_budget, periph_budget, contingency, total_budget)) or pc_budget + periph_budget + contingency != total_budget:
             errors.append("self_build_plan total/PC/peripheral budget mismatch")
         builds = build_plan.get("builds") or []
         if len(builds) != 3:

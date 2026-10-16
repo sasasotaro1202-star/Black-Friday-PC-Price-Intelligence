@@ -249,7 +249,7 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
     official_bf_pc_count = sum(1 for x in pc_rows if x.get("black_friday_offer_verified"))
     official_bf_peripheral_count = sum(1 for x in peripheral_rows if x.get("black_friday_price_verified"))
     any_official_bf_price_known = bool(official_bf_pc_count or official_bf_peripheral_count)
-    bf_pc_cap = min(int(policy["pc_budget_jpy"]), int(policy["total_budget_jpy"])-projected_bf_cost)
+    bf_pc_cap = min(int(policy["pc_budget_jpy"]), int(policy["total_budget_jpy"])-projected_bf_cost-int(policy.get("unallocated_contingency_jpy", 0)))
     target_sum_matches = total_target == int(policy["peripheral_budget_jpy"])
     return {
         "pricing_phase": phase,

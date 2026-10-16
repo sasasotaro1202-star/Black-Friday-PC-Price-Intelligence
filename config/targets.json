@@ -1,5 +1,5 @@
 {
-  "budget_jpy": 330200,
+  "budget_jpy": 350000,
   "target_date": "2026-11-27",
   "monitor_window_start": "2026-11-01T00:00:00+09:00",
   "monitor_window_end": "2026-12-11T23:59:59+09:00",
@@ -246,18 +246,18 @@
   "desktop_note": "Desktop PCs are evaluated in the same integrated purchase-priority ranking as laptops. Include an RTX 5060 Ti 16GB/32GB/1TB desktop alternative for the gaming-versus-local-AI-VRAM trade-off; all BTO memory configuration costs must be verified.",
   "desktop_exact_candidate_count": 7,
   "total_budget_jpy": 400000,
-  "peripheral_budget_jpy": 69800,
-  "pc_target_jpy": 330200,
-  "pc_budget_jpy": 330200,
+  "peripheral_budget_jpy": 45000,
+  "pc_target_jpy": 350000,
+  "pc_budget_jpy": 350000,
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
-  "budget_scope_note": "budget_jpy is the PC-only planning target, not the full-system budget. The overall planning target is JPY 400,000 for the DIY desktop plus two monitors, EDIFIER MR4 MKII speakers, keyboard, mouse, mousepad, power strip, needed cables, shipping and incidentals. Keep over-target dark horses in comparison rankings, but label any overrun and never authorize purchase without verified final cost and compatibility.",
+  "budget_scope_note": "総予算の上限は400,000円。PC本体の購入目標は350,000円、周辺機器は45,000円程度、残り5,000円は総額の予備費とする。周辺機器はサブモニター・ヘッドセットなし、メインモニター1台で、すべて実店舗購入の前提。送料は周辺機器に計上しない。価格はBF目標と実売を分け、価格・在庫・型番・互換性が未確認なら購入許可しない。",
   "peripherals": [
     {
       "id": "main_monitor",
       "name": "AOC Q27G40E/11 27-inch WQHD 180Hz",
-      "target_price_jpy": 17500,
+      "target_price_jpy": 18000,
       "track_current_price": true,
       "monitor_url": "https://www.yodobashi.com/product/100000001009314680/",
       "purchase_url": "https://www.yodobashi.com/product/100000001009314680/",
@@ -273,13 +273,13 @@
       "max_price_jpy": 60000,
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "17,500円はBF目標。価格.comの現行比較掲載（2026-10-11時点の最低掲載価格18,900円）とヨドバシの掲載20,790円はBF価格ではない。比較ページを先に確認し、取得に失敗したらヨドバシで再試行。",
+      "target_price_note": "18,000円は2026年BFの購入目標であり、店頭で確認した価格ではない。Web掲載価格は比較参考のみ。ビックカメラ天神1号館・ヨドバシ博多の同一型番の店頭価格と取置き/在庫を購入前に確認する。",
       "monitor_urls": [
         "https://www.yodobashi.com/product/100000001009314680/",
         "https://www.biccamera.com/bc/item/14369301/"
       ],
       "ranking_score_100": 94,
-      "ranking_reason": "WQHD・180Hz・Fast IPSを比較的低予算で両立。現在の直接確認価格と在庫を監視し、FPSとCities: Skylines IIに予算を振り分けやすい。",
+      "ranking_reason": "27型WQHD・Fast IPS・180Hz。FPSとCities: Skylines IIの画面解像度を両立。店頭で実物と接続端子を確認し、同一型番の現金価格を比較する。",
       "best_for": "メイン画面の総合コスパ",
       "category": "main_monitor",
       "image_url": "https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png",
@@ -319,80 +319,41 @@
       ]
     },
     {
-      "id": "secondary_monitor",
-      "name": "LG 24MS500-B 23.8-inch FHD IPS 100Hz secondary monitor",
-      "target_price_jpy": 10000,
+      "id": "speakers",
+      "category": "speakers",
+      "name": "EDIFIER MR3 2.0 powered monitor speakers (36W RMS, Bluetooth 5.4)",
+      "target_price_jpy": 12000,
       "track_current_price": true,
-      "monitor_url": "https://kakaku.com/item/K0001619930/",
-      "purchase_url": "https://kakaku.com/item/K0001619930/",
+      "monitor_url": "https://www.biccamera.com/bc/item/13719866/",
+      "purchase_url": "https://www.biccamera.com/bc/item/13719866/",
       "identity_terms": [
-        "24MS500-B",
-        "K0001619930"
+        "ED-MR3-BK",
+        "EDIFIER MR3",
+        "EDMR3BK"
       ],
+      "model_code": "ED-MR3-BK",
       "allowed_hosts": [
-        "kakaku.com"
+        "www.yodobashi.com",
+        "www.biccamera.com",
+        "www.edifier.jp"
       ],
-      "min_price_jpy": 7000,
+      "min_price_jpy": 10000,
       "max_price_jpy": 25000,
       "mandatory": true,
-      "model_code": "24MS500-B",
       "price_target_phase": "black_friday",
-      "target_price_note": "10000円はBF期間中の購入目標。2026-10-11に価格.comで確認した参考最安値10980円とBF価格を混同しない。",
-      "ranking_score_100": 93,
-      "ranking_reason": "FHD・IPS・100Hzでコード、GitHub、ログ表示に十分。主画面に予算を回せる。",
-      "best_for": "プログラミング用サブ画面",
-      "category": "secondary_monitor",
-      "image_url": "https://www.lg.com/content/dam/channel/wcms/id/monitor/fhd-qhd/24ms500/gallery/02-gallery/fhd-24ms500-gallery-01-2010.jpg",
-      "image_source_url": "https://www.lg.com/id/monitor/fhd-qhd/24ms500-b/",
-      "image_note": "型番24MS500-Bの製品画像",
-      "image_checked_at": "2026-10-15",
-      "purchase_channel": "online",
-      "store_inventory_required_before_purchase": false,
-      "online_price_is_comparison_only": false
-    },
-    {
-      "id": "speakers",
-      "name": "EDIFIER MR4 MKII 2.0 active studio-monitor speakers (80W RMS, Bluetooth 6.0 multipoint)",
-      "target_price_jpy": 24000,
-      "track_current_price": true,
-      "monitor_url": "https://www.edifier.jp/products/mr4-mkii",
-      "purchase_url": "https://www.edifier.jp/products/mr4-mkii",
-      "identity_terms": [
-        "MR4 MKII",
-        "EDIFIER MR4 MKII"
-      ],
-      "allowed_hosts": [
-        "www.edifier.jp",
-        "www.yodobashi.com",
-        "www.biccamera.com"
-      ],
-      "min_price_jpy": 18000,
-      "max_price_jpy": 40000,
-      "mandatory": true,
-      "coupon_policy": "On 2026-10-11 the official MR4 MKII page displayed coupon code SLW20 for 20% off the listed ¥29,980 price. Arithmetic equivalent is ¥23,984 only if the code is eligible and actually applied at checkout. This is not a confirmed final cash price and must not be assumed to remain available during Black Friday.",
-      "price_target_phase": "black_friday",
-      "target_price_note": "24,000円は2026年BF期間中の購入目標。公式ページの29,980円はBF前参考価格。表示中のクーポンは決済画面で適用・最終支払額を確認するまでBF価格や確定値引きとして扱わない。",
-      "model_code": "MR4 MKII",
+      "target_price_note": "12,000円はBF目標。EDIFIER公式ページの¥14,980表示やオンラインクーポンは参考情報にすぎず、店舗の現金価格・在庫・値引き適用を証明しない。ビックカメラ天神1号館またはヨドバシ博多で同一型番を確認する。",
+      "ranking_score_100": 91,
+      "ranking_reason": "36W RMS、Bluetooth 5.4、TRS/RCA/AUX入力、ルーム補正対応。MR5ほど高価ではなく、品質を保ちつつ予算を抑える実店舗候補。オンライン表示値は店頭価格として扱わない。",
+      "best_for": "音質を確保しつつ4.5万円予算を守る",
       "monitor_urls": [
-        "https://www.yodobashi.com/product/100000001009991946/",
-        "https://www.biccamera.com/bc/item/15313369/",
-        "https://www.edifier.jp/products/mr4-mkii"
+        "https://www.yodobashi.com/product/100000001008849809/",
+        "https://www.biccamera.com/bc/item/13719866/",
+        "https://www.edifier.jp/products/mr3"
       ],
-      "coupon_code_reference": "SLW20",
-      "coupon_observed_date": "2026-10-11",
-      "ranking_score_100": 95,
-      "ranking_reason": "80W RMSとBluetooth 6.0、複数の有線入力を備え、音質と接続性のバランスが良い。公式ページのクーポンは決済画面で確認できるまで価格に控除しない。",
-      "best_for": "音質・機能・価格の総合バランス",
-      "category": "speakers",
-      "image_url": "https://www1.yohohongkong.com/images/202606/goods_img/434786_P_1780969137592.png",
-      "image_source_url": "https://www.yohohongkong.com/zh-hk/product/434786-Edifier-MR4-MKII-%E9%9B%99%E5%8A%9F%E6%94%BE%E9%8C%84%E5%AE%A4%E7%9B%A3%E8%81%BD%E5%96%87%E5%8F%AD-%E9%BB%91%E8%89%B2-%E9%A6%99%E6%B8%AF%E8%A1%8C%E8%B2%A8",
-      "image_note": "型番MR4 MKIIの製品画像",
-      "image_checked_at": "2026-10-15",
-      "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "biccamera_tenjin_1",
+        "bicamera_tenjin_1",
         "yodobashi_hakata"
       ],
       "store_price_jpy": null,
@@ -400,14 +361,15 @@
       "store_stock_status": "unknown",
       "store_confirmation_url": null,
       "store_model_match": false,
+      "purchase_channel": "physical_store",
       "store_observation_store_id": null,
       "store_evidence_type": null,
       "store_evidence_notes": null,
       "store_inventory_checks": [
         {
-          "store_id": "biccamera_tenjin_1",
+          "store_id": "bicamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=15313369",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=13719866",
           "allowed_hosts": [
             "www.biccamera.com"
           ],
@@ -418,12 +380,17 @@
           ],
           "source_type": "official_branch_stock_page"
         }
-      ]
+      ],
+      "image_url": "https://www.edifier.jp/cdn/shop/files/MR3_1_1.jpg?v=1788508256&width=1000",
+      "image_source_url": "https://www.edifier.jp/products/mr3",
+      "image_note": "EDIFIER公式 MR3製品画像",
+      "image_checked_at": "2026-10-17",
+      "inventory_monitoring_note": "支店別取置きページは在庫状況の参考。店頭の税込現金価格と棚在庫は来店前に店舗へ確認する。"
     },
     {
       "id": "keyboard",
       "name": "Logicool G213r",
-      "target_price_jpy": 5500,
+      "target_price_jpy": 5000,
       "track_current_price": true,
       "monitor_url": "https://www.yodobashi.com/product/100000001006099089/",
       "purchase_url": "https://www.biccamera.com/bc/item/9242996/",
@@ -434,7 +401,7 @@
       ],
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "5500円はBF期間中の購入目標。現在の参考価格とは区別し、購入画面の実売をBF価格として扱わない。",
+      "target_price_note": "5,000円はBF目標。Web価格は実店舗の店頭価格ではない。ビックカメラ天神1号館・ヨドバシ博多の税込現金価格と在庫を確認する。",
       "allowed_hosts": [
         "www.yodobashi.com",
         "www.biccamera.com",
@@ -490,7 +457,7 @@
     {
       "id": "mouse",
       "name": "Logicool G304",
-      "target_price_jpy": 3800,
+      "target_price_jpy": 4000,
       "track_current_price": true,
       "monitor_url": "https://www.yodobashi.com/product/100000001004334450/",
       "purchase_url": "https://www.yodobashi.com/product/100000001004334450/",
@@ -506,7 +473,7 @@
       "max_price_jpy": 15000,
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "3800円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。",
+      "target_price_note": "4,000円はBF目標。Web価格は実店舗の店頭価格ではない。色/型番と税込現金価格、在庫を確認する。",
       "ranking_score_100": 92,
       "ranking_reason": "LIGHTSPEED無線で予算を抑えられる。重量は軽量競技モデルほどではないが、費用対効果が高い。",
       "best_for": "価格重視のFPS用無線",
@@ -553,108 +520,172 @@
     },
     {
       "id": "mousepad",
-      "name": "SteelSeries QcK Large",
-      "target_price_jpy": 2500,
+      "name": "SteelSeries QcK Large Black 450x400mm (model 63003)",
+      "target_price_jpy": 2000,
       "track_current_price": true,
-      "monitor_url": "https://www.yodobashi.com/product/100000001009472873/",
-      "purchase_url": "https://www.yodobashi.com/product/100000001009472873/",
+      "monitor_url": "https://www.biccamera.com/bc/item/1570130/",
+      "purchase_url": "https://www.biccamera.com/bc/item/1570130/",
       "identity_terms": [
         "QcK Large",
-        "63464"
+        "63003",
+        "1570130"
       ],
       "allowed_hosts": [
-        "www.yodobashi.com"
+        "www.biccamera.com"
       ],
       "min_price_jpy": 800,
       "max_price_jpy": 10000,
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "2500円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。",
+      "target_price_note": "2,000円はBF購入目標。ビックカメラのWeb掲載価格は比較参考であり、天神1号館の店頭価格・在庫を示さない。正確な型番63003の店頭在庫と税込現金価格を確認する。",
       "ranking_score_100": 93,
-      "ranking_reason": "450×400mm級の布面と滑り止めで、FPSに必要な移動幅を低コストで確保。",
+      "ranking_reason": "450×400mmの黒い大型布面。実店舗でサイズと表面を確認しやすく、FPSの操作幅を低コストで確保。",
       "best_for": "低価格の大型布パッド",
       "category": "mousepad",
       "image_url": "https://files.pccasegear.com/images/SS-63003-thumb.jpg",
       "image_source_url": "https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad",
-      "image_note": "型番SteelSeries QcK Largeの製品画像",
-      "image_checked_at": "2026-10-15",
-      "purchase_channel": "online",
-      "store_inventory_required_before_purchase": false,
-      "online_price_is_comparison_only": false
+      "image_note": "SteelSeries QcK Large black model 63003 product image",
+      "image_checked_at": "2026-10-17",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "model_code": "63003",
+      "monitor_urls": [
+        "https://www.biccamera.com/bc/item/1570130/"
+      ],
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=1570130",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "ビックカメラ天神1号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
+        }
+      ],
+      "store_stock_status": "unknown",
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "power_strip",
-      "name": "ELECOM T-K1A-2625BK 6-outlet 2.5m surge-protected power strip",
+      "name": "ELECOM T-NSLK-2620BK 6-outlet 2m slim surge-protected power strip",
       "target_price_jpy": 1500,
       "track_current_price": true,
-      "monitor_url": "https://www.askul.co.jp/p/N678805/",
-      "purchase_url": "https://www.askul.co.jp/p/N678805/",
+      "monitor_url": "https://www.biccamera.com/bc/item/3605560/",
+      "purchase_url": "https://www.biccamera.com/bc/item/3605560/",
       "identity_terms": [
-        "T-K1A-2625BK",
-        "4953103457027"
+        "T-NSLK-2620BK",
+        "TNSLK2620BK",
+        "3605560"
       ],
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "1500円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。",
+      "target_price_note": "1,500円はBF目標。ビックカメラWebの参考価格は¥1,910（2026-10-17の閲覧）だが、天神1号館の店頭現金価格・在庫ではない。店頭税込価格と在庫を確認する。",
       "monitor_urls": [
-        "https://www.askul.co.jp/p/N678805/",
-        "https://shopping.yahoo.co.jp/products/293aa7c210",
-        "https://kakaku.com/item/K0000766839/"
+        "https://www.biccamera.com/bc/item/3605560/"
       ],
-      "model_code": "T-K1A-2625BK",
+      "model_code": "T-NSLK-2620BK",
       "allowed_hosts": [
-        "www.askul.co.jp",
-        "shopping.yahoo.co.jp",
-        "kakaku.com"
+        "www.biccamera.com"
       ],
       "min_price_jpy": 1000,
-      "max_price_jpy": 6000,
+      "max_price_jpy": 7000,
       "ranking_score_100": 86,
-      "ranking_reason": "6口・2.5m・雷ガード付き。現行参考価格は目標1,500円を上回るため、取得した実売価格でPC上限を動的に下げる。",
-      "best_for": "PCとモニター類を一括接続する安全寄りの最低限構成",
+      "ranking_reason": "6口・2m・雷ガード・ほこりシャッター・幅広差込口。現行の販売ページがあり、旧T-K1A-2625BKより実店舗候補として追跡しやすい。",
+      "best_for": "PCとモニター類を接続するための6口タップ",
       "category": "power_strip",
-      "purchase_channel": "online",
-      "store_inventory_required_before_purchase": false,
-      "online_price_is_comparison_only": false
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=3605560",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "ビックカメラ天神1号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
+        }
+      ],
+      "store_stock_status": "unknown",
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "cables",
       "name": "Required cables only; check included monitor/speaker cables first",
-      "target_price_jpy": 1000,
+      "target_price_jpy": 0,
       "track_current_price": false,
       "monitor_url": null,
       "purchase_url": null,
       "identity_terms": [],
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "1000円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。",
+      "target_price_note": "原則0円。付属品を確認し、不足時だけビックカメラ天神1号館またはヨドバシ博多で必要なケーブルを購入。送料は計上しない。",
       "ranking_score_100": 88,
       "ranking_reason": "モニター付属品を先に確認し、不足分だけ購入することで不要な二重購入を防ぐ。",
       "best_for": "同梱品を優先し、足りない分だけ買う",
       "category": "cables",
-      "purchase_channel": "online",
+      "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": false,
-      "online_price_is_comparison_only": false
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
-      "id": "shipping_reserve",
-      "name": "Shipping / multi-store purchase reserve",
-      "target_price_jpy": 4000,
+      "id": "store_price_buffer",
+      "category": "budget_reserve",
+      "name": "店頭価格差・ケーブル不足用予備費（商品ではない）",
+      "target_price_jpy": 2500,
       "track_current_price": false,
       "monitor_url": null,
       "purchase_url": null,
       "identity_terms": [],
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "4000円はBF期間中の購入目標。現行観測価格とは区別し、将来の実売価格として確定扱いしない。",
-      "purchase_channel": "online",
+      "target_price_note": "周辺機器の店頭価格が目標を超える場合や、付属ケーブルが不足する場合の予備枠。商品価格ではなく、必ず使い切る費用でもない。",
+      "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": false,
-      "online_price_is_comparison_only": false
+      "online_price_is_comparison_only": true,
+      "ranking_score_100": null
     }
   ],
   "purchase_strategy": {
     "updated_at": "2026-10-15",
-    "purpose": "総予算40万円程度を中心目標に、自作PCのRTX 5070 12GBを本命とし、32GB/1TB以上・27型メイン＋23.8型サブ＋EDIFIER MR4 MKII等の周辺機器を組み合わせる。40万円は最適化の中心目標であり、ランキングからRTX 5070 Tiなどの大穴候補を除外する絶対条件ではない。目標額とBF実売・最終決済額は厳密に区別する。",
+    "purpose": "総予算上限40万円、PC本体の購入目標35万円、周辺機器目標4.5万円（総額予備費5,000円は別枠）で、自作PCのRTX 5070 12GBを本命とし、RAM 32GB以上/SSD 1TB以上を確保する。周辺機器は27型WQHDメインモニター1台＋EDIFIER MR3＋入力機器等。サブモニターとヘッドセットは購入しない。BF目標と実売・最終決済額を厳密に区別する。",
     "priority_plans": [
       {
         "candidate_id": "desktop-gtune-dg-i5g70-5070",
@@ -668,9 +699,9 @@
         "price_source_note": "279,800円は16GB/500GB基本構成の監視基準。32GB/1TB完成構成の実価格として扱わない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 330200,
-        "black_friday_planned_hard_cap_jpy": 330200,
-        "black_friday_target_note": "RAM 32GB/SSD 1TBの完成構成に対するBF購入目標330,200円。279,800円は16GB/500GB基本構成の事前参考値でありBF価格ではない。構成変更費・送料込みで目標に収まるか、最終見積で確認する。"
+        "black_friday_target_price_jpy": 350000,
+        "black_friday_planned_hard_cap_jpy": 350000,
+        "black_friday_target_note": "RAM 32GB/SSD 1TB完成構成のBF購入目標350,000円。279,800円は16GB/500GB基本構成の事前参考価格でBF実売ではない。構成変更費・送料込みの最終見積を確認する。目標との差70,200円を構成変更費の見積とみなさない。"
       },
       {
         "candidate_id": "desktop-gtune-dg-a7g70-5070",
@@ -682,9 +713,9 @@
         "reference_checked_date": "2026-10-10",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
         "reference_note": "公式ページで確認した参考価格。次の監視サイクルでも現行価格・在庫・SKUを検証する。",
-        "black_friday_target_price_jpy": 330200,
-        "black_friday_planned_hard_cap_jpy": 330200,
-        "black_friday_target_note": "32GB/1TB完成構成のBF購入目標330,200円。304,800円は2026-10-10時点の事前参考掲載額でありBF実売ではない。目標までの差は25,400円だが、セール期間・在庫・SKU・PITを再確認する。"
+        "black_friday_target_price_jpy": 350000,
+        "black_friday_planned_hard_cap_jpy": 350000,
+        "black_friday_target_note": "32GB/1TB完成構成のBF購入目標350,000円。304,800円は2026-10-10時点の事前参考価格でBF実売ではない。目標との差額45,200円は余地の計算値であり、構成・在庫・セール日程・PITを確認する。"
       },
       {
         "candidate_id": "desktop-gtune-dg-i7g70-5070",
@@ -699,9 +730,9 @@
         "price_source_note": "299,800円は16GB/500GB基本構成の事前参考価格。32GB/1TB完成構成のBF実売価格ではない。",
         "required_quote": "32GB RAM・1TB SSDに変更したカート/見積の確定価格",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 330200,
-        "black_friday_planned_hard_cap_jpy": 330200,
-        "black_friday_target_note": "CPU重視の大穴候補。完成構成のBF購入目標330,200円。299,800円は16GB/500GB基本構成の事前参考値で、構成変更費・送料込みの残り目安は30,400円に限られる。RAM32GB/SSD1TBへの最終見積を確認し、アップグレード費用を0円と仮定しない。目標超過でもランキング上は大穴として比較し、超過額を明示する。"
+        "black_friday_target_price_jpy": 350000,
+        "black_friday_planned_hard_cap_jpy": 350000,
+        "black_friday_target_note": "CPU重視の大穴候補。完成構成のBF購入目標350,000円。299,800円は16GB/500GB基本構成の事前参考価格で、構成変更費・送料込みの余地は50,200円に限られる。RAM32GB/SSD1TB完成構成の最終見積を確認し、アップグレード費用を0円と仮定しない。"
       },
       {
         "candidate_id": "desktop-gtune-fg-a7g6t-5060ti16",
@@ -716,9 +747,9 @@
         "price_source_note": "309,800円は2026-10-11に公式ページで確認した事前参考掲載額。ブラックフライデー実売価格ではない。",
         "required_quote": "32GB RAM・1TB SSD完成構成の最終カート価格。可能なら16GB×2のデュアルチャネル構成を出荷時カスタマイズで指定し、追加費用を含めて確認。",
         "status_if_unquoted": "NEEDS_CONFIGURATION",
-        "black_friday_target_price_jpy": 330200,
-        "black_friday_planned_hard_cap_jpy": 330200,
-        "black_friday_target_note": "AI用VRAMを重視する大穴候補。RTX 5060 Ti 16GB、32GB×1・1TBの事前参考掲載額309,800円はBF実売ではない。購入目標330,200円との差は20,400円で、16GB×2デュアルチャネルへの変更費・送料を含む見積が必要。目標超過でもランキング上は残し、VRAM容量とゲーム性能のトレードオフを明示する。",
+        "black_friday_target_price_jpy": 350000,
+        "black_friday_planned_hard_cap_jpy": 350000,
+        "black_friday_target_note": "AI用VRAMを重視する大穴候補。309,800円は32GB/1TB完成構成の事前参考価格でBF実売ではない。購入目標350,000円との差は40,200円。16GB×2デュアルチャネル指定の可否・費用を含む最終見積を確認し、目標超過でも比較に残す。",
         "ai_tradeoff": "RTX 5070候補よりゲーム描画性能は控えめになり得る一方、16GB VRAMは12GBのRTX 5070よりローカルAIモデルやGPUメモリ負荷で余裕が出る場合がある。CPU/RAM/SSD中心の大規模予測プログラムではGPU単体だけで性能は決まらない。"
       }
     ],
@@ -731,7 +762,7 @@
       "maximum_completed_pc_price_uses": "dynamic_pc_cap_jpy",
       "requires_direct_price_stock_exact_identity_and_valid_pit": true,
       "zero_cost_upgrade_assumption_allowed": false,
-      "black_friday_target_cap_jpy": 330200,
+      "black_friday_target_cap_jpy": 350000,
       "price_basis": "completed_build_black_friday_offer_only",
       "include_in_final_ranking": true,
       "over_target_policy": "KEEP_IN_RANKING; DISPLAY_ANY_ACTUAL_OVERRUN_OR_REMAINING_BUFFER_AND_COMPATIBILITY_BLOCKERS"
@@ -739,13 +770,13 @@
     "score_policy": "説明文にある96/94/95/97点は条件付きの目標イメージであり、実測スコアとして固定しない。実際のスコアはコードが確認済み価格・構成・在庫・性能・データ品質から計算する。",
     "speaker_strategy": {
       "id": "speakers",
-      "model": "EDIFIER MR4 MKII",
-      "target_price_jpy": 24000,
-      "priority": "best balanced sound quality and features per yen",
-      "rationale": "MR3より一段上のクラスを狙いつつ、約4万円のMR5までは上げないバランス重視。公式仕様は合計80W RMS、50Hz–40kHz、Bluetooth 6.0マルチポイント、XLR/TRS/RCA/AUX/Bluetooth入力と専用アプリ対応。ゲーム・音楽・動画・日常作業に使える機能と出力を重視し、サブモニター追加後も総予算を管理する。",
-      "coupon_policy": "公式ページに表示されているクーポンは、購入画面で適用対象・最終現金決済額を確認するまで実質価格から控除しない。BF期間まで有効と仮定しない。",
+      "model": "EDIFIER MR3",
+      "target_price_jpy": 12000,
+      "priority": "best balanced sound quality and value within the JPY 45,000 in-store peripheral budget",
+      "rationale": "MR3 is the baseline because it provides a pair of active monitor speakers with 36W RMS, Bluetooth 5.4 and multiple analog inputs at a lower target price. MR4 MKII stays as an optional upgrade only if the exact store price makes the upgrade worthwhile. MR5 is excluded because it exceeds the user's preferred value range.",
+      "coupon_policy": "Online coupons and web checkout discounts do not count as physical-store prices. Confirm in-store cash price and stock independently.",
       "price_target_phase": "black_friday",
-      "target_price_note": "BF購入目標24,000円。公式掲載価格29,980円はBF前の参考値であり、将来の値下げ確率・保証ではない。"
+      "target_price_note": "BF購入目標12,000円。メーカー公式のWeb表示価格は現行参考情報で、実店舗の現金価格やBF時の確定値引きではない。"
     },
     "price_semantics": {
       "all_configured_target_prices_mean": "black_friday_purchase_targets",
@@ -769,7 +800,7 @@
       "requires_direct_price_stock_exact_identity_and_valid_pit": true,
       "requires_final_configuration_quote": true,
       "zero_cost_upgrade_assumption_allowed": false,
-      "black_friday_target_cap_jpy": 330200,
+      "black_friday_target_cap_jpy": 350000,
       "price_basis": "completed_build_black_friday_offer_only",
       "rationale": "Track beside faster RTX 5070 options because 16GB VRAM may better support some local-AI workloads; do not outrank based on VRAM alone.",
       "include_in_final_ranking": true
@@ -778,16 +809,14 @@
       "pc_body": "online",
       "physical_store_categories": [
         "main_monitor",
-        "mouse",
+        "speakers",
         "keyboard",
-        "speakers"
-      ],
-      "online_categories": [
-        "secondary_monitor",
+        "mouse",
         "mousepad",
         "power_strip",
         "cables"
       ],
+      "online_categories": [],
       "store_inventory_must_be_verified": true,
       "online_price_is_store_price": false
     }
@@ -816,9 +845,13 @@
       "ranking_score_100": 82,
       "ranking_reason": "2m・DisplayPort 1.4準拠の代替。モニター付属品の有無を確認し、不足分だけ購入する。",
       "best_for": "付属ケーブルが不足した場合",
-      "purchase_channel": "online",
-      "store_inventory_required_before_purchase": false,
-      "online_price_is_comparison_only": false
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "cables_alt_sanwa_kc_dp1420",
@@ -845,9 +878,13 @@
       "ranking_reason": "VESA認証済みDisplayPort 1.4・2m。メーカー標準価格は¥5,280なので、実売が下がった場合だけ。不足がなければ購入しない。",
       "best_for": "A specifically identified DP 1.4 cable if the monitor's included cable is absent",
       "category": "cables",
-      "purchase_channel": "online",
-      "store_inventory_required_before_purchase": false,
-      "online_price_is_comparison_only": false
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "keyboard_alt_logicool_g413_tkl_se",
@@ -1201,9 +1238,13 @@
       "ranking_score_100": 89,
       "ranking_reason": "Lサイズ約450×400mmでQcK Largeと同程度の操作面。公式ページ表示額は送料条件の影響があるため、決済時の配送込み総額で比較する。",
       "best_for": "大型布製パッドを安く確保したい場合",
-      "purchase_channel": "online",
-      "store_inventory_required_before_purchase": false,
-      "online_price_is_comparison_only": false
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "mousepad_alt_logicool_g640s",
@@ -1229,9 +1270,13 @@
       "ranking_score_100": 87,
       "ranking_reason": "Logicool公式のG640は400×460mmの大型クロス面。公式掲載価格は¥3,850でQcK Largeより高価なので、表面の好みとBF価格差が小さい場合に選ぶ。",
       "best_for": "表面の好みで選ぶ",
-      "purchase_channel": "online",
-      "store_inventory_required_before_purchase": false,
-      "online_price_is_comparison_only": false
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "power_strip_alt_sanwa_tap_sp2116mg2wn",
@@ -1263,9 +1308,13 @@
       "ranking_reason": "6口・2m・雷ガードに加えてホコリ防止シャッターやマグネットを備える。配送込みで¥1,800程度になった場合のみ検討。",
       "best_for": "Dust shutters and magnetic desk-side mounting",
       "category": "power_strip",
-      "purchase_channel": "online",
-      "store_inventory_required_before_purchase": false,
-      "online_price_is_comparison_only": false
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "power_strip_alt_elecom_tk6a2630bk",
@@ -1291,131 +1340,12 @@
       "ranking_score_100": 76,
       "ranking_reason": "3mが必要な場合の代替。公式掲載額は¥3,993で高いため、標準2.5mタップより優先しない。",
       "best_for": "コンセントまで距離がある設置場所",
-      "purchase_channel": "online",
-      "store_inventory_required_before_purchase": false,
-      "online_price_is_comparison_only": false
-    },
-    {
-      "id": "secondary_monitor_alt_asus_vy249hgr",
-      "category": "secondary_monitor",
-      "name": "ASUS VY249HGR 23.8-inch FHD IPS 120Hz secondary monitor",
-      "target_price_jpy": 13000,
-      "track_current_price": true,
-      "monitor_url": "https://www.amazon.co.jp/dp/B0DNDXMLR7",
-      "purchase_url": "https://www.amazon.co.jp/dp/B0DNDXMLR7",
-      "identity_terms": [
-        "VY249HGR"
-      ],
-      "model_code": "VY249HGR",
-      "allowed_hosts": [
-        "www.amazon.co.jp",
-        "amazon.co.jp",
-        "search.kakaku.com"
-      ],
-      "min_price_jpy": 9000,
-      "max_price_jpy": 30000,
-      "mandatory": false,
-      "price_target_phase": "black_friday",
-      "target_price_note": "Primary alternative with 120Hz(OC). Price.com search results showed around 16800 yen as a reference on 2026-10-11; Amazon exact page price must be independently verified.",
-      "monitor_urls": [
-        "https://www.amazon.co.jp/dp/B0DNDXMLR7",
-        "https://search.kakaku.com/ASUS%20VY249HGR/"
-      ],
-      "ranking_score_100": 88,
-      "ranking_reason": "IPS・120Hz(OC)でサブ画面でも滑らかさを重視できる。価格未確認ならLG 24MS500-Bの方を優先。",
-      "best_for": "少し高いリフレッシュレート",
-      "purchase_channel": "online",
-      "store_inventory_required_before_purchase": false,
-      "online_price_is_comparison_only": false
-    },
-    {
-      "id": "secondary_monitor_alt_lg_24gs60fb",
-      "category": "secondary_monitor",
-      "name": "LG UltraGear 24GS60F-B 23.8-inch FHD IPS 180Hz",
-      "target_price_jpy": 19000,
-      "track_current_price": true,
-      "monitor_url": "https://kakaku.com/item/K0001667935/",
-      "purchase_url": "https://kakaku.com/item/K0001667935/",
-      "identity_terms": [
-        "24GS60F-B",
-        "K0001667935"
-      ],
-      "model_code": "24GS60F-B",
-      "allowed_hosts": [
-        "kakaku.com"
-      ],
-      "min_price_jpy": 15000,
-      "max_price_jpy": 40000,
-      "mandatory": false,
-      "price_target_phase": "black_friday",
-      "target_price_note": "Higher-refresh secondary alternative. Price.com indicated 24980 yen reference; not worth prioritizing over the cheaper main recommendation unless discounted.",
-      "ranking_score_100": 83,
-      "ranking_reason": "180Hzでサブ画面でもゲーム向きだが、コード表示用途には高コスト。大きなBF値引きがある場合だけ候補。",
-      "best_for": "サブ画面でもFPSを遊ぶ",
-      "purchase_channel": "online",
-      "store_inventory_required_before_purchase": false,
-      "online_price_is_comparison_only": false
-    },
-    {
-      "id": "speakers_alt_edifier_mr3",
-      "category": "speakers",
-      "name": "EDIFIER MR3 2.0 powered monitor speakers 36W",
-      "target_price_jpy": 12000,
-      "track_current_price": true,
-      "monitor_url": "https://www.biccamera.com/bc/item/13719866/",
-      "purchase_url": "https://www.biccamera.com/bc/item/13719866/",
-      "identity_terms": [
-        "ED-MR3-BK",
-        "EDIFIER MR3",
-        "EDMR3BK"
-      ],
-      "model_code": "ED-MR3-BK",
-      "allowed_hosts": [
-        "www.yodobashi.com",
-        "www.biccamera.com"
-      ],
-      "min_price_jpy": 10000,
-      "max_price_jpy": 25000,
-      "mandatory": false,
-      "price_target_phase": "black_friday",
-      "target_price_note": "Lower-cost alternative to MR4 MKII. Not included in mandatory peripheral budget.",
-      "ranking_score_100": 91,
-      "ranking_reason": "36W powered monitor speakers, TRS/RCA/AUX/Bluetooth inputs; current major-retailer web references around ¥16,650. Physical branch price/stock is unconfirmed; ¥12,000 is the BF target, not a current offer.",
-      "best_for": "Lower-cost active monitor-speaker alternative with stereo pair and multiple inputs",
-      "monitor_urls": [
-        "https://www.yodobashi.com/product/100000001008849809/",
-        "https://www.biccamera.com/bc/item/13719866/"
-      ],
+      "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
-        "biccamera_tenjin_1",
+        "bicamera_tenjin_1",
         "yodobashi_hakata"
-      ],
-      "store_price_jpy": null,
-      "store_price_checked_at": null,
-      "store_stock_status": "unknown",
-      "store_confirmation_url": null,
-      "store_model_match": false,
-      "purchase_channel": "physical_store",
-      "store_observation_store_id": null,
-      "store_evidence_type": null,
-      "store_evidence_notes": null,
-      "store_inventory_checks": [
-        {
-          "store_id": "biccamera_tenjin_1",
-          "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=13719866",
-          "allowed_hosts": [
-            "www.biccamera.com"
-          ],
-          "branch_match_terms": [
-            "ビックカメラ 天神１号館",
-            "ビックカメラ天神1号館",
-            "Tenjin 1st Store"
-          ],
-          "source_type": "official_branch_stock_page"
-        }
       ]
     },
     {
@@ -1477,6 +1407,76 @@
           "source_type": "official_branch_stock_page"
         }
       ]
+    },
+    {
+      "id": "speakers_alt_edifier_mr4_mkii",
+      "name": "EDIFIER MR4 MKII 2.0 active speakers (80W RMS, Bluetooth 6.0)",
+      "target_price_jpy": 24000,
+      "track_current_price": true,
+      "monitor_url": "https://www.biccamera.com/bc/item/15313369/",
+      "purchase_url": "https://www.biccamera.com/bc/item/15313369/",
+      "identity_terms": [
+        "MR4 MKII",
+        "EDIFIER MR4 MKII"
+      ],
+      "allowed_hosts": [
+        "www.edifier.jp",
+        "www.yodobashi.com",
+        "www.biccamera.com"
+      ],
+      "min_price_jpy": 18000,
+      "max_price_jpy": 40000,
+      "mandatory": false,
+      "coupon_policy": "On 2026-10-11 the official MR4 MKII page displayed coupon code SLW20 for 20% off the listed ¥29,980 price. Arithmetic equivalent is ¥23,984 only if the code is eligible and actually applied at checkout. This is not a confirmed final cash price and must not be assumed to remain available during Black Friday.",
+      "price_target_phase": "black_friday",
+      "target_price_note": "24,000円はBF目標。公式/家電量販店のWeb価格は店頭価格ではない。実店舗の同一型番・現金価格・在庫が確認できる場合のみ採用候補とする。",
+      "model_code": "MR4 MKII",
+      "monitor_urls": [
+        "https://www.yodobashi.com/product/100000001009991946/",
+        "https://www.biccamera.com/bc/item/15313369/",
+        "https://www.edifier.jp/products/mr4-mkii"
+      ],
+      "coupon_code_reference": "SLW20",
+      "coupon_observed_date": "2026-10-11",
+      "ranking_score_100": 88,
+      "ranking_reason": "より高出力の上位候補（80W RMS）。オンライン参考価格はBF目標を上回るため、店頭で24,000円程度まで下がる場合のみMR3との価格差を比較。",
+      "best_for": "スピーカーにより多く予算を割く場合の上位候補",
+      "category": "speakers",
+      "image_url": "https://www1.yohohongkong.com/images/202606/goods_img/434786_P_1780969137592.png",
+      "image_source_url": "https://www.edifier.jp/products/mr4-mkii",
+      "image_note": "EDIFIER公式 MR4 MKII製品画像",
+      "image_checked_at": "2026-10-17",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ],
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=15313369",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "ビックカメラ天神1号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
+        }
+      ]
     }
   ],
   "peripheral_ranking_policy": {
@@ -1500,15 +1500,11 @@
         "weight_pct": 15
       }
     ],
-    "instructions": "Category scores are user-fit/relative purchase-priority judgments, not independent lab benchmarks. The report ranks one primary recommendation and up to two alternatives in each category. Alternatives are price-monitored independently but do not enter the mandatory ¥69,800 accessory budget unless selected. Monitor target prices, live observations, stock and delivered total are separate. Current coupons/points do not reduce the budget until final checkout cash payment is confirmed. For speaker coupon, the 2026-10-11 observation of code SLW20 is historical and never implies BF eligibility. Cable purchase is conditional: check included cables first and choose at most one cable if needed. Purchase-channel contract: PC-body DIY parts are ordered online. Main monitor, mouse, keyboard, and speakers are purchased in physical stores. Web-listed prices for those four categories are comparison references only, never proof of local branch shelf stock or in-store price. Verify exact SKU/color, Fukuoka branch stock/reservation, and checkout cash price before marking any item purchase-ready. Secondary monitor and remaining accessories stay online unless separately changed. Speaker ranking includes the chosen MR4 MKII objective, MR3 as a serious lower-cost active-monitor alternative, and Pebble Pro only as a compact budget comparison. MR5 is removed from active shortlist because it was previously judged too expensive. Do not label online prices as branch prices.",
+    "instructions": "各カテゴリから主候補を1商品選び、代替候補を同時購入しない。サブモニターとヘッドセットは購入対象外。モニター・スピーカー・キーボード・マウス・マウスパッド・電源タップ・必要ケーブルはすべて実店舗購入で、周辺機器の送料は計上しない。Web価格は参考値であり、福岡のビックカメラ天神1号館またはヨドバシ博多の店頭価格/在庫を証明しない。店舗で同じ型番・色・仕様、税込現金価格、在庫を確認する。ケーブルは付属品を確認して不足時のみ買う。MR3を予算内の主スピーカー、MR4 MKIIを店頭価格が十分下がった場合の上位代替、Creative Pebble Proを小型・低価格代替とする。ポイント・クーポンは決済条件確認前に値引き扱いしない。 マウスパッド・電源タップも含む全周辺機器は、別途指定がない限り実店舗購入。周辺機器の送料は予算に含めない。",
     "category_order": [
       {
         "category": "main_monitor",
         "label": "メインモニター（27インチ・WQHD）"
-      },
-      {
-        "category": "secondary_monitor",
-        "label": "サブモニター（23.8インチ・FHD）"
       },
       {
         "category": "speakers",
@@ -1539,7 +1535,7 @@
   "monitor_window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
   "monitor_window_note": "暫定の広域監視窓であり、いずれかの販売店の公式BF開催日を意味しない。各店の2026年公式日程を公式ページから明示的な年付き日付範囲で確認するまで、価格をBF実売として認定せず、買い時判定は購入許可を出さない。過去日程、曜日、年のない月日から開催日を推定しない。",
   "budget_mode": "SOFT_TARGET",
-  "budget_target_note": "総額400,000円程度（PC本体＋周辺機器）を中心目標とする。PC本体の計画上限は330,200円、周辺機器目標は69,800円。候補ランキングから目標超過の大穴を除外せず、超過額・必要条件・値下げ根拠を明示する。購入許可は型番・在庫・互換性・最終決済額を再確認し、ユーザーの予算条件を満たすまで出さない。",
+  "budget_target_note": "総額400,000円を上限に、PC本体の目標350,000円・周辺機器45,000円・別枠予備費5,000円で最適化する。目標超過の大穴は比較に残し、超過額を明示する。",
   "purchase_channels": {
     "pc_body": {
       "channel": "online",
@@ -1548,16 +1544,14 @@
     },
     "physical_store_categories": [
       "main_monitor",
-      "mouse",
+      "speakers",
       "keyboard",
-      "speakers"
-    ],
-    "online_categories": [
-      "secondary_monitor",
+      "mouse",
       "mousepad",
       "power_strip",
       "cables"
     ],
+    "online_categories": [],
     "physical_store_candidates": [
       {
         "id": "biccamera_tenjin_1",
@@ -1568,9 +1562,12 @@
         "floor_guide_note": "AフロアにPCスピーカー等、Bフロアにパソコン・液晶モニター・ゲーミングデバイス・マウス・キーボード等の案内あり。",
         "suitable_categories": [
           "main_monitor",
-          "mouse",
+          "speakers",
           "keyboard",
-          "speakers"
+          "mouse",
+          "mousepad",
+          "power_strip",
+          "cables"
         ]
       },
       {
@@ -1583,13 +1580,78 @@
         "floor_guide_note": "PC周辺機器・モニター・マウス・キーボード・ゲーミング製品の取扱フロア案内あり。スピーカーを含む各商品の当日店頭在庫は事前確認が必要。",
         "suitable_categories": [
           "main_monitor",
-          "mouse",
+          "speakers",
           "keyboard",
-          "speakers"
+          "mouse",
+          "mousepad",
+          "power_strip",
+          "cables"
         ]
       }
     ],
-    "store_stock_rule": "全国オンライン在庫・オンライン価格は当該店舗の店頭在庫・店頭決済価格を証明しない。購入判断前に、同一型番/色、対象店舗の店頭在庫または取り置き、店頭での現金支払総額（ポイントは別記）を確認する。店頭在庫が未確認なら購入許可は保留する。",
-    "online_price_handling": "物理店舗購入カテゴリに記録されたウェブ価格は比較参考値であり、実店頭価格として扱わない。"
-  }
+    "store_stock_rule": "周辺機器はすべて実店舗購入。全国オンライン在庫・Web価格は当該店舗の店頭在庫・店頭決済価格を証明しない。購入判断前に、同一型番/色、ビックカメラ天神1号館またはヨドバシ博多の店頭在庫または取り置き、店頭税込現金支払総額を確認する。未確認なら購入許可は保留する。",
+    "online_price_handling": "オンライン価格は市場比較の参考値に限る。実店舗の価格・在庫として扱わない。"
+  },
+  "target_budget_notes": "総額の上限400,000円、PC本体の購入目標350,000円、周辺機器45,000円程度、総額予備費5,000円。サブモニター・ヘッドセットなし。周辺機器はすべて実店舗購入で送料計上なし。大穴はランキングに残し、超過額・必要値下げ・互換性ブロッカーを明示する。",
+  "target_budget_mode": "SOFT_TARGET",
+  "market_risk_policy": {
+    "snapshot_date": "2026-10-17",
+    "purpose": "Qualitative monitoring priority. Not a price forecast, discount probability, or automatic purchase command.",
+    "priority_order": [
+      {
+        "rank": 1,
+        "category": "gpu",
+        "risk_level": "high monitoring priority",
+        "evidence_date": "2026-10-14",
+        "summary": "A published Japan-versus-US listing comparison reported large price differences across some NVIDIA RTX 50-series models, including RTX 5070 and RTX 5070 Ti. The comparison is not an exact-SKU time series for the tracked PNY card and cannot by itself prove a future Japan price increase.",
+        "source_url": "https://www.tomshardware.com/pc-components/gpus/nvidia-gpu-prices-spike-in-japan-prices-up-to-41-percent-higher-than-amazon-us-rtx-5060-ti-sees-the-biggest-increase-among-the-rtx-50-series-stack",
+        "decision_rule": "Prioritize exact-SKU current price and stock checks; compare vendors only after verifying SKU, stock, freight, and warranty."
+      },
+      {
+        "rank": 2,
+        "category": "cpu",
+        "risk_level": "high monitoring priority",
+        "evidence_date": "2026-10-15",
+        "summary": "AKIBA PC Hotline first-half October survey reported Ryzen 7 9700X at JPY 51,800 (+29.6% versus its previous survey) and Ryzen 7 9800X3D at JPY 74,800 (+24.7%). The reading is a dated domestic retail survey, not a guaranteed current price at every shop.",
+        "source_url": "https://akiba-pc.watch.impress.co.jp/docs/price/monthly_repo/2148206.html",
+        "decision_rule": "Recheck direct offers and calculate the gap versus the Ryzen 7 9700X BF target of JPY 38,000."
+      },
+      {
+        "rank": 3,
+        "category": "ddr5_memory",
+        "risk_level": "elevated industry-cost risk",
+        "evidence_date": "2026-09-30",
+        "summary": "TrendForce forecast conventional DRAM contract prices +10% to +15% QoQ in 4Q26. Contract prices are not a SKU-specific consumer retail forecast.",
+        "source_url": "https://www.trendforce.com/presscenter/news/20260930-13258.html",
+        "decision_rule": "Track exact 32GB 2x16 kit retail prices, stock and motherboard QVL. Do not buy at a premium solely because of an industry forecast."
+      },
+      {
+        "rank": 4,
+        "category": "nvme_ssd",
+        "risk_level": "elevated industry-cost risk",
+        "evidence_date": "2026-09-30",
+        "summary": "TrendForce forecast NAND Flash contract prices +15% to +20% QoQ in 4Q26. Retail consumer SSD prices can diverge by product and stock.",
+        "source_url": "https://www.trendforce.com/presscenter/news/20260930-13258.html",
+        "decision_rule": "Track exact Crucial P3 Plus 1TB price and sellable stock. Reject stale or sold-out listing prices as actionable."
+      },
+      {
+        "rank": 5,
+        "category": "motherboard_psu_case_cooler",
+        "risk_level": "sku-specific monitoring",
+        "evidence_date": "2026-10-17",
+        "summary": "No sufficient evidence in the cited sources to claim a broad retail price rise for every tracked motherboard, PSU, case, or cooler.",
+        "source_url": "https://www.trendforce.com/price/flash/pcc_oem_ssd_contract",
+        "decision_rule": "Judge from fresh exact-SKU listings, stock, seller and delivered cost, not a generalized claim."
+      }
+    ],
+    "general_rules": [
+      "Risk priority is qualitative, not numeric probability.",
+      "Use multiple same-SKU observations before labeling a trend; preserve retrieval_time and available_at.",
+      "A BF target is a desired price, not an expected price or observed deal.",
+      "A BF-period actual needs verified retailer-specific 2026 official campaign dates plus exact SKU, price applicability, stock and timestamp.",
+      "A risk ranking does not automatically authorize a purchase; require exact live price, inventory, complete configuration, compatibility, return terms and final cash total."
+    ]
+  },
+  "target_budget_note": "undefined 値上がりリスクの定性的優先順位（GPU→CPU→DDR5→SSD）と根拠の種別・出典は market_risk_policy と docs/price-rise-risk-playbook.md に保存する。",
+  "unallocated_contingency_jpy": 5000
 }
