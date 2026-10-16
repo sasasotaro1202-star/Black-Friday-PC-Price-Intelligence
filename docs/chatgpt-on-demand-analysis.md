@@ -50,6 +50,12 @@
 
 公式根拠：[Epic Games — Unreal Engine 5.8 requirements](https://dev.epicgames.com/documentation/en-us/unreal-engine/hardware-and-software-specifications-for-unreal-engine)、[Unity 6 system requirements](https://docs.unity3d.com/6000.0/Documentation/Manual/system-requirements.html)。
 
+## 勉強・分析・同時作業の評価
+
+ゲームを遊ぶ/作ることに加え、勉強、PDF・資料の読解、Web調査、動画教材、文書作成や複数タブのブラウザーを第一級の用途として扱います。また、Python・GitHub・ローカルテスト、大きなデータ処理/シミュレーション、スポーツ・株式・BTCの予測システム、使える範囲のローカルAIも想定します。
+
+候補別ランキングではCPU（単一/マルチコア）、RAM、VRAM、SSD容量とI/O、冷却・長時間負荷時の安定性、IDE/エンジン/ブラウザー/テスト/分析ツールの同時起動を評価します。AI・分析用途でも、全処理がGPUで高速化されるとは仮定しません。32GB RAM/1TB SSDは購入時の最低計画基準、64GB/2TBは実際の完成価格・互換性・総額が許す場合の優先候補です。購入後の増設を前提にしません。無料・オープンソースを基本とし、有料API、クラウドGPU、定額サービスが必須の構成を前提にしません。
+
 ## 値上がりリスクに関する共通ルール
 
 2026-10-17の監視優先はGPU → CPU → DDR5 RAM → SSD → その他パーツです。日本のGPU価格と米国Web価格の比較差は供給/価格リスクの警告材料ですが、正確なPNY型番の値上がり予測ではありません。AKIBA PC Hotlineの2026年10月前半調査ではRyzen 7 9700Xが¥51,800（前回比+29.6%）、9800X3Dが¥74,800（+24.7%）と報告されました。TrendForceは2026年第4四半期の契約価格をDRAM +10〜15%、NAND +15〜20%と予測していますが、契約価格の予測を消費者向けの特定RAM/SSDの店頭価格上昇率に置き換えません。
