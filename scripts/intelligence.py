@@ -153,6 +153,7 @@ def purchase_budget_policy():
         "peripheral_budget_jpy": int(cfg.get("peripheral_budget_jpy", PERIPHERAL_BUDGET)),
         "pc_target_jpy": int(cfg.get("pc_target_jpy", BUDGET)),
         "pc_budget_jpy": int(cfg.get("pc_budget_jpy", PC_BUDGET)),
+        "unallocated_contingency_jpy": int(cfg.get("unallocated_contingency_jpy", 0)),
         "minimum_ram_gb": int(cfg.get("minimum_ram_gb", MINIMUM_RAM_GB)),
         "minimum_ssd_gb": int(cfg.get("minimum_ssd_gb", MINIMUM_SSD_GB)),
         "desktop_preferred": bool(cfg.get("desktop_preferred", True)),
@@ -528,7 +529,7 @@ def peripheral_budget_projection():
             "purchase_url": target.get("purchase_url") or target.get("monitor_url"),
             "track_current_price": bool(target.get("track_current_price")),
         })
-    cap = max(0, min(policy["pc_budget_jpy"], policy["total_budget_jpy"] - total_projection))
+    cap = max(0, min(policy["pc_budget_jpy"], policy["total_budget_jpy"] - total_projection - policy.get("unallocated_contingency_jpy", 0)))
     return {
         "total_budget_jpy": policy["total_budget_jpy"], "peripheral_target_budget_jpy": policy["peripheral_budget_jpy"],
         "peripheral_projection_jpy": total_projection, "observed_verified_peripheral_total_jpy": observed_total,
