@@ -12,20 +12,19 @@
 ## 1. Current user choices — authoritative as of 2026-10-17
 
 - Total-system cash ceiling: **¥400,000**.
-- PC planning allowance/target: **¥350,000**.
-- Peripheral target budget: **¥45,000**.
+- PC planning allowance/target: **¥360,000**; the hard all-in total cap controls the actual permitted amount.
+- Flexible peripheral planning allocation: **¥36,000**; this is not an obligation to spend the whole amount.
 - Unallocated total-system contingency: **¥5,000**.
 - Primary purchase method: **self-built DIY PC**. Assembly time is not a constraint and receives no penalty. BTO systems are comparison benchmarks only.
 - PC at purchase: **RAM ≥32GB, SSD ≥1TB**. Do not assume post-purchase upgrades or treat 16GB/500GB basic configurations as compliant.
 - one main monitor only: AOC Q27G40E/11, 27-inch WQHD 180Hz. **No secondary monitor** and no headset in the purchase plan.
-- Baseline speakers: EDIFIER MR3, BF target ¥12,000. Keep EDIFIER MR4 MKII as an optional upgrade only if its exact in-store price makes the premium worthwhile. Do not promote MR5 as the main plan; it was rejected as too expensive.
-- Baseline keyboard: Logicool G213r, BF target ¥5,000.
-- Baseline FPS mouse: Logicool G304, BF target ¥4,000.
-- Mousepad: SteelSeries QcK Large, BF target ¥2,000.
-- Power strip: ELECOM T-NSLK-2620BK (6 outlets, 2m, surge protection and dust shutters), BF target ¥1,500. Bic's web listing price is comparison-only; verify exact Tenjin branch stock and in-store cash price.
-- Cable target ¥0. Check included monitor/speaker cables first and buy only if something necessary is missing.
-- Peripherals are to be purchased **in physical stores**. First check Bic Camera Tenjin 1st Store and Yodobashi Camera Multimedia Hakata. Peripheral shipping is **not** budgeted. Web prices are comparison-only and never prove the branch's shelf price or inventory.
-- The ¥45,000 peripheral allocation is: monitor ¥18,000 + speakers ¥12,000 + keyboard ¥5,000 + mouse ¥4,000 + mousepad ¥2,000 + power strip ¥1,500 + cable allowance ¥0 + store-price/cable contingency ¥2,500. This is a target budget, not a statement that these items currently sell at those amounts.
+- Speakers, sub-monitor and headset: **excluded** from candidates, price tracking and budget. The power strip is already owned and excluded from purchase/monitoring/budget.
+- Baseline keyboard: Logicool G213r, BF target ¥4,500.
+- Baseline FPS mouse: Logicool G304, BF target ¥5,000.
+- Mousepad: SteelSeries QcK Large, BF target ¥1,500.
+- Cable budget target ¥0. Check the included monitor cable first and only buy a missing cable if necessary.
+- Compare each peripheral across **online delivery, in-store cash purchase, and online order with store pickup**. Compare the same SKU/variant, direct checkout total including delivery/mandatory fees, stock, warranty and return terms. A web price is not evidence of in-store cash price or branch inventory; points are not cash discounts. Use a provisional delivery-fee reserve until the actual checkout fee is confirmed.
+- The ¥36,000 flexible peripheral planning allocation is: AOC Q27G40E/11 monitor ¥22,000 + Logicool G213r keyboard ¥4,500 + Logicool G304 mouse ¥5,000 + QcK Large mousepad ¥1,500 + cable allowance ¥0 unless missing + ¥3,000 flexible price/delivery/cable reserve. These are BF targets, not verified prices. The power strip is already owned.
 - Main self-built candidate: Ryzen 7 9700X + RTX 5070 12GB. Keep RTX 5060 Ti 16GB as the VRAM-focused alternative and RTX 5070 Ti 16GB as a dark horse, even if a candidate may exceed the target. Show any overrun, required price reduction, and compatibility blockers.
 
 ### 勉強・分析・複数作業も必須の用途として扱う
@@ -59,8 +58,8 @@ BF purchase targets are aspirations, not forecasts or executable checkout prices
 - Case: Fractal Design Pop Air TG — ¥12,000.
 - CPU cooler: Thermalright Peerless Assassin 120 SE V3 — ¥5,000.
 - Windows 11 Home Japanese retail package — ¥14,800.
-- Current configured TeamGroup-based target bills: RTX 5070 PC ¥300,600 / all-in with ¥45,000 peripherals ¥345,600; RTX 5060 Ti 16GB PC ¥280,600 / all-in ¥325,600; RTX 5070 Ti 16GB PC ¥324,800 / all-in ¥369,800. These sums use aspirational component targets and must not be presented as current purchase quotes.
-- The PC planning allowance remains ¥350,000; it is not a reason to spend the difference if the lower-cost build meets the user's performance goals.
+- Current configured TeamGroup-based target bills: RTX 5070 PC ¥300,600 / all-in with ¥36,000 peripherals and ¥5,000 contingency ¥341,600; RTX 5060 Ti 16GB PC ¥280,600 / all-in ¥321,600; RTX 5070 Ti 16GB PC ¥324,800 / all-in ¥365,800. These sums use aspirational component targets and must not be presented as current purchase quotes.
+- The PC planning target is ¥360,000, not a requirement to spend the full amount if a lower-cost build meets the user's performance goals.
 
 ## 3. Component compatibility gates
 
@@ -88,7 +87,7 @@ For each monitored part, retain: exact model/SKU; seller/source URL; retrieval a
 - First check exact GPU/CPU price and stock because their recent Japanese retail evidence raises the most immediate risk. This is a priority for checking—not an automatic instruction to buy today.
 - A user target is a desired threshold, not a forecast. If a price stays above target, show the yen gap and required reduction instead of fabricating a discount likelihood.
 - Buy only when exact identity, direct seller price, stock, official 2026 campaign applicability (if calling it a BF offer), completed-build compatibility, final cash total, warranty/return conditions, and budget all pass.
-- For physical-store peripherals, require exact model, branch stock or reservation, and same-store cash price. The online listing must stay a reference-only value.
+- For every peripheral, compare exact-model online checkout total including shipping/mandatory fees with verified same-store cash price and branch stock. Treat online order with store pickup as a third route. Do not require store evidence before using a verified in-stock online offer, but mark the all-channel comparison incomplete until the store route is verified.
 - Official 2026 Black Friday dates are store-specific. The provisional broad watch window `2026-11-01 00:00 JST` to `2026-12-11 23:59 JST` is not an official campaign date range.
 
 Detailed playbook and sources: [docs/price-rise-risk-playbook.md](../docs/price-rise-risk-playbook.md).
