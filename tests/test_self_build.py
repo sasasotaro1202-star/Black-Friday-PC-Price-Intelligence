@@ -234,6 +234,38 @@ class SelfBuildPlannerTests(unittest.TestCase):
             self.assertFalse(part["trusted_for_market_estimate"])
             self.assertFalse(build["market_reference_coverage_complete"])
 
+    def test_gaming_creation_study_and_analysis_are_all_explicit_workloads(self):
+        plan = planner.build_plan(self.config, {"products": []}, now=NOW)
+        profile = plan["workload_profile"]
+        self.assertEqual(profile["game_development"]["priority"], "HIGH")
+        self.assertEqual(profile["study_and_research"]["priority"], "HIGH")
+        self.assertEqual(profile["analysis_and_automation"]["priority"], "HIGH")
+        self.assertIn("school/study work", profile["study_and_research"]["targets"])
+        self.assertIn("sports prediction systems", profile["analysis_and_automation"]["targets"])
+        self.assertIn("stock/securities prediction", profile["analysis_and_automation"]["targets"])
+        self.assertIn("BTC prediction", profile["analysis_and_automation"]["targets"])
+        self.assertIn("local AI where practical", profile["analysis_and_automation"]["targets"])
+
+        for build in plan["builds"]:
+            fit = build["workload_fit"]
+            self.assertEqual(fit["status"], "MEETS_BASELINE")
+            self.assertEqual(fit["selected_hardware"]["system_ram_gb"], 32)
+            self.assertGreaterEqual(fit["selected_hardware"]["dedicated_gpu_vram_gb"], 8)
+            self.assertEqual(fit["selected_hardware"]["primary_ssd_gb"], 1000)
+            self.assertFalse(fit["post_purchase_upgrade_assumption"])
+            self.assertFalse(fit["purchase_authorized"])
+            self.assertIn("study_and_research", fit)
+            self.assertIn("analysis_automation_profile", fit["ai_and_data_analysis"])
+            self.assertEqual(
+                fit["game_development"]["unreal_engine_source_compile"]["status"],
+                "TRADEOFF_BELOW_PRACTICAL_CORE_TARGET",
+            )
+
+        rendered = planner.render_plan_markdown(plan)
+        self.assertIn("勉強・調査:", rendered)
+        self.assertIn("データ分析・自動化・AI:", rendered)
+        self.assertIn("ゲーム制作も主要要件", rendered)
+
     def _verified_hardware_rows(self, config, stamp=None):
         stamp = stamp or NOW.isoformat()
         return [
