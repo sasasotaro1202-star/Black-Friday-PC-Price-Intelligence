@@ -11,13 +11,13 @@ WORKFLOW = ROOT / ".github" / "workflows" / "pc-price-monitor.yml"
 class WorkflowContractTests(unittest.TestCase):
     def test_monitor_cron_has_five_and_fifteen_minute_schedules(self):
         text = WORKFLOW.read_text(encoding="utf-8")
-        self.assertIn('cron: "*/5 * * * *"', text)
-        self.assertIn('cron: "*/15 * * * *"', text)
+        self.assertIn('cron: "3-59/5 * * * *"', text)
+        self.assertIn('cron: "7,22,37,52 * * * *"', text)
 
     def test_schedule_gate_uses_cron_expression_not_runner_start_minute(self):
         text = WORKFLOW.read_text(encoding="utf-8")
         self.assertIn("SCHEDULE_CRON: ${{ github.event.schedule }}", text)
-        self.assertIn('expected_cron = "*/5 * * * *" if in_watch_window else "*/15 * * * *"', text)
+        self.assertIn('expected_cron = "3-59/5 * * * *" if in_watch_window else "7,22,37,52 * * * *"', text)
         self.assertIn("run_now = schedule_cron == expected_cron", text)
         self.assertNotIn("regular_due = now.minute % 15 == 0", text)
 
