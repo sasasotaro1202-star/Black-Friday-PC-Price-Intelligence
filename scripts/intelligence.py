@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 JST = timezone(timedelta(hours=9))
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def _initial_budget_settings():
-    """Read PC, peripheral and unallocated contingency settings once at process start."""
+    """Read the total ceiling, a soft peripheral reference, and the dynamic PC ceiling."""
     path = os.path.join(ROOT, "config", "targets.json")
     try:
         with open(path, encoding="utf-8") as f:
@@ -17,14 +17,21 @@ def _initial_budget_settings():
         cfg = {}
     try:
         total = int(cfg.get("total_budget_jpy", 400000))
-        peripherals = int(cfg.get("peripheral_budget_jpy", 45000))
-        pc_cap = int(cfg.get("pc_budget_jpy", 350000))
+        peripherals = int(cfg.get("peripheral_budget_jpy", 55000))
+        pc_cap = int(cfg.get("pc_budget_jpy", 395000))
         pc_target = int(cfg.get("pc_target_jpy", min(350000, pc_cap)))
         contingency = int(cfg.get("unallocated_contingency_jpy", max(0, total - peripherals - pc_cap)))
+        mode = str(cfg.get("peripheral_budget_mode") or "").upper()
+        dynamic_peripherals = mode == "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET" or cfg.get("peripheral_budget_is_hard_cap") is False
     except (TypeError, ValueError):
-        total, peripherals, pc_cap, pc_target, contingency = 400000, 45000, 350000, 350000, 5000
-    if min(total, peripherals, pc_cap, pc_target, contingency) < 0 or pc_cap + peripherals + contingency != total or pc_target > pc_cap:
-        total, peripherals, pc_cap, pc_target, contingency = 400000, 45000, 350000, 350000, 5000
+        total, peripherals, pc_cap, pc_target, contingency, dynamic_peripherals = 400000, 55000, 395000, 350000, 5000, True
+    invalid = (
+        min(total, peripherals, pc_cap, pc_target, contingency) < 0
+        or pc_target > pc_cap
+        or (pc_cap + contingency > total if dynamic_peripherals else pc_cap + peripherals + contingency != total)
+    )
+    if invalid:
+        total, peripherals, pc_cap, pc_target, contingency, dynamic_peripherals = 400000, 55000, 395000, 350000, 5000, True
     return total, peripherals, pc_target, pc_cap
 
 TOTAL_BUDGET, PERIPHERAL_BUDGET, BUDGET, PC_BUDGET = _initial_budget_settings()
@@ -151,6 +158,8 @@ def purchase_budget_policy():
     return {
         "total_budget_jpy": int(cfg.get("total_budget_jpy", TOTAL_BUDGET)),
         "peripheral_budget_jpy": int(cfg.get("peripheral_budget_jpy", PERIPHERAL_BUDGET)),
+        "peripheral_budget_mode": str(cfg.get("peripheral_budget_mode") or "FIXED_TARGET_BUDGET"),
+        "peripheral_budget_is_hard_cap": bool(cfg.get("peripheral_budget_is_hard_cap", True)),
         "pc_target_jpy": int(cfg.get("pc_target_jpy", BUDGET)),
         "pc_budget_jpy": int(cfg.get("pc_budget_jpy", PC_BUDGET)),
         "unallocated_contingency_jpy": int(cfg.get("unallocated_contingency_jpy", 0)),
@@ -493,6 +502,15 @@ def peripheral_budget_projection():
                 if target.get("track_current_price"):
                     unverified.append(pid)
 
+        if target.get("requires_exact_model_before_purchase"):
+            exact_model_selected = bool(
+                str(target.get("model_code") or "").strip()
+                and str(target.get("name") or "").strip()
+                and list(target.get("identity_terms") or [])
+            )
+            if not exact_model_selected:
+                unverified.append(pid)
+
         total_projection += selected_cost
         rows.append({
             "id": pid, "name": target.get("name"), "target_price_jpy": target_price,
@@ -531,7 +549,10 @@ def peripheral_budget_projection():
         })
     cap = max(0, min(policy["pc_budget_jpy"], policy["total_budget_jpy"] - total_projection - policy.get("unallocated_contingency_jpy", 0)))
     return {
-        "total_budget_jpy": policy["total_budget_jpy"], "peripheral_target_budget_jpy": policy["peripheral_budget_jpy"],
+        "total_budget_jpy": policy["total_budget_jpy"],
+        "peripheral_target_budget_jpy": policy["peripheral_budget_jpy"],
+        "peripheral_budget_mode": policy["peripheral_budget_mode"],
+        "peripheral_budget_is_hard_cap": policy["peripheral_budget_is_hard_cap"],
         "peripheral_projection_jpy": total_projection, "observed_verified_peripheral_total_jpy": observed_total,
         "pc_target_jpy": policy["pc_target_jpy"], "pc_planned_cap_jpy": policy["pc_budget_jpy"],
         "pc_dynamic_cap_jpy": cap, "snapshot_generated_at": snapshot.get("generated_at"),
