@@ -66,6 +66,38 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(profile["bto_role"], "REFERENCE_BENCHMARK_ONLY")
         self.assertIn("shopping.yahoo.co.jp", profile["allowed_search_reference_domains"])
 
+    def test_user_workload_profile_covers_games_creation_study_and_analysis(self):
+        targets_profile = self.targets["user_workload_profile"]
+        build_workloads = self.profile["workload_profile"]
+        target_ids = {item["id"] for item in targets_profile["priorities"]}
+        self.assertTrue({
+            "gaming",
+            "game_development",
+            "ai_data_analysis",
+            "study_research_multitasking",
+            "data_analysis_automation_ai",
+        }.issubset(target_ids))
+
+        game_dev = build_workloads["game_development"]
+        self.assertTrue(game_dev["engine_agnostic"])
+        self.assertEqual(set(game_dev["target_engines"]), {"Unreal Engine 5", "Unity", "Godot"})
+        self.assertEqual(game_dev["baseline_requirements"]["system_ram_gb"], 32)
+        self.assertEqual(game_dev["baseline_requirements"]["dedicated_gpu_vram_gb"], 8)
+        self.assertEqual(game_dev["baseline_requirements"]["primary_ssd_gb"], 1000)
+        self.assertEqual(game_dev["preferred_cpu_cores_for_unreal_source_build"], 12)
+        self.assertIn("large datasets and simulations", build_workloads["analysis_and_automation"]["targets"])
+        self.assertIn("school/study work", build_workloads["study_and_research"]["targets"])
+
+        for relative_path in (
+            "README.md",
+            "docs/chatgpt-on-demand-analysis.md",
+            ".github/copilot-instructions.md",
+        ):
+            text = read_text(relative_path)
+            self.assertIn("勉強", text, relative_path)
+            self.assertTrue("データ分析" in text or "Python" in text, relative_path)
+            self.assertTrue("ゲーム制作" in text or "ゲームを作る" in text, relative_path)
+
     def test_primary_build_subtotal_counts_one_gpu_only(self):
         parts_by_id = {item["id"]: item for item in self.build["parts"]}
         selected_ids = list(self.profile["fixed_part_ids"]) + [

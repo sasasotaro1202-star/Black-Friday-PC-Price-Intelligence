@@ -75,28 +75,32 @@
     "selection_policy": "Prioritize self-build for the actual desktop recommendation. Assembly time and assembly effort are not negative factors. Compare BTO only as a reference benchmark on equivalent final specification, total cash price, part quality and warranty; do not switch the primary recommendation to BTO merely for convenience.",
     "purchase_decision_factors": [
       {
-        "name": "performance_for_user_workloads",
+        "name": "combined_performance_for_gaming_game_creation_study_analysis",
         "priority": 1
       },
       {
-        "name": "total_all_in_cash_cost",
+        "name": "memory_vram_storage_and_multitasking_headroom",
         "priority": 2
       },
       {
-        "name": "component_quality_and_reliability",
+        "name": "total_all_in_cash_cost",
         "priority": 3
       },
       {
-        "name": "compatibility_and_thermal_headroom",
+        "name": "component_quality_reliability_thermal_behavior",
         "priority": 4
       },
       {
-        "name": "warranty_and_return_risk",
+        "name": "compatibility_and_ease_of_long_term_use",
         "priority": 5
       },
       {
-        "name": "future_upgradeability",
+        "name": "warranty_and_return_risk",
         "priority": 6
+      },
+      {
+        "name": "future_upgradeability_without_relying_on_it",
+        "priority": 7
       }
     ],
     "memory_choice_ids": [
@@ -104,7 +108,136 @@
       "memory-teamgroup-ddr5-32gb-6000"
     ],
     "primary_memory_choice_id": "memory-teamgroup-ddr5-32gb-6000",
-    "unallocated_contingency_jpy": 5000
+    "unallocated_contingency_jpy": 5000,
+    "workload_profile": {
+      "gaming": {
+        "priority": "HIGH",
+        "targets": [
+          "Cities: Skylines II",
+          "Apex Legends",
+          "VALORANT",
+          "other FPS games"
+        ],
+        "target_display": "27-inch WQHD, 180Hz",
+        "evaluation_note": "Evaluate competitive-FPS responsiveness separately from demanding city-simulation performance; do not infer guaranteed FPS without a matching independent benchmark."
+      },
+      "game_development": {
+        "priority": "HIGH",
+        "engine_agnostic": true,
+        "target_engines": [
+          "Unreal Engine 5",
+          "Unity",
+          "Godot"
+        ],
+        "target_project_types": [
+          "2D indie games",
+          "3D indie games",
+          "FPS prototypes",
+          "city-builder/simulation games"
+        ],
+        "concurrent_tasks": [
+          "game-engine editor",
+          "IDE/debugger",
+          "compiler and project builds",
+          "browser/documentation",
+          "automated tests",
+          "Python/data-analysis tools"
+        ],
+        "baseline_requirements": {
+          "system_ram_gb": 32,
+          "dedicated_gpu_vram_gb": 8,
+          "primary_ssd_gb": 1000
+        },
+        "preferred_if_budget_allows": {
+          "system_ram_gb": 64,
+          "primary_ssd_gb": 2000,
+          "dedicated_gpu_vram_gb": 12
+        },
+        "preference_note": "32GB RAM, 8GB dedicated VRAM and 1TB SSD are the project's baseline planning thresholds, not universal minimum specifications for every engine. 64GB RAM and 2TB SSD are project preferences for large assets, builds and simultaneous AI/data workloads, not claimed official engine requirements. Only score them as achieved if included in the as-purchased configuration; assume no post-purchase upgrades.",
+        "unreal_engine_source_compile_note": "Epic's current UE5 guidance says 12–16 CPU cores are a practical baseline for local engine-source compilation without a distributed build solution. The configured Ryzen 7 9700X is 8 cores/16 threads: suitable as a balanced gaming and project-development baseline, but not the highest-throughput choice for full engine-source builds. Treat that workload as a documented trade-off, not as a general game-creation blocker.",
+        "official_reference_urls": [
+          "https://dev.epicgames.com/documentation/ja-jp/unreal-engine/hardware-and-software-specifications-for-unreal-engine",
+          "https://docs.unity3d.com/6000.0/Documentation/Manual/system-requirements.html"
+        ],
+        "preferred_cpu_cores_for_unreal_source_build": 12
+      },
+      "ai_and_data_analysis": {
+        "priority": "HIGH",
+        "targets": [
+          "Python",
+          "GitHub",
+          "sports prediction",
+          "stock/security prediction",
+          "BTC prediction",
+          "local AI where practical"
+        ],
+        "evaluate": [
+          "CPU multithread performance",
+          "system RAM",
+          "GPU VRAM",
+          "SSD capacity and sustained workload thermal behavior"
+        ],
+        "note": "Do not assume every AI/data workload uses the GPU. Distinguish model VRAM fit from overall runtime and CPU/RAM/SSD bottlenecks."
+      },
+      "gpu_candidate_roles": {
+        "gpu-rtx5070-12gb": "Balanced first choice for gaming, game creation and general use; 12GB VRAM clears the project's preferred VRAM threshold.",
+        "gpu-rtx5060ti-16gb": "VRAM-capacity alternative for larger textures/assets and local-AI models that fit in 16GB; do not assume it beats RTX 5070 in gaming performance.",
+        "gpu-rtx5070ti-16gb": "Performance dark horse for higher gaming/render headroom with 16GB VRAM; only promote if the full build price, PSU/cable, dimensions and case clearance are verified."
+      },
+      "ranking_rules": [
+        "Evaluate playing games and creating games as separate high-priority workloads; do not reduce the recommendation to FPS alone.",
+        "For game creation, score engine/editor responsiveness, project build/compile behavior, VRAM, system RAM, SSD capacity, thermals and simultaneous IDE/browser/tests.",
+        "Score 64GB RAM and 2TB SSD as preferences only when those exact capacities are included at purchase and the all-in budget is verified; no assumed future upgrades.",
+        "Treat full Unreal Engine source compilation without distributed build as a distinct high-core-count workload; do not claim the 8-core Ryzen 7 9700X is optimal for that special case.",
+        "Never claim measured game FPS or compile times without a source-backed benchmark matching the actual CPU/GPU/RAM, engine version and settings.",
+        "Treat schoolwork, research, browser/PDF/document work and general multitasking as a first-class workload alongside gaming and game development.",
+        "Treat Python analytics, larger simulations, sports/stock/BTC predictions, automated tests and feasible local AI as first-class workloads; score CPU, RAM, VRAM, SSD and long-run thermal behavior by workload instead of GPU-only ranking.",
+        "Prefer 64GB RAM and 2TB SSD only when a complete as-purchased build fits the total budget and exact capacities are priced/verified; never rely on post-purchase upgrades.",
+        "Prioritize a balanced workstation/gaming build; do not overspend on GPU at the expense of memory and storage needs for study, development and data work."
+      ],
+      "study_and_research": {
+        "priority": "HIGH",
+        "targets": [
+          "school/study work",
+          "reading and summarizing source documents",
+          "research",
+          "writing and presentations",
+          "browser with many tabs",
+          "video lessons and note-taking"
+        ],
+        "concurrent_tasks": [
+          "browser/source research",
+          "PDF/document reading",
+          "office/editor tools",
+          "reference notes",
+          "game engine/IDE when needed",
+          "Python notebooks and data tools"
+        ],
+        "evaluation_note": "Do not assume a browser or school application needs a powerful GPU; optimize reliable multitasking, RAM capacity, SSD headroom and CPU responsiveness without overspending."
+      },
+      "analysis_and_automation": {
+        "priority": "HIGH",
+        "targets": [
+          "Python data analysis",
+          "large datasets and simulations",
+          "sports prediction systems",
+          "stock/securities prediction",
+          "BTC prediction",
+          "GitHub Actions and local tests",
+          "AI-assisted workflows",
+          "local AI models when feasible"
+        ],
+        "evaluate": [
+          "CPU single-thread and multithread performance",
+          "system RAM capacity",
+          "GPU VRAM and compute compatibility",
+          "SSD capacity and sustained I/O",
+          "cooling/noise under long-running workloads",
+          "multi-process and background-app responsiveness"
+        ],
+        "note": "Free/open-source tools and local processing are preferred where practical. Do not assume paid APIs, cloud GPUs, paid data services or subscription services. Do not claim a GPU accelerates CPU-only workloads automatically."
+      }
+    }
   },
   "parts": [
     {
