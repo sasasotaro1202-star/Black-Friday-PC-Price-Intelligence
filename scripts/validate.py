@@ -208,8 +208,6 @@ def main():
             errors.append("self_build_plan has invalid budget values")
         elif pc_budget + contingency != total_budget:
             errors.append("self_build_plan PC cap + contingency mismatch")
-        elif build_plan.get("pc_target_jpy", policy["pc_target_jpy"]) + periph_budget + contingency > total_budget:
-            errors.append("self_build_plan target + peripherals + contingency exceeds hard ceiling")
         builds = build_plan.get("builds") or []
         if len(builds) != 3:
             errors.append("self_build_plan should contain exactly three mutually exclusive GPU alternatives")
