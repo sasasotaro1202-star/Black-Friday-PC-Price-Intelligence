@@ -258,13 +258,13 @@
   "desktop_note": "Desktop self-build candidate monitoring must account for gaming, game creation, schoolwork/research/multitasking, Python/data analysis, automated prediction systems and feasible local AI. Keep the total all-in ceiling at ¥400,000, peripherals ¥45,000, PC planning target ¥350,000 and ¥5,000 contingency. Required at purchase: 32GB RAM and 1TB SSD; 64GB/2TB is a preferred complete-build outlier only when exact price and compatibility evidence are available. No post-purchase upgrade assumptions. BTO is a benchmark only.",
   "desktop_exact_candidate_count": 7,
   "total_budget_jpy": 400000,
-  "peripheral_budget_jpy": 45000,
+  "peripheral_budget_jpy": 55000,
   "pc_target_jpy": 350000,
-  "pc_budget_jpy": 350000,
+  "pc_budget_jpy": 395000,
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
-  "budget_scope_note": "総予算の上限は400,000円。PC本体の購入目標は350,000円、周辺機器は45,000円程度、残り5,000円は総額の予備費とする。周辺機器はサブモニター・ヘッドセットなし、メインモニター1台で、すべて実店舗購入の前提。送料は周辺機器に計上しない。価格はBF目標と実売を分け、価格・在庫・型番・互換性が未確認なら購入許可しない。",
+  "budget_scope_note": "総額上限400,000円は固定。周辺機器予算は45,000円に固定しない。メインモニター1台に加え、勉強・ゲーム制作・分析用のサブモニターも購入対象。サブモニターは23.8〜24インチ・FHD・IPS・100Hz級を暫定基準とし、型番は福岡の実店舗で確認できる価格・在庫・保証を見て選ぶ。ヘッドセットは現時点で購入対象外。スピーカーは安さだけで妥協せず、音質と価格のバランスを重視する。周辺機器は実店舗購入を基本とし送料を計上しない。PC本体の許容額は周辺機器計画/確認額と総額予備費を差し引いて動的に計算する。",
   "peripherals": [
     {
       "id": "main_monitor",
@@ -329,6 +329,46 @@
           "source_type": "official_branch_stock_page"
         }
       ]
+    },
+    {
+      "id": "secondary_monitor",
+      "category": "secondary_monitor",
+      "name": "サブモニター（23.8〜24インチ FHD IPS 100Hz級。正確な型番は店頭価格・在庫で選定）",
+      "target_price_jpy": 10000,
+      "track_current_price": false,
+      "monitor_url": "https://kakaku.com/pc/lcd-monitor/itemlist.aspx?pdf_Spec107=1&pdf_Spec301=23.8&pdf_Spec311=100-",
+      "purchase_url": "https://kakaku.com/pc/lcd-monitor/itemlist.aspx?pdf_Spec107=1&pdf_Spec301=23.8&pdf_Spec311=100-",
+      "identity_terms": [],
+      "allowed_hosts": [
+        "kakaku.com",
+        "www.yodobashi.com",
+        "www.biccamera.com",
+        "www.lenovo.com"
+      ],
+      "min_price_jpy": 7000,
+      "max_price_jpy": 18000,
+      "mandatory": true,
+      "requires_exact_model_before_purchase": true,
+      "price_target_phase": "black_friday",
+      "target_price_note": "¥10,000はサブモニター1台分の暫定BF目標枠であり、特定型番の価格・BF実売・福岡店舗の現金価格/在庫を意味しない。候補条件は23.8〜24インチ、FHD、IPS、100Hz級。例としてLenovo L24-41はメーカー仕様で23.8インチFHD IPS・100Hzだが、福岡の実店舗での販売/在庫は未確認。購入前に実店舗で型番・現金価格・在庫・保証を確認し、選定後は正確なSKUで価格・在庫の監視対象に置き換える。",
+      "ranking_reason": "勉強資料、ブラウザー、IDE、ゲームエンジン、データ分析を別画面に分けて作業効率を上げる。高リフレッシュレートは必須ではなく、FHD IPSと読みやすさ、安定したスタンド、価格・保証を優先する。",
+      "best_for": "学校の勉強・ゲーム制作・分析のマルチウィンドウ",
+      "purchase_channel": "physical_store",
+      "store_inventory_required_before_purchase": true,
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "biccamera_tenjin_1",
+        "yodobashi_hakata"
+      ],
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": []
     },
     {
       "id": "speakers",
@@ -696,8 +736,8 @@
     }
   ],
   "purchase_strategy": {
-    "updated_at": "2026-10-15",
-    "purpose": "総予算上限40万円、PC本体の購入目標35万円、周辺機器目標4.5万円（総額予備費5,000円は別枠）で、自作PCのRTX 5070 12GBを本命とし、RAM 32GB以上/SSD 1TB以上を確保する。周辺機器は27型WQHDメインモニター1台＋EDIFIER MR3＋入力機器等。サブモニターとヘッドセットは購入しない。BF目標と実売・最終決済額を厳密に区別する。",
+    "updated_at": "2026-10-17",
+    "purpose": "総額上限400,000円の中でPC本体・周辺機器の配分を動的に最適化する。周辺機器45,000円固定を廃止し、メインモニター＋サブモニター＋品質と価格のバランスを重視したスピーカー＋入力機器を含める。総額予備費5,000円を基準とし、PC本体の許容額は周辺機器の計画/確認額に応じて自動計算する。自作PCを本命とし、RAM 32GB以上/SSD 1TB以上を初期構成で確保する。BF購入目標と実売・最終決済額を厳密に区別する。継続課金なしを基本とし、有料AI/API/クラウドGPUを必須にしない。",
     "priority_plans": [
       {
         "candidate_id": "desktop-gtune-dg-i5g70-5070",
@@ -784,8 +824,8 @@
       "id": "speakers",
       "model": "EDIFIER MR3",
       "target_price_jpy": 12000,
-      "priority": "best balanced sound quality and value within the JPY 45,000 in-store peripheral budget",
-      "rationale": "MR3 is the baseline because it provides a pair of active monitor speakers with 36W RMS, Bluetooth 5.4 and multiple analog inputs at a lower target price. MR4 MKII stays as an optional upgrade only if the exact store price makes the upgrade worthwhile. MR5 is excluded because it exceeds the user's preferred value range.",
+      "priority": "good sound quality-to-price balance within the dynamically allocated total-system budget",
+      "rationale": "MR3 is the baseline pair of active monitor speakers with 36W RMS, Bluetooth 5.4 and multiple analog inputs. MR4 MKII remains an optional upgrade only if a verified physical-store price justifies the difference. MR5 is excluded from the main shortlist because it is considered too expensive. Do not downgrade to the cheapest speaker only to preserve an arbitrary fixed peripheral budget.",
       "coupon_policy": "Online coupons and web checkout discounts do not count as physical-store prices. Confirm in-store cash price and stock independently.",
       "price_target_phase": "black_friday",
       "target_price_note": "BF購入目標12,000円。メーカー公式のWeb表示価格は現行参考情報で、実店舗の現金価格やBF時の確定値引きではない。"
@@ -1512,11 +1552,15 @@
         "weight_pct": 15
       }
     ],
-    "instructions": "各カテゴリから主候補を1商品選び、代替候補を同時購入しない。サブモニターとヘッドセットは購入対象外。モニター・スピーカー・キーボード・マウス・マウスパッド・電源タップ・必要ケーブルはすべて実店舗購入で、周辺機器の送料は計上しない。Web価格は参考値であり、福岡のビックカメラ天神1号館またはヨドバシ博多の店頭価格/在庫を証明しない。店舗で同じ型番・色・仕様、税込現金価格、在庫を確認する。ケーブルは付属品を確認して不足時のみ買う。MR3を予算内の主スピーカー、MR4 MKIIを店頭価格が十分下がった場合の上位代替、Creative Pebble Proを小型・低価格代替とする。ポイント・クーポンは決済条件確認前に値引き扱いしない。 マウスパッド・電源タップも含む全周辺機器は、別途指定がない限り実店舗購入。周辺機器の送料は予算に含めない。",
+    "instructions": "各カテゴリから主候補を1商品選び、代替候補を同時購入しない。メインモニターとサブモニターを各1台、スピーカー、キーボード、マウス、マウスパッド、電源タップ、必要ケーブルを対象とする。ヘッドセットは現時点で購入対象外。周辺機器予算45,000円は固定しない。総額400,000円と予備費5,000円を優先し、実際の店頭価格・品質・必要性を元にPC本体との配分を動的に最適化する。周辺機器は福岡の実店舗購入を基本とし、送料は計上しない。Web価格は参考値であり、ビックカメラ天神1号館またはヨドバシ博多の店頭価格/在庫を証明しない。サブモニターの暫定条件は23.8〜24インチ、FHD、IPS、100Hz級。型番は店頭在庫・現金価格・保証を確認してから確定し、型番未確定の予算目標を購入可能価格や在庫確認済みとして扱わない。MR3を音質・価格のバランス候補、MR4 MKIIを店頭価格が十分下がった場合の上位代替、Creative Pebble Proを小型・低価格代替とする。ポイント・クーポンは決済条件確認前に値引き扱いしない。",
     "category_order": [
       {
         "category": "main_monitor",
         "label": "メインモニター（27インチ・WQHD）"
+      },
+      {
+        "category": "secondary_monitor",
+        "label": "サブモニター（勉強・制作・分析用）"
       },
       {
         "category": "speakers",
@@ -1546,8 +1590,8 @@
   },
   "monitor_window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
   "monitor_window_note": "暫定の広域監視窓であり、いずれかの販売店の公式BF開催日を意味しない。各店の2026年公式日程を公式ページから明示的な年付き日付範囲で確認するまで、価格をBF実売として認定せず、買い時判定は購入許可を出さない。過去日程、曜日、年のない月日から開催日を推定しない。",
-  "budget_mode": "SOFT_TARGET",
-  "budget_target_note": "総額400,000円を上限に、PC本体の目標350,000円・周辺機器45,000円・別枠予備費5,000円で最適化する。目標超過の大穴は比較に残し、超過額を明示する。",
+  "budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
+  "budget_target_note": "総額400,000円を絶対上限とする。周辺機器45,000円固定を廃止。メイン＋サブモニター、スピーカー、入力機器などの実際の必要額・店頭価格を見て配分し、PC本体の許容額は総額400,000円－周辺機器の計画/確認額－総額予備費5,000円を基本に動的計算する。55,000円はサブモニターを含めた現時点の配分試算であり、固定予算や実売価格ではない。",
   "purchase_channels": {
     "pc_body": {
       "channel": "online",
@@ -1604,8 +1648,8 @@
     "store_stock_rule": "周辺機器はすべて実店舗購入。全国オンライン在庫・Web価格は当該店舗の店頭在庫・店頭決済価格を証明しない。購入判断前に、同一型番/色、ビックカメラ天神1号館またはヨドバシ博多の店頭在庫または取り置き、店頭税込現金支払総額を確認する。未確認なら購入許可は保留する。",
     "online_price_handling": "オンライン価格は市場比較の参考値に限る。実店舗の価格・在庫として扱わない。"
   },
-  "target_budget_notes": "総額の上限400,000円、PC本体の購入目標350,000円、周辺機器45,000円程度、総額予備費5,000円。サブモニター・ヘッドセットなし。周辺機器はすべて実店舗購入で送料計上なし。大穴はランキングに残し、超過額・必要値下げ・互換性ブロッカーを明示する。",
-  "target_budget_mode": "SOFT_TARGET",
+  "target_budget_notes": "総額上限400,000円。周辺機器45,000円固定を廃止し、メインモニター＋サブモニター＋スピーカー＋入力機器等を用途に合わせて選び、PC本体と周辺機器の配分を動的に最適化する。現時点の配分試算は周辺機器55,000円だが必須上限ではない。総額予備費5,000円を基本として、PC本体の許容額は総額から周辺機器の計画/確認額と予備費を差し引く。ヘッドセットなし。周辺機器送料なし。BF目標、事前参考価格、確認済みBF実売価格、最終決済価格を区別し、価格・型番・在庫・互換性の未確認が残る場合は購入許可しない。",
+  "target_budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
   "market_risk_policy": {
     "snapshot_date": "2026-10-17",
     "purpose": "Qualitative monitoring priority. Not a price forecast, discount probability, or automatic purchase command.",
@@ -1775,5 +1819,7 @@
       "64GB RAM and 2TB SSD are preferred stretch targets only when their exact at-purchase configurations and prices fit the complete budget; 32GB RAM and 1TB SSD are the current minimum purchase baseline; do not rely on post-purchase upgrades.",
       "For prediction/data systems, distinguish CPU-heavy, memory-heavy and GPU/VRAM-dependent tasks; never imply every analysis job benefits from a faster GPU."
     ]
-  }
+  },
+  "peripheral_budget_mode": "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET",
+  "peripheral_budget_is_hard_cap": false
 }
