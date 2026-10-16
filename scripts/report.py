@@ -64,10 +64,57 @@ def image_markup(item, fallback_url=None, width=88):
 
 
 def peripheral_is_physical_store(item, target_config):
+    """True only when the selected purchase route is a physical-store cash purchase."""
     item = item if isinstance(item, dict) else {}
-    policy = (target_config or {}).get("purchase_channels") or {}
-    physical_categories = set(policy.get("physical_store_categories") or [])
-    return item.get("purchase_channel") == "physical_store" or item.get("category") in physical_categories
+    return item.get("purchase_channel") == "physical_store"
+
+
+def peripheral_route_label(item):
+    """Human-readable route options; do not equate a web listing with a store cash quote."""
+    item = item if isinstance(item, dict) else {}
+    channel = str(item.get("purchase_channel") or "online")
+    if channel == "compare_online_and_store":
+        return "ネット配送・実店舗・店舗受取を比較"
+    if channel == "physical_store":
+        return "実店舗（現金価格・在庫を確認）"
+    if channel == "conditional_need_only":
+        return "付属ケーブル不足時のみ"
+    if channel == "budget_reserve":
+        return "予備枠（商品ではない）"
+    return "ネット注文"
+
+
+def peripheral_route_price_summary(item):
+    """Separate online listing, shipping, store cash quote and route completeness."""
+    item = item if isinstance(item, dict) else {}
+    channel = str(item.get("purchase_channel") or "online")
+    price = item.get("online_comparison_price_jpy")
+    shipping = item.get("online_shipping_jpy")
+    reserve = item.get("online_shipping_reserve_jpy")
+    online_total = item.get("estimated_online_cash_total_jpy")
+    store_price = item.get("store_price_jpy") if item.get("store_price_confirmed") else None
+    parts = []
+    if isinstance(price, int) and not isinstance(price, bool):
+        if isinstance(online_total, int) and not isinstance(online_total, bool):
+            fee_text = f"（送料込み推計 ¥{online_total:,}"
+            if not item.get("online_shipping_cost_verified"):
+                fee_text += f"・送料予備 ¥{int(reserve or 0):,}"
+            fee_text += "）"
+        else:
+            fee_text = ""
+        parts.append(f"ネット掲載 ¥{price:,}{fee_text}")
+    else:
+        parts.append("ネット価格未確認")
+    if isinstance(store_price, int) and not isinstance(store_price, bool):
+        stock = str(item.get("store_stock_status") or "unknown")
+        store_name = item.get("store_inventory_store_name") or "対象店"
+        parts.append(f"{store_name} 店頭 ¥{store_price:,}・在庫 {stock}")
+    elif channel in ("compare_online_and_store", "physical_store") or "physical_store" in (item.get("purchase_channel_options") or []):
+        parts.append("店頭現金価格未確認")
+    route_status = item.get("channel_comparison_status")
+    if route_status:
+        parts.append(f"比較状態 {route_status}")
+    return " / ".join(parts)
 
 
 def inventory_status_label(item):
@@ -831,7 +878,7 @@ def main():
         "|画像|項目|購入方法|BF購入目標価格|観測価格（BF前は参考）|在庫（購入先）|価格確認|商品/比較ページ|",
         "|---|---|---|---:|---|---|---|---|",
         *[
-            f"|{image_markup(next((t for t in (target_config.get('peripherals') or []) if str(t.get('id')) == str(p.get('id'))), {}), p.get('purchase_url'), 84)}|{p['name']}|{'実店舗' if p.get('purchase_channel') == 'physical_store' else 'ネット'}|¥{p['target_price_jpy']:,}|{('店頭価格未確認・Web参考 ¥'+format(p['online_comparison_price_jpy'],',')) if p.get('purchase_channel') == 'physical_store' and p.get('online_comparison_price_jpy') is not None else ('店頭価格未確認・目標額で仮計算' if p.get('purchase_channel') == 'physical_store' else (('¥'+format(p['current_price_jpy'],',')) if p.get('current_price_jpy') is not None else '—（目標額で仮計算）'))}|{inventory_status_label(p) if p.get('purchase_channel') == 'physical_store' else p.get('stock_status','unknown')}|{('店頭価格未確認' if p.get('purchase_channel') == 'physical_store' else ('確認済み' if p.get('price_verified') else '未確認'))}|{('[商品/比較ページ]('+p['purchase_url']+')') if p.get('purchase_url') else '予算枠のみ'}|"
+            f"|{image_markup(next((t for t in (target_config.get('peripherals') or []) if str(t.get('id')) == str(p.get('id'))), {}), p.get('purchase_url'), 84)}|{p['name']}|{peripheral_route_label(p)}|¥{p['target_price_jpy']:,}|{peripheral_route_price_summary(p)}|{'店頭価格・支店在庫を別途確認' if p.get('purchase_channel') == 'compare_online_and_store' else inventory_status_label(p) if p.get('purchase_channel') == 'physical_store' else p.get('stock_status','unknown')}|{'店頭価格確認済み' if p.get('store_price_confirmed') else '店頭価格未確認' if p.get('purchase_channel') in ('physical_store','compare_online_and_store') else ('オンライン価格確認済み' if p.get('price_verified') else '未確認')}|{('[商品/比較ページ]('+p['purchase_url']+')') if p.get('purchase_url') else '予算枠のみ'}|"
             for p in peripheral_projection["peripherals"]
         ],
         "",
@@ -861,11 +908,9 @@ def main():
     ranking_policy = target_config.get("peripheral_ranking_policy") or {}
     category_order = ranking_policy.get("category_order") or [
         {"category": "main_monitor", "label": "メインモニター（27インチ・WQHD）"},
-        {"category": "speakers", "label": "スピーカー"},
         {"category": "keyboard", "label": "キーボード"},
         {"category": "mouse", "label": "マウス（FPS向け）"},
         {"category": "mousepad", "label": "マウスパッド"},
-        {"category": "power_strip", "label": "電源タップ（6口・雷ガード）"},
         {"category": "cables", "label": "映像ケーブル（必要な場合のみ）"},
     ]
     category_ids = {}
@@ -882,7 +927,7 @@ def main():
         "各カテゴリから**1商品だけ**選びます。代替候補は価格監視対象ですが、選択しない限り必須周辺機器の総予算には加算しません。",
         "100点は用途適合35%、予算適合30%、仕様・機能20%、代替性・購入リスク15%のユーザー条件別評価であり、独立した実機ベンチマークではありません。",
         "BF購入目標・BF前の観測価格・在庫・送料込み決済額を分けて扱います。取得失敗は売り切れと見なしません。",
-        "購入ルート：PC本体（自作パーツ）はネット注文。メインモニター・マウス・キーボード・スピーカーは実店舗購入。これら4カテゴリのWeb価格は比較参考で、店頭価格・支店在庫として扱いません。自動で読めた支店別取置き在庫は「確認時点」の参考表示であり、店頭価格や棚在庫の保証ではありません。",
+        "購入ルート：PC本体（自作パーツ）はネット注文。メインモニター・キーボード・マウス・マウスパッドはネット配送・実店舗・ネット注文の店舗受け取りを同一型番で比較します。ネット価格・送料・店頭現金価格・支店在庫・ポイント・保証・返品条件を別々に記録し、ネット価格を店頭価格として扱いません。電源タップは所有済み、スピーカー・サブモニター・ヘッドセットは購入対象外です。",
         "",
     ]
     for group in category_order:
@@ -944,7 +989,7 @@ def main():
     peripheral_category_lines += [
         "### 予算・配線の実用項目",
         "",
-        "- 電源タップはPC・モニター・スピーカーの同時使用を想定し、定格電力とケーブル長を確認する。",
+        "- 電源タップは所有済みのため買い足さず、必要なケーブルは付属品を確認してから不足時だけ購入する。",
         "- DisplayPort/HDMIケーブルは付属品を確認してから、不足分だけ買う。",
         "- ポイントは現金支払額から控除せず、クーポンも決済画面で適用と最終支払額を確認できた場合だけ反映する。",
         "",
