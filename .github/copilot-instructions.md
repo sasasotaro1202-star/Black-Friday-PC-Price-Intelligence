@@ -47,7 +47,7 @@ BF purchase targets are aspirations, not forecasts or executable checkout prices
 
 ## 3. Component compatibility gates
 
-Keep all unverified compatibility as REVIEW; never promote to PASS by assumption.
+Keep all unverified compatibility as REVIEW; never promote to PASS by assumption. Require exact model/SKU evidence before marking identity, pricing, or compatibility verified.
 - The ASRock B850M Pro RS WiFi CPU-support information indicates Ryzen 7 9700X requires BIOS 3.12. The actual supplied BIOS is not yet verified.
 - The exact TeamGroup memory kit's appearance on the board's QVL remains UNCONFIRMED. Verify exact manufacturer SKU before purchase.
 - Validate NVMe format/slot availability, board and case form factor, cooler height, memory/cooler clearance, exact GPU dimensions/slot thickness, GPU power connector and cable routing, PSU wattage/connectors, case airflow, Windows license, shipping, small parts, return conditions and final completed build total.
