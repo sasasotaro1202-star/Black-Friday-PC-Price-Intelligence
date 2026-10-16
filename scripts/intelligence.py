@@ -19,7 +19,7 @@ def _initial_budget_settings():
         total = int(cfg.get("total_budget_jpy", 400000))
         peripherals = int(cfg.get("peripheral_budget_jpy", 40000))
         pc_cap = int(cfg.get("pc_budget_jpy", 395000))
-        pc_target = int(cfg.get("pc_target_jpy", min(350000, pc_cap)))
+        pc_target = int(cfg.get("pc_target_jpy", min(360000, pc_cap)))
         contingency = int(cfg.get("unallocated_contingency_jpy", max(0, total - peripherals - pc_cap)))
         mode = str(cfg.get("peripheral_budget_mode") or "").upper()
         dynamic_peripherals = mode == "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET" or cfg.get("peripheral_budget_is_hard_cap") is False
