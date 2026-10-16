@@ -5,7 +5,7 @@
     "build_type": "DIY_PC",
     "currency": "JPY",
     "total_budget_jpy": 400000,
-    "peripheral_budget_jpy": 40000,
+    "peripheral_budget_jpy": 36000,
     "pc_budget_jpy": 395000,
     "minimum_ram_gb": 32,
     "minimum_memory_modules": 2,
@@ -42,7 +42,7 @@
     "allowed_comparison_domains": [
       "kakaku.com"
     ],
-    "policy": "Black Friday target prices are aspirational, not forecasts. Total-system hard ceiling is JPY 400,000. PC base target is JPY 350,000. Peripheral allocation is dynamic and is not an obligation to spend a fixed amount; JPY 40,000 is only a reference plan. Include exactly one 27-inch WQHD main monitor, one sufficient cost-effective speaker set, input devices, and only necessary power/cables. Do not include a sub-monitor or headset in candidate lists, monitoring, budgets, or totals. Keep JPY 5,000 as an unallocated contingency. Calculate the permissible PC spend from the total ceiling minus projected/verified peripheral costs and contingency; if peripherals cost less, spending the difference is optional rather than required. Comparison-site prices are references, not checkout prices, stock confirmation, or official BF actuals. Peripheral shipping is not budgeted. Keep over-target dark horses in comparisons with explicit overruns; never authorize purchases from targets or references.",
+    "policy": "Black Friday target prices are aspirational, not forecasts. Total-system hard ceiling is JPY 400,000. PC planning target is JPY 360,000, while maximum PC spend is dynamically capped by the all-in total. Peripheral allocation is flexible at JPY 36,000, not an obligation to spend the full amount. Include exactly one 27-inch WQHD high-refresh main monitor, keyboard, mouse, and mousepad. The power strip is already owned and excluded from purchase, monitoring, and budget. Buy only necessary cables after checking included cables. Do not include speakers, a sub-monitor, or a headset in candidate lists, monitoring, budgets, or totals. Keep JPY 5,000 as an unallocated contingency. Compare online delivery, in-store cash purchase, and online order with store pickup per item using the exact SKU/variant, direct price, total cash checkout amount including fees, stock, warranty and return terms. Points are not cash discounts. Comparison-site prices and BF targets are not checkout prices or verified BF deals. Include online delivery shipping, but never assume peripheral shipping for in-store purchases. Keep dark-horse candidates in comparisons with explicit overruns; never authorize purchases from target prices alone.",
     "allowed_search_reference_domains": [
       "kakaku.com",
       "amazon.co.jp",
@@ -239,7 +239,7 @@
         "note": "Free/open-source tools and local processing are preferred where practical. Do not assume paid APIs, cloud GPUs, paid data services or subscription services. Do not claim a GPU accelerates CPU-only workloads automatically. Do not add peripheral audio hardware to the required build unless the user explicitly changes scope."
       }
     },
-    "pc_target_jpy": 350000,
+    "pc_target_jpy": 360000,
     "peripheral_budget_mode": "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET",
     "peripheral_budget_is_hard_cap": false,
     "ongoing_cost_policy": {
@@ -280,10 +280,10 @@
         "gpu_id": "gpu-rtx5070ti-16gb",
         "base_pc_target_jpy": 324800,
         "pc_target_with_2tb_ssd_jpy": 351800,
-        "peripherals_reference_jpy": 40000,
+        "peripherals_reference_jpy": 36000,
         "contingency_jpy": 5000,
-        "all_in_target_jpy": 396800,
-        "remaining_to_hard_ceiling_jpy": 3200
+        "all_in_target_jpy": 392800,
+        "remaining_to_hard_ceiling_jpy": 7200
       },
       "rules": [
         "The 2TB drive replaces the 1TB drive; never add both SSD prices to the same build.",
@@ -314,10 +314,10 @@
         "base_memory_target_jpy": 40000,
         "memory64_target_jpy": 100000,
         "pc_target_with_64gb_jpy": 340600,
-        "peripherals_reference_jpy": 40000,
+        "peripherals_reference_jpy": 36000,
         "contingency_jpy": 5000,
-        "all_in_target_jpy": 385600,
-        "remaining_to_hard_ceiling_jpy": 14400
+        "all_in_target_jpy": 381600,
+        "remaining_to_hard_ceiling_jpy": 18400
       },
       "rules": [
         "The 64GB kit replaces the selected 32GB kit; never add both RAM prices to the same build.",
