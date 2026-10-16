@@ -122,9 +122,13 @@ class WorkflowContractTests(unittest.TestCase):
             self.assertIn("catalog_url_mismatch_ids", text)
             self.assertIn("or bool(catalog_url_mismatch_ids)", text)
 
-    def test_primary_workflow_does_not_cancel_in_progress_collection(self):
+    def test_primary_and_fast_workflows_share_current_writer_lock_without_cancelling_active_collection(self):
         text = WORKFLOW.read_text(encoding="utf-8")
+        fast = (ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml").read_text(encoding="utf-8")
+        self.assertIn("group: pc-price-intelligence-writer-v3", text)
+        self.assertIn("group: pc-price-intelligence-writer-v3", fast)
         self.assertIn("cancel-in-progress: false", text)
+        self.assertIn("cancel-in-progress: false", fast)
 
     def test_watchlist_discovery_runs_after_remote_reset_before_collection(self):
         for path in (
