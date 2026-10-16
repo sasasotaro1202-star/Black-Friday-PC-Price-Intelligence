@@ -32,7 +32,7 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_all_in_jpy"], 369800)
         self.assertTrue(builds["gpu-rtx5070ti-16gb"]["target_within_pc_budget"])
         self.assertTrue(builds["gpu-rtx5070ti-16gb"]["target_within_total_budget"])
-        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_remaining_budget_jpy"], 5400)
+        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_remaining_budget_jpy"], 30200)
         self.assertEqual(builds["gpu-rtx5070ti-16gb"]["decision"], "WAIT_FOR_COMPATIBILITY_REVIEW")
         self.assertTrue(plan["budget_arithmetic_valid"])
         self.assertFalse(plan["buy_now_authorized"])
