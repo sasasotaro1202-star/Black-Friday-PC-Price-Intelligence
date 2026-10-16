@@ -5,7 +5,7 @@
     "build_type": "DIY_PC",
     "currency": "JPY",
     "total_budget_jpy": 400000,
-    "peripheral_budget_jpy": 40000,
+    "peripheral_budget_jpy": 32000,
     "pc_budget_jpy": 395000,
     "minimum_ram_gb": 32,
     "minimum_memory_modules": 2,
@@ -42,7 +42,7 @@
     "allowed_comparison_domains": [
       "kakaku.com"
     ],
-    "policy": "Black Friday target prices are aspirational, not forecasts. Total-system hard ceiling is JPY 400,000. Peripheral allocation is dynamic and is not an obligation to spend a fixed amount; JPY 40,000 is only a reference plan. Include exactly one 27-inch WQHD main monitor, a sufficient cost-effective speaker set, input devices, and only necessary power/cables. Do not include a sub-monitor or headset in the candidate list, budget, or totals. Keep JPY 5,000 as an unallocated contingency. Calculate the permissible PC spend from the total ceiling minus projected/verified peripheral costs and contingency; if peripherals cost less, spending the difference is optional rather than required. Comparison-site prices are references, not checkout prices, stock confirmation, or official BF actuals. Peripheral shipping is not budgeted. Keep over-target dark horses in comparisons with explicit overruns; never authorize purchases from targets or references.",
+    "policy": "Black Friday target prices are aspirational, not forecasts. Total-system hard ceiling is JPY 400,000. Peripheral allocation is dynamic and is not an obligation to spend a fixed amount; JPY 32,000 is only a reference plan. Include exactly one 27-inch WQHD main monitor, keyboard, mouse, mousepad, power strip and necessary cables only. Do not include a sub-monitor, speakers or headset in candidate lists, monitoring, budgets or totals. Keep JPY 5,000 as unallocated contingency. Calculate permissible PC spend from the total ceiling minus projected/verified peripheral costs and contingency; if peripherals cost less, spending the difference is optional rather than required. All peripherals must be purchased in physical stores; website prices only support model/spec comparison, never prove branch cash price or stock. Peripheral shipping is not budgeted. Comparison-site prices are references, not checkout prices, stock confirmation, or official BF actuals. Keep over-target dark horses in comparisons with explicit overruns; never authorize purchases from targets or references.",
     "allowed_search_reference_domains": [
       "kakaku.com",
       "amazon.co.jp",
@@ -279,10 +279,10 @@
         "gpu_id": "gpu-rtx5070ti-16gb",
         "base_pc_target_jpy": 324800,
         "pc_target_with_2tb_ssd_jpy": 351800,
-        "peripherals_reference_jpy": 40000,
+        "peripherals_reference_jpy": 32000,
         "contingency_jpy": 5000,
-        "all_in_target_jpy": 396800,
-        "remaining_to_hard_ceiling_jpy": 3200
+        "all_in_target_jpy": 388800,
+        "remaining_to_hard_ceiling_jpy": 11200
       },
       "rules": [
         "The 2TB drive replaces the 1TB drive; never add both SSD prices to the same build.",
@@ -458,7 +458,7 @@
         "connector": "12V-2x6",
         "card_thickness_slots": 2.98
       },
-      "notes": "PNY公式のARGB Overclocked Triple Fan型番VCG5070T16TFXXPB1-Oに一致。公称約300×120×60mm、2.98スロット、300W、16ピン入力、推奨PSU750W。2026-10-14時点のドスパラ表示例は207,700円。154,000円は希望するBF購入目標であり値下がり予測ではない。TeamGroupの40,000円メモリ目標でも自作PC本体目標は324,800円。メインモニター1台と必要な入力機器の参考配分32,000円、予備費5,000円込みで総額目標361,800円となり、40万円上限まで38,200円の余地がある。2TB SSDを45,000円目標（既存1TB目標との差額27,000円）で置き換えられる場合は、PC本体351,800円、周辺機器32,000円、予備費5,000円込みで388,800円。すべてBF目標値による算術シナリオであり、実売価格や値下がり予測ではない。大穴ランキングには残し、GPUの実売価格・在庫、ケース干渉、電源コネクタの安全なクリアランスを確認する。周辺機器参考配分40,000円と予備費5,000円では、1TB SSD構成の計画総額は369,800円。2TB SSDへ45,000円目標（1TB目標との差額27,000円）で置換できる場合は396,800円となる。ただしBF目標値の計算であり、実売価格ではない。",
+      "notes": "PNY公式のARGB Overclocked Triple Fan型番VCG5070T16TFXXPB1-Oに一致。公称約300×120×60mm、2.98スロット、300W、16ピン入力、推奨PSU750W。2026-10-14時点のドスパラ表示例は207,700円。154,000円は希望するBF購入目標であり値下がり予測ではない。TeamGroupの40,000円メモリ目標でも自作PC本体目標は324,800円。メインモニター1台と必要な入力機器の参考配分32,000円、予備費5,000円込みで総額目標361,800円。2TB SSDへ45,000円目標（1TB目標との差額27,000円）で置き換えられる場合は、PC本体351,800円、周辺機器32,000円、予備費5,000円込みで388,800円。すべてBF目標による算術シナリオで、実売価格や値下がり予測ではない。GPUの実売・在庫、ケース干渉、電源コネクタのクリアランスを確認する。",
       "spec_source_url": "https://www.pny.com/geforce-rtx-5070-ti-models?sku=VCG5070T16TFXXPB1-O",
       "spec_source_verified_at": "2026-10-14",
       "direct_retailer_urls": [
