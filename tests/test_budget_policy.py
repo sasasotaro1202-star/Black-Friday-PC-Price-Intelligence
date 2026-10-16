@@ -48,7 +48,7 @@ class BudgetPolicyTests(unittest.TestCase):
             self.assertIn("350,000円", plan["black_friday_target_note"])
             self.assertNotIn("310,200円", plan["black_friday_target_note"])
         notes_by_candidate = {x["candidate_id"]: x["black_friday_target_note"] for x in strategy["priority_plans"]}
-        self.assertIn("目標までの差は45,200円", notes_by_candidate["desktop-gtune-dg-a7g70-5070"])
+        self.assertIn("目標までの差45,200円", notes_by_candidate["desktop-gtune-dg-a7g70-5070"])
         self.assertIn("余地は50,200円", notes_by_candidate["desktop-gtune-dg-i7g70-5070"])
         self.assertIn("差は40,200円", notes_by_candidate["desktop-gtune-fg-a7g6t-5060ti16"])
 
@@ -377,7 +377,7 @@ class BudgetPolicyTests(unittest.TestCase):
         target_sum = sum(int(p.get("target_price_jpy") or 0) for p in mandatory)
         self.assertEqual(target_sum, int(self.cfg["peripheral_budget_jpy"]))
         self.assertEqual(
-            int(self.cfg["pc_target_jpy"]) + int(self.cfg["peripheral_budget_jpy"]),
+            int(self.cfg["pc_target_jpy"]) + int(self.cfg["peripheral_budget_jpy"]) + int(self.cfg["unallocated_contingency_jpy"]),
             int(self.cfg["total_budget_jpy"]),
         )
         self.assertEqual(int(self.cfg["pc_budget_jpy"]), int(self.cfg["pc_target_jpy"]))
