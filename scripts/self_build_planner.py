@@ -748,9 +748,10 @@ def build_plan(config=None, price_snapshot=None, now=None):
         compat, checks = compatibility_checks(parts, profile, gpu_id, selected_memory_id)
         workload_fit = assess_workload_fit(profile, parts, selected_ids, gpu_id, selected_memory_id)
         target_pc = target_parts + shipping + small_parts
-        target_all_in = target_pc + peripheral_budget
+        contingency = int(profile.get("unallocated_contingency_jpy", 0))
+        target_all_in = target_pc + peripheral_budget + contingency
         market_estimate = market_subtotal + shipping + small_parts if all_parts_referenced and not missing else None
-        all_in_market = market_estimate + peripheral_budget if market_estimate is not None else None
+        all_in_market = market_estimate + peripheral_budget + contingency if market_estimate is not None else None
         gpu_part = parts.get(gpu_id) or {}
         gpu_live = by_id.get(gpu_id) or {}
         live_gpu_price = gpu_live.get("market_reference_price_jpy")
@@ -783,6 +784,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "target_pc_budget_delta_jpy": target_pc - pc_budget,
             "target_peripheral_budget_jpy": peripheral_budget, "target_all_in_jpy": target_all_in,
             "total_budget_jpy": all_budget, "target_remaining_budget_jpy": all_budget-target_all_in,
+            "target_contingency_jpy": contingency,
             "target_within_pc_budget": target_pc <= pc_budget, "target_within_total_budget": target_all_in <= all_budget,
             "market_reference_estimate_jpy": market_estimate,
             "market_reference_all_in_estimate_jpy": all_in_market,
@@ -816,7 +818,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
         "total_budget_jpy": all_budget, "peripheral_budget_jpy": peripheral_budget, "pc_budget_jpy": pc_budget,
         "unallocated_contingency_jpy": int(profile.get("unallocated_contingency_jpy", 0)),
         "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
-        "budget_arithmetic_valid": pc_budget + peripheral_budget + int(profile.get("unallocated_contingency_jpy", 0)) == all_budget,
+        "budget_arithmetic_valid": pc_budget + int(profile.get("unallocated_contingency_jpy", 0)) == all_budget,
         "required_categories": profile.get("required_categories") or [],
         "memory_choice_selection": memory_choice_selection,
         "component_coverage": {
