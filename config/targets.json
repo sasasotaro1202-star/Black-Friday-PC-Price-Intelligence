@@ -652,14 +652,18 @@
       "identity_terms": [],
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "原則0円。モニターとスピーカーの付属ケーブルを先に確認し、実際に不足した場合のみ実店舗で購入する。",
+      "target_price_note": "原則0円。付属品を確認し、不足時だけビックカメラ天神1号館またはヨドバシ博多で必要なケーブルを購入。送料は計上しない。",
       "ranking_score_100": 88,
       "ranking_reason": "モニター付属品を先に確認し、不足分だけ購入することで不要な二重購入を防ぐ。",
       "best_for": "同梱品を優先し、足りない分だけ買う",
       "category": "cables",
       "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": false,
-      "online_price_is_comparison_only": true
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "store_price_buffer",
