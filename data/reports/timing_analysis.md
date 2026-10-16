@@ -1,25 +1,25 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-16T23:23:51+09:00
-Source snapshot: 2026-10-16T23:21:57+09:00
-Source snapshot SHA256: 44bedc934218d90a9e6f93c436c9dd1cda1b1abf51da28e009e57b086d1d9e71
-Budget: ¥330,200
+Generated: 2026-10-17T01:30:57+09:00
+Source snapshot: 2026-10-17T01:27:52+09:00
+Source snapshot SHA256: f6355491c69d8d6c45da88cc8104c5bd24caf0fbeab7dab63cbdba5569f5f3f1
+Budget: ¥350,000
 Target Black Friday: 2026-11-27
 
 ## Current actionable candidates
 
 |Rank|Product|Current|Required discount|Feasibility|GPU|Perf|Source|
 |---:|---|---:|---:|---|---|---:|---|
-|1|G TUNE P6-I7G70BK-B|¥284,700|0.0%|HIGH|rtx 5070|35|direct_structured|
-|2|G TUNE FG-A7G70|¥319,800|0.0%|HIGH|rtx 5070|33|direct_structured|
-|3|G TUNE DG-I7G70|¥299,800|0.0%|HIGH|rtx 5070|32|direct_structured|
-|4|G TUNE FG-A7G6T|¥300,001|0.0%|HIGH|rtx 5060 ti|28|direct_text|
-|5|G TUNE DG-A7G70|¥300,001|0.0%|HIGH|rtx 5070|26|direct_text|
-|6|G TUNE DG-I5G70|¥279,800|0.0%|HIGH|rtx 5070|22|direct_structured|
-|7|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
-|8|Lenovo Legion Pro 5i Gen 10（16型 Intel）|¥337,240|2.1%|HIGH|rtx 5080|40|direct_structured|
-|9|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|17.4%|REALISTIC|rtx 5070 ti|38|direct_structured|
-|10|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|26.4%|AGGRESSIVE|rtx 5070|32|direct_structured|
+|1|Lenovo Legion Pro 5i Gen 10（16型 Intel）|¥337,240|0.0%|HIGH|rtx 5080|40|direct_structured|
+|2|G TUNE P6-I7G70BK-B|¥284,700|0.0%|HIGH|rtx 5070|35|direct_structured|
+|3|G TUNE FG-A7G70|¥319,800|0.0%|HIGH|rtx 5070|33|direct_structured|
+|4|G TUNE DG-I7G70|¥299,800|0.0%|HIGH|rtx 5070|32|direct_structured|
+|5|G TUNE FG-A7G6T|¥300,001|0.0%|HIGH|rtx 5060 ti|28|direct_text|
+|6|G TUNE DG-A7G70|¥300,001|0.0%|HIGH|rtx 5070|26|direct_text|
+|7|G TUNE DG-I5G70|¥279,800|0.0%|HIGH|rtx 5070|22|direct_structured|
+|8|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
+|9|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|12.5%|REALISTIC|rtx 5070 ti|38|direct_structured|
+|10|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|22.0%|AGGRESSIVE|rtx 5070|32|direct_structured|
 
 ## Empirical price-change timing
 
