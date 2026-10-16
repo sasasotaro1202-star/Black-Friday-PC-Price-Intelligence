@@ -31,7 +31,7 @@ def _initial_budget_settings():
         or (pc_cap + contingency > total if dynamic_peripherals else pc_cap + peripherals + contingency != total)
     )
     if invalid:
-        total, peripherals, pc_cap, pc_target, contingency, dynamic_peripherals = 400000, 40000, 395000, 350000, 5000, True
+        total, peripherals, pc_cap, pc_target, contingency, dynamic_peripherals = 400000, 36000, 395000, 360000, 5000, True
     return total, peripherals, pc_target, pc_cap
 
 TOTAL_BUDGET, PERIPHERAL_BUDGET, BUDGET, PC_BUDGET = _initial_budget_settings()
