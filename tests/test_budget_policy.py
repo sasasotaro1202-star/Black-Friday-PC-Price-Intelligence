@@ -41,6 +41,19 @@ class BudgetPolicyTests(unittest.TestCase):
         dynamic_cap = max(0, min(self.cfg["pc_budget_jpy"], self.cfg["total_budget_jpy"] - self.cfg["peripheral_budget_jpy"] - self.cfg["unallocated_contingency_jpy"]))
         self.assertEqual(dynamic_cap, 359000)
 
+
+    def test_hard_budget_ceiling_and_dynamic_peripheral_allocation_are_distinct(self):
+        targets = self.cfg
+        self.assertEqual(targets["pc_budget_jpy"] + targets["unallocated_contingency_jpy"], targets["total_budget_jpy"])
+        self.assertLessEqual(
+            targets["pc_target_jpy"] + targets["peripheral_budget_jpy"] + targets["unallocated_contingency_jpy"],
+            targets["total_budget_jpy"],
+        )
+        self.assertEqual(
+            sum(int(p.get("target_price_jpy") or 0) for p in targets["peripherals"] if p.get("mandatory", True)),
+            targets["peripheral_budget_jpy"],
+        )
+
     def test_purchase_strategy_matches_40man_target_and_channel_policy(self):
         strategy = self.cfg["purchase_strategy"]
         self.assertEqual(self.cfg["total_budget_jpy"], 400000)
