@@ -23,6 +23,12 @@
 
 参照：[Epic Games — Unreal Engine 5.8 ハードウェア/ソフトウェア要件](https://dev.epicgames.com/documentation/en-us/unreal-engine/hardware-and-software-specifications-for-unreal-engine)、[Unity 6 システム要件](https://docs.unity3d.com/6000.0/Documentation/Manual/system-requirements.html)。
 
+## 勉強・分析・普段の作業も同時に行う前提
+
+ゲーム/ゲーム制作だけで用途を狭めません。学校の勉強、PDF・資料の読解、Web調査、動画教材とノート、レポート・発表資料の作成、ブラウザーの複数タブを快適に使えることも評価対象です。さらにPython、GitHub、データ処理、スポーツ・株式・BTC予測、自動テスト、実行可能な範囲のローカルAIを同じPCで動かす想定です。
+
+そのためGPUだけでなく、CPUのシングル/マルチコア性能、RAM、VRAM、SSD容量と持続性能、長時間稼働時の冷却・騒音、複数ツール同時利用の応答性で比較します。基本は購入時32GB RAM・1TB SSD以上。予算が許せば64GB RAM・2TB SSDも、**完成構成の実価格が確認できる場合に限り**優先候補にします。後からの増設を前提にしません。勉強やデータ分析のすべてがGPUで速くなるわけではないため、用途ごとのボトルネックを分けて評価します。
+
 ## 予算と購入条件（2026-10-17更新）
 
 - **総予算の上限：400,000円**
