@@ -253,8 +253,9 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertFalse(projection["budget_data_ready"])
         self.assertEqual(mouse_row["selected_purchase_channel"], "unconfirmed")
         self.assertEqual(mouse_row["channel_comparison_status"], "NO_ACTIONABLE_CHANNEL")
-        self.assertEqual(projection["peripheral_projection_jpy"], self.cfg["peripheral_budget_jpy"])
-        self.assertEqual(projection["flexible_reserve_offset_for_shipping_jpy"], 2500)
+        self.assertEqual(projection["peripheral_projection_jpy"], 35500)
+        self.assertEqual(projection["flexible_reserve_offset_for_shipping_jpy"], 2000)
+        self.assertEqual(projection["pc_dynamic_cap_jpy"], 359500)
         self.assertEqual(projection["channel_comparison_required_count"], 4)
         self.assertEqual(projection["channel_comparison_complete_count"], 0)
         self.assertEqual(
@@ -384,9 +385,11 @@ class BudgetPolicyTests(unittest.TestCase):
         with patch.object(intelligence, "load_json", side_effect=deterministic_load_json):
             projection = intelligence.peripheral_budget_projection()
 
-        self.assertEqual(projection["peripheral_projection_jpy"], self.cfg["peripheral_budget_jpy"])
-        self.assertEqual(projection["online_delivery_cost_absorbed_by_flexible_buffer_jpy"], 2500)
-        self.assertEqual(projection["flexible_reserve_offset_for_shipping_jpy"], 2500)
+        self.assertEqual(projection["peripheral_projection_jpy"], 35500)
+        self.assertEqual(projection["online_delivery_cost_reserve_required_jpy"], 2500)
+        self.assertEqual(projection["online_delivery_cost_absorbed_by_flexible_buffer_jpy"], 2000)
+        self.assertEqual(projection["uncovered_online_delivery_cost_jpy"], 500)
+        self.assertEqual(projection["flexible_reserve_offset_for_shipping_jpy"], 2000)
         self.assertLessEqual(
             projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"] + self.cfg["unallocated_contingency_jpy"],
             projection["total_budget_jpy"],
