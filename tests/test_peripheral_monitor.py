@@ -302,5 +302,23 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertEqual(result["store_inventory_status"], "unknown")
         self.assertEqual(result["store_inventory_store_ids_available"], [])
 
+    def test_visible_text_normalizes_unicode_and_collapses_whitespace(self):
+        html = "<html><body>ビックカメラ　 天神１号館<br>在庫あり</body></html>"
+        normalized = peripheral_monitor.normalized_visible_text(html)
+        self.assertEqual(normalized, "ビックカメラ 天神1号館 在庫あり")
+
+    def test_compact_removes_whitespace_and_normalizes_full_width_digits(self):
+        self.assertEqual(
+            peripheral_monitor._compact(" ビックカメラ　天神１号館 "),
+            "ビックカメラ天神1号館",
+        )
+
+    def test_branch_stock_status_survives_whitespace_between_tokens(self):
+        self.assertEqual(
+            peripheral_monitor._branch_stock_status("在庫　あり"),
+            "in_stock",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
