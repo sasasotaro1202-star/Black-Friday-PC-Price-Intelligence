@@ -847,7 +847,11 @@
       "best_for": "付属ケーブルが不足した場合",
       "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "cables_alt_sanwa_kc_dp1420",
@@ -876,7 +880,11 @@
       "category": "cables",
       "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "keyboard_alt_logicool_g413_tkl_se",
@@ -1232,7 +1240,11 @@
       "best_for": "大型布製パッドを安く確保したい場合",
       "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "mousepad_alt_logicool_g640s",
@@ -1260,7 +1272,11 @@
       "best_for": "表面の好みで選ぶ",
       "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "power_strip_alt_sanwa_tap_sp2116mg2wn",
@@ -1294,7 +1310,11 @@
       "category": "power_strip",
       "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "power_strip_alt_elecom_tk6a2630bk",
@@ -1322,7 +1342,11 @@
       "best_for": "コンセントまで距離がある設置場所",
       "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true
+      "online_price_is_comparison_only": true,
+      "physical_store_candidate_ids": [
+        "bicamera_tenjin_1",
+        "yodobashi_hakata"
+      ]
     },
     {
       "id": "speakers_alt_creative_pebble_pro",
