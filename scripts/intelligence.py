@@ -678,6 +678,28 @@ def peripheral_budget_projection():
             "track_current_price": bool(target.get("track_current_price")),
         })
 
+    # Shipping reserve is a use of the flexible peripheral reserve, not a second
+    # contingency line. Verified shipping replaces the reserve estimate; unverified
+    # online delivery uses the configured guard amount until checkout is checked.
+    shipping_reserve_used = sum(
+        int(row.get("online_shipping_reserve_jpy") or 0)
+        for row in rows
+        if row.get("selected_purchase_channel") == "online"
+        and row.get("online_comparison_price_jpy") is not None
+        and not row.get("online_shipping_cost_verified")
+    )
+    flexible_buffer = next((row for row in rows if row.get("id") == "store_price_buffer"), None)
+    flexible_buffer_used = min(
+        shipping_reserve_used,
+        int(flexible_buffer.get("budget_cost_jpy") or 0)
+    ) if flexible_buffer else 0
+    if flexible_buffer and flexible_buffer_used:
+        flexible_buffer["budget_cost_jpy"] = max(0, int(flexible_buffer["budget_cost_jpy"]) - flexible_buffer_used)
+        flexible_buffer["shipping_reserve_offset_jpy"] = flexible_buffer_used
+        total_projection -= flexible_buffer_used
+    if flexible_buffer and not flexible_buffer_used:
+        flexible_buffer["shipping_reserve_offset_jpy"] = 0
+
     cap = max(0, min(policy["pc_budget_jpy"], policy["total_budget_jpy"] - total_projection - policy.get("unallocated_contingency_jpy", 0)))
     unverified_ids = set(unverified)
     verified_tracked_count = sum(1 for p in tracked if str(p.get("id") or "") not in unverified_ids)
@@ -695,6 +717,8 @@ def peripheral_budget_projection():
         "tracked_peripheral_unverified_ids": sorted(unverified_ids),
         "channel_comparison_pending_ids": sorted(set(channel_pending)),
         "channel_comparison_pending_count": len(set(channel_pending)),
+        "shipping_reserve_used_jpy": shipping_reserve_used,
+        "flexible_reserve_offset_for_shipping_jpy": flexible_buffer_used,
         "channel_comparison_complete_count": sum(1 for x in rows if x.get("channel_comparison_complete")),
         "budget_data_ready": bool(snapshot_fresh and not unverified_ids and len(tracked) > 0),
         "peripherals": rows,
