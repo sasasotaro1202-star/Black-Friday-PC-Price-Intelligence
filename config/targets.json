@@ -1615,7 +1615,8 @@
       "warranty_and_return_terms",
       "physical_store_cash_price_and_stock_when_store_is_recommended",
       "store_pickup_price_and_stock_are_separate_from_online_delivery"
-    ]
+    ],
+    "online_price_is_store_price": false
   },
   "target_budget_notes": "総額上限400,000円。PC本体の基準目標360,000円。周辺機器36,000円は参考配分で固定枠ではない。メインモニターは1台だけ。電源タップは所有済みのため購入・監視・予算から除外。スピーカー、サブモニター、ヘッドセットを購入対象・ランキング・価格監視・総額試算に含めない。予備費5,000円を別途確保し、PC本体に使える額は周辺機器の実費から動的に算出する。周辺機器送料は実費・チャネル別に計上し、ポイントは現金支払い額から控除しない。価格目標と実売価格を区別し、未確認が残る場合は購入許可しない。",
   "target_budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
