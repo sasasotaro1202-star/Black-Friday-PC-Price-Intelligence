@@ -17,12 +17,13 @@ def _initial_budget_settings():
         cfg = {}
     try:
         total = int(cfg.get("total_budget_jpy", 400000))
-        peripherals = int(cfg.get("peripheral_budget_jpy", 69800))
-        pc_cap = int(cfg.get("pc_budget_jpy", total - peripherals))
-        pc_target = int(cfg.get("pc_target_jpy", min(330200, pc_cap)))
+        peripherals = int(cfg.get("peripheral_budget_jpy", 45000))
+        pc_cap = int(cfg.get("pc_budget_jpy", 350000))
+        pc_target = int(cfg.get("pc_target_jpy", min(350000, pc_cap)))
     except (TypeError, ValueError):
-        total, peripherals, pc_cap, pc_target = 400000, 69800, 330200, 330200
-    if min(total, peripherals, pc_cap, pc_target) < 0 or pc_cap + peripherals != total or pc_target > pc_cap:
+        total, peripherals, pc_cap, pc_target = 400000, 45000, 350000, 350000
+    contingency = int(cfg.get("unallocated_contingency_jpy", max(0, total - peripherals - pc_cap)))
+    if min(total, peripherals, pc_cap, pc_target, contingency) < 0 or pc_cap + peripherals + contingency != total or pc_target > pc_cap:
         total, peripherals, pc_cap, pc_target = 400000, 69800, 330200, 330200
     return total, peripherals, pc_target, pc_cap
 
