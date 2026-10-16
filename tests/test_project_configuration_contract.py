@@ -289,8 +289,8 @@ class ProjectConfigurationContractTests(unittest.TestCase):
 
         # Explicit alternative-build totals and compatibility descriptions must
         # stay aligned with the authoritative component target configuration.
-        self.assertIn("PC本体300,600円、周辺機器込み341,600円", readme)
-        self.assertIn("PC本体324,800円、周辺機器込み365,800円", readme)
+        self.assertIn("| バランス本命 | Ryzen 7 9700X + RTX 5070 12GB | 300,600円 | **341,600円** |", readme)
+        self.assertIn("| 性能重視の大穴 | Ryzen 7 9700X + RTX 5070 Ti 16GB | 324,800円 | **365,800円** |", readme)
         self.assertNotIn("PC本体295,360円", readme)
         self.assertNotIn("PC本体329,360円", readme)
         guide = read_text("docs/self-build-assembly-guide.md")
