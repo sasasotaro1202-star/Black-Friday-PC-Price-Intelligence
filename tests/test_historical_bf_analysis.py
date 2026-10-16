@@ -34,14 +34,14 @@ class HistoricalBFAnalysisTests(unittest.TestCase):
         with open(os.path.join(ROOT, "config", "targets.json"), encoding="utf-8") as f:
             cfg = json.load(f)
         self.assertEqual(set(cfg["purchase_channels"]["physical_store_categories"]),
-                         {"main_monitor", "mouse", "keyboard", "speakers"})
+                         {"main_monitor", "mouse", "keyboard", "speakers", "mousepad", "power_strip", "cables"})
         self.assertEqual(set(cfg["purchase_channels"]["online_categories"]),
-                         {"secondary_monitor", "mousepad", "power_strip", "cables"})
+                         set())
         self.assertEqual(cfg["purchase_channels"]["pc_body"]["channel"], "online")
         items = cfg["peripherals"]
         self.assertEqual(sum(int(p.get("target_price_jpy") or 0) for p in items if p.get("mandatory", True)),
                          cfg["peripheral_budget_jpy"])
-        self.assertEqual(cfg["pc_budget_jpy"] + cfg["peripheral_budget_jpy"], cfg["total_budget_jpy"])
+        self.assertEqual(cfg["pc_budget_jpy"] + cfg["peripheral_budget_jpy"] + cfg["unallocated_contingency_jpy"], cfg["total_budget_jpy"])
         physical_categories = set(cfg["purchase_channels"]["physical_store_categories"])
         all_items = items + cfg.get("peripheral_alternatives", [])
         for p in all_items:
