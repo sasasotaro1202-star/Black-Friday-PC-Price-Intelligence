@@ -106,7 +106,7 @@ class BudgetPolicyTests(unittest.TestCase):
             strategy,
             {
                 "total_budget_jpy": 400000,
-                "peripheral_budget_jpy": 45000,
+                "peripheral_budget_jpy": 62000,
                 "pc_target_jpy": 350000,
                 "pc_budget_jpy": 350000,
             },
@@ -167,7 +167,7 @@ class BudgetPolicyTests(unittest.TestCase):
 
     def test_intelligence_uses_pc_only_budget(self):
         self.assertEqual(intelligence.TOTAL_BUDGET, 400000)
-        self.assertEqual(intelligence.PERIPHERAL_BUDGET, 55000)
+        self.assertEqual(intelligence.PERIPHERAL_BUDGET, 62000)
         self.assertEqual(intelligence.BUDGET, 350000)
         self.assertEqual(intelligence.PC_BUDGET, 395000)
 
@@ -369,8 +369,8 @@ class BudgetPolicyTests(unittest.TestCase):
 
         self.assertFalse(projection["budget_data_ready"])
         self.assertEqual(projection["tracked_peripheral_unverified_ids"], sorted(set(tracked_ids + ["secondary_monitor"])))
-        self.assertEqual(projection["peripheral_projection_jpy"], 55000)
-        self.assertEqual(projection["pc_dynamic_cap_jpy"], 340000)
+        self.assertEqual(projection["peripheral_projection_jpy"], 62000)
+        self.assertEqual(projection["pc_dynamic_cap_jpy"], 333000)
         self.assertLessEqual(
             projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"],
             projection["total_budget_jpy"],
