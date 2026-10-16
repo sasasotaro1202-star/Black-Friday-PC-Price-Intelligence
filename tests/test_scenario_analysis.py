@@ -79,9 +79,9 @@ class BlackFridayScenarioTests(unittest.TestCase):
         self.assertEqual(result["pricing_phase"], "PRE_BLACK_FRIDAY_REFERENCE")
         self.assertFalse(result["black_friday_prices_known"])
         self.assertEqual(result["total_budget_jpy"], 400000)
-        self.assertEqual(result["peripheral_target_total_jpy"], 36000)
-        self.assertEqual(result["black_friday_ideal_bundle_target_jpy"], 401000)
-        self.assertEqual(result["black_friday_target_buffer_jpy"], -1000)
+        self.assertEqual(result["peripheral_target_total_jpy"], 35000)
+        self.assertEqual(result["black_friday_ideal_bundle_target_jpy"], 400000)
+        self.assertEqual(result["black_friday_target_buffer_jpy"], 0)
         self.assertEqual(result["black_friday_hard_cap_bundle_jpy"], 400000)
         self.assertFalse(result["all_in_checkout_total_final"])
 
