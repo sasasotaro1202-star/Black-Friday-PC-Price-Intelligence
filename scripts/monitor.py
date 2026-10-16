@@ -87,7 +87,7 @@ def fetch(url, timeout=18):
             req = Request(url, headers=browser_headers)
             with urlopen(req, timeout=timeout) as r:
                 enc = r.headers.get_content_charset() or "utf-8"
-                return r.read().decode(enc, errors="replace"), r.geturl(), dict(r.headers)
+                return decode_response_body(r.read(), enc), r.geturl(), dict(r.headers)
         except (HTTPError, URLError, TimeoutError):
             pass
 
@@ -207,7 +207,7 @@ def ddg_search(query, timeout=20):
     )
     with urlopen(req, timeout=timeout) as r:
         enc = r.headers.get_content_charset() or "utf-8"
-        html = r.read().decode(enc, errors="replace")
+        html = decode_response_body(r.read(), enc)
     return parse_duckduckgo_results(html)
 
 
