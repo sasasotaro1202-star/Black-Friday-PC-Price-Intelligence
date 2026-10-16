@@ -51,9 +51,9 @@ def fixture(now, price=280000, stock="in_stock", rank_status="BUY_NOW", gate_all
         "source_snapshot_generated_at": retrieved,
         "source_snapshot_sha256": "test-snapshot",
         "total_budget_jpy": 400000,
-        "pc_target_jpy": 350000,
-        "dynamic_pc_cap_jpy": 350000,
-        "peripheral_projection_jpy": 45000,
+        "pc_target_jpy": 360000,
+        "dynamic_pc_cap_jpy": 359000,
+        "peripheral_projection_jpy": 36000,
         "peripheral_budget_data_ready": budget_ready,
         "purchase_gate": {
             "allowed": gate_allowed,
