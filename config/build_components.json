@@ -158,7 +158,8 @@
         "official_reference_urls": [
           "https://dev.epicgames.com/documentation/ja-jp/unreal-engine/hardware-and-software-specifications-for-unreal-engine",
           "https://docs.unity3d.com/6000.0/Documentation/Manual/system-requirements.html"
-        ]
+        ],
+        "preferred_cpu_cores_for_unreal_source_build": 12
       },
       "ai_and_data_analysis": {
         "priority": "HIGH",
