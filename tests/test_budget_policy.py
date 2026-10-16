@@ -297,6 +297,30 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertTrue(projection["budget_data_ready"])
         self.assertIn("main_monitor", projection["channel_comparison_pending_ids"])
 
+    def test_store_pickup_quote_requires_exact_branch_model_and_fresh_checkout_total(self):
+        target = dict(next(x for x in self.cfg["peripherals"] if x["id"] == "main_monitor"))
+        now = intelligence.now_jst()
+        target.update({
+            "store_pickup_checkout_total_jpy": 20990,
+            "store_pickup_quote_checked_at": intelligence.iso(now),
+            "store_pickup_store_id": "biccamera_tenjin_1",
+            "store_pickup_stock_status": "in_stock",
+            "store_pickup_checkout_url": "https://www.biccamera.com/bc/item/14369301/",
+            "store_pickup_model_match": True,
+            "store_pickup_evidence_type": "online_checkout_with_store_pickup",
+            "store_pickup_evidence_notes": "Exact AOC Q27G40E/11 variant; online order with Tenjin 1st Store pickup selected; cash total includes mandatory fees and excludes points.",
+        })
+        quote = intelligence.store_pickup_quote_validation(target, now)
+        self.assertTrue(quote["store_pickup_checkout_total_confirmed"])
+        self.assertTrue(quote["store_pickup_route_actionable"])
+        self.assertEqual(quote["store_pickup_checkout_total_jpy"], 20990)
+
+        wrong_model = dict(target)
+        wrong_model["store_pickup_model_match"] = False
+        invalid = intelligence.store_pickup_quote_validation(wrong_model, now)
+        self.assertFalse(invalid["store_pickup_checkout_total_confirmed"])
+        self.assertEqual(invalid["store_pickup_quote_status"], "PICKUP_EXACT_MODEL_UNVERIFIED")
+
     def test_verified_delivery_fees_are_absorbed_by_flexible_peripheral_buffer(self):
         now_text = intelligence.iso(intelligence.now_jst())
         products = []
