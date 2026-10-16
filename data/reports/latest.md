@@ -1,8 +1,8 @@
 # ブラックフライデー期間通算・購入ランキング
 
-更新: 2026-10-17T02:02:51+09:00
-観測スナップショット: 2026-10-17T02:00:03+09:00
-観測スナップショットSHA256: d579f7b3f064b9f8b766a19ad174609bd2ddb89894ffd12a7d0583a75f5f890e
+更新: 2026-10-17T02:25:49+09:00
+観測スナップショット: 2026-10-17T02:23:14+09:00
+観測スナップショットSHA256: d82bb4e0b96bee2fed078ae96c7f9f2bcac76eedd9df6e574a6c11d495a4fc0c
 総予算（PC＋周辺機器）: ¥400,000
 周辺機器の目標予算: ¥45,000
 PC本体の目標価格: ¥350,000
@@ -180,10 +180,11 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 |3|laptop|Lenovo Legion Pro 5i Gen 10（16型 Intel）|¥337,240|¥337,240|¥0|¥337,240|¥0|+0|0.0%|40/40|20/20|0/15|11/15|10/10|**74/100**|WATCH|[販売ページ](https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040)|
 |4|desktop|G TUNE DG-I7G70|¥299,800|¥299,800|¥0|¥299,800|¥0|+0|未算出|32/40|20/20|0/15|11/15|10/10|**73/100**|NEEDS_CONFIGURATION|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/)|
 |5|desktop|G TUNE DG-I5G70|¥279,800|¥279,800|¥0|¥279,800|¥0|+0|未算出|22/40|20/20|0/15|11/15|10/10|**63/100**|NEEDS_CONFIGURATION|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/)|
-|6|desktop|G TUNE FG-A7G6T|¥300,001|¥300,001|¥0|¥300,001|¥0|+0|0.0%|28/40|20/20|0/15|3/15|7/10|**58/100**|VERIFY_NOW|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/)|
-|7|laptop|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|¥448,800|¥0|¥448,800|¥0|+0|22.0%|32/40|10/20|0/15|11/15|5/10|**58/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/)|
-|8|desktop|G TUNE DG-A5G60|¥194,800|¥194,800|¥0|¥194,800|¥0|+0|未算出|15/40|20/20|0/15|11/15|10/10|**56/100**|NEEDS_CONFIGURATION|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
-|9|desktop|G TUNE DG-A7G70|¥300,001|¥300,001|¥0|¥300,001|¥0|+0|0.0%|26/40|20/20|0/15|3/15|7/10|**56/100**|VERIFY_NOW|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/)|
+|6|laptop|Acer Predator Helios Neo 16 AI Windows 11 Home Core Ult|¥547,800|¥547,800|¥0|¥547,800|¥0|+1|36.1%|40/40|5/20|0/15|11/15|3/10|**59/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1)|
+|7|desktop|G TUNE FG-A7G6T|¥300,001|¥300,001|¥0|¥300,001|¥0|+0|0.0%|28/40|20/20|0/15|3/15|7/10|**58/100**|VERIFY_NOW|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/)|
+|8|laptop|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|¥448,800|¥0|¥448,800|¥0|+0|22.0%|32/40|10/20|0/15|11/15|5/10|**58/100**|WAIT_FOR_DISCOUNT|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/)|
+|9|desktop|G TUNE DG-A5G60|¥194,800|¥194,800|¥0|¥194,800|¥0|+0|未算出|15/40|20/20|0/15|11/15|10/10|**56/100**|NEEDS_CONFIGURATION|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
+|10|desktop|G TUNE DG-A7G70|¥300,001|¥300,001|¥0|¥300,001|¥0|+0|0.0%|26/40|20/20|0/15|3/15|7/10|**56/100**|VERIFY_NOW|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/)|
 
 ## データ品質
 
@@ -196,23 +197,23 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 - 重要候補: 5
 - 重要候補の未確認: 4
 - カバレッジ: PARTIAL
-- 現行価格を使える候補: 9
-- 参照情報のみ: 11
+- 現行価格を使える候補: 10
+- 参照情報のみ: 10
 - 自動発見候補: 0
-- 直接確認: 10
+- 直接確認: 11
 - 検索補完: 0
 - 異常価格棄却: 0
 - 構成不明: 2
-- 在庫不明: 12
+- 在庫不明: 11
 - 売り切れ確認: 2
 - PIT失敗: 0
 - 処理対象: 21 / 21
 - 処理率: 100.0%
-- 取得成功率: 52.4%
-- 価格確認率: 47.6%
-- 検索補完（成功/試行）: 0/10
-- 検索SKU不一致による除外: 47
-- 取得エラー内訳（host|reason）: rog.asus.com|curl_http_404=1, store.acer.com| (28) Operation timed out after 18002 milliseconds with 0 bytes received=1, store.asus.com|curl_http_403=7, www.dospara.co.jp|curl_http_404=1
+- 取得成功率: 57.1%
+- 価格確認率: 52.4%
+- 検索補完（成功/試行）: 0/9
+- 検索SKU不一致による除外: 18
+- 取得エラー内訳（host|reason）: rog.asus.com|curl_http_404=1, store.asus.com|curl_http_403=7, www.dospara.co.jp|curl_http_404=1
 - 未処理候補: なし
 
 ## 価格シナリオ
@@ -232,16 +233,19 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 ### 5. G TUNE DG-I5G70
 10%→¥251,800 / 15%→¥237,800 / 20%→¥223,800 / 25%→¥209,800 / 30%→¥195,900 / PC目標価格到達→10%
 
-### 6. G TUNE FG-A7G6T
+### 6. Acer Predator Helios Neo 16 AI Windows 11 Home Core Ultra 9 290HX Plus RTX 5070 Ti IPS 非光沢 WQXGA 240Hz 3ms G-SYNC DCI-P3 100% 32GBメモリ 1TB SSD 第5世代 AeroBladeファン 有線LAN WiFi 6E 英字キーボード ゲーミングノートパソコン PHN16-I71-N93Z57T/E
+10%→¥493,000 / 15%→¥465,600 / 20%→¥438,200 / 25%→¥410,800 / 30%→¥383,500 / 30%でもPC目標価格未到達
+
+### 7. G TUNE FG-A7G6T
 10%→¥270,000 / 15%→¥255,000 / 20%→¥240,000 / 25%→¥225,000 / 30%→¥210,000 / PC目標価格到達→10%
 
-### 7. G TUNE P5-I7G70BK-C（ブラック）
+### 8. G TUNE P5-I7G70BK-C（ブラック）
 10%→¥403,900 / 15%→¥381,500 / 20%→¥359,000 / 25%→¥336,600 / 30%→¥314,200 / PC目標価格到達→25%
 
-### 8. G TUNE DG-A5G60
+### 9. G TUNE DG-A5G60
 10%→¥175,300 / 15%→¥165,600 / 20%→¥155,800 / 25%→¥146,100 / 30%→¥136,400 / PC目標価格到達→10%
 
-### 9. G TUNE DG-A7G70
+### 10. G TUNE DG-A7G70
 10%→¥270,000 / 15%→¥255,000 / 20%→¥240,000 / 25%→¥225,000 / 30%→¥210,000 / PC目標価格到達→10%
 
 ## 判定ルール
@@ -271,7 +275,7 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 
 ## 今この瞬間の買い時判定
 
-- 更新時刻（JST）: 2026-10-17T02:02:51+09:00
+- 更新時刻（JST）: 2026-10-17T02:25:49+09:00
 - 判定: **事前監視継続・公式日程未確認** (PRE_BF_MONITORING)
 - 暫定の広域監視窓（公式セール日程ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 - 公式日程確認: 0/16 店舗（未確認: 12、取得エラー: 4）
@@ -302,7 +306,7 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 - 本命構成: 自作本命：Ryzen 7 9700X + RTX 5070 12GB
 - PC本体BF購入目標: ¥300,600
 - 周辺機器込みBF購入目標: ¥345,600
-- 互換性 / 部品の比較参考価格 / 店舗決済オファー: REVIEW / 5/9 / 0/9
+- 互換性 / 部品の比較参考価格 / 店舗決済オファー: REVIEW / 4/9 / 0/9
 - 自作の買い時判定: **WAIT_FOR_COMPATIBILITY_REVIEW**
 - 購入許可: **保留**。購入目標や比較価格は確定実売ではありません。
 - 主な未解決条件: GPUの正確な型番寸法・補助電源など未確認の互換性項目を解消する。；BF購入目標額は希望価格であり、確認済み実売価格ではない。；比較サイト価格は購入店舗の最終決済価格・在庫・送料を証明しない。
