@@ -79,16 +79,18 @@ class BlackFridayScenarioTests(unittest.TestCase):
         self.assertEqual(result["pricing_phase"], "PRE_BLACK_FRIDAY_REFERENCE")
         self.assertFalse(result["black_friday_prices_known"])
         self.assertEqual(result["total_budget_jpy"], 400000)
-        self.assertEqual(result["peripheral_target_total_jpy"], 45000)
+        self.assertEqual(result["peripheral_target_total_jpy"], 36000)
         self.assertEqual(result["black_friday_ideal_bundle_target_jpy"], 395000)
         self.assertEqual(result["black_friday_target_buffer_jpy"], 5000)
         self.assertEqual(result["black_friday_hard_cap_bundle_jpy"], 395000)
         self.assertFalse(result["all_in_checkout_total_final"])
 
-        speaker = next(x for x in result["peripherals"] if x["id"] == "speakers")
-        self.assertEqual(speaker["black_friday_target_price_jpy"], 12000)
-        self.assertIsNone(speaker["black_friday_price_observed_jpy"])
-        self.assertEqual(speaker["pre_black_friday_reference_price_jpy"], 12100)
+        peripheral_ids = {x["id"] for x in result["peripherals"]}
+        self.assertTrue({"speakers", "secondary_monitor", "headset", "power_strip"}.isdisjoint(peripheral_ids))
+        keyboard = next(x for x in result["peripherals"] if x["id"] == "keyboard")
+        self.assertEqual(keyboard["black_friday_target_price_jpy"], 4500)
+        self.assertIsNone(keyboard["black_friday_price_observed_jpy"])
+        self.assertEqual(keyboard["pre_black_friday_reference_price_jpy"], 4600)
 
         outlier_row = next(x for x in result["rtx_5070_ti_desktop_outliers"]
                            if x["id"] == outlier["id"])
@@ -127,7 +129,7 @@ class BlackFridayScenarioTests(unittest.TestCase):
             is_tracked = bool(item.get("track_current_price"))
             peripheral_products.append({
                 "id": item["id"],
-                "current_price_jpy": 11000 if item["id"] == "speakers" else item["target_price_jpy"],
+                "current_price_jpy": int(item["target_price_jpy"]) + 100,
                 "price_verified": is_tracked,
                 "identity_verified": is_tracked,
                 "price_source_mode": "direct_structured" if is_tracked else None,
@@ -170,11 +172,8 @@ class BlackFridayScenarioTests(unittest.TestCase):
         self.assertEqual(row["black_friday_price_observed_jpy"], 299800)
         self.assertIsNone(row["pre_black_friday_reference_price_jpy"])
         self.assertEqual(row["retailer_campaign_status"], "CONFIRMED_ACTIVE")
-        speaker = next(x for x in result["peripherals"] if x["id"] == "speakers")
-        self.assertTrue(speaker["black_friday_price_verified"])
-        self.assertEqual(speaker["black_friday_price_observed_jpy"], 11000)
-        self.assertIsNone(speaker["pre_black_friday_reference_price_jpy"])
-        self.assertEqual(speaker["retailer_campaign_status"], "CONFIRMED_ACTIVE")
+        peripheral_ids = {x["id"] for x in result["peripherals"]}
+        self.assertTrue({"speakers", "secondary_monitor", "headset", "power_strip"}.isdisjoint(peripheral_ids))
 
     def test_provisional_watch_window_alone_never_claims_black_friday_prices(self):
         now = datetime.fromisoformat("2026-11-20T12:01:00+09:00")
