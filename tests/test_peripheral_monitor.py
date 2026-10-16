@@ -325,6 +325,22 @@ class PeripheralMonitorTests(unittest.TestCase):
         )
 
 
+    def test_all_configured_fallback_urls_are_allowlisted(self):
+        import json
+        config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        targets = config.get("peripherals", []) + config.get("peripheral_alternatives", [])
+        for target in targets:
+            if not target.get("track_current_price"):
+                continue
+            urls = target.get("monitor_urls") or [target.get("monitor_url")]
+            with self.subTest(target=target.get("id")):
+                self.assertTrue(urls)
+                for url in urls:
+                    self.assertTrue(
+                        peripheral_monitor.allowed_host(url, target.get("allowed_hosts")),
+                        f"{target.get('id')} has an unapproved fallback URL: {url}",
+                    )
+
     def test_observe_targets_uses_bounded_parallelism_and_preserves_input_order(self):
         targets = [
             {"id": f"item_{i}", "name": f"Item {i}", "track_current_price": True}
