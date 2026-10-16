@@ -244,7 +244,7 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertIn("sports prediction systems", profile["analysis_and_automation"]["targets"])
         self.assertIn("stock/securities prediction", profile["analysis_and_automation"]["targets"])
         self.assertIn("BTC prediction", profile["analysis_and_automation"]["targets"])
-        self.assertIn("local AI where practical", profile["analysis_and_automation"]["targets"])
+        self.assertIn("local AI models when feasible", profile["analysis_and_automation"]["targets"])
 
         for build in plan["builds"]:
             fit = build["workload_fit"]
