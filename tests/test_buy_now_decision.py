@@ -291,7 +291,7 @@ class BuyNowDecisionTests(unittest.TestCase):
     def test_self_build_timing_does_not_authorize_from_targets_or_reference_prices(self):
         plan = {
             "total_budget_jpy": 400000, "pc_budget_jpy": 350000,
-            "peripheral_budget_jpy": 45000,
+            "peripheral_budget_jpy": 36000,
             "purchase_method_policy": {
                 "primary_method": "SELF_BUILD",
                 "assembly_time_is_constraint": False,
@@ -335,7 +335,7 @@ class BuyNowDecisionTests(unittest.TestCase):
         now = datetime(2026, 10, 14, 12, 0, tzinfo=JST)
         plan = {
             "total_budget_jpy": 400000, "pc_budget_jpy": 350000,
-            "peripheral_budget_jpy": 45000,
+            "peripheral_budget_jpy": 36000,
             "purchase_method_policy": {
                 "primary_method": "SELF_BUILD",
                 "assembly_time_is_constraint": False,
@@ -448,7 +448,7 @@ class BuyNowDecisionTests(unittest.TestCase):
 
     def test_self_build_waits_for_checkout_offers_even_when_reference_prices_are_complete(self):
         plan = {
-            "total_budget_jpy": 400000, "pc_budget_jpy": 350000, "peripheral_budget_jpy": 45000,
+            "total_budget_jpy": 400000, "pc_budget_jpy": 350000, "peripheral_budget_jpy": 36000,
             "purchase_method_policy": {"assembly_time_is_constraint": False, "assembly_time_penalty_points": 0},
             "builds": [{
                 "rank": 1, "id": "diy-primary", "gpu_choice_id": "g1", "name": "DIY build",
