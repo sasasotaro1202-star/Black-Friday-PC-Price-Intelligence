@@ -1,6 +1,6 @@
 # ブラックフライデー期間通算・購入ランキング
 
-> **設定反映待ち・購入判断には使用禁止:** この保存済みレポートは、修正前の設定（スピーカー除外・周辺機器32,000円配分）から生成されています。現行条件は、27インチWQHDメインモニター1台＋必要十分なコスパ重視スピーカー＋入力機器、周辺機器参考配分40,000円、総額上限400,000円、予備費5,000円です。サブモニターとヘッドセットは購入対象外です。下記の価格・在庫・総額は最新条件での正常な再生成まで購入判断に使わないでください。購入許可は出していません。
+> **設定反映待ち・購入判断には使用禁止:** この保存済みレポートは2026-10-17の最新設定変更より前に生成された古いスナップショットです。旧版には現在除外されたスピーカー候補、旧予算・旧総額計算が残る可能性があります。現行設定はPC本体基準目標360,000円、必須周辺機器の参考配分約32,000円、予備費5,000円、総額上限400,000円です。スピーカー、サブモニター、ヘッドセットは購入対象・候補・価格監視・総額計算から除外済みです。レポート全体は更新済み設定からの正常な再生成が確認されるまで購入判断に使用しないでください。購入許可は出していません。
 
 
 更新: 2026-10-17T02:25:49+09:00
@@ -80,12 +80,11 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 |画像|項目|購入方法|BF購入目標価格|観測価格（BF前は参考）|在庫（購入先）|価格確認|商品/比較ページ|
 |---|---|---|---:|---|---|---|---|
 |<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="84"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz|実店舗|¥18,000|店頭価格未確認・Web参考 ¥20,790|ビックカメラ天神1号館: 取置き在庫少（確認時点）|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001009314680/)|
-|<a href="https://www.edifier.jp/products/mr3"><img src="https://www.edifier.jp/cdn/shop/files/MR3_1_1.jpg?v=1788508256&amp;width=1000" alt="EDIFIER MR3 2.0 powered monitor speakers (36W RMS, Bluetooth 5.4)" width="84"></a>|EDIFIER MR3 2.0 powered monitor speakers (36W RMS, Bluetooth 5.4)|実店舗|¥12,000|店頭価格未確認・Web参考 ¥16,650|支店別在庫未確認|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/13719866/)|
 |<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="84"></a>|Logicool G213r|実店舗|¥5,000|店頭価格未確認・Web参考 ¥7,330|ビックカメラ天神1号館: 取置き在庫少（確認時点）|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/9242996/)|
 |<a href="https://shopee.ph/Logitech-Gaming-Mouse-G304-LIGHTSPEED-Wireless-12-000-DPI-Hero-Sensor-Lightweight-i.470352549.26121376846"><img src="https://down-ph.img.susercontent.com/file/sg-11134202-7rfh8-m43f6xs2o7yb73" alt="Logicool G304" width="84"></a>|Logicool G304|実店舗|¥4,000|店頭価格未確認・Web参考 ¥5,350|ビックカメラ天神1号館: 取置き在庫少（確認時点）|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001004334450/)|
 |<a href="https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad"><img src="https://files.pccasegear.com/images/SS-63003-thumb.jpg" alt="SteelSeries QcK Large Black 450x400mm (model 63003)" width="84"></a>|SteelSeries QcK Large Black 450x400mm (model 63003)|実店舗|¥2,000|店頭価格未確認・目標額で仮計算|支店別在庫未確認|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/1570130/)|
 |画像未確認|ELECOM T-NSLK-2620BK 6-outlet 2m slim surge-protected power strip|実店舗|¥1,500|店頭価格未確認・目標額で仮計算|支店別在庫未確認|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/3605560/)|
-|画像未確認|Required cables only; check included monitor/speaker cables first|実店舗|¥0|店頭価格未確認・目標額で仮計算|支店別在庫未確認|店頭価格未確認|予算枠のみ|
+|画像未確認|Required monitor cables only; check included cables first|実店舗|¥0|店頭価格未確認・目標額で仮計算|支店別在庫未確認|店頭価格未確認|予算枠のみ|
 |画像未確認|店頭価格差・ケーブル不足用予備費（商品ではない）|実店舗|¥2,500|店頭価格未確認・目標額で仮計算|支店別在庫未確認|店頭価格未確認|予算枠のみ|
 
 周辺機器価格確認: 0/6。未確認項目は目標額を試算に使用し、自作PCを含む総額の購入判断は保留します。
@@ -110,7 +109,7 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 各カテゴリから**1商品だけ**選びます。代替候補は価格監視対象ですが、選択しない限り必須周辺機器の総予算には加算しません。
 100点は用途適合35%、予算適合30%、仕様・機能20%、代替性・購入リスク15%のユーザー条件別評価であり、独立した実機ベンチマークではありません。
 BF購入目標・BF前の観測価格・在庫・送料込み決済額を分けて扱います。取得失敗は売り切れと見なしません。
-購入ルート：PC本体（自作パーツ）はネット注文。メインモニター・マウス・キーボード・スピーカーは実店舗購入。これら4カテゴリのWeb価格は比較参考で、店頭価格・支店在庫として扱いません。自動で読めた支店別取置き在庫は「確認時点」の参考表示であり、店頭価格や棚在庫の保証ではありません。
+購入ルート：PC本体（自作パーツ）はネット注文。メインモニター・マウス・キーボードは実店舗購入。これら3カテゴリのWeb価格は比較参考で、店頭価格・支店在庫として扱いません。自動で読めた支店別取置き在庫は「確認時点」の参考表示であり、店頭価格や棚在庫の保証ではありません。
 
 ### メインモニター（27インチ・WQHD）
 
@@ -119,14 +118,6 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 |1|**94/100**|<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="88"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz（主予算候補）|実店舗|¥18,000|Web参考 ¥20,790（店頭価格未確認）|ビックカメラ天神1号館: 取置き在庫少（確認時点）|店頭価格未確認|27型WQHD・Fast IPS・180Hz。FPSとCities: Skylines IIの画面解像度を両立。店頭で実物と接続端子を確認し、同一型番の現金価格を比較する。|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
 |2|**90/100**|画像未確認|MSI MAG 275QF 27-inch WQHD 180Hz Rapid IPS（代替候補）|実店舗|¥20,000|店頭価格未確認|支店別在庫未確認|店頭価格未確認|27型WQHD・180Hzの直接的な代替候補。AOCの在庫切れ・目標未達時に、配送込み総額と高さ調整の有無を比較する。|[商品ページ](https://kakaku.com/item/K0001690691/)|
 |3|**87/100**|画像未確認|LG UltraGear 27GS75Q-B 27-inch WQHD IPS 180Hz（代替候補）|実店舗|¥22,000|店頭価格未確認|支店別在庫未確認|店頭価格未確認|高さ調整・ピボット対応スタンドが必要な場合の有力候補。AOCのBF価格や在庫が悪い場合だけ比較し、目標価格は¥22,000。|[商品ページ](https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/)|
-
-### スピーカー
-
-|順位|総合点|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|
-|---:|---:|---|---|---|---:|---:|---|---|---|---|
-|1|**91/100**|<a href="https://www.edifier.jp/products/mr3"><img src="https://www.edifier.jp/cdn/shop/files/MR3_1_1.jpg?v=1788508256&amp;width=1000" alt="EDIFIER MR3 2.0 powered monitor speakers (36W RMS, Bluetooth 5.4)" width="88"></a>|EDIFIER MR3 2.0 powered monitor speakers (36W RMS, Bluetooth 5.4)（主予算候補）|実店舗|¥12,000|Web参考 ¥16,650（店頭価格未確認）|ビックカメラ天神1号館: 取置き在庫少（確認時点）|店頭価格未確認|36W RMS、Bluetooth 5.4、TRS/RCA/AUX入力、ルーム補正対応。MR5ほど高価ではなく、品質を保ちつつ予算を抑える実店舗候補。オンライン表示値は店頭価格として扱わない。|[商品ページ](https://www.biccamera.com/bc/item/13719866/)|
-|2|**88/100**|<a href="https://www.edifier.jp/products/mr4-mkii"><img src="https://www1.yohohongkong.com/images/202606/goods_img/434786_P_1780969137592.png" alt="EDIFIER MR4 MKII 2.0 active speakers (80W RMS, Bluetooth 6.0)" width="88"></a>|EDIFIER MR4 MKII 2.0 active speakers (80W RMS, Bluetooth 6.0)（代替候補）|実店舗|¥24,000|Web参考 ¥33,320（店頭価格未確認）|ビックカメラ天神1号館: 取寄せ表示（即時在庫ではない）|店頭価格未確認|より高出力の上位候補（80W RMS）。オンライン参考価格はBF目標を上回るため、店頭で24,000円程度まで下がる場合のみMR3との価格差を比較。|[商品ページ](https://www.biccamera.com/bc/item/15313369/)|
-|3|**82/100**|画像未確認|Creative Pebble Pro 2.0 PC speakers, black (USB-C/USB-A/Bluetooth/3.5mm)（代替候補）|実店舗|¥8,000|Web参考 ¥9,980（店頭価格未確認）|ビックカメラ天神1号館: 取置き在庫少（確認時点）|店頭価格未確認|Compact USB/Bluetooth/analog speaker set currently listed around ¥9,980 online. Kept as a lower-cost comparison only; not the main sound-quality recommendation.|[商品ページ](https://www.biccamera.com/bc/item/14119746/)|
 
 ### キーボード
 
@@ -164,13 +155,13 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 
 |順位|総合点|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|
 |---:|---:|---|---|---|---:|---:|---|---|---|---|
-|1|**88/100**|画像未確認|Required cables only; check included monitor/speaker cables first（主予算候補）|実店舗|¥0|店頭価格未確認|支店別在庫未確認|店頭価格未確認|モニター付属品を先に確認し、不足分だけ購入することで不要な二重購入を防ぐ。|リンク未設定|
+|1|**88/100**|画像未確認|Required monitor cables only; check included cables first（主予算候補）|実店舗|¥0|店頭価格未確認|支店別在庫未確認|店頭価格未確認|モニター付属品を先に確認し、不足分だけ購入することで不要な二重購入を防ぐ。|リンク未設定|
 |2|**85/100**|画像未確認|Sanwa Supply KC-DP1420 VESA-certified DisplayPort 1.4 cable 2m（代替候補）|実店舗|¥3,000|店頭価格未確認|支店別在庫未確認|店頭価格未確認|VESA認証済みDisplayPort 1.4・2m。メーカー標準価格は¥5,280なので、実売が下がった場合だけ。不足がなければ購入しない。|[商品ページ](https://www.sanwa.co.jp/product/syohin?code=KC-DP1420)|
 |3|**82/100**|画像未確認|ELECOM ECCAC-DP1420BK DisplayPort 1.4 cable 2m（代替候補）|実店舗|¥2,200|店頭価格未確認|支店別在庫未確認|店頭価格未確認|2m・DisplayPort 1.4準拠の代替。モニター付属品の有無を確認し、不足分だけ購入する。|[商品ページ](https://www.elecom.co.jp/products/ECCAC-DP1420BK.html)|
 
 ### 予算・配線の実用項目
 
-- 電源タップはPC・モニター・スピーカーの同時使用を想定し、定格電力とケーブル長を確認する。
+- 電源タップはPC・モニター等の必要な機器数と定格電力、ケーブル長を確認する。
 - DisplayPort/HDMIケーブルは付属品を確認してから、不足分だけ買う。
 - ポイントは現金支払額から控除せず、クーポンも決済画面で適用と最終支払額を確認できた場合だけ反映する。
 
