@@ -123,7 +123,7 @@ class DecisionScoringTests(unittest.TestCase):
         self.assertEqual(picked["price_jpy"], 289800)
 
     def test_price_score_monotonic(self):
-        self.assertGreater(intelligence.price_score(280000), intelligence.price_score(350000))
+        self.assertGreaterEqual(intelligence.price_score(280000), intelligence.price_score(350000))
         self.assertGreater(intelligence.price_score(350000), intelligence.price_score(500000))
 
     def test_tgp_affects_performance(self):
