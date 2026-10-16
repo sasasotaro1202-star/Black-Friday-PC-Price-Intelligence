@@ -3,6 +3,8 @@
 import json
 import os
 import re
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import unicodedata
 from html.parser import HTMLParser
 from urllib.parse import urlparse
@@ -428,6 +430,62 @@ def run_one(target, previous, retrieved_at):
     return row
 
 
+
+def _target_only_row(target, previous, observed_at):
+    old = previous if isinstance(previous, dict) else {}
+    return {
+        "id": target["id"], "name": target.get("name"),
+        "target_price_jpy": int(target.get("target_price_jpy") or 0),
+        "purchase_channel": target.get("purchase_channel", "online"),
+        "store_inventory_required_before_purchase": bool(target.get("store_inventory_required_before_purchase", False)),
+        "online_price_is_comparison_only": bool(target.get("online_price_is_comparison_only", False)),
+        "physical_store_candidate_ids": target.get("physical_store_candidate_ids") or [],
+        "current_price_jpy": None,
+        "last_valid_price_jpy": old.get("last_valid_price_jpy"),
+        "online_comparison_price_jpy": None,
+        "online_reference_price_verified": False,
+        **store_observation_validation(target, observed_at),
+        "price_verified": False, "stock_status": "unknown", "status": "target_only",
+        "monitor_url": None, "purchase_url": target.get("purchase_url"),
+        "retrieval_time": observed_at, "available_at": None, "price_source_mode": "none",
+    }
+
+
+def observe_targets(targets, previous_by_id, observed_at, max_workers=3):
+    """Observe targets with bounded concurrency while preserving config-order output.
+
+    Three workers reduce serial timeout cost without creating an unbounded burst
+    against retail sites. The returned list always follows the input target order.
+    """
+    indexed = list(enumerate(targets))
+    if not indexed:
+        return []
+    try:
+        worker_limit = max(1, min(int(max_workers), 3, len(indexed)))
+    except (TypeError, ValueError):
+        worker_limit = min(3, len(indexed))
+
+    def observe(index_target):
+        index, target = index_target
+        target_id = str(target.get("id") or "")
+        previous = previous_by_id.get(target_id, {})
+        if not target.get("track_current_price"):
+            row = _target_only_row(target, previous, observed_at)
+        else:
+            row = run_one(target, previous, observed_at)
+        return index, row
+
+    results = [None] * len(indexed)
+    with ThreadPoolExecutor(max_workers=worker_limit) as executor:
+        futures = [executor.submit(observe, pair) for pair in indexed]
+        for future in as_completed(futures):
+            index, row = future.result()
+            results[index] = row
+    if any(row is None for row in results):
+        raise RuntimeError("peripheral_observation_result_missing")
+    return results
+
+
 def main():
     cfg = load_json(TARGETS_PATH, {})
     primary_targets = [p for p in (cfg.get("peripherals") or []) if isinstance(p, dict)]
@@ -445,25 +503,11 @@ def main():
     previous = load_json(OUTPUT_PATH, {"products": []})
     previous_by_id = {str(x.get("id")): x for x in (previous.get("products") or []) if x.get("id")}
     observed_at = iso(now_jst())
-    rows = []
-    for target in targets:
-        if not target.get("track_current_price"):
-            old = previous_by_id.get(target["id"], {})
-            rows.append({
-                "id": target["id"], "name": target.get("name"), "target_price_jpy": int(target.get("target_price_jpy") or 0),
-                "purchase_channel": target.get("purchase_channel", "online"),
-                "store_inventory_required_before_purchase": bool(target.get("store_inventory_required_before_purchase", False)),
-                "online_price_is_comparison_only": bool(target.get("online_price_is_comparison_only", False)),
-                "physical_store_candidate_ids": target.get("physical_store_candidate_ids") or [],
-                "current_price_jpy": None, "last_valid_price_jpy": old.get("last_valid_price_jpy"),
-                "online_comparison_price_jpy": None, "online_reference_price_verified": False,
-                **store_observation_validation(target, observed_at),
-                "price_verified": False, "stock_status": "unknown", "status": "target_only",
-                "monitor_url": None, "purchase_url": target.get("purchase_url"),
-                "retrieval_time": observed_at, "available_at": None, "price_source_mode": "none",
-            })
-        else:
-            rows.append(run_one(target, previous_by_id.get(target["id"], {}), observed_at))
+    # Keep target-only items cheap, but fetch tracked products concurrently with a
+    # small worker cap. This prevents 20+ independent 18-second timeouts from
+    # serially consuming the entire workflow window. Results are reassembled in
+    # configuration order so report/event output stays deterministic.
+    rows = observe_targets(targets, previous_by_id, observed_at, max_workers=3)
     old = {str(x.get("id")): x for x in (previous.get("products") or []) if x.get("id")}
     events = []
     for item in rows:
