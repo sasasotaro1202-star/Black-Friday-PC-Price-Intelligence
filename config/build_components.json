@@ -5,8 +5,8 @@
     "build_type": "DIY_PC",
     "currency": "JPY",
     "total_budget_jpy": 400000,
-    "peripheral_budget_jpy": 45000,
-    "pc_budget_jpy": 350000,
+    "peripheral_budget_jpy": 55000,
+    "pc_budget_jpy": 395000,
     "minimum_ram_gb": 32,
     "minimum_memory_modules": 2,
     "minimum_ssd_gb": 1000,
@@ -42,7 +42,7 @@
     "allowed_comparison_domains": [
       "kakaku.com"
     ],
-    "policy": "BF targets are aspirational, not forecasts. Comparison-site prices are market references, not checkout prices, stock confirmation, or official BF actuals. Total-system ceiling is JPY 400,000. PC purchase target is JPY 350,000, in-store peripherals target JPY 45,000, and unallocated contingency is JPY 5,000. Peripheral shipping is not budgeted. Keep over-target dark horses in comparisons with explicit overruns; never authorize purchases from targets or references. Reserve JPY 5,000 outside the PC target and peripheral target as an unallocated all-in contingency.",
+    "policy": "Black Friday target prices are aspirational, not forecasts. Total-system hard ceiling is JPY 400,000. Peripheral allocation is dynamic, not fixed at JPY 45,000: include a 27-inch WQHD main monitor, one work/study sub-monitor, speakers with good sound quality-to-price ratio, input devices and necessary power/cables. JPY 55,000 is an illustrative current planning scenario, not a cap or observed offer. Default contingency is JPY 5,000. Calculate the permissible PC spend from the total ceiling minus projected/verified peripherals and contingency, and reallocate when store-verified prices change. Comparison-site prices are references, not checkout prices, stock confirmation, or official BF actuals. Peripheral shipping is not budgeted. Keep over-target dark horses in comparisons with explicit overruns; never authorize purchases from targets or references.",
     "allowed_search_reference_domains": [
       "kakaku.com",
       "amazon.co.jp",
@@ -237,6 +237,29 @@
         ],
         "note": "Free/open-source tools and local processing are preferred where practical. Do not assume paid APIs, cloud GPUs, paid data services or subscription services. Do not claim a GPU accelerates CPU-only workloads automatically."
       }
+    },
+    "pc_target_jpy": 350000,
+    "peripheral_budget_mode": "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET",
+    "peripheral_budget_is_hard_cap": false,
+    "ongoing_cost_policy": {
+      "default": "ZERO_RECURRING_COST",
+      "recurring_paid_services_required": false,
+      "default_tooling": [
+        "free software",
+        "open-source tooling",
+        "local execution",
+        "free tiers only as optional supplements"
+      ],
+      "disallowed_as_core_dependencies": [
+        "paid monthly AI subscriptions",
+        "paid APIs",
+        "cloud GPU rentals",
+        "paid datasets",
+        "paid data feeds"
+      ],
+      "one_time_purchase_allowed": true,
+      "hardware_expansion_allowed": true,
+      "expansion_rule": "Expand RAM, SSD, GPU or other local hardware only when a demonstrated workload bottleneck justifies the one-time cost; do not assume upgrades in the initial PC ranking."
     }
   },
   "parts": [
