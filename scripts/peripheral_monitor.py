@@ -74,10 +74,13 @@ def observe_store_inventory(target, retrieved_at):
     named branch. It does not prove the cash register price, shelf stock, or that the
     item can still be reserved after this observation.
     """
-    if not (
-        target.get("purchase_channel") == "physical_store"
-        and target.get("store_inventory_required_before_purchase")
-    ):
+    channel_options = target.get("purchase_channel_options") or []
+    supports_store = (
+        target.get("purchase_channel") in ("physical_store", "compare_online_and_store")
+        or "physical_store" in channel_options
+        or "store_pickup" in channel_options
+    )
+    if not (supports_store and target.get("store_inventory_required_before_purchase")):
         return {
             "store_inventory_observations": [],
             "store_inventory_status": "unknown",
@@ -276,20 +279,30 @@ def previous_matches_target(previous, target):
 def run_one(target, previous, retrieved_at):
     primary_url = target.get("monitor_url")
     configured_urls = target.get("monitor_urls") or ([primary_url] if primary_url else [])
+    channel_options = target.get("purchase_channel_options") or []
+    store_route_supported = (
+        target.get("purchase_channel") in ("physical_store", "compare_online_and_store")
+        or "physical_store" in channel_options
+        or "store_pickup" in channel_options
+    )
     row = {
         "id": target["id"], "name": target.get("name"),
         "purchase_channel": target.get("purchase_channel", "online"),
+        "purchase_channel_options": channel_options,
         "store_inventory_required_before_purchase": bool(target.get("store_inventory_required_before_purchase", False)),
         "online_price_is_comparison_only": bool(target.get("online_price_is_comparison_only", False)),
+        "online_shipping_reserve_jpy": int(target.get("online_shipping_reserve_jpy") or 0),
+        "online_shipping_jpy": None, "online_shipping_cost_verified": False,
         "physical_store_candidate_ids": target.get("physical_store_candidate_ids") or [],
         "identity_terms": target.get("identity_terms") or [], "model_code": target.get("model_code"),
         "target_price_jpy": int(target.get("target_price_jpy") or 0),
         "monitor_url": primary_url,
         "purchase_url": target.get("purchase_url") or primary_url,
         "retrieval_time": retrieved_at, "available_at": None,
-        "current_price_jpy": None,
-        "online_comparison_price_jpy": None,
-        "online_reference_price_verified": False,
+        "current_price_jpy": None, "online_comparison_price_jpy": None,
+        "online_reference_price_verified": False, "online_offers": [],
+        "online_offer_count": 0, "online_actionable_offer_count": 0,
+        "online_best_offer_url": None, "online_best_offer_stock_status": "unknown",
         **store_observation_validation(target, retrieved_at),
         **observe_store_inventory(target, retrieved_at),
         "last_valid_price_jpy": (previous.get("current_price_jpy") or previous.get("last_valid_price_jpy")) if previous_matches_target(previous, target) else None,
@@ -314,6 +327,7 @@ def run_one(target, previous, retrieved_at):
 
     terms = [norm_text(x) for x in target.get("identity_terms", []) if norm_text(x)]
     last_candidate_state = None
+    offers = []
     for attempt_index, candidate_url in enumerate(urls):
         try:
             html, final_url, _headers = fetch(candidate_url, timeout=18)
@@ -351,9 +365,8 @@ def run_one(target, previous, retrieved_at):
             except (TypeError, ValueError):
                 price = None
 
-            # Whole-page text/meta prices can be from recommendations. Only
-            # structured exact-model offers or text beside the exact model title
-            # are considered here.
+            # Reject unrelated carousel, SEO or recommendation prices. Evaluate every
+            # retailer URL independently and retain only exact-model offers.
             if price_source != "direct_structured":
                 contextual_price = local_price_candidate(context) if context else None
                 if contextual_price:
@@ -370,49 +383,66 @@ def run_one(target, previous, retrieved_at):
             if price is None or price < lower or price > upper:
                 row["retrieval_attempts"].append({
                     "url": candidate_url, "final_url": final_url,
-                    "status": "price_unverified",
-                    "error": "missing_or_implausible_price",
+                    "status": "price_unverified", "error": "missing_or_implausible_price",
                     "price_candidate_jpy": price,
-                })
-                last_candidate_state.update({
-                    "unverified_price_candidate_jpy": price,
-                    "price_source_mode": price_source,
-                    "price_context": price_context,
                 })
                 continue
 
             stock = local_product_stock(context, parsed.get("stock_status") or "unknown")
-            row.update({
-                "current_price_jpy": price,
-                "online_comparison_price_jpy": price,
-                "online_reference_price_verified": True,
-                "last_valid_price_jpy": price,
-                "price_verified": True,
-                "stock_status": stock,
-                "price_source_mode": price_source,
-                "price_validation_status": "validated_exact_model_page",
-                "identity_verified": True,
-                "available_at": retrieved_at,
-                "status": "verified" if stock in ("in_stock", "low_stock") else "price_verified_stock_unknown",
+            offers.append({
+                "url": candidate_url, "final_url": final_url, "price_jpy": price,
+                "stock_status": stock, "price_source_mode": price_source,
+                "price_context": price_context, "page_title": parsed.get("name"),
+                "identity_verified": True, "price_verified": True,
+                "retrieval_time": retrieved_at, "available_at": retrieved_at,
                 "target_met": price <= int(target.get("target_price_jpy") or 0),
-                "page_title": parsed.get("name"),
-                "price_context": price_context,
-                "coupon_note": target.get("coupon_policy"),
-                "monitor_url_used": candidate_url,
-                "source_url": final_url,
-                "purchase_url": final_url,
-                "fallback_url_used": attempt_index > 0,
             })
             row["retrieval_attempts"].append({
                 "url": candidate_url, "final_url": final_url, "status": "verified",
+                "price_jpy": price, "stock_status": stock, "price_source_mode": price_source,
             })
-            return row
         except Exception as exc:
             row["retrieval_attempts"].append({
-                "url": candidate_url,
-                "status": "error",
+                "url": candidate_url, "status": "error",
                 "error": f"{type(exc).__name__}:{str(exc)[:180]}",
             })
+
+    if offers:
+        actionable = [offer for offer in offers if offer.get("stock_status") in ("in_stock", "low_stock")]
+        pool = actionable if actionable else offers
+        selected = min(pool, key=lambda offer: (
+            int(offer["price_jpy"]),
+            0 if offer.get("stock_status") == "in_stock" else 1,
+            str(offer.get("final_url") or offer.get("url") or ""),
+        ))
+        row.update({
+            "current_price_jpy": int(selected["price_jpy"]),
+            "online_comparison_price_jpy": int(selected["price_jpy"]),
+            "online_reference_price_verified": True,
+            "last_valid_price_jpy": int(selected["price_jpy"]),
+            "price_verified": True,
+            "stock_status": selected.get("stock_status") or "unknown",
+            "online_best_offer_stock_status": selected.get("stock_status") or "unknown",
+            "online_offer_count": len(offers),
+            "online_actionable_offer_count": len(actionable),
+            "online_best_offer_url": selected.get("final_url") or selected.get("url"),
+            "online_offers": offers,
+            "price_source_mode": selected.get("price_source_mode") or "none",
+            "price_validation_status": "validated_exact_model_page",
+            "identity_verified": True,
+            "available_at": retrieved_at,
+            "status": "verified" if actionable else "price_verified_stock_unknown",
+            "target_met": bool(selected.get("target_met")),
+            "page_title": selected.get("page_title"),
+            "price_context": selected.get("price_context"),
+            "coupon_note": target.get("coupon_policy"),
+            "monitor_url_used": selected.get("url"),
+            "source_url": selected.get("final_url") or selected.get("url"),
+            "purchase_url": selected.get("final_url") or selected.get("url"),
+            "fallback_url_used": selected.get("url") != primary_url,
+            "channel_comparison_status": "ONLINE_OPTIONS_COMPARED_STORE_PENDING" if store_route_supported else "ONLINE_OPTIONS_COMPARED",
+        })
+        return row
 
     if last_candidate_state:
         row.update(last_candidate_state)
@@ -427,9 +457,8 @@ def run_one(target, previous, retrieved_at):
         f"{x.get('url')}: {x.get('error')}"
         for x in row["retrieval_attempts"] if x.get("error")
     )[:700] or "all_configured_urls_failed"
+    row["channel_comparison_status"] = "ONLINE_PRICE_UNVERIFIED_STORE_PENDING" if store_route_supported else "ONLINE_PRICE_UNVERIFIED"
     return row
-
-
 
 def _target_only_row(target, previous, observed_at):
     old = previous if isinstance(previous, dict) else {}
