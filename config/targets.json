@@ -298,9 +298,9 @@
       "image_source_url": "https://www.aoc.com/jp/gaming/monitors/q27g40e_11",
       "image_note": "Q27G40Eシリーズの製品画像",
       "image_checked_at": "2026-10-15",
-      "purchase_channel": "physical_store",
+      "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
+      "online_price_is_comparison_only": false,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -328,7 +328,15 @@
           ],
           "source_type": "official_branch_stock_page"
         }
-      ]
+      ],
+      "purchase_channel_options": [
+        "online",
+        "physical_store",
+        "store_pickup"
+      ],
+      "online_offer_actionable_if_exact_price_stock_verified": true,
+      "store_price_is_separate_evidence": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": true
     },
     {
       "id": "keyboard",
@@ -365,9 +373,9 @@
       "image_source_url": "https://item.rakuten.co.jp/logicool/g213r/",
       "image_note": "Logicool公式ストアの製品画像",
       "image_checked_at": "2026-10-15",
-      "purchase_channel": "physical_store",
+      "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
+      "online_price_is_comparison_only": false,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -395,7 +403,15 @@
           ],
           "source_type": "official_branch_stock_page"
         }
-      ]
+      ],
+      "purchase_channel_options": [
+        "online",
+        "physical_store",
+        "store_pickup"
+      ],
+      "online_offer_actionable_if_exact_price_stock_verified": true,
+      "store_price_is_separate_evidence": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": true
     },
     {
       "id": "mouse",
@@ -425,9 +441,9 @@
       "image_source_url": "https://shopee.ph/Logitech-Gaming-Mouse-G304-LIGHTSPEED-Wireless-12-000-DPI-Hero-Sensor-Lightweight-i.470352549.26121376846",
       "image_note": "型番G304の製品画像",
       "image_checked_at": "2026-10-15",
-      "purchase_channel": "physical_store",
+      "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
+      "online_price_is_comparison_only": false,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -459,7 +475,15 @@
           ],
           "source_type": "official_branch_stock_page"
         }
-      ]
+      ],
+      "purchase_channel_options": [
+        "online",
+        "physical_store",
+        "store_pickup"
+      ],
+      "online_offer_actionable_if_exact_price_stock_verified": true,
+      "store_price_is_separate_evidence": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": true
     },
     {
       "id": "mousepad",
@@ -489,9 +513,9 @@
       "image_source_url": "https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad",
       "image_note": "SteelSeries QcK Large black model 63003 product image",
       "image_checked_at": "2026-10-17",
-      "purchase_channel": "physical_store",
+      "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
+      "online_price_is_comparison_only": false,
       "model_code": "63003",
       "monitor_urls": [
         "https://www.biccamera.com/bc/item/1570130/"
@@ -523,7 +547,15 @@
       "physical_store_candidate_ids": [
         "bicamera_tenjin_1",
         "yodobashi_hakata"
-      ]
+      ],
+      "purchase_channel_options": [
+        "online",
+        "physical_store",
+        "store_pickup"
+      ],
+      "online_offer_actionable_if_exact_price_stock_verified": true,
+      "store_price_is_separate_evidence": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": true
     },
     {
       "id": "cables",
@@ -535,17 +567,22 @@
       "identity_terms": [],
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "先にモニター等の付属品を確認。不足する必要なケーブルのみ購入し、余分なケーブルは買わない。",
+      "target_price_note": "モニター付属ケーブルを先に確認。適切なケーブルが付属しない場合だけ、ネットと実店舗の同一仕様・最終価格を比較して購入する。",
       "ranking_score_100": 88,
       "ranking_reason": "モニター付属品を先に確認し、不足分だけ購入することで不要な二重購入を防ぐ。",
       "best_for": "同梱品を優先し、足りない分だけ買う",
       "category": "cables",
-      "purchase_channel": "physical_store",
+      "purchase_channel": "conditional_need_only",
       "store_inventory_required_before_purchase": false,
-      "online_price_is_comparison_only": true,
+      "online_price_is_comparison_only": false,
       "physical_store_candidate_ids": [
         "bicamera_tenjin_1",
         "yodobashi_hakata"
+      ],
+      "purchase_channel_options": [
+        "online",
+        "physical_store",
+        "store_pickup"
       ]
     },
     {
@@ -560,15 +597,16 @@
       "mandatory": true,
       "price_target_phase": "black_friday",
       "target_price_note": "3,000円は周辺機器計画枠の未配賦分。付属ケーブルを先に確認し、必要な場合だけ使う。余れば使わず、PC本体に動的に戻す。",
-      "purchase_channel": "physical_store",
+      "purchase_channel": "budget_reserve",
       "store_inventory_required_before_purchase": false,
       "online_price_is_comparison_only": true,
-      "ranking_score_100": null
+      "ranking_score_100": null,
+      "purchase_channel_options": []
     }
   ],
   "purchase_strategy": {
     "updated_at": "2026-10-17",
-    "purpose": "総額上限40万円の中でPC本体と必要な周辺機器を動的に最適化する。自作PCを本命とし、購入時にRAM 32GB以上、SSD 1TB以上を確保。周辺機器の計画配分は約36,000円（27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、ケーブル不足等への柔軟な予備枠）。電源タップは所有済みのため購入・監視・予算から除外する。スピーカー、サブモニター、ヘッドセットも購入対象・候補・価格監視・予算計算から除外する。価格目標と実売・最終決済額を区別し、購入後の継続費用は原則0円を目指す。",
+    "purpose": "総額上限40万円の中でPC本体と必要な周辺機器を動的に最適化する。自作PCを本命とし、購入時にRAM 32GB以上、SSD 1TB以上を確保。周辺機器の計画配分は約36,000円（27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差用の柔軟な予備枠）。電源タップは所有済みのため購入・監視・予算から除外する。スピーカー、サブモニター、ヘッドセットも購入・候補・価格監視・予算計算から除外する。周辺機器はネット配送・実店舗・店舗受け取りを商品ごとに比較し、ネット掲載価格・店頭価格・ポイント・送料・在庫の証拠を混同しない。価格目標と実売・最終決済額を区別し、購入後の継続費用は原則0円を目指す。",
     "priority_plans": [
       {
         "candidate_id": "desktop-gtune-dg-i5g70-5070",
@@ -687,14 +725,25 @@
         "mousepad",
         "cables"
       ],
-      "online_categories": [],
-      "store_inventory_must_be_verified": true,
-      "online_price_is_store_price": false
+      "online_categories": [
+        "main_monitor",
+        "keyboard",
+        "mouse",
+        "mousepad",
+        "cables"
+      ],
+      "store_inventory_must_be_verified": false,
+      "online_price_is_store_price": false,
+      "channel_selection_mode": "COMPARE_ONLINE_AND_LOCAL_STORE",
+      "store_inventory_must_be_verified_only_when_selected_channel_is_physical_store": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "store_pickup_counts_as_online_order_but_requires_separate_stock_confirmation": true,
+      "selection_policy": "Choose the purchase route item-by-item. Compare exact-SKU online checkout price including shipping and mandatory fees with verified same-variant local cash price and branch stock. Store pickup is a separate route: verify online checkout price and branch pickup stock. Do not require store evidence to use a verified in-stock online offer; do not call an online price a store price."
     },
     "peripheral_allocation_scenario_jpy": 36000,
-    "peripheral_allocation_scenario_note": "周辺機器の計画配分は約36,000円（メインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差用の柔軟な予備枠）。電源タップは所有済みで購入・監視・予算対象外。スピーカー、サブモニター、ヘッドセットは購入・監視対象外。参考配分を使い切ることは目的ではない。総額上限400,000円と別枠の予備費5,000円を維持し、PCの許容額は実支出から動的に計算する。",
+    "peripheral_allocation_scenario_note": "周辺機器の計画配分は約36,000円（メインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差用の柔軟な予備枠）。電源タップは所有済みで購入・価格監視・予算対象外。スピーカー、サブモニター、ヘッドセットは購入・監視対象外。参考配分を使い切ることは目的ではない。ネット配送・店頭購入・ネット注文の店舗受け取りを同一型番・最終支払額・在庫・保証条件で比較する。総額上限400,000円と別枠予備費5,000円を守り、PCの許容額は確認できた実支出から動的に計算する。",
     "budget_formula": "dynamic_pc_cap_jpy = max(0, min(pc_budget_jpy, total_budget_jpy - current_or_reserved_mandatory_peripheral_cost_jpy - unallocated_contingency_jpy))",
-    "budget_optimization_policy": "総額40万円を使い切ることを目的にしない。周辺機器は必要なものだけ実費計上する。電源タップは所有済みのため買い足さない。余りが出たときだけ、総額上限を守りながら、ゲーム性能・ゲーム制作・勉強・分析を実際に改善するCPU/GPU/RAM/SSDの一回限りの購入候補を再比較する。スピーカー、サブモニター、ヘッドセットも対象外で、予算消化のために追加しない。"
+    "budget_optimization_policy": "総額40万円を使い切ることを目的にしない。周辺機器は必要なものだけ実費計上し、ネット配送・店頭購入・ネット注文の店舗受け取りを同一型番の最終支払額・送料・在庫・保証・返品条件で比較する。電源タップは所有済みのため買い足さない。余りが出た場合は、総額上限を守りながらゲーム性能・ゲーム制作・勉強・分析を改善するCPU/GPU/RAM/SSD候補を再比較する。スピーカー、サブモニター、ヘッドセットは対象外で予算消化のために追加しない。"
   },
   "peripheral_alternatives": [
     {
@@ -720,13 +769,30 @@
       "ranking_score_100": 82,
       "ranking_reason": "2m・DisplayPort 1.4準拠の代替。モニター付属品の有無を確認し、不足分だけ購入する。",
       "best_for": "付属ケーブルが不足した場合",
-      "purchase_channel": "physical_store",
-      "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
+      "purchase_channel": "compare_online_and_store",
+      "store_inventory_required_before_purchase": false,
+      "online_price_is_comparison_only": false,
       "physical_store_candidate_ids": [
         "bicamera_tenjin_1",
         "yodobashi_hakata"
-      ]
+      ],
+      "purchase_channel_options": [
+        "online",
+        "physical_store",
+        "store_pickup"
+      ],
+      "online_offer_actionable_if_exact_price_stock_verified": true,
+      "store_price_is_separate_evidence": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": []
     },
     {
       "id": "cables_alt_sanwa_kc_dp1420",
@@ -753,13 +819,30 @@
       "ranking_reason": "VESA認証済みDisplayPort 1.4・2m。メーカー標準価格は¥5,280なので、実売が下がった場合だけ。不足がなければ購入しない。",
       "best_for": "A specifically identified DP 1.4 cable if the monitor's included cable is absent",
       "category": "cables",
-      "purchase_channel": "physical_store",
-      "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
+      "purchase_channel": "compare_online_and_store",
+      "store_inventory_required_before_purchase": false,
+      "online_price_is_comparison_only": false,
       "physical_store_candidate_ids": [
         "bicamera_tenjin_1",
         "yodobashi_hakata"
-      ]
+      ],
+      "purchase_channel_options": [
+        "online",
+        "physical_store",
+        "store_pickup"
+      ],
+      "online_offer_actionable_if_exact_price_stock_verified": true,
+      "store_price_is_separate_evidence": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": []
     },
     {
       "id": "keyboard_alt_logicool_g413_tkl_se",
@@ -787,9 +870,9 @@
       "ranking_score_100": 86,
       "ranking_reason": "テンキーレスのメカニカル。マウススペースを優先するFPS向けだが、現在¥11,000参考価格より大幅に下がる場合に検討。",
       "best_for": "FPSの操作スペース",
-      "purchase_channel": "physical_store",
+      "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
+      "online_price_is_comparison_only": false,
       "physical_store_candidate_ids": [
         "bicamera_tenjin_1",
         "yodobashi_hakata"
@@ -821,7 +904,15 @@
         "https://www.yodobashi.com/product/100000001007258185/",
         "https://www.biccamera.com/bc/item/10326363/"
       ],
-      "inventory_monitoring_note": "ビックカメラの商品ページを利用した店頭在庫チェック対象。通販価格は比較用で、支店在庫はチェック実行後に確定する。"
+      "inventory_monitoring_note": "ビックカメラの商品ページを利用した店頭在庫チェック対象。通販価格は比較用で、支店在庫はチェック実行後に確定する。",
+      "purchase_channel_options": [
+        "online",
+        "physical_store",
+        "store_pickup"
+      ],
+      "online_offer_actionable_if_exact_price_stock_verified": true,
+      "store_price_is_separate_evidence": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": true
     },
     {
       "id": "keyboard_alt_logicool_g413se",
@@ -849,9 +940,9 @@
       "ranking_score_100": 84,
       "ranking_reason": "フルサイズのメカニカルでテンキーを残せるが、現在¥12,320参考価格のためBF目標¥9,500以下が条件。",
       "best_for": "テンキーとメカニカル打鍵感",
-      "purchase_channel": "physical_store",
+      "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
+      "online_price_is_comparison_only": false,
       "physical_store_candidate_ids": [
         "bicamera_tenjin_1",
         "yodobashi_hakata"
@@ -883,7 +974,15 @@
         "https://www.yodobashi.com/product/100000001007258184/",
         "https://www.biccamera.com/bc/item/10326362/"
       ],
-      "inventory_monitoring_note": "ビックカメラの商品ページを利用した店頭在庫チェック対象。通販価格は比較用で、支店在庫はチェック実行後に確定する。"
+      "inventory_monitoring_note": "ビックカメラの商品ページを利用した店頭在庫チェック対象。通販価格は比較用で、支店在庫はチェック実行後に確定する。",
+      "purchase_channel_options": [
+        "online",
+        "physical_store",
+        "store_pickup"
+      ],
+      "online_offer_actionable_if_exact_price_stock_verified": true,
+      "store_price_is_separate_evidence": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": true
     },
     {
       "id": "main_monitor_alt_msi_mag_275qf",
@@ -909,9 +1008,9 @@
       "ranking_score_100": 90,
       "ranking_reason": "27型WQHD・180Hzの直接的な代替候補。AOCの在庫切れ・目標未達時に、配送込み総額と高さ調整の有無を比較する。",
       "best_for": "AOCが高い・在庫切れの場合",
-      "purchase_channel": "physical_store",
+      "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
+      "online_price_is_comparison_only": false,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -924,7 +1023,15 @@
       "store_observation_store_id": null,
       "store_evidence_type": null,
       "store_evidence_notes": null,
-      "store_inventory_checks": []
+      "store_inventory_checks": [],
+      "purchase_channel_options": [
+        "online",
+        "physical_store",
+        "store_pickup"
+      ],
+      "online_offer_actionable_if_exact_price_stock_verified": true,
+      "store_price_is_separate_evidence": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": true
     },
     {
       "id": "main_monitor_alt_lg_27gs75qb",
@@ -949,9 +1056,9 @@
       "ranking_score_100": 87,
       "ranking_reason": "高さ調整・ピボット対応スタンドが必要な場合の有力候補。AOCのBF価格や在庫が悪い場合だけ比較し、目標価格は¥22,000。",
       "best_for": "高さ調整・ピボットの必要性が高い場合",
-      "purchase_channel": "physical_store",
+      "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
+      "online_price_is_comparison_only": false,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -964,7 +1071,15 @@
       "store_observation_store_id": null,
       "store_evidence_type": null,
       "store_evidence_notes": null,
-      "store_inventory_checks": []
+      "store_inventory_checks": [],
+      "purchase_channel_options": [
+        "online",
+        "physical_store",
+        "store_pickup"
+      ],
+      "online_offer_actionable_if_exact_price_stock_verified": true,
+      "store_price_is_separate_evidence": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": true
     },
     {
       "id": "mouse_alt_logicool_g203",
@@ -993,9 +1108,9 @@
       "ranking_score_100": 90,
       "ranking_reason": "有線で電池交換不要。公式掲載¥4,510、BF目標¥3,500。ワイヤレスにこだわらず価格を抑えたい場合の予備候補。",
       "best_for": "価格優先・有線で問題ない場合",
-      "purchase_channel": "physical_store",
+      "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
+      "online_price_is_comparison_only": false,
       "physical_store_candidate_ids": [
         "bicamera_tenjin_1",
         "yodobashi_hakata"
@@ -1027,7 +1142,15 @@
         "https://www.yodobashi.com/product/100000001005593918/",
         "https://www.biccamera.com/bc/item/8019882/"
       ],
-      "inventory_monitoring_note": "ビックカメラの商品ページを利用した店頭在庫チェック対象。通販価格は比較用で、支店在庫はチェック実行後に確定する。"
+      "inventory_monitoring_note": "ビックカメラの商品ページを利用した店頭在庫チェック対象。通販価格は比較用で、支店在庫はチェック実行後に確定する。",
+      "purchase_channel_options": [
+        "online",
+        "physical_store",
+        "store_pickup"
+      ],
+      "online_offer_actionable_if_exact_price_stock_verified": true,
+      "store_price_is_separate_evidence": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": true
     },
     {
       "id": "mouse_alt_logicool_g304_x_superlight",
@@ -1054,9 +1177,9 @@
       "ranking_score_100": 87,
       "ranking_reason": "メーカー公称59gの充電式無線モデル。FPSで軽さを重視する上位選択だが、標準G304より高価なため、総合コスパは予算条件込みで評価。",
       "best_for": "軽さを優先",
-      "purchase_channel": "physical_store",
+      "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
+      "online_price_is_comparison_only": false,
       "physical_store_candidate_ids": [
         "bicamera_tenjin_1",
         "yodobashi_hakata"
@@ -1087,7 +1210,15 @@
       "monitor_urls": [
         "https://www.biccamera.com/bc/item/15216264/"
       ],
-      "inventory_monitoring_note": "ビックカメラの商品ページを利用した店頭在庫チェック対象。通販価格は比較用で、支店在庫はチェック実行後に確定する。"
+      "inventory_monitoring_note": "ビックカメラの商品ページを利用した店頭在庫チェック対象。通販価格は比較用で、支店在庫はチェック実行後に確定する。",
+      "purchase_channel_options": [
+        "online",
+        "physical_store",
+        "store_pickup"
+      ],
+      "online_offer_actionable_if_exact_price_stock_verified": true,
+      "store_price_is_separate_evidence": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": true
     },
     {
       "id": "mousepad_alt_razer_gigantus_v2_l",
@@ -1113,13 +1244,30 @@
       "ranking_score_100": 89,
       "ranking_reason": "Lサイズ約450×400mmでQcK Largeと同程度の操作面。公式ページ表示額は送料条件の影響があるため、決済時の配送込み総額で比較する。",
       "best_for": "大型布製パッドを安く確保したい場合",
-      "purchase_channel": "physical_store",
+      "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
+      "online_price_is_comparison_only": false,
       "physical_store_candidate_ids": [
         "bicamera_tenjin_1",
         "yodobashi_hakata"
-      ]
+      ],
+      "purchase_channel_options": [
+        "online",
+        "physical_store",
+        "store_pickup"
+      ],
+      "online_offer_actionable_if_exact_price_stock_verified": true,
+      "store_price_is_separate_evidence": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": []
     },
     {
       "id": "mousepad_alt_logicool_g640s",
@@ -1145,13 +1293,30 @@
       "ranking_score_100": 87,
       "ranking_reason": "Logicool公式のG640は400×460mmの大型クロス面。公式掲載価格は¥3,850でQcK Largeより高価なので、表面の好みとBF価格差が小さい場合に選ぶ。",
       "best_for": "表面の好みで選ぶ",
-      "purchase_channel": "physical_store",
+      "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
+      "online_price_is_comparison_only": false,
       "physical_store_candidate_ids": [
         "bicamera_tenjin_1",
         "yodobashi_hakata"
-      ]
+      ],
+      "purchase_channel_options": [
+        "online",
+        "physical_store",
+        "store_pickup"
+      ],
+      "online_offer_actionable_if_exact_price_stock_verified": true,
+      "store_price_is_separate_evidence": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_stock_status": "unknown",
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null,
+      "store_inventory_checks": []
     }
   ],
   "peripheral_ranking_policy": {
@@ -1175,7 +1340,7 @@
         "weight_pct": 15
       }
     ],
-    "instructions": "各カテゴリから主候補を1商品選び、代替候補を同時購入しない。対象は27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要ケーブル（付属品が不足する場合のみ）。電源タップは所有済みのため購入候補・価格監視・費用計算に含めない。スピーカー、サブモニター、ヘッドセットも購入・価格監視・費用計算に含めない。周辺機器約36,000円は固定枠・使い切り予算ではなく、総額400,000円と別枠予備費5,000円を優先し、実際の必要性と店頭価格に応じPC本体との配分を動的に最適化する。",
+    "instructions": "各カテゴリから主候補を1商品選び、代替候補を同時購入しない。対象は27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要時のみケーブル。電源タップは所有済みのため購入候補・価格監視・費用計算に含めない。スピーカー、サブモニター、ヘッドセットも購入・価格監視・費用計算に含めない。周辺機器の購入先はネット配送・実店舗・ネット注文の店舗受け取りを商品別に比較し、同一型番、税込現金支払額、送料・手数料、在庫、保証・返品条件を分離記録する。店頭価格をネット価格から推定しない。周辺機器36,000円は計画枠であり固定支出ではなく、総額400,000円と別枠予備費5,000円を優先してPC本体との配分を動的に最適化する。",
     "category_order": [
       {
         "category": "main_monitor",
@@ -1202,7 +1367,7 @@
   "monitor_window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
   "monitor_window_note": "暫定の広域監視窓であり、いずれかの販売店の公式BF開催日を意味しない。各店の2026年公式日程を公式ページから明示的な年付き日付範囲で確認するまで、価格をBF実売として認定せず、買い時判定は購入許可を出さない。過去日程、曜日、年のない月日から開催日を推定しない。",
   "budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
-  "budget_target_note": "総額400,000円を絶対上限、PC本体の基準目標360,000円とする。周辺機器の計画配分は約36,000円だが固定支出ではない。メインモニターは27インチWQHDを1台のみ。電源タップは所有済みのため購入・価格監視・予算から除外。スピーカー、サブモニター、ヘッドセットも購入対象・候補・価格監視・費用計算から除外する。PC購入時にRAM 32GB以上、SSD 1TB以上を確保する。",
+  "budget_target_note": "総額400,000円を絶対上限、PC本体の基準目標360,000円とする。周辺機器36,000円は柔軟な参考配分で固定支出ではない。メインモニターは1台のみ。電源タップは所有済みのため購入・価格監視・予算計算から除外する。スピーカー、サブモニター、ヘッドセットも購入対象・候補・価格監視・費用計算から除外する。周辺機器はネット配送・実店舗・ネット注文の店舗受け取りを同一型番の最終支払額で比較し、PC購入時にRAM 32GB以上、SSD 1TB以上を確保する。",
   "purchase_channels": {
     "pc_body": {
       "channel": "online",
@@ -1216,7 +1381,13 @@
       "mousepad",
       "cables"
     ],
-    "online_categories": [],
+    "online_categories": [
+      "main_monitor",
+      "keyboard",
+      "mouse",
+      "mousepad",
+      "cables"
+    ],
     "physical_store_candidates": [
       {
         "id": "biccamera_tenjin_1",
@@ -1250,10 +1421,22 @@
         ]
       }
     ],
-    "store_stock_rule": "周辺機器はすべて実店舗購入。全国オンライン在庫・Web価格は当該店舗の店頭在庫・店頭決済価格を証明しない。購入判断前に、同一型番/色、ビックカメラ天神1号館またはヨドバシ博多の店頭在庫または取り置き、店頭税込現金支払総額を確認する。未確認なら購入許可は保留する。",
-    "online_price_handling": "オンライン価格は市場比較の参考値に限る。実店舗の価格・在庫として扱わない。"
+    "store_stock_rule": "全国オンライン価格は店舗の店頭現金価格・店頭在庫を証明しない。店頭を最安候補として推す場合は、同一型番/色の店頭価格・店舗在庫/取り置きを別途確認する。確認がない場合でも、同一型番の直接販売ページでネット価格・配送費・販売元・在庫・保証・返品条件が検証できれば、ネット購入候補として評価できる。ネット注文・店舗受け取りはネット注文価格と店舗在庫を別々に評価する。",
+    "online_price_handling": "オンライン価格は直接販売ページの同一型番・価格・在庫・販売元が検証できた場合、ネット購入の候補額として扱う。価格比較ページの最安値、ポイント、クーポン、送料未確認の価格は確定支払額とみなさない。ネット掲載価格を店頭価格として転用しない。",
+    "channel_selection_mode": "COMPARE_ONLINE_AND_LOCAL_STORE",
+    "channel_selection_policy": "周辺機器ごとに同じ型番・色・仕様を、直接販売ページのネット注文価格、配送費、店頭の税込現金価格、店頭/取り置き在庫、保証・返品条件で比較する。ネット注文・店舗受け取りも独立した選択肢として扱う。ポイント還元は現金値引きと分離し、最終カートに適用された額だけを反映する。店頭価格未確認なら「最安購入先確定」と表示しない。",
+    "online_store_comparison_requirements": [
+      "exact_model_and_variant_match",
+      "direct_retailer_checkout_or_product_listing",
+      "stock_and_delivery_status",
+      "shipping_and_mandatory_fees",
+      "cash_checkout_total_before_points",
+      "warranty_and_return_terms",
+      "physical_store_cash_price_and_stock_when_store_is_recommended",
+      "store_pickup_price_and_stock_are_separate_from_online_delivery"
+    ]
   },
-  "target_budget_notes": "総額上限400,000円。PC本体の基準目標360,000円。周辺機器は約36,000円の参考配分で固定枠ではない。メインモニターは1台だけ。電源タップは所有済みで購入・監視・予算に含めない。スピーカー、サブモニター、ヘッドセットを購入対象・ランキング・価格監視・総額試算に含めない。予備費5,000円を別途確保し、PC本体に使える額は周辺機器の実費から動的に算出する。周辺機器送料は計上しない。価格目標と実売価格を区別し、未確認が残る場合は購入許可しない。",
+  "target_budget_notes": "総額上限400,000円。PC本体の基準目標360,000円。周辺機器36,000円は参考配分で固定枠ではない。メインモニターは1台だけ。電源タップは所有済みのため購入・監視・予算から除外。スピーカー、サブモニター、ヘッドセットを購入対象・ランキング・価格監視・総額試算に含めない。予備費5,000円を別途確保し、PC本体に使える額は周辺機器の実費から動的に算出する。周辺機器送料は実費・チャネル別に計上し、ポイントは現金支払い額から控除しない。価格目標と実売価格を区別し、未確認が残る場合は購入許可しない。",
   "target_budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
   "market_risk_policy": {
     "snapshot_date": "2026-10-17",
@@ -1427,7 +1610,7 @@
   },
   "peripheral_budget_mode": "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET",
   "peripheral_budget_is_hard_cap": false,
-  "peripheral_allocation_scenario_note": "周辺機器の計画配分は約36,000円（メインモニター1台、キーボード、マウス、マウスパッド、必要ケーブル用の未配賦枠）。電源タップは所有済みで購入・価格監視・予算から除外。スピーカー、サブモニター、ヘッドセットは購入・監視対象外。総額上限400,000円と別枠予備費5,000円を維持し、PCの許容額は実支出から動的に計算する。",
+  "peripheral_allocation_scenario_note": "周辺機器の計画配分は約36,000円（メインモニター1台、キーボード、マウス、マウスパッド、必要時のみケーブル、不測の価格差用の柔軟な予備枠）。電源タップは所有済みで除外。スピーカー、サブモニター、ヘッドセットも購入・監視対象外。総額上限400,000円と別枠予備費5,000円を維持し、PC許容額は実支出とチャネル選択から動的に計算する。",
   "peripheral_allocation_scenario_jpy": 36000,
   "budget_optimization_policy": "総額40万円を使い切ることを目的にしない。必須周辺機器のみ実費計上する。余りが出たときだけ、総額上限を守りながら、ゲーム性能・ゲーム制作・勉強・分析を実際に改善するCPU/GPU/RAM/SSDを比較する。スピーカー、サブモニター、ヘッドセットは対象外で、予算消化のために追加しない。"
 }
