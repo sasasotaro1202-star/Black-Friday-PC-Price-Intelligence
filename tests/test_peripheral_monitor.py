@@ -29,10 +29,13 @@ class PeripheralMonitorTests(unittest.TestCase):
         config = __import__("json").loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
         target = next(x for x in config["peripherals"] if x["id"] == "keyboard")
         self.assertTrue(target["track_current_price"])
-        self.assertEqual(target["monitor_url"], "https://www.biccamera.com/bc/item/9242996/")
+        self.assertEqual(target["monitor_url"], "https://www.yodobashi.com/product/100000001006099089/")
+        self.assertEqual(target["purchase_url"], "https://www.biccamera.com/bc/item/9242996/")
+        self.assertIn("https://www.biccamera.com/bc/item/9242996/", target["monitor_urls"])
         self.assertEqual(target["target_price_jpy"], 5500)
         self.assertIn("G213r", target["identity_terms"])
         self.assertIn("www.biccamera.com", target["allowed_hosts"])
+        self.assertIn("www.yodobashi.com", target["allowed_hosts"])
 
     def test_ranked_alternatives_are_monitored_separately_from_budget_targets(self):
         import json
