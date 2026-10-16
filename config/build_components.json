@@ -75,11 +75,11 @@
     "selection_policy": "Prioritize self-build for the actual desktop recommendation. Assembly time and assembly effort are not negative factors. Compare BTO only as a reference benchmark on equivalent final specification, total cash price, part quality and warranty; do not switch the primary recommendation to BTO merely for convenience.",
     "purchase_decision_factors": [
       {
-        "name": "performance_for_gaming_game_development_and_user_workloads",
+        "name": "combined_performance_for_gaming_game_creation_study_analysis",
         "priority": 1
       },
       {
-        "name": "game_creation_editor_build_vram_and_memory_headroom",
+        "name": "memory_vram_storage_and_multitasking_headroom",
         "priority": 2
       },
       {
@@ -87,11 +87,11 @@
         "priority": 3
       },
       {
-        "name": "component_quality_and_reliability",
+        "name": "component_quality_reliability_thermal_behavior",
         "priority": 4
       },
       {
-        "name": "compatibility_and_thermal_headroom",
+        "name": "compatibility_and_ease_of_long_term_use",
         "priority": 5
       },
       {
@@ -99,7 +99,7 @@
         "priority": 6
       },
       {
-        "name": "future_upgradeability",
+        "name": "future_upgradeability_without_relying_on_it",
         "priority": 7
       }
     ],
@@ -189,8 +189,54 @@
         "For game creation, score engine/editor responsiveness, project build/compile behavior, VRAM, system RAM, SSD capacity, thermals and simultaneous IDE/browser/tests.",
         "Score 64GB RAM and 2TB SSD as preferences only when those exact capacities are included at purchase and the all-in budget is verified; no assumed future upgrades.",
         "Treat full Unreal Engine source compilation without distributed build as a distinct high-core-count workload; do not claim the 8-core Ryzen 7 9700X is optimal for that special case.",
-        "Never claim measured game FPS or compile times without a source-backed benchmark matching the actual CPU/GPU/RAM, engine version and settings."
-      ]
+        "Never claim measured game FPS or compile times without a source-backed benchmark matching the actual CPU/GPU/RAM, engine version and settings.",
+        "Treat schoolwork, research, browser/PDF/document work and general multitasking as a first-class workload alongside gaming and game development.",
+        "Treat Python analytics, larger simulations, sports/stock/BTC predictions, automated tests and feasible local AI as first-class workloads; score CPU, RAM, VRAM, SSD and long-run thermal behavior by workload instead of GPU-only ranking.",
+        "Prefer 64GB RAM and 2TB SSD only when a complete as-purchased build fits the total budget and exact capacities are priced/verified; never rely on post-purchase upgrades.",
+        "Prioritize a balanced workstation/gaming build; do not overspend on GPU at the expense of memory and storage needs for study, development and data work."
+      ],
+      "study_and_research": {
+        "priority": "HIGH",
+        "targets": [
+          "school/study work",
+          "reading and summarizing source documents",
+          "research",
+          "writing and presentations",
+          "browser with many tabs",
+          "video lessons and note-taking"
+        ],
+        "concurrent_tasks": [
+          "browser/source research",
+          "PDF/document reading",
+          "office/editor tools",
+          "reference notes",
+          "game engine/IDE when needed",
+          "Python notebooks and data tools"
+        ],
+        "evaluation_note": "Do not assume a browser or school application needs a powerful GPU; optimize reliable multitasking, RAM capacity, SSD headroom and CPU responsiveness without overspending."
+      },
+      "analysis_and_automation": {
+        "priority": "HIGH",
+        "targets": [
+          "Python data analysis",
+          "large datasets and simulations",
+          "sports prediction systems",
+          "stock/securities prediction",
+          "BTC prediction",
+          "GitHub Actions and local tests",
+          "AI-assisted workflows",
+          "local AI models when feasible"
+        ],
+        "evaluate": [
+          "CPU single-thread and multithread performance",
+          "system RAM capacity",
+          "GPU VRAM and compute compatibility",
+          "SSD capacity and sustained I/O",
+          "cooling/noise under long-running workloads",
+          "multi-process and background-app responsiveness"
+        ],
+        "note": "Free/open-source tools and local processing are preferred where practical. Do not assume paid APIs, cloud GPUs, paid data services or subscription services. Do not claim a GPU accelerates CPU-only workloads automatically."
+      }
     }
   },
   "parts": [
