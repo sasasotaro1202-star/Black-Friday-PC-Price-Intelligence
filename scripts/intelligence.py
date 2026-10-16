@@ -444,6 +444,7 @@ def store_pickup_quote_validation(target, now=None):
     current = parse_dt(now) if isinstance(now, str) else now
     current = current or now_jst()
     price = target.get("store_pickup_checkout_total_jpy")
+    checkout_total_attested = target.get("store_pickup_checkout_total_verified") is True
     checked_raw = target.get("store_pickup_quote_checked_at")
     checked = parse_dt(checked_raw)
     age_minutes = (current - checked).total_seconds() / 60.0 if checked else None
@@ -475,6 +476,8 @@ def store_pickup_quote_validation(target, now=None):
 
     if not isinstance(price, int) or isinstance(price, bool) or price <= 0:
         reason = "PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID"
+    elif not checkout_total_attested:
+        reason = "PICKUP_CHECKOUT_TOTAL_NOT_ATTESTED"
     elif checked is None or age_minutes is None:
         reason = "PICKUP_QUOTE_TIMESTAMP_MISSING_OR_INVALID"
     elif age_minutes < 0 or age_minutes > max_age:
