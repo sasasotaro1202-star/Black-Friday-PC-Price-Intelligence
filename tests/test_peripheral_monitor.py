@@ -75,6 +75,44 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertEqual(row["price_source_mode"], "direct_text")
         self.assertEqual(row["stock_status"], "low_stock")
 
+    def test_all_configured_exact_model_offers_are_compared(self):
+        target = dict(self.target)
+        target["monitor_urls"] = [
+            "https://www.yodobashi.com/product/example/",
+            "https://www.biccamera.com/bc/item/example/",
+        ]
+        target["allowed_hosts"] = ["www.yodobashi.com", "www.biccamera.com"]
+        target["purchase_channel"] = "compare_online_and_store"
+        target["purchase_channel_options"] = ["online", "physical_store", "store_pickup"]
+        target["store_inventory_required_before_purchase"] = False
+        parsed_by_url = {
+            target["monitor_urls"][0]: {
+                "page_text_excerpt": "AOC Q27G40E/11 20,790円 在庫残少",
+                "price_jpy": 20790, "price_source_mode": "direct_structured",
+                "price_context": None, "stock_status": "low_stock", "name": "AOC Q27G40E/11",
+            },
+            target["monitor_urls"][1]: {
+                "page_text_excerpt": "AOC Q27G40E/11 19,990円 在庫あり",
+                "price_jpy": 19990, "price_source_mode": "direct_structured",
+                "price_context": None, "stock_status": "in_stock", "name": "AOC Q27G40E/11",
+            },
+        }
+        def parsed_page(final_url, html, expected):
+            return parsed_by_url[final_url]
+        with patch.object(peripheral_monitor, "fetch", side_effect=[
+            ("<html>store one</html>", target["monitor_urls"][0], {}),
+            ("<html>store two</html>", target["monitor_urls"][1], {}),
+        ]) as fetch, patch.object(peripheral_monitor, "parse_page", side_effect=parsed_page):
+            row = peripheral_monitor.run_one(target, {}, "2026-10-10T15:00:00+09:00")
+        self.assertEqual(fetch.call_count, 2)
+        self.assertEqual(row["online_offer_count"], 2)
+        self.assertEqual(row["online_actionable_offer_count"], 2)
+        self.assertEqual(row["current_price_jpy"], 19990)
+        self.assertEqual(row["online_best_offer_url"], target["monitor_urls"][1])
+        self.assertEqual(row["purchase_url"], target["monitor_urls"][1])
+        self.assertFalse(row["store_price_confirmed"])
+        self.assertEqual(row["channel_comparison_status"], "ONLINE_OPTIONS_COMPARED_STORE_PENDING")
+
     def test_exact_product_window_does_not_read_global_page_status(self):
         context = "AOC Q27G40E/11 ￥20,790 在庫あり 関連商品 取り寄せ"
         stock = peripheral_monitor.local_product_stock(context, "preorder_or_backorder")
