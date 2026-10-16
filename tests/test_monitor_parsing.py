@@ -10,6 +10,15 @@ import monitor
 
 
 class MonitorParsingTests(unittest.TestCase):
+    def test_windows_31j_charset_alias_decodes_japanese_inventory_text(self):
+        original = "ビックカメラ 天神1号館 店舗在庫"
+        raw = original.encode("cp932")
+        self.assertEqual(monitor.decode_response_body(raw, "windows-31j"), original)
+
+    def test_unknown_charset_falls_back_without_aborting_collection(self):
+        raw = "inventory unavailable".encode("utf-8")
+        self.assertEqual(monitor.decode_response_body(raw, "unknown-retailer-charset"), "inventory unavailable")
+
     def test_curl_http_000_preserves_transport_exit_and_stderr(self):
         from types import SimpleNamespace
         from unittest.mock import patch
