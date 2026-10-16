@@ -105,7 +105,8 @@
     ],
     "memory_choice_ids": [
       "memory-crucial-pro-ddr5-32gb-6000",
-      "memory-teamgroup-ddr5-32gb-6000"
+      "memory-teamgroup-ddr5-32gb-6000",
+      "memory-lexar-thor-ddr5-64gb-6000"
     ],
     "primary_memory_choice_id": "memory-teamgroup-ddr5-32gb-6000",
     "unallocated_contingency_jpy": 5000,
@@ -291,11 +292,39 @@
         "If the 2TB target is missed, compare another exact-model 2TB SSD or keep the 1TB baseline; do not exceed the total budget for capacity alone.",
         "The KIOXIA EXCERIA BASIC model uses QLC NAND; evaluate sustained-write workload suitability rather than treating its sequential-speed headline as proof of workstation endurance."
       ],
-      "source_note": "KIOXIA official specs confirm the exact tracked SKU SSD-CK2.0N4B/N as M.2 2280 PCIe 4.0, 2TB, maximum 7,300/6,800 MB/s sequential read/write, 600 TBW and QLC NAND. A price-comparison page showed ¥68,280 for this tracked SKU (one listed shop) when checked in October 2026. A separate /J SKU had a ¥61,182 listing, but that price is not treated as a price for the tracked /N SKU. The ¥45,000 BF target is aspirational; no forecast or confirmed BF price is implied.",
+      "source_note": "KIOXIA official specs confirm the tracked SKU SSD-CK2.0N4B/N as M.2 2280 PCIe 4.0, 2TB, maximum 7,300/6,800 MB/s sequential read/write, 600 TBW and QLC NAND. On 2026-10-17 search pages showed a ¥52,980-from listing and another older/page-specific listing at ¥68,280; this spread is evidence to re-fetch exact model and stock, not proof of a single checkout price. The ¥45,000 BF target is aspirational. Sources: https://www.kioxia.com/ja-jp/personal/ssd/exceria-basic.html ; https://search.kakaku.com/SSD%20SSD-CK2.0N4B%2FN/ ; https://kakaku.com/item/K0001719361/",
       "source_urls": [
         "https://www.kioxia.com/ja-jp/personal/ssd/exceria-basic.html",
         "https://kakaku.com/item/K0001724151/",
         "https://kakaku.com/item/K0001719361/"
+      ]
+    },
+    "memory_upgrade_policy": {
+      "priority": "OPTIONAL_IF_PRICE_AND_COMPATIBILITY_SUPPORT_IT",
+      "baseline_part_id": "memory-teamgroup-ddr5-32gb-6000",
+      "conditional_replacement_id": "memory-lexar-thor-ddr5-64gb-6000",
+      "target_price_jpy": 100000,
+      "current_page_reference_jpy": 119990,
+      "reference_checked_at": "2026-10-17",
+      "reference_url": "https://www.ark-pc.co.jp/i/11650134/",
+      "current_offer_expiry": "2026-10-29T23:59:00+09:00",
+      "full_system_scenario": {
+        "gpu_id": "gpu-rtx5060ti-16gb",
+        "base_pc_target_jpy": 280600,
+        "base_memory_target_jpy": 40000,
+        "memory64_target_jpy": 100000,
+        "pc_target_with_64gb_jpy": 340600,
+        "peripherals_reference_jpy": 40000,
+        "contingency_jpy": 5000,
+        "all_in_target_jpy": 385600,
+        "remaining_to_hard_ceiling_jpy": 14400
+      },
+      "rules": [
+        "The 64GB kit replaces the selected 32GB kit; never add both RAM prices to the same build.",
+        "The ¥100,000 BF target is aspirational, not a forecast or confirmed BF offer.",
+        "The plan pairs 64GB RAM with RTX 5060 Ti 16GB; do not combine it with RTX 5070 or RTX 5070 Ti in a recommended under-¥400,000 build unless the exact full-system calculation and observed prices prove it fits.",
+        "Verify exact model, motherboard QVL, BIOS, AMD EXPO stability, retailer stock, checkout price, and all-in total before promotion.",
+        "If the RAM target is missed or compatibility remains unclear, retain the 32GB default configuration and do not assume post-purchase upgrades."
       ]
     }
   },
@@ -458,7 +487,7 @@
         "connector": "12V-2x6",
         "card_thickness_slots": 2.98
       },
-      "notes": "PNY公式のARGB Overclocked Triple Fan型番VCG5070T16TFXXPB1-Oに一致。公称約300×120×60mm、2.98スロット、300W、16ピン入力、推奨PSU750W。2026-10-14時点のドスパラ表示例は207,700円。154,000円は希望するBF購入目標であり値下がり予測ではない。TeamGroupの40,000円メモリ目標でも自作PC本体目標は324,800円。メインモニター1台と必要な入力機器の参考配分32,000円、予備費5,000円込みで総額目標361,800円。2TB SSDへ45,000円目標（1TB目標との差額27,000円）で置き換えられる場合は、PC本体351,800円、周辺機器32,000円、予備費5,000円込みで388,800円。すべてBF目標による算術シナリオで、実売価格や値下がり予測ではない。GPUの実売・在庫、ケース干渉、電源コネクタのクリアランスを確認する。周辺機器参考配分40,000円と予備費5,000円では、1TB SSD構成の計画総額は369,800円。2TB SSDへ45,000円目標（1TB目標との差額27,000円）で置換できる場合は396,800円となる。ただしBF目標値の計算であり、実売価格ではない。",
+      "notes": "PNY公式のARGB Overclocked Triple Fan型番VCG5070T16TFXXPB1-Oに一致。公称約300×120×60mm、2.98スロット、300W、16ピン入力、推奨PSU750W。2026-10-14時点のドスパラ表示例は207,700円。154,000円は希望するBF購入目標であり値下がり予測ではない。TeamGroupの40,000円メモリ目標でも自作PC本体目標は324,800円。メインモニター1台と必要な入力機器の参考配分32,000円、予備費5,000円込みで総額目標361,800円。2TB SSDへ45,000円目標（1TB目標との差額27,000円）で置き換えられる場合は、PC本体351,800円、周辺機器32,000円、予備費5,000円込みで388,800円。すべてBF目標による算術シナリオで、実売価格や値下がり予測ではない。GPUの実売・在庫、ケース干渉、電源コネクタのクリアランスを確認する。周辺機器参考配分40,000円と予備費5,000円では、1TB SSD構成の計画総額は369,800円。2TB SSDへ45,000円目標（1TB目標との差額27,000円）で置換できる場合は396,800円となる。ただしBF目標値の計算であり、実売価格ではない。比較すべき別案としてRTX 5060 Ti 16GB＋64GB RAM（RAM BF目標100,000円）も監視対象。目標価格ではPC本体340,600円、周辺機器40,000円、予備費5,000円込み385,600円だが、これはRTX 5070 Ti構成との同時採用ではなく、別の分析・制作寄り構成。",
       "spec_source_url": "https://www.pny.com/geforce-rtx-5070-ti-models?sku=VCG5070T16TFXXPB1-O",
       "spec_source_verified_at": "2026-10-14",
       "direct_retailer_urls": [
@@ -829,8 +858,53 @@
         "tbw": 600
       },
       "spec_source_url": "https://www.kioxia.com/ja-jp/personal/ssd/exceria-basic.html",
-      "notes": "条件付きの1TB SSD置換候補。監視SKUはSSD-CK2.0N4B/N。BF目標45,000円は希望値で、確定価格ではない。2026年10月の価格.com表示例はこの正確な型番で68,280円・掲載店舗1件。監視時に同一型番・在庫・決済価格を再確認する。QLC NANDなので長時間の継続書き込み量が大きい用途ではTLC製品とも比較する。1TB品に追加せず、必ず置換として総額を再計算する。",
+      "notes": "条件付きの1TB SSD置換候補。監視SKUはSSD-CK2.0N4B/N。BF目標45,000円は希望値で、確定価格や価格予測ではない。2026-10-17の比較サイト検索結果にはこの型番で52,980円からの掲載表示がある一方、別のページ取得では68,280円・1店舗の表示例もあった。ページ・店舗・在庫条件が異なるため同一時点の確定相場とみなさず、監視時に直接価格・在庫・SKUを再確認する。QLC NANDのため継続的大容量書き込みではTLC製品とも比較する。1TB品に追加せず、必ず置換として総額を再計算する。",
       "direct_retailer_urls": []
+    },
+    {
+      "id": "memory-lexar-thor-ddr5-64gb-6000",
+      "category": "memory",
+      "role": "conditional_memory_replacement",
+      "replaces_part_id": "memory-teamgroup-ddr5-32gb-6000",
+      "name": "Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2)",
+      "model_code": "LD5U32G60C40BV-RGD",
+      "aliases": [
+        "Lexar THOR RGB 2nd Gen 64GB",
+        "LD5U32G60C40BV-RGD",
+        "DDR5-6000 64GB 32GBx2"
+      ],
+      "identity_terms": [
+        "LD5U32G60C40BV-RGD",
+        "THOR RGB 2nd Gen 64GB",
+        "Lexar DDR5-6000 64GB"
+      ],
+      "monitor_url": "https://www.ark-pc.co.jp/i/11650134/",
+      "purchase_url": "https://www.ark-pc.co.jp/i/11650134/",
+      "direct_retailer_urls": [
+        "https://www.ark-pc.co.jp/i/11650134/"
+      ],
+      "track_price": true,
+      "target_price_jpy": 100000,
+      "min_price_jpy": 65000,
+      "max_price_jpy": 250000,
+      "specs": {
+        "memory_type": "DDR5",
+        "capacity_gb": 64,
+        "modules": 2,
+        "module_size_gb": 32,
+        "speed_mts": 6000,
+        "cas_latency": "CL40",
+        "profiles": [
+          "Intel XMP 3.0",
+          "AMD EXPO"
+        ],
+        "qvl_verified_with_asrock_b850m_pro_rs_wifi": false,
+        "qvl_verification_status": "UNCONFIRMED"
+      },
+      "spec_source_url": "https://www.ark-pc.co.jp/i/11650134/",
+      "notes": "32GBメモリキットを置き換える条件付き候補。約100,000円はBF購入目標であり、確認済みBF価格・予測ではない。2026-10-17時点でアーク公式商品ページに表示された期間限定価格は119,990円（通常154,800円、ハロウィンフェアは10/29 23:59まで）。売価は変動するため監視で再取得する。RAM 32GB目標40,000円に対して64GB目標100,000円なら差額60,000円。RTX 5060 Ti 16GB構成に限り、計画PC本体340,600円・周辺機器40,000円・予備費5,000円込み385,600円、上限まで14,400円となる。他のGPU構成では全額計算し、40万円超過なら採用しない。マザーボードの正確なQVL・EXPO安定性は未確認なので注文前に確認する。32GBキットと同時に加算せず置換として計算する。",
+      "image_source_url": "https://www.ark-pc.co.jp/i/11650134/",
+      "image_note": "アーク公式の型番一致製品画像は商品ページから取得する。"
     }
   ]
 }
