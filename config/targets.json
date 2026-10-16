@@ -520,69 +520,119 @@
     },
     {
       "id": "mousepad",
-      "name": "SteelSeries QcK Large",
+      "name": "SteelSeries QcK Large Black 450x400mm (model 63003)",
       "target_price_jpy": 2000,
       "track_current_price": true,
-      "monitor_url": "https://www.yodobashi.com/product/100000001009472873/",
-      "purchase_url": "https://www.yodobashi.com/product/100000001009472873/",
+      "monitor_url": "https://www.biccamera.com/bc/item/1570130/",
+      "purchase_url": "https://www.biccamera.com/bc/item/1570130/",
       "identity_terms": [
         "QcK Large",
-        "63464"
+        "63003",
+        "1570130"
       ],
       "allowed_hosts": [
-        "www.yodobashi.com"
+        "www.biccamera.com"
       ],
       "min_price_jpy": 800,
       "max_price_jpy": 10000,
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "2,000円はBF目標。実店舗で現物サイズと表面を確認して購入する。Web価格は比較参考のみ。",
+      "target_price_note": "2,000円はBF購入目標。ビックカメラのWeb掲載価格は比較参考であり、天神1号館の店頭価格・在庫を示さない。正確な型番63003の店頭在庫と税込現金価格を確認する。",
       "ranking_score_100": 93,
-      "ranking_reason": "450×400mm級の布面と滑り止めで、FPSに必要な移動幅を低コストで確保。",
+      "ranking_reason": "450×400mmの黒い大型布面。実店舗でサイズと表面を確認しやすく、FPSの操作幅を低コストで確保。",
       "best_for": "低価格の大型布パッド",
       "category": "mousepad",
       "image_url": "https://files.pccasegear.com/images/SS-63003-thumb.jpg",
       "image_source_url": "https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad",
-      "image_note": "型番SteelSeries QcK Largeの製品画像",
-      "image_checked_at": "2026-10-15",
+      "image_note": "SteelSeries QcK Large black model 63003 product image",
+      "image_checked_at": "2026-10-17",
       "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true
+      "online_price_is_comparison_only": true,
+      "model_code": "63003",
+      "monitor_urls": [
+        "https://www.biccamera.com/bc/item/1570130/"
+      ],
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=1570130",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "ビックカメラ天神1号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
+        }
+      ],
+      "store_stock_status": "unknown",
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null
     },
     {
       "id": "power_strip",
-      "name": "ELECOM T-K1A-2625BK 6-outlet 2.5m surge-protected power strip",
+      "name": "ELECOM T-NSLK-2620BK 6-outlet 2m slim surge-protected power strip",
       "target_price_jpy": 1500,
       "track_current_price": true,
-      "monitor_url": "https://www.askul.co.jp/p/N678805/",
-      "purchase_url": "https://www.askul.co.jp/p/N678805/",
+      "monitor_url": "https://www.biccamera.com/bc/item/3605560/",
+      "purchase_url": "https://www.biccamera.com/bc/item/3605560/",
       "identity_terms": [
-        "T-K1A-2625BK",
-        "4953103457027"
+        "T-NSLK-2620BK",
+        "TNSLK2620BK",
+        "3605560"
       ],
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "1,500円はBF目標。実店舗で6口以上・必要なコード長・雷ガードの有無・税込価格を確認する。",
+      "target_price_note": "1,500円はBF目標。ビックカメラWebの参考価格は¥1,910（2026-10-17の閲覧）だが、天神1号館の店頭現金価格・在庫ではない。店頭税込価格と在庫を確認する。",
       "monitor_urls": [
-        "https://www.askul.co.jp/p/N678805/",
-        "https://shopping.yahoo.co.jp/products/293aa7c210",
-        "https://kakaku.com/item/K0000766839/"
+        "https://www.biccamera.com/bc/item/3605560/"
       ],
-      "model_code": "T-K1A-2625BK",
+      "model_code": "T-NSLK-2620BK",
       "allowed_hosts": [
-        "www.askul.co.jp",
-        "shopping.yahoo.co.jp",
-        "kakaku.com"
+        "www.biccamera.com"
       ],
       "min_price_jpy": 1000,
-      "max_price_jpy": 6000,
+      "max_price_jpy": 7000,
       "ranking_score_100": 86,
-      "ranking_reason": "6口・2.5m・雷ガード付き。現行参考価格は目標1,500円を上回るため、取得した実売価格でPC上限を動的に下げる。",
-      "best_for": "PCとモニター類を一括接続する安全寄りの最低限構成",
+      "ranking_reason": "6口・2m・雷ガード・ほこりシャッター・幅広差込口。現行の販売ページがあり、旧T-K1A-2625BKより実店舗候補として追跡しやすい。",
+      "best_for": "PCとモニター類を接続するための6口タップ",
       "category": "power_strip",
       "purchase_channel": "physical_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true
+      "online_price_is_comparison_only": true,
+      "store_inventory_checks": [
+        {
+          "store_id": "bicamera_tenjin_1",
+          "store_name": "ビックカメラ天神1号館",
+          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=3605560",
+          "allowed_hosts": [
+            "www.biccamera.com"
+          ],
+          "branch_match_terms": [
+            "ビックカメラ 天神１号館",
+            "ビックカメラ天神1号館",
+            "Tenjin 1st Store"
+          ],
+          "source_type": "official_branch_stock_page"
+        }
+      ],
+      "store_stock_status": "unknown",
+      "store_price_jpy": null,
+      "store_price_checked_at": null,
+      "store_confirmation_url": null,
+      "store_model_match": false,
+      "store_observation_store_id": null,
+      "store_evidence_type": null,
+      "store_evidence_notes": null
     },
     {
       "id": "cables",
