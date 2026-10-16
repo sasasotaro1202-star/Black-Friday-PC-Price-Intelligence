@@ -233,6 +233,8 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertFalse(projection["budget_data_ready"])
         self.assertEqual(mouse_row["selected_purchase_channel"], "unconfirmed")
         self.assertEqual(mouse_row["channel_comparison_status"], "NO_ACTIONABLE_CHANNEL")
+        self.assertEqual(projection["peripheral_projection_jpy"], self.cfg["peripheral_budget_jpy"])
+        self.assertEqual(projection["flexible_reserve_offset_for_shipping_jpy"], 2500)
         self.assertLessEqual(
             projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"] + self.cfg["unallocated_contingency_jpy"],
             projection["total_budget_jpy"],
@@ -294,6 +296,44 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertFalse(row["store_price_confirmed"])
         self.assertTrue(projection["budget_data_ready"])
         self.assertIn("main_monitor", projection["channel_comparison_pending_ids"])
+
+    def test_verified_delivery_fees_are_absorbed_by_flexible_peripheral_buffer(self):
+        now_text = intelligence.iso(intelligence.now_jst())
+        products = []
+        for target in self.cfg["peripherals"]:
+            if not target.get("track_current_price"):
+                continue
+            products.append({
+                "id": target["id"],
+                "name": target["name"],
+                "current_price_jpy": target["target_price_jpy"],
+                "last_valid_price_jpy": target["target_price_jpy"],
+                "price_verified": True,
+                "identity_verified": True,
+                "stock_status": "in_stock",
+                "online_shipping_jpy": target.get("online_shipping_reserve_jpy", 0),
+                "online_shipping_cost_verified": True,
+                "retrieval_time": now_text,
+                "available_at": now_text,
+            })
+        snapshot = {"generated_at": now_text, "products": products}
+        original_load_json = intelligence.load_json
+
+        def deterministic_load_json(path, default):
+            if str(path).endswith("data/peripheral_prices.json"):
+                return snapshot
+            return original_load_json(path, default)
+
+        with patch.object(intelligence, "load_json", side_effect=deterministic_load_json):
+            projection = intelligence.peripheral_budget_projection()
+
+        self.assertEqual(projection["peripheral_projection_jpy"], self.cfg["peripheral_budget_jpy"])
+        self.assertEqual(projection["online_delivery_cost_absorbed_by_flexible_buffer_jpy"], 2500)
+        self.assertEqual(projection["flexible_reserve_offset_for_shipping_jpy"], 2500)
+        self.assertLessEqual(
+            projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"] + self.cfg["unallocated_contingency_jpy"],
+            projection["total_budget_jpy"],
+        )
 
     def test_stale_excluded_audio_rows_do_not_enter_budget_or_ranked_projection(self):
         now_text = intelligence.iso(intelligence.now_jst())
