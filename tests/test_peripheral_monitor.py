@@ -1,5 +1,7 @@
 import pathlib
 import sys
+import threading
+import time
 import unittest
 from unittest.mock import patch
 
@@ -318,6 +320,36 @@ class PeripheralMonitorTests(unittest.TestCase):
             peripheral_monitor._branch_stock_status("在庫　あり"),
             "in_stock",
         )
+
+
+    def test_observe_targets_uses_bounded_parallelism_and_preserves_input_order(self):
+        targets = [
+            {"id": f"item_{i}", "name": f"Item {i}", "track_current_price": True}
+            for i in range(8)
+        ]
+        state = {"active": 0, "max_active": 0}
+        lock = threading.Lock()
+
+        def fake_run_one(target, previous, observed_at):
+            with lock:
+                state["active"] += 1
+                state["max_active"] = max(state["max_active"], state["active"])
+            time.sleep(0.03)
+            with lock:
+                state["active"] -= 1
+            return {"id": target["id"], "retrieval_time": observed_at}
+
+        with patch.object(peripheral_monitor, "run_one", side_effect=fake_run_one):
+            rows = peripheral_monitor.observe_targets(
+                targets, {}, "2026-10-16T16:00:00+09:00", max_workers=50
+            )
+
+        self.assertEqual([row["id"] for row in rows], [target["id"] for target in targets])
+        self.assertGreaterEqual(state["max_active"], 2)
+        self.assertLessEqual(state["max_active"], 3)
+
+    def test_observe_targets_handles_empty_target_list(self):
+        self.assertEqual(peripheral_monitor.observe_targets([], {}, "2026-10-16T16:00:00+09:00"), [])
 
 
 if __name__ == "__main__":
