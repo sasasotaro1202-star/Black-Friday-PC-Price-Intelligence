@@ -183,6 +183,7 @@ def purchase_gate_reason(
     action,
     dynamic_pc_cap_jpy,
     purchase_gate_allowed,
+    peripheral_channel_comparison_pending_count=0,
 ):
     """Explain the completed-PC shortlist gate without conflating it with DIY authorization."""
     if self_build_primary:
@@ -191,6 +192,8 @@ def purchase_gate_reason(
         return "critical_candidates_not_fully_verified"
     if not peripheral_budget_ready:
         return "peripheral_prices_or_availability_unverified"
+    if int(peripheral_channel_comparison_pending_count or 0) > 0:
+        return "peripheral_purchase_channel_comparison_incomplete"
     if action and action.get("effective_cost_jpy", 10**12) > (dynamic_pc_cap_jpy or 0):
         return "all_in_cost_exceeds_total_budget"
     if not purchase_gate_allowed:
@@ -656,6 +659,7 @@ def main():
         and action
         and coverage_status == "COMPLETE"
         and peripheral_projection.get("budget_data_ready")
+        and peripheral_projection.get("channel_comparison_pending_count", 0) == 0
         and action.get("score_detail", {}).get("status") in ("BUY_NOW", "BUY_NOW_LOW_STOCK", "BUY_NOW_NEAR_BUDGET")
         and action.get("effective_cost_jpy") is not None
         and action.get("effective_cost_jpy") <= peripheral_projection.get("pc_dynamic_cap_jpy", 0)
