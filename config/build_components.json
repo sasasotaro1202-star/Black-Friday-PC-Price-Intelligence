@@ -238,7 +238,7 @@
         "note": "Free/open-source tools and local processing are preferred where practical. Do not assume paid APIs, cloud GPUs, paid data services or subscription services. Do not claim a GPU accelerates CPU-only workloads automatically. Do not add peripheral audio hardware to the required build unless the user explicitly changes scope."
       }
     },
-    "pc_target_jpy": 350000,
+    "pc_target_jpy": 360000,
     "peripheral_budget_mode": "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET",
     "peripheral_budget_is_hard_cap": false,
     "ongoing_cost_policy": {
