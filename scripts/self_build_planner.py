@@ -445,6 +445,144 @@ def compatibility_checks(parts, profile, gpu_id, memory_part_id=None):
     return overall, checks
 
 
+def assess_workload_fit(profile, parts, selected_ids, gpu_id, memory_id):
+    """Assess the configured build against gaming, game-creation and AI/data workloads."""
+    profile = profile if isinstance(profile, dict) else {}
+    workload = profile.get("workload_profile") or {}
+    game_dev = workload.get("game_development") or {}
+    baseline = game_dev.get("baseline_requirements") or {}
+    preferred = game_dev.get("preferred_if_budget_allows") or {}
+    selected = [parts.get(str(cid)) or {} for cid in selected_ids]
+    by_category = {str(item.get("category")): item for item in selected if item.get("category")}
+
+    gpu = parts.get(str(gpu_id)) or {}
+    memory = parts.get(str(memory_id)) or {}
+    storage = by_category.get("storage") or {}
+    cpu = by_category.get("cpu") or {}
+    gpu_specs = gpu.get("specs") or {}
+    memory_specs = memory.get("specs") or {}
+    storage_specs = storage.get("specs") or {}
+    cpu_specs = cpu.get("specs") or {}
+
+    def as_positive_int(value):
+        return value if isinstance(value, int) and not isinstance(value, bool) and value > 0 else None
+
+    ram_gb = as_positive_int(memory_specs.get("capacity_gb"))
+    vram_gb = as_positive_int(gpu_specs.get("vram_gb"))
+    ssd_gb = as_positive_int(storage_specs.get("capacity_gb"))
+    cpu_cores = as_positive_int(cpu_specs.get("cores"))
+    cpu_threads = as_positive_int(cpu_specs.get("threads"))
+
+    def metric(actual, required, preferred_value, unit):
+        required = as_positive_int(required)
+        preferred_value = as_positive_int(preferred_value)
+        if actual is None or required is None:
+            status = "REVIEW"
+        elif actual < required:
+            status = "FAIL"
+        elif preferred_value is not None and actual < preferred_value:
+            status = "MEETS_BASELINE_BELOW_PREFERENCE"
+        elif preferred_value is not None:
+            status = "MEETS_PREFERENCE"
+        else:
+            status = "MEETS_BASELINE"
+        return {
+            "actual": actual,
+            "required_baseline": required,
+            "preferred_if_budget_allows": preferred_value,
+            "unit": unit,
+            "status": status,
+        }
+
+    ram = metric(ram_gb, baseline.get("system_ram_gb"), preferred.get("system_ram_gb"), "GB")
+    vram = metric(vram_gb, baseline.get("dedicated_gpu_vram_gb"), preferred.get("dedicated_gpu_vram_gb"), "GB VRAM")
+    ssd = metric(ssd_gb, baseline.get("primary_ssd_gb"), preferred.get("primary_ssd_gb"), "GB")
+    required_statuses = [ram["status"], vram["status"], ssd["status"]]
+    if "FAIL" in required_statuses:
+        status = "FAIL_BASELINE_REQUIREMENT"
+        summary = "制作向けの基準を満たさない"
+    elif "REVIEW" in required_statuses:
+        status = "REVIEW_MISSING_SPEC"
+        summary = "仕様の確認が必要"
+    else:
+        status = "MEETS_BASELINE"
+        summary = "制作ベースライン適合"
+
+    roles = workload.get("gpu_candidate_roles") or {}
+    gpu_role = roles.get(str(gpu_id), "役割未定義。個別GPUの実測と仕様を確認する。")
+    source_compile_target = as_positive_int(game_dev.get("preferred_cpu_cores_for_unreal_source_build"))
+    engines = list(game_dev.get("target_engines") or [])
+    if source_compile_target is None or "Unreal Engine 5" not in engines:
+        unreal_source_compile = {
+            "status": "NOT_CONFIGURED",
+            "cpu_cores": cpu_cores,
+            "practical_core_target": source_compile_target,
+            "note": "Unreal Engineのソースからのフルビルドは個別要件として評価していない。",
+        }
+    elif cpu_cores is None:
+        unreal_source_compile = {
+            "status": "REVIEW_CPU_CORE_COUNT",
+            "cpu_cores": None,
+            "practical_core_target": source_compile_target,
+            "note": "正確なCPUコア数の確認が必要。",
+        }
+    elif cpu_cores < source_compile_target:
+        unreal_source_compile = {
+            "status": "TRADEOFF_BELOW_PRACTICAL_CORE_TARGET",
+            "cpu_cores": cpu_cores,
+            "cpu_threads": cpu_threads,
+            "practical_core_target": source_compile_target,
+            "note": "Epicは分散ビルドを使わないUnreal Engineソースのローカルコンパイルについて12～16コアを実用的な目安として案内。通常のゲームプロジェクト制作全般が不可という意味ではない。",
+        }
+    else:
+        unreal_source_compile = {
+            "status": "MEETS_LOWER_PRACTICAL_CORE_TARGET",
+            "cpu_cores": cpu_cores,
+            "cpu_threads": cpu_threads,
+            "practical_core_target": source_compile_target,
+            "note": "コア数の目安を満たす。ビルド時間はプロジェクト、設定、ストレージ等で変わる。",
+        }
+
+    return {
+        "status": status,
+        "summary_label": summary,
+        "target_engines": engines,
+        "target_project_types": list(game_dev.get("target_project_types") or []),
+        "target_games": list((workload.get("gaming") or {}).get("targets") or []),
+        "selected_hardware": {
+            "cpu_name": cpu.get("name"),
+            "cpu_cores": cpu_cores,
+            "cpu_threads": cpu_threads,
+            "system_ram_gb": ram_gb,
+            "gpu_name": gpu.get("name"),
+            "dedicated_gpu_vram_gb": vram_gb,
+            "primary_ssd_gb": ssd_gb,
+        },
+        "game_development": {
+            "status": status,
+            "system_ram": ram,
+            "dedicated_gpu_vram": vram,
+            "primary_ssd": ssd,
+            "gpu_candidate_role": gpu_role,
+            "unreal_engine_source_compile": unreal_source_compile,
+            "preferred_capacity_note": game_dev.get("preference_note"),
+            "official_reference_urls": list(game_dev.get("official_reference_urls") or []),
+        },
+        "gaming": {
+            "targets": list((workload.get("gaming") or {}).get("targets") or []),
+            "display_target": (workload.get("gaming") or {}).get("target_display"),
+            "assessment_note": (workload.get("gaming") or {}).get("evaluation_note"),
+            "gpu_candidate_role": gpu_role,
+        },
+        "ai_and_data_analysis": {
+            "targets": list((workload.get("ai_and_data_analysis") or {}).get("targets") or []),
+            "assessment_note": (workload.get("ai_and_data_analysis") or {}).get("note"),
+        },
+        "post_purchase_upgrade_assumption": False,
+        "purchase_authorized": False,
+    }
+
+
 def build_plan(config=None, price_snapshot=None, now=None):
     config = config or load_json(CONFIG_PATH, {})
     profile = config.get("profile") or {}
@@ -603,6 +741,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
                     missing.append(cid)
 
         compat, checks = compatibility_checks(parts, profile, gpu_id, selected_memory_id)
+        workload_fit = assess_workload_fit(profile, parts, selected_ids, gpu_id, selected_memory_id)
         target_pc = target_parts + shipping + small_parts
         target_all_in = target_pc + peripheral_budget
         market_estimate = market_subtotal + shipping + small_parts if all_parts_referenced and not missing else None
@@ -633,7 +772,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "selected_memory_id": selected_memory_id,
             "memory_choice_method": memory_selection_method,
             "memory_choice_candidates": memory_candidates,
-            "components": components, "target_parts_subtotal_jpy": target_parts,
+            "components": components, "workload_fit": workload_fit, "target_parts_subtotal_jpy": target_parts,
             "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
             "target_pc_total_jpy": target_pc, "pc_budget_jpy": pc_budget,
             "target_pc_budget_delta_jpy": target_pc - pc_budget,
@@ -668,6 +807,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "selection_policy": profile.get("selection_policy") or "Prioritize self-build; do not penalize assembly time."
         },
         "selection_factors": profile.get("purchase_decision_factors") or [],
+        "workload_profile": profile.get("workload_profile") or {},
         "total_budget_jpy": all_budget, "peripheral_budget_jpy": peripheral_budget, "pc_budget_jpy": pc_budget,
         "unallocated_contingency_jpy": int(profile.get("unallocated_contingency_jpy", 0)),
         "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
@@ -687,6 +827,33 @@ def build_plan(config=None, price_snapshot=None, now=None):
 
 
 def render_plan_markdown(plan):
+    workload_profile = plan.get("workload_profile") or {}
+    game_dev = workload_profile.get("game_development") or {}
+    workload_summary_lines = [
+        "## 用途評価：ゲームを遊ぶだけでなく、ゲーム制作も主要要件",
+        "",
+        "制作対象エンジン: " + "、".join(game_dev.get("target_engines") or ["未設定"]),
+        "想定プロジェクト: " + "、".join(game_dev.get("target_project_types") or ["未設定"]),
+        "制作ベースラインはRAM 32GB・専用GPU VRAM 8GB以上・SSD 1TB以上。64GB RAM・2TB SSDは、大きなアセット、ビルド、AI/分析ツールの同時利用に備える本プロジェクト上の優先目標です。予算・価格証拠を満たし、購入時の構成に含まれる場合だけ達成とし、後からの増設は想定しません。",
+        "Unreal Engine自体をソースからローカルでフルビルドする用途は別扱いです。Epicの12～16コアという実用的な目安に対し、8コアのRyzen 7 9700Xはここでは妥協点であり、通常のゲームプロジェクト制作が不可という意味ではありません。",
+        "",
+        "|GPU候補|制作評価|RAM|GPU VRAM|SSD|Unreal Engineソースフルビルド|",
+        "|---|---|---:|---:|---:|---|",
+    ]
+    for build in plan.get("builds") or []:
+        fit = build.get("workload_fit") or {}
+        hw = fit.get("selected_hardware") or {}
+        dev = fit.get("game_development") or {}
+        compile_fit = dev.get("unreal_engine_source_compile") or {}
+        workload_summary_lines.append("|{}|{}|{}GB|{}GB|{}GB|{}|".format(
+            build.get("name") or build.get("id"),
+            fit.get("summary_label") or "仕様未確認",
+            hw.get("system_ram_gb") if hw.get("system_ram_gb") is not None else "未確認",
+            hw.get("dedicated_gpu_vram_gb") if hw.get("dedicated_gpu_vram_gb") is not None else "未確認",
+            hw.get("primary_ssd_gb") if hw.get("primary_ssd_gb") is not None else "未確認",
+            compile_fit.get("status") or "未確認",
+        ))
+    workload_summary_lines.extend(["", "評価対象ゲーム: " + "、".join((workload_profile.get("gaming") or {}).get("targets") or ["未設定"])])
     lines = [
         "# 自作PCパーツ構成・価格監視", "",
         "更新: " + str(plan.get("generated_at")),
@@ -695,6 +862,8 @@ def render_plan_markdown(plan):
         "**購入方式:** 自作PCを正式な本命として最適化します。組み立て時間・作業時間は減点しません。BTOは同等仕様での総額・部品品質・保証のベンチマークとして比較し、便利さだけを理由に自作から切り替えません。",
         "",
         "**注意:** BF購入目標は購入希望額です。比較サイト価格は市場参考値であり、店舗の決済価格・在庫・公式BF実売価格ではありません。現在のデータから購入許可は出しません。",
+        "",
+        *workload_summary_lines,
         "",
         "**メモリ選択:** " + str((plan.get("memory_choice_selection") or {}).get("selected_name") or "未選定"),
         "選定方法: " + str((plan.get("memory_choice_selection") or {}).get("selection_method") or "未確認"),
