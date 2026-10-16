@@ -260,6 +260,43 @@
       "one_time_purchase_allowed": true,
       "hardware_expansion_allowed": true,
       "expansion_rule": "Expand RAM, SSD, GPU or other local hardware only when a demonstrated workload bottleneck justifies the one-time cost; do not assume upgrades in the initial PC ranking."
+    },
+    "storage_choice_ids": [
+      "ssd-crucial-p3-plus-1tb",
+      "ssd-kioxia-exceria-basic-2tb"
+    ],
+    "primary_storage_choice_id": "ssd-crucial-p3-plus-1tb",
+    "preferred_storage_upgrade_id": "ssd-kioxia-exceria-basic-2tb",
+    "storage_upgrade_policy": {
+      "priority": "HIGH_IF_AFFORDABLE_AT_PURCHASE",
+      "substitution_only": true,
+      "baseline_item_id": "ssd-crucial-p3-plus-1tb",
+      "optional_item_id": "ssd-kioxia-exceria-basic-2tb",
+      "budget_target_jpy": 45000,
+      "baseline_target_jpy": 18000,
+      "incremental_budget_target_jpy": 27000,
+      "full_system_scenario": {
+        "gpu_id": "gpu-rtx5070ti-16gb",
+        "base_pc_target_jpy": 324800,
+        "pc_target_with_2tb_ssd_jpy": 351800,
+        "peripherals_reference_jpy": 40000,
+        "contingency_jpy": 5000,
+        "all_in_target_jpy": 396800,
+        "remaining_to_hard_ceiling_jpy": 3200
+      },
+      "rules": [
+        "The 2TB drive replaces the 1TB drive; never add both SSD prices to the same build.",
+        "JPY 45,000 is an aspirational Black Friday target, not a forecast or confirmed offer.",
+        "Only select the 2TB configuration if the exact model price, stock, motherboard compatibility, and complete checkout total are verified and total <= JPY 400,000.",
+        "If the 2TB target is missed, compare another exact-model 2TB SSD or keep the 1TB baseline; do not exceed the total budget for capacity alone.",
+        "The KIOXIA EXCERIA BASIC model uses QLC NAND; evaluate sustained-write workload suitability rather than treating its sequential-speed headline as proof of workstation endurance."
+      ],
+      "source_note": "KIOXIA official specs confirm M.2 2280 PCIe 4.0, 2TB, maximum 7,300/6,800 MB/s sequential read/write, 600 TBW and QLC NAND. A price-comparison page showed ¥61,182 for the Japan retail variant and another SKU at ¥68,280 when researched in October 2026. The ¥45,000 BF target is therefore aspirational; do not represent it as a likely or confirmed BF price.",
+      "source_urls": [
+        "https://www.kioxia.com/ja-jp/personal/ssd/exceria-basic.html",
+        "https://kakaku.com/item/K0001724151/",
+        "https://kakaku.com/item/K0001719361/"
+      ]
     }
   },
   "parts": [
@@ -759,6 +796,45 @@
       "image_source_url": "https://shop.tsukumo.co.jp/goods/4549576190358/",
       "image_note": "型番HAJ-00094のパッケージ画像",
       "image_checked_at": "2026-10-15"
+    },
+    {
+      "id": "ssd-kioxia-exceria-basic-2tb",
+      "category": "storage",
+      "role": "conditional_storage_replacement",
+      "replaces_part_id": "ssd-crucial-p3-plus-1tb",
+      "name": "KIOXIA EXCERIA BASIC SSD-CK2.0N4B/J 2TB",
+      "model_code": "SSD-CK2.0N4B/J",
+      "aliases": [
+        "KIOXIA EXCERIA BASIC 2TB",
+        "SSD-CK2.0N4B/J",
+        "SSD-CK2.0N4B/N"
+      ],
+      "identity_terms": [
+        "SSD-CK2.0N4B/J",
+        "SSD-CK2.0N4B/N",
+        "EXCERIA BASIC 2TB"
+      ],
+      "monitor_url": "https://kakaku.com/item/K0001724151/",
+      "purchase_url": "https://kakaku.com/item/K0001724151/",
+      "track_price": true,
+      "target_price_jpy": 45000,
+      "min_price_jpy": 30000,
+      "max_price_jpy": 100000,
+      "specs": {
+        "capacity_gb": 2000,
+        "interface": "NVMe PCIe 4.0",
+        "form_factor": "M.2 2280",
+        "nand": "QLC",
+        "sequential_read_mbs": 7300,
+        "sequential_write_mbs": 6800,
+        "tbw": 600
+      },
+      "spec_source_url": "https://www.kioxia.com/ja-jp/personal/ssd/exceria-basic.html",
+      "notes": "条件付きの1TB SSD置換候補。BF目標45,000円は希望値で、確定価格ではない。2026年10月に価格.comでSSD-CK2.0N4B/Jは61,182円、SSD-CK2.0N4B/Nは68,280円の表示例を確認したが、監視時に同一型番・在庫・決済価格を再確認する。QLC NANDなので長時間の継続書き込み量が大きい用途ではTLC製品とも比較する。1TB品に追加せず、必ず置換として総額を再計算する。",
+      "direct_retailer_urls": [
+        "https://www.yodobashi.com/",
+        "https://shop.tsukumo.co.jp/"
+      ]
     }
   ]
 }
