@@ -339,7 +339,17 @@
       "online_purchase_allowed_when_store_price_unconfirmed": true,
       "online_shipping_reserve_jpy": 1000,
       "online_shipping_cost_verified": false,
-      "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。"
+      "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。",
+      "store_pickup_checkout_total_jpy": null,
+      "store_pickup_quote_checked_at": null,
+      "store_pickup_store_id": null,
+      "store_pickup_stock_status": "unknown",
+      "store_pickup_checkout_url": null,
+      "store_pickup_model_match": false,
+      "store_pickup_evidence_type": null,
+      "store_pickup_evidence_notes": null,
+      "store_pickup_checkout_total_verified": false,
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
     },
     {
       "id": "keyboard",
@@ -417,7 +427,17 @@
       "online_purchase_allowed_when_store_price_unconfirmed": true,
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
-      "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。"
+      "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。",
+      "store_pickup_checkout_total_jpy": null,
+      "store_pickup_quote_checked_at": null,
+      "store_pickup_store_id": null,
+      "store_pickup_stock_status": "unknown",
+      "store_pickup_checkout_url": null,
+      "store_pickup_model_match": false,
+      "store_pickup_evidence_type": null,
+      "store_pickup_evidence_notes": null,
+      "store_pickup_checkout_total_verified": false,
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
     },
     {
       "id": "mouse",
@@ -492,7 +512,17 @@
       "online_purchase_allowed_when_store_price_unconfirmed": true,
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
-      "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。"
+      "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。",
+      "store_pickup_checkout_total_jpy": null,
+      "store_pickup_quote_checked_at": null,
+      "store_pickup_store_id": null,
+      "store_pickup_stock_status": "unknown",
+      "store_pickup_checkout_url": null,
+      "store_pickup_model_match": false,
+      "store_pickup_evidence_type": null,
+      "store_pickup_evidence_notes": null,
+      "store_pickup_checkout_total_verified": false,
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
     },
     {
       "id": "mousepad",
@@ -567,7 +597,17 @@
       "online_purchase_allowed_when_store_price_unconfirmed": true,
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
-      "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。"
+      "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。",
+      "store_pickup_checkout_total_jpy": null,
+      "store_pickup_quote_checked_at": null,
+      "store_pickup_store_id": null,
+      "store_pickup_stock_status": "unknown",
+      "store_pickup_checkout_url": null,
+      "store_pickup_model_match": false,
+      "store_pickup_evidence_type": null,
+      "store_pickup_evidence_notes": null,
+      "store_pickup_checkout_total_verified": false,
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
     },
     {
       "id": "cables",
@@ -806,7 +846,17 @@
       "store_inventory_checks": [],
       "online_shipping_reserve_jpy": 0,
       "online_shipping_cost_verified": false,
-      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
+      "store_pickup_checkout_total_jpy": null,
+      "store_pickup_quote_checked_at": null,
+      "store_pickup_store_id": null,
+      "store_pickup_stock_status": "unknown",
+      "store_pickup_checkout_url": null,
+      "store_pickup_model_match": false,
+      "store_pickup_evidence_type": null,
+      "store_pickup_evidence_notes": null,
+      "store_pickup_checkout_total_verified": false,
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
     },
     {
       "id": "cables_alt_sanwa_kc_dp1420",
@@ -859,7 +909,17 @@
       "store_inventory_checks": [],
       "online_shipping_reserve_jpy": 0,
       "online_shipping_cost_verified": false,
-      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
+      "store_pickup_checkout_total_jpy": null,
+      "store_pickup_quote_checked_at": null,
+      "store_pickup_store_id": null,
+      "store_pickup_stock_status": "unknown",
+      "store_pickup_checkout_url": null,
+      "store_pickup_model_match": false,
+      "store_pickup_evidence_type": null,
+      "store_pickup_evidence_notes": null,
+      "store_pickup_checkout_total_verified": false,
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
     },
     {
       "id": "keyboard_alt_logicool_g413_tkl_se",
@@ -932,7 +992,17 @@
       "online_purchase_allowed_when_store_price_unconfirmed": true,
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
-      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
+      "store_pickup_checkout_total_jpy": null,
+      "store_pickup_quote_checked_at": null,
+      "store_pickup_store_id": null,
+      "store_pickup_stock_status": "unknown",
+      "store_pickup_checkout_url": null,
+      "store_pickup_model_match": false,
+      "store_pickup_evidence_type": null,
+      "store_pickup_evidence_notes": null,
+      "store_pickup_checkout_total_verified": false,
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
     },
     {
       "id": "keyboard_alt_logicool_g413se",
@@ -1005,7 +1075,17 @@
       "online_purchase_allowed_when_store_price_unconfirmed": true,
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
-      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
+      "store_pickup_checkout_total_jpy": null,
+      "store_pickup_quote_checked_at": null,
+      "store_pickup_store_id": null,
+      "store_pickup_stock_status": "unknown",
+      "store_pickup_checkout_url": null,
+      "store_pickup_model_match": false,
+      "store_pickup_evidence_type": null,
+      "store_pickup_evidence_notes": null,
+      "store_pickup_checkout_total_verified": false,
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
     },
     {
       "id": "main_monitor_alt_msi_mag_275qf",
@@ -1057,7 +1137,17 @@
       "online_purchase_allowed_when_store_price_unconfirmed": true,
       "online_shipping_reserve_jpy": 1000,
       "online_shipping_cost_verified": false,
-      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
+      "store_pickup_checkout_total_jpy": null,
+      "store_pickup_quote_checked_at": null,
+      "store_pickup_store_id": null,
+      "store_pickup_stock_status": "unknown",
+      "store_pickup_checkout_url": null,
+      "store_pickup_model_match": false,
+      "store_pickup_evidence_type": null,
+      "store_pickup_evidence_notes": null,
+      "store_pickup_checkout_total_verified": false,
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
     },
     {
       "id": "main_monitor_alt_lg_27gs75qb",
@@ -1108,7 +1198,17 @@
       "online_purchase_allowed_when_store_price_unconfirmed": true,
       "online_shipping_reserve_jpy": 1000,
       "online_shipping_cost_verified": false,
-      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
+      "store_pickup_checkout_total_jpy": null,
+      "store_pickup_quote_checked_at": null,
+      "store_pickup_store_id": null,
+      "store_pickup_stock_status": "unknown",
+      "store_pickup_checkout_url": null,
+      "store_pickup_model_match": false,
+      "store_pickup_evidence_type": null,
+      "store_pickup_evidence_notes": null,
+      "store_pickup_checkout_total_verified": false,
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
     },
     {
       "id": "mouse_alt_logicool_g203",
@@ -1182,7 +1282,17 @@
       "online_purchase_allowed_when_store_price_unconfirmed": true,
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
-      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
+      "store_pickup_checkout_total_jpy": null,
+      "store_pickup_quote_checked_at": null,
+      "store_pickup_store_id": null,
+      "store_pickup_stock_status": "unknown",
+      "store_pickup_checkout_url": null,
+      "store_pickup_model_match": false,
+      "store_pickup_evidence_type": null,
+      "store_pickup_evidence_notes": null,
+      "store_pickup_checkout_total_verified": false,
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
     },
     {
       "id": "mouse_alt_logicool_g304_x_superlight",
@@ -1253,7 +1363,17 @@
       "online_purchase_allowed_when_store_price_unconfirmed": true,
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
-      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
+      "store_pickup_checkout_total_jpy": null,
+      "store_pickup_quote_checked_at": null,
+      "store_pickup_store_id": null,
+      "store_pickup_stock_status": "unknown",
+      "store_pickup_checkout_url": null,
+      "store_pickup_model_match": false,
+      "store_pickup_evidence_type": null,
+      "store_pickup_evidence_notes": null,
+      "store_pickup_checkout_total_verified": false,
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
     },
     {
       "id": "mousepad_alt_razer_gigantus_v2_l",
@@ -1305,7 +1425,17 @@
       "store_inventory_checks": [],
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
-      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
+      "store_pickup_checkout_total_jpy": null,
+      "store_pickup_quote_checked_at": null,
+      "store_pickup_store_id": null,
+      "store_pickup_stock_status": "unknown",
+      "store_pickup_checkout_url": null,
+      "store_pickup_model_match": false,
+      "store_pickup_evidence_type": null,
+      "store_pickup_evidence_notes": null,
+      "store_pickup_checkout_total_verified": false,
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
     },
     {
       "id": "mousepad_alt_logicool_g640s",
@@ -1357,7 +1487,17 @@
       "store_inventory_checks": [],
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
-      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。"
+      "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
+      "store_pickup_checkout_total_jpy": null,
+      "store_pickup_quote_checked_at": null,
+      "store_pickup_store_id": null,
+      "store_pickup_stock_status": "unknown",
+      "store_pickup_checkout_url": null,
+      "store_pickup_model_match": false,
+      "store_pickup_evidence_type": null,
+      "store_pickup_evidence_notes": null,
+      "store_pickup_checkout_total_verified": false,
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
     }
   ],
   "peripheral_ranking_policy": {
