@@ -42,7 +42,7 @@
     "allowed_comparison_domains": [
       "kakaku.com"
     ],
-    "policy": "BF targets are aspirational, not forecasts. Comparison-site prices are market references, not checkout prices, stock confirmation, or official BF actuals. Total-system ceiling is JPY 400,000. PC purchase target is JPY 350,000, in-store peripherals target JPY 45,000, and unallocated contingency is JPY 5,000. Peripheral shipping is not budgeted. Keep over-target dark horses in comparisons with explicit overruns; never authorize purchases from targets or references.",
+    "policy": "BF targets are aspirational, not forecasts. Comparison-site prices are market references, not checkout prices, stock confirmation, or official BF actuals. Total-system ceiling is JPY 400,000. PC purchase target is JPY 350,000, in-store peripherals target JPY 45,000, and unallocated contingency is JPY 5,000. Peripheral shipping is not budgeted. Keep over-target dark horses in comparisons with explicit overruns; never authorize purchases from targets or references. Reserve JPY 5,000 outside the PC target and peripheral target as an unallocated all-in contingency.",
     "allowed_search_reference_domains": [
       "kakaku.com",
       "amazon.co.jp",
@@ -103,7 +103,8 @@
       "memory-crucial-pro-ddr5-32gb-6000",
       "memory-teamgroup-ddr5-32gb-6000"
     ],
-    "primary_memory_choice_id": "memory-teamgroup-ddr5-32gb-6000"
+    "primary_memory_choice_id": "memory-teamgroup-ddr5-32gb-6000",
+    "unallocated_contingency_jpy": 5000
   },
   "parts": [
     {
