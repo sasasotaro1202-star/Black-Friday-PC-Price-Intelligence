@@ -32,7 +32,7 @@ class BudgetPolicyTests(unittest.TestCase):
 
     def test_all_in_budget_arithmetic(self):
         self.assertEqual(self.cfg["total_budget_jpy"], 400000)
-        self.assertEqual(self.cfg["peripheral_budget_jpy"], 55000)  # soft reference, not a hard cap
+        self.assertEqual(self.cfg["peripheral_budget_jpy"], 62000)  # soft reference, not a hard cap
         self.assertEqual(self.cfg["pc_target_jpy"], 350000)
         self.assertEqual(self.cfg["pc_budget_jpy"], 395000)  # upper bound before dynamic all-in calculation
         self.assertFalse(self.cfg["peripheral_budget_is_hard_cap"])
@@ -46,7 +46,7 @@ class BudgetPolicyTests(unittest.TestCase):
     def test_purchase_strategy_matches_40man_target_and_speaker_goal(self):
         strategy = self.cfg["purchase_strategy"]
         self.assertEqual(self.cfg["total_budget_jpy"], 400000)
-        self.assertEqual(self.cfg["peripheral_budget_jpy"], 55000)
+        self.assertEqual(self.cfg["peripheral_budget_jpy"], 62000)
         self.assertEqual(self.cfg["pc_target_jpy"], 350000)
         self.assertEqual(self.cfg["pc_budget_jpy"], 395000)
         self.assertEqual(self.cfg["pc_target_jpy"] - 279800, 70200)
@@ -234,8 +234,8 @@ class BudgetPolicyTests(unittest.TestCase):
             projection = intelligence.peripheral_budget_projection()
 
         speaker_row = next(x for x in projection["peripherals"] if x["id"] == "speakers")
-        self.assertEqual(projection["peripheral_projection_jpy"], 57980)
-        self.assertEqual(projection["pc_dynamic_cap_jpy"], 337020)
+        self.assertEqual(projection["peripheral_projection_jpy"], 64980)
+        self.assertEqual(projection["pc_dynamic_cap_jpy"], 330020)
         self.assertIn("speakers", projection["tracked_peripheral_unverified_ids"])
         self.assertFalse(projection["budget_data_ready"])
         self.assertIsNone(speaker_row["current_price_jpy"])
@@ -332,8 +332,8 @@ class BudgetPolicyTests(unittest.TestCase):
             projection = intelligence.peripheral_budget_projection()
 
         speaker_row = next(x for x in projection["peripherals"] if x["id"] == "speakers")
-        self.assertEqual(projection["peripheral_projection_jpy"], 55000)
-        self.assertEqual(projection["pc_dynamic_cap_jpy"], 340000)
+        self.assertEqual(projection["peripheral_projection_jpy"], 62000)
+        self.assertEqual(projection["pc_dynamic_cap_jpy"], 333000)
         self.assertIn("speakers", projection["tracked_peripheral_unverified_ids"])
         self.assertFalse(projection["budget_data_ready"])
         self.assertIsNone(speaker_row["current_price_jpy"])
@@ -413,7 +413,7 @@ class BudgetPolicyTests(unittest.TestCase):
                     int(self.cfg["total_budget_jpy"]) - target_sum - int(self.cfg["unallocated_contingency_jpy"]),
                 ),
             ),
-            340000,
+            333000,
         )
 
 
