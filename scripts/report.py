@@ -93,6 +93,9 @@ def peripheral_route_price_summary(item):
     reserve = item.get("online_shipping_reserve_jpy")
     online_total = item.get("estimated_online_cash_total_jpy")
     store_price = item.get("store_price_jpy") if item.get("store_price_confirmed") else None
+    pickup_price = item.get("store_pickup_checkout_total_jpy") if item.get("store_pickup_checkout_total_confirmed") else None
+    pickup_branch_status = item.get("store_pickup_branch_inventory_status") or "unknown"
+    pickup_quote_status = item.get("store_pickup_quote_status") or "UNCONFIRMED"
     parts = []
     if isinstance(price, int) and not isinstance(price, bool):
         if isinstance(online_total, int) and not isinstance(online_total, bool):
@@ -111,6 +114,10 @@ def peripheral_route_price_summary(item):
         parts.append(f"{store_name} 店頭 ¥{store_price:,}・在庫 {stock}")
     elif channel in ("compare_online_and_store", "physical_store") or "physical_store" in (item.get("purchase_channel_options") or []):
         parts.append("店頭現金価格未確認")
+    if isinstance(pickup_price, int) and not isinstance(pickup_price, bool):
+        parts.append(f"店舗受け取り決済額 ¥{pickup_price:,}・受取在庫 {item.get('store_pickup_quote_stock_status') or 'unknown'}")
+    elif "store_pickup" in (item.get("purchase_channel_options") or []):
+        parts.append(f"店舗受け取り: 決済額未確認・支店在庫 {pickup_branch_status}・{pickup_quote_status}")
     route_status = item.get("channel_comparison_status")
     if route_status:
         parts.append(f"比較状態 {route_status}")
@@ -974,6 +981,10 @@ def main():
             if comparison_route:
                 online_price = observed_price if isinstance(observed_price, int) and not isinstance(observed_price, bool) else None
                 store_price = observation.get("store_price_jpy") if observation.get("store_price_confirmed") else None
+                pickup_price = observation.get("store_pickup_checkout_total_jpy") if observation.get("store_pickup_checkout_total_confirmed") else None
+                pickup_stock = observation.get("store_pickup_quote_stock_status") or "unknown"
+                pickup_branch_status = observation.get("store_pickup_branch_inventory_status") or "unknown"
+                pickup_quote_status = observation.get("store_pickup_quote_status") or "UNCONFIRMED"
                 price_parts = []
                 if online_price is not None:
                     online_part = f"ネット掲載 ¥{online_price:,}"
@@ -987,15 +998,19 @@ def main():
                     price_parts.append(f"店頭現金 ¥{store_price:,}")
                 else:
                     price_parts.append("店頭現金価格未確認")
+                if isinstance(pickup_price, int) and not isinstance(pickup_price, bool):
+                    price_parts.append(f"店舗受け取り決済 ¥{pickup_price:,}")
+                else:
+                    price_parts.append(f"店舗受け取り決済額未確認（支店在庫:{pickup_branch_status}）")
                 price_text = " / ".join(price_parts)
                 online_stock = str(observation.get("stock_status") or "unknown")
                 store_stock = inventory_status_label(observation)
-                stock_text = f"ネット:{online_stock} / 店頭:{store_stock}"
+                stock_text = f"ネット:{online_stock} / 店頭:{store_stock} / 店舗受け取り:{pickup_stock if isinstance(pickup_price, int) else pickup_branch_status}"
                 verified_text = (
-                    "ネット・店頭の両方を比較済み"
-                    if online_price is not None and isinstance(store_price, int) and observation.get("store_stock_status") in ("in_stock", "low_stock")
-                    else "ネット掲載のみ確認・購入先比較未完了"
-                    if online_price is not None
+                    "ネット配送・店頭現金・店舗受け取りの全ルートを確認済み"
+                    if observation.get("channel_comparison_complete")
+                    else "購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）"
+                    if online_price is not None or isinstance(store_price, int) or isinstance(pickup_price, int)
                     else "価格・在庫未確認"
                 )
             elif physical_store:
