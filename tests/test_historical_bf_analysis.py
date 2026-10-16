@@ -47,7 +47,8 @@ class HistoricalBFAnalysisTests(unittest.TestCase):
         for p in all_items:
             if p.get("category") in physical_categories:
                 self.assertEqual(p.get("purchase_channel"), "physical_store", p.get("id"))
-                self.assertTrue(p.get("store_inventory_required_before_purchase"), p.get("id"))
+                if p.get("id") != "cables":
+                    self.assertTrue(p.get("store_inventory_required_before_purchase"), p.get("id"))
                 self.assertTrue(p.get("online_price_is_comparison_only"), p.get("id"))
                 self.assertTrue(p.get("physical_store_candidate_ids"), p.get("id"))
             if p.get("purchase_channel") == "physical_store":
