@@ -230,7 +230,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         )
         self.assertEqual(
             set(self.profile["memory_choice_ids"]),
-            {"memory-crucial-pro-ddr5-32gb-6000", "memory-teamgroup-ddr5-32gb-6000"},
+            {"memory-crucial-pro-ddr5-32gb-6000", "memory-teamgroup-ddr5-32gb-6000", "memory-lexar-thor-ddr5-64gb-6000"},
         )
         self.assertNotIn("memory-crucial-pro-ddr5-32gb-6000", self.profile["fixed_part_ids"])
         self.assertNotIn("memory-teamgroup-ddr5-32gb-6000", self.profile["fixed_part_ids"])
