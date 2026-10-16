@@ -28,6 +28,15 @@
 - The ¥45,000 peripheral allocation is: monitor ¥18,000 + speakers ¥12,000 + keyboard ¥5,000 + mouse ¥4,000 + mousepad ¥2,000 + power strip ¥1,500 + cable allowance ¥0 + store-price/cable contingency ¥2,500. This is a target budget, not a statement that these items currently sell at those amounts.
 - Main self-built candidate: Ryzen 7 9700X + RTX 5070 12GB. Keep RTX 5060 Ti 16GB as the VRAM-focused alternative and RTX 5070 Ti 16GB as a dark horse, even if a candidate may exceed the target. Show any overrun, required price reduction, and compatibility blockers.
 
+### ゲーム制作を必須の用途として扱う
+
+- PC用途はゲームプレイだけでなく、Unreal Engine 5 / Unity / Godotでの2D・3D制作、FPS試作、都市建設・シミュレーション制作を含む。エディター、IDE/デバッガー、ビルド、ブラウザー、テスト、Python/AI・データ分析の同時使用を評価する。
+- 主要制作基準は購入時RAM 32GB以上、専用GPU VRAM 8GB以上、SSD 1TB以上。UE5の公式推奨は32GB RAM/8GB以上のグラフィックスメモリ。64GB RAM/2TB SSDは予算が許す場合のプロジェクト優先目標であり、全エンジン共通の公式要件ではない。
+- 64GB/2TBを適合扱いするには、その容量が購入時の完成構成と確定見積に含まれている必要がある。購入後の増設を想定した条件付き構成を適合扱いしない。
+- RTX 5070 12GBは総合本命、RTX 5060 Ti 16GBはVRAM重視代替、RTX 5070 Ti 16GBは性能重視大穴。VRAM容量と実際のゲーム/レンダリング性能を同じ指標として扱わない。
+- Ryzen 7 9700Xは8コア/16スレッド。通常のゲームプロジェクト制作の土台だが、Unreal Engine自体のソースをローカルでフルビルドする用途には、Epicが示す12～16コアの実用目安より少ない。フルソースビルドを主要用途とするなら、多コアCPUを別候補として価格・総額込みで比較し、この制約を明記する。
+- ベンチマークがないゲームFPS、アセットインポート、シェーダーコンパイル時間、ビルド時間を実測値のように記載しない。
+
 ## 2. PC target bill of materials
 
 BF purchase targets are aspirations, not forecasts or executable checkout prices:
