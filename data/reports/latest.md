@@ -1,6 +1,6 @@
 # ブラックフライデー期間通算・購入ランキング
 
-> **設定反映待ち・購入判断には使用禁止:** この保存済みレポートは2026-10-17の最新設定変更より前に生成された古いスナップショットです。旧版には現在除外されたスピーカー候補、旧予算・旧総額計算が残る可能性があります。現行設定はPC本体基準目標360,000円、必須周辺機器の参考配分約32,000円、予備費5,000円、総額上限400,000円です。スピーカー、サブモニター、ヘッドセットは購入対象・候補・価格監視・総額計算から除外済みです。レポート全体は更新済み設定からの正常な再生成が確認されるまで購入判断に使用しないでください。購入許可は出していません。
+> **設定反映待ち・購入判断には使用禁止:** この保存済みレポートは2026-10-17の最新設定変更より前に生成された古いスナップショットです。旧版には現在除外されたスピーカー候補、旧予算・旧総額計算が残る可能性があります。現行設定はPC本体基準目標360,000円、周辺機器の計画配分約36,000円、予備費5,000円、総額上限400,000円です。電源タップは所有済みのため購入・価格監視・予算から除外済みです。スピーカー、サブモニター、ヘッドセットも購入対象・候補・価格監視・総額計算から除外済みです。レポート全体は更新済み設定からの正常な再生成が確認されるまで購入判断に使用しないでください。購入許可は出していません。
 
 
 更新: 2026-10-17T02:25:49+09:00
@@ -83,7 +83,6 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 |<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="84"></a>|Logicool G213r|実店舗|¥5,000|店頭価格未確認・Web参考 ¥7,330|ビックカメラ天神1号館: 取置き在庫少（確認時点）|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/9242996/)|
 |<a href="https://shopee.ph/Logitech-Gaming-Mouse-G304-LIGHTSPEED-Wireless-12-000-DPI-Hero-Sensor-Lightweight-i.470352549.26121376846"><img src="https://down-ph.img.susercontent.com/file/sg-11134202-7rfh8-m43f6xs2o7yb73" alt="Logicool G304" width="84"></a>|Logicool G304|実店舗|¥4,000|店頭価格未確認・Web参考 ¥5,350|ビックカメラ天神1号館: 取置き在庫少（確認時点）|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001004334450/)|
 |<a href="https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad"><img src="https://files.pccasegear.com/images/SS-63003-thumb.jpg" alt="SteelSeries QcK Large Black 450x400mm (model 63003)" width="84"></a>|SteelSeries QcK Large Black 450x400mm (model 63003)|実店舗|¥2,000|店頭価格未確認・目標額で仮計算|支店別在庫未確認|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/1570130/)|
-|画像未確認|ELECOM T-NSLK-2620BK 6-outlet 2m slim surge-protected power strip|実店舗|¥1,500|店頭価格未確認・目標額で仮計算|支店別在庫未確認|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/3605560/)|
 |画像未確認|Required monitor cables only; check included cables first|実店舗|¥0|店頭価格未確認・目標額で仮計算|支店別在庫未確認|店頭価格未確認|予算枠のみ|
 |画像未確認|店頭価格差・ケーブル不足用予備費（商品ではない）|実店舗|¥2,500|店頭価格未確認・目標額で仮計算|支店別在庫未確認|店頭価格未確認|予算枠のみ|
 
@@ -143,13 +142,6 @@ BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け�
 |2|**89/100**|画像未確認|Razer Gigantus V2 Large 450x400mm cloth gaming mouse mat（代替候補）|実店舗|¥2,200|店頭価格未確認|支店別在庫未確認|店頭価格未確認|Lサイズ約450×400mmでQcK Largeと同程度の操作面。公式ページ表示額は送料条件の影響があるため、決済時の配送込み総額で比較する。|[商品ページ](https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1)|
 |3|**87/100**|画像未確認|Logicool G640 Large cloth gaming mousepad（代替候補）|実店舗|¥3,000|店頭価格未確認|支店別在庫未確認|店頭価格未確認|Logicool公式のG640は400×460mmの大型クロス面。公式掲載価格は¥3,850でQcK Largeより高価なので、表面の好みとBF価格差が小さい場合に選ぶ。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g640-cloth-gaming-mouse-pad)|
 
-### 電源タップ（6口・雷ガード）
-
-|順位|総合点|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|
-|---:|---:|---|---|---|---:|---:|---|---|---|---|
-|1|**86/100**|画像未確認|ELECOM T-NSLK-2620BK 6-outlet 2m slim surge-protected power strip（主予算候補）|実店舗|¥1,500|店頭価格未確認|ビックカメラ天神1号館: 取寄せ表示（即時在庫ではない）|店頭価格未確認|6口・2m・雷ガード・ほこりシャッター・幅広差込口。現行の販売ページがあり、旧T-K1A-2625BKより実店舗候補として追跡しやすい。|[商品ページ](https://www.biccamera.com/bc/item/3605560/)|
-|2|**82/100**|画像未確認|Sanwa Supply TAP-SP2116MG-2WN 6-outlet 2m surge protector with dust shutters and magnet（代替候補）|実店舗|¥1,800|店頭価格未確認|支店別在庫未確認|店頭価格未確認|6口・2m・雷ガードに加えてホコリ防止シャッターやマグネットを備える。配送込みで¥1,800程度になった場合のみ検討。|[商品ページ](https://kakaku.com/item/K0001569733/)|
-|3|**76/100**|画像未確認|ELECOM T-K6A-2630BK 6-outlet 3m surge-protected power strip（代替候補）|実店舗|¥2,500|店頭価格未確認|支店別在庫未確認|店頭価格未確認|3mが必要な場合の代替。公式掲載額は¥3,993で高いため、標準2.5mタップより優先しない。|[商品ページ](https://www.elecom.co.jp/products/T-K6A-2630BK.html)|
 
 ### 映像ケーブル（必要な場合のみ）
 
