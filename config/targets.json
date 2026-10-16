@@ -546,7 +546,7 @@
       "image_note": "型番SteelSeries QcK Largeの製品画像",
       "image_checked_at": "2026-10-15",
       "purchase_channel": "physical_store",
-      "store_inventory_required_before_purchase": false,
+      "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true
     },
     {
@@ -581,7 +581,7 @@
       "best_for": "PCとモニター類を一括接続する安全寄りの最低限構成",
       "category": "power_strip",
       "purchase_channel": "physical_store",
-      "store_inventory_required_before_purchase": false,
+      "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true
     },
     {
@@ -784,7 +784,7 @@
       "ranking_reason": "2m・DisplayPort 1.4準拠の代替。モニター付属品の有無を確認し、不足分だけ購入する。",
       "best_for": "付属ケーブルが不足した場合",
       "purchase_channel": "physical_store",
-      "store_inventory_required_before_purchase": false,
+      "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true
     },
     {
@@ -813,7 +813,7 @@
       "best_for": "A specifically identified DP 1.4 cable if the monitor's included cable is absent",
       "category": "cables",
       "purchase_channel": "physical_store",
-      "store_inventory_required_before_purchase": false,
+      "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true
     },
     {
@@ -1169,7 +1169,7 @@
       "ranking_reason": "Lサイズ約450×400mmでQcK Largeと同程度の操作面。公式ページ表示額は送料条件の影響があるため、決済時の配送込み総額で比較する。",
       "best_for": "大型布製パッドを安く確保したい場合",
       "purchase_channel": "physical_store",
-      "store_inventory_required_before_purchase": false,
+      "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true
     },
     {
@@ -1197,7 +1197,7 @@
       "ranking_reason": "Logicool公式のG640は400×460mmの大型クロス面。公式掲載価格は¥3,850でQcK Largeより高価なので、表面の好みとBF価格差が小さい場合に選ぶ。",
       "best_for": "表面の好みで選ぶ",
       "purchase_channel": "physical_store",
-      "store_inventory_required_before_purchase": false,
+      "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true
     },
     {
@@ -1231,7 +1231,7 @@
       "best_for": "Dust shutters and magnetic desk-side mounting",
       "category": "power_strip",
       "purchase_channel": "physical_store",
-      "store_inventory_required_before_purchase": false,
+      "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true
     },
     {
@@ -1259,7 +1259,7 @@
       "ranking_reason": "3mが必要な場合の代替。公式掲載額は¥3,993で高いため、標準2.5mタップより優先しない。",
       "best_for": "コンセントまで距離がある設置場所",
       "purchase_channel": "physical_store",
-      "store_inventory_required_before_purchase": false,
+      "store_inventory_required_before_purchase": true,
       "online_price_is_comparison_only": true
     },
     {
@@ -1507,5 +1507,64 @@
     "online_price_handling": "オンライン価格は市場比較の参考値に限る。実店舗の価格・在庫として扱わない。"
   },
   "target_budget_notes": "総額の上限400,000円、PC本体の購入目標350,000円、周辺機器45,000円程度、総額予備費5,000円。サブモニター・ヘッドセットなし。周辺機器はすべて実店舗購入で送料計上なし。大穴はランキングに残し、超過額・必要値下げ・互換性ブロッカーを明示する。",
-  "target_budget_mode": "SOFT_TARGET"
+  "target_budget_mode": "SOFT_TARGET",
+  "market_risk_policy": {
+    "snapshot_date": "2026-10-17",
+    "purpose": "Qualitative monitoring priority. Not a price forecast, discount probability, or automatic purchase command.",
+    "priority_order": [
+      {
+        "rank": 1,
+        "category": "gpu",
+        "risk_level": "high monitoring priority",
+        "evidence_date": "2026-10-14",
+        "summary": "A published Japan-versus-US listing comparison reported large price differences across some NVIDIA RTX 50-series models, including RTX 5070 and RTX 5070 Ti. The comparison is not an exact-SKU time series for the tracked PNY card and cannot by itself prove a future Japan price increase.",
+        "source_url": "https://www.tomshardware.com/pc-components/gpus/nvidia-gpu-prices-spike-in-japan-prices-up-to-41-percent-higher-than-amazon-us-rtx-5060-ti-sees-the-biggest-increase-among-the-rtx-50-series-stack",
+        "decision_rule": "Prioritize exact-SKU current price and stock checks; compare vendors only after verifying SKU, stock, freight, and warranty."
+      },
+      {
+        "rank": 2,
+        "category": "cpu",
+        "risk_level": "high monitoring priority",
+        "evidence_date": "2026-10-15",
+        "summary": "AKIBA PC Hotline first-half October survey reported Ryzen 7 9700X at JPY 51,800 (+29.6% versus its previous survey) and Ryzen 7 9800X3D at JPY 74,800 (+24.7%). The reading is a dated domestic retail survey, not a guaranteed current price at every shop.",
+        "source_url": "https://akiba-pc.watch.impress.co.jp/docs/price/monthly_repo/2148206.html",
+        "decision_rule": "Recheck direct offers and calculate the gap versus the Ryzen 7 9700X BF target of JPY 38,000."
+      },
+      {
+        "rank": 3,
+        "category": "ddr5_memory",
+        "risk_level": "elevated industry-cost risk",
+        "evidence_date": "2026-09-30",
+        "summary": "TrendForce forecast conventional DRAM contract prices +10% to +15% QoQ in 4Q26. Contract prices are not a SKU-specific consumer retail forecast.",
+        "source_url": "https://www.trendforce.com/presscenter/news/20260930-13258.html",
+        "decision_rule": "Track exact 32GB 2x16 kit retail prices, stock and motherboard QVL. Do not buy at a premium solely because of an industry forecast."
+      },
+      {
+        "rank": 4,
+        "category": "nvme_ssd",
+        "risk_level": "elevated industry-cost risk",
+        "evidence_date": "2026-09-30",
+        "summary": "TrendForce forecast NAND Flash contract prices +15% to +20% QoQ in 4Q26. Retail consumer SSD prices can diverge by product and stock.",
+        "source_url": "https://www.trendforce.com/presscenter/news/20260930-13258.html",
+        "decision_rule": "Track exact Crucial P3 Plus 1TB price and sellable stock. Reject stale or sold-out listing prices as actionable."
+      },
+      {
+        "rank": 5,
+        "category": "motherboard_psu_case_cooler",
+        "risk_level": "sku-specific monitoring",
+        "evidence_date": "2026-10-17",
+        "summary": "No sufficient evidence in the cited sources to claim a broad retail price rise for every tracked motherboard, PSU, case, or cooler.",
+        "source_url": "https://www.trendforce.com/price/flash/pcc_oem_ssd_contract",
+        "decision_rule": "Judge from fresh exact-SKU listings, stock, seller and delivered cost, not a generalized claim."
+      }
+    ],
+    "general_rules": [
+      "Risk priority is qualitative, not numeric probability.",
+      "Use multiple same-SKU observations before labeling a trend; preserve retrieval_time and available_at.",
+      "A BF target is a desired price, not an expected price or observed deal.",
+      "A BF-period actual needs verified retailer-specific 2026 official campaign dates plus exact SKU, price applicability, stock and timestamp.",
+      "A risk ranking does not automatically authorize a purchase; require exact live price, inventory, complete configuration, compatibility, return terms and final cash total."
+    ]
+  },
+  "target_budget_note": "undefined 値上がりリスクの定性的優先順位（GPU→CPU→DDR5→SSD）と根拠の種別・出典は market_risk_policy と docs/price-rise-risk-playbook.md に保存する。"
 }
