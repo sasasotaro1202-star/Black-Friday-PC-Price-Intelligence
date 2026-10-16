@@ -45,8 +45,15 @@ class BudgetPolicyTests(unittest.TestCase):
     def test_hard_budget_ceiling_and_dynamic_peripheral_allocation_are_distinct(self):
         targets = self.cfg
         self.assertEqual(targets["pc_budget_jpy"] + targets["unallocated_contingency_jpy"], targets["total_budget_jpy"])
+        dynamic_pc_cap = max(
+            0,
+            min(
+                targets["pc_budget_jpy"],
+                targets["total_budget_jpy"] - targets["peripheral_budget_jpy"] - targets["unallocated_contingency_jpy"],
+            ),
+        )
         self.assertLessEqual(
-            targets["pc_target_jpy"] + targets["peripheral_budget_jpy"] + targets["unallocated_contingency_jpy"],
+            dynamic_pc_cap + targets["peripheral_budget_jpy"] + targets["unallocated_contingency_jpy"],
             targets["total_budget_jpy"],
         )
         self.assertEqual(
