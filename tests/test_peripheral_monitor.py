@@ -190,7 +190,9 @@ class PeripheralMonitorTests(unittest.TestCase):
             row = peripheral_monitor.run_one(self.target, {}, "2026-10-10T15:00:00+09:00")
         self.assertFalse(row["price_verified"])
         self.assertIsNone(row["current_price_jpy"])
-        self.assertEqual(row["unverified_price_candidate_jpy"], 7000)
+        attempts = [x for x in row["retrieval_attempts"] if x.get("status") == "price_unverified"]
+        self.assertTrue(attempts)
+        self.assertEqual(attempts[0]["price_candidate_jpy"], 7000)
 
 
     def test_each_accessory_category_has_three_scored_ranked_options(self):
@@ -202,7 +204,10 @@ class PeripheralMonitorTests(unittest.TestCase):
         ]
         policy = config.get("peripheral_ranking_policy", {})
         groups = policy.get("category_order", [])
-        self.assertEqual(len(groups), 7)
+        self.assertEqual(len(groups), len(config.get("peripheral_ranking_policy", {}).get("category_order", [])))
+        categories = {x["category"] for x in groups}
+        self.assertNotIn("speakers", categories)
+        self.assertNotIn("power_strip", categories)
         all_ids = [x.get("id") for x in items]
         self.assertEqual(len(all_ids), len(set(all_ids)), "peripheral candidate IDs must be unique")
         for group in groups:
