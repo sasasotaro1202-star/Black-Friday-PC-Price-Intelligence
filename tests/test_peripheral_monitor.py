@@ -32,7 +32,7 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertEqual(target["monitor_url"], "https://www.yodobashi.com/product/100000001006099089/")
         self.assertEqual(target["purchase_url"], "https://www.biccamera.com/bc/item/9242996/")
         self.assertIn("https://www.biccamera.com/bc/item/9242996/", target["monitor_urls"])
-        self.assertEqual(target["target_price_jpy"], 5000)
+        self.assertEqual(target["target_price_jpy"], 4500)
         self.assertIn("G213r", target["identity_terms"])
         self.assertIn("www.biccamera.com", target["allowed_hosts"])
         self.assertIn("www.yodobashi.com", target["allowed_hosts"])
@@ -112,22 +112,22 @@ class PeripheralMonitorTests(unittest.TestCase):
 
     def test_old_price_is_not_inherited_after_product_replacement(self):
         target = {
-            "id": "speakers",
-            "name": "Creative Pebble (classic) compact 2.0 USB-powered speakers",
-            "monitor_url": "https://jp.creative.com/p/speakers/creative-pebble",
-            "purchase_url": "https://jp.creative.com/p/speakers/creative-pebble",
-            "identity_terms": ["Creative Pebble"],
-            "model_code": "Creative Pebble classic",
-            "allowed_hosts": ["jp.creative.com"],
-            "min_price_jpy": 1500,
-            "max_price_jpy": 10000,
-            "target_price_jpy": 2500,
+            "id": "mouse",
+            "name": "Logicool G304",
+            "monitor_url": "https://www.yodobashi.com/product/100000001004334450/",
+            "purchase_url": "https://www.yodobashi.com/product/100000001004334450/",
+            "identity_terms": ["G304"],
+            "model_code": "G304",
+            "allowed_hosts": ["www.yodobashi.com"],
+            "min_price_jpy": 1000,
+            "max_price_jpy": 15000,
+            "target_price_jpy": 5000,
         }
         previous = {
-            "id": "speakers",
-            "name": "Edifier MR5 studio monitors",
-            "monitor_url": "https://www.edifier.jp/products/mr5",
-            "current_price_jpy": 39980,
+            "id": "mouse",
+            "name": "Logicool G203 LIGHTSYNC",
+            "monitor_url": "https://www.yodobashi.com/product/100000001005593918/",
+            "current_price_jpy": 3720,
             "last_valid_price_jpy": 39980,
             "stock_status": "in_stock",
         }
