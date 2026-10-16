@@ -13,6 +13,35 @@ from intelligence import (
 )
 from sale_calendar import campaign_window_for_item
 
+def peripheral_monitor_section_heading(target_config):
+    """Describe the primary peripheral purchase set from the active target config."""
+    primary = [
+        item for item in (target_config.get("peripherals") or [])
+        if isinstance(item, dict) and item.get("mandatory", True)
+    ]
+    main_count = sum(
+        1 for item in primary
+        if str(item.get("id") or "") == "main_monitor"
+        or str(item.get("category") or "") == "main_monitor"
+    )
+    has_secondary = any(
+        str(item.get("id") or "") == "secondary_monitor"
+        or str(item.get("category") or "") == "secondary_monitor"
+        for item in primary
+    )
+    has_headset = any(
+        str(item.get("id") or "") == "headset"
+        or str(item.get("category") or "") == "headset"
+        for item in primary
+    )
+    secondary_label = "あり" if has_secondary else "なし"
+    headset_label = "あり" if has_headset else "なし"
+    return (
+        f"## 周辺機器の価格監視（メインモニター{main_count}台・"
+        f"サブモニター{secondary_label}・ヘッドセット{headset_label}）"
+    )
+
+
 def sales_url(item):
     """Return only a real HTTP(S) product URL; never fabricate a purchase URL."""
     url = str(item.get("url") or "").strip()
@@ -797,7 +826,7 @@ def main():
         "",
         purchase_strategy_status["score_policy_note"],
         "",
-        "## 周辺機器の価格監視（サブモニターあり・ヘッドセットなし）",
+        peripheral_monitor_section_heading(target_config),
         "",
         "|画像|項目|購入方法|BF購入目標価格|観測価格（BF前は参考）|在庫（購入先）|価格確認|商品/比較ページ|",
         "|---|---|---|---:|---|---|---|---|",
@@ -832,7 +861,6 @@ def main():
     ranking_policy = target_config.get("peripheral_ranking_policy") or {}
     category_order = ranking_policy.get("category_order") or [
         {"category": "main_monitor", "label": "メインモニター（27インチ・WQHD）"},
-        {"category": "secondary_monitor", "label": "サブモニター（23.8インチ・FHD）"},
         {"category": "speakers", "label": "スピーカー"},
         {"category": "keyboard", "label": "キーボード"},
         {"category": "mouse", "label": "マウス（FPS向け）"},
