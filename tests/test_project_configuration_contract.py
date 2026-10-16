@@ -29,7 +29,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
     def test_all_in_budget_and_primary_peripheral_targets_balance(self):
         targets = self.targets
         self.assertEqual(
-            targets["pc_target_jpy"] + targets["peripheral_budget_jpy"],
+            targets["pc_target_jpy"] + targets["peripheral_budget_jpy"] + targets["unallocated_contingency_jpy"],
             targets["total_budget_jpy"],
         )
         self.assertEqual(targets["budget_jpy"], targets["pc_target_jpy"])
