@@ -40,6 +40,27 @@ def append_jsonl(path, rows):
         for row in rows:
             f.write(json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n")
 
+def decode_response_body(body, charset="utf-8"):
+    """Decode retailer HTML while handling common Japanese charset aliases."""
+    label = str(charset or "utf-8").strip().strip("\"'").lower().replace("_", "-")
+    aliases = {
+        "windows-31j": "cp932",
+        "windows31j": "cp932",
+        "ms932": "cp932",
+        "shift-jis": "cp932",
+        "shiftjis": "cp932",
+        "sjis": "cp932",
+        "x-sjis": "cp932",
+    }
+    encoding = aliases.get(label, label or "utf-8")
+    try:
+        return body.decode(encoding, errors="replace")
+    except LookupError:
+        # An unknown charset must not abort price/stock collection; use UTF-8
+        # replacement decoding and retain downstream identity checks.
+        return body.decode("utf-8", errors="replace")
+
+
 def fetch(url, timeout=18):
     headers = {
         "User-Agent": UA,
@@ -52,7 +73,7 @@ def fetch(url, timeout=18):
         req = Request(url, headers=headers)
         with urlopen(req, timeout=timeout) as r:
             enc = r.headers.get_content_charset() or "utf-8"
-            return r.read().decode(enc, errors="replace"), r.geturl(), dict(r.headers)
+            return decode_response_body(r.read(), enc), r.geturl(), dict(r.headers)
     except (HTTPError, URLError, TimeoutError):
         # A second request with a normal browser UA handles transient blocks
         # without trusting the response unless it actually returns 2xx/3xx.
@@ -292,7 +313,7 @@ def bing_search(query, timeout=9):
     )
     with urlopen(req, timeout=timeout) as response:
         charset = response.headers.get_content_charset() or "utf-8"
-        html = response.read().decode(charset, errors="replace")
+        html = decode_response_body(response.read(), charset)
     parser = BingSearchParser()
     parser.feed(html)
     out = []
