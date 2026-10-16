@@ -11,8 +11,8 @@ on:
       - ".github/copilot-instructions.md"
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"
-    - cron: "*/15 * * * *"
+    - cron: "3-59/5 * * * *"
+    - cron: "7,22,37,52 * * * *"
 
 permissions:
   contents: write
@@ -58,7 +58,7 @@ jobs:
           # The configured dates only define a provisional broad watch window.
           # Retailer sale authorization is separately source-verified by Python.
           if event == "schedule":
-              expected_cron = "*/5 * * * *" if in_watch_window else "*/15 * * * *"
+              expected_cron = "3-59/5 * * * *" if in_watch_window else "7,22,37,52 * * * *"
               run_now = schedule_cron == expected_cron
           else:
               run_now = True
