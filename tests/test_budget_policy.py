@@ -188,7 +188,7 @@ class BudgetPolicyTests(unittest.TestCase):
         strategy = self.cfg["purchase_strategy"]
         policy = {
             "total_budget_jpy": 400000,
-            "peripheral_budget_jpy": 45000,
+            "peripheral_budget_jpy": 36000,
             "pc_target_jpy": 350000,
             "pc_budget_jpy": 350000,
         }
