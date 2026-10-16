@@ -1566,5 +1566,6 @@
       "A risk ranking does not automatically authorize a purchase; require exact live price, inventory, complete configuration, compatibility, return terms and final cash total."
     ]
   },
-  "target_budget_note": "undefined 値上がりリスクの定性的優先順位（GPU→CPU→DDR5→SSD）と根拠の種別・出典は market_risk_policy と docs/price-rise-risk-playbook.md に保存する。"
+  "target_budget_note": "undefined 値上がりリスクの定性的優先順位（GPU→CPU→DDR5→SSD）と根拠の種別・出典は market_risk_policy と docs/price-rise-risk-playbook.md に保存する。",
+  "unallocated_contingency_jpy": 5000
 }
