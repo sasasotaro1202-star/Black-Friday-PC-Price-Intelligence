@@ -44,11 +44,11 @@ def normalized_visible_text(html):
     parser.feed(str(html or ""))
     parser.close()
     text = unicodedata.normalize("NFKC", " ".join(parser.parts)).lower()
-    return re.sub(r"\\s+", " ", text).strip()
+    return re.sub(r"\s+", " ", text).strip()
 
 
 def _compact(text):
-    return re.sub(r"\\s+", "", unicodedata.normalize("NFKC", str(text or "")).lower())
+    return re.sub(r"\s+", "", unicodedata.normalize("NFKC", str(text or "")).lower())
 
 
 def _branch_stock_status(text):
