@@ -202,7 +202,7 @@ class BuyNowDecisionTests(unittest.TestCase):
     def test_over_budget_offer_is_not_authorized(self):
         now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
         result = self.evaluate(now, price=360000, rank_status="WAIT_FOR_DISCOUNT")
-        self.assertEqual(result["status"], "WAIT_FOR_DISCOUNT")
+        self.assertEqual(result["status"], "WAIT_FOR_VERIFIED_OFFER")
         self.assertFalse(result["chosen_candidate"]["qualified_to_buy"])
 
     def test_sold_out_candidate_is_never_authorized(self):
