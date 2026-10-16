@@ -62,3 +62,9 @@
 - [ ] 返品条件・保証・納期を確認した。データが古い場合はそのことを明示した。
 
 目標価格に届かない候補は値下げ必要額を示して監視継続にし、目標価格に届いても在庫・互換性・最終決済額が未確認なら保留します。
+
+
+## 正本データ
+依頼時には `data/build_component_observations.jsonl`、`data/peripheral_change_events.jsonl`、`data/reports/latest.md`、`data/reports/buy-now-now.md`、`data/reports/self-build-ranking.md` の最新コミット・生成時刻・品質状態を確認する。
+
+「公式キャンペーン期間内の確認済み価格」とするには、正確なSKU、販売店の公式2026年キャンペーン日程、価格適用条件、在庫、取得時刻の検証をすべて必要とする。
