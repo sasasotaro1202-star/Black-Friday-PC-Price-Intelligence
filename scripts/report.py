@@ -960,12 +960,40 @@ def main():
             target = all_peripheral_targets[candidate_id]
             observation = peripheral_live.get(candidate_id, {})
             physical_store = peripheral_is_physical_store(target, target_config)
-            observed_price = (
-                observation.get("online_comparison_price_jpy")
-                if physical_store and observation.get("online_comparison_price_jpy") is not None
-                else observation.get("current_price_jpy") if observation.get("price_verified") else None
+            comparison_route = bool(
+                target.get("purchase_channel") == "compare_online_and_store"
+                or {"physical_store", "store_pickup"}.intersection(target.get("purchase_channel_options") or [])
             )
-            if physical_store:
+            observed_price = observation.get("current_price_jpy") if observation.get("price_verified") else None
+            if comparison_route:
+                online_price = observed_price if isinstance(observed_price, int) and not isinstance(observed_price, bool) else None
+                store_price = observation.get("store_price_jpy") if observation.get("store_price_confirmed") else None
+                price_parts = []
+                if online_price is not None:
+                    online_part = f"ネット掲載 ¥{online_price:,}"
+                    reserve = int(target.get("online_shipping_reserve_jpy") or 0)
+                    if reserve and not observation.get("online_shipping_cost_verified"):
+                        online_part += f"（送料未確認・予備枠¥{reserve:,}）"
+                    price_parts.append(online_part)
+                else:
+                    price_parts.append("ネット価格未確認")
+                if isinstance(store_price, int) and not isinstance(store_price, bool):
+                    price_parts.append(f"店頭現金 ¥{store_price:,}")
+                else:
+                    price_parts.append("店頭現金価格未確認")
+                price_text = " / ".join(price_parts)
+                online_stock = str(observation.get("stock_status") or "unknown")
+                store_stock = inventory_status_label(observation)
+                stock_text = f"ネット:{online_stock} / 店頭:{store_stock}"
+                verified_text = (
+                    "ネット・店頭の両方を比較済み"
+                    if online_price is not None and isinstance(store_price, int) and observation.get("store_stock_status") in ("in_stock", "low_stock")
+                    else "ネット掲載のみ確認・購入先比較未完了"
+                    if online_price is not None
+                    else "価格・在庫未確認"
+                )
+            elif physical_store:
+                observed_price = observation.get("online_comparison_price_jpy") if observation.get("online_comparison_price_jpy") is not None else None
                 price_text = f"Web参考 ¥{int(observed_price):,}（店頭価格未確認）" if isinstance(observed_price, int) and not isinstance(observed_price, bool) else "店頭価格未確認"
                 stock_text = inventory_status_label(observation)
                 verified_text = "店頭価格未確認"
@@ -973,7 +1001,7 @@ def main():
                 price_text = f"¥{int(observed_price):,}" if isinstance(observed_price, int) and not isinstance(observed_price, bool) else "未確認"
                 stock_text = str(observation.get("stock_status") or "unknown")
                 verified_text = "確認済み" if observation.get("price_verified") and observed_price is not None else "未確認"
-            purchase_method_text = "実店舗" if physical_store else "ネット"
+            purchase_method_text = peripheral_route_label(target)
             target_price = int(target.get("target_price_jpy") or 0)
             url = target.get("purchase_url") or target.get("monitor_url")
             product_link = f"[商品ページ]({url})" if isinstance(url, str) and url.startswith("https://") else "リンク未設定"
