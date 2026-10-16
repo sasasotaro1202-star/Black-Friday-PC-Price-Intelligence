@@ -577,6 +577,11 @@ def assess_workload_fit(profile, parts, selected_ids, gpu_id, memory_id):
         "ai_and_data_analysis": {
             "targets": list((workload.get("ai_and_data_analysis") or {}).get("targets") or []),
             "assessment_note": (workload.get("ai_and_data_analysis") or {}).get("note"),
+            "analysis_automation_profile": workload.get("analysis_and_automation") or {},
+        },
+        "study_and_research": workload.get("study_and_research") or {
+            "status": "NOT_CONFIGURED",
+            "note": "勉強・文書閲覧・調査の要件は未設定。",
         },
         "post_purchase_upgrade_assumption": False,
         "purchase_authorized": False,
@@ -853,7 +858,13 @@ def render_plan_markdown(plan):
             hw.get("primary_ssd_gb") if hw.get("primary_ssd_gb") is not None else "未確認",
             compile_fit.get("status") or "未確認",
         ))
-    workload_summary_lines.extend(["", "評価対象ゲーム: " + "、".join((workload_profile.get("gaming") or {}).get("targets") or ["未設定"])])
+    workload_summary_lines.extend([
+        "",
+        "評価対象ゲーム: " + "、".join((workload_profile.get("gaming") or {}).get("targets") or ["未設定"]),
+        "勉強・調査: " + "、".join((workload_profile.get("study_and_research") or {}).get("targets") or ["未設定"]),
+        "データ分析・自動化・AI: " + "、".join((workload_profile.get("analysis_and_automation") or workload_profile.get("ai_and_data_analysis") or {}).get("targets") or ["未設定"]),
+        "同時利用想定: IDE/ゲームエンジン/Python/テスト/資料閲覧/ブラウザー/AIツール。CPU・RAM・VRAM・SSD・冷却を用途別に確認し、すべての分析処理がGPUで速くなるとは仮定しません。",
+    ])
     lines = [
         "# 自作PCパーツ構成・価格監視", "",
         "更新: " + str(plan.get("generated_at")),
