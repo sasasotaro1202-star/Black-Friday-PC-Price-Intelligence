@@ -95,8 +95,8 @@ class BlackFridayScenarioTests(unittest.TestCase):
         self.assertEqual(outlier_row["black_friday_target_price_jpy"], 350000)
         self.assertEqual(outlier_row["pre_black_friday_reference_price_jpy"], 399800)
         self.assertIsNone(outlier_row["black_friday_price_observed_jpy"])
-        self.assertEqual(outlier_row["discount_needed_to_bf_target_jpy"], 69600)
-        self.assertEqual(outlier_row["discount_needed_to_bf_target_pct"], 17.4)
+        self.assertEqual(outlier_row["discount_needed_to_bf_target_jpy"], 49800)
+        self.assertEqual(outlier_row["discount_needed_to_bf_target_pct"], 12.5)
         bands = {x["discount_pct"]: x["price_jpy"] for x in outlier_row["scenario_prices"]}
         self.assertEqual(bands[25], 299850)
         self.assertTrue(outlier_row["configuration_ready"])
