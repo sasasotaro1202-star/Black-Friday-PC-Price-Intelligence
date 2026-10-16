@@ -67,8 +67,8 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertLessEqual(strategy["outlier_rule"]["black_friday_target_cap_jpy"], self.cfg["pc_target_jpy"])
         self.assertLessEqual(strategy["ai_vram_outlier_rule"]["black_friday_target_cap_jpy"], self.cfg["pc_target_jpy"])
         for plan in strategy["priority_plans"]:
-            self.assertEqual(plan["black_friday_target_price_jpy"], self.cfg["pc_target_jpy"])
-            self.assertEqual(plan["black_friday_planned_hard_cap_jpy"], self.cfg["pc_target_jpy"])
+            self.assertEqual(plan["black_friday_target_price_jpy"], 350000)
+            self.assertEqual(plan["black_friday_planned_hard_cap_jpy"], 350000)
             self.assertIn("350,000円", plan["black_friday_target_note"])
             self.assertNotIn("310,200円", plan["black_friday_target_note"])
         notes_by_candidate = {x["candidate_id"]: x["black_friday_target_note"] for x in strategy["priority_plans"]}
@@ -109,7 +109,7 @@ class BudgetPolicyTests(unittest.TestCase):
             strategy,
             {
                 "total_budget_jpy": 400000,
-                "peripheral_budget_jpy": 62000,
+                "peripheral_budget_jpy": 36000,
                 "pc_target_jpy": 350000,
                 "pc_budget_jpy": 350000,
             },
@@ -288,8 +288,9 @@ class BudgetPolicyTests(unittest.TestCase):
         row = next(x for x in projection["peripherals"] if x["id"] == "main_monitor")
         self.assertEqual(row["store_inventory_status"], "low_stock")
         self.assertTrue(row["store_inventory_verified"])
-        self.assertIsNone(row["current_price_jpy"])
+        self.assertEqual(row["current_price_jpy"], 20790)
         self.assertEqual(row["online_comparison_price_jpy"], 20790)
+        self.assertEqual(row["selected_purchase_channel"], "online")
         self.assertFalse(row["store_price_confirmed"])
         self.assertTrue(projection["budget_data_ready"])
         self.assertIn("main_monitor", projection["channel_comparison_pending_ids"])
@@ -356,9 +357,9 @@ class BudgetPolicyTests(unittest.TestCase):
             projection = intelligence.peripheral_budget_projection()
 
         self.assertFalse(projection["budget_data_ready"])
-        self.assertEqual(projection["tracked_peripheral_unverified_ids"], sorted(set(tracked_ids + ["secondary_monitor"])))
-        self.assertEqual(projection["peripheral_projection_jpy"], 62000)
-        self.assertEqual(projection["pc_dynamic_cap_jpy"], 333000)
+        self.assertEqual(projection["tracked_peripheral_unverified_ids"], sorted(tracked_ids))
+        self.assertEqual(projection["peripheral_projection_jpy"], 36000)
+        self.assertEqual(projection["pc_dynamic_cap_jpy"], 359000)
         self.assertLessEqual(
             projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"],
             projection["total_budget_jpy"],
