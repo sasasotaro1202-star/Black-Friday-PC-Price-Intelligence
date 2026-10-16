@@ -631,6 +631,14 @@ def peripheral_budget_projection():
             if not exact_model_selected:
                 unverified.append(pid)
 
+        online_shipping_in_budget = 0
+        if online_price_verified and online_cash_estimate is not None:
+            if purchase_channel_selected == "online" or (
+                purchase_channel_selected == "unconfirmed"
+                and selected_cost == online_cash_estimate
+            ):
+                online_shipping_in_budget = estimated_shipping
+
         total_projection += selected_cost
         rows.append({
             "id": pid, "name": target.get("name"), "target_price_jpy": target_price,
@@ -641,6 +649,7 @@ def peripheral_budget_projection():
             "online_shipping_jpy": int(actual_shipping) if shipping_verified else None,
             "online_shipping_cost_verified": shipping_verified,
             "estimated_online_cash_total_jpy": online_cash_estimate,
+            "online_shipping_cost_in_budget_jpy": online_shipping_in_budget,
             "online_offer_count": int(live.get("online_offer_count") or (1 if online_price_verified else 0)),
             "online_actionable_offer_count": int(live.get("online_actionable_offer_count") or (1 if online_route_actionable else 0)),
             "online_best_offer_url": live.get("online_best_offer_url"),
@@ -682,14 +691,9 @@ def peripheral_budget_projection():
     # contingency line. Verified shipping replaces the reserve estimate; unverified
     # online delivery uses the configured guard amount until checkout is checked.
     flexible_shipping_buffer_used = sum(
-        (
-            int(row.get("online_shipping_jpy") or 0)
-            if row.get("online_shipping_cost_verified") and valid_money(row.get("online_shipping_jpy"))
-            else int(row.get("online_shipping_reserve_jpy") or 0)
-        )
+        int(row.get("online_shipping_cost_in_budget_jpy") or 0)
         for row in rows
-        if row.get("selected_purchase_channel") == "online"
-        and row.get("online_comparison_price_jpy") is not None
+        if row.get("online_comparison_price_jpy") is not None
     )
     flexible_buffer = next((row for row in rows if row.get("id") == "store_price_buffer"), None)
     flexible_buffer_used = min(
