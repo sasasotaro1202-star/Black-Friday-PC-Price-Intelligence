@@ -382,5 +382,26 @@ class ReportLinkTests(unittest.TestCase):
             self.assertEqual(len(first), 64)
 
 
+
+    def test_mixed_route_report_never_labels_online_price_as_store_cash_price(self):
+        item = {
+            "purchase_channel": "compare_online_and_store",
+            "purchase_channel_options": ["online", "physical_store", "store_pickup"],
+            "online_comparison_price_jpy": 20790,
+            "estimated_online_cash_total_jpy": 21790,
+            "online_shipping_reserve_jpy": 1000,
+            "online_shipping_cost_verified": False,
+            "store_price_confirmed": False,
+            "channel_comparison_status": "ONLINE_OPTIONS_COMPARED_STORE_PENDING",
+        }
+        self.assertFalse(report.peripheral_is_physical_store(item, {}))
+        self.assertEqual(report.peripheral_route_label(item), "ネット配送・実店舗・店舗受取を比較")
+        summary = report.peripheral_route_price_summary(item)
+        self.assertIn("ネット掲載 ¥20,790", summary)
+        self.assertIn("送料込み推計 ¥21,790", summary)
+        self.assertIn("店頭現金価格未確認", summary)
+        self.assertIn("ONLINE_OPTIONS_COMPARED_STORE_PENDING", summary)
+
+
 if __name__ == "__main__":
     unittest.main()
