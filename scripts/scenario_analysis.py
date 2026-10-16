@@ -249,7 +249,12 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
     official_bf_pc_count = sum(1 for x in pc_rows if x.get("black_friday_offer_verified"))
     official_bf_peripheral_count = sum(1 for x in peripheral_rows if x.get("black_friday_price_verified"))
     any_official_bf_price_known = bool(official_bf_pc_count or official_bf_peripheral_count)
-    bf_pc_cap = min(int(policy["pc_budget_jpy"]), int(policy["total_budget_jpy"])-projected_bf_cost-int(policy.get("unallocated_contingency_jpy", 0)))
+    contingency = int(policy.get("unallocated_contingency_jpy", 0))
+    total_budget = int(policy["total_budget_jpy"])
+    pc_target = int(policy["pc_target_jpy"])
+    pc_budget = int(policy["pc_budget_jpy"])
+    target_based_pc_cap = max(0, min(pc_budget, total_budget - total_target - contingency))
+    bf_pc_cap = min(pc_budget, total_budget - projected_bf_cost - contingency)
     target_sum_matches = total_target == int(policy["peripheral_budget_jpy"])
     return {
         "pricing_phase": phase,
@@ -269,9 +274,9 @@ def build_black_friday_price_plan(target_config, catalog_data, latest, periphera
         "pc_target_price_jpy": int(policy["pc_target_jpy"]),
         "pc_planned_hard_cap_jpy": int(policy["pc_budget_jpy"]),
         "peripheral_target_total_jpy": total_target,
-        "black_friday_ideal_bundle_target_jpy": int(policy["pc_target_jpy"])+total_target,
-        "black_friday_target_buffer_jpy": int(policy["total_budget_jpy"])-int(policy["pc_target_jpy"])-total_target,
-        "black_friday_hard_cap_bundle_jpy": int(policy["pc_budget_jpy"])+total_target,
+        "black_friday_ideal_bundle_target_jpy": pc_target + total_target + contingency,
+        "black_friday_target_buffer_jpy": total_budget - pc_target - total_target - contingency,
+        "black_friday_hard_cap_bundle_jpy": target_based_pc_cap + total_target + contingency,
         "black_friday_pc_price_cap_jpy": bf_pc_cap,
         "black_friday_pc_price_cap_final": bool(in_watch_window and snapshot_fresh and tracked_all_bf_verified),
         "peripheral_snapshot_fresh": snapshot_fresh,
