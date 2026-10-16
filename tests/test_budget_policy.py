@@ -308,6 +308,7 @@ class BudgetPolicyTests(unittest.TestCase):
         now = intelligence.now_jst()
         target.update({
             "store_pickup_checkout_total_jpy": 20990,
+            "store_pickup_checkout_total_verified": True,
             "store_pickup_quote_checked_at": intelligence.iso(now),
             "store_pickup_store_id": "biccamera_tenjin_1",
             "store_pickup_stock_status": "in_stock",
@@ -320,6 +321,12 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertTrue(quote["store_pickup_checkout_total_confirmed"])
         self.assertTrue(quote["store_pickup_route_actionable"])
         self.assertEqual(quote["store_pickup_checkout_total_jpy"], 20990)
+
+        unattested = dict(target)
+        unattested["store_pickup_checkout_total_verified"] = False
+        missing_attestation = intelligence.store_pickup_quote_validation(unattested, now)
+        self.assertFalse(missing_attestation["store_pickup_checkout_total_confirmed"])
+        self.assertEqual(missing_attestation["store_pickup_quote_status"], "PICKUP_CHECKOUT_TOTAL_NOT_ATTESTED")
 
         wrong_model = dict(target)
         wrong_model["store_pickup_model_match"] = False
