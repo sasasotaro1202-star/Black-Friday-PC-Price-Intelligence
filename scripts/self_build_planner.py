@@ -670,7 +670,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
         "selection_factors": profile.get("purchase_decision_factors") or [],
         "total_budget_jpy": all_budget, "peripheral_budget_jpy": peripheral_budget, "pc_budget_jpy": pc_budget,
         "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
-        "budget_arithmetic_valid": pc_budget + peripheral_budget == all_budget,
+        "budget_arithmetic_valid": pc_budget + peripheral_budget + int(profile.get("unallocated_contingency_jpy", 0)) == all_budget,
         "required_categories": profile.get("required_categories") or [],
         "memory_choice_selection": memory_choice_selection,
         "component_coverage": {
