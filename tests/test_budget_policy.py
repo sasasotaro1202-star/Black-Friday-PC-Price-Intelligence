@@ -369,5 +369,19 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(sum(int(x["weight_pct"]) for x in policy.get("factors", [])), 100)
         self.assertFalse(next(x for x in self.cfg["peripheral_alternatives"] if x["id"] == "cables_alt_sanwa_kc_dp1420")["mandatory"])
 
+    def test_configured_peripheral_targets_sum_to_all_in_budget_allocation(self):
+        mandatory = [
+            p for p in self.cfg["peripherals"]
+            if p.get("mandatory", True)
+        ]
+        target_sum = sum(int(p.get("target_price_jpy") or 0) for p in mandatory)
+        self.assertEqual(target_sum, int(self.cfg["peripheral_budget_jpy"]))
+        self.assertEqual(
+            int(self.cfg["pc_target_jpy"]) + int(self.cfg["peripheral_budget_jpy"]),
+            int(self.cfg["total_budget_jpy"]),
+        )
+        self.assertEqual(int(self.cfg["pc_budget_jpy"]), int(self.cfg["pc_target_jpy"]))
+
+
 if __name__ == "__main__":
     unittest.main()
