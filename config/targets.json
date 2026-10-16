@@ -258,13 +258,13 @@
   "desktop_note": "Desktop self-build candidate monitoring must account for gaming, game creation, schoolwork/research/multitasking, Python/data analysis, automated prediction systems and feasible local AI. Keep the total all-in ceiling at ¥400,000, peripherals ¥45,000, PC planning target ¥350,000 and ¥5,000 contingency. Required at purchase: 32GB RAM and 1TB SSD; 64GB/2TB is a preferred complete-build outlier only when exact price and compatibility evidence are available. No post-purchase upgrade assumptions. BTO is a benchmark only.",
   "desktop_exact_candidate_count": 7,
   "total_budget_jpy": 400000,
-  "peripheral_budget_jpy": 40000,
+  "peripheral_budget_jpy": 32000,
   "pc_target_jpy": 350000,
   "pc_budget_jpy": 395000,
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
-  "budget_scope_note": "総額上限400,000円。周辺機器は約40,000円を参考配分とするが固定枠・支出義務ではなく、確認した店頭価格と必要性に応じてPC本体と動的に配分する。対象は27インチWQHDメインモニター1台、必要十分なコスパ重視スピーカー、キーボード、マウス、マウスパッド、電源タップ、必要ケーブルのみ。サブモニターとヘッドセットは購入対象・候補・価格監視・予算・総額計算に含めない。周辺機器の送料は計上しない。総額予備費5,000円を確保し、PC本体に使える上限は総額から実際の周辺機器費と予備費を差し引いて算出する。価格目標は確定価格ではなく、購入前に型番・在庫・店頭現金価格を確認する。",
+  "budget_scope_note": "総額上限400,000円。周辺機器は約32,000円を参考配分とするが、固定枠・支出義務ではなく、確認した店頭価格と必要性に応じてPC本体と動的に配分する。対象は27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、電源タップ、必要ケーブルのみ。サブモニター、スピーカー、ヘッドセットは購入対象・候補・価格監視・予算・総額計算に含めない。周辺機器は実店舗購入で送料は計上しない。総額予備費5,000円を確保し、PC本体の許容額は総額から実際の周辺機器費と予備費を差し引いて動的に算出する。",
   "peripherals": [
     {
       "id": "main_monitor",
@@ -329,67 +329,6 @@
           "source_type": "official_branch_stock_page"
         }
       ]
-    },
-    {
-      "id": "speakers",
-      "name": "Creative Pebble Pro 2.0 PC speakers, black (USB-C/USB-A/Bluetooth/3.5mm)",
-      "category": "speakers",
-      "track_current_price": true,
-      "mandatory": true,
-      "target_price_jpy": 8000,
-      "purchase_url": "https://www.biccamera.com/bc/item/14119746/",
-      "monitor_url": "https://www.yodobashi.com/product/100000001009107289/",
-      "monitor_urls": [
-        "https://www.yodobashi.com/product/100000001009107289/",
-        "https://www.biccamera.com/bc/item/14119746/"
-      ],
-      "identity_terms": [
-        "Pebble Pro",
-        "SP-PBLPRO-BKA"
-      ],
-      "model_code": "SP-PBLPRO-BKA",
-      "allowed_hosts": [
-        "www.yodobashi.com",
-        "www.biccamera.com"
-      ],
-      "min_price_jpy": 6000,
-      "max_price_jpy": 15000,
-      "ranking_score_100": 88,
-      "ranking_reason": "必要十分な音を手頃な価格で確保するコスパ重視の第一候補。高級なモニタースピーカーは必須とせず、ゲーム・動画教材・普段のPC音声が聞き取りやすいことを優先。実店舗で音と接続方法を確認し、8,000円はBF目標であって確定価格ではない。",
-      "best_for": "必要十分な音質と価格のバランス",
-      "price_target_phase": "black_friday",
-      "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
-      "physical_store_candidate_ids": [
-        "biccamera_tenjin_1",
-        "yodobashi_hakata"
-      ],
-      "purchase_channel": "physical_store",
-      "store_price_jpy": null,
-      "store_price_checked_at": null,
-      "store_stock_status": "unknown",
-      "store_confirmation_url": null,
-      "store_model_match": false,
-      "store_observation_store_id": null,
-      "store_evidence_type": null,
-      "store_evidence_notes": null,
-      "store_inventory_checks": [
-        {
-          "store_id": "biccamera_tenjin_1",
-          "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14119746",
-          "allowed_hosts": [
-            "www.biccamera.com"
-          ],
-          "branch_match_terms": [
-            "ビックカメラ 天神１号館",
-            "ビックカメラ天神1号館",
-            "Tenjin 1st Store"
-          ],
-          "source_type": "official_branch_stock_page"
-        }
-      ],
-      "target_price_note": "8,000円はBF購入目標であり、実売・店頭価格の確認値ではない。高級音質は必須とせず、ゲーム・動画・勉強用に必要十分な音とコスパを優先する。ビックカメラ天神1号館またはヨドバシ博多で同一型番の税込現金価格と在庫を確認。"
     },
     {
       "id": "keyboard",
@@ -656,7 +595,7 @@
       "identity_terms": [],
       "mandatory": true,
       "price_target_phase": "black_friday",
-      "target_price_note": "先にモニター等の付属品を確認。不足するケーブルのみ購入し、余分なケーブルは買わない。",
+      "target_price_note": "先にモニター等の付属品を確認。不足する必要なケーブルのみ購入し、余分なケーブルは買わない。",
       "ranking_score_100": 88,
       "ranking_reason": "モニター付属品を先に確認し、不足分だけ購入することで不要な二重購入を防ぐ。",
       "best_for": "同梱品を優先し、足りない分だけ買う",
@@ -689,7 +628,7 @@
   ],
   "purchase_strategy": {
     "updated_at": "2026-10-17",
-    "purpose": "総額上限40万円の中でPC本体と必要な周辺機器を動的に最適化する。自作PCを本命とし、購入時にRAM 32GB以上、SSD 1TB以上を確保。周辺機器はメインモニター1台、必要十分なコスパ重視スピーカー、キーボード、マウス、マウスパッド、電源タップ、必要ケーブルを対象とする。サブモニターとヘッドセットは購入対象外。価格目標と実売・最終決済額を区別し、購入後の継続費用は原則0円を目指す。",
+    "purpose": "総額上限40万円の中でPC本体と必要な周辺機器を動的に最適化する。自作PCを本命とし、購入時にRAM 32GB以上/SSD 1TB以上を確保。周辺機器はメインモニター1台、キーボード、マウス、マウスパッド、電源タップ、必要ケーブルのみ。サブモニター・スピーカー・ヘッドセットは購入対象外。BF目標と実売・最終決済額を区別し、購入後の継続費用は原則0円を目指す。",
     "priority_plans": [
       {
         "candidate_id": "desktop-gtune-dg-i5g70-5070",
@@ -813,20 +752,10 @@
       "store_inventory_must_be_verified": true,
       "online_price_is_store_price": false
     },
-    "peripheral_allocation_scenario_jpy": 40000,
-    "peripheral_allocation_scenario_note": "約40,000円はメインモニター1台・必要十分なスピーカー・入力機器等の参考配分であり、強制的に使い切る予算でもハード上限でもない。サブモニターは含めない。総額上限400,000円と予備費5,000円を維持し、PCの許容額は確認できた実支出から動的に計算する。",
+    "peripheral_allocation_scenario_jpy": 32000,
+    "peripheral_allocation_scenario_note": "約32,000円はメインモニター1台と必要な入力機器・電源タップ等の参考配分。サブモニター、スピーカー、ヘッドセットを含めず、必ず使い切る予算でもハード上限でもない。総額上限400,000円と総額予備費5,000円を維持し、PCに使える額は確認できた実支出から動的に計算する。",
     "budget_formula": "dynamic_pc_cap_jpy = max(0, min(pc_budget_jpy, total_budget_jpy - current_or_reserved_mandatory_peripheral_cost_jpy - unallocated_contingency_jpy))",
-    "budget_optimization_policy": "総額40万円を使い切ることを目的にしない。周辺機器は実費ベース。余りが出たときだけ、総額上限を守りながら、ゲーム性能・ゲーム制作・分析を実際に改善するCPU/GPU/RAM/SSDの一回限りの購入候補を再比較する。サブモニター、ヘッドセット、不要な高級スピーカーで予算を消化しない。",
-    "speaker_strategy": {
-      "id": "speakers",
-      "model": "Creative Pebble Pro",
-      "target_price_jpy": 8000,
-      "priority": "cost-effective, sufficient everyday sound rather than high-end audio",
-      "rationale": "A practical small speaker set for games, school videos and everyday PC use. High-end studio-monitor sound is not required. Prefer the lower-cost Pebble Pro by default; consider EDIFIER MR3 only if a verified store price difference and actual listening justify it. MR4 MKII remains a higher-cost option only when an unusually attractive store offer makes sense. MR5 is excluded as unnecessarily expensive for this use case.",
-      "coupon_policy": "Online coupons and web checkout discounts do not count as physical-store prices. Confirm in-store cash price and stock independently.",
-      "price_target_phase": "black_friday",
-      "target_price_note": "BF目標8,000円。実際の店頭現金価格・在庫は購入前に確認。"
-    }
+    "budget_optimization_policy": "総額40万円を使い切ることを目的にしない。周辺機器は実費ベース。余りが出たときだけ、総額上限を守りながら、ゲーム性能・ゲーム制作・分析を実際に改善するCPU/GPU/RAM/SSDの一回限りの購入候補を再比較。サブモニター、スピーカー、ヘッドセットは購入対象外であり、予算消化のために追加しない。"
   },
   "peripheral_alternatives": [
     {
@@ -1354,145 +1283,6 @@
         "bicamera_tenjin_1",
         "yodobashi_hakata"
       ]
-    },
-    {
-      "id": "speakers_alt_edifier_mr4_mkii",
-      "name": "EDIFIER MR4 MKII 2.0 active speakers (80W RMS, Bluetooth 6.0)",
-      "target_price_jpy": 24000,
-      "track_current_price": true,
-      "monitor_url": "https://www.biccamera.com/bc/item/15313369/",
-      "purchase_url": "https://www.biccamera.com/bc/item/15313369/",
-      "identity_terms": [
-        "MR4 MKII",
-        "EDIFIER MR4 MKII"
-      ],
-      "allowed_hosts": [
-        "www.edifier.jp",
-        "www.yodobashi.com",
-        "www.biccamera.com"
-      ],
-      "min_price_jpy": 18000,
-      "max_price_jpy": 40000,
-      "mandatory": false,
-      "coupon_policy": "On 2026-10-11 the official MR4 MKII page displayed coupon code SLW20 for 20% off the listed ¥29,980 price. Arithmetic equivalent is ¥23,984 only if the code is eligible and actually applied at checkout. This is not a confirmed final cash price and must not be assumed to remain available during Black Friday.",
-      "price_target_phase": "black_friday",
-      "target_price_note": "24,000円はBF目標。公式/家電量販店のWeb価格は店頭価格ではない。実店舗の同一型番・現金価格・在庫が確認できる場合のみ採用候補とする。",
-      "model_code": "MR4 MKII",
-      "monitor_urls": [
-        "https://www.yodobashi.com/product/100000001009991946/",
-        "https://www.biccamera.com/bc/item/15313369/",
-        "https://www.edifier.jp/products/mr4-mkii"
-      ],
-      "coupon_code_reference": "SLW20",
-      "coupon_observed_date": "2026-10-11",
-      "ranking_score_100": 88,
-      "ranking_reason": "より高出力の上位候補（80W RMS）。オンライン参考価格はBF目標を上回るため、店頭で24,000円程度まで下がる場合のみMR3との価格差を比較。",
-      "best_for": "スピーカーにより多く予算を割く場合の上位候補",
-      "category": "speakers",
-      "image_url": "https://www1.yohohongkong.com/images/202606/goods_img/434786_P_1780969137592.png",
-      "image_source_url": "https://www.edifier.jp/products/mr4-mkii",
-      "image_note": "EDIFIER公式 MR4 MKII製品画像",
-      "image_checked_at": "2026-10-17",
-      "purchase_channel": "physical_store",
-      "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
-      "physical_store_candidate_ids": [
-        "bicamera_tenjin_1",
-        "yodobashi_hakata"
-      ],
-      "store_price_jpy": null,
-      "store_price_checked_at": null,
-      "store_stock_status": "unknown",
-      "store_confirmation_url": null,
-      "store_model_match": false,
-      "store_observation_store_id": null,
-      "store_evidence_type": null,
-      "store_evidence_notes": null,
-      "store_inventory_checks": [
-        {
-          "store_id": "biccamera_tenjin_1",
-          "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=15313369",
-          "allowed_hosts": [
-            "www.biccamera.com"
-          ],
-          "branch_match_terms": [
-            "ビックカメラ 天神１号館",
-            "ビックカメラ天神1号館",
-            "Tenjin 1st Store"
-          ],
-          "source_type": "official_branch_stock_page"
-        }
-      ]
-    },
-    {
-      "id": "speakers_alt_edifier_mr3",
-      "category": "speakers",
-      "name": "EDIFIER MR3 2.0 powered speakers (36W RMS, Bluetooth 5.4)",
-      "target_price_jpy": 12000,
-      "track_current_price": true,
-      "monitor_url": "https://www.biccamera.com/bc/item/13719866/",
-      "purchase_url": "https://www.biccamera.com/bc/item/13719866/",
-      "identity_terms": [
-        "ED-MR3-BK",
-        "EDIFIER MR3",
-        "EDMR3BK"
-      ],
-      "model_code": "ED-MR3-BK",
-      "allowed_hosts": [
-        "www.yodobashi.com",
-        "www.biccamera.com",
-        "www.edifier.jp"
-      ],
-      "min_price_jpy": 10000,
-      "max_price_jpy": 25000,
-      "mandatory": false,
-      "price_target_phase": "black_friday",
-      "target_price_note": "12,000円はBF目標で実売価格ではない。Pebble Proからの価格差に価値があると実店舗で判断できる場合だけ選ぶ。店舗の現金価格・在庫を確認する。",
-      "ranking_score_100": 84,
-      "ranking_reason": "Pebble Proより音作り・入力構成を重視したい場合の上位代替。店頭価格差と実際の音を確認し、価値があるときだけ選ぶ。",
-      "best_for": "音質やアナログ入力を少し重視する場合",
-      "monitor_urls": [
-        "https://www.yodobashi.com/product/100000001008849809/",
-        "https://www.biccamera.com/bc/item/13719866/",
-        "https://www.edifier.jp/products/mr3"
-      ],
-      "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": true,
-      "physical_store_candidate_ids": [
-        "bicamera_tenjin_1",
-        "yodobashi_hakata"
-      ],
-      "store_price_jpy": null,
-      "store_price_checked_at": null,
-      "store_stock_status": "unknown",
-      "store_confirmation_url": null,
-      "store_model_match": false,
-      "purchase_channel": "physical_store",
-      "store_observation_store_id": null,
-      "store_evidence_type": null,
-      "store_evidence_notes": null,
-      "store_inventory_checks": [
-        {
-          "store_id": "biccamera_tenjin_1",
-          "store_name": "ビックカメラ天神1号館",
-          "url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=13719866",
-          "allowed_hosts": [
-            "www.biccamera.com"
-          ],
-          "branch_match_terms": [
-            "ビックカメラ 天神１号館",
-            "ビックカメラ天神1号館",
-            "Tenjin 1st Store"
-          ],
-          "source_type": "official_branch_stock_page"
-        }
-      ],
-      "image_url": "https://www.edifier.jp/cdn/shop/files/MR3_1_1.jpg?v=1788508256&width=1000",
-      "image_source_url": "https://www.edifier.jp/products/mr3",
-      "image_note": "EDIFIER公式 MR3製品画像",
-      "image_checked_at": "2026-10-17",
-      "inventory_monitoring_note": "支店別取置きページは在庫状況の参考。店頭の税込現金価格と棚在庫は来店前に店舗へ確認する。"
     }
   ],
   "peripheral_ranking_policy": {
@@ -1516,15 +1306,11 @@
         "weight_pct": 15
       }
     ],
-    "instructions": "各カテゴリから主候補を1商品選び、代替候補を同時購入しない。対象は27インチWQHDメインモニター1台、必要十分なコスパ重視スピーカー、キーボード、マウス、マウスパッド、電源タップ、必要ケーブル。サブモニターとヘッドセットは購入対象・候補・価格監視・費用計算に含めない。周辺機器予算は約40,000円の参考配分で固定枠ではなく、総額400,000円と予備費5,000円を優先し、実際の店頭価格・必要性に応じPC本体との配分を動的に最適化する。周辺機器は福岡の実店舗購入を基本とし、送料は計上しない。Web価格は参考値であり、ビックカメラ天神1号館またはヨドバシ博多の店頭価格・在庫を証明しない。スピーカーはCreative Pebble Proを第一候補とし、EDIFIER MR3は価格差に価値がある場合の代替、MR4 MKIIは特に割安な店頭価格の場合のみの上位候補とする。ポイント・クーポンは決済条件確認前に値引き扱いしない。",
+    "instructions": "各カテゴリから主候補を1商品選び、代替候補を同時購入しない。購入対象は27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、電源タップ、必要ケーブルのみ。サブモニター、スピーカー、ヘッドセットは購入対象・候補・価格監視・費用計算に含めない。周辺機器予算は約32,000円の参考配分で固定枠ではなく、総額400,000円と予備費5,000円を優先し、実際の店頭価格と必要性に応じPC本体との配分を動的に最適化する。周辺機器は福岡の実店舗購入を基本とし、送料は計上しない。Web価格は仕様比較のみで、店頭価格・在庫を証明しない。",
     "category_order": [
       {
         "category": "main_monitor",
         "label": "メインモニター（27インチ・WQHD）"
-      },
-      {
-        "category": "speakers",
-        "label": "スピーカー（必要十分・コスパ重視）"
       },
       {
         "category": "keyboard",
@@ -1551,7 +1337,7 @@
   "monitor_window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
   "monitor_window_note": "暫定の広域監視窓であり、いずれかの販売店の公式BF開催日を意味しない。各店の2026年公式日程を公式ページから明示的な年付き日付範囲で確認するまで、価格をBF実売として認定せず、買い時判定は購入許可を出さない。過去日程、曜日、年のない月日から開催日を推定しない。",
   "budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
-  "budget_target_note": "総額400,000円を絶対上限とする。周辺機器は固定予算を設けず、メインモニター1台・必要十分なスピーカー・入力機器の実際の必要額と店頭価格に応じて配分する。サブモニターは購入対象・候補・価格監視・予算・合計計算に含めない。PC本体の許容額は総額から周辺機器実費と総額予備費5,000円を差し引く。",
+  "budget_target_note": "総額400,000円を絶対上限とする。周辺機器の約32,000円は参考配分で固定枠ではない。対象はメインモニター1台、キーボード、マウス、マウスパッド、電源タップ、必要なケーブルのみ。サブモニター、スピーカー、ヘッドセットは購入対象・候補・価格監視・予算・合計計算に含めない。PC本体の許容額は実際の周辺機器費と総額予備費5,000円を差し引いて動的に計算する。",
   "purchase_channels": {
     "pc_body": {
       "channel": "online",
@@ -1605,7 +1391,7 @@
     "store_stock_rule": "周辺機器はすべて実店舗購入。全国オンライン在庫・Web価格は当該店舗の店頭在庫・店頭決済価格を証明しない。購入判断前に、同一型番/色、ビックカメラ天神1号館またはヨドバシ博多の店頭在庫または取り置き、店頭税込現金支払総額を確認する。未確認なら購入許可は保留する。",
     "online_price_handling": "オンライン価格は市場比較の参考値に限る。実店舗の価格・在庫として扱わない。"
   },
-  "target_budget_notes": "総額上限400,000円。周辺機器は約40,000円の参考配分で、固定の消費義務やハード上限ではない。メインモニターは1台だけ。サブモニターとヘッドセットを購入対象・ランキング・価格監視・総額試算に含めない。スピーカーは高級音質を追わず、必要十分な音とコスパを優先し、Creative Pebble Proを第一候補、EDIFIER MR3を価格差に価値がある場合の代替とする。予備費5,000円を確保し、PC本体に使える額は周辺機器の実費から動的に算出する。周辺機器送料は計上しない。価格目標と実売価格を区別し、価格・型番・在庫・互換性の未確認が残る場合は購入許可しない。",
+  "target_budget_notes": "総額400,000円を絶対上限とする。周辺機器の約32,000円は参考配分で固定枠ではない。対象はメインモニター1台、キーボード、マウス、マウスパッド、電源タップ、必要なケーブルのみ。サブモニター、スピーカー、ヘッドセットは購入対象・候補・価格監視・予算・合計計算に含めない。PC本体の許容額は実際の周辺機器費と総額予備費5,000円を差し引いて動的に計算する。 予備費5,000円を確保し、PC購入は価格・在庫・型番・互換性の確認後に判断する。",
   "target_budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
   "market_risk_policy": {
     "snapshot_date": "2026-10-17",
@@ -1665,7 +1451,7 @@
       "A risk ranking does not automatically authorize a purchase; require exact live price, inventory, complete configuration, compatibility, return terms and final cash total."
     ]
   },
-  "target_budget_note": "総額400,000円を絶対上限とし、周辺機器は約40,000円を参考配分とするが固定枠ではない。メインモニターは1台のみ。サブモニターとヘッドセットは購入対象に含めない。スピーカーは必要十分なコスパ重視品とし、必要以上の高級機は選ばない。PC購入時にRAM 32GB以上、SSD 1TB以上を確保する。",
+  "target_budget_note": "総額400,000円を絶対上限とする。周辺機器の約32,000円は参考配分で固定枠ではない。対象はメインモニター1台、キーボード、マウス、マウスパッド、電源タップ、必要なケーブルのみ。サブモニター、スピーカー、ヘッドセットは購入対象・候補・価格監視・予算・合計計算に含めない。PC本体の許容額は実際の周辺機器費と総額予備費5,000円を差し引いて動的に計算する。",
   "unallocated_contingency_jpy": 5000,
   "user_workload_profile": {
     "priorities": [
@@ -1779,7 +1565,7 @@
   },
   "peripheral_budget_mode": "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET",
   "peripheral_budget_is_hard_cap": false,
-  "peripheral_allocation_scenario_note": "約40,000円はメインモニター1台・必要十分なスピーカー・入力機器等の参考配分であり、強制的に使い切る予算でもハード上限でもない。サブモニターは含めない。総額上限400,000円と予備費5,000円を維持し、PCの許容額は確認できた実支出から動的に計算する。",
+  "peripheral_allocation_scenario_note": "約32,000円はメインモニター1台と必要な入力機器・電源タップ等の参考配分。サブモニター、スピーカー、ヘッドセットを含めず、必ず使い切る予算でもハード上限でもない。総額上限400,000円と総額予備費5,000円を維持し、PCに使える額は確認できた実支出から動的に計算する。",
   "peripheral_allocation_scenario_jpy": 32000,
   "budget_optimization_policy": "総額40万円を使い切ることを目的にしない。周辺機器は実費ベース。余りが出たときだけ、総額上限を守りながら、ゲーム性能・ゲーム制作・分析を実際に改善するCPU/GPU/RAM/SSDの一回限りの購入候補を再比較。サブモニター、スピーカー、ヘッドセットは購入対象外であり、予算消化のために追加しない。"
 }
