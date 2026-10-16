@@ -62,6 +62,11 @@ class BlackFridayScenarioTests(unittest.TestCase):
                 "current_price_jpy": item["target_price_jpy"] + 100,
                 "price_verified": bool(item.get("track_current_price")),
                 "identity_verified": bool(item.get("track_current_price")),
+                "price_source_mode": "direct_structured" if item.get("track_current_price") else None,
+                "price_validation_status": "validated" if item.get("track_current_price") else None,
+                "variant_match": "exact" if item.get("track_current_price") else None,
+                "url": item.get("monitor_url") or item.get("purchase_url"),
+                "purchase_url": item.get("purchase_url") or item.get("monitor_url"),
                 "stock_status": "in_stock" if item.get("track_current_price") else "unknown",
                 "retrieval_time": ts if item.get("track_current_price") else None,
                 "available_at": "2026-10-10T17:58:00+09:00" if item.get("track_current_price") else None,
@@ -75,15 +80,15 @@ class BlackFridayScenarioTests(unittest.TestCase):
         self.assertFalse(result["black_friday_prices_known"])
         self.assertEqual(result["total_budget_jpy"], 400000)
         self.assertEqual(result["peripheral_target_total_jpy"], 45000)
-        self.assertEqual(result["black_friday_ideal_bundle_target_jpy"], 400000)
-        self.assertEqual(result["black_friday_target_buffer_jpy"], 0)
-        self.assertEqual(result["black_friday_hard_cap_bundle_jpy"], 400000)
+        self.assertEqual(result["black_friday_ideal_bundle_target_jpy"], 395000)
+        self.assertEqual(result["black_friday_target_buffer_jpy"], 5000)
+        self.assertEqual(result["black_friday_hard_cap_bundle_jpy"], 395000)
         self.assertFalse(result["all_in_checkout_total_final"])
 
         speaker = next(x for x in result["peripherals"] if x["id"] == "speakers")
-        self.assertEqual(speaker["black_friday_target_price_jpy"], 24000)
+        self.assertEqual(speaker["black_friday_target_price_jpy"], 12000)
         self.assertIsNone(speaker["black_friday_price_observed_jpy"])
-        self.assertEqual(speaker["pre_black_friday_reference_price_jpy"], 24100)
+        self.assertEqual(speaker["pre_black_friday_reference_price_jpy"], 12100)
 
         outlier_row = next(x for x in result["rtx_5070_ti_desktop_outliers"]
                            if x["id"] == outlier["id"])
@@ -125,6 +130,11 @@ class BlackFridayScenarioTests(unittest.TestCase):
                 "current_price_jpy": 11000 if item["id"] == "speakers" else item["target_price_jpy"],
                 "price_verified": is_tracked,
                 "identity_verified": is_tracked,
+                "price_source_mode": "direct_structured" if is_tracked else None,
+                "price_validation_status": "validated" if is_tracked else None,
+                "variant_match": "exact" if is_tracked else None,
+                "url": item.get("monitor_url") or item.get("purchase_url"),
+                "purchase_url": item.get("purchase_url") or item.get("monitor_url"),
                 "stock_status": "in_stock" if is_tracked else "unknown",
                 "retrieval_time": retrieved if is_tracked else None,
                 "available_at": available if is_tracked else None,
@@ -140,11 +150,11 @@ class BlackFridayScenarioTests(unittest.TestCase):
                 "end_jst": "2026-11-30T23:59:59+09:00",
                 "source_url": "https://www.mouse-jp.co.jp/",
             },
-            "edifier": {
+            "bic_camera": {
                 "status": "CONFIRMED_MANUAL",
                 "start_jst": "2026-11-15T00:00:00+09:00",
                 "end_jst": "2026-11-30T23:59:59+09:00",
-                "source_url": "https://www.edifier.jp/",
+                "source_url": "https://www.biccamera.com/",
             },
         })
         with patch.object(scenario_analysis, "load_json", return_value={"sources": {}}):
