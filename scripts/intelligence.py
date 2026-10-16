@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 JST = timezone(timedelta(hours=9))
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def _initial_budget_settings():
-    """Read explicit all-in budget settings once at process start."""
+    """Read PC, peripheral and unallocated contingency settings once at process start."""
     path = os.path.join(ROOT, "config", "targets.json")
     try:
         with open(path, encoding="utf-8") as f:
@@ -20,11 +20,11 @@ def _initial_budget_settings():
         peripherals = int(cfg.get("peripheral_budget_jpy", 45000))
         pc_cap = int(cfg.get("pc_budget_jpy", 350000))
         pc_target = int(cfg.get("pc_target_jpy", min(350000, pc_cap)))
+        contingency = int(cfg.get("unallocated_contingency_jpy", max(0, total - peripherals - pc_cap)))
     except (TypeError, ValueError):
-        total, peripherals, pc_cap, pc_target = 400000, 45000, 350000, 350000
-    contingency = int(cfg.get("unallocated_contingency_jpy", max(0, total - peripherals - pc_cap)))
+        total, peripherals, pc_cap, pc_target, contingency = 400000, 45000, 350000, 350000, 5000
     if min(total, peripherals, pc_cap, pc_target, contingency) < 0 or pc_cap + peripherals + contingency != total or pc_target > pc_cap:
-        total, peripherals, pc_cap, pc_target = 400000, 69800, 330200, 330200
+        total, peripherals, pc_cap, pc_target, contingency = 400000, 45000, 350000, 350000, 5000
     return total, peripherals, pc_target, pc_cap
 
 TOTAL_BUDGET, PERIPHERAL_BUDGET, BUDGET, PC_BUDGET = _initial_budget_settings()
