@@ -13,6 +13,22 @@ from intelligence import (
 )
 from sale_calendar import campaign_window_for_item
 
+def early_buy_amount_label(review):
+    """Display a product listing price separately from a shipping estimate or verified checkout total."""
+    review = review if isinstance(review, dict) else {}
+    observed = review.get("observed_price_jpy")
+    estimate = review.get("estimated_checkout_total_jpy")
+    verified_total = review.get("verified_checkout_total_jpy")
+    verified = review.get("checkout_total_verified") is True
+    if verified and isinstance(verified_total, int) and not isinstance(verified_total, bool) and verified_total > 0:
+        return "決済総額確認済み ¥{:,}".format(verified_total)
+    if isinstance(observed, int) and not isinstance(observed, bool) and observed > 0:
+        if isinstance(estimate, int) and not isinstance(estimate, bool) and estimate > 0 and estimate != observed:
+            return "掲載 ¥{:,} / 送料込概算 ¥{:,}（決済未確認）".format(observed, estimate)
+        return "掲載 ¥{:,}（決済未確認）".format(observed)
+    return "未確認"
+
+
 def peripheral_monitor_section_heading(target_config):
     """Describe the primary peripheral purchase set from the active target config."""
     primary = [
@@ -905,15 +921,14 @@ def main():
         "",
         "ブラックフライデーを基本に待ちます。前倒し価格は購入許可ではなく、同一型番の直接価格・在庫・取得時刻が検証された場合に再確認を始める目安です。",
         "",
-        "|商品|前倒し価格|観測済み現金総額|判定|次の確認|",
+        "|商品|前倒し価格|観測価格・決済総額の確認状況|判定|次の確認|",
         "|---|---:|---:|---|---|",
         *[
             "|{}|{}|{}|{}|{}|".format(
                 str(p.get("name") or p.get("id") or "不明").replace("|", "/"),
                 ("¥{:,}".format((p.get("early_buy_review") or {}).get("early_buy_threshold_jpy"))
                  if isinstance((p.get("early_buy_review") or {}).get("early_buy_threshold_jpy"), int) else "—"),
-                ("¥{:,}".format((p.get("early_buy_review") or {}).get("observed_cash_total_jpy"))
-                 if isinstance((p.get("early_buy_review") or {}).get("observed_cash_total_jpy"), int) else "未確認"),
+                early_buy_amount_label(p.get("early_buy_review")),
                 str((p.get("early_buy_review") or {}).get("label_ja") or "未判定").replace("|", "/"),
                 str((p.get("early_buy_review") or {}).get("next_step") or "価格・在庫を確認").replace("|", "/"),
             )
