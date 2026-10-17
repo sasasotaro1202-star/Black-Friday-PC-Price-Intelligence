@@ -198,12 +198,12 @@ class ReportLinkTests(unittest.TestCase):
                 "budget_fit_points": 28,
                 "feature_spec_points": 19,
                 "substitution_risk_points": 13,
-                "rationale_ja": "用途  と\\tても | 理由",
+                "rationale_ja": "用途  と\tても | 理由",
                 "limitations_ja": "留意点   あり",
             },
         })
         self.assertEqual(normalized_reason, "評価理由: 用途 と ても ／ 理由 / 留意点: 留意点 あり")
-        self.assertNotIn("\\t", normalized_reason)
+        self.assertNotIn("\t", normalized_reason)
         self.assertNotIn("  ", normalized_reason)
         evidence = {
             "score": 55,
