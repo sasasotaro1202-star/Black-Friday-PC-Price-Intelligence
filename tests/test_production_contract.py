@@ -5,7 +5,7 @@ import unittest
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from observation_contract import observation_metadata_schema_errors
+from observation_contract import observation_metadata_schema_errors, purchase_gate_schema_errors
 
 
 def valid_snapshot():
@@ -34,6 +34,70 @@ def valid_snapshot():
 
 
 class ProductionObservationContractTests(unittest.TestCase):
+    def test_purchase_gate_schema_passes(self):
+        rankings = {
+            "quality": {
+                "critical_candidate_count": 5,
+                "critical_unverified_count": 2,
+                "coverage_status": "PARTIAL",
+            },
+            "purchase_gate": {
+                "allowed": False,
+                "coverage_status": "PARTIAL",
+                "critical_unverified_ids": ["gpu-model", "ram-kit"],
+            },
+        }
+        self.assertEqual(purchase_gate_schema_errors(rankings), [])
+
+    def test_missing_purchase_gate_fails_closed(self):
+        rankings = {
+            "quality": {
+                "critical_candidate_count": 5,
+                "critical_unverified_count": 2,
+                "coverage_status": "PARTIAL",
+            }
+        }
+        self.assertIn(
+            "purchase_gate is missing or is not an object",
+            purchase_gate_schema_errors(rankings),
+        )
+
+    def test_missing_or_non_boolean_purchase_authorization_fails_closed(self):
+        rankings = {
+            "quality": {
+                "critical_candidate_count": 5,
+                "critical_unverified_count": 0,
+                "coverage_status": "COMPLETE",
+            },
+            "purchase_gate": {
+                "allowed": None,
+                "coverage_status": "COMPLETE",
+                "critical_unverified_ids": [],
+            },
+        }
+        self.assertIn(
+            "purchase_gate.allowed is missing or invalid",
+            purchase_gate_schema_errors(rankings),
+        )
+
+    def test_gate_and_quality_coverage_status_must_match(self):
+        rankings = {
+            "quality": {
+                "critical_candidate_count": 5,
+                "critical_unverified_count": 0,
+                "coverage_status": "COMPLETE",
+            },
+            "purchase_gate": {
+                "allowed": False,
+                "coverage_status": "PARTIAL",
+                "critical_unverified_ids": [],
+            },
+        }
+        self.assertIn(
+            "purchase_gate.coverage_status does not match quality.coverage_status",
+            purchase_gate_schema_errors(rankings),
+        )
+
     def test_complete_metadata_passes(self):
         self.assertEqual(observation_metadata_schema_errors(valid_snapshot()), [])
 
