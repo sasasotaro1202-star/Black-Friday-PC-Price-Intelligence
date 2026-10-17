@@ -31,10 +31,12 @@
 - stock_status: in_stock / low_stock / out_of_stock / unknown / preorder_or_backorder
 - confirmation_url: 該当支店の価格証拠となる公式HTTPSページ。同じ販売店ドメインであることを検証
 - model_match: 完全な型番・色・容量・バリアントが一致した場合だけ true
-- evidence_type: in_store_check / store_phone_confirmation / official_branch_price_page / official_branch_stock_page
-- evidence_notes: 確認した型番、税込現金価格、在庫、確認方法。ポイント・クーポンは別記
+- evidence_type: in_store_check / store_phone_confirmation / official_branch_price_page。official_branch_stock_page（在庫のみの証拠）は店頭価格の検証には使用不可
+- evidence_notes: 確認した型番、税込現金価格、確認方法。ポイント・クーポンは別記
 
-従来の store_price_jpy / store_price_checked_at 等の単一支店フィールドも後方互換のため受け付けます。出力のこれらの単一値は比較上の代表候補です。**支店ごとの判断・監査には store_price_observations 全件を使います。** 未確認の項目は空のままにし、価格を推測して埋めません。
+支店別在庫ページは価格を証明しないため、価格記録の evidence_type に指定できません。
+
+従来の単一支店フィールドも後方互換のため受け付けますが、現金価格の基準を明示する store_price_basis = tax_inclusive_cash が必須です。出力のこれらの単一値は比較上の代表候補です。**支店ごとの判断・監査には store_price_observations 全件を使います。** 未確認の項目は空のままにし、価格を推測して埋めません。
 
 **店舗受け取り用のWeb在庫表示は、店頭現金購入の棚在庫を証明しません。** 店頭現金価格とその時点の在庫は `store_price_observations` 内の同じ支店の確認記録だけで判定します。`store_inventory_observations` のWeb取置き/店舗受取在庫は別ルートの証拠として保持し、店頭現金価格の在庫を補完・上書きしません。
 
