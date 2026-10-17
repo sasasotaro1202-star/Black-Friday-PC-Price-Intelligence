@@ -45,6 +45,34 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(targets["peripheral_budget_jpy"], 35000)
         self.assertEqual(targets["pc_target_jpy"], 360000)
 
+    def test_peripheral_shipping_and_excluded_device_scope_are_consistent(self):
+        scope = self.targets["budget_scope_note"]
+        shipping = self.targets["peripheral_shipping_policy"]
+        self.assertNotIn("周辺機器の送料は計上しない", scope)
+        self.assertIn("オンライン配送", scope)
+        self.assertIn("実店舗", scope)
+        self.assertIn("最終支払額", scope)
+        self.assertEqual(shipping["mode"], "CHANNEL_SPECIFIC")
+        self.assertIn("never assume zero", shipping["online_delivery"])
+        self.assertIn("Do not add delivery shipping", shipping["physical_store_cash"])
+        self.assertIn("branch inventory", shipping["store_pickup"])
+        self.assertIn("do not subtract points", shipping["points_and_rewards"].lower())
+
+        primary = self.targets["peripherals"]
+        self.assertEqual(sum(1 for item in primary if item.get("id") == "main_monitor"), 1)
+        candidate_rows = primary + self.targets.get("peripheral_alternatives", [])
+        candidate_identity_text = " ".join(
+            str(item.get(key, ""))
+            for item in candidate_rows
+            for key in ("id", "category", "name", "best_for")
+        ).lower()
+        for excluded in ("speaker", "スピーカー", "sub_monitor", "sub-monitor", "サブモニター", "headset", "ヘッドセット"):
+            self.assertNotIn(excluded.lower(), candidate_identity_text)
+
+        # DIY is the primary purchase route; BTO remains a comparison benchmark only.
+        self.assertEqual(self.profile["pc_build_method_preference"], "SELF_BUILD_REQUIRED_FOR_PRIMARY_RECOMMENDATION")
+        self.assertEqual(self.profile["bto_role"], "REFERENCE_BENCHMARK_ONLY")
+
     def test_diy_profile_matches_budget_and_never_penalizes_assembly_time(self):
         profile = self.profile
         self.assertEqual(profile["total_budget_jpy"], self.targets["total_budget_jpy"])

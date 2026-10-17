@@ -264,7 +264,7 @@
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
-  "budget_scope_note": "総額上限400,000円、PC本体の基準目標360,000円。周辺機器の計画配分は約35,000円（27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差・ケーブル不足用の柔軟な予備枠）。電源タップは所有済みのため購入候補・価格監視・予算から除外する。スピーカー、サブモニター、ヘッドセットも購入対象・候補・価格監視・予算・総額計算から完全に除外する。周辺機器の送料は計上しない。総額予備費5,000円を別に確保し、PC本体の最終許容額は総額400,000円から実際の必要周辺機器費と予備費を引いて動的に算出する。価格目標は確定値ではなく、購入前に型番・在庫・決済額を確認する。",
+  "budget_scope_note": "総額上限400,000円、PC本体の基準目標360,000円。周辺機器の計画配分は約35,000円（27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差・ケーブル不足用の柔軟な予備枠）。電源タップは所有済みのため購入候補・価格監視・予算から除外する。スピーカー、サブモニター、ヘッドセットも購入対象・候補・価格監視・予算・総額計算から完全に除外する。周辺機器送料は購入チャネル別に計上する。オンライン配送では実際の送料・必須費用を最終支払額に加え、未確認時は該当商品の送料予備枠で保守的に試算して0円と仮定しない。実店舗の現金購入では配送送料を計上せず、同一型番の税込現金価格と支店在庫を別々に確認する。ネット注文の店舗受け取りはオンライン決済額に必須費用を反映し、受取可能な支店在庫を別途確認する。ポイントは現金値引きに算入しない。総額予備費5,000円を別に確保し、PC本体の最終許容額は総額400,000円から実際の必要周辺機器費と予備費を引いて動的に算出する。価格目標は確定値ではなく、購入前に型番・在庫・決済額を確認する。",
   "peripherals": [
     {
       "id": "main_monitor",
@@ -1968,5 +1968,13 @@
     ],
     "trigger_outcome": "REVIEW_ONLY_NO_AUTOMATIC_BUY",
     "notes": "この価格は前倒し検討用の閾値であり、BF価格予測・最安値予測・購入許可ではない。ポイント還元を現金支払額から差し引かない。公式BF日程は前年の日付や暫定監視窓から推定しない。"
+  },
+  "peripheral_shipping_policy": {
+    "mode": "CHANNEL_SPECIFIC",
+    "online_delivery": "Add checkout-verified shipping and mandatory fees to the online cash total. Until verified, use the selected product's configured shipping reserve and label it as an estimate; never assume zero.",
+    "physical_store_cash": "Do not add delivery shipping. Verify the exact SKU's tax-included cash price and branch inventory separately.",
+    "store_pickup": "Use the actual online checkout cash total and separately verify pickup eligibility and branch inventory.",
+    "points_and_rewards": "Report separately; do not subtract points from the cash price.",
+    "checkout_price_is_verified_only_when": "Exact SKU, seller/channel, stock, applicable fees, checkout total and observation timestamp are verified."
   }
 }
