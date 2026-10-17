@@ -1,6 +1,7 @@
 import importlib.util
 import pathlib
 import unittest
+from datetime import datetime, timedelta, timezone
 from unittest.mock import patch
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -10,6 +11,82 @@ spec.loader.exec_module(report)
 
 
 class ReportLinkTests(unittest.TestCase):
+    def test_peripheral_purchase_evidence_score_rewards_only_fresh_complete_evidence(self):
+        now = datetime(2026, 10, 17, 20, 0, tzinfo=timezone(timedelta(hours=9)))
+        stamp = now.isoformat()
+        target = {"purchase_channel": "compare_online_and_store"}
+        observation = {
+            "current_price_jpy": 20000,
+            "price_verified": True,
+            "identity_verified": True,
+            "price_validation_status": "validated_exact_model_page",
+            "price_source_mode": "direct_text",
+            "retrieval_time": stamp,
+            "available_at": stamp,
+            "stock_status": "in_stock",
+            "online_best_offer_stock_status": "in_stock",
+            "online_shipping_cost_verified": True,
+            "online_shipping_jpy": 0,
+            "channel_comparison_complete": True,
+            "warranty_return_conditions_verified": True,
+        }
+        result = report.peripheral_purchase_evidence_score(target, observation, now=now)
+        self.assertEqual(result["score"], 100)
+        self.assertEqual(result["breakdown"], {
+            "direct_price_identity_pit": 30,
+            "sellable_stock": 25,
+            "verified_checkout_total": 25,
+            "route_comparison": 10,
+            "warranty_and_returns": 10,
+        })
+        self.assertTrue(result["direct_price_verified_fresh"])
+        self.assertTrue(result["sellable_stock_verified_fresh"])
+        self.assertTrue(result["checkout_total_verified"])
+
+    def test_peripheral_purchase_evidence_score_fails_closed_on_stale_or_ambiguous_data(self):
+        now = datetime(2026, 10, 17, 20, 0, tzinfo=timezone(timedelta(hours=9)))
+        old_stamp = (now - timedelta(hours=8)).isoformat()
+        result = report.peripheral_purchase_evidence_score(
+            {"purchase_channel": "compare_online_and_store"},
+            {
+                "current_price_jpy": 20000,
+                "price_verified": True,
+                "identity_verified": True,
+                "price_validation_status": "validated_exact_model_page",
+                "price_source_mode": "direct_text",
+                "retrieval_time": old_stamp,
+                "available_at": old_stamp,
+                "stock_status": "in_stock",
+                "online_best_offer_stock_status": "in_stock",
+                "online_shipping_cost_verified": True,
+                "online_shipping_jpy": 0,
+                "channel_comparison_complete": True,
+            },
+            now=now,
+        )
+        self.assertEqual(result["score"], 0)
+        self.assertFalse(result["direct_price_verified_fresh"])
+        self.assertFalse(result["sellable_stock_verified_fresh"])
+        self.assertFalse(result["checkout_total_verified"])
+
+        unknown = report.peripheral_purchase_evidence_score(
+            {"purchase_channel": "online"},
+            {
+                "current_price_jpy": 20000,
+                "price_verified": False,
+                "identity_verified": False,
+                "price_validation_status": "missing",
+                "price_source_mode": "none",
+                "retrieval_time": now.isoformat(),
+                "available_at": None,
+                "stock_status": "unknown",
+            },
+            now=now,
+        )
+        self.assertEqual(unknown["score"], 0)
+        self.assertFalse(unknown["direct_price_verified_fresh"])
+        self.assertFalse(unknown["sellable_stock_verified_fresh"])
+
     def test_early_buy_amount_label_separates_listing_estimate_and_verified_checkout(self):
         estimated = {
             "observed_price_jpy": 20790,
