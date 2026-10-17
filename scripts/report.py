@@ -1231,9 +1231,9 @@ def main():
         "",
         "## 周辺機器カテゴリ別ランキング（カテゴリ別・最大3候補）",
         "",
-        "各カテゴリから**1商品だけ**選びます。代替候補は価格監視対象ですが、選択しない限り必須周辺機器の総予算には加算しません。",
-        "用途適合点/100は、用途・仕様・予算目標を調査して config/targets.json に登録した事前評価です。現在価格や在庫を自動的に織り込む総合点ではないため、購入根拠点と分けて読みます。",
-        "購入根拠点/100は最新の観測から動的に計算します（直接価格・型番・時刻/PIT 30、販売可能在庫25、決済総額25、購入ルート確認10、保証/返品条件確認10）。未確認・古い観測は加点しません。BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け、取得失敗は売り切れと見なしません。",
+        "各カテゴリから**1商品だけ**選びます。代替候補は価格監視対象ですが、選択しない限り必須周辺機器の総予算には加算しません。付属ケーブル不足時だけ検討する条件付き購入ルールと、商品ではない予備費は製品ランキングから除外します。",
+        "用途適合点/100は4軸の明示的な事前ルーブリックです（用途35、予算30、仕様・機能20、代替性・購入リスク15）。製品ごとに内訳、評価理由、留意点を表示します。ライブ価格・在庫を自動的に織り込む点数ではなく、実測ベンチマークでもありません。",
+        "購入根拠点/100は最新の観測から動的に計算します（直接価格・型番・時刻/PIT 30、販売可能在庫25、決済総額25、購入ルート確認10、保証/返品条件確認10）。内訳も行ごとに表示します。オンライン購入の決済点には送料額だけでなく、最終決済総額・確認フラグ・確認時刻が必要です。未確認・古い観測は加点しません。BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け、取得失敗は売り切れと見なしません。",
         "購入ルート：PC本体（自作パーツ）はネット注文。メインモニター・キーボード・マウス・マウスパッドはネット配送・実店舗・ネット注文の店舗受け取りを同一型番で比較します。ネット価格・送料・店頭現金価格・支店在庫・ポイント・保証・返品条件を別々に記録し、ネット価格を店頭価格として扱いません。電源タップは所有済み、スピーカー・サブモニター・ヘッドセットは購入対象外です。",
         "",
     ]
@@ -1244,12 +1244,14 @@ def main():
         candidate_ids = [
             candidate_id for candidate_id in candidate_ids
             if candidate_id in all_peripheral_targets
+            and all_peripheral_targets[candidate_id].get("category") != "budget_reserve"
+            and all_peripheral_targets[candidate_id].get("purchase_channel") != "conditional_need_only"
+            and not all_peripheral_targets[candidate_id].get("score_exclusion_reason_ja")
         ]
         candidate_ids.sort(
             key=lambda candidate_id: (
-                int(all_peripheral_targets[candidate_id].get("ranking_score_100", -1))
-                if isinstance(all_peripheral_targets[candidate_id].get("ranking_score_100"), (int, float))
-                   and not isinstance(all_peripheral_targets[candidate_id].get("ranking_score_100"), bool)
+                peripheral_suitability_score(all_peripheral_targets[candidate_id]).get("score")
+                if isinstance(peripheral_suitability_score(all_peripheral_targets[candidate_id]).get("score"), int)
                 else -1
             ),
             reverse=True,
@@ -1260,7 +1262,7 @@ def main():
         peripheral_category_lines += [
             f"### {group_name}",
             "",
-            "|順位|用途適合点/100|購入根拠点/100|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|",
+            "|順位|用途適合点/100（内訳）|購入根拠点/100（内訳）|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|適合評価の理由・留意点|商品ページ|",
             "|---:|---:|---:|---|---|---|---:|---:|---|---|---|---|",
         ]
         for rank, candidate_id in enumerate(candidate_ids, 1):
@@ -1322,16 +1324,15 @@ def main():
             product_link = f"[商品ページ]({url})" if isinstance(url, str) and url.startswith("https://") else "リンク未設定"
             image_html = image_markup(target, url, 88)
             suffix = "（主予算候補）" if candidate_id in mandatory_ids else "（代替候補）"
-            score = target.get("ranking_score_100")
-            score_text = f"**{int(score)}/100**" if isinstance(score, (int, float)) and not isinstance(score, bool) and 0 <= score <= 100 else "未評価"
+            score_text = peripheral_fit_score_text(target)
             max_price_age = int(target_config.get("peripheral_price_max_age_minutes", 360))
             max_stock_age = int(target_config.get("peripheral_stock_max_age_minutes", 30))
             evidence = peripheral_purchase_evidence_score(
                 target, observation, now=now_jst(),
                 max_age_minutes=max_price_age, stock_max_age_minutes=max_stock_age,
             )
-            evidence_text = f"**{evidence['score']}/100**"
-            reason = str(target.get("ranking_reason") or target.get("target_price_note") or "").replace("|", "/").replace("\\n", " ").strip()
+            evidence_text = peripheral_purchase_evidence_score_text(evidence)
+            reason = peripheral_fit_reason_text(target)
             peripheral_category_lines.append(
                 f"|{rank}|{score_text}|{evidence_text}|{image_html}|{target.get('name', candidate_id)}{suffix}|{purchase_method_text}|¥{target_price:,}|{price_text}|{stock_text}|{verified_text}|{reason}|{product_link}|"
             )
