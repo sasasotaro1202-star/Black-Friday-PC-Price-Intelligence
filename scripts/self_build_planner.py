@@ -920,25 +920,25 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "direct_listing_display_offers": memory_price.get("direct_listing_display_offers") or [],
             "purchase_url": memory_price.get("purchase_url") or memory_part.get("purchase_url") or memory_part.get("monitor_url"),
         })
-    trusted_memory_candidates = [
+    sellable_memory_candidates = [
         candidate for candidate in memory_candidates
-        if candidate["trusted_for_market_estimate"]
-        and isinstance(candidate["market_reference_price_jpy"], int)
+        if isinstance(candidate.get("sellable_listing_price_jpy"), int)
+        and candidate.get("stock_status") in ("in_stock", "low_stock")
     ]
-    if trusted_memory_candidates:
+    if sellable_memory_candidates:
         chosen_memory = min(
-            trusted_memory_candidates,
+            sellable_memory_candidates,
             key=lambda candidate: (
-                candidate["market_reference_price_jpy"],
-                candidate["target_price_jpy"] if isinstance(candidate["target_price_jpy"], int) else 10**12,
+                candidate["sellable_listing_price_jpy"],
+                0 if candidate["stock_status"] == "in_stock" else 1,
                 candidate["id"],
             ),
         )
         selected_memory_id = chosen_memory["id"]
-        memory_selection_method = "lowest_fresh_verified_market_reference"
+        memory_selection_method = "lowest_fresh_verified_in_stock_direct_seller_price"
     else:
         selected_memory_id = primary_memory_id
-        memory_selection_method = "primary_memory_fallback_no_verified_market_reference"
+        memory_selection_method = "primary_memory_fallback_no_verified_in_stock_alternative"
     selected_memory = parts.get(selected_memory_id) or {}
     memory_choice_selection = {
         "selected_id": selected_memory_id,
