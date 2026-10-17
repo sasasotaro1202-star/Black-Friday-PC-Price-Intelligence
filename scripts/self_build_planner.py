@@ -1589,7 +1589,7 @@ def render_plan_markdown(plan):
             preorder_count = int(stock_counts.get("preorder_or_backorder") or 0)
             stale_count = int(stock_counts.get("stale") or 0)
             if sold_out_count or unknown_count or preorder_count or stale_count:
-                direct_text += " / 売切れ{}・在庫不明{}・取寄/予約{}・鮮度切れ{}".format(
+                direct_text += " / 売切れ{}・在庫不明{}・取寄せ/予約{}・鮮度切れ{}".format(
                     sold_out_count, unknown_count, preorder_count, stale_count
                 )
             # Link to each vetted seller-specific offer with its own stock label;
@@ -1599,7 +1599,7 @@ def render_plan_markdown(plan):
             stock_labels = {
                 "in_stock": "在庫あり", "low_stock": "在庫少",
                 "out_of_stock": "売切れ", "unknown": "在庫不明",
-                "preorder_or_backorder": "取寄/予約",
+                "preorder_or_backorder": "取寄せ/予約",
             }
             for offer in (part.get("direct_listing_display_offers") or [])[:5]:
                 offer_url = str(offer.get("url") or "")
