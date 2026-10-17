@@ -2,6 +2,7 @@ import hashlib
 import html
 import json
 import os
+import re
 from datetime import datetime
 
 from intelligence import (
