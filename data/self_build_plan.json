@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T22:55:48+09:00",
+  "generated_at": "2026-10-17T22:59:06+09:00",
   "schema_version": 1,
   "project": "DIY_PC",
   "source_policy": "Comparison-site prices are market references only. This plan never authorizes a purchase; official seller-specific BF price evidence is missing.",
@@ -244,7 +244,7 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-17T22:55:30+09:00",
+            "retrieval_time": "2026-10-17T22:58:49+09:00",
             "display_age_minutes": 0.3
           },
           {
@@ -255,7 +255,7 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-17T22:55:29+09:00",
+            "retrieval_time": "2026-10-17T22:58:48+09:00",
             "display_age_minutes": 0.3
           },
           {
@@ -266,7 +266,7 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_structured",
-            "retrieval_time": "2026-10-17T22:55:28+09:00",
+            "retrieval_time": "2026-10-17T22:58:47+09:00",
             "display_age_minutes": 0.3
           },
           {
@@ -277,7 +277,7 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_structured",
-            "retrieval_time": "2026-10-17T22:55:27+09:00",
+            "retrieval_time": "2026-10-17T22:58:46+09:00",
             "display_age_minutes": 0.3
           }
         ],
@@ -321,7 +321,7 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-17T22:55:23+09:00",
+            "retrieval_time": "2026-10-17T22:58:43+09:00",
             "display_age_minutes": 0.4
           }
         ],
@@ -434,8 +434,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-17T22:55:36+09:00",
-            "display_age_minutes": 0.2
+            "retrieval_time": "2026-10-17T22:58:58+09:00",
+            "display_age_minutes": 0.1
           },
           {
             "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
@@ -445,7 +445,7 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_structured",
-            "retrieval_time": "2026-10-17T22:55:33+09:00",
+            "retrieval_time": "2026-10-17T22:58:55+09:00",
             "display_age_minutes": 0.2
           },
           {
@@ -456,8 +456,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_structured",
-            "retrieval_time": "2026-10-17T22:55:32+09:00",
-            "display_age_minutes": 0.3
+            "retrieval_time": "2026-10-17T22:58:54+09:00",
+            "display_age_minutes": 0.2
           },
           {
             "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -467,7 +467,7 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-17T22:55:34+09:00",
+            "retrieval_time": "2026-10-17T22:58:56+09:00",
             "display_age_minutes": 0.2
           }
         ],
@@ -546,7 +546,7 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_structured",
-            "retrieval_time": "2026-10-17T22:55:35+09:00",
+            "retrieval_time": "2026-10-17T22:58:56+09:00",
             "display_age_minutes": 0.2
           }
         ],
@@ -633,9 +633,9 @@
     "configured_component_count": 18,
     "tracked_hardware_part_count": 18,
     "snapshot_verified_count": 0,
-    "snapshot_generated_at": "2026-10-17T22:55:44+09:00",
+    "snapshot_generated_at": "2026-10-17T22:59:05+09:00",
     "snapshot_source_role": "comparison_site_reference",
-    "snapshot_sha256": "5b64954c4b709c9d9bb1aa90698803df29779a2070ab12b9f8a5c5f391ccd08a"
+    "snapshot_sha256": "5424464553387f75e0dcc8727b1fd5a05d44d5c4d47903b921d2499f17d7d178"
   },
   "builds": [
     {
@@ -682,8 +682,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:21+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-17T22:58:41+09:00",
+              "display_age_minutes": 0.4
             }
           ],
           "purchase_url": "https://www.dospara.co.jp/SBR1892/IC634895.html"
@@ -730,7 +730,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:30+09:00",
+              "retrieval_time": "2026-10-17T22:58:49+09:00",
               "display_age_minutes": 0.3
             },
             {
@@ -741,7 +741,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:29+09:00",
+              "retrieval_time": "2026-10-17T22:58:48+09:00",
               "display_age_minutes": 0.3
             },
             {
@@ -752,7 +752,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:28+09:00",
+              "retrieval_time": "2026-10-17T22:58:47+09:00",
               "display_age_minutes": 0.3
             },
             {
@@ -763,7 +763,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:27+09:00",
+              "retrieval_time": "2026-10-17T22:58:46+09:00",
               "display_age_minutes": 0.3
             }
           ],
@@ -807,7 +807,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:23+09:00",
+              "retrieval_time": "2026-10-17T22:58:43+09:00",
               "display_age_minutes": 0.4
             }
           ],
@@ -917,8 +917,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:36+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-17T22:58:58+09:00",
+              "display_age_minutes": 0.1
             },
             {
               "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
@@ -928,7 +928,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:33+09:00",
+              "retrieval_time": "2026-10-17T22:58:55+09:00",
               "display_age_minutes": 0.2
             },
             {
@@ -939,8 +939,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:32+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-17T22:58:54+09:00",
+              "display_age_minutes": 0.2
             },
             {
               "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -950,7 +950,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:34+09:00",
+              "retrieval_time": "2026-10-17T22:58:56+09:00",
               "display_age_minutes": 0.2
             }
           ],
@@ -1026,7 +1026,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:35+09:00",
+              "retrieval_time": "2026-10-17T22:58:56+09:00",
               "display_age_minutes": 0.2
             }
           ],
@@ -1076,7 +1076,7 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:26+09:00",
+          "retrieval_time": "2026-10-17T22:58:44+09:00",
           "reference_age_minutes": 0.36666666666666664,
           "monitor_url": "https://kakaku.com/item/K0001630332/",
           "purchase_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
@@ -1120,7 +1120,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:26+09:00",
+              "retrieval_time": "2026-10-17T22:58:44+09:00",
               "display_age_minutes": 0.4
             },
             {
@@ -1131,14 +1131,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:21+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-17T22:58:42+09:00",
+              "display_age_minutes": 0.4
             }
           ],
           "direct_listing_sellable_price_jpy": 47800,
           "direct_listing_sellable_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:26+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:44+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -1214,8 +1214,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:28+09:00",
-          "reference_age_minutes": 0.3333333333333333,
+          "retrieval_time": "2026-10-17T22:58:50+09:00",
+          "reference_age_minutes": 0.26666666666666666,
           "monitor_url": "https://kakaku.com/item/K0001669878/",
           "purchase_url": "https://www.ark-pc.co.jp/i/12201558/",
           "reference_source_url": "https://www.ark-pc.co.jp/i/12201558/",
@@ -1258,7 +1258,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:28+09:00",
+              "retrieval_time": "2026-10-17T22:58:50+09:00",
               "display_age_minutes": 0.3
             },
             {
@@ -1269,7 +1269,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:22+09:00",
+              "retrieval_time": "2026-10-17T22:58:42+09:00",
               "display_age_minutes": 0.4
             },
             {
@@ -1280,8 +1280,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:26+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-17T22:58:47+09:00",
+              "display_age_minutes": 0.3
             },
             {
               "url": "https://www.pc4u.co.jp/view/item/000000092844",
@@ -1291,14 +1291,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:23+09:00",
+              "retrieval_time": "2026-10-17T22:58:44+09:00",
               "display_age_minutes": 0.4
             }
           ],
           "direct_listing_sellable_price_jpy": 21380,
           "direct_listing_sellable_url": "https://www.ark-pc.co.jp/i/12201558/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:28+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:50+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -1393,8 +1393,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:32+09:00",
-          "reference_age_minutes": 0.26666666666666666,
+          "retrieval_time": "2026-10-17T22:58:53+09:00",
+          "reference_age_minutes": 0.21666666666666667,
           "monitor_url": "https://kakaku.com/item/K0001671441/",
           "purchase_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
@@ -1437,14 +1437,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:32+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-17T22:58:53+09:00",
+              "display_age_minutes": 0.2
             }
           ],
           "direct_listing_sellable_price_jpy": 14980,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:32+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:53+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -1521,8 +1521,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:36+09:00",
-          "reference_age_minutes": 0.2,
+          "retrieval_time": "2026-10-17T22:58:57+09:00",
+          "reference_age_minutes": 0.15,
           "monitor_url": "https://kakaku.com/item/J0000039064/",
           "purchase_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
@@ -1565,8 +1565,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:36+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-17T22:58:57+09:00",
+              "display_age_minutes": 0.1
             },
             {
               "url": "https://www.yodobashi.com/product/100000001007195271/",
@@ -1576,14 +1576,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:35+09:00",
+              "retrieval_time": "2026-10-17T22:58:55+09:00",
               "display_age_minutes": 0.2
             }
           ],
           "direct_listing_sellable_price_jpy": 13180,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:36+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:57+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -1661,8 +1661,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:37+09:00",
-          "reference_age_minutes": 0.18333333333333332,
+          "retrieval_time": "2026-10-17T22:58:57+09:00",
+          "reference_age_minutes": 0.15,
           "monitor_url": "https://kakaku.com/item/K0001432816/",
           "purchase_url": "https://www.yodobashi.com/product/100000001006975270/",
           "reference_source_url": "https://www.yodobashi.com/product/100000001006975270/",
@@ -1705,14 +1705,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:37+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-17T22:58:57+09:00",
+              "display_age_minutes": 0.1
             }
           ],
           "direct_listing_sellable_price_jpy": 19280,
           "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001006975270/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:37+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:57+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -1772,8 +1772,8 @@
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-17T22:55:21+09:00",
-          "reference_age_minutes": 0.45,
+          "retrieval_time": "2026-10-17T22:58:41+09:00",
+          "reference_age_minutes": 0.4166666666666667,
           "monitor_url": "https://kakaku.com/item/K0001610896/",
           "purchase_url": "https://kakaku.com/item/K0001610896/",
           "reference_source_url": null,
@@ -1787,7 +1787,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-17T22:55:23+09:00",
+          "direct_listing_display_observed_at": "2026-10-17T22:58:43+09:00",
           "early_buy_review": {
             "item_id": "memory-teamgroup-ddr5-32gb-6000",
             "early_buy_threshold_jpy": 36000,
@@ -1815,7 +1815,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:23+09:00",
+              "retrieval_time": "2026-10-17T22:58:43+09:00",
               "display_age_minutes": 0.4
             }
           ],
@@ -1902,8 +1902,8 @@
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-17T22:55:30+09:00",
-          "reference_age_minutes": 0.3,
+          "retrieval_time": "2026-10-17T22:58:51+09:00",
+          "reference_age_minutes": 0.25,
           "monitor_url": "https://kakaku.com/item/K0001466997/",
           "purchase_url": "https://kakaku.com/item/K0001466997/",
           "reference_source_url": null,
@@ -1917,7 +1917,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-17T22:55:36+09:00",
+          "direct_listing_display_observed_at": "2026-10-17T22:58:58+09:00",
           "early_buy_review": {
             "item_id": "ssd-crucial-p3-plus-1tb",
             "early_buy_threshold_jpy": 16000,
@@ -1934,7 +1934,7 @@
             "purchase_authorized": false,
             "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.2,
+          "direct_listing_display_age_minutes": 0.1,
           "direct_listing_display_price_context": "イ ULHD01 超軽量 270g 大風量 速乾 58m/秒 艶髪 ビーエイチ ヘアドライヤー マイナスイオン 静音 コンパクト プロ仕様 サロン専売品 ギフト プレゼント 価格 36,080円 【正規販売店】 ハビッツ ビーメイクサンダル リカバリー サンダル レディース オフィス 履き替え 靴下 ソックス 室内 事務 デスクワーク 美脚 厚底 むくみ 冷え性 室内履き",
           "direct_listing_display_offers": [
             {
@@ -1945,8 +1945,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:36+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-17T22:58:58+09:00",
+              "display_age_minutes": 0.1
             },
             {
               "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
@@ -1956,7 +1956,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:33+09:00",
+              "retrieval_time": "2026-10-17T22:58:55+09:00",
               "display_age_minutes": 0.2
             },
             {
@@ -1967,8 +1967,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:32+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-17T22:58:54+09:00",
+              "display_age_minutes": 0.2
             },
             {
               "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -1978,7 +1978,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:34+09:00",
+              "retrieval_time": "2026-10-17T22:58:56+09:00",
               "display_age_minutes": 0.2
             }
           ],
@@ -2072,8 +2072,8 @@
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-17T22:55:34+09:00",
-          "reference_age_minutes": 0.23333333333333334,
+          "retrieval_time": "2026-10-17T22:58:55+09:00",
+          "reference_age_minutes": 0.18333333333333332,
           "monitor_url": "https://kakaku.com/item/K0001789043/",
           "purchase_url": "https://kakaku.com/item/K0001789043/",
           "reference_source_url": null,
@@ -2087,7 +2087,7 @@
           "direct_listing_display_stock_status": "out_of_stock",
           "direct_listing_display_stock_label": "在庫切れ",
           "direct_listing_display_source_mode": "direct_structured",
-          "direct_listing_display_observed_at": "2026-10-17T22:55:35+09:00",
+          "direct_listing_display_observed_at": "2026-10-17T22:58:56+09:00",
           "early_buy_review": {
             "item_id": "cooler-thermalright-pa120-se-v3",
             "early_buy_threshold_jpy": 4500,
@@ -2115,7 +2115,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:35+09:00",
+              "retrieval_time": "2026-10-17T22:58:56+09:00",
               "display_age_minutes": 0.2
             }
           ],
@@ -2185,8 +2185,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:21+09:00",
-          "reference_age_minutes": 0.45,
+          "retrieval_time": "2026-10-17T22:58:41+09:00",
+          "reference_age_minutes": 0.4166666666666667,
           "monitor_url": "https://kakaku.com/item/K0001696164/",
           "purchase_url": "https://www.dospara.co.jp/SBR1892/IC634895.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR1892/IC634895.html",
@@ -2229,14 +2229,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:21+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-17T22:58:41+09:00",
+              "display_age_minutes": 0.4
             }
           ],
           "direct_listing_sellable_price_jpy": 209800,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1892/IC634895.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:21+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:41+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -2645,7 +2645,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:27+09:00",
+              "retrieval_time": "2026-10-17T22:58:45+09:00",
               "display_age_minutes": 0.3
             },
             {
@@ -2656,7 +2656,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:25+09:00",
+              "retrieval_time": "2026-10-17T22:58:43+09:00",
               "display_age_minutes": 0.4
             }
           ],
@@ -2734,7 +2734,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:30+09:00",
+              "retrieval_time": "2026-10-17T22:58:49+09:00",
               "display_age_minutes": 0.3
             },
             {
@@ -2745,7 +2745,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:29+09:00",
+              "retrieval_time": "2026-10-17T22:58:48+09:00",
               "display_age_minutes": 0.3
             },
             {
@@ -2756,7 +2756,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:28+09:00",
+              "retrieval_time": "2026-10-17T22:58:47+09:00",
               "display_age_minutes": 0.3
             },
             {
@@ -2767,7 +2767,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:27+09:00",
+              "retrieval_time": "2026-10-17T22:58:46+09:00",
               "display_age_minutes": 0.3
             }
           ],
@@ -2811,7 +2811,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:23+09:00",
+              "retrieval_time": "2026-10-17T22:58:43+09:00",
               "display_age_minutes": 0.4
             }
           ],
@@ -2921,8 +2921,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:36+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-17T22:58:58+09:00",
+              "display_age_minutes": 0.1
             },
             {
               "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
@@ -2932,7 +2932,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:33+09:00",
+              "retrieval_time": "2026-10-17T22:58:55+09:00",
               "display_age_minutes": 0.2
             },
             {
@@ -2943,8 +2943,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:32+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-17T22:58:54+09:00",
+              "display_age_minutes": 0.2
             },
             {
               "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -2954,7 +2954,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:34+09:00",
+              "retrieval_time": "2026-10-17T22:58:56+09:00",
               "display_age_minutes": 0.2
             }
           ],
@@ -3030,7 +3030,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:35+09:00",
+              "retrieval_time": "2026-10-17T22:58:56+09:00",
               "display_age_minutes": 0.2
             }
           ],
@@ -3080,7 +3080,7 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:26+09:00",
+          "retrieval_time": "2026-10-17T22:58:44+09:00",
           "reference_age_minutes": 0.36666666666666664,
           "monitor_url": "https://kakaku.com/item/K0001630332/",
           "purchase_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
@@ -3124,7 +3124,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:26+09:00",
+              "retrieval_time": "2026-10-17T22:58:44+09:00",
               "display_age_minutes": 0.4
             },
             {
@@ -3135,14 +3135,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:21+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-17T22:58:42+09:00",
+              "display_age_minutes": 0.4
             }
           ],
           "direct_listing_sellable_price_jpy": 47800,
           "direct_listing_sellable_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:26+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:44+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -3218,8 +3218,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:28+09:00",
-          "reference_age_minutes": 0.3333333333333333,
+          "retrieval_time": "2026-10-17T22:58:50+09:00",
+          "reference_age_minutes": 0.26666666666666666,
           "monitor_url": "https://kakaku.com/item/K0001669878/",
           "purchase_url": "https://www.ark-pc.co.jp/i/12201558/",
           "reference_source_url": "https://www.ark-pc.co.jp/i/12201558/",
@@ -3262,7 +3262,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:28+09:00",
+              "retrieval_time": "2026-10-17T22:58:50+09:00",
               "display_age_minutes": 0.3
             },
             {
@@ -3273,7 +3273,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:22+09:00",
+              "retrieval_time": "2026-10-17T22:58:42+09:00",
               "display_age_minutes": 0.4
             },
             {
@@ -3284,8 +3284,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:26+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-17T22:58:47+09:00",
+              "display_age_minutes": 0.3
             },
             {
               "url": "https://www.pc4u.co.jp/view/item/000000092844",
@@ -3295,14 +3295,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:23+09:00",
+              "retrieval_time": "2026-10-17T22:58:44+09:00",
               "display_age_minutes": 0.4
             }
           ],
           "direct_listing_sellable_price_jpy": 21380,
           "direct_listing_sellable_url": "https://www.ark-pc.co.jp/i/12201558/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:28+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:50+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -3397,8 +3397,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:32+09:00",
-          "reference_age_minutes": 0.26666666666666666,
+          "retrieval_time": "2026-10-17T22:58:53+09:00",
+          "reference_age_minutes": 0.21666666666666667,
           "monitor_url": "https://kakaku.com/item/K0001671441/",
           "purchase_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
@@ -3441,14 +3441,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:32+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-17T22:58:53+09:00",
+              "display_age_minutes": 0.2
             }
           ],
           "direct_listing_sellable_price_jpy": 14980,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:32+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:53+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -3525,8 +3525,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:36+09:00",
-          "reference_age_minutes": 0.2,
+          "retrieval_time": "2026-10-17T22:58:57+09:00",
+          "reference_age_minutes": 0.15,
           "monitor_url": "https://kakaku.com/item/J0000039064/",
           "purchase_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
@@ -3569,8 +3569,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:36+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-17T22:58:57+09:00",
+              "display_age_minutes": 0.1
             },
             {
               "url": "https://www.yodobashi.com/product/100000001007195271/",
@@ -3580,14 +3580,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:35+09:00",
+              "retrieval_time": "2026-10-17T22:58:55+09:00",
               "display_age_minutes": 0.2
             }
           ],
           "direct_listing_sellable_price_jpy": 13180,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:36+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:57+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -3665,8 +3665,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:37+09:00",
-          "reference_age_minutes": 0.18333333333333332,
+          "retrieval_time": "2026-10-17T22:58:57+09:00",
+          "reference_age_minutes": 0.15,
           "monitor_url": "https://kakaku.com/item/K0001432816/",
           "purchase_url": "https://www.yodobashi.com/product/100000001006975270/",
           "reference_source_url": "https://www.yodobashi.com/product/100000001006975270/",
@@ -3709,14 +3709,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:37+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-17T22:58:57+09:00",
+              "display_age_minutes": 0.1
             }
           ],
           "direct_listing_sellable_price_jpy": 19280,
           "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001006975270/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:37+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:57+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -3776,8 +3776,8 @@
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-17T22:55:21+09:00",
-          "reference_age_minutes": 0.45,
+          "retrieval_time": "2026-10-17T22:58:41+09:00",
+          "reference_age_minutes": 0.4166666666666667,
           "monitor_url": "https://kakaku.com/item/K0001610896/",
           "purchase_url": "https://kakaku.com/item/K0001610896/",
           "reference_source_url": null,
@@ -3791,7 +3791,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-17T22:55:23+09:00",
+          "direct_listing_display_observed_at": "2026-10-17T22:58:43+09:00",
           "early_buy_review": {
             "item_id": "memory-teamgroup-ddr5-32gb-6000",
             "early_buy_threshold_jpy": 36000,
@@ -3819,7 +3819,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:23+09:00",
+              "retrieval_time": "2026-10-17T22:58:43+09:00",
               "display_age_minutes": 0.4
             }
           ],
@@ -3906,8 +3906,8 @@
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-17T22:55:30+09:00",
-          "reference_age_minutes": 0.3,
+          "retrieval_time": "2026-10-17T22:58:51+09:00",
+          "reference_age_minutes": 0.25,
           "monitor_url": "https://kakaku.com/item/K0001466997/",
           "purchase_url": "https://kakaku.com/item/K0001466997/",
           "reference_source_url": null,
@@ -3921,7 +3921,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-17T22:55:36+09:00",
+          "direct_listing_display_observed_at": "2026-10-17T22:58:58+09:00",
           "early_buy_review": {
             "item_id": "ssd-crucial-p3-plus-1tb",
             "early_buy_threshold_jpy": 16000,
@@ -3938,7 +3938,7 @@
             "purchase_authorized": false,
             "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.2,
+          "direct_listing_display_age_minutes": 0.1,
           "direct_listing_display_price_context": "イ ULHD01 超軽量 270g 大風量 速乾 58m/秒 艶髪 ビーエイチ ヘアドライヤー マイナスイオン 静音 コンパクト プロ仕様 サロン専売品 ギフト プレゼント 価格 36,080円 【正規販売店】 ハビッツ ビーメイクサンダル リカバリー サンダル レディース オフィス 履き替え 靴下 ソックス 室内 事務 デスクワーク 美脚 厚底 むくみ 冷え性 室内履き",
           "direct_listing_display_offers": [
             {
@@ -3949,8 +3949,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:36+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-17T22:58:58+09:00",
+              "display_age_minutes": 0.1
             },
             {
               "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
@@ -3960,7 +3960,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:33+09:00",
+              "retrieval_time": "2026-10-17T22:58:55+09:00",
               "display_age_minutes": 0.2
             },
             {
@@ -3971,8 +3971,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:32+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-17T22:58:54+09:00",
+              "display_age_minutes": 0.2
             },
             {
               "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -3982,7 +3982,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:34+09:00",
+              "retrieval_time": "2026-10-17T22:58:56+09:00",
               "display_age_minutes": 0.2
             }
           ],
@@ -4076,8 +4076,8 @@
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-17T22:55:34+09:00",
-          "reference_age_minutes": 0.23333333333333334,
+          "retrieval_time": "2026-10-17T22:58:55+09:00",
+          "reference_age_minutes": 0.18333333333333332,
           "monitor_url": "https://kakaku.com/item/K0001789043/",
           "purchase_url": "https://kakaku.com/item/K0001789043/",
           "reference_source_url": null,
@@ -4091,7 +4091,7 @@
           "direct_listing_display_stock_status": "out_of_stock",
           "direct_listing_display_stock_label": "在庫切れ",
           "direct_listing_display_source_mode": "direct_structured",
-          "direct_listing_display_observed_at": "2026-10-17T22:55:35+09:00",
+          "direct_listing_display_observed_at": "2026-10-17T22:58:56+09:00",
           "early_buy_review": {
             "item_id": "cooler-thermalright-pa120-se-v3",
             "early_buy_threshold_jpy": 4500,
@@ -4119,7 +4119,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:35+09:00",
+              "retrieval_time": "2026-10-17T22:58:56+09:00",
               "display_age_minutes": 0.2
             }
           ],
@@ -4189,8 +4189,8 @@
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-17T22:55:19+09:00",
-          "reference_age_minutes": 0.48333333333333334,
+          "retrieval_time": "2026-10-17T22:58:39+09:00",
+          "reference_age_minutes": 0.45,
           "monitor_url": "https://kakaku.com/item/K0001798041/",
           "purchase_url": "https://kakaku.com/item/K0001798041/",
           "reference_source_url": null,
@@ -4204,7 +4204,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_structured",
-          "direct_listing_display_observed_at": "2026-10-17T22:55:27+09:00",
+          "direct_listing_display_observed_at": "2026-10-17T22:58:45+09:00",
           "early_buy_review": {
             "item_id": "gpu-rtx5070-12gb",
             "early_buy_threshold_jpy": 119000,
@@ -4232,7 +4232,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:27+09:00",
+              "retrieval_time": "2026-10-17T22:58:45+09:00",
               "display_age_minutes": 0.3
             },
             {
@@ -4243,7 +4243,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:25+09:00",
+              "retrieval_time": "2026-10-17T22:58:43+09:00",
               "display_age_minutes": 0.4
             }
           ],
@@ -4687,8 +4687,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:21+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-17T22:58:41+09:00",
+              "display_age_minutes": 0.4
             }
           ],
           "purchase_url": "https://www.dospara.co.jp/SBR1892/IC625088.html"
@@ -4735,7 +4735,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:30+09:00",
+              "retrieval_time": "2026-10-17T22:58:49+09:00",
               "display_age_minutes": 0.3
             },
             {
@@ -4746,7 +4746,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:29+09:00",
+              "retrieval_time": "2026-10-17T22:58:48+09:00",
               "display_age_minutes": 0.3
             },
             {
@@ -4757,7 +4757,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:28+09:00",
+              "retrieval_time": "2026-10-17T22:58:47+09:00",
               "display_age_minutes": 0.3
             },
             {
@@ -4768,7 +4768,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:27+09:00",
+              "retrieval_time": "2026-10-17T22:58:46+09:00",
               "display_age_minutes": 0.3
             }
           ],
@@ -4812,7 +4812,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:23+09:00",
+              "retrieval_time": "2026-10-17T22:58:43+09:00",
               "display_age_minutes": 0.4
             }
           ],
@@ -4922,8 +4922,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:36+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-17T22:58:58+09:00",
+              "display_age_minutes": 0.1
             },
             {
               "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
@@ -4933,7 +4933,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:33+09:00",
+              "retrieval_time": "2026-10-17T22:58:55+09:00",
               "display_age_minutes": 0.2
             },
             {
@@ -4944,8 +4944,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:32+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-17T22:58:54+09:00",
+              "display_age_minutes": 0.2
             },
             {
               "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -4955,7 +4955,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:34+09:00",
+              "retrieval_time": "2026-10-17T22:58:56+09:00",
               "display_age_minutes": 0.2
             }
           ],
@@ -5031,7 +5031,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:35+09:00",
+              "retrieval_time": "2026-10-17T22:58:56+09:00",
               "display_age_minutes": 0.2
             }
           ],
@@ -5081,7 +5081,7 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:26+09:00",
+          "retrieval_time": "2026-10-17T22:58:44+09:00",
           "reference_age_minutes": 0.36666666666666664,
           "monitor_url": "https://kakaku.com/item/K0001630332/",
           "purchase_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
@@ -5125,7 +5125,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:26+09:00",
+              "retrieval_time": "2026-10-17T22:58:44+09:00",
               "display_age_minutes": 0.4
             },
             {
@@ -5136,14 +5136,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:21+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-17T22:58:42+09:00",
+              "display_age_minutes": 0.4
             }
           ],
           "direct_listing_sellable_price_jpy": 47800,
           "direct_listing_sellable_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:26+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:44+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -5219,8 +5219,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:28+09:00",
-          "reference_age_minutes": 0.3333333333333333,
+          "retrieval_time": "2026-10-17T22:58:50+09:00",
+          "reference_age_minutes": 0.26666666666666666,
           "monitor_url": "https://kakaku.com/item/K0001669878/",
           "purchase_url": "https://www.ark-pc.co.jp/i/12201558/",
           "reference_source_url": "https://www.ark-pc.co.jp/i/12201558/",
@@ -5263,7 +5263,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:28+09:00",
+              "retrieval_time": "2026-10-17T22:58:50+09:00",
               "display_age_minutes": 0.3
             },
             {
@@ -5274,7 +5274,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:22+09:00",
+              "retrieval_time": "2026-10-17T22:58:42+09:00",
               "display_age_minutes": 0.4
             },
             {
@@ -5285,8 +5285,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:26+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-17T22:58:47+09:00",
+              "display_age_minutes": 0.3
             },
             {
               "url": "https://www.pc4u.co.jp/view/item/000000092844",
@@ -5296,14 +5296,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:23+09:00",
+              "retrieval_time": "2026-10-17T22:58:44+09:00",
               "display_age_minutes": 0.4
             }
           ],
           "direct_listing_sellable_price_jpy": 21380,
           "direct_listing_sellable_url": "https://www.ark-pc.co.jp/i/12201558/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:28+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:50+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -5398,8 +5398,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:32+09:00",
-          "reference_age_minutes": 0.26666666666666666,
+          "retrieval_time": "2026-10-17T22:58:53+09:00",
+          "reference_age_minutes": 0.21666666666666667,
           "monitor_url": "https://kakaku.com/item/K0001671441/",
           "purchase_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
@@ -5442,14 +5442,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:32+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-17T22:58:53+09:00",
+              "display_age_minutes": 0.2
             }
           ],
           "direct_listing_sellable_price_jpy": 14980,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:32+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:53+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -5526,8 +5526,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:36+09:00",
-          "reference_age_minutes": 0.2,
+          "retrieval_time": "2026-10-17T22:58:57+09:00",
+          "reference_age_minutes": 0.15,
           "monitor_url": "https://kakaku.com/item/J0000039064/",
           "purchase_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
@@ -5570,8 +5570,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:36+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-17T22:58:57+09:00",
+              "display_age_minutes": 0.1
             },
             {
               "url": "https://www.yodobashi.com/product/100000001007195271/",
@@ -5581,14 +5581,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:35+09:00",
+              "retrieval_time": "2026-10-17T22:58:55+09:00",
               "display_age_minutes": 0.2
             }
           ],
           "direct_listing_sellable_price_jpy": 13180,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:36+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:57+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -5666,8 +5666,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:37+09:00",
-          "reference_age_minutes": 0.18333333333333332,
+          "retrieval_time": "2026-10-17T22:58:57+09:00",
+          "reference_age_minutes": 0.15,
           "monitor_url": "https://kakaku.com/item/K0001432816/",
           "purchase_url": "https://www.yodobashi.com/product/100000001006975270/",
           "reference_source_url": "https://www.yodobashi.com/product/100000001006975270/",
@@ -5710,14 +5710,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:37+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-17T22:58:57+09:00",
+              "display_age_minutes": 0.1
             }
           ],
           "direct_listing_sellable_price_jpy": 19280,
           "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001006975270/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:37+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:57+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -5777,8 +5777,8 @@
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-17T22:55:21+09:00",
-          "reference_age_minutes": 0.45,
+          "retrieval_time": "2026-10-17T22:58:41+09:00",
+          "reference_age_minutes": 0.4166666666666667,
           "monitor_url": "https://kakaku.com/item/K0001610896/",
           "purchase_url": "https://kakaku.com/item/K0001610896/",
           "reference_source_url": null,
@@ -5792,7 +5792,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-17T22:55:23+09:00",
+          "direct_listing_display_observed_at": "2026-10-17T22:58:43+09:00",
           "early_buy_review": {
             "item_id": "memory-teamgroup-ddr5-32gb-6000",
             "early_buy_threshold_jpy": 36000,
@@ -5820,7 +5820,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:23+09:00",
+              "retrieval_time": "2026-10-17T22:58:43+09:00",
               "display_age_minutes": 0.4
             }
           ],
@@ -5907,8 +5907,8 @@
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-17T22:55:30+09:00",
-          "reference_age_minutes": 0.3,
+          "retrieval_time": "2026-10-17T22:58:51+09:00",
+          "reference_age_minutes": 0.25,
           "monitor_url": "https://kakaku.com/item/K0001466997/",
           "purchase_url": "https://kakaku.com/item/K0001466997/",
           "reference_source_url": null,
@@ -5922,7 +5922,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-17T22:55:36+09:00",
+          "direct_listing_display_observed_at": "2026-10-17T22:58:58+09:00",
           "early_buy_review": {
             "item_id": "ssd-crucial-p3-plus-1tb",
             "early_buy_threshold_jpy": 16000,
@@ -5939,7 +5939,7 @@
             "purchase_authorized": false,
             "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.2,
+          "direct_listing_display_age_minutes": 0.1,
           "direct_listing_display_price_context": "イ ULHD01 超軽量 270g 大風量 速乾 58m/秒 艶髪 ビーエイチ ヘアドライヤー マイナスイオン 静音 コンパクト プロ仕様 サロン専売品 ギフト プレゼント 価格 36,080円 【正規販売店】 ハビッツ ビーメイクサンダル リカバリー サンダル レディース オフィス 履き替え 靴下 ソックス 室内 事務 デスクワーク 美脚 厚底 むくみ 冷え性 室内履き",
           "direct_listing_display_offers": [
             {
@@ -5950,8 +5950,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:36+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-17T22:58:58+09:00",
+              "display_age_minutes": 0.1
             },
             {
               "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
@@ -5961,7 +5961,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:33+09:00",
+              "retrieval_time": "2026-10-17T22:58:55+09:00",
               "display_age_minutes": 0.2
             },
             {
@@ -5972,8 +5972,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:32+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-17T22:58:54+09:00",
+              "display_age_minutes": 0.2
             },
             {
               "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -5983,7 +5983,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-17T22:55:34+09:00",
+              "retrieval_time": "2026-10-17T22:58:56+09:00",
               "display_age_minutes": 0.2
             }
           ],
@@ -6077,8 +6077,8 @@
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-17T22:55:34+09:00",
-          "reference_age_minutes": 0.23333333333333334,
+          "retrieval_time": "2026-10-17T22:58:55+09:00",
+          "reference_age_minutes": 0.18333333333333332,
           "monitor_url": "https://kakaku.com/item/K0001789043/",
           "purchase_url": "https://kakaku.com/item/K0001789043/",
           "reference_source_url": null,
@@ -6092,7 +6092,7 @@
           "direct_listing_display_stock_status": "out_of_stock",
           "direct_listing_display_stock_label": "在庫切れ",
           "direct_listing_display_source_mode": "direct_structured",
-          "direct_listing_display_observed_at": "2026-10-17T22:55:35+09:00",
+          "direct_listing_display_observed_at": "2026-10-17T22:58:56+09:00",
           "early_buy_review": {
             "item_id": "cooler-thermalright-pa120-se-v3",
             "early_buy_threshold_jpy": 4500,
@@ -6120,7 +6120,7 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:35+09:00",
+              "retrieval_time": "2026-10-17T22:58:56+09:00",
               "display_age_minutes": 0.2
             }
           ],
@@ -6190,8 +6190,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-17T22:55:21+09:00",
-          "reference_age_minutes": 0.45,
+          "retrieval_time": "2026-10-17T22:58:41+09:00",
+          "reference_age_minutes": 0.4166666666666667,
           "monitor_url": "https://kakaku.com/item/K0001696163/",
           "purchase_url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
@@ -6234,14 +6234,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-17T22:55:21+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-17T22:58:41+09:00",
+              "display_age_minutes": 0.4
             }
           ],
           "direct_listing_sellable_price_jpy": 129800,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-17T22:55:21+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-17T22:58:41+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
