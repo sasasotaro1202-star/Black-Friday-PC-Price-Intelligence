@@ -131,6 +131,17 @@ PRICE_INCLUDE_CONTEXT = (
     "割引価格", "支払価格", "price", "sale",
 )
 
+# Navigation facets such as "価格から探す 300,001円～" describe a filter
+# boundary, not the price of the requested SKU. Never promote such numbers to
+# current-price evidence, even when they look numerically plausible.
+PRICE_NAVIGATION_CONTEXT = (
+    "価格から探す",
+    "価格から絞り込む",
+    "価格帯から探す",
+    "価格帯から絞り込む",
+    "価格で絞り込む",
+)
+
 def now_jst():
     return datetime.now(JST).replace(microsecond=0)
 
@@ -1203,6 +1214,9 @@ def price_candidates(text):
                 continue
             seen.add(value)
             context = text[max(0, m.start()-110):min(len(text), m.end()+110)]
+            normalized_context = norm_text(context)
+            if any(phrase in normalized_context for phrase in PRICE_NAVIGATION_CONTEXT):
+                continue
             score = price_context_score(context)
             if is_discount_amount_context(context, m.group(1)):
                 score -= 60
