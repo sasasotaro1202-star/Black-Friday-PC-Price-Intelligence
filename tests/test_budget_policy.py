@@ -15,6 +15,46 @@ class BudgetPolicyTests(unittest.TestCase):
         with (ROOT / "config" / "targets.json").open(encoding="utf-8") as f:
             self.cfg = json.load(f)
 
+    def test_pre_black_friday_early_buy_threshold_requires_fresh_exact_evidence_and_never_authorizes(self):
+        timing = self.cfg["purchase_timing_policy"]
+        self.assertFalse(timing["thresholds_are_forecasts"])
+        self.assertFalse(timing["purchase_authorization_automatic"])
+        self.assertEqual(timing["early_buy_thresholds_jpy"]["cpu-ryzen7-9700x"], 36000)
+        self.assertEqual(timing["early_buy_thresholds_jpy"]["main_monitor"], 18000)
+        self.assertEqual(timing["early_buy_thresholds_jpy"]["mouse"], 4000)
+
+        triggered = intelligence.early_buy_review_assessment(
+            "cpu-ryzen7-9700x", 35900, True, True, "in_stock", True, False
+        )
+        self.assertEqual(triggered["status"], "PRICE_TRIGGERED_CHECKOUT_REVIEW")
+        self.assertFalse(triggered["purchase_authorized"])
+        self.assertIn("決済総額", triggered["next_step"])
+
+        above = intelligence.early_buy_review_assessment(
+            "cpu-ryzen7-9700x", 38000, True, True, "in_stock", True, True
+        )
+        self.assertEqual(above["status"], "WAIT_FOR_EARLY_BUY_THRESHOLD")
+        self.assertFalse(above["purchase_authorized"])
+
+        bad_pit = intelligence.early_buy_review_assessment(
+            "cpu-ryzen7-9700x", 35000, True, True, "in_stock", False, True
+        )
+        self.assertEqual(bad_pit["status"], "PIT_NOT_VERIFIED")
+
+        unknown_stock = intelligence.early_buy_review_assessment(
+            "cpu-ryzen7-9700x", 35000, True, True, "unknown", True, True
+        )
+        self.assertEqual(unknown_stock["status"], "STOCK_NOT_VERIFIED")
+        self.assertFalse(unknown_stock["purchase_authorized"])
+
+    def test_peripheral_early_buy_thresholds_exclude_unwanted_items(self):
+        thresholds = self.cfg["purchase_timing_policy"]["early_buy_thresholds_jpy"]
+        self.assertEqual(thresholds["main_monitor"], 18000)
+        self.assertEqual(thresholds["keyboard"], 4000)
+        self.assertEqual(thresholds["mouse"], 4000)
+        self.assertEqual(thresholds["mousepad"], 1200)
+        self.assertTrue({"speakers", "secondary_monitor", "headset", "power_strip"}.isdisjoint(thresholds))
+
     def test_peripheral_report_heading_matches_configured_purchase_items(self):
         heading = report.peripheral_monitor_section_heading(self.cfg)
         self.assertIn("メインモニター1台", heading)
