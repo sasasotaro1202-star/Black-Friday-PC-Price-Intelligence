@@ -349,7 +349,16 @@
       "store_pickup_evidence_type": null,
       "store_pickup_evidence_notes": null,
       "store_pickup_checkout_total_verified": false,
-      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field.",
+      "fit_scorecard": {
+        "workload_fit_points": 34,
+        "budget_fit_points": 28,
+        "feature_spec_points": 19,
+        "substitution_risk_points": 13,
+        "rationale_ja": "27型WQHD・Fast IPS・180Hzを軸に、Cities: Skylines IIの作業領域とApex/VALORANTの高リフレッシュを両立。目標22,000円は計画枠内。",
+        "limitations_ja": "重いゲームで常時180fpsを保証しない。実物の画質・輝度・スタンド、入力端子、保証、同一型番の店頭価格・在庫を確認する。",
+        "version": "peripheral-fit-rubric-v1"
+      }
     },
     {
       "id": "keyboard",
@@ -437,7 +446,16 @@
       "store_pickup_evidence_type": null,
       "store_pickup_evidence_notes": null,
       "store_pickup_checkout_total_verified": false,
-      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field.",
+      "fit_scorecard": {
+        "workload_fit_points": 32,
+        "budget_fit_points": 27,
+        "feature_spec_points": 17,
+        "substitution_risk_points": 12,
+        "rationale_ja": "フルサイズ日本語配列・テンキー・パームレストを備え、ゲームだけでなくPython、レポート、数値入力にも使いやすい。",
+        "limitations_ja": "メカニカルではない。フルサイズはマウスの可動域を圧迫する場合があり、キー感触・机上サイズを確認する。",
+        "version": "peripheral-fit-rubric-v1"
+      }
     },
     {
       "id": "mouse",
@@ -522,7 +540,16 @@
       "store_pickup_evidence_type": null,
       "store_pickup_evidence_notes": null,
       "store_pickup_checkout_total_verified": false,
-      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field.",
+      "fit_scorecard": {
+        "workload_fit_points": 34,
+        "budget_fit_points": 27,
+        "feature_spec_points": 19,
+        "substitution_risk_points": 12,
+        "rationale_ja": "LIGHTSPEED無線と価格のバランスがよく、FPSと日常作業を一台でこなせる。",
+        "limitations_ja": "軽量競技モデルより重く、単3電池の重量・交換がある。手の大きさ、つかみ方、色・正確なSKUを確認する。",
+        "version": "peripheral-fit-rubric-v1"
+      }
     },
     {
       "id": "mousepad",
@@ -607,7 +634,16 @@
       "store_pickup_evidence_type": null,
       "store_pickup_evidence_notes": null,
       "store_pickup_checkout_total_verified": false,
-      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field.",
+      "fit_scorecard": {
+        "workload_fit_points": 34,
+        "budget_fit_points": 29,
+        "feature_spec_points": 18,
+        "substitution_risk_points": 12,
+        "rationale_ja": "450×400mmの大型布面で低価格を狙え、低感度FPSの操作領域と汎用用途を確保できる。",
+        "limitations_ja": "布面は摩耗・汚れで滑走感が変わる。実寸、厚さ、表面の好みと正確な型番63003を確認する。",
+        "version": "peripheral-fit-rubric-v1"
+      }
     },
     {
       "id": "cables",
@@ -620,8 +656,6 @@
       "mandatory": true,
       "price_target_phase": "black_friday",
       "target_price_note": "モニター付属ケーブルを先に確認。適切なケーブルが付属しない場合だけ、ネットと実店舗の同一仕様・最終価格を比較して購入する。",
-      "ranking_score_100": 88,
-      "ranking_reason": "モニター付属品を先に確認し、不足分だけ購入することで不要な二重購入を防ぐ。",
       "best_for": "同梱品を優先し、足りない分だけ買う",
       "category": "cables",
       "purchase_channel": "conditional_need_only",
@@ -634,7 +668,8 @@
       "purchase_channel_options": [],
       "online_shipping_reserve_jpy": 0,
       "online_shipping_cost_verified": false,
-      "online_shipping_note": "付属品確認後に不足時のみ購入。配送費が必要な場合は決済前に実額を確認。"
+      "online_shipping_note": "付属品確認後に不足時のみ購入。配送費が必要な場合は決済前に実額を確認。",
+      "score_exclusion_reason_ja": "ケーブルは同梱品が不適切・不足する場合だけ選ぶ条件付き購入ルールであり、単体製品ではないため用途適合点を付けない。"
     },
     {
       "id": "store_price_buffer",
@@ -651,8 +686,8 @@
       "purchase_channel": "budget_reserve",
       "store_inventory_required_before_purchase": false,
       "online_price_is_comparison_only": true,
-      "ranking_score_100": null,
-      "purchase_channel_options": []
+      "purchase_channel_options": [],
+      "score_exclusion_reason_ja": "予備費は商品ではなく、用途適合点・購入根拠点の採点対象外。"
     }
   ],
   "purchase_strategy": {
@@ -856,7 +891,16 @@
       "store_pickup_evidence_type": null,
       "store_pickup_evidence_notes": null,
       "store_pickup_checkout_total_verified": false,
-      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field.",
+      "fit_scorecard": {
+        "workload_fit_points": 29,
+        "budget_fit_points": 28,
+        "feature_spec_points": 16,
+        "substitution_risk_points": 9,
+        "rationale_ja": "必要時の2m DisplayPort 1.4ケーブル候補として基本仕様を満たし、目標2,200円でケーブル費を抑える。",
+        "limitations_ja": "モニターに必要なケーブルが付属していれば購入不要。付属品、端子、長さ、必要な解像度・リフレッシュレートを確認する。",
+        "version": "peripheral-fit-rubric-v1"
+      }
     },
     {
       "id": "cables_alt_sanwa_kc_dp1420",
@@ -919,7 +963,16 @@
       "store_pickup_evidence_type": null,
       "store_pickup_evidence_notes": null,
       "store_pickup_checkout_total_verified": false,
-      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field.",
+      "fit_scorecard": {
+        "workload_fit_points": 30,
+        "budget_fit_points": 28,
+        "feature_spec_points": 17,
+        "substitution_risk_points": 10,
+        "rationale_ja": "VESA認証のDisplayPort 1.4・2mを選びたい場合の候補で、仕様の確実性を重視できる。",
+        "limitations_ja": "他の適切な付属ケーブルがあれば不要。目標3,000円を超える場合は、認証や長さの必要性を確認してから購入する。",
+        "version": "peripheral-fit-rubric-v1"
+      }
     },
     {
       "id": "keyboard_alt_logicool_g413_tkl_se",
@@ -1002,7 +1055,16 @@
       "store_pickup_evidence_type": null,
       "store_pickup_evidence_notes": null,
       "store_pickup_checkout_total_verified": false,
-      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field.",
+      "fit_scorecard": {
+        "workload_fit_points": 31,
+        "budget_fit_points": 25,
+        "feature_spec_points": 18,
+        "substitution_risk_points": 12,
+        "rationale_ja": "テンキーレスの有線メカニカルで、FPS時のマウススペースと打鍵感を優先する選択肢。",
+        "limitations_ja": "テンキーがないため表計算・数値入力では不便な場合がある。主候補より高い価格になりやすく、配列・打鍵感を確認する。",
+        "version": "peripheral-fit-rubric-v1"
+      }
     },
     {
       "id": "keyboard_alt_logicool_g413se",
@@ -1085,7 +1147,16 @@
       "store_pickup_evidence_type": null,
       "store_pickup_evidence_notes": null,
       "store_pickup_checkout_total_verified": false,
-      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field.",
+      "fit_scorecard": {
+        "workload_fit_points": 30,
+        "budget_fit_points": 25,
+        "feature_spec_points": 18,
+        "substitution_risk_points": 11,
+        "rationale_ja": "フルサイズとメカニカルスイッチを両立し、テンキーを維持したい場合の候補。",
+        "limitations_ja": "G213rより高価になりやすい。有線接続、打鍵感、キー配列、BF決済価格が予算に見合うか確認する。",
+        "version": "peripheral-fit-rubric-v1"
+      }
     },
     {
       "id": "main_monitor_alt_msi_mag_275qf",
@@ -1147,7 +1218,16 @@
       "store_pickup_evidence_type": null,
       "store_pickup_evidence_notes": null,
       "store_pickup_checkout_total_verified": false,
-      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field.",
+      "fit_scorecard": {
+        "workload_fit_points": 33,
+        "budget_fit_points": 28,
+        "feature_spec_points": 18,
+        "substitution_risk_points": 11,
+        "rationale_ja": "27型WQHD・180Hzの主要仕様をAOC候補と近い価格目標で確保する代替候補。",
+        "limitations_ja": "スタンド調整・端子・保証・パネル差を同等と決めつけない。AOCと同じタイミングで同一型番の送料込み価格と在庫を比較する。",
+        "version": "peripheral-fit-rubric-v1"
+      }
     },
     {
       "id": "main_monitor_alt_lg_27gs75qb",
@@ -1208,7 +1288,16 @@
       "store_pickup_evidence_type": null,
       "store_pickup_evidence_notes": null,
       "store_pickup_checkout_total_verified": false,
-      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field.",
+      "fit_scorecard": {
+        "workload_fit_points": 32,
+        "budget_fit_points": 25,
+        "feature_spec_points": 19,
+        "substitution_risk_points": 11,
+        "rationale_ja": "27型WQHD・180Hzに加え、スタンドの高さ調整・ピボットを重視するときに有力。",
+        "limitations_ja": "AOCより安いとは限らない。スタンド機能、端子、表示特性、税込総額と在庫を確認する。",
+        "version": "peripheral-fit-rubric-v1"
+      }
     },
     {
       "id": "mouse_alt_logicool_g203",
@@ -1292,7 +1381,16 @@
       "store_pickup_evidence_type": null,
       "store_pickup_evidence_notes": null,
       "store_pickup_checkout_total_verified": false,
-      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field.",
+      "fit_scorecard": {
+        "workload_fit_points": 33,
+        "budget_fit_points": 29,
+        "feature_spec_points": 17,
+        "substitution_risk_points": 11,
+        "rationale_ja": "有線で価格を抑え、電池交換を避けたいFPS・日常作業向け。",
+        "limitations_ja": "ケーブルが操作を妨げる場合がある。形状・大きさ・重量、接続方式と配線を確認する。",
+        "version": "peripheral-fit-rubric-v1"
+      }
     },
     {
       "id": "mouse_alt_logicool_g304_x_superlight",
@@ -1373,7 +1471,16 @@
       "store_pickup_evidence_type": null,
       "store_pickup_evidence_notes": null,
       "store_pickup_checkout_total_verified": false,
-      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field.",
+      "fit_scorecard": {
+        "workload_fit_points": 32,
+        "budget_fit_points": 23,
+        "feature_spec_points": 20,
+        "substitution_risk_points": 12,
+        "rationale_ja": "軽量ワイヤレスを優先する場合の上位候補で、FPSの素早い操作を狙える。",
+        "limitations_ja": "主候補より費用が上がりやすい。充電方式・実重量・形状、目標10,000円と追加費用の価値を確認する。",
+        "version": "peripheral-fit-rubric-v1"
+      }
     },
     {
       "id": "mousepad_alt_razer_gigantus_v2_l",
@@ -1435,7 +1542,16 @@
       "store_pickup_evidence_type": null,
       "store_pickup_evidence_notes": null,
       "store_pickup_checkout_total_verified": false,
-      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field.",
+      "fit_scorecard": {
+        "workload_fit_points": 32,
+        "budget_fit_points": 29,
+        "feature_spec_points": 17,
+        "substitution_risk_points": 11,
+        "rationale_ja": "約450×400mmのLサイズ布製パッドで、主候補と近い操作領域を確保できる代替。",
+        "limitations_ja": "表面の滑走感・摩擦は好みに依存する。配送込み価格と主候補との差額、正確なサイズを確認する。",
+        "version": "peripheral-fit-rubric-v1"
+      }
     },
     {
       "id": "mousepad_alt_logicool_g640s",
@@ -1497,7 +1613,16 @@
       "store_pickup_evidence_type": null,
       "store_pickup_evidence_notes": null,
       "store_pickup_checkout_total_verified": false,
-      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
+      "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field.",
+      "fit_scorecard": {
+        "workload_fit_points": 32,
+        "budget_fit_points": 26,
+        "feature_spec_points": 18,
+        "substitution_risk_points": 11,
+        "rationale_ja": "400×460mmの大判クロス面で、表面の好みやLogitech製品で揃えたい場合の候補。",
+        "limitations_ja": "主候補より高くなりやすく、価格差に見合うとは限らない。表面の好み、サイズ、保証、実売価格を比較する。",
+        "version": "peripheral-fit-rubric-v1"
+      }
     }
   ],
   "peripheral_price_max_age_minutes": 360,
@@ -1523,7 +1648,7 @@
         "weight_pct": 15
       }
     ],
-    "instructions": "各カテゴリから主候補を1商品選び、代替候補を同時購入しない。対象は27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要時のみケーブル。電源タップは所有済みのため購入候補・価格監視・費用計算に含めない。スピーカー、サブモニター、ヘッドセットも購入・価格監視・費用計算に含めない。周辺機器の購入先はネット配送・実店舗・ネット注文の店舗受け取りを商品別に比較し、同一型番、税込現金支払額、送料・手数料、在庫、保証・返品条件を分離記録する。店頭価格をネット価格から推定しない。周辺機器35,000円は計画枠であり固定支出ではなく、総額400,000円と別枠予備費5,000円を優先してPC本体との配分を動的に最適化する。",
+    "instructions": "各カテゴリから主候補を1商品選び、代替候補を同時購入しない。対象は27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要時のみケーブル。電源タップは所有済みのため購入候補・価格監視・費用計算に含めない。スピーカー、サブモニター、ヘッドセットも購入・価格監視・費用計算に含めない。周辺機器の購入先はネット配送・実店舗・ネット注文の店舗受け取りを商品別に比較し、同一型番、税込現金支払額、送料・手数料、在庫、保証・返品条件を分離記録する。店頭価格をネット価格から推定しない。周辺機器35,000円は計画枠であり固定支出ではなく、総額400,000円と別枠予備費5,000円を優先してPC本体との配分を動的に最適化する。 用途適合点は用途35・予算適合30・仕様機能20・代替性/購入リスク15点の内訳を必ず表示する。個別製品でない予備費、および付属品不足時だけ検討する条件付きケーブル購入ルールには製品適合点を付けない。各製品の評価理由・制約も明示する。",
     "category_order": [
       {
         "category": "main_monitor",
@@ -1545,7 +1670,14 @@
         "category": "cables",
         "label": "映像ケーブル（必要な場合のみ）"
       }
-    ]
+    ],
+    "scorecard_version": "peripheral-fit-rubric-v1",
+    "score_scale": {
+      "workload_fit_points": 35,
+      "budget_fit_points": 30,
+      "feature_spec_points": 20,
+      "substitution_risk_points": 15
+    }
   },
   "monitor_window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
   "monitor_window_note": "暫定の広域監視窓であり、いずれかの販売店の公式BF開催日を意味しない。各店の2026年公式日程を公式ページから明示的な年付き日付範囲で確認するまで、価格をBF実売として認定せず、買い時判定は購入許可を出さない。過去日程、曜日、年のない月日から開催日を推定しない。",
