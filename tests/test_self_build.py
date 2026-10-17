@@ -257,7 +257,7 @@ class SelfBuildPlannerTests(unittest.TestCase):
         main = next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")
         self.assertEqual(main["selected_memory_id"], "memory-teamgroup-ddr5-32gb-6000")
         self.assertEqual(main["memory_choice_method"], "primary_memory_fallback_no_verified_in_stock_alternative")
-        self.assertEqual(main["target_pc_total_jpy"], 300600)
+        self.assertEqual(main["target_pc_total_jpy"], self._target_pc_total("gpu-rtx5070-12gb"))
         self.assertFalse(main["buy_now_authorized"])
 
     def test_diy_is_primary_and_assembly_time_has_zero_penalty(self):
