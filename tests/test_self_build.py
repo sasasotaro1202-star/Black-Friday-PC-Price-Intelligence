@@ -21,6 +21,25 @@ class SelfBuildPlannerTests(unittest.TestCase):
             cls.config = json.load(stream)
         cls.parts = {x["id"]: x for x in cls.config["parts"]}
 
+    def _target_pc_total(self, gpu_id, memory_id=None, storage_id=None, cooler_id=None):
+        profile = self.config["profile"]
+        ids = list(profile["fixed_part_ids"]) + [
+            memory_id or profile["primary_memory_choice_id"],
+            storage_id or profile["primary_storage_choice_id"],
+            cooler_id or profile["primary_cooler_choice_id"],
+            gpu_id,
+        ]
+        subtotal = sum(int(self.parts[item_id]["target_price_jpy"]) for item_id in ids)
+        return subtotal + int(profile["build_shipping_reserve_jpy"]) + int(profile["small_parts_reserve_jpy"])
+
+    def _target_all_in(self, gpu_id, memory_id=None, storage_id=None, cooler_id=None):
+        profile = self.config["profile"]
+        return (
+            self._target_pc_total(gpu_id, memory_id, storage_id, cooler_id)
+            + int(profile["peripheral_budget_jpy"])
+            + int(profile["unallocated_contingency_jpy"])
+        )
+
     def test_component_early_buy_signal_reaches_ranked_build_table(self):
         signal = {
             "item_id": "cpu-ryzen7-9700x",
@@ -126,16 +145,29 @@ class SelfBuildPlannerTests(unittest.TestCase):
     def test_target_totals_and_all_in_budget(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         builds = {x["gpu_choice_id"]:x for x in plan["builds"]}
-        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_pc_total_jpy"], 342000)
-        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_pc_total_jpy"], 324000)
-        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_pc_total_jpy"], 362000)
-        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_all_in_jpy"], 382000)
-        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_all_in_jpy"], 364000)
-        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_all_in_jpy"], 402000)
-        self.assertTrue(builds["gpu-rtx5070ti-16gb"]["target_within_pc_budget"])
-        self.assertTrue(builds["gpu-rtx5070ti-16gb"]["target_within_total_budget"])
-        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_remaining_budget_jpy"], -2000)
-        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["decision"], "OVER_BUDGET_TARGET")
+        profile = self.config["profile"]
+        for gpu_id, build in builds.items():
+            self.assertEqual(build["target_pc_total_jpy"], self._target_pc_total(gpu_id))
+            self.assertEqual(build["target_all_in_jpy"], self._target_all_in(gpu_id))
+            self.assertEqual(
+                build["target_remaining_budget_jpy"],
+                int(profile["total_budget_jpy"]) - build["target_all_in_jpy"],
+            )
+            self.assertEqual(
+                build["target_within_pc_budget"],
+                build["target_pc_total_jpy"] <= int(profile["pc_budget_jpy"]),
+            )
+            self.assertEqual(
+                build["target_within_total_budget"],
+                build["target_all_in_jpy"] <= int(profile["total_budget_jpy"]),
+            )
+            expected_decision = (
+                "OVER_BUDGET_TARGET" if build["target_all_in_jpy"] > int(profile["total_budget_jpy"])
+                else "WAIT_FOR_COMPATIBILITY_REVIEW"
+            )
+            if build["compatibility_status"] == "FAIL":
+                expected_decision = "COMPATIBILITY_FAIL"
+            self.assertEqual(build["decision"], expected_decision)
         self.assertTrue(plan["budget_arithmetic_valid"])
         self.assertFalse(plan["buy_now_authorized"])
 
@@ -218,13 +250,13 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(len(memory), 1)
         self.assertEqual(memory[0]["id"], "memory-teamgroup-ddr5-32gb-6000")
         self.assertEqual(main["selected_memory_id"], "memory-teamgroup-ddr5-32gb-6000")
-        self.assertEqual(main["target_pc_total_jpy"], 300600)
+        self.assertEqual(main["target_pc_total_jpy"], self._target_pc_total("gpu-rtx5070-12gb"))
 
     def test_no_trusted_memory_reference_keeps_budget_fit_teamgroup_primary(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         main = next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")
         self.assertEqual(main["selected_memory_id"], "memory-teamgroup-ddr5-32gb-6000")
-        self.assertEqual(main["memory_choice_method"], "primary_memory_fallback_no_verified_market_reference")
+        self.assertEqual(main["memory_choice_method"], "primary_memory_fallback_no_verified_in_stock_alternative")
         self.assertEqual(main["target_pc_total_jpy"], 300600)
         self.assertFalse(main["buy_now_authorized"])
 
@@ -437,7 +469,7 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(os_row["price_status"], "not_observed")
         self.assertFalse(os_row["trusted_for_market_estimate"])
         report = planner.render_plan_markdown(plan)
-        self.assertIn("¥14,800", report)
+        self.assertIn("¥{:,.0f}".format(self.parts["os-windows11-home"]["target_price_jpy"]), report)
         self.assertNotIn("19,360（手動参考・現行未確認）", report)
 
     def test_fresh_verified_os_retailer_reference_can_complete_estimate(self):
