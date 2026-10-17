@@ -180,7 +180,7 @@ def peripheral_fit_reason_text(target):
     if result.get("score") is None:
         return "採点不能: " + ", ".join(result.get("missing_or_invalid_fields") or ["scorecard_invalid"])
     text = "評価理由: " + result["reason_ja"] + " / 留意点: " + result["limitations_ja"]
-    return re.sub(r"\\s+", " ", text).replace("|", "／").strip()
+    return re.sub(r"\s+", " ", text).replace("|", "／").strip()
 
 
 def peripheral_purchase_evidence_score_text(result):
