@@ -258,6 +258,7 @@ class PeripheralMonitorTests(unittest.TestCase):
         stores = {x["id"]: x for x in config["purchase_channels"]["physical_store_candidates"]}
         target.update({
             "store_price_jpy": 19980,
+            "store_price_basis": "tax_inclusive_cash",
             "store_price_checked_at": "2026-10-15T11:50:00+09:00",
             "store_stock_status": "in_stock",
             "store_confirmation_url": stores["biccamera_tenjin_1"]["official_store_url"],
@@ -276,6 +277,8 @@ class PeripheralMonitorTests(unittest.TestCase):
         invalid_variants = [
             ({"store_observation_store_id": "unlisted_store"}, "BRANCH_UNVERIFIED"),
             ({"store_evidence_type": None}, "EVIDENCE_TYPE_UNVERIFIED"),
+            ({"store_evidence_type": "official_branch_stock_page"}, "EVIDENCE_TYPE_UNVERIFIED"),
+            ({"store_price_basis": None}, "PRICE_BASIS_UNVERIFIED"),
             ({"store_evidence_notes": ""}, "EVIDENCE_NOTES_MISSING"),
             ({"store_model_match": False}, "EXACT_MODEL_UNVERIFIED"),
             ({"store_confirmation_url": "https://example.com/store"}, "SOURCE_URL_UNVERIFIED"),
