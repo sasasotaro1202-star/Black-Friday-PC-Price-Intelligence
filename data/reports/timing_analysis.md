@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-17T22:59:06+09:00
-Source snapshot: 2026-10-17T22:55:59+09:00
-Source snapshot SHA256: adc6d57e9fb3494c8cd7020b15a03ab70936adcca457b561b1c13da90491b8e2
+Generated: 2026-10-18T00:23:33+09:00
+Source snapshot: 2026-10-18T00:20:56+09:00
+Source snapshot SHA256: 3c9635098479bc19eba5c8ab30e9fbc10abae7a68f709545ef45fe3beeae80e3
 Budget: ¥360,000
 Target Black Friday: 2026-11-27
 
@@ -14,16 +14,16 @@ Target Black Friday: 2026-11-27
 |2|G TUNE P6-I7G70BK-B|¥284,700|0.0%|HIGH|rtx 5070|35|direct_structured|
 |3|G TUNE FG-A7G70|¥319,800|0.0%|HIGH|rtx 5070|33|direct_structured|
 |4|G TUNE DG-I7G70|¥299,800|0.0%|HIGH|rtx 5070|32|direct_structured|
-|5|G TUNE FG-A7G6T|¥300,001|0.0%|HIGH|rtx 5060 ti|28|direct_text|
-|6|G TUNE DG-A7G70|¥300,001|0.0%|HIGH|rtx 5070|26|direct_text|
-|7|G TUNE DG-I5G70|¥279,800|0.0%|HIGH|rtx 5070|22|direct_structured|
-|8|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
+|5|G TUNE FG-A7G6T|¥290,728|0.0%|HIGH|rtx 5060 ti|28|direct_text|
+|6|G TUNE DG-I5G70|¥279,800|0.0%|HIGH|rtx 5070|22|direct_structured|
+|7|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
+|8|G TUNE DG-A7G70|¥390,728|7.9%|HIGH|rtx 5070|26|direct_text|
 |9|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|10.0%|HIGH|rtx 5070 ti|38|direct_structured|
 |10|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|19.8%|REALISTIC|rtx 5070|32|direct_structured|
 
 ## Empirical price-change timing
 
-- Meaningful change sample: **7**
+- Meaningful change sample: **9**
 - **観測不足:** 20件未満なので時間帯の傾向は作りません。
 
 ## Historical anchors

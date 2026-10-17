@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-10-17T22:59:06+09:00
+更新: 2026-10-18T00:23:33+09:00
 価格フェーズ: **PRE_BLACK_FRIDAY_REFERENCE**
 暫定の広域監視窓（公式セール開催期間ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 総予算: ¥400,000
@@ -15,10 +15,10 @@ BF PC計画上限＋周辺機器目標: ¥400,000
 
 |項目|BF購入目標|公式期間内の確認価格|監視窓内参考価格|セール前参考価格|在庫|費用の扱い|購入ページ|
 |---|---:|---:|---:|---|---|---|
-|AOC Q27G40E/11 27-inch WQHD 180Hz|¥22,000|未確認|—|¥20,790|low_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
+|AOC Q27G40E/11 27-inch WQHD 180Hz|¥22,000|未確認|—|¥20,790|in_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
 |Logicool G213r|¥4,500|未確認|—|¥7,330|in_stock|black_friday_target_reserve|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
 |Logicool G304|¥5,000|未確認|—|¥5,350|in_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
-|SteelSeries QcK Large Black 450x400mm (model 63003)|¥1,500|未確認|—|—|unknown|black_friday_target_reserve|[商品ページ](https://www.biccamera.com/bc/item/1570130/)|
+|SteelSeries QcK Large Black 450x400mm (model 63003)|¥1,500|未確認|—|¥2,423|in_stock|black_friday_target_reserve|[商品ページ](https://www.biccamera.com/bc/item/1570130/)|
 |Required cables only; check included monitor cables first|¥0|未確認|—|—|unknown|black_friday_target_reserve|予算枠/見積確認|
 |周辺機器の価格差・必要ケーブル不足用の柔軟な予備枠（商品ではない）|¥2,000|未確認|—|—|unknown|black_friday_target_reserve|予算枠/見積確認|
 
@@ -62,12 +62,12 @@ BF PC計画上限＋周辺機器目標: ¥400,000
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---|
 |G TUNE DG-I7G70|¥299,800|0.0%|¥269,800|¥254,800|¥239,800|¥224,800|¥209,900|10%|same_gpu|
 |G TUNE DG-I5G70|¥279,800|0.0%|¥251,800|¥237,800|¥223,800|¥209,800|¥195,900|10%|same_gpu|
-|G TUNE DG-A7G70|¥304,800|0.0%|¥270,000|¥255,000|¥240,000|¥225,000|¥210,000|10%|same_gpu|
 |G TUNE FG-A7G70|¥319,800|0.0%|¥287,800|¥271,800|¥255,800|¥239,800|¥223,900|10%|same_gpu|
 |Lenovo Legion Pro 5i Gen 10（16型 Intel）|—|0.0%|¥303,500|¥286,700|¥269,800|¥252,900|¥236,100|10%|none|
 |G TUNE P6-I7G70BK-B|¥284,700|0.0%|¥256,200|¥242,000|¥227,800|¥213,500|¥199,300|10%|none|
-|G TUNE FG-A7G6T|¥309,800|0.0%|¥270,000|¥255,000|¥240,000|¥225,000|¥210,000|10%|none|
+|G TUNE FG-A7G6T|¥309,800|0.0%|¥261,700|¥247,100|¥232,600|¥218,000|¥203,500|10%|none|
 |G TUNE DG-A5G60|¥194,800|0.0%|¥175,300|¥165,600|¥155,800|¥146,100|¥136,400|10%|none|
+|G TUNE DG-A7G70|¥304,800|7.9%|¥351,700|¥332,100|¥312,600|¥293,000|¥273,500|10%|same_gpu|
 |G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|10.0%|¥359,800|¥339,800|¥319,800|¥299,800|¥279,900|10%|same_gpu|
 |G TUNE P5-I7G70BK-C（ブラック）|¥329,800|19.8%|¥403,900|¥381,500|¥359,000|¥336,600|¥314,200|20%|none|
 |ASUS TUF Gaming A16 FA608PP-R9R5070S|¥319,800|0.0%|¥287,800|¥271,800|¥255,800|¥239,800|¥223,900|10%|same_family|
