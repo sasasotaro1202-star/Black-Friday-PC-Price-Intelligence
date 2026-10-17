@@ -132,6 +132,12 @@ jobs:
           for attempt in 1 2 3; do
             git fetch --no-tags origin main
             git reset --hard origin/main
+            # A concurrent data publish or code merge may advance main after the
+            # first preflight. Validate the exact tree we are about to execute.
+            python -m py_compile scripts/*.py
+            python -m unittest discover -s tests -p "test_production_contract.py" -v
+            python -m unittest discover -s tests -p "test_*.py" -v
+            git diff --check
             if [ "${NEEDS_WATCHLIST_REFRESH:-false}" = "true" ]; then
               echo "Refreshing watchlist after syncing origin/main."
               python scripts/discover.py
