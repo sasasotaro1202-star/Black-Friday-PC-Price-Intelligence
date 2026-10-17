@@ -327,8 +327,9 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         readme = read_text("README.md")
         instructions = read_text(".github/copilot-instructions.md")
         peripherals = read_text("docs/peripheral-rankings.md")
+        completion_gates = read_text("docs/PROJECT_COMPLETION_GATES_2026.md")
 
-        for text in (readme, instructions, peripherals):
+        for text in (readme, instructions, peripherals, completion_gates):
             with self.subTest(document="budget and route policy", text_length=len(text)):
                 self.assertRegex(text, r"(?:¥\s?400,000|400,000円)")
                 self.assertTrue("35,000円" in text or "35,000" in text or "35000" in text)
@@ -346,6 +347,20 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertIn("2026-11-01 00:00 JST", peripherals)
         self.assertIn("2026-12-11 23:59 JST", peripherals)
         self.assertIn("公式開催日程", peripherals)
+
+        # The completion-gates document is a human-readable contract too: it
+        # must stay aligned with the current target config and must not retain
+        # the older accessory allocation or superseded build totals.
+        self.assertIn("周辺機器の柔軟な計画配分：**35,000円**。", completion_gates)
+        self.assertIn("| 本命：RTX 5070 12GB | 342,000円 | 382,000円 | 18,000円 |", completion_gates)
+        self.assertIn("| VRAM重視：RTX 5060 Ti 16GB | 324,000円 | 364,000円 | 36,000円 |", completion_gates)
+        self.assertIn("| 大穴：RTX 5070 Ti 16GB | 362,000円 | 402,000円 | -2,000円 |", completion_gates)
+        self.assertIn("ネット配送では送料の実額を総額に反映", completion_gates)
+        self.assertNotIn("周辺機器36,000円", completion_gates)
+        self.assertNotIn("周辺機器の送料は計上しない", completion_gates)
+        self.assertNotIn("300,600円", completion_gates)
+        self.assertNotIn("280,600円", completion_gates)
+        self.assertNotIn("324,800円", completion_gates)
 
         # Explicit alternative-build totals and compatibility descriptions must
         # stay aligned with the authoritative component target configuration.
