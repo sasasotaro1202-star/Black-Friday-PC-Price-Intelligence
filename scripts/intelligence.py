@@ -412,6 +412,7 @@ def store_observation_validation(target, now=None):
         "store_confirmation_url": None,
         "store_model_match": False,
         "store_observation_store_id": None,
+        "store_observation_store_name": None,
         "store_evidence_type": None,
         "store_evidence_notes": None,
         "store_observation_status": "UNCONFIRMED" if required else "NOT_REQUIRED",
@@ -585,6 +586,7 @@ def store_observation_validation(target, now=None):
         "store_confirmation_url": chosen["store_confirmation_url"],
         "store_model_match": chosen["store_model_match"],
         "store_observation_store_id": chosen["store_observation_store_id"],
+        "store_observation_store_name": chosen["store_name"],
         "store_evidence_type": chosen["store_evidence_type"],
         "store_evidence_notes": chosen["store_evidence_notes"],
         "store_observation_status": chosen["store_observation_status"],
@@ -769,22 +771,9 @@ def peripheral_budget_projection():
             if isinstance(row, dict) and row.get("store_price_confirmed") is True
             and valid_money(row.get("store_price_jpy")) and row.get("store_model_match") is True
         ]
-        inventory_by_store = {
-            str(row.get("store_id")): row
-            for row in (live_store_inventory.get("store_inventory_observations") or [])
-            if isinstance(row, dict) and row.get("store_id")
-        }
-        for quote in store_price_observations:
-            quote_store_id = str(quote.get("store_observation_store_id") or "")
-            quote_stock = quote.get("store_stock_status") or "unknown"
-            inventory = inventory_by_store.get(quote_store_id)
-            if quote_stock not in ("in_stock", "low_stock") and inventory:
-                branch_status = inventory.get("status")
-                if inventory.get("status") in ("in_stock", "low_stock"):
-                    quote["store_stock_status"] = branch_status
-                    quote["stock_evidence_source_url"] = inventory.get("source_url")
-                    quote["stock_evidence_checked_at"] = inventory.get("checked_at")
-
+        # Do not merge the physical-store cash quote with online store-pickup
+        # stock. These are distinct purchase routes and their availability signals
+        # are not interchangeable; each quote must bring its own branch stock evidence.
         stocked_quotes = [
             quote for quote in store_price_observations
             if quote.get("store_stock_status") in ("in_stock", "low_stock")
@@ -839,6 +828,10 @@ def peripheral_budget_projection():
         store_observation_store_id = (
             chosen_store_quote.get("store_observation_store_id") if chosen_store_quote
             else store_observation.get("store_observation_store_id")
+        )
+        store_observation_store_name = (
+            chosen_store_quote.get("store_name") if chosen_store_quote
+            else store_observation.get("store_observation_store_name")
         )
         store_evidence_type = (
             chosen_store_quote.get("store_evidence_type") if chosen_store_quote
@@ -1134,6 +1127,7 @@ def peripheral_budget_projection():
             "store_stock_status": store_stock if store_route else None,
             "store_confirmation_url": store_url if store_price_verified else None,
             "store_observation_store_id": store_observation_store_id,
+            "store_observation_store_name": store_observation_store_name,
             "store_evidence_type": store_evidence_type,
             "store_evidence_notes": store_evidence_notes,
             "store_observation_status": store_observation_status,
