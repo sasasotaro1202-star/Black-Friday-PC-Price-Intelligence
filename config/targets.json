@@ -1500,8 +1500,10 @@
       "store_pickup_quote_policy": "Final online order amount for the exact item with branch pickup selected. Include mandatory fees, exclude points as cash discount, and confirm branch pickup availability separately. Do not copy the regular web listing price into this field."
     }
   ],
+  "peripheral_price_max_age_minutes": 360,
+  "peripheral_stock_max_age_minutes": 30,
   "peripheral_ranking_policy": {
-    "score_type": "User-fit and value judgment, not an independent lab benchmark",
+    "score_type": "Curated product-suitability score; separate dynamic purchase-evidence score is calculated from fresh price, stock, checkout and terms",
     "scale": 100,
     "factors": [
       {
