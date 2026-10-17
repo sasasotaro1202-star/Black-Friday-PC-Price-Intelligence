@@ -1038,6 +1038,7 @@ def verify_retailer_listing(part, candidate_url, domains, diagnostic_out=None):
                 {"title": raw.get("name") or "", "snippet": ""}, part
             ) else anchor,
             "price_jpy": price,
+            "seller_name": raw.get("seller_name"),
             "price_source_mode": source_mode,
             "stock_status": stock_status,
             "identity_anchor": anchor,
