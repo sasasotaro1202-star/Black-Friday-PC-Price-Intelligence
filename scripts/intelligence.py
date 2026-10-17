@@ -385,12 +385,12 @@ def validate_live_store_inventory(target, live, now=None):
 
 
 def store_observation_validation(target, now=None):
-    """Fail closed unless a fresh, exact-model, branch-specific store observation is evidenced.
+    """Validate each physical branch's cash price independently and fail closed.
 
-    Website prices alone are never sufficient to verify a physical-store price. For a
-    physical-store target, a record must identify one configured branch, use an
-    approved evidence type, include an audit note, and link to that branch's official
-    store page on the same host. Price evidence and stock confirmation remain distinct.
+    Multiple branches may have different shelf prices or stock. A single summary
+    row is retained for compatibility, while store_price_observations preserves
+    branch-specific evidence so one store's stock is never paired with another
+    store's price.
     """
     channel_options = target.get("purchase_channel_options") or []
     supports_store_route = (
@@ -414,6 +414,9 @@ def store_observation_validation(target, now=None):
         "store_evidence_notes": None,
         "store_observation_status": "UNCONFIRMED" if required else "NOT_REQUIRED",
         "store_observation_age_minutes": None,
+        "store_price_observations": [],
+        "store_price_observation_count": 0,
+        "store_price_verified_store_ids": [],
     }
     if not required:
         return empty
@@ -429,72 +432,156 @@ def store_observation_validation(target, now=None):
         for item in configured_stores
         if isinstance(item, dict) and item.get("id")
     }
-
-    price = target.get("store_price_jpy")
-    checked_raw = target.get("store_price_checked_at")
-    checked = parse_dt(checked_raw)
-    age_minutes = (current - checked).total_seconds() / 60.0 if checked else None
-    store_id = str(target.get("store_observation_store_id") or "")
-    store = stores_by_id.get(store_id)
     candidate_ids = {str(x) for x in (target.get("physical_store_candidate_ids") or [])}
-    evidence_type = str(target.get("store_evidence_type") or "")
-    evidence_notes = str(target.get("store_evidence_notes") or "").strip()
-    confirmation_url = str(target.get("store_confirmation_url") or "")
-    stock = str(target.get("store_stock_status") or "unknown")
-    model_match = target.get("store_model_match") is True
-
     allowed_evidence_types = {
         "in_store_check",
         "store_phone_confirmation",
         "official_branch_stock_page",
+        "official_branch_price_page",
     }
-    official_store_url = str((store or {}).get("official_store_url") or "")
-    expected_host = urlparse(official_store_url).netloc.lower()
-    source = urlparse(confirmation_url)
-    source_host_matches = bool(
-        confirmation_url
-        and source.scheme == "https"
-        and source.netloc
-        and expected_host
-        and source.netloc.lower() == expected_host
-    )
-
     max_age = actionable_max_age_minutes(current)
-    if not isinstance(price, int) or isinstance(price, bool) or price <= 0:
-        reason = "MISSING_OR_INVALID_PRICE"
-    elif checked is None or age_minutes is None:
-        reason = "MISSING_OR_INVALID_TIMESTAMP"
-    elif age_minutes < 0 or age_minutes > max_age:
-        reason = "FUTURE_OR_STALE"
-    elif not store or store_id not in candidate_ids:
-        reason = "BRANCH_UNVERIFIED"
-    elif evidence_type not in allowed_evidence_types:
-        reason = "EVIDENCE_TYPE_UNVERIFIED"
-    elif not evidence_notes:
-        reason = "EVIDENCE_NOTES_MISSING"
-    elif not model_match:
-        reason = "EXACT_MODEL_UNVERIFIED"
-    elif not source_host_matches:
-        reason = "SOURCE_URL_UNVERIFIED"
-    else:
-        reason = "PRICE_VERIFIED"
 
-    verified = reason == "PRICE_VERIFIED"
-    valid_stock = stock if stock in {
-        "in_stock", "low_stock", "out_of_stock", "unknown", "preorder_or_backorder"
-    } else "unknown"
+    raw_observations = target.get("store_price_observations")
+    observations = list(raw_observations) if isinstance(raw_observations, list) else []
+    # Backward compatibility for existing single-branch fields. Do not manufacture
+    # a legacy observation from the default unknown-stock marker alone.
+    legacy_keys = (
+        "store_price_jpy", "store_price_checked_at", "store_confirmation_url",
+        "store_observation_store_id", "store_evidence_type", "store_evidence_notes",
+        "store_model_match",
+    )
+    legacy_present = any(target.get(key) not in (None, "") for key in legacy_keys)
+    if not observations and legacy_present:
+        observations = [{
+            "store_id": target.get("store_observation_store_id"),
+            "price_jpy": target.get("store_price_jpy"),
+            "checked_at": target.get("store_price_checked_at"),
+            "stock_status": target.get("store_stock_status") or "unknown",
+            "confirmation_url": target.get("store_confirmation_url"),
+            "model_match": target.get("store_model_match") is True,
+            "evidence_type": target.get("store_evidence_type"),
+            "evidence_notes": target.get("store_evidence_notes"),
+            "_legacy_single_branch": True,
+        }]
+
+    checked_rows = []
+    for raw in observations:
+        if not isinstance(raw, dict):
+            checked_rows.append({
+                "store_observation_store_id": None, "store_name": None, "store_price_jpy": None,
+                "store_price_checked_at": None, "store_stock_status": "unknown",
+                "store_confirmation_url": None, "store_model_match": False,
+                "store_evidence_type": None, "store_evidence_notes": None,
+                "store_observation_status": "OBSERVATION_NOT_AN_OBJECT",
+                "store_observation_age_minutes": None, "store_price_confirmed": False,
+            })
+            continue
+
+        store_id = str(raw.get("store_id") or raw.get("store_observation_store_id") or "")
+        store = stores_by_id.get(store_id)
+        price = raw.get("price_jpy", raw.get("store_price_jpy"))
+        checked_raw = raw.get("checked_at", raw.get("store_price_checked_at"))
+        checked = parse_dt(checked_raw)
+        age_minutes = (current - checked).total_seconds() / 60.0 if checked else None
+        evidence_type = str(raw.get("evidence_type") or raw.get("store_evidence_type") or "")
+        evidence_notes = str(raw.get("evidence_notes") or raw.get("store_evidence_notes") or "").strip()
+        confirmation_url = str(raw.get("confirmation_url") or raw.get("store_confirmation_url") or "")
+        stock = str(raw.get("stock_status") or raw.get("store_stock_status") or "unknown")
+        model_match = raw.get("model_match", raw.get("store_model_match")) is True
+        price_basis = str(raw.get("price_basis") or "")
+        official_store_url = str((store or {}).get("official_store_url") or "")
+        expected_host = urlparse(official_store_url).netloc.lower()
+        source = urlparse(confirmation_url)
+        source_host_matches = bool(
+            confirmation_url
+            and source.scheme == "https"
+            and source.netloc
+            and expected_host
+            and source.netloc.lower() == expected_host
+        )
+
+        if not isinstance(price, int) or isinstance(price, bool) or price <= 0:
+            reason = "MISSING_OR_INVALID_PRICE"
+        elif checked is None or age_minutes is None:
+            reason = "MISSING_OR_INVALID_TIMESTAMP"
+        elif age_minutes < 0 or age_minutes > max_age:
+            reason = "FUTURE_OR_STALE"
+        elif not store or store_id not in candidate_ids:
+            reason = "BRANCH_UNVERIFIED"
+        elif evidence_type not in allowed_evidence_types:
+            reason = "EVIDENCE_TYPE_UNVERIFIED"
+        elif not evidence_notes:
+            reason = "EVIDENCE_NOTES_MISSING"
+        elif not model_match:
+            reason = "EXACT_MODEL_UNVERIFIED"
+        elif not source_host_matches:
+            reason = "SOURCE_URL_UNVERIFIED"
+        elif not raw.get("_legacy_single_branch") and price_basis != "tax_inclusive_cash":
+            reason = "PRICE_BASIS_UNVERIFIED"
+        else:
+            reason = "PRICE_VERIFIED"
+
+        verified = reason == "PRICE_VERIFIED"
+        valid_stock = stock if stock in {
+            "in_stock", "low_stock", "out_of_stock", "unknown", "preorder_or_backorder"
+        } else "unknown"
+        checked_rows.append({
+            "store_observation_store_id": store_id or None,
+            "store_name": str((store or {}).get("name") or store_id or "") or None,
+            "store_price_jpy": int(price) if verified else None,
+            "store_price_checked_at": str(checked_raw) if verified else None,
+            "store_stock_status": valid_stock if verified else "unknown",
+            "store_confirmation_url": confirmation_url if verified else None,
+            "store_model_match": bool(model_match and verified),
+            "store_evidence_type": evidence_type if verified else None,
+            "store_evidence_notes": evidence_notes if verified else None,
+            "store_observation_status": reason,
+            "store_observation_age_minutes": round(age_minutes, 1) if verified else None,
+            "store_price_confirmed": verified,
+            "price_basis": price_basis or ("legacy_untyped_cash_quote" if raw.get("_legacy_single_branch") else None),
+        })
+
+    stock_priority = {
+        "in_stock": 0, "low_stock": 1, "unknown": 2,
+        "preorder_or_backorder": 3, "out_of_stock": 4,
+    }
+    verified_rows = [row for row in checked_rows if row.get("store_price_confirmed")]
+    verified_rows.sort(key=lambda row: (
+        stock_priority.get(str(row.get("store_stock_status") or "unknown"), 2),
+        int(row.get("store_price_jpy") or 10**12),
+        -(float(row.get("store_observation_age_minutes") or 0)),
+        str(row.get("store_observation_store_id") or ""),
+    ))
+    empty["store_price_observations"] = checked_rows
+    empty["store_price_observation_count"] = len(checked_rows)
+    empty["store_price_verified_store_ids"] = sorted({
+        str(row["store_observation_store_id"])
+        for row in verified_rows if row.get("store_observation_store_id")
+    })
+    if not verified_rows:
+        invalid = next((row for row in checked_rows if row.get("store_observation_status")), None)
+        if invalid:
+            empty["store_observation_status"] = invalid["store_observation_status"]
+        elif required:
+            empty["store_observation_status"] = "MISSING_OR_INVALID_PRICE"
+        return empty
+
+    chosen = verified_rows[0]
     return {
-        "store_price_jpy": int(price) if verified else None,
-        "store_price_checked_at": str(checked_raw) if verified else None,
-        "store_price_confirmed": verified,
-        "store_stock_status": valid_stock if verified else "unknown",
-        "store_confirmation_url": confirmation_url if verified else None,
-        "store_model_match": bool(model_match and verified),
-        "store_observation_store_id": store_id if verified else None,
-        "store_evidence_type": evidence_type if verified else None,
-        "store_evidence_notes": evidence_notes if verified else None,
-        "store_observation_status": "PRICE_VERIFIED" if verified else reason,
-        "store_observation_age_minutes": round(age_minutes, 1) if verified else None,
+        "store_price_jpy": chosen["store_price_jpy"],
+        "store_price_checked_at": chosen["store_price_checked_at"],
+        "store_price_confirmed": True,
+        "store_stock_status": chosen["store_stock_status"],
+        "store_confirmation_url": chosen["store_confirmation_url"],
+        "store_model_match": chosen["store_model_match"],
+        "store_observation_store_id": chosen["store_observation_store_id"],
+        "store_evidence_type": chosen["store_evidence_type"],
+        "store_evidence_notes": chosen["store_evidence_notes"],
+        "store_observation_status": chosen["store_observation_status"],
+        "store_observation_age_minutes": chosen["store_observation_age_minutes"],
+        "store_price_observations": checked_rows,
+        "store_price_observation_count": len(checked_rows),
+        "store_price_verified_store_ids": empty["store_price_verified_store_ids"],
     }
 
 
