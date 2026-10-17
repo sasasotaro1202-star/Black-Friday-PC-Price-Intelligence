@@ -14,7 +14,7 @@ from urllib.request import Request, urlopen
 from intelligence import (
     ROOT, JST, load_json, save_json, load_catalog, now_jst,
     norm_text, pick_price, price_candidates, validate_price,
-    enrich_identity, iso, plausible_floor
+    enrich_identity, iso, plausible_floor, PRICE_NAVIGATION_CONTEXT
 )
 
 PRIMARY_DOMAINS = {
@@ -992,6 +992,16 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
     cid = entry["id"]
     current_url = entry["url"]
     previous_valid = previous.get("current_price_jpy") if previous else None
+    # Do not carry forward a value whose saved source context proves it came
+    # from a category-navigation filter rather than the requested SKU offer.
+    previous_context = norm_text((previous or {}).get("price_context"))
+    previous_was_navigation_bound = (
+        previous_valid is not None
+        and (previous or {}).get("price_source_mode") == "direct_text"
+        and any(phrase in previous_context for phrase in PRICE_NAVIGATION_CONTEXT)
+    )
+    if previous_was_navigation_bound:
+        previous_valid = None
     reference = previous_valid
     if reference is None and catalog_item:
         reference = catalog_item.get("reference_price_jpy")
