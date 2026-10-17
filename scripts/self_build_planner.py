@@ -1468,11 +1468,96 @@ def render_plan_markdown(plan):
             money(build.get("target_remaining_budget_jpy")), money(build.get("market_reference_estimate_jpy")),
             build.get("compatibility_status"), build.get("decision")
         ))
+    lines.extend([
+        "",
+        "## 現在の在庫・売り切れリスク（購入可能総額ではない）",
+        "",
+        "この表は最新スナップショットの、型番一致した販売店掲載の観測です。価格・在庫は注文時に変わる可能性があります。売り切れ価格は販売可能額に加算せず、取得失敗・在庫不明は売り切れと断定しません。",
+        "",
+        "|構成|販売可能掲載を確認|うち在庫少|監視先すべて売切れ|在庫未確認/未取得|販売可能掲載の部分合計|完成総額|",
+        "|---|---:|---:|---:|---:|---:|---|"
+    ])
     for build in plan.get("builds") or []:
-        lines.extend(["", "## " + build.get("name", "自作PC"), "",
-          "- PC本体目標（送料・小物予備費込み）: " + money(build.get("target_pc_total_jpy")),
-          "- 周辺機器込み目標: " + money(build.get("target_all_in_jpy")) + " / 残額 " + money(build.get("target_remaining_budget_jpy")),
-          "- 現在の比較参考合計: " + (money(build.get("market_reference_estimate_jpy")) + "（決済見積ではない）" if build.get("market_reference_estimate_jpy") is not None else "未算出。部品価格の欠落・不一致・古さを0円補完しない"),
+        component_by_id = {str(part.get("id")): part for part in (build.get("components") or [])}
+        sellable_n = build.get("current_sellable_listing_part_count", 0)
+        required_n = build.get("current_sellable_listing_required_part_count", 0)
+        low_ids = build.get("current_low_stock_part_ids") or []
+        oos_ids = build.get("current_confirmed_out_of_stock_part_ids") or []
+        unknown_ids = build.get("current_unconfirmed_availability_part_ids") or []
+        partial = money(build.get("current_sellable_listing_subtotal_jpy"))
+        complete_total = "未算出（全パーツ・送料・決済条件の確認が必要）"
+        lines.append("|{}|{}/{}|{}|{}|{}|{}|{}|".format(
+            build.get("name"), sellable_n, required_n, len(low_ids), len(oos_ids),
+            len(unknown_ids), partial + "（掲載価格のみ）", complete_total
+        ))
+        def names_for(ids):
+            return "、".join(
+                str(component_by_id.get(str(cid), {}).get("name") or cid)
+                for cid in ids
+            ) or "なし"
+        lines.append("")
+        lines.append("- {} — 在庫少: {} / 監視先すべて売切れ: {} / 在庫未確認・未取得: {}".format(
+            build.get("name"), names_for(low_ids), names_for(oos_ids), names_for(unknown_ids)
+        ))
+        lines.append("- 販売可能掲載の部分合計は{}部品分。完成PC価格でも、送料・一括決済済み金額でもありません。".format(sellable_n))
+
+    lines.extend([
+        "",
+        "## 売り切れ時の代替候補（自動注文なし・型番別に再検証）",
+        "",
+        "代替SKUへの切り替えは、同じ規格/クラスか、正確な型番、最新の直接価格、販売可能在庫、互換性が検証できた場合だけ計画上で行います。低在庫は売り切れリスクとして別途示し、在庫不明を在庫ありと扱いません。",
+        "",
+        "|カテゴリ|候補|目標価格|最新の販売可能掲載|在庫信号|選定ルール|商品ページ|",
+        "|---|---|---:|---:|---|---|---|"
+    ])
+    fallback_groups = [
+        ("メモリ", (plan.get("memory_choice_selection") or {}).get("candidates") or [],
+         (plan.get("memory_choice_selection") or {}).get("selected_id"), "検証済み在庫あり候補の価格比較"),
+        ("SSD", (plan.get("storage_choice_selection") or {}).get("candidates") or [],
+         (plan.get("storage_choice_selection") or {}).get("selected_id"), "優先SSDが買えなければ、在庫確認済みの1TB NVMeへ切替"),
+        ("CPUクーラー", (plan.get("cooler_choice_selection") or {}).get("candidates") or [],
+         (plan.get("cooler_choice_selection") or {}).get("selected_id"), "優先クーラーが買えなければ、互換性を確認した代替へ切替"),
+    ]
+    for base_gpu_id, candidates in (plan.get("gpu_fallback_candidates_by_choice") or {}).items():
+        fallback_groups.append(("GPU代替", candidates, None, "同じGPUクラスの別SKU。寸法・端子・冷却を再確認"))
+    stock_labels = {
+        "in_stock": "在庫あり（再確認必須）", "low_stock": "在庫少（急変リスク）",
+        "out_of_stock": "売切れ", "unknown": "在庫未確認",
+        "preorder_or_backorder": "取寄/予約", "stale": "鮮度切れ",
+    }
+    for category, candidates, selected_id, rule in fallback_groups:
+        for candidate in candidates:
+            cprice = candidate.get("sellable_listing_price_jpy")
+            if cprice is None:
+                cprice = candidate.get("direct_listing_sellable_price_jpy")
+            stock = candidate.get("stock_status") or candidate.get("direct_listing_sellable_stock_status") or "unknown"
+            if candidate.get("trusted_for_market_estimate") and isinstance(candidate.get("market_reference_price_jpy"), int):
+                cprice = candidate.get("market_reference_price_jpy")
+                stock = "in_stock"
+            page = candidate.get("purchase_url") or "—"
+            name = candidate.get("name") or candidate.get("id")
+            if selected_id and candidate.get("id") == selected_id:
+                name = str(name) + "（選定中）"
+            lines.append("|{}|{}|{}|{}|{}|{}|{}|".format(
+                category, name, money(candidate.get("target_price_jpy")),
+                money(cprice) if isinstance(cprice, int) and not isinstance(cprice, bool) else "販売可能価格なし",
+                stock_labels.get(str(stock), str(stock)), rule,
+                "[商品ページ]({})".format(page) if str(page).startswith("https://") else page
+            ))
+    lines.extend(["", "## 構成別の詳細", ""])
+    for build in plan.get("builds") or []:
+        component_names = {str(part.get("id")): str(part.get("name") or part.get("id")) for part in (build.get("components") or [])}
+        lines.extend(["", "### " + build.get("name", "自作PC"), "",
+          "- BF目標総額（計画値）: " + money(build.get("target_all_in_jpy")) + "。値下がり予測・実売の確定額ではない。",
+          "- 現時点の販売可能掲載: {}/{}部品 / 部分合計 {}（掲載額だけ。完成価格・注文カート合計ではない）。".format(
+              build.get("current_sellable_listing_part_count", 0),
+              build.get("current_sellable_listing_required_part_count", 0),
+              money(build.get("current_sellable_listing_subtotal_jpy"))),
+          "- 採用GPU SKU: {}（{}）".format(component_names.get(str(build.get("selected_gpu_part_id")), str(build.get("selected_gpu_part_id"))), build.get("gpu_selection_method")),
+          "- 採用RAM: {}（{}）".format(component_names.get(str(build.get("selected_memory_id")), str(build.get("selected_memory_id"))), build.get("memory_choice_method")),
+          "- 採用SSD: {}（{}）".format(component_names.get(str(build.get("selected_storage_id")), str(build.get("selected_storage_id"))), build.get("storage_selection_method")),
+          "- 採用CPUクーラー: {}（{}）".format(component_names.get(str(build.get("selected_cooler_id")), str(build.get("selected_cooler_id"))), build.get("cooler_selection_method")),
+          "- 現在の比較参考合計: " + (money(build.get("market_reference_estimate_jpy")) + "（各店の参考掲載値の合算で、決済見積ではない）" if build.get("market_reference_estimate_jpy") is not None else "未算出。価格・型番・在庫条件を満たさない部品を0円補完しない"),
           "- 互換性: " + str(build.get("compatibility_status")) + " / 判定: " + str(build.get("decision")), "",
           "|画像|部品|型番|BF目標|検証済み/表示専用参考値|直接掲載価格（在庫条件未達・推定不採用）|確認状態|前倒し購入シグナル|直接取得診断|リンク|",
           "|---|---|---|---:|---:|---|---|---|---|---|---|"])
