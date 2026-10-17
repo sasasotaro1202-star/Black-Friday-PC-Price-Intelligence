@@ -386,7 +386,7 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
     }
 
 
-def compatibility_checks(parts, profile, gpu_id, memory_part_id=None, storage_part_id=None, cooler_part_id=None):
+def compatibility_checks(parts, profile, gpu_id, memory_part_id=None, storage_part_id=None, cooler_part_id=None, cpu_part_id=None):
     """Checks known socket/memory/storage/size/power constraints, fail-closed."""
     checks = []
     def add(name, status, detail):
@@ -395,9 +395,13 @@ def compatibility_checks(parts, profile, gpu_id, memory_part_id=None, storage_pa
     def spec(part_id):
         return (parts.get(part_id) or {}).get("specs") or {}
 
-    cpu = spec("cpu-ryzen7-9700x")
-    board = spec("motherboard-asrock-b850m-pro-rs-wifi")
     fixed_ids = profile.get("fixed_part_ids") or []
+    cpu_part_id = cpu_part_id or next(
+        (str(part_id) for part_id in fixed_ids if (parts.get(str(part_id)) or {}).get("category") == "cpu"),
+        "cpu-ryzen7-9700x",
+    )
+    cpu = spec(cpu_part_id)
+    board = spec("motherboard-asrock-b850m-pro-rs-wifi")
     memory_part_id = memory_part_id or profile.get("primary_memory_choice_id") or next(
         (
             str(part_id) for part_id in fixed_ids
@@ -415,27 +419,41 @@ def compatibility_checks(parts, profile, gpu_id, memory_part_id=None, storage_pa
     add("cpu_motherboard_socket", "PASS" if cpu.get("socket") and cpu.get("socket") == board.get("socket") else "FAIL",
         "CPU socket {} / board socket {}".format(cpu.get("socket", "unknown"), board.get("socket", "unknown")))
 
-    minimum_bios = board.get("minimum_bios_for_ryzen7_9700x")
     observed_bios = board.get("observed_bios_version")
-    cpu_support_verified = board.get("cpu_support_list_verified_for_ryzen7_9700x") is True
     def version_tuple(value):
         pieces = re.findall(r"\d+", str(value or ""))
         return tuple(int(piece) for piece in pieces) if pieces else None
-    required_bios_tuple = version_tuple(minimum_bios)
-    observed_bios_tuple = version_tuple(observed_bios)
-    if not cpu_support_verified or required_bios_tuple is None:
+    if cpu_part_id == "cpu-ryzen7-9700x":
+        minimum_bios = board.get("minimum_bios_for_ryzen7_9700x")
+        cpu_support_verified = board.get("cpu_support_list_verified_for_ryzen7_9700x") is True
+        required_bios_tuple = version_tuple(minimum_bios)
+        observed_bios_tuple = version_tuple(observed_bios)
+        if not cpu_support_verified or required_bios_tuple is None:
+            bios_status = "REVIEW"
+            bios_detail = "Exact CPU support-list entry or minimum BIOS version has not been verified from the manufacturer."
+        elif observed_bios_tuple is None:
+            bios_status = "REVIEW"
+            bios_detail = "ASRock support list requires BIOS {}; the exact board's shipped/installed BIOS is unobserved. Verify it and use BIOS Flashback/update if needed.".format(minimum_bios)
+        elif observed_bios_tuple < required_bios_tuple:
+            bios_status = "REVIEW"
+            bios_detail = "Observed BIOS {} is older than the required {}; update before using this CPU.".format(observed_bios, minimum_bios)
+        else:
+            bios_status = "PASS"
+            bios_detail = "Observed BIOS {} meets the manufacturer minimum {} for Ryzen 7 9700X.".format(observed_bios, minimum_bios)
+    elif cpu.get("series") in (board.get("supported_cpu_series") or []):
         bios_status = "REVIEW"
-        bios_detail = "Exact CPU support-list entry or minimum BIOS version has not been verified from the manufacturer."
-    elif observed_bios_tuple is None:
-        bios_status = "REVIEW"
-        bios_detail = "ASRock support list requires BIOS {}; the exact board's shipped/installed BIOS is unobserved. Verify it and use BIOS Flashback/update if needed.".format(minimum_bios)
-    elif observed_bios_tuple < required_bios_tuple:
-        bios_status = "REVIEW"
-        bios_detail = "Observed BIOS {} is older than the required {}; update before using this CPU.".format(observed_bios, minimum_bios)
+        bios_detail = "The motherboard manufacturer lists the Ryzen 9000 series as supported, but the exact minimum BIOS for {} and the shipped BIOS are not confirmed in this plan. Verify the exact CPU row and update BIOS if required.".format((parts.get(cpu_part_id) or {}).get("name") or cpu_part_id)
     else:
-        bios_status = "PASS"
-        bios_detail = "Observed BIOS {} meets the manufacturer minimum {} for Ryzen 7 9700X.".format(observed_bios, minimum_bios)
+        bios_status = "REVIEW"
+        bios_detail = "Exact motherboard support-list entry and minimum BIOS for {} remain unverified.".format((parts.get(cpu_part_id) or {}).get("name") or cpu_part_id)
     add("cpu_bios_support", bios_status, bios_detail)
+
+    cooler_guidance = str(cpu.get("recommended_cooler_guidance") or "")
+    if cpu.get("cooler_guidance_review") is True and cooler.get("cooling_type") != "liquid":
+        add(
+            "cpu_cooling_headroom", "REVIEW",
+            "{}; currently configured CPU cooler is not the liquid-cooling setup described by the manufacturer. Sustained build/analysis thermal performance and any cooler replacement cost are not verified.".format(cooler_guidance),
+        )
 
     memory_ok = (
         memory.get("memory_type") == board.get("memory_type")
@@ -1212,8 +1230,13 @@ def build_plan(config=None, price_snapshot=None, now=None):
                     all_parts_referenced = False
                     missing.append(cid)
 
+        selected_cpu_id = next(
+            (str(cid) for cid in selected_ids if (parts.get(str(cid)) or {}).get("category") == "cpu"),
+            None,
+        )
         compat, checks = compatibility_checks(
-            parts, profile, selected_gpu_id, selected_memory_id, selected_storage_id, selected_cooler_id
+            parts, profile, selected_gpu_id, selected_memory_id, selected_storage_id, selected_cooler_id,
+            cpu_part_id=selected_cpu_id,
         )
         workload_fit = assess_workload_fit(profile, parts, selected_ids, selected_gpu_id, selected_memory_id)
         target_pc = target_parts + shipping + small_parts
@@ -1294,7 +1317,114 @@ def build_plan(config=None, price_snapshot=None, now=None):
             ]
         })
 
-    builds = score_and_rank_builds(builds)
+    # Add one like-for-like CPU alternative while preserving three primary GPU-tier builds.
+    # Recursion uses a copied config with the alternative list emptied, so it is bounded.
+    cpu_alternative_scenarios = []
+    primary_gpu_for_cpu_comparison = str(
+        profile.get("cpu_comparison_gpu_choice_id")
+        or profile.get("primary_gpu_choice_id")
+        or (gpu_ids[0] if gpu_ids else "")
+    )
+    primary_gpu_build = next(
+        (build for build in builds if str(build.get("gpu_choice_id")) == primary_gpu_for_cpu_comparison),
+        None,
+    )
+    base_cpu_id = next(
+        (str(cid) for cid in fixed_ids if (parts.get(str(cid)) or {}).get("category") == "cpu"),
+        "cpu-ryzen7-9700x",
+    )
+    for alternative_cpu_id in profile.get("cpu_alternative_choice_ids") or []:
+        alternative_cpu_id = str(alternative_cpu_id)
+        alternative_cpu = parts.get(alternative_cpu_id) or {}
+        if alternative_cpu.get("category") != "cpu" or primary_gpu_build is None or alternative_cpu_id == base_cpu_id:
+            continue
+        alternate_config = json.loads(json.dumps(config))
+        alternate_profile = alternate_config.get("profile") or {}
+        original_fixed_ids = [str(cid) for cid in (alternate_profile.get("fixed_part_ids") or [])]
+        alternate_profile["fixed_part_ids"] = [
+            cid for cid in original_fixed_ids if (parts.get(cid) or {}).get("category") != "cpu"
+        ] + [alternative_cpu_id]
+        alternate_profile["cpu_alternative_choice_ids"] = []
+        alternate_profile["gpu_choice_ids"] = [primary_gpu_for_cpu_comparison]
+        alternate_plan = build_plan(alternate_config, snapshot, now=now)
+        if not alternate_plan.get("builds"):
+            continue
+        alternative_build = alternate_plan["builds"][0]
+        alternative_build["cpu_alternative_candidate"] = True
+        alternative_build["cpu_choice_id"] = alternative_cpu_id
+        alternative_build["id"] = "self-build-cpu-comparison-" + alternative_cpu_id
+        alternative_build["name"] = "CPU比較案：" + str(alternative_cpu.get("name") or alternative_cpu_id) + " + " + str((parts.get(primary_gpu_for_cpu_comparison) or {}).get("name") or primary_gpu_for_cpu_comparison)
+        base_cpu_target = int((parts.get(base_cpu_id) or {}).get("target_price_jpy") or 0)
+        alternative_cpu_target = int(alternative_cpu.get("target_price_jpy") or 0)
+        alternative_build["target_cpu_delta_vs_base_jpy"] = alternative_cpu_target - base_cpu_target
+        alternative_build["target_all_in_delta_vs_base_jpy"] = int(alternative_build.get("target_all_in_jpy") or 0) - int(primary_gpu_build.get("target_all_in_jpy") or 0)
+        alternative_build["cpu_comparison_gpu_id"] = primary_gpu_for_cpu_comparison
+        alternative_build["cpu_comparison_is_purchase_authorization"] = False
+        cpu_alternative_scenarios.append({
+            "cpu_choice_id": alternative_cpu_id,
+            "cpu_name": alternative_cpu.get("name"),
+            "cpu_cores": (alternative_cpu.get("specs") or {}).get("cores"),
+            "cpu_threads": (alternative_cpu.get("specs") or {}).get("threads"),
+            "cpu_target_price_jpy": alternative_cpu.get("target_price_jpy"),
+            "target_cpu_delta_vs_base_jpy": alternative_build["target_cpu_delta_vs_base_jpy"],
+            "target_pc_total_jpy": alternative_build.get("target_pc_total_jpy"),
+            "target_all_in_jpy": alternative_build.get("target_all_in_jpy"),
+            "target_all_in_delta_vs_base_jpy": alternative_build["target_all_in_delta_vs_base_jpy"],
+            "compatibility_status": alternative_build.get("compatibility_status"),
+            "decision": alternative_build.get("decision"),
+            "build": alternative_build,
+            "purchase_authorized": False,
+        })
+
+    # Score primary GPU candidates and CPU comparison builds together so their
+    # 100-point scores use the same price-efficiency denominator.
+    all_candidate_builds = score_and_rank_builds(
+        builds + [item["build"] for item in cpu_alternative_scenarios]
+    )
+    for overall_rank, item in enumerate(all_candidate_builds, 1):
+        item["overall_comparison_rank"] = overall_rank
+    builds = [item for item in all_candidate_builds if not item.get("cpu_alternative_candidate")]
+    builds.sort(key=lambda item: (
+        -(item.get("scorecard") or {}).get("overall_score", 0.0),
+        item.get("target_all_in_jpy") if isinstance(item.get("target_all_in_jpy"), int) else 10**12,
+        str(item.get("gpu_choice_id") or ""),
+    ))
+    for rank, build in enumerate(builds, 1):
+        build["rank"] = rank
+    for item in cpu_alternative_scenarios:
+        item["overall_comparison_rank"] = item["build"].get("overall_comparison_rank")
+        item["scorecard"] = item["build"].get("scorecard") or {}
+
+    cpu_dark_horse_candidates = []
+    primary_cpu = parts.get(base_cpu_id) or {}
+    base_cpu_target = int(primary_cpu.get("target_price_jpy") or 0)
+    base_all_in = int(primary_gpu_build.get("target_all_in_jpy") or 0) if primary_gpu_build else None
+    for dark_horse_id in profile.get("cpu_dark_horse_ids") or []:
+        dark_cpu = parts.get(str(dark_horse_id)) or {}
+        if dark_cpu.get("category") != "cpu":
+            continue
+        dark_target = dark_cpu.get("target_price_jpy")
+        increment = int(dark_target) - base_cpu_target if isinstance(dark_target, int) else None
+        target_all_in_floor = base_all_in + increment if isinstance(base_all_in, int) and isinstance(increment, int) else None
+        cpu_dark_horse_candidates.append({
+            "cpu_choice_id": str(dark_horse_id),
+            "cpu_name": dark_cpu.get("name"),
+            "cpu_cores": (dark_cpu.get("specs") or {}).get("cores"),
+            "cpu_threads": (dark_cpu.get("specs") or {}).get("threads"),
+            "cpu_tdp_w": (dark_cpu.get("specs") or {}).get("package_power_w"),
+            "cpu_target_price_jpy": dark_target,
+            "target_cpu_delta_vs_base_jpy": increment,
+            "target_all_in_floor_with_current_cooler_jpy": target_all_in_floor,
+            "over_budget_before_cooling_change_jpy": max(0, target_all_in_floor - all_budget) if isinstance(target_all_in_floor, int) else None,
+            "manufacturer_cooling_guidance": (dark_cpu.get("specs") or {}).get("recommended_cooler_guidance"),
+            "complete_build_price_verified": False,
+            "cooling_cost_included": False,
+            "purchase_authorized": False,
+            "note_ja": "高コア数大穴。参考下限はCPU目標額の差分のみを現行構成に置き換えた値で、冷却変更費用を含まない。完全構成のランキング・購入価格として扱わない。",
+            "source_url": dark_cpu.get("image_source_url") or dark_cpu.get("monitor_url"),
+        })
+
+
 
     return {
         "generated_at": iso(now), "schema_version": 1, "project": "DIY_PC",
@@ -1317,6 +1447,8 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "purchase_authorization_automatic": False
         },
         "workload_profile": profile.get("workload_profile") or {},
+        "cpu_alternative_scenarios": cpu_alternative_scenarios,
+        "cpu_dark_horse_candidates": cpu_dark_horse_candidates,
         "total_budget_jpy": all_budget, "peripheral_budget_jpy": peripheral_budget, "pc_budget_jpy": pc_budget,
         "unallocated_contingency_jpy": int(profile.get("unallocated_contingency_jpy", 0)),
         "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
@@ -1614,6 +1746,59 @@ def render_plan_markdown(plan):
                 score.get("market_reference_required_count", 0)
             )
         ))
+    cpu_alternatives = plan.get("cpu_alternative_scenarios") or []
+    cpu_dark_horses = plan.get("cpu_dark_horse_candidates") or []
+    lines.extend([
+        "",
+        "## 高コア数CPUの比較（補助候補。購入認定ではない）",
+        "",
+        "主ランキングのRyzen 7 9700Xはゲームと一般的な制作・分析を両立する基準構成です。次のCPU案はRTX 5070 12GBを共通GPUとしてCPU差分を比較します。100点スコアは主ランキングと同じ式・価格効率の比較母集団で再計算していますが、互換性・冷却・販売価格の未確認が解消されたことを意味しません。",
+        "",
+        "|全候補順位|CPU比較案|コア/スレッド|CPU BF目標|PC本体BF目標|周辺機器込みBF目標|基準案からの総額差|制作スコア/20|分析スコア/20|総合点/100|互換性|判定|",
+        "|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|",
+    ])
+    for item in cpu_alternatives:
+        build = item.get("build") or {}
+        score = item.get("scorecard") or {}
+        fit = build.get("scorecard") or {}
+        lines.append("|{}|{}|{}/{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
+            item.get("overall_comparison_rank", "—"),
+            item.get("cpu_name") or item.get("cpu_choice_id"),
+            item.get("cpu_cores", "—"), item.get("cpu_threads", "—"),
+            money(item.get("cpu_target_price_jpy")),
+            money(item.get("target_pc_total_jpy")),
+            money(item.get("target_all_in_jpy")),
+            money(item.get("target_all_in_delta_vs_base_jpy")),
+            fit.get("game_creation_score", "—"),
+            fit.get("analysis_ai_score", "—"),
+            fit.get("overall_score", "—"),
+            item.get("compatibility_status", "REVIEW"),
+            item.get("decision", "REVIEW"),
+        ))
+    if not cpu_alternatives:
+        lines.append("|—|CPU高コア数比較は未設定|—|—|—|—|—|—|—|—|未確認|未確認|")
+    lines.extend([
+        "",
+        "この補助案でもCPUの目標価格だけを使って実売価格を作り出しません。購入前にCPUの正確なSKU・最新の販売可能価格・BIOS・RAM QVL/EXPO・冷却性能・送料・保証を確認します。",
+        "",
+        "|高コア数の大穴|コア/スレッド|CPU BF目標|現行クーラーのままCPU差額だけを置換した総額下限|40万円上限超過（冷却変更前）|冷却・価格の状態|",
+        "|---|---:|---:|---:|---:|---|",
+    ])
+    for item in cpu_dark_horses:
+        cooling = item.get("manufacturer_cooling_guidance") or "要確認"
+        total_floor = money(item.get("target_all_in_floor_with_current_cooler_jpy"))
+        overrun = money(item.get("over_budget_before_cooling_change_jpy"))
+        lines.append("|{}|{}/{}|{}|{}|{}|{}|".format(
+            item.get("cpu_name") or item.get("cpu_choice_id"),
+            item.get("cpu_cores", "—"), item.get("cpu_threads", "—"),
+            money(item.get("cpu_target_price_jpy")),
+            total_floor, overrun, cooling + "。冷却費用未算入・完全構成未確認"
+        ))
+    if cpu_dark_horses:
+        lines.extend([
+            "",
+            "上記の総額下限は完全な購入構成ではありません。メーカー推奨の冷却を採用する場合の追加費用を含まず、予算内と誤認しないために別枠で表示しています。",
+        ])
     lines.extend([
         "",
         "## 目標総額と購入ゲート",
@@ -1863,6 +2048,20 @@ def section_from_plan(plan):
             score.get("overall_score", "—"), score.get("purchase_evidence_completeness_score_out_of_100", "—"),
             money(build.get("target_pc_total_jpy")), money(build.get("target_all_in_jpy")),
             money(build.get("target_remaining_budget_jpy")), build.get("compatibility_status"), build.get("decision")))
+    cpu_alternatives = plan.get("cpu_alternative_scenarios") or []
+    if cpu_alternatives:
+        lines.extend(["", "CPU高コア数の補助比較（RTX 5070 12GBを固定）："])
+        for item in cpu_alternatives:
+            lines.append("- {} / {}コア{}スレッド / CPU目標 {} / 周辺機器込み目標 {} / 総合点 {} / 互換性 {}（購入許可ではない）".format(
+                item.get("cpu_name"), item.get("cpu_cores"), "/" + str(item.get("cpu_threads")) + "T",
+                money(item.get("cpu_target_price_jpy")), money(item.get("target_all_in_jpy")),
+                (item.get("scorecard") or {}).get("overall_score", "—"), item.get("compatibility_status", "REVIEW")))
+    cpu_dark_horses = plan.get("cpu_dark_horse_candidates") or []
+    for item in cpu_dark_horses:
+        lines.append("- CPU大穴：{} / {}コア{}スレッド / 冷却費用を含まない総額下限 {}（40万円上限超過 {}、完全構成未確認）".format(
+            item.get("cpu_name"), item.get("cpu_cores"), "/" + str(item.get("cpu_threads")) + "T",
+            money(item.get("target_all_in_floor_with_current_cooler_jpy")),
+            money(item.get("over_budget_before_cooling_change_jpy")))
     lines.extend(["", "RTX 5070 12GBを本命、RTX 5060 Ti 16GBをVRAM重視の代替、RTX 5070 Ti 16GBを大穴として分離します。",
         "", "BF目標額は値下げ希望額であり、現時点で購入許可はありません。比較サイト価格はBF実売に数えません。",
         "", "[自作PCの部品別価格・互換性レポート](self-build-ranking.md)", END_MARKER])
@@ -1900,6 +2099,8 @@ def main():
                 stream.write(updated)
     print(json.dumps({"status":"OK","generated_at":plan["generated_at"],
         "build_count":len(plan["builds"]),
+        "cpu_alternative_count":len(plan.get("cpu_alternative_scenarios") or []),
+        "cpu_dark_horse_count":len(plan.get("cpu_dark_horse_candidates") or []),
         "target_pc_totals":{x["id"]:x["target_pc_total_jpy"] for x in plan["builds"]},
         "all_in_targets":{x["id"]:x["target_all_in_jpy"] for x in plan["builds"]},
         "buy_now_authorized":False,

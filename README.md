@@ -29,7 +29,8 @@
 - 購入時の基準はRAM 32GB以上・専用GPU VRAM 8GB以上・SSD 1TB以上。UE5の公式推奨仕様はRAM 32GB、グラフィックスメモリ8GB以上です。
 - 64GB RAMと2TB SSDは、予算と最終価格が許せば優先しますが、必須の公式要件とは扱いません。購入時点で搭載された容量のみ適合判定に使い、購入後の増設を前提にしません。
 - RTX 5070 12GBはゲーム性能と制作の総合候補、RTX 5060 Ti 16GBはVRAM重視の候補、RTX 5070 Ti 16GBは性能重視の大穴です。GPUの優劣はFPSだけで決めず、VRAM、描画性能、総額、電源、寸法を別々に評価します。
-- 現在のRyzen 7 9700X（8コア/16スレッド）は通常のゲームプロジェクト制作の土台です。ただしUnreal Engine自体をソースからローカルでフルビルドする場合、Epicの12～16コアという実用目安よりコア数が少ないため、その特殊用途は明示的なトレードオフとして報告します。
+- Ryzen 7 9700X（8コア/16スレッド）をバランス本命として残しつつ、Unreal Engine自体のソースフルビルドや並列分析向けにRyzen 9 9900X（12コア/24スレッド）をRTX 5070 12GB固定の補助比較案として採点します。55,000円はBF目標で、PC本体約352,000円・一式目標約392,000円の計画試算は実売価格ではありません。
+- Ryzen 9 9950X（16コア/32スレッド）も大穴として価格監視しますが、85,000円のCPU目標だけ置換しても総額下限約422,000円で、メーカー推奨の冷却変更費用も含みません。完成構成が予算内に収まる証拠が出るまでは買える候補に格上げしません。
 
 参照：[Epic Games — Unreal Engine 5.8 ハードウェア/ソフトウェア要件](https://dev.epicgames.com/documentation/en-us/unreal-engine/hardware-and-software-specifications-for-unreal-engine)、[Unity 6 システム要件](https://docs.unity3d.com/6000.0/Documentation/Manual/system-requirements.html)。
 

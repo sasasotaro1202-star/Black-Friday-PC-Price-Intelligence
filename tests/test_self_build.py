@@ -314,6 +314,40 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertTrue(plan["budget_arithmetic_valid"])
         self.assertFalse(plan["buy_now_authorized"])
 
+    def test_cpu_high_core_alternative_is_scored_separately_and_dark_horse_is_not_misrepresented(self):
+        plan = planner.build_plan(self.config, {"products": []}, now=NOW)
+        self.assertEqual(len(plan["builds"]), 3)  # keep the primary GPU-tier table stable
+        self.assertEqual(len(plan["cpu_alternative_scenarios"]), 1)
+        alternative = plan["cpu_alternative_scenarios"][0]
+        cpu_build = alternative["build"]
+        cpu = next(item for item in cpu_build["components"] if item["category"] == "cpu")
+        self.assertEqual(cpu["id"], "cpu-ryzen9-9900x")
+        self.assertEqual(alternative["cpu_cores"], 12)
+        self.assertEqual(alternative["cpu_threads"], 24)
+        self.assertEqual(alternative["target_pc_total_jpy"], 352000)
+        self.assertEqual(alternative["target_all_in_jpy"], 392000)
+        self.assertEqual(alternative["target_all_in_delta_vs_base_jpy"], 10000)
+        self.assertEqual(cpu_build["workload_fit"]["selected_hardware"]["cpu_cores"], 12)
+        self.assertEqual(cpu_build["workload_fit"]["game_development"]["unreal_engine_source_compile"]["status"], "MEETS_LOWER_PRACTICAL_CORE_TARGET")
+        checks = {item["check"]: item["status"] for item in cpu_build["compatibility_checks"]}
+        self.assertEqual(checks["cpu_bios_support"], "REVIEW")
+        self.assertEqual(checks["cpu_cooling_headroom"], "REVIEW")
+        self.assertFalse(cpu_build["buy_now_authorized"])
+        self.assertFalse(alternative["purchase_authorized"])
+
+        dark_horse = next(item for item in plan["cpu_dark_horse_candidates"] if item["cpu_choice_id"] == "cpu-ryzen9-9950x")
+        self.assertEqual(dark_horse["cpu_cores"], 16)
+        self.assertEqual(dark_horse["cpu_threads"], 32)
+        self.assertEqual(dark_horse["target_all_in_floor_with_current_cooler_jpy"], 422000)
+        self.assertEqual(dark_horse["over_budget_before_cooling_change_jpy"], 22000)
+        self.assertFalse(dark_horse["complete_build_price_verified"])
+        self.assertFalse(dark_horse["cooling_cost_included"])
+        report = planner.render_plan_markdown(plan)
+        self.assertIn("高コア数CPUの比較", report)
+        self.assertIn("AMD Ryzen 9 9900X BOX", report)
+        self.assertIn("422,000", report)
+        self.assertIn("完全構成未確認", report)
+
     def test_primary_build_selects_budget_fit_teamgroup_and_keeps_crucial_as_alternative(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         builds = {x["gpu_choice_id"]:x for x in plan["builds"]}

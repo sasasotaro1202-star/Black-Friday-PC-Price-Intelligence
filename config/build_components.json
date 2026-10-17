@@ -40,7 +40,7 @@
     "allowed_comparison_domains": [
       "kakaku.com"
     ],
-    "policy": "Black Friday target prices are aspirational, not forecasts. Total-system hard ceiling is JPY 400,000. PC planning target is JPY 360,000, while maximum PC spend is dynamically capped by the all-in total. Peripheral allocation is flexible at JPY 35,000, not an obligation to spend the full amount. Include exactly one 27-inch WQHD high-refresh main monitor, keyboard, mouse, and mousepad. In-stock fallbacks are tracked for RAM, 1TB NVMe SSD, CPU cooler, and the RTX 5070 class; substitution is allowed only after exact model/price/stock/compatibility verification. The power strip is already owned and excluded from purchase, monitoring, and budget. Buy only necessary cables after checking included cables. Do not include speakers, a sub-monitor, or a headset in candidate lists, monitoring, budgets, or totals. Keep JPY 5,000 as an unallocated contingency. Compare online delivery, in-store cash purchase, and online order with store pickup per item using the exact SKU/variant, direct price, total cash checkout amount including fees, stock, warranty and return terms. Points are not cash discounts. Comparison-site prices and BF targets are not checkout prices or verified BF deals. Include online delivery shipping, but never assume peripheral shipping for in-store purchases. Keep dark-horse candidates in comparisons with explicit overruns; never authorize purchases from target prices alone.",
+    "policy": "Black Friday target prices are aspirational, not forecasts. Total-system hard ceiling is JPY 400,000. PC planning target is JPY 360,000, while maximum PC spend is dynamically capped by the all-in total. Peripheral allocation is flexible at JPY 35,000, not an obligation to spend the full amount. Include exactly one 27-inch WQHD high-refresh main monitor, keyboard, mouse, and mousepad. In-stock fallbacks are tracked for RAM, 1TB NVMe SSD, CPU cooler, and the RTX 5070 class; substitution is allowed only after exact model/price/stock/compatibility verification. The power strip is already owned and excluded from purchase, monitoring, and budget. Buy only necessary cables after checking included cables. Do not include speakers, a sub-monitor, or a headset in candidate lists, monitoring, budgets, or totals. Keep JPY 5,000 as an unallocated contingency. Compare online delivery, in-store cash purchase, and online order with store pickup per item using the exact SKU/variant, direct price, total cash checkout amount including fees, stock, warranty and return terms. Points are not cash discounts. Comparison-site prices and BF targets are not checkout prices or verified BF deals. Include online delivery shipping, but never assume peripheral shipping for in-store purchases. Keep dark-horse candidates in comparisons with explicit overruns; never authorize purchases from target prices alone. Track a Ryzen 9 9900X alternative with the same RTX 5070 12GB for a CPU-workload comparison; show a Ryzen 9 9950X as a CPU dark horse only with an explicit over-budget lower-bound calculation and cooling caveat. Never treat either comparison target as a live checkout quote.",
     "allowed_search_reference_domains": [
       "kakaku.com",
       "amazon.co.jp",
@@ -71,7 +71,7 @@
     "assembly_time_penalty_points": 0,
     "pc_build_method_preference": "SELF_BUILD_REQUIRED_FOR_PRIMARY_RECOMMENDATION",
     "bto_role": "REFERENCE_BENCHMARK_ONLY",
-    "selection_policy": "Prioritize self-build for the actual desktop recommendation. Assembly time and assembly effort are not negative factors. Compare BTO only as a reference benchmark on equivalent final specification, total cash price, part quality and warranty; do not switch the primary recommendation to BTO merely for convenience.",
+    "selection_policy": "Prioritize self-build for the actual desktop recommendation. Assembly time and assembly effort are not negative factors. Compare BTO only as a reference benchmark on equivalent final specification, total cash price, part quality and warranty; do not switch the primary recommendation to BTO merely for convenience. Add a separately scored CPU-core alternative for compile/data workloads; clearly identify unresolved BIOS/cooling constraints and do not silently swap away from the base CPU.",
     "purchase_decision_factors": [
       {
         "name": "combined_performance_for_gaming_game_creation_study_analysis",
@@ -160,7 +160,8 @@
           "https://dev.epicgames.com/documentation/ja-jp/unreal-engine/hardware-and-software-specifications-for-unreal-engine",
           "https://docs.unity3d.com/6000.0/Documentation/Manual/system-requirements.html"
         ],
-        "preferred_cpu_cores_for_unreal_source_build": 12
+        "preferred_cpu_cores_for_unreal_source_build": 12,
+        "cpu_comparison_policy": "The primary ranked build uses Ryzen 7 9700X, but the project also produces a separately scored Ryzen 9 9900X + RTX 5070 comparison for 12-core parallel-build headroom. Ryzen 9 9950X is a tracked 16-core dark horse, not a purchase-ready configuration, because target arithmetic exceeds the total cap before its manufacturer-recommended cooling change is costed."
       },
       "ai_and_data_analysis": {
         "priority": "HIGH",
@@ -337,6 +338,36 @@
       "gpu-rtx5070-12gb": [
         "gpu-rtx5070-12gb-msi-ventus2x"
       ]
+    },
+    "cpu_alternative_choice_ids": [
+      "cpu-ryzen9-9900x"
+    ],
+    "cpu_comparison_gpu_choice_id": "gpu-rtx5070-12gb",
+    "cpu_dark_horse_ids": [
+      "cpu-ryzen9-9950x"
+    ],
+    "cpu_comparison_policy": {
+      "comparison_method": "Keep Ryzen 7 9700X as the base build; create a separate fully itemized Ryzen 9 9900X scenario paired with the RTX 5070 12GB for a like-for-like CPU comparison. The 16-core Ryzen 9 9950X is monitored as a dark-horse CPU candidate but is not called a complete build because current target arithmetic exceeds the cap before its recommended cooling change.",
+      "current_base_pc_target_jpy": 342000,
+      "current_base_all_in_target_jpy": 382000,
+      "alternative_cpu_targets_are_aspirational": true,
+      "never_authorize_purchase_from_target_price": true,
+      "cpu_9900x_target_jpy": 55000,
+      "cpu_9950x_target_jpy": 85000,
+      "compare_same_gpu_id": "gpu-rtx5070-12gb",
+      "requirements": [
+        "Expose CPU cores/threads in the comparison and workload scoring.",
+        "Report CPU target-price delta, complete component list and total-system target.",
+        "Do not treat a comparison-page reference as a current checkout quote.",
+        "Exact CPU BIOS, selected memory QVL/EXPO, sustained cooling, stock, shipping, warranty and return status must be checked.",
+        "For Ryzen 9 9950X, show the over-budget arithmetic separately and exclude any unpriced liquid-cooling change from claims of a complete-system cost."
+      ],
+      "sources": [
+        "https://www.amd.com/ja/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9900x.html",
+        "https://www.amd.com/ja/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x.html",
+        "https://kakaku.com/item/K0001630331/",
+        "https://kakaku.com/item/K0001630330/"
+      ]
     }
   },
   "parts": [
@@ -383,6 +414,98 @@
         "integration_flexibility_points": 14,
         "rationale_ja": "ゲームの応答性と8コア/16スレッドを両立し、ゲーム制作・Python分析を含む汎用本命に合う。",
         "limitations_ja": "UE5エンジン本体のソースフルビルドでは12～16コア級の構成より不利。大規模な並列ビルド最優先のCPUではない。"
+      }
+    },
+    {
+      "id": "cpu-ryzen9-9900x",
+      "category": "cpu",
+      "role": "cpu_multicore_alternative",
+      "name": "AMD Ryzen 9 9900X BOX",
+      "model_code": "100-100000662WOF",
+      "aliases": [
+        "Ryzen 9 9900X",
+        "100-100000662WOF"
+      ],
+      "identity_terms": [
+        "AMD Ryzen 9 9900X",
+        "Ryzen 9 9900X",
+        "100-100000662WOF"
+      ],
+      "monitor_url": "https://kakaku.com/item/K0001630331/",
+      "purchase_url": "https://kakaku.com/item/K0001630331/",
+      "track_price": true,
+      "target_price_jpy": 55000,
+      "min_price_jpy": 40000,
+      "max_price_jpy": 100000,
+      "specs": {
+        "socket": "AM5",
+        "series": "Ryzen 9000 Series",
+        "cores": 12,
+        "threads": 24,
+        "package_power_w": 120,
+        "max_boost_clock_ghz": 5.6,
+        "cooler_included": false,
+        "recommended_cooler_guidance": "AMD official specification: liquid cooler recommended for optimal performance",
+        "cooler_guidance_review": true
+      },
+      "notes": "CPU高コア数の比較候補。55,000円はBF購入目標であり、確定価格・価格予測ではない。価格.comのページは検索時点で約60,932円を表示していたが、参照時刻が最新決済確認とは限らない。購入可能価格として扱わず、正確な販売店SKU・在庫・送料・決済総額を再確認する。AMDは最適な性能のために液冷クーラーを推奨しているため、現在の空冷クーラーのままでは持続負荷時の冷却を要確認。BIOSの正確な最低バージョン、QVL、冷却費用、全構成価格が未確認の間は購入判断しない。",
+      "image_url": "https://www.amd.com/content/dam/amd/en/images/products/processors/ryzen/2405508-ryzen-9-9900x-box-1260x709.png",
+      "image_source_url": "https://www.amd.com/ja/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9900x.html",
+      "image_note": "AMD公式製品ページ",
+      "image_checked_at": "2026-10-18",
+      "fit_scorecard": {
+        "workload_fit_points": 39,
+        "headroom_points": 24,
+        "quality_reliability_points": 18,
+        "integration_flexibility_points": 12,
+        "rationale_ja": "12コア/24スレッドで並列ビルド、シミュレーション、Python分析のCPU側余力を増やす比較案。",
+        "limitations_ja": "Ryzen 7 9700Xより高い目標価格と120W TDP。冷却、BIOS、QVLと実売を検証するまで推奨本命に昇格させない。"
+      }
+    },
+    {
+      "id": "cpu-ryzen9-9950x",
+      "category": "cpu",
+      "role": "cpu_high_core_dark_horse",
+      "name": "AMD Ryzen 9 9950X BOX",
+      "model_code": "100-100001277WOF",
+      "aliases": [
+        "Ryzen 9 9950X",
+        "100-100001277WOF"
+      ],
+      "identity_terms": [
+        "AMD Ryzen 9 9950X",
+        "Ryzen 9 9950X",
+        "100-100001277WOF"
+      ],
+      "monitor_url": "https://kakaku.com/item/K0001630330/",
+      "purchase_url": "https://kakaku.com/item/K0001630330/",
+      "track_price": true,
+      "target_price_jpy": 85000,
+      "min_price_jpy": 70000,
+      "max_price_jpy": 150000,
+      "specs": {
+        "socket": "AM5",
+        "series": "Ryzen 9000 Series",
+        "cores": 16,
+        "threads": 32,
+        "package_power_w": 170,
+        "max_boost_clock_ghz": 5.7,
+        "cooler_included": false,
+        "recommended_cooler_guidance": "AMD official specification: liquid cooler recommended for optimal performance",
+        "cooler_guidance_review": true
+      },
+      "notes": "16コア/32スレッドのCPU大穴。85,000円はBF購入目標であって予測価格ではない。標準9700X構成からCPU目標差額だけを置換しても、基準総額382,000円から422,000円となり40万円を22,000円超過する。これは液冷クーラーの追加・変更費用をまだ含まない参考下限であり、完成構成価格ではない。AMDは最適な性能のために液冷クーラーを推奨。高コア数の魅力だけで推奨構成に混ぜず、GPU/メモリ/冷却の選び直し、型番・在庫・保証・互換性を検証してから再評価する。",
+      "image_url": "https://www.amd.com/content/dam/amd/en/images/products/processors/ryzen/2405508-ryzen-9-9950x-box-1260x709.png",
+      "image_source_url": "https://www.amd.com/ja/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x.html",
+      "image_note": "AMD公式製品ページ",
+      "image_checked_at": "2026-10-18",
+      "fit_scorecard": {
+        "workload_fit_points": 40,
+        "headroom_points": 25,
+        "quality_reliability_points": 18,
+        "integration_flexibility_points": 11,
+        "rationale_ja": "16コア/32スレッド。大規模コンパイル、並列処理、CPU中心の分析を重視する場合の高コア数大穴。",
+        "limitations_ja": "目標総額を22,000円以上超過し、メーカー推奨の冷却構成の追加費用も未算入。完全な購入構成としては未採点。"
       }
     },
     {
@@ -572,7 +695,11 @@
         "observed_bios_version": null,
         "cpu_support_source_url": "https://www.asrock.com/support/cpu.asp?s=AM5&u=766",
         "bios_flashback_available": true,
-        "bios_support_reference_url": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS%20WiFi/index.jp.asp"
+        "bios_support_reference_url": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS%20WiFi/index.jp.asp",
+        "supported_cpu_series": [
+          "Ryzen 9000 Series"
+        ],
+        "supported_cpu_series_source_url": "https://www.asrock.com/mb/amd/B850M%20Pro%20RS%20WiFi/index.jp.asp"
       },
       "notes": "AM5・DDR5・MicroATX。CPU対応BIOS、QVL、M.2レーン共有は購入前に再確認。 ヨドバシの型番一致商品ページも直接監視。 PC4Uの正規代理店品個別ページも第二監視先として追加。2026-10-14時点の検索表示は32,080円・在庫ありだが、監視時に直接価格と在庫を再取得する。 ソフマップの型番一致商品ページ（sku=101393495）を第三の直接監視先として追加。価格表示・在庫情報は検索結果の転載ではなく、本番監視で直接再取得して検証する。 ASRock公式CPUサポートリストではRyzen 7 9700Xの必要BIOSは3.12。購入個体の出荷時BIOSは未観測のため、実物のBIOS確認または必要に応じたBIOS Flashbackを組立前に確認する。正確なメモリキットのQVL掲載も未確認なので、QVL/EXPOの確認完了までは互換性をREVIEWとする。",
       "direct_retailer_urls": [

@@ -45,6 +45,19 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(targets["peripheral_budget_jpy"], 35000)
         self.assertEqual(targets["pc_target_jpy"], 360000)
 
+    def test_cpu_core_alternatives_are_present_for_compile_and_analysis_workloads(self):
+        profile = self.build_components["profile"]
+        parts = {item["id"]: item for item in self.build_components["parts"]}
+        self.assertEqual(profile["cpu_alternative_choice_ids"], ["cpu-ryzen9-9900x"])
+        self.assertEqual(profile["cpu_dark_horse_ids"], ["cpu-ryzen9-9950x"])
+        self.assertEqual(parts["cpu-ryzen9-9900x"]["specs"]["cores"], 12)
+        self.assertEqual(parts["cpu-ryzen9-9900x"]["specs"]["threads"], 24)
+        self.assertEqual(parts["cpu-ryzen9-9950x"]["specs"]["cores"], 16)
+        self.assertTrue(parts["cpu-ryzen9-9900x"]["track_price"])
+        self.assertTrue(parts["cpu-ryzen9-9950x"]["track_price"])
+        self.assertIn("game_development", profile["workload_profile"])
+        self.assertIn("cpu_comparison_policy", profile["workload_profile"]["game_development"])
+
     def test_peripheral_shipping_and_excluded_device_scope_are_consistent(self):
         scope = self.targets["budget_scope_note"]
         shipping = self.targets["peripheral_shipping_policy"]
