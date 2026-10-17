@@ -18,18 +18,25 @@
 - クーポンは最終決済画面で適用を確認した場合のみ現金コストに反映します。ポイント、延長保証、同梱品等は現金支払額と分けます。
 - ネット価格だけで「最安購入先確定」と表示しません。比較する店頭価格・店頭在庫が未確認なら、ネットが「確認できた候補の中で有効」と表現し、全ルート比較未完了と記録します。
 
-## 店頭価格・在庫の記録項目
+## 店頭価格・在庫の記録項目（支店ごとに独立）
 
-`config/targets.json` の対象商品に、実際に確認できた場合だけ次の項目を記録します。
+**支店ごとに価格・在庫を別のレコードとして記録します。** ビックカメラ天神1号館の価格とヨドバシ博多の在庫を組み合わせる、といった誤比較は禁止です。店舗ごとに同一型番・色、税込現金価格、在庫、確認時刻、証拠URLを保持します。
 
-- `store_price_jpy`: 税込の店頭現金価格（整数の円）
-- `store_price_checked_at`: JSTの確認時刻。例 `2026-11-20T14:35:00+09:00`
-- `store_stock_status`: `in_stock` / `low_stock` / `out_of_stock` / `unknown`
-- `store_observation_store_id`: `physical_store_candidate_ids` 内の支店ID
-- `store_evidence_type`: `in_store_check` / `store_phone_confirmation` / `official_branch_stock_page`
-- `store_evidence_notes`: 型番・色、価格、確認方法、在庫/取り置き可否
-- `store_confirmation_url`: 支店の公式URL（HTTPS）
-- `store_model_match`: 完全な型番・バリアントが一致した場合だけ `true`
+新しい記録先は config/targets.json の store_price_observations 配列です。1商品に複数支店のレコードを持たせられます。各レコードに必要な項目は次のとおりです。
+
+- store_id: physical_store_candidate_ids 内の実在支店ID
+- price_jpy: その支店の税込・現金支払価格（整数の円）
+- price_basis: tax_inclusive_cash。ポイントを値引きとして差し引かない
+- checked_at: 価格と在庫を確認したJST時刻。例 2026-11-20T14:35:00+09:00
+- stock_status: in_stock / low_stock / out_of_stock / unknown / preorder_or_backorder
+- confirmation_url: 該当支店の価格証拠となる公式HTTPSページ。同じ販売店ドメインであることを検証
+- model_match: 完全な型番・色・容量・バリアントが一致した場合だけ true
+- evidence_type: in_store_check / store_phone_confirmation / official_branch_price_page / official_branch_stock_page
+- evidence_notes: 確認した型番、税込現金価格、在庫、確認方法。ポイント・クーポンは別記
+
+従来の store_price_jpy / store_price_checked_at 等の単一支店フィールドも後方互換のため受け付けます。出力のこれらの単一値は比較上の代表候補です。**支店ごとの判断・監査には store_price_observations 全件を使います。** 未確認の項目は空のままにし、価格を推測して埋めません。
+
+選び方は次のとおりです。まず、鮮度のある支店別在庫証拠がある価格だけを「購入可能な店頭候補」とします。その候補内で税込現金価格が最も安い支店を選びます。ポイント還元は現金値引きと区別し、対象者限定クーポンや会員価格は実際に適用できたことが分かるまで通常価格に反映しません。全支店の価格が未確認なら「店頭最安」や「全ルート最安」を確定しません。
 
 ## 店舗受け取り用の証拠
 
