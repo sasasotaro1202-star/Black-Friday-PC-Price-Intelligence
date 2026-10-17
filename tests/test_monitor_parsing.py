@@ -138,6 +138,52 @@ class MonitorParsingTests(unittest.TestCase):
                                              expected=expected)
         self.assertIsNone(result)
 
+    def test_previous_navigation_filter_price_is_not_retained_as_last_valid(self):
+        entry = {
+            "id": "desktop-test",
+            "url": "https://www.mouse-jp.co.jp/store/g/test/",
+            "query": "G TUNE test desktop RTX 5070",
+            "priority": "critical",
+        }
+        previous = {
+            "current_price_jpy": 300001,
+            "price_jpy": 300001,
+            "last_valid_price_jpy": 300001,
+            "price_source_mode": "direct_text",
+            "price_validation_status": "validated",
+            "price_context": "G TUNE HOME 価格から探す 300,001円～ グラフィックスから探す",
+        }
+        raw = {
+            "name": "G TUNE test desktop",
+            "price_jpy": None,
+            "price_source_mode": "none",
+            "price_context": None,
+            "stock_status": "unknown",
+            "parsed_spec": {"form_factor": "desktop"},
+            "page_text_excerpt": "G TUNE test desktop",
+        }
+        catalog_item = {
+            "id": "desktop-test",
+            "name": "G TUNE test desktop",
+            "url_is_exact": True,
+            "identity_confidence": "high",
+            "reference_price_jpy": 304800,
+            "gpu": "RTX 5070",
+            "form_factor": "desktop",
+        }
+        result = monitor.apply_observation(
+            entry,
+            raw,
+            previous,
+            catalog_item,
+            "2026-10-18T00:00:00+09:00",
+        )
+        self.assertIsNone(result["current_price_jpy"])
+        self.assertIsNone(result["price_jpy"])
+        self.assertIsNone(result["last_valid_price_jpy"])
+        self.assertEqual(result["price_source_mode"], "none")
+        self.assertEqual(result["price_validation_status"], "missing")
+
     def test_navigation_price_filter_range_is_not_selected_as_product_price(self):
         for text in (
             "商品一覧 価格から探す 300,001円～ CPUから探す",
