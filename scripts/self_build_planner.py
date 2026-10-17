@@ -364,7 +364,7 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
     }
 
 
-def compatibility_checks(parts, profile, gpu_id, memory_part_id=None):
+def compatibility_checks(parts, profile, gpu_id, memory_part_id=None, storage_part_id=None, cooler_part_id=None):
     """Checks known socket/memory/storage/size/power constraints, fail-closed."""
     checks = []
     def add(name, status, detail):
@@ -384,10 +384,10 @@ def compatibility_checks(parts, profile, gpu_id, memory_part_id=None):
         "memory-teamgroup-ddr5-32gb-6000",
     )
     memory = spec(memory_part_id)
-    storage = spec("ssd-crucial-p3-plus-1tb")
+    storage = spec(storage_part_id or "ssd-crucial-p3-plus-1tb")
     psu = spec("psu-corsair-rm850e-2025")
     case = spec("case-fractal-pop-air-tg")
-    cooler = spec("cooler-thermalright-pa120-se-v3")
+    cooler = spec(cooler_part_id or "cooler-thermalright-pa120-se-v3")
     gpu = spec(gpu_id)
 
     add("cpu_motherboard_socket", "PASS" if cpu.get("socket") and cpu.get("socket") == board.get("socket") else "FAIL",
