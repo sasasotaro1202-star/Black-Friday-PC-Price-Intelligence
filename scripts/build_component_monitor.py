@@ -947,6 +947,7 @@ def verify_retailer_listing(part, candidate_url, domains, diagnostic_out=None):
             )
         diagnostic.update({
             "page_name": str(raw.get("name") or "")[:180] or None,
+            "seller_name": str(raw.get("seller_name") or "")[:120] or None,
             "price_source_mode": raw.get("price_source_mode"),
             "parsed_price_jpy": raw.get("price_jpy"),
             "raw_stock_status": raw.get("stock_status"),
@@ -971,6 +972,19 @@ def verify_retailer_listing(part, candidate_url, domains, diagnostic_out=None):
                 page_text_excerpt=excerpt[:220] or None,
             )
         diagnostic["identity_anchor"] = str(anchor)[:180]
+
+        # Amazon's product page may display a featured offer from Amazon itself
+        # or from a marketplace seller. Without a seller-scoped name, this price
+        # is not a safely comparable merchant offer and must not enter the
+        # sellable-listing subtotal or ranking.
+        normalized_host = final_host.lower().removeprefix("www.")
+        seller_name = str(raw.get("seller_name") or "").strip()
+        if normalized_host == "amazon.co.jp" and not seller_name:
+            return fail(
+                "marketplace_seller_identity_unverified",
+                seller_identity_required=True,
+                page_text_excerpt=str(raw.get("page_text_excerpt") or "")[:220] or None,
+            )
 
         price = raw.get("price_jpy")
         source_mode = raw.get("price_source_mode")
