@@ -1210,7 +1210,7 @@ def search_comparison_snippet(part, domains):
 
     # Search a rotating set of allowlisted retailer pages directly. Search-card
     # prices only identify candidate listings; each detail URL is fetched again.
-    for search in build_retailer_search_urls(part, domains, limit=2):
+    for search in build_retailer_search_urls(part, domains, limit=1):
         page_metrics = {}
         search_url = search["url"]
         retailer_domain = search["retailer_domain"]
@@ -1398,6 +1398,98 @@ def search_comparison_snippet(part, domains):
         }
     return {"search_diagnostics": diagnostics} if diagnostics else None
 
+def merge_recent_retailer_offers(part, current_offers, previous_row, allowed_domains,
+                                 now=None, max_age_minutes=360):
+    """Retain recent verified retailer offers across rotating searches.
+
+    Seller searches rotate across runs. Preserve each retailer's latest validated
+    listing while its price observation is recent; the planner separately applies
+    the stricter stock-freshness window before treating inventory as actionable.
+    """
+    now = now or now_jst()
+    previous_row = previous_row if isinstance(previous_row, dict) else {}
+    candidates = []
+    previous_selected = previous_row.get("retailer_listing_offer")
+    if isinstance(previous_selected, dict):
+        candidates.append(previous_selected)
+    candidates.extend(
+        offer for offer in (previous_row.get("retailer_listing_offers") or [])
+        if isinstance(offer, dict)
+    )
+    candidates.extend(
+        offer for offer in (current_offers or []) if isinstance(offer, dict)
+    )
+
+    identity_terms = [
+        part.get("model_code"), part.get("name"),
+        *(part.get("aliases") or []), *(part.get("identity_terms") or []),
+    ]
+    identity_terms = {
+        normalized(term) for term in identity_terms if str(term or "").strip()
+    }
+    minimum = int(part.get("min_price_jpy") or 1)
+    maximum = int(part.get("max_price_jpy") or 10**9)
+    retained = {}
+    for source in candidates:
+        offer = dict(source)
+        price = offer.get("price_jpy")
+        url = str(offer.get("url") or "")
+        parsed = urlparse(url)
+        host = (parsed.hostname or "").lower()
+        path = parsed.path.rstrip("/").lower()
+        anchor = normalized(offer.get("identity_anchor"))
+        available = parse_dt(offer.get("available_at"))
+        retrieved = parse_dt(offer.get("retrieval_time"))
+        if (
+            offer.get("source_role") != "direct_retailer_listing_reference"
+            or offer.get("identity_match") is not True
+            or not anchor or anchor not in identity_terms
+            or offer.get("pit_valid") is not True
+            or offer.get("bf_actual_authorized") is not False
+            or offer.get("price_source_mode") not in (
+                "direct_structured", "direct_meta", "direct_text"
+            )
+            or isinstance(price, bool) or not isinstance(price, int)
+            or not minimum <= price <= maximum
+            or not url.startswith("https://")
+            or not allowed_url(url, allowed_domains)
+            or host == "kakaku.com" or host.endswith(".kakaku.com")
+            or not path or available is None or retrieved is None
+            or available > retrieved or retrieved > now
+        ):
+            continue
+        age = (now - retrieved).total_seconds() / 60.0
+        if age < 0 or age > max(1, int(max_age_minutes)):
+            continue
+        offer["retailer_domain"] = host.removeprefix("www.")
+        # Different marketplace sellers can list the same ASIN/product URL.
+        seller = str(
+            offer.get("seller_name") or offer.get("merchant")
+            or offer.get("seller") or ""
+        ).strip().lower()
+        key = (host, path, seller)
+        previous = retained.get(key)
+        previous_retrieved = parse_dt(previous.get("retrieval_time")) if previous else None
+        if previous_retrieved is not None and previous_retrieved > retrieved:
+            continue
+        retained[key] = offer
+
+    stock_priority = {
+        "in_stock": 0, "low_stock": 1, "unknown": 2,
+        "preorder_or_backorder": 3, "out_of_stock": 4,
+    }
+    result = list(retained.values())
+    result.sort(key=lambda offer: (
+        stock_priority.get(str(offer.get("stock_status") or "unknown"), 2),
+        int(offer.get("price_jpy") or 10**12),
+        0 if offer.get("price_source_mode") == "direct_structured" else 1,
+        -((now - parse_dt(offer.get("retrieval_time"))).total_seconds()),
+        str(offer.get("retailer_domain") or ""),
+        str(offer.get("seller_name") or offer.get("merchant") or ""),
+    ))
+    return result
+
+
 def fetch_part(part, domains, search_domains=None):
     """Collect a comparison-site reference and independent retailer offers.
 
@@ -1533,9 +1625,7 @@ def fetch_part(part, domains, search_domains=None):
             if (
                 not allowed_offer_host
                 or offer_host in ("kakaku.com", "www.kakaku.com")
-                or not (
-                    offer_host.endswith(".kakaku.com") is False
-                )
+                or offer_host.endswith(".kakaku.com")
                 or offer.get("source_role") != "direct_retailer_listing_reference"
                 or offer.get("identity_match") is not True
                 or not offer.get("identity_anchor")
@@ -1814,6 +1904,18 @@ def collect_component_prices(config=None):
             counts["unverified_or_missing"] += 1
         if row.get("fetch_status") == "error":
             counts["fetch_error"] += 1
+        # Seller discovery rotates to keep free monitoring bounded. Merge the
+        # latest recent offer per retailer/seller into the snapshot, while the
+        # ranking layer independently expires old stock signals.
+        row["retailer_listing_offers"] = merge_recent_retailer_offers(
+            part,
+            row.get("retailer_listing_offers") or [],
+            previous,
+            search_domains,
+            now=now_jst(),
+            max_age_minutes=int(profile.get("market_reference_max_age_minutes") or 360),
+        )
+        row["retailer_listing_offer_count"] = len(row["retailer_listing_offers"])
         output_rows.append(row)
     append_jsonl(OBSERVATIONS_PATH, observations)
     append_jsonl(EVENTS_PATH, events)
