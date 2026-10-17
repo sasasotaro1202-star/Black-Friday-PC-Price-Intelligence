@@ -241,7 +241,6 @@ class PeripheralMonitorTests(unittest.TestCase):
                     self.assertTrue(card.get("limitations_ja"))
                     self.assertTrue(candidate.get("purchase_url") or candidate.get("monitor_url"))
                     scores.append(score)
-                self.assertEqual(sorted(scores, reverse=True), sorted(scores, reverse=True))
         cable_rule = next(x for x in config["peripherals"] if x["id"] == "cables")
         self.assertIsNone(cable_rule.get("ranking_score_100"))
         self.assertIn("条件付き購入ルール", cable_rule.get("score_exclusion_reason_ja", ""))
