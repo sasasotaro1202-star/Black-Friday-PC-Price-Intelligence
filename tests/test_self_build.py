@@ -85,6 +85,12 @@ class SelfBuildPlannerTests(unittest.TestCase):
             by_gpu["gpu-rtx5070ti-16gb"]["gaming_benchmark_reference"]["source_updated"],
             "2026-06-24",
         )
+        expected_reference_fps = {"gpu-rtx5070ti-16gb": 116.8, "gpu-rtx5070-12gb": 96.4, "gpu-rtx5060ti-16gb": 73.4}
+        for gpu_id, expected_fps in expected_reference_fps.items():
+            reference = by_gpu[gpu_id]["gaming_benchmark_reference"]
+            self.assertEqual(reference["reference_mean_fps"], expected_fps)
+            self.assertEqual(reference["resolution"], "1440p Ultra")
+            self.assertFalse(reference["user_game_specific"])
         self.assertFalse(by_gpu["gpu-rtx5070ti-16gb"]["gaming_benchmark_reference"]["user_game_specific"])
         rendered = planner.render_plan_markdown(plan)
         self.assertIn("100点方式の構成スコア", rendered)
