@@ -235,8 +235,12 @@ def main():
                 errors.append("self_build_plan PC total mismatch: " + bid)
             if build.get("target_all_in_jpy") != build.get("target_pc_total_jpy", 0) + periph_budget + contingency:
                 errors.append("self_build_plan all-in total mismatch: " + bid)
-            if build.get("target_all_in_jpy", total_budget + 1) > total_budget:
-                errors.append("self_build_plan exceeds total budget: " + bid)
+            target_all_in = build.get("target_all_in_jpy", total_budget + 1)
+            target_decision = str(build.get("decision") or "")
+            if target_all_in > total_budget and target_decision != "OVER_BUDGET_TARGET":
+                errors.append("self_build_plan over-budget alternative is not explicitly labeled: " + bid)
+            if target_all_in <= total_budget and target_decision == "OVER_BUDGET_TARGET":
+                errors.append("self_build_plan incorrectly labels an in-budget alternative as over budget: " + bid)
             statuses = [c.get("status") for c in (build.get("compatibility_checks") or [])]
             expected_status = "FAIL" if "FAIL" in statuses else "REVIEW" if "REVIEW" in statuses else "PASS"
             if build.get("compatibility_status") != expected_status:
