@@ -290,6 +290,67 @@ class PeripheralMonitorTests(unittest.TestCase):
                 self.assertIsNone(result["store_price_jpy"])
                 self.assertEqual(result["store_observation_status"], expected_status)
 
+    def test_multiple_branch_cash_quotes_are_validated_and_compared_independently(self):
+        import json
+        from intelligence import store_observation_validation
+
+        config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        target = dict(next(x for x in config["peripherals"] if x["id"] == "main_monitor"))
+        stores = {x["id"]: x for x in config["purchase_channels"]["physical_store_candidates"]}
+        now = "2026-10-15T12:00:00+09:00"
+        target["store_price_observations"] = [
+            {
+                "store_id": "biccamera_tenjin_1",
+                "price_jpy": 22980,
+                "checked_at": "2026-10-15T11:55:00+09:00",
+                "stock_status": "in_stock",
+                "confirmation_url": stores["biccamera_tenjin_1"]["official_store_url"],
+                "model_match": True,
+                "evidence_type": "store_phone_confirmation",
+                "evidence_notes": "型番Q27G40E/11、税込の店頭現金価格、在庫を確認。ポイントは差し引いていない。",
+                "price_basis": "tax_inclusive_cash",
+            },
+            {
+                "store_id": "yodobashi_hakata",
+                "price_jpy": 21980,
+                "checked_at": "2026-10-15T11:56:00+09:00",
+                "stock_status": "low_stock",
+                "confirmation_url": stores["yodobashi_hakata"]["official_store_url"],
+                "model_match": True,
+                "evidence_type": "store_phone_confirmation",
+                "evidence_notes": "型番Q27G40E/11、税込の店頭現金価格、在庫を確認。ポイントは差し引いていない。",
+                "price_basis": "tax_inclusive_cash",
+            },
+            {
+                "store_id": "yodobashi_hakata",
+                "price_jpy": 19980,
+                "checked_at": "2026-10-15T11:57:00+09:00",
+                "stock_status": "in_stock",
+                "confirmation_url": stores["yodobashi_hakata"]["official_store_url"],
+                "model_match": True,
+                "evidence_type": "store_phone_confirmation",
+                "evidence_notes": "誤った価格基準の負例。ポイント相当額を差し引いている。",
+                "price_basis": "points_deducted",
+            },
+        ]
+
+        result = store_observation_validation(target, now)
+        self.assertTrue(result["store_price_confirmed"])
+        self.assertEqual(result["store_price_jpy"], 21980)
+        self.assertEqual(result["store_observation_store_id"], "yodobashi_hakata")
+        self.assertEqual(result["store_price_observation_count"], 3)
+        self.assertEqual(
+            set(result["store_price_verified_store_ids"]),
+            {"biccamera_tenjin_1", "yodobashi_hakata"},
+        )
+        by_status = {
+            (row["store_observation_store_id"], row["store_observation_status"], row.get("store_price_jpy"))
+            for row in result["store_price_observations"]
+        }
+        self.assertIn(("yodobashi_hakata", "PRICE_BASIS_UNVERIFIED", None), by_status)
+        self.assertIn(("biccamera_tenjin_1", "PRICE_VERIFIED", 22980), by_status)
+        self.assertIn(("yodobashi_hakata", "PRICE_VERIFIED", 21980), by_status)
+
     def test_online_listing_for_store_purchase_is_never_mislabelled_as_store_price(self):
         target = dict(self.target)
         target.update({
