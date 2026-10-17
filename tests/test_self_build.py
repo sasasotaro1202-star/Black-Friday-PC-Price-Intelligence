@@ -635,5 +635,73 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(once.count(planner.END_MARKER), 1)
 
 
+    def test_sold_out_and_unknown_stock_stay_separate_and_do_not_count_as_sellable(self):
+        part = self.parts["gpu-rtx5070-12gb"]
+        stamp = NOW.isoformat()
+        sold_out = {
+            "url": "https://www.sofmap.com/product_detail.aspx?sku=example",
+            "title": part["name"],
+            "price_jpy": 190800,
+            "price_source_mode": "direct_structured",
+            "stock_status": "out_of_stock",
+            "identity_anchor": part["model_code"],
+            "identity_match": True,
+            "source_role": "direct_retailer_listing_reference",
+            "available_at": stamp,
+            "retrieval_time": stamp,
+            "pit_valid": True,
+            "bf_actual_authorized": False,
+        }
+        unknown = {
+            **sold_out,
+            "url": "https://shop.tsukumo.co.jp/goods/example/",
+            "price_jpy": 190800,
+            "stock_status": "unknown",
+        }
+        row = {
+            "id": part["id"],
+            "price_validation_status": "missing",
+            "bf_actual_authorized": False,
+            "retailer_listing_offer": sold_out,
+            "retailer_listing_offers": [sold_out, unknown],
+            "early_buy_review": {
+                "item_id": part["id"], "observed_price_jpy": 190800,
+                "price_verified": True, "identity_verified": True, "pit_valid": True,
+                "stock_status": "unknown", "status": "STOCK_NOT_VERIFIED",
+                "label_ja": "在庫未確認", "purchase_authorized": False,
+            },
+        }
+        plan = planner.build_plan(self.config, {"generated_at": stamp, "products": [row]}, now=NOW)
+        build = next(x for x in plan["builds"] if x["gpu_choice_id"] == part["id"])
+        gpu = next(x for x in build["components"] if x["id"] == part["id"])
+
+        self.assertEqual(gpu["direct_listing_offer_count"], 2)
+        self.assertEqual(gpu["direct_listing_sellable_price_jpy"], None)
+        self.assertEqual(gpu["direct_listing_stock_counts"]["out_of_stock"], 1)
+        self.assertEqual(gpu["direct_listing_stock_counts"]["unknown"], 1)
+        self.assertNotIn(part["id"], build["current_sellable_listing_part_ids"])
+        self.assertFalse(build["current_listing_subtotal_is_complete_build_price"])
+        self.assertFalse(build["current_listing_subtotal_is_checkout_price"])
+
+        report = planner.render_plan_markdown(plan)
+        self.assertIn("売切れ1・在庫不明1", report)
+        self.assertIn("在庫切れ掲載", report)
+        self.assertIn("販売可能な直接掲載価格なし", report)
+        self.assertIn("ソフマップ", report) if "ソフマップ" in report else self.assertIn("PNY GeForce RTX 5070", report)
+        self.assertFalse(plan["buy_now_authorized"])
+
+    def test_partial_sellable_listing_subtotal_never_presents_as_complete_price(self):
+        plan = planner.build_plan(self.config, {"products": []}, now=NOW)
+        for build in plan["builds"]:
+            self.assertEqual(build["current_sellable_listing_subtotal_jpy"], 0)
+            self.assertEqual(build["current_sellable_listing_part_count"], 0)
+            self.assertEqual(build["current_sellable_listing_required_part_count"], len(build["components"]))
+            self.assertFalse(build["current_listing_subtotal_is_complete_build_price"])
+            self.assertFalse(build["current_listing_subtotal_is_checkout_price"])
+        report = planner.render_plan_markdown(plan)
+        self.assertIn("現時点の販売店掲載価格・在庫", report)
+        self.assertIn("部品数カバー率", report)
+        self.assertIn("在庫不明", report)
+
 if __name__ == "__main__":
     unittest.main()
