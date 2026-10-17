@@ -1370,8 +1370,9 @@ def main():
                     price_parts.append(online_part)
                 else:
                     price_parts.append("ネット価格未確認")
-                if isinstance(store_price, int) and not isinstance(store_price, bool):
-                    price_parts.append(f"店頭現金 ¥{store_price:,}")
+                store_price_labels = physical_store_cash_price_labels(observation)
+                if store_price_labels:
+                    price_parts.append("支店別店頭現金: " + " / ".join(store_price_labels))
                 else:
                     price_parts.append("店頭現金価格未確認")
                 if isinstance(pickup_price, int) and not isinstance(pickup_price, bool):
