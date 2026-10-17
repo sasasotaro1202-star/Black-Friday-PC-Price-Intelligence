@@ -3,8 +3,31 @@ import os
 
 from intelligence import (
     ROOT, load_json, save_json, load_catalog, enrich_identity,
-    validate_price
+    validate_price, norm_text, PRICE_NAVIGATION_CONTEXT
 )
+
+
+def reject_navigation_filter_price(item, price, reference):
+    """Downgrade page-navigation price ranges so they cannot be treated as SKU offers."""
+    if price is None or item.get("price_source_mode") != "direct_text":
+        return False
+    context = str(item.get("price_context") or "")
+    normalized = norm_text(context)
+    if not any(phrase in normalized for phrase in PRICE_NAVIGATION_CONTEXT):
+        return False
+
+    # Preserve the rejected candidate only in explicitly non-actionable audit
+    # fields. Never let it become last_valid_price_jpy or current_price_jpy.
+    item["rejected_price_candidate_jpy"] = int(price)
+    item["rejected_price_context"] = context[:260]
+    item["reference_price_jpy"] = reference
+    item["current_price_jpy"] = None
+    item["price_jpy"] = None
+    item["price_validation_status"] = "reference_only"
+    item["price_validation_reason"] = "price_from_navigation_filter_not_sku_offer"
+    item["price_source_mode"] = "public_baseline" if reference is not None else "none"
+    item["data_confidence"] = "low"
+    return True
 
 def final_fetch_stats(final_products, monitor_stats=None):
     """Recompute final price counts after sanitization while preserving monitor diagnostics."""
@@ -46,6 +69,7 @@ def main():
         "checked": 0,
         "accepted": 0,
         "rejected_anomaly": 0,
+        "rejected_navigation_price": 0,
         "variant_ambiguous": 0,
         "repaired": 0,
     }
@@ -64,6 +88,16 @@ def main():
         reference = item.get("last_valid_price_jpy")
         if reference is None:
             reference = cat.get("reference_price_jpy", cat.get("price_jpy"))
+
+        # Defense in depth: sanitization independently enforces SKU-offer context,
+        # so older artifacts or a parser regression cannot leak navigation bounds.
+        if reject_navigation_filter_price(item, price, reference):
+            stats["rejected_navigation_price"] += 1
+            stats["repaired"] += 1
+            repaired.append(item)
+            continue
+        item.pop("rejected_price_candidate_jpy", None)
+        item.pop("rejected_price_context", None)
 
         # Shared family pages are not sufficient evidence for a specific configuration.
         # Keep the observed number as a reference, but remove it from the actionable price field.
