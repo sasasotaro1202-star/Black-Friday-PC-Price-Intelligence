@@ -48,17 +48,17 @@
 
 BF purchase targets are aspirations, not forecasts or executable checkout prices:
 - CPU: AMD Ryzen 7 9700X BOX — ¥38,000.
-- GPU primary: PNY GeForce RTX 5070 12GB OC SLIM, exact SKU VCG507012DFSXPB1-O — ¥129,800.
+- GPU primary: PNY GeForce RTX 5070 12GB OC SLIM, exact SKU VCG507012DFSXPB1-O — BF target ¥138,000 (not a current quote).
 - GPU VRAM alternative: PNY RTX 5060 Ti 16GB OC, exact SKU VCG5060T16DFXPB1-O — ¥109,800.
-- GPU dark horse: PNY RTX 5070 Ti 16GB ARGB, exact SKU VCG5070T16TFXXPB1-O — ¥154,000.
+- GPU dark horse: PNY RTX 5070 Ti 16GB ARGB, exact SKU VCG5070T16TFXXPB1-O — BF target ¥158,000; this build currently targets ¥402,000 all-in, so it must remain explicitly over-budget and blocked unless verified costs/choices bring the total to ¥400,000 or less.
 - Motherboard: ASRock B850M Pro RS WiFi — ¥20,000.
-- Primary budget-fit memory target: TeamGroup T-CREATE EXPERT DDR5-6000 32GB (2×16GB) — ¥40,000; Crucial Pro DDR5-6000 32GB (2×16GB) remains a ¥60,000 alternative.
-- SSD: Crucial P3 Plus 1TB — ¥18,000.
+- Primary planning memory target: TeamGroup T-CREATE EXPERT DDR5-6000 32GB (2×16GB) — BF target ¥58,000; Crucial Pro DDR5-6000 32GB (2×16GB) remains a ¥60,000 alternative. Neither target is a current purchase quote.
+- SSD: Crucial P3 Plus 1TB — BF target ¥24,000; 1TB is the required baseline, and the target is not a current purchase quote.
 - PSU: Corsair RM850e 2025, 850W ATX 3.1 Gold — ¥14,000.
 - Case: Fractal Design Pop Air TG — ¥12,000.
 - CPU cooler: Thermalright Peerless Assassin 120 SE V3 — ¥5,000.
 - Windows 11 Home Japanese retail package — ¥14,800.
-- Current configured TeamGroup-based target bills: RTX 5070 PC ¥300,600 / all-in with ¥35,000 peripherals and ¥5,000 contingency ¥340,600; RTX 5060 Ti 16GB PC ¥280,600 / all-in ¥320,600; RTX 5070 Ti 16GB PC ¥324,800 / all-in ¥364,800. These sums use aspirational component targets and must not be presented as current purchase quotes.
+- Current TeamGroup-based BF target bills (not current quotes): RTX 5070 12GB PC ¥342,000 / all-in with ¥35,000 peripherals and ¥5,000 contingency ¥382,000; RTX 5060 Ti 16GB PC ¥324,000 / all-in ¥364,000; RTX 5070 Ti 16GB PC ¥362,000 / all-in ¥402,000. The RTX 5070 Ti option exceeds the ¥400,000 hard ceiling by ¥2,000 at these targets and must remain a blocked comparison-only dark horse unless the actual complete cash total is within budget.
 - The PC planning target is ¥360,000, not a requirement to spend the full amount if a lower-cost build meets the user's performance goals.
 
 ## 3. Component compatibility gates
