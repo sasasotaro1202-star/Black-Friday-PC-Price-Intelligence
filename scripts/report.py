@@ -79,6 +79,98 @@ def image_markup(item, fallback_url=None, width=88):
     )
 
 
+PERIPHERAL_FIT_SCORE_MAXIMA = {
+    "workload_fit_points": 35,
+    "budget_fit_points": 30,
+    "feature_spec_points": 20,
+    "substitution_risk_points": 15,
+}
+
+
+def peripheral_suitability_score(target):
+    """Validate the curated product-fit rubric separately from live purchase evidence."""
+    target = target if isinstance(target, dict) else {}
+    category = str(target.get("category") or "")
+    exclusion = target.get("score_exclusion_reason_ja")
+    if category == "budget_reserve" or target.get("purchase_channel") == "conditional_need_only" or exclusion:
+        return {
+            "score": None, "out_of": 100, "breakdown": {},
+            "scorecard_complete": False, "status": "NOT_A_PRODUCT",
+            "reason_ja": str(exclusion or "商品ではないため用途適合点の対象外"),
+            "limitations_ja": "", "missing_or_invalid_fields": [],
+        }
+
+    card = target.get("fit_scorecard") if isinstance(target.get("fit_scorecard"), dict) else {}
+    points, invalid = {}, []
+    for key, maximum in PERIPHERAL_FIT_SCORE_MAXIMA.items():
+        value = card.get(key)
+        if not isinstance(value, int) or isinstance(value, bool) or not 0 <= value <= maximum:
+            invalid.append(key)
+        else:
+            points[key] = value
+    score = sum(points.values()) if not invalid else None
+    registered_score = target.get("ranking_score_100")
+    if score is not None and (
+        not isinstance(registered_score, int) or isinstance(registered_score, bool)
+        or registered_score != score
+    ):
+        invalid.append("ranking_score_100_mismatch")
+        score = None
+    reason = str(card.get("rationale_ja") or "")
+    limitations = str(card.get("limitations_ja") or "")
+    if not reason:
+        invalid.append("rationale_ja")
+    if not limitations:
+        invalid.append("limitations_ja")
+    if invalid:
+        score = None
+    return {
+        "score": score,
+        "out_of": 100,
+        "breakdown": points,
+        "scorecard_complete": not invalid,
+        "status": "VALID" if not invalid else "UNSCORED_INVALID_RUBRIC",
+        "reason_ja": reason,
+        "limitations_ja": limitations,
+        "missing_or_invalid_fields": list(dict.fromkeys(invalid)),
+    }
+
+
+def peripheral_fit_score_text(target):
+    result = peripheral_suitability_score(target)
+    if result.get("score") is None:
+        return "対象外" if result.get("status") == "NOT_A_PRODUCT" else "未採点（採点表の不足/不一致）"
+    p = result["breakdown"]
+    return "**{}/100**（用途{}/35・予算{}/30・仕様{}/20・代替性{}/15）".format(
+        result["score"], p["workload_fit_points"], p["budget_fit_points"],
+        p["feature_spec_points"], p["substitution_risk_points"]
+    )
+
+
+def peripheral_fit_reason_text(target):
+    result = peripheral_suitability_score(target)
+    if result.get("status") == "NOT_A_PRODUCT":
+        return result.get("reason_ja") or "商品ではないため採点対象外"
+    if result.get("score") is None:
+        return "採点不能: " + ", ".join(result.get("missing_or_invalid_fields") or ["scorecard_invalid"])
+    text = "評価理由: " + result["reason_ja"] + " / 留意点: " + result["limitations_ja"]
+    return re.sub(r"\\s+", " ", text).replace("|", "／").strip()
+
+
+def peripheral_purchase_evidence_score_text(result):
+    """Render purchase-evidence subscores, separately from product suitability."""
+    result = result if isinstance(result, dict) else {}
+    p = result.get("breakdown") if isinstance(result.get("breakdown"), dict) else {}
+    return "**{}/100**（価格/PIT {}・在庫 {}・決済 {}・購入先比較 {}・保証/返品 {}）".format(
+        int(result.get("score") or 0),
+        int(p.get("direct_price_identity_pit") or 0),
+        int(p.get("sellable_stock") or 0),
+        int(p.get("verified_checkout_total") or 0),
+        int(p.get("route_comparison") or 0),
+        int(p.get("warranty_and_returns") or 0),
+    )
+
+
 def peripheral_purchase_evidence_score(target, observation, now=None, max_age_minutes=360, stock_max_age_minutes=30):
     """Score purchase evidence, not product quality; incomplete evidence earns no credit.
 
@@ -173,10 +265,15 @@ def peripheral_purchase_evidence_score(target, observation, now=None, max_age_mi
     points["sellable_stock"] = stock_score
 
     online_shipping = observation.get("online_shipping_jpy")
+    online_total = observation.get("online_checkout_total_jpy")
+    online_total_checked = observation.get("online_checkout_total_checked_at")
     online_checkout = bool(
         direct_price_verified and online_sellable
         and observation.get("online_shipping_cost_verified") is True
         and nonnegative_int(online_shipping)
+        and observation.get("online_checkout_total_verified") is True
+        and positive_int(online_total)
+        and fresh_timestamp(online_total_checked, None, max_age_minutes)
     )
     store_checkout = bool(
         observation.get("store_price_confirmed") is True
