@@ -336,6 +336,22 @@ class ProjectConfigurationContractTests(unittest.TestCase):
                 self.assertIn(f"¥{all_in_target:,}", guide_row)
                 self.assertEqual(all_in_target > int(self.profile["total_budget_jpy"]), gpu_id == "gpu-rtx5070ti-16gb")
 
+        memory_scenario = self.profile["memory_upgrade_policy"]["full_system_scenario"]
+        self.assertEqual(memory_scenario["base_pc_target_jpy"], 324000)
+        self.assertEqual(memory_scenario["base_memory_target_jpy"], 58000)
+        self.assertEqual(memory_scenario["pc_target_with_64gb_jpy"], 366000)
+        self.assertEqual(memory_scenario["all_in_target_jpy"], 406000)
+        self.assertEqual(memory_scenario["remaining_to_hard_ceiling_jpy"], -6000)
+
+        storage_policy = self.profile["storage_upgrade_policy"]
+        self.assertEqual(storage_policy["baseline_target_jpy"], 24000)
+        self.assertEqual(storage_policy["incremental_budget_target_jpy"], 21000)
+        storage_scenario = storage_policy["full_system_scenario"]
+        self.assertEqual(storage_scenario["base_pc_target_jpy"], 362000)
+        self.assertEqual(storage_scenario["pc_target_with_2tb_ssd_jpy"], 383000)
+        self.assertEqual(storage_scenario["all_in_target_jpy"], 423000)
+        self.assertEqual(storage_scenario["remaining_to_hard_ceiling_jpy"], -23000)
+
     def test_github_is_collector_and_chatgpt_produces_final_on_demand_ranking(self):
         readme = read_text("README.md")
         instructions = read_text(".github/copilot-instructions.md")

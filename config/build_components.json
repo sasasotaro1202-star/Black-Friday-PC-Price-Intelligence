@@ -275,16 +275,16 @@
       "baseline_item_id": "ssd-crucial-p3-plus-1tb",
       "optional_item_id": "ssd-kioxia-exceria-basic-2tb",
       "budget_target_jpy": 45000,
-      "baseline_target_jpy": 18000,
-      "incremental_budget_target_jpy": 27000,
+      "baseline_target_jpy": 24000,
+      "incremental_budget_target_jpy": 21000,
       "full_system_scenario": {
         "gpu_id": "gpu-rtx5070ti-16gb",
-        "base_pc_target_jpy": 324800,
-        "pc_target_with_2tb_ssd_jpy": 351800,
+        "base_pc_target_jpy": 362000,
+        "pc_target_with_2tb_ssd_jpy": 383000,
         "peripherals_reference_jpy": 35000,
         "contingency_jpy": 5000,
-        "all_in_target_jpy": 391800,
-        "remaining_to_hard_ceiling_jpy": 8200
+        "all_in_target_jpy": 423000,
+        "remaining_to_hard_ceiling_jpy": -23000
       },
       "rules": [
         "The 2TB drive replaces the 1TB drive; never add both SSD prices to the same build.",
@@ -311,14 +311,14 @@
       "current_offer_expiry": "2026-10-29T23:59:00+09:00",
       "full_system_scenario": {
         "gpu_id": "gpu-rtx5060ti-16gb",
-        "base_pc_target_jpy": 280600,
-        "base_memory_target_jpy": 40000,
+        "base_pc_target_jpy": 324000,
+        "base_memory_target_jpy": 58000,
         "memory64_target_jpy": 100000,
-        "pc_target_with_64gb_jpy": 340600,
+        "pc_target_with_64gb_jpy": 366000,
         "peripherals_reference_jpy": 35000,
         "contingency_jpy": 5000,
-        "all_in_target_jpy": 380600,
-        "remaining_to_hard_ceiling_jpy": 19400
+        "all_in_target_jpy": 406000,
+        "remaining_to_hard_ceiling_jpy": -6000
       },
       "rules": [
         "The 64GB kit replaces the selected 32GB kit; never add both RAM prices to the same build.",
