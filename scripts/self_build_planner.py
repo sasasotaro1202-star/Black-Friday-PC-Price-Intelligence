@@ -109,16 +109,18 @@ def trusted_retailer_listing_reference(row, now, max_age, allowed_domains=()):
     )
 
 
-def direct_listing_offer_for_display(row, part, now, max_age, allowed_domains=()):
-    """Keep fresh, identity-anchored detail-page prices visible when stock blocks trust.
+def direct_listing_offers_for_display(row, part, now, max_age, allowed_domains=()):
+    """Return fresh, identity-anchored direct retailer observations with stock kept per seller.
 
-    This is a display-only observation. It is never a trusted market estimate or
-    a checkout offer; stock must separately be confirmed before promotion.
+    These are listing references, not verified checkout offers. Unknown stock and
+    sold-out listings remain visible for auditing, but only in_stock/low_stock
+    entries may contribute to the sellable-listing subtotal.
     """
     if not isinstance(row, dict):
-        return None
+        return []
     values = []
     raw_offers = [row.get("retailer_listing_offer")] + list(row.get("retailer_listing_offers") or [])
+    seen = set()
     for offer in raw_offers:
         if not isinstance(offer, dict):
             continue
@@ -163,23 +165,35 @@ def direct_listing_offer_for_display(row, part, now, max_age, allowed_domains=()
         age = (now - retrieved).total_seconds() / 60.0
         if age < 0 or age > max_age:
             continue
+        stock = str(offer.get("stock_status") or "unknown")
+        if stock not in ("in_stock", "low_stock", "preorder_or_backorder", "unknown", "out_of_stock"):
+            stock = "unknown"
+        key = (url, price, stock, iso(retrieved))
+        if key in seen:
+            continue
+        seen.add(key)
         item = dict(offer)
+        item["stock_status"] = stock
         item["display_age_minutes"] = round(age, 1)
         values.append(item)
 
-    if not values:
-        return None
     stock_rank = {
-        "in_stock": 0, "low_stock": 1, "preorder_or_backorder": 2,
-        "unknown": 3, "out_of_stock": 4,
+        "in_stock": 0, "low_stock": 1, "unknown": 2,
+        "preorder_or_backorder": 3, "out_of_stock": 4,
     }
     values.sort(key=lambda offer: (
-        stock_rank.get(str(offer.get("stock_status") or "unknown"), 3),
+        stock_rank.get(str(offer.get("stock_status") or "unknown"), 2),
+        offer.get("price_jpy", 10**12),
         0 if offer.get("price_source_mode") == "direct_structured" else 1,
         offer.get("display_age_minutes", 10**9),
-        offer.get("price_jpy", 10**12),
     ))
-    return values[0]
+    return values
+
+
+def direct_listing_offer_for_display(row, part, now, max_age, allowed_domains=()):
+    """Select one best-status direct retailer listing for the existing summary fields."""
+    values = direct_listing_offers_for_display(row, part, now, max_age, allowed_domains)
+    return values[0] if values else None
 
 
 def direct_listing_stock_label(status):
