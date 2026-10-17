@@ -252,7 +252,7 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertIn("比較参考のみ・在庫証拠ではない", crucial_row)
         self.assertNotIn("在庫あり（再確認必須）", crucial_row)
 
-    def test_malformed_memory_choice_list_falls_back_to_valid_primary_not_missing_ram):
+    def test_malformed_memory_choice_list_falls_back_to_valid_primary_not_missing_ram(self):
         bad_config = json.loads(json.dumps(self.config))
         bad_config["profile"]["memory_choice_ids"] = ["not-a-configured-memory-kit"]
         plan = planner.build_plan(bad_config, {"products":[]}, now=NOW)
