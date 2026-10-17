@@ -1,4 +1,5 @@
 name: PC Price Intelligence
+run-name: PC Price Intelligence${{ inputs.watchdog_recovery == true && ' [watchdog-recovery]' || '' }}
 
 on:
   push:
@@ -10,6 +11,12 @@ on:
       - "README.md"
       - ".github/copilot-instructions.md"
   workflow_dispatch:
+    inputs:
+      watchdog_recovery:
+        description: "Internal one-time recovery attempt initiated by the watchdog"
+        required: false
+        type: boolean
+        default: false
   schedule:
     - cron: "3-59/5 * * * *"
     - cron: "7,22,37,52 * * * *"
