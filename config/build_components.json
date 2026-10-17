@@ -183,7 +183,8 @@
       "gpu_candidate_roles": {
         "gpu-rtx5070-12gb": "Balanced first choice for gaming, game creation and general use; 12GB VRAM clears the project's preferred VRAM threshold.",
         "gpu-rtx5060ti-16gb": "VRAM-capacity alternative for larger textures/assets and local-AI models that fit in 16GB; do not assume it beats RTX 5070 in gaming performance.",
-        "gpu-rtx5070ti-16gb": "Performance dark horse for higher gaming/render headroom with 16GB VRAM; only promote if the full build price, PSU/cable, dimensions and case clearance are verified."
+        "gpu-rtx5070ti-16gb": "Performance dark horse for higher gaming/render headroom with 16GB VRAM; only promote if the full build price, PSU/cable, dimensions and case clearance are verified.",
+        "gpu-rtx5070-12gb-msi-ventus2x": "Stockout fallback SKU for the RTX 5070 12GB tier. Same GPU class, but exact board size, cooling, power connector, stock and checkout must be revalidated; not assumed interchangeable by model name alone."
       },
       "ranking_rules": [
         "Evaluate playing games and creating games as separate high-priority workloads; do not reduce the recommendation to FPS alone.",
@@ -356,7 +357,7 @@
       "monitor_url": "https://kakaku.com/item/K0001630332/",
       "purchase_url": "https://kakaku.com/item/K0001630332/",
       "track_price": true,
-      "target_price_jpy": 38000,
+      "target_price_jpy": 45000,
       "min_price_jpy": 25000,
       "max_price_jpy": 80000,
       "specs": {
@@ -366,7 +367,7 @@
         "package_power_w": 65,
         "cooler_included": false
       },
-      "notes": "BOXモデル。AM5。CPUクーラーは別途必要。比較サイト掲載額は決済価格ではない。 ヨドバシの型番一致商品ページも直接監視。 TSUKUMOの型番一致ページも第二監視先として追加。2026-10-14時点の検索表示は46,800円・在庫ありだが、監視時に直接価格と在庫を再取得する。",
+      "notes": "BOXモデル。AM5。CPUクーラーは別途必要。比較サイト掲載額は決済価格ではない。 ヨドバシの型番一致商品ページも直接監視。 TSUKUMOの型番一致ページも第二監視先として追加。2026-10-14時点の検索表示は46,800円・在庫ありだが、監視時に直接価格と在庫を再取得する。 BF目標を¥38,000から¥45,000へ修正。直近の同一型番の在庫あり直接掲載¥47,800を基準にした目標であり、価格予測ではない。",
       "direct_retailer_urls": [
         "https://www.yodobashi.com/product/100000001008661707/",
         "https://shop.tsukumo.co.jp/goods/0730143315593/"
@@ -394,7 +395,7 @@
       "monitor_url": "https://kakaku.com/item/K0001798041/",
       "purchase_url": "https://kakaku.com/item/K0001798041/",
       "track_price": true,
-      "target_price_jpy": 129800,
+      "target_price_jpy": 138000,
       "min_price_jpy": 100000,
       "max_price_jpy": 330000,
       "specs": {
@@ -408,7 +409,7 @@
         "connector": "12V-2x6",
         "card_thickness_slots": 2
       },
-      "notes": "正確な型番VCG507012DFSXPB1-OをPNY公式仕様と照合済み。寸法290×128×40mm、250W、16ピン入力、推奨PSU650W。BF目標129,800円は値下げ希望額であり、予測・確定価格ではない。Joshinの正確な型番ページを直接再取得して価格・在庫を検証する。 追加監視: TSUKUMOのJAN一致商品ページ。販売ページ価格と在庫は実行時に直接再取得して検証し、検索掲載だけでは購入可能と扱わない。 Amazonの直接ページも監視候補に追加。ASIN B0GSXJPTLNは価格.comの当該SKUショップリンク先から取得したURL。掲載値・在庫はAmazonページを直接取得して型番一致を検証するまで未確認。 AmazonのB0GSXJPTLN候補は、取得ページにASUS RTX 5060 Tiの価格が出る一方で対象PNY RTX 5070の価格を検証できなかったため監視候補から除外。",
+      "notes": "正確な型番VCG507012DFSXPB1-OをPNY公式仕様と照合済み。寸法290×128×40mm、250W、16ピン入力、推奨PSU650W。BF目標129,800円は値下げ希望額であり、予測・確定価格ではない。Joshinの正確な型番ページを直接再取得して価格・在庫を検証する。 追加監視: TSUKUMOのJAN一致商品ページ。販売ページ価格と在庫は実行時に直接再取得して検証し、検索掲載だけでは購入可能と扱わない。 Amazonの直接ページも監視候補に追加。ASIN B0GSXJPTLNは価格.comの当該SKUショップリンク先から取得したURL。掲載値・在庫はAmazonページを直接取得して型番一致を検証するまで未確認。 AmazonのB0GSXJPTLN候補は、取得ページにASUS RTX 5060 Tiの価格が出る一方で対象PNY RTX 5070の価格を検証できなかったため監視候補から除外。 BF目標は現在の別SKUの在庫あり価格例と比較して再点検し、¥138,000を計画目標とする。正確なSKUの価格と在庫は別途確認する。",
       "spec_source_url": "https://www.pny.com/en-eu/geforce-rtx-5070-slim-models?sku=VCG507012DFSXPB1-O",
       "spec_source_verified_at": "2026-10-14",
       "direct_retailer_urls": [
@@ -440,7 +441,7 @@
       "monitor_url": "https://kakaku.com/item/K0001696163/",
       "purchase_url": "https://kakaku.com/item/K0001696163/",
       "track_price": true,
-      "target_price_jpy": 109800,
+      "target_price_jpy": 120000,
       "min_price_jpy": 85000,
       "max_price_jpy": 260000,
       "specs": {
@@ -454,7 +455,7 @@
         "connector": "8-pin PCIe",
         "card_thickness_slots": 2
       },
-      "notes": "国内正規代理店アスクの型番一致仕様で寸法245×120×39.9mm、8ピン補助電源、最大180W、推奨PSU600Wを確認。BF目標109,800円は希望額であり値下がり予測ではない。 ドスパラの当該型番の個別商品ページも直接監視し、表示価格・在庫は実行ごとに再取得して検証する。",
+      "notes": "国内正規代理店アスクの型番一致仕様で寸法245×120×39.9mm、8ピン補助電源、最大180W、推奨PSU600Wを確認。BF目標109,800円は希望額であり値下がり予測ではない。 ドスパラの当該型番の個別商品ページも直接監視し、表示価格・在庫は実行ごとに再取得して検証する。 BF目標を¥109,800から¥120,000へ修正。直近の同一SKUの販売店掲載価格¥129,800を参考にした目標で、確認済みBF価格ではない。",
       "spec_source_url": "https://www.ask-corp.jp/products/pny/graphicsboard/geforce-rtx-5060-ti/pny-geforce-rtx-5060-ti-16gb-overclocked-dual-fan.html",
       "spec_source_verified_at": "2026-10-14",
       "direct_retailer_urls": [
@@ -483,7 +484,7 @@
       "monitor_url": "https://kakaku.com/item/K0001696164/",
       "purchase_url": "https://kakaku.com/item/K0001696164/",
       "track_price": true,
-      "target_price_jpy": 154000,
+      "target_price_jpy": 158000,
       "min_price_jpy": 140000,
       "max_price_jpy": 450000,
       "specs": {
@@ -497,7 +498,7 @@
         "connector": "12V-2x6",
         "card_thickness_slots": 2.98
       },
-      "notes": "PNY公式のARGB Overclocked Triple Fan型番VCG5070T16TFXXPB1-Oに一致。公称約300×120×60mm、2.98スロット、300W、16ピン入力、推奨PSU750W。2026-10-14時点のドスパラ表示例は207,700円。154,000円は希望するBF購入目標であり値下がり予測ではない。TeamGroupの40,000円メモリ目標でのRTX 5070 Ti構成はPC本体目標324,800円。周辺機器の計画配分35,000円と別枠予備費5,000円込みの総額目標は364,800円。1TB SSDを2TB SSDへ置き換えるBF目標45,000円（1TB目標18,000円との差額27,000円）を達成できた場合は、PC本体目標351,800円、周辺機器35,000円、予備費5,000円込みで391,800円。RTX 5060 Ti 16GB＋64GB RAMの別案も監視対象で、目標PC本体340,600円、周辺機器35,000円、予備費5,000円込み380,600円。これらはBF購入目標の算術シナリオであり、実売価格・値下がり予測ではない。電源タップは所有済み、スピーカー・サブモニター・ヘッドセットは購入対象外。GPUの実売・在庫、ケース干渉、電源コネクタのクリアランスを確認する。",
+      "notes": "PNY公式のARGB Overclocked Triple Fan型番VCG5070T16TFXXPB1-Oに一致。公称約300×120×60mm、2.98スロット、300W、16ピン入力、推奨PSU750W。2026-10-14時点のドスパラ表示例は207,700円。154,000円は希望するBF購入目標であり値下がり予測ではない。TeamGroupの40,000円メモリ目標でのRTX 5070 Ti構成はPC本体目標324,800円。周辺機器の計画配分35,000円と別枠予備費5,000円込みの総額目標は364,800円。1TB SSDを2TB SSDへ置き換えるBF目標45,000円（1TB目標18,000円との差額27,000円）を達成できた場合は、PC本体目標351,800円、周辺機器35,000円、予備費5,000円込みで391,800円。RTX 5060 Ti 16GB＋64GB RAMの別案も監視対象で、目標PC本体340,600円、周辺機器35,000円、予備費5,000円込み380,600円。これらはBF購入目標の算術シナリオであり、実売価格・値下がり予測ではない。電源タップは所有済み、スピーカー・サブモニター・ヘッドセットは購入対象外。GPUの実売・在庫、ケース干渉、電源コネクタのクリアランスを確認する。 ¥158,000は現在の¥209,800の在庫あり掲載例から大幅な値下がりを必要とする大穴目標。通常の価格予測や達成見込みとは扱わない。",
       "spec_source_url": "https://www.pny.com/geforce-rtx-5070-ti-models?sku=VCG5070T16TFXXPB1-O",
       "spec_source_verified_at": "2026-10-14",
       "direct_retailer_urls": [
@@ -662,7 +663,7 @@
       "monitor_url": "https://kakaku.com/item/K0001466997/",
       "purchase_url": "https://kakaku.com/item/K0001466997/",
       "track_price": true,
-      "target_price_jpy": 18000,
+      "target_price_jpy": 24000,
       "min_price_jpy": 8000,
       "max_price_jpy": 60000,
       "specs": {
@@ -670,7 +671,7 @@
         "interface": "NVMe PCIe 4.0",
         "form_factor": "M.2 2280"
       },
-      "notes": "最初から1TB。OS・開発環境・ゲーム用途を想定。 TSUKUMOの型番一致商品ページを直接監視。在庫切れや完売の表示価格は市場参考値・購入可能価格として使用しない。 TSUKUMOとドスパラの型番一致商品ページを直接監視。ドスパラ掲載は現在在庫なしの参考なので、購入可能価格に格上げしない。 Kaago/Excellarの型番一致候補を追加。直接価格・在庫の検証が通るまでは購入可能と扱わない。",
+      "notes": "最初から1TB。OS・開発環境・ゲーム用途を想定。 TSUKUMOの型番一致商品ページを直接監視。在庫切れや完売の表示価格は市場参考値・購入可能価格として使用しない。 TSUKUMOとドスパラの型番一致商品ページを直接監視。ドスパラ掲載は現在在庫なしの参考なので、購入可能価格に格上げしない。 Kaago/Excellarの型番一致候補を追加。直接価格・在庫の検証が通るまでは購入可能と扱わない。 BF目標を¥18,000から¥24,000へ引き上げ、現状の1TB NVMe価格水準と在庫不確実性を踏まえた計画目標に修正。",
       "direct_retailer_urls": [
         "https://shop.tsukumo.co.jp/goods/0649528918970/",
         "https://www.dospara.co.jp/SBR1144/IC481159.html",
@@ -814,7 +815,7 @@
       "monitor_url": "https://kakaku.com/item/K0001432816/",
       "purchase_url": "https://kakaku.com/item/K0001432816/",
       "track_price": true,
-      "target_price_jpy": 14800,
+      "target_price_jpy": 17000,
       "reference_price_jpy": null,
       "price_source_role": "comparison_site_reference",
       "reference_price_is_current_verified": false,
