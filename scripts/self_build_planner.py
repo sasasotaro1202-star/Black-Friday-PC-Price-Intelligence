@@ -1512,8 +1512,8 @@ def render_plan_markdown(plan):
         "",
         "代替SKUへの切り替えは、同じ規格/クラスか、正確な型番、最新の直接価格、販売可能在庫、互換性が検証できた場合だけ計画上で行います。低在庫は売り切れリスクとして別途示し、在庫不明を在庫ありと扱いません。",
         "",
-        "|カテゴリ|候補|目標価格|最新の販売可能掲載|在庫信号|選定ルール|商品ページ|",
-        "|---|---|---:|---:|---|---|---|"
+        "|カテゴリ|候補|目標価格|販売可能な直接掲載|在庫信号|比較サイト参考（在庫・購入可否の根拠ではない）|選定ルール|商品ページ|",
+        "|---|---|---:|---:|---|---|---|---|"
     ])
     fallback_groups = [
         ("メモリ", (plan.get("memory_choice_selection") or {}).get("candidates") or [],
@@ -1536,17 +1536,21 @@ def render_plan_markdown(plan):
             if cprice is None:
                 cprice = candidate.get("direct_listing_sellable_price_jpy")
             stock = candidate.get("stock_status") or candidate.get("direct_listing_sellable_stock_status") or "unknown"
-            if candidate.get("trusted_for_market_estimate") and isinstance(candidate.get("market_reference_price_jpy"), int):
-                cprice = candidate.get("market_reference_price_jpy")
-                stock = "in_stock"
+            market_reference = candidate.get("market_reference_price_jpy")
+            market_reference_text = (
+                money(market_reference) + "（比較参考のみ・在庫証拠ではない）"
+                if candidate.get("trusted_for_market_estimate") is True
+                and isinstance(market_reference, int) and not isinstance(market_reference, bool)
+                else "未検証/未取得"
+            )
             page = candidate.get("purchase_url") or "—"
             name = candidate.get("name") or candidate.get("id")
             if selected_id and candidate.get("id") == selected_id:
                 name = str(name) + "（選定中）"
-            lines.append("|{}|{}|{}|{}|{}|{}|{}|".format(
+            lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|".format(
                 category, name, money(candidate.get("target_price_jpy")),
                 money(cprice) if isinstance(cprice, int) and not isinstance(cprice, bool) else "販売可能価格なし",
-                stock_labels.get(str(stock), str(stock)), rule,
+                stock_labels.get(str(stock), str(stock)), market_reference_text, rule,
                 "[商品ページ]({})".format(page) if str(page).startswith("https://") else page
             ))
     lines.extend(["", "## 構成別の詳細", ""])
