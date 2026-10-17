@@ -173,15 +173,23 @@ def purchase_budget_policy():
 def early_buy_review_assessment(
     item_id, observed_price_jpy=None, price_verified=False, identity_verified=False,
     stock_status="unknown", pit_valid=False, checkout_total_verified=False,
+    estimated_checkout_total_jpy=None, verified_checkout_total_jpy=None,
 ):
     """Return a cautious early-buy review signal; this function never authorizes purchase."""
     policy = purchase_budget_policy().get("purchase_timing_policy") or {}
     thresholds = policy.get("early_buy_thresholds_jpy") or {}
     threshold = thresholds.get(str(item_id))
+    valid_observed_price = isinstance(observed_price_jpy, int) and not isinstance(observed_price_jpy, bool) and observed_price_jpy > 0
+    valid_estimated_total = isinstance(estimated_checkout_total_jpy, int) and not isinstance(estimated_checkout_total_jpy, bool) and estimated_checkout_total_jpy > 0
+    valid_verified_total = isinstance(verified_checkout_total_jpy, int) and not isinstance(verified_checkout_total_jpy, bool) and verified_checkout_total_jpy > 0
+    checkout_total_is_verified = bool(checkout_total_verified is True and valid_verified_total)
     result = {
         "item_id": str(item_id),
         "early_buy_threshold_jpy": int(threshold) if isinstance(threshold, int) and not isinstance(threshold, bool) else None,
-        "observed_cash_total_jpy": observed_price_jpy if isinstance(observed_price_jpy, int) and not isinstance(observed_price_jpy, bool) else None,
+        "observed_price_jpy": observed_price_jpy if valid_observed_price else None,
+        "estimated_checkout_total_jpy": estimated_checkout_total_jpy if valid_estimated_total else None,
+        "verified_checkout_total_jpy": verified_checkout_total_jpy if checkout_total_is_verified else None,
+        "checkout_total_verified": checkout_total_is_verified,
         "status": "NOT_CONFIGURED",
         "label_ja": "前倒し購入基準なし",
         "purchase_authorized": False,
@@ -214,7 +222,7 @@ def early_buy_review_assessment(
     if stock_status not in ("in_stock", "low_stock"):
         result.update(status="STOCK_NOT_VERIFIED", label_ja="価格条件到達・在庫未確認", next_step="購入可能な在庫を直接確認")
         return result
-    if not checkout_total_verified:
+    if not checkout_total_is_verified:
         result.update(
             status="PRICE_TRIGGERED_CHECKOUT_REVIEW",
             label_ja="前倒し候補：決済総額確認待ち",
