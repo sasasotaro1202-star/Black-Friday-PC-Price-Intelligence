@@ -513,6 +513,7 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertIn("直接掲載価格（在庫条件未達・推定不採用）", report)
         self.assertIn("21,380", report)
         self.assertIn("取寄せ/予約", report)
+        self.assertIn("2026-11-20 11:58 JST", report)
 
     def test_direct_listing_failure_diagnostics_are_visible_in_part_report(self):
         gpu = self.parts["gpu-rtx5070-12gb"]
