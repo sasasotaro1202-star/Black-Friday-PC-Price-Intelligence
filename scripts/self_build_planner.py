@@ -717,6 +717,7 @@ def score_and_rank_builds(builds):
             "checkout_coverage": checkout_coverage,
             "evidence_completeness": evidence_completeness,
             "value_ratio": value_ratio,
+            "gpu_reference_fps": gpu_fps,
         })
 
     best_value_ratio = max((row["value_ratio"] for row in scored), default=0.0)
@@ -748,7 +749,7 @@ def score_and_rank_builds(builds):
             "required_component_count": row["component_count"],
             "purchase_evidence_completeness_score_out_of_100": row["evidence_completeness"],
             "score_basis": "BF目標総額ベースの構成ルーブリック。GPUゲーム点はTom's Hardwareの1440p Ultraラスタライズ階層を25点満点に正規化した代理指標で、対象ゲームの実測FPSではない。",
-            "gaming_benchmark_reference": {"source_url": gpu_benchmark_source, "source_updated": gpu_benchmark_updated, "resolution": "1440p Ultra", "method": "rasterization hierarchy", "reference_mean_fps": gpu_fps, "user_game_specific": False},
+            "gaming_benchmark_reference": {"source_url": gpu_benchmark_source, "source_updated": gpu_benchmark_updated, "resolution": "1440p Ultra", "method": "rasterization hierarchy", "reference_mean_fps": row["gpu_reference_fps"], "user_game_specific": False},
             "purchase_authorized": False,
         }
         result.append(build)
@@ -1080,18 +1081,20 @@ def render_plan_markdown(plan):
         "",
         "## 100点方式の構成スコア（BF目標構成ベース）",
         "",
-        "構成点は用途適性・目標総額ベースの相対価格効率・互換性で採点。ゲーム点は[Tom's Hardware GPU Benchmarks Hierarchy 2026](https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html)の1440p Ultraラスタライズ値を25点満点に正規化した代理指標で、対象ゲームの実測FPSではありません。",
+        "構成点は用途適性・目標総額ベースの相対価格効率・互換性で採点。ゲーム点は[Tom's Hardware GPU Benchmarks Hierarchy 2026](https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html)の1440p Ultraラスタライズ値を25点満点に正規化した代理指標で、対象ゲームの実測FPSではありません。参照表の最終更新日は2026-06-24です。GPU参照FPSも各構成に対応させて表示します。",
         "購入根拠充足度は直接価格・型番・取得時刻・販売可能在庫・検証済み決済総額・互換性を別計算し、購入許可とは切り離します。",
         "",
-        "|順位|構成|総合点/100|ゲーム/25|制作/20|分析・AI/20|勉強・同時利用/10|価格効率/15|互換性/10|購入根拠充足度/100|直接価格・在庫・決済確認率|市場参考値|",
-        "|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---|"
+        "|順位|構成|GPU参照FPS (1440p Ultra)|総合点/100|ゲーム/25|制作/20|分析・AI/20|勉強・同時利用/10|価格効率/15|互換性/10|購入根拠充足度/100|直接価格・在庫・決済確認率|市場参考値|",
+        "|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|"
     ]
     for build in plan.get("builds") or []:
         score = build.get("scorecard") or {}
-        lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
-            build.get("rank"), build.get("name"), score.get("overall_score", "—"),
-            score.get("gaming_score", "—"), score.get("game_creation_score", "—"),
-            score.get("analysis_ai_score", "—"), score.get("study_multitasking_score", "—"),
+        benchmark = score.get("gaming_benchmark_reference") or {}
+        lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
+            build.get("rank"), build.get("name"), benchmark.get("reference_mean_fps", "—"),
+            score.get("overall_score", "—"), score.get("gaming_score", "—"),
+            score.get("game_creation_score", "—"), score.get("analysis_ai_score", "—"),
+            score.get("study_multitasking_score", "—"),
             score.get("price_efficiency_points_out_of_15", "—"),
             score.get("compatibility_points_out_of_10", "—"),
             score.get("purchase_evidence_completeness_score_out_of_100", "—"),
