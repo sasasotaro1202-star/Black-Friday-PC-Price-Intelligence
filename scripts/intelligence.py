@@ -452,7 +452,10 @@ def store_observation_validation(target, now=None):
         "store_observation_store_id", "store_evidence_type", "store_evidence_notes",
         "store_model_match",
     )
-    legacy_present = any(target.get(key) not in (None, "") for key in legacy_keys)
+    legacy_present = any(
+        target.get(key) not in (None, "") and target.get(key) is not False
+        for key in legacy_keys
+    )
     if not observations and legacy_present:
         observations = [{
             "store_id": target.get("store_observation_store_id"),
