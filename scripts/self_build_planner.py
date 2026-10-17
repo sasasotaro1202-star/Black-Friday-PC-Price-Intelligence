@@ -237,9 +237,27 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
     trusted = trusted_comparison or trusted_retailer
     age = age_minutes(row.get("retrieval_time"), now)
     retailer_offer = row.get("retailer_listing_offer") if trusted_retailer else None
+    # Retain every fresh seller-specific direct offer so sold-out and unknown-stock
+    # stores are not hidden by a single "best" listing.
+    direct_display_offers = direct_listing_offers_for_display(
+        row, part, now, max_age, allowed_domains
+    )
+    sellable_offers = [
+        offer for offer in direct_display_offers
+        if offer.get("stock_status") in ("in_stock", "low_stock")
+    ]
+    sellable_offers.sort(key=lambda offer: (
+        0 if offer.get("stock_status") == "in_stock" else 1,
+        offer.get("price_jpy", 10**12),
+        offer.get("display_age_minutes", 10**9),
+    ))
+    sellable_offer = sellable_offers[0] if sellable_offers else None
+    stock_counts = {
+        status: sum(1 for offer in direct_display_offers if offer.get("stock_status") == status)
+        for status in ("in_stock", "low_stock", "preorder_or_backorder", "unknown", "out_of_stock")
+    }
     direct_display_offer = (
-        direct_listing_offer_for_display(row, part, now, max_age, allowed_domains)
-        if not trusted else None
+        direct_display_offers[0] if direct_display_offers and not trusted else None
     )
     reference_price = (
         row.get("market_reference_price_jpy") if trusted_comparison
@@ -321,6 +339,25 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
         "early_buy_review": row.get("early_buy_review") if isinstance(row.get("early_buy_review"), dict) else None,
         "direct_listing_display_age_minutes": direct_display_offer.get("display_age_minutes") if direct_display_offer else None,
         "direct_listing_display_price_context": direct_display_offer.get("price_context") if direct_display_offer else None,
+        "direct_listing_display_offers": [
+            {
+                "url": offer.get("url"),
+                "title": offer.get("title") or offer.get("identity_anchor"),
+                "price_jpy": offer.get("price_jpy"),
+                "stock_status": offer.get("stock_status") or "unknown",
+                "price_source_mode": offer.get("price_source_mode"),
+                "retrieval_time": offer.get("retrieval_time"),
+                "display_age_minutes": offer.get("display_age_minutes"),
+            }
+            for offer in direct_display_offers
+        ],
+        "direct_listing_sellable_price_jpy": sellable_offer.get("price_jpy") if sellable_offer else None,
+        "direct_listing_sellable_url": sellable_offer.get("url") if sellable_offer else None,
+        "direct_listing_sellable_stock_status": sellable_offer.get("stock_status") if sellable_offer else None,
+        "direct_listing_sellable_retrieval_time": sellable_offer.get("retrieval_time") if sellable_offer else None,
+        "direct_listing_stock_counts": stock_counts,
+        "direct_listing_offer_count": len(direct_display_offers),
+        "direct_listing_sellable_offer_count": len(sellable_offers),
         "direct_listing_display_is_estimate_eligible": False,
         "direct_listing_display_purchase_allowed": False,
         "direct_listing_validation_diagnostics": direct_diagnostics,
