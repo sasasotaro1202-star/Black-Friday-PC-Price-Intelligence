@@ -296,13 +296,13 @@ class ProjectConfigurationContractTests(unittest.TestCase):
 
         # Explicit alternative-build totals and compatibility descriptions must
         # stay aligned with the authoritative component target configuration.
-        self.assertIn("| バランス本命 | Ryzen 7 9700X + RTX 5070 12GB | 300,600円 | **340,600円** |", readme)
-        self.assertIn("| 性能重視の大穴 | Ryzen 7 9700X + RTX 5070 Ti 16GB | 324,800円 | **364,800円** |", readme)
+        self.assertIn("| バランス本命 | Ryzen 7 9700X + RTX 5070 12GB | 341,500〜342,000円 | **381,500〜382,000円** |", readme)
+        self.assertIn("| 性能重視の大穴 | Ryzen 7 9700X + RTX 5070 Ti 16GB | 361,500〜362,000円 | **401,500〜402,000円** |", readme)
         self.assertNotIn("PC本体295,360円", readme)
         self.assertNotIn("PC本体329,360円", readme)
         guide = read_text("docs/self-build-assembly-guide.md")
-        self.assertIn("| VRAM重視 | RTX 5060 Ti 16GB＋TeamGroup 32GB | ¥280,600 | ¥320,600 |", guide)
-        self.assertIn("| 大穴（ストレッチ） | RTX 5070 Ti 16GB＋TeamGroup 32GB | ¥324,800 | ¥364,800 |", guide)
+        self.assertIn("| VRAM重視 | RTX 5060 Ti 16GB＋TeamGroup 32GB | ¥324,000 | ¥364,000 |", guide)
+        self.assertIn("| 大穴（ストレッチ） | RTX 5070 Ti 16GB＋TeamGroup 32GB | ¥362,000 | ¥402,000 |", guide)
         self.assertNotIn("正確なカード寸法・補助電源の確認が未完了", guide)
         self.assertNotIn("¥295,360", guide)
         self.assertNotIn("¥365,160", guide)
