@@ -1404,8 +1404,8 @@ def render_plan_markdown(plan):
         "",
         "以下は、商品型番・取得時刻が検証できた直接販売店ページのうち、在庫あり／在庫少と明示された掲載価格だけの部分小計です。注文カートの最終価格ではなく、在庫不明・売り切れ・未取得の部品は合計に埋めません。必須部品すべてに販売可能な掲載価格がそろわない構成は、PC本体価格を算定できません。",
         "",
-        "|構成|販売可能掲載価格が確認できた部品|部品数カバー率|確認済み掲載価格の部分小計|売り切れ掲載|在庫不明掲載|販売可能価格が未確認の部品|",
-        "|---|---|---:|---:|---:|---:|---|"
+        "|構成|販売可能掲載価格が確認できた部品|部品数カバー率|確認済み掲載価格の部分小計|売り切れ掲載|在庫不明掲載|鮮度切れ掲載|販売可能価格が未確認の部品|",
+        "|---|---|---:|---:|---:|---:|---:|---|"
     ])
     for build in plan.get("builds") or []:
         counts = build.get("current_retailer_listing_offer_count_by_status") or {}
@@ -1413,11 +1413,12 @@ def render_plan_markdown(plan):
         missing_names = [names.get(str(cid), str(cid)) for cid in (build.get("current_parts_without_sellable_listing") or [])]
         sellable_count = int(build.get("current_sellable_listing_part_count") or 0)
         required_count = int(build.get("current_sellable_listing_required_part_count") or 0)
-        lines.append("|{}|{}/{}|{}%|{}|{}|{}|{}|".format(
+        lines.append("|{}|{}/{}|{}%|{}|{}|{}|{}|{}|".format(
             build.get("name"), sellable_count, required_count,
             build.get("current_sellable_listing_coverage_pct", 0),
             money(build.get("current_sellable_listing_subtotal_jpy")),
             int(counts.get("out_of_stock") or 0), int(counts.get("unknown") or 0),
+            int(counts.get("stale") or 0),
             "、".join(missing_names) if missing_names else "直接掲載上は全点に在庫シグナルあり（決済未確認）"
         ))
     lines.extend([
@@ -1496,9 +1497,10 @@ def render_plan_markdown(plan):
             sold_out_count = int(stock_counts.get("out_of_stock") or 0)
             unknown_count = int(stock_counts.get("unknown") or 0)
             preorder_count = int(stock_counts.get("preorder_or_backorder") or 0)
-            if sold_out_count or unknown_count or preorder_count:
-                direct_text += " / 売切れ{}・在庫不明{}・取寄/予約{}".format(
-                    sold_out_count, unknown_count, preorder_count
+            stale_count = int(stock_counts.get("stale") or 0)
+            if sold_out_count or unknown_count or preorder_count or stale_count:
+                direct_text += " / 売切れ{}・在庫不明{}・取寄/予約{}・鮮度切れ{}".format(
+                    sold_out_count, unknown_count, preorder_count, stale_count
                 )
             # Link to each vetted seller-specific offer with its own stock label;
             # never blend an out-of-stock sticker price into the sellable subtotal.
@@ -1515,6 +1517,8 @@ def render_plan_markdown(plan):
                     continue
                 offer_price = offer.get("price_jpy")
                 offer_status = stock_labels.get(str(offer.get("stock_status") or "unknown"), "在庫不明")
+                if offer.get("stock_signal_fresh") is not True:
+                    offer_status += "（在庫情報が古い）"
                 offer_label = str(offer.get("title") or offer.get("identity_anchor") or "販売店")
                 label = "{} {} {}".format(offer_label[:35], offer_status, money(offer_price))
                 links.append("[" + label.replace("]", ")") + "](" + offer_url + ")")
