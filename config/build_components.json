@@ -24,10 +24,8 @@
     "fixed_part_ids": [
       "cpu-ryzen7-9700x",
       "motherboard-asrock-b850m-pro-rs-wifi",
-      "ssd-crucial-p3-plus-1tb",
       "psu-corsair-rm850e-2025",
       "case-fractal-pop-air-tg",
-      "cooler-thermalright-pa120-se-v3",
       "os-windows11-home"
     ],
     "gpu_choice_ids": [
@@ -42,7 +40,7 @@
     "allowed_comparison_domains": [
       "kakaku.com"
     ],
-    "policy": "Black Friday target prices are aspirational, not forecasts. Total-system hard ceiling is JPY 400,000. PC planning target is JPY 360,000, while maximum PC spend is dynamically capped by the all-in total. Peripheral allocation is flexible at JPY 35,000, not an obligation to spend the full amount. Include exactly one 27-inch WQHD high-refresh main monitor, keyboard, mouse, and mousepad. The power strip is already owned and excluded from purchase, monitoring, and budget. Buy only necessary cables after checking included cables. Do not include speakers, a sub-monitor, or a headset in candidate lists, monitoring, budgets, or totals. Keep JPY 5,000 as an unallocated contingency. Compare online delivery, in-store cash purchase, and online order with store pickup per item using the exact SKU/variant, direct price, total cash checkout amount including fees, stock, warranty and return terms. Points are not cash discounts. Comparison-site prices and BF targets are not checkout prices or verified BF deals. Include online delivery shipping, but never assume peripheral shipping for in-store purchases. Keep dark-horse candidates in comparisons with explicit overruns; never authorize purchases from target prices alone.",
+    "policy": "Black Friday target prices are aspirational, not forecasts. Total-system hard ceiling is JPY 400,000. PC planning target is JPY 360,000, while maximum PC spend is dynamically capped by the all-in total. Peripheral allocation is flexible at JPY 35,000, not an obligation to spend the full amount. Include exactly one 27-inch WQHD high-refresh main monitor, keyboard, mouse, and mousepad. In-stock fallbacks are tracked for RAM, 1TB NVMe SSD, CPU cooler, and the RTX 5070 class; substitution is allowed only after exact model/price/stock/compatibility verification. The power strip is already owned and excluded from purchase, monitoring, and budget. Buy only necessary cables after checking included cables. Do not include speakers, a sub-monitor, or a headset in candidate lists, monitoring, budgets, or totals. Keep JPY 5,000 as an unallocated contingency. Compare online delivery, in-store cash purchase, and online order with store pickup per item using the exact SKU/variant, direct price, total cash checkout amount including fees, stock, warranty and return terms. Points are not cash discounts. Comparison-site prices and BF targets are not checkout prices or verified BF deals. Include online delivery shipping, but never assume peripheral shipping for in-store purchases. Keep dark-horse candidates in comparisons with explicit overruns; never authorize purchases from target prices alone.",
     "allowed_search_reference_domains": [
       "kakaku.com",
       "amazon.co.jp",
@@ -66,7 +64,8 @@
       "nojima.co.jp",
       "yamada-denkiweb.com",
       "kaago.com",
-      "pc4u.co.jp"
+      "pc4u.co.jp",
+      "corsair.com"
     ],
     "assembly_time_is_constraint": false,
     "assembly_time_penalty_points": 0,
@@ -106,7 +105,8 @@
     "memory_choice_ids": [
       "memory-crucial-pro-ddr5-32gb-6000",
       "memory-teamgroup-ddr5-32gb-6000",
-      "memory-lexar-thor-ddr5-64gb-6000"
+      "memory-lexar-thor-ddr5-64gb-6000",
+      "memory-corsair-vengeance-ddr5-32gb-6000"
     ],
     "primary_memory_choice_id": "memory-teamgroup-ddr5-32gb-6000",
     "unallocated_contingency_jpy": 5000,
@@ -264,7 +264,7 @@
     },
     "storage_choice_ids": [
       "ssd-crucial-p3-plus-1tb",
-      "ssd-kioxia-exceria-basic-2tb"
+      "ssd-msi-spatium-m450-1tb"
     ],
     "primary_storage_choice_id": "ssd-crucial-p3-plus-1tb",
     "preferred_storage_upgrade_id": "ssd-kioxia-exceria-basic-2tb",
@@ -325,6 +325,16 @@
         "The plan pairs 64GB RAM with RTX 5060 Ti 16GB; do not combine it with RTX 5070 or RTX 5070 Ti in a recommended under-¥400,000 build unless the exact full-system calculation and observed prices prove it fits.",
         "Verify exact model, motherboard QVL, BIOS, AMD EXPO stability, retailer stock, checkout price, and all-in total before promotion.",
         "If the RAM target is missed or compatibility remains unclear, retain the 32GB default configuration and do not assume post-purchase upgrades."
+      ]
+    },
+    "cooler_choice_ids": [
+      "cooler-thermalright-pa120-se-v3",
+      "cooler-thermalright-assassin-x-120-refined-se"
+    ],
+    "primary_cooler_choice_id": "cooler-thermalright-pa120-se-v3",
+    "gpu_fallback_candidates_by_choice": {
+      "gpu-rtx5070-12gb": [
+        "gpu-rtx5070-12gb-msi-ventus2x"
       ]
     }
   },
@@ -562,7 +572,7 @@
       "monitor_url": "https://kakaku.com/item/K0001610896/",
       "purchase_url": "https://kakaku.com/item/K0001610896/",
       "track_price": true,
-      "target_price_jpy": 40000,
+      "target_price_jpy": 58000,
       "min_price_jpy": 20000,
       "max_price_jpy": 120000,
       "specs": {
@@ -576,7 +586,7 @@
         "qvl_verification_status": "UNCONFIRMED",
         "qvl_reference_url": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS%20WiFi/index.jp.asp"
       },
-      "notes": "16GB×2のデュアルチャネル。メモリ市況の急変はBF目標に反映し、価格を推測しない。 YMallの型番一致候補ページを直接監視。正確な型番・価格・販売状態を実ページで確認できなければ未検証のまま保持する。 メーカー公式ページで型番・32GB(16GB×2)・DDR5-6000・CL38を再照合。YMallは販売可否を実行時検証し、在庫/価格が取得不能なら未確認を維持。 Amazonの型番候補も第二監視先として追加。主商品見出し・SKU・直接価格・商品固有在庫が一致しない場合は未検証のまま保持する。 YMallの実主商品見出し（TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応）を、同一仕様確認用の別名として登録。価格と在庫は別途直接検証する。 2026-10-14に代替候補へ変更。予算適合を優先する現在の主候補メモリとして、¥40,000のBF購入目標で計画に採用する。これは購入可能な現行価格や将来価格の予測ではない。新鮮で型番一致・PIT検証済みの市場参考値がCrucial Proより高い場合や欠ける場合は、TeamGroupを計画上の既定候補として維持する。両候補に信頼できる同条件の参考値がある場合は価格を比較する。どちらを採用する場合も、販売店の決済価格・在庫・正確なSKU・マザーボードQVL/BIOSを購入前に確認する。",
+      "notes": "16GB×2のデュアルチャネル。メモリ市況の急変はBF目標に反映し、価格を推測しない。 YMallの型番一致候補ページを直接監視。正確な型番・価格・販売状態を実ページで確認できなければ未検証のまま保持する。 メーカー公式ページで型番・32GB(16GB×2)・DDR5-6000・CL38を再照合。YMallは販売可否を実行時検証し、在庫/価格が取得不能なら未確認を維持。 Amazonの型番候補も第二監視先として追加。主商品見出し・SKU・直接価格・商品固有在庫が一致しない場合は未検証のまま保持する。 YMallの実主商品見出し（TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応）を、同一仕様確認用の別名として登録。価格と在庫は別途直接検証する。 2026-10-14に代替候補へ変更。予算適合を優先する現在の主候補メモリとして、¥40,000のBF購入目標で計画に採用する。これは購入可能な現行価格や将来価格の予測ではない。新鮮で型番一致・PIT検証済みの市場参考値がCrucial Proより高い場合や欠ける場合は、TeamGroupを計画上の既定候補として維持する。両候補に信頼できる同条件の参考値がある場合は価格を比較する。どちらを採用する場合も、販売店の決済価格・在庫・正確なSKU・マザーボードQVL/BIOSを購入前に確認する。 2026-10-17の同等クラスの販売例が約¥68,000〜¥69,000だったことを踏まえ、¥40,000の極端に低い目標を¥58,000へ修正。これはBF予測ではなく引き続き目標値。",
       "direct_retailer_urls": [
         "https://ymall.jp/store/mlymall/b0chf9th1b-20260811/",
         "https://www.amazon.co.jp/dp/B0CHF9TH1B"
@@ -905,6 +915,152 @@
       "notes": "32GBメモリキットを置き換える条件付き候補。約100,000円はBF購入目標であり、確認済みBF価格・予測ではない。2026-10-17時点でアーク公式商品ページに表示された期間限定価格は119,990円（通常154,800円、ハロウィンフェアは10/29 23:59まで）。売価は変動するため監視で再取得する。RAM 32GB目標40,000円に対して64GB目標100,000円なら差額60,000円。RTX 5060 Ti 16GB構成に限り、計画PC本体340,600円・周辺機器35,000円・予備費5,000円込み380,600円、40万円まで18,400円となる。他のGPU構成では全額計算し、40万円超過なら採用しない。マザーボードの正確なQVL・EXPO安定性は未確認なので注文前に確認する。32GBキットと同時に加算せず置換として計算する。",
       "image_source_url": "https://www.ark-pc.co.jp/i/11650134/",
       "image_note": "アーク公式の型番一致製品画像は商品ページから取得する。"
+    },
+    {
+      "id": "memory-corsair-vengeance-ddr5-32gb-6000",
+      "category": "memory",
+      "role": "stockout_alternative",
+      "name": "Corsair VENGEANCE DDR5-6000 32GB (16GBx2) CL38 EXPO/XMP",
+      "model_code": "CMK32GX5M2D6000Z38",
+      "aliases": [
+        "CMK32GX5M2D6000Z38",
+        "Corsair VENGEANCE 32GB 6000 CL38",
+        "VENGEANCE 32GB (2 x 16GB) DDR5 6000MT/s CL38"
+      ],
+      "identity_terms": [
+        "CMK32GX5M2D6000Z38",
+        "VENGEANCE 32GB (2 x 16GB) DDR5 6000MT/s CL38",
+        "Corsair VENGEANCE DDR5 6000 32GB"
+      ],
+      "monitor_url": "https://www.corsair.com/jp/ja/p/memory/cmk32gx5m2d6000z38/vengeance-32gb-2-x-16gb-ddr5-dram-up-to-6000mt-s-cl38-amd-expo-%26-intel-xmp-memory-kit-gray-cmk32gx5m2d6000z38",
+      "purchase_url": "https://www.corsair.com/jp/ja/p/memory/cmk32gx5m2d6000z38/vengeance-32gb-2-x-16gb-ddr5-dram-up-to-6000mt-s-cl38-amd-expo-%26-intel-xmp-memory-kit-gray-cmk32gx5m2d6000z38",
+      "direct_retailer_urls": [
+        "https://www.corsair.com/jp/ja/p/memory/cmk32gx5m2d6000z38/vengeance-32gb-2-x-16gb-ddr5-dram-up-to-6000mt-s-cl38-amd-expo-%26-intel-xmp-memory-kit-gray-cmk32gx5m2d6000z38"
+      ],
+      "track_price": true,
+      "target_price_jpy": 59000,
+      "min_price_jpy": 25000,
+      "max_price_jpy": 130000,
+      "specs": {
+        "memory_type": "DDR5",
+        "capacity_gb": 32,
+        "modules": 2,
+        "module_size_gb": 16,
+        "speed_mts": 6000,
+        "profile": "EXPO/XMP",
+        "qvl_verified_with_asrock_b850m_pro_rs_wifi": false,
+        "qvl_verification_status": "UNCONFIRMED",
+        "qvl_reference_url": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS%20WiFi/index.jp.asp"
+      },
+      "notes": "売り切れ時の代替監視候補。2026-10-17のCorsair公式ページは¥68,990・在庫あり表示だが、BF価格ではない。QVLは未確認のため購入前に正確な型番で確認する。",
+      "spec_source_url": "https://www.corsair.com/jp/ja/p/memory/cmk32gx5m2d6000z38/vengeance-32gb-2-x-16gb-ddr5-dram-up-to-6000mt-s-cl38-amd-expo-%26-intel-xmp-memory-kit-gray-cmk32gx5m2d6000z38",
+      "spec_source_verified_at": "2026-10-17"
+    },
+    {
+      "id": "ssd-msi-spatium-m450-1tb",
+      "category": "storage",
+      "role": "stockout_alternative",
+      "name": "MSI SPATIUM M450 PCIe 4.0 NVMe M.2 1TB V1",
+      "model_code": "SPATIUM M450 PCIe 4.0 NVMe M.2 1TB V1",
+      "aliases": [
+        "SPATIUM M450 PCIe 4.0 NVMe M.2 1TB V1",
+        "MSI SPATIUM M450 1TB"
+      ],
+      "identity_terms": [
+        "SPATIUM M450 PCIe 4.0 NVMe M.2 1TB V1",
+        "MSI SPATIUM M450 1TB"
+      ],
+      "monitor_url": "https://www.yodobashi.com/product/100000001009402658/",
+      "purchase_url": "https://www.yodobashi.com/product/100000001009402658/",
+      "direct_retailer_urls": [
+        "https://www.yodobashi.com/product/100000001009402658/"
+      ],
+      "track_price": true,
+      "target_price_jpy": 25000,
+      "min_price_jpy": 10000,
+      "max_price_jpy": 60000,
+      "specs": {
+        "capacity_gb": 1000,
+        "interface": "NVMe PCIe 4.0",
+        "form_factor": "M.2 2280",
+        "max_sequential_read_mb_s": 3400
+      },
+      "notes": "Crucial P3 Plus 1TBが売り切れ／在庫未確認の場合の代替監視候補。ヨドバシの商品ページ掲載例は¥29,130だが、表示日・配送先・在庫は監視時に再確認する。読み取り公称値はP3 Plus候補より低いため、同等性能とは扱わず、購入前に仕様・保証・最終決済額を確認する。",
+      "spec_source_url": "https://www.yodobashi.com/product/100000001009402658/",
+      "spec_source_verified_at": "2026-10-17"
+    },
+    {
+      "id": "cooler-thermalright-assassin-x-120-refined-se",
+      "category": "cpu_cooler",
+      "role": "stockout_alternative",
+      "name": "Thermalright Assassin X 120 Refined SE",
+      "model_code": "AX120-R-SE",
+      "aliases": [
+        "AX120-R-SE",
+        "Assassin X 120 Refined SE"
+      ],
+      "identity_terms": [
+        "AX120-R-SE",
+        "Assassin X 120 Refined SE"
+      ],
+      "monitor_url": "https://www.yodobashi.com/product/100000001008996814/",
+      "purchase_url": "https://www.yodobashi.com/product/100000001008996814/",
+      "direct_retailer_urls": [
+        "https://www.yodobashi.com/product/100000001008996814/",
+        "https://shop.tsukumo.co.jp/goods/4573615590182/"
+      ],
+      "track_price": true,
+      "target_price_jpy": 2500,
+      "min_price_jpy": 1500,
+      "max_price_jpy": 10000,
+      "specs": {
+        "supported_sockets": [
+          "AM5"
+        ],
+        "cooler_height_mm": 148,
+        "included_thermal_paste": true
+      },
+      "notes": "Peerless Assassin 120 SE V3の売り切れ時の空冷代替。AM5対応・高さ148mmの仕様掲載あり。ツインタワーより冷却余裕が小さいため、Ryzen 7 9700XのPBO/電力設定・温度・騒音を確認し、同等冷却性能とは扱わない。",
+      "spec_source_url": "https://www.dospara.co.jp/SBR1968/IC549673.html",
+      "spec_source_verified_at": "2026-10-17"
+    },
+    {
+      "id": "gpu-rtx5070-12gb-msi-ventus2x",
+      "category": "gpu",
+      "role": "stockout_alternative_same_gpu_tier",
+      "name": "MSI GeForce RTX 5070 12G VENTUS 2X OC",
+      "model_code": "4711377308229",
+      "aliases": [
+        "MSI GeForce RTX 5070 12G VENTUS 2X OC",
+        "4711377308229"
+      ],
+      "identity_terms": [
+        "4711377308229",
+        "MSI GeForce RTX 5070 12G VENTUS 2X OC"
+      ],
+      "monitor_url": "https://kakaku.com/item/K0001679747/",
+      "purchase_url": "https://shop.tsukumo.co.jp/goods/4711377308229/",
+      "direct_retailer_urls": [
+        "https://shop.tsukumo.co.jp/goods/4711377308229/"
+      ],
+      "track_price": true,
+      "target_price_jpy": 138000,
+      "min_price_jpy": 95000,
+      "max_price_jpy": 300000,
+      "specs": {
+        "gpu": "GeForce RTX 5070",
+        "vram_gb": 12,
+        "board_power_w": 250,
+        "minimum_psu_w": 650,
+        "card_length_mm": 236,
+        "card_width_mm": 126,
+        "card_thickness_mm": 50,
+        "connector": "12V-2x6",
+        "card_thickness_slots": 2.5
+      },
+      "notes": "PNY RTX 5070 OC SLIMが売り切れの場合の同GPUクラス代替SKU。2026-10-17の市場監視では在庫ありの別SKUの価格例が¥148,980だったが、この正確なSKUの購入可能価格は監視時に直接再確認する。138,000円はBF目標であり予測ではない。正確な寸法・端子・送料・在庫を再確認する。",
+      "spec_source_url": "https://shop.tsukumo.co.jp/goods/4711377308229/",
+      "spec_source_verified_at": "2026-10-17"
     }
   ]
 }
