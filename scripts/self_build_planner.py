@@ -1162,6 +1162,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
                 "direct_listing_display_is_estimate_eligible": False,
                 "direct_listing_display_purchase_allowed": False,
                 "track_price": bool(part.get("track_price")), "specs": part.get("specs") or {},
+                "fit_scorecard": part.get("fit_scorecard"),
                 "image_url": part.get("image_url"), "image_source_url": part.get("image_source_url"),
                 "image_note": part.get("image_note"), "image_checked_at": part.get("image_checked_at"),
                 "notes": part.get("notes"), "bf_actual_authorized": False
@@ -1349,6 +1350,56 @@ def build_plan(config=None, price_snapshot=None, now=None):
     }
 
 
+COMPONENT_FIT_SCORE_WEIGHTS = {
+    "workload_fit_points": 40,
+    "headroom_points": 25,
+    "quality_reliability_points": 20,
+    "integration_flexibility_points": 15,
+}
+
+
+def component_suitability_score(part):
+    """Return a transparent curated fit score; never infer missing component qualities.
+
+    This score is intentionally distinct from purchase evidence and the complete-build
+    score. It is profile-specific expert rubric input, not a hardware benchmark.
+    """
+    part = part if isinstance(part, dict) else {}
+    rubric = part.get("fit_scorecard") if isinstance(part.get("fit_scorecard"), dict) else {}
+    points = {}
+    for key, maximum in COMPONENT_FIT_SCORE_WEIGHTS.items():
+        value = rubric.get(key)
+        if not isinstance(value, int) or isinstance(value, bool) or not 0 <= value <= maximum:
+            return {
+                "score": None,
+                "out_of": 100,
+                "breakdown": {},
+                "scorecard_complete": False,
+                "missing_or_invalid_fields": [
+                    field for field, limit in COMPONENT_FIT_SCORE_WEIGHTS.items()
+                    if not isinstance(rubric.get(field), int)
+                    or isinstance(rubric.get(field), bool)
+                    or not 0 <= rubric.get(field) <= limit
+                ],
+                "rationale_ja": str(rubric.get("rationale_ja") or ""),
+                "limitations_ja": str(rubric.get("limitations_ja") or ""),
+                "score_basis": "curated profile-fit rubric; incomplete inputs fail closed",
+                "purchase_authorized": False,
+            }
+        points[key] = value
+    return {
+        "score": sum(points.values()),
+        "out_of": 100,
+        "breakdown": points,
+        "scorecard_complete": True,
+        "missing_or_invalid_fields": [],
+        "rationale_ja": str(rubric.get("rationale_ja") or ""),
+        "limitations_ja": str(rubric.get("limitations_ja") or ""),
+        "score_basis": "curated profile-fit rubric; not a measured benchmark or purchase-readiness score",
+        "purchase_authorized": False,
+    }
+
+
 def component_purchase_evidence_score(part, build, now=None):
     """Score whether this exact PC component is ready to purchase, not its performance.
 
@@ -1420,8 +1471,14 @@ def component_purchase_evidence_score(part, build, now=None):
     }.get(category, ())
     status_value = {"PASS": 1.0, "REVIEW": 0.5, "FAIL": 0.0}
     matched = [compatibility_checks[key] for key in relevant_checks if key in compatibility_checks]
-    if matched:
-        points["compatibility"] = round(10 * sum(status_value.get(status, 0.0) for status in matched) / len(matched))
+    # Missing required checks are zero, not silently removed from the denominator.
+    # This prevents one passing check from earning full compatibility evidence credit.
+    if relevant_checks:
+        all_relevant_statuses = [compatibility_checks.get(key, "MISSING") for key in relevant_checks]
+        points["compatibility"] = round(
+            10 * sum(status_value.get(status, 0.0) for status in all_relevant_statuses)
+            / len(relevant_checks)
+        )
 
     terms_verified = bool(
         signal.get("warranty_return_conditions_verified") is True
@@ -1439,6 +1496,8 @@ def component_purchase_evidence_score(part, build, now=None):
         "sellable_stock_verified_fresh": points["sellable_stock"] > 0,
         "checkout_total_verified": points["verified_checkout_total"] == 25,
         "compatibility_checks_used": list(matched),
+        "compatibility_checks_required": list(relevant_checks),
+        "missing_compatibility_checks": [key for key in relevant_checks if key not in compatibility_checks],
         "warranty_return_terms_verified": terms_verified,
     }
 
@@ -1662,9 +1721,10 @@ def render_plan_markdown(plan):
           "- 採用CPUクーラー: {}（{}）".format(component_names.get(str(build.get("selected_cooler_id")), str(build.get("selected_cooler_id"))), build.get("cooler_selection_method")),
           "- 現在の比較参考合計: " + (money(build.get("market_reference_estimate_jpy")) + "（各店の参考掲載値の合算で、決済見積ではない）" if build.get("market_reference_estimate_jpy") is not None else "未算出。価格・型番・在庫条件を満たさない部品を0円補完しない"),
           "- 互換性: " + str(build.get("compatibility_status")) + " / 判定: " + str(build.get("decision")), "",
-          "部品購入根拠点/100は直接価格・在庫・決済総額・その部品に関係する互換性確認・保証/返品条件から動的計算します。部品の性能点ではなく、比較サイト価格や未確認の在庫では加点しません。", "",
-          "|画像|部品|部品購入根拠点/100|型番|BF目標|検証済み/表示専用参考値|直接掲載価格（在庫条件未達・推定不採用）|確認状態|前倒し購入シグナル|直接取得診断|リンク|",
-          "|---|---|---:|---|---:|---:|---|---|---|---|---|---|"])
+          "部品適合点/100は用途適合40・性能/容量余裕25・品質/信頼性20・構成/拡張性15点のルーブリックから計算します。理由と制約を併記し、未入力・範囲外は未採点です。構成全体の点数や実測ベンチマークではありません。", 
+          "部品購入根拠点/100は直接価格・在庫・決済総額・その部品に関係する互換性確認・保証/返品条件から動的計算します。適合点とは別で、比較サイト価格や未確認の在庫では加点しません。どちらの点数も購入許可ではありません。", "",
+          "|画像|部品|部品適合点/100（内訳）|部品購入根拠点/100|型番|適合評価の理由・制約|BF目標|検証済み/表示専用参考値|直接掲載価格（在庫条件未達・推定不採用）|確認状態|前倒し購入シグナル|直接取得診断|リンク|",
+          "|---|---|---:|---:|---|---|---:|---:|---|---|---|---|---|"])
         for part in build.get("components") or []:
             p = part.get("display_reference_price_jpy")
             if part.get("price_status") == "manual_reference_unverified":
@@ -1744,12 +1804,25 @@ def render_plan_markdown(plan):
             diagnostic_text = "; ".join(diagnostic_texts) if diagnostic_texts else "—"
             early_signal = part.get("early_buy_review") if isinstance(part.get("early_buy_review"), dict) else {}
             early_label = str(early_signal.get("label_ja") or "未判定")
+            part_fit = component_suitability_score(part)
+            if part_fit.get("score") is None:
+                part_fit_text = "未採点（ルーブリック不足）"
+            else:
+                breakdown = part_fit["breakdown"]
+                part_fit_text = "{}/100（用途{}/40・余裕{}/25・品質{}/20・構成{}/15）".format(
+                    part_fit["score"], breakdown["workload_fit_points"], breakdown["headroom_points"],
+                    breakdown["quality_reliability_points"], breakdown["integration_flexibility_points"]
+                )
+            fit_notes = "根拠: " + (part_fit.get("rationale_ja") or "説明未設定")
+            if part_fit.get("limitations_ja"):
+                fit_notes += " / 留意: " + part_fit["limitations_ja"]
+            fit_notes = re.sub(r"\\s+", " ", fit_notes).replace("|", "／")
             part_evidence = component_purchase_evidence_score(part, build)
             part_evidence_text = "{}/100".format(part_evidence["score"])
-            lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
-                image_html, part.get("name"), part_evidence_text, part.get("model_code") or "—",
-                money(part.get("target_price_jpy")), price_text, direct_text,
-                part.get("price_status"), early_label, diagnostic_text, link
+            lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
+                image_html, part.get("name"), part_fit_text, part_evidence_text,
+                part.get("model_code") or "—", fit_notes, money(part.get("target_price_jpy")),
+                price_text, direct_text, part.get("price_status"), early_label, diagnostic_text, link
             ))
         lines.extend(["", "互換性チェック:", ""])
         for check in build.get("compatibility_checks") or []:
