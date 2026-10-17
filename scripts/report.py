@@ -136,6 +136,31 @@ def peripheral_suitability_score(target):
     }
 
 
+def peripheral_ranked_candidate_ids(category_ids, target_by_id, category, limit=3):
+    """Return purchasable product candidates only, ordered by curated fit score."""
+    target_by_id = target_by_id if isinstance(target_by_id, dict) else {}
+    try:
+        limit = max(0, int(limit))
+    except (TypeError, ValueError):
+        limit = 3
+    candidates = []
+    for candidate_id in dict.fromkeys(category_ids.get(str(category), []) if isinstance(category_ids, dict) else []):
+        target = target_by_id.get(str(candidate_id))
+        if not isinstance(target, dict):
+            continue
+        if target.get("category") == "budget_reserve":
+            continue
+        if target.get("purchase_channel") == "conditional_need_only":
+            continue
+        if target.get("score_exclusion_reason_ja"):
+            continue
+        result = peripheral_suitability_score(target)
+        score = result.get("score")
+        candidates.append((candidate_id, score if isinstance(score, int) else None))
+    candidates.sort(key=lambda item: (item[1] is None, -(item[1] if isinstance(item[1], int) else -1), item[0]))
+    return [candidate_id for candidate_id, _score in candidates[:limit]]
+
+
 def peripheral_fit_score_text(target):
     result = peripheral_suitability_score(target)
     if result.get("score") is None:
@@ -1240,23 +1265,9 @@ def main():
     for group in category_order:
         category = str(group.get("category") or "")
         group_name = str(group.get("label") or category)
-        candidate_ids = list(dict.fromkeys(category_ids.get(category, [])))
-        candidate_ids = [
-            candidate_id for candidate_id in candidate_ids
-            if candidate_id in all_peripheral_targets
-            and all_peripheral_targets[candidate_id].get("category") != "budget_reserve"
-            and all_peripheral_targets[candidate_id].get("purchase_channel") != "conditional_need_only"
-            and not all_peripheral_targets[candidate_id].get("score_exclusion_reason_ja")
-        ]
-        candidate_ids.sort(
-            key=lambda candidate_id: (
-                peripheral_suitability_score(all_peripheral_targets[candidate_id]).get("score")
-                if isinstance(peripheral_suitability_score(all_peripheral_targets[candidate_id]).get("score"), int)
-                else -1
-            ),
-            reverse=True,
+        candidate_ids = peripheral_ranked_candidate_ids(
+            category_ids, all_peripheral_targets, category, limit=3
         )
-        candidate_ids = candidate_ids[:3]
         if not candidate_ids:
             continue
         peripheral_category_lines += [
