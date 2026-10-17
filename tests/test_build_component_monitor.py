@@ -788,7 +788,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertEqual(result["retailer_listing_reference_url"], seller_url)
         self.assertEqual(len(result["retailer_listing_offers"]), 1)
         self.assertEqual(result["retailer_listing_offers"][0]["url"], seller_url)
-        self.assertEqual(result["retailer_listing_offers"][0]["retailer_domain"], "amazon.co.jp")
+        self.assertEqual(result["retailer_listing_offers"][0]["price_jpy"], 139800)
         self.assertEqual(result["fetch_status"], "ok")
 
     def test_fetch_part_uses_verified_retailer_offer_when_comparison_site_fails(self):
