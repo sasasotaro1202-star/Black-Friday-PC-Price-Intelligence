@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import pathlib
 import unittest
 from datetime import datetime, timedelta, timezone
@@ -27,6 +28,9 @@ class ReportLinkTests(unittest.TestCase):
             "online_best_offer_stock_status": "in_stock",
             "online_shipping_cost_verified": True,
             "online_shipping_jpy": 0,
+            "online_checkout_total_jpy": 20000,
+            "online_checkout_total_verified": True,
+            "online_checkout_total_checked_at": stamp,
             "channel_comparison_complete": True,
             "warranty_return_conditions_verified": True,
         }
@@ -86,6 +90,116 @@ class ReportLinkTests(unittest.TestCase):
         self.assertEqual(unknown["score"], 0)
         self.assertFalse(unknown["direct_price_verified_fresh"])
         self.assertFalse(unknown["sellable_stock_verified_fresh"])
+
+    def test_peripheral_purchase_evidence_requires_verified_final_online_total(self):
+        now = datetime(2026, 10, 17, 20, 0, tzinfo=timezone(timedelta(hours=9)))
+        stamp = now.isoformat()
+        target = {"purchase_channel": "compare_online_and_store"}
+        observation = {
+            "current_price_jpy": 20000,
+            "price_verified": True, "identity_verified": True,
+            "price_validation_status": "validated_exact_model_page",
+            "price_source_mode": "direct_text",
+            "retrieval_time": stamp, "available_at": stamp,
+            "stock_status": "in_stock", "online_best_offer_stock_status": "in_stock",
+            "online_shipping_cost_verified": True, "online_shipping_jpy": 0,
+            "channel_comparison_complete": True,
+        }
+        result = report.peripheral_purchase_evidence_score(target, observation, now=now)
+        self.assertEqual(result["breakdown"]["direct_price_identity_pit"], 30)
+        self.assertEqual(result["breakdown"]["sellable_stock"], 25)
+        self.assertEqual(result["breakdown"]["verified_checkout_total"], 0)
+        observation.update({
+            "online_checkout_total_jpy": 20000,
+            "online_checkout_total_verified": True,
+            "online_checkout_total_checked_at": stamp,
+        })
+        verified = report.peripheral_purchase_evidence_score(target, observation, now=now)
+        self.assertEqual(verified["breakdown"]["verified_checkout_total"], 25)
+
+    def test_peripheral_suitability_scorecards_match_all_product_targets_and_fail_closed(self):
+        config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        entries = list(config.get("peripherals") or []) + list(config.get("peripheral_alternatives") or [])
+        limits = {
+            "workload_fit_points": 35,
+            "budget_fit_points": 30,
+            "feature_spec_points": 20,
+            "substitution_risk_points": 15,
+        }
+        product_count = 0
+        for target in entries:
+            result = report.peripheral_suitability_score(target)
+            if target.get("category") == "budget_reserve" or target.get("purchase_channel") == "conditional_need_only":
+                self.assertIsNone(result["score"], target.get("id"))
+                self.assertEqual(result["status"], "NOT_A_PRODUCT")
+                continue
+            product_count += 1
+            self.assertTrue(result["scorecard_complete"], (target.get("id"), result["missing_or_invalid_fields"]))
+            self.assertEqual(result["score"], target.get("ranking_score_100"), target.get("id"))
+            self.assertEqual(sum(result["breakdown"].values()), result["score"], target.get("id"))
+            for key, maximum in limits.items():
+                self.assertGreaterEqual(result["breakdown"][key], 0, target.get("id"))
+                self.assertLessEqual(result["breakdown"][key], maximum, target.get("id"))
+            self.assertTrue(result["reason_ja"], target.get("id"))
+            self.assertTrue(result["limitations_ja"], target.get("id"))
+        self.assertEqual(product_count, 14)
+
+        invalid = report.peripheral_suitability_score({
+            "category": "mouse",
+            "ranking_score_100": 90,
+            "fit_scorecard": {
+                "workload_fit_points": 34,
+                "budget_fit_points": 29,
+                "feature_spec_points": 20,
+                "substitution_risk_points": 15,
+                "rationale_ja": "reason",
+                "limitations_ja": "limitation",
+            },
+        })
+        self.assertIsNone(invalid["score"])
+        self.assertFalse(invalid["scorecard_complete"])
+        self.assertIn("ranking_score_100_mismatch", invalid["missing_or_invalid_fields"])
+
+    def test_peripheral_rankings_exclude_conditional_cable_rule_and_budget_reserve(self):
+        config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        entries = list(config.get("peripherals") or []) + list(config.get("peripheral_alternatives") or [])
+        target_by_id = {str(x["id"]): x for x in entries}
+        category_ids = {}
+        for target in entries:
+            category_ids.setdefault(str(target.get("category") or ""), []).append(str(target["id"]))
+        cable_ids = report.peripheral_ranked_candidate_ids(category_ids, target_by_id, "cables", limit=3)
+        self.assertEqual(len(cable_ids), 2)
+        self.assertNotIn("cables", cable_ids)
+        self.assertTrue(all(target_by_id[candidate_id].get("fit_scorecard") for candidate_id in cable_ids))
+        mouse_ids = report.peripheral_ranked_candidate_ids(category_ids, target_by_id, "mouse", limit=3)
+        self.assertEqual(mouse_ids[0], "mouse")
+        self.assertIn("mouse_alt_logicool_g203", mouse_ids)
+        self.assertNotIn("store_price_buffer", sum(category_ids.values(), []))
+
+    def test_peripheral_score_renderers_show_component_breakdown_and_limitations(self):
+        config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        target = next(x for x in config["peripherals"] if x["id"] == "main_monitor")
+        score = report.peripheral_suitability_score(target)
+        self.assertEqual(score["score"], 94)
+        fit_text = report.peripheral_fit_score_text(target)
+        self.assertIn("**94/100**（用途34/35・予算28/30・仕様19/20・代替性13/15）", fit_text)
+        reason = report.peripheral_fit_reason_text(target)
+        self.assertIn("評価理由:", reason)
+        self.assertIn("留意点:", reason)
+        evidence = {
+            "score": 55,
+            "breakdown": {
+                "direct_price_identity_pit": 30,
+                "sellable_stock": 25,
+                "verified_checkout_total": 0,
+                "route_comparison": 0,
+                "warranty_and_returns": 0,
+            },
+        }
+        evidence_text = report.peripheral_purchase_evidence_score_text(evidence)
+        self.assertIn("**55/100**", evidence_text)
+        self.assertIn("決済 0", evidence_text)
+        self.assertEqual(report.peripheral_fit_score_text({"category":"budget_reserve"}), "対象外")
 
     def test_early_buy_amount_label_separates_listing_estimate_and_verified_checkout(self):
         estimated = {
