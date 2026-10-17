@@ -290,6 +290,19 @@ class PeripheralMonitorTests(unittest.TestCase):
                 self.assertIsNone(result["store_price_jpy"])
                 self.assertEqual(result["store_observation_status"], expected_status)
 
+    def test_empty_branch_price_matrix_does_not_create_a_fake_quote(self):
+        import json
+        from intelligence import store_observation_validation
+
+        config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        target = dict(next(x for x in config["peripherals"] if x["id"] == "main_monitor"))
+        result = store_observation_validation(target, "2026-10-15T12:00:00+09:00")
+        self.assertEqual(result["store_price_observations"], [])
+        self.assertEqual(result["store_price_observation_count"], 0)
+        self.assertEqual(result["store_price_verified_store_ids"], [])
+        self.assertFalse(result["store_price_confirmed"])
+        self.assertEqual(result["store_observation_status"], "UNCONFIRMED")
+
     def test_multiple_branch_cash_quotes_are_validated_and_compared_independently(self):
         import json
         from intelligence import store_observation_validation
