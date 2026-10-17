@@ -772,8 +772,8 @@ class BuildComponentMonitorTests(unittest.TestCase):
         with patch.object(
             bcm, "fetch",
             return_value=("<html>comparison</html>", part["monitor_url"], {}),
-        ), patch.object(bcm, "parse_page", return_value=market_page), \\
-             patch.object(bcm, "identity_match", return_value=(True, [part["model_code"]])), \\
+        ), patch.object(bcm, "parse_page", return_value=market_page), \
+             patch.object(bcm, "identity_match", return_value=(True, [part["model_code"]])), \
              patch.object(bcm, "search_comparison_snippet", return_value=seller_result) as seller_search:
             result = bcm.fetch_part(
                 part,
@@ -812,7 +812,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
             "retailer_listing_offers": [offer],
             "search_diagnostics": [{"provider": "configured_direct_retailer", "status": "verified"}],
         }
-        with patch.object(bcm, "fetch", side_effect=RuntimeError("comparison site blocked")), \\
+        with patch.object(bcm, "fetch", side_effect=RuntimeError("comparison site blocked")), \
              patch.object(bcm, "search_comparison_snippet", return_value=seller_result) as seller_search:
             result = bcm.fetch_part(
                 part,
