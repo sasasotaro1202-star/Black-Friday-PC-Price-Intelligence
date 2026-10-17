@@ -142,6 +142,75 @@ class SelfBuildPlannerTests(unittest.TestCase):
             self.assertGreaterEqual(score["purchase_evidence_completeness_score_out_of_100"], 80.0)
             self.assertFalse(score["purchase_authorized"])
 
+    def test_individual_component_purchase_evidence_score_is_transparent(self):
+        now = NOW.isoformat()
+        part = {
+            "category": "cpu",
+            "direct_listing_display_offers": [{
+                "url": "https://store.example.test/cpu",
+                "price_jpy": 45000,
+                "price_source_mode": "direct_structured",
+                "stock_status": "in_stock",
+                "stock_signal_fresh": True,
+            }],
+            "early_buy_review": {
+                "observed_price_jpy": 45000,
+                "price_verified": True,
+                "identity_verified": True,
+                "pit_valid": True,
+                "stock_status": "in_stock",
+                "verified_checkout_total_jpy": 45500,
+                "checkout_total_verified": True,
+                "warranty_return_conditions_verified": True,
+            },
+        }
+        build = {"compatibility_checks": [
+            {"check": "cpu_motherboard_socket", "status": "PASS"},
+            {"check": "cpu_bios_support", "status": "PASS"},
+        ]}
+        result = planner.component_purchase_evidence_score(part, build, now=NOW)
+        self.assertEqual(result["score"], 100)
+        self.assertEqual(result["breakdown"], {
+            "direct_price_identity_pit": 30,
+            "sellable_stock": 25,
+            "verified_checkout_total": 25,
+            "compatibility": 10,
+            "warranty_and_returns": 10,
+        })
+        self.assertTrue(result["direct_price_verified_fresh"])
+        self.assertTrue(result["sellable_stock_verified_fresh"])
+        self.assertTrue(result["checkout_total_verified"])
+
+    def test_individual_component_score_does_not_reward_stale_price_or_unknown_stock(self):
+        part = {
+            "category": "cpu",
+            "direct_listing_display_offers": [{
+                "url": "https://store.example.test/cpu",
+                "price_jpy": 45000,
+                "price_source_mode": "direct_structured",
+                "stock_status": "in_stock",
+                "stock_signal_fresh": False,
+            }],
+            "early_buy_review": {
+                "observed_price_jpy": 45000,
+                "price_verified": True,
+                "identity_verified": True,
+                "pit_valid": True,
+                "stock_status": "unknown",
+                "verified_checkout_total_jpy": None,
+                "checkout_total_verified": False,
+            },
+        }
+        build = {"compatibility_checks": [
+            {"check": "cpu_motherboard_socket", "status": "PASS"},
+            {"check": "cpu_bios_support", "status": "REVIEW"},
+        ]}
+        result = planner.component_purchase_evidence_score(part, build, now=NOW)
+        self.assertEqual(result["breakdown"]["direct_price_identity_pit"], 0)
+        self.assertEqual(result["breakdown"]["sellable_stock"], 0)
+        self.assertEqual(result["breakdown"]["verified_checkout_total"], 0)
+        self.assertLessEqual(result["score"], 10)
+
     def test_target_totals_and_all_in_budget(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         builds = {x["gpu_choice_id"]:x for x in plan["builds"]}
