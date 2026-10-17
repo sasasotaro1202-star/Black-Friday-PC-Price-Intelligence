@@ -24,11 +24,25 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(timing["early_buy_thresholds_jpy"]["mouse"], 4000)
 
         triggered = intelligence.early_buy_review_assessment(
-            "cpu-ryzen7-9700x", 35900, True, True, "in_stock", True, False
+            "cpu-ryzen7-9700x", 35900, True, True, "in_stock", True, False,
+            estimated_checkout_total_jpy=36900,
         )
         self.assertEqual(triggered["status"], "PRICE_TRIGGERED_CHECKOUT_REVIEW")
         self.assertFalse(triggered["purchase_authorized"])
         self.assertIn("決済総額", triggered["next_step"])
+        self.assertEqual(triggered["observed_price_jpy"], 35900)
+        self.assertEqual(triggered["estimated_checkout_total_jpy"], 36900)
+        self.assertIsNone(triggered["verified_checkout_total_jpy"])
+        self.assertFalse(triggered["checkout_total_verified"])
+
+        verified = intelligence.early_buy_review_assessment(
+            "cpu-ryzen7-9700x", 35000, True, True, "in_stock", True, True,
+            estimated_checkout_total_jpy=35500, verified_checkout_total_jpy=35500,
+        )
+        self.assertEqual(verified["status"], "EARLY_BUY_REVIEW_ONLY")
+        self.assertEqual(verified["verified_checkout_total_jpy"], 35500)
+        self.assertTrue(verified["checkout_total_verified"])
+        self.assertFalse(verified["purchase_authorized"])
 
         above = intelligence.early_buy_review_assessment(
             "cpu-ryzen7-9700x", 38000, True, True, "in_stock", True, True
