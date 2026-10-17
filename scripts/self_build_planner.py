@@ -1349,6 +1349,100 @@ def build_plan(config=None, price_snapshot=None, now=None):
     }
 
 
+def component_purchase_evidence_score(part, build, now=None):
+    """Score whether this exact PC component is ready to purchase, not its performance.
+
+    30 direct exact-SKU price/PIT, 25 sellable stock (18 when low), 25 verified
+    checkout total, 10 relevant compatibility checks, 10 explicit warranty/return
+    evidence. A comparison-site price never earns direct-price or stock points.
+    """
+    part = part if isinstance(part, dict) else {}
+    build = build if isinstance(build, dict) else {}
+    now = now or now_jst()
+    points = {
+        "direct_price_identity_pit": 0,
+        "sellable_stock": 0,
+        "verified_checkout_total": 0,
+        "compatibility": 0,
+        "warranty_and_returns": 0,
+    }
+
+    def positive_int(value):
+        return isinstance(value, int) and not isinstance(value, bool) and value > 0
+
+    direct_offers = [
+        offer for offer in (part.get("direct_listing_display_offers") or [])
+        if isinstance(offer, dict)
+        and offer.get("stock_signal_fresh") is True
+        and positive_int(offer.get("price_jpy"))
+        and offer.get("price_source_mode") in ("direct_structured", "direct_meta", "direct_text")
+        and str(offer.get("url") or "").startswith("https://")
+    ]
+    if direct_offers:
+        points["direct_price_identity_pit"] = 30
+        statuses = {str(offer.get("stock_status") or "unknown") for offer in direct_offers}
+        if "in_stock" in statuses:
+            points["sellable_stock"] = 25
+        elif "low_stock" in statuses:
+            points["sellable_stock"] = 18
+
+    signal = part.get("early_buy_review") if isinstance(part.get("early_buy_review"), dict) else {}
+    checkout_total = signal.get("verified_checkout_total_jpy")
+    checkout_valid = (
+        bool(direct_offers) and points["sellable_stock"] > 0
+        and positive_int(checkout_total)
+        and signal.get("checkout_total_verified") is True
+        and signal.get("price_verified") is True
+        and signal.get("identity_verified") is True
+        and signal.get("pit_valid") is True
+        and signal.get("stock_status") in ("in_stock", "low_stock")
+    )
+    if checkout_valid:
+        points["verified_checkout_total"] = 25
+
+    compatibility_checks = {
+        str(item.get("check")): str(item.get("status") or "REVIEW")
+        for item in (build.get("compatibility_checks") or [])
+        if isinstance(item, dict) and item.get("check")
+    }
+    category = str(part.get("category") or "")
+    relevant_checks = {
+        "cpu": ("cpu_motherboard_socket", "cpu_bios_support"),
+        "gpu": ("gpu_case_clearance", "gpu_slot_thickness", "psu_wattage", "gpu_power_connector"),
+        "motherboard": ("cpu_motherboard_socket", "cpu_bios_support", "memory_type_capacity_dual_channel",
+                        "storage_capacity_interface", "motherboard_case_form_factor"),
+        "memory": ("memory_type_capacity_dual_channel", "memory_qvl"),
+        "storage": ("storage_capacity_interface",),
+        "psu": ("psu_wattage", "gpu_power_connector"),
+        "case": ("motherboard_case_form_factor", "gpu_case_clearance", "gpu_slot_thickness", "cooler_case_clearance"),
+        "cpu_cooler": ("cooler_socket", "cooler_case_clearance"),
+        "os_license": ("os_license",),
+    }.get(category, ())
+    status_value = {"PASS": 1.0, "REVIEW": 0.5, "FAIL": 0.0}
+    matched = [compatibility_checks[key] for key in relevant_checks if key in compatibility_checks]
+    if matched:
+        points["compatibility"] = round(10 * sum(status_value.get(status, 0.0) for status in matched) / len(matched))
+
+    terms_verified = bool(
+        signal.get("warranty_return_conditions_verified") is True
+        or part.get("warranty_return_conditions_verified") is True
+        or (
+            signal.get("warranty_verified") is True and signal.get("return_policy_verified") is True
+        )
+    )
+    points["warranty_and_returns"] = 10 if terms_verified else 0
+    return {
+        "score": sum(points.values()),
+        "out_of": 100,
+        "breakdown": points,
+        "direct_price_verified_fresh": bool(direct_offers),
+        "sellable_stock_verified_fresh": points["sellable_stock"] > 0,
+        "checkout_total_verified": points["verified_checkout_total"] == 25,
+        "compatibility_checks_used": list(matched),
+        "warranty_return_terms_verified": terms_verified,
+    }
+
+
 def render_plan_markdown(plan):
     workload_profile = plan.get("workload_profile") or {}
     game_dev = workload_profile.get("game_development") or {}
@@ -1568,8 +1662,9 @@ def render_plan_markdown(plan):
           "- 採用CPUクーラー: {}（{}）".format(component_names.get(str(build.get("selected_cooler_id")), str(build.get("selected_cooler_id"))), build.get("cooler_selection_method")),
           "- 現在の比較参考合計: " + (money(build.get("market_reference_estimate_jpy")) + "（各店の参考掲載値の合算で、決済見積ではない）" if build.get("market_reference_estimate_jpy") is not None else "未算出。価格・型番・在庫条件を満たさない部品を0円補完しない"),
           "- 互換性: " + str(build.get("compatibility_status")) + " / 判定: " + str(build.get("decision")), "",
-          "|画像|部品|型番|BF目標|検証済み/表示専用参考値|直接掲載価格（在庫条件未達・推定不採用）|確認状態|前倒し購入シグナル|直接取得診断|リンク|",
-          "|---|---|---|---:|---:|---|---|---|---|---|---|"])
+          "部品購入根拠点/100は直接価格・在庫・決済総額・その部品に関係する互換性確認・保証/返品条件から動的計算します。部品の性能点ではなく、比較サイト価格や未確認の在庫では加点しません。", "",
+          "|画像|部品|部品購入根拠点/100|型番|BF目標|検証済み/表示専用参考値|直接掲載価格（在庫条件未達・推定不採用）|確認状態|前倒し購入シグナル|直接取得診断|リンク|",
+          "|---|---|---:|---|---:|---:|---|---|---|---|---|---|"])
         for part in build.get("components") or []:
             p = part.get("display_reference_price_jpy")
             if part.get("price_status") == "manual_reference_unverified":
@@ -1649,8 +1744,10 @@ def render_plan_markdown(plan):
             diagnostic_text = "; ".join(diagnostic_texts) if diagnostic_texts else "—"
             early_signal = part.get("early_buy_review") if isinstance(part.get("early_buy_review"), dict) else {}
             early_label = str(early_signal.get("label_ja") or "未判定")
-            lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
-                image_html, part.get("name"), part.get("model_code") or "—",
+            part_evidence = component_purchase_evidence_score(part, build)
+            part_evidence_text = "{}/100".format(part_evidence["score"])
+            lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
+                image_html, part.get("name"), part_evidence_text, part.get("model_code") or "—",
                 money(part.get("target_price_jpy")), price_text, direct_text,
                 part.get("price_status"), early_label, diagnostic_text, link
             ))
