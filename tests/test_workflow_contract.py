@@ -174,5 +174,15 @@ class WorkflowContractTests(unittest.TestCase):
         text = (ROOT / "scripts" / "monitor.py").read_text(encoding="utf-8")
         self.assertIn('MONITOR_MAX_URLS", "100"', text)
 
+    def test_watchdog_checks_freshness_and_recovers_default_branch_failures(self):
+        watchdog = (ROOT / ".github" / "workflows" / "pc-price-watchdog.yml").read_text(encoding="utf-8")
+        self.assertIn('cron: "*/5 * * * *"', watchdog)
+        self.assertIn("workflow_run:", watchdog)
+        self.assertIn('"PC Price Intelligence"', watchdog)
+        self.assertIn('"PC Price Intelligence - Tests"', watchdog)
+        self.assertIn("github.event.workflow_run.head_branch == 'main'", watchdog)
+        self.assertIn("github.event.workflow_run.run_attempt == 1", watchdog)
+        self.assertNotIn('cron: "12,27,42,57 * * * *"', watchdog)
+
 if __name__ == "__main__":
     unittest.main()
