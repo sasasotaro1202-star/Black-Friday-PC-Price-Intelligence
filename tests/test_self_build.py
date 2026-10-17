@@ -117,6 +117,9 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertIn("対象ゲームの実測FPSではありません", rendered)
         self.assertIn("Tom's Hardware GPU Benchmarks Hierarchy 2026", rendered)
         self.assertIn("https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html", rendered)
+        self.assertIn("部品適合点/100（内訳）", rendered)
+        self.assertIn("部品購入根拠点/100", rendered)
+        self.assertIn("用途37/40・余裕20/25・品質18/20・構成14/15", rendered)
         self.assertFalse(plan["buy_now_authorized"])
 
     def test_verified_direct_price_stock_and_checkout_evidence_raise_completeness(self):
@@ -210,6 +213,74 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(result["breakdown"]["sellable_stock"], 0)
         self.assertEqual(result["breakdown"]["verified_checkout_total"], 0)
         self.assertLessEqual(result["score"], 10)
+
+    def test_component_suitability_score_uses_explicit_bounded_rubric(self):
+        part = {
+            "fit_scorecard": {
+                "workload_fit_points": 37,
+                "headroom_points": 20,
+                "quality_reliability_points": 18,
+                "integration_flexibility_points": 14,
+                "rationale_ja": "balanced fit",
+                "limitations_ja": "source compile trade-off",
+            }
+        }
+        result = planner.component_suitability_score(part)
+        self.assertEqual(result["score"], 89)
+        self.assertEqual(result["out_of"], 100)
+        self.assertTrue(result["scorecard_complete"])
+        self.assertEqual(sum(result["breakdown"].values()), 89)
+        self.assertFalse(result["purchase_authorized"])
+
+    def test_component_suitability_score_fails_closed_for_missing_or_out_of_range_input(self):
+        missing = planner.component_suitability_score({"fit_scorecard": {"workload_fit_points": 40}})
+        excessive = planner.component_suitability_score({"fit_scorecard": {
+            "workload_fit_points": 41, "headroom_points": 25,
+            "quality_reliability_points": 20, "integration_flexibility_points": 15,
+        }})
+        self.assertIsNone(missing["score"])
+        self.assertFalse(missing["scorecard_complete"])
+        self.assertIsNone(excessive["score"])
+        self.assertFalse(excessive["scorecard_complete"])
+
+    def test_component_fit_rubric_is_present_for_every_configured_part(self):
+        limits = {
+            "workload_fit_points": 40,
+            "headroom_points": 25,
+            "quality_reliability_points": 20,
+            "integration_flexibility_points": 15,
+        }
+        for part in self.config["parts"]:
+            self.assertIn("fit_scorecard", part, part["id"])
+            card = part["fit_scorecard"]
+            for key, maximum in limits.items():
+                self.assertIsInstance(card.get(key), int, f"{part['id']}:{key}")
+                self.assertGreaterEqual(card[key], 0, f"{part['id']}:{key}")
+                self.assertLessEqual(card[key], maximum, f"{part['id']}:{key}")
+            self.assertTrue(card.get("rationale_ja"), part["id"])
+            self.assertTrue(card.get("limitations_ja"), part["id"])
+
+    def test_compatibility_evidence_score_penalizes_missing_required_checks(self):
+        now = NOW.isoformat()
+        part = {
+            "category": "cpu",
+            "direct_listing_display_offers": [{
+                "url": "https://store.example.test/cpu",
+                "price_jpy": 45000,
+                "price_source_mode": "direct_structured",
+                "stock_status": "in_stock",
+                "stock_signal_fresh": True,
+            }],
+            "early_buy_review": {
+                "price_verified": True, "identity_verified": True, "pit_valid": True,
+                "stock_status": "in_stock",
+            },
+        }
+        result = planner.component_purchase_evidence_score(part, {
+            "compatibility_checks": [{"check": "cpu_motherboard_socket", "status": "PASS"}]
+        }, now=NOW)
+        self.assertEqual(result["breakdown"]["compatibility"], 5)
+        self.assertEqual(result["missing_compatibility_checks"], ["cpu_bios_support"])
 
     def test_target_totals_and_all_in_budget(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
