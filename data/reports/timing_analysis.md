@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-17T14:02:55+09:00
-Source snapshot: 2026-10-17T14:00:45+09:00
-Source snapshot SHA256: 911f6fd57029716aa1d92fe6a5169c676b5f7a144d20a37a23a35960154c3970
+Generated: 2026-10-17T14:07:47+09:00
+Source snapshot: 2026-10-17T14:04:41+09:00
+Source snapshot SHA256: 540d1f5cff4d51d98192bb3e64ad74fd8ac2f19aacea4b178051c6a0704e0690
 Budget: ¥360,000
 Target Black Friday: 2026-11-27
 
@@ -20,7 +20,6 @@ Target Black Friday: 2026-11-27
 |8|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
 |9|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|10.0%|HIGH|rtx 5070 ti|38|direct_structured|
 |10|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|19.8%|REALISTIC|rtx 5070|32|direct_structured|
-|11|Acer Predator Helios Neo 16 AI Windows 11 Home Core Ult|¥547,800|34.3%|LOW|rtx 5070 ti|40|direct_structured|
 
 ## Empirical price-change timing
 
