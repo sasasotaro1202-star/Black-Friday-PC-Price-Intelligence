@@ -718,6 +718,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
                 "direct_listing_display_stock_label": price.get("direct_listing_display_stock_label"),
                 "direct_listing_display_source_mode": price.get("direct_listing_display_source_mode"),
                 "direct_listing_display_observed_at": price.get("direct_listing_display_observed_at"),
+                "early_buy_review": price.get("early_buy_review") if isinstance(price.get("early_buy_review"), dict) else None,
                 "direct_listing_display_age_minutes": price.get("direct_listing_display_age_minutes"),
                 "direct_listing_display_price_context": price.get("direct_listing_display_price_context"),
                 "direct_listing_validation_diagnostics": price.get("direct_listing_validation_diagnostics") or [],
