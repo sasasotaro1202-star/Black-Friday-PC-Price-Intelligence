@@ -1406,7 +1406,7 @@ def render_plan_markdown(plan):
         "",
         "|構成|販売可能掲載価格が確認できた部品|部品数カバー率|確認済み掲載価格の部分小計|売り切れ掲載|在庫不明掲載|鮮度切れ掲載|販売可能価格が未確認の部品|",
         "|---|---|---:|---:|---:|---:|---:|---|"
-    ])
+    ]
     for build in plan.get("builds") or []:
         counts = build.get("current_retailer_listing_offer_count_by_status") or {}
         names = {str(part.get("id")): str(part.get("name") or part.get("id")) for part in (build.get("components") or [])}
