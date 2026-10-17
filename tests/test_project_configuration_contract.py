@@ -46,8 +46,8 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(targets["pc_target_jpy"], 360000)
 
     def test_cpu_core_alternatives_are_present_for_compile_and_analysis_workloads(self):
-        profile = self.build_components["profile"]
-        parts = {item["id"]: item for item in self.build_components["parts"]}
+        profile = self.build["profile"]
+        parts = {item["id"]: item for item in self.build["parts"]}
         self.assertEqual(profile["cpu_alternative_choice_ids"], ["cpu-ryzen9-9900x"])
         self.assertEqual(profile["cpu_dark_horse_ids"], ["cpu-ryzen9-9950x"])
         self.assertEqual(parts["cpu-ryzen9-9900x"]["specs"]["cores"], 12)

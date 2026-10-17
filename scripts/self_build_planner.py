@@ -2061,7 +2061,7 @@ def section_from_plan(plan):
         lines.append("- CPU大穴：{} / {}コア{}スレッド / 冷却費用を含まない総額下限 {}（40万円上限超過 {}、完全構成未確認）".format(
             item.get("cpu_name"), item.get("cpu_cores"), "/" + str(item.get("cpu_threads")) + "T",
             money(item.get("target_all_in_floor_with_current_cooler_jpy")),
-            money(item.get("over_budget_before_cooling_change_jpy")))
+            money(item.get("over_budget_before_cooling_change_jpy"))))
     lines.extend(["", "RTX 5070 12GBを本命、RTX 5060 Ti 16GBをVRAM重視の代替、RTX 5070 Ti 16GBを大穴として分離します。",
         "", "BF目標額は値下げ希望額であり、現時点で購入許可はありません。比較サイト価格はBF実売に数えません。",
         "", "[自作PCの部品別価格・互換性レポート](self-build-ranking.md)", END_MARKER])
