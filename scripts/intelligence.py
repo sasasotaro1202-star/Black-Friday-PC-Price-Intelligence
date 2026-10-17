@@ -754,18 +754,84 @@ def peripheral_budget_projection():
             "store_inventory_evidence_notes": None, "store_inventory_age_minutes": None,
             "store_inventory_store_ids_available": [],
         }
-        store_price = store_observation["store_price_jpy"]
-        store_checked_at = store_observation["store_price_checked_at"]
-        store_stock = store_observation["store_stock_status"]
-        store_url = store_observation["store_confirmation_url"]
-        store_model_match = store_observation["store_model_match"]
-        store_price_verified = bool(store_observation["store_price_confirmed"])
-        # A branch stock observation may corroborate availability for a separately
-        # verified cash quote. It must never turn an online price into a store price.
-        if store_price_verified and store_stock not in ("in_stock", "low_stock"):
-            branch_status = live_store_inventory.get("store_inventory_status")
-            if live_store_inventory.get("store_inventory_verified") and stocked(branch_status):
-                store_stock = branch_status
+        # Reconcile cash quotes and stock only within the same named branch.
+        # A lower price at one branch must never inherit another branch's stock.
+        store_price_observations = [
+            dict(row) for row in (store_observation.get("store_price_observations") or [])
+            if isinstance(row, dict) and row.get("store_price_confirmed") is True
+            and valid_money(row.get("store_price_jpy")) and row.get("store_model_match") is True
+        ]
+        inventory_by_store = {
+            str(row.get("store_id")): row
+            for row in (live_store_inventory.get("store_inventory_observations") or [])
+            if isinstance(row, dict) and row.get("store_id")
+        }
+        for quote in store_price_observations:
+            quote_store_id = str(quote.get("store_observation_store_id") or "")
+            quote_stock = quote.get("store_stock_status") or "unknown"
+            inventory = inventory_by_store.get(quote_store_id)
+            if quote_stock not in ("in_stock", "low_stock") and inventory:
+                branch_status = inventory.get("status")
+                if inventory.get("status") in ("in_stock", "low_stock"):
+                    quote["store_stock_status"] = branch_status
+                    quote["stock_evidence_source_url"] = inventory.get("source_url")
+                    quote["stock_evidence_checked_at"] = inventory.get("checked_at")
+
+        stocked_quotes = [
+            quote for quote in store_price_observations
+            if quote.get("store_stock_status") in ("in_stock", "low_stock")
+        ]
+        stock_priority = {"in_stock": 0, "low_stock": 1, "unknown": 2,
+                          "preorder_or_backorder": 3, "out_of_stock": 4}
+        if stocked_quotes:
+            chosen_store_quote = min(
+                stocked_quotes,
+                key=lambda quote: (
+                    int(quote.get("store_price_jpy") or 10**12),
+                    stock_priority.get(quote.get("store_stock_status"), 2),
+                    str(quote.get("store_observation_store_id") or ""),
+                ),
+            )
+        elif store_price_observations:
+            chosen_store_quote = min(
+                store_price_observations,
+                key=lambda quote: (
+                    stock_priority.get(quote.get("store_stock_status") or "unknown", 2),
+                    int(quote.get("store_price_jpy") or 10**12),
+                    str(quote.get("store_observation_store_id") or ""),
+                ),
+            )
+        else:
+            chosen_store_quote = None
+
+        store_price = (
+            chosen_store_quote.get("store_price_jpy") if chosen_store_quote
+            else store_observation["store_price_jpy"]
+        )
+        store_checked_at = (
+            chosen_store_quote.get("store_price_checked_at") if chosen_store_quote
+            else store_observation["store_price_checked_at"]
+        )
+        store_stock = (
+            chosen_store_quote.get("store_stock_status") if chosen_store_quote
+            else store_observation["store_stock_status"]
+        )
+        store_url = (
+            chosen_store_quote.get("store_confirmation_url") if chosen_store_quote
+            else store_observation["store_confirmation_url"]
+        )
+        store_model_match = (
+            chosen_store_quote.get("store_model_match") if chosen_store_quote
+            else store_observation["store_model_match"]
+        )
+        store_price_verified = bool(
+            chosen_store_quote.get("store_price_confirmed") if chosen_store_quote
+            else store_observation["store_price_confirmed"]
+        )
+        store_observation_store_id = (
+            chosen_store_quote.get("store_observation_store_id") if chosen_store_quote
+            else store_observation.get("store_observation_store_id")
+        )
         store_route_actionable = bool(store_price_verified and stocked(store_stock))
         store_route_known = bool(
             store_price_verified
