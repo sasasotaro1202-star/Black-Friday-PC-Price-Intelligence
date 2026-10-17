@@ -1056,7 +1056,34 @@ def build_plan(config=None, price_snapshot=None, now=None):
     builds = []
 
     for rank, gpu_id in enumerate(gpu_ids, 1):
-        selected_ids = fixed_ids + ([selected_memory_id] if selected_memory_id else []) + [gpu_id]
+        gpu_fallback_ids = [
+            str(x) for x in (gpu_fallbacks.get(str(gpu_id)) or [])
+            if str(x) in parts and (parts[str(x)].get("category") == "gpu")
+        ]
+        gpu_candidate_ids = list(dict.fromkeys([str(gpu_id)] + gpu_fallback_ids))
+        trusted_gpu_ids = [
+            candidate_id for candidate_id in gpu_candidate_ids
+            if gpu_price_by_id.get(candidate_id, {}).get("trusted_for_market_estimate")
+            and isinstance(gpu_price_by_id.get(candidate_id, {}).get("market_reference_price_jpy"), int)
+        ]
+        if str(gpu_id) in trusted_gpu_ids:
+            selected_gpu_id = str(gpu_id)
+            gpu_selection_method = "keep_primary_exact_sku_if_fresh_in_stock"
+        elif trusted_gpu_ids:
+            selected_gpu_id = min(
+                trusted_gpu_ids,
+                key=lambda candidate_id: (
+                    gpu_price_by_id[candidate_id]["market_reference_price_jpy"],
+                    (parts.get(candidate_id) or {}).get("target_price_jpy", 10**12),
+                    candidate_id,
+                ),
+            )
+            gpu_selection_method = "same_gpu_tier_stockout_fallback_lowest_verified_in_stock_price"
+        else:
+            selected_gpu_id = str(gpu_id)
+            gpu_selection_method = "primary_exact_sku_fallback_no_verified_in_stock_alternative"
+
+        selected_ids = fixed_ids + ([selected_memory_id] if selected_memory_id else []) + ([selected_storage_id] if selected_storage_id else []) + ([selected_cooler_id] if selected_cooler_id else []) + [selected_gpu_id]
         components, missing, market_subtotal = [], [], 0
         all_parts_referenced = True
         target_parts = 0
@@ -1079,9 +1106,16 @@ def build_plan(config=None, price_snapshot=None, now=None):
             target = part.get("target_price_jpy")
             if isinstance(target, int) and not isinstance(target, bool):
                 target_parts += target
-            price = memory_price_by_id[cid] if cid in memory_price_by_id else component_price(
-                part, by_id, now, max_age, allowed_domains=allowed_price_domains
-            )
+            if cid in memory_price_by_id:
+                price = memory_price_by_id[cid]
+            elif cid in storage_price_by_id:
+                price = storage_price_by_id[cid]
+            elif cid in cooler_price_by_id:
+                price = cooler_price_by_id[cid]
+            elif cid in gpu_price_by_id:
+                price = gpu_price_by_id[cid]
+            else:
+                price = component_price(part, by_id, now, max_age, allowed_domains=allowed_price_domains)
             component = {
                 "id": cid, "category": part.get("category"), "name": part.get("name"),
                 "model_code": part.get("model_code"), "role": part.get("role"),
@@ -1151,16 +1185,18 @@ def build_plan(config=None, price_snapshot=None, now=None):
                     all_parts_referenced = False
                     missing.append(cid)
 
-        compat, checks = compatibility_checks(parts, profile, gpu_id, selected_memory_id)
-        workload_fit = assess_workload_fit(profile, parts, selected_ids, gpu_id, selected_memory_id)
+        compat, checks = compatibility_checks(
+            parts, profile, selected_gpu_id, selected_memory_id, selected_storage_id, selected_cooler_id
+        )
+        workload_fit = assess_workload_fit(profile, parts, selected_ids, selected_gpu_id, selected_memory_id)
         target_pc = target_parts + shipping + small_parts
         contingency = int(profile.get("unallocated_contingency_jpy", 0))
         target_all_in = target_pc + peripheral_budget + contingency
         market_estimate = market_subtotal + shipping + small_parts if all_parts_referenced and not missing else None
         all_in_market = market_estimate + peripheral_budget + contingency if market_estimate is not None else None
-        gpu_part = parts.get(gpu_id) or {}
-        gpu_live = by_id.get(gpu_id) or {}
-        live_gpu_price = gpu_live.get("market_reference_price_jpy")
+        gpu_part = parts.get(selected_gpu_id) or {}
+        selected_gpu_price = gpu_price_by_id.get(selected_gpu_id) or {}
+        live_gpu_price = selected_gpu_price.get("market_reference_price_jpy")
         gpu_target = gpu_part.get("target_price_jpy")
         reduction = round((live_gpu_price - gpu_target) * 100.0 / live_gpu_price, 1) if isinstance(live_gpu_price, int) and isinstance(gpu_target, int) and live_gpu_price > gpu_target else None
 
