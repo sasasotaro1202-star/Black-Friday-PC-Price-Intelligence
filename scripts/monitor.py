@@ -936,7 +936,7 @@ def parse_page(url, html, expected=None):
                 merchant_text = re.sub(r"<[^>]+>", " ", merchant_scope.group(1))
                 merchant_text = html_lib.unescape(re.sub(r"\s+", " ", merchant_text)).strip()
                 merchant_match = re.search(
-                    r'(?:販売元|販売者|出品者)\s*[:：]?\s*([^|｜]{2,100}?)(?=\\s+(?:発送元|返品|ストアを表示)|$)',
+                    r'(?:販売元|販売者|出品者)\s*[:：]?\s*([^|｜]{2,100}?)(?=\s+(?:発送元|返品|ストアを表示)|$)',
                     merchant_text
                 )
                 if merchant_match:
