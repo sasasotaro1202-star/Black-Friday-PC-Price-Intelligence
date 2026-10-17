@@ -206,6 +206,12 @@ def early_buy_review_assessment(
     if not pit_valid:
         result.update(status="PIT_NOT_VERIFIED", label_ja="取得時刻未検証", next_step="新しい取得時刻・価格の有効時刻を再確認")
         return result
+    if stock_status == "out_of_stock":
+        result.update(status="UNAVAILABLE", label_ja="在庫切れ", next_step="同一型番の別販売店・再入荷を確認")
+        return result
+    if stock_status not in ("in_stock", "low_stock"):
+        result.update(status="STOCK_NOT_VERIFIED", label_ja="在庫未確認", next_step="購入可能な在庫を直接確認")
+        return result
     threshold_jpy = result["early_buy_threshold_jpy"]
     if observed_price_jpy > threshold_jpy:
         gap = observed_price_jpy - threshold_jpy
@@ -215,12 +221,6 @@ def early_buy_review_assessment(
             price_gap_to_threshold_jpy=gap,
             next_step=f"前倒し検討価格まであと{gap:,}円。ブラックフライデーを含め監視継続",
         )
-        return result
-    if stock_status == "out_of_stock":
-        result.update(status="UNAVAILABLE", label_ja="在庫切れ", next_step="同一型番の別販売店・再入荷を確認")
-        return result
-    if stock_status not in ("in_stock", "low_stock"):
-        result.update(status="STOCK_NOT_VERIFIED", label_ja="価格条件到達・在庫未確認", next_step="購入可能な在庫を直接確認")
         return result
     if not checkout_total_is_verified:
         result.update(
