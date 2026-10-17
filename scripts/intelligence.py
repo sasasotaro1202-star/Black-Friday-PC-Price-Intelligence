@@ -841,8 +841,18 @@ def peripheral_budget_projection():
                 online_shipping_in_budget = estimated_shipping
 
         total_projection += selected_cost
-        # Early-buy thresholds only create a review signal; price targets never authorize a purchase.
-        if purchase_channel_selected == "online":
+        # A listed product price, an estimated delivered total, and a verified checkout total are different facts.
+        early_observed_price = None
+        early_estimated_total = None
+        early_verified_total = None
+        early_price_verified = False
+        early_identity_verified = False
+        early_stock_status = "unknown"
+        early_pit_valid = False
+        early_checkout_verified = False
+        if purchase_channel_selected == "online" or (purchase_channel_selected == "unconfirmed" and online_price_verified):
+            early_observed_price = price if online_price_verified else None
+            early_estimated_total = online_cash_estimate if online_price_verified else None
             early_price_verified = bool(online_price_verified)
             early_identity_verified = bool(identity_matches and live.get("identity_verified", True))
             early_stock_status = online_stock
@@ -853,8 +863,10 @@ def peripheral_budget_projection():
                 and available_dt <= retrieval_dt <= now
             )
             early_checkout_verified = bool(online_route_actionable and shipping_verified)
-            early_cash_total = online_cash_estimate
+            early_verified_total = online_cash_estimate if early_checkout_verified else None
         elif purchase_channel_selected == "physical_store":
+            early_observed_price = store_price if valid_money(store_price) else None
+            early_estimated_total = store_price if valid_money(store_price) else None
             early_price_verified = bool(store_price_verified)
             early_identity_verified = bool(store_model_match)
             early_stock_status = store_stock
@@ -863,29 +875,29 @@ def peripheral_budget_projection():
                 store_dt is not None and 0 <= (now - store_dt).total_seconds() / 60.0 <= max_age
             )
             early_checkout_verified = bool(store_route_actionable)
-            early_cash_total = store_price if valid_money(store_price) else selected_cost
+            early_verified_total = store_price if early_checkout_verified and valid_money(store_price) else None
         elif purchase_channel_selected == "store_pickup":
+            early_observed_price = store_pickup_price if valid_money(store_pickup_price) else None
+            early_estimated_total = store_pickup_price if valid_money(store_pickup_price) else None
             early_price_verified = bool(store_pickup_quote_confirmed)
             early_identity_verified = bool(store_pickup_quote_confirmed)
             early_stock_status = store_pickup_stock
-            early_pit_valid = bool(store_pickup_quote_confirmed and store_pickup_observation.get("store_pickup_quote_age_minutes") is not None)
+            early_pit_valid = bool(
+                store_pickup_quote_confirmed
+                and store_pickup_observation.get("store_pickup_quote_age_minutes") is not None
+            )
             early_checkout_verified = bool(store_pickup_route_actionable)
-            early_cash_total = store_pickup_price if valid_money(store_pickup_price) else selected_cost
-        else:
-            early_price_verified = False
-            early_identity_verified = False
-            early_stock_status = stock
-            early_pit_valid = False
-            early_checkout_verified = False
-            early_cash_total = None
+            early_verified_total = store_pickup_price if early_checkout_verified and valid_money(store_pickup_price) else None
         early_buy_review = early_buy_review_assessment(
             pid,
-            observed_price_jpy=early_cash_total,
+            observed_price_jpy=early_observed_price,
             price_verified=early_price_verified,
             identity_verified=early_identity_verified,
             stock_status=early_stock_status,
             pit_valid=early_pit_valid,
             checkout_total_verified=early_checkout_verified,
+            estimated_checkout_total_jpy=early_estimated_total,
+            verified_checkout_total_jpy=early_verified_total,
         )
         rows.append({
             "id": pid, "name": target.get("name"), "target_price_jpy": target_price,
