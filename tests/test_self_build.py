@@ -89,7 +89,7 @@ class SelfBuildPlannerTests(unittest.TestCase):
         rendered = planner.render_plan_markdown(plan)
         self.assertIn("100点方式の構成スコア", rendered)
         self.assertIn("購入根拠充足度/100", planner.section_from_plan(plan))
-        self.assertIn("実測FPSやベンチマークではありません", rendered)
+        self.assertIn("対象ゲームの実測FPSではありません", rendered)
         self.assertFalse(plan["buy_now_authorized"])
 
     def test_verified_direct_price_stock_and_checkout_evidence_raise_completeness(self):
