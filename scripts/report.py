@@ -202,6 +202,10 @@ def peripheral_purchase_evidence_score(target, observation, now=None, max_age_mi
 
     30 direct exact-model price/PIT, 25 fresh sellable stock, 25 verified checkout
     total, 10 completed route comparison, 10 verified warranty/returns terms.
+    For online purchases, the checkout subtotal must be an explicit positive final
+    total with a true verification flag and a fresh checked-at timestamp; a known
+    shipping amount alone is not checkout-total evidence. Store cash quotes and
+    store-pickup checkout totals use their own exact-model evidence gates.
     Product suitability is a separate curated score stored in the target config.
     """
     target = target if isinstance(target, dict) else {}
