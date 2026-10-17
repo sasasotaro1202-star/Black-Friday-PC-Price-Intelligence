@@ -901,6 +901,28 @@ def main():
         "",
         f"周辺機器価格確認: {peripheral_projection['tracked_peripheral_verified_count']}/{peripheral_projection['tracked_peripheral_count']}。未確認項目は目標額を試算に使用し、自作PCを含む総額の購入判断は保留します。",
         "",
+        "## 前倒し購入の再検討シグナル",
+        "",
+        "ブラックフライデーを基本に待ちます。前倒し価格は購入許可ではなく、同一型番の直接価格・在庫・取得時刻が検証された場合に再確認を始める目安です。",
+        "",
+        "|商品|前倒し価格|観測済み現金総額|判定|次の確認|",
+        "|---|---:|---:|---|---|",
+        *[
+            "|{}|{}|{}|{}|{}|".format(
+                str(p.get("name") or p.get("id") or "不明").replace("|", "/"),
+                ("¥{:,}".format((p.get("early_buy_review") or {}).get("early_buy_threshold_jpy"))
+                 if isinstance((p.get("early_buy_review") or {}).get("early_buy_threshold_jpy"), int) else "—"),
+                ("¥{:,}".format((p.get("early_buy_review") or {}).get("observed_cash_total_jpy"))
+                 if isinstance((p.get("early_buy_review") or {}).get("observed_cash_total_jpy"), int) else "未確認"),
+                str((p.get("early_buy_review") or {}).get("label_ja") or "未判定").replace("|", "/"),
+                str((p.get("early_buy_review") or {}).get("next_step") or "価格・在庫を確認").replace("|", "/"),
+            )
+            for p in peripheral_projection["peripherals"]
+            if isinstance((p.get("early_buy_review") or {}).get("early_buy_threshold_jpy"), int)
+        ],
+        "",
+        "このシグナルは購入許可ではありません。送料・保証/返品・互換性・PC全体40万円上限を注文前に再確認します。",
+        "",
         "## 100点ランキング",
         "",
         "|順位|タイプ|商品|観測価格（BF前は参考）|現金総額|確定現金特典|実質コスト|非現金価値|価値加点|PC目標まで|性能|価格価値|過去根拠|在庫|時期|総合|判定|購入リンク|",
