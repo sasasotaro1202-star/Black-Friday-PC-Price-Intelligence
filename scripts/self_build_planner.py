@@ -910,6 +910,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "name": memory_part.get("name"),
             "model_code": memory_part.get("model_code"),
             "target_price_jpy": memory_part.get("target_price_jpy"),
+            "fit_scorecard": memory_part.get("fit_scorecard"),
             "market_reference_price_jpy": memory_price.get("market_reference_price_jpy"),
             "price_status": memory_price.get("price_status"),
             "trusted_for_market_estimate": trusted,
@@ -965,6 +966,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "name": part.get("name"),
             "model_code": part.get("model_code"),
             "target_price_jpy": part.get("target_price_jpy"),
+            "fit_scorecard": part.get("fit_scorecard"),
             "market_reference_price_jpy": price.get("market_reference_price_jpy"),
             "display_reference_price_jpy": price.get("display_reference_price_jpy"),
             "sellable_listing_price_jpy": sellable_price,
@@ -1665,8 +1667,8 @@ def render_plan_markdown(plan):
         "",
         "代替SKUへの切り替えは、同じ規格/クラスか、正確な型番、最新の直接価格、販売可能在庫、互換性が検証できた場合だけ計画上で行います。低在庫は売り切れリスクとして別途示し、在庫不明を在庫ありと扱いません。",
         "",
-        "|カテゴリ|候補|目標価格|販売可能な直接掲載|在庫信号|比較サイト参考（在庫・購入可否の根拠ではない）|選定ルール|商品ページ|",
-        "|---|---|---:|---:|---|---|---|---|"
+        "|カテゴリ|候補|部品適合点/100（内訳）|適合の理由・留意点|目標価格|販売可能な直接掲載|在庫信号|比較サイト参考（在庫・購入可否の根拠ではない）|選定ルール|商品ページ|",
+        "|---|---|---:|---|---:|---:|---|---|---|---|"
     ])
     fallback_groups = [
         ("メモリ", (plan.get("memory_choice_selection") or {}).get("candidates") or [],
@@ -1700,8 +1702,22 @@ def render_plan_markdown(plan):
             name = candidate.get("name") or candidate.get("id")
             if selected_id and candidate.get("id") == selected_id:
                 name = str(name) + "（選定中）"
-            lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|".format(
-                category, name, money(candidate.get("target_price_jpy")),
+            fit = component_suitability_score(candidate)
+            if fit.get("score") is None:
+                fit_text = "未採点"
+                fit_notes = "ルーブリック不足のため適合点を付与しない"
+            else:
+                fb = fit["breakdown"]
+                fit_text = "{}/100（用途{}/40・余裕{}/25・品質{}/20・構成{}/15）".format(
+                    fit["score"], fb["workload_fit_points"], fb["headroom_points"],
+                    fb["quality_reliability_points"], fb["integration_flexibility_points"]
+                )
+                fit_notes = "根拠: " + fit.get("rationale_ja", "")
+                if fit.get("limitations_ja"):
+                    fit_notes += " / 留意: " + fit["limitations_ja"]
+            fit_notes = re.sub(r"\\s+", " ", fit_notes).replace("|", "／")
+            lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
+                category, name, fit_text, fit_notes, money(candidate.get("target_price_jpy")),
                 money(cprice) if isinstance(cprice, int) and not isinstance(cprice, bool) else "販売可能価格なし",
                 stock_labels.get(str(stock), str(stock)), market_reference_text, rule,
                 "[商品ページ]({})".format(page) if str(page).startswith("https://") else page
