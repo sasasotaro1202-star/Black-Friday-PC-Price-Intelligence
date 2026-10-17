@@ -108,6 +108,12 @@ jobs:
           for attempt in 1 2 3; do
             git fetch --no-tags origin main
             git reset --hard origin/main
+            # Revalidate after syncing main so collection never runs a tree that
+            # has not passed the syntax and regression gates in this attempt.
+            python -m py_compile scripts/*.py
+            python -m unittest discover -s tests -p "test_production_contract.py" -v
+            python -m unittest discover -s tests -p "test_*.py" -v
+            git diff --check
             if [ "${NEEDS_WATCHLIST_REFRESH:-false}" = "true" ]; then
               echo "Refreshing watchlist after syncing origin/main."
               python scripts/discover.py

@@ -154,17 +154,21 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertIn("cancel-in-progress: false", text)
         self.assertIn("cancel-in-progress: false", fast)
 
-    def test_watchlist_discovery_runs_after_remote_reset_before_collection(self):
+    def test_main_sync_is_revalidated_before_every_collection_attempt(self):
         for path in (
             ROOT / ".github" / "workflows" / "pc-price-monitor.yml",
             ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml",
         ):
             text = path.read_text(encoding="utf-8")
             reset_at = text.index("git reset --hard origin/main")
-            discovery_at = text.index("python scripts/discover.py", reset_at)
+            syntax_at = text.index("python -m py_compile scripts/*.py", reset_at)
+            focused_tests_at = text.index('python -m unittest discover -s tests -p "test_production_contract.py" -v', reset_at)
+            regression_at = text.index('python -m unittest discover -s tests -p "test_*.py" -v', reset_at)
             monitor_at = text.index("python scripts/monitor.py", reset_at)
-            self.assertLess(reset_at, discovery_at, str(path))
-            self.assertLess(discovery_at, monitor_at, str(path))
+            self.assertLess(reset_at, syntax_at, str(path))
+            self.assertLess(syntax_at, focused_tests_at, str(path))
+            self.assertLess(focused_tests_at, regression_at, str(path))
+            self.assertLess(regression_at, monitor_at, str(path))
 
     def test_monitor_limit_allows_full_discovered_watchlist(self):
         text = (ROOT / "scripts" / "monitor.py").read_text(encoding="utf-8")
