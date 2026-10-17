@@ -176,12 +176,22 @@ class WorkflowContractTests(unittest.TestCase):
 
     def test_watchdog_checks_freshness_and_recovers_default_branch_failures(self):
         watchdog = (ROOT / ".github" / "workflows" / "pc-price-watchdog.yml").read_text(encoding="utf-8")
+        primary = WORKFLOW.read_text(encoding="utf-8")
         self.assertIn('cron: "*/5 * * * *"', watchdog)
         self.assertIn("workflow_run:", watchdog)
         self.assertIn('"PC Price Intelligence"', watchdog)
         self.assertIn('"PC Price Intelligence - Tests"', watchdog)
         self.assertIn("github.event.workflow_run.head_branch == 'main'", watchdog)
         self.assertIn("github.event.workflow_run.run_attempt == 1", watchdog)
+        # A collector can conclude success yet leave stale snapshots; this is
+        # still an unhealthy run and must trigger one bounded recovery.
+        self.assertIn("github.event.workflow_run.conclusion == 'success'", watchdog)
+        self.assertIn("!contains(github.event.workflow_run.display_title, '[watchdog-recovery]')", watchdog)
+        self.assertEqual(watchdog.count("gh workflow run pc-price-monitor.yml --ref main -f watchdog_recovery=true"), 2)
+        # The recovery marker is part of the run title so its completion cannot
+        # trigger a recursive chain of recovery dispatches.
+        self.assertIn("inputs.watchdog_recovery == true && ' [watchdog-recovery]'", primary)
+        self.assertIn("watchdog_recovery:", primary)
         self.assertNotIn('cron: "12,27,42,57 * * * *"', watchdog)
 
 if __name__ == "__main__":
