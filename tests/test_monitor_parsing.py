@@ -138,6 +138,20 @@ class MonitorParsingTests(unittest.TestCase):
                                              expected=expected)
         self.assertIsNone(result)
 
+    def test_navigation_price_filter_range_is_not_selected_as_product_price(self):
+        for text in (
+            "商品一覧 価格から探す 300,001円～ CPUから探す",
+            "スペック・パーツ別 価格から絞り込む 300,001円～ グラフィックスから探す",
+            "価格帯から探す 300,001円～ G TUNE DG-A7G70",
+        ):
+            with self.subTest(text=text):
+                self.assertIsNone(intelligence.pick_price(text))
+
+    def test_direct_product_price_still_parses_after_navigation_filter_changes(self):
+        picked = intelligence.pick_price("G TUNE DG-A7G70 販売価格 304,800円（税込）")
+        self.assertIsNotNone(picked)
+        self.assertEqual(picked["price_jpy"], 304800)
+
     def test_discount_amount_is_not_selected_as_price(self):
         picked = intelligence.pick_price("90,000円OFF / 販売価格 329,800円(税込)")
         self.assertIsNotNone(picked)
