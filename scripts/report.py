@@ -376,6 +376,55 @@ def peripheral_route_label(item):
     return "ネット注文"
 
 
+def physical_store_cash_price_labels(item):
+    """Format each independently verified branch cash quote without mixing routes."""
+    item = item if isinstance(item, dict) else {}
+    quotes = [
+        quote for quote in (item.get("store_price_observations") or [])
+        if isinstance(quote, dict)
+        and quote.get("store_price_confirmed") is True
+        and quote.get("store_model_match") is True
+        and positive_int(quote.get("store_price_jpy"))
+    ]
+    # Backward compatibility for older snapshots that only contain a single
+    # verified branch-price summary row.
+    if not quotes and item.get("store_price_confirmed") is True \
+        and item.get("store_model_match") is True \
+        and positive_int(item.get("store_price_jpy")):
+        quotes = [{
+            "store_name": item.get("store_observation_store_name"),
+            "store_observation_store_id": item.get("store_observation_store_id"),
+            "store_price_jpy": item.get("store_price_jpy"),
+            "store_stock_status": item.get("store_stock_status") or "unknown",
+            "store_price_checked_at": item.get("store_price_checked_at"),
+            "store_observation_age_minutes": item.get("store_observation_age_minutes"),
+        }]
+    labels = []
+    for quote in quotes:
+        store_name = str(
+            quote.get("store_name")
+            or quote.get("store_observation_store_id")
+            or "対象店"
+        )
+        price = int(quote["store_price_jpy"])
+        stock = str(quote.get("store_stock_status") or "unknown")
+        checked_at = str(quote.get("store_price_checked_at") or "").strip()
+        checked_label = (
+            "・確認 " + checked_at[:16].replace("T", " ") + " JST"
+            if len(checked_at) >= 16 and checked_at[10:11] == "T" else
+            "・確認時刻未記録"
+        )
+        age = quote.get("store_observation_age_minutes")
+        age_label = (
+            "（{:.0f}分前）".format(max(0, age))
+            if isinstance(age, (int, float)) and not isinstance(age, bool) else ""
+        )
+        labels.append(
+            f"{store_name} 店頭現金 ¥{price:,}・在庫 {stock}{checked_label}{age_label}"
+        )
+    return labels
+
+
 def peripheral_route_price_summary(item):
     """Separate online listing, shipping, store cash quote and route completeness."""
     item = item if isinstance(item, dict) else {}
@@ -384,7 +433,7 @@ def peripheral_route_price_summary(item):
     shipping = item.get("online_shipping_jpy")
     reserve = item.get("online_shipping_reserve_jpy")
     online_total = item.get("estimated_online_cash_total_jpy")
-    store_price = item.get("store_price_jpy") if item.get("store_price_confirmed") else None
+    store_price_labels = physical_store_cash_price_labels(item)
     pickup_price = item.get("store_pickup_checkout_total_jpy") if item.get("store_pickup_checkout_total_confirmed") else None
     pickup_branch_status = item.get("store_pickup_branch_inventory_status") or "unknown"
     pickup_quote_status = item.get("store_pickup_quote_status") or "UNCONFIRMED"
@@ -400,10 +449,8 @@ def peripheral_route_price_summary(item):
         parts.append(f"ネット掲載 ¥{price:,}{fee_text}")
     else:
         parts.append("ネット価格未確認")
-    if isinstance(store_price, int) and not isinstance(store_price, bool):
-        stock = str(item.get("store_stock_status") or "unknown")
-        store_name = item.get("store_inventory_store_name") or "対象店"
-        parts.append(f"{store_name} 店頭 ¥{store_price:,}・在庫 {stock}")
+    if store_price_labels:
+        parts.append("支店別価格: " + " / ".join(store_price_labels))
     elif channel in ("compare_online_and_store", "physical_store") or "physical_store" in (item.get("purchase_channel_options") or []):
         parts.append("店頭現金価格未確認")
     if isinstance(pickup_price, int) and not isinstance(pickup_price, bool):
