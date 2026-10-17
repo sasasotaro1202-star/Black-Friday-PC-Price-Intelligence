@@ -1432,7 +1432,7 @@ def render_plan_markdown(plan):
         "",
         "|順位|構成|GPU参照FPS (1440p Ultra)|総合点/100|ゲーム/25|制作/20|分析・AI/20|勉強・同時利用/10|価格効率/15|互換性/10|購入根拠充足度/100|直接価格・在庫・決済確認率|市場参考値|",
         "|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|"
-    ]
+    ])
     for build in plan.get("builds") or []:
         score = build.get("scorecard") or {}
         benchmark = score.get("gaming_benchmark_reference") or {}
