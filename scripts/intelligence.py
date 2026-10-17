@@ -218,7 +218,7 @@ def early_buy_review_assessment(
         result.update(
             status="PRICE_TRIGGERED_CHECKOUT_REVIEW",
             label_ja="前倒し候補：決済総額確認待ち",
-            next_step="送料込み決済額・保証・返品条件・互換性・全体予算を確認",
+            next_step="送料込みの決済総額・保証・返品条件・互換性・全体予算を確認",
         )
         return result
     result.update(
