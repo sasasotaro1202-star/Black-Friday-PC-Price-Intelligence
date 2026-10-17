@@ -1089,6 +1089,9 @@ def build_plan(config=None, price_snapshot=None, now=None):
         target_parts = 0
         current_sellable_listing_subtotal = 0
         current_sellable_part_ids = []
+        current_low_stock_part_ids = []
+        current_confirmed_out_of_stock_part_ids = []
+        current_unconfirmed_availability_part_ids = []
         current_stock_counts = {
             "in_stock": 0, "low_stock": 0, "preorder_or_backorder": 0,
             "unknown": 0, "out_of_stock": 0, "stale": 0,
@@ -1160,9 +1163,25 @@ def build_plan(config=None, price_snapshot=None, now=None):
             }
             components.append(component)
             sellable_price = price.get("direct_listing_sellable_price_jpy")
-            if isinstance(sellable_price, int) and not isinstance(sellable_price, bool) and sellable_price > 0:
+            sellable_status = price.get("direct_listing_sellable_stock_status")
+            observed_counts = price.get("direct_listing_stock_counts") or {}
+            if isinstance(sellable_price, int) and not isinstance(sellable_price, bool) and sellable_price > 0 and sellable_status in ("in_stock", "low_stock"):
                 current_sellable_listing_subtotal += sellable_price
                 current_sellable_part_ids.append(cid)
+                if sellable_status == "low_stock":
+                    current_low_stock_part_ids.append(cid)
+            else:
+                has_sold_out = int(observed_counts.get("out_of_stock") or 0) > 0
+                has_unknown = int(observed_counts.get("unknown") or 0) > 0 or int(observed_counts.get("stale") or 0) > 0
+                has_preorder = int(observed_counts.get("preorder_or_backorder") or 0) > 0
+                has_sellable_status = (
+                    int(observed_counts.get("in_stock") or 0) > 0
+                    or int(observed_counts.get("low_stock") or 0) > 0
+                )
+                if has_sold_out and not has_unknown and not has_preorder and not has_sellable_status:
+                    current_confirmed_out_of_stock_part_ids.append(cid)
+                else:
+                    current_unconfirmed_availability_part_ids.append(cid)
             for status, count in (price.get("direct_listing_stock_counts") or {}).items():
                 if status in current_stock_counts and isinstance(count, int) and not isinstance(count, bool):
                     current_listing_offer_counts[status] += max(0, count)
@@ -1217,9 +1236,18 @@ def build_plan(config=None, price_snapshot=None, now=None):
         }.get(gpu_id, "DIY build " + gpu_id)
         builds.append({
             "rank": rank, "id": "self-build-" + gpu_id, "name": name, "gpu_choice_id": gpu_id,
+            "selected_gpu_part_id": selected_gpu_id,
+            "gpu_selection_method": gpu_selection_method,
+            "gpu_selection_candidates": gpu_candidate_prices.get(str(gpu_id), []),
             "selected_memory_id": selected_memory_id,
             "memory_choice_method": memory_selection_method,
             "memory_choice_candidates": memory_candidates,
+            "selected_storage_id": selected_storage_id,
+            "storage_selection_method": storage_selection_method,
+            "storage_choice_candidates": storage_candidates,
+            "selected_cooler_id": selected_cooler_id,
+            "cooler_selection_method": cooler_selection_method,
+            "cooler_choice_candidates": cooler_candidates,
             "components": components, "workload_fit": workload_fit, "target_parts_subtotal_jpy": target_parts,
             "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
             "target_pc_total_jpy": target_pc, "pc_budget_jpy": pc_budget,
@@ -1234,6 +1262,9 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "current_sellable_listing_coverage_pct": round(100.0 * len(current_sellable_part_ids) / len(selected_ids), 1) if selected_ids else 0.0,
             "current_sellable_listing_part_ids": current_sellable_part_ids,
             "current_parts_without_sellable_listing": [cid for cid in selected_ids if cid not in set(current_sellable_part_ids)],
+            "current_low_stock_part_ids": current_low_stock_part_ids,
+            "current_confirmed_out_of_stock_part_ids": current_confirmed_out_of_stock_part_ids,
+            "current_unconfirmed_availability_part_ids": current_unconfirmed_availability_part_ids,
             "current_stock_confirmed_component_count": current_stock_counts,
             "current_retailer_listing_offer_count_by_status": current_listing_offer_counts,
             "current_listing_subtotal_is_complete_build_price": False,
@@ -1284,6 +1315,23 @@ def build_plan(config=None, price_snapshot=None, now=None):
         "budget_arithmetic_valid": pc_budget + int(profile.get("unallocated_contingency_jpy", 0)) == all_budget,
         "required_categories": profile.get("required_categories") or [],
         "memory_choice_selection": memory_choice_selection,
+        "storage_choice_selection": storage_choice_selection,
+        "cooler_choice_selection": cooler_choice_selection,
+        "gpu_fallback_candidates_by_choice": {
+            base_id: [
+                candidate for candidate in gpu_candidate_prices.get(base_id, [])
+                if candidate.get("id") != base_id
+            ]
+            for base_id in gpu_candidate_prices
+        },
+        "stockout_policy": {
+            "direct_stock_signals_required": True,
+            "sold_out_and_fetch_error_are_distinct": True,
+            "never_count_sold_out_or_unknown_listings_as_buyable": True,
+            "fallback_selection_requires_fresh_exact_sku_in_stock_listing": True,
+            "low_stock_is_a_risk_flag_not_a_guaranteed_order": True,
+            "partial_listing_subtotal_is_not_a_complete_build_or_checkout_price": True,
+        },
         "component_coverage": {
             "configured_component_count": len(parts_list),
             "tracked_hardware_part_count": sum(1 for x in parts_list if x.get("track_price")),
