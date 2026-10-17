@@ -7,6 +7,7 @@ from intelligence import (
     effective_cost, EFFECTIVE_SOFT_MAX, EFFECTIVE_HARD_MAX,
     purchase_budget_policy, configuration_readiness, peripheral_budget_projection
 )
+from observation_contract import observation_metadata_schema_errors
 
 
 def file_sha256(path):
@@ -107,6 +108,8 @@ def main():
     # Latest observation integrity
     latest_path = os.path.join(ROOT, "data", "current_latest.json")
     latest = load_json(latest_path, {})
+    for problem in observation_metadata_schema_errors(latest):
+        errors.append("observation metadata contract: " + problem)
     products = latest.get("products", [])
     latest_generated = parse_dt(latest.get("generated_at"))
     if latest_generated is None:

@@ -9,6 +9,28 @@ WORKFLOW = ROOT / ".github" / "workflows" / "pc-price-monitor.yml"
 
 
 class WorkflowContractTests(unittest.TestCase):
+    def test_primary_workflow_has_fail_closed_preflight_before_monitoring(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        smoke_at = text.index("Production syntax and fail-closed smoke gate")
+        gate_at = text.index("Check whether regular monitoring should run")
+        monitor_at = text.index("python scripts/monitor.py")
+        self.assertLess(smoke_at, gate_at)
+        self.assertLess(gate_at, monitor_at)
+        self.assertIn('python -m unittest discover -s tests -p "test_production_contract.py" -v', text)
+        self.assertIn("if: github.event_name != 'schedule'", text)
+        self.assertIn('python -m unittest discover -s tests -p "test_*.py" -v', text)
+
+    def test_fast_workflow_has_full_regression_gate_before_monitoring(self):
+        path = ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml"
+        text = path.read_text(encoding="utf-8")
+        gate_at = text.index("Production syntax and regression gate")
+        window_at = text.index("Check provisional broad watch window")
+        monitor_at = text.index("python scripts/monitor.py")
+        self.assertLess(gate_at, window_at)
+        self.assertLess(window_at, monitor_at)
+        self.assertIn('python -m py_compile scripts/*.py', text)
+        self.assertIn('python -m unittest discover -s tests -p "test_*.py" -v', text)
+
     def test_monitor_cron_has_five_and_fifteen_minute_schedules(self):
         text = WORKFLOW.read_text(encoding="utf-8")
         self.assertIn('cron: "3-59/5 * * * *"', text)
