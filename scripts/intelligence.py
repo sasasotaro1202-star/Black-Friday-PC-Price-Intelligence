@@ -167,7 +167,66 @@ def purchase_budget_policy():
         "minimum_ssd_gb": int(cfg.get("minimum_ssd_gb", MINIMUM_SSD_GB)),
         "desktop_preferred": bool(cfg.get("desktop_preferred", True)),
         "peripherals": peripherals,
+        "purchase_timing_policy": cfg.get("purchase_timing_policy") or {},
     }
+
+def early_buy_review_assessment(
+    item_id, observed_price_jpy=None, price_verified=False, identity_verified=False,
+    stock_status="unknown", pit_valid=False, checkout_total_verified=False,
+):
+    """Return a cautious early-buy review signal; this function never authorizes purchase."""
+    policy = purchase_budget_policy().get("purchase_timing_policy") or {}
+    thresholds = policy.get("early_buy_thresholds_jpy") or {}
+    threshold = thresholds.get(str(item_id))
+    result = {
+        "item_id": str(item_id),
+        "early_buy_threshold_jpy": int(threshold) if isinstance(threshold, int) and not isinstance(threshold, bool) else None,
+        "observed_cash_total_jpy": observed_price_jpy if isinstance(observed_price_jpy, int) and not isinstance(observed_price_jpy, bool) else None,
+        "status": "NOT_CONFIGURED",
+        "label_ja": "前倒し購入基準なし",
+        "purchase_authorized": False,
+        "next_step": "ブラックフライデー目標で監視を継続",
+    }
+    if result["early_buy_threshold_jpy"] is None or result["early_buy_threshold_jpy"] <= 0:
+        return result
+    if not isinstance(observed_price_jpy, int) or isinstance(observed_price_jpy, bool) or observed_price_jpy <= 0 or not price_verified:
+        result.update(status="PRICE_NOT_VERIFIED", label_ja="価格未検証", next_step="直接価格と送料・必須費用を確認")
+        return result
+    if not identity_verified:
+        result.update(status="IDENTITY_NOT_VERIFIED", label_ja="型番未検証", next_step="正確な型番・容量・仕様を確認")
+        return result
+    if not pit_valid:
+        result.update(status="PIT_NOT_VERIFIED", label_ja="取得時刻未検証", next_step="新しい取得時刻・価格の有効時刻を再確認")
+        return result
+    threshold_jpy = result["early_buy_threshold_jpy"]
+    if observed_price_jpy > threshold_jpy:
+        gap = observed_price_jpy - threshold_jpy
+        result.update(
+            status="WAIT_FOR_EARLY_BUY_THRESHOLD",
+            label_ja="前倒し購入価格に未到達",
+            price_gap_to_threshold_jpy=gap,
+            next_step=f"前倒し検討価格まであと{gap:,}円。ブラックフライデーを含め監視継続",
+        )
+        return result
+    if stock_status == "out_of_stock":
+        result.update(status="UNAVAILABLE", label_ja="在庫切れ", next_step="同一型番の別販売店・再入荷を確認")
+        return result
+    if stock_status not in ("in_stock", "low_stock"):
+        result.update(status="STOCK_NOT_VERIFIED", label_ja="価格条件到達・在庫未確認", next_step="購入可能な在庫を直接確認")
+        return result
+    if not checkout_total_verified:
+        result.update(
+            status="PRICE_TRIGGERED_CHECKOUT_REVIEW",
+            label_ja="前倒し候補：決済総額確認待ち",
+            next_step="送料込み決済額・保証・返品条件・互換性・全体予算を確認",
+        )
+        return result
+    result.update(
+        status="EARLY_BUY_REVIEW_ONLY",
+        label_ja="前倒し候補：総額・返品条件の最終確認",
+        next_step="40万円総額・保証/返品・互換性を人手で最終確認。自動購入許可は出さない",
+    )
+    return result
 
 def _ssd_capacity_gb(value):
     text = norm_text(value).replace(",", "")
@@ -774,8 +833,55 @@ def peripheral_budget_projection():
                 online_shipping_in_budget = estimated_shipping
 
         total_projection += selected_cost
+        # Early-buy thresholds only create a review signal; price targets never authorize a purchase.
+        if purchase_channel_selected == "online":
+            early_price_verified = bool(online_price_verified)
+            early_identity_verified = bool(identity_matches and live.get("identity_verified", True))
+            early_stock_status = online_stock
+            available_dt = parse_dt(live.get("available_at"))
+            retrieval_dt = parse_dt(live.get("retrieval_time"))
+            early_pit_valid = bool(
+                snapshot_fresh and available_dt is not None and retrieval_dt is not None
+                and available_dt <= retrieval_dt <= now
+            )
+            early_checkout_verified = bool(online_route_actionable and shipping_verified)
+            early_cash_total = online_cash_estimate
+        elif purchase_channel_selected == "physical_store":
+            early_price_verified = bool(store_price_verified)
+            early_identity_verified = bool(store_model_match)
+            early_stock_status = store_stock
+            store_dt = parse_dt(store_checked_at)
+            early_pit_valid = bool(
+                store_dt is not None and 0 <= (now - store_dt).total_seconds() / 60.0 <= max_age
+            )
+            early_checkout_verified = bool(store_route_actionable)
+            early_cash_total = store_price if valid_money(store_price) else selected_cost
+        elif purchase_channel_selected == "store_pickup":
+            early_price_verified = bool(store_pickup_quote_confirmed)
+            early_identity_verified = bool(store_pickup_quote_confirmed)
+            early_stock_status = store_pickup_stock
+            early_pit_valid = bool(store_pickup_quote_confirmed and store_pickup_observation.get("store_pickup_quote_age_minutes") is not None)
+            early_checkout_verified = bool(store_pickup_route_actionable)
+            early_cash_total = store_pickup_price if valid_money(store_pickup_price) else selected_cost
+        else:
+            early_price_verified = False
+            early_identity_verified = False
+            early_stock_status = stock
+            early_pit_valid = False
+            early_checkout_verified = False
+            early_cash_total = None
+        early_buy_review = early_buy_review_assessment(
+            pid,
+            observed_price_jpy=early_cash_total,
+            price_verified=early_price_verified,
+            identity_verified=early_identity_verified,
+            stock_status=early_stock_status,
+            pit_valid=early_pit_valid,
+            checkout_total_verified=early_checkout_verified,
+        )
         rows.append({
             "id": pid, "name": target.get("name"), "target_price_jpy": target_price,
+            "early_buy_review": early_buy_review,
             "current_price_jpy": exposed_price, "price_verified": exposed_price_verified,
             "online_comparison_price_jpy": online_comparison_price,
             "online_reference_price_verified": bool(online_price_verified),
