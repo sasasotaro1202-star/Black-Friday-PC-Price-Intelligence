@@ -1979,7 +1979,22 @@ def render_plan_markdown(plan):
                 )
                 seller = str(offer.get("seller_name") or "").strip()
                 offer_label = retailer + (" / " + seller if seller else "")
-                label = "{} {} {}".format(offer_label[:48], offer_status, money(offer_price))
+                retrieved_at = str(offer.get("retrieval_time") or "").strip()
+                retrieval_label = ""
+                # Every seller listing has its own point-in-time observation.
+                # Display it beside the price so users do not confuse listings
+                # fetched at different times or treat an old price as current.
+                if len(retrieved_at) >= 16 and retrieved_at[10:11] == "T":
+                    retrieval_label = "（取得 {} JST".format(
+                        retrieved_at[:16].replace("T", " ")
+                    )
+                    age_minutes = offer.get("display_age_minutes")
+                    if isinstance(age_minutes, (int, float)) and not isinstance(age_minutes, bool):
+                        retrieval_label += "・{:.0f}分前".format(max(0, age_minutes))
+                    retrieval_label += "）"
+                label = "{} {} {}{}".format(
+                    offer_label[:48], offer_status, money(offer_price), retrieval_label
+                )
                 links.append("[" + label.replace("]", ")") + "](" + offer_url + ")")
             search_url = part.get("search_snippet_reference_url")
             if search_url and search_url != url:
