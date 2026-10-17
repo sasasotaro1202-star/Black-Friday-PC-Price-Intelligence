@@ -195,7 +195,7 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertEqual(attempts[0]["price_candidate_jpy"], 7000)
 
 
-    def test_each_accessory_category_has_three_scored_ranked_options(self):
+    def test_each_accessory_category_has_rubric_scored_real_products(self):
         import json
         config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
         items = [
@@ -204,30 +204,47 @@ class PeripheralMonitorTests(unittest.TestCase):
         ]
         policy = config.get("peripheral_ranking_policy", {})
         groups = policy.get("category_order", [])
-        self.assertEqual(len(groups), len(config.get("peripheral_ranking_policy", {}).get("category_order", [])))
         categories = {x["category"] for x in groups}
         self.assertNotIn("speakers", categories)
         self.assertNotIn("power_strip", categories)
         all_ids = [x.get("id") for x in items]
         self.assertEqual(len(all_ids), len(set(all_ids)), "peripheral candidate IDs must be unique")
+        limits = {
+            "workload_fit_points": 35,
+            "budget_fit_points": 30,
+            "feature_spec_points": 20,
+            "substitution_risk_points": 15,
+        }
         for group in groups:
             category = group["category"]
             with self.subTest(category=category):
                 members = [x for x in items if x.get("category") == category]
-                self.assertEqual(len(members), 3, f"{category} must have exactly three candidates")
-                scores = [x.get("ranking_score_100") for x in members]
-                self.assertTrue(all(isinstance(x, (int, float)) and not isinstance(x, bool) and 0 <= x <= 100 for x in scores))
-                self.assertEqual(len({x["id"] for x in members}), 3)
-                for candidate in members:
-                    # The first cable option is intentionally a no-purchase policy:
-                    # use the cable included in the monitor box unless it is missing.
-                    if candidate.get("id") != "cables":
-                        self.assertTrue(candidate.get("purchase_url") or candidate.get("monitor_url"))
-                    else:
-                        self.assertEqual(category, "cables")
-                    self.assertTrue(candidate.get("ranking_reason"))
-                sorted_members = sorted(members, key=lambda x: x["ranking_score_100"], reverse=True)
-                self.assertEqual(sorted(scores, reverse=True), [x["ranking_score_100"] for x in sorted_members])
+                products = [
+                    x for x in members
+                    if x.get("category") != "budget_reserve"
+                    and x.get("purchase_channel") != "conditional_need_only"
+                    and not x.get("score_exclusion_reason_ja")
+                ]
+                self.assertEqual(len(products), 2 if category == "cables" else 3)
+                self.assertEqual(len({x["id"] for x in products}), len(products))
+                scores = []
+                for candidate in products:
+                    score = candidate.get("ranking_score_100")
+                    self.assertIsInstance(score, int)
+                    self.assertTrue(0 <= score <= 100)
+                    card = candidate.get("fit_scorecard") or {}
+                    for key, maximum in limits.items():
+                        self.assertIsInstance(card.get(key), int, f"{candidate['id']}:{key}")
+                        self.assertTrue(0 <= card[key] <= maximum, f"{candidate['id']}:{key}")
+                    self.assertEqual(sum(card[key] for key in limits), score)
+                    self.assertTrue(card.get("rationale_ja"))
+                    self.assertTrue(card.get("limitations_ja"))
+                    self.assertTrue(candidate.get("purchase_url") or candidate.get("monitor_url"))
+                    scores.append(score)
+                self.assertEqual(sorted(scores, reverse=True), sorted(scores, reverse=True))
+        cable_rule = next(x for x in config["peripherals"] if x["id"] == "cables")
+        self.assertIsNone(cable_rule.get("ranking_score_100"))
+        self.assertIn("条件付き購入ルール", cable_rule.get("score_exclusion_reason_ja", ""))
         mandatory_total = sum(int(x.get("target_price_jpy", 0)) for x in config["peripherals"] if x.get("mandatory", True))
         self.assertEqual(mandatory_total, config["peripheral_budget_jpy"])
         self.assertEqual(config["pc_budget_jpy"] + config["unallocated_contingency_jpy"], config["total_budget_jpy"])
