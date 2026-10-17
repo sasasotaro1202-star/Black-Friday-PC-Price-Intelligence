@@ -31,6 +31,10 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertFalse(triggered["purchase_authorized"])
         self.assertIn("決済総額", triggered["next_step"])
         self.assertEqual(triggered["observed_price_jpy"], 35900)
+        self.assertTrue(triggered["price_verified"])
+        self.assertTrue(triggered["identity_verified"])
+        self.assertTrue(triggered["pit_valid"])
+        self.assertEqual(triggered["stock_status"], "in_stock")
         self.assertEqual(triggered["estimated_checkout_total_jpy"], 36900)
         self.assertIsNone(triggered["verified_checkout_total_jpy"])
         self.assertFalse(triggered["checkout_total_verified"])
@@ -59,6 +63,7 @@ class BudgetPolicyTests(unittest.TestCase):
             "cpu-ryzen7-9700x", 35000, True, True, "unknown", True, True
         )
         self.assertEqual(unknown_stock["status"], "STOCK_NOT_VERIFIED")
+        self.assertEqual(unknown_stock["stock_status"], "unknown")
         self.assertFalse(unknown_stock["purchase_authorized"])
 
     def test_peripheral_early_buy_thresholds_exclude_unwanted_items(self):

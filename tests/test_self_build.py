@@ -58,17 +58,21 @@ class SelfBuildPlannerTests(unittest.TestCase):
             score = build["scorecard"]
             self.assertGreaterEqual(score["overall_score"], 0)
             self.assertLessEqual(score["overall_score"], 100)
-            self.assertGreaterEqual(score["purchase_readiness_score_out_of_100"], 0)
-            self.assertLessEqual(score["purchase_readiness_score_out_of_100"], 100)
+            self.assertGreaterEqual(score["purchase_evidence_completeness_score_out_of_100"], 0)
+            self.assertLessEqual(score["purchase_evidence_completeness_score_out_of_100"], 100)
             self.assertFalse(score["purchase_authorized"])
-            self.assertEqual(score["required_price_component_count"], len(build["components"]))
+            self.assertEqual(score["required_component_count"], len(build["components"]))
             self.assertAlmostEqual(
                 score["overall_score"],
                 score["gaming_score"] + score["game_creation_score"] + score["analysis_ai_score"]
                 + score["study_multitasking_score"] + score["price_efficiency_points_out_of_15"]
                 + score["compatibility_points_out_of_10"],
-                delta=0.3,
+                delta=0.01,
             )
+            # Price-comparison coverage must not masquerade as checkout readiness.
+            self.assertEqual(score["sellable_stock_coverage_pct"], 0)
+            self.assertEqual(score["verified_checkout_total_coverage_pct"], 0)
+            self.assertLess(score["purchase_evidence_completeness_score_out_of_100"], 30)
         by_gpu = {build["gpu_choice_id"]: build["scorecard"] for build in builds}
         self.assertGreater(
             by_gpu["gpu-rtx5070ti-16gb"]["gaming_score"],
@@ -76,9 +80,32 @@ class SelfBuildPlannerTests(unittest.TestCase):
         )
         rendered = planner.render_plan_markdown(plan)
         self.assertIn("100点方式の構成スコア", rendered)
-        self.assertIn("購入準備度/100", planner.section_from_plan(plan))
+        self.assertIn("購入根拠充足度/100", planner.section_from_plan(plan))
         self.assertIn("実測FPSやベンチマークではありません", rendered)
         self.assertFalse(plan["buy_now_authorized"])
+
+    def test_verified_direct_price_stock_and_checkout_evidence_raise_completeness(self):
+        plan = planner.build_plan(self.config, {"products": []}, now=NOW)
+        for build in plan["builds"]:
+            for part in build["components"]:
+                part["early_buy_review"] = {
+                    "observed_price_jpy": 10000,
+                    "price_verified": True,
+                    "identity_verified": True,
+                    "pit_valid": True,
+                    "stock_status": "in_stock",
+                    "verified_checkout_total_jpy": 10500,
+                    "checkout_total_verified": True,
+                    "purchase_authorized": False,
+                }
+        rescored = planner.score_and_rank_builds(plan["builds"])
+        for build in rescored:
+            score = build["scorecard"]
+            self.assertEqual(score["direct_price_identity_pit_coverage_pct"], 100.0)
+            self.assertEqual(score["sellable_stock_coverage_pct"], 100.0)
+            self.assertEqual(score["verified_checkout_total_coverage_pct"], 100.0)
+            self.assertGreaterEqual(score["purchase_evidence_completeness_score_out_of_100"], 80.0)
+            self.assertFalse(score["purchase_authorized"])
 
     def test_target_totals_and_all_in_budget(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
