@@ -1080,7 +1080,7 @@ def render_plan_markdown(plan):
     ]
     for build in plan.get("builds") or []:
         score = build.get("scorecard") or {}
-        lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}/{}点|".format(
+        lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
             build.get("rank"), build.get("name"), score.get("overall_score", "—"),
             score.get("gaming_score", "—"), score.get("game_creation_score", "—"),
             score.get("analysis_ai_score", "—"), score.get("study_multitasking_score", "—"),
