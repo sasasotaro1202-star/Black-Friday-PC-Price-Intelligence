@@ -101,6 +101,59 @@ class ProjectConfigurationContractTests(unittest.TestCase):
             self.assertTrue("データ分析" in text or "Python" in text, relative_path)
             self.assertTrue("ゲーム制作" in text or "ゲームを作る" in text, relative_path)
 
+    def test_optional_memory_and_storage_scenarios_follow_current_targets(self):
+        parts = {item["id"]: item for item in self.build["parts"]}
+        profile = self.profile
+
+        def pc_target(gpu_id, memory_id, storage_id):
+            selected = (
+                list(profile["fixed_part_ids"])
+                + [gpu_id, memory_id, storage_id, profile["primary_cooler_choice_id"]]
+            )
+            subtotal = sum(int(parts[item_id]["target_price_jpy"]) for item_id in selected)
+            return subtotal + profile["build_shipping_reserve_jpy"] + profile["small_parts_reserve_jpy"]
+
+        def all_in(pc):
+            return pc + profile["peripheral_budget_jpy"] + profile["unallocated_contingency_jpy"]
+
+        storage = profile["storage_upgrade_policy"]
+        storage_base = int(parts[storage["baseline_item_id"]]["target_price_jpy"])
+        storage_2tb = int(parts[storage["optional_item_id"]]["target_price_jpy"])
+        self.assertEqual(storage["baseline_target_jpy"], storage_base)
+        self.assertEqual(storage["budget_target_jpy"] - storage_base, storage["incremental_budget_target_jpy"])
+        storage_scenario = storage["full_system_scenario"]
+        expected_storage_base_pc = pc_target(
+            storage_scenario["gpu_id"], profile["primary_memory_choice_id"], storage["baseline_item_id"]
+        )
+        expected_storage_pc = expected_storage_base_pc + storage_2tb - storage_base
+        self.assertEqual(storage_scenario["base_pc_target_jpy"], expected_storage_base_pc)
+        self.assertEqual(storage_scenario["pc_target_with_2tb_ssd_jpy"], expected_storage_pc)
+        self.assertEqual(storage_scenario["all_in_target_jpy"], all_in(expected_storage_pc))
+        self.assertEqual(
+            storage_scenario["remaining_to_hard_ceiling_jpy"],
+            profile["total_budget_jpy"] - all_in(expected_storage_pc),
+        )
+        self.assertGreater(storage_scenario["all_in_target_jpy"], profile["total_budget_jpy"])
+
+        memory = profile["memory_upgrade_policy"]
+        memory_scenario = memory["full_system_scenario"]
+        base_memory = int(parts[memory["baseline_part_id"]]["target_price_jpy"])
+        memory64 = int(parts[memory["conditional_replacement_id"]]["target_price_jpy"])
+        self.assertEqual(memory_scenario["base_memory_target_jpy"], base_memory)
+        self.assertEqual(memory_scenario["memory64_target_jpy"], memory64)
+        expected_memory_base_pc = pc_target(
+            memory_scenario["gpu_id"], memory["baseline_part_id"], profile["primary_storage_choice_id"]
+        )
+        expected_memory_pc = expected_memory_base_pc + memory64 - base_memory
+        self.assertEqual(memory_scenario["base_pc_target_jpy"], expected_memory_base_pc)
+        self.assertEqual(memory_scenario["pc_target_with_64gb_jpy"], expected_memory_pc)
+        self.assertEqual(memory_scenario["all_in_target_jpy"], all_in(expected_memory_pc))
+        self.assertEqual(
+            memory_scenario["remaining_to_hard_ceiling_jpy"],
+            profile["total_budget_jpy"] - all_in(expected_memory_pc),
+        )
+        self.assertGreater(memory_scenario["all_in_target_jpy"], profile["total_budget_jpy"])
+
     def test_primary_build_subtotal_counts_one_gpu_only(self):
         parts_by_id = {item["id"]: item for item in self.build["parts"]}
         selected_ids = list(self.profile["fixed_part_ids"]) + [
