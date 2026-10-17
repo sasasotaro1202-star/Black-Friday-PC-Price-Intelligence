@@ -79,6 +79,162 @@ def image_markup(item, fallback_url=None, width=88):
     )
 
 
+def peripheral_purchase_evidence_score(target, observation, now=None, max_age_minutes=360, stock_max_age_minutes=30):
+    """Score purchase evidence, not product quality; incomplete evidence earns no credit.
+
+    30 direct exact-model price/PIT, 25 fresh sellable stock, 25 verified checkout
+    total, 10 completed route comparison, 10 verified warranty/returns terms.
+    Product suitability is a separate curated score stored in the target config.
+    """
+    target = target if isinstance(target, dict) else {}
+    observation = observation if isinstance(observation, dict) else {}
+    now = now or now_jst()
+
+    def as_time(value):
+        if isinstance(value, datetime):
+            return value
+        if not isinstance(value, str) or not value.strip():
+            return None
+        try:
+            parsed = datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
+            return parsed if parsed.tzinfo is not None else None
+        except (TypeError, ValueError):
+            return None
+
+    def positive_int(value):
+        return isinstance(value, int) and not isinstance(value, bool) and value > 0
+
+    def nonnegative_int(value):
+        return isinstance(value, int) and not isinstance(value, bool) and value >= 0
+
+    def fresh_timestamp(checked_value, available_value=None, age_limit=max_age_minutes):
+        checked = as_time(checked_value)
+        available = as_time(available_value) if available_value else checked
+        if checked is None or available is None or checked > now or available > checked:
+            return False
+        age = (now - checked).total_seconds() / 60.0
+        return 0 <= age <= max(0, int(age_limit))
+
+    retrieved = as_time(observation.get("retrieval_time"))
+    available = as_time(observation.get("available_at"))
+    price = observation.get("current_price_jpy")
+    direct_price_verified = bool(
+        positive_int(price)
+        and observation.get("price_verified") is True
+        and observation.get("identity_verified") is True
+        and observation.get("price_validation_status") == "validated_exact_model_page"
+        and observation.get("price_source_mode") in ("direct_text", "direct_structured", "direct_meta")
+        and retrieved is not None and available is not None
+        and fresh_timestamp(retrieved.isoformat(), available.isoformat(), max_age_minutes)
+    )
+
+    points = {
+        "direct_price_identity_pit": 30 if direct_price_verified else 0,
+        "sellable_stock": 0,
+        "verified_checkout_total": 0,
+        "route_comparison": 0,
+        "warranty_and_returns": 0,
+    }
+
+    online_stock = str(
+        observation.get("online_best_offer_stock_status")
+        or observation.get("stock_status") or "unknown"
+    )
+    online_stock_fresh = bool(
+        observation.get("identity_verified") is True
+        and retrieved is not None
+        and fresh_timestamp(retrieved.isoformat(), available.isoformat() if available else None, stock_max_age_minutes)
+    )
+    stock_score = 0
+    online_sellable = online_stock_fresh and online_stock in ("in_stock", "low_stock")
+    if online_sellable:
+        stock_score = 25 if online_stock == "in_stock" else 18
+
+    store_status = str(observation.get("store_inventory_status") or observation.get("store_stock_status") or "unknown")
+    store_checked = observation.get("store_inventory_checked_at") or observation.get("store_price_checked_at")
+    store_stock_fresh = bool(
+        observation.get("store_inventory_verified") is True
+        and fresh_timestamp(store_checked, None, stock_max_age_minutes)
+    )
+    branch_evidence = [
+        row for row in (observation.get("store_inventory_observations") or [])
+        if isinstance(row, dict)
+        and row.get("verified") is True
+        and row.get("branch_match") is True
+        and row.get("model_match") is True
+        and row.get("status") in ("in_stock", "low_stock")
+        and fresh_timestamp(row.get("checked_at"), None, stock_max_age_minutes)
+    ]
+    if store_stock_fresh and store_status in ("in_stock", "low_stock"):
+        stock_score = max(stock_score, 25 if store_status == "in_stock" else 18)
+    elif branch_evidence:
+        branch_best = max(branch_evidence, key=lambda row: 25 if row.get("status") == "in_stock" else 18)
+        stock_score = max(stock_score, 25 if branch_best.get("status") == "in_stock" else 18)
+    points["sellable_stock"] = stock_score
+
+    online_shipping = observation.get("online_shipping_jpy")
+    online_checkout = bool(
+        direct_price_verified and online_sellable
+        and observation.get("online_shipping_cost_verified") is True
+        and nonnegative_int(online_shipping)
+    )
+    store_checkout = bool(
+        observation.get("store_price_confirmed") is True
+        and positive_int(observation.get("store_price_jpy"))
+        and observation.get("store_model_match") is True
+        and store_stock_fresh and store_status in ("in_stock", "low_stock")
+        and fresh_timestamp(observation.get("store_price_checked_at"), None, max_age_minutes)
+    )
+    pickup_total = observation.get("store_pickup_checkout_total_jpy")
+    pickup_stock = str(observation.get("store_pickup_quote_stock_status") or observation.get("store_pickup_branch_inventory_status") or "unknown")
+    pickup_checkout = bool(
+        (observation.get("store_pickup_checkout_total_confirmed") is True
+         or observation.get("store_pickup_checkout_total_verified") is True)
+        and positive_int(pickup_total)
+        and pickup_stock in ("in_stock", "low_stock")
+        and fresh_timestamp(observation.get("store_pickup_quote_checked_at"), None, max_age_minutes)
+    )
+    checkout_verified = online_checkout or store_checkout or pickup_checkout
+    points["verified_checkout_total"] = 25 if checkout_verified else 0
+
+    channel = str(target.get("purchase_channel") or observation.get("purchase_channel") or "online")
+    channel_complete = (
+        observation.get("channel_comparison_complete") is True
+        or observation.get("channel_comparison_status") in ("CHANNEL_COMPARISON_COMPLETE", "ALL_PURCHASE_ROUTES_VERIFIED")
+    )
+    if channel == "compare_online_and_store":
+        route_ready = channel_complete and (direct_price_verified or store_checkout or pickup_checkout)
+    elif channel == "physical_store":
+        route_ready = store_checkout
+    elif channel == "conditional_need_only":
+        # This category is deliberately not promoted until the item is required.
+        route_ready = False
+    else:
+        route_ready = online_checkout
+    points["route_comparison"] = 10 if route_ready else 0
+
+    terms_verified = bool(
+        observation.get("warranty_return_conditions_verified") is True
+        or (
+            observation.get("warranty_verified") is True
+            and observation.get("return_policy_verified") is True
+        )
+    )
+    points["warranty_and_returns"] = 10 if terms_verified else 0
+    return {
+        "score": sum(points.values()),
+        "out_of": 100,
+        "breakdown": points,
+        "direct_price_verified_fresh": direct_price_verified,
+        "sellable_stock_verified_fresh": bool(stock_score),
+        "checkout_total_verified": checkout_verified,
+        "purchase_route_ready": route_ready,
+        "warranty_return_terms_verified": terms_verified,
+        "maximum_price_age_minutes": int(max_age_minutes),
+        "maximum_stock_age_minutes": int(stock_max_age_minutes),
+    }
+
+
 def peripheral_is_physical_store(item, target_config):
     """True only when the selected purchase route is a physical-store cash purchase."""
     item = item if isinstance(item, dict) else {}
@@ -979,8 +1135,8 @@ def main():
         "## 周辺機器カテゴリ別ランキング（カテゴリ別・最大3候補）",
         "",
         "各カテゴリから**1商品だけ**選びます。代替候補は価格監視対象ですが、選択しない限り必須周辺機器の総予算には加算しません。",
-        "100点は用途適合35%、予算適合30%、仕様・機能20%、代替性・購入リスク15%のユーザー条件別評価であり、独立した実機ベンチマークではありません。",
-        "BF購入目標・BF前の観測価格・在庫・送料込み決済額を分けて扱います。取得失敗は売り切れと見なしません。",
+        "用途適合点/100は、用途・仕様・予算目標を調査して config/targets.json に登録した事前評価です。現在価格や在庫を自動的に織り込む総合点ではないため、購入根拠点と分けて読みます。",
+        "購入根拠点/100は最新の観測から動的に計算します（直接価格・型番・時刻/PIT 30、販売可能在庫25、決済総額25、購入ルート確認10、保証/返品条件確認10）。未確認・古い観測は加点しません。BF購入目標・BF前の観測価格・在庫・送料込み決済額を分け、取得失敗は売り切れと見なしません。",
         "購入ルート：PC本体（自作パーツ）はネット注文。メインモニター・キーボード・マウス・マウスパッドはネット配送・実店舗・ネット注文の店舗受け取りを同一型番で比較します。ネット価格・送料・店頭現金価格・支店在庫・ポイント・保証・返品条件を別々に記録し、ネット価格を店頭価格として扱いません。電源タップは所有済み、スピーカー・サブモニター・ヘッドセットは購入対象外です。",
         "",
     ]
@@ -1007,8 +1163,8 @@ def main():
         peripheral_category_lines += [
             f"### {group_name}",
             "",
-            "|順位|総合点|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|",
-            "|---:|---:|---|---|---|---:|---:|---|---|---|---|",
+            "|順位|用途適合点/100|購入根拠点/100|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|選ぶ理由|商品ページ|",
+            "|---:|---:|---:|---|---|---|---:|---:|---|---|---|---|",
         ]
         for rank, candidate_id in enumerate(candidate_ids, 1):
             target = all_peripheral_targets[candidate_id]
@@ -1071,9 +1227,16 @@ def main():
             suffix = "（主予算候補）" if candidate_id in mandatory_ids else "（代替候補）"
             score = target.get("ranking_score_100")
             score_text = f"**{int(score)}/100**" if isinstance(score, (int, float)) and not isinstance(score, bool) and 0 <= score <= 100 else "未評価"
+            max_price_age = int(target_config.get("peripheral_price_max_age_minutes", 360))
+            max_stock_age = int(target_config.get("peripheral_stock_max_age_minutes", 30))
+            evidence = peripheral_purchase_evidence_score(
+                target, observation, now=now_jst(),
+                max_age_minutes=max_price_age, stock_max_age_minutes=max_stock_age,
+            )
+            evidence_text = f"**{evidence['score']}/100**"
             reason = str(target.get("ranking_reason") or target.get("target_price_note") or "").replace("|", "/").replace("\\n", " ").strip()
             peripheral_category_lines.append(
-                f"|{rank}|{score_text}|{image_html}|{target.get('name', candidate_id)}{suffix}|{purchase_method_text}|¥{target_price:,}|{price_text}|{stock_text}|{verified_text}|{reason}|{product_link}|"
+                f"|{rank}|{score_text}|{evidence_text}|{image_html}|{target.get('name', candidate_id)}{suffix}|{purchase_method_text}|¥{target_price:,}|{price_text}|{stock_text}|{verified_text}|{reason}|{product_link}|"
             )
         peripheral_category_lines.append("")
     peripheral_category_lines += [
