@@ -848,7 +848,28 @@ def build_plan(config=None, price_snapshot=None, now=None):
     primary_memory_id = profile.get("primary_memory_choice_id")
     if primary_memory_id not in memory_choice_ids:
         primary_memory_id = memory_choice_ids[0] if memory_choice_ids else None
-    fixed_ids = [str(cid) for cid in fixed_ids if str(cid) not in memory_choice_ids]
+    storage_choice_ids = [
+        str(sid) for sid in (profile.get("storage_choice_ids") or [])
+        if str(sid) in parts and (parts[str(sid)].get("category") == "storage")
+    ]
+    if not storage_choice_ids:
+        storage_choice_ids = [str(cid) for cid in fixed_ids if (parts.get(str(cid)) or {}).get("category") == "storage"]
+    primary_storage_id = str(profile.get("primary_storage_choice_id") or "")
+    if primary_storage_id not in storage_choice_ids:
+        primary_storage_id = storage_choice_ids[0] if storage_choice_ids else None
+
+    cooler_choice_ids = [
+        str(cid) for cid in (profile.get("cooler_choice_ids") or [])
+        if str(cid) in parts and (parts[str(cid)].get("category") == "cpu_cooler")
+    ]
+    if not cooler_choice_ids:
+        cooler_choice_ids = [str(cid) for cid in fixed_ids if (parts.get(str(cid)) or {}).get("category") == "cpu_cooler"]
+    primary_cooler_id = str(profile.get("primary_cooler_choice_id") or "")
+    if primary_cooler_id not in cooler_choice_ids:
+        primary_cooler_id = cooler_choice_ids[0] if cooler_choice_ids else None
+
+    choice_ids_to_remove = set(memory_choice_ids + storage_choice_ids + cooler_choice_ids)
+    fixed_ids = [str(cid) for cid in fixed_ids if str(cid) not in choice_ids_to_remove]
     allowed_price_domains = profile.get("allowed_search_reference_domains") or profile.get("allowed_comparison_domains") or []
     memory_price_by_id = {}
     memory_candidates = []
@@ -904,6 +925,107 @@ def build_plan(config=None, price_snapshot=None, now=None):
         "candidates": memory_candidates,
         "rule": "Choose the lowest fresh, exact-item trusted market reference among available candidates. If no candidate has a trusted reference, retain the memory kit configured as the primary planning fallback. Market references are not checkout prices and never authorize purchase."
     }
+    def choice_candidate(part_id, price):
+        part = parts.get(part_id) or {}
+        sellable_price = price.get("direct_listing_sellable_price_jpy")
+        sellable_status = price.get("direct_listing_sellable_stock_status")
+        if price.get("trusted_for_market_estimate") and isinstance(price.get("market_reference_price_jpy"), int):
+            sellable_price = price.get("market_reference_price_jpy")
+            sellable_status = "in_stock"
+        elif not sellable_status:
+            signal = price.get("early_buy_review") if isinstance(price.get("early_buy_review"), dict) else {}
+            sellable_status = signal.get("stock_status") or price.get("direct_listing_display_stock_status") or "unknown"
+        return {
+            "id": part_id,
+            "name": part.get("name"),
+            "model_code": part.get("model_code"),
+            "target_price_jpy": part.get("target_price_jpy"),
+            "market_reference_price_jpy": price.get("market_reference_price_jpy"),
+            "display_reference_price_jpy": price.get("display_reference_price_jpy"),
+            "sellable_listing_price_jpy": sellable_price,
+            "stock_status": sellable_status or "unknown",
+            "price_status": price.get("price_status"),
+            "trusted_for_market_estimate": bool(price.get("trusted_for_market_estimate")),
+            "direct_listing_stock_counts": price.get("direct_listing_stock_counts") or {},
+            "direct_listing_offers": price.get("direct_listing_display_offers") or [],
+            "purchase_url": price.get("purchase_url") or part.get("purchase_url") or part.get("monitor_url"),
+        }
+
+    storage_price_by_id = {}
+    storage_candidates = []
+    for storage_id in storage_choice_ids:
+        storage_part = parts.get(storage_id) or {}
+        storage_price = component_price(storage_part, by_id, now, max_age, allowed_domains=allowed_price_domains)
+        storage_price_by_id[storage_id] = storage_price
+        storage_candidates.append(choice_candidate(storage_id, storage_price))
+    trusted_storage_candidates = [
+        item for item in storage_candidates
+        if item["trusted_for_market_estimate"] and isinstance(item["market_reference_price_jpy"], int)
+    ]
+    if primary_storage_id and any(item["id"] == primary_storage_id for item in trusted_storage_candidates):
+        selected_storage_id = primary_storage_id
+        storage_selection_method = "keep_primary_if_fresh_in_stock"
+    elif trusted_storage_candidates:
+        selected_storage_id = min(
+            trusted_storage_candidates,
+            key=lambda item: (item["market_reference_price_jpy"], item["target_price_jpy"] if isinstance(item["target_price_jpy"], int) else 10**12, item["id"]),
+        )["id"]
+        storage_selection_method = "stockout_fallback_lowest_verified_in_stock_price"
+    else:
+        selected_storage_id = primary_storage_id
+        storage_selection_method = "primary_fallback_no_verified_in_stock_alternative"
+    storage_choice_selection = {
+        "selected_id": selected_storage_id,
+        "selection_method": storage_selection_method,
+        "candidates": storage_candidates,
+        "rule": "Keep the preferred 1TB NVMe SSD when the exact SKU is freshly verified in stock; otherwise use the least-cost freshly verified in-stock 1TB NVMe alternative. If none is verified, keep the baseline in the plan but block purchase."
+    }
+
+    cooler_price_by_id = {}
+    cooler_candidates = []
+    for cooler_id in cooler_choice_ids:
+        cooler_part = parts.get(cooler_id) or {}
+        cooler_price = component_price(cooler_part, by_id, now, max_age, allowed_domains=allowed_price_domains)
+        cooler_price_by_id[cooler_id] = cooler_price
+        cooler_candidates.append(choice_candidate(cooler_id, cooler_price))
+    trusted_cooler_candidates = [
+        item for item in cooler_candidates
+        if item["trusted_for_market_estimate"] and isinstance(item["market_reference_price_jpy"], int)
+    ]
+    if primary_cooler_id and any(item["id"] == primary_cooler_id for item in trusted_cooler_candidates):
+        selected_cooler_id = primary_cooler_id
+        cooler_selection_method = "keep_primary_if_fresh_in_stock"
+    elif trusted_cooler_candidates:
+        selected_cooler_id = min(
+            trusted_cooler_candidates,
+            key=lambda item: (item["market_reference_price_jpy"], item["target_price_jpy"] if isinstance(item["target_price_jpy"], int) else 10**12, item["id"]),
+        )["id"]
+        cooler_selection_method = "stockout_fallback_lowest_verified_in_stock_price"
+    else:
+        selected_cooler_id = primary_cooler_id
+        cooler_selection_method = "primary_fallback_no_verified_in_stock_alternative"
+    cooler_choice_selection = {
+        "selected_id": selected_cooler_id,
+        "selection_method": cooler_selection_method,
+        "candidates": cooler_candidates,
+        "rule": "Keep the preferred cooler when its exact SKU is freshly verified in stock; otherwise use a compatible alternative with a verified in-stock listing. Cooling capacity remains a trade-off to review, not an assumed equivalence."
+    }
+
+    gpu_fallbacks = profile.get("gpu_fallback_candidates_by_choice") or {}
+    gpu_price_by_id = {}
+    gpu_candidate_prices = {}
+    for base_gpu_id in gpu_ids:
+        candidate_ids = [str(base_gpu_id)] + [
+            str(x) for x in (gpu_fallbacks.get(str(base_gpu_id)) or [])
+            if str(x) in parts and (parts[str(x)].get("category") == "gpu")
+        ]
+        candidate_records = []
+        for candidate_id in dict.fromkeys(candidate_ids):
+            price = component_price(parts.get(candidate_id) or {}, by_id, now, max_age, allowed_domains=allowed_price_domains)
+            gpu_price_by_id[candidate_id] = price
+            candidate_records.append(choice_candidate(candidate_id, price))
+        gpu_candidate_prices[str(base_gpu_id)] = candidate_records
+
     pc_budget = int(profile.get("pc_budget_jpy", 395000))
     all_budget = int(profile.get("total_budget_jpy", 400000))
     peripheral_budget = int(profile.get("peripheral_budget_jpy", 35000))
