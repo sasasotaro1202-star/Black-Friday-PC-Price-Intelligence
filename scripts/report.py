@@ -272,26 +272,18 @@ def peripheral_purchase_evidence_score(target, observation, now=None, max_age_mi
     if online_sellable:
         stock_score = 25 if online_stock == "in_stock" else 18
 
-    store_status = str(observation.get("store_inventory_status") or observation.get("store_stock_status") or "unknown")
-    store_checked = observation.get("store_inventory_checked_at") or observation.get("store_price_checked_at")
+    # A physical-store cash quote must use stock evidence from that same cash-purchase
+    # observation. Web store-pickup availability belongs to a different purchase route.
+    store_status = str(observation.get("store_stock_status") or "unknown")
+    store_checked = observation.get("store_price_checked_at")
     store_stock_fresh = bool(
-        observation.get("store_inventory_verified") is True
+        observation.get("store_price_confirmed") is True
+        and observation.get("store_model_match") is True
+        and observation.get("store_observation_store_id")
         and fresh_timestamp(store_checked, None, stock_max_age_minutes)
     )
-    branch_evidence = [
-        row for row in (observation.get("store_inventory_observations") or [])
-        if isinstance(row, dict)
-        and row.get("verified") is True
-        and row.get("branch_match") is True
-        and row.get("model_match") is True
-        and row.get("status") in ("in_stock", "low_stock")
-        and fresh_timestamp(row.get("checked_at"), None, stock_max_age_minutes)
-    ]
     if store_stock_fresh and store_status in ("in_stock", "low_stock"):
         stock_score = max(stock_score, 25 if store_status == "in_stock" else 18)
-    elif branch_evidence:
-        branch_best = max(branch_evidence, key=lambda row: 25 if row.get("status") == "in_stock" else 18)
-        stock_score = max(stock_score, 25 if branch_best.get("status") == "in_stock" else 18)
     points["sellable_stock"] = stock_score
 
     online_shipping = observation.get("online_shipping_jpy")
@@ -309,6 +301,7 @@ def peripheral_purchase_evidence_score(target, observation, now=None, max_age_mi
         observation.get("store_price_confirmed") is True
         and positive_int(observation.get("store_price_jpy"))
         and observation.get("store_model_match") is True
+        and observation.get("store_observation_store_id")
         and store_stock_fresh and store_status in ("in_stock", "low_stock")
         and fresh_timestamp(observation.get("store_price_checked_at"), None, max_age_minutes)
     )
@@ -425,19 +418,43 @@ def peripheral_route_price_summary(item):
 
 def inventory_status_label(item):
     item = item if isinstance(item, dict) else {}
-    if item.get("store_inventory_verified"):
-        status = item.get("store_inventory_status")
-        store_name = item.get("store_inventory_store_name") or "指定店舗"
-        labels = {
-            "in_stock": "取置き在庫あり（確認時点）",
-            "low_stock": "取置き在庫少（確認時点）",
-            "out_of_stock": "在庫なし（確認時点）",
-            "preorder_or_backorder": "取寄せ表示（即時在庫ではない）",
-        }
-        if status in labels:
-            return f"{store_name}: {labels[status]}"
-    if item.get("store_inventory_status") == "unknown":
-        return "支店別在庫未確認"
+    stock_labels = {
+        "in_stock": "在庫あり（確認時点）",
+        "low_stock": "在庫少（確認時点）",
+        "out_of_stock": "在庫なし（確認時点）",
+        "preorder_or_backorder": "取寄せ表示（即時在庫ではない）",
+        "unknown": "在庫不明（確認時点）",
+    }
+    # Prefer the same-branch cash-price observation, if present.
+    if item.get("store_price_confirmed") is True and item.get("store_observation_store_id"):
+        status = str(item.get("store_stock_status") or "unknown")
+        store_name = (
+            item.get("store_observation_store_name")
+            or item.get("store_observation_store_id")
+            or "対象店"
+        )
+        label = stock_labels.get(status, "在庫不明")
+        return f"{store_name}: 店頭現金購入 {label}"
+
+    # Online pickup/hold inventory is useful, but must be shown as a separate route
+    # and never used as evidence that a shelf-price quote is available for cash purchase.
+    branch_rows = [
+        row for row in (item.get("store_inventory_observations") or [])
+        if isinstance(row, dict) and row.get("store_id")
+    ]
+    branch_labels = []
+    for row in branch_rows:
+        name = str(row.get("store_name") or row.get("store_id") or "支店")
+        status = stock_labels.get(str(row.get("status") or "unknown"), "在庫不明")
+        checked = str(row.get("checked_at") or "").strip()
+        checked_label = (
+            "・確認 " + checked[:16].replace("T", " ") + " JST"
+            if len(checked) >= 16 and checked[10:11] == "T" else ""
+        )
+        branch_labels.append(f"{name}: Web取置き/店舗受取 {status}{checked_label}")
+    if branch_labels:
+        return " / ".join(branch_labels)
+
     return "支店別在庫未確認"
 
 
