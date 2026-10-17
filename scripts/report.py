@@ -142,8 +142,8 @@ def peripheral_purchase_evidence_score(target, observation, now=None, max_age_mi
     )
     online_stock_fresh = bool(
         observation.get("identity_verified") is True
-        and retrieved is not None
-        and fresh_timestamp(retrieved.isoformat(), available.isoformat() if available else None, stock_max_age_minutes)
+        and retrieved is not None and available is not None
+        and fresh_timestamp(retrieved.isoformat(), available.isoformat(), stock_max_age_minutes)
     )
     stock_score = 0
     online_sellable = online_stock_fresh and online_stock in ("in_stock", "low_stock")
