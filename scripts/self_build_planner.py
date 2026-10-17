@@ -915,6 +915,8 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "trusted_for_market_estimate": trusted,
             "direct_listing_sellable_price_jpy": memory_price.get("direct_listing_sellable_price_jpy"),
             "direct_listing_sellable_stock_status": memory_price.get("direct_listing_sellable_stock_status"),
+            "sellable_listing_price_jpy": memory_price.get("direct_listing_sellable_price_jpy"),
+            "stock_status": memory_price.get("direct_listing_sellable_stock_status") or "unknown",
             "direct_listing_offer_count": memory_price.get("direct_listing_offer_count", 0),
             "direct_listing_stock_counts": memory_price.get("direct_listing_stock_counts") or {},
             "direct_listing_display_offers": memory_price.get("direct_listing_display_offers") or [],
@@ -1407,7 +1409,7 @@ def render_plan_markdown(plan):
         "",
         "以下は、商品型番・取得時刻が検証できた直接販売店ページのうち、在庫あり／在庫少と明示された掲載価格だけの部分小計です。注文カートの最終価格ではなく、在庫不明・売り切れ・未取得の部品は合計に埋めません。必須部品すべてに販売可能な掲載価格がそろわない構成は、PC本体価格を算定できません。",
         "",
-        "|構成|販売可能掲載価格が確認できた部品|部品数カバー率|確認済み掲載価格の部分小計|売り切れ掲載|在庫不明掲載|鮮度切れ掲載|販売可能価格が未確認の部品|",
+        "|構成|販売可能掲載価格が確認できた部品|部品数カバー率|確認済み掲載価格の部分小計|在庫切れ掲載（売り切れ）|在庫不明掲載|鮮度切れ掲載|販売可能価格が未確認の部品|",
         "|---|---|---:|---:|---:|---:|---:|---|"
     ]
     for build in plan.get("builds") or []:
