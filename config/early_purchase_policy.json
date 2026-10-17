@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-17",
+  "purpose": "Pre-Black-Friday early-purchase review triggers. Thresholds are review targets, not predictions or permission to buy.",
+  "total_budget_hard_cap_jpy": 400000,
+  "unallocated_contingency_jpy": 5000,
+  "max_observation_age_minutes": 120,
+  "rules": [
+    {
+      "id": "cpu-ryzen7-9700x",
+      "source": "build_component",
+      "name": "AMD Ryzen 7 9700X BOX",
+      "early_trigger_price_jpy": 36000,
+      "bf_target_price_jpy": 38000,
+      "url": "https://kakaku.com/item/K0001630332/",
+      "note": "Do not buy solely from the low headline price; confirm exact BOX SKU, seller, stock, shipping, return window and motherboard BIOS."
+    },
+    {
+      "id": "gpu-rtx5070-12gb",
+      "source": "build_component",
+      "name": "PNY GeForce RTX 5070 12GB OC SLIM",
+      "early_trigger_price_jpy": 97800,
+      "bf_target_price_jpy": 129800,
+      "url": "https://kakaku.com/item/K0001798041/",
+      "note": "GPU-only trigger. Recalculate the whole build with exact card model, power connector, size, stock and total budget."
+    },
+    {
+      "id": "gpu-rtx5060ti-16gb",
+      "source": "build_component",
+      "name": "PNY GeForce RTX 5060 Ti 16GB OC",
+      "early_trigger_price_jpy": 92000,
+      "bf_target_price_jpy": 109800,
+      "url": "https://kakaku.com/item/K0001696163/",
+      "note": "Alternative GPU; select instead of RTX 5070, never add both."
+    },
+    {
+      "id": "gpu-rtx5070ti-16gb",
+      "source": "build_component",
+      "name": "PNY GeForce RTX 5070 Ti 16GB ARGB",
+      "early_trigger_price_jpy": 145000,
+      "bf_target_price_jpy": 154000,
+      "url": "https://kakaku.com/item/K0001696164/",
+      "note": "Dark-horse alternative; not a viable buy unless the final all-in build stays within ¥400,000."
+    },
+    {
+      "id": "motherboard-asrock-b850m-pro-rs-wifi",
+      "source": "build_component",
+      "name": "ASRock B850M Pro RS WiFi",
+      "early_trigger_price_jpy": 19000,
+      "bf_target_price_jpy": 20000,
+      "url": "https://kakaku.com/item/K0001669878/",
+      "note": "Confirm exact model, CPU support/BIOS and RAM QVL."
+    },
+    {
+      "id": "memory-teamgroup-ddr5-32gb-6000",
+      "source": "build_component",
+      "name": "TeamGroup T-CREATE EXPERT DDR5-6000 32GB (16GBx2)",
+      "early_trigger_price_jpy": 36000,
+      "bf_target_price_jpy": 40000,
+      "url": "https://kakaku.com/item/K0001610896/",
+      "note": "Confirm exact SKU and ASRock QVL/EXPO support."
+    },
+    {
+      "id": "memory-crucial-pro-ddr5-32gb-6000",
+      "source": "build_component",
+      "name": "Crucial Pro DDR5-6000 32GB (16GBx2)",
+      "early_trigger_price_jpy": 57000,
+      "bf_target_price_jpy": 60000,
+      "url": "https://kakaku.com/item/K0001633533/",
+      "note": "Alternative to the TeamGroup kit; do not add both unless explicitly re-budgeted."
+    },
+    {
+      "id": "memory-lexar-thor-ddr5-64gb-6000",
+      "source": "build_component",
+      "name": "Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2)",
+      "early_trigger_price_jpy": 95000,
+      "bf_target_price_jpy": 100000,
+      "url": "https://www.ark-pc.co.jp/i/11650134/",
+      "note": "Replaces the 32GB kit. Include only if the total build and exact RAM QVL/EXPO stability are verified."
+    },
+    {
+      "id": "ssd-crucial-p3-plus-1tb",
+      "source": "build_component",
+      "name": "Crucial P3 Plus 1TB",
+      "early_trigger_price_jpy": 16200,
+      "bf_target_price_jpy": 18000,
+      "url": "https://kakaku.com/item/K0001466997/",
+      "note": "1TB baseline; exact SKU and in-stock price required."
+    },
+    {
+      "id": "ssd-kioxia-exceria-basic-2tb",
+      "source": "build_component",
+      "name": "KIOXIA EXCERIA BASIC 2TB",
+      "early_trigger_price_jpy": 42000,
+      "bf_target_price_jpy": 45000,
+      "url": "https://kakaku.com/item/K0001719361/",
+      "note": "Replacement for the 1TB SSD, not an additional drive; compare TLC alternatives for sustained writes."
+    },
+    {
+      "id": "psu-corsair-rm850e-2025",
+      "source": "build_component",
+      "name": "Corsair RM850e 2025 850W ATX 3.1 Gold",
+      "early_trigger_price_jpy": 13300,
+      "bf_target_price_jpy": 14000,
+      "url": "https://kakaku.com/item/K0001671441/",
+      "note": "Confirm exact Japanese SKU/revision and included 12V-2x6 cable."
+    },
+    {
+      "id": "case-fractal-pop-air-tg",
+      "source": "build_component",
+      "name": "Fractal Design Pop Air TG",
+      "early_trigger_price_jpy": 11400,
+      "bf_target_price_jpy": 12000,
+      "url": "https://kakaku.com/item/J0000039064/",
+      "note": "Confirm exact version, stock and GPU clearance."
+    },
+    {
+      "id": "cooler-thermalright-pa120-se-v3",
+      "source": "build_component",
+      "name": "Thermalright Peerless Assassin 120 SE V3",
+      "early_trigger_price_jpy": 4700,
+      "bf_target_price_jpy": 5000,
+      "url": "https://kakaku.com/item/K0001789043/",
+      "note": "Confirm AM5 mounting kit and case/RAM clearance."
+    },
+    {
+      "id": "os-windows11-home",
+      "source": "build_component",
+      "name": "Windows 11 Home Japanese retail package",
+      "early_trigger_price_jpy": 14000,
+      "bf_target_price_jpy": 14800,
+      "url": "https://kakaku.com/item/K0001432816/",
+      "note": "Exclude if an eligible transferable license is already available; use genuine retail licensing only."
+    },
+    {
+      "id": "main_monitor",
+      "source": "peripheral",
+      "name": "AOC Q27G40E/11 27-inch WQHD 180Hz",
+      "early_trigger_price_jpy": 18000,
+      "bf_target_price_jpy": 22000,
+      "url": "https://www.yodobashi.com/product/100000001009314680/",
+      "note": "One main monitor only. Verify checkout cash price, delivery/collection route and stock."
+    },
+    {
+      "id": "keyboard",
+      "source": "peripheral",
+      "name": "Logicool G213r",
+      "early_trigger_price_jpy": 4000,
+      "bf_target_price_jpy": 4500,
+      "url": "https://www.biccamera.com/bc/item/9242996/",
+      "note": "Verify exact Japanese model/keyboard layout and final price."
+    },
+    {
+      "id": "mouse",
+      "source": "peripheral",
+      "name": "Logicool G304",
+      "early_trigger_price_jpy": 4000,
+      "bf_target_price_jpy": 5000,
+      "url": "https://www.yodobashi.com/product/100000001004334450/",
+      "note": "Verify exact variant, cash price and stock."
+    },
+    {
+      "id": "mousepad",
+      "source": "peripheral",
+      "name": "SteelSeries QcK Large",
+      "early_trigger_price_jpy": 1200,
+      "bf_target_price_jpy": 1500,
+      "url": "https://www.biccamera.com/bc/item/1570130/",
+      "note": "Verify exact size/model and stock."
+    }
+  ],
+  "gate_rules": [
+    "A threshold hit is an EARLY_BUY_REVIEW alert, never an automatic purchase authorization.",
+    "Only exact-model, direct-page price evidence with valid observation time may trigger a review; comparison search snippets, points, coupons not applied at checkout, stale prices and ambiguous variants do not trigger.",
+    "For components, require identity match, valid point-in-time evidence and a current in-stock/low-stock status before labeling a trigger actionable.",
+    "Before buying, verify final checkout price, shipping, stock, seller, warranty, returns, SKU and compatibility.",
+    "Recalculate the complete PC plus peripherals, required shipping/small parts and ¥5,000 contingency after every proposed early purchase; total must remain at or below ¥400,000.",
+    "Do not assume that the rest of the build can later be upgraded for free. RAM must be at least 32GB and SSD at least 1TB at purchase; 64GB/2TB are substitutions only when the exact final build fits.",
+    "Wait when the early target is not met. Black Friday is not guaranteed to have the lowest price, and a target is not a forecast."
+  ]
+}
