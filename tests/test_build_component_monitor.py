@@ -222,7 +222,9 @@ class BuildComponentMonitorTests(unittest.TestCase):
         }
         with patch.object(bcm, "verify_retailer_listing", return_value=offer) as verify, \
              patch.object(bcm, "fetch") as fetcher, \
-             patch.object(bcm, "build_retailer_search_urls") as rotate:
+             patch.object(bcm, "build_retailer_search_urls", return_value=[]) as rotate, \
+             patch.object(bcm, "bing_search", return_value=[]), \
+             patch.object(bcm, "ddg_search", return_value=[]):
             result = bcm.search_comparison_snippet(part, ("dospara.co.jp",))
         verify.assert_called_once()
         self.assertEqual(
@@ -231,7 +233,8 @@ class BuildComponentMonitorTests(unittest.TestCase):
         )
         self.assertIn("diagnostic_out", verify.call_args.kwargs)
         fetcher.assert_not_called()
-        rotate.assert_not_called()
+        # A known offer no longer short-circuits comparison against more sellers.
+        rotate.assert_called_once()
         self.assertEqual(result["retailer_listing_offer"]["price_jpy"], 138800)
         self.assertEqual(result["retailer_listing_offer"]["stock_status"], "in_stock")
         self.assertEqual(result["search_diagnostics"][0]["provider"], "configured_direct_retailer")
@@ -282,7 +285,9 @@ class BuildComponentMonitorTests(unittest.TestCase):
         ]
         with patch.object(bcm, "verify_retailer_listing", side_effect=offers) as verify, \
              patch.object(bcm, "fetch") as fetcher, \
-             patch.object(bcm, "build_retailer_search_urls") as rotate:
+             patch.object(bcm, "build_retailer_search_urls", return_value=[]) as rotate, \
+             patch.object(bcm, "bing_search", return_value=[]), \
+             patch.object(bcm, "ddg_search", return_value=[]):
             result = bcm.search_comparison_snippet(part, ("joshinweb.jp", "sofmap.com", "tsukumo.co.jp", "pc-koubou.jp"))
         self.assertEqual(verify.call_count, 4)
         self.assertEqual(result["retailer_listing_offer"]["url"], part["direct_retailer_urls"][3])
@@ -290,7 +295,8 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertEqual(result["retailer_listing_offer"]["stock_status"], "in_stock")
         self.assertEqual(len(result["retailer_listing_offers"]), 4)
         fetcher.assert_not_called()
-        rotate.assert_not_called()
+        # The monitor continues to retailer search pages after checking direct URLs.
+        rotate.assert_called_once()
 
     def test_curated_direct_retailer_url_rejects_non_allowlisted_host_without_fetch(self):
         part = dict(self.part)
@@ -729,6 +735,101 @@ class BuildComponentMonitorTests(unittest.TestCase):
             {**row, "retailer_listing_offer": {**offer, "stock_status": "unknown"}},
             now, 360, ["dospara.co.jp"]
         ))
+
+
+    def test_fetch_part_compares_retailers_even_when_comparison_price_is_valid(self):
+        part = dict(self.part)
+        seller_url = "https://www.amazon.co.jp/dp/B0TESTSKU"
+        stamp = iso(now_jst())
+        offer = {
+            "url": seller_url,
+            "title": "PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFSXPB1-O",
+            "price_jpy": 139800,
+            "price_source_mode": "direct_structured",
+            "stock_status": "in_stock",
+            "identity_anchor": "VCG507012DFSXPB1-O",
+            "identity_match": True,
+            "source_role": "direct_retailer_listing_reference",
+            "available_at": stamp,
+            "retrieval_time": stamp,
+            "pit_valid": True,
+            "bf_actual_authorized": False,
+        }
+        market_page = {
+            "price_jpy": 149900,
+            "name": part["name"],
+            "page_text_excerpt": part["name"] + " " + part["model_code"],
+            "stock_status": "in_stock",
+            "price_source_mode": "direct_structured",
+            "data_confidence": "high",
+            "price_context": "税込価格 ¥149,900",
+        }
+        seller_result = {
+            "retailer_listing_offer": offer,
+            "retailer_listing_offers": [offer],
+            "search_diagnostics": [{"provider": "configured_direct_retailer", "status": "verified"}],
+        }
+        with patch.object(
+            bcm, "fetch",
+            return_value=("<html>comparison</html>", part["monitor_url"], {}),
+        ), patch.object(bcm, "parse_page", return_value=market_page), \\
+             patch.object(bcm, "identity_match", return_value=(True, [part["model_code"]])), \\
+             patch.object(bcm, "search_comparison_snippet", return_value=seller_result) as seller_search:
+            result = bcm.fetch_part(
+                part,
+                ("kakaku.com",),
+                ("amazon.co.jp", "yodobashi.com"),
+            )
+
+        seller_search.assert_called_once_with(part, ("amazon.co.jp", "yodobashi.com"))
+        self.assertEqual(result["market_reference_price_jpy"], 149900)
+        self.assertEqual(result["price_validation_status"], "verified_market_reference")
+        self.assertEqual(result["retailer_listing_reference_price_jpy"], 139800)
+        self.assertEqual(result["retailer_listing_reference_url"], seller_url)
+        self.assertEqual(result["retailer_listing_offers"], [offer])
+        self.assertEqual(result["fetch_status"], "ok")
+
+    def test_fetch_part_uses_verified_retailer_offer_when_comparison_site_fails(self):
+        part = dict(self.part)
+        seller_url = "https://www.amazon.co.jp/dp/B0TESTSKU"
+        stamp = iso(now_jst())
+        offer = {
+            "url": seller_url,
+            "title": "PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFSXPB1-O",
+            "price_jpy": 139800,
+            "price_source_mode": "direct_structured",
+            "stock_status": "in_stock",
+            "identity_anchor": "VCG507012DFSXPB1-O",
+            "identity_match": True,
+            "source_role": "direct_retailer_listing_reference",
+            "available_at": stamp,
+            "retrieval_time": stamp,
+            "pit_valid": True,
+            "bf_actual_authorized": False,
+        }
+        seller_result = {
+            "retailer_listing_offer": offer,
+            "retailer_listing_offers": [offer],
+            "search_diagnostics": [{"provider": "configured_direct_retailer", "status": "verified"}],
+        }
+        with patch.object(bcm, "fetch", side_effect=RuntimeError("comparison site blocked")), \\
+             patch.object(bcm, "search_comparison_snippet", return_value=seller_result) as seller_search:
+            result = bcm.fetch_part(
+                part,
+                ("kakaku.com",),
+                ("amazon.co.jp", "yodobashi.com"),
+            )
+
+        seller_search.assert_called_once_with(part, ("amazon.co.jp", "yodobashi.com"))
+        self.assertEqual(result["comparison_fetch_status"], "error")
+        self.assertIsNone(result["market_reference_price_jpy"])
+        self.assertEqual(result["retailer_listing_reference_price_jpy"], 139800)
+        self.assertEqual(result["price_validation_status"], "verified_retailer_listing_reference")
+        self.assertEqual(result["source_role"], "direct_retailer_listing_reference")
+        self.assertEqual(result["retrieval_time"], stamp)
+        self.assertEqual(result["available_at"], stamp)
+        self.assertTrue(result["pit_valid"])
+        self.assertEqual(result["fetch_status"], "ok")
 
 
 if __name__ == "__main__":
