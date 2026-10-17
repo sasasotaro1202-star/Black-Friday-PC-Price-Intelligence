@@ -15,7 +15,7 @@ SCRIPTS = os.path.join(ROOT, "scripts")
 if SCRIPTS not in sys.path:
     sys.path.insert(0, SCRIPTS)
 
-from intelligence import load_json, save_json, now_jst, iso, parse_dt
+from intelligence import load_json, save_json, now_jst, iso, parse_dt, early_buy_review_assessment
 from monitor import fetch, parse_page, ddg_search, bing_search, search_identity_anchor, pick_price
 
 JST = timezone(timedelta(hours=9))
@@ -1570,6 +1570,39 @@ def collect_component_prices(config=None):
         price = row.get("market_reference_price_jpy")
         row["last_valid_market_reference_jpy"] = price if row.get("price_validation_status") == "verified_market_reference" else (prev_price if isinstance(prev_price, int) else None)
         row["bf_actual_authorized"] = False
+        # Direct listings can trigger a review, never an automatic purchase.
+        direct_offers = [
+            offer for offer in (row.get("retailer_listing_offers") or [])
+            if isinstance(offer, dict)
+            and offer.get("source_role") == "direct_retailer_listing_reference"
+            and offer.get("price_source_mode") in ("direct_structured", "direct_meta", "direct_text")
+            and isinstance(offer.get("price_jpy"), int) and not isinstance(offer.get("price_jpy"), bool)
+            and offer.get("price_jpy") > 0
+            and offer.get("identity_match") is True
+            and offer.get("identity_anchor")
+            and offer.get("pit_valid") is True
+            and offer.get("bf_actual_authorized") is False
+        ]
+        direct_offers.sort(key=lambda offer: (
+            0 if offer.get("stock_status") == "in_stock" else
+            1 if offer.get("stock_status") == "low_stock" else
+            2 if offer.get("stock_status") == "unknown" else 3,
+            offer.get("price_jpy", 10**12),
+        ))
+        early_offer = direct_offers[0] if direct_offers else None
+        early_price = early_offer.get("price_jpy") if early_offer else None
+        early_stock = early_offer.get("stock_status", "unknown") if early_offer else "unknown"
+        early_available = parse_dt(early_offer.get("available_at")) if early_offer else None
+        early_retrieved = parse_dt(early_offer.get("retrieval_time")) if early_offer else None
+        row["early_buy_review"] = early_buy_review_assessment(
+            row["id"],
+            observed_price_jpy=early_price,
+            price_verified=bool(early_offer),
+            identity_verified=bool(early_offer and early_offer.get("identity_match") is True and early_offer.get("identity_anchor")),
+            stock_status=early_stock,
+            pit_valid=bool(early_offer and early_offer.get("pit_valid") is True and early_available and early_retrieved and early_available <= early_retrieved <= now_jst()),
+            checkout_total_verified=False,
+        )
         if row.get("price_validation_status") == "verified_market_reference":
             counts["verified_market_reference"] += 1
             observations.append({
