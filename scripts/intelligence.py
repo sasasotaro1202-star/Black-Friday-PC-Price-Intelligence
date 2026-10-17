@@ -548,9 +548,14 @@ def store_observation_validation(target, now=None):
         "preorder_or_backorder": 3, "out_of_stock": 4,
     }
     verified_rows = [row for row in checked_rows if row.get("store_price_confirmed")]
-    verified_rows.sort(key=lambda row: (
-        stock_priority.get(str(row.get("store_stock_status") or "unknown"), 2),
+    actionable_rows = [
+        row for row in verified_rows
+        if row.get("store_stock_status") in ("in_stock", "low_stock")
+    ]
+    selection_rows = actionable_rows or verified_rows
+    selection_rows.sort(key=lambda row: (
         int(row.get("store_price_jpy") or 10**12),
+        stock_priority.get(str(row.get("store_stock_status") or "unknown"), 2),
         -(float(row.get("store_observation_age_minutes") or 0)),
         str(row.get("store_observation_store_id") or ""),
     ))
@@ -568,7 +573,7 @@ def store_observation_validation(target, now=None):
             empty["store_observation_status"] = "MISSING_OR_INVALID_PRICE"
         return empty
 
-    chosen = verified_rows[0]
+    chosen = selection_rows[0]
     return {
         "store_price_jpy": chosen["store_price_jpy"],
         "store_price_checked_at": chosen["store_price_checked_at"],
