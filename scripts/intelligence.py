@@ -572,7 +572,7 @@ def store_observation_validation(target, now=None):
         invalid = next((row for row in checked_rows if row.get("store_observation_status")), None)
         if invalid:
             empty["store_observation_status"] = invalid["store_observation_status"]
-        elif required:
+        elif required and checked_rows:
             empty["store_observation_status"] = "MISSING_OR_INVALID_PRICE"
         return empty
 
