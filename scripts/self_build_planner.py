@@ -1080,10 +1080,10 @@ def render_plan_markdown(plan):
         "",
         "## 100点方式の構成スコア（BF目標構成ベース）",
         "",
-        "構成点は用途適性・目標総額ベースの相対価格効率・互換性で採点。ゲーム点はTom's Hardwareの1440p Ultraラスタライズ階層を25点満点に正規化した代理指標で、対象ゲームの実測FPSではありません。",
+        "構成点は用途適性・目標総額ベースの相対価格効率・互換性で採点。ゲーム点は[Tom's Hardware GPU Benchmarks Hierarchy 2026](https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html)の1440p Ultraラスタライズ値を25点満点に正規化した代理指標で、対象ゲームの実測FPSではありません。",
         "購入根拠充足度は直接価格・型番・取得時刻・販売可能在庫・検証済み決済総額・互換性を別計算し、購入許可とは切り離します。",
         "",
-        "|順位|構成|総合点/100|ゲーム/25|制作/20|分析・AI/20|勉強・同時利用/10|価格効率/15|互換性/10|購入根拠充足度/100|直接価格/在庫/決済確認率|市場参考値|",
+        "|順位|構成|総合点/100|ゲーム/25|制作/20|分析・AI/20|勉強・同時利用/10|価格効率/15|互換性/10|購入根拠充足度/100|直接価格・在庫・決済確認率|市場参考値|",
         "|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---|"
     ]
     for build in plan.get("builds") or []:
@@ -1095,7 +1095,7 @@ def render_plan_markdown(plan):
             score.get("price_efficiency_points_out_of_15", "—"),
             score.get("compatibility_points_out_of_10", "—"),
             score.get("purchase_evidence_completeness_score_out_of_100", "—"),
-            "{}/{}/{}%".format(
+            "価格{}%・在庫{}%・決済{}%".format(
                 score.get("direct_price_identity_pit_coverage_pct", 0),
                 score.get("sellable_stock_coverage_pct", 0),
                 score.get("verified_checkout_total_coverage_pct", 0)

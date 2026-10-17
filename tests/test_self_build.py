@@ -90,6 +90,8 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertIn("100点方式の構成スコア", rendered)
         self.assertIn("購入根拠充足度/100", planner.section_from_plan(plan))
         self.assertIn("対象ゲームの実測FPSではありません", rendered)
+        self.assertIn("Tom's Hardware GPU Benchmarks Hierarchy 2026", rendered)
+        self.assertIn("https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html", rendered)
         self.assertFalse(plan["buy_now_authorized"])
 
     def test_verified_direct_price_stock_and_checkout_evidence_raise_completeness(self):
