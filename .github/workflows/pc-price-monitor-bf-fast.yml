@@ -19,6 +19,15 @@ jobs:
         with:
           fetch-depth: 1
 
+      # This manually dispatched fast-season workflow is production-facing too:
+      # never collect or publish with code that fails tests.
+      - name: Production syntax and regression gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/*.py
+          python -m unittest discover -s tests -p "test_*.py" -v
+
       - name: Check provisional broad watch window from config (JST; not an official sale date)
         id: window
         shell: bash
