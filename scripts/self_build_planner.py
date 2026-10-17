@@ -949,14 +949,15 @@ def build_plan(config=None, price_snapshot=None, now=None):
     }
     def choice_candidate(part_id, price):
         part = parts.get(part_id) or {}
+        # A comparison-site reference is never proof that a specific retailer has stock.
+        # Only fresh, exact-SKU direct seller offers may qualify a fallback as available.
         sellable_price = price.get("direct_listing_sellable_price_jpy")
         sellable_status = price.get("direct_listing_sellable_stock_status")
-        if price.get("trusted_for_market_estimate") and isinstance(price.get("market_reference_price_jpy"), int):
-            sellable_price = price.get("market_reference_price_jpy")
-            sellable_status = "in_stock"
-        elif not sellable_status:
+        if sellable_status not in ("in_stock", "low_stock"):
             signal = price.get("early_buy_review") if isinstance(price.get("early_buy_review"), dict) else {}
             sellable_status = signal.get("stock_status") or price.get("direct_listing_display_stock_status") or "unknown"
+        if not isinstance(sellable_price, int) or isinstance(sellable_price, bool) or sellable_price <= 0:
+            sellable_price = None
         return {
             "id": part_id,
             "name": part.get("name"),
@@ -980,17 +981,18 @@ def build_plan(config=None, price_snapshot=None, now=None):
         storage_price = component_price(storage_part, by_id, now, max_age, allowed_domains=allowed_price_domains)
         storage_price_by_id[storage_id] = storage_price
         storage_candidates.append(choice_candidate(storage_id, storage_price))
-    trusted_storage_candidates = [
+    sellable_storage_candidates = [
         item for item in storage_candidates
-        if item["trusted_for_market_estimate"] and isinstance(item["market_reference_price_jpy"], int)
+        if isinstance(item.get("sellable_listing_price_jpy"), int)
+        and item.get("stock_status") in ("in_stock", "low_stock")
     ]
-    if primary_storage_id and any(item["id"] == primary_storage_id for item in trusted_storage_candidates):
+    if primary_storage_id and any(item["id"] == primary_storage_id for item in sellable_storage_candidates):
         selected_storage_id = primary_storage_id
         storage_selection_method = "keep_primary_if_fresh_in_stock"
-    elif trusted_storage_candidates:
+    elif sellable_storage_candidates:
         selected_storage_id = min(
-            trusted_storage_candidates,
-            key=lambda item: (item["market_reference_price_jpy"], item["target_price_jpy"] if isinstance(item["target_price_jpy"], int) else 10**12, item["id"]),
+            sellable_storage_candidates,
+            key=lambda item: (item["sellable_listing_price_jpy"], 0 if item["stock_status"] == "in_stock" else 1, item["id"]),
         )["id"]
         storage_selection_method = "stockout_fallback_lowest_verified_in_stock_price"
     else:
@@ -1010,17 +1012,18 @@ def build_plan(config=None, price_snapshot=None, now=None):
         cooler_price = component_price(cooler_part, by_id, now, max_age, allowed_domains=allowed_price_domains)
         cooler_price_by_id[cooler_id] = cooler_price
         cooler_candidates.append(choice_candidate(cooler_id, cooler_price))
-    trusted_cooler_candidates = [
+    sellable_cooler_candidates = [
         item for item in cooler_candidates
-        if item["trusted_for_market_estimate"] and isinstance(item["market_reference_price_jpy"], int)
+        if isinstance(item.get("sellable_listing_price_jpy"), int)
+        and item.get("stock_status") in ("in_stock", "low_stock")
     ]
-    if primary_cooler_id and any(item["id"] == primary_cooler_id for item in trusted_cooler_candidates):
+    if primary_cooler_id and any(item["id"] == primary_cooler_id for item in sellable_cooler_candidates):
         selected_cooler_id = primary_cooler_id
         cooler_selection_method = "keep_primary_if_fresh_in_stock"
-    elif trusted_cooler_candidates:
+    elif sellable_cooler_candidates:
         selected_cooler_id = min(
-            trusted_cooler_candidates,
-            key=lambda item: (item["market_reference_price_jpy"], item["target_price_jpy"] if isinstance(item["target_price_jpy"], int) else 10**12, item["id"]),
+            sellable_cooler_candidates,
+            key=lambda item: (item["sellable_listing_price_jpy"], 0 if item["stock_status"] == "in_stock" else 1, item["id"]),
         )["id"]
         cooler_selection_method = "stockout_fallback_lowest_verified_in_stock_price"
     else:
@@ -1061,19 +1064,19 @@ def build_plan(config=None, price_snapshot=None, now=None):
             if str(x) in parts and (parts[str(x)].get("category") == "gpu")
         ]
         gpu_candidate_ids = list(dict.fromkeys([str(gpu_id)] + gpu_fallback_ids))
-        trusted_gpu_ids = [
+        sellable_gpu_ids = [
             candidate_id for candidate_id in gpu_candidate_ids
-            if gpu_price_by_id.get(candidate_id, {}).get("trusted_for_market_estimate")
-            and isinstance(gpu_price_by_id.get(candidate_id, {}).get("market_reference_price_jpy"), int)
+            if isinstance(gpu_price_by_id.get(candidate_id, {}).get("direct_listing_sellable_price_jpy"), int)
+            and gpu_price_by_id.get(candidate_id, {}).get("direct_listing_sellable_stock_status") in ("in_stock", "low_stock")
         ]
-        if str(gpu_id) in trusted_gpu_ids:
+        if str(gpu_id) in sellable_gpu_ids:
             selected_gpu_id = str(gpu_id)
             gpu_selection_method = "keep_primary_exact_sku_if_fresh_in_stock"
-        elif trusted_gpu_ids:
+        elif sellable_gpu_ids:
             selected_gpu_id = min(
-                trusted_gpu_ids,
+                sellable_gpu_ids,
                 key=lambda candidate_id: (
-                    gpu_price_by_id[candidate_id]["market_reference_price_jpy"],
+                    gpu_price_by_id[candidate_id]["direct_listing_sellable_price_jpy"],
                     (parts.get(candidate_id) or {}).get("target_price_jpy", 10**12),
                     candidate_id,
                 ),
