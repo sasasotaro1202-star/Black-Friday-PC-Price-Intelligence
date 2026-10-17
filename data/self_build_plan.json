@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T01:35:33+09:00",
+  "generated_at": "2026-10-18T03:03:09+09:00",
   "schema_version": 1,
   "project": "DIY_PC",
   "source_policy": "Comparison-site prices are market references only. This plan never authorizes a purchase; official seller-specific BF price evidence is missing.",
@@ -241,8 +241,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T01:35:07+09:00",
-                "display_age_minutes": 0.4
+                "retrieval_time": "2026-10-18T03:01:01+09:00",
+                "display_age_minutes": 2.1
               }
             ],
             "purchase_url": "https://kakaku.com/item/K0001798041/"
@@ -270,23 +270,11 @@
               "in_stock": 0,
               "low_stock": 0,
               "preorder_or_backorder": 0,
-              "unknown": 1,
+              "unknown": 0,
               "out_of_stock": 0,
               "stale": 0
             },
-            "direct_listing_offers": [
-              {
-                "url": "https://item.rakuten.co.jp/a-price/4711377308229/?variantId=4711377308229",
-                "title": "https://item.rakuten.co.jp/a-price/4711377308229/?variantId=4711377308229",
-                "price_jpy": 213800,
-                "stock_status": "unknown",
-                "stock_signal_fresh": true,
-                "stock_signal_max_age_minutes": 60,
-                "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T01:35:30+09:00",
-                "display_age_minutes": 0.1
-              }
-            ],
+            "direct_listing_offers": [],
             "purchase_url": "https://shop.tsukumo.co.jp/goods/4711377308229/"
           }
         ],
@@ -331,8 +319,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T01:35:16+09:00",
-                "display_age_minutes": 0.3
+                "retrieval_time": "2026-10-18T03:01:18+09:00",
+                "display_age_minutes": 1.9
               },
               {
                 "url": "https://www.pc4u.co.jp/view/item/000000090356?category_page_id=ct824",
@@ -342,8 +330,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T01:35:15+09:00",
-                "display_age_minutes": 0.3
+                "retrieval_time": "2026-10-18T03:01:16+09:00",
+                "display_age_minutes": 1.9
               },
               {
                 "url": "https://www.dospara.co.jp/SBR1534/IC512079.html",
@@ -353,8 +341,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T01:35:14+09:00",
-                "display_age_minutes": 0.3
+                "retrieval_time": "2026-10-18T03:01:14+09:00",
+                "display_age_minutes": 1.9
               }
             ],
             "purchase_url": "https://kakaku.com/item/K0001633533/"
@@ -397,8 +385,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T01:35:12+09:00",
-                "display_age_minutes": 0.3
+                "retrieval_time": "2026-10-18T03:01:10+09:00",
+                "display_age_minutes": 2.0
               }
             ],
             "purchase_url": "https://kakaku.com/item/K0001610896/"
@@ -485,20 +473,31 @@
               "limitations_ja": "QLC系で長時間の大容量書込みや書込み耐久を最優先する用途にはより適した候補と比較が必要。速度表記だけで持続性能を保証しない。"
             },
             "market_reference_price_jpy": null,
-            "display_reference_price_jpy": 35500,
+            "display_reference_price_jpy": 32600,
             "sellable_listing_price_jpy": null,
-            "stock_status": "out_of_stock",
+            "stock_status": "unknown",
             "price_status": "search_snippet_reference_only",
             "trusted_for_market_estimate": false,
             "direct_listing_stock_counts": {
               "in_stock": 0,
               "low_stock": 0,
               "preorder_or_backorder": 0,
-              "unknown": 0,
+              "unknown": 1,
               "out_of_stock": 2,
               "stale": 0
             },
             "direct_listing_offers": [
+              {
+                "url": "https://www.yodobashi.com/product/100000001007390887/",
+                "title": "CT1000P3PSSD8JP",
+                "price_jpy": 10210,
+                "stock_status": "unknown",
+                "stock_signal_fresh": true,
+                "stock_signal_max_age_minutes": 60,
+                "price_source_mode": "direct_text",
+                "retrieval_time": "2026-10-18T03:01:28+09:00",
+                "display_age_minutes": 1.7
+              },
               {
                 "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
                 "title": "Crucial  P3 Plus CT1000P3PSSD8JP (M.2 2280 1TB) ",
@@ -507,8 +506,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T01:35:14+09:00",
-                "display_age_minutes": 0.3
+                "retrieval_time": "2026-10-18T03:01:17+09:00",
+                "display_age_minutes": 1.9
               },
               {
                 "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -518,8 +517,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T01:35:15+09:00",
-                "display_age_minutes": 0.3
+                "retrieval_time": "2026-10-18T03:01:18+09:00",
+                "display_age_minutes": 1.9
               }
             ],
             "purchase_url": "https://kakaku.com/item/K0001466997/"
@@ -580,12 +579,23 @@
             "direct_listing_stock_counts": {
               "in_stock": 0,
               "low_stock": 0,
-              "preorder_or_backorder": 0,
+              "preorder_or_backorder": 1,
               "unknown": 0,
               "out_of_stock": 1,
               "stale": 0
             },
             "direct_listing_offers": [
+              {
+                "url": "https://www.yodobashi.com/product/100000001009948470/",
+                "title": "Peerless Assassin 120 SE V3",
+                "price_jpy": 5470,
+                "stock_status": "preorder_or_backorder",
+                "stock_signal_fresh": true,
+                "stock_signal_max_age_minutes": 60,
+                "price_source_mode": "direct_text",
+                "retrieval_time": "2026-10-18T03:01:31+09:00",
+                "display_age_minutes": 1.6
+              },
               {
                 "url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
                 "title": "Thermalright  Peerless Assassin 120 SE V3 PA120SE-V3 ",
@@ -594,8 +604,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T01:35:23+09:00",
-                "display_age_minutes": 0.2
+                "retrieval_time": "2026-10-18T03:01:21+09:00",
+                "display_age_minutes": 1.8
               }
             ],
             "purchase_url": "https://kakaku.com/item/K0001789043/"
@@ -640,18 +650,18 @@
             "role": "required_fixed_part",
             "target_price_jpy": 20000,
             "market_reference_price_jpy": null,
-            "display_reference_price_jpy": null,
-            "price_status": "missing",
+            "display_reference_price_jpy": 35680,
+            "price_status": "search_snippet_reference_only",
             "trusted_for_market_estimate": false,
             "source_role": "comparison_site_reference",
-            "retrieval_time": "2026-10-18T01:35:09+09:00",
-            "reference_age_minutes": 0.4,
+            "retrieval_time": "2026-10-18T03:01:06+09:00",
+            "reference_age_minutes": 2.05,
             "monitor_url": "https://kakaku.com/item/K0001669878/",
             "purchase_url": "https://kakaku.com/item/K0001669878/",
             "reference_source_url": null,
             "reference_source_label": null,
-            "search_snippet_reference_url": null,
-            "search_snippet_reference_title": null,
+            "search_snippet_reference_url": "https://search.kakaku.com/ASRock%20B850M%20Pro%20RS%20WiFi/",
+            "search_snippet_reference_title": "B850M Pro RS WiFi",
             "direct_listing_display_price_jpy": 26990,
             "direct_listing_display_url": "https://www.yodobashi.com/product/100000001008871801/",
             "direct_listing_display_title": "B850M Pro RS WiFi",
@@ -659,7 +669,7 @@
             "direct_listing_display_stock_status": "unknown",
             "direct_listing_display_stock_label": "在庫未確認",
             "direct_listing_display_source_mode": "direct_text",
-            "direct_listing_display_observed_at": "2026-10-18T01:35:11+09:00",
+            "direct_listing_display_observed_at": "2026-10-18T03:01:09+09:00",
             "early_buy_review": {
               "item_id": "motherboard-asrock-b850m-pro-rs-wifi",
               "early_buy_threshold_jpy": 18000,
@@ -676,7 +686,7 @@
               "purchase_authorized": false,
               "next_step": "購入可能な在庫を直接確認"
             },
-            "direct_listing_display_age_minutes": 0.4,
+            "direct_listing_display_age_minutes": 2.0,
             "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる アスロック ASRock AMD B850チップセット搭載 Micro-ATX マザーボード B850M Pro RS ... ￥26,990 2,699 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月19日月曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
             "direct_listing_display_offers": [
               {
@@ -687,8 +697,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T01:35:11+09:00",
-                "display_age_minutes": 0.4
+                "retrieval_time": "2026-10-18T03:01:09+09:00",
+                "display_age_minutes": 2.0
               },
               {
                 "url": "https://www.sofmap.com/product_detail.aspx?sku=101393495",
@@ -698,8 +708,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T01:35:15+09:00",
-                "display_age_minutes": 0.3
+                "retrieval_time": "2026-10-18T03:01:14+09:00",
+                "display_age_minutes": 1.9
               },
               {
                 "url": "https://www.pc4u.co.jp/view/item/000000092844",
@@ -709,8 +719,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T01:35:12+09:00",
-                "display_age_minutes": 0.3
+                "retrieval_time": "2026-10-18T03:01:11+09:00",
+                "display_age_minutes": 2.0
               }
             ],
             "direct_listing_sellable_price_jpy": null,
@@ -815,8 +825,8 @@
             "price_status": "verified_retailer_listing_reference",
             "trusted_for_market_estimate": true,
             "source_role": "direct_retailer_listing_reference",
-            "retrieval_time": "2026-10-18T01:35:21+09:00",
-            "reference_age_minutes": 0.2,
+            "retrieval_time": "2026-10-18T03:01:18+09:00",
+            "reference_age_minutes": 1.85,
             "monitor_url": "https://kakaku.com/item/K0001671441/",
             "purchase_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
             "reference_source_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
@@ -859,14 +869,14 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T01:35:21+09:00",
-                "display_age_minutes": 0.2
+                "retrieval_time": "2026-10-18T03:01:18+09:00",
+                "display_age_minutes": 1.9
               }
             ],
             "direct_listing_sellable_price_jpy": 14980,
             "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
             "direct_listing_sellable_stock_status": "in_stock",
-            "direct_listing_sellable_retrieval_time": "2026-10-18T01:35:21+09:00",
+            "direct_listing_sellable_retrieval_time": "2026-10-18T03:01:18+09:00",
             "direct_listing_stock_counts": {
               "in_stock": 1,
               "low_stock": 0,
@@ -943,8 +953,8 @@
             "price_status": "verified_retailer_listing_reference",
             "trusted_for_market_estimate": true,
             "source_role": "direct_retailer_listing_reference",
-            "retrieval_time": "2026-10-18T01:35:22+09:00",
-            "reference_age_minutes": 0.18333333333333332,
+            "retrieval_time": "2026-10-18T03:01:24+09:00",
+            "reference_age_minutes": 1.75,
             "monitor_url": "https://kakaku.com/item/J0000039064/",
             "purchase_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
             "reference_source_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
@@ -987,8 +997,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T01:35:22+09:00",
-                "display_age_minutes": 0.2
+                "retrieval_time": "2026-10-18T03:01:24+09:00",
+                "display_age_minutes": 1.8
               },
               {
                 "url": "https://www.yodobashi.com/product/100000001007195271/",
@@ -998,14 +1008,14 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T01:35:20+09:00",
-                "display_age_minutes": 0.2
+                "retrieval_time": "2026-10-18T03:01:23+09:00",
+                "display_age_minutes": 1.8
               }
             ],
             "direct_listing_sellable_price_jpy": 13180,
             "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
             "direct_listing_sellable_stock_status": "in_stock",
-            "direct_listing_sellable_retrieval_time": "2026-10-18T01:35:22+09:00",
+            "direct_listing_sellable_retrieval_time": "2026-10-18T03:01:24+09:00",
             "direct_listing_stock_counts": {
               "in_stock": 1,
               "low_stock": 0,
@@ -1083,8 +1093,8 @@
             "price_status": "verified_retailer_listing_reference",
             "trusted_for_market_estimate": true,
             "source_role": "direct_retailer_listing_reference",
-            "retrieval_time": "2026-10-18T01:35:23+09:00",
-            "reference_age_minutes": 0.16666666666666666,
+            "retrieval_time": "2026-10-18T03:01:26+09:00",
+            "reference_age_minutes": 1.7166666666666666,
             "monitor_url": "https://kakaku.com/item/K0001432816/",
             "purchase_url": "https://www.yodobashi.com/product/100000001006975270/",
             "reference_source_url": "https://www.yodobashi.com/product/100000001006975270/",
@@ -1127,14 +1137,14 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T01:35:23+09:00",
-                "display_age_minutes": 0.2
+                "retrieval_time": "2026-10-18T03:01:26+09:00",
+                "display_age_minutes": 1.7
               }
             ],
             "direct_listing_sellable_price_jpy": 19280,
             "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001006975270/",
             "direct_listing_sellable_stock_status": "in_stock",
-            "direct_listing_sellable_retrieval_time": "2026-10-18T01:35:23+09:00",
+            "direct_listing_sellable_retrieval_time": "2026-10-18T03:01:26+09:00",
             "direct_listing_stock_counts": {
               "in_stock": 1,
               "low_stock": 0,
@@ -1189,19 +1199,19 @@
             "model_code": "100-100000662WOF",
             "role": "cpu_multicore_alternative",
             "target_price_jpy": 55000,
-            "market_reference_price_jpy": null,
-            "display_reference_price_jpy": 80230,
-            "price_status": "search_snippet_reference_only",
-            "trusted_for_market_estimate": false,
-            "source_role": "comparison_site_reference",
-            "retrieval_time": "2026-10-18T01:35:02+09:00",
-            "reference_age_minutes": 0.5166666666666667,
+            "market_reference_price_jpy": 69624,
+            "display_reference_price_jpy": 69624,
+            "price_status": "verified_retailer_listing_reference",
+            "trusted_for_market_estimate": true,
+            "source_role": "direct_retailer_listing_reference",
+            "retrieval_time": "2026-10-18T03:00:59+09:00",
+            "reference_age_minutes": 2.1666666666666665,
             "monitor_url": "https://kakaku.com/item/K0001630331/",
-            "purchase_url": "https://kakaku.com/item/K0001630331/",
-            "reference_source_url": null,
-            "reference_source_label": null,
-            "search_snippet_reference_url": "https://search.kakaku.com/AMD%20Ryzen%209%209900X%20BOX/",
-            "search_snippet_reference_title": "100-100000662WOF",
+            "purchase_url": "https://www.ark-pc.co.jp/i/10240256/",
+            "reference_source_url": "https://www.ark-pc.co.jp/i/10240256/",
+            "reference_source_label": "販売店ページ直接取得・掲載価格（決済未確認）",
+            "search_snippet_reference_url": null,
+            "search_snippet_reference_title": null,
             "direct_listing_display_price_jpy": null,
             "direct_listing_display_url": null,
             "direct_listing_display_title": null,
@@ -1213,14 +1223,14 @@
             "early_buy_review": {
               "item_id": "cpu-ryzen9-9900x",
               "early_buy_threshold_jpy": null,
-              "observed_price_jpy": null,
+              "observed_price_jpy": 69624,
               "estimated_checkout_total_jpy": null,
               "verified_checkout_total_jpy": null,
               "checkout_total_verified": false,
-              "price_verified": false,
-              "identity_verified": false,
-              "stock_status": "unknown",
-              "pit_valid": false,
+              "price_verified": true,
+              "identity_verified": true,
+              "stock_status": "in_stock",
+              "pit_valid": true,
               "status": "NOT_CONFIGURED",
               "label_ja": "前倒し購入基準なし",
               "purchase_authorized": false,
@@ -1228,21 +1238,33 @@
             },
             "direct_listing_display_age_minutes": null,
             "direct_listing_display_price_context": null,
-            "direct_listing_display_offers": [],
-            "direct_listing_sellable_price_jpy": null,
-            "direct_listing_sellable_url": null,
-            "direct_listing_sellable_stock_status": null,
-            "direct_listing_sellable_retrieval_time": null,
+            "direct_listing_display_offers": [
+              {
+                "url": "https://www.ark-pc.co.jp/i/10240256/",
+                "title": "100-100000662WOF",
+                "price_jpy": 69624,
+                "stock_status": "in_stock",
+                "stock_signal_fresh": true,
+                "stock_signal_max_age_minutes": 60,
+                "price_source_mode": "direct_structured",
+                "retrieval_time": "2026-10-18T03:00:59+09:00",
+                "display_age_minutes": 2.2
+              }
+            ],
+            "direct_listing_sellable_price_jpy": 69624,
+            "direct_listing_sellable_url": "https://www.ark-pc.co.jp/i/10240256/",
+            "direct_listing_sellable_stock_status": "in_stock",
+            "direct_listing_sellable_retrieval_time": "2026-10-18T03:00:59+09:00",
             "direct_listing_stock_counts": {
-              "in_stock": 0,
+              "in_stock": 1,
               "low_stock": 0,
               "preorder_or_backorder": 0,
               "unknown": 0,
               "out_of_stock": 0,
               "stale": 0
             },
-            "direct_listing_offer_count": 0,
-            "direct_listing_sellable_offer_count": 0,
+            "direct_listing_offer_count": 1,
+            "direct_listing_sellable_offer_count": 1,
             "direct_listing_validation_diagnostics": [],
             "direct_listing_display_is_estimate_eligible": false,
             "direct_listing_display_purchase_allowed": false,
@@ -1285,8 +1307,8 @@
             "price_status": "missing",
             "trusted_for_market_estimate": false,
             "source_role": "comparison_site_reference",
-            "retrieval_time": "2026-10-18T01:35:11+09:00",
-            "reference_age_minutes": 0.36666666666666664,
+            "retrieval_time": "2026-10-18T03:01:07+09:00",
+            "reference_age_minutes": 2.033333333333333,
             "monitor_url": "https://kakaku.com/item/K0001610896/",
             "purchase_url": "https://kakaku.com/item/K0001610896/",
             "reference_source_url": null,
@@ -1300,7 +1322,7 @@
             "direct_listing_display_stock_status": "unknown",
             "direct_listing_display_stock_label": "在庫未確認",
             "direct_listing_display_source_mode": "direct_text",
-            "direct_listing_display_observed_at": "2026-10-18T01:35:12+09:00",
+            "direct_listing_display_observed_at": "2026-10-18T03:01:10+09:00",
             "early_buy_review": {
               "item_id": "memory-teamgroup-ddr5-32gb-6000",
               "early_buy_threshold_jpy": 36000,
@@ -1317,7 +1339,7 @@
               "purchase_authorized": false,
               "next_step": "購入可能な在庫を直接確認"
             },
-            "direct_listing_display_age_minutes": 0.3,
+            "direct_listing_display_age_minutes": 2.0,
             "direct_listing_display_price_context": "000HC38ADC01-A 商品内容：16GBx2枚 色：T-CREATE EXPERT ホワイト 商品タイプ：DDR5 6000MHz CL38 【当店からの連絡】 販売価格 113,938円 (税込) ポイント 1% 1,140円相当進呈 送料無料 ※ポイントは商品発送後、且つ注文日から20日後に付与されます。 販売：株式会社マルチラテラル（登録番号：T8020001",
             "direct_listing_display_offers": [
               {
@@ -1328,8 +1350,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T01:35:12+09:00",
-                "display_age_minutes": 0.3
+                "retrieval_time": "2026-10-18T03:01:10+09:00",
+                "display_age_minutes": 2.0
               }
             ],
             "direct_listing_sellable_price_jpy": null,
@@ -1411,45 +1433,56 @@
             "role": "required_fixed_part",
             "target_price_jpy": 24000,
             "market_reference_price_jpy": null,
-            "display_reference_price_jpy": 35500,
+            "display_reference_price_jpy": 32600,
             "price_status": "search_snippet_reference_only",
             "trusted_for_market_estimate": false,
             "source_role": "comparison_site_reference",
-            "retrieval_time": "2026-10-18T01:35:12+09:00",
-            "reference_age_minutes": 0.35,
+            "retrieval_time": "2026-10-18T03:01:14+09:00",
+            "reference_age_minutes": 1.9166666666666667,
             "monitor_url": "https://kakaku.com/item/K0001466997/",
             "purchase_url": "https://kakaku.com/item/K0001466997/",
             "reference_source_url": null,
             "reference_source_label": null,
             "search_snippet_reference_url": "https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/",
             "search_snippet_reference_title": "CT1000P3PSSD8JP",
-            "direct_listing_display_price_jpy": 9300,
-            "direct_listing_display_url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
-            "direct_listing_display_title": "Crucial  P3 Plus CT1000P3PSSD8JP (M.2 2280 1TB) ",
+            "direct_listing_display_price_jpy": 10210,
+            "direct_listing_display_url": "https://www.yodobashi.com/product/100000001007390887/",
+            "direct_listing_display_title": "CT1000P3PSSD8JP",
             "direct_listing_display_identity_anchor": "CT1000P3PSSD8JP",
-            "direct_listing_display_stock_status": "out_of_stock",
-            "direct_listing_display_stock_label": "在庫切れ",
-            "direct_listing_display_source_mode": "direct_structured",
-            "direct_listing_display_observed_at": "2026-10-18T01:35:14+09:00",
+            "direct_listing_display_stock_status": "unknown",
+            "direct_listing_display_stock_label": "在庫未確認",
+            "direct_listing_display_source_mode": "direct_text",
+            "direct_listing_display_observed_at": "2026-10-18T03:01:28+09:00",
             "early_buy_review": {
               "item_id": "ssd-crucial-p3-plus-1tb",
               "early_buy_threshold_jpy": 16000,
-              "observed_price_jpy": 9300,
+              "observed_price_jpy": 10210,
               "estimated_checkout_total_jpy": null,
               "verified_checkout_total_jpy": null,
               "checkout_total_verified": false,
               "price_verified": true,
               "identity_verified": true,
-              "stock_status": "out_of_stock",
+              "stock_status": "unknown",
               "pit_valid": true,
-              "status": "UNAVAILABLE",
-              "label_ja": "在庫切れ",
+              "status": "STOCK_NOT_VERIFIED",
+              "label_ja": "在庫未確認",
               "purchase_authorized": false,
-              "next_step": "同一型番の別販売店・再入荷を確認"
+              "next_step": "購入可能な在庫を直接確認"
             },
-            "direct_listing_display_age_minutes": 0.3,
-            "direct_listing_display_price_context": null,
+            "direct_listing_display_age_minutes": 1.7,
+            "direct_listing_display_price_context": "e Gen4 x4 CT1000P3PSSD8JP 4.11 レビュー （28） Q＆A （1） 投稿画像 （1） 最新情報 希望小売価格： オープンプライス 販売終了時の価格： ￥10,210 （税込） メーカー： crucial 販売開始日： 2022/09/09（販売終了商品） お取り扱い： のお取り扱い商品です。 バリエーション： 内蔵SSD Crucial P3",
             "direct_listing_display_offers": [
+              {
+                "url": "https://www.yodobashi.com/product/100000001007390887/",
+                "title": "CT1000P3PSSD8JP",
+                "price_jpy": 10210,
+                "stock_status": "unknown",
+                "stock_signal_fresh": true,
+                "stock_signal_max_age_minutes": 60,
+                "price_source_mode": "direct_text",
+                "retrieval_time": "2026-10-18T03:01:28+09:00",
+                "display_age_minutes": 1.7
+              },
               {
                 "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
                 "title": "Crucial  P3 Plus CT1000P3PSSD8JP (M.2 2280 1TB) ",
@@ -1458,8 +1491,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T01:35:14+09:00",
-                "display_age_minutes": 0.3
+                "retrieval_time": "2026-10-18T03:01:17+09:00",
+                "display_age_minutes": 1.9
               },
               {
                 "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -1469,8 +1502,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T01:35:15+09:00",
-                "display_age_minutes": 0.3
+                "retrieval_time": "2026-10-18T03:01:18+09:00",
+                "display_age_minutes": 1.9
               }
             ],
             "direct_listing_sellable_price_jpy": null,
@@ -1481,11 +1514,11 @@
               "in_stock": 0,
               "low_stock": 0,
               "preorder_or_backorder": 0,
-              "unknown": 0,
+              "unknown": 1,
               "out_of_stock": 2,
               "stale": 0
             },
-            "direct_listing_offer_count": 2,
+            "direct_listing_offer_count": 3,
             "direct_listing_sellable_offer_count": 0,
             "direct_listing_validation_diagnostics": [
               {
@@ -1563,22 +1596,22 @@
             "price_status": "search_snippet_reference_only",
             "trusted_for_market_estimate": false,
             "source_role": "comparison_site_reference",
-            "retrieval_time": "2026-10-18T01:35:22+09:00",
-            "reference_age_minutes": 0.18333333333333332,
+            "retrieval_time": "2026-10-18T03:01:19+09:00",
+            "reference_age_minutes": 1.8333333333333333,
             "monitor_url": "https://kakaku.com/item/K0001789043/",
             "purchase_url": "https://kakaku.com/item/K0001789043/",
             "reference_source_url": null,
             "reference_source_label": null,
             "search_snippet_reference_url": "https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/",
             "search_snippet_reference_title": "Peerless Assassin 120 SE V3",
-            "direct_listing_display_price_jpy": 4980,
-            "direct_listing_display_url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
-            "direct_listing_display_title": "Thermalright  Peerless Assassin 120 SE V3 PA120SE-V3 ",
+            "direct_listing_display_price_jpy": 5470,
+            "direct_listing_display_url": "https://www.yodobashi.com/product/100000001009948470/",
+            "direct_listing_display_title": "Peerless Assassin 120 SE V3",
             "direct_listing_display_identity_anchor": "Peerless Assassin 120 SE V3",
-            "direct_listing_display_stock_status": "out_of_stock",
-            "direct_listing_display_stock_label": "在庫切れ",
-            "direct_listing_display_source_mode": "direct_structured",
-            "direct_listing_display_observed_at": "2026-10-18T01:35:23+09:00",
+            "direct_listing_display_stock_status": "preorder_or_backorder",
+            "direct_listing_display_stock_label": "取寄せ/予約",
+            "direct_listing_display_source_mode": "direct_text",
+            "direct_listing_display_observed_at": "2026-10-18T03:01:31+09:00",
             "early_buy_review": {
               "item_id": "cooler-thermalright-pa120-se-v3",
               "early_buy_threshold_jpy": 4500,
@@ -1595,9 +1628,20 @@
               "purchase_authorized": false,
               "next_step": "同一型番の別販売店・再入荷を確認"
             },
-            "direct_listing_display_age_minutes": 0.2,
-            "direct_listing_display_price_context": null,
+            "direct_listing_display_age_minutes": 1.6,
+            "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる サーマルライト Thermalright 120mmファン搭載 ツインタワー型 CPUクーラー Peerless Ass... ￥5,470 547 ゴールドポイント （10％還元） お取り寄せ 日本全国配達料金無料 会員ページ ご注文商品の確認・変更 お客様情報の確認・変更 ヨドバシ・ドット・コム会員IDの変更 ヨド",
             "direct_listing_display_offers": [
+              {
+                "url": "https://www.yodobashi.com/product/100000001009948470/",
+                "title": "Peerless Assassin 120 SE V3",
+                "price_jpy": 5470,
+                "stock_status": "preorder_or_backorder",
+                "stock_signal_fresh": true,
+                "stock_signal_max_age_minutes": 60,
+                "price_source_mode": "direct_text",
+                "retrieval_time": "2026-10-18T03:01:31+09:00",
+                "display_age_minutes": 1.6
+              },
               {
                 "url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
                 "title": "Thermalright  Peerless Assassin 120 SE V3 PA120SE-V3 ",
@@ -1606,8 +1650,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T01:35:23+09:00",
-                "display_age_minutes": 0.2
+                "retrieval_time": "2026-10-18T03:01:21+09:00",
+                "display_age_minutes": 1.8
               }
             ],
             "direct_listing_sellable_price_jpy": null,
@@ -1617,12 +1661,12 @@
             "direct_listing_stock_counts": {
               "in_stock": 0,
               "low_stock": 0,
-              "preorder_or_backorder": 0,
+              "preorder_or_backorder": 1,
               "unknown": 0,
               "out_of_stock": 1,
               "stale": 0
             },
-            "direct_listing_offer_count": 1,
+            "direct_listing_offer_count": 2,
             "direct_listing_sellable_offer_count": 0,
             "direct_listing_validation_diagnostics": [
               {
@@ -1676,8 +1720,8 @@
             "price_status": "missing",
             "trusted_for_market_estimate": false,
             "source_role": "comparison_site_reference",
-            "retrieval_time": "2026-10-18T01:35:02+09:00",
-            "reference_age_minutes": 0.5166666666666667,
+            "retrieval_time": "2026-10-18T03:00:55+09:00",
+            "reference_age_minutes": 2.2333333333333334,
             "monitor_url": "https://kakaku.com/item/K0001798041/",
             "purchase_url": "https://kakaku.com/item/K0001798041/",
             "reference_source_url": null,
@@ -1691,7 +1735,7 @@
             "direct_listing_display_stock_status": "out_of_stock",
             "direct_listing_display_stock_label": "在庫切れ",
             "direct_listing_display_source_mode": "direct_structured",
-            "direct_listing_display_observed_at": "2026-10-18T01:35:07+09:00",
+            "direct_listing_display_observed_at": "2026-10-18T03:01:01+09:00",
             "early_buy_review": {
               "item_id": "gpu-rtx5070-12gb",
               "early_buy_threshold_jpy": 119000,
@@ -1708,7 +1752,7 @@
               "purchase_authorized": false,
               "next_step": "同一型番の別販売店・再入荷を確認"
             },
-            "direct_listing_display_age_minutes": 0.4,
+            "direct_listing_display_age_minutes": 2.1,
             "direct_listing_display_price_context": null,
             "direct_listing_display_offers": [
               {
@@ -1719,8 +1763,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T01:35:07+09:00",
-                "display_age_minutes": 0.4
+                "retrieval_time": "2026-10-18T03:01:01+09:00",
+                "display_age_minutes": 2.1
               }
             ],
             "direct_listing_sellable_price_jpy": null,
@@ -1954,18 +1998,18 @@
         "target_contingency_jpy": 5000,
         "target_within_pc_budget": true,
         "target_within_total_budget": true,
-        "current_sellable_listing_subtotal_jpy": 47440,
-        "current_sellable_listing_part_count": 3,
+        "current_sellable_listing_subtotal_jpy": 117064,
+        "current_sellable_listing_part_count": 4,
         "current_sellable_listing_required_part_count": 9,
-        "current_sellable_listing_coverage_pct": 33.3,
+        "current_sellable_listing_coverage_pct": 44.4,
         "current_sellable_listing_part_ids": [
           "psu-corsair-rm850e-2025",
           "case-fractal-pop-air-tg",
-          "os-windows11-home"
+          "os-windows11-home",
+          "cpu-ryzen9-9900x"
         ],
         "current_parts_without_sellable_listing": [
           "motherboard-asrock-b850m-pro-rs-wifi",
-          "cpu-ryzen9-9900x",
           "memory-teamgroup-ddr5-32gb-6000",
           "ssd-crucial-p3-plus-1tb",
           "cooler-thermalright-pa120-se-v3",
@@ -1973,28 +2017,27 @@
         ],
         "current_low_stock_part_ids": [],
         "current_confirmed_out_of_stock_part_ids": [
-          "ssd-crucial-p3-plus-1tb",
-          "cooler-thermalright-pa120-se-v3",
           "gpu-rtx5070-12gb"
         ],
         "current_unconfirmed_availability_part_ids": [
           "motherboard-asrock-b850m-pro-rs-wifi",
-          "cpu-ryzen9-9900x",
-          "memory-teamgroup-ddr5-32gb-6000"
+          "memory-teamgroup-ddr5-32gb-6000",
+          "ssd-crucial-p3-plus-1tb",
+          "cooler-thermalright-pa120-se-v3"
         ],
         "current_stock_confirmed_component_count": {
-          "in_stock": 3,
+          "in_stock": 4,
           "low_stock": 0,
-          "preorder_or_backorder": 1,
-          "unknown": 2,
+          "preorder_or_backorder": 2,
+          "unknown": 3,
           "out_of_stock": 4,
           "stale": 0
         },
         "current_retailer_listing_offer_count_by_status": {
-          "in_stock": 3,
+          "in_stock": 4,
           "low_stock": 0,
-          "preorder_or_backorder": 1,
-          "unknown": 3,
+          "preorder_or_backorder": 2,
+          "unknown": 4,
           "out_of_stock": 5,
           "stale": 0
         },
@@ -2006,13 +2049,12 @@
         "market_reference_coverage_complete": false,
         "missing_or_untrusted_market_reference_ids": [
           "cooler-thermalright-pa120-se-v3",
-          "cpu-ryzen9-9900x",
           "gpu-rtx5070-12gb",
           "memory-teamgroup-ddr5-32gb-6000",
           "motherboard-asrock-b850m-pro-rs-wifi",
           "ssd-crucial-p3-plus-1tb"
         ],
-        "market_reference_coverage_count": 3,
+        "market_reference_coverage_count": 4,
         "market_reference_required_count": 9,
         "target_gpu_required_reduction_pct_from_market_reference": null,
         "compatibility_status": "REVIEW",
@@ -2105,17 +2147,17 @@
           "workload_fit_points_out_of_75": 57.6,
           "price_efficiency_points_out_of_15": 14.2,
           "compatibility_points_out_of_10": 8.9,
-          "market_reference_coverage_pct": 33.3,
-          "market_reference_component_count": 3,
+          "market_reference_coverage_pct": 44.4,
+          "market_reference_component_count": 4,
           "market_reference_required_count": 9,
-          "direct_price_identity_pit_coverage_pct": 88.9,
-          "sellable_stock_coverage_pct": 33.3,
+          "direct_price_identity_pit_coverage_pct": 100.0,
+          "sellable_stock_coverage_pct": 44.4,
           "verified_checkout_total_coverage_pct": 0.0,
-          "direct_price_verified_component_count": 8,
-          "sellable_stock_verified_component_count": 3,
+          "direct_price_verified_component_count": 9,
+          "sellable_stock_verified_component_count": 4,
           "verified_checkout_total_component_count": 0,
           "required_component_count": 9,
-          "purchase_evidence_completeness_score_out_of_100": 52.8,
+          "purchase_evidence_completeness_score_out_of_100": 58.9,
           "score_basis": "BF目標総額ベースの構成ルーブリック。GPUゲーム点はTom's Hardwareの1440p Ultraラスタライズ階層を25点満点に正規化した代理指標で、対象ゲームの実測FPSではない。",
           "gaming_benchmark_reference": {
             "source_url": "https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html",
@@ -2146,17 +2188,17 @@
         "workload_fit_points_out_of_75": 57.6,
         "price_efficiency_points_out_of_15": 14.2,
         "compatibility_points_out_of_10": 8.9,
-        "market_reference_coverage_pct": 33.3,
-        "market_reference_component_count": 3,
+        "market_reference_coverage_pct": 44.4,
+        "market_reference_component_count": 4,
         "market_reference_required_count": 9,
-        "direct_price_identity_pit_coverage_pct": 88.9,
-        "sellable_stock_coverage_pct": 33.3,
+        "direct_price_identity_pit_coverage_pct": 100.0,
+        "sellable_stock_coverage_pct": 44.4,
         "verified_checkout_total_coverage_pct": 0.0,
-        "direct_price_verified_component_count": 8,
-        "sellable_stock_verified_component_count": 3,
+        "direct_price_verified_component_count": 9,
+        "sellable_stock_verified_component_count": 4,
         "verified_checkout_total_component_count": 0,
         "required_component_count": 9,
-        "purchase_evidence_completeness_score_out_of_100": 52.8,
+        "purchase_evidence_completeness_score_out_of_100": 58.9,
         "score_basis": "BF目標総額ベースの構成ルーブリック。GPUゲーム点はTom's Hardwareの1440p Ultraラスタライズ階層を25点満点に正規化した代理指標で、対象ゲームの実測FPSではない。",
         "gaming_benchmark_reference": {
           "source_url": "https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html",
@@ -2250,8 +2292,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-18T01:35:16+09:00",
-            "display_age_minutes": 0.3
+            "retrieval_time": "2026-10-18T03:01:18+09:00",
+            "display_age_minutes": 1.9
           },
           {
             "url": "https://www.pc4u.co.jp/view/item/000000090356?category_page_id=ct824",
@@ -2261,8 +2303,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-18T01:35:15+09:00",
-            "display_age_minutes": 0.3
+            "retrieval_time": "2026-10-18T03:01:16+09:00",
+            "display_age_minutes": 1.9
           },
           {
             "url": "https://www.dospara.co.jp/SBR1534/IC512079.html",
@@ -2272,8 +2314,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_structured",
-            "retrieval_time": "2026-10-18T01:35:14+09:00",
-            "display_age_minutes": 0.3
+            "retrieval_time": "2026-10-18T03:01:14+09:00",
+            "display_age_minutes": 1.9
           }
         ],
         "purchase_url": "https://kakaku.com/item/K0001633533/"
@@ -2316,8 +2358,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-18T01:35:12+09:00",
-            "display_age_minutes": 0.3
+            "retrieval_time": "2026-10-18T03:01:10+09:00",
+            "display_age_minutes": 2.0
           }
         ],
         "purchase_url": "https://kakaku.com/item/K0001610896/"
@@ -2407,20 +2449,31 @@
           "limitations_ja": "QLC系で長時間の大容量書込みや書込み耐久を最優先する用途にはより適した候補と比較が必要。速度表記だけで持続性能を保証しない。"
         },
         "market_reference_price_jpy": null,
-        "display_reference_price_jpy": 35500,
+        "display_reference_price_jpy": 32600,
         "sellable_listing_price_jpy": null,
-        "stock_status": "out_of_stock",
+        "stock_status": "unknown",
         "price_status": "search_snippet_reference_only",
         "trusted_for_market_estimate": false,
         "direct_listing_stock_counts": {
           "in_stock": 0,
           "low_stock": 0,
           "preorder_or_backorder": 0,
-          "unknown": 0,
+          "unknown": 1,
           "out_of_stock": 2,
           "stale": 0
         },
         "direct_listing_offers": [
+          {
+            "url": "https://www.yodobashi.com/product/100000001007390887/",
+            "title": "CT1000P3PSSD8JP",
+            "price_jpy": 10210,
+            "stock_status": "unknown",
+            "stock_signal_fresh": true,
+            "stock_signal_max_age_minutes": 60,
+            "price_source_mode": "direct_text",
+            "retrieval_time": "2026-10-18T03:01:28+09:00",
+            "display_age_minutes": 1.7
+          },
           {
             "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
             "title": "Crucial  P3 Plus CT1000P3PSSD8JP (M.2 2280 1TB) ",
@@ -2429,8 +2482,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_structured",
-            "retrieval_time": "2026-10-18T01:35:14+09:00",
-            "display_age_minutes": 0.3
+            "retrieval_time": "2026-10-18T03:01:17+09:00",
+            "display_age_minutes": 1.9
           },
           {
             "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -2440,8 +2493,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-18T01:35:15+09:00",
-            "display_age_minutes": 0.3
+            "retrieval_time": "2026-10-18T03:01:18+09:00",
+            "display_age_minutes": 1.9
           }
         ],
         "purchase_url": "https://kakaku.com/item/K0001466997/"
@@ -2505,12 +2558,23 @@
         "direct_listing_stock_counts": {
           "in_stock": 0,
           "low_stock": 0,
-          "preorder_or_backorder": 0,
+          "preorder_or_backorder": 1,
           "unknown": 0,
           "out_of_stock": 1,
           "stale": 0
         },
         "direct_listing_offers": [
+          {
+            "url": "https://www.yodobashi.com/product/100000001009948470/",
+            "title": "Peerless Assassin 120 SE V3",
+            "price_jpy": 5470,
+            "stock_status": "preorder_or_backorder",
+            "stock_signal_fresh": true,
+            "stock_signal_max_age_minutes": 60,
+            "price_source_mode": "direct_text",
+            "retrieval_time": "2026-10-18T03:01:31+09:00",
+            "display_age_minutes": 1.6
+          },
           {
             "url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
             "title": "Thermalright  Peerless Assassin 120 SE V3 PA120SE-V3 ",
@@ -2519,8 +2583,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_structured",
-            "retrieval_time": "2026-10-18T01:35:23+09:00",
-            "display_age_minutes": 0.2
+            "retrieval_time": "2026-10-18T03:01:21+09:00",
+            "display_age_minutes": 1.8
           }
         ],
         "purchase_url": "https://kakaku.com/item/K0001789043/"
@@ -2583,23 +2647,11 @@
           "in_stock": 0,
           "low_stock": 0,
           "preorder_or_backorder": 0,
-          "unknown": 1,
+          "unknown": 0,
           "out_of_stock": 0,
           "stale": 0
         },
-        "direct_listing_offers": [
-          {
-            "url": "https://item.rakuten.co.jp/a-price/4711377308229/?variantId=4711377308229",
-            "title": "https://item.rakuten.co.jp/a-price/4711377308229/?variantId=4711377308229",
-            "price_jpy": 213800,
-            "stock_status": "unknown",
-            "stock_signal_fresh": true,
-            "stock_signal_max_age_minutes": 60,
-            "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-18T01:35:30+09:00",
-            "display_age_minutes": 0.1
-          }
-        ],
+        "direct_listing_offers": [],
         "purchase_url": "https://shop.tsukumo.co.jp/goods/4711377308229/"
       }
     ],
@@ -2618,9 +2670,9 @@
     "configured_component_count": 20,
     "tracked_hardware_part_count": 20,
     "snapshot_verified_count": 0,
-    "snapshot_generated_at": "2026-10-18T01:35:32+09:00",
+    "snapshot_generated_at": "2026-10-18T03:01:42+09:00",
     "snapshot_source_role": "comparison_site_reference",
-    "snapshot_sha256": "1613c3e6478115460f61747985b46d3929733214c2a3fa6f9215975f0fb0b4ed"
+    "snapshot_sha256": "bf15db35b355616829c5027aeffc428ba6acc64258e0bacb43cc87e7b77cf17d"
   },
   "builds": [
     {
@@ -2667,8 +2719,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:11+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T03:01:07+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "purchase_url": "https://www.dospara.co.jp/SBR1892/IC634895.html"
@@ -2715,8 +2767,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:16+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:18+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://www.pc4u.co.jp/view/item/000000090356?category_page_id=ct824",
@@ -2726,8 +2778,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:15+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:16+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://www.dospara.co.jp/SBR1534/IC512079.html",
@@ -2737,8 +2789,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:14+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:14+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001633533/"
@@ -2781,8 +2833,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:12+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:10+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001610896/"
@@ -2869,20 +2921,31 @@
             "limitations_ja": "QLC系で長時間の大容量書込みや書込み耐久を最優先する用途にはより適した候補と比較が必要。速度表記だけで持続性能を保証しない。"
           },
           "market_reference_price_jpy": null,
-          "display_reference_price_jpy": 35500,
+          "display_reference_price_jpy": 32600,
           "sellable_listing_price_jpy": null,
-          "stock_status": "out_of_stock",
+          "stock_status": "unknown",
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "direct_listing_stock_counts": {
             "in_stock": 0,
             "low_stock": 0,
             "preorder_or_backorder": 0,
-            "unknown": 0,
+            "unknown": 1,
             "out_of_stock": 2,
             "stale": 0
           },
           "direct_listing_offers": [
+            {
+              "url": "https://www.yodobashi.com/product/100000001007390887/",
+              "title": "CT1000P3PSSD8JP",
+              "price_jpy": 10210,
+              "stock_status": "unknown",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T03:01:28+09:00",
+              "display_age_minutes": 1.7
+            },
             {
               "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
               "title": "Crucial  P3 Plus CT1000P3PSSD8JP (M.2 2280 1TB) ",
@@ -2891,8 +2954,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:14+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:17+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -2902,8 +2965,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:15+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:18+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001466997/"
@@ -2964,12 +3027,23 @@
           "direct_listing_stock_counts": {
             "in_stock": 0,
             "low_stock": 0,
-            "preorder_or_backorder": 0,
+            "preorder_or_backorder": 1,
             "unknown": 0,
             "out_of_stock": 1,
             "stale": 0
           },
           "direct_listing_offers": [
+            {
+              "url": "https://www.yodobashi.com/product/100000001009948470/",
+              "title": "Peerless Assassin 120 SE V3",
+              "price_jpy": 5470,
+              "stock_status": "preorder_or_backorder",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T03:01:31+09:00",
+              "display_age_minutes": 1.6
+            },
             {
               "url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
               "title": "Thermalright  Peerless Assassin 120 SE V3 PA120SE-V3 ",
@@ -2978,8 +3052,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:23+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:21+09:00",
+              "display_age_minutes": 1.8
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001789043/"
@@ -3028,8 +3102,8 @@
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:02+09:00",
-          "reference_age_minutes": 0.5166666666666667,
+          "retrieval_time": "2026-10-18T03:00:55+09:00",
+          "reference_age_minutes": 2.2333333333333334,
           "monitor_url": "https://kakaku.com/item/K0001630332/",
           "purchase_url": "https://kakaku.com/item/K0001630332/",
           "reference_source_url": null,
@@ -3043,7 +3117,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:03+09:00",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:00+09:00",
           "early_buy_review": {
             "item_id": "cpu-ryzen7-9700x",
             "early_buy_threshold_jpy": 36000,
@@ -3060,7 +3134,7 @@
             "purchase_authorized": false,
             "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.5,
+          "direct_listing_display_age_minutes": 2.1,
           "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる 日本AMD AMD Ryzen 7 9000シリーズ AMD Ryzen 7 9700X 100-100001404WO... ￥53,110 5,311 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月19日月曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
           "direct_listing_display_offers": [
             {
@@ -3071,8 +3145,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:03+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T03:01:00+09:00",
+              "display_age_minutes": 2.1
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -3150,18 +3224,18 @@
           "role": "required_fixed_part",
           "target_price_jpy": 20000,
           "market_reference_price_jpy": null,
-          "display_reference_price_jpy": null,
-          "price_status": "missing",
+          "display_reference_price_jpy": 35680,
+          "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:09+09:00",
-          "reference_age_minutes": 0.4,
+          "retrieval_time": "2026-10-18T03:01:06+09:00",
+          "reference_age_minutes": 2.05,
           "monitor_url": "https://kakaku.com/item/K0001669878/",
           "purchase_url": "https://kakaku.com/item/K0001669878/",
           "reference_source_url": null,
           "reference_source_label": null,
-          "search_snippet_reference_url": null,
-          "search_snippet_reference_title": null,
+          "search_snippet_reference_url": "https://search.kakaku.com/ASRock%20B850M%20Pro%20RS%20WiFi/",
+          "search_snippet_reference_title": "B850M Pro RS WiFi",
           "direct_listing_display_price_jpy": 26990,
           "direct_listing_display_url": "https://www.yodobashi.com/product/100000001008871801/",
           "direct_listing_display_title": "B850M Pro RS WiFi",
@@ -3169,7 +3243,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:11+09:00",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:09+09:00",
           "early_buy_review": {
             "item_id": "motherboard-asrock-b850m-pro-rs-wifi",
             "early_buy_threshold_jpy": 18000,
@@ -3186,7 +3260,7 @@
             "purchase_authorized": false,
             "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.4,
+          "direct_listing_display_age_minutes": 2.0,
           "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる アスロック ASRock AMD B850チップセット搭載 Micro-ATX マザーボード B850M Pro RS ... ￥26,990 2,699 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月19日月曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
           "direct_listing_display_offers": [
             {
@@ -3197,8 +3271,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:11+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T03:01:09+09:00",
+              "display_age_minutes": 2.0
             },
             {
               "url": "https://www.sofmap.com/product_detail.aspx?sku=101393495",
@@ -3208,8 +3282,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:15+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:14+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://www.pc4u.co.jp/view/item/000000092844",
@@ -3219,8 +3293,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:12+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:11+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -3325,8 +3399,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T01:35:21+09:00",
-          "reference_age_minutes": 0.2,
+          "retrieval_time": "2026-10-18T03:01:18+09:00",
+          "reference_age_minutes": 1.85,
           "monitor_url": "https://kakaku.com/item/K0001671441/",
           "purchase_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
@@ -3369,14 +3443,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:21+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:18+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "direct_listing_sellable_price_jpy": 14980,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T01:35:21+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T03:01:18+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -3453,8 +3527,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T01:35:22+09:00",
-          "reference_age_minutes": 0.18333333333333332,
+          "retrieval_time": "2026-10-18T03:01:24+09:00",
+          "reference_age_minutes": 1.75,
           "monitor_url": "https://kakaku.com/item/J0000039064/",
           "purchase_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
@@ -3497,8 +3571,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:22+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:24+09:00",
+              "display_age_minutes": 1.8
             },
             {
               "url": "https://www.yodobashi.com/product/100000001007195271/",
@@ -3508,14 +3582,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:20+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:23+09:00",
+              "display_age_minutes": 1.8
             }
           ],
           "direct_listing_sellable_price_jpy": 13180,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T01:35:22+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T03:01:24+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -3593,8 +3667,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T01:35:23+09:00",
-          "reference_age_minutes": 0.16666666666666666,
+          "retrieval_time": "2026-10-18T03:01:26+09:00",
+          "reference_age_minutes": 1.7166666666666666,
           "monitor_url": "https://kakaku.com/item/K0001432816/",
           "purchase_url": "https://www.yodobashi.com/product/100000001006975270/",
           "reference_source_url": "https://www.yodobashi.com/product/100000001006975270/",
@@ -3637,14 +3711,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:23+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:26+09:00",
+              "display_age_minutes": 1.7
             }
           ],
           "direct_listing_sellable_price_jpy": 19280,
           "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001006975270/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T01:35:23+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T03:01:26+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -3704,8 +3778,8 @@
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:11+09:00",
-          "reference_age_minutes": 0.36666666666666664,
+          "retrieval_time": "2026-10-18T03:01:07+09:00",
+          "reference_age_minutes": 2.033333333333333,
           "monitor_url": "https://kakaku.com/item/K0001610896/",
           "purchase_url": "https://kakaku.com/item/K0001610896/",
           "reference_source_url": null,
@@ -3719,7 +3793,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:12+09:00",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:10+09:00",
           "early_buy_review": {
             "item_id": "memory-teamgroup-ddr5-32gb-6000",
             "early_buy_threshold_jpy": 36000,
@@ -3736,7 +3810,7 @@
             "purchase_authorized": false,
             "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.3,
+          "direct_listing_display_age_minutes": 2.0,
           "direct_listing_display_price_context": "000HC38ADC01-A 商品内容：16GBx2枚 色：T-CREATE EXPERT ホワイト 商品タイプ：DDR5 6000MHz CL38 【当店からの連絡】 販売価格 113,938円 (税込) ポイント 1% 1,140円相当進呈 送料無料 ※ポイントは商品発送後、且つ注文日から20日後に付与されます。 販売：株式会社マルチラテラル（登録番号：T8020001",
           "direct_listing_display_offers": [
             {
@@ -3747,8 +3821,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:12+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:10+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -3830,45 +3904,56 @@
           "role": "required_fixed_part",
           "target_price_jpy": 24000,
           "market_reference_price_jpy": null,
-          "display_reference_price_jpy": 35500,
+          "display_reference_price_jpy": 32600,
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:12+09:00",
-          "reference_age_minutes": 0.35,
+          "retrieval_time": "2026-10-18T03:01:14+09:00",
+          "reference_age_minutes": 1.9166666666666667,
           "monitor_url": "https://kakaku.com/item/K0001466997/",
           "purchase_url": "https://kakaku.com/item/K0001466997/",
           "reference_source_url": null,
           "reference_source_label": null,
           "search_snippet_reference_url": "https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/",
           "search_snippet_reference_title": "CT1000P3PSSD8JP",
-          "direct_listing_display_price_jpy": 9300,
-          "direct_listing_display_url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
-          "direct_listing_display_title": "Crucial  P3 Plus CT1000P3PSSD8JP (M.2 2280 1TB) ",
+          "direct_listing_display_price_jpy": 10210,
+          "direct_listing_display_url": "https://www.yodobashi.com/product/100000001007390887/",
+          "direct_listing_display_title": "CT1000P3PSSD8JP",
           "direct_listing_display_identity_anchor": "CT1000P3PSSD8JP",
-          "direct_listing_display_stock_status": "out_of_stock",
-          "direct_listing_display_stock_label": "在庫切れ",
-          "direct_listing_display_source_mode": "direct_structured",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:14+09:00",
+          "direct_listing_display_stock_status": "unknown",
+          "direct_listing_display_stock_label": "在庫未確認",
+          "direct_listing_display_source_mode": "direct_text",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:28+09:00",
           "early_buy_review": {
             "item_id": "ssd-crucial-p3-plus-1tb",
             "early_buy_threshold_jpy": 16000,
-            "observed_price_jpy": 9300,
+            "observed_price_jpy": 10210,
             "estimated_checkout_total_jpy": null,
             "verified_checkout_total_jpy": null,
             "checkout_total_verified": false,
             "price_verified": true,
             "identity_verified": true,
-            "stock_status": "out_of_stock",
+            "stock_status": "unknown",
             "pit_valid": true,
-            "status": "UNAVAILABLE",
-            "label_ja": "在庫切れ",
+            "status": "STOCK_NOT_VERIFIED",
+            "label_ja": "在庫未確認",
             "purchase_authorized": false,
-            "next_step": "同一型番の別販売店・再入荷を確認"
+            "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.3,
-          "direct_listing_display_price_context": null,
+          "direct_listing_display_age_minutes": 1.7,
+          "direct_listing_display_price_context": "e Gen4 x4 CT1000P3PSSD8JP 4.11 レビュー （28） Q＆A （1） 投稿画像 （1） 最新情報 希望小売価格： オープンプライス 販売終了時の価格： ￥10,210 （税込） メーカー： crucial 販売開始日： 2022/09/09（販売終了商品） お取り扱い： のお取り扱い商品です。 バリエーション： 内蔵SSD Crucial P3",
           "direct_listing_display_offers": [
+            {
+              "url": "https://www.yodobashi.com/product/100000001007390887/",
+              "title": "CT1000P3PSSD8JP",
+              "price_jpy": 10210,
+              "stock_status": "unknown",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T03:01:28+09:00",
+              "display_age_minutes": 1.7
+            },
             {
               "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
               "title": "Crucial  P3 Plus CT1000P3PSSD8JP (M.2 2280 1TB) ",
@@ -3877,8 +3962,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:14+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:17+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -3888,8 +3973,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:15+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:18+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -3900,11 +3985,11 @@
             "in_stock": 0,
             "low_stock": 0,
             "preorder_or_backorder": 0,
-            "unknown": 0,
+            "unknown": 1,
             "out_of_stock": 2,
             "stale": 0
           },
-          "direct_listing_offer_count": 2,
+          "direct_listing_offer_count": 3,
           "direct_listing_sellable_offer_count": 0,
           "direct_listing_validation_diagnostics": [
             {
@@ -3982,22 +4067,22 @@
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:22+09:00",
-          "reference_age_minutes": 0.18333333333333332,
+          "retrieval_time": "2026-10-18T03:01:19+09:00",
+          "reference_age_minutes": 1.8333333333333333,
           "monitor_url": "https://kakaku.com/item/K0001789043/",
           "purchase_url": "https://kakaku.com/item/K0001789043/",
           "reference_source_url": null,
           "reference_source_label": null,
           "search_snippet_reference_url": "https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/",
           "search_snippet_reference_title": "Peerless Assassin 120 SE V3",
-          "direct_listing_display_price_jpy": 4980,
-          "direct_listing_display_url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
-          "direct_listing_display_title": "Thermalright  Peerless Assassin 120 SE V3 PA120SE-V3 ",
+          "direct_listing_display_price_jpy": 5470,
+          "direct_listing_display_url": "https://www.yodobashi.com/product/100000001009948470/",
+          "direct_listing_display_title": "Peerless Assassin 120 SE V3",
           "direct_listing_display_identity_anchor": "Peerless Assassin 120 SE V3",
-          "direct_listing_display_stock_status": "out_of_stock",
-          "direct_listing_display_stock_label": "在庫切れ",
-          "direct_listing_display_source_mode": "direct_structured",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:23+09:00",
+          "direct_listing_display_stock_status": "preorder_or_backorder",
+          "direct_listing_display_stock_label": "取寄せ/予約",
+          "direct_listing_display_source_mode": "direct_text",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:31+09:00",
           "early_buy_review": {
             "item_id": "cooler-thermalright-pa120-se-v3",
             "early_buy_threshold_jpy": 4500,
@@ -4014,9 +4099,20 @@
             "purchase_authorized": false,
             "next_step": "同一型番の別販売店・再入荷を確認"
           },
-          "direct_listing_display_age_minutes": 0.2,
-          "direct_listing_display_price_context": null,
+          "direct_listing_display_age_minutes": 1.6,
+          "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる サーマルライト Thermalright 120mmファン搭載 ツインタワー型 CPUクーラー Peerless Ass... ￥5,470 547 ゴールドポイント （10％還元） お取り寄せ 日本全国配達料金無料 会員ページ ご注文商品の確認・変更 お客様情報の確認・変更 ヨドバシ・ドット・コム会員IDの変更 ヨド",
           "direct_listing_display_offers": [
+            {
+              "url": "https://www.yodobashi.com/product/100000001009948470/",
+              "title": "Peerless Assassin 120 SE V3",
+              "price_jpy": 5470,
+              "stock_status": "preorder_or_backorder",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T03:01:31+09:00",
+              "display_age_minutes": 1.6
+            },
             {
               "url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
               "title": "Thermalright  Peerless Assassin 120 SE V3 PA120SE-V3 ",
@@ -4025,8 +4121,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:23+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:21+09:00",
+              "display_age_minutes": 1.8
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -4036,12 +4132,12 @@
           "direct_listing_stock_counts": {
             "in_stock": 0,
             "low_stock": 0,
-            "preorder_or_backorder": 0,
+            "preorder_or_backorder": 1,
             "unknown": 0,
             "out_of_stock": 1,
             "stale": 0
           },
-          "direct_listing_offer_count": 1,
+          "direct_listing_offer_count": 2,
           "direct_listing_sellable_offer_count": 0,
           "direct_listing_validation_diagnostics": [
             {
@@ -4095,8 +4191,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T01:35:11+09:00",
-          "reference_age_minutes": 0.36666666666666664,
+          "retrieval_time": "2026-10-18T03:01:07+09:00",
+          "reference_age_minutes": 2.033333333333333,
           "monitor_url": "https://kakaku.com/item/K0001696164/",
           "purchase_url": "https://www.dospara.co.jp/SBR1892/IC634895.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR1892/IC634895.html",
@@ -4139,14 +4235,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:11+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T03:01:07+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": 209800,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1892/IC634895.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T01:35:11+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T03:01:07+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -4366,28 +4462,27 @@
         "cooler-thermalright-pa120-se-v3"
       ],
       "current_low_stock_part_ids": [],
-      "current_confirmed_out_of_stock_part_ids": [
-        "ssd-crucial-p3-plus-1tb",
-        "cooler-thermalright-pa120-se-v3"
-      ],
+      "current_confirmed_out_of_stock_part_ids": [],
       "current_unconfirmed_availability_part_ids": [
         "cpu-ryzen7-9700x",
         "motherboard-asrock-b850m-pro-rs-wifi",
-        "memory-teamgroup-ddr5-32gb-6000"
+        "memory-teamgroup-ddr5-32gb-6000",
+        "ssd-crucial-p3-plus-1tb",
+        "cooler-thermalright-pa120-se-v3"
       ],
       "current_stock_confirmed_component_count": {
         "in_stock": 4,
         "low_stock": 0,
-        "preorder_or_backorder": 1,
-        "unknown": 3,
+        "preorder_or_backorder": 2,
+        "unknown": 4,
         "out_of_stock": 3,
         "stale": 0
       },
       "current_retailer_listing_offer_count_by_status": {
         "in_stock": 4,
         "low_stock": 0,
-        "preorder_or_backorder": 1,
-        "unknown": 4,
+        "preorder_or_backorder": 2,
+        "unknown": 5,
         "out_of_stock": 4,
         "stale": 0
       },
@@ -4560,8 +4655,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:07+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T03:01:01+09:00",
+              "display_age_minutes": 2.1
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001798041/"
@@ -4589,23 +4684,11 @@
             "in_stock": 0,
             "low_stock": 0,
             "preorder_or_backorder": 0,
-            "unknown": 1,
+            "unknown": 0,
             "out_of_stock": 0,
             "stale": 0
           },
-          "direct_listing_offers": [
-            {
-              "url": "https://item.rakuten.co.jp/a-price/4711377308229/?variantId=4711377308229",
-              "title": "https://item.rakuten.co.jp/a-price/4711377308229/?variantId=4711377308229",
-              "price_jpy": 213800,
-              "stock_status": "unknown",
-              "stock_signal_fresh": true,
-              "stock_signal_max_age_minutes": 60,
-              "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:30+09:00",
-              "display_age_minutes": 0.1
-            }
-          ],
+          "direct_listing_offers": [],
           "purchase_url": "https://shop.tsukumo.co.jp/goods/4711377308229/"
         }
       ],
@@ -4650,8 +4733,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:16+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:18+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://www.pc4u.co.jp/view/item/000000090356?category_page_id=ct824",
@@ -4661,8 +4744,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:15+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:16+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://www.dospara.co.jp/SBR1534/IC512079.html",
@@ -4672,8 +4755,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:14+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:14+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001633533/"
@@ -4716,8 +4799,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:12+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:10+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001610896/"
@@ -4804,20 +4887,31 @@
             "limitations_ja": "QLC系で長時間の大容量書込みや書込み耐久を最優先する用途にはより適した候補と比較が必要。速度表記だけで持続性能を保証しない。"
           },
           "market_reference_price_jpy": null,
-          "display_reference_price_jpy": 35500,
+          "display_reference_price_jpy": 32600,
           "sellable_listing_price_jpy": null,
-          "stock_status": "out_of_stock",
+          "stock_status": "unknown",
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "direct_listing_stock_counts": {
             "in_stock": 0,
             "low_stock": 0,
             "preorder_or_backorder": 0,
-            "unknown": 0,
+            "unknown": 1,
             "out_of_stock": 2,
             "stale": 0
           },
           "direct_listing_offers": [
+            {
+              "url": "https://www.yodobashi.com/product/100000001007390887/",
+              "title": "CT1000P3PSSD8JP",
+              "price_jpy": 10210,
+              "stock_status": "unknown",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T03:01:28+09:00",
+              "display_age_minutes": 1.7
+            },
             {
               "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
               "title": "Crucial  P3 Plus CT1000P3PSSD8JP (M.2 2280 1TB) ",
@@ -4826,8 +4920,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:14+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:17+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -4837,8 +4931,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:15+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:18+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001466997/"
@@ -4899,12 +4993,23 @@
           "direct_listing_stock_counts": {
             "in_stock": 0,
             "low_stock": 0,
-            "preorder_or_backorder": 0,
+            "preorder_or_backorder": 1,
             "unknown": 0,
             "out_of_stock": 1,
             "stale": 0
           },
           "direct_listing_offers": [
+            {
+              "url": "https://www.yodobashi.com/product/100000001009948470/",
+              "title": "Peerless Assassin 120 SE V3",
+              "price_jpy": 5470,
+              "stock_status": "preorder_or_backorder",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T03:01:31+09:00",
+              "display_age_minutes": 1.6
+            },
             {
               "url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
               "title": "Thermalright  Peerless Assassin 120 SE V3 PA120SE-V3 ",
@@ -4913,8 +5018,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:23+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:21+09:00",
+              "display_age_minutes": 1.8
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001789043/"
@@ -4963,8 +5068,8 @@
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:02+09:00",
-          "reference_age_minutes": 0.5166666666666667,
+          "retrieval_time": "2026-10-18T03:00:55+09:00",
+          "reference_age_minutes": 2.2333333333333334,
           "monitor_url": "https://kakaku.com/item/K0001630332/",
           "purchase_url": "https://kakaku.com/item/K0001630332/",
           "reference_source_url": null,
@@ -4978,7 +5083,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:03+09:00",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:00+09:00",
           "early_buy_review": {
             "item_id": "cpu-ryzen7-9700x",
             "early_buy_threshold_jpy": 36000,
@@ -4995,7 +5100,7 @@
             "purchase_authorized": false,
             "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.5,
+          "direct_listing_display_age_minutes": 2.1,
           "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる 日本AMD AMD Ryzen 7 9000シリーズ AMD Ryzen 7 9700X 100-100001404WO... ￥53,110 5,311 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月19日月曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
           "direct_listing_display_offers": [
             {
@@ -5006,8 +5111,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:03+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T03:01:00+09:00",
+              "display_age_minutes": 2.1
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -5085,18 +5190,18 @@
           "role": "required_fixed_part",
           "target_price_jpy": 20000,
           "market_reference_price_jpy": null,
-          "display_reference_price_jpy": null,
-          "price_status": "missing",
+          "display_reference_price_jpy": 35680,
+          "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:09+09:00",
-          "reference_age_minutes": 0.4,
+          "retrieval_time": "2026-10-18T03:01:06+09:00",
+          "reference_age_minutes": 2.05,
           "monitor_url": "https://kakaku.com/item/K0001669878/",
           "purchase_url": "https://kakaku.com/item/K0001669878/",
           "reference_source_url": null,
           "reference_source_label": null,
-          "search_snippet_reference_url": null,
-          "search_snippet_reference_title": null,
+          "search_snippet_reference_url": "https://search.kakaku.com/ASRock%20B850M%20Pro%20RS%20WiFi/",
+          "search_snippet_reference_title": "B850M Pro RS WiFi",
           "direct_listing_display_price_jpy": 26990,
           "direct_listing_display_url": "https://www.yodobashi.com/product/100000001008871801/",
           "direct_listing_display_title": "B850M Pro RS WiFi",
@@ -5104,7 +5209,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:11+09:00",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:09+09:00",
           "early_buy_review": {
             "item_id": "motherboard-asrock-b850m-pro-rs-wifi",
             "early_buy_threshold_jpy": 18000,
@@ -5121,7 +5226,7 @@
             "purchase_authorized": false,
             "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.4,
+          "direct_listing_display_age_minutes": 2.0,
           "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる アスロック ASRock AMD B850チップセット搭載 Micro-ATX マザーボード B850M Pro RS ... ￥26,990 2,699 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月19日月曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
           "direct_listing_display_offers": [
             {
@@ -5132,8 +5237,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:11+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T03:01:09+09:00",
+              "display_age_minutes": 2.0
             },
             {
               "url": "https://www.sofmap.com/product_detail.aspx?sku=101393495",
@@ -5143,8 +5248,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:15+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:14+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://www.pc4u.co.jp/view/item/000000092844",
@@ -5154,8 +5259,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:12+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:11+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -5260,8 +5365,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T01:35:21+09:00",
-          "reference_age_minutes": 0.2,
+          "retrieval_time": "2026-10-18T03:01:18+09:00",
+          "reference_age_minutes": 1.85,
           "monitor_url": "https://kakaku.com/item/K0001671441/",
           "purchase_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
@@ -5304,14 +5409,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:21+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:18+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "direct_listing_sellable_price_jpy": 14980,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T01:35:21+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T03:01:18+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -5388,8 +5493,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T01:35:22+09:00",
-          "reference_age_minutes": 0.18333333333333332,
+          "retrieval_time": "2026-10-18T03:01:24+09:00",
+          "reference_age_minutes": 1.75,
           "monitor_url": "https://kakaku.com/item/J0000039064/",
           "purchase_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
@@ -5432,8 +5537,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:22+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:24+09:00",
+              "display_age_minutes": 1.8
             },
             {
               "url": "https://www.yodobashi.com/product/100000001007195271/",
@@ -5443,14 +5548,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:20+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:23+09:00",
+              "display_age_minutes": 1.8
             }
           ],
           "direct_listing_sellable_price_jpy": 13180,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T01:35:22+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T03:01:24+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -5528,8 +5633,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T01:35:23+09:00",
-          "reference_age_minutes": 0.16666666666666666,
+          "retrieval_time": "2026-10-18T03:01:26+09:00",
+          "reference_age_minutes": 1.7166666666666666,
           "monitor_url": "https://kakaku.com/item/K0001432816/",
           "purchase_url": "https://www.yodobashi.com/product/100000001006975270/",
           "reference_source_url": "https://www.yodobashi.com/product/100000001006975270/",
@@ -5572,14 +5677,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:23+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:26+09:00",
+              "display_age_minutes": 1.7
             }
           ],
           "direct_listing_sellable_price_jpy": 19280,
           "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001006975270/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T01:35:23+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T03:01:26+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -5639,8 +5744,8 @@
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:11+09:00",
-          "reference_age_minutes": 0.36666666666666664,
+          "retrieval_time": "2026-10-18T03:01:07+09:00",
+          "reference_age_minutes": 2.033333333333333,
           "monitor_url": "https://kakaku.com/item/K0001610896/",
           "purchase_url": "https://kakaku.com/item/K0001610896/",
           "reference_source_url": null,
@@ -5654,7 +5759,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:12+09:00",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:10+09:00",
           "early_buy_review": {
             "item_id": "memory-teamgroup-ddr5-32gb-6000",
             "early_buy_threshold_jpy": 36000,
@@ -5671,7 +5776,7 @@
             "purchase_authorized": false,
             "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.3,
+          "direct_listing_display_age_minutes": 2.0,
           "direct_listing_display_price_context": "000HC38ADC01-A 商品内容：16GBx2枚 色：T-CREATE EXPERT ホワイト 商品タイプ：DDR5 6000MHz CL38 【当店からの連絡】 販売価格 113,938円 (税込) ポイント 1% 1,140円相当進呈 送料無料 ※ポイントは商品発送後、且つ注文日から20日後に付与されます。 販売：株式会社マルチラテラル（登録番号：T8020001",
           "direct_listing_display_offers": [
             {
@@ -5682,8 +5787,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:12+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:10+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -5765,45 +5870,56 @@
           "role": "required_fixed_part",
           "target_price_jpy": 24000,
           "market_reference_price_jpy": null,
-          "display_reference_price_jpy": 35500,
+          "display_reference_price_jpy": 32600,
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:12+09:00",
-          "reference_age_minutes": 0.35,
+          "retrieval_time": "2026-10-18T03:01:14+09:00",
+          "reference_age_minutes": 1.9166666666666667,
           "monitor_url": "https://kakaku.com/item/K0001466997/",
           "purchase_url": "https://kakaku.com/item/K0001466997/",
           "reference_source_url": null,
           "reference_source_label": null,
           "search_snippet_reference_url": "https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/",
           "search_snippet_reference_title": "CT1000P3PSSD8JP",
-          "direct_listing_display_price_jpy": 9300,
-          "direct_listing_display_url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
-          "direct_listing_display_title": "Crucial  P3 Plus CT1000P3PSSD8JP (M.2 2280 1TB) ",
+          "direct_listing_display_price_jpy": 10210,
+          "direct_listing_display_url": "https://www.yodobashi.com/product/100000001007390887/",
+          "direct_listing_display_title": "CT1000P3PSSD8JP",
           "direct_listing_display_identity_anchor": "CT1000P3PSSD8JP",
-          "direct_listing_display_stock_status": "out_of_stock",
-          "direct_listing_display_stock_label": "在庫切れ",
-          "direct_listing_display_source_mode": "direct_structured",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:14+09:00",
+          "direct_listing_display_stock_status": "unknown",
+          "direct_listing_display_stock_label": "在庫未確認",
+          "direct_listing_display_source_mode": "direct_text",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:28+09:00",
           "early_buy_review": {
             "item_id": "ssd-crucial-p3-plus-1tb",
             "early_buy_threshold_jpy": 16000,
-            "observed_price_jpy": 9300,
+            "observed_price_jpy": 10210,
             "estimated_checkout_total_jpy": null,
             "verified_checkout_total_jpy": null,
             "checkout_total_verified": false,
             "price_verified": true,
             "identity_verified": true,
-            "stock_status": "out_of_stock",
+            "stock_status": "unknown",
             "pit_valid": true,
-            "status": "UNAVAILABLE",
-            "label_ja": "在庫切れ",
+            "status": "STOCK_NOT_VERIFIED",
+            "label_ja": "在庫未確認",
             "purchase_authorized": false,
-            "next_step": "同一型番の別販売店・再入荷を確認"
+            "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.3,
-          "direct_listing_display_price_context": null,
+          "direct_listing_display_age_minutes": 1.7,
+          "direct_listing_display_price_context": "e Gen4 x4 CT1000P3PSSD8JP 4.11 レビュー （28） Q＆A （1） 投稿画像 （1） 最新情報 希望小売価格： オープンプライス 販売終了時の価格： ￥10,210 （税込） メーカー： crucial 販売開始日： 2022/09/09（販売終了商品） お取り扱い： のお取り扱い商品です。 バリエーション： 内蔵SSD Crucial P3",
           "direct_listing_display_offers": [
+            {
+              "url": "https://www.yodobashi.com/product/100000001007390887/",
+              "title": "CT1000P3PSSD8JP",
+              "price_jpy": 10210,
+              "stock_status": "unknown",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T03:01:28+09:00",
+              "display_age_minutes": 1.7
+            },
             {
               "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
               "title": "Crucial  P3 Plus CT1000P3PSSD8JP (M.2 2280 1TB) ",
@@ -5812,8 +5928,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:14+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:17+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -5823,8 +5939,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:15+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:18+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -5835,11 +5951,11 @@
             "in_stock": 0,
             "low_stock": 0,
             "preorder_or_backorder": 0,
-            "unknown": 0,
+            "unknown": 1,
             "out_of_stock": 2,
             "stale": 0
           },
-          "direct_listing_offer_count": 2,
+          "direct_listing_offer_count": 3,
           "direct_listing_sellable_offer_count": 0,
           "direct_listing_validation_diagnostics": [
             {
@@ -5917,22 +6033,22 @@
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:22+09:00",
-          "reference_age_minutes": 0.18333333333333332,
+          "retrieval_time": "2026-10-18T03:01:19+09:00",
+          "reference_age_minutes": 1.8333333333333333,
           "monitor_url": "https://kakaku.com/item/K0001789043/",
           "purchase_url": "https://kakaku.com/item/K0001789043/",
           "reference_source_url": null,
           "reference_source_label": null,
           "search_snippet_reference_url": "https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/",
           "search_snippet_reference_title": "Peerless Assassin 120 SE V3",
-          "direct_listing_display_price_jpy": 4980,
-          "direct_listing_display_url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
-          "direct_listing_display_title": "Thermalright  Peerless Assassin 120 SE V3 PA120SE-V3 ",
+          "direct_listing_display_price_jpy": 5470,
+          "direct_listing_display_url": "https://www.yodobashi.com/product/100000001009948470/",
+          "direct_listing_display_title": "Peerless Assassin 120 SE V3",
           "direct_listing_display_identity_anchor": "Peerless Assassin 120 SE V3",
-          "direct_listing_display_stock_status": "out_of_stock",
-          "direct_listing_display_stock_label": "在庫切れ",
-          "direct_listing_display_source_mode": "direct_structured",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:23+09:00",
+          "direct_listing_display_stock_status": "preorder_or_backorder",
+          "direct_listing_display_stock_label": "取寄せ/予約",
+          "direct_listing_display_source_mode": "direct_text",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:31+09:00",
           "early_buy_review": {
             "item_id": "cooler-thermalright-pa120-se-v3",
             "early_buy_threshold_jpy": 4500,
@@ -5949,9 +6065,20 @@
             "purchase_authorized": false,
             "next_step": "同一型番の別販売店・再入荷を確認"
           },
-          "direct_listing_display_age_minutes": 0.2,
-          "direct_listing_display_price_context": null,
+          "direct_listing_display_age_minutes": 1.6,
+          "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる サーマルライト Thermalright 120mmファン搭載 ツインタワー型 CPUクーラー Peerless Ass... ￥5,470 547 ゴールドポイント （10％還元） お取り寄せ 日本全国配達料金無料 会員ページ ご注文商品の確認・変更 お客様情報の確認・変更 ヨドバシ・ドット・コム会員IDの変更 ヨド",
           "direct_listing_display_offers": [
+            {
+              "url": "https://www.yodobashi.com/product/100000001009948470/",
+              "title": "Peerless Assassin 120 SE V3",
+              "price_jpy": 5470,
+              "stock_status": "preorder_or_backorder",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T03:01:31+09:00",
+              "display_age_minutes": 1.6
+            },
             {
               "url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
               "title": "Thermalright  Peerless Assassin 120 SE V3 PA120SE-V3 ",
@@ -5960,8 +6087,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:23+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:21+09:00",
+              "display_age_minutes": 1.8
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -5971,12 +6098,12 @@
           "direct_listing_stock_counts": {
             "in_stock": 0,
             "low_stock": 0,
-            "preorder_or_backorder": 0,
+            "preorder_or_backorder": 1,
             "unknown": 0,
             "out_of_stock": 1,
             "stale": 0
           },
-          "direct_listing_offer_count": 1,
+          "direct_listing_offer_count": 2,
           "direct_listing_sellable_offer_count": 0,
           "direct_listing_validation_diagnostics": [
             {
@@ -6030,8 +6157,8 @@
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:02+09:00",
-          "reference_age_minutes": 0.5166666666666667,
+          "retrieval_time": "2026-10-18T03:00:55+09:00",
+          "reference_age_minutes": 2.2333333333333334,
           "monitor_url": "https://kakaku.com/item/K0001798041/",
           "purchase_url": "https://kakaku.com/item/K0001798041/",
           "reference_source_url": null,
@@ -6045,7 +6172,7 @@
           "direct_listing_display_stock_status": "out_of_stock",
           "direct_listing_display_stock_label": "在庫切れ",
           "direct_listing_display_source_mode": "direct_structured",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:07+09:00",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:01+09:00",
           "early_buy_review": {
             "item_id": "gpu-rtx5070-12gb",
             "early_buy_threshold_jpy": 119000,
@@ -6062,7 +6189,7 @@
             "purchase_authorized": false,
             "next_step": "同一型番の別販売店・再入荷を確認"
           },
-          "direct_listing_display_age_minutes": 0.4,
+          "direct_listing_display_age_minutes": 2.1,
           "direct_listing_display_price_context": null,
           "direct_listing_display_offers": [
             {
@@ -6073,8 +6200,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:07+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T03:01:01+09:00",
+              "display_age_minutes": 2.1
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -6327,28 +6454,28 @@
       ],
       "current_low_stock_part_ids": [],
       "current_confirmed_out_of_stock_part_ids": [
-        "ssd-crucial-p3-plus-1tb",
-        "cooler-thermalright-pa120-se-v3",
         "gpu-rtx5070-12gb"
       ],
       "current_unconfirmed_availability_part_ids": [
         "cpu-ryzen7-9700x",
         "motherboard-asrock-b850m-pro-rs-wifi",
-        "memory-teamgroup-ddr5-32gb-6000"
+        "memory-teamgroup-ddr5-32gb-6000",
+        "ssd-crucial-p3-plus-1tb",
+        "cooler-thermalright-pa120-se-v3"
       ],
       "current_stock_confirmed_component_count": {
         "in_stock": 3,
         "low_stock": 0,
-        "preorder_or_backorder": 1,
-        "unknown": 3,
+        "preorder_or_backorder": 2,
+        "unknown": 4,
         "out_of_stock": 4,
         "stale": 0
       },
       "current_retailer_listing_offer_count_by_status": {
         "in_stock": 3,
         "low_stock": 0,
-        "preorder_or_backorder": 1,
-        "unknown": 4,
+        "preorder_or_backorder": 2,
+        "unknown": 5,
         "out_of_stock": 5,
         "stale": 0
       },
@@ -6522,8 +6649,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:09+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T03:01:06+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "purchase_url": "https://www.dospara.co.jp/SBR1892/IC625088.html"
@@ -6570,8 +6697,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:16+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:18+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://www.pc4u.co.jp/view/item/000000090356?category_page_id=ct824",
@@ -6581,8 +6708,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:15+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:16+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://www.dospara.co.jp/SBR1534/IC512079.html",
@@ -6592,8 +6719,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:14+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:14+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001633533/"
@@ -6636,8 +6763,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:12+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:10+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001610896/"
@@ -6724,20 +6851,31 @@
             "limitations_ja": "QLC系で長時間の大容量書込みや書込み耐久を最優先する用途にはより適した候補と比較が必要。速度表記だけで持続性能を保証しない。"
           },
           "market_reference_price_jpy": null,
-          "display_reference_price_jpy": 35500,
+          "display_reference_price_jpy": 32600,
           "sellable_listing_price_jpy": null,
-          "stock_status": "out_of_stock",
+          "stock_status": "unknown",
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "direct_listing_stock_counts": {
             "in_stock": 0,
             "low_stock": 0,
             "preorder_or_backorder": 0,
-            "unknown": 0,
+            "unknown": 1,
             "out_of_stock": 2,
             "stale": 0
           },
           "direct_listing_offers": [
+            {
+              "url": "https://www.yodobashi.com/product/100000001007390887/",
+              "title": "CT1000P3PSSD8JP",
+              "price_jpy": 10210,
+              "stock_status": "unknown",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T03:01:28+09:00",
+              "display_age_minutes": 1.7
+            },
             {
               "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
               "title": "Crucial  P3 Plus CT1000P3PSSD8JP (M.2 2280 1TB) ",
@@ -6746,8 +6884,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:14+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:17+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -6757,8 +6895,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:15+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:18+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001466997/"
@@ -6819,12 +6957,23 @@
           "direct_listing_stock_counts": {
             "in_stock": 0,
             "low_stock": 0,
-            "preorder_or_backorder": 0,
+            "preorder_or_backorder": 1,
             "unknown": 0,
             "out_of_stock": 1,
             "stale": 0
           },
           "direct_listing_offers": [
+            {
+              "url": "https://www.yodobashi.com/product/100000001009948470/",
+              "title": "Peerless Assassin 120 SE V3",
+              "price_jpy": 5470,
+              "stock_status": "preorder_or_backorder",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T03:01:31+09:00",
+              "display_age_minutes": 1.6
+            },
             {
               "url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
               "title": "Thermalright  Peerless Assassin 120 SE V3 PA120SE-V3 ",
@@ -6833,8 +6982,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:23+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:21+09:00",
+              "display_age_minutes": 1.8
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001789043/"
@@ -6883,8 +7032,8 @@
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:02+09:00",
-          "reference_age_minutes": 0.5166666666666667,
+          "retrieval_time": "2026-10-18T03:00:55+09:00",
+          "reference_age_minutes": 2.2333333333333334,
           "monitor_url": "https://kakaku.com/item/K0001630332/",
           "purchase_url": "https://kakaku.com/item/K0001630332/",
           "reference_source_url": null,
@@ -6898,7 +7047,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:03+09:00",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:00+09:00",
           "early_buy_review": {
             "item_id": "cpu-ryzen7-9700x",
             "early_buy_threshold_jpy": 36000,
@@ -6915,7 +7064,7 @@
             "purchase_authorized": false,
             "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.5,
+          "direct_listing_display_age_minutes": 2.1,
           "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる 日本AMD AMD Ryzen 7 9000シリーズ AMD Ryzen 7 9700X 100-100001404WO... ￥53,110 5,311 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月19日月曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
           "direct_listing_display_offers": [
             {
@@ -6926,8 +7075,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:03+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T03:01:00+09:00",
+              "display_age_minutes": 2.1
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -7005,18 +7154,18 @@
           "role": "required_fixed_part",
           "target_price_jpy": 20000,
           "market_reference_price_jpy": null,
-          "display_reference_price_jpy": null,
-          "price_status": "missing",
+          "display_reference_price_jpy": 35680,
+          "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:09+09:00",
-          "reference_age_minutes": 0.4,
+          "retrieval_time": "2026-10-18T03:01:06+09:00",
+          "reference_age_minutes": 2.05,
           "monitor_url": "https://kakaku.com/item/K0001669878/",
           "purchase_url": "https://kakaku.com/item/K0001669878/",
           "reference_source_url": null,
           "reference_source_label": null,
-          "search_snippet_reference_url": null,
-          "search_snippet_reference_title": null,
+          "search_snippet_reference_url": "https://search.kakaku.com/ASRock%20B850M%20Pro%20RS%20WiFi/",
+          "search_snippet_reference_title": "B850M Pro RS WiFi",
           "direct_listing_display_price_jpy": 26990,
           "direct_listing_display_url": "https://www.yodobashi.com/product/100000001008871801/",
           "direct_listing_display_title": "B850M Pro RS WiFi",
@@ -7024,7 +7173,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:11+09:00",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:09+09:00",
           "early_buy_review": {
             "item_id": "motherboard-asrock-b850m-pro-rs-wifi",
             "early_buy_threshold_jpy": 18000,
@@ -7041,7 +7190,7 @@
             "purchase_authorized": false,
             "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.4,
+          "direct_listing_display_age_minutes": 2.0,
           "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる アスロック ASRock AMD B850チップセット搭載 Micro-ATX マザーボード B850M Pro RS ... ￥26,990 2,699 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月19日月曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
           "direct_listing_display_offers": [
             {
@@ -7052,8 +7201,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:11+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T03:01:09+09:00",
+              "display_age_minutes": 2.0
             },
             {
               "url": "https://www.sofmap.com/product_detail.aspx?sku=101393495",
@@ -7063,8 +7212,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:15+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:14+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://www.pc4u.co.jp/view/item/000000092844",
@@ -7074,8 +7223,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:12+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:11+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -7180,8 +7329,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T01:35:21+09:00",
-          "reference_age_minutes": 0.2,
+          "retrieval_time": "2026-10-18T03:01:18+09:00",
+          "reference_age_minutes": 1.85,
           "monitor_url": "https://kakaku.com/item/K0001671441/",
           "purchase_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
@@ -7224,14 +7373,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:21+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:18+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "direct_listing_sellable_price_jpy": 14980,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T01:35:21+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T03:01:18+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -7308,8 +7457,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T01:35:22+09:00",
-          "reference_age_minutes": 0.18333333333333332,
+          "retrieval_time": "2026-10-18T03:01:24+09:00",
+          "reference_age_minutes": 1.75,
           "monitor_url": "https://kakaku.com/item/J0000039064/",
           "purchase_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
@@ -7352,8 +7501,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:22+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:24+09:00",
+              "display_age_minutes": 1.8
             },
             {
               "url": "https://www.yodobashi.com/product/100000001007195271/",
@@ -7363,14 +7512,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:20+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:23+09:00",
+              "display_age_minutes": 1.8
             }
           ],
           "direct_listing_sellable_price_jpy": 13180,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T01:35:22+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T03:01:24+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -7448,8 +7597,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T01:35:23+09:00",
-          "reference_age_minutes": 0.16666666666666666,
+          "retrieval_time": "2026-10-18T03:01:26+09:00",
+          "reference_age_minutes": 1.7166666666666666,
           "monitor_url": "https://kakaku.com/item/K0001432816/",
           "purchase_url": "https://www.yodobashi.com/product/100000001006975270/",
           "reference_source_url": "https://www.yodobashi.com/product/100000001006975270/",
@@ -7492,14 +7641,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:23+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:26+09:00",
+              "display_age_minutes": 1.7
             }
           ],
           "direct_listing_sellable_price_jpy": 19280,
           "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001006975270/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T01:35:23+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T03:01:26+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -7559,8 +7708,8 @@
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:11+09:00",
-          "reference_age_minutes": 0.36666666666666664,
+          "retrieval_time": "2026-10-18T03:01:07+09:00",
+          "reference_age_minutes": 2.033333333333333,
           "monitor_url": "https://kakaku.com/item/K0001610896/",
           "purchase_url": "https://kakaku.com/item/K0001610896/",
           "reference_source_url": null,
@@ -7574,7 +7723,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:12+09:00",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:10+09:00",
           "early_buy_review": {
             "item_id": "memory-teamgroup-ddr5-32gb-6000",
             "early_buy_threshold_jpy": 36000,
@@ -7591,7 +7740,7 @@
             "purchase_authorized": false,
             "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.3,
+          "direct_listing_display_age_minutes": 2.0,
           "direct_listing_display_price_context": "000HC38ADC01-A 商品内容：16GBx2枚 色：T-CREATE EXPERT ホワイト 商品タイプ：DDR5 6000MHz CL38 【当店からの連絡】 販売価格 113,938円 (税込) ポイント 1% 1,140円相当進呈 送料無料 ※ポイントは商品発送後、且つ注文日から20日後に付与されます。 販売：株式会社マルチラテラル（登録番号：T8020001",
           "direct_listing_display_offers": [
             {
@@ -7602,8 +7751,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:12+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:10+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -7685,45 +7834,56 @@
           "role": "required_fixed_part",
           "target_price_jpy": 24000,
           "market_reference_price_jpy": null,
-          "display_reference_price_jpy": 35500,
+          "display_reference_price_jpy": 32600,
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:12+09:00",
-          "reference_age_minutes": 0.35,
+          "retrieval_time": "2026-10-18T03:01:14+09:00",
+          "reference_age_minutes": 1.9166666666666667,
           "monitor_url": "https://kakaku.com/item/K0001466997/",
           "purchase_url": "https://kakaku.com/item/K0001466997/",
           "reference_source_url": null,
           "reference_source_label": null,
           "search_snippet_reference_url": "https://search.kakaku.com/Crucial%20P3%20Plus%20CT1000P3PSSD8JP%201TB/",
           "search_snippet_reference_title": "CT1000P3PSSD8JP",
-          "direct_listing_display_price_jpy": 9300,
-          "direct_listing_display_url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
-          "direct_listing_display_title": "Crucial  P3 Plus CT1000P3PSSD8JP (M.2 2280 1TB) ",
+          "direct_listing_display_price_jpy": 10210,
+          "direct_listing_display_url": "https://www.yodobashi.com/product/100000001007390887/",
+          "direct_listing_display_title": "CT1000P3PSSD8JP",
           "direct_listing_display_identity_anchor": "CT1000P3PSSD8JP",
-          "direct_listing_display_stock_status": "out_of_stock",
-          "direct_listing_display_stock_label": "在庫切れ",
-          "direct_listing_display_source_mode": "direct_structured",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:14+09:00",
+          "direct_listing_display_stock_status": "unknown",
+          "direct_listing_display_stock_label": "在庫未確認",
+          "direct_listing_display_source_mode": "direct_text",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:28+09:00",
           "early_buy_review": {
             "item_id": "ssd-crucial-p3-plus-1tb",
             "early_buy_threshold_jpy": 16000,
-            "observed_price_jpy": 9300,
+            "observed_price_jpy": 10210,
             "estimated_checkout_total_jpy": null,
             "verified_checkout_total_jpy": null,
             "checkout_total_verified": false,
             "price_verified": true,
             "identity_verified": true,
-            "stock_status": "out_of_stock",
+            "stock_status": "unknown",
             "pit_valid": true,
-            "status": "UNAVAILABLE",
-            "label_ja": "在庫切れ",
+            "status": "STOCK_NOT_VERIFIED",
+            "label_ja": "在庫未確認",
             "purchase_authorized": false,
-            "next_step": "同一型番の別販売店・再入荷を確認"
+            "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.3,
-          "direct_listing_display_price_context": null,
+          "direct_listing_display_age_minutes": 1.7,
+          "direct_listing_display_price_context": "e Gen4 x4 CT1000P3PSSD8JP 4.11 レビュー （28） Q＆A （1） 投稿画像 （1） 最新情報 希望小売価格： オープンプライス 販売終了時の価格： ￥10,210 （税込） メーカー： crucial 販売開始日： 2022/09/09（販売終了商品） お取り扱い： のお取り扱い商品です。 バリエーション： 内蔵SSD Crucial P3",
           "direct_listing_display_offers": [
+            {
+              "url": "https://www.yodobashi.com/product/100000001007390887/",
+              "title": "CT1000P3PSSD8JP",
+              "price_jpy": 10210,
+              "stock_status": "unknown",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T03:01:28+09:00",
+              "display_age_minutes": 1.7
+            },
             {
               "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
               "title": "Crucial  P3 Plus CT1000P3PSSD8JP (M.2 2280 1TB) ",
@@ -7732,8 +7892,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:14+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:17+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -7743,8 +7903,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T01:35:15+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T03:01:18+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -7755,11 +7915,11 @@
             "in_stock": 0,
             "low_stock": 0,
             "preorder_or_backorder": 0,
-            "unknown": 0,
+            "unknown": 1,
             "out_of_stock": 2,
             "stale": 0
           },
-          "direct_listing_offer_count": 2,
+          "direct_listing_offer_count": 3,
           "direct_listing_sellable_offer_count": 0,
           "direct_listing_validation_diagnostics": [
             {
@@ -7837,22 +7997,22 @@
           "price_status": "search_snippet_reference_only",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T01:35:22+09:00",
-          "reference_age_minutes": 0.18333333333333332,
+          "retrieval_time": "2026-10-18T03:01:19+09:00",
+          "reference_age_minutes": 1.8333333333333333,
           "monitor_url": "https://kakaku.com/item/K0001789043/",
           "purchase_url": "https://kakaku.com/item/K0001789043/",
           "reference_source_url": null,
           "reference_source_label": null,
           "search_snippet_reference_url": "https://search.kakaku.com/Thermalright%20Peerless%20Assassin%20120%20SE%20V3/",
           "search_snippet_reference_title": "Peerless Assassin 120 SE V3",
-          "direct_listing_display_price_jpy": 4980,
-          "direct_listing_display_url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
-          "direct_listing_display_title": "Thermalright  Peerless Assassin 120 SE V3 PA120SE-V3 ",
+          "direct_listing_display_price_jpy": 5470,
+          "direct_listing_display_url": "https://www.yodobashi.com/product/100000001009948470/",
+          "direct_listing_display_title": "Peerless Assassin 120 SE V3",
           "direct_listing_display_identity_anchor": "Peerless Assassin 120 SE V3",
-          "direct_listing_display_stock_status": "out_of_stock",
-          "direct_listing_display_stock_label": "在庫切れ",
-          "direct_listing_display_source_mode": "direct_structured",
-          "direct_listing_display_observed_at": "2026-10-18T01:35:23+09:00",
+          "direct_listing_display_stock_status": "preorder_or_backorder",
+          "direct_listing_display_stock_label": "取寄せ/予約",
+          "direct_listing_display_source_mode": "direct_text",
+          "direct_listing_display_observed_at": "2026-10-18T03:01:31+09:00",
           "early_buy_review": {
             "item_id": "cooler-thermalright-pa120-se-v3",
             "early_buy_threshold_jpy": 4500,
@@ -7869,9 +8029,20 @@
             "purchase_authorized": false,
             "next_step": "同一型番の別販売店・再入荷を確認"
           },
-          "direct_listing_display_age_minutes": 0.2,
-          "direct_listing_display_price_context": null,
+          "direct_listing_display_age_minutes": 1.6,
+          "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる サーマルライト Thermalright 120mmファン搭載 ツインタワー型 CPUクーラー Peerless Ass... ￥5,470 547 ゴールドポイント （10％還元） お取り寄せ 日本全国配達料金無料 会員ページ ご注文商品の確認・変更 お客様情報の確認・変更 ヨドバシ・ドット・コム会員IDの変更 ヨド",
           "direct_listing_display_offers": [
+            {
+              "url": "https://www.yodobashi.com/product/100000001009948470/",
+              "title": "Peerless Assassin 120 SE V3",
+              "price_jpy": 5470,
+              "stock_status": "preorder_or_backorder",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T03:01:31+09:00",
+              "display_age_minutes": 1.6
+            },
             {
               "url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
               "title": "Thermalright  Peerless Assassin 120 SE V3 PA120SE-V3 ",
@@ -7880,8 +8051,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:23+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T03:01:21+09:00",
+              "display_age_minutes": 1.8
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -7891,12 +8062,12 @@
           "direct_listing_stock_counts": {
             "in_stock": 0,
             "low_stock": 0,
-            "preorder_or_backorder": 0,
+            "preorder_or_backorder": 1,
             "unknown": 0,
             "out_of_stock": 1,
             "stale": 0
           },
-          "direct_listing_offer_count": 1,
+          "direct_listing_offer_count": 2,
           "direct_listing_sellable_offer_count": 0,
           "direct_listing_validation_diagnostics": [
             {
@@ -7950,8 +8121,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T01:35:09+09:00",
-          "reference_age_minutes": 0.4,
+          "retrieval_time": "2026-10-18T03:01:06+09:00",
+          "reference_age_minutes": 2.05,
           "monitor_url": "https://kakaku.com/item/K0001696163/",
           "purchase_url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
@@ -7994,14 +8165,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T01:35:09+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T03:01:06+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": 129800,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T01:35:09+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T03:01:06+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -8221,28 +8392,27 @@
         "cooler-thermalright-pa120-se-v3"
       ],
       "current_low_stock_part_ids": [],
-      "current_confirmed_out_of_stock_part_ids": [
-        "ssd-crucial-p3-plus-1tb",
-        "cooler-thermalright-pa120-se-v3"
-      ],
+      "current_confirmed_out_of_stock_part_ids": [],
       "current_unconfirmed_availability_part_ids": [
         "cpu-ryzen7-9700x",
         "motherboard-asrock-b850m-pro-rs-wifi",
-        "memory-teamgroup-ddr5-32gb-6000"
+        "memory-teamgroup-ddr5-32gb-6000",
+        "ssd-crucial-p3-plus-1tb",
+        "cooler-thermalright-pa120-se-v3"
       ],
       "current_stock_confirmed_component_count": {
         "in_stock": 4,
         "low_stock": 0,
-        "preorder_or_backorder": 1,
-        "unknown": 3,
+        "preorder_or_backorder": 2,
+        "unknown": 4,
         "out_of_stock": 3,
         "stale": 0
       },
       "current_retailer_listing_offer_count_by_status": {
         "in_stock": 4,
         "low_stock": 0,
-        "preorder_or_backorder": 1,
-        "unknown": 4,
+        "preorder_or_backorder": 2,
+        "unknown": 5,
         "out_of_stock": 4,
         "stale": 0
       },

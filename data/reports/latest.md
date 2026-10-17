@@ -1,8 +1,8 @@
 # ブラックフライデー期間通算・購入ランキング
 
-更新: 2026-10-18T01:35:33+09:00
-観測スナップショット: 2026-10-18T01:32:58+09:00
-観測スナップショットSHA256: 267483097dbf8a8d8571ae5985ad6d2463e2326edcec61d7febf9784069261d2
+更新: 2026-10-18T03:03:09+09:00
+観測スナップショット: 2026-10-18T02:58:46+09:00
+観測スナップショットSHA256: 581db168ed7e696475f5927fa38909fb07135dcbf85f23cdb220dee9641f6de7
 総予算（PC＋周辺機器）: ¥400,000
 周辺機器の目標予算: ¥35,000
 PC本体の目標価格: ¥360,000
@@ -82,7 +82,7 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 |画像|項目|購入方法|BF購入目標価格|観測価格（BF前は参考）|在庫（購入先）|価格確認|商品/比較ページ|
 |---|---|---|---:|---|---|---|---|
 |<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="84"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz|ネット配送・実店舗・店舗受取を比較|¥22,000|ネット掲載 ¥20,790（送料込み推計 ¥21,790・送料予備 ¥1,000） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|店頭価格・支店在庫を別途確認|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001009314680/)|
-|<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="84"></a>|Logicool G213r|ネット配送・実店舗・店舗受取を比較|¥4,500|ネット掲載 ¥7,330（送料込み推計 ¥7,830・送料予備 ¥500） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|店頭価格・支店在庫を別途確認|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001006099089/)|
+|<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="84"></a>|Logicool G213r|ネット配送・実店舗・店舗受取を比較|¥4,500|ネット掲載 ¥7,330（送料込み推計 ¥7,830・送料予備 ¥500） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|店頭価格・支店在庫を別途確認|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/9242996/)|
 |<a href="https://shopee.ph/Logitech-Gaming-Mouse-G304-LIGHTSPEED-Wireless-12-000-DPI-Hero-Sensor-Lightweight-i.470352549.26121376846"><img src="https://down-ph.img.susercontent.com/file/sg-11134202-7rfh8-m43f6xs2o7yb73" alt="Logicool G304" width="84"></a>|Logicool G304|ネット配送・実店舗・店舗受取を比較|¥5,000|ネット掲載 ¥5,350（送料込み推計 ¥5,850・送料予備 ¥500） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|店頭価格・支店在庫を別途確認|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001004334450/)|
 |<a href="https://www.pccasegear.com/products/12360/steelseries-qck-large-mousepad"><img src="https://files.pccasegear.com/images/SS-63003-thumb.jpg" alt="SteelSeries QcK Large Black 450x400mm (model 63003)" width="84"></a>|SteelSeries QcK Large Black 450x400mm (model 63003)|ネット配送・実店舗・店舗受取を比較|¥1,500|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 unknown・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 NO_VERIFIED_PRICE_OR_STOCK|店頭価格・支店在庫を別途確認|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/1570130/)|
 |画像未確認|Required cables only; check included monitor cables first|付属ケーブル不足時のみ|¥0|ネット価格未確認 / 比較状態 ONLINE_PRICE_OR_STOCK_UNCONFIRMED|unknown|未確認|予算枠のみ|
@@ -210,7 +210,7 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 - 取得成功率: 57.1%
 - 価格確認率: 47.6%
 - 検索補完（成功/試行）: 0/9
-- 検索SKU不一致による除外: 41
+- 検索SKU不一致による除外: 52
 - 取得エラー内訳（host|reason）: rog.asus.com|curl_http_404=1, store.asus.com|curl_http_403=7, www.dospara.co.jp|curl_http_404=1
 - 未処理候補: なし
 
@@ -270,10 +270,10 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 
 ## 今この瞬間の買い時判定
 
-- 更新時刻（JST）: 2026-10-18T01:35:33+09:00
+- 更新時刻（JST）: 2026-10-18T03:03:10+09:00
 - 判定: **事前監視継続・公式日程未確認** (PRE_BF_MONITORING)
 - 暫定の広域監視窓（公式セール日程ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
-- 公式日程確認: 0/16 店舗（未確認: 12、取得エラー: 4）
+- 公式日程確認: 0/16 店舗（未確認: 11、取得エラー: 5）
 - 総予算: ¥400,000
 - PC本体の動的上限: ¥358,030
 - 周辺機器の価格・在庫確認: 未完了
