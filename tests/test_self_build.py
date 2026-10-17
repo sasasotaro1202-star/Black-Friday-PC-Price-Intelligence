@@ -241,7 +241,18 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(main["memory_choice_method"], "primary_memory_fallback_no_verified_in_stock_alternative")
         self.assertFalse(main["buy_now_authorized"])
 
-    def test_malformed_memory_choice_list_falls_back_to_valid_primary_not_missing_ram(self):
+        # A trusted price-history/comparison reference is not a retailer stock signal.
+        report = planner.render_plan_markdown(plan)
+        crucial_row = next(
+            line for line in report.splitlines()
+            if line.startswith("|メモリ|Crucial Pro DDR5-6000 32GB")
+        )
+        self.assertIn("販売可能価格なし", crucial_row)
+        self.assertIn("在庫未確認", crucial_row)
+        self.assertIn("比較参考のみ・在庫証拠ではない", crucial_row)
+        self.assertNotIn("在庫あり（再確認必須）", crucial_row)
+
+    def test_malformed_memory_choice_list_falls_back_to_valid_primary_not_missing_ram):
         bad_config = json.loads(json.dumps(self.config))
         bad_config["profile"]["memory_choice_ids"] = ["not-a-configured-memory-kit"]
         plan = planner.build_plan(bad_config, {"products":[]}, now=NOW)
