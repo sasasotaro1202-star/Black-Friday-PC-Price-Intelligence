@@ -21,6 +21,34 @@ class SelfBuildPlannerTests(unittest.TestCase):
             cls.config = json.load(stream)
         cls.parts = {x["id"]: x for x in cls.config["parts"]}
 
+    def test_component_early_buy_signal_reaches_ranked_build_table(self):
+        signal = {
+            "item_id": "cpu-ryzen7-9700x",
+            "early_buy_threshold_jpy": 36000,
+            "observed_price_jpy": 35000,
+            "estimated_checkout_total_jpy": 35500,
+            "verified_checkout_total_jpy": None,
+            "checkout_total_verified": False,
+            "status": "PRICE_TRIGGERED_CHECKOUT_REVIEW",
+            "label_ja": "前倒し候補：決済総額確認待ち",
+            "purchase_authorized": False,
+            "next_step": "送料込みの決済総額・保証・返品条件・互換性を確認",
+        }
+        plan = planner.build_plan(
+            self.config,
+            {"generated_at": NOW.isoformat(), "products": [
+                {"id": "cpu-ryzen7-9700x", "early_buy_review": signal}
+            ]},
+            now=NOW,
+        )
+        main = next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")
+        cpu = next(x for x in main["components"] if x["id"] == "cpu-ryzen7-9700x")
+        self.assertEqual(cpu["early_buy_review"], signal)
+        markdown = planner.render_plan_markdown(plan)
+        self.assertIn("前倒し購入シグナル", markdown)
+        self.assertIn("前倒し候補：決済総額確認待ち", markdown)
+        self.assertFalse(plan["buy_now_authorized"])
+
     def test_target_totals_and_all_in_budget(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         builds = {x["gpu_choice_id"]:x for x in plan["builds"]}
