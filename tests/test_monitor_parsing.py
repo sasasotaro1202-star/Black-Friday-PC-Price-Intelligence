@@ -203,6 +203,39 @@ class MonitorParsingTests(unittest.TestCase):
         self.assertIsNotNone(picked)
         self.assertEqual(picked["price_jpy"], 329800)
 
+    def test_matching_jsonld_offer_preserves_seller_name(self):
+        html = """
+        <script type="application/ld+json">
+        {"@type":"Product","name":"TeamGroup T-CREATE DDR5-6000 32GB",
+         "offers":{"price":"11980","priceCurrency":"JPY",
+                   "availability":"https://schema.org/InStock",
+                   "seller":{"@type":"Organization","name":"Example Retailer Japan"}}}
+        </script>
+        """
+        expected = {
+            "name": "TeamGroup T-CREATE DDR5-6000 32GB",
+            "model_code": "CTCWD532G6000HC38ADC01",
+            "aliases": ["TeamGroup T-CREATE DDR5-6000 32GB"],
+        }
+        parsed = monitor.parse_page("https://shop.example.jp/product", html, expected=expected)
+        self.assertEqual(parsed["price_jpy"], 11980)
+        self.assertEqual(parsed["seller_name"], "Example Retailer Japan")
+
+    def test_amazon_seller_profile_markup_is_used_without_guessing_from_host(self):
+        html = """
+        <h1>TeamGroup T-CREATE DDR5-6000 32GB</h1>
+        <span class="a-price"><span class="a-offscreen">￥11,980</span></span>
+        <a id="sellerProfileTriggerId" href="/sp?seller=A1">Third-Party PC Store</a>
+        <div>発送元 Amazon.co.jp</div>
+        """
+        expected = {
+            "name": "TeamGroup T-CREATE DDR5-6000 32GB",
+            "model_code": "CTCWD532G6000HC38ADC01",
+            "aliases": ["TeamGroup T-CREATE DDR5-6000 32GB"],
+        }
+        parsed = monitor.parse_page("https://www.amazon.co.jp/dp/B0CHF9TH1B", html, expected=expected)
+        self.assertEqual(parsed["seller_name"], "Third-Party PC Store")
+
     def test_multiple_structured_prices_fail_closed(self):
         html = """
         <script type="application/ld+json">
