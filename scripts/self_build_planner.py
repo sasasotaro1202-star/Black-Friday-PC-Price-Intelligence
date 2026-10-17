@@ -595,11 +595,16 @@ def score_and_rank_builds(builds):
     The score is a planning rubric, not measured FPS/benchmark data. Evidence
     completeness is separate from performance and never authorizes purchase.
     """
-    gpu_gaming_tier = {
-        "gpu-rtx5070ti-16gb": 9.6,
-        "gpu-rtx5070-12gb": 8.8,
-        "gpu-rtx5060ti-16gb": 8.1,
+    # Tom's Hardware GPU Hierarchy 2026, 1440p Ultra rasterization benchmark.
+    # Parenthesized values from the source table are the reference mean FPS/index.
+    # This is a broad benchmark proxy, not a measurement for the user's exact games.
+    gpu_raster_1440p_fps = {
+        "gpu-rtx5070ti-16gb": 116.8,
+        "gpu-rtx5070-12gb": 96.4,
+        "gpu-rtx5060ti-16gb": 73.4,
     }
+    gpu_benchmark_source = "https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html"
+    gpu_benchmark_updated = "2026-06-24"
 
     def positive_number(value):
         return float(value) if isinstance(value, (int, float)) and not isinstance(value, bool) and value > 0 else 0.0
@@ -612,12 +617,12 @@ def score_and_rank_builds(builds):
         vram = positive_number(hw.get("dedicated_gpu_vram_gb"))
         ssd = positive_number(hw.get("primary_ssd_gb"))
         cores = positive_number(hw.get("cpu_cores"))
-        gpu_tier = gpu_gaming_tier.get(str(build.get("gpu_choice_id")), 7.0)
+        gpu_fps = gpu_raster_1440p_fps.get(str(build.get("gpu_choice_id")))
 
         # The four workload scores add to 75 points. These are rubric scores,
         # not measured FPS, compile time, or AI throughput.
         workload_scores = {
-            "gaming_score": round(gpu_tier / 10.0 * 25.0, 1),
+            "gaming_score": round(25.0 * gpu_fps / max(gpu_raster_1440p_fps.values()) if gpu_fps else 0.0, 1),
             "game_creation_score": round(
                 min(vram / 16.0, 1.0) * 8.0
                 + min(ram / 32.0, 1.0) * 4.0 + (1.0 if ram >= 64 else 0.0)
@@ -742,7 +747,8 @@ def score_and_rank_builds(builds):
             "verified_checkout_total_component_count": row["checkout_verified"],
             "required_component_count": row["component_count"],
             "purchase_evidence_completeness_score_out_of_100": row["evidence_completeness"],
-            "score_basis": "BF目標総額ベースの構成ルーブリック。GPUゲーム点は相対的な製品階層の判断値で、FPS/ベンチマーク測定値ではない。",
+            "score_basis": "BF目標総額ベースの構成ルーブリック。GPUゲーム点はTom's Hardwareの1440p Ultraラスタライズ階層を25点満点に正規化した代理指標で、対象ゲームの実測FPSではない。",
+            "gaming_benchmark_reference": {"source_url": gpu_benchmark_source, "source_updated": gpu_benchmark_updated, "resolution": "1440p Ultra", "method": "rasterization hierarchy", "reference_mean_fps": gpu_fps, "user_game_specific": False},
             "purchase_authorized": False,
         }
         result.append(build)
@@ -991,7 +997,9 @@ def build_plan(config=None, price_snapshot=None, now=None):
         "score_policy": {
             "overall_score": "ゲーム25 + ゲーム制作20 + 分析/AI20 + 勉強/同時利用10 + BF目標総額ベースの相対価格効率15 + 互換性10 = 100点",
             "purchase_evidence_completeness_score": "直接価格/型番/PIT 30% + 販売可能在庫 25% + 検証済み決済総額 25% + 互換性ステータス 20%; 購入許可ではない",
-            "gpu_gaming_tier_scores_out_of_10": {"gpu-rtx5070ti-16gb": 9.6, "gpu-rtx5070-12gb": 8.8, "gpu-rtx5060ti-16gb": 8.1},
+            "gpu_1440p_ultra_raster_reference_mean_fps": {"gpu-rtx5070ti-16gb": 116.8, "gpu-rtx5070-12gb": 96.4, "gpu-rtx5060ti-16gb": 73.4},
+            "gpu_gaming_benchmark_source_url": "https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html",
+            "gpu_gaming_benchmark_source_updated": "2026-06-24",
             "benchmark_or_fps_measurement": False,
             "purchase_authorization_automatic": False
         },
@@ -1072,7 +1080,7 @@ def render_plan_markdown(plan):
         "",
         "## 100点方式の構成スコア（BF目標構成ベース）",
         "",
-        "構成点は用途適性・目標総額ベースの相対価格効率・互換性で採点。ゲーム点は製品階層の判断値で、実測FPSやベンチマークではありません。",
+        "構成点は用途適性・目標総額ベースの相対価格効率・互換性で採点。ゲーム点はTom's Hardwareの1440p Ultraラスタライズ階層を25点満点に正規化した代理指標で、対象ゲームの実測FPSではありません。",
         "購入根拠充足度は直接価格・型番・取得時刻・販売可能在庫・検証済み決済総額・互換性を別計算し、購入許可とは切り離します。",
         "",
         "|順位|構成|総合点/100|ゲーム/25|制作/20|分析・AI/20|勉強・同時利用/10|価格効率/15|互換性/10|購入根拠充足度/100|直接価格/在庫/決済確認率|市場参考値|",

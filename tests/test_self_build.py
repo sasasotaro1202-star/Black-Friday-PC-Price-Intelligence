@@ -74,10 +74,18 @@ class SelfBuildPlannerTests(unittest.TestCase):
             self.assertEqual(score["verified_checkout_total_coverage_pct"], 0)
             self.assertLess(score["purchase_evidence_completeness_score_out_of_100"], 30)
         by_gpu = {build["gpu_choice_id"]: build["scorecard"] for build in builds}
+        self.assertEqual(by_gpu["gpu-rtx5070ti-16gb"]["gaming_score"], 25.0)
+        self.assertEqual(by_gpu["gpu-rtx5070-12gb"]["gaming_score"], round(25 * 96.4 / 116.8, 1))
+        self.assertEqual(by_gpu["gpu-rtx5060ti-16gb"]["gaming_score"], round(25 * 73.4 / 116.8, 1))
         self.assertGreater(
-            by_gpu["gpu-rtx5070ti-16gb"]["gaming_score"],
+            by_gpu["gpu-rtx5070-12gb"]["gaming_score"],
             by_gpu["gpu-rtx5060ti-16gb"]["gaming_score"],
         )
+        self.assertEqual(
+            by_gpu["gpu-rtx5070ti-16gb"]["gaming_benchmark_reference"]["source_updated"],
+            "2026-06-24",
+        )
+        self.assertFalse(by_gpu["gpu-rtx5070ti-16gb"]["gaming_benchmark_reference"]["user_game_specific"])
         rendered = planner.render_plan_markdown(plan)
         self.assertIn("100点方式の構成スコア", rendered)
         self.assertIn("購入根拠充足度/100", planner.section_from_plan(plan))
