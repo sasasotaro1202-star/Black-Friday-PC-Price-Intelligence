@@ -375,7 +375,15 @@
       "image_url": "https://img.mm-vision.dk/images/v1/mmv/amd-9000-series-ryzen-7-02.webp",
       "image_source_url": "https://www.mm-vision.dk/amd-ryzen-7-9700x-processor",
       "image_note": "CPUパッケージ画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "fit_scorecard": {
+        "workload_fit_points": 37,
+        "headroom_points": 20,
+        "quality_reliability_points": 18,
+        "integration_flexibility_points": 14,
+        "rationale_ja": "ゲームの応答性と8コア/16スレッドを両立し、ゲーム制作・Python分析を含む汎用本命に合う。",
+        "limitations_ja": "UE5エンジン本体のソースフルビルドでは12～16コア級の構成より不利。大規模な並列ビルド最優先のCPUではない。"
+      }
     },
     {
       "id": "gpu-rtx5070-12gb",
@@ -420,7 +428,15 @@
       "image_url": "https://teknoklik.com/images/product/pny/2745/pny-geforce-rtx-5070-oc-12gb-dual-fan-slim-gddr7-192bit-vcg507012dfsxpb1-o_1000x1000_NNAECGHFET.jpg",
       "image_source_url": "https://teknoklik.com/pny-geforce-rtx-5070-oc-12gb-dual-fan-slim-gddr7-192bit-vcg507012dfsxpb1-o-2744",
       "image_note": "型番一致の製品画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "fit_scorecard": {
+        "workload_fit_points": 36,
+        "headroom_points": 22,
+        "quality_reliability_points": 17,
+        "integration_flexibility_points": 14,
+        "rationale_ja": "1440pゲーム性能と12GB VRAMのバランスがよく、ゲーム制作・AI用途の優先VRAM目安も満たす。",
+        "limitations_ja": "参照GPU階層は対象ゲームの実測FPSではない。モデル別寸法・冷却・端子・価格・在庫の確認は別途必要。"
+      }
     },
     {
       "id": "gpu-rtx5060ti-16gb",
@@ -464,7 +480,15 @@
       "image_url": "https://cdn.idealo.com/folder/Product/206267/0/206267042/s11_produktbild_max/pny-geforce-rtx-5060-ti-dual-fan-oc-16gb.jpg",
       "image_source_url": "https://www.idealo.es/precios/206267042/pny-geforce-rtx-5060-ti-dual-fan-oc-16gb.html",
       "image_note": "型番シリーズ一致の製品画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "fit_scorecard": {
+        "workload_fit_points": 31,
+        "headroom_points": 24,
+        "quality_reliability_points": 16,
+        "integration_flexibility_points": 14,
+        "rationale_ja": "16GB VRAMを比較的抑えた構成目標で確保でき、制作アセットや対応するローカルAIの容量面に強い。",
+        "limitations_ja": "RTX 5070よりゲーム性能が高いとは限らない。VRAM容量だけで処理速度やモデル実行可否は決まらない。"
+      }
     },
     {
       "id": "gpu-rtx5070ti-16gb",
@@ -507,7 +531,15 @@
       "image_url": "https://vdstore.vn/storage/main/products/vga/pny/5070-5070ti/vcg5070t16tfxxpb1-o/613a9b1e-46c8-4cc3-a3ab-61b7d9bbf92d.webp",
       "image_source_url": "https://vdstore.vn/products/card-man-hinh-pny-gefocre-rtx-5070-ti-16gb-argb-epic-x-oc-triple-fan-vcg5070t16tfxxpb1-o",
       "image_note": "型番一致の製品画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "fit_scorecard": {
+        "workload_fit_points": 40,
+        "headroom_points": 25,
+        "quality_reliability_points": 18,
+        "integration_flexibility_points": 14,
+        "rationale_ja": "3候補中で最も高い参照ゲーム性能と16GB VRAMを狙える高性能な大穴。",
+        "limitations_ja": "目標構成の総額が40万円を超えるシナリオがある。購入可否は全構成・送料・周辺機器を含む実額で判定し、寸法・電源も要検証。"
+      }
     },
     {
       "id": "motherboard-asrock-b850m-pro-rs-wifi",
@@ -551,7 +583,15 @@
       "image_url": "https://www.cclonline.com/images/avante/B850M-Pro-RS-WiFi_box.jpg",
       "image_source_url": "https://www.cclonline.com/90-mxbr7-a0uayz-asrock-b850m-pro-rs-wifi-matx-motherboard-for-amd-am5-cpus-476896/",
       "image_note": "型番一致の製品画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "fit_scorecard": {
+        "workload_fit_points": 35,
+        "headroom_points": 22,
+        "quality_reliability_points": 17,
+        "integration_flexibility_points": 13,
+        "rationale_ja": "AM5・DDR5・MicroATX・Wi-Fiを備え、選定CPUとコンパクトな空気流重視ケースの計画に合う。",
+        "limitations_ja": "Ryzen 7 9700XのBIOS 3.12要件と出荷BIOS、メモリキットのQVL、M.2レーン共有は未確認のまま購入承認しない。"
+      }
     },
     {
       "id": "memory-teamgroup-ddr5-32gb-6000",
@@ -597,7 +637,15 @@
       "image_url": "https://img.pccomponentes.com/articles/1086/10864724/394-team-group-t-create-expert-ddr5-6000mhz-32gb-2x16gb-cl30-dual-amd-expo-e-intel-xmp-blanca.jpg",
       "image_source_url": "https://www.pccomponentes.com/memoria-ram-team-group-t-create-expert-ddr5-6000mhz-32gb-2x16gb-cl30-dual-amd-expo-e-intel-xmp-blanca",
       "image_note": "同シリーズ白色キットの外観参考画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "fit_scorecard": {
+        "workload_fit_points": 34,
+        "headroom_points": 16,
+        "quality_reliability_points": 16,
+        "integration_flexibility_points": 13,
+        "rationale_ja": "32GB・16GB×2・DDR5-6000で、購入時点の必須要件とデュアルチャネル計画を満たす。",
+        "limitations_ja": "大きなゲーム制作・複数ツール・データ処理を同時に行う場合の余裕は64GBより小さい。正確なQVL/EXPO安定性は要確認。"
+      }
     },
     {
       "id": "memory-crucial-pro-ddr5-32gb-6000",
@@ -644,7 +692,15 @@
       "image_url": "https://c1.neweggimages.com/productimage/nb640/20-156-406-01.png",
       "image_source_url": "https://www.newegg.com/crucial-pro-overclocking-32gb-ddr5-6000-cas-latency-cl36-desktop-memory-white/p/N82E16820156406",
       "image_note": "同型番の白色キット画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "fit_scorecard": {
+        "workload_fit_points": 34,
+        "headroom_points": 16,
+        "quality_reliability_points": 17,
+        "integration_flexibility_points": 13,
+        "rationale_ja": "32GB・16GB×2・DDR5-6000の基本要件を満たし、主メモリの代替候補となる。",
+        "limitations_ja": "64GBより容量余裕は小さく、正確な型番のQVL・EXPO安定性は未確認。比較価格だけでは購入可能性を示さない。"
+      }
     },
     {
       "id": "ssd-crucial-p3-plus-1tb",
@@ -680,7 +736,15 @@
       "image_url": "https://www.cfd.co.jp/webpim/product/image/c/crucial-p3-plus-m2-series/ct1000p3pssd8jp/ct1000p3pssd8jp__0100.jpg",
       "image_source_url": "https://www.cfd.co.jp/biz/product/release/ct1000p3pssd8jp.html",
       "image_note": "型番一致の製品画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "fit_scorecard": {
+        "workload_fit_points": 34,
+        "headroom_points": 14,
+        "quality_reliability_points": 13,
+        "integration_flexibility_points": 14,
+        "rationale_ja": "1TB NVMeでOS・開発環境・ゲームを入れる購入時の最低容量要件を満たす。",
+        "limitations_ja": "QLC系で長時間の大容量書込みや書込み耐久を最優先する用途にはより適した候補と比較が必要。速度表記だけで持続性能を保証しない。"
+      }
     },
     {
       "id": "psu-corsair-rm850e-2025",
@@ -721,7 +785,15 @@
       "image_url": "https://baseec-img-mng.akamaized.net/images/item/origin/fe2f683b0a8212c0166b85f0c7969499.jpg?imformat=generic",
       "image_source_url": "https://banin123.base.shop/items/131528972",
       "image_note": "2025年モデルの製品画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "fit_scorecard": {
+        "workload_fit_points": 37,
+        "headroom_points": 24,
+        "quality_reliability_points": 19,
+        "integration_flexibility_points": 14,
+        "rationale_ja": "850W・80 PLUS Gold・ATX 3.1の計画はRTX 5070クラスと将来の一般的な拡張に余裕を取りやすい。",
+        "limitations_ja": "正確な2025型番、12V-2x6ケーブルの付属、製品保証、個体の付属品を購入前に再確認する。"
+      }
     },
     {
       "id": "case-fractal-pop-air-tg",
@@ -760,7 +832,15 @@
       "image_url": "https://www.dateks.lv/images/pic/2400/2400/518/1239.jpg",
       "image_source_url": "https://www.dateks.lv/en/cenas/korpusi/863822-fractaldesign-pop-air-black-tg-clear-tint",
       "image_note": "型番FD-C-POA1A-02一致の製品画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "fit_scorecard": {
+        "workload_fit_points": 35,
+        "headroom_points": 21,
+        "quality_reliability_points": 17,
+        "integration_flexibility_points": 13,
+        "rationale_ja": "エアフロー重視のケースを基準にし、長時間のゲーム・制作・分析負荷で冷却しやすい構成を狙える。",
+        "limitations_ja": "GPU長・厚み、CPUクーラー高、ラジエーター/ファン構成など正確な部品寸法でクリアランス確認が必要。"
+      }
     },
     {
       "id": "cooler-thermalright-pa120-se-v3",
@@ -795,7 +875,15 @@
       "image_url": "https://thermalright.com/wp-content/uploads/2024/12/8-3-1024x1024.jpg",
       "image_source_url": "https://www.thermalright.com/product/peerless-assassin-120-se-v3/",
       "image_note": "メーカー公式製品画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "fit_scorecard": {
+        "workload_fit_points": 37,
+        "headroom_points": 23,
+        "quality_reliability_points": 17,
+        "integration_flexibility_points": 14,
+        "rationale_ja": "デュアルタワー空冷でCPUの持続負荷や長いビルドに備えやすい。",
+        "limitations_ja": "AM5金具、ケース高、メモリ干渉、実装手順、正確な商品リビジョンを確認するまで互換性は確定扱いにしない。"
+      }
     },
     {
       "id": "os-windows11-home",
@@ -835,7 +923,15 @@
       "image_url": "https://cdn.tsukumo.co.jp/image/item/4549576190358_1.jpg",
       "image_source_url": "https://shop.tsukumo.co.jp/goods/4549576190358/",
       "image_note": "型番HAJ-00094のパッケージ画像",
-      "image_checked_at": "2026-10-15"
+      "image_checked_at": "2026-10-15",
+      "fit_scorecard": {
+        "workload_fit_points": 34,
+        "headroom_points": 15,
+        "quality_reliability_points": 16,
+        "integration_flexibility_points": 14,
+        "rationale_ja": "Windows 11 Homeの正規パッケージ版を購入構成に含める計画で、一般的なゲーム・開発ツール利用に対応。",
+        "limitations_ja": "すでに移行可能な正規ライセンスがある場合は二重購入を避ける。型番・正規販売店・ライセンス形態・有効化条件を確認する。"
+      }
     },
     {
       "id": "ssd-kioxia-exceria-basic-2tb",
@@ -870,7 +966,15 @@
       },
       "spec_source_url": "https://www.kioxia.com/ja-jp/personal/ssd/exceria-basic.html",
       "notes": "条件付きの1TB SSD置換候補。監視SKUはSSD-CK2.0N4B/N。BF目標45,000円は希望値で、確定価格や価格予測ではない。2026-10-17の比較サイト検索結果にはこの型番で52,980円からの掲載表示がある一方、別のページ取得では68,280円・1店舗の表示例もあった。ページ・店舗・在庫条件が異なるため同一時点の確定相場とみなさず、監視時に直接価格・在庫・SKUを再確認する。QLC NANDのため継続的大容量書き込みではTLC製品とも比較する。1TB品に追加せず、必ず置換として総額を再計算する。",
-      "direct_retailer_urls": []
+      "direct_retailer_urls": [],
+      "fit_scorecard": {
+        "workload_fit_points": 38,
+        "headroom_points": 23,
+        "quality_reliability_points": 12,
+        "integration_flexibility_points": 14,
+        "rationale_ja": "2TBで大きなゲームアセット、データ、環境の保管余裕を最初から確保できる。",
+        "limitations_ja": "QLC NANDで、長時間の大容量書込みではTLC候補との比較が必要。1TB SSDとの追加ではなく置換し、価格と40万円総額を確認する。"
+      }
     },
     {
       "id": "memory-lexar-thor-ddr5-64gb-6000",
@@ -915,7 +1019,15 @@
       "spec_source_url": "https://www.ark-pc.co.jp/i/11650134/",
       "notes": "32GBメモリキットを置き換える条件付き候補。約100,000円はBF購入目標であり、確認済みBF価格・予測ではない。2026-10-17時点でアーク公式商品ページに表示された期間限定価格は119,990円（通常154,800円、ハロウィンフェアは10/29 23:59まで）。売価は変動するため監視で再取得する。改訂後のRAM 32GB目標58,000円に対して64GB目標100,000円の差額は42,000円。RTX 5060 Ti 16GB構成でも、PC本体目標366,000円・周辺機器35,000円・予備費5,000円込み406,000円となり、40万円上限を6,000円超過する。現時点では予算適合案ではなく、確認済みの実価格や周辺機器費を含めて40万円以内に収められる場合だけ再評価する。マザーボードの正確なQVL・EXPO安定性は未確認なので注文前に確認する。32GBキットと同時に加算せず置換として計算する。",
       "image_source_url": "https://www.ark-pc.co.jp/i/11650134/",
-      "image_note": "アーク公式の型番一致製品画像は商品ページから取得する。"
+      "image_note": "アーク公式の型番一致製品画像は商品ページから取得する。",
+      "fit_scorecard": {
+        "workload_fit_points": 38,
+        "headroom_points": 25,
+        "quality_reliability_points": 16,
+        "integration_flexibility_points": 12,
+        "rationale_ja": "64GB・32GB×2で、大型アセット・ビルド・分析ツールの同時利用に最も余裕があるメモリ案。",
+        "limitations_ja": "計画価格では総額40万円を超える組み合わせがある。32GBキットと同時購入せず置換とし、QVLと実総額を確認する。"
+      }
     },
     {
       "id": "memory-corsair-vengeance-ddr5-32gb-6000",
@@ -955,7 +1067,15 @@
       },
       "notes": "売り切れ時の代替監視候補。2026-10-17のCorsair公式ページは¥68,990・在庫あり表示だが、BF価格ではない。QVLは未確認のため購入前に正確な型番で確認する。",
       "spec_source_url": "https://www.corsair.com/jp/ja/p/memory/cmk32gx5m2d6000z38/vengeance-32gb-2-x-16gb-ddr5-dram-up-to-6000mt-s-cl38-amd-expo-%26-intel-xmp-memory-kit-gray-cmk32gx5m2d6000z38",
-      "spec_source_verified_at": "2026-10-17"
+      "spec_source_verified_at": "2026-10-17",
+      "fit_scorecard": {
+        "workload_fit_points": 35,
+        "headroom_points": 16,
+        "quality_reliability_points": 18,
+        "integration_flexibility_points": 14,
+        "rationale_ja": "32GB・16GB×2・DDR5-6000 CL38の代替候補で、EXPO/XMP双方の表記がある。",
+        "limitations_ja": "32GBのため64GBより制作・分析の余裕は小さい。正確なキットのマザーボードQVLを購入前に確認する。"
+      }
     },
     {
       "id": "ssd-msi-spatium-m450-1tb",
@@ -988,7 +1108,15 @@
       },
       "notes": "Crucial P3 Plus 1TBが売り切れ／在庫未確認の場合の代替監視候補。ヨドバシの商品ページ掲載例は¥29,130だが、表示日・配送先・在庫は監視時に再確認する。読み取り公称値はP3 Plus候補より低いため、同等性能とは扱わず、購入前に仕様・保証・最終決済額を確認する。",
       "spec_source_url": "https://www.yodobashi.com/product/100000001009402658/",
-      "spec_source_verified_at": "2026-10-17"
+      "spec_source_verified_at": "2026-10-17",
+      "fit_scorecard": {
+        "workload_fit_points": 31,
+        "headroom_points": 13,
+        "quality_reliability_points": 14,
+        "integration_flexibility_points": 14,
+        "rationale_ja": "1TB NVMeの最低容量要件を満たす代替候補で、標準的なOS・ゲーム・開発用途に使える。",
+        "limitations_ja": "主候補より性能や耐久が高いとは仮定しない。正確なSKU・保証・持続書込み特性と決済額を購入前に確認する。"
+      }
     },
     {
       "id": "cooler-thermalright-assassin-x-120-refined-se",
@@ -1023,7 +1151,15 @@
       },
       "notes": "Peerless Assassin 120 SE V3の売り切れ時の空冷代替。AM5対応・高さ148mmの仕様掲載あり。ツインタワーより冷却余裕が小さいため、Ryzen 7 9700XのPBO/電力設定・温度・騒音を確認し、同等冷却性能とは扱わない。",
       "spec_source_url": "https://www.dospara.co.jp/SBR1968/IC549673.html",
-      "spec_source_verified_at": "2026-10-17"
+      "spec_source_verified_at": "2026-10-17",
+      "fit_scorecard": {
+        "workload_fit_points": 33,
+        "headroom_points": 17,
+        "quality_reliability_points": 15,
+        "integration_flexibility_points": 13,
+        "rationale_ja": "低コストなシングルタワー空冷代替で、組立費用を抑えやすい。",
+        "limitations_ja": "デュアルタワー候補より熱余裕が小さい可能性がある。CPU長時間負荷・ケース/メモリ干渉を確認して置換する。"
+      }
     },
     {
       "id": "gpu-rtx5070-12gb-msi-ventus2x",
@@ -1061,7 +1197,37 @@
       },
       "notes": "PNY RTX 5070 OC SLIMが売り切れの場合の同GPUクラス代替SKU。2026-10-17の市場監視では在庫ありの別SKUの価格例が¥148,980だったが、この正確なSKUの購入可能価格は監視時に直接再確認する。138,000円はBF目標であり予測ではない。正確な寸法・端子・送料・在庫を再確認する。",
       "spec_source_url": "https://shop.tsukumo.co.jp/goods/4711377308229/",
-      "spec_source_verified_at": "2026-10-17"
+      "spec_source_verified_at": "2026-10-17",
+      "fit_scorecard": {
+        "workload_fit_points": 36,
+        "headroom_points": 22,
+        "quality_reliability_points": 16,
+        "integration_flexibility_points": 12,
+        "rationale_ja": "RTX 5070 12GBクラスの用途バランスを維持できる売切れ時のSKU代替候補。",
+        "limitations_ja": "同一GPUクラスでもカード寸法・厚さ・冷却・端子・在庫は別物。正確なSKUでケースと電源への適合を再確認する。"
+      }
     }
-  ]
+  ],
+  "component_fit_scoring": {
+    "version": "curated-component-fit-v1",
+    "title_ja": "部品適合点/100",
+    "weights": {
+      "workload_fit_points": 40,
+      "headroom_points": 25,
+      "quality_reliability_points": 20,
+      "integration_flexibility_points": 15
+    },
+    "policy_ja": "これは想定用途に対する設計上の適合度を示す、明示的なルーブリック評価。実測ベンチマークや市場価格の評価ではなく、購入根拠点とは独立。各部品の理由・留意点を必ず併記する。データ不足を隠して満点化せず、カード欠損・範囲外は未採点とする。構成全体の点数と、部品の点数を混同しない。",
+    "intended_workloads": [
+      "Cities: Skylines II",
+      "Apex Legends",
+      "VALORANT",
+      "Unreal Engine 5 / Unity / Godot game development",
+      "Python and data analysis",
+      "sports/stock/BTC prediction research",
+      "schoolwork and multitasking",
+      "local AI when feasible"
+    ],
+    "limits_ja": "点数は判断を再現可能にするための比較ルーブリックであり、客観的な故障率・実測性能の保証ではない。ゲームFPS・コンパイル時間・ローカルAI速度を保証しない。価格、在庫、保証、実SKU互換性は別の購入根拠点と互換性ゲートで判断する。"
+  }
 }
