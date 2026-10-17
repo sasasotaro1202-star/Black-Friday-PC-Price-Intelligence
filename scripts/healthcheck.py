@@ -7,7 +7,7 @@ from intelligence import (
     effective_cost, EFFECTIVE_SOFT_MAX, EFFECTIVE_HARD_MAX,
     purchase_budget_policy, configuration_readiness, peripheral_budget_projection
 )
-from observation_contract import observation_metadata_schema_errors
+from observation_contract import observation_metadata_schema_errors, purchase_gate_schema_errors
 
 
 def file_sha256(path):
@@ -272,6 +272,8 @@ def main():
 
     # Ranking integrity
     rankings = load_json(os.path.join(ROOT, "data", "decision_rankings.json"), {})
+    for problem in purchase_gate_schema_errors(rankings):
+        errors.append("purchase-gate schema contract: " + problem)
     ranked = rankings.get("products", [])
     unavailable = rankings.get("unavailable_products", [])
     reference_only = rankings.get("reference_only", [])

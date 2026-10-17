@@ -4,7 +4,7 @@ import os
 import sys
 
 from intelligence import ROOT, parse_dt, load_catalog, load_json, purchase_budget_policy, peripheral_budget_projection, configuration_readiness
-from observation_contract import observation_metadata_schema_errors
+from observation_contract import observation_metadata_schema_errors, purchase_gate_schema_errors
 
 def file_sha256(path):
     h = hashlib.sha256()
@@ -70,6 +70,8 @@ def main():
             errors.append("coverage.processing_rate_pct mismatch")
 
     rankings = load_json(os.path.join(ROOT, "data", "decision_rankings.json"), {})
+    for problem in purchase_gate_schema_errors(rankings):
+        errors.append("purchase-gate schema contract: " + problem)
 
     seen = set()
     for p in latest.get("products", []):
