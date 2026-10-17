@@ -1794,5 +1794,45 @@
   "peripheral_budget_is_hard_cap": false,
   "peripheral_allocation_scenario_note": "周辺機器の計画配分は約35,000円（メインモニター1台、キーボード、マウス、マウスパッド、必要時のみケーブル、不測の価格差用の柔軟な予備枠）。電源タップは所有済みで除外。スピーカー、サブモニター、ヘッドセットも購入・監視対象外。総額上限400,000円と別枠予備費5,000円を維持し、PC許容額は実支出とチャネル選択から動的に計算する。",
   "peripheral_allocation_scenario_jpy": 35000,
-  "budget_optimization_policy": "総額40万円を使い切ることを目的にしない。必須周辺機器のみ実費計上する。余りが出たときだけ、総額上限を守りながら、ゲーム性能・ゲーム制作・勉強・分析を実際に改善するCPU/GPU/RAM/SSDを比較する。スピーカー、サブモニター、ヘッドセットは対象外で、予算消化のために追加しない。"
+  "budget_optimization_policy": "総額40万円を使い切ることを目的にしない。必須周辺機器のみ実費計上する。余りが出たときだけ、総額上限を守りながら、ゲーム性能・ゲーム制作・勉強・分析を実際に改善するCPU/GPU/RAM/SSDを比較する。スピーカー、サブモニター、ヘッドセットは対象外で、予算消化のために追加しない。",
+  "purchase_timing_policy": {
+    "updated_at": "2026-10-17",
+    "default_action": "WAIT_FOR_BLACK_FRIDAY_OR_UNUSUALLY_LOW_VERIFIED_PRICE",
+    "description": "ブラックフライデーを基本の購入時期とする。ただし同一型番の価格が個別の前倒し購入トリガー以下になり、直接価格・在庫・取得時刻が検証できた場合は、ブラックフライデー前の購入候補として再評価する。",
+    "early_buy_thresholds_jpy": {
+      "cpu-ryzen7-9700x": 36000,
+      "gpu-rtx5070-12gb": 119000,
+      "gpu-rtx5060ti-16gb": 100000,
+      "gpu-rtx5070ti-16gb": 140000,
+      "motherboard-asrock-b850m-pro-rs-wifi": 18000,
+      "memory-teamgroup-ddr5-32gb-6000": 36000,
+      "memory-crucial-pro-ddr5-32gb-6000": 54000,
+      "ssd-crucial-p3-plus-1tb": 16000,
+      "psu-corsair-rm850e-2025": 13000,
+      "case-fractal-pop-air-tg": 11000,
+      "cooler-thermalright-pa120-se-v3": 4500,
+      "os-windows11-home": 13500,
+      "ssd-kioxia-exceria-basic-2tb": 42000,
+      "memory-lexar-thor-ddr5-64gb-6000": 90000,
+      "main_monitor": 18000,
+      "keyboard": 4000,
+      "mouse": 4000,
+      "mousepad": 1200
+    },
+    "thresholds_are_forecasts": false,
+    "thresholds_are_purchase_promises": false,
+    "purchase_authorization_automatic": false,
+    "evidence_requirements": [
+      "正確な型番・容量・仕様の一致",
+      "直接販売ページまたは選択した購入チャネルの価格が検証済み",
+      "取得時刻と有効時刻が検証済みで、価格データが新しい",
+      "購入可能な在庫が確認済み（在庫切れ・不明は不可）",
+      "送料・必須手数料込みの現金決済額を確認",
+      "保証・返品条件を確認",
+      "PC部品はマザーボード・電源・ケース・冷却等との互換性を確認",
+      "PC本体・必須周辺機器・送料・小物・予備費込みの総額が400000円以内"
+    ],
+    "trigger_outcome": "REVIEW_ONLY_NO_AUTOMATIC_BUY",
+    "notes": "この価格は前倒し検討用の閾値であり、BF価格予測・最安値予測・購入許可ではない。ポイント還元を現金支払額から差し引かない。公式BF日程は前年の日付や暫定監視窓から推定しない。"
+  }
 }
