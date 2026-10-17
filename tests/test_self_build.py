@@ -120,6 +120,9 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertIn("部品適合点/100（内訳）", rendered)
         self.assertIn("部品購入根拠点/100", rendered)
         self.assertIn("用途37/40・余裕20/25・品質18/20・構成14/15", rendered)
+        self.assertIn("部品適合点/100（内訳）", rendered)
+        self.assertIn("Lexar THOR RGB 2nd Gen DDR5-6000 64GB", rendered)
+        self.assertIn("91/100（用途38/40・余裕25/25・品質16/20・構成12/15）", rendered)
         self.assertFalse(plan["buy_now_authorized"])
 
     def test_verified_direct_price_stock_and_checkout_evidence_raise_completeness(self):
