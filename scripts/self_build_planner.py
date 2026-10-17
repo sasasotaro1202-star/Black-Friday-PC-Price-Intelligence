@@ -109,6 +109,16 @@ def trusted_retailer_listing_reference(row, now, max_age, allowed_domains=()):
     )
 
 
+def direct_listing_stock_max_age_minutes(now):
+    """Use stricter stock freshness while the provisional intensive watch window is active."""
+    config = load_json(os.path.join(ROOT, "config", "targets.json"), {})
+    start = parse_dt(config.get("monitor_window_start"))
+    end = parse_dt(config.get("monitor_window_end"))
+    if start is not None and end is not None and start <= now <= end:
+        return 30
+    return 60
+
+
 def direct_listing_offers_for_display(row, part, now, max_age, allowed_domains=()):
     """Return fresh, identity-anchored direct retailer observations with stock kept per seller.
 
@@ -165,6 +175,8 @@ def direct_listing_offers_for_display(row, part, now, max_age, allowed_domains=(
         age = (now - retrieved).total_seconds() / 60.0
         if age < 0 or age > max_age:
             continue
+        stock_signal_max_age = min(int(max_age), direct_listing_stock_max_age_minutes(now))
+        stock_signal_fresh = age <= stock_signal_max_age
         stock = str(offer.get("stock_status") or "unknown")
         if stock not in ("in_stock", "low_stock", "preorder_or_backorder", "unknown", "out_of_stock"):
             stock = "unknown"
@@ -174,6 +186,8 @@ def direct_listing_offers_for_display(row, part, now, max_age, allowed_domains=(
         seen.add(key)
         item = dict(offer)
         item["stock_status"] = stock
+        item["stock_signal_fresh"] = bool(stock_signal_fresh)
+        item["stock_signal_max_age_minutes"] = stock_signal_max_age
         item["display_age_minutes"] = round(age, 1)
         values.append(item)
 
@@ -182,6 +196,7 @@ def direct_listing_offers_for_display(row, part, now, max_age, allowed_domains=(
         "preorder_or_backorder": 3, "out_of_stock": 4,
     }
     values.sort(key=lambda offer: (
+        0 if offer.get("stock_signal_fresh") is True else 1,
         stock_rank.get(str(offer.get("stock_status") or "unknown"), 2),
         offer.get("price_jpy", 10**12),
         0 if offer.get("price_source_mode") == "direct_structured" else 1,
@@ -244,7 +259,8 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
     )
     sellable_offers = [
         offer for offer in direct_display_offers
-        if offer.get("stock_status") in ("in_stock", "low_stock")
+        if offer.get("stock_signal_fresh") is True
+        and offer.get("stock_status") in ("in_stock", "low_stock")
     ]
     sellable_offers.sort(key=lambda offer: (
         0 if offer.get("stock_status") == "in_stock" else 1,
@@ -253,9 +269,13 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
     ))
     sellable_offer = sellable_offers[0] if sellable_offers else None
     stock_counts = {
-        status: sum(1 for offer in direct_display_offers if offer.get("stock_status") == status)
+        status: sum(
+            1 for offer in direct_display_offers
+            if offer.get("stock_signal_fresh") is True and offer.get("stock_status") == status
+        )
         for status in ("in_stock", "low_stock", "preorder_or_backorder", "unknown", "out_of_stock")
     }
+    stock_counts["stale"] = sum(1 for offer in direct_display_offers if offer.get("stock_signal_fresh") is not True)
     direct_display_offer = (
         direct_display_offers[0] if direct_display_offers and not trusted else None
     )
@@ -345,6 +365,8 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
                 "title": offer.get("title") or offer.get("identity_anchor"),
                 "price_jpy": offer.get("price_jpy"),
                 "stock_status": offer.get("stock_status") or "unknown",
+                "stock_signal_fresh": offer.get("stock_signal_fresh") is True,
+                "stock_signal_max_age_minutes": offer.get("stock_signal_max_age_minutes"),
                 "price_source_mode": offer.get("price_source_mode"),
                 "retrieval_time": offer.get("retrieval_time"),
                 "display_age_minutes": offer.get("display_age_minutes"),
@@ -1042,11 +1064,11 @@ def build_plan(config=None, price_snapshot=None, now=None):
         current_sellable_part_ids = []
         current_stock_counts = {
             "in_stock": 0, "low_stock": 0, "preorder_or_backorder": 0,
-            "unknown": 0, "out_of_stock": 0,
+            "unknown": 0, "out_of_stock": 0, "stale": 0,
         }
         current_listing_offer_counts = {
             "in_stock": 0, "low_stock": 0, "preorder_or_backorder": 0,
-            "unknown": 0, "out_of_stock": 0,
+            "unknown": 0, "out_of_stock": 0, "stale": 0,
         }
         for cid in selected_ids:
             part = parts.get(cid)
