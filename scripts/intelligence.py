@@ -832,6 +832,22 @@ def peripheral_budget_projection():
             chosen_store_quote.get("store_observation_store_id") if chosen_store_quote
             else store_observation.get("store_observation_store_id")
         )
+        store_evidence_type = (
+            chosen_store_quote.get("store_evidence_type") if chosen_store_quote
+            else store_observation.get("store_evidence_type")
+        )
+        store_evidence_notes = (
+            chosen_store_quote.get("store_evidence_notes") if chosen_store_quote
+            else store_observation.get("store_evidence_notes")
+        )
+        store_observation_status = (
+            chosen_store_quote.get("store_observation_status") if chosen_store_quote
+            else store_observation.get("store_observation_status")
+        )
+        store_observation_age_minutes = (
+            chosen_store_quote.get("store_observation_age_minutes") if chosen_store_quote
+            else store_observation.get("store_observation_age_minutes")
+        )
         store_route_actionable = bool(store_price_verified and stocked(store_stock))
         store_route_known = bool(
             store_price_verified
@@ -870,7 +886,7 @@ def peripheral_budget_projection():
                     "stock_status": store_stock, "shipping_jpy": 0,
                     "shipping_verified": True,
                     "url": store_url,
-                    "store_id": store_observation.get("store_observation_store_id"),
+                    "store_id": store_observation_store_id,
                 })
             if store_pickup_route_actionable:
                 channel_options_available.append({
@@ -1109,11 +1125,14 @@ def peripheral_budget_projection():
             "store_model_match": bool(store_model_match),
             "store_stock_status": store_stock if store_route else None,
             "store_confirmation_url": store_url if store_price_verified else None,
-            "store_observation_store_id": store_observation.get("store_observation_store_id"),
-            "store_evidence_type": store_observation.get("store_evidence_type"),
-            "store_evidence_notes": store_observation.get("store_evidence_notes"),
-            "store_observation_status": store_observation.get("store_observation_status"),
-            "store_observation_age_minutes": store_observation.get("store_observation_age_minutes"),
+            "store_observation_store_id": store_observation_store_id,
+            "store_evidence_type": store_evidence_type,
+            "store_evidence_notes": store_evidence_notes,
+            "store_observation_status": store_observation_status,
+            "store_observation_age_minutes": store_observation_age_minutes,
+            "store_price_observations": store_price_observations,
+            "store_price_observation_count": store_observation.get("store_price_observation_count", 0),
+            "store_price_verified_store_ids": store_observation.get("store_price_verified_store_ids") or [],
             "store_inventory_status": live_store_inventory["store_inventory_status"],
             "store_inventory_verified": live_store_inventory["store_inventory_verified"],
             "store_inventory_checked_at": live_store_inventory["store_inventory_checked_at"],
@@ -1123,6 +1142,7 @@ def peripheral_budget_projection():
             "store_inventory_evidence_notes": live_store_inventory["store_inventory_evidence_notes"],
             "store_inventory_age_minutes": live_store_inventory["store_inventory_age_minutes"],
             "store_inventory_store_ids_available": live_store_inventory["store_inventory_store_ids_available"],
+            "store_inventory_observations": live_store_inventory.get("store_inventory_observations") or [],
             "stock_status": stock, "online_stock_status": online_stock,
             "budget_cost_jpy": selected_cost, "cost_basis": cost_basis,
             "purchase_url": (
