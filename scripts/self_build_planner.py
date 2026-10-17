@@ -870,6 +870,11 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "market_reference_price_jpy": memory_price.get("market_reference_price_jpy"),
             "price_status": memory_price.get("price_status"),
             "trusted_for_market_estimate": trusted,
+            "direct_listing_sellable_price_jpy": memory_price.get("direct_listing_sellable_price_jpy"),
+            "direct_listing_sellable_stock_status": memory_price.get("direct_listing_sellable_stock_status"),
+            "direct_listing_offer_count": memory_price.get("direct_listing_offer_count", 0),
+            "direct_listing_stock_counts": memory_price.get("direct_listing_stock_counts") or {},
+            "direct_listing_display_offers": memory_price.get("direct_listing_display_offers") or [],
             "purchase_url": memory_price.get("purchase_url") or memory_part.get("purchase_url") or memory_part.get("monitor_url"),
         })
     trusted_memory_candidates = [
@@ -911,6 +916,16 @@ def build_plan(config=None, price_snapshot=None, now=None):
         components, missing, market_subtotal = [], [], 0
         all_parts_referenced = True
         target_parts = 0
+        current_sellable_listing_subtotal = 0
+        current_sellable_part_ids = []
+        current_stock_counts = {
+            "in_stock": 0, "low_stock": 0, "preorder_or_backorder": 0,
+            "unknown": 0, "out_of_stock": 0,
+        }
+        current_listing_offer_counts = {
+            "in_stock": 0, "low_stock": 0, "preorder_or_backorder": 0,
+            "unknown": 0, "out_of_stock": 0,
+        }
         for cid in selected_ids:
             part = parts.get(cid)
             if not part:
@@ -949,6 +964,14 @@ def build_plan(config=None, price_snapshot=None, now=None):
                 "early_buy_review": price.get("early_buy_review") if isinstance(price.get("early_buy_review"), dict) else None,
                 "direct_listing_display_age_minutes": price.get("direct_listing_display_age_minutes"),
                 "direct_listing_display_price_context": price.get("direct_listing_display_price_context"),
+                "direct_listing_display_offers": price.get("direct_listing_display_offers") or [],
+                "direct_listing_sellable_price_jpy": price.get("direct_listing_sellable_price_jpy"),
+                "direct_listing_sellable_url": price.get("direct_listing_sellable_url"),
+                "direct_listing_sellable_stock_status": price.get("direct_listing_sellable_stock_status"),
+                "direct_listing_sellable_retrieval_time": price.get("direct_listing_sellable_retrieval_time"),
+                "direct_listing_stock_counts": price.get("direct_listing_stock_counts") or {},
+                "direct_listing_offer_count": price.get("direct_listing_offer_count", 0),
+                "direct_listing_sellable_offer_count": price.get("direct_listing_sellable_offer_count", 0),
                 "direct_listing_validation_diagnostics": price.get("direct_listing_validation_diagnostics") or [],
                 "direct_listing_display_is_estimate_eligible": False,
                 "direct_listing_display_purchase_allowed": False,
@@ -958,6 +981,15 @@ def build_plan(config=None, price_snapshot=None, now=None):
                 "notes": part.get("notes"), "bf_actual_authorized": False
             }
             components.append(component)
+            sellable_price = price.get("direct_listing_sellable_price_jpy")
+            if isinstance(sellable_price, int) and not isinstance(sellable_price, bool) and sellable_price > 0:
+                current_sellable_listing_subtotal += sellable_price
+                current_sellable_part_ids.append(cid)
+            for status, count in (price.get("direct_listing_stock_counts") or {}).items():
+                if status in current_stock_counts and isinstance(count, int) and not isinstance(count, bool):
+                    current_listing_offer_counts[status] += max(0, count)
+                    if count > 0:
+                        current_stock_counts[status] += 1
             if part.get("track_price"):
                 if price["trusted_for_market_estimate"] and isinstance(price["market_reference_price_jpy"], int):
                     market_subtotal += price["market_reference_price_jpy"]
@@ -1016,6 +1048,16 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "total_budget_jpy": all_budget, "target_remaining_budget_jpy": all_budget-target_all_in,
             "target_contingency_jpy": contingency,
             "target_within_pc_budget": target_pc <= pc_budget, "target_within_total_budget": target_all_in <= all_budget,
+            "current_sellable_listing_subtotal_jpy": current_sellable_listing_subtotal,
+            "current_sellable_listing_part_count": len(current_sellable_part_ids),
+            "current_sellable_listing_required_part_count": len(selected_ids),
+            "current_sellable_listing_coverage_pct": round(100.0 * len(current_sellable_part_ids) / len(selected_ids), 1) if selected_ids else 0.0,
+            "current_sellable_listing_part_ids": current_sellable_part_ids,
+            "current_parts_without_sellable_listing": [cid for cid in selected_ids if cid not in set(current_sellable_part_ids)],
+            "current_stock_confirmed_component_count": current_stock_counts,
+            "current_retailer_listing_offer_count_by_status": current_listing_offer_counts,
+            "current_listing_subtotal_is_complete_build_price": False,
+            "current_listing_subtotal_is_checkout_price": False,
             "market_reference_estimate_jpy": market_estimate,
             "market_reference_all_in_estimate_jpy": all_in_market,
             "market_reference_estimate_is_checkout_price": False,
