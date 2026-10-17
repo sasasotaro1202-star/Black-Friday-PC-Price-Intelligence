@@ -442,6 +442,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
         )
         raw = {
             "name": "ASRock B850M Pro RS WiFi",
+            "seller_name": "Dospara direct sales",
             "page_text_excerpt": "ASRock B850M Pro RS WiFi 販売価格（税込）23,780円 在庫あり",
             "price_jpy": None, "price_source_mode": "none", "stock_status": "in_stock",
         }
@@ -453,6 +454,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertEqual(offer["price_jpy"], 23780)
         self.assertEqual(offer["price_source_mode"], "direct_text")
         self.assertEqual(offer["stock_status"], "in_stock")
+        self.assertEqual(offer["seller_name"], "Dospara direct sales")
         self.assertEqual(offer["source_role"], "direct_retailer_listing_reference")
 
     def test_teamgroup_ram_ymall_primary_title_matches_exact_kit_alias(self):
