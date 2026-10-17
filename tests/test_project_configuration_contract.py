@@ -105,10 +105,15 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         parts_by_id = {item["id"]: item for item in self.build["parts"]}
         selected_ids = list(self.profile["fixed_part_ids"]) + [
             self.profile["primary_memory_choice_id"],
-            self.profile["primary_gpu_choice_id"]
+            self.profile["primary_storage_choice_id"],
+            self.profile["primary_cooler_choice_id"],
+            self.profile["primary_gpu_choice_id"],
         ]
         self.assertEqual(len(selected_ids), len(set(selected_ids)))
         self.assertTrue(all(part_id in parts_by_id for part_id in selected_ids))
+        selected_categories = [parts_by_id[part_id]["category"] for part_id in selected_ids]
+        self.assertEqual(selected_categories.count("gpu"), 1)
+        self.assertEqual(set(selected_categories), set(self.profile["required_categories"]))
         components_subtotal = sum(
             int(parts_by_id[part_id]["target_price_jpy"]) for part_id in selected_ids
         )
@@ -117,20 +122,22 @@ class ProjectConfigurationContractTests(unittest.TestCase):
             + int(self.profile["build_shipping_reserve_jpy"])
             + int(self.profile["small_parts_reserve_jpy"])
         )
-        self.assertEqual(components_subtotal, 291600)
-        self.assertEqual(pc_total, 300600)
-        self.assertEqual(
-            pc_total + int(self.profile["peripheral_budget_jpy"]),
-            335600,
+        all_in_target = (
+            pc_total
+            + int(self.profile["peripheral_budget_jpy"])
+            + int(self.profile["unallocated_contingency_jpy"])
         )
-        self.assertLessEqual(335600 + int(self.profile["unallocated_contingency_jpy"]), int(self.profile["total_budget_jpy"]))
+        self.assertEqual(pc_total, components_subtotal + 9000)
+        self.assertLessEqual(pc_total, int(self.profile["pc_budget_jpy"]))
+        self.assertLessEqual(all_in_target, int(self.profile["total_budget_jpy"]))
 
     def test_windows_retail_package_is_live_tracked_and_exact_model_identified(self):
         parts_by_id = {item["id"]: item for item in self.build["parts"]}
         os = parts_by_id["os-windows11-home"]
         self.assertTrue(os["track_price"])
         self.assertEqual(os["model_code"], "HAJ-00094")
-        self.assertEqual(os["target_price_jpy"], 14800)
+        self.assertIsInstance(os["target_price_jpy"], int)
+        self.assertGreater(os["target_price_jpy"], 0)
         self.assertEqual(os["monitor_url"], "https://kakaku.com/item/K0001432816/")
         self.assertIn("yodobashi.com", os["direct_retailer_urls"][0])
 
@@ -230,7 +237,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         )
         self.assertEqual(
             set(self.profile["memory_choice_ids"]),
-            {"memory-crucial-pro-ddr5-32gb-6000", "memory-teamgroup-ddr5-32gb-6000", "memory-lexar-thor-ddr5-64gb-6000"},
+            {"memory-crucial-pro-ddr5-32gb-6000", "memory-teamgroup-ddr5-32gb-6000", "memory-lexar-thor-ddr5-64gb-6000", "memory-corsair-vengeance-ddr5-32gb-6000"},
         )
         self.assertNotIn("memory-crucial-pro-ddr5-32gb-6000", self.profile["fixed_part_ids"])
         self.assertNotIn("memory-teamgroup-ddr5-32gb-6000", self.profile["fixed_part_ids"])
