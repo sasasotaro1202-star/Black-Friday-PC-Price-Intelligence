@@ -304,6 +304,7 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
         "direct_listing_display_stock_label": direct_listing_stock_label(direct_display_offer.get("stock_status")) if direct_display_offer else None,
         "direct_listing_display_source_mode": direct_display_offer.get("price_source_mode") if direct_display_offer else None,
         "direct_listing_display_observed_at": direct_display_offer.get("retrieval_time") if direct_display_offer else None,
+        "early_buy_review": row.get("early_buy_review") if isinstance(row.get("early_buy_review"), dict) else None,
         "direct_listing_display_age_minutes": direct_display_offer.get("display_age_minutes") if direct_display_offer else None,
         "direct_listing_display_price_context": direct_display_offer.get("price_context") if direct_display_offer else None,
         "direct_listing_display_is_estimate_eligible": False,
@@ -905,8 +906,8 @@ def render_plan_markdown(plan):
           "- 周辺機器込み目標: " + money(build.get("target_all_in_jpy")) + " / 残額 " + money(build.get("target_remaining_budget_jpy")),
           "- 現在の比較参考合計: " + (money(build.get("market_reference_estimate_jpy")) + "（決済見積ではない）" if build.get("market_reference_estimate_jpy") is not None else "未算出。部品価格の欠落・不一致・古さを0円補完しない"),
           "- 互換性: " + str(build.get("compatibility_status")) + " / 判定: " + str(build.get("decision")), "",
-          "|画像|部品|型番|BF目標|検証済み/表示専用参考値|直接掲載価格（在庫条件未達・推定不採用）|確認状態|直接取得診断|リンク|",
-          "|---|---|---|---:|---:|---|---|---|---|---|"])
+          "|画像|部品|型番|BF目標|検証済み/表示専用参考値|直接掲載価格（在庫条件未達・推定不採用）|確認状態|前倒し購入シグナル|直接取得診断|リンク|",
+          "|---|---|---|---:|---:|---|---|---|---|---|---|"])
         for part in build.get("components") or []:
             p = part.get("display_reference_price_jpy")
             if part.get("price_status") == "manual_reference_unverified":
@@ -958,10 +959,12 @@ def render_plan_markdown(plan):
                     re.sub(r"\\s+", " ", detail).replace("|", "/")[:260]
                 )
             diagnostic_text = "; ".join(diagnostic_texts) if diagnostic_texts else "—"
-            lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
+            early_signal = part.get("early_buy_review") if isinstance(part.get("early_buy_review"), dict) else {}
+            early_label = str(early_signal.get("label_ja") or "未判定")
+            lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
                 image_html, part.get("name"), part.get("model_code") or "—",
                 money(part.get("target_price_jpy")), price_text, direct_text,
-                part.get("price_status"), diagnostic_text, link
+                part.get("price_status"), early_label, diagnostic_text, link
             ))
         lines.extend(["", "互換性チェック:", ""])
         for check in build.get("compatibility_checks") or []:
