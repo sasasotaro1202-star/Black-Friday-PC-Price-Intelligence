@@ -126,16 +126,16 @@ class SelfBuildPlannerTests(unittest.TestCase):
     def test_target_totals_and_all_in_budget(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         builds = {x["gpu_choice_id"]:x for x in plan["builds"]}
-        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_pc_total_jpy"], 300600)
-        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_pc_total_jpy"], 280600)
-        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_pc_total_jpy"], 324800)
-        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_all_in_jpy"], 340600)
-        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_all_in_jpy"], 320600)
-        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_all_in_jpy"], 364800)
+        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_pc_total_jpy"], 342000)
+        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_pc_total_jpy"], 324000)
+        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_pc_total_jpy"], 362000)
+        self.assertEqual(builds["gpu-rtx5070-12gb"]["target_all_in_jpy"], 382000)
+        self.assertEqual(builds["gpu-rtx5060ti-16gb"]["target_all_in_jpy"], 364000)
+        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_all_in_jpy"], 402000)
         self.assertTrue(builds["gpu-rtx5070ti-16gb"]["target_within_pc_budget"])
         self.assertTrue(builds["gpu-rtx5070ti-16gb"]["target_within_total_budget"])
-        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_remaining_budget_jpy"], 35200)
-        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["decision"], "WAIT_FOR_COMPATIBILITY_REVIEW")
+        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["target_remaining_budget_jpy"], -2000)
+        self.assertEqual(builds["gpu-rtx5070ti-16gb"]["decision"], "OVER_BUDGET_TARGET")
         self.assertTrue(plan["budget_arithmetic_valid"])
         self.assertFalse(plan["buy_now_authorized"])
 
@@ -146,7 +146,7 @@ class SelfBuildPlannerTests(unittest.TestCase):
         memory = [x for x in main["components"] if x["category"] == "memory"]
         self.assertEqual(len(memory), 1)
         self.assertEqual(memory[0]["id"], "memory-teamgroup-ddr5-32gb-6000")
-        self.assertEqual(memory[0]["target_price_jpy"], 40000)
+        self.assertEqual(memory[0]["target_price_jpy"], 58000)
         self.assertNotIn("memory-crucial-pro-ddr5-32gb-6000", [x["id"] for x in main["components"]])
         self.assertEqual(main["compatibility_status"], "REVIEW")
         self.assertIn("memory-teamgroup-ddr5-32gb-6000", {x["id"] for x in self.config["parts"]})
@@ -155,13 +155,33 @@ class SelfBuildPlannerTests(unittest.TestCase):
             "primary_budget_fit",
         )
 
-    def test_cheapest_fresh_verified_memory_reference_is_selected(self):
+    def test_cheapest_fresh_in_stock_direct_memory_offer_is_selected(self):
         rows = self._verified_hardware_rows(self.config)
         rows_by_id = {row["id"]: row for row in rows}
         crucial_id = "memory-crucial-pro-ddr5-32gb-6000"
         teamgroup_id = "memory-teamgroup-ddr5-32gb-6000"
-        rows_by_id[crucial_id]["market_reference_price_jpy"] = 82000
-        rows_by_id[teamgroup_id]["market_reference_price_jpy"] = 72000
+        for part_id, price, url in [
+            (crucial_id, 82000, "https://www.yodobashi.com/product/100000001009315413/"),
+            (teamgroup_id, 72000, "https://ymall.jp/store/mlymall/b0chf9th1b-20260811/"),
+        ]:
+            part = self.parts[part_id]
+            offer = {
+                "url": url, "title": part["name"], "price_jpy": price,
+                "price_source_mode": "direct_structured", "stock_status": "in_stock",
+                "identity_anchor": part["model_code"], "identity_match": True,
+                "source_role": "direct_retailer_listing_reference",
+                "available_at": NOW.isoformat(), "retrieval_time": NOW.isoformat(),
+                "pit_valid": True, "bf_actual_authorized": False,
+            }
+            rows_by_id[part_id].update({
+                "price_validation_status": "verified_retailer_listing_reference",
+                "source_role": "direct_retailer_listing_reference",
+                "market_reference_price_jpy": None,
+                "retailer_listing_reference_price_jpy": price,
+                "retailer_listing_offer": offer, "retailer_listing_offers": [offer],
+                "identity_match": True, "pit_valid": True,
+                "available_at": NOW.isoformat(), "retrieval_time": NOW.isoformat(),
+            })
         plan = planner.build_plan(
             self.config, {"generated_at": NOW.isoformat(), "products": rows}, now=NOW
         )
@@ -170,10 +190,23 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertIn(teamgroup_id, components)
         self.assertNotIn(crucial_id, components)
         self.assertEqual(main["selected_memory_id"], teamgroup_id)
-        self.assertEqual(main["memory_choice_method"], "lowest_fresh_verified_market_reference")
-        self.assertEqual(main["target_pc_total_jpy"], 300600)
-        self.assertEqual(main["target_all_in_jpy"], 340600)
+        self.assertEqual(main["memory_choice_method"], "lowest_fresh_verified_in_stock_direct_seller_price")
+        self.assertEqual(main["target_pc_total_jpy"], 342000)
+        self.assertEqual(main["target_all_in_jpy"], 382000)
         self.assertEqual(main["compatibility_status"], "REVIEW")
+        self.assertFalse(main["buy_now_authorized"])
+
+    def test_comparison_price_alone_cannot_trigger_memory_substitution(self):
+        rows = self._verified_hardware_rows(self.config)
+        rows_by_id = {row["id"]: row for row in rows}
+        rows_by_id["memory-crucial-pro-ddr5-32gb-6000"]["market_reference_price_jpy"] = 10000
+        rows_by_id["memory-teamgroup-ddr5-32gb-6000"]["market_reference_price_jpy"] = 90000
+        plan = planner.build_plan(
+            self.config, {"generated_at": NOW.isoformat(), "products": rows}, now=NOW
+        )
+        main = next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")
+        self.assertEqual(main["selected_memory_id"], "memory-teamgroup-ddr5-32gb-6000")
+        self.assertEqual(main["memory_choice_method"], "primary_memory_fallback_no_verified_in_stock_alternative")
         self.assertFalse(main["buy_now_authorized"])
 
     def test_malformed_memory_choice_list_falls_back_to_valid_primary_not_missing_ram(self):
