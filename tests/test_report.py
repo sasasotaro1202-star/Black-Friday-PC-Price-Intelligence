@@ -174,7 +174,10 @@ class ReportLinkTests(unittest.TestCase):
         mouse_ids = report.peripheral_ranked_candidate_ids(category_ids, target_by_id, "mouse", limit=3)
         self.assertEqual(mouse_ids[0], "mouse")
         self.assertIn("mouse_alt_logicool_g203", mouse_ids)
-        self.assertNotIn("store_price_buffer", sum(category_ids.values(), []))
+        self.assertEqual(
+            report.peripheral_ranked_candidate_ids(category_ids, target_by_id, "budget_reserve", limit=3),
+            [],
+        )
 
     def test_peripheral_score_renderers_show_component_breakdown_and_limitations(self):
         config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
