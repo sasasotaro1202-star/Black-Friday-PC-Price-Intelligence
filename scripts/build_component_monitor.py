@@ -1461,7 +1461,13 @@ def merge_recent_retailer_offers(part, current_offers, previous_row, allowed_dom
         age = (now - retrieved).total_seconds() / 60.0
         if age < 0 or age > max(1, int(max_age_minutes)):
             continue
-        offer["retailer_domain"] = host.removeprefix("www.")
+        retailer_domain = next((
+            str(domain).lower().strip(".")
+            for domain in sorted(allowed_domains, key=lambda value: len(str(value)), reverse=True)
+            if host == str(domain).lower().strip(".")
+            or host.endswith("." + str(domain).lower().strip("."))
+        ), host.removeprefix("www."))
+        offer["retailer_domain"] = retailer_domain
         # Different marketplace sellers can list the same ASIN/product URL.
         seller = str(
             offer.get("seller_name") or offer.get("merchant")
