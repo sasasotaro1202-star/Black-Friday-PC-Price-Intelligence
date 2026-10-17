@@ -768,5 +768,85 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertIn("部品数カバー率", report)
         self.assertIn("在庫不明", report)
 
+    def test_gpu_stockout_switches_to_verified_in_stock_same_tier_sku(self):
+        primary_id = "gpu-rtx5070-12gb"
+        alternate_id = "gpu-rtx5070-12gb-msi-ventus2x"
+
+        def row_for(part_id, price, stock, url):
+            part = self.parts[part_id]
+            offer = {
+                "url": url, "title": part["name"], "price_jpy": price,
+                "price_source_mode": "direct_structured", "stock_status": stock,
+                "identity_anchor": part["model_code"], "identity_match": True,
+                "source_role": "direct_retailer_listing_reference",
+                "available_at": NOW.isoformat(), "retrieval_time": NOW.isoformat(),
+                "pit_valid": True, "bf_actual_authorized": False,
+            }
+            return {
+                "id": part_id,
+                "price_validation_status": "verified_retailer_listing_reference" if stock in ("in_stock", "low_stock") else "missing",
+                "source_role": "direct_retailer_listing_reference",
+                "retailer_listing_reference_price_jpy": price,
+                "retailer_listing_offer": offer,
+                "retailer_listing_offers": [offer],
+                "identity_match": True, "pit_valid": True, "bf_actual_authorized": False,
+                "available_at": NOW.isoformat(), "retrieval_time": NOW.isoformat(),
+            }
+
+        rows = [
+            row_for(primary_id, 190800, "out_of_stock", "https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845"),
+            row_for(alternate_id, 148980, "in_stock", "https://shop.tsukumo.co.jp/goods/4711377308229/"),
+        ]
+        plan = planner.build_plan(self.config, {"generated_at": NOW.isoformat(), "products": rows}, now=NOW)
+        build = next(item for item in plan["builds"] if item["gpu_choice_id"] == primary_id)
+        selected = next(item for item in build["components"] if item["category"] == "gpu")
+        self.assertEqual(build["selected_gpu_part_id"], alternate_id)
+        self.assertEqual(build["gpu_selection_method"], "same_gpu_tier_stockout_fallback_lowest_verified_in_stock_price")
+        self.assertEqual(selected["id"], alternate_id)
+        self.assertEqual(selected["direct_listing_sellable_stock_status"], "in_stock")
+        self.assertFalse(plan["buy_now_authorized"])
+        self.assertFalse(build["buy_now_authorized"])
+
+    def test_ssd_and_cooler_stockouts_select_only_verified_direct_in_stock_fallbacks(self):
+        pairs = [
+            ("ssd-crucial-p3-plus-1tb", 10980, "out_of_stock", "https://www.dospara.co.jp/SBR1144/IC481159.html"),
+            ("ssd-msi-spatium-m450-1tb", 29130, "in_stock", "https://www.yodobashi.com/product/100000001009402658/"),
+            ("cooler-thermalright-pa120-se-v3", 4980, "out_of_stock", "https://www.dospara.co.jp/SBR1968/IC645423.html"),
+            ("cooler-thermalright-assassin-x-120-refined-se", 2580, "in_stock", "https://www.yodobashi.com/product/100000001008996814/"),
+        ]
+        rows = []
+        for part_id, price, stock, url in pairs:
+            part = self.parts[part_id]
+            offer = {
+                "url": url, "title": part["name"], "price_jpy": price,
+                "price_source_mode": "direct_structured", "stock_status": stock,
+                "identity_anchor": part["model_code"], "identity_match": True,
+                "source_role": "direct_retailer_listing_reference",
+                "available_at": NOW.isoformat(), "retrieval_time": NOW.isoformat(),
+                "pit_valid": True, "bf_actual_authorized": False,
+            }
+            rows.append({
+                "id": part_id,
+                "price_validation_status": "verified_retailer_listing_reference" if stock in ("in_stock", "low_stock") else "missing",
+                "source_role": "direct_retailer_listing_reference",
+                "retailer_listing_reference_price_jpy": price,
+                "retailer_listing_offer": offer,
+                "retailer_listing_offers": [offer],
+                "identity_match": True, "pit_valid": True, "bf_actual_authorized": False,
+                "available_at": NOW.isoformat(), "retrieval_time": NOW.isoformat(),
+            })
+
+        plan = planner.build_plan(self.config, {"generated_at": NOW.isoformat(), "products": rows}, now=NOW)
+        build = next(item for item in plan["builds"] if item["gpu_choice_id"] == "gpu-rtx5070-12gb")
+        self.assertEqual(build["selected_storage_id"], "ssd-msi-spatium-m450-1tb")
+        self.assertEqual(build["storage_selection_method"], "stockout_fallback_lowest_verified_in_stock_price")
+        self.assertEqual(build["selected_cooler_id"], "cooler-thermalright-assassin-x-120-refined-se")
+        self.assertEqual(build["cooler_selection_method"], "stockout_fallback_lowest_verified_in_stock_price")
+        storage_check = next(check for check in build["compatibility_checks"] if check["check"] == "storage_capacity_interface")
+        cooler_check = next(check for check in build["compatibility_checks"] if check["check"] == "cooler_case_clearance")
+        self.assertEqual(storage_check["status"], "PASS")
+        self.assertEqual(cooler_check["status"], "PASS")
+        self.assertFalse(plan["buy_now_authorized"])
+
 if __name__ == "__main__":
     unittest.main()
