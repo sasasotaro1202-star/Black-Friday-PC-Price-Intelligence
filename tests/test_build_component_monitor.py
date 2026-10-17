@@ -392,6 +392,35 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertEqual(diagnostic["error_type"], "RuntimeError")
         self.assertIn("403", diagnostic["error_message"])
 
+    def test_amazon_price_is_not_actionable_without_explicit_marketplace_seller(self):
+        html = (
+            "<html><h1>PNY GeForce RTX 5070 12GB OC SLIM "
+            "VCG507012DFSXPB1-O</h1><div>￥139,800 在庫あり</div></html>"
+        )
+        raw = {
+            "name": "PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFSXPB1-O",
+            "seller_name": None,
+            "page_text_excerpt": "PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFSXPB1-O ￥139,800 在庫あり",
+            "price_jpy": 139800,
+            "price_source_mode": "direct_structured",
+            "stock_status": "in_stock",
+            "structured_stock_status": "in_stock",
+        }
+        diagnostic = {}
+        with patch.object(
+            bcm, "fetch",
+            return_value=(html, "https://www.amazon.co.jp/dp/B0EXAMPLE", {})
+        ), patch.object(bcm, "parse_page", return_value=raw):
+            offer = bcm.verify_retailer_listing(
+                self.part,
+                "https://www.amazon.co.jp/dp/B0EXAMPLE",
+                ("amazon.co.jp",),
+                diagnostic_out=diagnostic,
+            )
+        self.assertIsNone(offer)
+        self.assertEqual(diagnostic["reason_code"], "marketplace_seller_identity_unverified")
+        self.assertTrue(diagnostic["seller_identity_required"])
+
     def test_direct_listing_verifier_reports_identity_and_price_failures_separately(self):
         no_identity = {}
         with patch.object(bcm, "fetch", return_value=(
