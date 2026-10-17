@@ -304,6 +304,7 @@ def validate_live_store_inventory(target, live, now=None):
         "store_inventory_evidence_notes": None,
         "store_inventory_age_minutes": None,
         "store_inventory_store_ids_available": [],
+        "store_inventory_observations": [],
     }
     if not required:
         return empty
@@ -381,6 +382,7 @@ def validate_live_store_inventory(target, live, now=None):
         "store_inventory_evidence_notes": chosen["evidence_notes"],
         "store_inventory_age_minutes": chosen["age_minutes"],
         "store_inventory_store_ids_available": available_ids,
+        "store_inventory_observations": valid,
     }
 
 
