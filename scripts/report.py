@@ -376,6 +376,11 @@ def peripheral_route_label(item):
     return "ネット注文"
 
 
+def positive_jpy_amount(value):
+    """Validate a positive integer yen amount, excluding booleans."""
+    return isinstance(value, int) and not isinstance(value, bool) and value > 0
+
+
 def physical_store_cash_price_labels(item):
     """Format each independently verified branch cash quote without mixing routes."""
     item = item if isinstance(item, dict) else {}
@@ -384,13 +389,13 @@ def physical_store_cash_price_labels(item):
         if isinstance(quote, dict)
         and quote.get("store_price_confirmed") is True
         and quote.get("store_model_match") is True
-        and positive_int(quote.get("store_price_jpy"))
+        and positive_jpy_amount(quote.get("store_price_jpy"))
     ]
     # Backward compatibility for older snapshots that only contain a single
     # verified branch-price summary row.
     if not quotes and item.get("store_price_confirmed") is True \
         and item.get("store_model_match") is True \
-        and positive_int(item.get("store_price_jpy")):
+        and positive_jpy_amount(item.get("store_price_jpy")):
         quotes = [{
             "store_name": item.get("store_observation_store_name"),
             "store_observation_store_id": item.get("store_observation_store_id"),
