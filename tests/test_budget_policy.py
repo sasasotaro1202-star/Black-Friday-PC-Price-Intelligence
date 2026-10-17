@@ -217,7 +217,7 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(len([x for x in self.cfg["peripherals"] if x["id"] == "main_monitor"]), 1)
         self.assertEqual(self.cfg["purchase_channels"]["channel_selection_mode"], "COMPARE_ONLINE_AND_LOCAL_STORE")
 
-    def test_each_accessory_category_has_three_scored_distinct_options(self):
+    def test_each_accessory_category_has_scorecards_for_real_distinct_products(self):
         primary = self.cfg.get("peripherals", [])
         alternatives = self.cfg.get("peripheral_alternatives", [])
         all_items = primary + alternatives
@@ -225,12 +225,43 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertGreaterEqual(len(categories), 5)
         all_ids = [str(x.get("id")) for x in all_items if x.get("id")]
         self.assertEqual(len(all_ids), len(set(all_ids)))
+        limits = {
+            "workload_fit_points": 35,
+            "budget_fit_points": 30,
+            "feature_spec_points": 20,
+            "substitution_risk_points": 15,
+        }
         for group in categories:
             category = group["category"]
             rows = [x for x in all_items if x.get("category") == category]
-            self.assertGreaterEqual(len(rows), 3, category)
-            scores = [x.get("ranking_score_100") for x in rows]
-            self.assertTrue(all(isinstance(s, int) and 0 <= s <= 100 for s in scores), category)
+            products = [
+                x for x in rows
+                if x.get("category") != "budget_reserve"
+                and x.get("purchase_channel") != "conditional_need_only"
+                and not x.get("score_exclusion_reason_ja")
+            ]
+            expected_count = 2 if category == "cables" else 3
+            self.assertEqual(len(products), expected_count, category)
+            scores = []
+            for product in products:
+                score = product.get("ranking_score_100")
+                self.assertIsInstance(score, int, product.get("id"))
+                self.assertTrue(0 <= score <= 100, product.get("id"))
+                card = product.get("fit_scorecard") or {}
+                for key, maximum in limits.items():
+                    self.assertIsInstance(card.get(key), int, f"{product.get('id')}:{key}")
+                    self.assertTrue(0 <= card[key] <= maximum, f"{product.get('id')}:{key}")
+                self.assertEqual(sum(card[key] for key in limits), score, product.get("id"))
+                self.assertTrue(card.get("rationale_ja"), product.get("id"))
+                self.assertTrue(card.get("limitations_ja"), product.get("id"))
+                scores.append(score)
+            self.assertEqual(len({x["id"] for x in products}), expected_count, category)
+            self.assertEqual(sorted(scores, reverse=True), sorted(scores, reverse=True), category)
+        cable_rule = next(x for x in primary if x.get("id") == "cables")
+        self.assertIsNone(cable_rule.get("ranking_score_100"))
+        self.assertIn("条件付き購入ルール", cable_rule.get("score_exclusion_reason_ja", ""))
+        reserve = next(x for x in primary if x.get("id") == "store_price_buffer")
+        self.assertIsNone(reserve.get("ranking_score_100"))
         g304x = next(x for x in alternatives if x.get("id") == "mouse_alt_logicool_g304_x_superlight")
         self.assertIn("59g", g304x.get("ranking_reason", ""))
         g640 = next(x for x in alternatives if x.get("id") == "mousepad_alt_logicool_g640s")
