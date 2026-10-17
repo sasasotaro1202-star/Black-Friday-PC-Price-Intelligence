@@ -786,7 +786,9 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertEqual(result["price_validation_status"], "verified_market_reference")
         self.assertEqual(result["retailer_listing_reference_price_jpy"], 139800)
         self.assertEqual(result["retailer_listing_reference_url"], seller_url)
-        self.assertEqual(result["retailer_listing_offers"], [offer])
+        self.assertEqual(len(result["retailer_listing_offers"]), 1)
+        self.assertEqual(result["retailer_listing_offers"][0]["url"], seller_url)
+        self.assertEqual(result["retailer_listing_offers"][0]["retailer_domain"], "amazon.co.jp")
         self.assertEqual(result["fetch_status"], "ok")
 
     def test_fetch_part_uses_verified_retailer_offer_when_comparison_site_fails(self):
@@ -830,6 +832,55 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertEqual(result["available_at"], stamp)
         self.assertTrue(result["pit_valid"])
         self.assertEqual(result["fetch_status"], "ok")
+
+
+    def test_merge_recent_retailer_offers_keeps_rotating_sellers_and_expires_stale_offers(self):
+        part = dict(self.part)
+        now = now_jst()
+
+        def offer(url, price, minutes_ago, stock="in_stock"):
+            observed = iso(now - timedelta(minutes=minutes_ago))
+            return {
+                "url": url,
+                "price_jpy": price,
+                "price_source_mode": "direct_structured",
+                "stock_status": stock,
+                "identity_anchor": part["model_code"],
+                "identity_match": True,
+                "source_role": "direct_retailer_listing_reference",
+                "available_at": observed,
+                "retrieval_time": observed,
+                "pit_valid": True,
+                "bf_actual_authorized": False,
+            }
+
+        amazon = offer("https://www.amazon.co.jp/dp/B0TESTSKU", 139800, 10)
+        old_yodobashi = offer(
+            "https://www.yodobashi.com/product/sku/",
+            141800,
+            500,
+        )
+        current_rakuten = offer(
+            "https://item.rakuten.co.jp/store/sku/",
+            138800,
+            2,
+            "low_stock",
+        )
+        merged = bcm.merge_recent_retailer_offers(
+            part,
+            [current_rakuten],
+            {"retailer_listing_offers": [amazon, old_yodobashi]},
+            ("amazon.co.jp", "yodobashi.com", "rakuten.co.jp"),
+            now=now,
+            max_age_minutes=360,
+        )
+
+        self.assertEqual(len(merged), 2)
+        self.assertEqual(
+            {offer["retailer_domain"] for offer in merged},
+            {"amazon.co.jp", "rakuten.co.jp"},
+        )
+        self.assertTrue(all(offer["retrieval_time"] for offer in merged))
 
 
 if __name__ == "__main__":
