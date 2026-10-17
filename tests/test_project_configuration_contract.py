@@ -309,6 +309,33 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertNotIn("¥329,360", guide)
         self.assertNotIn("¥399,160", guide)
 
+        # Human-facing target totals must be recalculated from the component config,
+        # including OS, a single GPU, chosen RAM/SSD/cooler, shipping and contingency.
+        parts_by_id = {item["id"]: item for item in self.build["parts"]}
+        selected_common = list(self.profile["fixed_part_ids"]) + [
+            self.profile["primary_memory_choice_id"],
+            self.profile["primary_storage_choice_id"],
+            self.profile["primary_cooler_choice_id"],
+        ]
+        gpu_rows = [
+            ("gpu-rtx5070-12gb", "バランス本命", "本命"),
+            ("gpu-rtx5060ti-16gb", "VRAM重視", "VRAM重視"),
+            ("gpu-rtx5070ti-16gb", "性能重視の大穴", "大穴（ストレッチ）"),
+        ]
+        for gpu_id, readme_label, guide_label in gpu_rows:
+            with self.subTest(gpu=gpu_id):
+                subtotal = sum(int(parts_by_id[item]["target_price_jpy"]) for item in selected_common)
+                subtotal += int(parts_by_id[gpu_id]["target_price_jpy"])
+                pc_target = subtotal + int(self.profile["build_shipping_reserve_jpy"]) + int(self.profile["small_parts_reserve_jpy"])
+                all_in_target = pc_target + int(self.profile["peripheral_budget_jpy"]) + int(self.profile["unallocated_contingency_jpy"])
+                readme_row = next(line for line in readme.splitlines() if f"| {readme_label} |" in line)
+                guide_row = next(line for line in guide.splitlines() if line.startswith(f"| {guide_label} |"))
+                self.assertIn(f"{pc_target:,}円", readme_row)
+                self.assertIn(f"{all_in_target:,}円", readme_row)
+                self.assertIn(f"¥{pc_target:,}", guide_row)
+                self.assertIn(f"¥{all_in_target:,}", guide_row)
+                self.assertEqual(all_in_target > int(self.profile["total_budget_jpy"]), gpu_id == "gpu-rtx5070ti-16gb")
+
     def test_github_is_collector_and_chatgpt_produces_final_on_demand_ranking(self):
         readme = read_text("README.md")
         instructions = read_text(".github/copilot-instructions.md")
