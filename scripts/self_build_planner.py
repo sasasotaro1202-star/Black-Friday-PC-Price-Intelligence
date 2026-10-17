@@ -1528,7 +1528,7 @@ def render_plan_markdown(plan):
     stock_labels = {
         "in_stock": "在庫あり（再確認必須）", "low_stock": "在庫少（急変リスク）",
         "out_of_stock": "売切れ", "unknown": "在庫未確認",
-        "preorder_or_backorder": "取寄/予約", "stale": "鮮度切れ",
+        "preorder_or_backorder": "取寄せ/予約", "stale": "鮮度切れ",
     }
     for category, candidates, selected_id, rule in fallback_groups:
         for candidate in candidates:
