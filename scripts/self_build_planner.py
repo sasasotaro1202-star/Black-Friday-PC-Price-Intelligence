@@ -589,6 +589,123 @@ def assess_workload_fit(profile, parts, selected_ids, gpu_id, memory_id):
     }
 
 
+def score_and_rank_builds(builds):
+    """Attach a transparent 100-point target-build rubric and a separate purchase-readiness score.
+
+    GPU gaming tier values are judgment-based ordering aids, not benchmark/FPS measurements.
+    Purchase readiness uses live evidence coverage and compatibility checks but never
+    authorizes purchase.
+    """
+    gpu_gaming_tier = {
+        "gpu-rtx5070ti-16gb": 9.6,
+        "gpu-rtx5070-12gb": 8.8,
+        "gpu-rtx5060ti-16gb": 8.1,
+    }
+    calculated = []
+    for build in builds:
+        fit = build.get("workload_fit") or {}
+        hw = fit.get("selected_hardware") or {}
+
+        def positive_number(value):
+            return float(value) if isinstance(value, (int, float)) and not isinstance(value, bool) and value > 0 else 0.0
+
+        ram = positive_number(hw.get("system_ram_gb"))
+        vram = positive_number(hw.get("dedicated_gpu_vram_gb"))
+        ssd = positive_number(hw.get("primary_ssd_gb"))
+        cores = positive_number(hw.get("cpu_cores"))
+        gpu_tier = gpu_gaming_tier.get(str(build.get("gpu_choice_id")), 7.0)
+
+        gaming = gpu_tier / 10.0 * 25.0
+        creation = (
+            min(vram / 16.0, 1.0) * 8.0
+            + (4.0 if ram >= 32 else ram / 32.0 * 4.0) + (1.0 if ram >= 64 else 0.0)
+            + (2.0 if ssd >= 1000 else ssd / 1000.0 * 2.0) + (1.0 if ssd >= 2000 else 0.0)
+            + min(cores / 12.0, 1.0) * 4.0
+        )
+        analysis = (
+            min(cores / 16.0, 1.0) * 7.0
+            + (3.0 if ram >= 32 else ram / 32.0 * 3.0) + (3.0 if ram >= 64 else 0.0)
+            + min(vram / 16.0, 1.0) * 5.0
+            + (1.0 if ssd >= 1000 else ssd / 1000.0) + (1.0 if ssd >= 2000 else 0.0)
+        )
+        study = (
+            (4.0 if ram >= 32 else ram / 32.0 * 4.0) + (1.0 if ram >= 64 else 0.0)
+            + min(cores / 8.0, 1.0) * 3.0
+            + (1.0 if ssd >= 1000 else ssd / 1000.0) + (1.0 if ssd >= 2000 else 0.0)
+        )
+        workload_points = gaming + creation + analysis + study
+
+        checks = build.get("compatibility_checks") or []
+        status_points = {"PASS": 1.0, "REVIEW": 0.5, "FAIL": 0.0}
+        compatibility_ratio = (
+            sum(status_points.get(str(check.get("status")), 0.0) for check in checks) / len(checks)
+            if checks else 0.0
+        )
+        compatibility_points = compatibility_ratio * 10.0
+        target_total = positive_number(build.get("target_all_in_jpy"))
+        value_ratio = workload_points / target_total if target_total else 0.0
+        required = int(positive_number(build.get("market_reference_required_count")))
+        covered = int(positive_number(build.get("market_reference_coverage_count")))
+        price_coverage = min(covered / required, 1.0) if required else 0.0
+        build["_score_workload_points"] = workload_points
+        build["_score_value_ratio"] = value_ratio
+        build["_score_compatibility_points"] = compatibility_points
+        build["_score_price_coverage"] = price_coverage
+        calculated.append(build)
+
+    best_value_ratio = max((item.get("_score_value_ratio", 0.0) for item in calculated), default=0.0)
+    for build in calculated:
+        value_ratio = build.pop("_score_value_ratio", 0.0)
+        workload_points = build.pop("_score_workload_points", 0.0)
+        compatibility_points = build.pop("_score_compatibility_points", 0.0)
+        price_coverage = build.pop("_score_price_coverage", 0.0)
+        score = 15.0 * value_ratio / best_value_ratio if best_value_ratio > 0 else 0.0
+        purchase_readiness = 65.0 * price_coverage + 35.0 * compatibility_points / 10.0
+        build["scorecard"] = {
+            "overall_score": round(min(100.0, workload_points + score + compatibility_points), 1),
+            "gaming_score": round(gpu_gaming_tier.get(str(build.get("gpu_choice_id")), 7.0) / 10.0 * 25.0, 1),
+            "game_creation_score": round(
+                min(float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("dedicated_gpu_vram_gb") or 0) / 16.0, 1.0) * 8.0
+                + (4.0 if float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("system_ram_gb") or 0) >= 32 else 0.0)
+                + (1.0 if float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("system_ram_gb") or 0) >= 64 else 0.0)
+                + (2.0 if float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("primary_ssd_gb") or 0) >= 1000 else 0.0)
+                + (1.0 if float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("primary_ssd_gb") or 0) >= 2000 else 0.0)
+                + min(float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("cpu_cores") or 0) / 12.0, 1.0) * 4.0, 1),
+            "analysis_ai_score": round(
+                min(float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("cpu_cores") or 0) / 16.0, 1.0) * 7.0
+                + (3.0 if float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("system_ram_gb") or 0) >= 32 else 0.0)
+                + (3.0 if float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("system_ram_gb") or 0) >= 64 else 0.0)
+                + min(float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("dedicated_gpu_vram_gb") or 0) / 16.0, 1.0) * 5.0
+                + (1.0 if float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("primary_ssd_gb") or 0) >= 1000 else 0.0)
+                + (1.0 if float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("primary_ssd_gb") or 0) >= 2000 else 0.0), 1),
+            "study_multitasking_score": round(
+                (4.0 if float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("system_ram_gb") or 0) >= 32 else 0.0)
+                + (1.0 if float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("system_ram_gb") or 0) >= 64 else 0.0)
+                + min(float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("cpu_cores") or 0) / 8.0, 1.0) * 3.0
+                + (1.0 if float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("primary_ssd_gb") or 0) >= 1000 else 0.0)
+                + (1.0 if float((build.get("workload_fit") or {}).get("selected_hardware", {}).get("primary_ssd_gb") or 0) >= 2000 else 0.0), 1),
+            "workload_fit_points_out_of_75": round(workload_points, 1),
+            "price_efficiency_points_out_of_15": round(score, 1),
+            "compatibility_points_out_of_10": round(compatibility_points, 1),
+            "verified_price_coverage_pct": round(price_coverage * 100.0, 1),
+            "verified_price_component_count": int(positive_number(build.get("market_reference_coverage_count"))),
+            "required_price_component_count": int(positive_number(build.get("market_reference_required_count"))),
+            "purchase_readiness_score_out_of_100": round(purchase_readiness, 1),
+            "score_basis": "BF目標価格での構成ルーブリック。GPUゲーム点は相対的な製品階層の判断値で、FPS/ベンチマークの測定値ではない。",
+            "purchase_authorized": False,
+        }
+    calculated.sort(
+        key=lambda item: (
+            -(item.get("scorecard") or {}).get("overall_score", 0.0),
+            item.get("target_all_in_jpy") if isinstance(item.get("target_all_in_jpy"), int) else 10**12,
+            str(item.get("gpu_choice_id") or ""),
+        )
+    )
+    for rank, build in enumerate(calculated, 1):
+        build["rank"] = rank
+    return calculated
+
+
 def build_plan(config=None, price_snapshot=None, now=None):
     config = config or load_json(CONFIG_PATH, {})
     profile = config.get("profile") or {}
@@ -805,6 +922,8 @@ def build_plan(config=None, price_snapshot=None, now=None):
             ]
         })
 
+    builds = score_and_rank_builds(builds)
+
     return {
         "generated_at": iso(now), "schema_version": 1, "project": "DIY_PC",
         "source_policy": "Comparison-site prices are market references only. This plan never authorizes a purchase; official seller-specific BF price evidence is missing.",
@@ -816,6 +935,13 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "selection_policy": profile.get("selection_policy") or "Prioritize self-build; do not penalize assembly time."
         },
         "selection_factors": profile.get("purchase_decision_factors") or [],
+        "score_policy": {
+            "overall_score": "ゲーム25 + ゲーム制作20 + 分析/AI20 + 勉強/同時利用10 + BF目標総額ベースの相対価格効率15 + 互換性10 = 100点",
+            "purchase_readiness_score": "信頼できる市場参考価格のカバー率65% + 互換性点35%; 購入許可ではない",
+            "gpu_gaming_tier_scores_out_of_10": {"gpu-rtx5070ti-16gb": 9.6, "gpu-rtx5070-12gb": 8.8, "gpu-rtx5060ti-16gb": 8.1},
+            "benchmark_or_fps_measurement": False,
+            "purchase_authorization_automatic": False
+        },
         "workload_profile": profile.get("workload_profile") or {},
         "total_budget_jpy": all_budget, "peripheral_budget_jpy": peripheral_budget, "pc_budget_jpy": pc_budget,
         "unallocated_contingency_jpy": int(profile.get("unallocated_contingency_jpy", 0)),
@@ -891,9 +1017,32 @@ def render_plan_markdown(plan):
             "[商品ページ]({})".format(item.get("purchase_url")) if item.get("purchase_url") else "リンク未確認"
         ) for item in (plan.get("memory_choice_selection") or {}).get("candidates", [])]),
         "",
+        "## 100点方式の構成スコア（BF目標構成ベース）",
+        "",
+        "構成点は用途適性・目標総額ベースの相対価格効率・互換性で採点。ゲーム点は製品階層の判断値で、実測FPSやベンチマークではありません。",
+        "購入準備度は現在の信頼できる価格根拠のカバー率と互換性確認状況を別計算し、購入許可とは切り離します。",
+        "",
+        "|順位|構成|総合点/100|ゲーム/25|制作/20|分析・AI/20|勉強・同時利用/10|価格効率/15|互換性/10|購入準備度/100|価格根拠|",
+        "|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---|"
+    ]
+    for build in plan.get("builds") or []:
+        score = build.get("scorecard") or {}
+        lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}/{}点|".format(
+            build.get("rank"), build.get("name"), score.get("overall_score", "—"),
+            score.get("gaming_score", "—"), score.get("game_creation_score", "—"),
+            score.get("analysis_ai_score", "—"), score.get("study_multitasking_score", "—"),
+            score.get("price_efficiency_points_out_of_15", "—"),
+            score.get("compatibility_points_out_of_10", "—"),
+            score.get("purchase_readiness_score_out_of_100", "—"),
+            score.get("verified_price_component_count", 0), score.get("required_price_component_count", 0)
+        ))
+    lines.extend([
+        "",
+        "## 目標総額と購入ゲート",
+        "",
         "|順位|構成|部品目標小計|PC本体目標総額|周辺機器込み目標|目標残額|比較参考合計|互換性|判定|",
         "|---:|---|---:|---:|---:|---:|---:|---|---|"
-    ]
+    ])
     for build in plan.get("builds") or []:
         lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
             build.get("rank"), build.get("name"), money(build.get("target_parts_subtotal_jpy")),
@@ -982,10 +1131,12 @@ def render_plan_markdown(plan):
 def section_from_plan(plan):
     lines = [START_MARKER, "## 最優先：PC本体は自作構成", "",
         "BTO完成品は価格比較用の参考枠に下げ、部品ごとの価格・互換性・送料を合算します。PC本体の計画上限は " + money(plan.get("pc_budget_jpy")) + "。", "",
-        "|順位|自作構成|PC本体目標|周辺機器込み|目標残額|互換性|判定|",
-        "|---:|---|---:|---:|---:|---|---|"]
+        "|順位|自作構成|構成点/100|購入準備度/100|PC本体目標|周辺機器込み|目標残額|互換性|判定|",
+        "|---:|---|---:|---:|---:|---:|---:|---|---|"]
     for build in plan.get("builds") or []:
-        lines.append("|{}|{}|{}|{}|{}|{}|{}|".format(build.get("rank"), build.get("name"),
+        score = build.get("scorecard") or {}
+        lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(build.get("rank"), build.get("name"),
+            score.get("overall_score", "—"), score.get("purchase_readiness_score_out_of_100", "—"),
             money(build.get("target_pc_total_jpy")), money(build.get("target_all_in_jpy")),
             money(build.get("target_remaining_budget_jpy")), build.get("compatibility_status"), build.get("decision")))
     lines.extend(["", "RTX 5070 12GBを本命、RTX 5060 Ti 16GBをVRAM重視の代替、RTX 5070 Ti 16GBを大穴として分離します。",
