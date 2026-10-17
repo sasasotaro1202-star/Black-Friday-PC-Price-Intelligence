@@ -439,7 +439,6 @@ def store_observation_validation(target, now=None):
     allowed_evidence_types = {
         "in_store_check",
         "store_phone_confirmation",
-        "official_branch_stock_page",
         "official_branch_price_page",
     }
     max_age = actionable_max_age_minutes(current)
@@ -467,6 +466,7 @@ def store_observation_validation(target, now=None):
             "model_match": target.get("store_model_match") is True,
             "evidence_type": target.get("store_evidence_type"),
             "evidence_notes": target.get("store_evidence_notes"),
+            "price_basis": target.get("store_price_basis"),
             "_legacy_single_branch": True,
         }]
 
@@ -522,7 +522,7 @@ def store_observation_validation(target, now=None):
             reason = "EXACT_MODEL_UNVERIFIED"
         elif not source_host_matches:
             reason = "SOURCE_URL_UNVERIFIED"
-        elif not raw.get("_legacy_single_branch") and price_basis != "tax_inclusive_cash":
+        elif price_basis != "tax_inclusive_cash":
             reason = "PRICE_BASIS_UNVERIFIED"
         else:
             reason = "PRICE_VERIFIED"
