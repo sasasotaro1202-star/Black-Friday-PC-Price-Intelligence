@@ -629,6 +629,80 @@ class ReportLinkTests(unittest.TestCase):
 
 
 
+    def test_branch_cash_prices_render_separately_with_their_own_timestamps(self):
+        item = {
+            "purchase_channel": "compare_online_and_store",
+            "purchase_channel_options": ["online", "physical_store", "store_pickup"],
+            "online_comparison_price_jpy": 20790,
+            "store_price_confirmed": True,
+            "store_price_jpy": 21980,
+            "store_stock_status": "low_stock",
+            "store_observation_store_id": "yodobashi_hakata",
+            "store_observation_store_name": "ヨドバシカメラ マルチメディア博多",
+            # Deliberately different aggregate inventory fields: the quote
+            # renderer must use branch-specific cash-price evidence instead.
+            "store_inventory_store_name": "誤った支店名",
+            "store_inventory_status": "in_stock",
+            "store_price_observations": [
+                {
+                    "store_price_confirmed": True,
+                    "store_model_match": True,
+                    "store_name": "ビックカメラ天神1号館",
+                    "store_observation_store_id": "bic_camera_tenjin_1",
+                    "store_price_jpy": 22980,
+                    "store_stock_status": "in_stock",
+                    "store_price_checked_at": "2026-10-18T10:00:00+09:00",
+                    "store_observation_age_minutes": 5,
+                },
+                {
+                    "store_price_confirmed": True,
+                    "store_model_match": True,
+                    "store_name": "ヨドバシカメラ マルチメディア博多",
+                    "store_observation_store_id": "yodobashi_hakata",
+                    "store_price_jpy": 21980,
+                    "store_stock_status": "low_stock",
+                    "store_price_checked_at": "2026-10-18T10:02:00+09:00",
+                    "store_observation_age_minutes": 3,
+                },
+            ],
+        }
+        summary = report.peripheral_route_price_summary(item)
+        self.assertIn("ビックカメラ天神1号館 店頭現金 ¥22,980", summary)
+        self.assertIn("ヨドバシカメラ マルチメディア博多 店頭現金 ¥21,980", summary)
+        self.assertIn("2026-10-18 10:00 JST", summary)
+        self.assertIn("2026-10-18 10:02 JST", summary)
+        self.assertNotIn("誤った支店名", summary)
+
+    def test_store_pickup_stock_cannot_authorize_a_physical_cash_purchase(self):
+        now = datetime(2026, 10, 18, 12, 0, tzinfo=timezone(timedelta(hours=9)))
+        stamp = now.isoformat()
+        observation = {
+            "store_price_confirmed": True,
+            "store_price_jpy": 21980,
+            "store_model_match": True,
+            "store_observation_store_id": "bic_camera_tenjin_1",
+            "store_price_checked_at": stamp,
+            "store_stock_status": "out_of_stock",
+            "store_inventory_verified": True,
+            "store_inventory_status": "in_stock",
+            "store_inventory_store_id": "yodobashi_hakata",
+            "store_inventory_checked_at": stamp,
+            "store_inventory_observations": [
+                {
+                    "store_id": "yodobashi_hakata",
+                    "store_name": "ヨドバシカメラ マルチメディア博多",
+                    "status": "in_stock",
+                    "checked_at": stamp,
+                }
+            ],
+        }
+        result = report.peripheral_purchase_evidence_score(
+            {"purchase_channel": "compare_online_and_store"}, observation, now=now
+        )
+        self.assertEqual(result["breakdown"]["sellable_stock"], 0)
+        self.assertFalse(result["checkout_total_verified"])
+        self.assertFalse(result["purchase_route_ready"])
+
     def test_mixed_route_report_never_labels_online_price_as_store_cash_price(self):
         item = {
             "purchase_channel": "compare_online_and_store",
