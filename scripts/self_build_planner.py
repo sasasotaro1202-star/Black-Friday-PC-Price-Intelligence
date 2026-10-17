@@ -362,6 +362,10 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
         "direct_listing_display_offers": [
             {
                 "url": offer.get("url"),
+                "retailer_domain": offer.get("retailer_domain") or (
+                    (urlparse(str(offer.get("url") or "")).hostname or "").removeprefix("www.")
+                ),
+                "seller_name": offer.get("seller_name") or offer.get("merchant") or offer.get("seller"),
                 "title": offer.get("title") or offer.get("identity_anchor"),
                 "price_jpy": offer.get("price_jpy"),
                 "stock_status": offer.get("stock_status") or "unknown",
@@ -1961,7 +1965,7 @@ def render_plan_markdown(plan):
                 "out_of_stock": "売切れ", "unknown": "在庫不明",
                 "preorder_or_backorder": "取寄せ/予約",
             }
-            for offer in (part.get("direct_listing_display_offers") or [])[:5]:
+            for offer in (part.get("direct_listing_display_offers") or []):
                 offer_url = str(offer.get("url") or "")
                 if not offer_url or any("(" + offer_url + ")" in link for link in links):
                     continue
@@ -1969,8 +1973,13 @@ def render_plan_markdown(plan):
                 offer_status = stock_labels.get(str(offer.get("stock_status") or "unknown"), "在庫不明")
                 if offer.get("stock_signal_fresh") is not True:
                     offer_status += "（在庫情報が古い）"
-                offer_label = str(offer.get("title") or offer.get("identity_anchor") or "販売店")
-                label = "{} {} {}".format(offer_label[:35], offer_status, money(offer_price))
+                retailer = str(
+                    offer.get("retailer_domain")
+                    or (urlparse(offer_url).hostname or "販売店").removeprefix("www.")
+                )
+                seller = str(offer.get("seller_name") or "").strip()
+                offer_label = retailer + (" / " + seller if seller else "")
+                label = "{} {} {}".format(offer_label[:48], offer_status, money(offer_price))
                 links.append("[" + label.replace("]", ")") + "](" + offer_url + ")")
             search_url = part.get("search_snippet_reference_url")
             if search_url and search_url != url:
