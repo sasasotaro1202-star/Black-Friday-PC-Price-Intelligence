@@ -1,4 +1,5 @@
 import hashlib
+import html as html_lib
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
@@ -771,6 +772,7 @@ def parse_page(url, html, expected=None):
     name = None
     structured_offers = []
     all_availability_states = set()
+    selected_seller_names = set()
     structured_stock = "unknown"
     price_ambiguity = None
     matched_structured = False
@@ -828,11 +830,19 @@ def parse_page(url, html, expected=None):
                     p = int(float(str(offer.get("price")).replace(",", "")))
                 except Exception:
                     p = None
+                seller_value = offer.get("seller")
+                if isinstance(seller_value, dict):
+                    offer_seller_name = str(seller_value.get("name") or "").strip()
+                elif isinstance(seller_value, str):
+                    offer_seller_name = seller_value.strip()
+                else:
+                    offer_seller_name = ""
                 if p and (currency in ("JPY", "YEN", "") or "¥" in str(offer.get("price"))):
                     structured_offers.append({
                         "price": p,
                         "match_level": match_level,
                         "availability": str(offer.get("availability") or ""),
+                        "seller_name": offer_seller_name or None,
                     })
 
     # A matching Product JSON-LD node can legitimately omit its offer/price.
@@ -843,6 +853,10 @@ def parse_page(url, html, expected=None):
         selected_offers = [x for x in structured_offers if x["match_level"] == best_match]
     else:
         selected_offers = structured_offers
+    selected_seller_names = {
+        str(x.get("seller_name") or "").strip()
+        for x in selected_offers if str(x.get("seller_name") or "").strip()
+    }
     unique_structured_prices = sorted(set(x["price"] for x in selected_offers))
     structured_price = unique_structured_prices[0] if len(unique_structured_prices) == 1 else None
     if len(unique_structured_prices) > 1:
@@ -899,12 +913,44 @@ def parse_page(url, html, expected=None):
     else:
         final_stock = text_stock
 
+    # Capture seller identity only from seller-scoped markup. Do not infer that
+    # Amazon is the seller merely because the product page is hosted on Amazon;
+    # third-party marketplace offers need their own seller identity.
+    seller_name = next(iter(selected_seller_names)) if len(selected_seller_names) == 1 else None
+    if not seller_name and (urlparse(url).hostname or "").lower().endswith("amazon.co.jp"):
+        seller_scope = re.search(
+            r'<a[^>]+id=["\']sellerProfileTriggerId["\'][^>]*>(.*?)</a>',
+            html, re.I | re.S
+        )
+        if seller_scope:
+            seller_text = re.sub(r"<[^>]+>", " ", seller_scope.group(1))
+            seller_text = html_lib.unescape(re.sub(r"\s+", " ", seller_text)).strip()
+            if seller_text and len(seller_text) <= 120:
+                seller_name = seller_text
+        if not seller_name:
+            merchant_scope = re.search(
+                r'id=["\']merchant-info["\'][^>]*>(.*?)(?:</div>|</span>)',
+                html, re.I | re.S
+            )
+            if merchant_scope:
+                merchant_text = re.sub(r"<[^>]+>", " ", merchant_scope.group(1))
+                merchant_text = html_lib.unescape(re.sub(r"\s+", " ", merchant_text)).strip()
+                merchant_match = re.search(
+                    r'(?:販売元|販売者|出品者)\s*[:：]?\s*([^|｜]{2,100}?)(?=\\s+(?:発送元|返品|ストアを表示)|$)',
+                    merchant_text
+                )
+                if merchant_match:
+                    candidate_seller = merchant_match.group(1).strip(" ：:　")
+                    if candidate_seller and len(candidate_seller) <= 120:
+                        seller_name = candidate_seller
+
     specs = parse_specs(text_html[:450000], expected=expected)
     benefit_signals = extract_benefit_signals(text_html[:450000])
     return {
         "url": url,
         "store": urlparse(url).netloc.lower(),
         "name": name or url,
+        "seller_name": seller_name,
         "price_jpy": picked["price_jpy"] if picked else None,
         "stock_status": final_stock,
         "structured_stock_status": structured_stock,
