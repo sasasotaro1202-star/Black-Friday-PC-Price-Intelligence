@@ -4,6 +4,7 @@ import os
 import sys
 
 from intelligence import ROOT, parse_dt, load_catalog, load_json, purchase_budget_policy, peripheral_budget_projection, configuration_readiness
+from observation_contract import observation_metadata_schema_errors
 
 def file_sha256(path):
     h = hashlib.sha256()
@@ -51,6 +52,8 @@ def main():
 
     latest = load_json(os.path.join(ROOT, "data", "current_latest.json"), {})
     latest_path = os.path.join(ROOT, "data", "current_latest.json")
+    for problem in observation_metadata_schema_errors(latest):
+        errors.append("observation metadata contract: " + problem)
     coverage = latest.get("coverage") or {}
     if coverage:
         processed = coverage.get("processed_count")
