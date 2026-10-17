@@ -189,6 +189,22 @@ class ReportLinkTests(unittest.TestCase):
         reason = report.peripheral_fit_reason_text(target)
         self.assertIn("評価理由:", reason)
         self.assertIn("留意点:", reason)
+
+        normalized_reason = report.peripheral_fit_reason_text({
+            "category": "main_monitor",
+            "ranking_score_100": 94,
+            "fit_scorecard": {
+                "workload_fit_points": 34,
+                "budget_fit_points": 28,
+                "feature_spec_points": 19,
+                "substitution_risk_points": 13,
+                "rationale_ja": "用途  と\\tても | 理由",
+                "limitations_ja": "留意点   あり",
+            },
+        })
+        self.assertEqual(normalized_reason, "評価理由: 用途 と ても ／ 理由 / 留意点: 留意点 あり")
+        self.assertNotIn("\\t", normalized_reason)
+        self.assertNotIn("  ", normalized_reason)
         evidence = {
             "score": 55,
             "breakdown": {
