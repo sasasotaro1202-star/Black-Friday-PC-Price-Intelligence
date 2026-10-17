@@ -1172,6 +1172,30 @@ def render_plan_markdown(plan):
             "[商品ページ]({})".format(item.get("purchase_url")) if item.get("purchase_url") else "リンク未確認"
         ) for item in (plan.get("memory_choice_selection") or {}).get("candidates", [])]),
         "",
+        "## 現時点の販売店掲載価格・在庫（BF目標とは別集計）",
+        "",
+        "以下は、商品型番・取得時刻が検証できた直接販売店ページのうち、在庫あり／在庫少と明示された掲載価格だけの部分小計です。注文カートの最終価格ではなく、在庫不明・売り切れ・未取得の部品は合計に埋めません。必須部品すべてに販売可能な掲載価格がそろわない構成は、PC本体価格を算定できません。",
+        "",
+        "|構成|販売可能掲載価格が確認できた部品|部品数カバー率|確認済み掲載価格の部分小計|売り切れ掲載|在庫不明掲載|販売可能価格が未確認の部品|",
+        "|---|---|---:|---:|---:|---:|---|"
+    ]
+    for build in plan.get("builds") or []:
+        counts = build.get("current_retailer_listing_offer_count_by_status") or {}
+        names = {str(part.get("id")): str(part.get("name") or part.get("id")) for part in (build.get("components") or [])}
+        missing_names = [names.get(str(cid), str(cid)) for cid in (build.get("current_parts_without_sellable_listing") or [])]
+        sellable_count = int(build.get("current_sellable_listing_part_count") or 0)
+        required_count = int(build.get("current_sellable_listing_required_part_count") or 0)
+        lines.append("|{}|{}/{}|{}%|{}|{}|{}|{}|".format(
+            build.get("name"), sellable_count, required_count,
+            build.get("current_sellable_listing_coverage_pct", 0),
+            money(build.get("current_sellable_listing_subtotal_jpy")),
+            int(counts.get("out_of_stock") or 0), int(counts.get("unknown") or 0),
+            "、".join(missing_names) if missing_names else "直接掲載上は全点に在庫シグナルあり（決済未確認）"
+        ))
+    lines.extend([
+        "",
+        "**重要:** 「確認済み掲載価格の部分小計」は全構成の現在価格ではありません。部品ごとの価格時刻・売り切れ状態は下の部品表を確認してください。価格や在庫を取得できないことを「売り切れ」とは推定しません。",
+        "",
         "## 100点方式の構成スコア（BF目標構成ベース）",
         "",
         "構成点は用途適性・目標総額ベースの相対価格効率・互換性で採点。ゲーム点は[Tom's Hardware GPU Benchmarks Hierarchy 2026](https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html)の1440p Ultraラスタライズ値を25点満点に正規化した代理指標で、対象ゲームの実測FPSではありません。参照表の最終更新日は2026-06-24です。GPU参照FPSも各構成に対応させて表示します。",
@@ -1233,16 +1257,39 @@ def render_plan_markdown(plan):
                 price_text = money(p) + "（検索スニペット参考のみ）"
             else:
                 price_text = money(p)
-            direct_price = part.get("direct_listing_display_price_jpy")
-            direct_text = money(direct_price) if isinstance(direct_price, int) else "—"
-            stock_label = part.get("direct_listing_display_stock_label")
-            if stock_label:
-                direct_text += "（" + str(stock_label) + "）"
+            direct_price = part.get("direct_listing_sellable_price_jpy")
+            direct_stock = part.get("direct_listing_sellable_stock_status")
+            direct_text = (
+                "販売可能掲載 " + money(direct_price) + "（" + str(direct_stock) + "）"
+                if isinstance(direct_price, int) and not isinstance(direct_price, bool) else
+                "販売可能な直接掲載価格なし"
+            )
+            stock_counts = part.get("direct_listing_stock_counts") or {}
+            sold_out_count = int(stock_counts.get("out_of_stock") or 0)
+            unknown_count = int(stock_counts.get("unknown") or 0)
+            preorder_count = int(stock_counts.get("preorder_or_backorder") or 0)
+            if sold_out_count or unknown_count or preorder_count:
+                direct_text += " / 売切れ{}・在庫不明{}・取寄/予約{}".format(
+                    sold_out_count, unknown_count, preorder_count
+                )
+            # Link to each vetted seller-specific offer with its own stock label;
+            # never blend an out-of-stock sticker price into the sellable subtotal.
             url = part.get("purchase_url")
             links = ["[価格比較ページ](" + url + ")"] if url else []
-            direct_url = part.get("direct_listing_display_url")
-            if direct_url:
-                links.append("[直接掲載ページ](" + str(direct_url) + ")")
+            stock_labels = {
+                "in_stock": "在庫あり", "low_stock": "在庫少",
+                "out_of_stock": "売切れ", "unknown": "在庫不明",
+                "preorder_or_backorder": "取寄/予約",
+            }
+            for offer in (part.get("direct_listing_display_offers") or [])[:5]:
+                offer_url = str(offer.get("url") or "")
+                if not offer_url or any("(" + offer_url + ")" in link for link in links):
+                    continue
+                offer_price = offer.get("price_jpy")
+                offer_status = stock_labels.get(str(offer.get("stock_status") or "unknown"), "在庫不明")
+                offer_label = str(offer.get("title") or offer.get("identity_anchor") or "販売店")
+                label = "{} {} {}".format(offer_label[:35], offer_status, money(offer_price))
+                links.append("[" + label.replace("]", ")") + "](" + offer_url + ")")
             search_url = part.get("search_snippet_reference_url")
             if search_url and search_url != url:
                 links.append("[検索ページ参考元](" + search_url + ")")
