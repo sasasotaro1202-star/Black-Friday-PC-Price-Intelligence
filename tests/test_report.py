@@ -10,6 +10,28 @@ spec.loader.exec_module(report)
 
 
 class ReportLinkTests(unittest.TestCase):
+    def test_early_buy_amount_label_separates_listing_estimate_and_verified_checkout(self):
+        estimated = {
+            "observed_price_jpy": 20790,
+            "estimated_checkout_total_jpy": 21790,
+            "verified_checkout_total_jpy": None,
+            "checkout_total_verified": False,
+        }
+        self.assertEqual(
+            report.early_buy_amount_label(estimated),
+            "掲載 ¥20,790 / 送料込概算 ¥21,790（決済未確認）",
+        )
+        verified = {
+            "observed_price_jpy": 20790,
+            "estimated_checkout_total_jpy": 21790,
+            "verified_checkout_total_jpy": 21790,
+            "checkout_total_verified": True,
+        }
+        self.assertEqual(report.early_buy_amount_label(verified), "決済総額確認済み ¥21,790")
+        listing_only = {"observed_price_jpy": 20790}
+        self.assertEqual(report.early_buy_amount_label(listing_only), "掲載 ¥20,790（決済未確認）")
+        self.assertEqual(report.early_buy_amount_label({}), "未確認")
+
     def test_self_build_policy_ignores_assembly_time_and_keeps_bto_reference_only(self):
         policy = report.build_purchase_method_policy({
             "pc_build_method_preference": "SELF_BUILD_REQUIRED_FOR_PRIMARY_RECOMMENDATION",
