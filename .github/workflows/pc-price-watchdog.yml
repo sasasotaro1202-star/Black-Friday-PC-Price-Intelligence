@@ -3,7 +3,12 @@ name: PC Price Intelligence - Watchdog
 on:
   workflow_dispatch:
   schedule:
-    - cron: "12,27,42,57 * * * *"
+    - cron: "*/5 * * * *"
+  workflow_run:
+    workflows:
+      - "PC Price Intelligence"
+      - "PC Price Intelligence - Tests"
+    types: [completed]
 
 permissions:
   contents: read
@@ -15,6 +20,9 @@ concurrency:
 
 jobs:
   watchdog:
+    # Ignore PR-branch test completions; only default-branch production runs
+    # may trigger recovery actions against main.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.head_branch == 'main'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -30,7 +38,12 @@ jobs:
           python scripts/validate.py
 
       - name: Recover monitor when data is stale or unhealthy
-        if: steps.check.outcome == 'failure'
+        if: |
+          (github.event_name == 'schedule' && steps.check.outcome == 'failure') ||
+          (github.event_name == 'workflow_run' &&
+           github.event.workflow_run.name == 'PC Price Intelligence' &&
+           github.event.workflow_run.conclusion == 'failure' &&
+           github.event.workflow_run.run_attempt == 1)
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -59,7 +72,12 @@ jobs:
           fi
 
       - name: Recover failed test workflow
-        if: steps.check.outcome == 'failure'
+        if: |
+          (github.event_name == 'schedule' && steps.check.outcome == 'failure') ||
+          (github.event_name == 'workflow_run' &&
+           github.event.workflow_run.name == 'PC Price Intelligence - Tests' &&
+           github.event.workflow_run.conclusion == 'failure' &&
+           github.event.workflow_run.run_attempt == 1)
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
