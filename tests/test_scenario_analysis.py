@@ -82,6 +82,21 @@ class BlackFridayScenarioTests(unittest.TestCase):
         self.assertEqual(result["peripheral_target_total_jpy"], 35000)
         self.assertEqual(result["black_friday_ideal_bundle_target_jpy"], 400000)
         self.assertEqual(result["black_friday_target_buffer_jpy"], 0)
+        self.assertEqual(result["pc_planned_hard_cap_jpy"], 360000)
+        self.assertEqual(result["pc_absolute_hard_cap_jpy"], 395000)
+        self.assertEqual(result["unallocated_contingency_jpy"], 5000)
+        self.assertEqual(
+            result["pc_planned_hard_cap_jpy"] + result["peripheral_target_total_jpy"] + result["unallocated_contingency_jpy"],
+            result["total_budget_jpy"],
+        )
+        expected_dynamic_pc_cap = max(
+            0,
+            min(
+                result["pc_absolute_hard_cap_jpy"],
+                result["total_budget_jpy"] - result["peripheral_projected_cost_jpy"] - result["unallocated_contingency_jpy"],
+            ),
+        )
+        self.assertEqual(result["black_friday_pc_price_cap_jpy"], expected_dynamic_pc_cap)
         self.assertEqual(result["black_friday_hard_cap_bundle_jpy"], 400000)
         self.assertFalse(result["all_in_checkout_total_final"])
 
