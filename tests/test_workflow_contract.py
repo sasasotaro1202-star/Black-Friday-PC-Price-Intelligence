@@ -195,6 +195,11 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertIn("inputs.watchdog_recovery == true && ' [watchdog-recovery]'", primary)
         self.assertIn("watchdog_recovery:", primary)
         self.assertNotIn('cron: "12,27,42,57 * * * *"', watchdog)
+        # Recovery must detect a stale writer even when a newer run is queued.
+        self.assertIn("--limit 20 --json databaseId,status,conclusion,createdAt,updatedAt,headSha", watchdog)
+        self.assertIn("gh run cancel", watchdog)
+        self.assertIn("20*60", watchdog)
+        self.assertIn("A fresh queued/running monitor remains", watchdog)
 
 if __name__ == "__main__":
     unittest.main()
