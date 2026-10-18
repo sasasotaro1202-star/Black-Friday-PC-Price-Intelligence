@@ -53,6 +53,14 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertLess(calendar_at, report_at)
         self.assertLess(calendar_at, timing_at)
 
+    def test_timing_analysis_marks_calendar_date_as_non_authoritative_reference(self):
+        source = (ROOT / "scripts" / "timing_analysis.py").read_text(encoding="utf-8")
+        self.assertIn("CALENDAR_REFERENCE_DATE", source)
+        self.assertIn("calendar_black_friday_reference_date", source)
+        self.assertIn("not official retailer sale dates", source)
+        self.assertNotIn('"target_black_friday":TARGET.date().isoformat()', source)
+        self.assertNotIn('f"Target Black Friday: {TARGET.date()}"', source)
+
     def test_watch_window_does_not_hardcode_2026_campaign_dates(self):
         paths = (
             WORKFLOW,
