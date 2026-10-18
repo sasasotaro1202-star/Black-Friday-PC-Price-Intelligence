@@ -121,7 +121,8 @@ def self_build_artifact_problems(root, now, threshold):
                 continue
             pc_total = item.get("target_pc_total_jpy")
             all_in = item.get("target_all_in_jpy")
-            if isinstance(pc_total, int) and isinstance(all_in, int):
+            if (isinstance(pc_total, int) and isinstance(all_in, int)
+                    and isinstance(peripheral, int) and isinstance(contingency, int)):
                 if all_in != pc_total + peripheral + contingency:
                     problems.append("self_build_candidate_all_in_arithmetic_mismatch:" + str(item.get("id") or item.get("gpu_choice_id") or "unknown"))
 
@@ -157,8 +158,11 @@ def self_build_artifact_problems(root, now, threshold):
             report_generated = parse_dt(match.group(1)) if match else None
             if report_generated is None:
                 problems.append(label + "_generated_at_missing")
-            elif plan_generated is not None and abs(report_generated - plan_generated) > timedelta(minutes=10):
-                problems.append(label + "_stale_relative_to_self_build_plan")
+            else:
+                if now.astimezone(JST) - report_generated > threshold:
+                    problems.append(label + "_stale")
+                if plan_generated is not None and abs(report_generated - plan_generated) > timedelta(minutes=10):
+                    problems.append(label + "_stale_relative_to_self_build_plan")
         except Exception as exc:
             problems.append(label + "_unreadable:" + type(exc).__name__)
 
