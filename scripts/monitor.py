@@ -837,7 +837,7 @@ def parse_page(url, html, expected=None):
                     offer_seller_name = seller_value.strip()
                 else:
                     offer_seller_name = ""
-                if p and (currency in ("JPY", "YEN", "") or "¥" in str(offer.get("price"))):
+                if p and (currency in ("JPY", "YEN") or any(symbol in str(offer.get("price")) for symbol in ("¥", "￥", "円"))):
                     structured_offers.append({
                         "price": p,
                         "match_level": match_level,
