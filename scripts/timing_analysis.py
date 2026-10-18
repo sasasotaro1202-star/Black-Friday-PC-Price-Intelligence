@@ -1183,6 +1183,29 @@ def append_buy_now_summary_to_latest(decision):
     return True
 
 
+def timing_candidates_section_lines(purchase_method_policy):
+    """Render completed PCs as comparison benchmarks when DIY is the required path."""
+    policy = purchase_method_policy if isinstance(purchase_method_policy, dict) else {}
+    if (
+        policy.get("primary_method") == "SELF_BUILD"
+        or policy.get("completed_pc_purchase_actionable") is False
+    ):
+        return [
+            "## Completed-PC / BTO benchmark references (not DIY purchase candidates)",
+            "",
+            "The primary purchase method is self-build. These completed-PC listings are price/performance benchmarks only; they do not authorize a purchase and must not be used as component prices or as the DIY build's checkout total.",
+            "",
+            "|Rank|Completed-PC reference model|Current reference price|Required drop to target|Reference feasibility|GPU|Perf|Source|",
+            "|---:|---|---:|---:|---|---|---:|---|",
+        ]
+    return [
+        "## Current actionable candidates",
+        "",
+        "|Rank|Product|Current|Required discount|Feasibility|GPU|Perf|Source|",
+        "|---:|---|---:|---:|---|---|---:|---|",
+    ]
+
+
 def main():
     latest_path=os.path.join(ROOT,"data","current_latest.json")
     latest=load_json(latest_path,{"products":[]})
@@ -1261,6 +1284,11 @@ def main():
         "budget_jpy":BUDGET,
         "calendar_black_friday_reference_date":CALENDAR_REFERENCE_DATE.date().isoformat(),
         "target_products":rows[:50],
+        "target_products_role": (
+            "completed_pc_benchmark_only_not_actionable"
+            if decision.get("purchase_method_policy", {}).get("primary_method") == "SELF_BUILD"
+            else "ranked_pc_candidate_reference"
+        ),
         "historical_events":HISTORY,
         "observed_change_timing":dynamic,
         "buy_now_decision": decision,
@@ -1292,10 +1320,7 @@ def main():
         f"Source snapshot SHA256: {source_snapshot_sha256 or 'UNCONFIRMED'}",
         f"Budget: ¥{BUDGET:,}",
         f"U.S. Black Friday calendar reference only (not official retailer sale dates): {CALENDAR_REFERENCE_DATE.date()}","",
-        "## Current actionable candidates","",
-        "|Rank|Product|Current|Required discount|Feasibility|GPU|Perf|Source|",
-        "|---:|---|---:|---:|---|---|---:|---|"
-    ]
+    ] + timing_candidates_section_lines(decision.get("purchase_method_policy"))
     for i,r in enumerate(rows[:30],1):
         lines.append(f"|{i}|{str(r['name'])[:55]}|¥{r['price_jpy']:,}|{r['required_discount_pct']:.1f}%|{r['feasibility']}|{r['gpu'] or '—'}|{r['performance_score']}|{r['source_mode']}|")
     lines += ["","## Empirical price-change timing","",f"- Meaningful change sample: **{dynamic['sample_size']}**"]
