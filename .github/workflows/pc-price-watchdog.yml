@@ -55,28 +55,69 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          latest="$(gh run list --workflow pc-price-monitor.yml --branch main --limit 1 --json databaseId,status,conclusion --jq '.[0]')"
+          # Inspect more than the newest queued run: a stale in-progress run can
+          # hold the writer lock while newer runs wait in the queue.
+          runs="$(gh run list --workflow pc-price-monitor.yml --branch main --limit 20 --json databaseId,status,conclusion,createdAt,updatedAt,headSha)"
+          assessment="$(RUNS_JSON="$runs" python - <<'PY'
+import json, os
+from datetime import datetime, timezone
+items=json.loads(os.environ.get("RUNS_JSON","[]"))
+now=datetime.now(timezone.utc)
+stale=[]
+active=[]
+for item in items:
+    status=item.get("status") or ""
+    if status not in ("queued","in_progress"):
+        continue
+    stamp=item.get("updatedAt") or item.get("createdAt")
+    try:
+        age=(now-datetime.fromisoformat(str(stamp).replace("Z","+00:00")).astimezone(timezone.utc)).total_seconds()
+    except Exception:
+        age=10**9
+    row={"id":item.get("databaseId"),"status":status,"age_seconds":int(age)}
+    (stale if age > 20*60 else active).append(row)
+print(json.dumps({"stale":stale,"active":active,"latest":items[0] if items else None}))
+PY
+)"
+          stale_ids="$(printf '%s' "$assessment" | python -c 'import json,sys; [print(x["id"]) for x in json.load(sys.stdin)["stale"] if x.get("id")]')"
+          stale_count="$(printf '%s' "$assessment" | python -c 'import json,sys; print(len(json.load(sys.stdin)["stale"]))')"
+          active_count="$(printf '%s' "$assessment" | python -c 'import json,sys; print(len(json.load(sys.stdin)["active"]))')"
 
+          if [ "$stale_count" -gt 0 ]; then
+            echo "Cancelling stale monitor run(s) older than the 20-minute safety window."
+            while IFS= read -r stale_id; do
+              [ -z "$stale_id" ] || gh run cancel "$stale_id"
+            done <<< "$stale_ids"
+            if [ "$active_count" -gt 0 ]; then
+              echo "A fresh queued/running monitor remains; preserve the single-writer lock and let it proceed."
+              exit 0
+            fi
+            echo "No fresh queued/running monitor remains; dispatching one recovery run."
+            gh workflow run pc-price-monitor.yml --ref main -f watchdog_recovery=true
+            exit 0
+          fi
+
+          if [ "$active_count" -gt 0 ]; then
+            echo "A queued/in-progress monitor is within the safety window; no duplicate recovery run."
+            exit 0
+          fi
+
+          latest="$(printf '%s' "$assessment" | python -c 'import json,sys; print(json.dumps(json.load(sys.stdin)["latest"]))')"
           if [ -z "$latest" ] || [ "$latest" = "null" ]; then
             echo "No monitor run found; dispatching a fresh run."
             gh workflow run pc-price-monitor.yml --ref main -f watchdog_recovery=true
             exit 0
           fi
-
-          status="$(printf '%s' "$latest" | python -c 'import json,sys; x=json.load(sys.stdin); print(x.get("status",""))')"
-          conclusion="$(printf '%s' "$latest" | python -c 'import json,sys; x=json.load(sys.stdin); print(x.get("conclusion") or "")')"
-          run_id="$(printf '%s' "$latest" | python -c 'import json,sys; x=json.load(sys.stdin); print(x["databaseId"])')"
-
+          status="$(printf '%s' "$latest" | python -c 'import json,sys; print(json.load(sys.stdin).get("status",""))')"
+          conclusion="$(printf '%s' "$latest" | python -c 'import json,sys; print(json.load(sys.stdin).get("conclusion") or "")')"
+          run_id="$(printf '%s' "$latest" | python -c 'import json,sys; print(json.load(sys.stdin).get("databaseId") or "")')"
           if [ "$status" = "completed" ] && [ "$conclusion" != "success" ]; then
             echo "Latest monitor failed; re-running failed jobs: $run_id"
             gh run rerun "$run_id" --failed
           elif [ "$status" = "completed" ] && [ "$conclusion" = "success" ]; then
             echo "Latest monitor succeeded but watchdog still sees unhealthy data; dispatching a fresh run."
             gh workflow run pc-price-monitor.yml --ref main -f watchdog_recovery=true
-          else
-            echo "Monitor is already queued or running; no duplicate recovery run."
           fi
-
       - name: Recover failed test workflow
         if: |
           (github.event_name == 'schedule' && steps.check.outcome == 'failure') ||
