@@ -1,6 +1,6 @@
 # 今この瞬間の買い時判定
 
-- 更新時刻（JST）: 2026-10-18T09:53:22+09:00
+- 更新時刻（JST）: 2026-10-18T13:20:38+09:00
 - 判定: **事前監視継続・公式日程未確認** (PRE_BF_MONITORING)
 - 暫定の広域監視窓（公式セール日程ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 - 公式日程確認: 0/16 店舗（公式期間が確認できない店舗: 12、取得エラー: 4）
@@ -18,12 +18,12 @@
 - 組み立て時間を考慮するか: いいえ（減点なし）
 - BTOの位置付け: 価格・性能・部品品質・保証の比較ベンチマークのみ
 - 本命構成: 自作本命：Ryzen 7 9700X + RTX 5070 12GB
-- PC本体のBF購入目標（送料・小物予備費込み）: ¥382,500
-- 周辺機器込みBF購入目標: ¥422,500
-- 目標上の総予算残額: ¥-22,500
+- PC本体のBF購入目標（送料・小物予備費込み）: ¥381,500
+- 周辺機器込みBF購入目標: ¥421,500
+- 目標上の総予算残額: ¥-21,500
 - 互換性判定: REVIEW
-- 検証済み比較参考価格: 7/9
-- 直接掲載価格を取得したが在庫条件未達（推定・購入判定には不使用）: 2/9
+- 検証済み比較参考価格: 6/9
+- 直接掲載価格を取得したが在庫条件未達（推定・購入判定には不使用）: 3/9
 - 検索ページ表示専用の参考価格（推定・購入判定には不使用）: 0/9
 - 確認済み店舗決済オファー: 0/9
 - 自作購入判定: **WAIT_FOR_COMPATIBILITY_REVIEW**
@@ -41,14 +41,14 @@
 
 |部品|BF購入目標|検証済み比較参考値|直接掲載価格（在庫条件未達・推定不採用）|検索ページ表示専用値（不採用）|目標までの差|履歴内参考最安|監視窓内参考最安|履歴件数 / 監視窓件数|判定|価格確認ページ|
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
-|AMD Ryzen 7 9700X BOX|¥45,000|¥47,800|—|—|¥2,800 (5.9%)|¥47,800|未観測|60 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://shop.tsukumo.co.jp/goods/0730143315593/)|
-|ASRock B850M Pro RS WiFi|¥20,000|未確認|¥21,780（在庫未確認） ([直接掲載](https://item.rakuten.co.jp/dospara-r/ic517983/?variantId=ic517983))|—|—|¥21,380|未観測|23 / 0|直接掲載価格あり（在庫未確認・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001669878/)|
-|Corsair RM850e 2025 850W ATX 3.1 Gold|¥14,000|¥14,980|—|—|¥980 (6.5%)|¥14,980|未観測|94 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.dospara.co.jp/SBR83/IC519918.html)|
-|Fractal Design Pop Air TG|¥12,000|¥13,180|—|—|¥1,180 (9.0%)|¥13,180|未観測|91 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.dospara.co.jp/SBR1959/IC480986.html)|
-|Microsoft Windows 11 Home 日本語版 パッケージ版|¥17,000|¥19,280|—|—|¥2,280 (11.8%)|¥16,230|未観測|89 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.yodobashi.com/product/100000001006975270/)|
-|Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2)|¥100,000|¥119,990|—|—|¥19,990 (16.7%)|¥119,990|未観測|9 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.ark-pc.co.jp/i/11650134/)|
-|MSI SPATIUM M450 PCIe 4.0 NVMe M.2 1TB V1|¥25,000|¥29,130|—|—|¥4,130 (14.2%)|¥29,130|未観測|9 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.yodobashi.com/product/100000001009402658/)|
-|Thermalright Assassin X 120 Refined SE|¥2,500|¥2,580|—|—|¥80 (3.1%)|¥2,580|未観測|9 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.yodobashi.com/product/100000001008996814/)|
+|AMD Ryzen 7 9700X BOX|¥45,000|¥47,800|—|—|¥2,800 (5.9%)|¥47,800|未観測|61 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://shop.tsukumo.co.jp/goods/0730143315593/)|
+|ASRock B850M Pro RS WiFi|¥20,000|未確認|¥26,990（在庫未確認） ([直接掲載](https://www.yodobashi.com/product/100000001008871801/))|—|—|¥21,380|未観測|23 / 0|直接掲載価格あり（在庫未確認・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001669878/)|
+|Corsair RM850e 2025 850W ATX 3.1 Gold|¥14,000|¥14,980|—|—|¥980 (6.5%)|¥14,980|未観測|95 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.dospara.co.jp/SBR83/IC519918.html)|
+|Fractal Design Pop Air TG|¥12,000|¥13,180|—|—|¥1,180 (9.0%)|¥13,180|未観測|92 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.dospara.co.jp/SBR1959/IC480986.html)|
+|Microsoft Windows 11 Home 日本語版 パッケージ版|¥17,000|¥19,280|—|—|¥2,280 (11.8%)|¥16,230|未観測|90 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.yodobashi.com/product/100000001006975270/)|
+|Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2)|¥100,000|¥119,990|—|—|¥19,990 (16.7%)|¥119,990|未観測|10 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.ark-pc.co.jp/i/11650134/)|
+|Crucial P3 Plus CT1000P3PSSD8JP 1TB|¥24,000|未確認|¥9,300（在庫切れ） ([直接掲載](https://www.dospara.co.jp/SBR1144/IC481159.html))|—|—|未観測|未観測|0 / 0|直接掲載価格あり（在庫切れ・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001466997/)|
+|Thermalright Assassin X 120 Refined SE|¥2,500|¥2,580|—|—|¥80 (3.1%)|¥2,580|未観測|10 / 0|目標まで値下がり待ち|[比較・仕様ページ](https://www.yodobashi.com/product/100000001008996814/)|
 |PNY GeForce RTX 5070 12GB OC SLIM|¥138,000|未確認|¥190,800（在庫未確認） ([直接掲載](https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom))|—|—|未観測|未観測|0 / 0|直接掲載価格あり（在庫未確認・購入許可なし）|[比較・仕様ページ](https://kakaku.com/item/K0001798041/)|
 
 ## 判定根拠
@@ -90,9 +90,10 @@
 |5|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|未確認|—|¥436,770|out_of_stock|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/)|
 |6|G TUNE DG-I5G70|未確認|—|¥316,770|in_stock|未達/未確認|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/)|
 |7|G TUNE P5-I7G70BK-C（ブラック）|未確認|—|¥485,770|in_stock|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/)|
-|8|G TUNE FG-A7G6T|未確認|—|¥327,698|unknown|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/)|
-|9|G TUNE DG-A5G60|未確認|—|¥231,770|in_stock|未達/未確認|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
-|10|G TUNE DG-A7G70|未確認|—|¥427,698|unknown|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/)|
+|8|Acer Predator Helios Neo 16 AI Windows 11 Home Core Ultra 9 290HX Plus RTX 5070 Ti IPS 非光沢 WQXGA 240Hz 3ms G-SYNC DCI-P3 100% 32GBメモリ 1TB SSD 第5世代 AeroBladeファン 有線LAN WiFi 6E 英字キーボード ゲーミングノートパソコン PHN16-I71-N93Z57T/E|未確認|—|¥584,770|in_stock|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1)|
+|9|G TUNE FG-A7G6T|未確認|—|¥327,698|unknown|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/)|
+|10|G TUNE DG-A5G60|未確認|—|¥231,770|in_stock|未達/未確認|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
+|11|G TUNE DG-A7G70|未確認|—|¥427,698|unknown|達成|未観測|—|PRE_BF_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/)|
 
 ## 読み方と安全規則
 
