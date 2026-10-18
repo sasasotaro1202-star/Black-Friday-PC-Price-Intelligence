@@ -844,7 +844,14 @@ def parse_page(url, html, expected=None):
                 else:
                     offer_seller_name = ""
                 has_yen_symbol = any(symbol in price_text for symbol in ("¥", "￥", "円"))
-                currency_verified = currency in ("JPY", "YEN") or (not currency and has_yen_symbol)
+                has_foreign_currency_symbol = any(symbol in price_text for symbol in ("$", "€", "£", "₹", "₩", "₱"))
+                currency_verified = (
+                    not has_foreign_currency_symbol
+                    and (
+                        currency in ("JPY", "YEN")
+                        or (not currency and has_yen_symbol)
+                    )
+                )
                 if p and currency_verified:
                     structured_offers.append({
                         "price": p,
@@ -905,9 +912,13 @@ def parse_page(url, html, expected=None):
     meta_currency_set = set(meta_currency_values)
     meta_currency = next(iter(meta_currency_set)) if len(meta_currency_set) == 1 else None
     meta_has_yen_symbol = any(symbol in meta_amount_text for symbol in ("¥", "￥", "円"))
+    meta_has_foreign_currency_symbol = any(symbol in meta_amount_text for symbol in ("$", "€", "£", "₹", "₩", "₱"))
     meta_currency_verified = (
-        meta_currency in ("JPY", "YEN")
-        or (not meta_currency_values and meta_has_yen_symbol)
+        not meta_has_foreign_currency_symbol
+        and (
+            meta_currency in ("JPY", "YEN")
+            or (not meta_currency_values and meta_has_yen_symbol)
+        )
     )
     if meta_amount_text and meta_currency_verified and len(meta_currency_set) <= 1:
         normalized_meta_amount = re.sub(r"[¥￥円\s]", "", meta_amount_text.replace(",", ""))
