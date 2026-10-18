@@ -59,25 +59,25 @@ jobs:
           # hold the writer lock while newer runs wait in the queue.
           runs="$(gh run list --workflow pc-price-monitor.yml --branch main --limit 20 --json databaseId,status,conclusion,createdAt,updatedAt,headSha)"
           assessment="$(RUNS_JSON="$runs" python - <<'PY'
-import json, os
-from datetime import datetime, timezone
-items=json.loads(os.environ.get("RUNS_JSON","[]"))
-now=datetime.now(timezone.utc)
-stale=[]
-active=[]
-for item in items:
-    status=item.get("status") or ""
-    if status not in ("queued","in_progress"):
-        continue
-    stamp=item.get("updatedAt") or item.get("createdAt")
-    try:
-        age=(now-datetime.fromisoformat(str(stamp).replace("Z","+00:00")).astimezone(timezone.utc)).total_seconds()
-    except Exception:
-        age=10**9
-    row={"id":item.get("databaseId"),"status":status,"age_seconds":int(age)}
-    (stale if age > 20*60 else active).append(row)
-print(json.dumps({"stale":stale,"active":active,"latest":items[0] if items else None}))
-PY
+          import json, os
+          from datetime import datetime, timezone
+          items=json.loads(os.environ.get("RUNS_JSON","[]"))
+          now=datetime.now(timezone.utc)
+          stale=[]
+          active=[]
+          for item in items:
+              status=item.get("status") or ""
+              if status not in ("queued","in_progress"):
+                  continue
+              stamp=item.get("updatedAt") or item.get("createdAt")
+              try:
+                  age=(now-datetime.fromisoformat(str(stamp).replace("Z","+00:00")).astimezone(timezone.utc)).total_seconds()
+              except Exception:
+                  age=10**9
+              row={"id":item.get("databaseId"),"status":status,"age_seconds":int(age)}
+              (stale if age > 20*60 else active).append(row)
+          print(json.dumps({"stale":stale,"active":active,"latest":items[0] if items else None}))
+          PY
 )"
           stale_ids="$(printf '%s' "$assessment" | python -c 'import json,sys; [print(x["id"]) for x in json.load(sys.stdin)["stale"] if x.get("id")]')"
           stale_count="$(printf '%s' "$assessment" | python -c 'import json,sys; print(len(json.load(sys.stdin)["stale"]))')"
