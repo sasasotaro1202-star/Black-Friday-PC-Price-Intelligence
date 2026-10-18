@@ -825,9 +825,9 @@ def parse_page(url, html, expected=None):
             for offer in offers_list:
                 if not isinstance(offer, dict):
                     continue
-                currency = str(offer.get("priceCurrency") or "").upper()
+                currency = str(offer.get("priceCurrency") or "").strip().upper()
                 price_text = str(offer.get("price") or "").strip()
-                numeric_price_text = re.sub(r"[¥￥円\\s]", "", price_text.replace(",", ""))
+                numeric_price_text = re.sub(r"[¥￥円\s]", "", price_text.replace(",", ""))
                 try:
                     p = int(float(numeric_price_text))
                 except Exception:
