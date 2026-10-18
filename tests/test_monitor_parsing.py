@@ -275,6 +275,23 @@ class MonitorParsingTests(unittest.TestCase):
         )
         self.assertEqual(parsed["price_jpy"], 11980)
 
+    def test_jpy_currency_code_does_not_override_conflicting_foreign_symbol(self):
+        html = """
+        <script type="application/ld+json">
+        {"@type":"Product","name":"Example GPU",
+         "offers":{"price":"$11980","priceCurrency":"JPY",
+                   "availability":"https://schema.org/InStock"}}
+        </script>
+        <h1>Example GPU</h1>
+        """
+        parsed = monitor.parse_page(
+            "https://shop.example.jp/product",
+            html,
+            expected={"name": "Example GPU", "aliases": ["Example GPU"], "model_code": "EG-1"},
+        )
+        self.assertIsNone(parsed["price_jpy"])
+        self.assertEqual(parsed["price_source_mode"], "none")
+
     def test_structured_offer_with_explicit_yen_symbol_is_accepted_without_currency_code(self):
         html = """
         <script type="application/ld+json">
@@ -468,6 +485,17 @@ class MonitorParsingTests(unittest.TestCase):
         parsed = monitor.parse_page("https://example.com/test", html)
         self.assertEqual(parsed["price_jpy"], 279800)
         self.assertEqual(parsed["price_source_mode"], "direct_meta")
+
+    def test_meta_jpy_currency_code_does_not_override_dollar_symbol(self):
+        html = """
+        <html><head>
+        <meta property="product:price:amount" content="$279800">
+        <meta property="product:price:currency" content="JPY">
+        </head><body>在庫あり</body></html>
+        """
+        parsed = monitor.parse_page("https://shop.example.jp/test", html)
+        self.assertIsNone(parsed["price_jpy"])
+        self.assertEqual(parsed["price_source_mode"], "none")
 
     def test_meta_price_with_usd_currency_is_rejected_even_on_japanese_url(self):
         html = """
