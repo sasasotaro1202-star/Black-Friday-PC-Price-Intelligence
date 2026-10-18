@@ -346,6 +346,29 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(len(parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"]), 2)
         self.assertIn("dospara.co.jp", parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"][1])
 
+    def test_copilot_bom_target_prices_match_machine_readable_source_of_truth(self):
+        build = json.loads((ROOT / "config" / "build_components.json").read_text(encoding="utf-8"))
+        instructions = read_text(".github/copilot-instructions.md")
+        parts = {item["id"]: item for item in build["parts"]}
+        self.assertIn(
+            f"AMD Ryzen 7 9700X BOX — ¥{parts['cpu-ryzen7-9700x']['target_price_jpy']:,}.",
+            instructions,
+        )
+        self.assertIn(
+            f"Windows 11 Home Japanese retail package — ¥{parts['os-windows11-home']['target_price_jpy']:,}.",
+            instructions,
+        )
+        self.assertEqual(
+            sum(parts[item_id]["target_price_jpy"] for item_id in (
+                "cpu-ryzen7-9700x", "gpu-rtx5070-12gb",
+                "motherboard-asrock-b850m-pro-rs-wifi", "memory-teamgroup-ddr5-32gb-6000",
+                "ssd-crucial-p3-plus-1tb", "psu-corsair-rm850e-2025",
+                "case-fractal-pop-air-tg", "cooler-thermalright-pa120-se-v3",
+                "os-windows11-home",
+            )) + int(build["profile"]["build_shipping_reserve_jpy"]) + int(build["profile"]["small_parts_reserve_jpy"]),
+            342000,
+        )
+
     def test_report_budget_labels_distinguish_target_absolute_ceiling_and_dynamic_cap(self):
         source = read_text("scripts/report.py")
         self.assertIn("PC本体の基準目標", source)
