@@ -931,6 +931,8 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "id": memory_id,
             "name": memory_part.get("name"),
             "model_code": memory_part.get("model_code"),
+            "capacity_gb": (memory_part.get("specs") or {}).get("capacity_gb"),
+            "role": memory_part.get("role"),
             "target_price_jpy": memory_part.get("target_price_jpy"),
             "fit_scorecard": memory_part.get("fit_scorecard"),
             "market_reference_price_jpy": memory_price.get("market_reference_price_jpy"),
@@ -945,9 +947,17 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "direct_listing_display_offers": memory_price.get("direct_listing_display_offers") or [],
             "purchase_url": memory_price.get("purchase_url") or memory_part.get("purchase_url") or memory_part.get("monitor_url"),
         })
+    primary_memory_specs = (parts.get(primary_memory_id) or {}).get("specs") or {}
+    primary_memory_capacity_gb = primary_memory_specs.get("capacity_gb")
     sellable_memory_candidates = [
         candidate for candidate in memory_candidates
-        if isinstance(candidate.get("sellable_listing_price_jpy"), int)
+        # Only substitute like-for-like baseline-capacity RAM in the base PC
+        # plan. Conditional 64GB replacements are displayed/tracked separately;
+        # they must not silently displace the 32GB kit when the full-system
+        # target would exceed the user's all-in budget.
+        if primary_memory_capacity_gb is not None
+        and candidate.get("capacity_gb") == primary_memory_capacity_gb
+        and isinstance(candidate.get("sellable_listing_price_jpy"), int)
         and candidate.get("stock_status") in ("in_stock", "low_stock")
     ]
     if sellable_memory_candidates:
@@ -970,7 +980,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
         "selected_name": selected_memory.get("name"),
         "selection_method": memory_selection_method,
         "candidates": memory_candidates,
-        "rule": "Choose the lowest fresh, exact-item trusted market reference among available candidates. If no candidate has a trusted reference, retain the memory kit configured as the primary planning fallback. Market references are not checkout prices and never authorize purchase."
+        "rule": "For base builds, choose the lowest fresh exact-SKU direct-seller offer only among candidates matching the configured primary memory capacity. Conditional higher-capacity kits remain visible as alternatives but cannot replace the baseline across all GPU builds unless a separate complete-system budget calculation proves the configuration fits. Comparison-site references are not checkout prices and never authorize purchase."
     }
     def choice_candidate(part_id, price):
         part = parts.get(part_id) or {}
@@ -1702,7 +1712,8 @@ def render_plan_markdown(plan):
         "",
         "**メモリ選択:** " + str((plan.get("memory_choice_selection") or {}).get("selected_name") or "未選定"),
         "選定方法: " + str((plan.get("memory_choice_selection") or {}).get("selection_method") or "未確認"),
-        "価格比較では、型番一致・鮮度・PIT条件を満たす市場参考値がある候補のうち、価格が最も低いものを優先します。どの候補にも信頼できる参考値がない場合は、設定ファイルで指定した既定メモリを計画上の候補として維持します。市場参考値は決済価格ではなく、購入許可も意味しません。",
+        "基本構成では、既定の32GB容量を満たす販売可能な完全一致キットだけを代替比較します。64GBは条件付き置換候補として表示し、全構成へ一律に入れず、PC本体・周辺機器・送料・予備費を含む総額が40万円以内と証明できる場合だけ別シナリオとして評価します。",
+        "価格比較では、型番一致・鮮度・PIT条件を満たす直接販売店の掲載価格と在庫を確認します。比較サイト価格は決済価格ではなく、購入許可も意味しません。",
         "",
         *(["- {} / BF目標 {} / 比較参考 {} / 状態 {} / {}".format(
             item.get("name"), money(item.get("target_price_jpy")),
