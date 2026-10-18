@@ -448,14 +448,37 @@ class MonitorParsingTests(unittest.TestCase):
         )
         self.assertEqual(parsed["parsed_spec"]["form_factor"], "desktop")
 
-    def test_meta_price_is_distinct_source(self):
+    def test_meta_price_without_explicit_jpy_currency_is_rejected(self):
         html = """
         <html><head>
         <meta property="product:price:amount" content="279800">
         </head><body>在庫あり</body></html>
         """
         parsed = monitor.parse_page("https://example.com/test", html)
+        self.assertIsNone(parsed["price_jpy"])
+        self.assertEqual(parsed["price_source_mode"], "none")
+
+    def test_meta_price_is_accepted_only_with_explicit_jpy_currency(self):
+        html = """
+        <html><head>
+        <meta property="product:price:amount" content="279800">
+        <meta property="product:price:currency" content="JPY">
+        </head><body>在庫あり</body></html>
+        """
+        parsed = monitor.parse_page("https://example.com/test", html)
+        self.assertEqual(parsed["price_jpy"], 279800)
         self.assertEqual(parsed["price_source_mode"], "direct_meta")
+
+    def test_meta_price_with_usd_currency_is_rejected_even_on_japanese_url(self):
+        html = """
+        <html><head>
+        <meta property="product:price:amount" content="279800">
+        <meta property="product:price:currency" content="USD">
+        </head><body>在庫あり</body></html>
+        """
+        parsed = monitor.parse_page("https://shop.example.jp/test", html)
+        self.assertIsNone(parsed["price_jpy"])
+        self.assertEqual(parsed["price_source_mode"], "none")
 
     def test_real_included_peripheral_is_detected(self):
         html = """
