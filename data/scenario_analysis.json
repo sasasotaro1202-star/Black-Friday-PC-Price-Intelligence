@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-19T06:27:20+09:00",
-  "source_snapshot_generated_at": "2026-10-19T06:23:30+09:00",
-  "source_snapshot_sha256": "689e1f2f450326d5eab32dec25fe6b61bd31643696a1ecd199cb94afe63d782e",
+  "generated_at": "2026-10-19T07:55:21+09:00",
+  "source_snapshot_generated_at": "2026-10-19T07:50:42+09:00",
+  "source_snapshot_sha256": "2422581be4aec265a0c0a0f58bd8e01acfef3b540ec3b6da8d6236f3b6c0025a",
   "budget_jpy": 360000,
   "budget_scope": "pc_only_excluding_peripherals",
   "total_budget_jpy": 400000,
@@ -53,7 +53,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 20790,
-        "pre_black_friday_reference_at": "2026-10-19T06:23:44+09:00",
+        "pre_black_friday_reference_at": "2026-10-19T07:50:50+09:00",
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "stock_status": "low_stock",
         "target_gap_vs_pre_bf_reference_jpy": 0,
@@ -76,7 +76,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 7330,
-        "pre_black_friday_reference_at": "2026-10-19T06:23:44+09:00",
+        "pre_black_friday_reference_at": "2026-10-19T07:50:50+09:00",
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "stock_status": "in_stock",
         "target_gap_vs_pre_bf_reference_jpy": 2830,
@@ -99,7 +99,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 5350,
-        "pre_black_friday_reference_at": "2026-10-19T06:23:44+09:00",
+        "pre_black_friday_reference_at": "2026-10-19T07:50:50+09:00",
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "stock_status": "in_stock",
         "target_gap_vs_pre_bf_reference_jpy": 350,
@@ -504,7 +504,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 319800,
-        "pre_black_friday_reference_at": "2026-10-19T06:23:30+09:00",
+        "pre_black_friday_reference_at": "2026-10-19T07:50:42+09:00",
         "catalog_reference_price_jpy": 319800,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 319800,
@@ -581,7 +581,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 284700,
-        "pre_black_friday_reference_at": "2026-10-19T06:23:30+09:00",
+        "pre_black_friday_reference_at": "2026-10-19T07:50:42+09:00",
         "catalog_reference_price_jpy": 284700,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 284700,
@@ -1043,7 +1043,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 448800,
-        "pre_black_friday_reference_at": "2026-10-19T06:23:30+09:00",
+        "pre_black_friday_reference_at": "2026-10-19T07:50:42+09:00",
         "catalog_reference_price_jpy": 329800,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 448800,
@@ -1102,6 +1102,83 @@
         "complete_build_target_comparable": true,
         "stock_status": "in_stock",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/"
+      },
+      {
+        "id": "candidate-5",
+        "name": "Acer Predator Helios Neo 16 AI Windows 11 Home Core Ultra 9 290HX Plus RTX 5070 Ti IPS 非光沢 WQXGA 240Hz 3ms G-SYNC DCI-P3 100% 32GBメモリ 1TB SSD 第5世代 AeroBladeファン 有線LAN WiFi 6E 英字キーボード ゲーミングノートパソコン PHN16-I71-N93Z57T/E",
+        "form_factor": "laptop",
+        "gpu": "RTX 5070 Ti Laptop GPU",
+        "ram_gb": 32,
+        "ssd": "1 TB",
+        "black_friday_target_price_jpy": 360000,
+        "black_friday_price_observed_jpy": null,
+        "black_friday_offer_verified": false,
+        "retailer_key": "acer",
+        "retailer_campaign_status": "UNCONFIRMED",
+        "retailer_campaign_start_jst": null,
+        "retailer_campaign_end_jst": null,
+        "watch_window_reference_price_jpy": null,
+        "watch_window_reference_at": null,
+        "pre_black_friday_reference_price_jpy": 547800,
+        "pre_black_friday_reference_at": "2026-10-19T07:50:42+09:00",
+        "catalog_reference_price_jpy": 547800,
+        "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
+        "scenario_base_price_jpy": 547800,
+        "scenario_base_note": "セール前の参考額を基準にした仮想割引。BF実売価格・値下げ確率ではない",
+        "scenario_prices": [
+          {
+            "discount_pct": 0,
+            "price_jpy": 547800
+          },
+          {
+            "discount_pct": 5,
+            "price_jpy": 520410
+          },
+          {
+            "discount_pct": 10,
+            "price_jpy": 493020
+          },
+          {
+            "discount_pct": 15,
+            "price_jpy": 465630
+          },
+          {
+            "discount_pct": 20,
+            "price_jpy": 438240
+          },
+          {
+            "discount_pct": 25,
+            "price_jpy": 410850
+          },
+          {
+            "discount_pct": 30,
+            "price_jpy": 383460
+          },
+          {
+            "discount_pct": 35,
+            "price_jpy": 356070
+          },
+          {
+            "discount_pct": 40,
+            "price_jpy": 328680
+          },
+          {
+            "discount_pct": 45,
+            "price_jpy": 301290
+          }
+        ],
+        "discount_needed_to_bf_target_jpy": 187800,
+        "discount_needed_to_bf_target_pct": 34.3,
+        "discount_needed_to_planned_cap_jpy": 152800,
+        "discount_needed_to_planned_cap_pct": 27.9,
+        "is_rtx_5070_ti_outlier": false,
+        "configuration_ready": true,
+        "configuration_reasons": [],
+        "catalog_configuration_ready": true,
+        "catalog_configuration_reasons": [],
+        "complete_build_target_comparable": true,
+        "stock_status": "in_stock",
+        "purchase_url": "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1"
       },
       {
         "id": "zephyrus-g16-386h-5070ti",
@@ -1310,7 +1387,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 194800,
-        "pre_black_friday_reference_at": "2026-10-19T06:23:30+09:00",
+        "pre_black_friday_reference_at": "2026-10-19T07:50:42+09:00",
         "catalog_reference_price_jpy": 194800,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 194800,
@@ -1393,7 +1470,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 279800,
-        "pre_black_friday_reference_at": "2026-10-19T06:23:30+09:00",
+        "pre_black_friday_reference_at": "2026-10-19T07:50:42+09:00",
         "catalog_reference_price_jpy": 279800,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 279800,
@@ -1476,7 +1553,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 299800,
-        "pre_black_friday_reference_at": "2026-10-19T06:23:30+09:00",
+        "pre_black_friday_reference_at": "2026-10-19T07:50:42+09:00",
         "catalog_reference_price_jpy": 299800,
         "price_reference_kind": "PRE_BLACK_FRIDAY_REFERENCE",
         "scenario_base_price_jpy": 299800,
@@ -1613,42 +1690,6 @@
         "complete_build_target_comparable": true,
         "stock_status": "unknown",
         "purchase_url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025-g815/"
-      },
-      {
-        "id": "candidate-5",
-        "name": "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1",
-        "form_factor": "laptop",
-        "gpu": "RTX 5070 Ti Laptop GPU",
-        "ram_gb": 32,
-        "ssd": "1 TB",
-        "black_friday_target_price_jpy": 360000,
-        "black_friday_price_observed_jpy": null,
-        "black_friday_offer_verified": false,
-        "retailer_key": "acer",
-        "retailer_campaign_status": "UNCONFIRMED",
-        "retailer_campaign_start_jst": null,
-        "retailer_campaign_end_jst": null,
-        "watch_window_reference_price_jpy": null,
-        "watch_window_reference_at": null,
-        "pre_black_friday_reference_price_jpy": null,
-        "pre_black_friday_reference_at": null,
-        "catalog_reference_price_jpy": null,
-        "price_reference_kind": "NO_PRICE_REFERENCE",
-        "scenario_base_price_jpy": null,
-        "scenario_base_note": "セール前の参考額を基準にした仮想割引。BF実売価格・値下げ確率ではない",
-        "scenario_prices": [],
-        "discount_needed_to_bf_target_jpy": null,
-        "discount_needed_to_bf_target_pct": null,
-        "discount_needed_to_planned_cap_jpy": null,
-        "discount_needed_to_planned_cap_pct": null,
-        "is_rtx_5070_ti_outlier": false,
-        "configuration_ready": true,
-        "configuration_reasons": [],
-        "catalog_configuration_ready": true,
-        "catalog_configuration_reasons": [],
-        "complete_build_target_comparable": true,
-        "stock_status": "unknown",
-        "purchase_url": "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1"
       }
     ],
     "rtx_5070_ti_desktop_outliers": [
@@ -2145,6 +2186,44 @@
         "discount_pct": 20,
         "price_jpy": 359000
       },
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "candidate-5",
+      "name": "Acer Predator Helios Neo 16 AI Windows 11 Home Core Ultra 9 290HX Plus RTX 5070 Ti IPS 非光沢 WQXGA 240Hz 3ms G-SYNC DCI-P3 100% 32GBメモリ 1TB SSD 第5世代 AeroBladeファン 有線LAN WiFi 6E 英字キーボード ゲーミングノートパソコン PHN16-I71-N93Z57T/E",
+      "form_factor": "laptop",
+      "current_price_jpy": 547800,
+      "reference_price_jpy": null,
+      "reference_only": false,
+      "required_discount_pct": 34.3,
+      "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 493000
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 465600
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 438200
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 410800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 383500
+        }
+      ],
+      "first_pc_target_scenario": null,
       "stock_status": "in_stock",
       "price_source_mode": "direct_structured",
       "price_validation_status": "validated",
