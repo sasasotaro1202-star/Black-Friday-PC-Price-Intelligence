@@ -78,7 +78,7 @@ jobs:
               (stale if age > 20*60 else active).append(row)
           print(json.dumps({"stale":stale,"active":active,"latest":items[0] if items else None}))
           PY
-)"
+          )"
           stale_ids="$(printf '%s' "$assessment" | python -c 'import json,sys; [print(x["id"]) for x in json.load(sys.stdin)["stale"] if x.get("id")]')"
           stale_count="$(printf '%s' "$assessment" | python -c 'import json,sys; print(len(json.load(sys.stdin)["stale"]))')"
           active_count="$(printf '%s' "$assessment" | python -c 'import json,sys; print(len(json.load(sys.stdin)["active"]))')"
