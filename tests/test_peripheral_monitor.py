@@ -403,6 +403,18 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertEqual(row["store_stock_status"], "unknown")
 
 
+    def test_store_inventory_check_ids_must_belong_to_each_peripherals_candidate_branches(self):
+        import json
+        config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        for target in config["peripherals"]:
+            candidates = set(target.get("physical_store_candidate_ids") or [])
+            for check in target.get("store_inventory_checks") or []:
+                with self.subTest(item=target["id"], store_id=check.get("store_id")):
+                    self.assertIn(check.get("store_id"), candidates)
+                    self.assertTrue(check.get("url", "").startswith("https://"))
+                    self.assertTrue(check.get("allowed_hosts"))
+                    self.assertTrue(check.get("branch_match_terms"))
+
     def test_primary_peripherals_monitor_both_fukuoka_store_candidates_without_inventing_stock(self):
         import json
         config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
