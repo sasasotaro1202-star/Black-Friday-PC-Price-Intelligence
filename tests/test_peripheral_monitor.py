@@ -403,6 +403,29 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertEqual(row["store_stock_status"], "unknown")
 
 
+    def test_primary_peripherals_monitor_both_fukuoka_store_candidates_without_inventing_stock(self):
+        import json
+        config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        peripherals = {x["id"]: x for x in config["peripherals"]}
+        expected_yodobashi_urls = {
+            "main_monitor": "https://www.yodobashi.com/product/100000001009314680/",
+            "keyboard": "https://www.yodobashi.com/product/100000001006099089/",
+            "mouse": "https://www.yodobashi.com/product/100000001004334450/",
+            "mousepad": "https://www.yodobashi.com/product/100000001001488658/",
+        }
+        for item_id, yodobashi_url in expected_yodobashi_urls.items():
+            with self.subTest(item_id=item_id):
+                target = peripherals[item_id]
+                checks = {x["store_id"]: x for x in target["store_inventory_checks"]}
+                self.assertIn("biccamera_tenjin_1", checks)
+                self.assertIn("yodobashi_hakata", checks)
+                check = checks["yodobashi_hakata"]
+                self.assertEqual(check["url"], yodobashi_url)
+                self.assertEqual(check["source_type"], "official_product_page_pickup_information")
+                self.assertIn("unknown", check.get("notes", ""))
+                self.assertTrue(target["store_price_is_separate_evidence"])
+                self.assertTrue(target["online_purchase_allowed_when_store_price_unconfirmed"])
+
     def test_official_tenjin_inventory_page_separates_branch_stock_from_cash_price(self):
         import json
         config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
