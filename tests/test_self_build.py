@@ -465,6 +465,46 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertEqual(main["target_pc_total_jpy"], self._target_pc_total("gpu-rtx5070-12gb"))
         self.assertFalse(main["buy_now_authorized"])
 
+    def test_conditional_64gb_ram_offer_cannot_replace_32gb_baseline_without_budget_fit(self):
+        rows = self._verified_hardware_rows(self.config)
+        rows_by_id = {row["id"]: row for row in rows}
+        part_id = "memory-lexar-thor-ddr5-64gb-6000"
+        part = self.parts[part_id]
+        offer = {
+            "url": "https://www.ark-pc.co.jp/i/11650134/",
+            "title": part["name"],
+            "price_jpy": 119990,
+            "price_source_mode": "direct_structured",
+            "stock_status": "in_stock",
+            "identity_anchor": part["model_code"],
+            "identity_match": True,
+            "source_role": "direct_retailer_listing_reference",
+            "available_at": NOW.isoformat(),
+            "retrieval_time": NOW.isoformat(),
+            "pit_valid": True,
+            "bf_actual_authorized": False,
+        }
+        rows_by_id[part_id].update({
+            "price_validation_status": "verified_retailer_listing_reference",
+            "source_role": "direct_retailer_listing_reference",
+            "retailer_listing_reference_price_jpy": 119990,
+            "retailer_listing_offer": offer,
+            "retailer_listing_offers": [offer],
+            "identity_match": True,
+            "pit_valid": True,
+            "available_at": NOW.isoformat(),
+            "retrieval_time": NOW.isoformat(),
+        })
+        plan = planner.build_plan(
+            self.config, {"generated_at": NOW.isoformat(), "products": rows}, now=NOW
+        )
+        main = next(x for x in plan["builds"] if x["gpu_choice_id"] == "gpu-rtx5070-12gb")
+        self.assertEqual(main["selected_memory_id"], "memory-teamgroup-ddr5-32gb-6000")
+        self.assertNotIn(part_id, {x["id"] for x in main["components"]})
+        self.assertEqual(main["target_pc_total_jpy"], 342000)
+        self.assertEqual(main["target_all_in_jpy"], 382000)
+        self.assertFalse(main["buy_now_authorized"])
+
     def test_diy_is_primary_and_assembly_time_has_zero_penalty(self):
         plan = planner.build_plan(self.config, {"products":[]}, now=NOW)
         policy = plan["purchase_method_policy"]
