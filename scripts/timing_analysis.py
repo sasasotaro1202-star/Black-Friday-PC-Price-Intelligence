@@ -12,7 +12,8 @@ from intelligence import (
 from sale_calendar import campaign_window_for_item
 
 JST=timezone(timedelta(hours=9))
-TARGET=datetime(2026,11,27,tzinfo=JST)
+# A calendar reference for the U.S. Black Friday date only; this is not a retailer sale window.
+CALENDAR_REFERENCE_DATE=datetime(2026,11,27,tzinfo=JST)
 
 HISTORY=[
   {"date":"2025-11-19","label":"Amazon surprise/pre-sale begins","source":"https://game.watch.impress.co.jp/docs/news/2064238.html"},
@@ -1258,7 +1259,7 @@ def main():
         "source_snapshot_generated_at":source_snapshot_generated_at,
         "source_snapshot_sha256":source_snapshot_sha256,
         "budget_jpy":BUDGET,
-        "target_black_friday":TARGET.date().isoformat(),
+        "calendar_black_friday_reference_date":CALENDAR_REFERENCE_DATE.date().isoformat(),
         "target_products":rows[:50],
         "historical_events":HISTORY,
         "observed_change_timing":dynamic,
@@ -1290,7 +1291,7 @@ def main():
         f"Source snapshot: {source_snapshot_generated_at or 'UNCONFIRMED'}",
         f"Source snapshot SHA256: {source_snapshot_sha256 or 'UNCONFIRMED'}",
         f"Budget: ¥{BUDGET:,}",
-        f"Target Black Friday: {TARGET.date()}","",
+        f"U.S. Black Friday calendar reference only (not official retailer sale dates): {CALENDAR_REFERENCE_DATE.date()}","",
         "## Current actionable candidates","",
         "|Rank|Product|Current|Required discount|Feasibility|GPU|Perf|Source|",
         "|---:|---|---:|---:|---|---|---:|---|"
