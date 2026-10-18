@@ -831,7 +831,7 @@ def parse_page(url, html, expected=None):
                 try:
                     # JPY product prices must resolve to an exact whole yen. Do not
                     # truncate fractional structured values into a different price.
-                    if not re.fullmatch(r"\\d+(?:\\.0+)?", numeric_price_text):
+                    if not re.fullmatch(r"\d+(?:\.0+)?", numeric_price_text):
                         raise ValueError("non_integral_or_malformed_jpy_price")
                     p = int(float(numeric_price_text))
                 except Exception:
