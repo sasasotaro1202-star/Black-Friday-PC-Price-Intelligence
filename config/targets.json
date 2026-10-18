@@ -327,6 +327,20 @@
             "Tenjin 1st Store"
           ],
           "source_type": "official_branch_stock_page"
+        },
+        {
+          "store_id": "yodobashi_hakata",
+          "store_name": "ヨドバシカメラ マルチメディア博多",
+          "url": "https://www.yodobashi.com/product/100000001009314680/",
+          "allowed_hosts": [
+            "www.yodobashi.com"
+          ],
+          "branch_match_terms": [
+            "マルチメディア博多",
+            "ヨドバシカメラ マルチメディア博多"
+          ],
+          "source_type": "official_product_page_pickup_information",
+          "notes": "商品ページで受取案内が表示されるかを監視する。ページ上の受取案内や店舗一覧のみでは、博多店の個別在庫ありと判定しない。在庫状態が明示されなければunknownを維持する。"
         }
       ],
       "purchase_channel_options": [
@@ -426,6 +440,20 @@
             "Tenjin 1st Store"
           ],
           "source_type": "official_branch_stock_page"
+        },
+        {
+          "store_id": "yodobashi_hakata",
+          "store_name": "ヨドバシカメラ マルチメディア博多",
+          "url": "https://www.yodobashi.com/product/100000001006099089/",
+          "allowed_hosts": [
+            "www.yodobashi.com"
+          ],
+          "branch_match_terms": [
+            "マルチメディア博多",
+            "ヨドバシカメラ マルチメディア博多"
+          ],
+          "source_type": "official_product_page_pickup_information",
+          "notes": "商品ページで受取案内が表示されるかを監視する。ページ上の受取案内や店舗一覧のみでは、博多店の個別在庫ありと判定しない。在庫状態が明示されなければunknownを維持する。"
         }
       ],
       "purchase_channel_options": [
@@ -522,6 +550,20 @@
             "Tenjin 1st Store"
           ],
           "source_type": "official_branch_stock_page"
+        },
+        {
+          "store_id": "yodobashi_hakata",
+          "store_name": "ヨドバシカメラ マルチメディア博多",
+          "url": "https://www.yodobashi.com/product/100000001004334450/",
+          "allowed_hosts": [
+            "www.yodobashi.com"
+          ],
+          "branch_match_terms": [
+            "マルチメディア博多",
+            "ヨドバシカメラ マルチメディア博多"
+          ],
+          "source_type": "official_product_page_pickup_information",
+          "notes": "商品ページで受取案内が表示されるかを監視する。ページ上の受取案内や店舗一覧のみでは、博多店の個別在庫ありと判定しない。在庫状態が明示されなければunknownを維持する。"
         }
       ],
       "purchase_channel_options": [
@@ -606,6 +648,20 @@
             "Tenjin 1st Store"
           ],
           "source_type": "official_branch_stock_page"
+        },
+        {
+          "store_id": "yodobashi_hakata",
+          "store_name": "ヨドバシカメラ マルチメディア博多",
+          "url": "https://www.yodobashi.com/product/100000001001488658/",
+          "allowed_hosts": [
+            "www.yodobashi.com"
+          ],
+          "branch_match_terms": [
+            "マルチメディア博多",
+            "ヨドバシカメラ マルチメディア博多"
+          ],
+          "source_type": "official_product_page_pickup_information",
+          "notes": "商品ページで受取案内が表示されるかを監視する。ページ上の受取案内や店舗一覧のみでは、博多店の個別在庫ありと判定しない。在庫状態が明示されなければunknownを維持する。"
         }
       ],
       "store_stock_status": "unknown",
