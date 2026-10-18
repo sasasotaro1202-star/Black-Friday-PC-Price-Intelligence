@@ -346,14 +346,21 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(len(parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"]), 2)
         self.assertIn("dospara.co.jp", parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"][1])
 
-    def test_primary_ranked_products_have_explicit_image_sources(self):
+    def test_primary_ranked_products_have_explicit_image_sources_or_documented_absence(self):
         targets = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
         build = json.loads((ROOT / "config" / "build_components.json").read_text(encoding="utf-8"))
         peripheral_by_id = {item["id"]: item for item in targets["peripherals"]}
         for item_id in ("main_monitor", "keyboard", "mouse", "mousepad"):
             item = peripheral_by_id[item_id]
-            self.assertTrue(str(item.get("image_url", "")).startswith("https://"), item_id)
-            self.assertTrue(str(item.get("image_source_url", "")).startswith("https://"), item_id)
+            image_url = str(item.get("image_url") or "")
+            image_source_url = str(item.get("image_source_url") or "")
+            if image_url or image_source_url:
+                self.assertTrue(image_url.startswith("https://"), item_id)
+                self.assertTrue(image_source_url.startswith("https://"), item_id)
+            else:
+                # Do not reintroduce foreign retailer image sources simply to make
+                # the UI look complete. An explicit "image unavailable" note is valid.
+                self.assertIn("画像未確認", item.get("image_note", ""), item_id)
         build_by_id = {item["id"]: item for item in build["parts"]}
         for item_id in ("gpu-rtx5070-12gb", "gpu-rtx5060ti-16gb", "gpu-rtx5070ti-16gb",
                         "cpu-ryzen7-9700x", "motherboard-asrock-b850m-pro-rs-wifi",
