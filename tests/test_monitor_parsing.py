@@ -222,16 +222,16 @@ class MonitorParsingTests(unittest.TestCase):
         self.assertEqual(parsed["seller_name"], "Example Retailer Japan")
 
     def test_structured_offer_requires_explicit_jpy_currency_or_yen_symbol(self):
-        for currency in ("USD", ""):
-            with self.subTest(currency=currency):
+        for currency, raw_price in (("USD", "11980"), ("", "11980"), ("USD", "¥11980")):
+            with self.subTest(currency=currency, raw_price=raw_price):
                 html = """
                 <script type="application/ld+json">
                 {"@type":"Product","name":"Example GPU",
-                 "offers":{"price":"11980","priceCurrency":"%s",
+                 "offers":{"price":"%s","priceCurrency":"%s",
                            "availability":"https://schema.org/InStock"}}
                 </script>
                 <h1>Example GPU</h1>
-                """ % currency
+                """ % (raw_price, currency)
                 parsed = monitor.parse_page(
                     "https://shop.example.jp/product",
                     html,
