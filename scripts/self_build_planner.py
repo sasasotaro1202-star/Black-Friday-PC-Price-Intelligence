@@ -1077,9 +1077,14 @@ def build_plan(config=None, price_snapshot=None, now=None):
             candidate_records.append(choice_candidate(candidate_id, price))
         gpu_candidate_prices[str(base_gpu_id)] = candidate_records
 
+    # All amounts are JPY. The configured PC ceiling is a fallback maximum, not
+    # an amount that can be spent in addition to peripherals and contingency.
     pc_budget = int(profile.get("pc_budget_jpy", 395000))
     all_budget = int(profile.get("total_budget_jpy", 400000))
     peripheral_budget = int(profile.get("peripheral_budget_jpy", 35000))
+    contingency = int(profile.get("unallocated_contingency_jpy", 0))
+    pc_target = int(profile.get("pc_target_jpy", 360000))
+    pc_planned_budget = max(0, min(pc_budget, all_budget - peripheral_budget - contingency))
     shipping = int(profile.get("build_shipping_reserve_jpy", 0))
     small_parts = int(profile.get("small_parts_reserve_jpy", 0))
     builds = []
@@ -1244,7 +1249,6 @@ def build_plan(config=None, price_snapshot=None, now=None):
         )
         workload_fit = assess_workload_fit(profile, parts, selected_ids, selected_gpu_id, selected_memory_id)
         target_pc = target_parts + shipping + small_parts
-        contingency = int(profile.get("unallocated_contingency_jpy", 0))
         target_all_in = target_pc + peripheral_budget + contingency
         market_estimate = market_subtotal + shipping + small_parts if all_parts_referenced and not missing else None
         all_in_market = market_estimate + peripheral_budget + contingency if market_estimate is not None else None
@@ -1256,7 +1260,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
 
         if compat == "FAIL":
             decision = "BLOCKED_COMPATIBILITY"
-        elif target_pc > pc_budget or target_all_in > all_budget:
+        elif target_pc > pc_planned_budget or target_all_in > all_budget:
             decision = "OVER_BUDGET_TARGET"
         elif compat == "REVIEW":
             decision = "WAIT_FOR_COMPATIBILITY_REVIEW"
@@ -1286,11 +1290,15 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "components": components, "workload_fit": workload_fit, "target_parts_subtotal_jpy": target_parts,
             "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
             "target_pc_total_jpy": target_pc, "pc_budget_jpy": pc_budget,
+            "pc_planned_budget_jpy": pc_planned_budget,
             "target_pc_budget_delta_jpy": target_pc - pc_budget,
+            "target_planned_pc_budget_delta_jpy": target_pc - pc_planned_budget,
             "target_peripheral_budget_jpy": peripheral_budget, "target_all_in_jpy": target_all_in,
             "total_budget_jpy": all_budget, "target_remaining_budget_jpy": all_budget-target_all_in,
             "target_contingency_jpy": contingency,
-            "target_within_pc_budget": target_pc <= pc_budget, "target_within_total_budget": target_all_in <= all_budget,
+            "target_within_pc_budget": target_pc <= pc_budget,
+            "target_within_planned_pc_budget": target_pc <= pc_planned_budget,
+            "target_within_total_budget": target_all_in <= all_budget,
             "current_sellable_listing_subtotal_jpy": current_sellable_listing_subtotal,
             "current_sellable_listing_part_count": len(current_sellable_part_ids),
             "current_sellable_listing_required_part_count": len(selected_ids),
@@ -1453,10 +1461,12 @@ def build_plan(config=None, price_snapshot=None, now=None):
         "workload_profile": profile.get("workload_profile") or {},
         "cpu_alternative_scenarios": cpu_alternative_scenarios,
         "cpu_dark_horse_candidates": cpu_dark_horse_candidates,
-        "total_budget_jpy": all_budget, "peripheral_budget_jpy": peripheral_budget, "pc_budget_jpy": pc_budget,
-        "unallocated_contingency_jpy": int(profile.get("unallocated_contingency_jpy", 0)),
+        "total_budget_jpy": all_budget, "peripheral_budget_jpy": peripheral_budget,
+        "pc_budget_jpy": pc_budget, "pc_planned_budget_jpy": pc_planned_budget,
+        "pc_target_jpy": pc_target,
+        "unallocated_contingency_jpy": contingency,
         "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
-        "budget_arithmetic_valid": pc_budget + int(profile.get("unallocated_contingency_jpy", 0)) == all_budget,
+        "budget_arithmetic_valid": pc_planned_budget + peripheral_budget + contingency == all_budget,
         "required_categories": profile.get("required_categories") or [],
         "memory_choice_selection": memory_choice_selection,
         "storage_choice_selection": storage_choice_selection,
@@ -1677,7 +1687,12 @@ def render_plan_markdown(plan):
     lines = [
         "# 自作PCパーツ構成・価格監視", "",
         "更新: " + str(plan.get("generated_at")),
-        "予算: PC本体 " + money(plan.get("pc_budget_jpy")) + " / 周辺機器 " + money(plan.get("peripheral_budget_jpy")) + " / 総額 " + money(plan.get("total_budget_jpy")),
+        "予算（すべて日本円）: PC本体基準目標 " + money(plan.get("pc_target_jpy")) +
+        " / PC本体計画上限 " + money(plan.get("pc_planned_budget_jpy")) +
+        " / PC本体の絶対上限 " + money(plan.get("pc_budget_jpy")) +
+        " / 周辺機器計画枠 " + money(plan.get("peripheral_budget_jpy")) +
+        " / 総額予備費 " + money(plan.get("unallocated_contingency_jpy")) +
+        " / 総額上限 " + money(plan.get("total_budget_jpy")),
         "",
         "**購入方式:** 自作PCを正式な本命として最適化します。組み立て時間・作業時間は減点しません。BTOは同等仕様での総額・部品品質・保証のベンチマークとして比較し、便利さだけを理由に自作から切り替えません。",
         "",
@@ -2063,7 +2078,10 @@ def render_plan_markdown(plan):
 
 def section_from_plan(plan):
     lines = [START_MARKER, "## 最優先：PC本体は自作構成", "",
-        "BTO完成品は価格比較用の参考枠に下げ、部品ごとの価格・互換性・送料を合算します。PC本体の計画上限は " + money(plan.get("pc_budget_jpy")) + "。", "",
+        "BTO完成品は価格比較用の参考枠に下げ、部品ごとの価格・互換性・送料を合算します。" +
+        "PC本体の計画上限は " + money(plan.get("pc_planned_budget_jpy")) +
+        "（周辺機器計画枠と総額予備費を先に確保。PC本体の絶対上限は " +
+        money(plan.get("pc_budget_jpy")) + "）。", "",
         "|順位|自作構成|構成点/100|購入根拠充足度/100|PC本体目標|周辺機器込み|目標残額|互換性|判定|",
         "|---:|---|---:|---:|---:|---:|---:|---|---|"]
     for build in plan.get("builds") or []:
