@@ -83,7 +83,7 @@ class ConfiguredWatchWindowTests(unittest.TestCase):
         }), encoding="utf-8")
         for relative in ("reports/latest.md", "reports/self-build-ranking.md"):
             (data / relative).write_text(
-                "# Ranking\\n\\n更新: " + report_generated_at + "\\n",
+                "# Ranking\n\n更新: " + report_generated_at + "\n",
                 encoding="utf-8",
             )
 
@@ -109,6 +109,8 @@ class ConfiguredWatchWindowTests(unittest.TestCase):
             )
         self.assertIn("build_component_prices_stale", problems)
         self.assertIn("self_build_plan_stale", problems)
+        self.assertIn("latest_report_stale", problems)
+        self.assertIn("self_build_report_stale", problems)
 
     def test_self_build_artifact_audit_flags_memory_and_budget_regressions(self):
         now = datetime(2026, 11, 20, 12, 1, tzinfo=JST)
