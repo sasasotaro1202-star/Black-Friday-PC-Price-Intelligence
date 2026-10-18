@@ -886,10 +886,10 @@ def parse_page(url, html, expected=None):
     # a Japanese-looking page URL or from a bare integer.
     meta_amount_values = []
     meta_currency_values = []
-    for tag in re.findall(r"<meta\\b[^>]*>", html, re.I):
+    for tag in re.findall(r"<meta\b[^>]*>", html, re.I):
         attrs = {
             str(key).lower(): html_lib.unescape(str(value)).strip()
-            for key, value in re.findall(r"""([a-zA-Z_:][a-zA-Z0-9_:.-]*)\\s*=\\s*["']([^"']*)["']""", tag)
+            for key, value in re.findall(r"""([a-zA-Z_:][a-zA-Z0-9_:.-]*)\s*=\s*["']([^"']*)["']""", tag)
         }
         key = (attrs.get("property") or attrs.get("name") or attrs.get("itemprop") or "").lower()
         value = attrs.get("content") or attrs.get("value") or ""
@@ -910,9 +910,9 @@ def parse_page(url, html, expected=None):
         or (not meta_currency_values and meta_has_yen_symbol)
     )
     if meta_amount_text and meta_currency_verified and len(meta_currency_set) <= 1:
-        normalized_meta_amount = re.sub(r"[¥￥円\\s]", "", meta_amount_text.replace(",", ""))
+        normalized_meta_amount = re.sub(r"[¥￥円\s]", "", meta_amount_text.replace(",", ""))
         try:
-            if not re.fullmatch(r"\\d+(?:\\.0+)?", normalized_meta_amount):
+            if not re.fullmatch(r"\d+(?:\.0+)?", normalized_meta_amount):
                 raise ValueError("non_integral_or_malformed_jpy_meta_price")
             meta_price = int(float(normalized_meta_amount))
         except Exception:
