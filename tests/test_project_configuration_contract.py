@@ -346,6 +346,14 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(len(parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"]), 2)
         self.assertIn("dospara.co.jp", parts_by_id["case-fractal-pop-air-tg"]["direct_retailer_urls"][1])
 
+    def test_report_budget_labels_distinguish_target_absolute_ceiling_and_dynamic_cap(self):
+        source = read_text("scripts/report.py")
+        self.assertIn("PC本体の基準目標", source)
+        self.assertIn("PC本体の絶対上限", source)
+        self.assertIn("PC本体の動的上限", source)
+        self.assertNotIn("PC本体の計画上限（周辺機器が目標価格の場合）", source)
+        self.assertIn("総額予備費を控除後", source)
+
     def test_primary_ranked_products_have_explicit_image_sources_or_documented_absence(self):
         targets = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
         build = json.loads((ROOT / "config" / "build_components.json").read_text(encoding="utf-8"))
