@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T08:02:31+09:00",
+  "generated_at": "2026-10-18T09:07:21+09:00",
   "schema_version": 1,
   "project": "DIY_PC",
   "source_policy": "Comparison-site prices are market references only. This plan never authorizes a purchase; official seller-specific BF price evidence is missing.",
@@ -221,7 +221,7 @@
             "market_reference_price_jpy": null,
             "display_reference_price_jpy": null,
             "sellable_listing_price_jpy": null,
-            "stock_status": "out_of_stock",
+            "stock_status": "unknown",
             "price_status": "missing",
             "trusted_for_market_estimate": false,
             "direct_listing_stock_counts": {
@@ -235,7 +235,7 @@
             "direct_listing_offers": [
               {
                 "url": "https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom",
-                "retailer_domain": "tsukumo.co.jp",
+                "retailer_domain": "shop.tsukumo.co.jp",
                 "seller_name": null,
                 "title": "PNY GeForce RTX 5070 12GB OC SLIM　VCG507012DFSXPB1-O",
                 "price_jpy": 190800,
@@ -243,8 +243,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T07:16:17+09:00",
-                "display_age_minutes": 46.2
+                "retrieval_time": "2026-10-18T09:05:03+09:00",
+                "display_age_minutes": 2.3
               },
               {
                 "url": "https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845",
@@ -256,8 +256,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T08:01:58+09:00",
-                "display_age_minutes": 0.6
+                "retrieval_time": "2026-10-18T09:05:01+09:00",
+                "display_age_minutes": 2.3
               }
             ],
             "purchase_url": "https://kakaku.com/item/K0001798041/"
@@ -301,7 +301,7 @@
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
                 "retrieval_time": "2026-10-18T05:03:32+09:00",
-                "display_age_minutes": 179.0
+                "display_age_minutes": 243.8
               }
             ],
             "purchase_url": "https://shop.tsukumo.co.jp/goods/4711377308229/"
@@ -350,8 +350,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T08:02:07+09:00",
-                "display_age_minutes": 0.4
+                "retrieval_time": "2026-10-18T09:05:12+09:00",
+                "display_age_minutes": 2.1
               },
               {
                 "url": "https://www.pc4u.co.jp/view/item/000000090356?category_page_id=ct824",
@@ -363,8 +363,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T08:02:07+09:00",
-                "display_age_minutes": 0.4
+                "retrieval_time": "2026-10-18T09:05:10+09:00",
+                "display_age_minutes": 2.2
               },
               {
                 "url": "https://www.dospara.co.jp/SBR1534/IC512079.html",
@@ -376,8 +376,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T08:02:06+09:00",
-                "display_age_minutes": 0.4
+                "retrieval_time": "2026-10-18T09:05:09+09:00",
+                "display_age_minutes": 2.2
               },
               {
                 "url": "https://shop.tsukumo.co.jp/goods/0649528943019/",
@@ -389,8 +389,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T07:16:20+09:00",
-                "display_age_minutes": 46.2
+                "retrieval_time": "2026-10-18T09:05:08+09:00",
+                "display_age_minutes": 2.2
               }
             ],
             "purchase_url": "https://kakaku.com/item/K0001633533/"
@@ -435,8 +435,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T08:02:04+09:00",
-                "display_age_minutes": 0.5
+                "retrieval_time": "2026-10-18T09:05:06+09:00",
+                "display_age_minutes": 2.2
               }
             ],
             "purchase_url": "https://kakaku.com/item/K0001610896/"
@@ -481,8 +481,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T08:02:16+09:00",
-                "display_age_minutes": 0.2
+                "retrieval_time": "2026-10-18T09:05:20+09:00",
+                "display_age_minutes": 2.0
               }
             ],
             "purchase_url": "https://www.ark-pc.co.jp/i/11650134/"
@@ -539,31 +539,18 @@
             "market_reference_price_jpy": null,
             "display_reference_price_jpy": null,
             "sellable_listing_price_jpy": null,
-            "stock_status": "unknown",
+            "stock_status": "out_of_stock",
             "price_status": "missing",
             "trusted_for_market_estimate": false,
             "direct_listing_stock_counts": {
               "in_stock": 0,
               "low_stock": 0,
               "preorder_or_backorder": 0,
-              "unknown": 1,
+              "unknown": 0,
               "out_of_stock": 3,
-              "stale": 0
+              "stale": 1
             },
             "direct_listing_offers": [
-              {
-                "url": "https://www.yodobashi.com/product/100000001007390887/",
-                "retailer_domain": "yodobashi.com",
-                "seller_name": null,
-                "title": "CT1000P3PSSD8JP",
-                "price_jpy": 10210,
-                "stock_status": "unknown",
-                "stock_signal_fresh": true,
-                "stock_signal_max_age_minutes": 60,
-                "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T08:02:11+09:00",
-                "display_age_minutes": 0.3
-              },
               {
                 "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
                 "retailer_domain": "dospara.co.jp",
@@ -574,8 +561,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T08:02:07+09:00",
-                "display_age_minutes": 0.4
+                "retrieval_time": "2026-10-18T09:05:13+09:00",
+                "display_age_minutes": 2.1
               },
               {
                 "url": "https://shop.tsukumo.co.jp/goods/0649528918970/",
@@ -587,8 +574,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T07:16:22+09:00",
-                "display_age_minutes": 46.1
+                "retrieval_time": "2026-10-18T09:05:11+09:00",
+                "display_age_minutes": 2.2
               },
               {
                 "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -600,8 +587,21 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T08:02:08+09:00",
-                "display_age_minutes": 0.4
+                "retrieval_time": "2026-10-18T09:05:15+09:00",
+                "display_age_minutes": 2.1
+              },
+              {
+                "url": "https://www.yodobashi.com/product/100000001007390887/",
+                "retailer_domain": "yodobashi.com",
+                "seller_name": null,
+                "title": "CT1000P3PSSD8JP",
+                "price_jpy": 10210,
+                "stock_status": "unknown",
+                "stock_signal_fresh": false,
+                "stock_signal_max_age_minutes": 60,
+                "price_source_mode": "direct_text",
+                "retrieval_time": "2026-10-18T08:02:11+09:00",
+                "display_age_minutes": 65.2
               }
             ],
             "purchase_url": "https://kakaku.com/item/K0001466997/"
@@ -644,8 +644,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T08:02:19+09:00",
-                "display_age_minutes": 0.2
+                "retrieval_time": "2026-10-18T09:05:23+09:00",
+                "display_age_minutes": 2.0
               }
             ],
             "purchase_url": "https://www.yodobashi.com/product/100000001009402658/"
@@ -676,25 +676,12 @@
             "direct_listing_stock_counts": {
               "in_stock": 0,
               "low_stock": 0,
-              "preorder_or_backorder": 1,
+              "preorder_or_backorder": 0,
               "unknown": 0,
               "out_of_stock": 1,
-              "stale": 1
+              "stale": 2
             },
             "direct_listing_offers": [
-              {
-                "url": "https://www.yodobashi.com/product/100000001009948470/",
-                "retailer_domain": "yodobashi.com",
-                "seller_name": null,
-                "title": "Peerless Assassin 120 SE V3",
-                "price_jpy": 5470,
-                "stock_status": "preorder_or_backorder",
-                "stock_signal_fresh": true,
-                "stock_signal_max_age_minutes": 60,
-                "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T07:16:31+09:00",
-                "display_age_minutes": 46.0
-              },
               {
                 "url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
                 "retailer_domain": "dospara.co.jp",
@@ -705,8 +692,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T08:02:12+09:00",
-                "display_age_minutes": 0.3
+                "retrieval_time": "2026-10-18T09:05:19+09:00",
+                "display_age_minutes": 2.0
               },
               {
                 "url": "https://www.ark-pc.co.jp/i/10401914/",
@@ -719,7 +706,20 @@
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
                 "retrieval_time": "2026-10-18T03:35:03+09:00",
-                "display_age_minutes": 267.5
+                "display_age_minutes": 332.3
+              },
+              {
+                "url": "https://www.yodobashi.com/product/100000001009948470/",
+                "retailer_domain": "yodobashi.com",
+                "seller_name": null,
+                "title": "Peerless Assassin 120 SE V3",
+                "price_jpy": 5470,
+                "stock_status": "preorder_or_backorder",
+                "stock_signal_fresh": false,
+                "stock_signal_max_age_minutes": 60,
+                "price_source_mode": "direct_text",
+                "retrieval_time": "2026-10-18T07:16:31+09:00",
+                "display_age_minutes": 110.8
               }
             ],
             "purchase_url": "https://kakaku.com/item/K0001789043/"
@@ -746,7 +746,7 @@
             "direct_listing_stock_counts": {
               "in_stock": 1,
               "low_stock": 0,
-              "preorder_or_backorder": 0,
+              "preorder_or_backorder": 1,
               "unknown": 1,
               "out_of_stock": 0,
               "stale": 0
@@ -762,8 +762,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T08:02:21+09:00",
-                "display_age_minutes": 0.2
+                "retrieval_time": "2026-10-18T09:05:25+09:00",
+                "display_age_minutes": 1.9
               },
               {
                 "url": "https://shop.tsukumo.co.jp/goods/4573615590182/",
@@ -775,8 +775,21 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T07:16:38+09:00",
-                "display_age_minutes": 45.9
+                "retrieval_time": "2026-10-18T09:05:27+09:00",
+                "display_age_minutes": 1.9
+              },
+              {
+                "url": "https://www.ark-pc.co.jp/i/10401670/",
+                "retailer_domain": "ark-pc.co.jp",
+                "seller_name": null,
+                "title": "AX120-R-SE-WH-ARGB",
+                "price_jpy": 2970,
+                "stock_status": "preorder_or_backorder",
+                "stock_signal_fresh": true,
+                "stock_signal_max_age_minutes": 60,
+                "price_source_mode": "direct_structured",
+                "retrieval_time": "2026-10-18T09:05:28+09:00",
+                "display_age_minutes": 1.9
               }
             ],
             "purchase_url": "https://www.yodobashi.com/product/100000001008996814/"
@@ -795,8 +808,8 @@
             "price_status": "missing",
             "trusted_for_market_estimate": false,
             "source_role": "comparison_site_reference",
-            "retrieval_time": "2026-10-18T08:02:01+09:00",
-            "reference_age_minutes": 0.5,
+            "retrieval_time": "2026-10-18T09:05:04+09:00",
+            "reference_age_minutes": 2.283333333333333,
             "monitor_url": "https://kakaku.com/item/K0001669878/",
             "purchase_url": "https://kakaku.com/item/K0001669878/",
             "reference_source_url": null,
@@ -810,7 +823,7 @@
             "direct_listing_display_stock_status": "unknown",
             "direct_listing_display_stock_label": "在庫未確認",
             "direct_listing_display_source_mode": "direct_text",
-            "direct_listing_display_observed_at": "2026-10-18T08:02:02+09:00",
+            "direct_listing_display_observed_at": "2026-10-18T09:05:06+09:00",
             "early_buy_review": {
               "item_id": "motherboard-asrock-b850m-pro-rs-wifi",
               "early_buy_threshold_jpy": 18000,
@@ -827,8 +840,8 @@
               "purchase_authorized": false,
               "next_step": "購入可能な在庫を直接確認"
             },
-            "direct_listing_display_age_minutes": 0.5,
-            "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる アスロック ASRock AMD B850チップセット搭載 Micro-ATX マザーボード B850M Pro RS ... ￥26,990 2,699 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月19日月曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
+            "direct_listing_display_age_minutes": 2.2,
+            "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる アスロック ASRock AMD B850チップセット搭載 Micro-ATX マザーボード B850M Pro RS ... ￥26,990 2,699 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月20日火曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
             "direct_listing_display_offers": [
               {
                 "url": "https://www.yodobashi.com/product/100000001008871801/",
@@ -840,8 +853,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T08:02:02+09:00",
-                "display_age_minutes": 0.5
+                "retrieval_time": "2026-10-18T09:05:06+09:00",
+                "display_age_minutes": 2.2
               },
               {
                 "url": "https://www.sofmap.com/product_detail.aspx?sku=101393495",
@@ -853,8 +866,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T08:02:07+09:00",
-                "display_age_minutes": 0.4
+                "retrieval_time": "2026-10-18T09:05:13+09:00",
+                "display_age_minutes": 2.1
               },
               {
                 "url": "https://www.pc4u.co.jp/view/item/000000092844",
@@ -866,8 +879,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T08:02:04+09:00",
-                "display_age_minutes": 0.5
+                "retrieval_time": "2026-10-18T09:05:08+09:00",
+                "display_age_minutes": 2.2
               }
             ],
             "direct_listing_sellable_price_jpy": null,
@@ -972,8 +985,8 @@
             "price_status": "verified_retailer_listing_reference",
             "trusted_for_market_estimate": true,
             "source_role": "direct_retailer_listing_reference",
-            "retrieval_time": "2026-10-18T08:02:11+09:00",
-            "reference_age_minutes": 0.3333333333333333,
+            "retrieval_time": "2026-10-18T09:05:14+09:00",
+            "reference_age_minutes": 2.1166666666666667,
             "monitor_url": "https://kakaku.com/item/K0001671441/",
             "purchase_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
             "reference_source_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
@@ -1018,8 +1031,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T08:02:11+09:00",
-                "display_age_minutes": 0.3
+                "retrieval_time": "2026-10-18T09:05:14+09:00",
+                "display_age_minutes": 2.1
               },
               {
                 "url": "https://www.yodobashi.com/product/100000001008924490/",
@@ -1028,24 +1041,24 @@
                 "title": "CP-9020296-JP",
                 "price_jpy": 22760,
                 "stock_status": "unknown",
-                "stock_signal_fresh": true,
+                "stock_signal_fresh": false,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
                 "retrieval_time": "2026-10-18T07:16:29+09:00",
-                "display_age_minutes": 46.0
+                "display_age_minutes": 110.9
               }
             ],
             "direct_listing_sellable_price_jpy": 14980,
             "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
             "direct_listing_sellable_stock_status": "in_stock",
-            "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:11+09:00",
+            "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:14+09:00",
             "direct_listing_stock_counts": {
               "in_stock": 1,
               "low_stock": 0,
               "preorder_or_backorder": 0,
-              "unknown": 1,
+              "unknown": 0,
               "out_of_stock": 0,
-              "stale": 0
+              "stale": 1
             },
             "direct_listing_offer_count": 2,
             "direct_listing_sellable_offer_count": 1,
@@ -1115,8 +1128,8 @@
             "price_status": "verified_retailer_listing_reference",
             "trusted_for_market_estimate": true,
             "source_role": "direct_retailer_listing_reference",
-            "retrieval_time": "2026-10-18T08:02:12+09:00",
-            "reference_age_minutes": 0.31666666666666665,
+            "retrieval_time": "2026-10-18T09:05:20+09:00",
+            "reference_age_minutes": 2.0166666666666666,
             "monitor_url": "https://kakaku.com/item/J0000039064/",
             "purchase_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
             "reference_source_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
@@ -1161,8 +1174,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T08:02:12+09:00",
-                "display_age_minutes": 0.3
+                "retrieval_time": "2026-10-18T09:05:20+09:00",
+                "display_age_minutes": 2.0
               },
               {
                 "url": "https://www.yodobashi.com/product/100000001007195271/",
@@ -1174,14 +1187,14 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T08:02:11+09:00",
-                "display_age_minutes": 0.3
+                "retrieval_time": "2026-10-18T09:05:19+09:00",
+                "display_age_minutes": 2.0
               }
             ],
             "direct_listing_sellable_price_jpy": 13180,
             "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
             "direct_listing_sellable_stock_status": "in_stock",
-            "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:12+09:00",
+            "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:20+09:00",
             "direct_listing_stock_counts": {
               "in_stock": 1,
               "low_stock": 0,
@@ -1259,8 +1272,8 @@
             "price_status": "verified_retailer_listing_reference",
             "trusted_for_market_estimate": true,
             "source_role": "direct_retailer_listing_reference",
-            "retrieval_time": "2026-10-18T08:02:16+09:00",
-            "reference_age_minutes": 0.25,
+            "retrieval_time": "2026-10-18T09:05:20+09:00",
+            "reference_age_minutes": 2.0166666666666666,
             "monitor_url": "https://kakaku.com/item/K0001432816/",
             "purchase_url": "https://www.yodobashi.com/product/100000001006975270/",
             "reference_source_url": "https://www.yodobashi.com/product/100000001006975270/",
@@ -1305,14 +1318,14 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T08:02:16+09:00",
-                "display_age_minutes": 0.2
+                "retrieval_time": "2026-10-18T09:05:20+09:00",
+                "display_age_minutes": 2.0
               }
             ],
             "direct_listing_sellable_price_jpy": 19280,
             "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001006975270/",
             "direct_listing_sellable_stock_status": "in_stock",
-            "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:16+09:00",
+            "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:20+09:00",
             "direct_listing_stock_counts": {
               "in_stock": 1,
               "low_stock": 0,
@@ -1367,44 +1380,44 @@
             "model_code": "100-100000662WOF",
             "role": "cpu_multicore_alternative",
             "target_price_jpy": 55000,
-            "market_reference_price_jpy": 69624,
-            "display_reference_price_jpy": 69624,
-            "price_status": "verified_retailer_listing_reference",
-            "trusted_for_market_estimate": true,
-            "source_role": "direct_retailer_listing_reference",
-            "retrieval_time": "2026-10-18T08:01:56+09:00",
-            "reference_age_minutes": 0.5833333333333334,
+            "market_reference_price_jpy": null,
+            "display_reference_price_jpy": 80230,
+            "price_status": "search_snippet_reference_only",
+            "trusted_for_market_estimate": false,
+            "source_role": "comparison_site_reference",
+            "retrieval_time": "2026-10-18T09:04:56+09:00",
+            "reference_age_minutes": 2.4166666666666665,
             "monitor_url": "https://kakaku.com/item/K0001630331/",
-            "purchase_url": "https://www.ark-pc.co.jp/i/10240256/",
-            "reference_source_url": "https://www.ark-pc.co.jp/i/10240256/",
-            "reference_source_label": "販売店ページ直接取得・掲載価格（決済未確認）",
-            "search_snippet_reference_url": null,
-            "search_snippet_reference_title": null,
-            "direct_listing_display_price_jpy": null,
-            "direct_listing_display_url": null,
-            "direct_listing_display_title": null,
-            "direct_listing_display_identity_anchor": null,
-            "direct_listing_display_stock_status": null,
-            "direct_listing_display_stock_label": null,
-            "direct_listing_display_source_mode": null,
-            "direct_listing_display_observed_at": null,
+            "purchase_url": "https://kakaku.com/item/K0001630331/",
+            "reference_source_url": null,
+            "reference_source_label": null,
+            "search_snippet_reference_url": "https://search.kakaku.com/AMD%20Ryzen%209%209900X%20BOX/",
+            "search_snippet_reference_title": "100-100000662WOF",
+            "direct_listing_display_price_jpy": 69624,
+            "direct_listing_display_url": "https://www.ark-pc.co.jp/i/10240256/",
+            "direct_listing_display_title": "100-100000662WOF",
+            "direct_listing_display_identity_anchor": "Ryzen 9 9900X",
+            "direct_listing_display_stock_status": "in_stock",
+            "direct_listing_display_stock_label": "在庫あり（直接掲載・購入ゲート別）",
+            "direct_listing_display_source_mode": "direct_structured",
+            "direct_listing_display_observed_at": "2026-10-18T08:01:56+09:00",
             "early_buy_review": {
               "item_id": "cpu-ryzen9-9900x",
               "early_buy_threshold_jpy": null,
-              "observed_price_jpy": 69624,
+              "observed_price_jpy": null,
               "estimated_checkout_total_jpy": null,
               "verified_checkout_total_jpy": null,
               "checkout_total_verified": false,
-              "price_verified": true,
-              "identity_verified": true,
-              "stock_status": "in_stock",
-              "pit_valid": true,
+              "price_verified": false,
+              "identity_verified": false,
+              "stock_status": "unknown",
+              "pit_valid": false,
               "status": "NOT_CONFIGURED",
               "label_ja": "前倒し購入基準なし",
               "purchase_authorized": false,
               "next_step": "ブラックフライデー目標で監視を継続"
             },
-            "direct_listing_display_age_minutes": null,
+            "direct_listing_display_age_minutes": 65.4,
             "direct_listing_display_price_context": null,
             "direct_listing_display_offers": [
               {
@@ -1414,27 +1427,27 @@
                 "title": "100-100000662WOF",
                 "price_jpy": 69624,
                 "stock_status": "in_stock",
-                "stock_signal_fresh": true,
+                "stock_signal_fresh": false,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
                 "retrieval_time": "2026-10-18T08:01:56+09:00",
-                "display_age_minutes": 0.6
+                "display_age_minutes": 65.4
               }
             ],
-            "direct_listing_sellable_price_jpy": 69624,
-            "direct_listing_sellable_url": "https://www.ark-pc.co.jp/i/10240256/",
-            "direct_listing_sellable_stock_status": "in_stock",
-            "direct_listing_sellable_retrieval_time": "2026-10-18T08:01:56+09:00",
+            "direct_listing_sellable_price_jpy": null,
+            "direct_listing_sellable_url": null,
+            "direct_listing_sellable_stock_status": null,
+            "direct_listing_sellable_retrieval_time": null,
             "direct_listing_stock_counts": {
-              "in_stock": 1,
+              "in_stock": 0,
               "low_stock": 0,
               "preorder_or_backorder": 0,
               "unknown": 0,
               "out_of_stock": 0,
-              "stale": 0
+              "stale": 1
             },
             "direct_listing_offer_count": 1,
-            "direct_listing_sellable_offer_count": 1,
+            "direct_listing_sellable_offer_count": 0,
             "direct_listing_validation_diagnostics": [],
             "direct_listing_display_is_estimate_eligible": false,
             "direct_listing_display_purchase_allowed": false,
@@ -1477,8 +1490,8 @@
             "price_status": "verified_retailer_listing_reference",
             "trusted_for_market_estimate": true,
             "source_role": "direct_retailer_listing_reference",
-            "retrieval_time": "2026-10-18T08:02:16+09:00",
-            "reference_age_minutes": 0.25,
+            "retrieval_time": "2026-10-18T09:05:20+09:00",
+            "reference_age_minutes": 2.0166666666666666,
             "monitor_url": "https://www.ark-pc.co.jp/i/11650134/",
             "purchase_url": "https://www.ark-pc.co.jp/i/11650134/",
             "reference_source_url": "https://www.ark-pc.co.jp/i/11650134/",
@@ -1523,14 +1536,14 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T08:02:16+09:00",
-                "display_age_minutes": 0.2
+                "retrieval_time": "2026-10-18T09:05:20+09:00",
+                "display_age_minutes": 2.0
               }
             ],
             "direct_listing_sellable_price_jpy": 119990,
             "direct_listing_sellable_url": "https://www.ark-pc.co.jp/i/11650134/",
             "direct_listing_sellable_stock_status": "in_stock",
-            "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:16+09:00",
+            "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:20+09:00",
             "direct_listing_stock_counts": {
               "in_stock": 1,
               "low_stock": 0,
@@ -1600,8 +1613,8 @@
             "price_status": "verified_retailer_listing_reference",
             "trusted_for_market_estimate": true,
             "source_role": "direct_retailer_listing_reference",
-            "retrieval_time": "2026-10-18T08:02:19+09:00",
-            "reference_age_minutes": 0.2,
+            "retrieval_time": "2026-10-18T09:05:23+09:00",
+            "reference_age_minutes": 1.9666666666666666,
             "monitor_url": "https://www.yodobashi.com/product/100000001009402658/",
             "purchase_url": "https://www.yodobashi.com/product/100000001009402658/",
             "reference_source_url": "https://www.yodobashi.com/product/100000001009402658/",
@@ -1645,14 +1658,14 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T08:02:19+09:00",
-                "display_age_minutes": 0.2
+                "retrieval_time": "2026-10-18T09:05:23+09:00",
+                "display_age_minutes": 2.0
               }
             ],
             "direct_listing_sellable_price_jpy": 29130,
             "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001009402658/",
             "direct_listing_sellable_stock_status": "in_stock",
-            "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:19+09:00",
+            "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:23+09:00",
             "direct_listing_stock_counts": {
               "in_stock": 1,
               "low_stock": 0,
@@ -1714,8 +1727,8 @@
             "price_status": "verified_retailer_listing_reference",
             "trusted_for_market_estimate": true,
             "source_role": "direct_retailer_listing_reference",
-            "retrieval_time": "2026-10-18T08:02:21+09:00",
-            "reference_age_minutes": 0.16666666666666666,
+            "retrieval_time": "2026-10-18T09:05:25+09:00",
+            "reference_age_minutes": 1.9333333333333333,
             "monitor_url": "https://www.yodobashi.com/product/100000001008996814/",
             "purchase_url": "https://www.yodobashi.com/product/100000001008996814/",
             "reference_source_url": "https://www.yodobashi.com/product/100000001008996814/",
@@ -1759,8 +1772,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_text",
-                "retrieval_time": "2026-10-18T08:02:21+09:00",
-                "display_age_minutes": 0.2
+                "retrieval_time": "2026-10-18T09:05:25+09:00",
+                "display_age_minutes": 1.9
               },
               {
                 "url": "https://shop.tsukumo.co.jp/goods/4573615590182/",
@@ -1772,23 +1785,36 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T07:16:38+09:00",
-                "display_age_minutes": 45.9
+                "retrieval_time": "2026-10-18T09:05:27+09:00",
+                "display_age_minutes": 1.9
+              },
+              {
+                "url": "https://www.ark-pc.co.jp/i/10401670/",
+                "retailer_domain": "ark-pc.co.jp",
+                "seller_name": null,
+                "title": "AX120-R-SE-WH-ARGB",
+                "price_jpy": 2970,
+                "stock_status": "preorder_or_backorder",
+                "stock_signal_fresh": true,
+                "stock_signal_max_age_minutes": 60,
+                "price_source_mode": "direct_structured",
+                "retrieval_time": "2026-10-18T09:05:28+09:00",
+                "display_age_minutes": 1.9
               }
             ],
             "direct_listing_sellable_price_jpy": 2580,
             "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001008996814/",
             "direct_listing_sellable_stock_status": "in_stock",
-            "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:21+09:00",
+            "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:25+09:00",
             "direct_listing_stock_counts": {
               "in_stock": 1,
               "low_stock": 0,
-              "preorder_or_backorder": 0,
+              "preorder_or_backorder": 1,
               "unknown": 1,
               "out_of_stock": 0,
               "stale": 0
             },
-            "direct_listing_offer_count": 2,
+            "direct_listing_offer_count": 3,
             "direct_listing_sellable_offer_count": 1,
             "direct_listing_validation_diagnostics": [
               {
@@ -1806,16 +1832,16 @@
               },
               {
                 "url": "https://shop.tsukumo.co.jp/goods/4573615590182/",
-                "status": "unverified",
-                "reason_code": "fetch_error",
-                "page_name": null,
-                "price_source_mode": null,
-                "parsed_price_jpy": null,
+                "status": "verified",
+                "reason_code": "exact_identity_direct_price_and_pit_verified",
+                "page_name": "Assassin X 120 Refined SE　AX120-R-SE",
+                "price_source_mode": "direct_structured",
+                "parsed_price_jpy": 2350,
                 "stock_status": "unknown",
-                "structured_stock_status": null,
-                "text_stock_status": null,
-                "error_type": "RemoteDisconnected",
-                "error_message": "Remote end closed connection without response"
+                "structured_stock_status": "unknown",
+                "text_stock_status": "out_of_stock",
+                "error_type": null,
+                "error_message": null
               }
             ],
             "direct_listing_display_is_estimate_eligible": false,
@@ -1855,8 +1881,8 @@
             "price_status": "missing",
             "trusted_for_market_estimate": false,
             "source_role": "comparison_site_reference",
-            "retrieval_time": "2026-10-18T08:01:53+09:00",
-            "reference_age_minutes": 0.6333333333333333,
+            "retrieval_time": "2026-10-18T09:04:56+09:00",
+            "reference_age_minutes": 2.4166666666666665,
             "monitor_url": "https://kakaku.com/item/K0001798041/",
             "purchase_url": "https://kakaku.com/item/K0001798041/",
             "reference_source_url": null,
@@ -1870,7 +1896,7 @@
             "direct_listing_display_stock_status": "unknown",
             "direct_listing_display_stock_label": "在庫未確認",
             "direct_listing_display_source_mode": "direct_structured",
-            "direct_listing_display_observed_at": "2026-10-18T07:16:17+09:00",
+            "direct_listing_display_observed_at": "2026-10-18T09:05:03+09:00",
             "early_buy_review": {
               "item_id": "gpu-rtx5070-12gb",
               "early_buy_threshold_jpy": 119000,
@@ -1880,19 +1906,19 @@
               "checkout_total_verified": false,
               "price_verified": true,
               "identity_verified": true,
-              "stock_status": "out_of_stock",
+              "stock_status": "unknown",
               "pit_valid": true,
-              "status": "UNAVAILABLE",
-              "label_ja": "在庫切れ",
+              "status": "STOCK_NOT_VERIFIED",
+              "label_ja": "在庫未確認",
               "purchase_authorized": false,
-              "next_step": "同一型番の別販売店・再入荷を確認"
+              "next_step": "購入可能な在庫を直接確認"
             },
-            "direct_listing_display_age_minutes": 46.2,
+            "direct_listing_display_age_minutes": 2.3,
             "direct_listing_display_price_context": null,
             "direct_listing_display_offers": [
               {
                 "url": "https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom",
-                "retailer_domain": "tsukumo.co.jp",
+                "retailer_domain": "shop.tsukumo.co.jp",
                 "seller_name": null,
                 "title": "PNY GeForce RTX 5070 12GB OC SLIM　VCG507012DFSXPB1-O",
                 "price_jpy": 190800,
@@ -1900,8 +1926,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T07:16:17+09:00",
-                "display_age_minutes": 46.2
+                "retrieval_time": "2026-10-18T09:05:03+09:00",
+                "display_age_minutes": 2.3
               },
               {
                 "url": "https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845",
@@ -1913,8 +1939,8 @@
                 "stock_signal_fresh": true,
                 "stock_signal_max_age_minutes": 60,
                 "price_source_mode": "direct_structured",
-                "retrieval_time": "2026-10-18T08:01:58+09:00",
-                "display_age_minutes": 0.6
+                "retrieval_time": "2026-10-18T09:05:01+09:00",
+                "display_age_minutes": 2.3
               }
             ],
             "direct_listing_sellable_price_jpy": null,
@@ -1960,16 +1986,16 @@
               },
               {
                 "url": "https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom",
-                "status": "unverified",
-                "reason_code": "fetch_error",
-                "page_name": null,
-                "price_source_mode": null,
-                "parsed_price_jpy": null,
+                "status": "verified",
+                "reason_code": "exact_identity_direct_price_and_pit_verified",
+                "page_name": "PNY GeForce RTX 5070 12GB OC SLIM　VCG507012DFSXPB1-O",
+                "price_source_mode": "direct_structured",
+                "parsed_price_jpy": 190800,
                 "stock_status": "unknown",
-                "structured_stock_status": null,
-                "text_stock_status": null,
-                "error_type": "RemoteDisconnected",
-                "error_message": "Remote end closed connection without response"
+                "structured_stock_status": "unknown",
+                "text_stock_status": "out_of_stock",
+                "error_type": null,
+                "error_message": null
               }
             ],
             "direct_listing_display_is_estimate_eligible": false,
@@ -2148,44 +2174,45 @@
         "target_contingency_jpy": 5000,
         "target_within_pc_budget": true,
         "target_within_total_budget": false,
-        "current_sellable_listing_subtotal_jpy": 268764,
-        "current_sellable_listing_part_count": 7,
+        "current_sellable_listing_subtotal_jpy": 199140,
+        "current_sellable_listing_part_count": 6,
         "current_sellable_listing_required_part_count": 9,
-        "current_sellable_listing_coverage_pct": 77.8,
+        "current_sellable_listing_coverage_pct": 66.7,
         "current_sellable_listing_part_ids": [
           "psu-corsair-rm850e-2025",
           "case-fractal-pop-air-tg",
           "os-windows11-home",
-          "cpu-ryzen9-9900x",
           "memory-lexar-thor-ddr5-64gb-6000",
           "ssd-msi-spatium-m450-1tb",
           "cooler-thermalright-assassin-x-120-refined-se"
         ],
         "current_parts_without_sellable_listing": [
           "motherboard-asrock-b850m-pro-rs-wifi",
+          "cpu-ryzen9-9900x",
           "gpu-rtx5070-12gb"
         ],
         "current_low_stock_part_ids": [],
         "current_confirmed_out_of_stock_part_ids": [],
         "current_unconfirmed_availability_part_ids": [
           "motherboard-asrock-b850m-pro-rs-wifi",
+          "cpu-ryzen9-9900x",
           "gpu-rtx5070-12gb"
         ],
         "current_stock_confirmed_component_count": {
-          "in_stock": 7,
+          "in_stock": 6,
           "low_stock": 0,
-          "preorder_or_backorder": 1,
-          "unknown": 4,
+          "preorder_or_backorder": 2,
+          "unknown": 3,
           "out_of_stock": 2,
-          "stale": 0
+          "stale": 2
         },
         "current_retailer_listing_offer_count_by_status": {
-          "in_stock": 7,
+          "in_stock": 6,
           "low_stock": 0,
-          "preorder_or_backorder": 1,
-          "unknown": 5,
+          "preorder_or_backorder": 2,
+          "unknown": 4,
           "out_of_stock": 2,
-          "stale": 0
+          "stale": 2
         },
         "current_listing_subtotal_is_complete_build_price": false,
         "current_listing_subtotal_is_checkout_price": false,
@@ -2194,10 +2221,11 @@
         "market_reference_estimate_is_checkout_price": false,
         "market_reference_coverage_complete": false,
         "missing_or_untrusted_market_reference_ids": [
+          "cpu-ryzen9-9900x",
           "gpu-rtx5070-12gb",
           "motherboard-asrock-b850m-pro-rs-wifi"
         ],
-        "market_reference_coverage_count": 7,
+        "market_reference_coverage_count": 6,
         "market_reference_required_count": 9,
         "target_gpu_required_reduction_pct_from_market_reference": null,
         "compatibility_status": "REVIEW",
@@ -2290,17 +2318,17 @@
           "workload_fit_points_out_of_75": 62.6,
           "price_efficiency_points_out_of_15": 14.3,
           "compatibility_points_out_of_10": 8.9,
-          "market_reference_coverage_pct": 77.8,
-          "market_reference_component_count": 7,
+          "market_reference_coverage_pct": 66.7,
+          "market_reference_component_count": 6,
           "market_reference_required_count": 9,
-          "direct_price_identity_pit_coverage_pct": 100.0,
-          "sellable_stock_coverage_pct": 77.8,
+          "direct_price_identity_pit_coverage_pct": 88.9,
+          "sellable_stock_coverage_pct": 66.7,
           "verified_checkout_total_coverage_pct": 0.0,
-          "direct_price_verified_component_count": 9,
-          "sellable_stock_verified_component_count": 7,
+          "direct_price_verified_component_count": 8,
+          "sellable_stock_verified_component_count": 6,
           "verified_checkout_total_component_count": 0,
           "required_component_count": 9,
-          "purchase_evidence_completeness_score_out_of_100": 67.2,
+          "purchase_evidence_completeness_score_out_of_100": 61.1,
           "score_basis": "BF目標総額ベースの構成ルーブリック。GPUゲーム点はTom's Hardwareの1440p Ultraラスタライズ階層を25点満点に正規化した代理指標で、対象ゲームの実測FPSではない。",
           "gaming_benchmark_reference": {
             "source_url": "https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html",
@@ -2331,17 +2359,17 @@
         "workload_fit_points_out_of_75": 62.6,
         "price_efficiency_points_out_of_15": 14.3,
         "compatibility_points_out_of_10": 8.9,
-        "market_reference_coverage_pct": 77.8,
-        "market_reference_component_count": 7,
+        "market_reference_coverage_pct": 66.7,
+        "market_reference_component_count": 6,
         "market_reference_required_count": 9,
-        "direct_price_identity_pit_coverage_pct": 100.0,
-        "sellable_stock_coverage_pct": 77.8,
+        "direct_price_identity_pit_coverage_pct": 88.9,
+        "sellable_stock_coverage_pct": 66.7,
         "verified_checkout_total_coverage_pct": 0.0,
-        "direct_price_verified_component_count": 9,
-        "sellable_stock_verified_component_count": 7,
+        "direct_price_verified_component_count": 8,
+        "sellable_stock_verified_component_count": 6,
         "verified_checkout_total_component_count": 0,
         "required_component_count": 9,
-        "purchase_evidence_completeness_score_out_of_100": 67.2,
+        "purchase_evidence_completeness_score_out_of_100": 61.1,
         "score_basis": "BF目標総額ベースの構成ルーブリック。GPUゲーム点はTom's Hardwareの1440p Ultraラスタライズ階層を25点満点に正規化した代理指標で、対象ゲームの実測FPSではない。",
         "gaming_benchmark_reference": {
           "source_url": "https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html",
@@ -2437,8 +2465,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-18T08:02:07+09:00",
-            "display_age_minutes": 0.4
+            "retrieval_time": "2026-10-18T09:05:12+09:00",
+            "display_age_minutes": 2.1
           },
           {
             "url": "https://www.pc4u.co.jp/view/item/000000090356?category_page_id=ct824",
@@ -2450,8 +2478,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-18T08:02:07+09:00",
-            "display_age_minutes": 0.4
+            "retrieval_time": "2026-10-18T09:05:10+09:00",
+            "display_age_minutes": 2.2
           },
           {
             "url": "https://www.dospara.co.jp/SBR1534/IC512079.html",
@@ -2463,8 +2491,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_structured",
-            "retrieval_time": "2026-10-18T08:02:06+09:00",
-            "display_age_minutes": 0.4
+            "retrieval_time": "2026-10-18T09:05:09+09:00",
+            "display_age_minutes": 2.2
           },
           {
             "url": "https://shop.tsukumo.co.jp/goods/0649528943019/",
@@ -2476,8 +2504,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_structured",
-            "retrieval_time": "2026-10-18T07:16:20+09:00",
-            "display_age_minutes": 46.2
+            "retrieval_time": "2026-10-18T09:05:08+09:00",
+            "display_age_minutes": 2.2
           }
         ],
         "purchase_url": "https://kakaku.com/item/K0001633533/"
@@ -2522,8 +2550,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-18T08:02:04+09:00",
-            "display_age_minutes": 0.5
+            "retrieval_time": "2026-10-18T09:05:06+09:00",
+            "display_age_minutes": 2.2
           }
         ],
         "purchase_url": "https://kakaku.com/item/K0001610896/"
@@ -2568,8 +2596,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_structured",
-            "retrieval_time": "2026-10-18T08:02:16+09:00",
-            "display_age_minutes": 0.2
+            "retrieval_time": "2026-10-18T09:05:20+09:00",
+            "display_age_minutes": 2.0
           }
         ],
         "purchase_url": "https://www.ark-pc.co.jp/i/11650134/"
@@ -2629,31 +2657,18 @@
         "market_reference_price_jpy": null,
         "display_reference_price_jpy": null,
         "sellable_listing_price_jpy": null,
-        "stock_status": "unknown",
+        "stock_status": "out_of_stock",
         "price_status": "missing",
         "trusted_for_market_estimate": false,
         "direct_listing_stock_counts": {
           "in_stock": 0,
           "low_stock": 0,
           "preorder_or_backorder": 0,
-          "unknown": 1,
+          "unknown": 0,
           "out_of_stock": 3,
-          "stale": 0
+          "stale": 1
         },
         "direct_listing_offers": [
-          {
-            "url": "https://www.yodobashi.com/product/100000001007390887/",
-            "retailer_domain": "yodobashi.com",
-            "seller_name": null,
-            "title": "CT1000P3PSSD8JP",
-            "price_jpy": 10210,
-            "stock_status": "unknown",
-            "stock_signal_fresh": true,
-            "stock_signal_max_age_minutes": 60,
-            "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-18T08:02:11+09:00",
-            "display_age_minutes": 0.3
-          },
           {
             "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
             "retailer_domain": "dospara.co.jp",
@@ -2664,8 +2679,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_structured",
-            "retrieval_time": "2026-10-18T08:02:07+09:00",
-            "display_age_minutes": 0.4
+            "retrieval_time": "2026-10-18T09:05:13+09:00",
+            "display_age_minutes": 2.1
           },
           {
             "url": "https://shop.tsukumo.co.jp/goods/0649528918970/",
@@ -2677,8 +2692,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_structured",
-            "retrieval_time": "2026-10-18T07:16:22+09:00",
-            "display_age_minutes": 46.1
+            "retrieval_time": "2026-10-18T09:05:11+09:00",
+            "display_age_minutes": 2.2
           },
           {
             "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -2690,8 +2705,21 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-18T08:02:08+09:00",
-            "display_age_minutes": 0.4
+            "retrieval_time": "2026-10-18T09:05:15+09:00",
+            "display_age_minutes": 2.1
+          },
+          {
+            "url": "https://www.yodobashi.com/product/100000001007390887/",
+            "retailer_domain": "yodobashi.com",
+            "seller_name": null,
+            "title": "CT1000P3PSSD8JP",
+            "price_jpy": 10210,
+            "stock_status": "unknown",
+            "stock_signal_fresh": false,
+            "stock_signal_max_age_minutes": 60,
+            "price_source_mode": "direct_text",
+            "retrieval_time": "2026-10-18T08:02:11+09:00",
+            "display_age_minutes": 65.2
           }
         ],
         "purchase_url": "https://kakaku.com/item/K0001466997/"
@@ -2734,8 +2762,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-18T08:02:19+09:00",
-            "display_age_minutes": 0.2
+            "retrieval_time": "2026-10-18T09:05:23+09:00",
+            "display_age_minutes": 2.0
           }
         ],
         "purchase_url": "https://www.yodobashi.com/product/100000001009402658/"
@@ -2769,25 +2797,12 @@
         "direct_listing_stock_counts": {
           "in_stock": 0,
           "low_stock": 0,
-          "preorder_or_backorder": 1,
+          "preorder_or_backorder": 0,
           "unknown": 0,
           "out_of_stock": 1,
-          "stale": 1
+          "stale": 2
         },
         "direct_listing_offers": [
-          {
-            "url": "https://www.yodobashi.com/product/100000001009948470/",
-            "retailer_domain": "yodobashi.com",
-            "seller_name": null,
-            "title": "Peerless Assassin 120 SE V3",
-            "price_jpy": 5470,
-            "stock_status": "preorder_or_backorder",
-            "stock_signal_fresh": true,
-            "stock_signal_max_age_minutes": 60,
-            "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-18T07:16:31+09:00",
-            "display_age_minutes": 46.0
-          },
           {
             "url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
             "retailer_domain": "dospara.co.jp",
@@ -2798,8 +2813,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_structured",
-            "retrieval_time": "2026-10-18T08:02:12+09:00",
-            "display_age_minutes": 0.3
+            "retrieval_time": "2026-10-18T09:05:19+09:00",
+            "display_age_minutes": 2.0
           },
           {
             "url": "https://www.ark-pc.co.jp/i/10401914/",
@@ -2812,7 +2827,20 @@
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
             "retrieval_time": "2026-10-18T03:35:03+09:00",
-            "display_age_minutes": 267.5
+            "display_age_minutes": 332.3
+          },
+          {
+            "url": "https://www.yodobashi.com/product/100000001009948470/",
+            "retailer_domain": "yodobashi.com",
+            "seller_name": null,
+            "title": "Peerless Assassin 120 SE V3",
+            "price_jpy": 5470,
+            "stock_status": "preorder_or_backorder",
+            "stock_signal_fresh": false,
+            "stock_signal_max_age_minutes": 60,
+            "price_source_mode": "direct_text",
+            "retrieval_time": "2026-10-18T07:16:31+09:00",
+            "display_age_minutes": 110.8
           }
         ],
         "purchase_url": "https://kakaku.com/item/K0001789043/"
@@ -2839,7 +2867,7 @@
         "direct_listing_stock_counts": {
           "in_stock": 1,
           "low_stock": 0,
-          "preorder_or_backorder": 0,
+          "preorder_or_backorder": 1,
           "unknown": 1,
           "out_of_stock": 0,
           "stale": 0
@@ -2855,8 +2883,8 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
-            "retrieval_time": "2026-10-18T08:02:21+09:00",
-            "display_age_minutes": 0.2
+            "retrieval_time": "2026-10-18T09:05:25+09:00",
+            "display_age_minutes": 1.9
           },
           {
             "url": "https://shop.tsukumo.co.jp/goods/4573615590182/",
@@ -2868,8 +2896,21 @@
             "stock_signal_fresh": true,
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_structured",
-            "retrieval_time": "2026-10-18T07:16:38+09:00",
-            "display_age_minutes": 45.9
+            "retrieval_time": "2026-10-18T09:05:27+09:00",
+            "display_age_minutes": 1.9
+          },
+          {
+            "url": "https://www.ark-pc.co.jp/i/10401670/",
+            "retailer_domain": "ark-pc.co.jp",
+            "seller_name": null,
+            "title": "AX120-R-SE-WH-ARGB",
+            "price_jpy": 2970,
+            "stock_status": "preorder_or_backorder",
+            "stock_signal_fresh": true,
+            "stock_signal_max_age_minutes": 60,
+            "price_source_mode": "direct_structured",
+            "retrieval_time": "2026-10-18T09:05:28+09:00",
+            "display_age_minutes": 1.9
           }
         ],
         "purchase_url": "https://www.yodobashi.com/product/100000001008996814/"
@@ -2918,7 +2959,7 @@
             "stock_signal_max_age_minutes": 60,
             "price_source_mode": "direct_text",
             "retrieval_time": "2026-10-18T05:03:32+09:00",
-            "display_age_minutes": 179.0
+            "display_age_minutes": 243.8
           }
         ],
         "purchase_url": "https://shop.tsukumo.co.jp/goods/4711377308229/"
@@ -2939,9 +2980,9 @@
     "configured_component_count": 20,
     "tracked_hardware_part_count": 20,
     "snapshot_verified_count": 0,
-    "snapshot_generated_at": "2026-10-18T08:02:29+09:00",
+    "snapshot_generated_at": "2026-10-18T09:05:46+09:00",
     "snapshot_source_role": "comparison_site_reference",
-    "snapshot_sha256": "40cbf583462d38a047d6df90398f9206920965c187871eb3e3f57e9d09ff04a8"
+    "snapshot_sha256": "a0a6068961bff1d1a755d0845f3da9b403309b9a642e7b9a44daa89afcaa6f8a"
   },
   "builds": [
     {
@@ -2990,8 +3031,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:01+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T09:05:03+09:00",
+              "display_age_minutes": 2.3
             },
             {
               "url": "https://item.rakuten.co.jp/dospara-r/ic634895/?variantId=ic634895",
@@ -3004,7 +3045,7 @@
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
               "retrieval_time": "2026-10-18T05:58:14+09:00",
-              "display_age_minutes": 124.3
+              "display_age_minutes": 189.1
             }
           ],
           "purchase_url": "https://www.dospara.co.jp/SBR1892/IC634895.html"
@@ -3053,8 +3094,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:07+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:12+09:00",
+              "display_age_minutes": 2.1
             },
             {
               "url": "https://www.pc4u.co.jp/view/item/000000090356?category_page_id=ct824",
@@ -3066,8 +3107,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:07+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:10+09:00",
+              "display_age_minutes": 2.2
             },
             {
               "url": "https://www.dospara.co.jp/SBR1534/IC512079.html",
@@ -3079,8 +3120,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:06+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:09+09:00",
+              "display_age_minutes": 2.2
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/0649528943019/",
@@ -3092,8 +3133,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:20+09:00",
-              "display_age_minutes": 46.2
+              "retrieval_time": "2026-10-18T09:05:08+09:00",
+              "display_age_minutes": 2.2
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001633533/"
@@ -3138,8 +3179,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:04+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T09:05:06+09:00",
+              "display_age_minutes": 2.2
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001610896/"
@@ -3184,8 +3225,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:16+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:20+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "purchase_url": "https://www.ark-pc.co.jp/i/11650134/"
@@ -3242,31 +3283,18 @@
           "market_reference_price_jpy": null,
           "display_reference_price_jpy": null,
           "sellable_listing_price_jpy": null,
-          "stock_status": "unknown",
+          "stock_status": "out_of_stock",
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "direct_listing_stock_counts": {
             "in_stock": 0,
             "low_stock": 0,
             "preorder_or_backorder": 0,
-            "unknown": 1,
+            "unknown": 0,
             "out_of_stock": 3,
-            "stale": 0
+            "stale": 1
           },
           "direct_listing_offers": [
-            {
-              "url": "https://www.yodobashi.com/product/100000001007390887/",
-              "retailer_domain": "yodobashi.com",
-              "seller_name": null,
-              "title": "CT1000P3PSSD8JP",
-              "price_jpy": 10210,
-              "stock_status": "unknown",
-              "stock_signal_fresh": true,
-              "stock_signal_max_age_minutes": 60,
-              "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:11+09:00",
-              "display_age_minutes": 0.3
-            },
             {
               "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
               "retailer_domain": "dospara.co.jp",
@@ -3277,8 +3305,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:07+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:13+09:00",
+              "display_age_minutes": 2.1
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/0649528918970/",
@@ -3290,8 +3318,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:22+09:00",
-              "display_age_minutes": 46.1
+              "retrieval_time": "2026-10-18T09:05:11+09:00",
+              "display_age_minutes": 2.2
             },
             {
               "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -3303,8 +3331,21 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:08+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:15+09:00",
+              "display_age_minutes": 2.1
+            },
+            {
+              "url": "https://www.yodobashi.com/product/100000001007390887/",
+              "retailer_domain": "yodobashi.com",
+              "seller_name": null,
+              "title": "CT1000P3PSSD8JP",
+              "price_jpy": 10210,
+              "stock_status": "unknown",
+              "stock_signal_fresh": false,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T08:02:11+09:00",
+              "display_age_minutes": 65.2
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001466997/"
@@ -3347,8 +3388,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:19+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:23+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "purchase_url": "https://www.yodobashi.com/product/100000001009402658/"
@@ -3379,25 +3420,12 @@
           "direct_listing_stock_counts": {
             "in_stock": 0,
             "low_stock": 0,
-            "preorder_or_backorder": 1,
+            "preorder_or_backorder": 0,
             "unknown": 0,
             "out_of_stock": 1,
-            "stale": 1
+            "stale": 2
           },
           "direct_listing_offers": [
-            {
-              "url": "https://www.yodobashi.com/product/100000001009948470/",
-              "retailer_domain": "yodobashi.com",
-              "seller_name": null,
-              "title": "Peerless Assassin 120 SE V3",
-              "price_jpy": 5470,
-              "stock_status": "preorder_or_backorder",
-              "stock_signal_fresh": true,
-              "stock_signal_max_age_minutes": 60,
-              "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T07:16:31+09:00",
-              "display_age_minutes": 46.0
-            },
             {
               "url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
               "retailer_domain": "dospara.co.jp",
@@ -3408,8 +3436,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:12+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T09:05:19+09:00",
+              "display_age_minutes": 2.0
             },
             {
               "url": "https://www.ark-pc.co.jp/i/10401914/",
@@ -3422,7 +3450,20 @@
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
               "retrieval_time": "2026-10-18T03:35:03+09:00",
-              "display_age_minutes": 267.5
+              "display_age_minutes": 332.3
+            },
+            {
+              "url": "https://www.yodobashi.com/product/100000001009948470/",
+              "retailer_domain": "yodobashi.com",
+              "seller_name": null,
+              "title": "Peerless Assassin 120 SE V3",
+              "price_jpy": 5470,
+              "stock_status": "preorder_or_backorder",
+              "stock_signal_fresh": false,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T07:16:31+09:00",
+              "display_age_minutes": 110.8
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001789043/"
@@ -3449,7 +3490,7 @@
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
-            "preorder_or_backorder": 0,
+            "preorder_or_backorder": 1,
             "unknown": 1,
             "out_of_stock": 0,
             "stale": 0
@@ -3465,8 +3506,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:21+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:25+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/4573615590182/",
@@ -3478,8 +3519,21 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:38+09:00",
-              "display_age_minutes": 45.9
+              "retrieval_time": "2026-10-18T09:05:27+09:00",
+              "display_age_minutes": 1.9
+            },
+            {
+              "url": "https://www.ark-pc.co.jp/i/10401670/",
+              "retailer_domain": "ark-pc.co.jp",
+              "seller_name": null,
+              "title": "AX120-R-SE-WH-ARGB",
+              "price_jpy": 2970,
+              "stock_status": "preorder_or_backorder",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_structured",
+              "retrieval_time": "2026-10-18T09:05:28+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "purchase_url": "https://www.yodobashi.com/product/100000001008996814/"
@@ -3493,49 +3547,50 @@
           "model_code": "100-100001404WOF",
           "role": "required_fixed_part",
           "target_price_jpy": 45000,
-          "market_reference_price_jpy": null,
-          "display_reference_price_jpy": null,
-          "price_status": "missing",
-          "trusted_for_market_estimate": false,
-          "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T08:01:53+09:00",
-          "reference_age_minutes": 0.6333333333333333,
+          "market_reference_price_jpy": 47800,
+          "display_reference_price_jpy": 47800,
+          "price_status": "verified_retailer_listing_reference",
+          "trusted_for_market_estimate": true,
+          "source_role": "direct_retailer_listing_reference",
+          "retrieval_time": "2026-10-18T09:05:01+09:00",
+          "reference_age_minutes": 2.3333333333333335,
           "monitor_url": "https://kakaku.com/item/K0001630332/",
-          "purchase_url": "https://kakaku.com/item/K0001630332/",
-          "reference_source_url": null,
-          "reference_source_label": null,
+          "purchase_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
+          "reference_source_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
+          "reference_source_label": "販売店ページ直接取得・掲載価格（決済未確認）",
           "search_snippet_reference_url": null,
           "search_snippet_reference_title": null,
-          "direct_listing_display_price_jpy": 47800,
-          "direct_listing_display_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
-          "direct_listing_display_title": "Ryzen 7 9700X　100-100001404WOF　【国内正規品】",
-          "direct_listing_display_identity_anchor": "100-100001404WOF",
-          "direct_listing_display_stock_status": "in_stock",
-          "direct_listing_display_stock_label": "在庫あり（直接掲載・購入ゲート別）",
-          "direct_listing_display_source_mode": "direct_structured",
-          "direct_listing_display_observed_at": "2026-10-18T07:16:14+09:00",
+          "direct_listing_display_price_jpy": null,
+          "direct_listing_display_url": null,
+          "direct_listing_display_title": null,
+          "direct_listing_display_identity_anchor": null,
+          "direct_listing_display_stock_status": null,
+          "direct_listing_display_stock_label": null,
+          "direct_listing_display_source_mode": null,
+          "direct_listing_display_observed_at": null,
           "early_buy_review": {
             "item_id": "cpu-ryzen7-9700x",
             "early_buy_threshold_jpy": 36000,
-            "observed_price_jpy": 53110,
+            "observed_price_jpy": 47800,
             "estimated_checkout_total_jpy": null,
             "verified_checkout_total_jpy": null,
             "checkout_total_verified": false,
             "price_verified": true,
             "identity_verified": true,
-            "stock_status": "unknown",
+            "stock_status": "in_stock",
             "pit_valid": true,
-            "status": "STOCK_NOT_VERIFIED",
-            "label_ja": "在庫未確認",
+            "status": "WAIT_FOR_EARLY_BUY_THRESHOLD",
+            "label_ja": "前倒し購入価格に未到達",
             "purchase_authorized": false,
-            "next_step": "購入可能な在庫を直接確認"
+            "next_step": "前倒し検討価格まであと11,800円。ブラックフライデーを含め監視継続",
+            "price_gap_to_threshold_jpy": 11800
           },
-          "direct_listing_display_age_minutes": 46.3,
+          "direct_listing_display_age_minutes": null,
           "direct_listing_display_price_context": null,
           "direct_listing_display_offers": [
             {
               "url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
-              "retailer_domain": "tsukumo.co.jp",
+              "retailer_domain": "shop.tsukumo.co.jp",
               "seller_name": null,
               "title": "Ryzen 7 9700X　100-100001404WOF　【国内正規品】",
               "price_jpy": 47800,
@@ -3543,8 +3598,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:14+09:00",
-              "display_age_minutes": 46.3
+              "retrieval_time": "2026-10-18T09:05:01+09:00",
+              "display_age_minutes": 2.3
             },
             {
               "url": "https://www.yodobashi.com/product/100000001008661707/",
@@ -3556,14 +3611,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:01:55+09:00",
-              "display_age_minutes": 0.6
+              "retrieval_time": "2026-10-18T09:04:59+09:00",
+              "display_age_minutes": 2.4
             }
           ],
           "direct_listing_sellable_price_jpy": 47800,
           "direct_listing_sellable_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T07:16:14+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:01+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -3590,16 +3645,16 @@
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
-              "status": "unverified",
-              "reason_code": "fetch_error",
-              "page_name": null,
-              "price_source_mode": null,
-              "parsed_price_jpy": null,
-              "stock_status": "unknown",
-              "structured_stock_status": null,
-              "text_stock_status": null,
-              "error_type": "RemoteDisconnected",
-              "error_message": "Remote end closed connection without response"
+              "status": "verified",
+              "reason_code": "exact_identity_direct_price_and_pit_verified",
+              "page_name": "Ryzen 7 9700X　100-100001404WOF　【国内正規品】",
+              "price_source_mode": "direct_structured",
+              "parsed_price_jpy": 47800,
+              "stock_status": "in_stock",
+              "structured_stock_status": "in_stock",
+              "text_stock_status": "out_of_stock",
+              "error_type": null,
+              "error_message": null
             }
           ],
           "direct_listing_display_is_estimate_eligible": false,
@@ -3639,8 +3694,8 @@
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T08:02:01+09:00",
-          "reference_age_minutes": 0.5,
+          "retrieval_time": "2026-10-18T09:05:04+09:00",
+          "reference_age_minutes": 2.283333333333333,
           "monitor_url": "https://kakaku.com/item/K0001669878/",
           "purchase_url": "https://kakaku.com/item/K0001669878/",
           "reference_source_url": null,
@@ -3654,7 +3709,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-18T08:02:02+09:00",
+          "direct_listing_display_observed_at": "2026-10-18T09:05:06+09:00",
           "early_buy_review": {
             "item_id": "motherboard-asrock-b850m-pro-rs-wifi",
             "early_buy_threshold_jpy": 18000,
@@ -3671,8 +3726,8 @@
             "purchase_authorized": false,
             "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.5,
-          "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる アスロック ASRock AMD B850チップセット搭載 Micro-ATX マザーボード B850M Pro RS ... ￥26,990 2,699 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月19日月曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
+          "direct_listing_display_age_minutes": 2.2,
+          "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる アスロック ASRock AMD B850チップセット搭載 Micro-ATX マザーボード B850M Pro RS ... ￥26,990 2,699 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月20日火曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
           "direct_listing_display_offers": [
             {
               "url": "https://www.yodobashi.com/product/100000001008871801/",
@@ -3684,8 +3739,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:02+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T09:05:06+09:00",
+              "display_age_minutes": 2.2
             },
             {
               "url": "https://www.sofmap.com/product_detail.aspx?sku=101393495",
@@ -3697,8 +3752,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:07+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:13+09:00",
+              "display_age_minutes": 2.1
             },
             {
               "url": "https://www.pc4u.co.jp/view/item/000000092844",
@@ -3710,8 +3765,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:04+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T09:05:08+09:00",
+              "display_age_minutes": 2.2
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -3816,8 +3871,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:11+09:00",
-          "reference_age_minutes": 0.3333333333333333,
+          "retrieval_time": "2026-10-18T09:05:14+09:00",
+          "reference_age_minutes": 2.1166666666666667,
           "monitor_url": "https://kakaku.com/item/K0001671441/",
           "purchase_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
@@ -3862,8 +3917,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:11+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T09:05:14+09:00",
+              "display_age_minutes": 2.1
             },
             {
               "url": "https://www.yodobashi.com/product/100000001008924490/",
@@ -3872,24 +3927,24 @@
               "title": "CP-9020296-JP",
               "price_jpy": 22760,
               "stock_status": "unknown",
-              "stock_signal_fresh": true,
+              "stock_signal_fresh": false,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
               "retrieval_time": "2026-10-18T07:16:29+09:00",
-              "display_age_minutes": 46.0
+              "display_age_minutes": 110.9
             }
           ],
           "direct_listing_sellable_price_jpy": 14980,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:11+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:14+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
             "preorder_or_backorder": 0,
-            "unknown": 1,
+            "unknown": 0,
             "out_of_stock": 0,
-            "stale": 0
+            "stale": 1
           },
           "direct_listing_offer_count": 2,
           "direct_listing_sellable_offer_count": 1,
@@ -3959,8 +4014,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:12+09:00",
-          "reference_age_minutes": 0.31666666666666665,
+          "retrieval_time": "2026-10-18T09:05:20+09:00",
+          "reference_age_minutes": 2.0166666666666666,
           "monitor_url": "https://kakaku.com/item/J0000039064/",
           "purchase_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
@@ -4005,8 +4060,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:12+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T09:05:20+09:00",
+              "display_age_minutes": 2.0
             },
             {
               "url": "https://www.yodobashi.com/product/100000001007195271/",
@@ -4018,14 +4073,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:11+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T09:05:19+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": 13180,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:12+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:20+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -4103,8 +4158,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:16+09:00",
-          "reference_age_minutes": 0.25,
+          "retrieval_time": "2026-10-18T09:05:20+09:00",
+          "reference_age_minutes": 2.0166666666666666,
           "monitor_url": "https://kakaku.com/item/K0001432816/",
           "purchase_url": "https://www.yodobashi.com/product/100000001006975270/",
           "reference_source_url": "https://www.yodobashi.com/product/100000001006975270/",
@@ -4149,14 +4204,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:16+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:20+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": 19280,
           "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001006975270/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:16+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:20+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -4216,8 +4271,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:16+09:00",
-          "reference_age_minutes": 0.25,
+          "retrieval_time": "2026-10-18T09:05:20+09:00",
+          "reference_age_minutes": 2.0166666666666666,
           "monitor_url": "https://www.ark-pc.co.jp/i/11650134/",
           "purchase_url": "https://www.ark-pc.co.jp/i/11650134/",
           "reference_source_url": "https://www.ark-pc.co.jp/i/11650134/",
@@ -4262,14 +4317,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:16+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:20+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": 119990,
           "direct_listing_sellable_url": "https://www.ark-pc.co.jp/i/11650134/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:16+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:20+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -4339,8 +4394,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:19+09:00",
-          "reference_age_minutes": 0.2,
+          "retrieval_time": "2026-10-18T09:05:23+09:00",
+          "reference_age_minutes": 1.9666666666666666,
           "monitor_url": "https://www.yodobashi.com/product/100000001009402658/",
           "purchase_url": "https://www.yodobashi.com/product/100000001009402658/",
           "reference_source_url": "https://www.yodobashi.com/product/100000001009402658/",
@@ -4384,14 +4439,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:19+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:23+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": 29130,
           "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001009402658/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:19+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:23+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -4453,8 +4508,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:21+09:00",
-          "reference_age_minutes": 0.16666666666666666,
+          "retrieval_time": "2026-10-18T09:05:25+09:00",
+          "reference_age_minutes": 1.9333333333333333,
           "monitor_url": "https://www.yodobashi.com/product/100000001008996814/",
           "purchase_url": "https://www.yodobashi.com/product/100000001008996814/",
           "reference_source_url": "https://www.yodobashi.com/product/100000001008996814/",
@@ -4498,8 +4553,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:21+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:25+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/4573615590182/",
@@ -4511,23 +4566,36 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:38+09:00",
-              "display_age_minutes": 45.9
+              "retrieval_time": "2026-10-18T09:05:27+09:00",
+              "display_age_minutes": 1.9
+            },
+            {
+              "url": "https://www.ark-pc.co.jp/i/10401670/",
+              "retailer_domain": "ark-pc.co.jp",
+              "seller_name": null,
+              "title": "AX120-R-SE-WH-ARGB",
+              "price_jpy": 2970,
+              "stock_status": "preorder_or_backorder",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_structured",
+              "retrieval_time": "2026-10-18T09:05:28+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "direct_listing_sellable_price_jpy": 2580,
           "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001008996814/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:21+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:25+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
-            "preorder_or_backorder": 0,
+            "preorder_or_backorder": 1,
             "unknown": 1,
             "out_of_stock": 0,
             "stale": 0
           },
-          "direct_listing_offer_count": 2,
+          "direct_listing_offer_count": 3,
           "direct_listing_sellable_offer_count": 1,
           "direct_listing_validation_diagnostics": [
             {
@@ -4545,16 +4613,16 @@
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/4573615590182/",
-              "status": "unverified",
-              "reason_code": "fetch_error",
-              "page_name": null,
-              "price_source_mode": null,
-              "parsed_price_jpy": null,
+              "status": "verified",
+              "reason_code": "exact_identity_direct_price_and_pit_verified",
+              "page_name": "Assassin X 120 Refined SE　AX120-R-SE",
+              "price_source_mode": "direct_structured",
+              "parsed_price_jpy": 2350,
               "stock_status": "unknown",
-              "structured_stock_status": null,
-              "text_stock_status": null,
-              "error_type": "RemoteDisconnected",
-              "error_message": "Remote end closed connection without response"
+              "structured_stock_status": "unknown",
+              "text_stock_status": "out_of_stock",
+              "error_type": null,
+              "error_message": null
             }
           ],
           "direct_listing_display_is_estimate_eligible": false,
@@ -4594,8 +4662,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:01+09:00",
-          "reference_age_minutes": 0.5,
+          "retrieval_time": "2026-10-18T09:05:03+09:00",
+          "reference_age_minutes": 2.3,
           "monitor_url": "https://kakaku.com/item/K0001696164/",
           "purchase_url": "https://www.dospara.co.jp/SBR1892/IC634895.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR1892/IC634895.html",
@@ -4640,8 +4708,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:01+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T09:05:03+09:00",
+              "display_age_minutes": 2.3
             },
             {
               "url": "https://item.rakuten.co.jp/dospara-r/ic634895/?variantId=ic634895",
@@ -4654,13 +4722,13 @@
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
               "retrieval_time": "2026-10-18T05:58:14+09:00",
-              "display_age_minutes": 124.3
+              "display_age_minutes": 189.1
             }
           ],
           "direct_listing_sellable_price_jpy": 209800,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1892/IC634895.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:01+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:03+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -4887,18 +4955,18 @@
       "current_stock_confirmed_component_count": {
         "in_stock": 8,
         "low_stock": 0,
-        "preorder_or_backorder": 1,
-        "unknown": 4,
+        "preorder_or_backorder": 2,
+        "unknown": 3,
         "out_of_stock": 1,
-        "stale": 1
+        "stale": 2
       },
       "current_retailer_listing_offer_count_by_status": {
         "in_stock": 8,
         "low_stock": 0,
-        "preorder_or_backorder": 1,
-        "unknown": 5,
+        "preorder_or_backorder": 2,
+        "unknown": 4,
         "out_of_stock": 1,
-        "stale": 1
+        "stale": 2
       },
       "current_listing_subtotal_is_complete_build_price": false,
       "current_listing_subtotal_is_checkout_price": false,
@@ -4907,10 +4975,9 @@
       "market_reference_estimate_is_checkout_price": false,
       "market_reference_coverage_complete": false,
       "missing_or_untrusted_market_reference_ids": [
-        "cpu-ryzen7-9700x",
         "motherboard-asrock-b850m-pro-rs-wifi"
       ],
-      "market_reference_coverage_count": 7,
+      "market_reference_coverage_count": 8,
       "market_reference_required_count": 9,
       "target_gpu_required_reduction_pct_from_market_reference": 24.7,
       "compatibility_status": "REVIEW",
@@ -4998,17 +5065,17 @@
         "workload_fit_points_out_of_75": 67.2,
         "price_efficiency_points_out_of_15": 15.0,
         "compatibility_points_out_of_10": 8.8,
-        "market_reference_coverage_pct": 77.8,
-        "market_reference_component_count": 7,
+        "market_reference_coverage_pct": 88.9,
+        "market_reference_component_count": 8,
         "market_reference_required_count": 9,
         "direct_price_identity_pit_coverage_pct": 100.0,
-        "sellable_stock_coverage_pct": 77.8,
+        "sellable_stock_coverage_pct": 88.9,
         "verified_checkout_total_coverage_pct": 0.0,
         "direct_price_verified_component_count": 9,
-        "sellable_stock_verified_component_count": 7,
+        "sellable_stock_verified_component_count": 8,
         "verified_checkout_total_component_count": 0,
         "required_component_count": 9,
-        "purchase_evidence_completeness_score_out_of_100": 67.0,
+        "purchase_evidence_completeness_score_out_of_100": 69.8,
         "score_basis": "BF目標総額ベースの構成ルーブリック。GPUゲーム点はTom's Hardwareの1440p Ultraラスタライズ階層を25点満点に正規化した代理指標で、対象ゲームの実測FPSではない。",
         "gaming_benchmark_reference": {
           "source_url": "https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html",
@@ -5046,7 +5113,7 @@
           "market_reference_price_jpy": null,
           "display_reference_price_jpy": null,
           "sellable_listing_price_jpy": null,
-          "stock_status": "out_of_stock",
+          "stock_status": "unknown",
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "direct_listing_stock_counts": {
@@ -5060,7 +5127,7 @@
           "direct_listing_offers": [
             {
               "url": "https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom",
-              "retailer_domain": "tsukumo.co.jp",
+              "retailer_domain": "shop.tsukumo.co.jp",
               "seller_name": null,
               "title": "PNY GeForce RTX 5070 12GB OC SLIM　VCG507012DFSXPB1-O",
               "price_jpy": 190800,
@@ -5068,8 +5135,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:17+09:00",
-              "display_age_minutes": 46.2
+              "retrieval_time": "2026-10-18T09:05:03+09:00",
+              "display_age_minutes": 2.3
             },
             {
               "url": "https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845",
@@ -5081,8 +5148,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:01:58+09:00",
-              "display_age_minutes": 0.6
+              "retrieval_time": "2026-10-18T09:05:01+09:00",
+              "display_age_minutes": 2.3
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001798041/"
@@ -5126,7 +5193,7 @@
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
               "retrieval_time": "2026-10-18T05:03:32+09:00",
-              "display_age_minutes": 179.0
+              "display_age_minutes": 243.8
             }
           ],
           "purchase_url": "https://shop.tsukumo.co.jp/goods/4711377308229/"
@@ -5175,8 +5242,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:07+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:12+09:00",
+              "display_age_minutes": 2.1
             },
             {
               "url": "https://www.pc4u.co.jp/view/item/000000090356?category_page_id=ct824",
@@ -5188,8 +5255,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:07+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:10+09:00",
+              "display_age_minutes": 2.2
             },
             {
               "url": "https://www.dospara.co.jp/SBR1534/IC512079.html",
@@ -5201,8 +5268,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:06+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:09+09:00",
+              "display_age_minutes": 2.2
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/0649528943019/",
@@ -5214,8 +5281,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:20+09:00",
-              "display_age_minutes": 46.2
+              "retrieval_time": "2026-10-18T09:05:08+09:00",
+              "display_age_minutes": 2.2
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001633533/"
@@ -5260,8 +5327,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:04+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T09:05:06+09:00",
+              "display_age_minutes": 2.2
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001610896/"
@@ -5306,8 +5373,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:16+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:20+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "purchase_url": "https://www.ark-pc.co.jp/i/11650134/"
@@ -5364,31 +5431,18 @@
           "market_reference_price_jpy": null,
           "display_reference_price_jpy": null,
           "sellable_listing_price_jpy": null,
-          "stock_status": "unknown",
+          "stock_status": "out_of_stock",
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "direct_listing_stock_counts": {
             "in_stock": 0,
             "low_stock": 0,
             "preorder_or_backorder": 0,
-            "unknown": 1,
+            "unknown": 0,
             "out_of_stock": 3,
-            "stale": 0
+            "stale": 1
           },
           "direct_listing_offers": [
-            {
-              "url": "https://www.yodobashi.com/product/100000001007390887/",
-              "retailer_domain": "yodobashi.com",
-              "seller_name": null,
-              "title": "CT1000P3PSSD8JP",
-              "price_jpy": 10210,
-              "stock_status": "unknown",
-              "stock_signal_fresh": true,
-              "stock_signal_max_age_minutes": 60,
-              "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:11+09:00",
-              "display_age_minutes": 0.3
-            },
             {
               "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
               "retailer_domain": "dospara.co.jp",
@@ -5399,8 +5453,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:07+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:13+09:00",
+              "display_age_minutes": 2.1
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/0649528918970/",
@@ -5412,8 +5466,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:22+09:00",
-              "display_age_minutes": 46.1
+              "retrieval_time": "2026-10-18T09:05:11+09:00",
+              "display_age_minutes": 2.2
             },
             {
               "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -5425,8 +5479,21 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:08+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:15+09:00",
+              "display_age_minutes": 2.1
+            },
+            {
+              "url": "https://www.yodobashi.com/product/100000001007390887/",
+              "retailer_domain": "yodobashi.com",
+              "seller_name": null,
+              "title": "CT1000P3PSSD8JP",
+              "price_jpy": 10210,
+              "stock_status": "unknown",
+              "stock_signal_fresh": false,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T08:02:11+09:00",
+              "display_age_minutes": 65.2
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001466997/"
@@ -5469,8 +5536,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:19+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:23+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "purchase_url": "https://www.yodobashi.com/product/100000001009402658/"
@@ -5501,25 +5568,12 @@
           "direct_listing_stock_counts": {
             "in_stock": 0,
             "low_stock": 0,
-            "preorder_or_backorder": 1,
+            "preorder_or_backorder": 0,
             "unknown": 0,
             "out_of_stock": 1,
-            "stale": 1
+            "stale": 2
           },
           "direct_listing_offers": [
-            {
-              "url": "https://www.yodobashi.com/product/100000001009948470/",
-              "retailer_domain": "yodobashi.com",
-              "seller_name": null,
-              "title": "Peerless Assassin 120 SE V3",
-              "price_jpy": 5470,
-              "stock_status": "preorder_or_backorder",
-              "stock_signal_fresh": true,
-              "stock_signal_max_age_minutes": 60,
-              "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T07:16:31+09:00",
-              "display_age_minutes": 46.0
-            },
             {
               "url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
               "retailer_domain": "dospara.co.jp",
@@ -5530,8 +5584,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:12+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T09:05:19+09:00",
+              "display_age_minutes": 2.0
             },
             {
               "url": "https://www.ark-pc.co.jp/i/10401914/",
@@ -5544,7 +5598,20 @@
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
               "retrieval_time": "2026-10-18T03:35:03+09:00",
-              "display_age_minutes": 267.5
+              "display_age_minutes": 332.3
+            },
+            {
+              "url": "https://www.yodobashi.com/product/100000001009948470/",
+              "retailer_domain": "yodobashi.com",
+              "seller_name": null,
+              "title": "Peerless Assassin 120 SE V3",
+              "price_jpy": 5470,
+              "stock_status": "preorder_or_backorder",
+              "stock_signal_fresh": false,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T07:16:31+09:00",
+              "display_age_minutes": 110.8
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001789043/"
@@ -5571,7 +5638,7 @@
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
-            "preorder_or_backorder": 0,
+            "preorder_or_backorder": 1,
             "unknown": 1,
             "out_of_stock": 0,
             "stale": 0
@@ -5587,8 +5654,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:21+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:25+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/4573615590182/",
@@ -5600,8 +5667,21 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:38+09:00",
-              "display_age_minutes": 45.9
+              "retrieval_time": "2026-10-18T09:05:27+09:00",
+              "display_age_minutes": 1.9
+            },
+            {
+              "url": "https://www.ark-pc.co.jp/i/10401670/",
+              "retailer_domain": "ark-pc.co.jp",
+              "seller_name": null,
+              "title": "AX120-R-SE-WH-ARGB",
+              "price_jpy": 2970,
+              "stock_status": "preorder_or_backorder",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_structured",
+              "retrieval_time": "2026-10-18T09:05:28+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "purchase_url": "https://www.yodobashi.com/product/100000001008996814/"
@@ -5615,49 +5695,50 @@
           "model_code": "100-100001404WOF",
           "role": "required_fixed_part",
           "target_price_jpy": 45000,
-          "market_reference_price_jpy": null,
-          "display_reference_price_jpy": null,
-          "price_status": "missing",
-          "trusted_for_market_estimate": false,
-          "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T08:01:53+09:00",
-          "reference_age_minutes": 0.6333333333333333,
+          "market_reference_price_jpy": 47800,
+          "display_reference_price_jpy": 47800,
+          "price_status": "verified_retailer_listing_reference",
+          "trusted_for_market_estimate": true,
+          "source_role": "direct_retailer_listing_reference",
+          "retrieval_time": "2026-10-18T09:05:01+09:00",
+          "reference_age_minutes": 2.3333333333333335,
           "monitor_url": "https://kakaku.com/item/K0001630332/",
-          "purchase_url": "https://kakaku.com/item/K0001630332/",
-          "reference_source_url": null,
-          "reference_source_label": null,
+          "purchase_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
+          "reference_source_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
+          "reference_source_label": "販売店ページ直接取得・掲載価格（決済未確認）",
           "search_snippet_reference_url": null,
           "search_snippet_reference_title": null,
-          "direct_listing_display_price_jpy": 47800,
-          "direct_listing_display_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
-          "direct_listing_display_title": "Ryzen 7 9700X　100-100001404WOF　【国内正規品】",
-          "direct_listing_display_identity_anchor": "100-100001404WOF",
-          "direct_listing_display_stock_status": "in_stock",
-          "direct_listing_display_stock_label": "在庫あり（直接掲載・購入ゲート別）",
-          "direct_listing_display_source_mode": "direct_structured",
-          "direct_listing_display_observed_at": "2026-10-18T07:16:14+09:00",
+          "direct_listing_display_price_jpy": null,
+          "direct_listing_display_url": null,
+          "direct_listing_display_title": null,
+          "direct_listing_display_identity_anchor": null,
+          "direct_listing_display_stock_status": null,
+          "direct_listing_display_stock_label": null,
+          "direct_listing_display_source_mode": null,
+          "direct_listing_display_observed_at": null,
           "early_buy_review": {
             "item_id": "cpu-ryzen7-9700x",
             "early_buy_threshold_jpy": 36000,
-            "observed_price_jpy": 53110,
+            "observed_price_jpy": 47800,
             "estimated_checkout_total_jpy": null,
             "verified_checkout_total_jpy": null,
             "checkout_total_verified": false,
             "price_verified": true,
             "identity_verified": true,
-            "stock_status": "unknown",
+            "stock_status": "in_stock",
             "pit_valid": true,
-            "status": "STOCK_NOT_VERIFIED",
-            "label_ja": "在庫未確認",
+            "status": "WAIT_FOR_EARLY_BUY_THRESHOLD",
+            "label_ja": "前倒し購入価格に未到達",
             "purchase_authorized": false,
-            "next_step": "購入可能な在庫を直接確認"
+            "next_step": "前倒し検討価格まであと11,800円。ブラックフライデーを含め監視継続",
+            "price_gap_to_threshold_jpy": 11800
           },
-          "direct_listing_display_age_minutes": 46.3,
+          "direct_listing_display_age_minutes": null,
           "direct_listing_display_price_context": null,
           "direct_listing_display_offers": [
             {
               "url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
-              "retailer_domain": "tsukumo.co.jp",
+              "retailer_domain": "shop.tsukumo.co.jp",
               "seller_name": null,
               "title": "Ryzen 7 9700X　100-100001404WOF　【国内正規品】",
               "price_jpy": 47800,
@@ -5665,8 +5746,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:14+09:00",
-              "display_age_minutes": 46.3
+              "retrieval_time": "2026-10-18T09:05:01+09:00",
+              "display_age_minutes": 2.3
             },
             {
               "url": "https://www.yodobashi.com/product/100000001008661707/",
@@ -5678,14 +5759,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:01:55+09:00",
-              "display_age_minutes": 0.6
+              "retrieval_time": "2026-10-18T09:04:59+09:00",
+              "display_age_minutes": 2.4
             }
           ],
           "direct_listing_sellable_price_jpy": 47800,
           "direct_listing_sellable_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T07:16:14+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:01+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -5712,16 +5793,16 @@
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
-              "status": "unverified",
-              "reason_code": "fetch_error",
-              "page_name": null,
-              "price_source_mode": null,
-              "parsed_price_jpy": null,
-              "stock_status": "unknown",
-              "structured_stock_status": null,
-              "text_stock_status": null,
-              "error_type": "RemoteDisconnected",
-              "error_message": "Remote end closed connection without response"
+              "status": "verified",
+              "reason_code": "exact_identity_direct_price_and_pit_verified",
+              "page_name": "Ryzen 7 9700X　100-100001404WOF　【国内正規品】",
+              "price_source_mode": "direct_structured",
+              "parsed_price_jpy": 47800,
+              "stock_status": "in_stock",
+              "structured_stock_status": "in_stock",
+              "text_stock_status": "out_of_stock",
+              "error_type": null,
+              "error_message": null
             }
           ],
           "direct_listing_display_is_estimate_eligible": false,
@@ -5761,8 +5842,8 @@
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T08:02:01+09:00",
-          "reference_age_minutes": 0.5,
+          "retrieval_time": "2026-10-18T09:05:04+09:00",
+          "reference_age_minutes": 2.283333333333333,
           "monitor_url": "https://kakaku.com/item/K0001669878/",
           "purchase_url": "https://kakaku.com/item/K0001669878/",
           "reference_source_url": null,
@@ -5776,7 +5857,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-18T08:02:02+09:00",
+          "direct_listing_display_observed_at": "2026-10-18T09:05:06+09:00",
           "early_buy_review": {
             "item_id": "motherboard-asrock-b850m-pro-rs-wifi",
             "early_buy_threshold_jpy": 18000,
@@ -5793,8 +5874,8 @@
             "purchase_authorized": false,
             "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.5,
-          "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる アスロック ASRock AMD B850チップセット搭載 Micro-ATX マザーボード B850M Pro RS ... ￥26,990 2,699 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月19日月曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
+          "direct_listing_display_age_minutes": 2.2,
+          "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる アスロック ASRock AMD B850チップセット搭載 Micro-ATX マザーボード B850M Pro RS ... ￥26,990 2,699 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月20日火曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
           "direct_listing_display_offers": [
             {
               "url": "https://www.yodobashi.com/product/100000001008871801/",
@@ -5806,8 +5887,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:02+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T09:05:06+09:00",
+              "display_age_minutes": 2.2
             },
             {
               "url": "https://www.sofmap.com/product_detail.aspx?sku=101393495",
@@ -5819,8 +5900,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:07+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:13+09:00",
+              "display_age_minutes": 2.1
             },
             {
               "url": "https://www.pc4u.co.jp/view/item/000000092844",
@@ -5832,8 +5913,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:04+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T09:05:08+09:00",
+              "display_age_minutes": 2.2
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -5938,8 +6019,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:11+09:00",
-          "reference_age_minutes": 0.3333333333333333,
+          "retrieval_time": "2026-10-18T09:05:14+09:00",
+          "reference_age_minutes": 2.1166666666666667,
           "monitor_url": "https://kakaku.com/item/K0001671441/",
           "purchase_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
@@ -5984,8 +6065,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:11+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T09:05:14+09:00",
+              "display_age_minutes": 2.1
             },
             {
               "url": "https://www.yodobashi.com/product/100000001008924490/",
@@ -5994,24 +6075,24 @@
               "title": "CP-9020296-JP",
               "price_jpy": 22760,
               "stock_status": "unknown",
-              "stock_signal_fresh": true,
+              "stock_signal_fresh": false,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
               "retrieval_time": "2026-10-18T07:16:29+09:00",
-              "display_age_minutes": 46.0
+              "display_age_minutes": 110.9
             }
           ],
           "direct_listing_sellable_price_jpy": 14980,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:11+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:14+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
             "preorder_or_backorder": 0,
-            "unknown": 1,
+            "unknown": 0,
             "out_of_stock": 0,
-            "stale": 0
+            "stale": 1
           },
           "direct_listing_offer_count": 2,
           "direct_listing_sellable_offer_count": 1,
@@ -6081,8 +6162,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:12+09:00",
-          "reference_age_minutes": 0.31666666666666665,
+          "retrieval_time": "2026-10-18T09:05:20+09:00",
+          "reference_age_minutes": 2.0166666666666666,
           "monitor_url": "https://kakaku.com/item/J0000039064/",
           "purchase_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
@@ -6127,8 +6208,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:12+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T09:05:20+09:00",
+              "display_age_minutes": 2.0
             },
             {
               "url": "https://www.yodobashi.com/product/100000001007195271/",
@@ -6140,14 +6221,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:11+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T09:05:19+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": 13180,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:12+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:20+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -6225,8 +6306,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:16+09:00",
-          "reference_age_minutes": 0.25,
+          "retrieval_time": "2026-10-18T09:05:20+09:00",
+          "reference_age_minutes": 2.0166666666666666,
           "monitor_url": "https://kakaku.com/item/K0001432816/",
           "purchase_url": "https://www.yodobashi.com/product/100000001006975270/",
           "reference_source_url": "https://www.yodobashi.com/product/100000001006975270/",
@@ -6271,14 +6352,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:16+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:20+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": 19280,
           "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001006975270/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:16+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:20+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -6338,8 +6419,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:16+09:00",
-          "reference_age_minutes": 0.25,
+          "retrieval_time": "2026-10-18T09:05:20+09:00",
+          "reference_age_minutes": 2.0166666666666666,
           "monitor_url": "https://www.ark-pc.co.jp/i/11650134/",
           "purchase_url": "https://www.ark-pc.co.jp/i/11650134/",
           "reference_source_url": "https://www.ark-pc.co.jp/i/11650134/",
@@ -6384,14 +6465,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:16+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:20+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": 119990,
           "direct_listing_sellable_url": "https://www.ark-pc.co.jp/i/11650134/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:16+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:20+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -6461,8 +6542,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:19+09:00",
-          "reference_age_minutes": 0.2,
+          "retrieval_time": "2026-10-18T09:05:23+09:00",
+          "reference_age_minutes": 1.9666666666666666,
           "monitor_url": "https://www.yodobashi.com/product/100000001009402658/",
           "purchase_url": "https://www.yodobashi.com/product/100000001009402658/",
           "reference_source_url": "https://www.yodobashi.com/product/100000001009402658/",
@@ -6506,14 +6587,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:19+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:23+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": 29130,
           "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001009402658/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:19+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:23+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -6575,8 +6656,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:21+09:00",
-          "reference_age_minutes": 0.16666666666666666,
+          "retrieval_time": "2026-10-18T09:05:25+09:00",
+          "reference_age_minutes": 1.9333333333333333,
           "monitor_url": "https://www.yodobashi.com/product/100000001008996814/",
           "purchase_url": "https://www.yodobashi.com/product/100000001008996814/",
           "reference_source_url": "https://www.yodobashi.com/product/100000001008996814/",
@@ -6620,8 +6701,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:21+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:25+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/4573615590182/",
@@ -6633,23 +6714,36 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:38+09:00",
-              "display_age_minutes": 45.9
+              "retrieval_time": "2026-10-18T09:05:27+09:00",
+              "display_age_minutes": 1.9
+            },
+            {
+              "url": "https://www.ark-pc.co.jp/i/10401670/",
+              "retailer_domain": "ark-pc.co.jp",
+              "seller_name": null,
+              "title": "AX120-R-SE-WH-ARGB",
+              "price_jpy": 2970,
+              "stock_status": "preorder_or_backorder",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_structured",
+              "retrieval_time": "2026-10-18T09:05:28+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "direct_listing_sellable_price_jpy": 2580,
           "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001008996814/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:21+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:25+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
-            "preorder_or_backorder": 0,
+            "preorder_or_backorder": 1,
             "unknown": 1,
             "out_of_stock": 0,
             "stale": 0
           },
-          "direct_listing_offer_count": 2,
+          "direct_listing_offer_count": 3,
           "direct_listing_sellable_offer_count": 1,
           "direct_listing_validation_diagnostics": [
             {
@@ -6667,16 +6761,16 @@
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/4573615590182/",
-              "status": "unverified",
-              "reason_code": "fetch_error",
-              "page_name": null,
-              "price_source_mode": null,
-              "parsed_price_jpy": null,
+              "status": "verified",
+              "reason_code": "exact_identity_direct_price_and_pit_verified",
+              "page_name": "Assassin X 120 Refined SE　AX120-R-SE",
+              "price_source_mode": "direct_structured",
+              "parsed_price_jpy": 2350,
               "stock_status": "unknown",
-              "structured_stock_status": null,
-              "text_stock_status": null,
-              "error_type": "RemoteDisconnected",
-              "error_message": "Remote end closed connection without response"
+              "structured_stock_status": "unknown",
+              "text_stock_status": "out_of_stock",
+              "error_type": null,
+              "error_message": null
             }
           ],
           "direct_listing_display_is_estimate_eligible": false,
@@ -6716,8 +6810,8 @@
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T08:01:53+09:00",
-          "reference_age_minutes": 0.6333333333333333,
+          "retrieval_time": "2026-10-18T09:04:56+09:00",
+          "reference_age_minutes": 2.4166666666666665,
           "monitor_url": "https://kakaku.com/item/K0001798041/",
           "purchase_url": "https://kakaku.com/item/K0001798041/",
           "reference_source_url": null,
@@ -6731,7 +6825,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_structured",
-          "direct_listing_display_observed_at": "2026-10-18T07:16:17+09:00",
+          "direct_listing_display_observed_at": "2026-10-18T09:05:03+09:00",
           "early_buy_review": {
             "item_id": "gpu-rtx5070-12gb",
             "early_buy_threshold_jpy": 119000,
@@ -6741,19 +6835,19 @@
             "checkout_total_verified": false,
             "price_verified": true,
             "identity_verified": true,
-            "stock_status": "out_of_stock",
+            "stock_status": "unknown",
             "pit_valid": true,
-            "status": "UNAVAILABLE",
-            "label_ja": "在庫切れ",
+            "status": "STOCK_NOT_VERIFIED",
+            "label_ja": "在庫未確認",
             "purchase_authorized": false,
-            "next_step": "同一型番の別販売店・再入荷を確認"
+            "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 46.2,
+          "direct_listing_display_age_minutes": 2.3,
           "direct_listing_display_price_context": null,
           "direct_listing_display_offers": [
             {
               "url": "https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom",
-              "retailer_domain": "tsukumo.co.jp",
+              "retailer_domain": "shop.tsukumo.co.jp",
               "seller_name": null,
               "title": "PNY GeForce RTX 5070 12GB OC SLIM　VCG507012DFSXPB1-O",
               "price_jpy": 190800,
@@ -6761,8 +6855,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:17+09:00",
-              "display_age_minutes": 46.2
+              "retrieval_time": "2026-10-18T09:05:03+09:00",
+              "display_age_minutes": 2.3
             },
             {
               "url": "https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845",
@@ -6774,8 +6868,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:01:58+09:00",
-              "display_age_minutes": 0.6
+              "retrieval_time": "2026-10-18T09:05:01+09:00",
+              "display_age_minutes": 2.3
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -6821,16 +6915,16 @@
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom",
-              "status": "unverified",
-              "reason_code": "fetch_error",
-              "page_name": null,
-              "price_source_mode": null,
-              "parsed_price_jpy": null,
+              "status": "verified",
+              "reason_code": "exact_identity_direct_price_and_pit_verified",
+              "page_name": "PNY GeForce RTX 5070 12GB OC SLIM　VCG507012DFSXPB1-O",
+              "price_source_mode": "direct_structured",
+              "parsed_price_jpy": 190800,
               "stock_status": "unknown",
-              "structured_stock_status": null,
-              "text_stock_status": null,
-              "error_type": "RemoteDisconnected",
-              "error_message": "Remote end closed connection without response"
+              "structured_stock_status": "unknown",
+              "text_stock_status": "out_of_stock",
+              "error_type": null,
+              "error_message": null
             }
           ],
           "direct_listing_display_is_estimate_eligible": false,
@@ -7035,18 +7129,18 @@
       "current_stock_confirmed_component_count": {
         "in_stock": 7,
         "low_stock": 0,
-        "preorder_or_backorder": 1,
-        "unknown": 5,
+        "preorder_or_backorder": 2,
+        "unknown": 4,
         "out_of_stock": 2,
-        "stale": 0
+        "stale": 1
       },
       "current_retailer_listing_offer_count_by_status": {
         "in_stock": 7,
         "low_stock": 0,
-        "preorder_or_backorder": 1,
-        "unknown": 6,
+        "preorder_or_backorder": 2,
+        "unknown": 5,
         "out_of_stock": 2,
-        "stale": 0
+        "stale": 1
       },
       "current_listing_subtotal_is_complete_build_price": false,
       "current_listing_subtotal_is_checkout_price": false,
@@ -7055,11 +7149,10 @@
       "market_reference_estimate_is_checkout_price": false,
       "market_reference_coverage_complete": false,
       "missing_or_untrusted_market_reference_ids": [
-        "cpu-ryzen7-9700x",
         "gpu-rtx5070-12gb",
         "motherboard-asrock-b850m-pro-rs-wifi"
       ],
-      "market_reference_coverage_count": 6,
+      "market_reference_coverage_count": 7,
       "market_reference_required_count": 9,
       "target_gpu_required_reduction_pct_from_market_reference": null,
       "compatibility_status": "REVIEW",
@@ -7147,17 +7240,17 @@
         "workload_fit_points_out_of_75": 59.5,
         "price_efficiency_points_out_of_15": 13.9,
         "compatibility_points_out_of_10": 9.2,
-        "market_reference_coverage_pct": 66.7,
-        "market_reference_component_count": 6,
+        "market_reference_coverage_pct": 77.8,
+        "market_reference_component_count": 7,
         "market_reference_required_count": 9,
         "direct_price_identity_pit_coverage_pct": 100.0,
-        "sellable_stock_coverage_pct": 66.7,
+        "sellable_stock_coverage_pct": 77.8,
         "verified_checkout_total_coverage_pct": 0.0,
         "direct_price_verified_component_count": 9,
-        "sellable_stock_verified_component_count": 6,
+        "sellable_stock_verified_component_count": 7,
         "verified_checkout_total_component_count": 0,
         "required_component_count": 9,
-        "purchase_evidence_completeness_score_out_of_100": 65.1,
+        "purchase_evidence_completeness_score_out_of_100": 67.8,
         "score_basis": "BF目標総額ベースの構成ルーブリック。GPUゲーム点はTom's Hardwareの1440p Ultraラスタライズ階層を25点満点に正規化した代理指標で、対象ゲームの実測FPSではない。",
         "gaming_benchmark_reference": {
           "source_url": "https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html",
@@ -7217,8 +7310,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:01:59+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T09:05:03+09:00",
+              "display_age_minutes": 2.3
             },
             {
               "url": "https://item.rakuten.co.jp/dospara-r/ic625088/?variantId=ic625088",
@@ -7231,7 +7324,7 @@
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
               "retrieval_time": "2026-10-18T06:03:11+09:00",
-              "display_age_minutes": 119.3
+              "display_age_minutes": 184.2
             }
           ],
           "purchase_url": "https://www.dospara.co.jp/SBR1892/IC625088.html"
@@ -7280,8 +7373,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:07+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:12+09:00",
+              "display_age_minutes": 2.1
             },
             {
               "url": "https://www.pc4u.co.jp/view/item/000000090356?category_page_id=ct824",
@@ -7293,8 +7386,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:07+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:10+09:00",
+              "display_age_minutes": 2.2
             },
             {
               "url": "https://www.dospara.co.jp/SBR1534/IC512079.html",
@@ -7306,8 +7399,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:06+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:09+09:00",
+              "display_age_minutes": 2.2
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/0649528943019/",
@@ -7319,8 +7412,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:20+09:00",
-              "display_age_minutes": 46.2
+              "retrieval_time": "2026-10-18T09:05:08+09:00",
+              "display_age_minutes": 2.2
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001633533/"
@@ -7365,8 +7458,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:04+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T09:05:06+09:00",
+              "display_age_minutes": 2.2
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001610896/"
@@ -7411,8 +7504,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:16+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:20+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "purchase_url": "https://www.ark-pc.co.jp/i/11650134/"
@@ -7469,31 +7562,18 @@
           "market_reference_price_jpy": null,
           "display_reference_price_jpy": null,
           "sellable_listing_price_jpy": null,
-          "stock_status": "unknown",
+          "stock_status": "out_of_stock",
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "direct_listing_stock_counts": {
             "in_stock": 0,
             "low_stock": 0,
             "preorder_or_backorder": 0,
-            "unknown": 1,
+            "unknown": 0,
             "out_of_stock": 3,
-            "stale": 0
+            "stale": 1
           },
           "direct_listing_offers": [
-            {
-              "url": "https://www.yodobashi.com/product/100000001007390887/",
-              "retailer_domain": "yodobashi.com",
-              "seller_name": null,
-              "title": "CT1000P3PSSD8JP",
-              "price_jpy": 10210,
-              "stock_status": "unknown",
-              "stock_signal_fresh": true,
-              "stock_signal_max_age_minutes": 60,
-              "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:11+09:00",
-              "display_age_minutes": 0.3
-            },
             {
               "url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
               "retailer_domain": "dospara.co.jp",
@@ -7504,8 +7584,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:07+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:13+09:00",
+              "display_age_minutes": 2.1
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/0649528918970/",
@@ -7517,8 +7597,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:22+09:00",
-              "display_age_minutes": 46.1
+              "retrieval_time": "2026-10-18T09:05:11+09:00",
+              "display_age_minutes": 2.2
             },
             {
               "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
@@ -7530,8 +7610,21 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:08+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:15+09:00",
+              "display_age_minutes": 2.1
+            },
+            {
+              "url": "https://www.yodobashi.com/product/100000001007390887/",
+              "retailer_domain": "yodobashi.com",
+              "seller_name": null,
+              "title": "CT1000P3PSSD8JP",
+              "price_jpy": 10210,
+              "stock_status": "unknown",
+              "stock_signal_fresh": false,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T08:02:11+09:00",
+              "display_age_minutes": 65.2
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001466997/"
@@ -7574,8 +7667,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:19+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:23+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "purchase_url": "https://www.yodobashi.com/product/100000001009402658/"
@@ -7606,25 +7699,12 @@
           "direct_listing_stock_counts": {
             "in_stock": 0,
             "low_stock": 0,
-            "preorder_or_backorder": 1,
+            "preorder_or_backorder": 0,
             "unknown": 0,
             "out_of_stock": 1,
-            "stale": 1
+            "stale": 2
           },
           "direct_listing_offers": [
-            {
-              "url": "https://www.yodobashi.com/product/100000001009948470/",
-              "retailer_domain": "yodobashi.com",
-              "seller_name": null,
-              "title": "Peerless Assassin 120 SE V3",
-              "price_jpy": 5470,
-              "stock_status": "preorder_or_backorder",
-              "stock_signal_fresh": true,
-              "stock_signal_max_age_minutes": 60,
-              "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T07:16:31+09:00",
-              "display_age_minutes": 46.0
-            },
             {
               "url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
               "retailer_domain": "dospara.co.jp",
@@ -7635,8 +7715,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:12+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T09:05:19+09:00",
+              "display_age_minutes": 2.0
             },
             {
               "url": "https://www.ark-pc.co.jp/i/10401914/",
@@ -7649,7 +7729,20 @@
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
               "retrieval_time": "2026-10-18T03:35:03+09:00",
-              "display_age_minutes": 267.5
+              "display_age_minutes": 332.3
+            },
+            {
+              "url": "https://www.yodobashi.com/product/100000001009948470/",
+              "retailer_domain": "yodobashi.com",
+              "seller_name": null,
+              "title": "Peerless Assassin 120 SE V3",
+              "price_jpy": 5470,
+              "stock_status": "preorder_or_backorder",
+              "stock_signal_fresh": false,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_text",
+              "retrieval_time": "2026-10-18T07:16:31+09:00",
+              "display_age_minutes": 110.8
             }
           ],
           "purchase_url": "https://kakaku.com/item/K0001789043/"
@@ -7676,7 +7769,7 @@
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
-            "preorder_or_backorder": 0,
+            "preorder_or_backorder": 1,
             "unknown": 1,
             "out_of_stock": 0,
             "stale": 0
@@ -7692,8 +7785,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:21+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:25+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/4573615590182/",
@@ -7705,8 +7798,21 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:38+09:00",
-              "display_age_minutes": 45.9
+              "retrieval_time": "2026-10-18T09:05:27+09:00",
+              "display_age_minutes": 1.9
+            },
+            {
+              "url": "https://www.ark-pc.co.jp/i/10401670/",
+              "retailer_domain": "ark-pc.co.jp",
+              "seller_name": null,
+              "title": "AX120-R-SE-WH-ARGB",
+              "price_jpy": 2970,
+              "stock_status": "preorder_or_backorder",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_structured",
+              "retrieval_time": "2026-10-18T09:05:28+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "purchase_url": "https://www.yodobashi.com/product/100000001008996814/"
@@ -7720,49 +7826,50 @@
           "model_code": "100-100001404WOF",
           "role": "required_fixed_part",
           "target_price_jpy": 45000,
-          "market_reference_price_jpy": null,
-          "display_reference_price_jpy": null,
-          "price_status": "missing",
-          "trusted_for_market_estimate": false,
-          "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T08:01:53+09:00",
-          "reference_age_minutes": 0.6333333333333333,
+          "market_reference_price_jpy": 47800,
+          "display_reference_price_jpy": 47800,
+          "price_status": "verified_retailer_listing_reference",
+          "trusted_for_market_estimate": true,
+          "source_role": "direct_retailer_listing_reference",
+          "retrieval_time": "2026-10-18T09:05:01+09:00",
+          "reference_age_minutes": 2.3333333333333335,
           "monitor_url": "https://kakaku.com/item/K0001630332/",
-          "purchase_url": "https://kakaku.com/item/K0001630332/",
-          "reference_source_url": null,
-          "reference_source_label": null,
+          "purchase_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
+          "reference_source_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
+          "reference_source_label": "販売店ページ直接取得・掲載価格（決済未確認）",
           "search_snippet_reference_url": null,
           "search_snippet_reference_title": null,
-          "direct_listing_display_price_jpy": 47800,
-          "direct_listing_display_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
-          "direct_listing_display_title": "Ryzen 7 9700X　100-100001404WOF　【国内正規品】",
-          "direct_listing_display_identity_anchor": "100-100001404WOF",
-          "direct_listing_display_stock_status": "in_stock",
-          "direct_listing_display_stock_label": "在庫あり（直接掲載・購入ゲート別）",
-          "direct_listing_display_source_mode": "direct_structured",
-          "direct_listing_display_observed_at": "2026-10-18T07:16:14+09:00",
+          "direct_listing_display_price_jpy": null,
+          "direct_listing_display_url": null,
+          "direct_listing_display_title": null,
+          "direct_listing_display_identity_anchor": null,
+          "direct_listing_display_stock_status": null,
+          "direct_listing_display_stock_label": null,
+          "direct_listing_display_source_mode": null,
+          "direct_listing_display_observed_at": null,
           "early_buy_review": {
             "item_id": "cpu-ryzen7-9700x",
             "early_buy_threshold_jpy": 36000,
-            "observed_price_jpy": 53110,
+            "observed_price_jpy": 47800,
             "estimated_checkout_total_jpy": null,
             "verified_checkout_total_jpy": null,
             "checkout_total_verified": false,
             "price_verified": true,
             "identity_verified": true,
-            "stock_status": "unknown",
+            "stock_status": "in_stock",
             "pit_valid": true,
-            "status": "STOCK_NOT_VERIFIED",
-            "label_ja": "在庫未確認",
+            "status": "WAIT_FOR_EARLY_BUY_THRESHOLD",
+            "label_ja": "前倒し購入価格に未到達",
             "purchase_authorized": false,
-            "next_step": "購入可能な在庫を直接確認"
+            "next_step": "前倒し検討価格まであと11,800円。ブラックフライデーを含め監視継続",
+            "price_gap_to_threshold_jpy": 11800
           },
-          "direct_listing_display_age_minutes": 46.3,
+          "direct_listing_display_age_minutes": null,
           "direct_listing_display_price_context": null,
           "direct_listing_display_offers": [
             {
               "url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
-              "retailer_domain": "tsukumo.co.jp",
+              "retailer_domain": "shop.tsukumo.co.jp",
               "seller_name": null,
               "title": "Ryzen 7 9700X　100-100001404WOF　【国内正規品】",
               "price_jpy": 47800,
@@ -7770,8 +7877,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:14+09:00",
-              "display_age_minutes": 46.3
+              "retrieval_time": "2026-10-18T09:05:01+09:00",
+              "display_age_minutes": 2.3
             },
             {
               "url": "https://www.yodobashi.com/product/100000001008661707/",
@@ -7783,14 +7890,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:01:55+09:00",
-              "display_age_minutes": 0.6
+              "retrieval_time": "2026-10-18T09:04:59+09:00",
+              "display_age_minutes": 2.4
             }
           ],
           "direct_listing_sellable_price_jpy": 47800,
           "direct_listing_sellable_url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T07:16:14+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:01+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -7817,16 +7924,16 @@
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/0730143315593/",
-              "status": "unverified",
-              "reason_code": "fetch_error",
-              "page_name": null,
-              "price_source_mode": null,
-              "parsed_price_jpy": null,
-              "stock_status": "unknown",
-              "structured_stock_status": null,
-              "text_stock_status": null,
-              "error_type": "RemoteDisconnected",
-              "error_message": "Remote end closed connection without response"
+              "status": "verified",
+              "reason_code": "exact_identity_direct_price_and_pit_verified",
+              "page_name": "Ryzen 7 9700X　100-100001404WOF　【国内正規品】",
+              "price_source_mode": "direct_structured",
+              "parsed_price_jpy": 47800,
+              "stock_status": "in_stock",
+              "structured_stock_status": "in_stock",
+              "text_stock_status": "out_of_stock",
+              "error_type": null,
+              "error_message": null
             }
           ],
           "direct_listing_display_is_estimate_eligible": false,
@@ -7866,8 +7973,8 @@
           "price_status": "missing",
           "trusted_for_market_estimate": false,
           "source_role": "comparison_site_reference",
-          "retrieval_time": "2026-10-18T08:02:01+09:00",
-          "reference_age_minutes": 0.5,
+          "retrieval_time": "2026-10-18T09:05:04+09:00",
+          "reference_age_minutes": 2.283333333333333,
           "monitor_url": "https://kakaku.com/item/K0001669878/",
           "purchase_url": "https://kakaku.com/item/K0001669878/",
           "reference_source_url": null,
@@ -7881,7 +7988,7 @@
           "direct_listing_display_stock_status": "unknown",
           "direct_listing_display_stock_label": "在庫未確認",
           "direct_listing_display_source_mode": "direct_text",
-          "direct_listing_display_observed_at": "2026-10-18T08:02:02+09:00",
+          "direct_listing_display_observed_at": "2026-10-18T09:05:06+09:00",
           "early_buy_review": {
             "item_id": "motherboard-asrock-b850m-pro-rs-wifi",
             "early_buy_threshold_jpy": 18000,
@@ -7898,8 +8005,8 @@
             "purchase_authorized": false,
             "next_step": "購入可能な在庫を直接確認"
           },
-          "direct_listing_display_age_minutes": 0.5,
-          "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる アスロック ASRock AMD B850チップセット搭載 Micro-ATX マザーボード B850M Pro RS ... ￥26,990 2,699 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月19日月曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
+          "direct_listing_display_age_minutes": 2.2,
+          "direct_listing_display_price_context": " 通販【全品無料配達】 ショッピングカートに入れる アスロック ASRock AMD B850チップセット搭載 Micro-ATX マザーボード B850M Pro RS ... ￥26,990 2,699 ゴールドポイント （10％還元） 在庫残少 ご注文はお早めに！ 2026年10月20日火曜日まで に ヨドバシエクストリームサービス便（無料） がお届け 会員ページ ",
           "direct_listing_display_offers": [
             {
               "url": "https://www.yodobashi.com/product/100000001008871801/",
@@ -7911,8 +8018,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:02+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T09:05:06+09:00",
+              "display_age_minutes": 2.2
             },
             {
               "url": "https://www.sofmap.com/product_detail.aspx?sku=101393495",
@@ -7924,8 +8031,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:07+09:00",
-              "display_age_minutes": 0.4
+              "retrieval_time": "2026-10-18T09:05:13+09:00",
+              "display_age_minutes": 2.1
             },
             {
               "url": "https://www.pc4u.co.jp/view/item/000000092844",
@@ -7937,8 +8044,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:04+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T09:05:08+09:00",
+              "display_age_minutes": 2.2
             }
           ],
           "direct_listing_sellable_price_jpy": null,
@@ -8043,8 +8150,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:11+09:00",
-          "reference_age_minutes": 0.3333333333333333,
+          "retrieval_time": "2026-10-18T09:05:14+09:00",
+          "reference_age_minutes": 2.1166666666666667,
           "monitor_url": "https://kakaku.com/item/K0001671441/",
           "purchase_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
@@ -8089,8 +8196,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:11+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T09:05:14+09:00",
+              "display_age_minutes": 2.1
             },
             {
               "url": "https://www.yodobashi.com/product/100000001008924490/",
@@ -8099,24 +8206,24 @@
               "title": "CP-9020296-JP",
               "price_jpy": 22760,
               "stock_status": "unknown",
-              "stock_signal_fresh": true,
+              "stock_signal_fresh": false,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
               "retrieval_time": "2026-10-18T07:16:29+09:00",
-              "display_age_minutes": 46.0
+              "display_age_minutes": 110.9
             }
           ],
           "direct_listing_sellable_price_jpy": 14980,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:11+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:14+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
             "preorder_or_backorder": 0,
-            "unknown": 1,
+            "unknown": 0,
             "out_of_stock": 0,
-            "stale": 0
+            "stale": 1
           },
           "direct_listing_offer_count": 2,
           "direct_listing_sellable_offer_count": 1,
@@ -8186,8 +8293,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:12+09:00",
-          "reference_age_minutes": 0.31666666666666665,
+          "retrieval_time": "2026-10-18T09:05:20+09:00",
+          "reference_age_minutes": 2.0166666666666666,
           "monitor_url": "https://kakaku.com/item/J0000039064/",
           "purchase_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
@@ -8232,8 +8339,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:12+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T09:05:20+09:00",
+              "display_age_minutes": 2.0
             },
             {
               "url": "https://www.yodobashi.com/product/100000001007195271/",
@@ -8245,14 +8352,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:11+09:00",
-              "display_age_minutes": 0.3
+              "retrieval_time": "2026-10-18T09:05:19+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": 13180,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:12+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:20+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -8330,8 +8437,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:16+09:00",
-          "reference_age_minutes": 0.25,
+          "retrieval_time": "2026-10-18T09:05:20+09:00",
+          "reference_age_minutes": 2.0166666666666666,
           "monitor_url": "https://kakaku.com/item/K0001432816/",
           "purchase_url": "https://www.yodobashi.com/product/100000001006975270/",
           "reference_source_url": "https://www.yodobashi.com/product/100000001006975270/",
@@ -8376,14 +8483,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:16+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:20+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": 19280,
           "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001006975270/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:16+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:20+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -8443,8 +8550,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:16+09:00",
-          "reference_age_minutes": 0.25,
+          "retrieval_time": "2026-10-18T09:05:20+09:00",
+          "reference_age_minutes": 2.0166666666666666,
           "monitor_url": "https://www.ark-pc.co.jp/i/11650134/",
           "purchase_url": "https://www.ark-pc.co.jp/i/11650134/",
           "reference_source_url": "https://www.ark-pc.co.jp/i/11650134/",
@@ -8489,14 +8596,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:02:16+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:20+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": 119990,
           "direct_listing_sellable_url": "https://www.ark-pc.co.jp/i/11650134/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:16+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:20+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -8566,8 +8673,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:19+09:00",
-          "reference_age_minutes": 0.2,
+          "retrieval_time": "2026-10-18T09:05:23+09:00",
+          "reference_age_minutes": 1.9666666666666666,
           "monitor_url": "https://www.yodobashi.com/product/100000001009402658/",
           "purchase_url": "https://www.yodobashi.com/product/100000001009402658/",
           "reference_source_url": "https://www.yodobashi.com/product/100000001009402658/",
@@ -8611,14 +8718,14 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:19+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:23+09:00",
+              "display_age_minutes": 2.0
             }
           ],
           "direct_listing_sellable_price_jpy": 29130,
           "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001009402658/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:19+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:23+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -8680,8 +8787,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:02:21+09:00",
-          "reference_age_minutes": 0.16666666666666666,
+          "retrieval_time": "2026-10-18T09:05:25+09:00",
+          "reference_age_minutes": 1.9333333333333333,
           "monitor_url": "https://www.yodobashi.com/product/100000001008996814/",
           "purchase_url": "https://www.yodobashi.com/product/100000001008996814/",
           "reference_source_url": "https://www.yodobashi.com/product/100000001008996814/",
@@ -8725,8 +8832,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
-              "retrieval_time": "2026-10-18T08:02:21+09:00",
-              "display_age_minutes": 0.2
+              "retrieval_time": "2026-10-18T09:05:25+09:00",
+              "display_age_minutes": 1.9
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/4573615590182/",
@@ -8738,23 +8845,36 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T07:16:38+09:00",
-              "display_age_minutes": 45.9
+              "retrieval_time": "2026-10-18T09:05:27+09:00",
+              "display_age_minutes": 1.9
+            },
+            {
+              "url": "https://www.ark-pc.co.jp/i/10401670/",
+              "retailer_domain": "ark-pc.co.jp",
+              "seller_name": null,
+              "title": "AX120-R-SE-WH-ARGB",
+              "price_jpy": 2970,
+              "stock_status": "preorder_or_backorder",
+              "stock_signal_fresh": true,
+              "stock_signal_max_age_minutes": 60,
+              "price_source_mode": "direct_structured",
+              "retrieval_time": "2026-10-18T09:05:28+09:00",
+              "display_age_minutes": 1.9
             }
           ],
           "direct_listing_sellable_price_jpy": 2580,
           "direct_listing_sellable_url": "https://www.yodobashi.com/product/100000001008996814/",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:02:21+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:25+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
-            "preorder_or_backorder": 0,
+            "preorder_or_backorder": 1,
             "unknown": 1,
             "out_of_stock": 0,
             "stale": 0
           },
-          "direct_listing_offer_count": 2,
+          "direct_listing_offer_count": 3,
           "direct_listing_sellable_offer_count": 1,
           "direct_listing_validation_diagnostics": [
             {
@@ -8772,16 +8892,16 @@
             },
             {
               "url": "https://shop.tsukumo.co.jp/goods/4573615590182/",
-              "status": "unverified",
-              "reason_code": "fetch_error",
-              "page_name": null,
-              "price_source_mode": null,
-              "parsed_price_jpy": null,
+              "status": "verified",
+              "reason_code": "exact_identity_direct_price_and_pit_verified",
+              "page_name": "Assassin X 120 Refined SE　AX120-R-SE",
+              "price_source_mode": "direct_structured",
+              "parsed_price_jpy": 2350,
               "stock_status": "unknown",
-              "structured_stock_status": null,
-              "text_stock_status": null,
-              "error_type": "RemoteDisconnected",
-              "error_message": "Remote end closed connection without response"
+              "structured_stock_status": "unknown",
+              "text_stock_status": "out_of_stock",
+              "error_type": null,
+              "error_message": null
             }
           ],
           "direct_listing_display_is_estimate_eligible": false,
@@ -8821,8 +8941,8 @@
           "price_status": "verified_retailer_listing_reference",
           "trusted_for_market_estimate": true,
           "source_role": "direct_retailer_listing_reference",
-          "retrieval_time": "2026-10-18T08:01:59+09:00",
-          "reference_age_minutes": 0.5333333333333333,
+          "retrieval_time": "2026-10-18T09:05:03+09:00",
+          "reference_age_minutes": 2.3,
           "monitor_url": "https://kakaku.com/item/K0001696163/",
           "purchase_url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
           "reference_source_url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
@@ -8867,8 +8987,8 @@
               "stock_signal_fresh": true,
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_structured",
-              "retrieval_time": "2026-10-18T08:01:59+09:00",
-              "display_age_minutes": 0.5
+              "retrieval_time": "2026-10-18T09:05:03+09:00",
+              "display_age_minutes": 2.3
             },
             {
               "url": "https://item.rakuten.co.jp/dospara-r/ic625088/?variantId=ic625088",
@@ -8881,13 +9001,13 @@
               "stock_signal_max_age_minutes": 60,
               "price_source_mode": "direct_text",
               "retrieval_time": "2026-10-18T06:03:11+09:00",
-              "display_age_minutes": 119.3
+              "display_age_minutes": 184.2
             }
           ],
           "direct_listing_sellable_price_jpy": 129800,
           "direct_listing_sellable_url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
           "direct_listing_sellable_stock_status": "in_stock",
-          "direct_listing_sellable_retrieval_time": "2026-10-18T08:01:59+09:00",
+          "direct_listing_sellable_retrieval_time": "2026-10-18T09:05:03+09:00",
           "direct_listing_stock_counts": {
             "in_stock": 1,
             "low_stock": 0,
@@ -9114,18 +9234,18 @@
       "current_stock_confirmed_component_count": {
         "in_stock": 8,
         "low_stock": 0,
-        "preorder_or_backorder": 1,
-        "unknown": 4,
+        "preorder_or_backorder": 2,
+        "unknown": 3,
         "out_of_stock": 1,
-        "stale": 1
+        "stale": 2
       },
       "current_retailer_listing_offer_count_by_status": {
         "in_stock": 8,
         "low_stock": 0,
-        "preorder_or_backorder": 1,
-        "unknown": 5,
+        "preorder_or_backorder": 2,
+        "unknown": 4,
         "out_of_stock": 1,
-        "stale": 1
+        "stale": 2
       },
       "current_listing_subtotal_is_complete_build_price": false,
       "current_listing_subtotal_is_checkout_price": false,
@@ -9134,10 +9254,9 @@
       "market_reference_estimate_is_checkout_price": false,
       "market_reference_coverage_complete": false,
       "missing_or_untrusted_market_reference_ids": [
-        "cpu-ryzen7-9700x",
         "motherboard-asrock-b850m-pro-rs-wifi"
       ],
-      "market_reference_coverage_count": 7,
+      "market_reference_coverage_count": 8,
       "market_reference_required_count": 9,
       "target_gpu_required_reduction_pct_from_market_reference": 7.6,
       "compatibility_status": "REVIEW",
@@ -9225,17 +9344,17 @@
         "workload_fit_points_out_of_75": 57.9,
         "price_efficiency_points_out_of_15": 14.1,
         "compatibility_points_out_of_10": 9.2,
-        "market_reference_coverage_pct": 77.8,
-        "market_reference_component_count": 7,
+        "market_reference_coverage_pct": 88.9,
+        "market_reference_component_count": 8,
         "market_reference_required_count": 9,
         "direct_price_identity_pit_coverage_pct": 100.0,
-        "sellable_stock_coverage_pct": 77.8,
+        "sellable_stock_coverage_pct": 88.9,
         "verified_checkout_total_coverage_pct": 0.0,
         "direct_price_verified_component_count": 9,
-        "sellable_stock_verified_component_count": 7,
+        "sellable_stock_verified_component_count": 8,
         "verified_checkout_total_component_count": 0,
         "required_component_count": 9,
-        "purchase_evidence_completeness_score_out_of_100": 67.8,
+        "purchase_evidence_completeness_score_out_of_100": 70.6,
         "score_basis": "BF目標総額ベースの構成ルーブリック。GPUゲーム点はTom's Hardwareの1440p Ultraラスタライズ階層を25点満点に正規化した代理指標で、対象ゲームの実測FPSではない。",
         "gaming_benchmark_reference": {
           "source_url": "https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html",
