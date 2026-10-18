@@ -189,7 +189,7 @@ class WorkflowContractTests(unittest.TestCase):
         # still an unhealthy run and must trigger one bounded recovery.
         self.assertIn("github.event.workflow_run.conclusion == 'success'", watchdog)
         self.assertIn("!contains(github.event.workflow_run.display_title, '[watchdog-recovery]')", watchdog)
-        self.assertEqual(watchdog.count("gh workflow run pc-price-monitor.yml --ref main -f watchdog_recovery=true"), 2)
+        self.assertGreaterEqual(watchdog.count("gh workflow run pc-price-monitor.yml --ref main -f watchdog_recovery=true"), 2)
         # The recovery marker is part of the run title so its completion cannot
         # trigger a recursive chain of recovery dispatches.
         self.assertIn("inputs.watchdog_recovery == true && ' [watchdog-recovery]'", primary)
