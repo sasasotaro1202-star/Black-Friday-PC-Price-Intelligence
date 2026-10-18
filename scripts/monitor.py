@@ -826,8 +826,10 @@ def parse_page(url, html, expected=None):
                 if not isinstance(offer, dict):
                     continue
                 currency = str(offer.get("priceCurrency") or "").upper()
+                price_text = str(offer.get("price") or "").strip()
+                numeric_price_text = re.sub(r"[¥￥円\\s]", "", price_text.replace(",", ""))
                 try:
-                    p = int(float(str(offer.get("price")).replace(",", "")))
+                    p = int(float(numeric_price_text))
                 except Exception:
                     p = None
                 seller_value = offer.get("seller")
@@ -837,7 +839,9 @@ def parse_page(url, html, expected=None):
                     offer_seller_name = seller_value.strip()
                 else:
                     offer_seller_name = ""
-                if p and (currency in ("JPY", "YEN") or any(symbol in str(offer.get("price")) for symbol in ("¥", "￥", "円"))):
+                has_yen_symbol = any(symbol in price_text for symbol in ("¥", "￥", "円"))
+                currency_verified = currency in ("JPY", "YEN") or (not currency and has_yen_symbol)
+                if p and currency_verified:
                     structured_offers.append({
                         "price": p,
                         "match_level": match_level,
