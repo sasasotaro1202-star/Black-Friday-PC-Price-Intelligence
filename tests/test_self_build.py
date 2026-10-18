@@ -311,7 +311,24 @@ class SelfBuildPlannerTests(unittest.TestCase):
             if build["compatibility_status"] == "FAIL":
                 expected_decision = "COMPATIBILITY_FAIL"
             self.assertEqual(build["decision"], expected_decision)
+        self.assertEqual(plan["pc_planned_budget_jpy"], 360000)
+        self.assertEqual(plan["pc_budget_jpy"], int(profile["pc_budget_jpy"]))
+        self.assertEqual(
+            plan["pc_planned_budget_jpy"]
+            + plan["peripheral_budget_jpy"]
+            + plan["unallocated_contingency_jpy"],
+            plan["total_budget_jpy"],
+        )
         self.assertTrue(plan["budget_arithmetic_valid"])
+        for build in builds.values():
+            self.assertEqual(
+                build["target_within_planned_pc_budget"],
+                build["target_pc_total_jpy"] <= plan["pc_planned_budget_jpy"],
+            )
+        report = planner.render_plan_markdown(plan)
+        self.assertIn("予算（すべて日本円）", report)
+        self.assertIn("¥400,000", report)
+        self.assertNotIn("$400,000", report)
         self.assertFalse(plan["buy_now_authorized"])
 
     def test_cpu_high_core_alternative_is_scored_separately_and_dark_horse_is_not_misrepresented(self):
