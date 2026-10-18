@@ -240,6 +240,41 @@ class MonitorParsingTests(unittest.TestCase):
                 self.assertIsNone(parsed["price_jpy"])
                 self.assertEqual(parsed["price_source_mode"], "none")
 
+    def test_structured_jpy_price_does_not_truncate_fractional_yen(self):
+        for raw_price in ("11980.5", "11980.99"):
+            with self.subTest(raw_price=raw_price):
+                html = """
+                <script type="application/ld+json">
+                {"@type":"Product","name":"Example GPU",
+                 "offers":{"price":"%s","priceCurrency":"JPY",
+                           "availability":"https://schema.org/InStock"}}
+                </script>
+                <h1>Example GPU</h1>
+                """ % raw_price
+                parsed = monitor.parse_page(
+                    "https://shop.example.jp/product",
+                    html,
+                    expected={"name": "Example GPU", "aliases": ["Example GPU"], "model_code": "EG-1"},
+                )
+                self.assertIsNone(parsed["price_jpy"])
+                self.assertEqual(parsed["price_source_mode"], "none")
+
+    def test_structured_jpy_price_with_zero_decimal_tail_is_exact(self):
+        html = """
+        <script type="application/ld+json">
+        {"@type":"Product","name":"Example GPU",
+         "offers":{"price":"11980.00","priceCurrency":"JPY",
+                   "availability":"https://schema.org/InStock"}}
+        </script>
+        <h1>Example GPU</h1>
+        """
+        parsed = monitor.parse_page(
+            "https://shop.example.jp/product",
+            html,
+            expected={"name": "Example GPU", "aliases": ["Example GPU"], "model_code": "EG-1"},
+        )
+        self.assertEqual(parsed["price_jpy"], 11980)
+
     def test_structured_offer_with_explicit_yen_symbol_is_accepted_without_currency_code(self):
         html = """
         <script type="application/ld+json">
