@@ -37,6 +37,16 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertIn("www.biccamera.com", target["allowed_hosts"])
         self.assertIn("www.yodobashi.com", target["allowed_hosts"])
 
+    def test_mouse_and_mousepad_do_not_use_foreign_retail_images(self):
+        import json
+        config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        items = {x["id"]: x for x in (config["peripherals"] + config.get("peripheral_alternatives", []))}
+        for item_id in ("mouse", "mousepad"):
+            with self.subTest(item_id=item_id):
+                self.assertIsNone(items[item_id].get("image_url"))
+                self.assertIsNone(items[item_id].get("image_source_url"))
+                self.assertIn("画像未確認", items[item_id].get("image_note", ""))
+
     def test_ranked_alternatives_are_monitored_separately_from_budget_targets(self):
         import json
         config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
