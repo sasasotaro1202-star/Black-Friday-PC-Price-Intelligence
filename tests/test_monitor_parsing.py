@@ -221,6 +221,41 @@ class MonitorParsingTests(unittest.TestCase):
         self.assertEqual(parsed["price_jpy"], 11980)
         self.assertEqual(parsed["seller_name"], "Example Retailer Japan")
 
+    def test_structured_offer_requires_explicit_jpy_currency_or_yen_symbol(self):
+        for currency in ("USD", ""):
+            with self.subTest(currency=currency):
+                html = """
+                <script type="application/ld+json">
+                {"@type":"Product","name":"Example GPU",
+                 "offers":{"price":"11980","priceCurrency":"%s",
+                           "availability":"https://schema.org/InStock"}}
+                </script>
+                <h1>Example GPU</h1>
+                """ % currency
+                parsed = monitor.parse_page(
+                    "https://shop.example.jp/product",
+                    html,
+                    expected={"name": "Example GPU", "aliases": ["Example GPU"], "model_code": "EG-1"},
+                )
+                self.assertIsNone(parsed["price_jpy"])
+                self.assertEqual(parsed["price_source_mode"], "none")
+
+    def test_structured_offer_with_explicit_yen_symbol_is_accepted_without_currency_code(self):
+        html = """
+        <script type="application/ld+json">
+        {"@type":"Product","name":"Example GPU",
+         "offers":{"price":"¥11980",
+                   "availability":"https://schema.org/InStock"}}
+        </script>
+        <h1>Example GPU</h1>
+        """
+        parsed = monitor.parse_page(
+            "https://shop.example.jp/product",
+            html,
+            expected={"name": "Example GPU", "aliases": ["Example GPU"], "model_code": "EG-1"},
+        )
+        self.assertEqual(parsed["price_jpy"], 11980)
+
     def test_amazon_seller_profile_markup_is_used_without_guessing_from_host(self):
         html = """
         <h1>TeamGroup T-CREATE DDR5-6000 32GB</h1>
