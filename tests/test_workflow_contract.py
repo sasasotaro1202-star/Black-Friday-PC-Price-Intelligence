@@ -53,6 +53,13 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertLess(calendar_at, report_at)
         self.assertLess(calendar_at, timing_at)
 
+    def test_timing_report_labels_completed_pc_rows_as_benchmarks_for_self_build(self):
+        source = (ROOT / "scripts" / "timing_analysis.py").read_text(encoding="utf-8")
+        self.assertIn("Completed-PC / BTO benchmark references (not DIY purchase candidates)", source)
+        self.assertIn("completed_pc_benchmark_only_not_actionable", source)
+        self.assertIn("must not be used as component prices", source)
+        self.assertIn("timing_candidates_section_lines(decision.get(\"purchase_method_policy\"))", source)
+
     def test_timing_analysis_marks_calendar_date_as_non_authoritative_reference(self):
         source = (ROOT / "scripts" / "timing_analysis.py").read_text(encoding="utf-8")
         self.assertIn("CALENDAR_REFERENCE_DATE", source)
