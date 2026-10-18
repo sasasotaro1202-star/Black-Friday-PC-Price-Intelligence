@@ -377,6 +377,46 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertNotIn("PC本体の計画上限（周辺機器が目標価格の場合）", source)
         self.assertIn("総額予備費を控除後", source)
 
+    def test_excluded_peripherals_never_enter_purchase_or_monitoring_targets(self):
+        targets = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        build = json.loads((ROOT / "config" / "build_components.json").read_text(encoding="utf-8"))
+        peripheral_snapshot = json.loads((ROOT / "data" / "peripheral_prices.json").read_text(encoding="utf-8"))
+
+        def product_identity(item):
+            return " ".join(str(item.get(key) or "") for key in ("id", "name", "category", "product_type")).lower()
+
+        forbidden = re.compile(
+            r"speaker|headset|sub[-_ ]?monitor|secondary[-_ ]?monitor|second[-_ ]?monitor|"
+            r"power[-_ ]?strip|スピーカー|ヘッドセット|サブモニター|サブモニタ|電源タップ|予備モニター",
+            re.IGNORECASE,
+        )
+        purchase_surfaces = {
+            "primary_peripherals": targets.get("peripherals") or [],
+            "peripheral_alternatives": targets.get("peripheral_alternatives") or [],
+            "pc_bom": build.get("parts") or [],
+            "saved_peripheral_snapshot": peripheral_snapshot.get("products") or [],
+        }
+        for surface_name, items in purchase_surfaces.items():
+            for item in items:
+                with self.subTest(surface=surface_name, item_id=item.get("id")):
+                    self.assertIsNone(
+                        forbidden.search(product_identity(item)),
+                        f"Excluded item entered {surface_name}: {product_identity(item)}",
+                    )
+
+        primary = targets["peripherals"]
+        for category in ("main_monitor", "keyboard", "mouse", "mousepad"):
+            with self.subTest(required_category=category):
+                self.assertEqual(
+                    sum(1 for item in primary if item.get("mandatory") and item.get("category") == category),
+                    1,
+                    f"Exactly one mandatory {category} belongs in the setup.",
+                )
+        main_monitor = next(item for item in primary if item.get("mandatory") and item.get("category") == "main_monitor")
+        self.assertIn("27-inch", main_monitor.get("name", ""))
+        self.assertIn("WQHD", main_monitor.get("name", ""))
+        self.assertFalse(any(item.get("id") == "power-strip" for item in primary))
+
     def test_primary_ranked_products_have_explicit_image_sources_or_documented_absence(self):
         targets = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
         build = json.loads((ROOT / "config" / "build_components.json").read_text(encoding="utf-8"))
