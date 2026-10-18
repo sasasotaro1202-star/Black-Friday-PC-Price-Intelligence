@@ -244,7 +244,7 @@ class MonitorParsingTests(unittest.TestCase):
         html = """
         <script type="application/ld+json">
         {"@type":"Product","name":"Example GPU",
-         "offers":{"price":"¥11980",
+         "offers":{"price":"¥ 11,980",
                    "availability":"https://schema.org/InStock"}}
         </script>
         <h1>Example GPU</h1>
