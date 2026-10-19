@@ -11,8 +11,8 @@
 
 ## 1. Current user choices — authoritative as of 2026-10-17
 
-- Total-system cash ceiling: **¥400,000**.
-- PC planning allowance/target: **¥360,000**; the hard all-in total cap controls the actual permitted amount.
+- Preferred all-in total target: **¥400,000**, not a hard cutoff. Compare a soft band through **¥420,000** when the benefit is meaningful, and keep a separate **¥450,000 target / ¥470,000 soft-band** scenario.
+- PC planning target: **¥360,000**. Recalculate PC allocation from the selected scenario's soft-band total, actual necessary peripherals, fees and ¥5,000 contingency. Show overruns versus both target and soft band.
 - Flexible peripheral planning allocation: **¥35,000**; this is not an obligation to spend the whole amount.
 - Unallocated total-system contingency: **¥5,000**.
 - Primary purchase method: **self-built DIY PC**. Assembly time is not a constraint and receives no penalty. BTO systems are comparison benchmarks only.
@@ -32,7 +32,7 @@
 - 評価対象には学校の勉強、PDFや参照資料の閲覧、Web調査、動画教材、文章/発表資料の作成、複数タブ・複数アプリの同時利用を含める。
 - Python、GitHub、ローカルテスト、大規模データ処理/シミュレーション、スポーツ・株式・BTC予測、使える範囲のローカルAIも想定する。
 - CPUの単一/マルチコア、RAM、GPU VRAM、SSD容量/I/O、長時間負荷時の冷却・騒音、IDE/ゲームエンジン/ブラウザー/分析ツールの同時動作を用途別に確認する。全分析がGPUで速くなると仮定しない。
-- 基本の購入時要件は32GB RAM/1TB SSD。64GB RAM/2TB SSDは実際の正確な完成構成価格と互換性が確認でき、総額内に収まる場合の優先候補。購入後の増設は想定しない。
+- 基本の購入時要件は32GB RAM/1TB SSD。64GB RAM/2TB SSDは実際の完成構成価格と互換性を確認し、40万円目標・42万円許容帯・45万円シナリオのどこに入るか分けて評価する。購入後の増設は想定しない。
 - 無料・オープンソースを優先し、有料API・クラウドGPU・月額サービスを中核要件にしない。
 
 ### ゲーム制作を必須の用途として扱う
@@ -50,7 +50,7 @@ BF purchase targets are aspirations, not forecasts or executable checkout prices
 - CPU: AMD Ryzen 7 9700X BOX — ¥45,000.
 - GPU primary: PNY GeForce RTX 5070 12GB OC SLIM, exact SKU VCG507012DFSXPB1-O — BF target ¥138,000 (not a current quote).
 - GPU VRAM alternative: PNY RTX 5060 Ti 16GB OC, exact SKU VCG5060T16DFXPB1-O — ¥109,800.
-- GPU dark horse: PNY RTX 5070 Ti 16GB ARGB, exact SKU VCG5070T16TFXXPB1-O — BF target ¥158,000; this build currently targets ¥402,000 all-in, so it must remain explicitly over-budget and blocked unless verified costs/choices bring the total to ¥400,000 or less.
+- GPU dark horse: PNY RTX 5070 Ti 16GB ARGB, exact SKU VCG5070T16TFXXPB1-O — BF target ¥158,000; target arithmetic is ¥402,000 all-in. Keep it visible as ¥2,000 above the ¥400,000 target but inside the ¥420,000 soft band; do not authorize purchase until direct prices, stock, checkout total and compatibility are verified.
 - Motherboard: ASRock B850M Pro RS WiFi — ¥20,000.
 - Primary planning memory target: TeamGroup T-CREATE EXPERT DDR5-6000 32GB (2×16GB) — BF target ¥58,000; Crucial Pro DDR5-6000 32GB (2×16GB) remains a ¥60,000 alternative. Neither target is a current purchase quote.
 - SSD: Crucial P3 Plus 1TB — BF target ¥24,000; 1TB is the required baseline, and the target is not a current purchase quote.
@@ -58,7 +58,7 @@ BF purchase targets are aspirations, not forecasts or executable checkout prices
 - Case: Fractal Design Pop Air TG — ¥12,000.
 - CPU cooler: Thermalright Peerless Assassin 120 SE V3 — ¥5,000.
 - Windows 11 Home Japanese retail package — ¥17,000.
-- Current TeamGroup-based BF target bills (not current quotes): RTX 5070 12GB PC ¥342,000 / all-in with ¥35,000 peripherals and ¥5,000 contingency ¥382,000; RTX 5060 Ti 16GB PC ¥324,000 / all-in ¥364,000; RTX 5070 Ti 16GB PC ¥362,000 / all-in ¥402,000. The RTX 5070 Ti option exceeds the ¥400,000 hard ceiling by ¥2,000 at these targets and must remain a blocked comparison-only dark horse unless the actual complete cash total is within budget.
+- Current TeamGroup-based BF target bills (not current quotes): RTX 5070 12GB PC ¥342,000 / all-in with ¥35,000 peripherals and ¥5,000 contingency ¥382,000; RTX 5060 Ti 16GB PC ¥324,000 / all-in ¥364,000; RTX 5070 Ti 16GB PC ¥362,000 / all-in ¥402,000. RTX 5070 Ti is ¥2,000 above the ¥400,000 target but inside the ¥420,000 soft band at target prices; compare its performance gain, and do not treat target arithmetic as checkout evidence or purchase authorization.
 - The PC planning target is ¥360,000, not a requirement to spend the full amount if a lower-cost build meets the user's performance goals.
 
 ## 3. Component compatibility gates
