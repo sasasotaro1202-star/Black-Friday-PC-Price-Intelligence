@@ -2091,17 +2091,20 @@
     {
       "id": "budget_350k",
       "total_budget_jpy": 350000,
-      "description_ja": "35万円案。必須周辺機器・5,000円予備費を含む総額上限。32GB RAM・1TB SSDを維持し、実価格で成立しないなら購入可能と表示しない。"
+      "description_ja": "35万円案。必須周辺機器・5,000円予備費を含む総額上限。32GB RAM・1TB SSDを維持し、実価格で成立しないなら購入可能と表示しない。",
+      "soft_ceiling_total_jpy": 370000
     },
     {
       "id": "budget_400k",
       "total_budget_jpy": 400000,
-      "description_ja": "40万円案。標準の基準シナリオ。必須周辺機器・5,000円予備費込み。"
+      "description_ja": "40万円案。標準の基準シナリオ。必須周辺機器・5,000円予備費込み。",
+      "soft_ceiling_total_jpy": 420000
     },
     {
       "id": "budget_450k",
       "total_budget_jpy": 450000,
-      "description_ja": "45万円案。追加5万円を性能・制作・分析の実用性向上に使う拡張シナリオ。GPUだけでなく、64GB RAM・2TB SSD・高コアCPUの完全構成を比較し、総額の使い切りは目的にしない。"
+      "description_ja": "45万円案。追加5万円を性能・制作・分析の実用性向上に使う拡張シナリオ。GPUだけでなく、64GB RAM・2TB SSD・高コアCPUの完全構成を比較し、総額の使い切りは目的にしない。",
+      "soft_ceiling_total_jpy": 470000
     }
   ],
   "budget_scenario_policy": {
@@ -2139,5 +2142,7 @@
     "budget-450k-5070-64gb-1tb",
     "budget-450k-gpu-priority",
     "budget-450k-gpu-storage"
-  ]
+  ],
+  "soft_ceiling_total_jpy": 420000,
+  "soft_overrun_allowance_jpy": 20000
 }
