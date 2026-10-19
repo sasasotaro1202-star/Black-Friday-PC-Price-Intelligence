@@ -9,17 +9,19 @@ WORKFLOW = ROOT / ".github" / "workflows" / "pc-price-monitor.yml"
 
 
 class WorkflowContractTests(unittest.TestCase):
-    def test_primary_workflow_runs_full_regression_gate_before_every_collection(self):
+    def test_primary_workflow_skips_unselected_cron_ticks_before_running_tests(self):
         text = WORKFLOW.read_text(encoding="utf-8")
         smoke_at = text.index("Production syntax and fail-closed smoke gate")
         regression_at = text.index("Full regression gate before every production collection")
         gate_at = text.index("Check whether regular monitoring should run")
         monitor_at = text.index("python scripts/monitor.py")
         self.assertLess(smoke_at, regression_at)
-        self.assertLess(regression_at, gate_at)
+        self.assertLess(gate_at, smoke_at)
         self.assertLess(gate_at, monitor_at)
         self.assertIn('python -m unittest discover -s tests -p "test_production_contract.py" -v', text)
         self.assertIn('python -m unittest discover -s tests -p "test_*.py" -v', text)
+        self.assertIn("      - name: Production syntax and fail-closed smoke gate\n        if: steps.gate.outputs.skip != 'true'", text)
+        self.assertIn("      - name: Full regression gate before every production collection\n        if: steps.gate.outputs.skip != 'true'", text)
         self.assertNotIn("if: github.event_name != 'schedule'", text)
 
     def test_fast_workflow_has_full_regression_gate_before_monitoring(self):

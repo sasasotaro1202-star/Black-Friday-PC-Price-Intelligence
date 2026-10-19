@@ -37,22 +37,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      # Every scheduled execution gets a cheap syntax/contract gate. Push and
-      # manually dispatched production runs also execute the full regression
-      # suite before touching price data or publishing artifacts.
-      - name: Production syntax and fail-closed smoke gate
-        shell: bash
-        run: |
-          set -euo pipefail
-          python -m py_compile scripts/*.py
-          python -m unittest discover -s tests -p "test_production_contract.py" -v
-
-      - name: Full regression gate before every production collection
-        shell: bash
-        run: |
-          set -euo pipefail
-          python -m unittest discover -s tests -p "test_*.py" -v
-
       - name: Check whether regular monitoring should run
         id: gate
         shell: bash
@@ -93,6 +77,23 @@ jobs:
           print(f"schedule_cron={schedule_cron}")
           print(f"run_now={str(run_now).lower()}")
           PY
+
+      # Non-selected cron ticks stop here to avoid using runner time on full tests.
+      # Every actual collection remains guarded by syntax/contract and regression tests.
+      - name: Production syntax and fail-closed smoke gate
+        if: steps.gate.outputs.skip != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/*.py
+          python -m unittest discover -s tests -p "test_production_contract.py" -v
+
+      - name: Full regression gate before every production collection
+        if: steps.gate.outputs.skip != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p "test_*.py" -v
 
       - name: Refresh watchlist when empty or stale
         id: watchlist
