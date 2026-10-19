@@ -20,6 +20,24 @@ def read_text(relative_path):
 
 
 class ProjectConfigurationContractTests(unittest.TestCase):
+
+    def test_three_complete_budget_scenarios_include_350k_400k_450k(self):
+        scenarios = self.targets.get("budget_scenarios") or []
+        self.assertEqual(
+            [(item["id"], item["total_budget_jpy"]) for item in scenarios],
+            [("budget_350k", 350000), ("budget_400k", 400000), ("budget_450k", 450000)],
+        )
+        policy = self.targets.get("budget_scenario_policy") or {}
+        self.assertTrue(policy.get("hard_ceiling_per_scenario"))
+        self.assertTrue(policy.get("peripherals_included"))
+        self.assertEqual(policy.get("unallocated_contingency_jpy"), 5000)
+        excluded = policy.get("excluded", "")
+        for item in ("Speakers", "secondary monitor", "headset", "power strip"):
+            self.assertIn(item, excluded)
+        self.assertIn("64GB RAM", " ".join(policy.get("upgrade_preference_order_if_complete_total_fits", [])))
+        self.assertIn("2TB NVMe SSD", " ".join(policy.get("upgrade_preference_order_if_complete_total_fits", [])))
+
+
     @classmethod
     def setUpClass(cls):
         cls.targets = read_json("config/targets.json")

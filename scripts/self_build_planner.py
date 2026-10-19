@@ -1449,7 +1449,82 @@ def build_plan(config=None, price_snapshot=None, now=None):
 
 
     return {
-        "generated_at": iso(now), "schema_version": 1, "project": "DIY_PC",
+        "generated_at": iso(now), "schema_version": 1, "project": "DIY_PC",    # Same complete-build targets evaluated under three independent total-system ceilings.
+    # These are target-price scenarios, never verified checkout prices or purchase authorization.
+    configured_budget_scenarios = profile.get("budget_scenarios") or config.get("budget_scenarios") or [
+        {"id": "budget_350k", "total_budget_jpy": 350000, "description_ja": "35万円総額シナリオ"},
+        {"id": "budget_400k", "total_budget_jpy": 400000, "description_ja": "40万円総額シナリオ"},
+        {"id": "budget_450k", "total_budget_jpy": 450000, "description_ja": "45万円総額シナリオ"},
+    ]
+    budget_scenarios = []
+    for scenario in configured_budget_scenarios:
+        if not isinstance(scenario, dict):
+            continue
+        ceiling = scenario.get("total_budget_jpy")
+        if not isinstance(ceiling, int) or isinstance(ceiling, bool) or ceiling <= 0:
+            continue
+        peripheral_target = int(profile.get("peripheral_budget_jpy", 35000))
+        reserve = int(profile.get("unallocated_contingency_jpy", 5000))
+        pc_ceiling = max(0, ceiling - peripheral_target - reserve)
+        scenario_builds = []
+        for candidate in builds:
+            total = candidate.get("target_all_in_jpy")
+            pc_total = candidate.get("target_pc_total_jpy")
+            fit = isinstance(total, int) and total <= ceiling and isinstance(pc_total, int) and pc_total <= pc_ceiling
+            scenario_builds.append({
+                "build_id": candidate.get("id"),
+                "name": candidate.get("name"),
+                "gpu_choice_id": candidate.get("gpu_choice_id"),
+                "target_pc_total_jpy": pc_total,
+                "target_peripheral_budget_jpy": peripheral_target,
+                "target_contingency_jpy": reserve,
+                "target_all_in_jpy": total,
+                "remaining_budget_jpy": ceiling - total if isinstance(total, int) else None,
+                "within_scenario_target": fit,
+                "compatibility_status": candidate.get("compatibility_status"),
+                "decision": candidate.get("decision"),
+                "scorecard": candidate.get("scorecard") or {},
+                "purchase_authorized": False,
+                "price_basis": "aspirational_BF_targets_not_verified_checkout_prices",
+            })
+        for cpu_item in cpu_alternative_scenarios:
+            candidate = cpu_item.get("build") or {}
+            total = candidate.get("target_all_in_jpy")
+            pc_total = candidate.get("target_pc_total_jpy")
+            scenario_builds.append({
+                "build_id": candidate.get("id"),
+                "name": candidate.get("name"),
+                "gpu_choice_id": candidate.get("gpu_choice_id"),
+                "cpu_choice_id": cpu_item.get("cpu_choice_id"),
+                "target_pc_total_jpy": pc_total,
+                "target_peripheral_budget_jpy": peripheral_target,
+                "target_contingency_jpy": reserve,
+                "target_all_in_jpy": total,
+                "remaining_budget_jpy": ceiling - total if isinstance(total, int) else None,
+                "within_scenario_target": isinstance(total, int) and total <= ceiling and isinstance(pc_total, int) and pc_total <= pc_ceiling,
+                "compatibility_status": candidate.get("compatibility_status"),
+                "decision": candidate.get("decision"),
+                "scorecard": candidate.get("scorecard") or {},
+                "purchase_authorized": False,
+                "price_basis": "aspirational_BF_targets_not_verified_checkout_prices",
+            })
+        budget_scenarios.append({
+            "id": str(scenario.get("id") or "budget_" + str(ceiling)),
+            "total_budget_jpy": ceiling,
+            "description_ja": str(scenario.get("description_ja") or ""),
+            "peripheral_target_jpy": peripheral_target,
+            "contingency_jpy": reserve,
+            "pc_planned_ceiling_jpy": pc_ceiling,
+            "arithmetic_valid": pc_ceiling + peripheral_target + reserve == ceiling,
+            "builds": sorted(scenario_builds, key=lambda row: (
+                not row["within_scenario_target"],
+                -(row.get("scorecard") or {}).get("overall_score", 0),
+                row.get("target_all_in_jpy") if isinstance(row.get("target_all_in_jpy"), int) else 10**12,
+            )),
+            "purchase_authorized": False,
+        })
+
+
         "source_policy": "Comparison-site prices are market references only. This plan never authorizes a purchase; official seller-specific BF price evidence is missing.",
         "purchase_method_policy": {
             "primary_method": "SELF_BUILD",
@@ -1504,6 +1579,8 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "snapshot_source_role": snapshot.get("source_role") or "missing_snapshot",
             "snapshot_sha256": file_sha256(PRICE_PATH)
         },
+        "budget_scenarios": budget_scenarios,
+        "budget_scenario_policy": profile.get("budget_scenario_policy") or config.get("budget_scenario_policy") or {},
         "builds": builds, "bf_actual_authorized": False, "buy_now_authorized": False
     }
 

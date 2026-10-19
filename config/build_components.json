@@ -368,6 +368,48 @@
         "https://kakaku.com/item/K0001630331/",
         "https://kakaku.com/item/K0001630330/"
       ]
+    },
+    "budget_scenarios": [
+      {
+        "id": "budget_350k",
+        "total_budget_jpy": 350000,
+        "description_ja": "35万円案。必須周辺機器・5,000円予備費を含む総額上限。32GB RAM・1TB SSDを維持し、実価格で成立しないなら購入可能と表示しない。"
+      },
+      {
+        "id": "budget_400k",
+        "total_budget_jpy": 400000,
+        "description_ja": "40万円案。標準の基準シナリオ。必須周辺機器・5,000円予備費込み。"
+      },
+      {
+        "id": "budget_450k",
+        "total_budget_jpy": 450000,
+        "description_ja": "45万円案。追加5万円を性能・制作・分析の実用性向上に使う拡張シナリオ。GPUだけでなく、64GB RAM・2TB SSD・高コアCPUの完全構成を比較し、総額の使い切りは目的にしない。"
+      }
+    ],
+    "budget_scenario_policy": {
+      "currency": "JPY",
+      "hard_ceiling_per_scenario": true,
+      "peripherals_included": true,
+      "unallocated_contingency_jpy": 5000,
+      "required_peripherals": "One 27-inch WQHD main monitor, keyboard, mouse, mousepad, cables only if needed",
+      "excluded": "Speakers, secondary monitor, headset, power strip",
+      "selection_rule": "Compare complete as-purchased configurations against each scenario ceiling. Include PC parts, OS, PC shipping/small parts, required peripheral cash costs and shipping, plus contingency. Do not assume post-purchase upgrades, do not mix target prices with live checkout evidence, and never authorize purchase from target arithmetic alone.",
+      "workload_priorities": [
+        "gaming at 1440p",
+        "game development in Unreal Engine/Unity/Godot",
+        "Cities: Skylines II and FPS games",
+        "Python/GitHub/sports-stock-BTC prediction and data analysis",
+        "local AI where feasible",
+        "schoolwork/research and multitasking"
+      ],
+      "upgrade_preference_order_if_complete_total_fits": [
+        "32GB RAM minimum at purchase",
+        "1TB NVMe SSD minimum at purchase",
+        "64GB RAM for large game projects/data and multitasking",
+        "2TB NVMe SSD for games/assets/builds/datasets",
+        "GPU tier selected by measured gaming/rendering vs VRAM needs",
+        "12+ core CPU if local engine-source builds and parallel data jobs justify it"
+      ]
     }
   },
   "parts": [
