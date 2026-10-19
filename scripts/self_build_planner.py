@@ -390,7 +390,7 @@ def component_price(part, by_id, now, max_age, allowed_domains=()):
     }
 
 
-def compatibility_checks(parts, profile, gpu_id, memory_part_id=None, storage_part_id=None, cooler_part_id=None, cpu_part_id=None):
+def compatibility_checks(parts, profile, gpu_id, memory_part_id=None, storage_part_id=None, cooler_part_id=None, cpu_part_id=None, motherboard_part_id=None, psu_part_id=None, case_part_id=None, selected_part_ids=None, cooler_included=False):
     """Checks known socket/memory/storage/size/power constraints, fail-closed."""
     checks = []
     def add(name, status, detail):
@@ -405,7 +405,19 @@ def compatibility_checks(parts, profile, gpu_id, memory_part_id=None, storage_pa
         "cpu-ryzen7-9700x",
     )
     cpu = spec(cpu_part_id)
-    board = spec("motherboard-asrock-b850m-pro-rs-wifi")
+    motherboard_part_id = motherboard_part_id or next(
+        (str(part_id) for part_id in fixed_ids if (parts.get(str(part_id)) or {}).get("category") == "motherboard"),
+        "motherboard-asrock-b850m-pro-rs-wifi",
+    )
+    psu_part_id = psu_part_id or next(
+        (str(part_id) for part_id in fixed_ids if (parts.get(str(part_id)) or {}).get("category") == "psu"),
+        "psu-corsair-rm850e-2025",
+    )
+    case_part_id = case_part_id or next(
+        (str(part_id) for part_id in fixed_ids if (parts.get(str(part_id)) or {}).get("category") == "case"),
+        "case-fractal-pop-air-tg",
+    )
+    board = spec(motherboard_part_id)
     memory_part_id = memory_part_id or profile.get("primary_memory_choice_id") or next(
         (
             str(part_id) for part_id in fixed_ids
@@ -415,10 +427,11 @@ def compatibility_checks(parts, profile, gpu_id, memory_part_id=None, storage_pa
     )
     memory = spec(memory_part_id)
     storage = spec(storage_part_id or "ssd-crucial-p3-plus-1tb")
-    psu = spec("psu-corsair-rm850e-2025")
-    case = spec("case-fractal-pop-air-tg")
-    cooler = spec(cooler_part_id or "cooler-thermalright-pa120-se-v3")
+    psu = spec(psu_part_id)
+    case = spec(case_part_id)
+    cooler = spec(cooler_part_id or "cooler-thermalright-pa120-se-v3") if not cooler_included else {}
     gpu = spec(gpu_id)
+    selected_ids = set(str(x) for x in (selected_part_ids or (fixed_ids + [gpu_id, memory_part_id, storage_part_id] + ([cooler_part_id] if cooler_part_id else []))))
 
     add("cpu_motherboard_socket", "PASS" if cpu.get("socket") and cpu.get("socket") == board.get("socket") else "FAIL",
         "CPU socket {} / board socket {}".format(cpu.get("socket", "unknown"), board.get("socket", "unknown")))
@@ -453,7 +466,9 @@ def compatibility_checks(parts, profile, gpu_id, memory_part_id=None, storage_pa
     add("cpu_bios_support", bios_status, bios_detail)
 
     cooler_guidance = str(cpu.get("recommended_cooler_guidance") or "")
-    if cpu.get("cooler_guidance_review") is True and cooler.get("cooling_type") != "liquid":
+    if cooler_included and cpu.get("cooler_included") is True:
+        add("cpu_cooling_headroom", "REVIEW", "CPU BOX includes a bundled stock cooler; check noise/temperature under long game builds and analysis loads.")
+    elif cpu.get("cooler_guidance_review") is True and cooler.get("cooling_type") != "liquid":
         add(
             "cpu_cooling_headroom", "REVIEW",
             "{}; currently configured CPU cooler is not the liquid-cooling setup described by the manufacturer. Sustained build/analysis thermal performance and any cooler replacement cost are not verified.".format(cooler_guidance),
@@ -466,12 +481,14 @@ def compatibility_checks(parts, profile, gpu_id, memory_part_id=None, storage_pa
     )
     add("memory_type_capacity_dual_channel", "PASS" if memory_ok else "FAIL",
         "DDR type, >= {}GB, >= {} DIMMs".format(profile.get("minimum_ram_gb", 32), profile.get("minimum_memory_modules", 2)))
-    qvl_verified = memory.get("qvl_verified_with_asrock_b850m_pro_rs_wifi") is True
+    board_qvl_key = "qvl_verified_with_" + motherboard_part_id.removeprefix("motherboard-").replace("-", "_")
+    qvl_verified = memory.get(board_qvl_key) is True
+    board_name = (parts.get(motherboard_part_id) or {}).get("name") or motherboard_part_id
     add(
         "memory_qvl",
         "PASS" if qvl_verified else "REVIEW",
-        "Exact kit {} QVL entry for ASRock B850M Pro RS WiFi: {}".format(
-            memory_part_id,
+        "Exact kit {} QVL entry for {}: {}".format(
+            memory_part_id, board_name,
             "verified" if qvl_verified else "unconfirmed; DDR5/EXPO support alone is not proof of exact-kit QVL compatibility",
         ),
     )
@@ -503,17 +520,21 @@ def compatibility_checks(parts, profile, gpu_id, memory_part_id=None, storage_pa
     else:
         add("gpu_slot_thickness", "PASS", "GPU occupies {} slots; no additional adjacent-card requirement is configured".format(gpu_slots))
 
-    sockets = cooler.get("supported_sockets") or []
-    cooler_height, case_height = cooler.get("cooler_height_mm"), case.get("cooler_clearance_mm")
-    if "AM5" not in sockets:
-        add("cooler_socket", "FAIL", "AM5 mounting compatibility not proven")
+    if cooler_included and cpu.get("cooler_included") is True:
+        add("cooler_socket", "PASS", "CPU BOX includes its bundled stock cooler; preserve the exact boxed SKU.")
+        add("cooler_case_clearance", "REVIEW", "Confirm exact boxed SKU and airflow before purchase.")
     else:
-        add("cooler_socket", "PASS", "AM5 mounting support declared")
-    if not isinstance(cooler_height, int) or not isinstance(case_height, int):
-        add("cooler_case_clearance", "REVIEW", "Cooler/case heights are unverified")
-    else:
-        add("cooler_case_clearance", "PASS" if cooler_height <= case_height else "FAIL",
-            "Cooler {}mm / case limit {}mm".format(cooler_height, case_height))
+        sockets = cooler.get("supported_sockets") or []
+        cooler_height, case_height = cooler.get("cooler_height_mm"), case.get("cooler_clearance_mm")
+        if "AM5" not in sockets:
+            add("cooler_socket", "FAIL", "AM5 mounting compatibility not proven")
+        else:
+            add("cooler_socket", "PASS", "AM5 mounting support declared")
+        if not isinstance(cooler_height, int) or not isinstance(case_height, int):
+            add("cooler_case_clearance", "REVIEW", "Cooler/case heights are unverified")
+        else:
+            add("cooler_case_clearance", "PASS" if cooler_height <= case_height else "FAIL",
+                "Cooler {}mm / case limit {}mm".format(cooler_height, case_height))
 
     gpu_psu = gpu.get("minimum_psu_w")
     psu_w = psu.get("wattage_w")
@@ -533,8 +554,9 @@ def compatibility_checks(parts, profile, gpu_id, memory_part_id=None, storage_pa
     else:
         add("gpu_power_connector", "REVIEW",
             "Unrecognized GPU connector type {}; verify exact cable and manufacturer requirement".format(connector))
-    add("os_license", "PASS" if "os-windows11-home" in parts else "FAIL",
-        "Windows 11 Home license budgeted unless an existing transferable license is confirmed")
+    selected_has_os = any((parts.get(item_id) or {}).get("category") == "os_license" for item_id in selected_ids)
+    add("os_license", "PASS" if selected_has_os else "FAIL",
+        "Windows 11 Home license included in this exact build unless a transferable existing license is verified")
 
     statuses = [x["status"] for x in checks]
     overall = "FAIL" if "FAIL" in statuses else "REVIEW" if "REVIEW" in statuses else "PASS"
