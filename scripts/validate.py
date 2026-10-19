@@ -242,10 +242,11 @@ def main():
                 errors.append("self_build_plan all-in total mismatch: " + bid)
             target_all_in = build.get("target_all_in_jpy", total_budget + 1)
             target_decision = str(build.get("decision") or "")
-            if target_all_in > total_budget and target_decision != "OVER_BUDGET_TARGET":
-                errors.append("self_build_plan over-budget alternative is not explicitly labeled: " + bid)
-            if target_all_in <= total_budget and target_decision == "OVER_BUDGET_TARGET":
-                errors.append("self_build_plan incorrectly labels an in-budget alternative as over budget: " + bid)
+            soft_total_budget = build_plan.get("soft_ceiling_total_jpy", total_budget)
+            if target_all_in > soft_total_budget and target_decision not in ("OVER_SOFT_BUDGET_BAND", "BLOCKED_COMPATIBILITY"):
+                errors.append("self_build_plan above-soft-band alternative is not explicitly labeled: " + bid)
+            if target_all_in <= soft_total_budget and target_decision == "OVER_SOFT_BUDGET_BAND":
+                errors.append("self_build_plan incorrectly labels a soft-band alternative as over budget: " + bid)
             statuses = [c.get("status") for c in (build.get("compatibility_checks") or [])]
             expected_status = "FAIL" if "FAIL" in statuses else "REVIEW" if "REVIEW" in statuses else "PASS"
             if build.get("compatibility_status") != expected_status:
