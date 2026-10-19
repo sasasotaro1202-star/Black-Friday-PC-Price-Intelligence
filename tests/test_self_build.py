@@ -297,6 +297,14 @@ class SelfBuildPlannerTests(unittest.TestCase):
                 int(profile["total_budget_jpy"]) - build["target_all_in_jpy"],
             )
             self.assertEqual(
+                build["target_remaining_soft_budget_jpy"],
+                int(profile["soft_ceiling_total_jpy"]) - build["target_all_in_jpy"],
+            )
+            self.assertEqual(
+                build["target_within_soft_total_budget"],
+                build["target_all_in_jpy"] <= int(profile["soft_ceiling_total_jpy"]),
+            )
+            self.assertEqual(
                 build["target_within_pc_budget"],
                 build["target_pc_total_jpy"] <= int(profile["pc_budget_jpy"]),
             )
@@ -305,19 +313,21 @@ class SelfBuildPlannerTests(unittest.TestCase):
                 build["target_all_in_jpy"] <= int(profile["total_budget_jpy"]),
             )
             expected_decision = (
-                "OVER_BUDGET_TARGET" if build["target_all_in_jpy"] > int(profile["total_budget_jpy"])
+                "OVER_SOFT_BUDGET_BAND" if build["target_all_in_jpy"] > int(profile["soft_ceiling_total_jpy"])
                 else "WAIT_FOR_COMPATIBILITY_REVIEW"
             )
             if build["compatibility_status"] == "FAIL":
                 expected_decision = "COMPATIBILITY_FAIL"
             self.assertEqual(build["decision"], expected_decision)
-        self.assertEqual(plan["pc_planned_budget_jpy"], 360000)
+        self.assertEqual(plan["pc_planned_budget_jpy"], 380000)
+        self.assertEqual(plan["soft_ceiling_total_jpy"], 420000)
+        self.assertEqual(plan["soft_overrun_allowance_jpy"], 20000)
         self.assertEqual(plan["pc_budget_jpy"], int(profile["pc_budget_jpy"]))
         self.assertEqual(
             plan["pc_planned_budget_jpy"]
             + plan["peripheral_budget_jpy"]
             + plan["unallocated_contingency_jpy"],
-            plan["total_budget_jpy"],
+            plan["soft_ceiling_total_jpy"],
         )
         self.assertTrue(plan["budget_arithmetic_valid"])
         for build in builds.values():
@@ -325,9 +335,21 @@ class SelfBuildPlannerTests(unittest.TestCase):
                 build["target_within_planned_pc_budget"],
                 build["target_pc_total_jpy"] <= plan["pc_planned_budget_jpy"],
             )
+        ti = builds["gpu-rtx5070ti-16gb"]
+        self.assertEqual(ti["target_all_in_jpy"], 402000)
+        self.assertFalse(ti["target_within_total_budget"])
+        self.assertTrue(ti["target_within_soft_total_budget"])
+        scenarios = {x["id"]: x for x in plan["budget_scenarios"]}
+        self.assertEqual(scenarios["budget_400k"]["total_budget_jpy"], 400000)
+        self.assertEqual(scenarios["budget_400k"]["soft_ceiling_total_jpy"], 420000)
+        ti_40k = next(x for x in scenarios["budget_400k"]["builds"] if x["gpu_choice_id"] == "gpu-rtx5070ti-16gb")
+        self.assertFalse(ti_40k["within_scenario_target"])
+        self.assertTrue(ti_40k["within_soft_band"])
         report = planner.render_plan_markdown(plan)
         self.assertIn("予算（すべて日本円）", report)
         self.assertIn("¥400,000", report)
+        self.assertIn("¥420,000", report)
+        self.assertIn("35万円・40万円・45万円の一式予算比較", report)
         self.assertNotIn("$400,000", report)
         self.assertFalse(plan["buy_now_authorized"])
 
