@@ -264,7 +264,7 @@
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
-  "budget_scope_note": "総額上限400,000円、PC本体の基準目標360,000円。周辺機器の計画配分は約35,000円（27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差・ケーブル不足用の柔軟な予備枠）。電源タップは所有済みのため購入候補・価格監視・予算から除外する。スピーカー、サブモニター、ヘッドセットも購入対象・候補・価格監視・予算・総額計算から完全に除外する。周辺機器送料は購入チャネル別に計上する。オンライン配送では実際の送料・必須費用を最終支払額に加え、未確認時は該当商品の送料予備枠で保守的に試算して0円と仮定しない。実店舗の現金購入では配送送料を計上せず、同一型番の税込現金価格と支店在庫を別々に確認する。ネット注文の店舗受け取りはオンライン決済額に必須費用を反映し、受取可能な支店在庫を別途確認する。ポイントは現金値引きに算入しない。総額予備費5,000円を別に確保し、PC本体の最終許容額は総額400,000円から実際の必要周辺機器費と予備費を引いて動的に算出する。価格目標は確定値ではなく、購入前に型番・在庫・決済額を確認する。",
+  "budget_scope_note": "総額上限400,000円、PC本体の基準目標360,000円。周辺機器の計画配分は約35,000円（27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差・ケーブル不足用の柔軟な予備枠）。電源タップは所有済みのため購入候補・価格監視・予算から除外する。スピーカー、サブモニター、ヘッドセットも購入対象・候補・価格監視・予算・総額計算から完全に除外する。周辺機器送料は購入チャネル別に計上する。オンライン配送では実際の送料・必須費用を最終支払額に加え、未確認時は該当商品の送料予備枠で保守的に試算して0円と仮定しない。実店舗の現金購入では配送送料を計上せず、同一型番の税込現金価格と支店在庫を別々に確認する。ネット注文の店舗受け取りはオンライン決済額に必須費用を反映し、受取可能な支店在庫を別途確認する。ポイントは現金値引きに算入しない。総額予備費5,000円を別に確保し、PC本体の最終許容額は総額400,000円から実際の必要周辺機器費と予備費を引いて動的に算出する。価格目標は確定値ではなく、購入前に型番・在庫・決済額を確認する。 Compare 350,000/400,000/450,000 JPY as separate total-system ceilings; preserve mandatory peripherals and the 5,000 JPY contingency for each tier, and never treat target arithmetic as a checkout quote.",
   "peripherals": [
     {
       "id": "main_monitor",
@@ -1862,7 +1862,7 @@
       "legacy_single_branch_requires_explicit_cash_price_basis": true
     }
   },
-  "target_budget_notes": "総額上限400,000円。PC本体の基準目標360,000円。周辺機器35,000円は参考配分で固定枠ではない。メインモニターは1台だけ。電源タップは所有済みのため購入・監視・予算から除外。スピーカー、サブモニター、ヘッドセットを購入対象・ランキング・価格監視・総額試算に含めない。予備費5,000円を別途確保し、PC本体に使える額は周辺機器の実費から動的に算出する。周辺機器送料は実費・チャネル別に計上し、ポイントは現金支払い額から控除しない。価格目標と実売価格を区別し、未確認が残る場合は購入許可しない。",
+  "target_budget_notes": "総額上限400,000円。PC本体の基準目標360,000円。周辺機器35,000円は参考配分で固定枠ではない。メインモニターは1台だけ。電源タップは所有済みのため購入・監視・予算から除外。スピーカー、サブモニター、ヘッドセットを購入対象・ランキング・価格監視・総額試算に含めない。予備費5,000円を別途確保し、PC本体に使える額は周辺機器の実費から動的に算出する。周辺機器送料は実費・チャネル別に計上し、ポイントは現金支払い額から控除しない。価格目標と実売価格を区別し、未確認が残る場合は購入許可しない。 Budget alternatives are separate complete-build plans; each includes peripherals and contingency, and all prices remain aspirational until direct SKU/stock/checkout verification.",
   "target_budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
   "market_risk_policy": {
     "snapshot_date": "2026-10-17",
@@ -2128,5 +2128,16 @@
       "GPU tier selected by measured gaming/rendering vs VRAM needs",
       "12+ core CPU if local engine-source builds and parallel data jobs justify it"
     ]
-  }
+  },
+  "budget_build_candidate_ids": [
+    "budget-350k-rtx5060ti-fit",
+    "budget-350k-rtx5070-over",
+    "budget-400k-rtx5070-balanced",
+    "budget-400k-rtx5060ti-2tb",
+    "budget-400k-rtx5070ti-over",
+    "budget-450k-balanced-capacity",
+    "budget-450k-5070-64gb-1tb",
+    "budget-450k-gpu-priority",
+    "budget-450k-gpu-storage"
+  ]
 }
