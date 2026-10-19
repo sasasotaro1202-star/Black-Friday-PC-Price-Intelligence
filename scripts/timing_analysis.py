@@ -456,7 +456,9 @@ def build_self_build_timing_summary(build_plan, build_config=None, component_obs
         and _is_positive_yen(x.get("checkout_price_jpy")))
     target_pc, target_all = chosen.get("target_pc_total_jpy"), chosen.get("target_all_in_jpy")
     total_budget, pc_budget = build_plan.get("total_budget_jpy"), build_plan.get("pc_budget_jpy")
+    soft_total_budget = build_plan.get("soft_ceiling_total_jpy", total_budget)
     remaining = total_budget - target_all if isinstance(total_budget, int) and isinstance(target_all, int) else None
+    remaining_soft = soft_total_budget - target_all if isinstance(soft_total_budget, int) and isinstance(target_all, int) else None
     missing_ids = list(chosen.get("missing_or_untrusted_market_reference_ids") or [])
     compatibility = chosen.get("compatibility_status") or "REVIEW"
     blockers = [
@@ -472,9 +474,9 @@ def build_self_build_timing_summary(build_plan, build_config=None, component_obs
     elif isinstance(target_pc, int) and isinstance(pc_budget, int) and target_pc > pc_budget:
         status = "OVER_BUDGET_TARGET"
         blockers.insert(0, "PC本体の購入目標がPC予算を超過している。")
-    elif isinstance(target_all, int) and isinstance(total_budget, int) and target_all > total_budget:
-        status = "OVER_BUDGET_TARGET"
-        blockers.insert(0, "周辺機器込みの購入目標が総予算を超過している。")
+    elif isinstance(target_all, int) and isinstance(soft_total_budget, int) and target_all > soft_total_budget:
+        status = "OVER_SOFT_BUDGET_BAND"
+        blockers.insert(0, "周辺機器込みの総額が初期許容帯を超過している。40万円目標だけでなく許容帯・45万円シナリオも比較する。")
     elif reference_count < len(tracked):
         status = "WAIT_FOR_COMPONENT_REFERENCES"
         blockers.insert(0, "比較参考価格の確認が完了していない部品がある: " + (", ".join(missing_ids) or "未確認の部品"))
@@ -499,6 +501,9 @@ def build_self_build_timing_summary(build_plan, build_config=None, component_obs
         "target_pc_total_jpy": target_pc, "target_all_in_jpy": target_all,
         "total_budget_jpy": total_budget, "target_remaining_budget_jpy": remaining,
         "target_within_total_budget": chosen.get("target_within_total_budget") is True,
+        "soft_ceiling_total_jpy": soft_total_budget,
+        "target_remaining_soft_budget_jpy": remaining_soft,
+        "target_within_soft_total_budget": chosen.get("target_within_soft_total_budget") is True,
         "market_reference_estimate_jpy": chosen.get("market_reference_estimate_jpy"),
         "market_reference_all_in_estimate_jpy": chosen.get("market_reference_all_in_estimate_jpy"),
         "market_reference_estimate_is_checkout_price": False,
@@ -524,6 +529,7 @@ def self_build_purchase_gate_reason(self_build_timing):
         "BLOCKED_COMPATIBILITY": "self_build_compatibility_failed",
         "WAIT_FOR_COMPATIBILITY_REVIEW": "self_build_wait_for_compatibility_review",
         "OVER_BUDGET_TARGET": "self_build_target_over_budget",
+        "OVER_SOFT_BUDGET_BAND": "self_build_over_soft_budget_band",
         "WAIT_FOR_COMPONENT_REFERENCES": "self_build_wait_for_component_references",
         "WAIT_FOR_OFFICIAL_COMPONENT_OFFERS": "self_build_wait_for_official_component_offers",
         "WAIT_FOR_FINAL_COMPATIBILITY_AND_BUDGET_GATE": "self_build_wait_for_final_checkout_gate",
