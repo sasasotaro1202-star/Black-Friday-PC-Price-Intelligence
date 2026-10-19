@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-10-19T20:30:53+09:00
+更新: 2026-10-19T23:05:34+09:00
 価格フェーズ: **PRE_BLACK_FRIDAY_REFERENCE**
 暫定の広域監視窓（公式セール開催期間ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 総予算: ¥400,000
@@ -43,7 +43,7 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |Lenovo Legion Pro 5i Gen 10（16型 Intel）|laptop|RTX 5080|¥360,000|未確認|—|¥337,240|¥337,240|¥0|0.0%|¥269,792|¥252,930|¥236,068|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040)|
 |ROG Strix G16 G614FR-R9X3D5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥359,800|¥359,800|¥0|0.0%|¥287,840|¥269,850|¥251,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
 |ROG Strix G16 G614PR-R9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥359,800|¥359,800|¥0|0.0%|¥287,840|¥269,850|¥251,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
-|GIGABYTE GAMING A18 PRO DXJG3JPBC4JH|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥419,800|¥419,800|¥59,800|14.2%|¥335,840|¥314,850|¥293,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200)|
+|GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|laptop|RTX 5070 Ti|¥360,000|未確認|—|¥419,800|¥419,800|¥59,800|14.2%|¥335,840|¥314,850|¥293,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200)|
 |G TUNE P5-I7G70BK-C（ブラック）|laptop|RTX 5070 Laptop GPU|¥360,000|未確認|—|¥448,800|¥448,800|¥88,800|19.8%|¥359,040|¥336,600|¥314,160|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/)|
 |ROG Zephyrus G16 GU606AR-U9R5070TIG32G|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥599,800|¥599,800|¥239,800|40.0%|¥479,840|¥449,850|¥419,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/90nr0pc2-m002c0-rog-zephyrus-g16-2026.html)|
 |ROG Zephyrus G14 GU405AR-U9R5070TIG|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥684,800|¥684,800|¥324,800|47.4%|¥547,840|¥513,600|¥479,360|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/90nr0p94-m001d0-rog-zephyrus-g14-2026-gu405.html)|
@@ -75,7 +75,7 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |ROG Strix G16 G614FR-R9X3D5070TI|¥359,800|0.0%|¥323,800|¥305,800|¥287,800|¥269,800|¥251,900|10%|same_family|
 |ROG Strix G16 G614PR-R9R5070TI|¥359,800|0.0%|¥323,800|¥305,800|¥287,800|¥269,800|¥251,900|10%|same_family|
 |GALLERIA ZL9R-R57T-6|¥329,980|0.0%|¥297,000|¥280,500|¥264,000|¥247,500|¥231,000|10%|none|
-|GIGABYTE GAMING A18 PRO DXJG3JPBC4JH|¥419,800|14.2%|¥377,800|¥356,800|¥335,800|¥314,800|¥293,900|15%|none|
+|GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|¥419,800|14.2%|¥377,800|¥356,800|¥335,800|¥314,800|¥293,900|15%|same_gpu|
 |ROG Zephyrus G16 GU606AR-U9R5070TIG32G|¥599,800|40.0%|¥539,800|¥509,800|¥479,800|¥449,800|¥419,900|未到達|none|
 |ROG Zephyrus G14 GU405AR-U9R5070TIG|¥684,800|47.4%|¥616,300|¥582,100|¥547,800|¥513,600|¥479,400|未到達|none|
 
