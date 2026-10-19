@@ -379,17 +379,23 @@
       {
         "id": "budget_350k",
         "total_budget_jpy": 350000,
-        "description_ja": "35万円案。PC本体・必須周辺機器・送料/必要小物・5,000円予備費を含む総額上限。"
+        "description_ja": "35万円目標案。標準の許容帯は37万円まで。周辺機器・送料/必要小物・5,000円予備費込み。",
+        "soft_overrun_allowance_jpy": 20000,
+        "soft_ceiling_total_jpy": 370000
       },
       {
         "id": "budget_400k",
         "total_budget_jpy": 400000,
-        "description_ja": "40万円案。標準の基準シナリオ。必須周辺機器・送料/必要小物・5,000円予備費込み。"
+        "description_ja": "40万円目標案（本命）。標準の許容帯は42万円まで。周辺機器・送料/必要小物・5,000円予備費込み。",
+        "soft_overrun_allowance_jpy": 20000,
+        "soft_ceiling_total_jpy": 420000
       },
       {
         "id": "budget_450k",
         "total_budget_jpy": 450000,
-        "description_ja": "45万円案。性能・制作・分析の実用的な余裕を比較する拡張シナリオ。使い切ることは目的にしない。"
+        "description_ja": "45万円目標案。標準の許容帯は47万円まで。ゲーム制作・分析・容量拡張を比較するが、使い切ることは目的にしない。",
+        "soft_overrun_allowance_jpy": 20000,
+        "soft_ceiling_total_jpy": 470000
       }
     ],
     "budget_scenario_policy": {
