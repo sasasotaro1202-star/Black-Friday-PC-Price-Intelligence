@@ -40,7 +40,7 @@
     "allowed_comparison_domains": [
       "kakaku.com"
     ],
-    "policy": "Black Friday target prices are aspirational, not forecasts. Total-system hard ceiling is JPY 400,000. PC planning target is JPY 360,000, while maximum PC spend is dynamically capped by the all-in total. Peripheral allocation is flexible at JPY 35,000, not an obligation to spend the full amount. Include exactly one 27-inch WQHD high-refresh main monitor, keyboard, mouse, and mousepad. In-stock fallbacks are tracked for RAM, 1TB NVMe SSD, CPU cooler, and the RTX 5070 class; substitution is allowed only after exact model/price/stock/compatibility verification. The power strip is already owned and excluded from purchase, monitoring, and budget. Buy only necessary cables after checking included cables. Do not include speakers, a sub-monitor, or a headset in candidate lists, monitoring, budgets, or totals. Keep JPY 5,000 as an unallocated contingency. Compare online delivery, in-store cash purchase, and online order with store pickup per item using the exact SKU/variant, direct price, total cash checkout amount including fees, stock, warranty and return terms. Points are not cash discounts. Comparison-site prices and BF targets are not checkout prices or verified BF deals. Include online delivery shipping, but never assume peripheral shipping for in-store purchases. Keep dark-horse candidates in comparisons with explicit overruns; never authorize purchases from target prices alone. Track a Ryzen 9 9900X alternative with the same RTX 5070 12GB for a CPU-workload comparison; show a Ryzen 9 9950X as a CPU dark horse only with an explicit over-budget lower-bound calculation and cooling caveat. Never treat either comparison target as a live checkout quote.",
+    "policy": "Black Friday target prices are aspirational, not forecasts. JPY 400,000 is the preferred total-system target, not an absolute cutoff. A soft evaluation band extends to JPY 420,000 for a materially better configuration; the separate JPY 450,000 scenario extends to JPY 470,000. PC planning target is JPY 360,000, while maximum PC spend is dynamically capped by the all-in total. Peripheral allocation is flexible at JPY 35,000, not an obligation to spend the full amount. Include exactly one 27-inch WQHD high-refresh main monitor, keyboard, mouse, and mousepad. In-stock fallbacks are tracked for RAM, 1TB NVMe SSD, CPU cooler, and the RTX 5070 class; substitution is allowed only after exact model/price/stock/compatibility verification. The power strip is already owned and excluded from purchase, monitoring, and budget. Buy only necessary cables after checking included cables. Do not include speakers, a sub-monitor, or a headset in candidate lists, monitoring, budgets, or totals. Keep JPY 5,000 as an unallocated contingency. Compare online delivery, in-store cash purchase, and online order with store pickup per item using the exact SKU/variant, direct price, total cash checkout amount including fees, stock, warranty and return terms. Points are not cash discounts. Comparison-site prices and BF targets are not checkout prices or verified BF deals. Include online delivery shipping, but never assume peripheral shipping for in-store purchases. Keep dark-horse candidates in comparisons with explicit target overrun and soft-band status; never auto-reject a modest overrun when the workload benefit is meaningful, and never authorize purchases from target prices alone. Track a Ryzen 9 9900X alternative with the same RTX 5070 12GB for a CPU-workload comparison; show a Ryzen 9 9950X as a CPU dark horse only with an explicit over-budget lower-bound calculation and cooling caveat. Never treat either comparison target as a live checkout quote.",
     "allowed_search_reference_domains": [
       "kakaku.com",
       "amazon.co.jp",
@@ -285,7 +285,10 @@
         "peripherals_reference_jpy": 35000,
         "contingency_jpy": 5000,
         "all_in_target_jpy": 423000,
-        "remaining_to_hard_ceiling_jpy": -23000
+        "remaining_to_hard_ceiling_jpy": -23000,
+        "soft_ceiling_total_jpy": 420000,
+        "target_overrun_vs_400k_jpy": 23000,
+        "remaining_to_soft_ceiling_jpy": -3000
       },
       "rules": [
         "The 2TB drive replaces the 1TB drive; never add both SSD prices to the same build.",
@@ -319,7 +322,10 @@
         "peripherals_reference_jpy": 35000,
         "contingency_jpy": 5000,
         "all_in_target_jpy": 406000,
-        "remaining_to_hard_ceiling_jpy": -6000
+        "remaining_to_hard_ceiling_jpy": -6000,
+        "soft_ceiling_total_jpy": 420000,
+        "target_overrun_vs_400k_jpy": 6000,
+        "remaining_to_soft_ceiling_jpy": 14000
       },
       "rules": [
         "The 64GB kit replaces the selected 32GB kit; never add both RAM prices to the same build.",
@@ -373,27 +379,33 @@
       {
         "id": "budget_350k",
         "total_budget_jpy": 350000,
-        "description_ja": "35万円案。必須周辺機器・5,000円予備費を含む総額上限。32GB RAM・1TB SSDを維持し、実価格で成立しないなら購入可能と表示しない。"
+        "description_ja": "35万円目安案。必須周辺機器・5,000円予備費込み。総額目標を超える案も、許容帯37万円内なら性能差と用途適合を比較する。",
+        "soft_overrun_allowance_jpy": 20000,
+        "soft_ceiling_total_jpy": 370000
       },
       {
         "id": "budget_400k",
         "total_budget_jpy": 400000,
-        "description_ja": "40万円案。標準の基準シナリオ。必須周辺機器・5,000円予備費込み。"
+        "description_ja": "40万円目安案（本命）。必須周辺機器・5,000円予備費込み。目標は40万円、許容帯は42万円まで。2万円超過は自動失格にせず、改善点・超過額・互換性を比較する。",
+        "soft_overrun_allowance_jpy": 20000,
+        "soft_ceiling_total_jpy": 420000
       },
       {
         "id": "budget_450k",
         "total_budget_jpy": 450000,
-        "description_ja": "45万円案。追加5万円を性能・制作・分析の実用性向上に使う拡張シナリオ。GPUだけでなく、64GB RAM・2TB SSD・高コアCPUの完全構成を比較し、総額の使い切りは目的にしない。"
+        "description_ja": "45万円目安案。追加予算を性能・ゲーム制作・分析の実用性に使う拡張シナリオ。総額目標45万円、許容帯47万円。64GB RAM・2TB SSD・高コアCPUを完全構成で比較する。",
+        "soft_overrun_allowance_jpy": 20000,
+        "soft_ceiling_total_jpy": 470000
       }
     ],
     "budget_scenario_policy": {
       "currency": "JPY",
-      "hard_ceiling_per_scenario": true,
+      "hard_ceiling_per_scenario": false,
       "peripherals_included": true,
       "unallocated_contingency_jpy": 5000,
       "required_peripherals": "One 27-inch WQHD main monitor, keyboard, mouse, mousepad, cables only if needed",
       "excluded": "Speakers, secondary monitor, headset, power strip",
-      "selection_rule": "Compare complete as-purchased configurations against each scenario ceiling. Include PC parts, OS, PC shipping/small parts, required peripheral cash costs and shipping, plus contingency. Do not assume post-purchase upgrades, do not mix target prices with live checkout evidence, and never authorize purchase from target arithmetic alone.",
+      "selection_rule": "各シナリオの総額は厳密な上限ではなく目標。目標超過はまず最大20,000円の許容帯まで含め、用途適合・性能差・超過額・互換性・実売根拠を比較する。許容帯を超えた構成も候補から消さず、別シナリオとして超過額を明示する。PC部品、OS、PC送料/小物、必要周辺機器の現金支払額/送料、5,000円予備費を含める。価格目標は実売/決済証拠や購入許可ではない。",
       "workload_priorities": [
         "gaming at 1440p",
         "game development in Unreal Engine/Unity/Godot",
@@ -409,8 +421,14 @@
         "2TB NVMe SSD for games/assets/builds/datasets",
         "GPU tier selected by measured gaming/rendering vs VRAM needs",
         "12+ core CPU if local engine-source builds and parallel data jobs justify it"
-      ]
-    }
+      ],
+      "default_soft_overrun_allowance_jpy": 20000,
+      "allow_target_overrun_for_value": true,
+      "automatic_purchase_authorization": false
+    },
+    "soft_overrun_allowance_jpy": 20000,
+    "soft_ceiling_total_jpy": 420000,
+    "budget_is_approximate": true
   },
   "parts": [
     {
