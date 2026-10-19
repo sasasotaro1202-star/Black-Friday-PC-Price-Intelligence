@@ -890,6 +890,7 @@ def build_budget_scenarios(profile, parts, by_id, now, max_age):
     allowed_domains = profile.get("allowed_search_reference_domains") or profile.get("allowed_comparison_domains") or ["kakaku.com"]
     default_peripherals = int(profile.get("peripheral_budget_jpy", 35000))
     default_reserve = int(profile.get("unallocated_contingency_jpy", 5000))
+    default_soft_overrun = max(0, int(profile.get("soft_overrun_allowance_jpy", 20000)))
 
     for cfg in profile.get("budget_build_candidates") or []:
         if not isinstance(cfg, dict):
@@ -910,6 +911,10 @@ def build_budget_scenarios(profile, parts, by_id, now, max_age):
         cooler_included = cfg.get("cooler_included_by_cpu") is True
         peripherals = int(cfg.get("peripheral_budget_jpy", default_peripherals))
         reserve = int(cfg.get("unallocated_contingency_jpy", default_reserve))
+        tier_policy = next((x for x in (profile.get("budget_scenarios") or [])
+                            if isinstance(x, dict) and x.get("total_budget_jpy") == tier), {})
+        soft_allowance = max(0, int(tier_policy.get("soft_overrun_allowance_jpy", profile.get("soft_overrun_allowance_jpy", default_soft_overrun))))
+        soft_ceiling = max(tier, int(cfg.get("soft_ceiling_total_jpy", tier_policy.get("soft_ceiling_total_jpy", tier + soft_allowance))))
         shipping = int(cfg.get("build_shipping_reserve_jpy", profile.get("build_shipping_reserve_jpy", 0)))
         small_parts = int(cfg.get("small_parts_reserve_jpy", profile.get("small_parts_reserve_jpy", 0)))
 
@@ -987,8 +992,13 @@ def build_budget_scenarios(profile, parts, by_id, now, max_age):
         pc_total = target_parts + shipping + small_parts
         all_in = pc_total + peripherals + reserve
         pc_cap = max(0, tier - peripherals - reserve)
+        soft_pc_cap = max(0, soft_ceiling - peripherals - reserve)
         remaining = tier - all_in
         overrun = max(0, all_in - tier)
+        remaining_soft = soft_ceiling - all_in
+        soft_overrun = max(0, all_in - soft_ceiling)
+        within_target = all_in <= tier and pc_total <= pc_cap
+        within_soft_band = all_in <= soft_ceiling and pc_total <= soft_pc_cap
 
         cpu_specs = (parts.get(cpu_id) or {}).get("specs") or {}
         gpu_specs = (parts.get(gpu_id) or {}).get("specs") or {}
@@ -1013,8 +1023,8 @@ def build_budget_scenarios(profile, parts, by_id, now, max_age):
         workload = assess_workload_fit(profile, parts, ids, gpu_id, memory_id)
         if not config_valid:
             decision = "BLOCKED_INCOMPLETE_OR_BELOW_WORKLOAD_BASELINE"
-        elif all_in > tier or pc_total > pc_cap:
-            decision = "OVER_BUDGET_TARGET"
+        elif all_in > soft_ceiling or pc_total > soft_pc_cap:
+            decision = "OVER_SOFT_BUDGET_BAND"
         elif compatibility == "FAIL":
             decision = "BLOCKED_COMPATIBILITY"
         elif compatibility == "REVIEW":
@@ -1022,23 +1032,23 @@ def build_budget_scenarios(profile, parts, by_id, now, max_age):
         else:
             decision = "WAIT_FOR_DIRECT_PRICE_STOCK_CHECKOUT_AND_BF_EVIDENCE"
 
-        soft_allowance = int(profile.get("soft_overrun_allowance_jpy", 20000))
-        soft_ceiling = int(cfg.get("soft_ceiling_total_jpy", tier + soft_allowance))
         candidates.append({
             "id": str(cfg.get("id") or (str(tier) + "_" + gpu_id)),
             "budget_tier_jpy": tier, "budget_tier_label": str(cfg.get("budget_tier_label") or "{}万円".format(tier // 10000)),
             "name": str(cfg.get("name") or "自作PCシナリオ"), "scenario_role": str(cfg.get("scenario_role") or "comparison"),
             "purpose_note_ja": str(cfg.get("purpose_note_ja") or ""), "tradeoff_note_ja": str(cfg.get("tradeoff_note_ja") or ""),
             "target_budget_jpy": tier, "target_peripheral_budget_jpy": peripherals, "target_contingency_jpy": reserve,
-            "target_pc_budget_jpy": pc_cap, "target_parts_subtotal_jpy": target_parts,
+            "target_pc_budget_jpy": pc_cap, "target_pc_soft_budget_jpy": soft_pc_cap,
+            "soft_overrun_allowance_jpy": soft_allowance, "soft_ceiling_total_jpy": soft_ceiling,
+            "target_parts_subtotal_jpy": target_parts,
             "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
             "target_pc_total_jpy": pc_total, "target_all_in_jpy": all_in,
             "target_remaining_budget_jpy": remaining, "target_overrun_jpy": overrun,
-            "target_remaining_soft_budget_jpy": soft_ceiling - all_in,
-            "target_within_total_budget": all_in <= tier and pc_total <= pc_cap,
-            "target_within_soft_total_budget": all_in <= soft_ceiling,
-            "within_scenario_target": all_in <= tier,
-            "within_soft_band": all_in <= soft_ceiling,
+            "target_remaining_soft_budget_jpy": remaining_soft, "target_soft_overrun_jpy": soft_overrun,
+            "target_within_total_budget": within_target,
+            "target_within_soft_total_budget": within_soft_band,
+            "within_scenario_target": within_target,
+            "within_soft_band": within_soft_band,
             "target_prices_complete": not missing_target_ids, "configuration_valid": config_valid,
             "missing_price_part_ids": missing_target_ids, "missing_category_checks": missing_categories,
             "workload_baseline_met": baseline_ok, "selected_part_ids": ids,
@@ -1082,19 +1092,23 @@ def build_budget_scenarios(profile, parts, by_id, now, max_age):
             item["overall_score_100"] = (item.get("scorecard") or {}).get("overall_score")
             item["purchase_evidence_completeness_score_100"] = (item.get("scorecard") or {}).get("purchase_evidence_completeness_score_out_of_100")
         tier_items.sort(key=lambda item: (
-            not item["target_within_total_budget"], -(item.get("overall_score_100") or 0),
-            item["target_all_in_jpy"], item["id"],
+            not item["within_soft_band"], not item["target_within_total_budget"],
+            -(item.get("overall_score_100") or 0), item["target_all_in_jpy"], item["id"],
         ))
         for rank, item in enumerate(tier_items, 1):
             item["display_rank_within_tier"] = rank
-        tier_soft_ceiling = int(tier.get("soft_ceiling_total_jpy", ceiling + int(profile.get("soft_overrun_allowance_jpy", 20000))))
+        tier_soft_allowance = max(0, int(tier.get("soft_overrun_allowance_jpy", profile.get("soft_overrun_allowance_jpy", default_soft_overrun))))
+        tier_soft_ceiling = max(ceiling, int(tier.get("soft_ceiling_total_jpy", ceiling + tier_soft_allowance)))
+        target_pc_ceiling = max(0, ceiling - default_peripherals - default_reserve)
+        soft_pc_ceiling = max(0, tier_soft_ceiling - default_peripherals - default_reserve)
         grouped.append({
             "id": str(tier.get("id") or "budget_" + str(ceiling)), "total_budget_jpy": ceiling,
-            "soft_ceiling_total_jpy": tier_soft_ceiling,
+            "soft_overrun_allowance_jpy": tier_soft_allowance, "soft_ceiling_total_jpy": tier_soft_ceiling,
             "description_ja": str(tier.get("description_ja") or ""),
             "peripheral_target_jpy": default_peripherals, "contingency_jpy": default_reserve,
-            "pc_planned_ceiling_jpy": max(0, tier_soft_ceiling - default_peripherals - default_reserve),
-            "arithmetic_valid": max(0, tier_soft_ceiling - default_peripherals - default_reserve) + default_peripherals + default_reserve == tier_soft_ceiling,
+            "target_pc_ceiling_jpy": target_pc_ceiling, "pc_planned_ceiling_jpy": soft_pc_ceiling,
+            "arithmetic_valid": soft_pc_ceiling + default_peripherals + default_reserve == tier_soft_ceiling,
+            "target_arithmetic_valid": target_pc_ceiling + default_peripherals + default_reserve == ceiling,
             "scenario_count": len(tier_items), "builds": tier_items, "purchase_authorized": False,
             "score_comparison_scope": "within_this_budget_tier_only",
         })
