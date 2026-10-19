@@ -28,7 +28,11 @@ class ProjectConfigurationContractTests(unittest.TestCase):
             [("budget_350k", 350000), ("budget_400k", 400000), ("budget_450k", 450000)],
         )
         policy = self.targets.get("budget_scenario_policy") or {}
-        self.assertTrue(policy.get("hard_ceiling_per_scenario"))
+        self.assertFalse(policy.get("hard_ceiling_per_scenario"))
+        self.assertEqual(
+            [(item["total_budget_jpy"], item["soft_ceiling_total_jpy"]) for item in scenarios],
+            [(350000, 370000), (400000, 420000), (450000, 470000)],
+        )
         self.assertTrue(policy.get("peripherals_included"))
         self.assertEqual(policy.get("unallocated_contingency_jpy"), 5000)
         excluded = policy.get("excluded", "")
