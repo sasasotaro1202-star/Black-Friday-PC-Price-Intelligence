@@ -1027,12 +1027,18 @@ def build_budget_scenarios(profile, parts, by_id, now, max_age):
             "budget_tier_jpy": tier, "budget_tier_label": str(cfg.get("budget_tier_label") or "{}万円".format(tier // 10000)),
             "name": str(cfg.get("name") or "自作PCシナリオ"), "scenario_role": str(cfg.get("scenario_role") or "comparison"),
             "purpose_note_ja": str(cfg.get("purpose_note_ja") or ""), "tradeoff_note_ja": str(cfg.get("tradeoff_note_ja") or ""),
-            "target_budget_jpy": tier, "target_peripheral_budget_jpy": peripherals, "target_contingency_jpy": reserve,
+            soft_allowance = int(profile.get("soft_overrun_allowance_jpy", 20000))
+        soft_ceiling = int(cfg.get("soft_ceiling_total_jpy", tier + soft_allowance))
+        "target_budget_jpy": tier, "target_peripheral_budget_jpy": peripherals, "target_contingency_jpy": reserve,
             "target_pc_budget_jpy": pc_cap, "target_parts_subtotal_jpy": target_parts,
             "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
             "target_pc_total_jpy": pc_total, "target_all_in_jpy": all_in,
             "target_remaining_budget_jpy": remaining, "target_overrun_jpy": overrun,
+            "target_remaining_soft_budget_jpy": soft_ceiling - all_in,
             "target_within_total_budget": all_in <= tier and pc_total <= pc_cap,
+            "target_within_soft_total_budget": all_in <= soft_ceiling,
+            "within_scenario_target": all_in <= tier,
+            "within_soft_band": all_in <= soft_ceiling,
             "target_prices_complete": not missing_target_ids, "configuration_valid": config_valid,
             "missing_price_part_ids": missing_target_ids, "missing_category_checks": missing_categories,
             "workload_baseline_met": baseline_ok, "selected_part_ids": ids,
@@ -1081,12 +1087,14 @@ def build_budget_scenarios(profile, parts, by_id, now, max_age):
         ))
         for rank, item in enumerate(tier_items, 1):
             item["display_rank_within_tier"] = rank
+        tier_soft_ceiling = int(tier.get("soft_ceiling_total_jpy", ceiling + int(profile.get("soft_overrun_allowance_jpy", 20000))))
         grouped.append({
             "id": str(tier.get("id") or "budget_" + str(ceiling)), "total_budget_jpy": ceiling,
+            "soft_ceiling_total_jpy": tier_soft_ceiling,
             "description_ja": str(tier.get("description_ja") or ""),
             "peripheral_target_jpy": default_peripherals, "contingency_jpy": default_reserve,
-            "pc_planned_ceiling_jpy": max(0, ceiling - default_peripherals - default_reserve),
-            "arithmetic_valid": max(0, ceiling - default_peripherals - default_reserve) + default_peripherals + default_reserve == ceiling,
+            "pc_planned_ceiling_jpy": max(0, tier_soft_ceiling - default_peripherals - default_reserve),
+            "arithmetic_valid": max(0, tier_soft_ceiling - default_peripherals - default_reserve) + default_peripherals + default_reserve == tier_soft_ceiling,
             "scenario_count": len(tier_items), "builds": tier_items, "purchase_authorized": False,
             "score_comparison_scope": "within_this_budget_tier_only",
         })
@@ -1325,7 +1333,9 @@ def build_plan(config=None, price_snapshot=None, now=None):
     peripheral_budget = int(profile.get("peripheral_budget_jpy", 35000))
     contingency = int(profile.get("unallocated_contingency_jpy", 0))
     pc_target = int(profile.get("pc_target_jpy", 360000))
-    pc_planned_budget = max(0, min(pc_budget, all_budget - peripheral_budget - contingency))
+    soft_overrun_allowance = int(profile.get("soft_overrun_allowance_jpy", 20000))
+    soft_ceiling_total = int(profile.get("soft_ceiling_total_jpy", all_budget + soft_overrun_allowance))
+    pc_planned_budget = max(0, min(pc_budget, soft_ceiling_total - peripheral_budget - contingency))
     shipping = int(profile.get("build_shipping_reserve_jpy", 0))
     small_parts = int(profile.get("small_parts_reserve_jpy", 0))
     builds = []
@@ -1500,9 +1510,9 @@ def build_plan(config=None, price_snapshot=None, now=None):
         reduction = round((live_gpu_price - gpu_target) * 100.0 / live_gpu_price, 1) if isinstance(live_gpu_price, int) and isinstance(gpu_target, int) and live_gpu_price > gpu_target else None
 
         if compat == "FAIL":
-            decision = "BLOCKED_COMPATIBILITY"
-        elif target_pc > pc_planned_budget or target_all_in > all_budget:
-            decision = "OVER_BUDGET_TARGET"
+            decision = "COMPATIBILITY_FAIL"
+        elif target_all_in > soft_ceiling_total:
+            decision = "OVER_SOFT_BUDGET_BAND"
         elif compat == "REVIEW":
             decision = "WAIT_FOR_COMPATIBILITY_REVIEW"
         elif market_estimate is None:
@@ -1536,10 +1546,14 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "target_planned_pc_budget_delta_jpy": target_pc - pc_planned_budget,
             "target_peripheral_budget_jpy": peripheral_budget, "target_all_in_jpy": target_all_in,
             "total_budget_jpy": all_budget, "target_remaining_budget_jpy": all_budget-target_all_in,
+            "soft_ceiling_total_jpy": soft_ceiling_total,
+            "soft_overrun_allowance_jpy": soft_overrun_allowance,
+            "target_remaining_soft_budget_jpy": soft_ceiling_total-target_all_in,
             "target_contingency_jpy": contingency,
             "target_within_pc_budget": target_pc <= pc_budget,
             "target_within_planned_pc_budget": target_pc <= pc_planned_budget,
             "target_within_total_budget": target_all_in <= all_budget,
+            "target_within_soft_total_budget": target_all_in <= soft_ceiling_total,
             "current_sellable_listing_subtotal_jpy": current_sellable_listing_subtotal,
             "current_sellable_listing_part_count": len(current_sellable_part_ids),
             "current_sellable_listing_required_part_count": len(selected_ids),
@@ -1668,7 +1682,8 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "cpu_target_price_jpy": dark_target,
             "target_cpu_delta_vs_base_jpy": increment,
             "target_all_in_floor_with_current_cooler_jpy": target_all_in_floor,
-            "over_budget_before_cooling_change_jpy": max(0, target_all_in_floor - all_budget) if isinstance(target_all_in_floor, int) else None,
+            "over_budget_before_cooling_change_jpy": max(0, target_all_in_floor - soft_ceiling_total) if isinstance(target_all_in_floor, int) else None,
+            "over_reference_target_before_cooling_change_jpy": max(0, target_all_in_floor - all_budget) if isinstance(target_all_in_floor, int) else None,
             "manufacturer_cooling_guidance": (dark_cpu.get("specs") or {}).get("recommended_cooler_guidance"),
             "complete_build_price_verified": False,
             "cooling_cost_included": False,
@@ -1707,11 +1722,13 @@ def build_plan(config=None, price_snapshot=None, now=None):
         "cpu_alternative_scenarios": cpu_alternative_scenarios,
         "cpu_dark_horse_candidates": cpu_dark_horse_candidates,
         "total_budget_jpy": all_budget, "peripheral_budget_jpy": peripheral_budget,
+        "soft_ceiling_total_jpy": soft_ceiling_total,
+        "soft_overrun_allowance_jpy": soft_overrun_allowance,
         "pc_budget_jpy": pc_budget, "pc_planned_budget_jpy": pc_planned_budget,
         "pc_target_jpy": pc_target,
         "unallocated_contingency_jpy": contingency,
         "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
-        "budget_arithmetic_valid": pc_planned_budget + peripheral_budget + contingency == all_budget,
+        "budget_arithmetic_valid": pc_planned_budget + peripheral_budget + contingency == soft_ceiling_total,
         "required_categories": profile.get("required_categories") or [],
         "memory_choice_selection": memory_choice_selection,
         "storage_choice_selection": storage_choice_selection,
@@ -2081,8 +2098,8 @@ def render_plan_markdown(plan):
 
     budget_scenarios = plan.get("budget_scenarios") or []
     if budget_scenarios:
-        lines.extend(["", "## 35万円・40万円・45万円の完成構成比較（BF目標価格の計画値）", "",
-            "総額にはPC本体・OS・送料/小物・メインモニター1台と入力機器・必要な送料・5,000円予備費を含みます。BF目標価格の合計は現在購入できる価格ではありません。スコアは同一予算内の計画比較であり、実測性能や購入許可ではありません。",
+        lines.extend(["", "## 35万円・40万円・45万円の一式予算比較（BF目標価格の計画値）", "",
+            "各予算にはPC本体・OS・送料/小物・メインモニター1台と入力機器・必要送料・5,000円予備費を含みます。通常目標と20,000円の検討帯を分けて表示し、検討帯内でも購入許可は出しません。BF目標価格は現行決済価格ではありません。",
             "", "**用途要件:** Cities: Skylines IIとFPS、Unreal Engine/Unity/Godotによるゲーム制作、Python・スポーツ/株式/BTC分析、可能な範囲のローカルAI、勉強・調査。購入時RAM32GB/SSD1TB/専用VRAM8GB以上を下回る案は採用しません。"])
         for tier in budget_scenarios:
             lines.extend(["", "### {}（総額上限 {}）".format(tier.get("id"), money(tier.get("total_budget_jpy"))), "",
