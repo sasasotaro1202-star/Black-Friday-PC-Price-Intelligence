@@ -218,5 +218,18 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertIn("20*60", watchdog)
         self.assertIn("A fresh queued/running monitor remains", watchdog)
 
+    def test_all_workflows_pin_node24_checkout_action(self):
+        paths = (
+            ROOT / ".github" / "workflows" / "pc-price-monitor.yml",
+            ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml",
+            ROOT / ".github" / "workflows" / "pc-price-tests.yml",
+            ROOT / ".github" / "workflows" / "pc-price-watchdog.yml",
+        )
+        expected = "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1"
+        for path in paths:
+            text = path.read_text(encoding="utf-8")
+            self.assertIn(expected, text, str(path))
+            self.assertNotIn("actions/checkout@v4", text, str(path))
+
 if __name__ == "__main__":
     unittest.main()
