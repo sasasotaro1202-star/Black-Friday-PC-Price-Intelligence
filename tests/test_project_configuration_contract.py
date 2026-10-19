@@ -110,6 +110,14 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(profile["peripheral_budget_jpy"], self.targets["peripheral_budget_jpy"])
         self.assertEqual(profile["pc_target_jpy"], self.targets["pc_target_jpy"])
         self.assertEqual(profile["pc_budget_jpy"], self.targets["pc_budget_jpy"])
+        self.assertTrue(profile["budget_is_approximate"])
+        self.assertEqual(profile["soft_overrun_allowance_jpy"], 20000)
+        self.assertEqual(profile["soft_ceiling_total_jpy"], 420000)
+        self.assertFalse(profile["budget_scenario_policy"]["hard_ceiling_per_scenario"])
+        self.assertEqual(
+            [(item["total_budget_jpy"], item["soft_ceiling_total_jpy"]) for item in profile["budget_scenarios"]],
+            [(350000, 370000), (400000, 420000), (450000, 470000)],
+        )
         self.assertEqual(profile["minimum_ram_gb"], 32)
         self.assertEqual(profile["minimum_ssd_gb"], 1000)
         board_specs = next(x for x in self.build["parts"] if x["id"] == "motherboard-asrock-b850m-pro-rs-wifi")["specs"]
