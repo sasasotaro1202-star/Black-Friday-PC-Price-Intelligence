@@ -2892,8 +2892,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
 
 
 
-    return {
-        "generated_at": iso(now), "schema_version": 1, "project": "DIY_PC",    # Same complete-build targets evaluated under three independent total-system ceilings.
+    # Same complete-build targets evaluated under three independent total-system ceilings.
     # These are target-price scenarios, never verified checkout prices or purchase authorization.
     configured_budget_scenarios = profile.get("budget_scenarios") or config.get("budget_scenarios") or [
         {"id": "budget_350k", "total_budget_jpy": 350000, "description_ja": "35万円総額シナリオ"},
@@ -2969,6 +2968,10 @@ def build_plan(config=None, price_snapshot=None, now=None):
         })
 
 
+    return {
+        "generated_at": iso(now), "schema_version": 1, "project": "DIY_PC",
+        "budget_scenarios": budget_scenarios,
+        "budget_scenario_policy": profile.get("budget_scenario_policy") or config.get("budget_scenario_policy") or {},
         "source_policy": "Comparison-site prices are market references only. This plan never authorizes a purchase; official seller-specific BF price evidence is missing.",
         "purchase_method_policy": {
             "primary_method": "SELF_BUILD",
@@ -3023,17 +3026,10 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "snapshot_source_role": snapshot.get("source_role") or "missing_snapshot",
             "snapshot_sha256": file_sha256(PRICE_PATH)
         },
-
-    return {
-        "generated_at": iso(now), "schema_version": 1, "project": "DIY_PC",
-        "budget_scenarios": budget_scenarios,
-        "budget_scenario_policy": profile.get("budget_scenario_policy") or config.get("budget_scenario_policy") or {},
-        "builds": builds, "bf_actual_authorized": False, "buy_now_authorized": False
     }
 
 
-COMPONENT_FIT_SCORE_WEIGHTS = {
-    "workload_fit_points": 40,
+COMPONENT_FIT_SCORE_WEIGHTS = {    "workload_fit_points": 40,
     "headroom_points": 25,
     "quality_reliability_points": 20,
     "integration_flexibility_points": 15,
