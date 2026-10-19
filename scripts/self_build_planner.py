@@ -1954,7 +1954,8 @@ def render_plan_markdown(plan):
         " / PC本体の絶対上限 " + money(plan.get("pc_budget_jpy")) +
         " / 周辺機器計画枠 " + money(plan.get("peripheral_budget_jpy")) +
         " / 総額予備費 " + money(plan.get("unallocated_contingency_jpy")) +
-        " / 総額上限 " + money(plan.get("total_budget_jpy")),
+        " / 総額目標 " + money(plan.get("total_budget_jpy")) +
+        " / 比較検討帯上限 " + money(plan.get("soft_ceiling_total_jpy")),
         "",
         "**購入方式:** 自作PCを正式な本命として最適化します。組み立て時間・作業時間は減点しません。BTOは同等仕様での総額・部品品質・保証のベンチマークとして比較し、便利さだけを理由に自作から切り替えません。",
         "",
