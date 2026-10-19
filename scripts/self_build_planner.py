@@ -883,6 +883,215 @@ def score_and_rank_builds(builds):
     return result
 
 
+
+def build_budget_scenarios(profile, parts, by_id, now, max_age):
+    """Return itemized 350k/400k/450k configurations. Target arithmetic never authorizes a purchase."""
+    candidates = []
+    allowed_domains = profile.get("allowed_search_reference_domains") or profile.get("allowed_comparison_domains") or ["kakaku.com"]
+    default_peripherals = int(profile.get("peripheral_budget_jpy", 35000))
+    default_reserve = int(profile.get("unallocated_contingency_jpy", 5000))
+
+    for cfg in profile.get("budget_build_candidates") or []:
+        if not isinstance(cfg, dict):
+            continue
+        tier = cfg.get("budget_tier_jpy")
+        ids = [str(x) for x in (cfg.get("part_ids") or [])]
+        if not isinstance(tier, int) or isinstance(tier, bool) or tier <= 0 or not ids or len(ids) != len(set(ids)):
+            continue
+        if any(item_id not in parts for item_id in ids):
+            continue
+
+        cpu_id = str(cfg.get("cpu_part_id") or "")
+        board_id = str(cfg.get("motherboard_part_id") or "")
+        gpu_id = str(cfg.get("gpu_choice_id") or "")
+        memory_id = str(cfg.get("memory_part_id") or "")
+        storage_id = str(cfg.get("storage_part_id") or "")
+        cooler_id = str(cfg.get("cooler_part_id") or "") or None
+        cooler_included = cfg.get("cooler_included_by_cpu") is True
+        peripherals = int(cfg.get("peripheral_budget_jpy", default_peripherals))
+        reserve = int(cfg.get("unallocated_contingency_jpy", default_reserve))
+        shipping = int(cfg.get("build_shipping_reserve_jpy", profile.get("build_shipping_reserve_jpy", 0)))
+        small_parts = int(cfg.get("small_parts_reserve_jpy", profile.get("small_parts_reserve_jpy", 0)))
+
+        components = []
+        target_parts = 0
+        missing_target_ids = []
+        exact_price_count = 0
+        sellable_count = 0
+        checkout_count = 0
+        market_reference_count = 0
+        market_reference_required = 0
+        for item_id in ids:
+            part = parts[item_id]
+            price = component_price(part, by_id, now, max_age, allowed_domains=allowed_domains)
+            target = part.get("target_price_jpy")
+            if isinstance(target, int) and not isinstance(target, bool) and target > 0:
+                target_parts += target
+            else:
+                missing_target_ids.append(item_id)
+            if part.get("track_price"):
+                market_reference_required += 1
+                if price.get("trusted_for_market_estimate") is True and isinstance(price.get("market_reference_price_jpy"), int):
+                    market_reference_count += 1
+
+            signal = price.get("early_buy_review") if isinstance(price.get("early_buy_review"), dict) else {}
+            observed = signal.get("observed_price_jpy")
+            exact_fresh_price = (
+                isinstance(observed, int) and not isinstance(observed, bool) and observed > 0
+                and signal.get("price_verified") is True
+                and signal.get("identity_verified") is True
+                and signal.get("pit_valid") is True
+            )
+            stock = str(signal.get("stock_status") or price.get("direct_listing_sellable_stock_status") or "unknown")
+            stock_verified = exact_fresh_price and stock in ("in_stock", "low_stock")
+            checkout_verified = (
+                stock_verified and signal.get("checkout_total_verified") is True
+                and isinstance(signal.get("verified_checkout_total_jpy"), int)
+                and not isinstance(signal.get("verified_checkout_total_jpy"), bool)
+                and signal.get("verified_checkout_total_jpy") > 0
+            )
+            exact_price_count += int(exact_fresh_price)
+            sellable_count += int(stock_verified)
+            checkout_count += int(checkout_verified)
+            components.append({
+                "id": item_id, "category": part.get("category"), "name": part.get("name"),
+                "model_code": part.get("model_code"), "target_price_jpy": target,
+                "market_reference_price_jpy": price.get("market_reference_price_jpy"),
+                "display_reference_price_jpy": price.get("display_reference_price_jpy"),
+                "price_status": price.get("price_status"),
+                "trusted_for_market_estimate": bool(price.get("trusted_for_market_estimate")),
+                "retrieval_time": price.get("retrieval_time"),
+                "reference_source_url": price.get("reference_source_url"),
+                "monitor_url": part.get("monitor_url"),
+                "purchase_url": price.get("purchase_url") or part.get("purchase_url") or part.get("monitor_url"),
+                "early_buy_review": signal or None,
+                "direct_listing_display_price_jpy": price.get("direct_listing_display_price_jpy"),
+                "direct_listing_display_url": price.get("direct_listing_display_url"),
+                "direct_listing_display_stock_status": price.get("direct_listing_display_stock_status") or "unknown",
+                "direct_listing_sellable_price_jpy": price.get("direct_listing_sellable_price_jpy"),
+                "direct_listing_sellable_stock_status": price.get("direct_listing_sellable_stock_status") or "unknown",
+                "direct_listing_stock_counts": price.get("direct_listing_stock_counts") or {},
+                "specs": part.get("specs") or {},
+                "fit_scorecard": part.get("fit_scorecard"),
+            })
+
+        categories = [str((parts.get(item_id) or {}).get("category") or "") for item_id in ids]
+        category_counts = {category: categories.count(category) for category in set(categories)}
+        required_categories = ("cpu", "gpu", "motherboard", "memory", "storage", "psu", "case", "os_license")
+        missing_categories = [category for category in required_categories if category_counts.get(category, 0) != 1]
+        if cooler_included and not (parts.get(cpu_id) or {}).get("specs", {}).get("cooler_included"):
+            missing_categories.append("cpu_box_cooler_not_verified")
+        if not cooler_included and category_counts.get("cpu_cooler", 0) != 1:
+            missing_categories.append("cpu_cooler")
+
+        pc_total = target_parts + shipping + small_parts
+        all_in = pc_total + peripherals + reserve
+        pc_cap = max(0, tier - peripherals - reserve)
+        remaining = tier - all_in
+        overrun = max(0, all_in - tier)
+
+        cpu_specs = (parts.get(cpu_id) or {}).get("specs") or {}
+        gpu_specs = (parts.get(gpu_id) or {}).get("specs") or {}
+        memory_specs = (parts.get(memory_id) or {}).get("specs") or {}
+        storage_specs = (parts.get(storage_id) or {}).get("specs") or {}
+        ram_gb = memory_specs.get("capacity_gb")
+        vram_gb = gpu_specs.get("vram_gb")
+        ssd_gb = storage_specs.get("capacity_gb")
+        baseline_ok = (
+            isinstance(ram_gb, int) and ram_gb >= int(profile.get("minimum_ram_gb", 32))
+            and isinstance(vram_gb, int) and vram_gb >= 8
+            and isinstance(ssd_gb, int) and ssd_gb >= int(profile.get("minimum_ssd_gb", 1000))
+        )
+        config_valid = not missing_target_ids and not missing_categories and baseline_ok
+
+        compatibility, checks = compatibility_checks(
+            parts, profile, gpu_id, memory_id, storage_id, cooler_id,
+            cpu_part_id=cpu_id, motherboard_part_id=board_id,
+            psu_part_id=cfg.get("psu_part_id"), case_part_id=cfg.get("case_part_id"),
+            selected_part_ids=ids, cooler_included=cooler_included,
+        )
+        workload = assess_workload_fit(profile, parts, ids, gpu_id, memory_id)
+        if not config_valid:
+            decision = "BLOCKED_INCOMPLETE_OR_BELOW_WORKLOAD_BASELINE"
+        elif all_in > tier or pc_total > pc_cap:
+            decision = "OVER_BUDGET_TARGET"
+        elif compatibility == "FAIL":
+            decision = "BLOCKED_COMPATIBILITY"
+        elif compatibility == "REVIEW":
+            decision = "WAIT_FOR_COMPATIBILITY_REVIEW"
+        else:
+            decision = "WAIT_FOR_DIRECT_PRICE_STOCK_CHECKOUT_AND_BF_EVIDENCE"
+
+        candidates.append({
+            "id": str(cfg.get("id") or (str(tier) + "_" + gpu_id)),
+            "budget_tier_jpy": tier, "budget_tier_label": str(cfg.get("budget_tier_label") or "{}万円".format(tier // 10000)),
+            "name": str(cfg.get("name") or "自作PCシナリオ"), "scenario_role": str(cfg.get("scenario_role") or "comparison"),
+            "purpose_note_ja": str(cfg.get("purpose_note_ja") or ""), "tradeoff_note_ja": str(cfg.get("tradeoff_note_ja") or ""),
+            "target_budget_jpy": tier, "target_peripheral_budget_jpy": peripherals, "target_contingency_jpy": reserve,
+            "target_pc_budget_jpy": pc_cap, "target_parts_subtotal_jpy": target_parts,
+            "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
+            "target_pc_total_jpy": pc_total, "target_all_in_jpy": all_in,
+            "target_remaining_budget_jpy": remaining, "target_overrun_jpy": overrun,
+            "target_within_total_budget": all_in <= tier and pc_total <= pc_cap,
+            "target_prices_complete": not missing_target_ids, "configuration_valid": config_valid,
+            "missing_price_part_ids": missing_target_ids, "missing_category_checks": missing_categories,
+            "workload_baseline_met": baseline_ok, "selected_part_ids": ids,
+            "cpu_part_id": cpu_id, "motherboard_part_id": board_id, "gpu_choice_id": gpu_id,
+            "memory_part_id": memory_id, "storage_part_id": storage_id, "cooler_part_id": cooler_id,
+            "cooler_included_by_cpu": cooler_included, "ram_gb": ram_gb, "gpu_vram_gb": vram_gb, "ssd_gb": ssd_gb,
+            "cpu_cores": cpu_specs.get("cores"), "cpu_threads": cpu_specs.get("threads"),
+            "components": components, "compatibility_status": compatibility, "compatibility_checks": checks,
+            "workload_fit": workload, "current_exact_price_evidence_part_count": exact_price_count,
+            "current_sellable_stock_part_count": sellable_count, "current_verified_checkout_part_count": checkout_count,
+            "current_sellable_stock_coverage_pct": round(100 * sellable_count / len(ids), 1) if ids else 0.0,
+            "current_verified_checkout_coverage_pct": round(100 * checkout_count / len(ids), 1) if ids else 0.0,
+            "current_market_reference_coverage_count": market_reference_count,
+            "required_market_reference_count": market_reference_required,
+            "current_checkout_total_verified_jpy": None, "decision": decision,
+            "price_basis": "BF_TARGET_ARITHMETIC_ONLY_NOT_FORECAST_OR_VERIFIED_CHECKOUT",
+            "bf_actual_authorized": False, "buy_now_authorized": False, "purchase_authorized": False,
+            "target_all_in_jpy_is_verified_checkout_price": False,
+        })
+
+    grouped = []
+    for tier in profile.get("budget_scenarios") or []:
+        if not isinstance(tier, dict):
+            continue
+        ceiling = tier.get("total_budget_jpy")
+        tier_items = [item for item in candidates if item["budget_tier_jpy"] == ceiling]
+        score_inputs = [{
+            "id": item["id"], "name": item["name"], "gpu_choice_id": item["gpu_choice_id"],
+            "target_all_in_jpy": item["target_all_in_jpy"], "target_pc_total_jpy": item["target_pc_total_jpy"],
+            "components": item["components"], "workload_fit": item["workload_fit"],
+            "compatibility_checks": item["compatibility_checks"],
+            "market_reference_required_count": item["required_market_reference_count"],
+            "market_reference_coverage_count": item["current_market_reference_coverage_count"],
+        } for item in tier_items]
+        scored = score_and_rank_builds(score_inputs)
+        scoremap = {item["id"]: item for item in scored}
+        for item in tier_items:
+            result = scoremap.get(item["id"]) or {}
+            item["budget_tier_rank"] = result.get("rank")
+            item["scorecard"] = result.get("scorecard") or {}
+            item["overall_score_100"] = (item.get("scorecard") or {}).get("overall_score")
+            item["purchase_evidence_completeness_score_100"] = (item.get("scorecard") or {}).get("purchase_evidence_completeness_score_out_of_100")
+        tier_items.sort(key=lambda item: (
+            not item["target_within_total_budget"], -(item.get("overall_score_100") or 0),
+            item["target_all_in_jpy"], item["id"],
+        ))
+        for rank, item in enumerate(tier_items, 1):
+            item["display_rank_within_tier"] = rank
+        grouped.append({
+            "id": str(tier.get("id") or "budget_" + str(ceiling)), "total_budget_jpy": ceiling,
+            "description_ja": str(tier.get("description_ja") or ""),
+            "peripheral_target_jpy": default_peripherals, "contingency_jpy": default_reserve,
+            "pc_planned_ceiling_jpy": max(0, ceiling - default_peripherals - default_reserve),
+            "arithmetic_valid": max(0, ceiling - default_peripherals - default_reserve) + default_peripherals + default_reserve == ceiling,
+            "scenario_count": len(tier_items), "builds": tier_items, "purchase_authorized": False,
+            "score_comparison_scope": "within_this_budget_tier_only",
+        })
+    return grouped
+
 def build_plan(config=None, price_snapshot=None, now=None):
     config = config or load_json(CONFIG_PATH, {})
     profile = config.get("profile") or {}
@@ -1470,8 +1679,12 @@ def build_plan(config=None, price_snapshot=None, now=None):
 
 
 
+    budget_scenarios = build_budget_scenarios(profile, parts, by_id, now, max_age)
+
     return {
         "generated_at": iso(now), "schema_version": 1, "project": "DIY_PC",
+        "budget_scenarios": budget_scenarios,
+        "budget_scenario_policy": profile.get("budget_scenario_policy") or config.get("budget_scenario_policy") or {},
         "source_policy": "Comparison-site prices are market references only. This plan never authorizes a purchase; official seller-specific BF price evidence is missing.",
         "purchase_method_policy": {
             "primary_method": "SELF_BUILD",
@@ -1865,6 +2078,40 @@ def render_plan_markdown(plan):
             money(build.get("target_remaining_budget_jpy")), money(build.get("market_reference_estimate_jpy")),
             build.get("compatibility_status"), build.get("decision")
         ))
+
+    budget_scenarios = plan.get("budget_scenarios") or []
+    if budget_scenarios:
+        lines.extend(["", "## 35万円・40万円・45万円の完成構成比較（BF目標価格の計画値）", "",
+            "総額にはPC本体・OS・送料/小物・メインモニター1台と入力機器・必要な送料・5,000円予備費を含みます。BF目標価格の合計は現在購入できる価格ではありません。スコアは同一予算内の計画比較であり、実測性能や購入許可ではありません。",
+            "", "**用途要件:** Cities: Skylines IIとFPS、Unreal Engine/Unity/Godotによるゲーム制作、Python・スポーツ/株式/BTC分析、可能な範囲のローカルAI、勉強・調査。購入時RAM32GB/SSD1TB/専用VRAM8GB以上を下回る案は採用しません。"])
+        for tier in budget_scenarios:
+            lines.extend(["", "### {}（総額上限 {}）".format(tier.get("id"), money(tier.get("total_budget_jpy"))), "",
+                str(tier.get("description_ja") or ""), "",
+                "|順位|構成案|CPU|GPU / VRAM|RAM|SSD|PC本体目標|周辺機器|予備費|一式目標|残額/超過|総合点/100|販売可能在庫信号|互換性|購入判定|",
+                "|---:|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|---|"])
+            for candidate in tier.get("builds") or []:
+                cats={str(part.get("category")):part for part in (candidate.get("components") or []) if part.get("category")}
+                cpu=cats.get("cpu") or {}; gpu=cats.get("gpu") or {}; ram=cats.get("memory") or {}; ssd=cats.get("storage") or {}
+                rem=candidate.get("target_remaining_budget_jpy")
+                rem_text=("残り "+money(rem)) if isinstance(rem,int) and rem>=0 else ("超過 "+money(abs(rem))) if isinstance(rem,int) else "未計算"
+                lines.append("|{}|{}|{}|{} / {}GB|{}GB|{}GB|{}|{}|{}|{}|{}|{}|{}/{}部品|{}|{}|".format(
+                    candidate.get("display_rank_within_tier"),candidate.get("name"),cpu.get("name") or "未確認",
+                    gpu.get("name") or "未確認",(gpu.get("specs") or {}).get("vram_gb","未確認"),
+                    (ram.get("specs") or {}).get("capacity_gb","未確認"),(ssd.get("specs") or {}).get("capacity_gb","未確認"),
+                    money(candidate.get("target_pc_total_jpy")),money(candidate.get("target_peripheral_budget_jpy")),
+                    money(candidate.get("target_contingency_jpy")),money(candidate.get("target_all_in_jpy")),rem_text,
+                    candidate.get("overall_score_100","未採点"),candidate.get("current_sellable_stock_part_count",0),len(candidate.get("components") or []),
+                    candidate.get("compatibility_status"),candidate.get("decision")))
+            lines.extend(["","#### 部品内訳・用途のトレードオフ",""])
+            for candidate in tier.get("builds") or []:
+                details="、".join("{} {}".format(part.get("name") or part.get("id"),money(part.get("target_price_jpy"))) for part in (candidate.get("components") or []))
+                lines.append("**{} — {}点/100**".format(candidate.get("name"),candidate.get("overall_score_100","未採点")))
+                lines.append("- 一式目標 {}。{}".format(money(candidate.get("target_all_in_jpy")),candidate.get("purpose_note_ja") or "総合用途を対象。"))
+                lines.append("- 部品目標の内訳: "+(details or "未登録")+"。")
+                lines.append("- 留意点: "+str(candidate.get("tradeoff_note_ja") or "現行価格・互換性・最終決済額は未確認。"))
+                lines.append("- 販売可能在庫信号: {}/{}部品。直接価格・在庫・最終決済額がそろわない限り、目標総額が予算内でも購入可能とは判定しません。互換性={}。購入許可=false。".format(candidate.get("current_sellable_stock_part_count",0),len(candidate.get("components") or []),candidate.get("compatibility_status")))
+                lines.append("")
+
     lines.extend([
         "",
         "## 現在の在庫・売り切れリスク（購入可能総額ではない）",
