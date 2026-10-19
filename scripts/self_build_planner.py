@@ -2117,23 +2117,32 @@ def render_plan_markdown(plan):
             "各予算にはPC本体・OS・送料/小物・メインモニター1台と入力機器・必要送料・5,000円予備費を含みます。通常目標と20,000円の検討帯を分けて表示し、検討帯内でも購入許可は出しません。BF目標価格は現行決済価格ではありません。",
             "", "**用途要件:** Cities: Skylines IIとFPS、Unreal Engine/Unity/Godotによるゲーム制作、Python・スポーツ/株式/BTC分析、可能な範囲のローカルAI、勉強・調査。購入時RAM32GB/SSD1TB/専用VRAM8GB以上を下回る案は採用しません。"])
         for tier in budget_scenarios:
-            lines.extend(["", "### {}（総額上限 {}）".format(tier.get("id"), money(tier.get("total_budget_jpy"))), "",
+            lines.extend(["", "### {}（総額目標 {} / 許容帯上限 {}）".format(
+                    tier.get("id"), money(tier.get("total_budget_jpy")), money(tier.get("soft_ceiling_total_jpy"))), "",
                 str(tier.get("description_ja") or ""), "",
-                "|順位|構成案|CPU|GPU / VRAM|RAM|SSD|PC本体目標|周辺機器|予備費|一式目標|残額/超過|総合点/100|販売可能在庫信号|互換性|購入判定|",
-                "|---:|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|---|"])
+                "|順位|構成案|CPU|GPU / VRAM|RAM|SSD|PC本体目標|周辺機器|予備費|一式目標|目標との差/残額|目標超過額|許容帯残額/超過|許容帯内|総合点/100|販売可能在庫信号|互換性|購入判定|",
+                "|---:|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|---|---|---|"])
             for candidate in tier.get("builds") or []:
                 cats={str(part.get("category")):part for part in (candidate.get("components") or []) if part.get("category")}
                 cpu=cats.get("cpu") or {}; gpu=cats.get("gpu") or {}; ram=cats.get("memory") or {}; ssd=cats.get("storage") or {}
                 rem=candidate.get("target_remaining_budget_jpy")
                 rem_text=("残り "+money(rem)) if isinstance(rem,int) and rem>=0 else ("超過 "+money(abs(rem))) if isinstance(rem,int) else "未計算"
-                lines.append("|{}|{}|{}|{} / {}GB|{}GB|{}GB|{}|{}|{}|{}|{}|{}|{}/{}部品|{}|{}|".format(
-                    candidate.get("display_rank_within_tier"),candidate.get("name"),cpu.get("name") or "未確認",
-                    gpu.get("name") or "未確認",(gpu.get("specs") or {}).get("vram_gb","未確認"),
-                    (ram.get("specs") or {}).get("capacity_gb","未確認"),(ssd.get("specs") or {}).get("capacity_gb","未確認"),
+                soft_rem=candidate.get("target_remaining_soft_budget_jpy")
+                soft_rem_text=("残り "+money(soft_rem)) if isinstance(soft_rem,int) and soft_rem>=0 else ("超過 "+money(abs(soft_rem))) if isinstance(soft_rem,int) else "未計算"
+                band_status="はい" if candidate.get("within_soft_band") is True else "いいえ"
+                row=[
+                    str(candidate.get("display_rank_within_tier")),str(candidate.get("name")),str(cpu.get("name") or "未確認"),
+                    "{} / {}GB".format(gpu.get("name") or "未確認",(gpu.get("specs") or {}).get("vram_gb","未確認")),
+                    "{}GB".format((ram.get("specs") or {}).get("capacity_gb","未確認")),
+                    "{}GB".format((ssd.get("specs") or {}).get("capacity_gb","未確認")),
                     money(candidate.get("target_pc_total_jpy")),money(candidate.get("target_peripheral_budget_jpy")),
                     money(candidate.get("target_contingency_jpy")),money(candidate.get("target_all_in_jpy")),rem_text,
-                    candidate.get("overall_score_100","未採点"),candidate.get("current_sellable_stock_part_count",0),len(candidate.get("components") or []),
-                    candidate.get("compatibility_status"),candidate.get("decision")))
+                    money(candidate.get("target_overrun_jpy")),soft_rem_text,band_status,
+                    str(candidate.get("overall_score_100","未採点")),
+                    "{}/{}部品".format(candidate.get("current_sellable_stock_part_count",0),len(candidate.get("components") or [])),
+                    str(candidate.get("compatibility_status")),str(candidate.get("decision")),
+                ]
+                lines.append("|" + "|".join(row) + "|")
             lines.extend(["","#### 部品内訳・用途のトレードオフ",""])
             for candidate in tier.get("builds") or []:
                 details="、".join("{} {}".format(part.get("name") or part.get("id"),money(part.get("target_price_jpy"))) for part in (candidate.get("components") or []))
