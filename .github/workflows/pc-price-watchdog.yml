@@ -41,14 +41,22 @@ jobs:
         if: |
           (github.event_name == 'schedule' && steps.check.outcome == 'failure') ||
           (github.event_name == 'workflow_run' &&
-           github.event.workflow_run.name == 'PC Price Intelligence' &&
            github.event.workflow_run.head_branch == 'main' &&
            steps.check.outcome == 'failure' &&
            (
-             (github.event.workflow_run.conclusion == 'failure' &&
-              github.event.workflow_run.run_attempt == 1) ||
-             (github.event.workflow_run.conclusion == 'success' &&
-              !contains(github.event.workflow_run.display_title, '[watchdog-recovery]'))
+             (
+               github.event.workflow_run.name == 'PC Price Intelligence' &&
+               (
+                 (github.event.workflow_run.conclusion == 'failure' &&
+                  github.event.workflow_run.run_attempt == 1) ||
+                 (github.event.workflow_run.conclusion == 'success' &&
+                  !contains(github.event.workflow_run.display_title, '[watchdog-recovery]'))
+               )
+             ) ||
+             (
+               github.event.workflow_run.name == 'PC Price Intelligence - Tests' &&
+               github.event.workflow_run.conclusion == 'success'
+             )
            ))
         env:
           GH_TOKEN: ${{ github.token }}

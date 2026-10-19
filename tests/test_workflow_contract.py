@@ -200,6 +200,7 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertIn("workflow_run:", watchdog)
         self.assertIn('"PC Price Intelligence"', watchdog)
         self.assertIn('"PC Price Intelligence - Tests"', watchdog)
+        self.assertIn("github.event.workflow_run.name == 'PC Price Intelligence - Tests' &&\n               github.event.workflow_run.conclusion == 'success'", watchdog)
         self.assertIn("github.event.workflow_run.head_branch == 'main'", watchdog)
         self.assertIn("github.event.workflow_run.run_attempt == 1", watchdog)
         # A collector can conclude success yet leave stale snapshots; this is
