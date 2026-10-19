@@ -1022,14 +1022,14 @@ def build_budget_scenarios(profile, parts, by_id, now, max_age):
         else:
             decision = "WAIT_FOR_DIRECT_PRICE_STOCK_CHECKOUT_AND_BF_EVIDENCE"
 
+        soft_allowance = int(profile.get("soft_overrun_allowance_jpy", 20000))
+        soft_ceiling = int(cfg.get("soft_ceiling_total_jpy", tier + soft_allowance))
         candidates.append({
             "id": str(cfg.get("id") or (str(tier) + "_" + gpu_id)),
             "budget_tier_jpy": tier, "budget_tier_label": str(cfg.get("budget_tier_label") or "{}万円".format(tier // 10000)),
             "name": str(cfg.get("name") or "自作PCシナリオ"), "scenario_role": str(cfg.get("scenario_role") or "comparison"),
             "purpose_note_ja": str(cfg.get("purpose_note_ja") or ""), "tradeoff_note_ja": str(cfg.get("tradeoff_note_ja") or ""),
-            soft_allowance = int(profile.get("soft_overrun_allowance_jpy", 20000))
-        soft_ceiling = int(cfg.get("soft_ceiling_total_jpy", tier + soft_allowance))
-        "target_budget_jpy": tier, "target_peripheral_budget_jpy": peripherals, "target_contingency_jpy": reserve,
+            "target_budget_jpy": tier, "target_peripheral_budget_jpy": peripherals, "target_contingency_jpy": reserve,
             "target_pc_budget_jpy": pc_cap, "target_parts_subtotal_jpy": target_parts,
             "build_shipping_reserve_jpy": shipping, "small_parts_reserve_jpy": small_parts,
             "target_pc_total_jpy": pc_total, "target_all_in_jpy": all_in,
