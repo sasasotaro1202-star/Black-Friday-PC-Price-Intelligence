@@ -379,21 +379,21 @@
       {
         "id": "budget_350k",
         "total_budget_jpy": 350000,
-        "description_ja": "35万円目標案。標準の許容帯は37万円まで。周辺機器・送料/必要小物・5,000円予備費込み。",
+        "description_ja": "35万円目標案。必要周辺機器・送料・5,000円予備費込み。総額37万円までの許容帯で、目標超過額と性能差を比較する。",
         "soft_overrun_allowance_jpy": 20000,
         "soft_ceiling_total_jpy": 370000
       },
       {
         "id": "budget_400k",
         "total_budget_jpy": 400000,
-        "description_ja": "40万円目標案（本命）。標準の許容帯は42万円まで。周辺機器・送料/必要小物・5,000円予備費込み。",
+        "description_ja": "40万円目標案（本命）。必要周辺機器・送料・5,000円予備費込み。総額42万円までの許容帯で、数万円の超過だけでは候補を落とさない。",
         "soft_overrun_allowance_jpy": 20000,
         "soft_ceiling_total_jpy": 420000
       },
       {
         "id": "budget_450k",
         "total_budget_jpy": 450000,
-        "description_ja": "45万円目標案。標準の許容帯は47万円まで。ゲーム制作・分析・容量拡張を比較するが、使い切ることは目的にしない。",
+        "description_ja": "45万円目標案。必要周辺機器・送料・5,000円予備費込み。総額47万円までの許容帯。GPUだけでなく64GB RAM・2TB SSD・高コアCPUの実益を比較する。",
         "soft_overrun_allowance_jpy": 20000,
         "soft_ceiling_total_jpy": 470000
       }
@@ -405,7 +405,7 @@
       "unallocated_contingency_jpy": 5000,
       "required_peripherals": "One 27-inch WQHD main monitor, keyboard, mouse, mousepad, cables only if needed",
       "excluded": "Speakers, secondary monitor, headset, power strip",
-      "selection_rule": "各シナリオの総額は厳密な上限ではなく目標。目標超過はまず最大20,000円の許容帯まで含め、用途適合・性能差・超過額・互換性・実売根拠を比較する。許容帯を超えた構成も候補から消さず、別シナリオとして超過額を明示する。PC部品、OS、PC送料/小物、必要周辺機器の現金支払額/送料、5,000円予備費を含める。価格目標は実売/決済証拠や購入許可ではない。",
+      "selection_rule": "各金額は総額目標。目標＋20,000円の許容帯まで比較し、目標超過額、許容帯残額、用途上の性能差、互換性、実売根拠を分けて提示。許容帯を超えた候補も45万円案などで比較対象から消さず、超過額を明示する。PC部品・OS・送料/小物・必要周辺機器実費・送料・総額予備費5,000円を含む。BF目標額のみで購入許可を出さない。",
       "workload_priorities": [
         "gaming at 1440p",
         "game development in Unreal Engine/Unity/Godot",
