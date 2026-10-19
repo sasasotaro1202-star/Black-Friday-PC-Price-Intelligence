@@ -353,6 +353,71 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertNotIn("$400,000", report)
         self.assertFalse(plan["buy_now_authorized"])
 
+    def test_three_budget_tiers_generate_complete_purpose_fit_builds_with_strict_totals(self):
+        plan = planner.build_plan(self.config, {"products": []}, now=NOW)
+        tiers = {item["total_budget_jpy"]: item for item in plan["budget_scenarios"]}
+        self.assertEqual(set(tiers), {350000, 400000, 450000})
+        expected_soft = {350000: 370000, 400000: 420000, 450000: 470000}
+        expected_counts = {350000: 2, 400000: 3, 450000: 4}
+        for ceiling, tier in tiers.items():
+            self.assertEqual(tier["soft_ceiling_total_jpy"], expected_soft[ceiling])
+            self.assertTrue(tier["arithmetic_valid"])
+            self.assertFalse(tier["purchase_authorized"])
+            self.assertEqual(tier["scenario_count"], expected_counts[ceiling])
+            self.assertEqual(tier["score_comparison_scope"], "within_this_budget_tier_only")
+            for item in tier["builds"]:
+                with self.subTest(scenario=item["id"]):
+                    self.assertFalse(item["purchase_authorized"])
+                    self.assertFalse(item["buy_now_authorized"])
+                    self.assertFalse(item["bf_actual_authorized"])
+                    self.assertFalse(item["target_all_in_jpy_is_verified_checkout_price"])
+                    self.assertTrue(item["configuration_valid"])
+                    self.assertTrue(item["workload_baseline_met"])
+                    self.assertEqual(item["target_pc_total_jpy"], item["target_parts_subtotal_jpy"] + item["build_shipping_reserve_jpy"] + item["small_parts_reserve_jpy"])
+                    self.assertEqual(item["target_all_in_jpy"], item["target_pc_total_jpy"] + item["target_peripheral_budget_jpy"] + item["target_contingency_jpy"])
+                    self.assertEqual(item["target_remaining_budget_jpy"], ceiling - item["target_all_in_jpy"])
+                    self.assertEqual(item["target_overrun_jpy"], max(0, item["target_all_in_jpy"] - ceiling))
+                    self.assertEqual(item["target_remaining_soft_budget_jpy"], expected_soft[ceiling] - item["target_all_in_jpy"])
+                    self.assertEqual(item["within_scenario_target"], item["target_all_in_jpy"] <= ceiling)
+                    self.assertEqual(item["within_soft_band"], item["target_all_in_jpy"] <= expected_soft[ceiling])
+                    self.assertGreaterEqual(item["ram_gb"], 32)
+                    self.assertGreaterEqual(item["gpu_vram_gb"], 8)
+                    self.assertGreaterEqual(item["ssd_gb"], 1000)
+                    self.assertGreaterEqual(item["overall_score_100"], 0)
+                    self.assertLessEqual(item["overall_score_100"], 100)
+                    categories = [part["category"] for part in item["components"]]
+                    for category in ("cpu", "gpu", "motherboard", "memory", "storage", "psu", "case", "os_license"):
+                        self.assertEqual(categories.count(category), 1, (item["id"], category))
+                    if not item["cooler_included_by_cpu"]:
+                        self.assertEqual(categories.count("cpu_cooler"), 1)
+                    forbidden_names = " ".join(str(part.get("name") or "") for part in item["components"]).lower()
+                    for excluded in ("speaker", "headset", "サブモニター", "ヘッドセット", "スピーカー"):
+                        self.assertNotIn(excluded, forbidden_names)
+        all_items = {item["id"]: item for tier in tiers.values() for item in tier["builds"]}
+        expected_totals = {
+            "budget-350k-rtx5060ti-fit": 348000,
+            "budget-350k-rtx5070-over": 366000,
+            "budget-400k-rtx5070-balanced": 382000,
+            "budget-400k-rtx5060ti-2tb": 385000,
+            "budget-400k-rtx5070ti-over": 402000,
+            "budget-450k-balanced-capacity": 445000,
+            "budget-450k-5070-64gb-1tb": 424000,
+            "budget-450k-gpu-priority": 444000,
+            "budget-450k-gpu-storage": 423000,
+        }
+        for scenario_id, expected in expected_totals.items():
+            self.assertEqual(all_items[scenario_id]["target_all_in_jpy"], expected)
+        self.assertFalse(all_items["budget-400k-rtx5070ti-over"]["within_scenario_target"])
+        self.assertTrue(all_items["budget-400k-rtx5070ti-over"]["within_soft_band"])
+        best45 = all_items["budget-450k-balanced-capacity"]
+        self.assertEqual((best45["ram_gb"], best45["ssd_gb"], best45["gpu_vram_gb"]), (64, 2000, 12))
+        report = planner.render_plan_markdown(plan)
+        self.assertIn("35万円・40万円・45万円の一式予算比較", report)
+        self.assertIn("¥420,000", report)
+        self.assertIn("Ryzen 7 7700", report)
+        self.assertIn("64GB", report)
+        self.assertFalse(plan["buy_now_authorized"])
+
     def test_cpu_high_core_alternative_is_scored_separately_and_dark_horse_is_not_misrepresented(self):
         plan = planner.build_plan(self.config, {"products": []}, now=NOW)
         self.assertEqual(len(plan["builds"]), 3)  # keep the primary GPU-tier table stable

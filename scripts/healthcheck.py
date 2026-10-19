@@ -61,6 +61,67 @@ def main():
             if build.get("buy_now_authorized") is not False or build.get("bf_actual_authorized") is not False:
                 errors.append("self-build candidate has invalid purchase authorization:" + str(build.get("id")))
 
+        # Validate per-budget complete DIY build records and keep target-price math fail-closed.
+        budget_scenarios = self_build_plan.get("budget_scenarios") or []
+        expected_tiers = {350000: 370000, 400000: 420000, 450000: 470000}
+        actual_tiers = {
+            int(row.get("total_budget_jpy")): int(row.get("soft_ceiling_total_jpy"))
+            for row in budget_scenarios if isinstance(row, dict)
+            and isinstance(row.get("total_budget_jpy"), int)
+            and isinstance(row.get("soft_ceiling_total_jpy"), int)
+        }
+        if actual_tiers != expected_tiers:
+            errors.append("budget scenario tier/soft-ceiling coverage invalid")
+        all_scenario_builds = [
+            candidate for tier in budget_scenarios if isinstance(tier, dict)
+            for candidate in (tier.get("builds") or []) if isinstance(candidate, dict)
+        ]
+        if len(all_scenario_builds) != 9:
+            errors.append("budget scenario candidate count must be 9")
+        scenario_ids = [str(candidate.get("id") or "") for candidate in all_scenario_builds]
+        if len(scenario_ids) != len(set(scenario_ids)):
+            errors.append("budget scenario candidate IDs are not unique")
+        for candidate in all_scenario_builds:
+            sid = str(candidate.get("id") or "unknown")
+            ceiling = candidate.get("budget_tier_jpy")
+            soft_ceiling = candidate.get("soft_ceiling_total_jpy")
+            pc_total = candidate.get("target_pc_total_jpy")
+            parts_subtotal = candidate.get("target_parts_subtotal_jpy")
+            shipping = candidate.get("build_shipping_reserve_jpy")
+            small_parts = candidate.get("small_parts_reserve_jpy")
+            peripherals = candidate.get("target_peripheral_budget_jpy")
+            reserve = candidate.get("target_contingency_jpy")
+            total = candidate.get("target_all_in_jpy")
+            remaining = candidate.get("target_remaining_budget_jpy")
+            remaining_soft = candidate.get("target_remaining_soft_budget_jpy")
+            values = (ceiling, soft_ceiling, pc_total, parts_subtotal, shipping, small_parts, peripherals, reserve, total, remaining, remaining_soft)
+            if not all(isinstance(value, int) and not isinstance(value, bool) for value in values):
+                errors.append("budget scenario arithmetic values invalid:" + sid)
+                continue
+            if pc_total != parts_subtotal + shipping + small_parts or total != pc_total + peripherals + reserve:
+                errors.append("budget scenario sum mismatch:" + sid)
+            if remaining != ceiling - total or remaining_soft != soft_ceiling - total:
+                errors.append("budget scenario remaining amount mismatch:" + sid)
+            if candidate.get("within_scenario_target") is not (total <= ceiling):
+                errors.append("budget scenario target-fit flag mismatch:" + sid)
+            if candidate.get("within_soft_band") is not (total <= soft_ceiling):
+                errors.append("budget scenario soft-fit flag mismatch:" + sid)
+            if candidate.get("purchase_authorized") is not False or candidate.get("buy_now_authorized") is not False or candidate.get("bf_actual_authorized") is not False:
+                errors.append("budget scenario unexpectedly authorizes purchase:" + sid)
+            if candidate.get("target_all_in_jpy_is_verified_checkout_price") is not False:
+                errors.append("budget scenario target mislabeled as verified checkout:" + sid)
+            if candidate.get("configuration_valid") is not True or candidate.get("workload_baseline_met") is not True:
+                errors.append("budget scenario invalid or misses workload baseline:" + sid)
+            categories = [str(part.get("category") or "") for part in (candidate.get("components") or []) if isinstance(part, dict)]
+            for category in ("cpu", "gpu", "motherboard", "memory", "storage", "psu", "case", "os_license"):
+                if categories.count(category) != 1:
+                    errors.append("budget scenario component category mismatch:{}:{}".format(sid, category))
+            if not candidate.get("cooler_included_by_cpu") and categories.count("cpu_cooler") != 1:
+                errors.append("budget scenario cooler missing:" + sid)
+            names = " ".join(str(part.get("name") or "") for part in (candidate.get("components") or [])).lower()
+            if any(word in names for word in ("speaker", "headset", "サブモニター", "ヘッドセット", "スピーカー")):
+                errors.append("budget scenario includes excluded peripheral:" + sid)
+
     # Catalog integrity
     catalog = load_json(os.path.join(ROOT, "config", "candidate_catalog.json"), {})
     catalog_items = catalog.get("candidates", [])

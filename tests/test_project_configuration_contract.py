@@ -63,6 +63,56 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(targets["peripheral_budget_jpy"], 35000)
         self.assertEqual(targets["pc_target_jpy"], 360000)
 
+    def test_budget_build_candidates_are_complete_itemized_and_use_only_existing_skus(self):
+        profile = self.build["profile"]
+        parts = {item["id"]: item for item in self.build["parts"]}
+        candidates = profile["budget_build_candidates"]
+        self.assertEqual(len(candidates), 9)
+        self.assertEqual({item["budget_tier_jpy"] for item in candidates}, {350000, 400000, 450000})
+        self.assertEqual(profile["soft_ceiling_total_jpy"], 420000)
+        self.assertEqual(profile["soft_overrun_allowance_jpy"], 20000)
+        self.assertEqual(
+            [(item["total_budget_jpy"], item["soft_ceiling_total_jpy"]) for item in profile["budget_scenarios"]],
+            [(350000, 370000), (400000, 420000), (450000, 470000)],
+        )
+        expected_totals = {
+            "budget-350k-rtx5060ti-fit": 348000,
+            "budget-350k-rtx5070-over": 366000,
+            "budget-400k-rtx5070-balanced": 382000,
+            "budget-400k-rtx5060ti-2tb": 385000,
+            "budget-400k-rtx5070ti-over": 402000,
+            "budget-450k-balanced-capacity": 445000,
+            "budget-450k-5070-64gb-1tb": 424000,
+            "budget-450k-gpu-priority": 444000,
+            "budget-450k-gpu-storage": 423000,
+        }
+        for item in candidates:
+            with self.subTest(scenario=item["id"]):
+                ids = item["part_ids"]
+                self.assertEqual(len(ids), len(set(ids)))
+                self.assertTrue(all(part_id in parts for part_id in ids))
+                subtotal = sum(parts[part_id]["target_price_jpy"] for part_id in ids)
+                pc_total = subtotal + item["build_shipping_reserve_jpy"] + item["small_parts_reserve_jpy"]
+                all_in = pc_total + item["peripheral_budget_jpy"] + item["unallocated_contingency_jpy"]
+                self.assertEqual(all_in, expected_totals[item["id"]])
+                self.assertEqual(item["peripheral_budget_jpy"], 35000)
+                self.assertEqual(item["unallocated_contingency_jpy"], 5000)
+                self.assertTrue(item["purpose_note_ja"])
+                self.assertTrue(item["tradeoff_note_ja"])
+                categories = [parts[part_id]["category"] for part_id in ids]
+                for category in ("cpu", "gpu", "motherboard", "memory", "storage", "psu", "case", "os_license"):
+                    self.assertEqual(categories.count(category), 1, (item["id"], category))
+                if item["cooler_included_by_cpu"]:
+                    self.assertTrue(parts[item["cpu_part_id"]]["specs"]["cooler_included"])
+                    self.assertNotIn("cpu_cooler", categories)
+                else:
+                    self.assertEqual(categories.count("cpu_cooler"), 1)
+                self.assertGreaterEqual(parts[item["memory_part_id"]]["specs"]["capacity_gb"], 32)
+                self.assertGreaterEqual(parts[item["gpu_choice_id"]]["specs"]["vram_gb"], 8)
+                self.assertGreaterEqual(parts[item["storage_part_id"]]["specs"]["capacity_gb"], 1000)
+        self.assertEqual(parts["cpu-ryzen7-7700-box-stealth"]["specs"]["cores"], 8)
+        self.assertEqual(parts["motherboard-asrock-b650m-pro-x3d-wifi"]["specs"]["chipset"], "B650")
+
     def test_cpu_core_alternatives_are_present_for_compile_and_analysis_workloads(self):
         profile = self.build["profile"]
         parts = {item["id"]: item for item in self.build["parts"]}

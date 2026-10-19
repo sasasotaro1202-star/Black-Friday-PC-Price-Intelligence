@@ -1037,7 +1037,7 @@ def build_budget_scenarios(profile, parts, by_id, now, max_age):
             "budget_tier_jpy": tier, "budget_tier_label": str(cfg.get("budget_tier_label") or "{}万円".format(tier // 10000)),
             "name": str(cfg.get("name") or "自作PCシナリオ"), "scenario_role": str(cfg.get("scenario_role") or "comparison"),
             "purpose_note_ja": str(cfg.get("purpose_note_ja") or ""), "tradeoff_note_ja": str(cfg.get("tradeoff_note_ja") or ""),
-            "target_budget_jpy": tier, "target_peripheral_budget_jpy": peripherals, "target_contingency_jpy": reserve,
+            "target_budget_jpy": tier, "soft_ceiling_total_jpy": soft_ceiling, "target_peripheral_budget_jpy": peripherals, "target_contingency_jpy": reserve,
             "target_pc_budget_jpy": pc_cap, "target_pc_soft_budget_jpy": soft_pc_cap,
             "soft_overrun_allowance_jpy": soft_allowance, "soft_ceiling_total_jpy": soft_ceiling,
             "target_parts_subtotal_jpy": target_parts,
