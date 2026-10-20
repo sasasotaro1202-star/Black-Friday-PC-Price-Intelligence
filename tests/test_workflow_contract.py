@@ -224,7 +224,11 @@ class WorkflowContractTests(unittest.TestCase):
         # Recovery must detect a stale writer even when a newer run is queued.
         self.assertIn("--limit 20 --json databaseId,status,conclusion,createdAt,updatedAt,headSha", watchdog)
         self.assertIn("gh run cancel", watchdog)
-        self.assertIn("20*60", watchdog)
+        # The stale-writer cutoff must be longer than the collectors' timeout.
+        self.assertIn("timeout-minutes: 30", primary)
+        fast = (ROOT / ".github" / "workflows" / "pc-price-monitor-bf-fast.yml").read_text(encoding="utf-8")
+        self.assertIn("timeout-minutes: 30", fast)
+        self.assertIn("40*60", watchdog)
         self.assertIn("A fresh queued/running monitor remains", watchdog)
 
     def test_all_workflows_pin_node24_checkout_action(self):
