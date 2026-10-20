@@ -157,13 +157,13 @@ Unreal Engine自体をソースからローカルでフルビルドする用途�
 
 **35万円本命：Ryzen 7 7700 + RTX 5060 Ti 16GB — 76.5点/100**
 - 一式目標 ¥348,000。8コア/16スレッド、32GB RAM、16GB VRAM、1TB NVMeを購入時点で維持する予算優先案。
-- 部品目標の内訳: AMD Ryzen 7 7700 BOX (Wraith Stealth Cooler) ¥35,000、ASRock B650M Pro X3D WiFi ¥19,000、PNY GeForce RTX 5060 Ti 16GB OC ¥120,000、TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2) ¥58,000、Crucial P3 Plus CT1000P3PSSD8JP 1TB ¥24,000、Corsair RM850e 2025 850W ATX 3.1 Gold ¥14,000、Fractal Design Pop Air TG ¥12,000、Microsoft Windows 11 Home 日本語版 パッケージ版 ¥17,000。
+- 部品目標の内訳: [AMD Ryzen 7 7700 BOX (Wraith Stealth Cooler)](https://kakaku.com/item/K0001711744/) ¥35,000、[ASRock B650M Pro X3D WiFi](https://kakaku.com/item/K0001679617/) ¥19,000、[PNY GeForce RTX 5060 Ti 16GB OC](https://www.dospara.co.jp/SBR1892/IC625088.html) ¥120,000、[TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)](https://kakaku.com/item/K0001610896/) ¥58,000、[Crucial P3 Plus CT1000P3PSSD8JP 1TB](https://kakaku.com/item/K0001466997/) ¥24,000、[Corsair RM850e 2025 850W ATX 3.1 Gold](https://www.dospara.co.jp/SBR83/IC519918.html) ¥14,000、[Fractal Design Pop Air TG](https://www.dospara.co.jp/SBR1959/IC480986.html) ¥12,000、[Microsoft Windows 11 Home 日本語版 パッケージ版](https://kakaku.com/item/K0001432816/) ¥17,000。
 - 留意点: 9700X/RTX 5070より処理余裕・ゲーム描画は低い。付属クーラーの長時間負荷時の音・温度を確認。
 - 販売可能在庫信号: 3/8部品。直接価格・在庫・最終決済額がそろわない限り、目標総額が予算内でも購入可能とは判定しません。互換性=REVIEW。購入許可=false。
 
 **35万円比較：Ryzen 7 7700 + RTX 5070 12GB（予算超過） — 77.8点/100**
 - 一式目標 ¥366,000。RTX 5070を選んだ場合の性能差と必要予算を比較する参考案。
-- 部品目標の内訳: AMD Ryzen 7 7700 BOX (Wraith Stealth Cooler) ¥35,000、ASRock B650M Pro X3D WiFi ¥19,000、PNY GeForce RTX 5070 12GB OC SLIM ¥138,000、TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2) ¥58,000、Crucial P3 Plus CT1000P3PSSD8JP 1TB ¥24,000、Corsair RM850e 2025 850W ATX 3.1 Gold ¥14,000、Fractal Design Pop Air TG ¥12,000、Microsoft Windows 11 Home 日本語版 パッケージ版 ¥17,000。
+- 部品目標の内訳: [AMD Ryzen 7 7700 BOX (Wraith Stealth Cooler)](https://kakaku.com/item/K0001711744/) ¥35,000、[ASRock B650M Pro X3D WiFi](https://kakaku.com/item/K0001679617/) ¥19,000、[PNY GeForce RTX 5070 12GB OC SLIM](https://kakaku.com/item/K0001798041/) ¥138,000、[TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)](https://kakaku.com/item/K0001610896/) ¥58,000、[Crucial P3 Plus CT1000P3PSSD8JP 1TB](https://kakaku.com/item/K0001466997/) ¥24,000、[Corsair RM850e 2025 850W ATX 3.1 Gold](https://www.dospara.co.jp/SBR83/IC519918.html) ¥14,000、[Fractal Design Pop Air TG](https://www.dospara.co.jp/SBR1959/IC480986.html) ¥12,000、[Microsoft Windows 11 Home 日本語版 パッケージ版](https://kakaku.com/item/K0001432816/) ¥17,000。
 - 留意点: 目標構成でも総額35万円を16,000円超過。GPU以外を無理に削って適合扱いしない。
 - 販売可能在庫信号: 2/8部品。直接価格・在庫・最終決済額がそろわない限り、目標総額が予算内でも購入可能とは判定しません。互換性=REVIEW。購入許可=false。
 
@@ -182,19 +182,19 @@ Unreal Engine自体をソースからローカルでフルビルドする用途�
 
 **40万円容量案：Ryzen 7 9700X + RTX 5060 Ti 16GB + 2TB — 79.2点/100**
 - 一式目標 ¥385,000。16GB VRAMと2TB NVMeを購入時点で確保。
-- 部品目標の内訳: AMD Ryzen 7 9700X BOX ¥45,000、ASRock B850M Pro RS WiFi ¥20,000、PNY GeForce RTX 5060 Ti 16GB OC ¥120,000、TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2) ¥58,000、KIOXIA EXCERIA BASIC SSD-CK2.0N4B/N 2TB ¥45,000、Corsair RM850e 2025 850W ATX 3.1 Gold ¥14,000、Fractal Design Pop Air TG ¥12,000、Thermalright Peerless Assassin 120 SE V3 ¥5,000、Microsoft Windows 11 Home 日本語版 パッケージ版 ¥17,000。
+- 部品目標の内訳: [AMD Ryzen 7 9700X BOX](https://kakaku.com/item/K0001630332/) ¥45,000、[ASRock B850M Pro RS WiFi](https://kakaku.com/item/K0001669878/) ¥20,000、[PNY GeForce RTX 5060 Ti 16GB OC](https://www.dospara.co.jp/SBR1892/IC625088.html) ¥120,000、[TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)](https://kakaku.com/item/K0001610896/) ¥58,000、[KIOXIA EXCERIA BASIC SSD-CK2.0N4B/N 2TB](https://kakaku.com/item/K0001719361/) ¥45,000、[Corsair RM850e 2025 850W ATX 3.1 Gold](https://www.dospara.co.jp/SBR83/IC519918.html) ¥14,000、[Fractal Design Pop Air TG](https://www.dospara.co.jp/SBR1959/IC480986.html) ¥12,000、[Thermalright Peerless Assassin 120 SE V3](https://www.dospara.co.jp/SBR1968/IC645423.html) ¥5,000、[Microsoft Windows 11 Home 日本語版 パッケージ版](https://kakaku.com/item/K0001432816/) ¥17,000。
 - 留意点: RTX 5070よりゲーム描画は低くなり得る。KIOXIAのQLC NANDは持続書込み負荷との適合も確認。
 - 販売可能在庫信号: 4/9部品。直接価格・在庫・最終決済額がそろわない限り、目標総額が予算内でも購入可能とは判定しません。互換性=REVIEW。購入許可=false。
 
 **40万円本命：Ryzen 7 9700X + RTX 5070 12GB — 77.5点/100**
 - 一式目標 ¥382,000。ゲーム、ゲーム制作、分析、勉強を広く両立する基準構成。
-- 部品目標の内訳: AMD Ryzen 7 9700X BOX ¥45,000、ASRock B850M Pro RS WiFi ¥20,000、PNY GeForce RTX 5070 12GB OC SLIM ¥138,000、TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2) ¥58,000、Crucial P3 Plus CT1000P3PSSD8JP 1TB ¥24,000、Corsair RM850e 2025 850W ATX 3.1 Gold ¥14,000、Fractal Design Pop Air TG ¥12,000、Thermalright Peerless Assassin 120 SE V3 ¥5,000、Microsoft Windows 11 Home 日本語版 パッケージ版 ¥17,000。
+- 部品目標の内訳: [AMD Ryzen 7 9700X BOX](https://kakaku.com/item/K0001630332/) ¥45,000、[ASRock B850M Pro RS WiFi](https://kakaku.com/item/K0001669878/) ¥20,000、[PNY GeForce RTX 5070 12GB OC SLIM](https://kakaku.com/item/K0001798041/) ¥138,000、[TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)](https://kakaku.com/item/K0001610896/) ¥58,000、[Crucial P3 Plus CT1000P3PSSD8JP 1TB](https://kakaku.com/item/K0001466997/) ¥24,000、[Corsair RM850e 2025 850W ATX 3.1 Gold](https://www.dospara.co.jp/SBR83/IC519918.html) ¥14,000、[Fractal Design Pop Air TG](https://www.dospara.co.jp/SBR1959/IC480986.html) ¥12,000、[Thermalright Peerless Assassin 120 SE V3](https://www.dospara.co.jp/SBR1968/IC645423.html) ¥5,000、[Microsoft Windows 11 Home 日本語版 パッケージ版](https://kakaku.com/item/K0001432816/) ¥17,000。
 - 留意点: 標準ではRAM64GB/SSD2TBを含めない。価格と互換性の最終確認を優先。
 - 販売可能在庫信号: 3/9部品。直接価格・在庫・最終決済額がそろわない限り、目標総額が予算内でも購入可能とは判定しません。互換性=REVIEW。購入許可=false。
 
 **40万円大穴：RTX 5070 Ti 16GB（目標では予算超過） — 86.0点/100**
 - 一式目標 ¥402,000。最高いGPU性能と16GB VRAMを狙う参考案。
-- 部品目標の内訳: AMD Ryzen 7 9700X BOX ¥45,000、ASRock B850M Pro RS WiFi ¥20,000、PNY GeForce RTX 5070 Ti 16GB ARGB ¥158,000、TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2) ¥58,000、Crucial P3 Plus CT1000P3PSSD8JP 1TB ¥24,000、Corsair RM850e 2025 850W ATX 3.1 Gold ¥14,000、Fractal Design Pop Air TG ¥12,000、Thermalright Peerless Assassin 120 SE V3 ¥5,000、Microsoft Windows 11 Home 日本語版 パッケージ版 ¥17,000。
+- 部品目標の内訳: [AMD Ryzen 7 9700X BOX](https://kakaku.com/item/K0001630332/) ¥45,000、[ASRock B850M Pro RS WiFi](https://kakaku.com/item/K0001669878/) ¥20,000、[PNY GeForce RTX 5070 Ti 16GB ARGB](https://www.dospara.co.jp/SBR1892/IC634895.html) ¥158,000、[TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)](https://kakaku.com/item/K0001610896/) ¥58,000、[Crucial P3 Plus CT1000P3PSSD8JP 1TB](https://kakaku.com/item/K0001466997/) ¥24,000、[Corsair RM850e 2025 850W ATX 3.1 Gold](https://www.dospara.co.jp/SBR83/IC519918.html) ¥14,000、[Fractal Design Pop Air TG](https://www.dospara.co.jp/SBR1959/IC480986.html) ¥12,000、[Thermalright Peerless Assassin 120 SE V3](https://www.dospara.co.jp/SBR1968/IC645423.html) ¥5,000、[Microsoft Windows 11 Home 日本語版 パッケージ版](https://kakaku.com/item/K0001432816/) ¥17,000。
 - 留意点: 目標で総額2,000円超過。2.98スロット厚、補助電源配線とケース周囲クリアランスはREVIEW。
 - 販売可能在庫信号: 4/9部品。直接価格・在庫・最終決済額がそろわない限り、目標総額が予算内でも購入可能とは判定しません。互換性=REVIEW。購入許可=false。
 
@@ -216,37 +216,37 @@ Unreal Engine自体をソースからローカルでフルビルドする用途�
 
 **45万円GPU案：RTX 5070 Ti 16GB + 64GB RAM — 90.7点/100**
 - 一式目標 ¥444,000。GPUレンダリング/ゲーム性能とRAM64GBを優先。
-- 部品目標の内訳: AMD Ryzen 7 9700X BOX ¥45,000、ASRock B850M Pro RS WiFi ¥20,000、PNY GeForce RTX 5070 Ti 16GB ARGB ¥158,000、Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2) ¥100,000、Crucial P3 Plus CT1000P3PSSD8JP 1TB ¥24,000、Corsair RM850e 2025 850W ATX 3.1 Gold ¥14,000、Fractal Design Pop Air TG ¥12,000、Thermalright Peerless Assassin 120 SE V3 ¥5,000、Microsoft Windows 11 Home 日本語版 パッケージ版 ¥17,000。
+- 部品目標の内訳: [AMD Ryzen 7 9700X BOX](https://kakaku.com/item/K0001630332/) ¥45,000、[ASRock B850M Pro RS WiFi](https://kakaku.com/item/K0001669878/) ¥20,000、[PNY GeForce RTX 5070 Ti 16GB ARGB](https://www.dospara.co.jp/SBR1892/IC634895.html) ¥158,000、[Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2)](https://www.ark-pc.co.jp/i/11650134/) ¥100,000、[Crucial P3 Plus CT1000P3PSSD8JP 1TB](https://kakaku.com/item/K0001466997/) ¥24,000、[Corsair RM850e 2025 850W ATX 3.1 Gold](https://www.dospara.co.jp/SBR83/IC519918.html) ¥14,000、[Fractal Design Pop Air TG](https://www.dospara.co.jp/SBR1959/IC480986.html) ¥12,000、[Thermalright Peerless Assassin 120 SE V3](https://www.dospara.co.jp/SBR1968/IC645423.html) ¥5,000、[Microsoft Windows 11 Home 日本語版 パッケージ版](https://kakaku.com/item/K0001432816/) ¥17,000。
 - 留意点: SSDは1TB。RTX 5070 Tiの厚さ、電源ケーブル、RAM QVLと全決済価格を確認。
 - 販売可能在庫信号: 4/9部品。直接価格・在庫・最終決済額がそろわない限り、目標総額が予算内でも購入可能とは判定しません。互換性=REVIEW。購入許可=false。
 
 **45万円GPU+容量案：RTX 5070 Ti 16GB + 2TB SSD — 89.0点/100**
 - 一式目標 ¥423,000。GPU性能・16GB VRAM・2TB SSDを優先する別案。
-- 部品目標の内訳: AMD Ryzen 7 9700X BOX ¥45,000、ASRock B850M Pro RS WiFi ¥20,000、PNY GeForce RTX 5070 Ti 16GB ARGB ¥158,000、TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2) ¥58,000、KIOXIA EXCERIA BASIC SSD-CK2.0N4B/N 2TB ¥45,000、Corsair RM850e 2025 850W ATX 3.1 Gold ¥14,000、Fractal Design Pop Air TG ¥12,000、Thermalright Peerless Assassin 120 SE V3 ¥5,000、Microsoft Windows 11 Home 日本語版 パッケージ版 ¥17,000。
+- 部品目標の内訳: [AMD Ryzen 7 9700X BOX](https://kakaku.com/item/K0001630332/) ¥45,000、[ASRock B850M Pro RS WiFi](https://kakaku.com/item/K0001669878/) ¥20,000、[PNY GeForce RTX 5070 Ti 16GB ARGB](https://www.dospara.co.jp/SBR1892/IC634895.html) ¥158,000、[TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)](https://kakaku.com/item/K0001610896/) ¥58,000、[KIOXIA EXCERIA BASIC SSD-CK2.0N4B/N 2TB](https://kakaku.com/item/K0001719361/) ¥45,000、[Corsair RM850e 2025 850W ATX 3.1 Gold](https://www.dospara.co.jp/SBR83/IC519918.html) ¥14,000、[Fractal Design Pop Air TG](https://www.dospara.co.jp/SBR1959/IC480986.html) ¥12,000、[Thermalright Peerless Assassin 120 SE V3](https://www.dospara.co.jp/SBR1968/IC645423.html) ¥5,000、[Microsoft Windows 11 Home 日本語版 パッケージ版](https://kakaku.com/item/K0001432816/) ¥17,000。
 - 留意点: RAMは基準の32GB。予算余裕があってもRAM QVLと実価格の条件を確認して選ぶ。
 - 販売可能在庫信号: 4/9部品。直接価格・在庫・最終決済額がそろわない限り、目標総額が予算内でも購入可能とは判定しません。互換性=REVIEW。購入許可=false。
 
 **45万円総合案：RTX 5070 + 64GB RAM + 2TB SSD — 85.4点/100**
 - 一式目標 ¥445,000。ゲーム性能を保ちつつ、ゲーム制作素材・ビルド・Pythonと分析データの同時利用に向けRAM64GBとSSD2TBを購入時点で確保。
-- 部品目標の内訳: AMD Ryzen 7 9700X BOX ¥45,000、ASRock B850M Pro RS WiFi ¥20,000、PNY GeForce RTX 5070 12GB OC SLIM ¥138,000、Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2) ¥100,000、KIOXIA EXCERIA BASIC SSD-CK2.0N4B/N 2TB ¥45,000、Corsair RM850e 2025 850W ATX 3.1 Gold ¥14,000、Fractal Design Pop Air TG ¥12,000、Thermalright Peerless Assassin 120 SE V3 ¥5,000、Microsoft Windows 11 Home 日本語版 パッケージ版 ¥17,000。
+- 部品目標の内訳: [AMD Ryzen 7 9700X BOX](https://kakaku.com/item/K0001630332/) ¥45,000、[ASRock B850M Pro RS WiFi](https://kakaku.com/item/K0001669878/) ¥20,000、[PNY GeForce RTX 5070 12GB OC SLIM](https://kakaku.com/item/K0001798041/) ¥138,000、[Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2)](https://www.ark-pc.co.jp/i/11650134/) ¥100,000、[KIOXIA EXCERIA BASIC SSD-CK2.0N4B/N 2TB](https://kakaku.com/item/K0001719361/) ¥45,000、[Corsair RM850e 2025 850W ATX 3.1 Gold](https://www.dospara.co.jp/SBR83/IC519918.html) ¥14,000、[Fractal Design Pop Air TG](https://www.dospara.co.jp/SBR1959/IC480986.html) ¥12,000、[Thermalright Peerless Assassin 120 SE V3](https://www.dospara.co.jp/SBR1968/IC645423.html) ¥5,000、[Microsoft Windows 11 Home 日本語版 パッケージ版](https://kakaku.com/item/K0001432816/) ¥17,000。
 - 留意点: RTX 5070 TiほどGPU性能は高くない。正確なRAM QVL/EXPO・SSD持続書込適合・現行価格を確認。
 - 販売可能在庫信号: 3/9部品。直接価格・在庫・最終決済額がそろわない限り、目標総額が予算内でも購入可能とは判定しません。互換性=REVIEW。購入許可=false。
 
 **45万円分析案：RTX 5070 + 64GB RAM + 1TB SSD — 82.4点/100**
 - 一式目標 ¥424,000。RAM容量とCPU並列作業を優先して64GBを購入時点で確保。
-- 部品目標の内訳: AMD Ryzen 7 9700X BOX ¥45,000、ASRock B850M Pro RS WiFi ¥20,000、PNY GeForce RTX 5070 12GB OC SLIM ¥138,000、Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2) ¥100,000、Crucial P3 Plus CT1000P3PSSD8JP 1TB ¥24,000、Corsair RM850e 2025 850W ATX 3.1 Gold ¥14,000、Fractal Design Pop Air TG ¥12,000、Thermalright Peerless Assassin 120 SE V3 ¥5,000、Microsoft Windows 11 Home 日本語版 パッケージ版 ¥17,000。
+- 部品目標の内訳: [AMD Ryzen 7 9700X BOX](https://kakaku.com/item/K0001630332/) ¥45,000、[ASRock B850M Pro RS WiFi](https://kakaku.com/item/K0001669878/) ¥20,000、[PNY GeForce RTX 5070 12GB OC SLIM](https://kakaku.com/item/K0001798041/) ¥138,000、[Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2)](https://www.ark-pc.co.jp/i/11650134/) ¥100,000、[Crucial P3 Plus CT1000P3PSSD8JP 1TB](https://kakaku.com/item/K0001466997/) ¥24,000、[Corsair RM850e 2025 850W ATX 3.1 Gold](https://www.dospara.co.jp/SBR83/IC519918.html) ¥14,000、[Fractal Design Pop Air TG](https://www.dospara.co.jp/SBR1959/IC480986.html) ¥12,000、[Thermalright Peerless Assassin 120 SE V3](https://www.dospara.co.jp/SBR1968/IC645423.html) ¥5,000、[Microsoft Windows 11 Home 日本語版 パッケージ版](https://kakaku.com/item/K0001432816/) ¥17,000。
 - 留意点: SSDは1TBに留まるため、ゲーム素材やデータセット容量と比較。
 - 販売可能在庫信号: 3/9部品。直接価格・在庫・最終決済額がそろわない限り、目標総額が予算内でも購入可能とは判定しません。互換性=REVIEW。購入許可=false。
 
 **45万円上位大穴：Ryzen 7 9700X + RTX 5070 Ti 16GB + 64GB RAM + 2TB SSD — 93.7点/100**
 - 一式目標 ¥465,000。GPU性能・16GB VRAM・RAM 64GB・SSD 2TBを一度に確保する45万円帯の上位大穴。ゲーム、ゲーム制作アセット、ローカルAI、データ分析、並行開発を広く狙う。
-- 部品目標の内訳: AMD Ryzen 7 9700X BOX ¥45,000、ASRock B850M Pro RS WiFi ¥20,000、PNY GeForce RTX 5070 Ti 16GB ARGB ¥158,000、Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2) ¥100,000、KIOXIA EXCERIA BASIC SSD-CK2.0N4B/N 2TB ¥45,000、Corsair RM850e 2025 850W ATX 3.1 Gold ¥14,000、Fractal Design Pop Air TG ¥12,000、Thermalright Peerless Assassin 120 SE V3 ¥5,000、Microsoft Windows 11 Home 日本語版 パッケージ版 ¥17,000。
+- 部品目標の内訳: [AMD Ryzen 7 9700X BOX](https://kakaku.com/item/K0001630332/) ¥45,000、[ASRock B850M Pro RS WiFi](https://kakaku.com/item/K0001669878/) ¥20,000、[PNY GeForce RTX 5070 Ti 16GB ARGB](https://www.dospara.co.jp/SBR1892/IC634895.html) ¥158,000、[Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2)](https://www.ark-pc.co.jp/i/11650134/) ¥100,000、[KIOXIA EXCERIA BASIC SSD-CK2.0N4B/N 2TB](https://kakaku.com/item/K0001719361/) ¥45,000、[Corsair RM850e 2025 850W ATX 3.1 Gold](https://www.dospara.co.jp/SBR83/IC519918.html) ¥14,000、[Fractal Design Pop Air TG](https://www.dospara.co.jp/SBR1959/IC480986.html) ¥12,000、[Thermalright Peerless Assassin 120 SE V3](https://www.dospara.co.jp/SBR1968/IC645423.html) ¥5,000、[Microsoft Windows 11 Home 日本語版 パッケージ版](https://kakaku.com/item/K0001432816/) ¥17,000。
 - 留意点: BF目標額ベースの一式目標は465,000円で、45万円目標を15,000円超える一方、47万円の比較帯内には5,000円の余裕がある。実売価格ではない。SSDはQLC NANDのため大規模な持続書き込み速度をTLC候補と比較。RAM QVL/EXPO、GPU実SKU寸法/電源ケーブル余裕、BIOS、全パーツ在庫・最終決済額が未確認の間は購入可能扱いしない。
 - 販売可能在庫信号: 4/9部品。直接価格・在庫・最終決済額がそろわない限り、目標総額が予算内でも購入可能とは判定しません。互換性=REVIEW。購入許可=false。
 
 **45万円CPU並列案：Ryzen 9 9900X + RTX 5070 12GB + 64GB RAM + 2TB SSD — 88.5点/100**
 - 一式目標 ¥455,000。12コア/24スレッドでローカルビルド・並列分析の余裕を確保しながら、RTX 5070 12GB・RAM 64GB・SSD 2TBを購入時点で狙うCPU並列重視案。
-- 部品目標の内訳: AMD Ryzen 9 9900X BOX ¥55,000、ASRock B850M Pro RS WiFi ¥20,000、PNY GeForce RTX 5070 12GB OC SLIM ¥138,000、Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2) ¥100,000、KIOXIA EXCERIA BASIC SSD-CK2.0N4B/N 2TB ¥45,000、Corsair RM850e 2025 850W ATX 3.1 Gold ¥14,000、Fractal Design Pop Air TG ¥12,000、Thermalright Peerless Assassin 120 SE V3 ¥5,000、Microsoft Windows 11 Home 日本語版 パッケージ版 ¥17,000。
+- 部品目標の内訳: [AMD Ryzen 9 9900X BOX](https://kakaku.com/item/K0001630331/) ¥55,000、[ASRock B850M Pro RS WiFi](https://kakaku.com/item/K0001669878/) ¥20,000、[PNY GeForce RTX 5070 12GB OC SLIM](https://kakaku.com/item/K0001798041/) ¥138,000、[Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2)](https://www.ark-pc.co.jp/i/11650134/) ¥100,000、[KIOXIA EXCERIA BASIC SSD-CK2.0N4B/N 2TB](https://kakaku.com/item/K0001719361/) ¥45,000、[Corsair RM850e 2025 850W ATX 3.1 Gold](https://www.dospara.co.jp/SBR83/IC519918.html) ¥14,000、[Fractal Design Pop Air TG](https://www.dospara.co.jp/SBR1959/IC480986.html) ¥12,000、[Thermalright Peerless Assassin 120 SE V3](https://www.dospara.co.jp/SBR1968/IC645423.html) ¥5,000、[Microsoft Windows 11 Home 日本語版 パッケージ版](https://kakaku.com/item/K0001432816/) ¥17,000。
 - 留意点: CPU目標55,000円、RAM/SSD/GPUもBF目標を使った計画値で、実売ではない。9900Xは120W TDPでAMDは最適性能のため液冷を推奨するため、Peerless Assassin空冷での長時間全コア負荷時の温度・騒音・クロックを検証する。冷却変更が必要なら未計上費を追加し、総額を再計算する。メモリQVL/EXPO・GPU寸法/電源・BIOS・全SKUの実売/在庫を確認するまで購入可能扱いしない。
 - 販売可能在庫信号: 3/9部品。直接価格・在庫・最終決済額がそろわない限り、目標総額が予算内でも購入可能とは判定しません。互換性=REVIEW。購入許可=false。
 
