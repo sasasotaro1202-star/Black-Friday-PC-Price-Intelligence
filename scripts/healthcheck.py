@@ -69,7 +69,7 @@ def main():
     if "実店舗" not in peripheral_policy or "店頭税込現金価格" not in peripheral_policy:
         errors.append("peripheral purchase policy must retain in-store cash-price verification")
     local_ai_policy = str(workload_detail.get("local_ai_policy_ja") or "")
-    if not local_ai_policy or "VRAM" not in local_ai_policy or "有料API" not in local_ai_policy:
+    if not local_ai_policy or "VRAM" not in local_ai_policy or "オンラインAPI" not in local_ai_policy:
         errors.append("local AI policy must retain VRAM and zero-recurring-cost constraints")
     fixed_policy = str(workload_profile.get("policy") or "")
     if not all(phrase in fixed_policy for phrase in ("Do not include speakers", "sub-monitor", "headset")):
