@@ -228,7 +228,11 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(game_dev["baseline_requirements"]["primary_ssd_gb"], 1000)
         self.assertEqual(game_dev["preferred_cpu_cores_for_unreal_source_build"], 12)
         self.assertIn("large datasets and simulations", build_workloads["analysis_and_automation"]["targets"])
-        self.assertIn("school/study work", build_workloads["study_and_research"]["targets"])
+        study_targets = set(build_workloads["study_and_research"]["targets"])
+        self.assertIn("daily school lessons and class materials", study_targets)
+        self.assertIn("school quizzes and term exams", study_targets)
+        self.assertIn("transfer from school lessons to Waseda University / Kyushu University entrance-exam problem-solving", study_targets)
+        self.assertIn("faculty/admission-route requirements and public past papers verified from official sources", study_targets)
 
         for relative_path in (
             "README.md",
