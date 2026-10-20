@@ -36,7 +36,10 @@ class HistoricalBFAnalysisTests(unittest.TestCase):
         expected_categories = {"main_monitor", "mouse", "keyboard", "mousepad", "cables"}
         self.assertEqual(set(cfg["purchase_channels"]["physical_store_categories"]), expected_categories)
         self.assertEqual(set(cfg["purchase_channels"]["online_categories"]), expected_categories)
-        self.assertEqual(cfg["purchase_channels"]["channel_selection_mode"], "COMPARE_ONLINE_AND_LOCAL_STORE")
+        self.assertEqual(cfg["purchase_channels"]["channel_selection_mode"], "STORE_FIRST_LOCAL_PURCHASE")
+        self.assertEqual(cfg["purchase_channels"]["default_peripheral_channel"], "physical_store")
+        self.assertTrue(cfg["purchase_channels"]["physical_store_price_and_stock_required_before_recommendation"])
+        self.assertTrue(cfg["purchase_channels"]["online_orders_require_explicit_user_approval"])
         self.assertFalse(cfg["purchase_channels"]["online_price_is_store_price"])
         self.assertEqual(cfg["purchase_channels"]["pc_body"]["channel"], "online")
         items = cfg["peripherals"]
@@ -55,12 +58,13 @@ class HistoricalBFAnalysisTests(unittest.TestCase):
         item_ids = {p.get("id") for p in all_items}
         self.assertTrue({"speakers", "secondary_monitor", "headset", "power_strip"}.isdisjoint(item_ids))
         for p in all_items:
-            if p.get("purchase_channel") == "compare_online_and_store":
-                self.assertFalse(p.get("online_price_is_comparison_only", False), p.get("id"))
-                self.assertTrue({"online", "physical_store", "store_pickup"}.issubset(set(p.get("purchase_channel_options") or [])), p.get("id"))
-                self.assertTrue(p.get("physical_store_candidate_ids"), p.get("id"))
             if p.get("purchase_channel") == "physical_store":
                 self.assertTrue(p.get("store_inventory_required_before_purchase"), p.get("id"))
+                self.assertTrue(p.get("online_price_is_comparison_only"), p.get("id"))
+                self.assertFalse(p.get("online_purchase_allowed_when_store_price_unconfirmed"), p.get("id"))
+                self.assertEqual(p.get("purchase_channel_preference"), "physical_store_first", p.get("id"))
+                self.assertTrue({"online", "physical_store", "store_pickup"}.issubset(set(p.get("purchase_channel_options") or [])), p.get("id"))
+                self.assertTrue(p.get("physical_store_candidate_ids"), p.get("id"))
             for url in p.get("monitor_urls") or []:
                 self.assertIn(urlparse(url).netloc, p.get("allowed_hosts") or [],
                               msg=f"Configured monitoring URL host not allowed for {p.get('id')}: {url}")

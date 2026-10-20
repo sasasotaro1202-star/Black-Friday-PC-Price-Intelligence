@@ -436,7 +436,9 @@ class PeripheralMonitorTests(unittest.TestCase):
                 self.assertEqual(check["source_type"], "official_product_page_pickup_information")
                 self.assertIn("unknown", check.get("notes", ""))
                 self.assertTrue(target["store_price_is_separate_evidence"])
-                self.assertTrue(target["online_purchase_allowed_when_store_price_unconfirmed"])
+                self.assertFalse(target["online_purchase_allowed_when_store_price_unconfirmed"])
+                self.assertTrue(target["online_price_is_comparison_only"])
+                self.assertEqual(target["purchase_channel_preference"], "physical_store_first")
 
     def test_official_tenjin_inventory_page_separates_branch_stock_from_cash_price(self):
         import json
