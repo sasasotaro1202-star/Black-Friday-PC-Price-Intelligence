@@ -85,7 +85,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertIn("PC本体パーツはネット購入", self.profile.get("peripheral_purchase_policy_ja", ""))
         self.assertIn("実店舗", self.profile.get("peripheral_purchase_policy_ja", ""))
         self.assertIn("VRAM", workload.get("local_ai_policy_ja", ""))
-        self.assertIn("有料API", workload.get("local_ai_policy_ja", ""))
+        self.assertIn("オンラインAPI", workload.get("local_ai_policy_ja", ""))
         fixed_policy = self.profile.get("policy", "")
         self.assertIn("Do not include speakers", fixed_policy)
         self.assertIn("sub-monitor", fixed_policy)
