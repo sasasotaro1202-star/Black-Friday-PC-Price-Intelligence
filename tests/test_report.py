@@ -381,10 +381,10 @@ class ReportLinkTests(unittest.TestCase):
             {
                 "products": [{
                     "id": "pc-no-valid-url",
-                    "name": "Tracked GPU | model\\nrevision",
+                    "name": "Tracked GPU | model" + chr(10) + "revision",
                     "url": "https://",
                     "fetch_status": "error",
-                    "last_fetch_error": "timeout | parse\\nfailed",
+                    "last_fetch_error": "timeout | parse" + chr(10) + "failed",
                     "current_price_jpy": None,
                     "price_validation_status": "missing",
                     "stock_status": "unknown",
@@ -397,13 +397,13 @@ class ReportLinkTests(unittest.TestCase):
                 "purchase_url": "javascript:alert(1)",
                 "monitor_url": "file:///etc/passwd",
                 "status": "error",
-                "error": "page\\nfetch failed",
+                "error": "page" + chr(10) + "fetch failed",
                 "current_price_jpy": None,
                 "price_verified": False,
                 "stock_status": "unknown",
             }]},
         )
-        rendered = "\\n".join(lines)
+        rendered = chr(10).join(lines)
         self.assertIn("Tracked GPU / model revision", rendered)
         self.assertIn("timeout / parse failed", rendered)
         self.assertIn("Tracked keyboard", rendered)
@@ -425,8 +425,8 @@ class ReportLinkTests(unittest.TestCase):
             {"products": []},
             {"products": []},
         )
-        rendered = "\\n".join(lines)
-        self.assertIn("[商品ページを開く](https://example.com/product%28edition%29)", rendered)
+        rendered = chr(10).join(lines)
+        self.assertIn("[商品ページ](https://example.com/product%28edition%29)", rendered)
 
     def test_sales_url_accepts_http_url(self):
         self.assertEqual(
