@@ -428,6 +428,34 @@ class ReportLinkTests(unittest.TestCase):
         rendered = chr(10).join(lines)
         self.assertIn("[商品ページ](https://example.com/product%28edition%29)", rendered)
 
+    def test_main_ranking_link_section_surfaces_normalized_failure_states(self):
+        lines = report.retrieval_issue_link_section(
+            {"products": [{
+                "id": "pc-failed-status",
+                "name": "Tracked laptop with failed fetch status",
+                "url": "https://example.com/tracked-laptop",
+                "fetch_status": "failed",
+                "last_fetch_error": "HTTP 503",
+                "current_price_jpy": None,
+                "stock_status": "unknown",
+            }]},
+            {"products": [{
+                "id": "component-timeout-status",
+                "name": "Tracked GPU with timeout status",
+                "fetch_status": "timeout",
+                "last_fetch_error": "socket timeout",
+                "purchase_url": "https://example.com/tracked-gpu",
+                "monitor_url": "https://compare.example.com/tracked-gpu",
+                "price_validation_status": "missing",
+            }]},
+            {"products": []},
+        )
+        rendered = chr(10).join(lines)
+        self.assertIn("取得エラー: HTTP 503", rendered)
+        self.assertIn("[商品ページ](https://example.com/tracked-laptop)", rendered)
+        self.assertIn("取得エラー: socket timeout", rendered)
+        self.assertIn("[商品ページ](https://example.com/tracked-gpu)", rendered)
+
     def test_sales_url_accepts_http_url(self):
         self.assertEqual(
             report.sales_url({"url": "https://example.com/product"}),
