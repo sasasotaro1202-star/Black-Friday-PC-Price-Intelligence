@@ -1083,6 +1083,15 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
     cid = entry["id"]
     current_url = entry["url"]
     previous_valid = previous.get("current_price_jpy") if previous else None
+    # Historical values are reusable only when their prior observation had both
+    # a confirmed variant identity and a valid price state. Older snapshots can
+    # predate this guard and may contain a price for an ambiguous SKU.
+    if previous_valid is not None and (
+        previous.get("variant_match") not in ("exact", "trusted_url", "strong")
+        or previous.get("price_validation_status") not in ("validated", "anomaly_corroborated")
+    ):
+        previous_valid = None
+
     # Do not carry forward a value whose saved source context proves it came
     # from a category-navigation filter rather than the requested SKU offer.
     previous_context = norm_text((previous or {}).get("price_context"))
