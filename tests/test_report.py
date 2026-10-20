@@ -322,6 +322,80 @@ class ReportLinkTests(unittest.TestCase):
             "https://example.com/product",
         )
 
+    def test_retrieval_issue_link_section_links_each_unverified_item(self):
+        latest = {
+            "products": [
+                {
+                    "id": "pc-error",
+                    "name": "PC retrieval failure",
+                    "url": "https://shop.example.com/pc-error",
+                    "fetch_status": "error",
+                    "last_fetch_error": "HTTP 403",
+                    "current_price_jpy": None,
+                    "price_validation_status": "missing",
+                    "stock_status": "unknown",
+                },
+                {
+                    "id": "pc-variant",
+                    "name": "PC ambiguous SKU",
+                    "url": "https://shop.example.com/pc-variant",
+                    "fetch_status": "ok",
+                    "current_price_jpy": None,
+                    "price_validation_status": "variant_ambiguous",
+                    "variant_match": "ambiguous",
+                    "stock_status": "unknown",
+                },
+            ]
+        }
+        parts = {
+            "products": [
+                {
+                    "id": "gpu-error",
+                    "name": "GPU direct listing failed",
+                    "fetch_status": "error",
+                    "last_fetch_error": "HTTP 500",
+                    "price_validation_status": "missing",
+                    "purchase_url": "https://parts.example.com/gpu",
+                    "monitor_url": "https://compare.example.com/gpu",
+                },
+                {
+                    "id": "gpu-ok",
+                    "name": "GPU verified",
+                    "price_validation_status": "verified_retailer_listing_reference",
+                    "retailer_listing_offer": {
+                        "url": "https://parts.example.com/gpu-ok",
+                        "price_jpy": 120000,
+                        "identity_match": True,
+                        "pit_valid": True,
+                        "stock_status": "in_stock",
+                    },
+                },
+            ]
+        }
+        peripherals = {
+            "products": [
+                {
+                    "id": "mouse",
+                    "name": "Mouse no price",
+                    "purchase_url": "https://store.example.com/mouse",
+                    "monitor_url": "https://compare.example.com/mouse",
+                    "price_verified": False,
+                    "current_price_jpy": None,
+                    "stock_status": "unknown",
+                }
+            ]
+        }
+
+        lines = report.retrieval_issue_link_section(latest, parts, peripherals)
+        rendered = "\\n".join(lines)
+        self.assertIn("[商品ページ](https://shop.example.com/pc-error)", rendered)
+        self.assertIn("HTTP 403", rendered)
+        self.assertIn("[商品ページ](https://shop.example.com/pc-variant)", rendered)
+        self.assertIn("[商品ページ](https://parts.example.com/gpu)", rendered)
+        self.assertIn("[監視/比較ページ](https://compare.example.com/gpu)", rendered)
+        self.assertIn("[商品ページ](https://store.example.com/mouse)", rendered)
+        self.assertNotIn("https://parts.example.com/gpu-ok", rendered)
+
     def test_suppress_current_price_moves_value_to_reference_only(self):
         row = {"current_price_jpy": 299800, "last_valid_price_jpy": None, "price_jpy": 299800}
         out = report.suppress_current_price(row)
