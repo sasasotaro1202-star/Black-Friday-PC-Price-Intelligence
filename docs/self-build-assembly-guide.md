@@ -96,6 +96,15 @@ RTX 5060 Ti 16GBはローカルAIの一部用途でVRAM容量を確保したい�
 
 代替選択は、正確なSKUの直接ページで `in_stock` または `low_stock` が新しく検証できた場合に限ります。在庫不明・取得エラーは売り切れと同一視せず、在庫ありとみなすことも禁止します。代替SKUごとに価格履歴を分け、価格目標を現行価格へ代入しません。
 
+### 公式仕様に基づく現時点の確認
+
+- ASRock B850M Pro RS WiFiはAM5 Ryzen 9000シリーズに対応し、BIOS Flashbackを搭載。CPU Support ListとBIOS一覧ではBIOS 3.12対応表記/2026-10-12公開の4.60を確認できるが、購入個体の出荷BIOSは未確認。ラベル/販売店に確認し、必要時のみ説明書に従ってFlashbackを使う。
+- PNY RTX 5070 Ti 16GB ARGB（VCG5070T16TFXXPB1-O）の公式寸法は299.5×120.0×59.6mm、2.98-slot、300W。Pop Air TG系のメーカー最大GPU長405mmに対し長さは収まるが、実SKUの厚さ・電源端子から側板までのケーブル曲げ余裕を別に確認する。
+- Corsair RM850e 2025（CP-9020296-JP）は850W/ATX 3.1/ネイティブ12V-2x6ケーブル付属。メーカーシステム電源目安750Wの上記GPUに対して容量クラスは足りる見込みだが、配線は付属ケーブルとマニュアルに従う。
+- メモリQVL/EXPO、クーラー/ケース/メモリの物理干渉、注文時の在庫・決済総額・保証は別途確認。上記の情報だけで互換性全体をPASS扱いしない。
+
+参照：[ASRock BIOS](https://www.asrock.com/mb/AMD/B850M%20Pro%20RS%20WiFi/bios.html) / [PNY GPU](https://cs.pny.com.tw/geforce-rtx-5070-ti-models?iscommercial=true) / [Fractal Pop Air](https://www.fractal-design.com/ja/products/cases/pop-series/pop-air/pop-air-black-solid/) / [Corsair RM850e](https://www.corsair.com/jp/ja/p/psu/cp-9020296-jp/rme-series-rm850e-fully-modular-low-noise-atx-power-supply-jp-cp-9020296-jp).
+
 ## 注文前の互換性ゲート
 
 次のすべてを、注文する**正確な型番・リビジョン**で確認します。自動チェックがPASSでも、メーカー資料と販売店の最終構成を確認するまでは購入許可にはなりません。
