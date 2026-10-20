@@ -161,8 +161,13 @@ def retrieval_issue_link_section(latest, build_components=None, peripherals=None
         if item.get("category") in ("budget_reserve", "cables") or item.get("id") in ("store_price_buffer", "cables"):
             continue
         problems = []
-        if item.get("error"):
-            problems.append("取得エラー: " + cell(item.get("error")))
+        # A failed fetch must remain visible even when the last successful price/stock
+        # is still cached. Retrieval failure is not equivalent to out-of-stock.
+        fetch_state = str(item.get("fetch_status") or item.get("status") or "").strip().lower()
+        failure_states = ("error", "failed", "failure", "timeout", "exception")
+        if item.get("error") or item.get("last_fetch_error") or item.get("fetch_error") or fetch_state in failure_states:
+            error_detail = item.get("last_fetch_error") or item.get("fetch_error") or item.get("error") or item.get("price_validation_reason")
+            problems.append("取得エラー: " + cell(error_detail))
         if item.get("price_verified") is not True or item.get("current_price_jpy") is None:
             problems.append("価格未確認")
         stock = item.get("stock_status")
