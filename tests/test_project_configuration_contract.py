@@ -71,7 +71,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         profile = self.build["profile"]
         parts = {item["id"]: item for item in self.build["parts"]}
         candidates = profile["budget_build_candidates"]
-        self.assertEqual(len(candidates), 9)
+        self.assertEqual(len(candidates), 10)
         self.assertEqual({item["budget_tier_jpy"] for item in candidates}, {350000, 400000, 450000})
         self.assertEqual(profile["soft_ceiling_total_jpy"], 420000)
         self.assertEqual(profile["soft_overrun_allowance_jpy"], 20000)
@@ -87,6 +87,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
             "budget-400k-rtx5070ti-over": 402000,
             "budget-450k-balanced-capacity": 445000,
             "budget-450k-5070-64gb-1tb": 424000,
+            "budget-450k-9900x-5070-64gb-2tb": 455000,
             "budget-450k-gpu-priority": 444000,
             "budget-450k-gpu-storage": 423000,
         }
