@@ -305,6 +305,54 @@ class ReportLinkTests(unittest.TestCase):
         self.assertEqual(reason, "peripheral_purchase_channel_comparison_incomplete")
 
 
+    def test_retrieval_issue_links_include_failed_pc_component_and_peripheral_pages(self):
+        lines = report.retrieval_issue_link_lines(
+            {
+                "products": [{
+                    "id": "pc-test", "name": "ASUS Test PC",
+                    "url": "https://example.com/asus-test",
+                    "fetch_status": "error", "last_fetch_error": "RuntimeError:curl_http_403",
+                    "current_price_jpy": None, "stock_status": "unknown",
+                }]
+            },
+            {
+                "products": [{
+                    "id": "gpu-test", "name": "Test GPU",
+                    "purchase_url": "https://example.com/test-gpu",
+                    "fetch_status": "error", "last_fetch_error": "timeout",
+                    "price_validation_status": "missing",
+                }]
+            },
+            {
+                "products": [{
+                    "id": "pad-test", "name": "Test Mousepad",
+                    "purchase_url": "https://example.com/test-pad",
+                    "status": "error", "error": "curl timeout",
+                    "current_price_jpy": None, "stock_status": "unknown",
+                }]
+            },
+        )
+        text = "\n".join(lines)
+        self.assertIn("[商品ページを開く](https://example.com/asus-test)", text)
+        self.assertIn("[商品ページを開く](https://example.com/test-gpu)", text)
+        self.assertIn("[商品ページを開く](https://example.com/test-pad)", text)
+        self.assertIn("RuntimeError:curl_http_403", text)
+        self.assertIn("取得エラーは売り切れを意味しません", text)
+
+    def test_retrieval_issue_links_never_render_non_http_product_urls(self):
+        lines = report.retrieval_issue_link_lines(
+            {"products": [{
+                "id": "bad-url", "name": "Bad URL PC",
+                "url": "javascript:alert(1)", "fetch_status": "error",
+                "last_fetch_error": "fetch failed", "current_price_jpy": None,
+            }]},
+            {"products": []},
+            {"products": []},
+        )
+        text = "\n".join(lines)
+        self.assertNotIn("](javascript:alert(1))", text)
+        self.assertIn("商品URL未登録（要修正）", text)
+
     def test_sales_url_accepts_http_url(self):
         self.assertEqual(
             report.sales_url({"url": "https://example.com/product"}),
