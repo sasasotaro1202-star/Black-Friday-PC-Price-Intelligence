@@ -349,6 +349,8 @@ class SelfBuildPlannerTests(unittest.TestCase):
         self.assertIn("予算（すべて日本円）", report)
         self.assertIn("¥400,000", report)
         self.assertIn("¥420,000", report)
+        self.assertIn("PC本体単体の比較上限（総額上限ではない）", report)
+        self.assertNotIn("PC本体の絶対上限", report)
         self.assertIn("35万円・40万円・45万円の一式予算比較", report)
         self.assertNotIn("$400,000", report)
         self.assertFalse(plan["buy_now_authorized"])

@@ -1965,7 +1965,7 @@ def render_plan_markdown(plan):
         "更新: " + str(plan.get("generated_at")),
         "予算（すべて日本円）: PC本体基準目標 " + money(plan.get("pc_target_jpy")) +
         " / PC本体計画上限 " + money(plan.get("pc_planned_budget_jpy")) +
-        " / PC本体の絶対上限 " + money(plan.get("pc_budget_jpy")) +
+        " / PC本体単体の比較上限（総額上限ではない） " + money(plan.get("pc_budget_jpy")) +
         " / 周辺機器計画枠 " + money(plan.get("peripheral_budget_jpy")) +
         " / 総額予備費 " + money(plan.get("unallocated_contingency_jpy")) +
         " / 総額目標 " + money(plan.get("total_budget_jpy")) +
@@ -2401,7 +2401,7 @@ def section_from_plan(plan):
     lines = [START_MARKER, "## 最優先：PC本体は自作構成", "",
         "BTO完成品は価格比較用の参考枠に下げ、部品ごとの価格・互換性・送料を合算します。" +
         "PC本体の計画上限は " + money(plan.get("pc_planned_budget_jpy")) +
-        "（周辺機器計画枠と総額予備費を先に確保。PC本体の絶対上限は " +
+        "（周辺機器計画枠と総額予備費を先に確保。PC本体単体の比較上限（総額上限ではない）は " +
         money(plan.get("pc_budget_jpy")) + "）。", "",
         "|順位|自作構成|構成点/100|購入根拠充足度/100|PC本体目標|周辺機器込み|目標残額|互換性|判定|",
         "|---:|---|---:|---:|---:|---:|---:|---|---|"]
