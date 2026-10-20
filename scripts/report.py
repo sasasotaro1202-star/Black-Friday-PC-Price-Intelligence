@@ -251,7 +251,7 @@ def retrieval_issue_link_lines(latest=None, component_prices=None, peripheral_pr
         url = _first_http_product_url(item, url_keys)
         name = _clean_issue_cell(item.get("name") or item.get("model") or item.get("id") or "商品名未設定", 150)
         if url:
-            link = "[商品ページを開く]({})".format(url.replace(")", "%29"))
+            link = "[商品ページを開く]({})".format(url.replace("(", "%28").replace(")", "%29"))
         else:
             link = "商品URL未登録（要修正）"
         rows.append((group, name, _clean_issue_cell(status, 70), _clean_issue_cell(reason, 190), link, url or ""))
