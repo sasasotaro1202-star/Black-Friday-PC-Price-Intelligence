@@ -1142,7 +1142,24 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
             "benefit_confidence": raw.get("benefit_confidence") or "unconfirmed",
         })
         item = enrich_identity(item, catalog_item)
-        candidate_price = raw.get("price_jpy")
+        identity_usable = item.get("variant_match") in ("exact", "trusted_url", "strong")
+        if not identity_usable:
+            # A price/stock signal from a page whose SKU conflicts with the
+            # curated target is not an actionable observation, even when the
+            # HTTP fetch and price parser succeeded.
+            item["observed_price_source_mode"] = item.get("price_source_mode")
+            item["price_source_mode"] = "none"
+            item["price_validation_status"] = "variant_ambiguous"
+            item["price_validation_reason"] = (
+                item.get("variant_ambiguity_reason") or "variant_identity_not_confirmed"
+            )
+            item["current_price_jpy"] = None
+            item["price_jpy"] = None
+            item["available_at"] = None
+            item["stock_status"] = "unknown"
+            item["data_confidence"] = "low"
+
+        candidate_price = raw.get("price_jpy") if identity_usable else None
         if candidate_price is not None:
             val = validate_price(candidate_price, item, reference_price=reference, corroborated=False)
             item["price_validation_status"] = val["status"]
