@@ -71,7 +71,7 @@
     "assembly_time_penalty_points": 0,
     "pc_build_method_preference": "SELF_BUILD_REQUIRED_FOR_PRIMARY_RECOMMENDATION",
     "bto_role": "REFERENCE_BENCHMARK_ONLY",
-    "selection_policy": "Prioritize self-build for the actual desktop recommendation. Assembly time and assembly effort are not negative factors. Compare BTO only as a reference benchmark on equivalent final specification, total cash price, part quality and warranty; do not switch the primary recommendation to BTO merely for convenience. Add a separately scored CPU-core alternative for compile/data workloads; clearly identify unresolved BIOS/cooling constraints and do not silently swap away from the base CPU.",
+    "selection_policy": "PC本体は自作パーツをネット購入する方式を本命とし、組み立て時間を減点にしない。周辺機器は福岡の指定実店舗（ビックカメラ天神1号館、ヨドバシカメラ マルチメディア博多）での税込現金購入を既定ルートとし、店頭価格と当該支店の棚在庫が確認できるまで店頭購入先確定とは表示しない。オンライン価格は比較参考として別に保持し、ユーザーの明示承認なしにネット配送や店舗受け取りへ自動切替しない。BTOは同等構成の価格・性能・品質・保証の比較枠のみ。ゲーム、ゲーム制作、スポーツ/株/BTC分析、ローカルAI、学校の授業から早稲田/九大の入試応用までを一つの多目的構成として評価する。価格目標だけで購入許可を出さず、正確なSKU、最新在庫、決済額、互換性、返品/保証を確認する。",
     "purchase_decision_factors": [
       {
         "name": "combined_performance_for_gaming_game_creation_study_analysis",
@@ -196,27 +196,33 @@
         "Treat schoolwork, research, browser/PDF/document work and general multitasking as a first-class workload alongside gaming and game development.",
         "Treat Python analytics, larger simulations, sports/stock/BTC predictions, automated tests and feasible local AI as first-class workloads; score CPU, RAM, VRAM, SSD and long-run thermal behavior by workload instead of GPU-only ranking.",
         "Prefer 64GB RAM and 2TB SSD only when a complete as-purchased build fits the total budget and exact capacities are priced/verified; never rely on post-purchase upgrades.",
-        "Prioritize a balanced workstation/gaming build; do not overspend on GPU at the expense of memory and storage needs for study, development and data work."
+        "Prioritize a balanced workstation/gaming build; do not overspend on GPU at the expense of memory and storage needs for study, development and data work.",
+        "Optimize hardware and the study workflow together: daily lesson -> school test -> first-seen/application practice -> verified faculty-specific admissions mapping -> error log -> delayed retesting. Separate verified official past papers from original practice questions.",
+        "Treat the hardware study score as PC suitability, not a prediction of grades or admissions outcomes. Do not store personal school identity, student IDs, grades or non-public test materials in public GitHub."
       ],
       "study_and_research": {
         "priority": "HIGH",
         "targets": [
-          "school/study work",
-          "reading and summarizing source documents",
-          "research",
-          "writing and presentations",
-          "browser with many tabs",
-          "video lessons and note-taking"
+          "daily school lessons and class materials",
+          "school quizzes and term exams",
+          "transfer from school lessons to Waseda University / Kyushu University entrance-exam problem-solving",
+          "textbook, worksheet, PDF and source-document reading",
+          "first-seen problems, multi-unit transfer, written explanations and timed practice",
+          "faculty/admission-route requirements and public past papers verified from official sources",
+          "error analysis, delayed re-testing and revision tracking",
+          "research, writing, presentations, browser multitasking and video lessons"
         ],
         "concurrent_tasks": [
           "browser/source research",
-          "PDF/document reading",
-          "office/editor tools",
-          "reference notes",
+          "PDF/document/worksheet reading",
+          "notes, answer-writing and office/editor tools",
+          "question practice and answer checking",
+          "private learning log and error log",
+          "video lessons and reference notes",
           "game engine/IDE when needed",
           "Python notebooks and data tools"
         ],
-        "evaluation_note": "Do not assume a browser or school application needs a powerful GPU; optimize reliable multitasking, RAM capacity, SSD headroom and CPU responsiveness without overspending."
+        "evaluation_note": "School learning is a first-class use case: record each lesson, base school-test exercises on supplied class materials, build first-seen and multi-unit transfer questions, map applicability to the selected Waseda/Kyushu faculty/route/year using official sources, record errors, and verify delayed retrieval. Do not claim every lesson directly appears on every target faculty exam. Unknown faculty/exam-year requirements remain unknown. Learning quality depends on source fidelity, practice and feedback, not GPU power alone; prioritize CPU responsiveness, RAM, SSD and multitasking without overspending on GPU."
       },
       "analysis_and_automation": {
         "priority": "HIGH",
@@ -239,7 +245,8 @@
           "multi-process and background-app responsiveness"
         ],
         "note": "Free/open-source tools and local processing are preferred where practical. Do not assume paid APIs, cloud GPUs, paid data services or subscription services. Do not claim a GPU accelerates CPU-only workloads automatically. Do not add peripheral audio hardware to the required build unless the user explicitly changes scope."
-      }
+      },
+      "local_ai_policy_ja": "ローカルAIはモデル形式、量子化、VRAM、システムRAM、コンテキスト長、処理速度を個別に確認する。VRAM容量が大きいほど動かせるモデルの選択肢が広がる傾向はあるが、特定モデルの速度や完全な動作を保証しない。オンラインAPI・月額サービス・クラウドGPU・有料データセットを必須にしない。"
     },
     "pc_target_jpy": 360000,
     "peripheral_budget_mode": "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET",
@@ -726,7 +733,8 @@
         "purpose_note_ja": "GPU性能・16GB VRAM・2TB SSDを優先する別案。",
         "tradeoff_note_ja": "RAMは基準の32GB。予算余裕があってもRAM QVLと実価格の条件を確認して選ぶ。"
       }
-    ]
+    ],
+    "peripheral_purchase_policy_ja": "PC本体パーツはネット購入。周辺機器の基本ルートは福岡の指定実店舗での現金購入。ビックカメラ天神1号館・ヨドバシカメラ マルチメディア博多の同一SKUについて、店頭税込現金価格と実在する店頭在庫を支店ごとに確認する。ネット価格は比較参考とし、Web取置き/受取在庫で店頭棚在庫を代用しない。ネット注文・配送への切替はユーザーの明示承認が必要。ポイント還元は現金値引きから分離。"
   },
   "parts": [
     {
@@ -1799,51 +1807,61 @@
     }
   ],
   "study_to_university_transfer_policy": {
-      "goal_ja": "日々の学校授業・小テスト・定期テストを、早稲田大学および九州大学の志望学部の入試問題にも応用できる学力へつなげる。学校の成績と大学入試で必要な応用力を二重に伸ばし、授業内容を入試対策から切り離さない。",
-      "target_universities": [
-          "早稲田大学",
-          "九州大学"
-      ],
-      "faculty_and_admission_route_status": "未確定。学部・学科・受験方式・受験年度が指定されるまでは、一般的な基礎力と幅広い応用力を育て、学部別科目・配点・問題形式は未確認として表示する。",
-      "lesson_to_exam_workflow": [
-          "授業ごとに科目・単元・学習目標・学校で使う教材・小テスト/定期テスト範囲を記録する。",
-          "用語・公式・定理・文法・歴史的因果・科学的原理など、その単元の基礎と理由を自力で説明できる形に整理する。",
-          "学校の確認問題・定期テスト形式を解き、理解不足と失点原因を特定する。",
-          "同じ原理を使う初見問題、複数単元を組み合わせる問題、資料読解・記述・時間制限付き問題へ段階的に応用する。",
-          "志望学部の公開入試要項・出題範囲・公開過去問等で接続を確認し、事実確認済みの出題傾向と推測を区別する。",
-          "間違いを原因別に記録し、再演習と間隔反復で定着を確認する。"
-      ],
-      "every_lesson_should_produce": [
-          "授業内容の要点と前提知識",
-          "暗記だけでなく原理・理由・典型的な使い方",
-          "学校の小テスト/定期テストに直結する確認問題",
-          "入試の基礎〜標準レベルへの転用問題",
-          "早稲田・九大の志望学部に接続できる応用問題（志望学部未確定の場合は汎用応用と明記）",
-          "誤答診断・解き直し・次回復習項目"
-      ],
-      "assessment_dimensions": [
-          "学校の授業理解・定期テスト得点",
-          "基礎知識を何も見ずに再現する力",
-          "初見問題への転用力",
-          "複数単元を組み合わせる力",
-          "記述・根拠説明・答案構成",
-          "時間制限下の正確性",
-          "誤答の再発率と復習後の定着"
-      ],
-      "error_taxonomy": [
-          "知識不足",
-          "概念理解不足",
-          "問題文/資料の読解ミス",
-          "方針選択ミス",
-          "計算/処理ミス",
-          "記述/根拠不足",
-          "時間配分",
-          "ケアレスミス"
-      ],
-      "review_policy_ja": "学習後・翌日・数日後・週単位で復習と小テストを組み合わせ、誤答は正解を読むだけで終えず自力で再解答できるまで追跡する。間隔は理解度・試験日程に応じて調整する。",
-      "source_policy_ja": "入試科目・配点・方式・年度別の変更は大学公式の最新入試要項を優先する。公開過去問や出題例は、学部・方式・年度を特定して使用する。未公開の問題や出題確率を捏造せず、頻出の断定と予測を明確に分ける。",
-      "assistant_tutoring_policy_ja": "最終答案だけを渡すのではなく、必要に応じて生徒が途中で考える問い、段階的なヒント、解法の理由、別解、答案の改善点を示す。正解でも根拠を説明できない場合は理解済みにしない。",
-      "hardware_implication_ja": "この目的ではブラウザー複数タブ、PDF/教科書・授業資料、ノート/答案、問題演習、動画教材、Python等を並行利用できる応答性とRAM/SSDの余裕が重要。勉強用途だけを理由に最高級GPUへ予算を偏らせない。"
+    "goal_ja": "日々の学校授業・小テスト・定期テストを、早稲田大学および九州大学の志望学部の入試問題にも応用できる学力へつなげる。学校の成績と大学入試で必要な応用力を二重に伸ばし、授業内容を入試対策から切り離さない。",
+    "target_universities": [
+      "早稲田大学",
+      "九州大学"
+    ],
+    "faculty_and_admission_route_status": "未確定。学部・学科・受験方式・受験年度が指定されるまでは、一般的な基礎力と幅広い応用力を育て、学部別科目・配点・問題形式は未確認として表示する。",
+    "lesson_to_exam_workflow": [
+      "授業ごとに科目・単元・学習目標・学校で使う教材・小テスト/定期テスト範囲を記録する。",
+      "用語・公式・定理・文法・歴史的因果・科学的原理など、その単元の基礎と理由を自力で説明できる形に整理する。",
+      "学校の確認問題・定期テスト形式を解き、理解不足と失点原因を特定する。",
+      "同じ原理を使う初見問題、複数単元を組み合わせる問題、資料読解・記述・時間制限付き問題へ段階的に応用する。",
+      "志望学部の公開入試要項・出題範囲・公開過去問等で接続を確認し、事実確認済みの出題傾向と推測を区別する。",
+      "間違いを原因別に記録し、再演習と間隔反復で定着を確認する。"
+    ],
+    "every_lesson_should_produce": [
+      "授業内容の要点と前提知識",
+      "暗記だけでなく原理・理由・典型的な使い方",
+      "学校の小テスト/定期テストに直結する確認問題",
+      "入試の基礎〜標準レベルへの転用問題",
+      "早稲田・九大の志望学部に接続できる応用問題（志望学部未確定の場合は汎用応用と明記）",
+      "誤答診断・解き直し・次回復習項目"
+    ],
+    "assessment_dimensions": [
+      "学校の授業理解・定期テスト得点",
+      "基礎知識を何も見ずに再現する力",
+      "初見問題への転用力",
+      "複数単元を組み合わせる力",
+      "記述・根拠説明・答案構成",
+      "時間制限下の正確性",
+      "誤答の再発率と復習後の定着"
+    ],
+    "error_taxonomy": [
+      "知識不足",
+      "概念理解不足",
+      "問題文/資料の読解ミス",
+      "方針選択ミス",
+      "計算/処理ミス",
+      "記述/根拠不足",
+      "時間配分",
+      "ケアレスミス"
+    ],
+    "review_policy_ja": "学習後・翌日・数日後・週単位で復習と小テストを組み合わせ、誤答は正解を読むだけで終えず自力で再解答できるまで追跡する。間隔は理解度・試験日程に応じて調整する。",
+    "source_policy_ja": "入試科目・配点・方式・年度別の変更は大学公式の最新入試要項を優先する。公開過去問や出題例は、学部・方式・年度を特定して使用する。未公開の問題や出題確率を捏造せず、頻出の断定と予測を明確に分ける。",
+    "assistant_tutoring_policy_ja": "最終答案だけを渡すのではなく、必要に応じて生徒が途中で考える問い、段階的なヒント、解法の理由、別解、答案の改善点を示す。正解でも根拠を説明できない場合は理解済みにしない。",
+    "hardware_implication_ja": "この目的ではブラウザー複数タブ、PDF/教科書・授業資料、ノート/答案、問題演習、動画教材、Python等を並行利用できる応答性とRAM/SSDの余裕が重要。勉強用途だけを理由に最高級GPUへ予算を偏らせない。",
+    "operating_goal_ja": "学校の全授業単元を取りこぼさず整理し、学校の小テスト・定期テストで必要な知識と、早稲田大学・九州大学の志望学部の入試に応用する力を一つの学習サイクルで育てる。学校の授業と大学受験対策を分断しない。",
+    "coverage_rule_ja": "全授業単元について対応表を作る。入試との接続は「直接出題範囲」「前提・基礎知識」「読解/論理/資料処理などの転移可能な力」「直接対象外と確認」「学部/方式/年度未確定のため未判定」に分類する。全単元を記録するが、全単元が両大学の全学部で直接出題されると主張しない。",
+    "lesson_intake_ja": "授業ノート、教科書の指定範囲、プリント、小テスト、先生の出題範囲、本人の疑問を取り込む。資料にない事実を教材で確認済みとして書かず、画像が不鮮明なら推測せず要確認と明示する。授業日・科目・単元・教材名/ページ・試験日/範囲を記録する。",
+    "question_provenance_labels_ja": {
+      "school_material_based": "本人の学校教材/プリントを基に作成",
+      "original_practice": "学習用に新規作成した問題。実際の大学過去問ではない",
+      "official_past_exam": "大学・学部・入試方式・年度・問題番号・公開URLを確認できた公開過去問",
+      "generic_admissions_transfer": "入試で必要な思考を練習する汎用応用問題。特定大学の出題実績を示さない"
+    },
+    "privacy_policy_ja": "氏名、学校名、学籍番号、成績表、先生の個人情報、非公開テスト情報は公開リポジトリに保存しない。公開リポジトリは汎用テンプレートと手順のみ。個別の授業資料、成績、誤答記録はローカルまたは本人が管理する非公開領域に置く。"
   },
   "component_fit_scoring": {
     "version": "curated-component-fit-v1",
