@@ -42,7 +42,9 @@ class ConfiguredWatchWindowTests(unittest.TestCase):
 
     def _write_self_build_fixture(self, root, *, generated_at="2026-11-20T12:00:00+09:00",
                                    selected_memory_id="ram32", all_in=(399500, 379500, 361500),
-                                   report_generated_at="2026-11-20T12:00:00+09:00"):
+                                   report_generated_at="2026-11-20T12:00:00+09:00",
+                                   pc_planned_budget_jpy=360000, soft_ceiling_total_jpy=400000,
+                                   target_soft_ceiling_total_jpy=400000):
         data = pathlib.Path(root) / "data"
         config = pathlib.Path(root) / "config"
         (data / "reports").mkdir(parents=True)
@@ -64,7 +66,8 @@ class ConfiguredWatchWindowTests(unittest.TestCase):
             "generated_at": generated_at,
             "total_budget_jpy": 400000,
             "pc_budget_jpy": 395000,
-            "pc_planned_budget_jpy": 360000,
+            "pc_planned_budget_jpy": pc_planned_budget_jpy,
+            "soft_ceiling_total_jpy": soft_ceiling_total_jpy,
             "peripheral_budget_jpy": 35000,
             "unallocated_contingency_jpy": 5000,
             "budget_arithmetic_valid": True,
@@ -73,6 +76,7 @@ class ConfiguredWatchWindowTests(unittest.TestCase):
         (config / "targets.json").write_text(json.dumps({
             "total_budget_jpy": 400000,
             "peripheral_budget_jpy": 35000,
+            "soft_ceiling_total_jpy": target_soft_ceiling_total_jpy,
         }), encoding="utf-8")
         (config / "build_components.json").write_text(json.dumps({
             "profile": {"primary_memory_choice_id": "ram32"},
@@ -95,6 +99,34 @@ class ConfiguredWatchWindowTests(unittest.TestCase):
                 temp_dir, now, timedelta(minutes=45)
             )
         self.assertEqual(problems, [])
+
+    def test_self_build_artifact_audit_uses_soft_ceiling_for_dynamic_pc_budget(self):
+        now = datetime(2026, 11, 20, 12, 1, tzinfo=JST)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            self._write_self_build_fixture(
+                temp_dir,
+                pc_planned_budget_jpy=380000,
+                soft_ceiling_total_jpy=420000,
+                target_soft_ceiling_total_jpy=420000,
+            )
+            problems = watchdog.self_build_artifact_problems(
+                temp_dir, now, timedelta(minutes=45)
+            )
+        self.assertEqual(problems, [])
+
+    def test_self_build_artifact_audit_flags_soft_ceiling_config_drift(self):
+        now = datetime(2026, 11, 20, 12, 1, tzinfo=JST)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            self._write_self_build_fixture(
+                temp_dir,
+                pc_planned_budget_jpy=380000,
+                soft_ceiling_total_jpy=420000,
+                target_soft_ceiling_total_jpy=400000,
+            )
+            problems = watchdog.self_build_artifact_problems(
+                temp_dir, now, timedelta(minutes=45)
+            )
+        self.assertIn("self_build_soft_ceiling_differs_from_target_config", problems)
 
     def test_self_build_artifact_audit_flags_stale_plan_and_reports(self):
         now = datetime(2026, 11, 20, 13, 0, tzinfo=JST)
