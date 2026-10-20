@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-21T03:50:00+09:00
-Source snapshot: 2026-10-21T03:45:45+09:00
-Source snapshot SHA256: e986fa123440af8ca85173af0cf412777a6aa0fa77ba3b6eb29f05accb4767b1
+Generated: 2026-10-21T04:32:52+09:00
+Source snapshot: 2026-10-21T04:28:56+09:00
+Source snapshot SHA256: cf62b64c14d566ee53bf355ae42077432f2bbc5e81a8253c49890b96e846403e
 Budget: ¥360,000
 U.S. Black Friday calendar reference only (not official retailer sale dates): 2026-11-27
 
@@ -21,6 +21,7 @@ The primary purchase method is self-build. These completed-PC listings are price
 |7|G TUNE DG-A7G70|¥390,728|7.9%|HIGH|rtx 5070|26|direct_text|
 |8|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|10.0%|HIGH|rtx 5070 ti|38|direct_structured|
 |9|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|19.8%|REALISTIC|rtx 5070|32|direct_structured|
+|10|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|VERY_LOW|rtx 5070 ti|40|direct_structured|
 
 ## Empirical price-change timing
 
