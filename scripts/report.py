@@ -179,8 +179,16 @@ def retrieval_issue_link_section(latest, build_components=None, peripherals=None
         if item.get("channel_comparison_status") and item.get("channel_comparison_status") not in ("COMPLETE", "ALL_ROUTES_VERIFIED"):
             problems.append("購入ルート比較未完了: " + cell(item.get("channel_comparison_status")))
         if problems:
-            primary_url = product_url(item, item.get("purchase_url"), item.get("monitor_url"), item.get("source_url"), item.get("online_best_offer_url"))
-            monitor_url = product_url(item, item.get("monitor_url"), item.get("source_url"))
+            primary_url = product_url(
+                item,
+                item.get("purchase_url"), item.get("monitor_url"), item.get("source_url"),
+                item.get("online_best_offer_url"), item.get("retailer_listing_reference_url"),
+                item.get("direct_listing_display_url"),
+            )
+            monitor_url = product_url(
+                item, item.get("monitor_url"), item.get("source_url"),
+                item.get("retailer_listing_reference_url"), item.get("direct_listing_display_url"),
+            )
             rows["周辺機器"].append((item.get("name") or item.get("id"), "; ".join(dict.fromkeys(problems)), primary_url, monitor_url))
 
     lines = [
