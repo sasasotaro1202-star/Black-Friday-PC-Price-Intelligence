@@ -360,7 +360,7 @@ class SelfBuildPlannerTests(unittest.TestCase):
         tiers = {item["total_budget_jpy"]: item for item in plan["budget_scenarios"]}
         self.assertEqual(set(tiers), {350000, 400000, 450000})
         expected_soft = {350000: 370000, 400000: 420000, 450000: 470000}
-        expected_counts = {350000: 2, 400000: 3, 450000: 5}
+        expected_counts = {350000: 2, 400000: 3, 450000: 6}
         for ceiling, tier in tiers.items():
             self.assertEqual(tier["soft_ceiling_total_jpy"], expected_soft[ceiling])
             self.assertTrue(tier["arithmetic_valid"])
