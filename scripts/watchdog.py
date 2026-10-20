@@ -81,6 +81,7 @@ def self_build_artifact_problems(root, now, threshold):
 
     if plan and targets_config:
         total = plan.get("total_budget_jpy")
+        soft_total = plan.get("soft_ceiling_total_jpy", total)
         pc_budget = plan.get("pc_budget_jpy")
         pc_planned = plan.get("pc_planned_budget_jpy")
         peripheral = plan.get("peripheral_budget_jpy")
@@ -89,12 +90,19 @@ def self_build_artifact_problems(root, now, threshold):
             problems.append("self_build_total_budget_differs_from_target_config")
         if peripheral != targets_config.get("peripheral_budget_jpy"):
             problems.append("self_build_peripheral_budget_differs_from_target_config")
+        expected_soft_total = targets_config.get("soft_ceiling_total_jpy", total)
+        if soft_total != expected_soft_total:
+            problems.append("self_build_soft_ceiling_differs_from_target_config")
+        # pc_planned_budget_jpy is the planning allowance inside the soft ceiling,
+        # not the strict target total. The 40k comparison band permits a 380k PC
+        # plan plus 35k peripherals and 5k contingency = 420k, while retaining
+        # 400k as the preferred target for the complete system.
         if all(isinstance(x, int) and not isinstance(x, bool)
-               for x in (total, pc_budget, pc_planned, peripheral, contingency)):
-            expected_pc_planned = max(0, min(pc_budget, total - peripheral - contingency))
+               for x in (total, soft_total, pc_budget, pc_planned, peripheral, contingency)):
+            expected_pc_planned = max(0, min(pc_budget, soft_total - peripheral - contingency))
             if pc_planned != expected_pc_planned:
                 problems.append("self_build_dynamic_pc_budget_mismatch")
-            if pc_planned + peripheral + contingency != total:
+            if pc_planned + peripheral + contingency != soft_total:
                 problems.append("self_build_all_in_budget_arithmetic_mismatch")
         else:
             problems.append("self_build_budget_fields_missing_or_invalid")
