@@ -353,6 +353,23 @@ class ReportLinkTests(unittest.TestCase):
         self.assertNotIn("](javascript:alert(1))", text)
         self.assertIn("商品URL未登録（要修正）", text)
 
+    def test_retrieval_issue_links_encode_parentheses_in_product_urls(self):
+        lines = report.retrieval_issue_link_lines(
+            {"products": [{
+                "id": "pc-parentheses-helper",
+                "name": "Tracked PC",
+                "url": "https://example.com/product(edition)",
+                "fetch_status": "error",
+                "last_fetch_error": "timeout",
+                "current_price_jpy": None,
+                "stock_status": "unknown",
+            }]},
+            {"products": []},
+            {"products": []},
+        )
+        rendered = chr(10).join(lines)
+        self.assertIn("[商品ページを開く](https://example.com/product%28edition%29)", rendered)
+
     def test_retrieval_issue_links_keep_real_peripherals_with_missing_urls_visible(self):
         lines = report.retrieval_issue_link_lines(
             {"products": []},
