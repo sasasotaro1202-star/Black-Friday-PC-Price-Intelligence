@@ -376,15 +376,70 @@ class ReportLinkTests(unittest.TestCase):
         self.assertIn("timeout while fetching", text)
         self.assertNotIn("https://", text)
 
+    def test_main_ranking_link_section_marks_missing_or_malformed_product_urls(self):
+        lines = report.retrieval_issue_link_section(
+            {
+                "products": [{
+                    "id": "pc-no-valid-url",
+                    "name": "Tracked GPU | model\\nrevision",
+                    "url": "https://",
+                    "fetch_status": "error",
+                    "last_fetch_error": "timeout | parse\\nfailed",
+                    "current_price_jpy": None,
+                    "price_validation_status": "missing",
+                    "stock_status": "unknown",
+                }]
+            },
+            {"products": []},
+            {"products": [{
+                "id": "peripheral-no-url",
+                "name": "Tracked keyboard",
+                "purchase_url": "javascript:alert(1)",
+                "monitor_url": "file:///etc/passwd",
+                "status": "error",
+                "error": "page\\nfetch failed",
+                "current_price_jpy": None,
+                "price_verified": False,
+                "stock_status": "unknown",
+            }]},
+        )
+        rendered = "\\n".join(lines)
+        self.assertIn("Tracked GPU / model revision", rendered)
+        self.assertIn("timeout / parse failed", rendered)
+        self.assertIn("Tracked keyboard", rendered)
+        self.assertGreaterEqual(rendered.count("商品URL未登録（要修正）"), 2)
+        self.assertNotIn("javascript:alert(1)", rendered)
+        self.assertNotIn("file:///etc/passwd", rendered)
+
+    def test_main_ranking_link_section_encodes_parentheses_in_markdown_targets(self):
+        lines = report.retrieval_issue_link_section(
+            {"products": [{
+                "id": "pc-parentheses",
+                "name": "Tracked PC",
+                "url": "https://example.com/product(edition)",
+                "fetch_status": "error",
+                "last_fetch_error": "timeout",
+                "current_price_jpy": None,
+                "stock_status": "unknown",
+            }]},
+            {"products": []},
+            {"products": []},
+        )
+        rendered = "\\n".join(lines)
+        self.assertIn("[商品ページを開く](https://example.com/product%28edition%29)", rendered)
+
     def test_sales_url_accepts_http_url(self):
         self.assertEqual(
             report.sales_url({"url": "https://example.com/product"}),
             "https://example.com/product",
         )
 
-    def test_sales_url_rejects_missing_or_non_http_url(self):
+    def test_sales_url_rejects_missing_non_http_or_malformed_urls(self):
         self.assertIsNone(report.sales_url({"url": ""}))
         self.assertIsNone(report.sales_url({"url": "javascript:alert(1)"}))
+        self.assertIsNone(report.sales_url({"url": "https://"}))
+        self.assertIsNone(report.sales_url({"url": "https:///path-without-host"}))
+        self.assertIsNone(report.sales_url({"url": "https://user:password@example.com/product"}))
         self.assertIsNone(report.sales_url({}))
 
     def test_sales_url_strips_whitespace(self):
