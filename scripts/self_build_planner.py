@@ -1930,7 +1930,7 @@ def component_purchase_evidence_score(part, build, now=None):
 def component_markdown_link(part):
     """Render a safe, explicit product link for every configured build component."""
     part = part if isinstance(part, dict) else {}
-    name = re.sub(r"\\s+", " ", str(part.get("name") or part.get("id") or "商品名未設定")).strip()
+    name = re.sub(r"\s+", " ", str(part.get("name") or part.get("id") or "商品名未設定")).strip()
     name = name.replace("|", "／").replace("[", "（").replace("]", "）")
     url = None
     for key in ("purchase_url", "url", "monitor_url", "source_url"):
