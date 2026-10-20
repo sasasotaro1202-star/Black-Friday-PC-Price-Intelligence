@@ -67,6 +67,39 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(targets["peripheral_budget_jpy"], 35000)
         self.assertEqual(targets["pc_target_jpy"], 360000)
 
+    def test_study_workflow_and_pc_scope_preserve_all_user_requirements(self):
+        study = self.build.get("study_to_university_transfer_policy") or {}
+        self.assertEqual(set(study.get("target_universities") or []), {"早稲田大学", "九州大学"})
+        self.assertGreaterEqual(len(study.get("lesson_to_exam_workflow") or []), 5)
+        provenance = study.get("question_provenance_labels_ja") or {}
+        self.assertTrue({"school_material_based", "original_practice", "official_past_exam", "generic_admissions_transfer"}.issubset(provenance))
+        privacy = study.get("privacy_policy_ja", "")
+        self.assertIn("公開リポジトリ", privacy)
+        self.assertIn("成績表", privacy)
+
+        workload = self.profile.get("workload_profile") or {}
+        study_workload = workload.get("study_and_research") or {}
+        study_targets = " ".join(study_workload.get("targets") or [])
+        self.assertIn("daily school lessons", study_targets)
+        self.assertIn("entrance-exam problem-solving", study_targets)
+        self.assertIn("PC本体パーツはネット購入", self.profile.get("peripheral_purchase_policy_ja", ""))
+        self.assertIn("実店舗", self.profile.get("peripheral_purchase_policy_ja", ""))
+        self.assertIn("VRAM", workload.get("local_ai_policy_ja", ""))
+        self.assertIn("有料API", workload.get("local_ai_policy_ja", ""))
+        fixed_policy = self.profile.get("policy", "")
+        self.assertIn("Do not include speakers", fixed_policy)
+        self.assertIn("sub-monitor", fixed_policy)
+        self.assertIn("headset", fixed_policy)
+
+        checklist = read_text("docs/pc-goal-fit-checklist.md")
+        self.assertIn("## 用途別の要件・限界", checklist)
+        self.assertIn("購入許可ゲート", checklist)
+        self.assertIn("試合中", checklist)
+        study_doc = read_text("docs/study-to-university-transfer.md")
+        self.assertIn("学校の小テスト・定期テスト", study_doc)
+        self.assertIn("初見", study_doc)
+        self.assertIn("復習", study_doc)
+
     def test_budget_build_candidates_are_complete_itemized_and_use_only_existing_skus(self):
         profile = self.build["profile"]
         parts = {item["id"]: item for item in self.build["parts"]}
