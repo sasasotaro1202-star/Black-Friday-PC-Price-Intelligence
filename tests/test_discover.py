@@ -45,7 +45,7 @@ class DiscoveryTests(unittest.TestCase):
             self.assertEqual(len(matches), 1)
             self.assertEqual(matches[0]["url"], exact_url)
             self.assertEqual(matches[0]["priority"], "critical")
-            self.assertEqual(matches[0]["query"], "DGA7G70 old SKU URL")
+            self.assertEqual(matches[0]["query"], "DGA7G70B5BBDW101DECWA")
 
     def test_curated_skus_sharing_a_family_page_are_not_dropped(self):
         with tempfile.TemporaryDirectory() as tmp:

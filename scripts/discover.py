@@ -130,7 +130,10 @@ def main():
                 entry = dict(entry)
                 entry["url"] = curated["url"]
                 aliases = curated.get("aliases") or []
-                entry.setdefault("query", aliases[0] if aliases else (curated.get("name") or "curated catalog candidate"))
+                # A URL correction often means the catalog now points at a
+                # replacement model/SKU. Refresh the paired fallback query too;
+                # retaining an old query can surface a sibling variant's price.
+                entry["query"] = aliases[0] if aliases else (curated.get("name") or "curated catalog candidate")
         add(entry)
 
     # The curated catalog is authoritative for candidate identity/coverage.
