@@ -42,6 +42,39 @@ def main():
     if sum(int(p.get("target_price_jpy") or 0) for p in budget_policy["peripherals"] if p.get("mandatory", True)) != budget_policy["peripheral_budget_jpy"]:
         errors.append("peripheral target budget mismatch")
 
+    # Protect the user's full workload and study workflow from silent config drift.
+    workload_config = load_json(os.path.join(ROOT, "config", "build_components.json"), {})
+    workload_profile = workload_config.get("profile") if isinstance(workload_config, dict) else {}
+    workload_profile = workload_profile if isinstance(workload_profile, dict) else {}
+    study_policy = workload_config.get("study_to_university_transfer_policy") if isinstance(workload_config, dict) else {}
+    study_policy = study_policy if isinstance(study_policy, dict) else {}
+    universities = set(study_policy.get("target_universities") or [])
+    if not {"早稲田大学", "九州大学"}.issubset(universities):
+        errors.append("study policy must retain Waseda and Kyushu University goals")
+    lesson_steps = study_policy.get("lesson_to_exam_workflow") or []
+    if not isinstance(lesson_steps, list) or len(lesson_steps) < 5:
+        errors.append("study policy lesson-to-exam workflow is missing or incomplete")
+    provenance = study_policy.get("question_provenance_labels_ja") or {}
+    if not {"school_material_based", "original_practice", "official_past_exam", "generic_admissions_transfer"}.issubset(set(provenance)):
+        errors.append("study question provenance labels are incomplete")
+    privacy_policy = str(study_policy.get("privacy_policy_ja") or "")
+    if "公開リポジトリ" not in privacy_policy or "成績表" not in privacy_policy:
+        errors.append("study privacy policy must keep personal school records out of public GitHub")
+    workload_detail = workload_profile.get("workload_profile") or {}
+    study_detail = workload_detail.get("study_and_research") or {}
+    study_targets = " ".join(str(x) for x in (study_detail.get("targets") or []))
+    if "daily school lessons" not in study_targets or "entrance-exam problem-solving" not in study_targets:
+        errors.append("hardware workload profile must include daily lessons and university admissions transfer")
+    peripheral_policy = str(workload_profile.get("peripheral_purchase_policy_ja") or "")
+    if "実店舗" not in peripheral_policy or "店頭税込現金価格" not in peripheral_policy:
+        errors.append("peripheral purchase policy must retain in-store cash-price verification")
+    local_ai_policy = str(workload_detail.get("local_ai_policy_ja") or "")
+    if not local_ai_policy or "VRAM" not in local_ai_policy or "有料API" not in local_ai_policy:
+        errors.append("local AI policy must retain VRAM and zero-recurring-cost constraints")
+    fixed_policy = str(workload_profile.get("policy") or "")
+    if not all(phrase in fixed_policy for phrase in ("Do not include speakers", "sub-monitor", "headset")):
+        errors.append("excluded audio and secondary-display hardware has re-entered the build scope")
+
     self_build_plan = load_json(os.path.join(ROOT, "data", "self_build_plan.json"), {})
     if not self_build_plan:
         errors.append("self-build plan is missing")
