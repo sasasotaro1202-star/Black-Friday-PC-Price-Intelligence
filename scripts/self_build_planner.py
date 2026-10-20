@@ -6,6 +6,7 @@ import os
 import re
 from urllib.parse import urlparse
 from intelligence import ROOT, now_jst, iso, parse_dt, load_json, save_json
+from report import retrieval_issue_link_lines
 
 CONFIG_PATH = os.path.join(ROOT, "config", "build_components.json")
 PRICE_PATH = os.path.join(ROOT, "data", "build_component_prices.json")
@@ -2394,6 +2395,7 @@ def render_plan_markdown(plan):
         "- 電源容量・規格・付属ケーブル、クーラー高とRAM干渉、ファン配置。",
         "- 個別店の決済価格・送料・在庫・返品期限・保証・OSライセンス。",
         "- 比較サイト参考価格は公式BF価格ではない。公式日程・店舗価格が確認できるまで買い時判定は保留。", ""])
+    lines.extend(retrieval_issue_link_lines())
     return "\n".join(lines)
 
 
