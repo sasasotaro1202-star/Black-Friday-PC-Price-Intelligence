@@ -311,8 +311,9 @@ def retrieval_issue_link_lines(latest=None, component_prices=None, peripheral_pr
     for item in peripheral_prices.get("products") or []:
         item = item if isinstance(item, dict) else {}
         url = _first_http_product_url(item, ("purchase_url", "monitor_url", "source_url", "url"))
-        # Exclude budget-only placeholders and conditional cable reminders that are not actual listings.
-        if not url:
+        # Exclude only non-product placeholders. Real products without a usable URL must
+        # remain visible so the report can flag the missing link instead of hiding the item.
+        if item.get("category") in ("budget_reserve", "cables") or item.get("id") in ("store_price_buffer", "cables"):
             continue
         status_value = str(item.get("status") or "").lower()
         validation = str(item.get("price_validation_status") or "missing").lower()
@@ -327,9 +328,12 @@ def retrieval_issue_link_lines(latest=None, component_prices=None, peripheral_pr
             and validation == "validated_exact_model_page"
             and stock in ("in_stock", "low_stock")
         )
-        if verified_offer and not failed:
+        if verified_offer and not failed and url:
             continue
-        if failed:
+        if not url:
+            status = "商品URL未登録"
+            reason = (err + "; " if err else "") + "正確な商品ページURLを設定する必要あり"
+        elif failed:
             status = "取得/価格解析エラー"
             reason = err or ("status=" + status_value)
         elif validation == "variant_ambiguous":
@@ -1884,8 +1888,6 @@ def main():
         "- 過去価格は同一構成 > 同GPU同シリーズ > 同シリーズの順で証拠力を下げる。",
         "- PIT不明・違反データから購入判断を作らない。",
     ]
-
-    lines += retrieval_issue_link_lines()
 
     os.makedirs(os.path.join(ROOT, "data", "reports"), exist_ok=True)
     with open(os.path.join(ROOT, "data", "reports", "latest.md"), "w", encoding="utf-8") as f:
