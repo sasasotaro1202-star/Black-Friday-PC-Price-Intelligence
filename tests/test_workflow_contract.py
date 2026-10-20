@@ -291,7 +291,7 @@ class WorkflowContractTests(unittest.TestCase):
         # The official TUF F16 listing is a 512GB configuration, not 1TB.
         tuf_f16 = candidates["tuf-f16-14650hx-5070"]
         self.assertEqual(tuf_f16["ssd"], "512 GB")
-        self.assertEqual(tuf_f16["reference_price_jpy"], 244800)
+        self.assertEqual(tuf_f16["reference_price_jpy"], 359800)
 
         for candidate_id in (
             "galleria-zl9r-9955hx-5070ti",
@@ -301,6 +301,12 @@ class WorkflowContractTests(unittest.TestCase):
             "zephyrus-g16-386h-5070ti",
         ):
             self.assertTrue(candidates[candidate_id]["url"].startswith("https://"))
+
+        acer = candidates["candidate-5"]
+        self.assertEqual(acer["name"], "Acer Predator Helios Neo 16 AI PHN16-I71-N93Z57T/E")
+        self.assertEqual(acer["cpu"], "Core Ultra 9 290HX Plus")
+        self.assertEqual(acer["reference_price_jpy"], 547800)
+        self.assertEqual(acer["official_listing_reference_checked_date"], "2026-10-21")
 
 if __name__ == "__main__":
     unittest.main()

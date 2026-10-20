@@ -105,11 +105,11 @@
     },
     {
       "id": "candidate-5",
-      "name": "Acer Predator Helios Neo 16 AI",
+      "name": "Acer Predator Helios Neo 16 AI PHN16-I71-N93Z57T/E",
       "family": "Predator Helios Neo 16 AI",
       "form_factor": "laptop",
       "gpu": "RTX 5070 Ti Laptop GPU",
-      "cpu": "Core Ultra 9",
+      "cpu": "Core Ultra 9 290HX Plus",
       "tgp_w": 115,
       "ram_gb": 32,
       "ssd": "1 TB",
@@ -118,8 +118,12 @@
       "url_is_exact": true,
       "identity_confidence": "high",
       "aliases": [
+        "PHN16-I71-N93Z57T/E",
         "PHN16"
-      ]
+      ],
+      "reference_price_jpy": 547800,
+      "official_listing_reference_checked_date": "2026-10-21",
+      "notes": "公式オンラインストアの商品ページ表示は547,800円・在庫あり。自動監視ではタイムアウトが発生し得るため、reference_price_jpyは公式ページ確認時点の参照値であり現在の自動取得価格・購入可能性を保証しない。RTX 5070 Ti Laptop GPU、RAM 32GB、SSD 1TB。"
     },
     {
       "id": "gtune-p6-13700hx-5070",
@@ -176,9 +180,9 @@
       "aliases": [
         "FX608JPR"
       ],
-      "reference_price_jpy": 244800,
+      "reference_price_jpy": 359800,
       "official_listing_reference_checked_date": "2026-10-21",
-      "notes": "ASUS公式商品ページでは32GB RAM / 512GB SSD / RTX 5070 Laptop GPUの構成を確認。2026-10-21に表示された244,800円は公式ページ上の参考掲載額。自動収集はHTTP 403となるため、現行監視データでは未取得扱いとし、この参考額を現在価格や決済額として扱わない。"
+      "notes": "公式ASUS Store掲載情報を2026-10-21に再確認。CPU Core i7-14650HX、RTX 5070 Laptop GPU、RAM 32GB、SSD 512GB。公式掲載額359,800円は参照値であり、GitHubランナーでのHTTP 403により自動観測の現価格・決済額としては未確認。1TBモデルとしては扱わない。"
     },
     {
       "id": "zephyrus-g16-386h-5070ti",
