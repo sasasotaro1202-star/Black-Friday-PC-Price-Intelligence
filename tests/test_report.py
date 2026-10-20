@@ -353,6 +353,29 @@ class ReportLinkTests(unittest.TestCase):
         self.assertNotIn("](javascript:alert(1))", text)
         self.assertIn("商品URL未登録（要修正）", text)
 
+    def test_retrieval_issue_links_keep_real_peripherals_with_missing_urls_visible(self):
+        lines = report.retrieval_issue_link_lines(
+            {"products": []},
+            {"products": []},
+            {"products": [{
+                "id": "monitor-missing-url",
+                "name": "Tracked monitor missing source URL",
+                "status": "error",
+                "error": "timeout while fetching",
+                "current_price_jpy": None,
+                "stock_status": "unknown",
+                "purchase_url": None,
+                "monitor_url": None,
+                "source_url": None,
+            }]},
+        )
+        text = "\n".join(lines)
+        self.assertIn("Tracked monitor missing source URL", text)
+        self.assertIn("商品URL未登録（要修正）", text)
+        self.assertIn("商品URL未登録", text)
+        self.assertIn("timeout while fetching", text)
+        self.assertNotIn("https://", text)
+
     def test_sales_url_accepts_http_url(self):
         self.assertEqual(
             report.sales_url({"url": "https://example.com/product"}),
