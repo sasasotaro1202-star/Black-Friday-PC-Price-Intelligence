@@ -84,8 +84,8 @@ def retrieval_issue_link_section(latest, build_components=None, peripherals=None
     def cell(value):
         # Keep each source field on one Markdown table row and prevent pipes/newlines
         # in untrusted page titles or errors from corrupting the report layout.
-        text = re.sub(r"\\s+", " ", str(value or "未確認")).strip()
-        return text.replace("|", "/").replace("[", "\\\\[").replace("]", "\\\\]")
+        text = " ".join(str(value or "未確認").split())
+        return text.replace("|", "/").replace("[", "（").replace("]", "）")
 
     def product_url(item, *candidate_urls):
         for candidate in candidate_urls:
