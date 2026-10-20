@@ -73,6 +73,8 @@ jobs:
           now=datetime.now(timezone.utc)
           stale=[]
           active=[]
+          # Collectors may legitimately use the full 30-minute timeout; only treat a
+          # non-updating run as wedged after a 40-minute safety window.
           for item in items:
               status=item.get("status") or ""
               if status not in ("queued","in_progress"):
@@ -83,7 +85,7 @@ jobs:
               except Exception:
                   age=10**9
               row={"id":item.get("databaseId"),"status":status,"age_seconds":int(age)}
-              (stale if age > 20*60 else active).append(row)
+              (stale if age > 40*60 else active).append(row)
           print(json.dumps({"stale":stale,"active":active,"latest":items[0] if items else None}))
           PY
           )"
@@ -92,7 +94,7 @@ jobs:
           active_count="$(printf '%s' "$assessment" | python -c 'import json,sys; print(len(json.load(sys.stdin)["active"]))')"
 
           if [ "$stale_count" -gt 0 ]; then
-            echo "Cancelling stale monitor run(s) older than the 20-minute safety window."
+            echo "Cancelling stale monitor run(s) older than the 40-minute safety window."
             while IFS= read -r stale_id; do
               [ -z "$stale_id" ] || gh run cancel "$stale_id"
             done <<< "$stale_ids"
