@@ -98,8 +98,9 @@ def retrieval_issue_link_section(latest, build_components=None, peripherals=None
         if not isinstance(item, dict):
             continue
         problems = []
-        if item.get("fetch_status") == "error":
-            problems.append("取得エラー: " + cell(item.get("last_fetch_error") or item.get("price_validation_reason")))
+        fetch_state = str(item.get("fetch_status") or "").strip().lower()
+        if fetch_state in ("error", "failed", "failure", "timeout", "exception"):
+            problems.append("取得エラー: " + cell(item.get("last_fetch_error") or item.get("fetch_error") or item.get("price_validation_reason")))
         if item.get("variant_match") == "ambiguous" or item.get("price_validation_status") == "variant_ambiguous":
             problems.append("型番/構成不一致。価格は購入判断に不使用")
         if item.get("current_price_jpy") is None:
@@ -126,11 +127,15 @@ def retrieval_issue_link_section(latest, build_components=None, peripherals=None
             for o in ([offer] if offer else []) + offers
         )
         errors = []
-        if item.get("fetch_status") == "error":
-            errors.append("取得エラー: " + cell(item.get("last_fetch_error") or item.get("comparison_fetch_error") or item.get("retailer_search_error")))
-        if item.get("comparison_fetch_status") == "error" or item.get("comparison_fetch_error"):
+        fetch_state = str(item.get("fetch_status") or "").strip().lower()
+        comparison_state = str(item.get("comparison_fetch_status") or "").strip().lower()
+        retailer_state = str(item.get("retailer_search_status") or "").strip().lower()
+        failure_states = ("error", "failed", "failure", "timeout", "exception")
+        if fetch_state in failure_states:
+            errors.append("取得エラー: " + cell(item.get("last_fetch_error") or item.get("fetch_error") or item.get("comparison_fetch_error") or item.get("retailer_search_error")))
+        if comparison_state in failure_states or comparison_state == "configuration_error" or item.get("comparison_fetch_error"):
             errors.append("比較ページ取得失敗: " + cell(item.get("comparison_fetch_error")))
-        if item.get("retailer_search_status") == "error" or item.get("retailer_search_error"):
+        if retailer_state in failure_states or retailer_state == "configuration_error" or item.get("retailer_search_error"):
             errors.append("販売店検索失敗: " + cell(item.get("retailer_search_error")))
         if not direct_sellable:
             errors.append("直接価格・型番・販売可能在庫の同時確認が未完了 (" + cell(item.get("price_validation_status")) + ")")
