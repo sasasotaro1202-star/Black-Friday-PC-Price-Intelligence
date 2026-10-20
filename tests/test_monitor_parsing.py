@@ -138,6 +138,67 @@ class MonitorParsingTests(unittest.TestCase):
                                              expected=expected)
         self.assertIsNone(result)
 
+    def test_conflicting_catalog_variant_does_not_expose_price_or_stock(self):
+        url = "https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040"
+        entry = {
+            "id": "candidate-4",
+            "url": url,
+            "query": "Lenovo Legion Pro 5i Gen 10 Core Ultra 9 275HX RTX 5070 Ti",
+            "priority": "critical",
+        }
+        raw = {
+            "name": "Lenovo Legion Pro 5i Gen 10",
+            "price_jpy": 337240,
+            "price_source_mode": "direct_structured",
+            "data_confidence": "high",
+            "stock_status": "in_stock",
+            "parsed_spec": {
+                "gpu": "RTX 5080",
+                "cpu": "Core Ultra 9 275HX",
+                "tgp_w": 115,
+                "ram_gb": 32,
+                "ssd": "1 TB",
+                "vram_gb": 12,
+                "form_factor": "laptop",
+            },
+            "page_text_excerpt": "Lenovo Legion Pro 5i Gen 10 Core Ultra 9 275HX RTX 5080",
+        }
+        catalog_item = {
+            "id": "candidate-4",
+            "name": "Lenovo Legion Pro 5i Gen 10",
+            "family": "Legion Pro 5i Gen 10",
+            "form_factor": "laptop",
+            "gpu": "RTX 5070 Ti Laptop GPU",
+            "cpu": "Core Ultra 9 275HX",
+            "tgp_w": 115,
+            "ram_gb": 32,
+            "ssd": "1 TB",
+            "vram_gb": 12,
+            "url": url,
+            "url_is_exact": True,
+            "identity_confidence": "high",
+            "aliases": ["Legion Pro 5i Gen 10"],
+            "reference_price_jpy": 359800,
+        }
+
+        result = monitor.apply_observation(
+            entry, raw, {}, catalog_item, "2026-10-20T18:00:00+09:00"
+        )
+
+        self.assertEqual(result["variant_match"], "ambiguous")
+        self.assertEqual(
+            result["variant_ambiguity_reason"], "parsed_spec_contradicts_catalog"
+        )
+        self.assertIsNone(result["current_price_jpy"])
+        self.assertIsNone(result["price_jpy"])
+        self.assertIsNone(result["available_at"])
+        self.assertEqual(result["stock_status"], "unknown")
+        self.assertEqual(result["price_validation_status"], "variant_ambiguous")
+        self.assertEqual(
+            result["observed_price_source_mode"], "direct_structured"
+        )
+        self.assertIsNone(result["last_valid_price_jpy"])
+
     def test_previous_navigation_filter_price_is_not_retained_as_last_valid(self):
         entry = {
             "id": "desktop-test",
