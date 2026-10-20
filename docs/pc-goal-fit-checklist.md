@@ -59,3 +59,33 @@ PCが目的に適合するかの設計評価と、今すぐ購入できるかの
 - [九州大学: 学部入試・選抜概要・募集要項](https://www.kyushu-u.ac.jp/ja/admission/faculty/selection)
 - [Carpenter, Pan & Butler (2022): Spacing and retrieval practice](https://doi.org/10.1038/s44159-022-00089-1)
 - [Agarwal, Nunes & Blunt (2021): Retrieval practice in schools and classrooms](https://doi.org/10.1007/s10648-021-09595-9)
+
+
+## 互換性：現時点で確認できる公式仕様（2026-10-20）
+
+### マザーボードとBIOS
+
+- 対象：ASRock B850M Pro RS WiFi。
+- メーカーはAM5 Ryzen 9000/8000/7000シリーズへの対応と、BIOS Flashbackボタンを公式に掲載している。
+- CPU Support ListではこのボードのRyzen 9000対応にBIOS 3.12の記載があり、公式BIOS一覧には2026-10-12公開のBIOS 4.60が掲載されている。
+- **出荷時BIOSは購入前には未確認**。購入時に販売店へ出荷BIOSを確認するか、必要なら説明書に従いBIOS Flashbackで更新する手順を組み立て前チェックに含める。更新に失敗した場合の復旧手順を確認してから実施する。
+
+公式：[ボード仕様](https://www.asrock.com/mb/AMD/B850M%20Pro%20RS%20WiFi/index.jp.asp) / [BIOS一覧](https://www.asrock.com/mb/AMD/B850M%20Pro%20RS%20WiFi/bios.html) / [CPU Support List](https://www.asrock.com/support/cpu.asp?s=AM5&u=701)
+
+### GPU・ケース・電源
+
+- PNY GeForce RTX 5070 Ti 16GB ARGB候補（VCG5070T16TFXXPB1-O）のメーカー寸法は **299.5 × 120.0 × 59.6 mm、2.98-slot、TDP 300W**。メーカーのシステム電源目安は750W。
+- Fractal Design Pop Air TG系ケースのメーカー仕様では最大GPU長は **405 mm**。候補GPUは長さだけなら上限内。ただしグラフィックスカードの厚さ、隣接スロット、電源コネクターからサイドパネルまでの配線余裕は、実際に購入するケースSKUとGPUの図面・現物で確認する。
+- Corsair RM850e 2025（CP-9020296-JP）は **850W、ATX 3.1、ネイティブ12V-2x6 GPUケーブル付属**とメーカーが説明しており、容量クラスはこのGPU候補の750Wシステム目安を上回る。GPU付属変換アダプターと電源のネイティブケーブルを混在使用せず、電源メーカー指定のケーブルのみを使う。コネクターを完全に挿し、強い曲げや横方向の負荷がかからない配線を確認する。
+- 40万円本命RTX 5070 12GB・RTX 5060 Ti 16GBについても、候補SKUごとに寸法・電源入力・推奨電源を再確認する。5070 Tiの型番情報を他SKUへ流用しない。
+
+公式：[PNY RTX 5070 Ti候補の仕様](https://cs.pny.com.tw/geforce-rtx-5070-ti-models?iscommercial=true) / [Pop Airケース仕様](https://www.fractal-design.com/ja/products/cases/pop-series/pop-air/pop-air-black-solid/) / [Corsair RM850e 2025仕様](https://www.corsair.com/jp/ja/p/psu/cp-9020296-jp/rme-series-rm850e-fully-modular-low-noise-atx-power-supply-jp-cp-9020296-jp)
+
+### まだ確認が必要な仕様
+
+- TeamGroup 32GBキット / Lexar 64GBキットが当該ボードの正確なQVLに掲載されているか、EXPO動作が安定するか。
+- CPUクーラーの高さ・メモリ干渉・ケース内クリアランス、実負荷時の温度/騒音。
+- 注文時の実SKU、在庫、決済総額、保証/返品と、購入品すべてを含む完成構成価格。
+
+公式スペックで確認できる範囲は前進しましたが、これらの残項目が確認されるまでは完成構成の購入許可を出しません。
+
