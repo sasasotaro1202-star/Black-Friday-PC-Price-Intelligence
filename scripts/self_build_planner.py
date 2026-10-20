@@ -31,75 +31,6 @@ def file_sha256(path):
 def money(value):
     return "¥{:,.0f}".format(value) if isinstance(value, (int, float)) else "未確認"
 
-COMPONENT_CATEGORY_LABELS = {
-    "cpu": "CPU",
-    "motherboard": "マザーボード",
-    "gpu": "GPU",
-    "memory": "メモリ",
-    "storage": "SSD",
-    "psu": "電源",
-    "case": "ケース",
-    "cpu_cooler": "CPUクーラー",
-    "os_license": "OS",
-}
-
-
-def _safe_component_url(value):
-    """Accept only absolute HTTP(S) URLs and encode parentheses for Markdown links."""
-    url = str(value or "").strip()
-    try:
-        parsed = urlparse(url)
-    except ValueError:
-        return None
-    if (
-        parsed.scheme.lower() not in ("http", "https")
-        or not parsed.hostname
-        or parsed.username
-        or parsed.password
-    ):
-        return None
-    return url.replace("(", "%28").replace(")", "%29")
-
-
-def component_links_markdown(components):
-    """Render all parts in one build, with a separate comparison link where available."""
-    if not isinstance(components, list):
-        return ""
-    entries = []
-    for part in components:
-        if not isinstance(part, dict):
-            continue
-        category = str(part.get("category") or "").strip()
-        category_label = COMPONENT_CATEGORY_LABELS.get(category, category or "部品")
-        name = re.sub(r"\s+", " ", str(part.get("name") or part.get("id") or "商品名未設定")).strip()
-        name = name.replace("|", "／").replace("[", "（").replace("]", "）")
-
-        primary_key = None
-        primary_url = None
-        for key in (
-            "url", "purchase_url", "retailer_listing_reference_url",
-            "direct_listing_display_url", "source_url", "monitor_url",
-        ):
-            candidate = _safe_component_url(part.get(key))
-            if candidate:
-                primary_key = key
-                primary_url = candidate
-                break
-
-        comparison_url = _safe_component_url(part.get("monitor_url") or part.get("comparison_url"))
-        if primary_url:
-            parsed = urlparse(primary_url)
-            host = (parsed.hostname or "").lower()
-            is_comparison = primary_key == "monitor_url" or "kakaku.com" in host
-            link_label = "価格比較" if is_comparison else "商品ページ"
-            entries.append("{} [{}：{}]({})".format(category_label, link_label, name, primary_url))
-            if comparison_url and comparison_url != primary_url:
-                entries.append("[価格比較]({})".format(comparison_url))
-        else:
-            entries.append("{} {}：商品URL未登録（要修正）".format(category_label, name))
-    return " / ".join(entries)
-
-
 def age_minutes(value, now):
     """Return None for missing or future-dated observations instead of hiding clock/PIT errors."""
     dt = parse_dt(value)
@@ -2201,16 +2132,6 @@ def render_plan_markdown(plan):
             build.get("compatibility_status"), build.get("decision")
         ))
 
-    ranked_builds = plan.get("builds") or []
-    if ranked_builds:
-        lines.extend(["", "### ランキング各構成の全パーツ商品リンク", ""])
-        for build in ranked_builds:
-            build_name = str(build.get("name") or "構成名未設定").replace("|", "／")
-            lines.append("**{}位：{}**".format(build.get("rank", "順位未設定"), build_name))
-            component_links = component_links_markdown(build.get("components") or [])
-            lines.append("- " + (component_links or "商品パーツ未登録"))
-            lines.append("")
-
     budget_scenarios = plan.get("budget_scenarios") or []
     if budget_scenarios:
         lines.extend(["", "## 35万円・40万円・45万円の一式予算比較（BF目標価格の計画値）", "",
@@ -2249,8 +2170,6 @@ def render_plan_markdown(plan):
                 lines.append("**{} — {}点/100**".format(candidate.get("name"),candidate.get("overall_score_100","未採点")))
                 lines.append("- 一式目標 {}。{}".format(money(candidate.get("target_all_in_jpy")),candidate.get("purpose_note_ja") or "総合用途を対象。"))
                 lines.append("- 部品目標の内訳: "+(details or "未登録")+"。")
-                component_links = component_links_markdown(candidate.get("components") or [])
-                lines.append("- 商品リンク（各構成パーツ）: " + (component_links or "商品パーツ未登録"))
                 lines.append("- 留意点: "+str(candidate.get("tradeoff_note_ja") or "現行価格・互換性・最終決済額は未確認。"))
                 lines.append("- 販売可能在庫信号: {}/{}部品。直接価格・在庫・最終決済額がそろわない限り、目標総額が予算内でも購入可能とは判定しません。互換性={}。購入許可=false。".format(candidate.get("current_sellable_stock_part_count",0),len(candidate.get("components") or []),candidate.get("compatibility_status")))
                 lines.append("")
@@ -2518,16 +2437,6 @@ def section_from_plan(plan):
             money(build.get("target_pc_total_jpy")), money(build.get("target_all_in_jpy")),
             money(build.get("target_remaining_budget_jpy")), build.get("compatibility_status"),
             build.get("decision"), component_links))
-    ranked_builds = plan.get("builds") or []
-    if ranked_builds:
-        lines.extend(["", "### ランキング構成別・全パーツ商品リンク", ""])
-        for build in ranked_builds:
-            build_name = str(build.get("name") or "構成名未設定").replace("|", "／")
-            lines.append("**{}位：{}**".format(build.get("rank", "順位未設定"), build_name))
-            component_links = component_links_markdown(build.get("components") or [])
-            lines.append("- " + (component_links or "商品パーツ未登録"))
-            lines.append("")
-
     cpu_alternatives = plan.get("cpu_alternative_scenarios") or []
     if cpu_alternatives:
         lines.extend(["", "CPU高コア数の補助比較（RTX 5070 12GBを固定）："])
