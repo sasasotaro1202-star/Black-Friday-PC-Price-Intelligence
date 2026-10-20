@@ -199,7 +199,7 @@ def retrieval_issue_link_section(latest, build_components=None, peripherals=None
         for name, problem, primary_url, monitor_url in group:
             if primary_url:
                 safe_target = primary_url.replace("(", "%28").replace(")", "%29")
-                primary_link = "[商品ページを開く]({})".format(safe_target)
+                primary_link = "[商品ページ]({})".format(safe_target)
             else:
                 primary_link = "商品URL未登録（要修正）"
             if monitor_url and monitor_url != primary_url:
