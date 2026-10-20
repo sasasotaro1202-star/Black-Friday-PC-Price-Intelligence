@@ -1137,6 +1137,15 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
         "benefit_confidence": "unconfirmed",
     }
 
+    # Keep the human-facing product/checkout link separate from the official
+    # spec page used for automated observation. Some stores block GitHub-hosted
+    # collectors (403/timeout) even though their product page is still useful
+    # for a human to open. The spec URL is never represented as a checkout quote.
+    purchase_url = str((catalog_item or {}).get("purchase_url") or "").strip()
+    if purchase_url and purchase_url.startswith(("https://", "http://")) and purchase_url != current_url:
+        item["purchase_url"] = purchase_url
+        item["monitor_url"] = current_url
+
     if raw:
         item.update({
             "name": raw.get("name") or item["name"],

@@ -273,6 +273,10 @@ class WorkflowContractTests(unittest.TestCase):
         )
         self.assertEqual(
             candidates["rog-g16-8940hx-5070ti"]["url"],
+            "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/",
+        )
+        self.assertEqual(
+            candidates["rog-g16-8940hx-5070ti"]["purchase_url"],
             "https://store.asus.com/jp/rog/rog-strix-g16-g614.html",
         )
         self.assertEqual(
@@ -285,8 +289,13 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertNotIn("reference_price_jpy", g16_9955)
         self.assertEqual(
             g16_9955["url"],
-            "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/",
+            "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/",
         )
+        self.assertEqual(
+            g16_9955["purchase_url"],
+            "https://store.asus.com/jp/rog-strix-g16-g614.html",
+        )
+        self.assertFalse(g16_9955["url_is_exact"])
 
         # The official TUF F16 listing is a 512GB configuration, not 1TB.
         tuf_f16 = candidates["tuf-f16-14650hx-5070"]
@@ -307,6 +316,27 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertEqual(acer["cpu"], "Core Ultra 9 290HX Plus")
         self.assertEqual(acer["reference_price_jpy"], 547800)
         self.assertEqual(acer["official_listing_reference_checked_date"], "2026-10-21")
+        self.assertEqual(
+            acer["url"],
+            "https://www.acer.com/jp-ja/predator/laptops/helios/helios-neo-16-ai/pdp/NH.U44SJ.001",
+        )
+        self.assertEqual(
+            acer["purchase_url"],
+            "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1",
+        )
+        self.assertFalse(candidates["tuf-a16-8940hx-5070"]["url_is_exact"])
+        self.assertEqual(
+            candidates["tuf-a16-8940hx-5070"]["url"],
+            "https://www.asus.com/jp/laptops/for-gaming/tuf-gaming/asus-tuf-gaming-a16-2025/techspec/",
+        )
+        self.assertEqual(
+            candidates["tuf-f16-14650hx-5070"]["url"],
+            "https://www.asus.com/jp/laptops/for-gaming/tuf-gaming/asus-tuf-gaming-f16-2025/techspec/",
+        )
+        self.assertEqual(
+            candidates["zephyrus-g14-386h-5070ti"]["url"],
+            "https://rog.asus.com/jp/laptops/rog-zephyrus/rog-zephyrus-g14-2026-gu405/spec/",
+        )
 
 if __name__ == "__main__":
     unittest.main()

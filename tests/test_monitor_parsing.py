@@ -10,6 +10,31 @@ import monitor
 
 
 class MonitorParsingTests(unittest.TestCase):
+    def test_monitor_output_separates_purchase_page_from_spec_monitor_page(self):
+        monitor_url = "https://www.asus.com/jp/laptops/for-gaming/tuf-gaming/asus-tuf-gaming-a16-2025/techspec/"
+        purchase_url = "https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gaming-a16-2025.html"
+        item = monitor.apply_observation(
+            {
+                "id": "tuf-a16-test",
+                "url": monitor_url,
+                "query": "FA608PP",
+                "priority": "high",
+            },
+            None,
+            {},
+            {
+                "name": "ASUS TUF Gaming A16 FA608PP",
+                "family": "TUF Gaming A16",
+                "aliases": ["FA608PP"],
+                "url_is_exact": False,
+                "purchase_url": purchase_url,
+            },
+            "2026-10-21T04:00:00+09:00",
+        )
+        self.assertEqual(item["url"], monitor_url)
+        self.assertEqual(item["monitor_url"], monitor_url)
+        self.assertEqual(item["purchase_url"], purchase_url)
+
     def test_windows_31j_charset_alias_decodes_japanese_inventory_text(self):
         original = "ビックカメラ 天神1号館 店舗在庫"
         raw = original.encode("cp932")
