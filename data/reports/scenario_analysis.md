@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-10-20T17:51:35+09:00
+更新: 2026-10-20T18:07:59+09:00
 価格フェーズ: **PRE_BLACK_FRIDAY_REFERENCE**
 暫定の広域監視窓（公式セール開催期間ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 総予算: ¥400,000
@@ -40,7 +40,6 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |G TUNE FG-A7G70|desktop|RTX 5070|¥360,000|未確認|—|¥319,800|¥319,800|¥0|0.0%|¥255,840|¥239,850|¥223,860|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/)|
 |G TUNE P6-I7G70BK-B|laptop|RTX 5070 Laptop GPU|¥360,000|未確認|—|¥284,700|¥284,700|¥0|0.0%|¥227,760|¥213,525|¥199,290|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/)|
 |GALLERIA ZL9R-R57T-6|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥329,980|¥329,980|¥0|0.0%|¥263,984|¥247,485|¥230,986|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.dospara.co.jp/TC143/MC17880.html)|
-|Lenovo Legion Pro 5i Gen 10（16型 Intel）|laptop|RTX 5080|¥360,000|未確認|—|¥337,240|¥337,240|¥0|0.0%|¥269,792|¥252,930|¥236,068|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040)|
 |ROG Strix G16 G614FR-R9X3D5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥359,800|¥359,800|¥0|0.0%|¥287,840|¥269,850|¥251,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
 |ROG Strix G16 G614PR-R9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥359,800|¥359,800|¥0|0.0%|¥287,840|¥269,850|¥251,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
 |GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|laptop|RTX 5070 Ti|¥360,000|未確認|—|¥419,800|¥419,800|¥59,800|14.2%|¥335,840|¥314,850|¥293,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200)|
@@ -51,6 +50,7 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |G TUNE DG-A5G60|desktop|RTX 5060|¥360,000|未確認|—|¥194,800|¥194,800|—|—|¥155,840|¥146,100|¥136,360|未達/未確認|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
 |G TUNE DG-I5G70|desktop|RTX 5070|¥360,000|未確認|—|¥279,800|¥279,800|—|—|¥223,840|¥209,850|¥195,860|未達/未確認|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/)|
 |G TUNE DG-I7G70|desktop|RTX 5070|¥360,000|未確認|—|¥299,800|¥299,800|—|—|¥239,840|¥224,850|¥209,860|未達/未確認|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/)|
+|Lenovo Legion Pro 5i Gen 10（16型 Intel）|laptop|RTX 5080|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040)|
 |ROG Strix G16 G615LR-U9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
 |ROG Strix G18 G815LR-U9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025-g815/)|
 |https://store.acer.com/ja-jp/acer-phn16-i71-n93z|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1)|
@@ -64,7 +64,6 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |G TUNE DG-I7G70|¥299,800|0.0%|¥269,800|¥254,800|¥239,800|¥224,800|¥209,900|10%|same_gpu|
 |G TUNE DG-I5G70|¥279,800|0.0%|¥251,800|¥237,800|¥223,800|¥209,800|¥195,900|10%|same_gpu|
 |G TUNE FG-A7G70|¥319,800|0.0%|¥287,800|¥271,800|¥255,800|¥239,800|¥223,900|10%|same_gpu|
-|Lenovo Legion Pro 5i Gen 10（16型 Intel）|—|0.0%|¥303,500|¥286,700|¥269,800|¥252,900|¥236,100|10%|none|
 |G TUNE P6-I7G70BK-B|¥284,700|0.0%|¥256,200|¥242,000|¥227,800|¥213,500|¥199,300|10%|none|
 |G TUNE FG-A7G6T|¥309,800|0.0%|¥261,700|¥247,100|¥232,600|¥218,000|¥203,500|10%|none|
 |G TUNE DG-A5G60|¥194,800|0.0%|¥175,300|¥165,600|¥155,800|¥146,100|¥136,400|10%|none|
