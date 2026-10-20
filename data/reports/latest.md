@@ -1,8 +1,8 @@
 # ブラックフライデー期間通算・購入ランキング
 
-更新: 2026-10-20T21:44:28+09:00
-観測スナップショット: 2026-10-20T21:40:46+09:00
-観測スナップショットSHA256: 2c1355515263864d9c44538ab6d7743b9709cca504e55692f20f165f6be689fd
+更新: 2026-10-20T22:01:47+09:00
+観測スナップショット: 2026-10-20T21:58:00+09:00
+観測スナップショットSHA256: ca68e0062a8a3ee869cd3c470f750172b1db6b32adc1260d94a66a203372a832
 総予算（PC＋周辺機器）: ¥400,000
 周辺機器の目標予算: ¥35,000
 PC本体の基準目標: ¥360,000
@@ -21,9 +21,9 @@ BTO完成品は価格比較用の参考枠に下げ、部品ごとの価格・�
 
 |順位|自作構成|構成点/100|購入根拠充足度/100|PC本体目標|周辺機器込み|目標残額|互換性|判定|
 |---:|---|---:|---:|---:|---:|---:|---|---|
-|1|自作大穴：Ryzen 7 9700X + RTX 5070 Ti 16GB|86.0|61.5|¥362,000|¥402,000|¥-2,000|REVIEW|WAIT_FOR_COMPATIBILITY_REVIEW|
-|2|自作本命：Ryzen 7 9700X + RTX 5070 12GB|77.5|59.5|¥342,000|¥382,000|¥18,000|REVIEW|WAIT_FOR_COMPATIBILITY_REVIEW|
-|3|自作VRAM案：Ryzen 7 9700X + RTX 5060 Ti 16GB|76.2|62.3|¥324,000|¥364,000|¥36,000|REVIEW|WAIT_FOR_COMPATIBILITY_REVIEW|
+|1|自作大穴：Ryzen 7 9700X + RTX 5070 Ti 16GB|86.0|58.7|¥362,000|¥402,000|¥-2,000|REVIEW|WAIT_FOR_COMPATIBILITY_REVIEW|
+|2|自作本命：Ryzen 7 9700X + RTX 5070 12GB|77.5|56.7|¥342,000|¥382,000|¥18,000|REVIEW|WAIT_FOR_COMPATIBILITY_REVIEW|
+|3|自作VRAM案：Ryzen 7 9700X + RTX 5060 Ti 16GB|76.2|59.5|¥324,000|¥364,000|¥36,000|REVIEW|WAIT_FOR_COMPATIBILITY_REVIEW|
 
 CPU高コア数の補助比較（RTX 5070 12GBを固定）：
 - AMD Ryzen 9 9900X BOX / 12コア/24Tスレッド / CPU目標 ¥55,000 / 周辺機器込み目標 ¥392,000 / 総合点 80.7 / 互換性 REVIEW（購入許可ではない）
@@ -81,10 +81,10 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 
 |画像|項目|購入方法|BF購入目標価格|観測価格（BF前は参考）|在庫（購入先）|価格確認|商品/比較ページ|
 |---|---|---|---:|---|---|---|---|
-|<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="84"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz|実店舗（現金価格・在庫を確認）|¥22,000|ネット掲載 ¥20,790（送料込み推計 ¥21,790・送料予備 ¥1,000） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 preorder_or_backorder・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|ビックカメラ天神1号館: Web取置き/店舗受取 取寄せ表示（即時在庫ではない）・確認 2026-10-20 21:40 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:40 JST|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/14369301/)|
-|<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="84"></a>|Logicool G213r|実店舗（現金価格・在庫を確認）|¥4,500|ネット掲載 ¥7,330（送料込み推計 ¥7,830・送料予備 ¥500） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|ビックカメラ天神1号館: Web取置き/店舗受取 在庫少（確認時点）・確認 2026-10-20 21:40 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:40 JST|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001006099089/)|
-|画像未確認|Logicool G304|実店舗（現金価格・在庫を確認）|¥5,000|ネット掲載 ¥5,350（送料込み推計 ¥5,850・送料予備 ¥500） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|ビックカメラ天神1号館: Web取置き/店舗受取 在庫少（確認時点）・確認 2026-10-20 21:40 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:40 JST|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001004334450/)|
-|画像未確認|SteelSeries QcK Large Black 450x400mm (model 63003)|実店舗（現金価格・在庫を確認）|¥1,500|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 NO_VERIFIED_PRICE_OR_STOCK|ビックカメラ天神1号館: Web取置き/店舗受取 在庫少（確認時点）・確認 2026-10-20 21:40 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:40 JST|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/1570130/)|
+|<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="84"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz|実店舗（現金価格・在庫を確認）|¥22,000|ネット掲載 ¥20,790（送料込み推計 ¥21,790・送料予備 ¥1,000） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 preorder_or_backorder・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|ビックカメラ天神1号館: Web取置き/店舗受取 取寄せ表示（即時在庫ではない）・確認 2026-10-20 21:58 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:58 JST|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001009314680/)|
+|<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="84"></a>|Logicool G213r|実店舗（現金価格・在庫を確認）|¥4,500|ネット掲載 ¥7,330（送料込み推計 ¥7,830・送料予備 ¥500） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|ビックカメラ天神1号館: Web取置き/店舗受取 在庫少（確認時点）・確認 2026-10-20 21:58 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:58 JST|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001006099089/)|
+|画像未確認|Logicool G304|実店舗（現金価格・在庫を確認）|¥5,000|ネット掲載 ¥5,350（送料込み推計 ¥5,850・送料予備 ¥500） / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 ONLINE_ROUTE_SELECTED_OTHER_ROUTES_PENDING|ビックカメラ天神1号館: Web取置き/店舗受取 在庫少（確認時点）・確認 2026-10-20 21:58 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:58 JST|店頭価格未確認|[商品/比較ページ](https://www.yodobashi.com/product/100000001004334450/)|
+|画像未確認|SteelSeries QcK Large Black 450x400mm (model 63003)|実店舗（現金価格・在庫を確認）|¥1,500|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り: 決済額未確認・支店在庫 low_stock・PICKUP_CHECKOUT_TOTAL_MISSING_OR_INVALID / 比較状態 NO_VERIFIED_PRICE_OR_STOCK|ビックカメラ天神1号館: Web取置き/店舗受取 在庫少（確認時点）・確認 2026-10-20 21:58 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:58 JST|店頭価格未確認|[商品/比較ページ](https://www.biccamera.com/bc/item/1570130/)|
 |画像未確認|Required cables only; check included monitor cables first|付属ケーブル不足時のみ|¥0|ネット価格未確認 / 比較状態 ONLINE_PRICE_OR_STOCK_UNCONFIRMED|unknown|未確認|予算枠のみ|
 |画像未確認|周辺機器の価格差・必要ケーブル不足用の柔軟な予備枠（商品ではない）|予備枠（商品ではない）|¥2,000|ネット価格未確認 / 比較状態 ONLINE_PRICE_OR_STOCK_UNCONFIRMED|unknown|未確認|予算枠のみ|
 
@@ -129,7 +129,7 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 
 |順位|用途適合点/100（内訳）|購入根拠点/100（内訳）|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|適合評価の理由・留意点|商品ページ|
 |---:|---:|---:|---|---|---|---:|---:|---|---|---|---|
-|1|**94/100**（用途34/35・予算28/30・仕様19/20・代替性13/15）|**55/100**（価格/PIT 30・在庫 25・決済 0・購入先比較 0・保証/返品 0）|<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="88"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz（主予算候補）|実店舗（現金価格・在庫を確認）|¥22,000|ネット掲載 ¥20,790（送料未確認・予備枠¥1,000） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:in_stock / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 取寄せ表示（即時在庫ではない）・確認 2026-10-20 21:40 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:40 JST / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|評価理由: 27型WQHD・Fast IPS・180Hzを軸に、Cities: Skylines IIの作業領域とApex/VALORANTの高リフレッシュを両立。目標22,000円は計画枠内。 / 留意点: 重いゲームで常時180fpsを保証しない。実物の画質・輝度・スタンド、入力端子、保証、同一型番の店頭価格・在庫を確認する。|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
+|1|**94/100**（用途34/35・予算28/30・仕様19/20・代替性13/15）|**48/100**（価格/PIT 30・在庫 18・決済 0・購入先比較 0・保証/返品 0）|<a href="https://www.aoc.com/jp/gaming/monitors/q27g40e_11"><img src="https://cdn.hstatic.net/products/200000722513/q27g40e_f_5400107abac54a2598b9152fc579fccc.png" alt="AOC Q27G40E/11 27-inch WQHD 180Hz" width="88"></a>|AOC Q27G40E/11 27-inch WQHD 180Hz（主予算候補）|実店舗（現金価格・在庫を確認）|¥22,000|ネット掲載 ¥20,790（送料未確認・予備枠¥1,000） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:low_stock / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 取寄せ表示（即時在庫ではない）・確認 2026-10-20 21:58 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:58 JST / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|評価理由: 27型WQHD・Fast IPS・180Hzを軸に、Cities: Skylines IIの作業領域とApex/VALORANTの高リフレッシュを両立。目標22,000円は計画枠内。 / 留意点: 重いゲームで常時180fpsを保証しない。実物の画質・輝度・スタンド、入力端子、保証、同一型番の店頭価格・在庫を確認する。|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
 |2|**90/100**（用途33/35・予算28/30・仕様18/20・代替性11/15）|**0/100**（価格/PIT 0・在庫 0・決済 0・購入先比較 0・保証/返品 0）|画像未確認|MSI MAG 275QF 27-inch WQHD 180Hz Rapid IPS（代替候補）|実店舗（現金価格・在庫を確認）|¥20,000|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:unknown / 店頭:支店別在庫未確認 / 店舗受け取り:unknown|価格・在庫未確認|評価理由: 27型WQHD・180Hzの主要仕様をAOC候補と近い価格目標で確保する代替候補。 / 留意点: スタンド調整・端子・保証・パネル差を同等と決めつけない。AOCと同じタイミングで同一型番の送料込み価格と在庫を比較する。|[商品ページ](https://kakaku.com/item/K0001690691/)|
 |3|**87/100**（用途32/35・予算25/30・仕様19/20・代替性11/15）|**0/100**（価格/PIT 0・在庫 0・決済 0・購入先比較 0・保証/返品 0）|画像未確認|LG UltraGear 27GS75Q-B 27-inch WQHD IPS 180Hz（代替候補）|実店舗（現金価格・在庫を確認）|¥22,000|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:preorder_or_backorder / 店頭:支店別在庫未確認 / 店舗受け取り:unknown|価格・在庫未確認|評価理由: 27型WQHD・180Hzに加え、スタンドの高さ調整・ピボットを重視するときに有力。 / 留意点: AOCより安いとは限らない。スタンド機能、端子、表示特性、税込総額と在庫を確認する。|[商品ページ](https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/)|
 
@@ -137,23 +137,23 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 
 |順位|用途適合点/100（内訳）|購入根拠点/100（内訳）|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|適合評価の理由・留意点|商品ページ|
 |---:|---:|---:|---|---|---|---:|---:|---|---|---|---|
-|1|**88/100**（用途32/35・予算27/30・仕様17/20・代替性12/15）|**55/100**（価格/PIT 30・在庫 25・決済 0・購入先比較 0・保証/返品 0）|<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="88"></a>|Logicool G213r（主予算候補）|実店舗（現金価格・在庫を確認）|¥4,500|ネット掲載 ¥7,330（送料未確認・予備枠¥500） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:in_stock / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 在庫少（確認時点）・確認 2026-10-20 21:40 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:40 JST / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|評価理由: フルサイズ日本語配列・テンキー・パームレストを備え、ゲームだけでなくPython、レポート、数値入力にも使いやすい。 / 留意点: メカニカルではない。フルサイズはマウスの可動域を圧迫する場合があり、キー感触・机上サイズを確認する。|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
-|2|**86/100**（用途31/35・予算25/30・仕様18/20・代替性12/15）|**48/100**（価格/PIT 30・在庫 18・決済 0・購入先比較 0・保証/返品 0）|画像未確認|Logicool G413 TKL SE tenkeyless tactile mechanical keyboard（代替候補）|実店舗（現金価格・在庫を確認）|¥8,000|ネット掲載 ¥10,640（送料未確認・予備枠¥500） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:low_stock / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:40 JST / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|評価理由: テンキーレスの有線メカニカルで、FPS時のマウススペースと打鍵感を優先する選択肢。 / 留意点: テンキーがないため表計算・数値入力では不便な場合がある。主候補より高い価格になりやすく、配列・打鍵感を確認する。|[商品ページ](https://www.biccamera.com/bc/item/10326363/)|
-|3|**84/100**（用途30/35・予算25/30・仕様18/20・代替性11/15）|**0/100**（価格/PIT 0・在庫 0・決済 0・購入先比較 0・保証/返品 0）|画像未確認|Logicool G413 SE full-size tactile mechanical keyboard（代替候補）|実店舗（現金価格・在庫を確認）|¥9,500|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:preorder_or_backorder / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:40 JST / 店舗受け取り:unknown|価格・在庫未確認|評価理由: フルサイズとメカニカルスイッチを両立し、テンキーを維持したい場合の候補。 / 留意点: G213rより高価になりやすい。有線接続、打鍵感、キー配列、BF決済価格が予算に見合うか確認する。|[商品ページ](https://www.biccamera.com/bc/item/10326362/)|
+|1|**88/100**（用途32/35・予算27/30・仕様17/20・代替性12/15）|**55/100**（価格/PIT 30・在庫 25・決済 0・購入先比較 0・保証/返品 0）|<a href="https://item.rakuten.co.jp/logicool/g213r/"><img src="https://image.rakuten.co.jp/logicool/cabinet/white/g213r.jpg" alt="Logicool G213r" width="88"></a>|Logicool G213r（主予算候補）|実店舗（現金価格・在庫を確認）|¥4,500|ネット掲載 ¥7,330（送料未確認・予備枠¥500） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:in_stock / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 在庫少（確認時点）・確認 2026-10-20 21:58 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:58 JST / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|評価理由: フルサイズ日本語配列・テンキー・パームレストを備え、ゲームだけでなくPython、レポート、数値入力にも使いやすい。 / 留意点: メカニカルではない。フルサイズはマウスの可動域を圧迫する場合があり、キー感触・机上サイズを確認する。|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
+|2|**86/100**（用途31/35・予算25/30・仕様18/20・代替性12/15）|**48/100**（価格/PIT 30・在庫 18・決済 0・購入先比較 0・保証/返品 0）|画像未確認|Logicool G413 TKL SE tenkeyless tactile mechanical keyboard（代替候補）|実店舗（現金価格・在庫を確認）|¥8,000|ネット掲載 ¥10,640（送料未確認・予備枠¥500） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:low_stock / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:58 JST / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|評価理由: テンキーレスの有線メカニカルで、FPS時のマウススペースと打鍵感を優先する選択肢。 / 留意点: テンキーがないため表計算・数値入力では不便な場合がある。主候補より高い価格になりやすく、配列・打鍵感を確認する。|[商品ページ](https://www.biccamera.com/bc/item/10326363/)|
+|3|**84/100**（用途30/35・予算25/30・仕様18/20・代替性11/15）|**0/100**（価格/PIT 0・在庫 0・決済 0・購入先比較 0・保証/返品 0）|画像未確認|Logicool G413 SE full-size tactile mechanical keyboard（代替候補）|実店舗（現金価格・在庫を確認）|¥9,500|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:preorder_or_backorder / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:58 JST / 店舗受け取り:unknown|価格・在庫未確認|評価理由: フルサイズとメカニカルスイッチを両立し、テンキーを維持したい場合の候補。 / 留意点: G213rより高価になりやすい。有線接続、打鍵感、キー配列、BF決済価格が予算に見合うか確認する。|[商品ページ](https://www.biccamera.com/bc/item/10326362/)|
 
 ### マウス（FPS向け）
 
 |順位|用途適合点/100（内訳）|購入根拠点/100（内訳）|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|適合評価の理由・留意点|商品ページ|
 |---:|---:|---:|---|---|---|---:|---:|---|---|---|---|
-|1|**92/100**（用途34/35・予算27/30・仕様19/20・代替性12/15）|**55/100**（価格/PIT 30・在庫 25・決済 0・購入先比較 0・保証/返品 0）|画像未確認|Logicool G304（主予算候補）|実店舗（現金価格・在庫を確認）|¥5,000|ネット掲載 ¥5,350（送料未確認・予備枠¥500） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:in_stock / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 在庫少（確認時点）・確認 2026-10-20 21:40 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:40 JST / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|評価理由: LIGHTSPEED無線と価格のバランスがよく、FPSと日常作業を一台でこなせる。 / 留意点: 軽量競技モデルより重く、単3電池の重量・交換がある。手の大きさ、つかみ方、色・正確なSKUを確認する。|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
-|2|**90/100**（用途33/35・予算29/30・仕様17/20・代替性11/15）|**55/100**（価格/PIT 30・在庫 25・決済 0・購入先比較 0・保証/返品 0）|画像未確認|Logicool G203 LIGHTSYNC wired gaming mouse (black)（代替候補）|実店舗（現金価格・在庫を確認）|¥3,500|ネット掲載 ¥3,720（送料未確認・予備枠¥500） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:in_stock / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:40 JST / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|評価理由: 有線で価格を抑え、電池交換を避けたいFPS・日常作業向け。 / 留意点: ケーブルが操作を妨げる場合がある。形状・大きさ・重量、接続方式と配線を確認する。|[商品ページ](https://www.biccamera.com/bc/item/8019882/)|
-|3|**87/100**（用途32/35・予算23/30・仕様20/20・代替性12/15）|**0/100**（価格/PIT 0・在庫 0・決済 0・購入先比較 0・保証/返品 0）|画像未確認|Logicool G304 X SUPERLIGHT wireless gaming mouse（代替候補）|実店舗（現金価格・在庫を確認）|¥10,000|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:unknown / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:40 JST / 店舗受け取り:unknown|価格・在庫未確認|評価理由: 軽量ワイヤレスを優先する場合の上位候補で、FPSの素早い操作を狙える。 / 留意点: 主候補より費用が上がりやすい。充電方式・実重量・形状、目標10,000円と追加費用の価値を確認する。|[商品ページ](https://www.biccamera.com/bc/item/15216264/)|
+|1|**92/100**（用途34/35・予算27/30・仕様19/20・代替性12/15）|**55/100**（価格/PIT 30・在庫 25・決済 0・購入先比較 0・保証/返品 0）|画像未確認|Logicool G304（主予算候補）|実店舗（現金価格・在庫を確認）|¥5,000|ネット掲載 ¥5,350（送料未確認・予備枠¥500） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:in_stock / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 在庫少（確認時点）・確認 2026-10-20 21:58 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:58 JST / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|評価理由: LIGHTSPEED無線と価格のバランスがよく、FPSと日常作業を一台でこなせる。 / 留意点: 軽量競技モデルより重く、単3電池の重量・交換がある。手の大きさ、つかみ方、色・正確なSKUを確認する。|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
+|2|**90/100**（用途33/35・予算29/30・仕様17/20・代替性11/15）|**55/100**（価格/PIT 30・在庫 25・決済 0・購入先比較 0・保証/返品 0）|画像未確認|Logicool G203 LIGHTSYNC wired gaming mouse (black)（代替候補）|実店舗（現金価格・在庫を確認）|¥3,500|ネット掲載 ¥3,720（送料未確認・予備枠¥500） / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:in_stock / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:58 JST / 店舗受け取り:unknown|購入先比較未完了（ネット価格・店頭見積・店舗受取決済を分離）|評価理由: 有線で価格を抑え、電池交換を避けたいFPS・日常作業向け。 / 留意点: ケーブルが操作を妨げる場合がある。形状・大きさ・重量、接続方式と配線を確認する。|[商品ページ](https://www.biccamera.com/bc/item/8019882/)|
+|3|**87/100**（用途32/35・予算23/30・仕様20/20・代替性12/15）|**0/100**（価格/PIT 0・在庫 0・決済 0・購入先比較 0・保証/返品 0）|画像未確認|Logicool G304 X SUPERLIGHT wireless gaming mouse（代替候補）|実店舗（現金価格・在庫を確認）|¥10,000|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:unknown / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:58 JST / 店舗受け取り:unknown|価格・在庫未確認|評価理由: 軽量ワイヤレスを優先する場合の上位候補で、FPSの素早い操作を狙える。 / 留意点: 主候補より費用が上がりやすい。充電方式・実重量・形状、目標10,000円と追加費用の価値を確認する。|[商品ページ](https://www.biccamera.com/bc/item/15216264/)|
 
 ### マウスパッド
 
 |順位|用途適合点/100（内訳）|購入根拠点/100（内訳）|画像|商品|購入方法|BF購入目標|観測価格（BF前は参考）|在庫（購入先）|価格確認|適合評価の理由・留意点|商品ページ|
 |---:|---:|---:|---|---|---|---:|---:|---|---|---|---|
-|1|**93/100**（用途34/35・予算29/30・仕様18/20・代替性12/15）|**0/100**（価格/PIT 0・在庫 0・決済 0・購入先比較 0・保証/返品 0）|画像未確認|SteelSeries QcK Large Black 450x400mm (model 63003)（主予算候補）|実店舗（現金価格・在庫を確認）|¥1,500|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:unknown / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 在庫少（確認時点）・確認 2026-10-20 21:40 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:40 JST / 店舗受け取り:unknown|価格・在庫未確認|評価理由: 450×400mmの大型布面で低価格を狙え、低感度FPSの操作領域と汎用用途を確保できる。 / 留意点: 布面は摩耗・汚れで滑走感が変わる。実寸、厚さ、表面の好みと正確な型番63003を確認する。|[商品ページ](https://www.biccamera.com/bc/item/1570130/)|
+|1|**93/100**（用途34/35・予算29/30・仕様18/20・代替性12/15）|**0/100**（価格/PIT 0・在庫 0・決済 0・購入先比較 0・保証/返品 0）|画像未確認|SteelSeries QcK Large Black 450x400mm (model 63003)（主予算候補）|実店舗（現金価格・在庫を確認）|¥1,500|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:unknown / 店頭:ビックカメラ天神1号館: Web取置き/店舗受取 在庫少（確認時点）・確認 2026-10-20 21:58 JST / ヨドバシカメラ マルチメディア博多: Web取置き/店舗受取 在庫不明（確認時点）・確認 2026-10-20 21:58 JST / 店舗受け取り:unknown|価格・在庫未確認|評価理由: 450×400mmの大型布面で低価格を狙え、低感度FPSの操作領域と汎用用途を確保できる。 / 留意点: 布面は摩耗・汚れで滑走感が変わる。実寸、厚さ、表面の好みと正確な型番63003を確認する。|[商品ページ](https://www.biccamera.com/bc/item/1570130/)|
 |2|**89/100**（用途32/35・予算29/30・仕様17/20・代替性11/15）|**0/100**（価格/PIT 0・在庫 0・決済 0・購入先比較 0・保証/返品 0）|画像未確認|Razer Gigantus V2 Large 450x400mm cloth gaming mouse mat（代替候補）|実店舗（現金価格・在庫を確認）|¥2,200|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:unknown / 店頭:支店別在庫未確認 / 店舗受け取り:unknown|価格・在庫未確認|評価理由: 約450×400mmのLサイズ布製パッドで、主候補と近い操作領域を確保できる代替。 / 留意点: 表面の滑走感・摩擦は好みに依存する。配送込み価格と主候補との差額、正確なサイズを確認する。|[商品ページ](https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1)|
 |3|**87/100**（用途32/35・予算26/30・仕様18/20・代替性11/15）|**0/100**（価格/PIT 0・在庫 0・決済 0・購入先比較 0・保証/返品 0）|画像未確認|Logicool G640 Large cloth gaming mousepad（代替候補）|実店舗（現金価格・在庫を確認）|¥3,000|ネット価格未確認 / 店頭現金価格未確認 / 店舗受け取り決済額未確認（支店在庫:unknown）|ネット:in_stock / 店頭:支店別在庫未確認 / 店舗受け取り:unknown|価格・在庫未確認|評価理由: 400×460mmの大判クロス面で、表面の好みやLogitech製品で揃えたい場合の候補。 / 留意点: 主候補より高くなりやすく、価格差に見合うとは限らない。表面の好み、サイズ、保証、実売価格を比較する。|[商品ページ](https://gaming.logicool.co.jp/ja-jp/shop/p/g640-cloth-gaming-mouse-pad)|
 
@@ -241,26 +241,26 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 
 |商品|問題・確認事項|商品/販売ページ|監視・比較ページ|
 |---|---|---|---|
-|AMD Ryzen 7 9700X BOX|比較ページ取得失敗: price_or_point_in_time_missing|[商品ページ](https://shop.tsukumo.co.jp/goods/0730143315593/)|[監視/比較ページ](https://kakaku.com/item/K0001630332/)|
+|AMD Ryzen 7 9700X BOX|比較ページ取得失敗: price_or_point_in_time_missing; 価格/在庫を確認できず|[商品ページ](https://www.yodobashi.com/product/100000001008661707/)|[監視/比較ページ](https://kakaku.com/item/K0001630332/)|
 |AMD Ryzen 9 9900X BOX|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (search_snippet_reference); 検索スニペット参考値のみ。実売価格ではない|[商品ページ](https://kakaku.com/item/K0001630331/)|—|
-|AMD Ryzen 9 9950X BOX|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (search_snippet_reference); 検索スニペット参考値のみ。実売価格ではない|[商品ページ](https://kakaku.com/item/K0001630330/)|—|
-|PNY GeForce RTX 5070 12GB OC SLIM|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom)|[監視/比較ページ](https://kakaku.com/item/K0001798041/)|
+|AMD Ryzen 9 9950X BOX|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://biccamera.rakuten.co.jp/item/0730143315555/?variantId=0730143315555)|[監視/比較ページ](https://kakaku.com/item/K0001630330/)|
+|PNY GeForce RTX 5070 12GB OC SLIM|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845)|[監視/比較ページ](https://kakaku.com/item/K0001798041/)|
 |PNY GeForce RTX 5060 Ti 16GB OC|比較ページ取得失敗: price_or_point_in_time_missing|[商品ページ](https://www.dospara.co.jp/SBR1892/IC625088.html)|[監視/比較ページ](https://kakaku.com/item/K0001696163/)|
 |PNY GeForce RTX 5070 Ti 16GB ARGB|比較ページ取得失敗: price_or_point_in_time_missing|[商品ページ](https://www.dospara.co.jp/SBR1892/IC634895.html)|[監視/比較ページ](https://kakaku.com/item/K0001696164/)|
 |ASRock B850M Pro RS WiFi|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://www.yodobashi.com/product/100000001008871801/)|[監視/比較ページ](https://kakaku.com/item/K0001669878/)|
-|TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://item.rakuten.co.jp/matsukageya/mk-0chf9th1b/?variantId=mk-0chf9th1b)|[監視/比較ページ](https://kakaku.com/item/K0001610896/)|
+|TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://ymall.jp/store/mlymall/b0chf9th1b-20260811/)|[監視/比較ページ](https://kakaku.com/item/K0001610896/)|
 |Crucial Pro DDR5-6000 32GB (16GBx2)|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://www.yodobashi.com/product/100000001009315413/)|[監視/比較ページ](https://kakaku.com/item/K0001633533/)|
 |Crucial P3 Plus CT1000P3PSSD8JP 1TB|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://www.dospara.co.jp/SBR1144/IC481159.html)|[監視/比較ページ](https://kakaku.com/item/K0001466997/)|
 |Corsair RM850e 2025 850W ATX 3.1 Gold|比較ページ取得失敗: price_or_point_in_time_missing|[商品ページ](https://www.dospara.co.jp/SBR83/IC519918.html)|[監視/比較ページ](https://kakaku.com/item/K0001671441/)|
 |Fractal Design Pop Air TG|比較ページ取得失敗: price_or_point_in_time_missing|[商品ページ](https://www.dospara.co.jp/SBR1959/IC480986.html)|[監視/比較ページ](https://kakaku.com/item/J0000039064/)|
 |Thermalright Peerless Assassin 120 SE V3|比較ページ取得失敗: price_or_point_in_time_missing|[商品ページ](https://www.dospara.co.jp/SBR1968/IC645423.html)|[監視/比較ページ](https://kakaku.com/item/K0001789043/)|
-|Microsoft Windows 11 Home 日本語版 パッケージ版|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://www.yodobashi.com/product/100000001006975270/)|[監視/比較ページ](https://kakaku.com/item/K0001432816/)|
+|Microsoft Windows 11 Home 日本語版 パッケージ版|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://item.rakuten.co.jp/ebisuyahonnten/k-27/?iasid=07rpp_10095___34-mvgozf0l-u-548212ac-8ac4-4a0d-b215-05a3c8f99f06)|[監視/比較ページ](https://kakaku.com/item/K0001432816/)|
 |KIOXIA EXCERIA BASIC SSD-CK2.0N4B/N 2TB|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (search_snippet_reference); 検索スニペット参考値のみ。実売価格ではない|[商品ページ](https://kakaku.com/item/K0001719361/)|—|
 |Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2)|取得エラー: Direct retailer price captured, but current stock was not confirmed.; 比較ページ取得失敗: unapproved_comparison_url; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://www.ark-pc.co.jp/i/11650134/)|—|
-|Corsair VENGEANCE DDR5-6000 32GB (16GBx2) CL38 EXPO/XMP|取得エラー: Direct retailer price captured, but current stock was not confirmed.; 比較ページ取得失敗: unapproved_comparison_url; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://item.rakuten.co.jp/jism/0840440438649-44-61330-n/?variantId=0840440438649-44-61330-n)|[監視/比較ページ](https://www.corsair.com/jp/ja/p/memory/cmk32gx5m2d6000z38/vengeance-32gb-2-x-16gb-ddr5-dram-up-to-6000mt-s-cl38-amd-expo-%26-intel-xmp-memory-kit-gray-cmk32gx5m2d6000z38)|
+|Corsair VENGEANCE DDR5-6000 32GB (16GBx2) CL38 EXPO/XMP|取得エラー: unapproved_comparison_url; 比較ページ取得失敗: unapproved_comparison_url; 販売店検索失敗: configured_direct_retailer:0 results / 1 allowed host / 0 identity / 0 priced / 0 seller listings; retailer_search_page:858 results / 1 allowed host / 0 identity / 0 priced / 0 seller listings; bing:9 results / 0 allowed host / 0 identity / 0 priced / 0 seller; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://www.corsair.com/jp/ja/p/memory/cmk32gx5m2d6000z38/vengeance-32gb-2-x-16gb-ddr5-dram-up-to-6000mt-s-cl38-amd-expo-%26-intel-xmp-memory-kit-gray-cmk32gx5m2d6000z38)|—|
 |MSI SPATIUM M450 PCIe 4.0 NVMe M.2 1TB V1|取得エラー: Direct retailer price captured, but current stock was not confirmed.; 比較ページ取得失敗: unapproved_comparison_url; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://www.yodobashi.com/product/100000001009402658/)|—|
-|Thermalright Assassin X 120 Refined SE|取得エラー: Direct retailer price captured, but current stock was not confirmed.; 比較ページ取得失敗: unapproved_comparison_url; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://shop.tsukumo.co.jp/goods/4573615590182/)|[監視/比較ページ](https://www.yodobashi.com/product/100000001008996814/)|
-|MSI GeForce RTX 5070 12G VENTUS 2X OC|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://item.rakuten.co.jp/jism/4711377308229-44-73259-n/?variantId=4711377308229-44-73259-n)|[監視/比較ページ](https://kakaku.com/item/K0001679747/)|
+|Thermalright Assassin X 120 Refined SE|取得エラー: Direct retailer price captured, but current stock was not confirmed.; 比較ページ取得失敗: unapproved_comparison_url; 直接価格・型番・販売可能在庫の同時確認が未完了 (missing); 価格/在庫を確認できず|[商品ページ](https://www.yodobashi.com/product/100000001008996814/)|—|
+|MSI GeForce RTX 5070 12G VENTUS 2X OC|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (search_snippet_reference); 検索スニペット参考値のみ。実売価格ではない|[商品ページ](https://shop.tsukumo.co.jp/goods/4711377308229/)|[監視/比較ページ](https://kakaku.com/item/K0001679747/)|
 |AMD Ryzen 7 7700 BOX (Wraith Stealth Cooler)|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (search_snippet_reference); 検索スニペット参考値のみ。実売価格ではない|[商品ページ](https://kakaku.com/item/K0001711744/)|—|
 |ASRock B650M Pro X3D WiFi|比較ページ取得失敗: price_or_point_in_time_missing; 直接価格・型番・販売可能在庫の同時確認が未完了 (search_snippet_reference); 検索スニペット参考値のみ。実売価格ではない|[商品ページ](https://kakaku.com/item/K0001679617/)|—|
 
@@ -268,7 +268,7 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 
 |商品|問題・確認事項|商品/販売ページ|監視・比較ページ|
 |---|---|---|---|
-|AOC Q27G40E/11 27-inch WQHD 180Hz|購入ルート比較未完了: ONLINE_OPTIONS_COMPARED_STORE_PENDING|[商品ページ](https://www.biccamera.com/bc/item/14369301/)|[監視/比較ページ](https://www.yodobashi.com/product/100000001009314680/)|
+|AOC Q27G40E/11 27-inch WQHD 180Hz|購入ルート比較未完了: ONLINE_OPTIONS_COMPARED_STORE_PENDING|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|—|
 |Logicool G213r|購入ルート比較未完了: ONLINE_OPTIONS_COMPARED_STORE_PENDING|[商品ページ](https://www.yodobashi.com/product/100000001006099089/)|—|
 |Logicool G304|購入ルート比較未完了: ONLINE_OPTIONS_COMPARED_STORE_PENDING|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|—|
 |SteelSeries QcK Large Black 450x400mm (model 63003)|取得エラー: https://www.biccamera.com/bc/item/1570130/: RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 18002 milliseconds with 0 bytes received; 価格未確認; 購入ルート比較未完了: ONLINE_PRICE_UNVERIFIED_STORE_PENDING|[商品ページ](https://www.biccamera.com/bc/item/1570130/)|—|
@@ -335,58 +335,9 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 - 過去価格は同一構成 > 同GPU同シリーズ > 同シリーズの順で証拠力を下げる。
 - PIT不明・違反データから購入判断を作らない。
 
-## 取得エラー・価格/在庫未確認の商品リンク
-
-ここにあるリンクは、取得に失敗した商品や価格・型番・在庫の確認が完了していない商品の販売/監視ページです。**取得エラーは売り切れを意味しません**。ページがシリーズ共通の場合は、商品名・型番も照合してください。
-
-|対象|商品|状態|取得エラー/未確認理由|確認用リンク|
-|---|---|---|---|---|
-|完成品PC候補|ROG Strix G16 G614FR-R9X3D5070TI|取得エラー|RuntimeError:curl_http_403|[商品ページを開く](https://store.asus.com/jp/rog-strix-g16-g614.html)|
-|完成品PC候補|ASUS TUF Gaming A16 FA608PP-R9R5070S|取得エラー|RuntimeError:curl_http_403|[商品ページを開く](https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gaming-a16-2025.html)|
-|完成品PC候補|GALLERIA ZL9R-R57T-6|取得エラー|RuntimeError:curl_http_404|[商品ページを開く](https://www.dospara.co.jp/TC143/MC17880.html)|
-|完成品PC候補|Lenovo Legion Pro 5i Gen 10（16型 Intel）|型番/構成不一致の疑い|価格を購入判断から除外。商品ページで型番・GPU・仕様を確認|[商品ページを開く](https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040)|
-|完成品PC候補|ASUS TUF Gaming F16 FX608|取得エラー|RuntimeError:curl_http_403|[商品ページを開く](https://store.asus.com/jp/asus-tuf-gaming-f16-fx608.html?config=90NR0NB1-M00580)|
-|完成品PC候補|https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1|価格未確認|price_validation_status=missing|[商品ページを開く](https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1)|
-|完成品PC候補|GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|型番/構成不一致の疑い|価格を購入判断から除外。商品ページで型番・GPU・仕様を確認|[商品ページを開く](https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200)|
-|完成品PC候補|ROG Strix G16 G615LR-U9R5070TI|取得エラー|RuntimeError:curl_http_403|[商品ページを開く](https://store.asus.com/jp/rog-strix-g16-g614.html)|
-|完成品PC候補|ROG Strix G18 G815LR-U9R5070TI|取得エラー|RuntimeError:curl_http_404|[商品ページを開く](https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025-g815/)|
-|完成品PC候補|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|在庫未確認|stock_status=out_of_stock|[商品ページを開く](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/)|
-|完成品PC候補|G TUNE DG-A7G70|在庫未確認|stock_status=unknown|[商品ページを開く](https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/)|
-|完成品PC候補|ROG Strix G16 G614PR-R9R5070TI|取得エラー|RuntimeError:curl_http_403|[商品ページを開く](https://store.asus.com/jp/rog-strix-g16-g614.html)|
-|完成品PC候補|G TUNE FG-A7G6T|在庫未確認|stock_status=unknown|[商品ページを開く](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/)|
-|完成品PC候補|ROG Zephyrus G16 GU606AR-U9R5070TIG32G|取得エラー|RuntimeError:curl_http_403|[商品ページを開く](https://store.asus.com/jp/90nr0pc2-m002c0-rog-zephyrus-g16-2026.html)|
-|完成品PC候補|ROG Zephyrus G14 GU405AR-U9R5070TIG|取得エラー|RuntimeError:curl_http_403|[商品ページを開く](https://store.asus.com/jp/90nr0p94-m001d0-rog-zephyrus-g14-2026-gu405.html)|
-|自作PCパーツ|AMD Ryzen 9 9900X BOX|検索結果の参考値のみ|Search-result snippet is display-only; no direct seller price verified.|[商品ページを開く](https://kakaku.com/item/K0001630331/)|
-|自作PCパーツ|AMD Ryzen 9 9950X BOX|検索結果の参考値のみ|Search-result snippet is display-only; no direct seller price verified.|[商品ページを開く](https://kakaku.com/item/K0001630330/)|
-|自作PCパーツ|PNY GeForce RTX 5070 12GB OC SLIM|販売可能価格/在庫未確認|Direct retailer price captured, but current stock was not confirmed.|[商品ページを開く](https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom)|
-|自作PCパーツ|ASRock B850M Pro RS WiFi|販売可能価格/在庫未確認|Direct retailer price captured, but current stock was not confirmed.|[商品ページを開く](https://www.yodobashi.com/product/100000001008871801/)|
-|自作PCパーツ|TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)|販売可能価格/在庫未確認|Direct retailer price captured, but current stock was not confirmed.|[商品ページを開く](https://item.rakuten.co.jp/matsukageya/mk-0chf9th1b/?variantId=mk-0chf9th1b)|
-|自作PCパーツ|Crucial Pro DDR5-6000 32GB (16GBx2)|販売可能価格/在庫未確認|Direct retailer price captured, but current stock was not confirmed.|[商品ページを開く](https://www.yodobashi.com/product/100000001009315413/)|
-|自作PCパーツ|Crucial P3 Plus CT1000P3PSSD8JP 1TB|販売可能価格/在庫未確認|Direct retailer price captured, but current stock was not confirmed.|[商品ページを開く](https://www.dospara.co.jp/SBR1144/IC481159.html)|
-|自作PCパーツ|Microsoft Windows 11 Home 日本語版 パッケージ版|販売可能価格/在庫未確認|Direct retailer price captured, but current stock was not confirmed.|[商品ページを開く](https://www.yodobashi.com/product/100000001006975270/)|
-|自作PCパーツ|KIOXIA EXCERIA BASIC SSD-CK2.0N4B/N 2TB|検索結果の参考値のみ|Search-result snippet is display-only; no direct seller price verified.|[商品ページを開く](https://kakaku.com/item/K0001719361/)|
-|自作PCパーツ|Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2)|取得/照合エラー|Direct retailer price captured, but current stock was not confirmed.|[商品ページを開く](https://www.ark-pc.co.jp/i/11650134/)|
-|自作PCパーツ|Corsair VENGEANCE DDR5-6000 32GB (16GBx2) CL38 EXPO/XMP|取得/照合エラー|Direct retailer price captured, but current stock was not confirmed.|[商品ページを開く](https://item.rakuten.co.jp/jism/0840440438649-44-61330-n/?variantId=0840440438649-44-61330-n)|
-|自作PCパーツ|MSI SPATIUM M450 PCIe 4.0 NVMe M.2 1TB V1|取得/照合エラー|Direct retailer price captured, but current stock was not confirmed.|[商品ページを開く](https://www.yodobashi.com/product/100000001009402658/)|
-|自作PCパーツ|Thermalright Assassin X 120 Refined SE|取得/照合エラー|Direct retailer price captured, but current stock was not confirmed.|[商品ページを開く](https://shop.tsukumo.co.jp/goods/4573615590182/)|
-|自作PCパーツ|MSI GeForce RTX 5070 12G VENTUS 2X OC|販売可能価格/在庫未確認|Direct retailer price captured, but current stock was not confirmed.|[商品ページを開く](https://item.rakuten.co.jp/jism/4711377308229-44-73259-n/?variantId=4711377308229-44-73259-n)|
-|自作PCパーツ|AMD Ryzen 7 7700 BOX (Wraith Stealth Cooler)|検索結果の参考値のみ|Search-result snippet is display-only; no direct seller price verified.|[商品ページを開く](https://kakaku.com/item/K0001711744/)|
-|自作PCパーツ|ASRock B650M Pro X3D WiFi|検索結果の参考値のみ|Search-result snippet is display-only; no direct seller price verified.|[商品ページを開く](https://kakaku.com/item/K0001679617/)|
-|周辺機器|SteelSeries QcK Large Black 450x400mm (model 63003)|取得/価格解析エラー|https://www.biccamera.com/bc/item/1570130/: RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 18002 milliseconds with 0 bytes received|[商品ページを開く](https://www.biccamera.com/bc/item/1570130/)|
-|周辺機器|ELECOM ECCAC-DP1420BK DisplayPort 1.4 cable 2m|取得/価格解析エラー|https://www.elecom.co.jp/products/ECCAC-DP1420BK.html: missing_or_implausible_price|[商品ページを開く](https://www.elecom.co.jp/products/ECCAC-DP1420BK.html)|
-|周辺機器|Sanwa Supply KC-DP1420 VESA-certified DisplayPort 1.4 cable 2m|取得/価格解析エラー|https://www.sanwa.co.jp/product/syohin?code=KC-DP1420: missing_or_implausible_price|[商品ページを開く](https://www.sanwa.co.jp/product/syohin?code=KC-DP1420)|
-|周辺機器|Logicool G413 SE full-size tactile mechanical keyboard|取得/価格解析エラー|https://www.yodobashi.com/product/100000001007258184/: missing_or_implausible_price; https://www.biccamera.com/bc/item/10326362/: RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation|[商品ページを開く](https://www.biccamera.com/bc/item/10326362/)|
-|周辺機器|MSI MAG 275QF 27-inch WQHD 180Hz Rapid IPS|取得/価格解析エラー|https://kakaku.com/item/K0001690691/: missing_or_implausible_price|[商品ページを開く](https://kakaku.com/item/K0001690691/)|
-|周辺機器|LG UltraGear 27GS75Q-B 27-inch WQHD IPS 180Hz|取得/価格解析エラー|https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/: missing_or_implausible_price|[商品ページを開く](https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/)|
-|周辺機器|Logicool G304 X SUPERLIGHT wireless gaming mouse|取得/価格解析エラー|https://www.biccamera.com/bc/item/15216264/: RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 18002 milliseconds with 0 bytes received|[商品ページを開く](https://www.biccamera.com/bc/item/15216264/)|
-|周辺機器|Razer Gigantus V2 Large 450x400mm cloth gaming mouse mat|取得/価格解析エラー|https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1: missing_or_implausible_price|[商品ページを開く](https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1)|
-|周辺機器|Logicool G640 Large cloth gaming mousepad|取得/価格解析エラー|https://gaming.logicool.co.jp/ja-jp/shop/p/g640-cloth-gaming-mouse-pad: missing_or_implausible_price|[商品ページを開く](https://gaming.logicool.co.jp/ja-jp/shop/p/g640-cloth-gaming-mouse-pad)|
-
-未確認項目は在庫切れ・価格ゼロとみなさず、リンク先で直接確認するまで購入可否の根拠にしません。
-
 ## 今この瞬間の買い時判定
 
-- 更新時刻（JST）: 2026-10-20T21:44:28+09:00
+- 更新時刻（JST）: 2026-10-20T22:01:48+09:00
 - 判定: **事前監視継続・公式日程未確認** (PRE_BF_MONITORING)
 - 暫定の広域監視窓（公式セール日程ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 - 公式日程確認: 0/16 店舗（未確認: 12、取得エラー: 4）
@@ -417,7 +368,7 @@ BF目標額は値下げ希望額であり、現時点で購入許可はありま
 - 本命構成: 自作本命：Ryzen 7 9700X + RTX 5070 12GB
 - PC本体BF購入目標: ¥342,000
 - 周辺機器込みBF購入目標: ¥382,000
-- 互換性 / 部品の比較参考価格 / 店舗決済オファー: REVIEW / 4/9 / 0/9
+- 互換性 / 部品の比較参考価格 / 店舗決済オファー: REVIEW / 3/9 / 0/9
 - 自作の買い時判定: **WAIT_FOR_COMPATIBILITY_REVIEW**
 - 購入許可: **保留**。購入目標や比較価格は確定実売ではありません。
 - 主な未解決条件: GPUの正確な型番寸法・補助電源など未確認の互換性項目を解消する。；BF購入目標額は希望価格であり、確認済み実売価格ではない。；比較サイト価格は購入店舗の最終決済価格・在庫・送料を証明しない。
