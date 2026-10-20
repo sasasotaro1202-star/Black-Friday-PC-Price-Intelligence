@@ -35,6 +35,8 @@
 参照：[Epic Games — Unreal Engine 5.8 ハードウェア/ソフトウェア要件](https://dev.epicgames.com/documentation/en-us/unreal-engine/hardware-and-software-specifications-for-unreal-engine)、[Unity 6 システム要件](https://docs.unity3d.com/6000.0/Documentation/Manual/system-requirements.html)。
 
 ## 勉強・分析・普段の作業も同時に行う前提
+本構成の高コアCPU比較として、45万円案にRyzen 9 9900X＋RTX 5070＋64GB RAM＋2TB SSDも追加しています。目標額ベースでは一式455,000円ですが、実売価格ではなく、9900Xの冷却検証も購入前条件です。
+
 
 PC適合の全体監査では、ゲームを遊ぶこと、Unreal/Unity/Godotによる制作、スポーツ・株・BTC分析、ローカルAI、日々の授業/定期テストから早稲田・九大の入試応用までを、ハードウェア要件とデータ/学習運用の条件に分けて整理します。購入可能価格・互換性が未確認の項目を確定扱いしません。詳細：[PC構成の用途適合監査](docs/pc-goal-fit-checklist.md)。
 
