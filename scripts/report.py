@@ -194,6 +194,179 @@ def retrieval_issue_link_section(latest, build_components=None, peripherals=None
     return lines
 
 
+
+
+def _clean_issue_cell(value, limit=180):
+    """Keep retrieval diagnostics readable and safe inside a Markdown table."""
+    return re.sub(r"\s+", " ", str(value or "")).strip().replace("|", "/")[:limit]
+
+
+def _first_http_product_url(item, keys):
+    item = item if isinstance(item, dict) else {}
+    for key in keys:
+        value = str(item.get(key) or "").strip()
+        if value.startswith(("https://", "http://")):
+            return value
+    return None
+
+
+def retrieval_issue_link_lines(latest=None, component_prices=None, peripheral_prices=None):
+    """Render product links whenever retrieval, identity, price, or stock evidence is incomplete."""
+    if latest is None:
+        latest = load_json(os.path.join(ROOT, "data", "current_latest.json"), {})
+    if component_prices is None:
+        component_prices = load_json(os.path.join(ROOT, "data", "build_component_prices.json"), {})
+    if peripheral_prices is None:
+        peripheral_prices = load_json(os.path.join(ROOT, "data", "peripheral_prices.json"), {})
+
+    rows = []
+
+    def add_row(group, item, url_keys, status, reason):
+        url = _first_http_product_url(item, url_keys)
+        name = _clean_issue_cell(item.get("name") or item.get("model") or item.get("id") or "商品名未設定", 150)
+        if url:
+            link = "[商品ページを開く]({})".format(url.replace(")", "%29"))
+        else:
+            link = "商品URL未登録（要修正）"
+        rows.append((group, name, _clean_issue_cell(status, 70), _clean_issue_cell(reason, 190), link, url or ""))
+
+    def error_text(item, keys):
+        for key in keys:
+            value = item.get(key)
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+        return ""
+
+    for item in latest.get("products") or []:
+        item = item if isinstance(item, dict) else {}
+        fetch_status = str(item.get("fetch_status") or "").lower()
+        validation = str(item.get("price_validation_status") or "missing").lower()
+        price = item.get("current_price_jpy")
+        stock = str(item.get("stock_status") or "unknown").lower()
+        err = error_text(item, ("last_fetch_error", "fetch_error", "error"))
+        failed = fetch_status in ("error", "failed", "timeout", "exception") or (not fetch_status and bool(err))
+        unresolved = (
+            failed or not isinstance(price, (int, float)) or price <= 0
+            or stock not in ("in_stock", "low_stock")
+            or validation in ("missing", "variant_ambiguous", "reference_only", "anomaly_rejected")
+        )
+        if not unresolved:
+            continue
+        if failed:
+            status = "取得エラー"
+            reason = err or ("fetch_status=" + fetch_status)
+        elif validation == "variant_ambiguous":
+            status, reason = "型番/構成不一致の疑い", "価格を購入判断から除外。商品ページで型番・GPU・仕様を確認"
+        elif price is None or validation in ("missing", "reference_only", "anomaly_rejected"):
+            status, reason = "価格未確認", err or ("price_validation_status=" + validation)
+        else:
+            status, reason = "在庫未確認", err or ("stock_status=" + stock)
+        add_row("完成品PC候補", item, ("url", "purchase_url", "monitor_url"), status, reason)
+
+    for item in component_prices.get("products") or []:
+        item = item if isinstance(item, dict) else {}
+        fetch_status = str(item.get("fetch_status") or "").lower()
+        comparison_status = str(item.get("comparison_fetch_status") or "").lower()
+        retailer_status = str(item.get("retailer_search_status") or "").lower()
+        validation = str(item.get("price_validation_status") or "missing").lower()
+        offer = item.get("retailer_listing_offer") if isinstance(item.get("retailer_listing_offer"), dict) else {}
+        offers = item.get("retailer_listing_offers") if isinstance(item.get("retailer_listing_offers"), list) else []
+        if not offers and offer:
+            offers = [offer]
+        sellable_offer = any(
+            isinstance(candidate, dict)
+            and isinstance(candidate.get("price_jpy"), (int, float))
+            and candidate.get("price_jpy") > 0
+            and candidate.get("stock_status") in ("in_stock", "low_stock")
+            and candidate.get("identity_match") is True
+            and candidate.get("pit_valid") is True
+            for candidate in offers
+        )
+        err = error_text(item, ("last_fetch_error", "fetch_error", "comparison_fetch_error", "retailer_search_error"))
+        failed = (
+            fetch_status in ("error", "failed", "timeout", "exception")
+            or comparison_status in ("error", "failed", "timeout", "configuration_error")
+            or retailer_status in ("error", "failed", "timeout")
+            or bool(item.get("retailer_search_error"))
+        )
+        unresolved = failed or not sellable_offer or validation in ("missing", "search_snippet_reference", "variant_ambiguous")
+        if not unresolved:
+            continue
+        if failed:
+            status = "取得/照合エラー"
+            reason = err or "取得または販売店照合の状態がエラー"
+        elif validation == "variant_ambiguous":
+            status, reason = "型番/構成未確定", "同一型番・構成の直接掲載価格を確認できていない"
+        elif validation == "search_snippet_reference":
+            status, reason = "検索結果の参考値のみ", err or "検索スニペットは販売可能価格・在庫の根拠にしない"
+        elif not sellable_offer:
+            status, reason = "販売可能価格/在庫未確認", err or "直接掲載・型番一致・在庫あり/在庫少の条件を満たす掲載がない"
+        else:
+            status, reason = "価格/型番未確認", err or ("price_validation_status=" + validation)
+        add_row("自作PCパーツ", item, (
+            "retailer_listing_reference_url", "purchase_url", "monitor_url",
+            "search_snippet_reference_url", "source_url"
+        ), status, reason)
+
+    for item in peripheral_prices.get("products") or []:
+        item = item if isinstance(item, dict) else {}
+        url = _first_http_product_url(item, ("purchase_url", "monitor_url", "source_url", "url"))
+        # Exclude budget-only placeholders and conditional cable reminders that are not actual listings.
+        if not url:
+            continue
+        status_value = str(item.get("status") or "").lower()
+        validation = str(item.get("price_validation_status") or "missing").lower()
+        price = item.get("current_price_jpy")
+        stock = str(item.get("stock_status") or "unknown").lower()
+        err = error_text(item, ("error", "last_fetch_error", "fetch_error"))
+        failed = status_value in ("error", "failed", "timeout", "price_unverified") or bool(err)
+        verified_offer = (
+            isinstance(price, (int, float)) and price > 0
+            and item.get("price_verified") is True
+            and item.get("identity_verified") is True
+            and validation == "validated_exact_model_page"
+            and stock in ("in_stock", "low_stock")
+        )
+        if verified_offer and not failed:
+            continue
+        if failed:
+            status = "取得/価格解析エラー"
+            reason = err or ("status=" + status_value)
+        elif validation == "variant_ambiguous":
+            status, reason = "型番未確定", "正確な型番のページ/価格を確認できていない"
+        elif price is None or not item.get("price_verified"):
+            status, reason = "価格未確認", err or ("price_validation_status=" + validation)
+        else:
+            status, reason = "在庫未確認", err or ("stock_status=" + stock)
+        add_row("周辺機器", item, ("purchase_url", "monitor_url", "source_url", "url"), status, reason)
+
+    seen = set()
+    unique_rows = []
+    for row in rows:
+        key = (row[0], row[1], row[5])
+        if key in seen:
+            continue
+        seen.add(key)
+        unique_rows.append(row)
+
+    if not unique_rows:
+        return []
+    lines = [
+        "",
+        "## 取得エラー・価格/在庫未確認の商品リンク",
+        "",
+        "ここにあるリンクは、取得に失敗した商品や価格・型番・在庫の確認が完了していない商品の販売/監視ページです。**取得エラーは売り切れを意味しません**。ページがシリーズ共通の場合は、商品名・型番も照合してください。",
+        "",
+        "|対象|商品|状態|取得エラー/未確認理由|確認用リンク|",
+        "|---|---|---|---|---|",
+    ]
+    for group, name, status, reason, link, _url in unique_rows:
+        lines.append("|{}|{}|{}|{}|{}|".format(group, name, status, reason, link))
+    lines.extend(["", "未確認項目は在庫切れ・価格ゼロとみなさず、リンク先で直接確認するまで購入可否の根拠にしません。"])
+    return lines
+
+
+
 def image_markup(item, fallback_url=None, width=88):
     """Render only explicitly configured HTTPS product images; never guess image URLs."""
     item = item if isinstance(item, dict) else {}
@@ -1711,6 +1884,8 @@ def main():
         "- 過去価格は同一構成 > 同GPU同シリーズ > 同シリーズの順で証拠力を下げる。",
         "- PIT不明・違反データから購入判断を作らない。",
     ]
+
+    lines += retrieval_issue_link_lines()
 
     os.makedirs(os.path.join(ROOT, "data", "reports"), exist_ok=True)
     with open(os.path.join(ROOT, "data", "reports", "latest.md"), "w", encoding="utf-8") as f:
