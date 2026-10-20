@@ -1927,6 +1927,27 @@ def component_purchase_evidence_score(part, build, now=None):
     }
 
 
+def component_markdown_link(part):
+    """Render a safe, explicit product link for every configured build component."""
+    part = part if isinstance(part, dict) else {}
+    name = re.sub(r"\\s+", " ", str(part.get("name") or part.get("id") or "商品名未設定")).strip()
+    name = name.replace("|", "／").replace("[", "（").replace("]", "）")
+    url = None
+    for key in ("purchase_url", "url", "monitor_url", "source_url"):
+        candidate = str(part.get(key) or "").strip()
+        try:
+            parsed = urlparse(candidate)
+        except ValueError:
+            continue
+        if parsed.scheme.lower() in ("https", "http") and parsed.hostname and not parsed.username and not parsed.password:
+            url = candidate
+            break
+    if not url:
+        return name + "（商品URL未登録・要修正）"
+    target = url.replace("(", "%28").replace(")", "%29")
+    return "[{}]({})".format(name, target)
+
+
 def render_plan_markdown(plan):
     workload_profile = plan.get("workload_profile") or {}
     game_dev = workload_profile.get("game_development") or {}
@@ -2146,7 +2167,7 @@ def render_plan_markdown(plan):
                 lines.append("|" + "|".join(row) + "|")
             lines.extend(["","#### 部品内訳・用途のトレードオフ",""])
             for candidate in tier.get("builds") or []:
-                details="、".join("{} {}".format(part.get("name") or part.get("id"),money(part.get("target_price_jpy"))) for part in (candidate.get("components") or []))
+                details="、".join("{} {}".format(component_markdown_link(part), money(part.get("target_price_jpy"))) for part in (candidate.get("components") or []))
                 lines.append("**{} — {}点/100**".format(candidate.get("name"),candidate.get("overall_score_100","未採点")))
                 lines.append("- 一式目標 {}。{}".format(money(candidate.get("target_all_in_jpy")),candidate.get("purpose_note_ja") or "総合用途を対象。"))
                 lines.append("- 部品目標の内訳: "+(details or "未登録")+"。")
@@ -2405,14 +2426,18 @@ def section_from_plan(plan):
         "PC本体の計画上限は " + money(plan.get("pc_planned_budget_jpy")) +
         "（周辺機器計画枠と総額予備費を先に確保。PC本体単体の比較上限（総額上限ではない）は " +
         money(plan.get("pc_budget_jpy")) + "）。", "",
-        "|順位|自作構成|構成点/100|購入根拠充足度/100|PC本体目標|周辺機器込み|目標残額|互換性|判定|",
+        "|順位|自作構成|構成点/100|購入根拠充足度/100|PC本体目標|周辺機器込み|目標残額|互換性|判定|全パーツ商品リンク",
         "|---:|---|---:|---:|---:|---:|---:|---|---|"]
     for build in plan.get("builds") or []:
         score = build.get("scorecard") or {}
-        lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(build.get("rank"), build.get("name"),
+        component_links = " / ".join(
+            component_markdown_link(part) for part in (build.get("components") or [])
+        ) or "パーツ未登録"
+        lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(build.get("rank"), build.get("name"),
             score.get("overall_score", "—"), score.get("purchase_evidence_completeness_score_out_of_100", "—"),
             money(build.get("target_pc_total_jpy")), money(build.get("target_all_in_jpy")),
-            money(build.get("target_remaining_budget_jpy")), build.get("compatibility_status"), build.get("decision")))
+            money(build.get("target_remaining_budget_jpy")), build.get("compatibility_status"),
+            build.get("decision"), component_links))
     cpu_alternatives = plan.get("cpu_alternative_scenarios") or []
     if cpu_alternatives:
         lines.extend(["", "CPU高コア数の補助比較（RTX 5070 12GBを固定）："])
