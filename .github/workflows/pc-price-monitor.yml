@@ -79,7 +79,8 @@ jobs:
           print(f"run_now={str(run_now).lower()}")
           PY
 
-      # Non-selected cron ticks stop here to avoid using runner time on full tests.
+      # Non-selected cron ticks stop here to avoid runner use. Changes to workflow/config code enqueue a fresh collector,
+      # whose exact main-tree snapshot is regression-tested again after syncing inside the publish loop.
       # Every actual collection remains guarded by syntax/contract and regression tests.
       - name: Production syntax and fail-closed smoke gate
         if: steps.gate.outputs.skip != 'true'
