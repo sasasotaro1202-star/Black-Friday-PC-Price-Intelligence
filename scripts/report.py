@@ -4,6 +4,7 @@ import json
 import os
 import re
 from datetime import datetime
+from urllib.parse import urlsplit
 
 from intelligence import (
     ROOT, BUDGET, EFFECTIVE_SOFT_MAX, EFFECTIVE_HARD_MAX,
@@ -60,9 +61,17 @@ def peripheral_monitor_section_heading(target_config):
 
 
 def sales_url(item):
-    """Return only a real HTTP(S) product URL; never fabricate a purchase URL."""
+    """Return only an absolute HTTP(S) URL with a hostname; never fabricate a purchase URL."""
     url = str(item.get("url") or "").strip()
-    return url if url.startswith(("https://", "http://")) else None
+    try:
+        parsed = urlsplit(url)
+    except ValueError:
+        return None
+    if parsed.scheme.lower() not in ("https", "http") or not parsed.hostname:
+        return None
+    if parsed.username or parsed.password:
+        return None
+    return url
 
 
 def retrieval_issue_link_section(latest, build_components=None, peripherals=None):
@@ -73,7 +82,10 @@ def retrieval_issue_link_section(latest, build_components=None, peripherals=None
     rows = {"PC候補": [], "自作PC部品": [], "周辺機器": []}
 
     def cell(value):
-        return str(value or "未確認").replace("|", "/").replace("\\n", " ").strip()
+        # Keep each source field on one Markdown table row and prevent pipes/newlines
+        # in untrusted page titles or errors from corrupting the report layout.
+        text = re.sub(r"\\s+", " ", str(value or "未確認")).strip()
+        return text.replace("|", "/").replace("[", "\\\\[").replace("]", "\\\\]")
 
     def product_url(item, *candidate_urls):
         for candidate in candidate_urls:
@@ -185,8 +197,16 @@ def retrieval_issue_link_section(latest, build_components=None, peripherals=None
             "|---|---|---|---|",
         ])
         for name, problem, primary_url, monitor_url in group:
-            primary_link = "[商品ページ]({})".format(primary_url) if primary_url else "リンク未設定"
-            monitor_link = "[監視/比較ページ]({})".format(monitor_url) if monitor_url and monitor_url != primary_url else "—"
+            if primary_url:
+                safe_target = primary_url.replace("(", "%28").replace(")", "%29")
+                primary_link = "[商品ページを開く]({})".format(safe_target)
+            else:
+                primary_link = "商品URL未登録（要修正）"
+            if monitor_url and monitor_url != primary_url:
+                safe_monitor_target = monitor_url.replace("(", "%28").replace(")", "%29")
+                monitor_link = "[監視/比較ページ]({})".format(safe_monitor_target)
+            else:
+                monitor_link = "—"
             lines.append("|{}|{}|{}|{}|".format(cell(name), cell(problem), primary_link, monitor_link))
         lines.append("")
     if not rendered_any:
@@ -205,8 +225,9 @@ def _first_http_product_url(item, keys):
     item = item if isinstance(item, dict) else {}
     for key in keys:
         value = str(item.get(key) or "").strip()
-        if value.startswith(("https://", "http://")):
-            return value
+        url = sales_url({"url": value})
+        if url:
+            return url
     return None
 
 
