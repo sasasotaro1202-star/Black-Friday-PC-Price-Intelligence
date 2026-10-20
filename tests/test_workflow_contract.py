@@ -103,6 +103,14 @@ class WorkflowContractTests(unittest.TestCase):
         text = WORKFLOW.read_text(encoding="utf-8")
         self.assertIn("python scripts/peripheral_monitor.py", text)
 
+    def test_healthcheck_compares_budget_candidates_to_config_not_fixed_count(self):
+        source = (ROOT / "scripts" / "healthcheck.py").read_text(encoding="utf-8")
+        self.assertIn('"config", "build_components.json"', source)
+        self.assertIn('"budget_build_candidates"', source)
+        self.assertIn("budget scenario candidate count does not match config", source)
+        self.assertIn("budget scenario candidate IDs do not match config", source)
+        self.assertNotIn("len(all_scenario_builds) != 9", source)
+
     def test_diy_planner_runs_before_derived_timing_and_scenarios(self):
         for path in (
             ROOT / ".github" / "workflows" / "pc-price-monitor.yml",
