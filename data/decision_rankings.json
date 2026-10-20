@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-20T17:37:57+09:00",
-  "prediction_time": "2026-10-20T17:37:57+09:00",
-  "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-  "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0",
+  "generated_at": "2026-10-20T17:41:55+09:00",
+  "prediction_time": "2026-10-20T17:41:55+09:00",
+  "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+  "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d",
   "budget_jpy": 360000,
   "budget_scope": "pc_only_excluding_peripherals",
   "total_budget_jpy": 400000,
@@ -101,31 +101,31 @@
       "store_price_verified_store_ids": [],
       "store_inventory_status": "preorder_or_backorder",
       "store_inventory_verified": true,
-      "store_inventory_checked_at": "2026-10-20T17:34:26+09:00",
+      "store_inventory_checked_at": "2026-10-20T17:38:31+09:00",
       "store_inventory_source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14369301",
       "store_inventory_store_id": "biccamera_tenjin_1",
       "store_inventory_store_name": "ビックカメラ天神1号館",
       "store_inventory_evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-      "store_inventory_age_minutes": 3.5,
+      "store_inventory_age_minutes": 3.4,
       "store_inventory_store_ids_available": [],
       "store_inventory_observations": [
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-10-20T17:34:26+09:00",
+          "checked_at": "2026-10-20T17:38:31+09:00",
           "source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14369301",
           "status": "preorder_or_backorder",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 3.5
+          "age_minutes": 3.4
         },
         {
           "store_id": "yodobashi_hakata",
           "store_name": "ヨドバシカメラ マルチメディア博多",
-          "checked_at": "2026-10-20T17:34:26+09:00",
+          "checked_at": "2026-10-20T17:38:31+09:00",
           "source_url": "https://www.yodobashi.com/product/100000001009314680/",
           "status": "unknown",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 3.5
+          "age_minutes": 3.4
         }
       ],
       "stock_status": "low_stock",
@@ -212,12 +212,12 @@
       "store_price_verified_store_ids": [],
       "store_inventory_status": "low_stock",
       "store_inventory_verified": true,
-      "store_inventory_checked_at": "2026-10-20T17:34:26+09:00",
+      "store_inventory_checked_at": "2026-10-20T17:38:31+09:00",
       "store_inventory_source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=9242996",
       "store_inventory_store_id": "biccamera_tenjin_1",
       "store_inventory_store_name": "ビックカメラ天神1号館",
       "store_inventory_evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-      "store_inventory_age_minutes": 3.5,
+      "store_inventory_age_minutes": 3.4,
       "store_inventory_store_ids_available": [
         "biccamera_tenjin_1"
       ],
@@ -225,20 +225,20 @@
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-10-20T17:34:26+09:00",
+          "checked_at": "2026-10-20T17:38:31+09:00",
           "source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=9242996",
           "status": "low_stock",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 3.5
+          "age_minutes": 3.4
         },
         {
           "store_id": "yodobashi_hakata",
           "store_name": "ヨドバシカメラ マルチメディア博多",
-          "checked_at": "2026-10-20T17:34:26+09:00",
+          "checked_at": "2026-10-20T17:38:31+09:00",
           "source_url": "https://www.yodobashi.com/product/100000001006099089/",
           "status": "unknown",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 3.5
+          "age_minutes": 3.4
         }
       ],
       "stock_status": "in_stock",
@@ -325,12 +325,12 @@
       "store_price_verified_store_ids": [],
       "store_inventory_status": "low_stock",
       "store_inventory_verified": true,
-      "store_inventory_checked_at": "2026-10-20T17:34:26+09:00",
+      "store_inventory_checked_at": "2026-10-20T17:38:31+09:00",
       "store_inventory_source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=6566291",
       "store_inventory_store_id": "biccamera_tenjin_1",
       "store_inventory_store_name": "ビックカメラ天神1号館",
       "store_inventory_evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-      "store_inventory_age_minutes": 3.5,
+      "store_inventory_age_minutes": 3.4,
       "store_inventory_store_ids_available": [
         "biccamera_tenjin_1"
       ],
@@ -338,20 +338,20 @@
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-10-20T17:34:26+09:00",
+          "checked_at": "2026-10-20T17:38:31+09:00",
           "source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=6566291",
           "status": "low_stock",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 3.5
+          "age_minutes": 3.4
         },
         {
           "store_id": "yodobashi_hakata",
           "store_name": "ヨドバシカメラ マルチメディア博多",
-          "checked_at": "2026-10-20T17:34:26+09:00",
+          "checked_at": "2026-10-20T17:38:31+09:00",
           "source_url": "https://www.yodobashi.com/product/100000001004334450/",
           "status": "unknown",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 3.5
+          "age_minutes": 3.4
         }
       ],
       "stock_status": "in_stock",
@@ -437,12 +437,12 @@
       "store_price_verified_store_ids": [],
       "store_inventory_status": "low_stock",
       "store_inventory_verified": true,
-      "store_inventory_checked_at": "2026-10-20T17:34:26+09:00",
+      "store_inventory_checked_at": "2026-10-20T17:38:31+09:00",
       "store_inventory_source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=1570130",
       "store_inventory_store_id": "biccamera_tenjin_1",
       "store_inventory_store_name": "ビックカメラ天神1号館",
       "store_inventory_evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-      "store_inventory_age_minutes": 3.5,
+      "store_inventory_age_minutes": 3.4,
       "store_inventory_store_ids_available": [
         "biccamera_tenjin_1"
       ],
@@ -450,20 +450,20 @@
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-10-20T17:34:26+09:00",
+          "checked_at": "2026-10-20T17:38:31+09:00",
           "source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=1570130",
           "status": "low_stock",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 3.5
+          "age_minutes": 3.4
         },
         {
           "store_id": "yodobashi_hakata",
           "store_name": "ヨドバシカメラ マルチメディア博多",
-          "checked_at": "2026-10-20T17:34:26+09:00",
+          "checked_at": "2026-10-20T17:38:31+09:00",
           "source_url": "https://www.yodobashi.com/product/100000001001488658/",
           "status": "unknown",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 3.5
+          "age_minutes": 3.4
         }
       ],
       "stock_status": "unknown",
@@ -713,9 +713,9 @@
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
       "query": "G TUNE P6-I7G70BK-B i7-13700HX RTX 5070 32GB 1TB 日本",
       "priority": "critical",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
-      "available_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
+      "available_at": "2026-10-20T17:38:20+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -767,7 +767,7 @@
       "variant_match": "trusted_url",
       "identity_confidence": "high",
       "fingerprint": "f99a8080ee58d3f0ed4edc31ac7d1970370fde7c3536e5de0bab2dfc58d707ff",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": 76,
       "score_detail": {
         "status": "WATCH",
@@ -804,7 +804,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "trusted_url",
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -823,17 +823,17 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 284700,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0"
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d"
     },
     {
       "id": "desktop-gtune-fg-a7g70-5070",
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/",
       "query": "G TUNE FG-A7G70 Ryzen 7 7700 RTX 5070 32GB 1TB デスクトップ 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
-      "available_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
+      "available_at": "2026-10-20T17:38:20+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -885,7 +885,7 @@
       "variant_match": "exact",
       "identity_confidence": "high",
       "fingerprint": "52a980478c3ce2dd8191bf57183fcf7b9742cbdc69e08a95ef65c114aa8fe4e5",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": 74,
       "score_detail": {
         "status": "WATCH",
@@ -922,7 +922,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "exact",
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -941,17 +941,17 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 319800,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0"
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d"
     },
     {
       "id": "candidate-4",
       "url": "https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040",
       "query": "Lenovo Legion Pro 5i Gen 10 Core Ultra 9 275HX RTX 5070 Ti 32GB 1TB 日本",
       "priority": "critical",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
-      "available_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
+      "available_at": "2026-10-20T17:38:20+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1002,7 +1002,7 @@
       "variant_match": "ambiguous",
       "identity_confidence": "high",
       "fingerprint": "4f590fd97e89c4bac14f68bcaba5ae19122f2c79053d72d3be0ffd5991379089",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": 74,
       "score_detail": {
         "status": "WATCH",
@@ -1039,7 +1039,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "ambiguous",
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -1058,17 +1058,17 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 337240,
       "purchase_url": "https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0"
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d"
     },
     {
       "id": "desktop-gtune-dg-i7g70-5070",
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/",
       "query": "G TUNE DG-I7G70 Core Ultra 7 270K Plus RTX 5070 16GB 500GB デスクトップ 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
-      "available_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
+      "available_at": "2026-10-20T17:38:20+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1120,7 +1120,7 @@
       "variant_match": "exact",
       "identity_confidence": "high",
       "fingerprint": "320ed5724f6bf926c3fde71371542c71cec2ce10c7d0d734a03a393f8ab43409",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": 73,
       "score_detail": {
         "status": "NEEDS_CONFIGURATION",
@@ -1157,7 +1157,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "exact",
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60,
         "configuration_ready": false,
         "configuration_reasons": [
@@ -1179,17 +1179,17 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 299800,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0"
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d"
     },
     {
       "id": "desktop-gtune-dg-i5g70-5070",
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/",
       "query": "G TUNE DG-I5G70 Core Ultra 5 250K Plus RTX 5070 16GB 500GB デスクトップ 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
-      "available_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
+      "available_at": "2026-10-20T17:38:20+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1241,7 +1241,7 @@
       "variant_match": "exact",
       "identity_confidence": "high",
       "fingerprint": "4f20d819b55dcd4fb5923baa584fa4fdbef3f8f64e116490c4869c6c9ad53763",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": 63,
       "score_detail": {
         "status": "NEEDS_CONFIGURATION",
@@ -1278,7 +1278,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "exact",
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60,
         "configuration_ready": false,
         "configuration_reasons": [
@@ -1300,17 +1300,17 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 279800,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0"
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d"
     },
     {
       "id": "gtune-p5-13620h-5070",
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
       "query": "G TUNE P5-I7G70BK-C i7-13620H RTX 5070 32GB 1TB 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
-      "available_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
+      "available_at": "2026-10-20T17:38:20+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1360,7 +1360,7 @@
       "variant_match": "trusted_url",
       "identity_confidence": "high",
       "fingerprint": "491f37e10587c4ccb4d2c5a50e5369d208b8c7d9e9858b7b6e285e87d843d8b6",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": 63,
       "score_detail": {
         "status": "WAIT_FOR_DISCOUNT",
@@ -1397,7 +1397,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "trusted_url",
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -1416,17 +1416,17 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 448800,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0"
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d"
     },
     {
       "id": "desktop-gtune-fg-a7g6t-5060ti16",
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/",
       "query": "FGA7G6TG8BDDW101DECWA",
       "priority": "high",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
-      "available_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
+      "available_at": "2026-10-20T17:38:20+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1478,7 +1478,7 @@
       "variant_match": "exact",
       "identity_confidence": "high",
       "fingerprint": "98c93223ea974a37cb2e472a50b8401d2292f1d73a9fdb5f84774a22cb720a1d",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": 58,
       "score_detail": {
         "status": "VERIFY_NOW",
@@ -1506,7 +1506,7 @@
         "reason": "現金支払 ¥290,728 / 実質コスト ¥290,728 / 特典・構成価値 ¥0 / 加点 0 / PC目標価格内 / 在庫 unknown / 構成判定 exact / 待機リスク観測不足",
         "historical_floor_jpy": null,
         "price_trend": {
-          "sample_size": 228,
+          "sample_size": 229,
           "down_count": 2,
           "up_count": 0,
           "down_rate": 0.009,
@@ -1515,7 +1515,7 @@
         "data_confidence": "medium",
         "price_source_mode": "direct_text",
         "variant_match": "exact",
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -1534,17 +1534,17 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 290728,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0"
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d"
     },
     {
       "id": "desktop-gtune-dg-a5g60-5060",
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/",
       "query": "G TUNE DG-A5G60 Ryzen 5 4500 RTX 5060 16GB 500GB デスクトップ 日本",
       "priority": "normal",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
-      "available_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
+      "available_at": "2026-10-20T17:38:20+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1596,7 +1596,7 @@
       "variant_match": "exact",
       "identity_confidence": "high",
       "fingerprint": "edaf62b7389d839f69d09a0ae7d7af0cd02c0f7629489fbcf9eeaea495464cf5",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": 56,
       "score_detail": {
         "status": "NEEDS_CONFIGURATION",
@@ -1633,7 +1633,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "exact",
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60,
         "configuration_ready": false,
         "configuration_reasons": [
@@ -1655,17 +1655,17 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 194800,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0"
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d"
     },
     {
       "id": "desktop-gtune-dg-a7g70-5070",
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
       "query": "G TUNE DG-A7G70 Ryzen 7 5700X RTX 5070 32GB 1TB デスクトップ 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
-      "available_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
+      "available_at": "2026-10-20T17:38:20+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1717,7 +1717,7 @@
       "variant_match": "exact",
       "identity_confidence": "high",
       "fingerprint": "5acaa920c26740a4db9e4273a2b910f1e248d8c546b2185bc917e1b3948b3512",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": 56,
       "score_detail": {
         "status": "VERIFY_NOW",
@@ -1754,7 +1754,7 @@
         "data_confidence": "medium",
         "price_source_mode": "direct_text",
         "variant_match": "exact",
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -1773,8 +1773,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 390728,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0"
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d"
     }
   ],
   "unavailable_products": [
@@ -1783,9 +1783,9 @@
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/",
       "query": "G TUNE FG-A7G7T Ryzen 7 7700 RTX 5070 Ti 32GB 1TB TGS2026 デスクトップ 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
-      "available_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
+      "available_at": "2026-10-20T17:38:20+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1837,7 +1837,7 @@
       "variant_match": "exact",
       "identity_confidence": "high",
       "fingerprint": "0554661a5863401b38cfbb4b1dfa95a5d7f56bb5bd9d7204cb18c837150c4b7d",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": 65,
       "score_detail": {
         "status": "UNAVAILABLE",
@@ -1874,7 +1874,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "exact",
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -1893,8 +1893,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 399800,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0"
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d"
     }
   ],
   "reference_only": [
@@ -1903,8 +1903,8 @@
       "url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
       "query": "ROG Strix G16 G614 Ryzen 9 9955HX3D RTX 5070 Ti 32GB 1TB 日本",
       "priority": "critical",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -1975,7 +1975,7 @@
       ],
       "reference_price_jpy": 359800,
       "fingerprint": "2ef6e475a89bf489684baced6b25a142e438e22922827e5f7b2be5ad3df44f58",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -1986,7 +1986,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60
       },
       "rank": null,
@@ -1996,8 +1996,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
       "purchase_url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0",
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d",
       "current_price_suppressed": true
     },
     {
@@ -2005,8 +2005,8 @@
       "url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
       "query": "G614PR-R9R5070TI",
       "priority": "high",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -2077,7 +2077,7 @@
       ],
       "reference_price_jpy": 359800,
       "fingerprint": "011d41346aa5d4b9d601a2efd948906fd75a4cf21abcec2c983bb1781986b5ad",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2088,7 +2088,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60
       },
       "rank": null,
@@ -2098,8 +2098,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
       "purchase_url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0",
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d",
       "current_price_suppressed": true
     },
     {
@@ -2107,8 +2107,8 @@
       "url": "https://www.dospara.co.jp/TC143/MC17880.html",
       "query": "GALLERIA ZL9R-R57T-6 Ryzen 9 9955HX RTX 5070 Ti 32GB 1TB 日本",
       "priority": "critical",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -2179,7 +2179,7 @@
       ],
       "reference_price_jpy": 329980,
       "fingerprint": "8ce7ac6ec40a173ab19cdb2ee4b9ce4ea51b004cbb92e564f458516c3404d018",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2190,7 +2190,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60
       },
       "rank": null,
@@ -2200,8 +2200,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
       "purchase_url": "https://www.dospara.co.jp/TC143/MC17880.html",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0",
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d",
       "current_price_suppressed": true
     },
     {
@@ -2209,8 +2209,8 @@
       "url": "https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gaming-a16-2025.html",
       "query": "ASUS TUF Gaming A16 FA608PP Ryzen 9 8940HX RTX 5070 32GB 1TB 日本",
       "priority": "critical",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -2281,7 +2281,7 @@
       ],
       "reference_price_jpy": 319800,
       "fingerprint": "e062134449242c2acb6c3ee6b3d794155147e347f7e8e09b2dab276f82fb212f",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2292,7 +2292,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60
       },
       "rank": null,
@@ -2302,8 +2302,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
       "purchase_url": "https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gaming-a16-2025.html",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0",
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d",
       "current_price_suppressed": true
     },
     {
@@ -2311,8 +2311,8 @@
       "url": "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1",
       "query": "Acer Predator Helios Neo 16 AI Core Ultra 9 RTX 5070 Ti 32GB 1TB 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
       "available_at": null,
       "fetch_status": "ok",
       "last_fetch_status": "ok",
@@ -2365,7 +2365,7 @@
       "variant_match": "exact",
       "identity_confidence": "high",
       "fingerprint": "4e71c0dddce4aca2642a469bb7883d28fda0c01d9952c792c7ce69c6ea394aaf",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2376,7 +2376,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60
       },
       "rank": null,
@@ -2386,8 +2386,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
       "purchase_url": "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0",
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d",
       "reference_price_jpy": null,
       "current_price_suppressed": true
     },
@@ -2396,8 +2396,8 @@
       "url": "https://store.asus.com/jp/asus-tuf-gaming-f16-fx608.html?config=90NR0NB1-M00580",
       "query": "ASUS TUF Gaming F16 FX608JPR i7-14650HX RTX 5070 32GB 1TB 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -2467,7 +2467,7 @@
         }
       ],
       "fingerprint": "8dd76425c77b7ddfc52ca0895dd2640bc03a79c1758ed258e9fc90a9ebfa17b0",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2478,7 +2478,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60
       },
       "rank": null,
@@ -2488,8 +2488,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
       "purchase_url": "https://store.asus.com/jp/asus-tuf-gaming-f16-fx608.html?config=90NR0NB1-M00580",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0",
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d",
       "reference_price_jpy": null,
       "current_price_suppressed": true
     },
@@ -2498,8 +2498,8 @@
       "url": "https://store.asus.com/jp/90nr0pc2-m002c0-rog-zephyrus-g16-2026.html",
       "query": "ROG Zephyrus G16 GU606AR-U9R5070TIG32G RTX 5070 Ti 32GB 1TB 日本",
       "priority": "normal",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -2570,7 +2570,7 @@
       ],
       "reference_price_jpy": 599800,
       "fingerprint": "7dc7f4e1c955f8310cd1fc26b6c67708fb61377564401e886ace4c8be16aa9b8",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2581,7 +2581,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60
       },
       "rank": null,
@@ -2591,8 +2591,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
       "purchase_url": "https://store.asus.com/jp/90nr0pc2-m002c0-rog-zephyrus-g16-2026.html",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0",
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d",
       "current_price_suppressed": true
     },
     {
@@ -2600,8 +2600,8 @@
       "url": "https://store.asus.com/jp/90nr0p94-m001d0-rog-zephyrus-g14-2026-gu405.html",
       "query": "ROG Zephyrus G14 GU405AR-U9R5070TIG RTX 5070 Ti 32GB 1TB 日本",
       "priority": "normal",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -2672,7 +2672,7 @@
       ],
       "reference_price_jpy": 684800,
       "fingerprint": "c1211d79b6447bd94cfd91982027188974105f0f20890d3a66126a5a0c326072",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2683,7 +2683,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60
       },
       "rank": null,
@@ -2693,8 +2693,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
       "purchase_url": "https://store.asus.com/jp/90nr0p94-m001d0-rog-zephyrus-g14-2026-gu405.html",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0",
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d",
       "current_price_suppressed": true
     },
     {
@@ -2702,9 +2702,9 @@
       "url": "https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200",
       "query": "GIGABYTE GAMING A18 PRO RTX 5070 Ti 32GB 1TB 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
-      "available_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
+      "available_at": "2026-10-20T17:38:20+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -2765,7 +2765,7 @@
       "fingerprint": "cdf97dfc3157d746dd4ed7254c935e212e44afff4c3cdaf238885554a337d818",
       "variant_ambiguity_reason": "shared_family_page_without_exact_variant_identity",
       "reference_price_jpy": 419800,
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2776,7 +2776,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60
       },
       "rank": null,
@@ -2786,8 +2786,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
       "purchase_url": "https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0",
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d",
       "current_price_suppressed": true
     },
     {
@@ -2795,8 +2795,8 @@
       "url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
       "query": "ROG Strix G16 G615LR-U9R5070TI Core Ultra 9 275HX RTX 5070 Ti 32GB 1TB 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -2866,7 +2866,7 @@
         }
       ],
       "fingerprint": "a9d2afe0bb69e8c9875c5ff1e71d6154493bf740e82625f5c3aa5e93ed14e958",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2877,7 +2877,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60
       },
       "rank": null,
@@ -2887,8 +2887,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
       "purchase_url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0",
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d",
       "reference_price_jpy": null,
       "current_price_suppressed": true
     },
@@ -2897,8 +2897,8 @@
       "url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025-g815/",
       "query": "ROG Strix G18 G815LR-U9R5070TI Core Ultra 9 275HX RTX 5070 Ti 32GB 1TB 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-20T17:34:17+09:00",
-      "observed_at": "2026-10-20T17:34:17+09:00",
+      "retrieval_time": "2026-10-20T17:38:20+09:00",
+      "observed_at": "2026-10-20T17:38:20+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -2968,7 +2968,7 @@
         }
       ],
       "fingerprint": "0d48c1f6d4394b09e2adb782dc91ad4c4a86adfcb101295e9a95b48e16b154f6",
-      "prediction_time": "2026-10-20T17:37:57+09:00",
+      "prediction_time": "2026-10-20T17:41:55+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2979,7 +2979,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 3.7,
+        "observation_age_minutes": 3.6,
         "max_actionable_age_minutes": 60
       },
       "rank": null,
@@ -2989,14 +2989,14 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
       "purchase_url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025-g815/",
-      "source_snapshot_generated_at": "2026-10-20T17:34:17+09:00",
-      "source_snapshot_sha256": "bfda0abe10e83efa1da9e2cd334f75ae6b034dba6be363b6e4f44768243ab4e0",
+      "source_snapshot_generated_at": "2026-10-20T17:38:20+09:00",
+      "source_snapshot_sha256": "39a7c430ba61dc937bfb4cfd0579414d4c42714b144e9432e0af45a6e0df613d",
       "reference_price_jpy": null,
       "current_price_suppressed": true
     }
   ],
   "purchase_strategy": {
-    "generated_at": "2026-10-20T17:37:57+09:00",
+    "generated_at": "2026-10-20T17:41:55+09:00",
     "pricing_phase": "PRE_BLACK_FRIDAY_REFERENCE",
     "black_friday_window_start_jst": "2026-11-01T00:00:00+09:00",
     "black_friday_window_end_jst": "2026-12-11T23:59:59+09:00",
@@ -3025,7 +3025,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 279800,
-        "pre_black_friday_reference_at": "2026-10-20T17:34:17+09:00",
+        "pre_black_friday_reference_at": "2026-10-20T17:38:20+09:00",
         "post_black_friday_reference_price_jpy": null,
         "post_black_friday_reference_at": null,
         "observed_price_jpy": 279800,
@@ -3116,7 +3116,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 299800,
-        "pre_black_friday_reference_at": "2026-10-20T17:34:17+09:00",
+        "pre_black_friday_reference_at": "2026-10-20T17:38:20+09:00",
         "post_black_friday_reference_price_jpy": null,
         "post_black_friday_reference_at": null,
         "observed_price_jpy": 299800,
