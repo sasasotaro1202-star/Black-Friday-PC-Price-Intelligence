@@ -732,6 +732,39 @@
         "small_parts_reserve_jpy": 3000,
         "purpose_note_ja": "GPU性能・16GB VRAM・2TB SSDを優先する別案。",
         "tradeoff_note_ja": "RAMは基準の32GB。予算余裕があってもRAM QVLと実価格の条件を確認して選ぶ。"
+      },
+      {
+        "id": "budget-450k-9900x-5070-64gb-2tb",
+        "budget_tier_jpy": 450000,
+        "budget_tier_label": "45万円",
+        "name": "45万円CPU並列案：Ryzen 9 9900X + RTX 5070 12GB + 64GB RAM + 2TB SSD",
+        "scenario_role": "cpu_parallelism_priority",
+        "part_ids": [
+          "cpu-ryzen9-9900x",
+          "motherboard-asrock-b850m-pro-rs-wifi",
+          "gpu-rtx5070-12gb",
+          "memory-lexar-thor-ddr5-64gb-6000",
+          "ssd-kioxia-exceria-basic-2tb",
+          "psu-corsair-rm850e-2025",
+          "case-fractal-pop-air-tg",
+          "cooler-thermalright-pa120-se-v3",
+          "os-windows11-home"
+        ],
+        "cpu_part_id": "cpu-ryzen9-9900x",
+        "motherboard_part_id": "motherboard-asrock-b850m-pro-rs-wifi",
+        "psu_part_id": "psu-corsair-rm850e-2025",
+        "case_part_id": "case-fractal-pop-air-tg",
+        "gpu_choice_id": "gpu-rtx5070-12gb",
+        "memory_part_id": "memory-lexar-thor-ddr5-64gb-6000",
+        "storage_part_id": "ssd-kioxia-exceria-basic-2tb",
+        "cooler_part_id": "cooler-thermalright-pa120-se-v3",
+        "cooler_included_by_cpu": false,
+        "peripheral_budget_jpy": 35000,
+        "unallocated_contingency_jpy": 5000,
+        "build_shipping_reserve_jpy": 6000,
+        "small_parts_reserve_jpy": 3000,
+        "purpose_note_ja": "12コア/24スレッドでローカルビルド・並列分析の余裕を確保しながら、RTX 5070 12GB・RAM 64GB・SSD 2TBを購入時点で狙うCPU並列重視案。",
+        "tradeoff_note_ja": "CPU目標55,000円、RAM/SSD/GPUもBF目標を使った計画値で、実売ではない。9900Xは120W TDPでAMDは最適性能のため液冷を推奨するため、Peerless Assassin空冷での長時間全コア負荷時の温度・騒音・クロックを検証する。冷却変更が必要なら未計上費を追加し、総額を再計算する。メモリQVL/EXPO・GPU寸法/電源・BIOS・全SKUの実売/在庫を確認するまで購入可能扱いしない。"
       }
     ],
     "peripheral_purchase_policy_ja": "PC本体パーツはネット購入。周辺機器の基本ルートは福岡の指定実店舗での現金購入。ビックカメラ天神1号館・ヨドバシカメラ マルチメディア博多の同一SKUについて、店頭税込現金価格と実在する店頭在庫を支店ごとに確認する。ネット価格は比較参考とし、Web取置き/受取在庫で店頭棚在庫を代用しない。ネット注文・配送への切替はユーザーの明示承認が必要。ポイント還元は現金値引きから分離。"
