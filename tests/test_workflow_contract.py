@@ -1,3 +1,4 @@
+import json
 import pathlib
 import re
 import textwrap
@@ -243,6 +244,32 @@ class WorkflowContractTests(unittest.TestCase):
             text = path.read_text(encoding="utf-8")
             self.assertIn(expected, text, str(path))
             self.assertNotIn("actions/checkout@v4", text, str(path))
+
+
+    def test_known_broken_candidate_pages_use_verified_routes(self):
+        catalog_path = ROOT / "config" / "candidate_catalog.json"
+        catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+        candidates = {item["id"]: item for item in catalog.get("candidates", [])}
+
+        # These exact model pages were checked after the former paths returned 404.
+        self.assertEqual(
+            candidates["galleria-zl9r-9955hx-5070ti"]["url"],
+            "https://www.dospara.co.jp/TC143/MC18548.html",
+        )
+        self.assertEqual(
+            candidates["rog-g18-2025-275hx-5070ti"]["url"],
+            "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025/spec/",
+        )
+        for candidate_id in (
+            "galleria-zl9r-9955hx-5070ti",
+            "rog-g18-2025-275hx-5070ti",
+        ):
+            self.assertTrue(candidates[candidate_id]["url"].startswith("https://"))
+        self.assertNotIn("MC17880.html", candidates["galleria-zl9r-9955hx-5070ti"]["url"])
+        self.assertNotIn(
+            "/rog-strix-g18-2025-g815/",
+            candidates["rog-g18-2025-275hx-5070ti"]["url"],
+        )
 
 if __name__ == "__main__":
     unittest.main()
