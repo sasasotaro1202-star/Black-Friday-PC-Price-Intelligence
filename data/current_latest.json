@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-21T00:16:05+09:00",
-  "watchlist_generated_at": "2026-10-20T06:30:47+09:00",
+  "generated_at": "2026-10-21T01:02:30+09:00",
+  "watchlist_generated_at": "2026-10-21T01:02:30+09:00",
   "fetch_stats": {
     "total": 21,
     "direct_verified": 9,
@@ -8,16 +8,15 @@
     "stale_previous": 0,
     "baseline_only": 6,
     "anomaly_rejected": 0,
-    "errors": 10,
-    "search_fallback_attempts": 10,
+    "errors": 9,
+    "search_fallback_attempts": 9,
     "search_fallback_successes": 0,
-    "search_fallback_failures": 10,
-    "search_identity_rejections": 60,
+    "search_fallback_failures": 9,
+    "search_identity_rejections": 9,
     "errors_by_host_reason": {
       "store.asus.com|curl_http_403": 7,
       "www.dospara.co.jp|curl_http_404": 1,
-      "store.acer.com| (28) Operation timed out after 18002 milliseconds with 0 bytes received": 1,
-      "rog.asus.com|curl_http_404": 1
+      "store.acer.com| (28) Operation timed out after 18002 milliseconds with 0 bytes received": 1
     }
   },
   "coverage": {
@@ -26,7 +25,7 @@
     "skipped_count": 0,
     "max_urls": 100,
     "processing_rate_pct": 100.0,
-    "transport_success_rate_pct": 52.4,
+    "transport_success_rate_pct": 57.1,
     "price_verified_rate_pct": 42.9,
     "skipped_reason": null,
     "skipped_ids": []
@@ -37,8 +36,8 @@
       "url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
       "query": "ROG Strix G16 G614 Ryzen 9 9955HX3D RTX 5070 Ti 32GB 1TB 日本",
       "priority": "critical",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -92,18 +91,17 @@
       "search_fallback_diagnostics": [
         {
           "provider": "duckduckgo",
-          "status": "ok",
+          "status": "error",
+          "error": "HTTPError:HTTP Error 403: Forbidden",
           "result_count": 0,
-          "priced_exact_model_count": 0,
-          "identity_rejected_count": 0,
-          "matched_count": 0
+          "identity_rejected_count": 0
         },
         {
           "provider": "bing",
           "status": "ok",
-          "result_count": 10,
+          "result_count": 11,
           "priced_exact_model_count": 0,
-          "identity_rejected_count": 7,
+          "identity_rejected_count": 0,
           "matched_count": 0
         }
       ],
@@ -115,8 +113,8 @@
       "url": "https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gaming-a16-2025.html",
       "query": "ASUS TUF Gaming A16 FA608PP Ryzen 9 8940HX RTX 5070 32GB 1TB 日本",
       "priority": "critical",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -170,18 +168,17 @@
       "search_fallback_diagnostics": [
         {
           "provider": "duckduckgo",
-          "status": "ok",
+          "status": "error",
+          "error": "HTTPError:HTTP Error 403: Forbidden",
           "result_count": 0,
-          "priced_exact_model_count": 0,
-          "identity_rejected_count": 0,
-          "matched_count": 0
+          "identity_rejected_count": 0
         },
         {
           "provider": "bing",
           "status": "ok",
           "result_count": 10,
           "priced_exact_model_count": 0,
-          "identity_rejected_count": 8,
+          "identity_rejected_count": 0,
           "matched_count": 0
         }
       ],
@@ -190,11 +187,11 @@
     },
     {
       "id": "galleria-zl9r-9955hx-5070ti",
-      "url": "https://www.dospara.co.jp/TC143/MC17880.html",
+      "url": "https://www.dospara.co.jp/TC143/MC18548.html",
       "query": "GALLERIA ZL9R-R57T-6 Ryzen 9 9955HX RTX 5070 Ti 32GB 1TB 日本",
       "priority": "critical",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -248,11 +245,10 @@
       "search_fallback_diagnostics": [
         {
           "provider": "duckduckgo",
-          "status": "ok",
+          "status": "error",
+          "error": "HTTPError:HTTP Error 403: Forbidden",
           "result_count": 0,
-          "priced_exact_model_count": 0,
-          "identity_rejected_count": 0,
-          "matched_count": 0
+          "identity_rejected_count": 0
         },
         {
           "provider": "bing",
@@ -264,15 +260,15 @@
         }
       ],
       "reference_price_jpy": 329980,
-      "fingerprint": "8ce7ac6ec40a173ab19cdb2ee4b9ce4ea51b004cbb92e564f458516c3404d018"
+      "fingerprint": "e98e970602cc50c7e5bafe07dc6a2b568d56719b4d222ff31449a655e46f2438"
     },
     {
       "id": "candidate-4",
       "url": "https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040",
       "query": "Lenovo Legion Pro 5i Gen 10 Core Ultra 9 275HX RTX 5070 Ti 32GB 1TB 日本",
       "priority": "critical",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
       "available_at": null,
       "fetch_status": "ok",
       "last_fetch_status": "ok",
@@ -331,9 +327,9 @@
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
       "query": "G TUNE P6-I7G70BK-B i7-13700HX RTX 5070 32GB 1TB 日本",
       "priority": "critical",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
-      "available_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
+      "available_at": "2026-10-21T01:02:30+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -391,8 +387,8 @@
       "url": "https://store.asus.com/jp/asus-tuf-gaming-f16-fx608.html?config=90NR0NB1-M00580",
       "query": "ASUS TUF Gaming F16 FX608JPR i7-14650HX RTX 5070 32GB 1TB 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -446,18 +442,17 @@
       "search_fallback_diagnostics": [
         {
           "provider": "duckduckgo",
-          "status": "ok",
+          "status": "error",
+          "error": "HTTPError:HTTP Error 403: Forbidden",
           "result_count": 0,
-          "priced_exact_model_count": 0,
-          "identity_rejected_count": 0,
-          "matched_count": 0
+          "identity_rejected_count": 0
         },
         {
           "provider": "bing",
           "status": "ok",
-          "result_count": 10,
+          "result_count": 0,
           "priced_exact_model_count": 0,
-          "identity_rejected_count": 8,
+          "identity_rejected_count": 0,
           "matched_count": 0
         }
       ],
@@ -468,8 +463,8 @@
       "url": "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1",
       "query": "Acer Predator Helios Neo 16 AI Core Ultra 9 RTX 5070 Ti 32GB 1TB 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -523,11 +518,10 @@
       "search_fallback_diagnostics": [
         {
           "provider": "duckduckgo",
-          "status": "ok",
+          "status": "error",
+          "error": "HTTPError:HTTP Error 403: Forbidden",
           "result_count": 0,
-          "priced_exact_model_count": 0,
-          "identity_rejected_count": 0,
-          "matched_count": 0
+          "identity_rejected_count": 0
         },
         {
           "provider": "bing",
@@ -545,9 +539,9 @@
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
       "query": "G TUNE P5-I7G70BK-C i7-13620H RTX 5070 32GB 1TB 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
-      "available_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
+      "available_at": "2026-10-21T01:02:30+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -603,8 +597,8 @@
       "url": "https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200",
       "query": "GIGABYTE GAMING A18 PRO RTX 5070 Ti 32GB 1TB 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
       "available_at": null,
       "fetch_status": "ok",
       "last_fetch_status": "ok",
@@ -671,8 +665,8 @@
       "url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
       "query": "ROG Strix G16 G615LR-U9R5070TI Core Ultra 9 275HX RTX 5070 Ti 32GB 1TB 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -726,18 +720,17 @@
       "search_fallback_diagnostics": [
         {
           "provider": "duckduckgo",
-          "status": "ok",
+          "status": "error",
+          "error": "HTTPError:HTTP Error 403: Forbidden",
           "result_count": 0,
-          "priced_exact_model_count": 0,
-          "identity_rejected_count": 0,
-          "matched_count": 0
+          "identity_rejected_count": 0
         },
         {
           "provider": "bing",
           "status": "ok",
-          "result_count": 10,
+          "result_count": 11,
           "priced_exact_model_count": 0,
-          "identity_rejected_count": 7,
+          "identity_rejected_count": 0,
           "matched_count": 0
         }
       ],
@@ -745,47 +738,46 @@
     },
     {
       "id": "rog-g18-2025-275hx-5070ti",
-      "url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025-g815/",
+      "url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025/spec/",
       "query": "ROG Strix G18 G815LR-U9R5070TI Core Ultra 9 275HX RTX 5070 Ti 32GB 1TB 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
       "available_at": null,
-      "fetch_status": "error",
-      "last_fetch_status": "error",
-      "last_fetch_error": "RuntimeError:curl_http_404",
+      "fetch_status": "ok",
+      "last_fetch_status": "ok",
+      "last_fetch_error": null,
       "current_price_jpy": null,
       "price_jpy": null,
       "last_valid_price_jpy": null,
       "stock_status": "unknown",
       "price_source_mode": "none",
-      "price_validation_status": "missing",
-      "price_validation_reason": "price_missing",
+      "price_validation_status": "variant_ambiguous",
+      "price_validation_reason": "parsed_spec_contradicts_catalog",
       "data_confidence": "low",
-      "name": "ROG Strix G18 G815LR-U9R5070TI",
+      "name": "ROG Strix G18 (2025)",
       "family": "ROG Strix G18",
       "parsed_spec": {
         "gpu": "RTX 5070 Ti Laptop GPU",
+        "ram_gb": 64,
         "cpu": "Core Ultra 9 275HX",
-        "tgp_w": 140,
-        "ram_gb": 32,
         "ssd": "1 TB",
-        "vram_gb": 12,
         "form_factor": "laptop"
       },
       "spec": {
         "gpu": "RTX 5070 Ti Laptop GPU",
         "cpu": "Core Ultra 9 275HX",
         "tgp_w": 140,
-        "ram_gb": 32,
+        "ram_gb": 64,
         "ssd": "1 TB",
         "vram_gb": 12,
         "form_factor": "laptop"
       },
-      "page_text_excerpt": "",
+      "page_text_excerpt": " ROG Strix G18 (2025) G815 | ノートパソコン | ROG 日本 Accessibility links Skip to content Accessibility Help Skip to Menu ASUS Footer USER My ROG Elite Rewards アカウント 注文確認 欲しいものリスト よくある質問 公式ストア 製品 イノベーション ダウンロード ROGについて 最新トピック サポート ASUS home logo カートは空です。 カートは空です。 ROG Strix G18 (2025) G815 - スペック The lowest price from 30 days before the promotion: The lowest price from 30 days before the promotion: 特長 スペック レビュー記事 / 動画 ギャラリー サポート Menu 特長 特長 スペック レビュー記事 / 動画 ギャラリー サポート Quick nav OS CPU グラフィックス機能 AI機能 ディスプレイ メインメモリ 記憶装置 インターフェース 入力機能 Webカメラ サウンド機能 通信機能 電源 質量 サイズ PC Game Pass Exclusive Subscription Offers 主な付属品 その他 ROG Strix G18 (2025) G815 G815LP-U9R5070G ASUS estoreの最低価格 ディスカウント The lowest price from 30 days before the promotion: すぐに購入 製品比較 ROG Strix G18 (2025) G815 G815LR-U9R5070TI ASUS estoreの最低価格 ディスカウント The lowest price from 30 days before the promotion: すぐに購入 製品比較 ON OFF 異なる部分を強調する OS Windows 11 Home 64ビット Windows 11 Home 64ビット CPU インテル ® Core™ Ultra 9 プロセッサー 275HX インテル ® Core™ Ultra 9 プロセッサー 275HX グラフィックス機能 NVIDIA ® GeForce RTX™ 5070 Laptop GPU (NVIDIA ® Optimus™ Technology対応) 8GB GDDR7 NVIDIA ® GeForce RTX™ 5070 Ti Laptop GPU (NVIDIA ® Optimus™ Technology対応) 12GB GDDR7 AI機能 インテル ® AI Boost (NPU AI エンジン) インテル ® AI Boost (NPU AI エンジン) ディスプレイ 18.0型ワイドTFTカラー液晶 2,560×1,600ドット ノングレア リフレッシュレート: 240Hz 18.0型ワイドTFTカラー液晶 2,560×1,600ドット ノングレア リフレッシュレート: 240Hz メインメモリ 最大 64GB 最大 64GB 記憶装置 SSD 1TB (PCI Express 4.0 x4接続 NVMe/M.2)※ ※ リカバリーイメージなどに使用されるシステム領域が存在するので、上記の容量すべてがユーザー使用可能領域とはなりません。 SSD 1TB (PCI Express 4.0 x4接続 NVMe/M.2)※ ※ リカバリーイメージなどに使用されるシステム領域が存在するので、上記の容量すべてがユーザー使用可能領域とはなりません。 インターフェース マイクロホン/ヘッドホン/ヘッドセット・コンボジャック×1 HDMI×1 USBポート：USB3.2 (Type-A/Gen2) x3 USB3.2 (Type-C/Gen2/Power Delivery対応) ×1 ※ ※ データ転送と映像出力、本機への給電をサポートしています。すべてのデバイスの動作を保証するものではありません。 Thunderbolt 4 (Type-C) ×1 ※ ※ データ転送と映像出力、本機への給電をサポートしています。すべてのデバイスの動作を保証するものではありません。 RJ45ｘ1 (1000BASE-T/100BASE-TX/10BASE-T) マイクロホン/ヘッドホン/ヘッドセット・コンボジャック×1 HDMI×1 USBポート：USB3.2 (Type-A/Gen2) x3 Thunderbolt 5 (Type-C/Power Delivery対応)×2 2.5GBASE-T/1000BASE-T/100BASE-TX/10BASE-T (RJ45) 入力機能 Backlit Chiclet Keyboard Per-Key RGB with Num-key Backlit Chiclet Keyboard Per-Key RGB with Num-key Webカメラ 207万画素赤外線 (IR) カメラ内蔵 、Windows Hello (顔認証対応) 207万画素赤外線 (IR) カメラ内蔵 、Windows Hello (顔認証対応) サウンド機能 ハイ・デフィニション・オーディオ準拠 アレイマイク内蔵 ステレオスピーカー内蔵 (1W×2) ハイ・デフィニション・オーディオ準拠 アレイマイク内蔵 ステレオスピーカー内蔵 (1W×2) 通信機能 Wi-Fi 7(802.11be) (Triple band) 2*2 Wireless Card Bluetooth ® 5.4 (The features and supported version may vary depending on OS support and driver availability.) Wi-Fi 7(802.11be) (Triple band) 2*2 Wireless Card Bluetooth ® 5.4 (The features and supported version may vary depending on OS support and driver availability.) 電源 リチウムポリマーバッテリー (4セル/90Wh) リチウムポリマーバッテリー (4セル/90Wh) 質量 約3.2kg 約3.2kg サイズ 幅399.0mm×奥行き298.0mm×高さ23.5～32.0mm 幅399.0mm×奥行き298.0mm×高さ23.5～32.0mm PC Game Pass ROGゲーミングPCにはGame Passが付属しており、期間限定で利用できます。（※規約が適用されます。対象のプランや適用期間は、デバイスやご購入時期によって異なります。) ROGゲーミングPCにはGame Passが付属しており、期間限定で利用できます。（※規約が適用されます。対象のプランや適用期間は、デバイスやご購入時期によって異なります。) Exclusive Subscription Offers 3ヶ月分の Google AI Pro サブスクリプション 6ヶ月分の Dropbox 500GB サブスクリプション 1年分の ASUS Secure Auto-Backup 200GB サブスクリプション ※対象地域限定。対象条件は地域・デバイス・時期により異なります。利用規約が適用されます。詳細はプロモーションページをご確認ください。 3ヶ月分の Google AI Pro サブスクリプション 6ヶ月分の Dropbox 500GB サブスクリプション 1年分の ASUS Secure Auto-Backup 200GB サブスクリプション ※対象地域限定。対象条件は地域・デバイス・時期により異なります。利用規約が適用されます。詳細はプロモーションページをご確認ください。 主な付属品 ACアダプター ※、製品マニュアル、製品保証書 ※ 電源ジャックからの給電に対応したACアダプターです。Type-C 経由での給電はサポートしていません。 ACアダプター ※、製品マニュアル、製品保証書 ※ 電源ジャックからの給電に対応したACアダプターです。Type-C 経由での給電はサポートしていません。 その他 詳細のROG Strix G18 G815LPのスペックは こちら からご確認ください。 詳細のROG Strix G18 G815LRのスペックは こちら からご確認ください。 ASUS estoreの最低価格 ディスカウント The lowest price from 30 days before the promotion: すぐに購入 ASUS estoreの最低価格 ディスカウント The lowest price from 30 days before the promotion: すぐに購入 G815LP-U9R5070G G815LR-U9R5070TI Disclaimer 各製品や使用条件により計算値が異なる場合があります。 記載されているブランド名および製品名は、それぞれの会社の商標となります。 HDMI、HDMI High-Definition Multimedia Interfaceという語、HDMIのトレードドレスおよびHDMIのロゴは、HDMI Licensing Administrator, Inc.の商標または登録商標です。 PoE（ピーオーイー）に対応していない有線LANポートを持つユニットは、データ転送のみサポートします。 米国およびカナダでは、米連邦通信委員会（Federal Communications Commission）およびカナダ産業省（Industry Canada）の認証を受けた製品が販売されます。現地で購入可能な製品については、ASUS USAおよびASUS CanadaのWebサイトをご覧ください。 すべての仕様は、予告なしに変更されることがあります。実際の製品内容につきましては、サプライヤーにお尋ねください。製品はすべての国地域で入手できるわけではありません。 仕様や機能は、モデルによって異なります。すべての画像はイメージです。詳細は仕様をご確認ください。 基板色、同梱ソフトのバージョンは予告なく変更する場合がございます。 前述のすべてのブランド名および製品名は、各社の商標または登録商標です。 特に明記されない限り、すべての性能表示は理論上の性能に基づくものです。実際のパフォーマンスとは異なる場合があります。 USB 3.0、3.1、3.2、および/またはType-Cの実際の転送速度は、ホストデバイスの処理速度、ファイル属性、およびシステム構成と動作環境により異なります。 &gt; Gaming ノートパソコン &gt; ノートパソコン Filter &gt; ROG Strix G18 (2025) 最新のお得情報などを手に入れよう メールアドレスを入力 新規登録 Please enter a valid email address. ROGについて NEWSROOM ホーム facebook instagram twitter youtube Japan/日本語 特定商取引法に基づく表記 個人情報保護方針 ご利用条件 Cookie Settings &copy;ASUSTeK Computer Inc. All rights reserved. ",
       "benefit_signals": [],
       "confirmed_benefit_value_jpy": 0,
       "benefit_confidence": "unconfirmed",
+      "price_context": null,
       "catalog_id": "rog-g18-2025-275hx-5070ti",
       "catalog_name": "ROG Strix G18 G815LR-U9R5070TI",
       "form_factor": "laptop",
@@ -798,36 +790,20 @@
         "vram_gb": 12,
         "form_factor": "laptop"
       },
-      "variant_match": "strong",
+      "variant_ambiguity_reason": "parsed_spec_contradicts_catalog",
+      "variant_match": "ambiguous",
       "identity_confidence": "high",
-      "search_fallback_diagnostics": [
-        {
-          "provider": "duckduckgo",
-          "status": "ok",
-          "result_count": 0,
-          "priced_exact_model_count": 0,
-          "identity_rejected_count": 0,
-          "matched_count": 0
-        },
-        {
-          "provider": "bing",
-          "status": "ok",
-          "result_count": 10,
-          "priced_exact_model_count": 0,
-          "identity_rejected_count": 7,
-          "matched_count": 0
-        }
-      ],
-      "fingerprint": "0d48c1f6d4394b09e2adb782dc91ad4c4a86adfcb101295e9a95b48e16b154f6"
+      "observed_price_source_mode": "none",
+      "fingerprint": "58d6a8f1cfbb34b1bfeda50942116d2199d659b7ae8d0fda8d9c270b80662db6"
     },
     {
       "id": "desktop-gtune-dg-i7g70-5070",
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/",
       "query": "G TUNE DG-I7G70 Core Ultra 7 270K Plus RTX 5070 16GB 500GB デスクトップ 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
-      "available_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
+      "available_at": "2026-10-21T01:02:30+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -885,9 +861,9 @@
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/",
       "query": "G TUNE FG-A7G7T Ryzen 7 7700 RTX 5070 Ti 32GB 1TB TGS2026 デスクトップ 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
-      "available_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
+      "available_at": "2026-10-21T01:02:30+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -945,9 +921,9 @@
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/",
       "query": "G TUNE DG-I5G70 Core Ultra 5 250K Plus RTX 5070 16GB 500GB デスクトップ 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
-      "available_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
+      "available_at": "2026-10-21T01:02:30+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1005,9 +981,9 @@
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
       "query": "G TUNE DG-A7G70 Ryzen 7 5700X RTX 5070 32GB 1TB デスクトップ 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
-      "available_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
+      "available_at": "2026-10-21T01:02:30+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1065,9 +1041,9 @@
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/",
       "query": "G TUNE FG-A7G70 Ryzen 7 7700 RTX 5070 32GB 1TB デスクトップ 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
-      "available_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
+      "available_at": "2026-10-21T01:02:30+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1125,8 +1101,8 @@
       "url": "https://store.asus.com/jp/rog-strix-g16-g614.html",
       "query": "G614PR-R9R5070TI",
       "priority": "high",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -1180,16 +1156,15 @@
       "search_fallback_diagnostics": [
         {
           "provider": "duckduckgo",
-          "status": "ok",
+          "status": "error",
+          "error": "HTTPError:HTTP Error 403: Forbidden",
           "result_count": 0,
-          "priced_exact_model_count": 0,
-          "identity_rejected_count": 0,
-          "matched_count": 0
+          "identity_rejected_count": 0
         },
         {
           "provider": "bing",
           "status": "ok",
-          "result_count": 0,
+          "result_count": 10,
           "priced_exact_model_count": 0,
           "identity_rejected_count": 0,
           "matched_count": 0
@@ -1203,9 +1178,9 @@
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/",
       "query": "FGA7G6TG8BDDW101DECWA",
       "priority": "high",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
-      "available_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
+      "available_at": "2026-10-21T01:02:30+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1263,8 +1238,8 @@
       "url": "https://store.asus.com/jp/90nr0pc2-m002c0-rog-zephyrus-g16-2026.html",
       "query": "ROG Zephyrus G16 GU606AR-U9R5070TIG32G RTX 5070 Ti 32GB 1TB 日本",
       "priority": "normal",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -1318,18 +1293,17 @@
       "search_fallback_diagnostics": [
         {
           "provider": "duckduckgo",
-          "status": "ok",
+          "status": "error",
+          "error": "HTTPError:HTTP Error 403: Forbidden",
           "result_count": 0,
-          "priced_exact_model_count": 0,
-          "identity_rejected_count": 0,
-          "matched_count": 0
+          "identity_rejected_count": 0
         },
         {
           "provider": "bing",
           "status": "ok",
-          "result_count": 10,
+          "result_count": 11,
           "priced_exact_model_count": 0,
-          "identity_rejected_count": 7,
+          "identity_rejected_count": 0,
           "matched_count": 0
         }
       ],
@@ -1341,8 +1315,8 @@
       "url": "https://store.asus.com/jp/90nr0p94-m001d0-rog-zephyrus-g14-2026-gu405.html",
       "query": "ROG Zephyrus G14 GU405AR-U9R5070TIG RTX 5070 Ti 32GB 1TB 日本",
       "priority": "normal",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
       "available_at": null,
       "fetch_status": "error",
       "last_fetch_status": "error",
@@ -1396,18 +1370,17 @@
       "search_fallback_diagnostics": [
         {
           "provider": "duckduckgo",
-          "status": "ok",
+          "status": "error",
+          "error": "HTTPError:HTTP Error 403: Forbidden",
           "result_count": 0,
-          "priced_exact_model_count": 0,
-          "identity_rejected_count": 0,
-          "matched_count": 0
+          "identity_rejected_count": 0
         },
         {
           "provider": "bing",
           "status": "ok",
-          "result_count": 10,
+          "result_count": 11,
           "priced_exact_model_count": 0,
-          "identity_rejected_count": 7,
+          "identity_rejected_count": 0,
           "matched_count": 0
         }
       ],
@@ -1419,9 +1392,9 @@
       "url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/",
       "query": "G TUNE DG-A5G60 Ryzen 5 4500 RTX 5060 16GB 500GB デスクトップ 日本",
       "priority": "normal",
-      "retrieval_time": "2026-10-21T00:16:05+09:00",
-      "observed_at": "2026-10-21T00:16:05+09:00",
-      "available_at": "2026-10-21T00:16:05+09:00",
+      "retrieval_time": "2026-10-21T01:02:30+09:00",
+      "observed_at": "2026-10-21T01:02:30+09:00",
+      "available_at": "2026-10-21T01:02:30+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,

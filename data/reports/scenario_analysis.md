@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-10-21T00:20:18+09:00
+更新: 2026-10-21T01:07:29+09:00
 価格フェーズ: **PRE_BLACK_FRIDAY_REFERENCE**
 暫定の広域監視窓（公式セール開催期間ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 総予算: ¥400,000
@@ -19,7 +19,7 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |AOC Q27G40E/11 27-inch WQHD 180Hz|¥22,000|未確認|—|¥20,790|low_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
 |Logicool G213r|¥4,500|未確認|—|¥7,330|in_stock|black_friday_target_reserve|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
 |Logicool G304|¥5,000|未確認|—|¥5,350|in_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
-|SteelSeries QcK Large Black 450x400mm (model 63003)|¥1,500|未確認|—|—|unknown|black_friday_target_reserve|[商品ページ](https://www.biccamera.com/bc/item/1570130/)|
+|SteelSeries QcK Large Black 450x400mm (model 63003)|¥1,500|未確認|—|¥2,640|in_stock|black_friday_target_reserve|[商品ページ](https://www.biccamera.com/bc/item/1570130/)|
 |Required cables only; check included monitor cables first|¥0|未確認|—|—|unknown|black_friday_target_reserve|予算枠/見積確認|
 |周辺機器の価格差・必要ケーブル不足用の柔軟な予備枠（商品ではない）|¥2,000|未確認|—|—|unknown|black_friday_target_reserve|予算枠/見積確認|
 
@@ -39,7 +39,7 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |G TUNE FG-A7G6T|desktop|RTX 5060 Ti 16GB|¥360,000|未確認|—|¥309,800|¥309,800|¥0|0.0%|¥247,840|¥232,350|¥216,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/)|
 |G TUNE FG-A7G70|desktop|RTX 5070|¥360,000|未確認|—|¥319,800|¥319,800|¥0|0.0%|¥255,840|¥239,850|¥223,860|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/)|
 |G TUNE P6-I7G70BK-B|laptop|RTX 5070 Laptop GPU|¥360,000|未確認|—|¥284,700|¥284,700|¥0|0.0%|¥227,760|¥213,525|¥199,290|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/)|
-|GALLERIA ZL9R-R57T-6|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥329,980|¥329,980|¥0|0.0%|¥263,984|¥247,485|¥230,986|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.dospara.co.jp/TC143/MC17880.html)|
+|GALLERIA ZL9R-R57T-6|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥329,980|¥329,980|¥0|0.0%|¥263,984|¥247,485|¥230,986|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.dospara.co.jp/TC143/MC18548.html)|
 |ROG Strix G16 G614FR-R9X3D5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥359,800|¥359,800|¥0|0.0%|¥287,840|¥269,850|¥251,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
 |ROG Strix G16 G614PR-R9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥359,800|¥359,800|¥0|0.0%|¥287,840|¥269,850|¥251,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
 |GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|laptop|RTX 5070 Ti|¥360,000|未確認|—|¥419,800|¥419,800|¥59,800|14.2%|¥335,840|¥314,850|¥293,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200)|
@@ -53,7 +53,7 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |G TUNE DG-I7G70|desktop|RTX 5070|¥360,000|未確認|—|¥299,800|¥299,800|—|—|¥239,840|¥224,850|¥209,860|未達/未確認|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/)|
 |Lenovo Legion Pro 5i Gen 10（16型 Intel）|laptop|RTX 5080|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040)|
 |ROG Strix G16 G615LR-U9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://store.asus.com/jp/rog-strix-g16-g614.html)|
-|ROG Strix G18 G815LR-U9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025-g815/)|
+|ROG Strix G18 (2025)|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025/spec/)|
 
 ## 既存の参照価格シナリオ（比較用・確率ではない）
 
