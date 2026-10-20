@@ -109,7 +109,22 @@ class SelfBuildRankingLinkTests(unittest.TestCase):
                 "builds": [candidate],
             }],
         }
+        plan["builds"] = [{
+            "rank": 1,
+            "name": "Primary test build",
+            "target_parts_subtotal_jpy": 20000,
+            "target_pc_total_jpy": 30000,
+            "target_all_in_jpy": 70000,
+            "target_remaining_budget_jpy": 330000,
+            "market_reference_estimate_jpy": None,
+            "compatibility_status": "REVIEW",
+            "decision": "WAIT_FOR_COMPATIBILITY_REVIEW",
+            "components": candidate["components"],
+        }]
         rendered = planner.render_plan_markdown(plan)
+        self.assertIn("|判定|全パーツ商品リンク|", rendered)
+        self.assertIn("[CPU test](https://shop.example/cpu)", rendered)
+        self.assertIn("[GPU test](https://shop.example/gpu)", rendered)
         self.assertIn("- 部品目標の内訳: [CPU test](https://shop.example/cpu) ¥10,000", rendered)
         self.assertIn("[GPU test](https://shop.example/gpu) ¥10,000", rendered)
 

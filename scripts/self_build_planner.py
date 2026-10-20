@@ -2121,15 +2121,18 @@ def render_plan_markdown(plan):
         "",
         "## 目標総額と購入ゲート",
         "",
-        "|順位|構成|部品目標小計|PC本体目標総額|周辺機器込み目標|目標残額|比較参考合計|互換性|判定|",
-        "|---:|---|---:|---:|---:|---:|---:|---|---|"
+        "|順位|構成|部品目標小計|PC本体目標総額|周辺機器込み目標|目標残額|比較参考合計|互換性|判定|全パーツ商品リンク|",
+        "|---:|---|---:|---:|---:|---:|---:|---|---|---|"
     ])
     for build in plan.get("builds") or []:
-        lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
+        component_links = " / ".join(
+            component_markdown_link(part) for part in (build.get("components") or [])
+        ) or "パーツ未登録"
+        lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
             build.get("rank"), build.get("name"), money(build.get("target_parts_subtotal_jpy")),
             money(build.get("target_pc_total_jpy")), money(build.get("target_all_in_jpy")),
             money(build.get("target_remaining_budget_jpy")), money(build.get("market_reference_estimate_jpy")),
-            build.get("compatibility_status"), build.get("decision")
+            build.get("compatibility_status"), build.get("decision"), component_links
         ))
 
     budget_scenarios = plan.get("budget_scenarios") or []

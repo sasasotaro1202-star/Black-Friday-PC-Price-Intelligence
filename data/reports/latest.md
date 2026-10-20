@@ -2,6 +2,7 @@
 
 更新: 2026-10-20T22:10:39+09:00
 観測スナップショット: 2026-10-20T22:06:33+09:00
+リンク表示修正: 2026-10-20T22:55:52+09:00（価格・在庫スナップショットの更新なし）
 観測スナップショットSHA256: 66ea1da57e8e225346fe9be5112764564cfcd4b50118597c029d6b7c4b011479
 総予算（PC＋周辺機器）: ¥400,000
 周辺機器の目標予算: ¥35,000
@@ -19,11 +20,11 @@ PC本体の動的上限（周辺機器の実費試算と総額予備費を控除
 
 BTO完成品は価格比較用の参考枠に下げ、部品ごとの価格・互換性・送料を合算します。PC本体の計画上限は ¥380,000（周辺機器計画枠と総額予備費を先に確保。PC本体単体の比較上限（総額上限ではない）は ¥395,000）。
 
-|順位|自作構成|構成点/100|購入根拠充足度/100|PC本体目標|周辺機器込み|目標残額|互換性|判定|
+|順位|自作構成|構成点/100|購入根拠充足度/100|PC本体目標|周辺機器込み|目標残額|互換性|判定|全パーツ商品リンク|
 |---:|---|---:|---:|---:|---:|---:|---|---|
-|1|自作大穴：Ryzen 7 9700X + RTX 5070 Ti 16GB|86.0|58.7|¥362,000|¥402,000|¥-2,000|REVIEW|WAIT_FOR_COMPATIBILITY_REVIEW|
-|2|自作本命：Ryzen 7 9700X + RTX 5070 12GB|77.5|56.7|¥342,000|¥382,000|¥18,000|REVIEW|WAIT_FOR_COMPATIBILITY_REVIEW|
-|3|自作VRAM案：Ryzen 7 9700X + RTX 5060 Ti 16GB|76.2|59.5|¥324,000|¥364,000|¥36,000|REVIEW|WAIT_FOR_COMPATIBILITY_REVIEW|
+|1|自作大穴：Ryzen 7 9700X + RTX 5070 Ti 16GB|86.0|58.7|¥362,000|¥402,000|¥-2,000|REVIEW|WAIT_FOR_COMPATIBILITY_REVIEW|AMD Ryzen 7 9700X BOX（商品URL未登録・要修正） / ASRock B850M Pro RS WiFi（商品URL未登録・要修正） / Corsair RM850e 2025 850W ATX 3.1 Gold（商品URL未登録・要修正） / Fractal Design Pop Air TG（商品URL未登録・要修正） / Microsoft Windows 11 Home 日本語版 パッケージ版（商品URL未登録・要修正） / TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)（商品URL未登録・要修正） / Crucial P3 Plus CT1000P3PSSD8JP 1TB（商品URL未登録・要修正） / Thermalright Peerless Assassin 120 SE V3（商品URL未登録・要修正） / PNY GeForce RTX 5070 Ti 16GB ARGB（商品URL未登録・要修正）|
+|2|自作本命：Ryzen 7 9700X + RTX 5070 12GB|77.5|56.7|¥342,000|¥382,000|¥18,000|REVIEW|WAIT_FOR_COMPATIBILITY_REVIEW|AMD Ryzen 7 9700X BOX（商品URL未登録・要修正） / ASRock B850M Pro RS WiFi（商品URL未登録・要修正） / Corsair RM850e 2025 850W ATX 3.1 Gold（商品URL未登録・要修正） / Fractal Design Pop Air TG（商品URL未登録・要修正） / Microsoft Windows 11 Home 日本語版 パッケージ版（商品URL未登録・要修正） / TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)（商品URL未登録・要修正） / Crucial P3 Plus CT1000P3PSSD8JP 1TB（商品URL未登録・要修正） / Thermalright Peerless Assassin 120 SE V3（商品URL未登録・要修正） / PNY GeForce RTX 5070 12GB OC SLIM（商品URL未登録・要修正）|
+|3|自作VRAM案：Ryzen 7 9700X + RTX 5060 Ti 16GB|76.2|59.5|¥324,000|¥364,000|¥36,000|REVIEW|WAIT_FOR_COMPATIBILITY_REVIEW|AMD Ryzen 7 9700X BOX（商品URL未登録・要修正） / ASRock B850M Pro RS WiFi（商品URL未登録・要修正） / Corsair RM850e 2025 850W ATX 3.1 Gold（商品URL未登録・要修正） / Fractal Design Pop Air TG（商品URL未登録・要修正） / Microsoft Windows 11 Home 日本語版 パッケージ版（商品URL未登録・要修正） / TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)（商品URL未登録・要修正） / Crucial P3 Plus CT1000P3PSSD8JP 1TB（商品URL未登録・要修正） / Thermalright Peerless Assassin 120 SE V3（商品URL未登録・要修正） / PNY GeForce RTX 5060 Ti 16GB OC（商品URL未登録・要修正）|
 
 CPU高コア数の補助比較（RTX 5070 12GBを固定）：
 - AMD Ryzen 9 9900X BOX / 12コア/24Tスレッド / CPU目標 ¥55,000 / 周辺機器込み目標 ¥392,000 / 総合点 80.7 / 互換性 REVIEW（購入許可ではない）
