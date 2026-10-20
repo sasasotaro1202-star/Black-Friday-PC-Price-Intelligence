@@ -251,25 +251,56 @@ class WorkflowContractTests(unittest.TestCase):
         catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
         candidates = {item["id"]: item for item in catalog.get("candidates", [])}
 
-        # These exact model pages were checked after the former paths returned 404.
-        self.assertEqual(
-            candidates["galleria-zl9r-9955hx-5070ti"]["url"],
-            "https://www.dospara.co.jp/TC143/MC18548.html",
-        )
+        # Old GALLERIA page returned 404. The replacement is the exact current
+        # ZL9R-R57T-6-B model page; its listed price is explicitly marked sold out.
+        galleria = candidates["galleria-zl9r-9955hx-5070ti"]
+        self.assertEqual(galleria["url"], "https://www.dospara.co.jp/TC1085/MC24569.html")
+        self.assertEqual(galleria["name"], "GALLERIA ZL9R-R57T-6-B")
+        self.assertEqual(galleria["ram_gb"], 32)
+        self.assertEqual(galleria["ssd"], "1 TB")
+        self.assertEqual(galleria["reference_price_jpy"], 738980)
+        self.assertTrue(galleria["historical_sellout"])
+
+        # Model-generation-specific official routes must not point to the old
+        # G18 path or a G614-family page when the SKU is actually G615.
         self.assertEqual(
             candidates["rog-g18-2025-275hx-5070ti"]["url"],
             "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025/spec/",
         )
+        self.assertEqual(
+            candidates["rog-g16-2025-275hx-5070ti"]["url"],
+            "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025/spec/",
+        )
+        self.assertEqual(
+            candidates["rog-g16-8940hx-5070ti"]["url"],
+            "https://store.asus.com/jp/rog/rog-strix-g16-g614.html",
+        )
+        self.assertEqual(
+            candidates["zephyrus-g16-386h-5070ti"]["url"],
+            "https://rog.asus.com/jp/laptops/rog-zephyrus/rog-zephyrus-g16-2026/spec/",
+        )
+
+        # Never transfer a sibling G614PR price to the different 9955HX3D SKU.
+        g16_9955 = candidates["rog-g16-9955hx3d"]
+        self.assertNotIn("reference_price_jpy", g16_9955)
+        self.assertEqual(
+            g16_9955["url"],
+            "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/",
+        )
+
+        # The official TUF F16 listing is a 512GB configuration, not 1TB.
+        tuf_f16 = candidates["tuf-f16-14650hx-5070"]
+        self.assertEqual(tuf_f16["ssd"], "512 GB")
+        self.assertEqual(tuf_f16["reference_price_jpy"], 244800)
+
         for candidate_id in (
             "galleria-zl9r-9955hx-5070ti",
             "rog-g18-2025-275hx-5070ti",
+            "rog-g16-2025-275hx-5070ti",
+            "rog-g16-8940hx-5070ti",
+            "zephyrus-g16-386h-5070ti",
         ):
             self.assertTrue(candidates[candidate_id]["url"].startswith("https://"))
-        self.assertNotIn("MC17880.html", candidates["galleria-zl9r-9955hx-5070ti"]["url"])
-        self.assertNotIn(
-            "/rog-strix-g18-2025-g815/",
-            candidates["rog-g18-2025-275hx-5070ti"]["url"],
-        )
 
 if __name__ == "__main__":
     unittest.main()
