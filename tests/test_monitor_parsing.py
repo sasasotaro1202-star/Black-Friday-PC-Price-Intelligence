@@ -181,8 +181,19 @@ class MonitorParsingTests(unittest.TestCase):
             "reference_price_jpy": 359800,
         }
 
+        # The previous snapshot contains the same untrusted variant as a
+        # formerly "validated" current price. It must not become a historical
+        # baseline after the identity contradiction is detected.
+        previous = {
+            "current_price_jpy": 337240,
+            "price_jpy": 337240,
+            "last_valid_price_jpy": 337240,
+            "price_validation_status": "validated",
+            "variant_match": "ambiguous",
+            "price_source_mode": "direct_structured",
+        }
         result = monitor.apply_observation(
-            entry, raw, {}, catalog_item, "2026-10-20T18:00:00+09:00"
+            entry, raw, previous, catalog_item, "2026-10-20T18:00:00+09:00"
         )
 
         self.assertEqual(result["variant_match"], "ambiguous")
