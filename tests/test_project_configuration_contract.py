@@ -158,6 +158,24 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(self.profile["pc_build_method_preference"], "SELF_BUILD_REQUIRED_FOR_PRIMARY_RECOMMENDATION")
         self.assertEqual(self.profile["bto_role"], "REFERENCE_BENCHMARK_ONLY")
 
+    def test_store_first_peripheral_policy_matches_user_purchase_route(self):
+        channels = self.targets["purchase_channels"]
+        self.assertEqual(channels["channel_selection_mode"], "STORE_FIRST_LOCAL_PURCHASE")
+        self.assertEqual(channels["default_peripheral_channel"], "physical_store")
+        self.assertTrue(channels["physical_store_price_and_stock_required_before_recommendation"])
+        self.assertTrue(channels["online_orders_require_explicit_user_approval"])
+        self.assertFalse(channels["online_price_is_store_price"])
+        policy = self.targets["purchase_strategy"]["purchase_channel_policy"]
+        self.assertEqual(policy["channel_selection_mode"], "STORE_FIRST_LOCAL_PURCHASE")
+        self.assertFalse(policy["online_purchase_allowed_when_store_price_unconfirmed"])
+        for item in self.targets["peripherals"] + self.targets.get("peripheral_alternatives", []):
+            if item.get("category") == "budget_reserve" or item.get("purchase_channel") == "conditional_need_only":
+                continue
+            self.assertEqual(item.get("purchase_channel"), "physical_store", item.get("id"))
+            self.assertTrue(item.get("store_inventory_required_before_purchase"), item.get("id"))
+            self.assertTrue(item.get("online_price_is_comparison_only"), item.get("id"))
+            self.assertFalse(item.get("online_purchase_allowed_when_store_price_unconfirmed"), item.get("id"))
+
     def test_diy_profile_matches_budget_and_never_penalizes_assembly_time(self):
         profile = self.profile
         self.assertEqual(profile["total_budget_jpy"], self.targets["total_budget_jpy"])

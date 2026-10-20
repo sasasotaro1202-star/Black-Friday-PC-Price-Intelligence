@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-17",
-  "purpose": "Pre-Black-Friday early-purchase review triggers. Thresholds are review targets, not predictions or permission to buy.",
-  "total_budget_hard_cap_jpy": 400000,
+  "updated_at": "2026-10-20",
+  "purpose": "Pre-Black-Friday purchase-review triggers. Thresholds start a manual review only; they are neither forecasts nor purchase permission. ¥400,000 is the all-in target with a ¥420,000 initial soft band; the ¥350,000/¥370,000 and ¥450,000/¥470,000 scenarios remain separate.",
+  "total_budget_hard_cap_jpy": null,
   "unallocated_contingency_jpy": 5000,
   "max_observation_age_minutes": 120,
   "rules": [
@@ -40,7 +40,7 @@
       "early_trigger_price_jpy": 145000,
       "bf_target_price_jpy": 154000,
       "url": "https://kakaku.com/item/K0001696164/",
-      "note": "Dark-horse alternative; not a viable buy unless the final all-in build stays within ¥400,000."
+      "note": "Dark-horse alternative; keep it in comparison. At the ¥400,000 target this build may exceed target, but do not reject it solely for that reason while the completed all-in total remains within the ¥420,000 initial soft band and the performance gain justifies it. Compare the ¥450,000/¥470,000 scenario separately too."
     },
     {
       "id": "motherboard-asrock-b850m-pro-rs-wifi",
@@ -174,8 +174,27 @@
     "Only exact-model, direct-page price evidence with valid observation time may trigger a review; comparison search snippets, points, coupons not applied at checkout, stale prices and ambiguous variants do not trigger.",
     "For components, require identity match, valid point-in-time evidence and a current in-stock/low-stock status before labeling a trigger actionable.",
     "Before buying, verify final checkout price, shipping, stock, seller, warranty, returns, SKU and compatibility.",
-    "Recalculate the complete PC plus peripherals, required shipping/small parts and ¥5,000 contingency after every proposed early purchase; total must remain at or below ¥400,000.",
+    "Recalculate the complete PC plus required peripherals, shipping/small parts and ¥5,000 contingency after every proposed early purchase. Compare the ¥400,000 all-in target and the ¥420,000 initial soft ceiling; modest overrun may be justified by measurable workload benefits. Do not compare only the PC body or hide required peripheral costs.",
+    "Keep the ¥350,000 target / ¥370,000 soft band, ¥400,000 target / ¥420,000 soft band, and ¥450,000 target / ¥470,000 soft band as separate complete-system scenarios. Do not force all tiers into the ¥400,000 target.",
     "Do not assume that the rest of the build can later be upgraded for free. RAM must be at least 32GB and SSD at least 1TB at purchase; 64GB/2TB are substitutions only when the exact final build fits.",
-    "Wait when the early target is not met. Black Friday is not guaranteed to have the lowest price, and a target is not a forecast."
+    "Wait when an early target is not met. Black Friday is not guaranteed to have the lowest price, and a target is not a forecast."
+  ],
+  "total_budget_target_jpy": 400000,
+  "soft_overrun_allowance_jpy": 20000,
+  "soft_ceiling_total_jpy": 420000,
+  "budget_is_approximate": true,
+  "budget_scenarios": [
+    {
+      "target_total_jpy": 350000,
+      "soft_ceiling_total_jpy": 370000
+    },
+    {
+      "target_total_jpy": 400000,
+      "soft_ceiling_total_jpy": 420000
+    },
+    {
+      "target_total_jpy": 450000,
+      "soft_ceiling_total_jpy": 470000
+    }
   ]
 }
