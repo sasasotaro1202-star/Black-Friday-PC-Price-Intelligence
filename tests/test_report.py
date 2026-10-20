@@ -393,6 +393,30 @@ class ReportLinkTests(unittest.TestCase):
         self.assertIn("timeout while fetching", text)
         self.assertNotIn("https://", text)
 
+    def test_main_ranking_link_section_surfaces_peripheral_fetch_failure_with_cached_price(self):
+        lines = report.retrieval_issue_link_section(
+            {"products": []},
+            {"products": []},
+            {"products": [{
+                "id": "mousepad-fetch-failed-cached-price",
+                "name": "SteelSeries QcK Large",
+                "purchase_url": "https://example.com/qck-large",
+                "direct_listing_display_url": "https://example.com/qck-listing",
+                "fetch_status": "error",
+                "last_fetch_error": "HTTP 503",
+                # A prior observation must not hide the latest failed retrieval.
+                "price_verified": True,
+                "current_price_jpy": 1490,
+                "stock_status": "in_stock",
+                "channel_comparison_status": "COMPLETE",
+            }]},
+        )
+        rendered = "\\n".join(lines)
+        self.assertIn("SteelSeries QcK Large", rendered)
+        self.assertIn("取得エラー: HTTP 503", rendered)
+        self.assertIn("[商品ページ](https://example.com/qck-large)", rendered)
+        self.assertIn("[監視/比較ページ](https://example.com/qck-listing)", rendered)
+
     def test_main_ranking_link_section_marks_missing_or_malformed_product_urls(self):
         lines = report.retrieval_issue_link_section(
             {
