@@ -28,7 +28,7 @@ class ComponentLinkRenderingTests(unittest.TestCase):
         ])
         self.assertIn("[商品ページ：Test CPU](https://shop.example.com/test-cpu)", links)
         self.assertIn("[価格比較](https://compare.example.com/test-cpu)", links)
-        self.assertIn("[商品ページ：Test GPU （OC）](https://shop.example.com/test-gpu%28oc%29)", links)
+        self.assertIn("[商品ページ：Test GPU (OC)](https://shop.example.com/test-gpu%28oc%29)", links)
         self.assertIn("OS Test OS：商品URL未登録（要修正）", links)
         self.assertNotIn("javascript:", links)
 
