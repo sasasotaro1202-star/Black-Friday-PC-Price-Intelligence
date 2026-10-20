@@ -76,11 +76,23 @@ def main():
             candidate for tier in budget_scenarios if isinstance(tier, dict)
             for candidate in (tier.get("builds") or []) if isinstance(candidate, dict)
         ]
-        if len(all_scenario_builds) != 9:
-            errors.append("budget scenario candidate count must be 9")
+        build_components_config = load_json(os.path.join(ROOT, "config", "build_components.json"), {})
+        build_profile = build_components_config.get("profile") if isinstance(build_components_config, dict) else {}
+        configured_candidates = build_profile.get("budget_build_candidates") if isinstance(build_profile, dict) else []
+        configured_candidate_ids = [
+            str(candidate.get("id") or "")
+            for candidate in (configured_candidates or [])
+            if isinstance(candidate, dict)
+        ]
+        if not configured_candidate_ids or any(not candidate_id for candidate_id in configured_candidate_ids):
+            errors.append("configured budget scenario candidate IDs are missing or invalid")
+        if len(all_scenario_builds) != len(configured_candidate_ids):
+            errors.append("budget scenario candidate count does not match config")
         scenario_ids = [str(candidate.get("id") or "") for candidate in all_scenario_builds]
         if len(scenario_ids) != len(set(scenario_ids)):
             errors.append("budget scenario candidate IDs are not unique")
+        if set(scenario_ids) != set(configured_candidate_ids):
+            errors.append("budget scenario candidate IDs do not match config")
         for candidate in all_scenario_builds:
             sid = str(candidate.get("id") or "unknown")
             ceiling = candidate.get("budget_tier_jpy")
