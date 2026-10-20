@@ -621,7 +621,8 @@
         "1570130"
       ],
       "allowed_hosts": [
-        "www.biccamera.com"
+        "www.biccamera.com",
+        "www.yodobashi.com"
       ],
       "min_price_jpy": 800,
       "max_price_jpy": 10000,
@@ -641,7 +642,8 @@
       "online_price_is_comparison_only": true,
       "model_code": "63003",
       "monitor_urls": [
-        "https://www.biccamera.com/bc/item/1570130/"
+        "https://www.biccamera.com/bc/item/1570130/",
+        "https://www.yodobashi.com/product/100000001001488658/"
       ],
       "store_inventory_checks": [
         {

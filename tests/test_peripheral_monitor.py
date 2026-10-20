@@ -524,6 +524,41 @@ class PeripheralMonitorTests(unittest.TestCase):
                         f"{target.get('id')} has an unapproved fallback URL: {url}",
                     )
 
+
+    def test_mousepad_yodobashi_fallback_verifies_exact_model_after_bic_timeout(self):
+        import json
+        config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        target = dict(next(x for x in config["peripherals"] if x["id"] == "mousepad"))
+        yodobashi_url = "https://www.yodobashi.com/product/100000001001488658/"
+        self.assertEqual(target["monitor_urls"][0], "https://www.biccamera.com/bc/item/1570130/")
+        self.assertIn(yodobashi_url, target["monitor_urls"])
+        self.assertIn("www.yodobashi.com", target["allowed_hosts"])
+
+        target["store_inventory_required_before_purchase"] = False
+        target["store_inventory_checks"] = []
+        parsed = {
+            "page_text_excerpt": "SteelSeries スティールシリーズ SteelSeries QcK+ ゲーミングマウスパッド 63003 ￥2,640 在庫あり",
+            "price_jpy": 2640,
+            "price_source_mode": "direct_structured",
+            "price_context": "SteelSeries QcK+ 63003 ￥2,640 在庫あり",
+            "stock_status": "in_stock",
+            "name": "SteelSeries QcK+ 63003",
+        }
+        with patch.object(peripheral_monitor, "fetch", side_effect=[
+            RuntimeError("curl_exit_28:curl_http_000:timeout"),
+            ("<html>yodobashi fallback</html>", yodobashi_url, {}),
+        ]) as fetch, patch.object(peripheral_monitor, "parse_page", return_value=parsed):
+            row = peripheral_monitor.run_one(target, {}, "2026-10-21T00:30:00+09:00")
+
+        self.assertEqual(fetch.call_count, 2)
+        self.assertTrue(row["price_verified"])
+        self.assertEqual(row["current_price_jpy"], 2640)
+        self.assertEqual(row["online_offer_count"], 1)
+        self.assertEqual(row["monitor_url_used"], yodobashi_url)
+        self.assertTrue(row["fallback_url_used"])
+        self.assertEqual(row["retrieval_attempts"][0]["status"], "error")
+        self.assertEqual(row["retrieval_attempts"][1]["status"], "verified")
+
     def test_observe_targets_uses_bounded_parallelism_and_preserves_input_order(self):
         targets = [
             {"id": f"item_{i}", "name": f"Item {i}", "track_current_price": True}
