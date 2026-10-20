@@ -79,3 +79,7 @@ Tom's Hardwareは2026年10月、国内のRTX 50シリーズの一部価格が米
 - [今の買い時診断](../data/reports/buy-now-now.md)
 - [販売店別価格比較ルール](retailer-price-comparison.md)
 - [前倒し購入とBF待ちの判定ルール](purchase-timing-policy.md)
+
+
+**公式仕様を確認した項目（2026-10-20）：** ASRock B850M Pro RS WiFiはRyzen 9000シリーズ対応、BIOS Flashback搭載。メーカーBIOSページには2026-10-12の4.60、CPU Support ListにはBIOS 3.12対応表記があります。ただし購入個体の出荷BIOSは未確認です。PNY RTX 5070 Ti候補（VCG5070T16TFXXPB1-O）は299.5×120.0×59.6mm、2.98-slot、300Wで、Fractal Pop Air TG系のメーカーGPU長上限405mmには長さ上収まります。Corsair RM850e 2025は850W/ATX 3.1/ネイティブ12V-2x6ケーブル付属です。いずれも正確なSKUのQVL、ケーブル余裕、販売可能在庫・決済総額が確認済みという意味ではありません。公式ページ：[ASRock BIOS](https://www.asrock.com/mb/AMD/B850M%20Pro%20RS%20WiFi/bios.html)、[PNY GPU](https://cs.pny.com.tw/geforce-rtx-5070-ti-models?iscommercial=true)、[Fractal Pop Air](https://www.fractal-design.com/ja/products/cases/pop-series/pop-air/pop-air-black-solid/)、[Corsair RM850e](https://www.corsair.com/jp/ja/p/psu/cp-9020296-jp/rme-series-rm850e-fully-modular-low-noise-atx-power-supply-jp-cp-9020296-jp)。
+
