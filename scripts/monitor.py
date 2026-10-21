@@ -1233,7 +1233,7 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
             item["price_jpy"] = None
             item["available_at"] = None
             item["price_source_mode"] = "none"
-            item["price_validation_status"] = "reference_only" if reference is not None else "missing"
+            item["price_validation_status"] = "reference_only"
             item["price_validation_reason"] = "specification_page_is_not_sku_offer_evidence"
         if item.get("current_price_jpy") is None and previous_valid is not None:
             item["price_source_mode"] = "stale_previous"
