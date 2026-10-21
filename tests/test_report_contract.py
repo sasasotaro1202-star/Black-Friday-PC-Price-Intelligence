@@ -33,6 +33,27 @@ class ReportProductLinkTests(unittest.TestCase):
         self.assertIn(purchase_url, matching)
         self.assertNotIn(monitor_url, matching)
 
+    def test_purchase_page_fetch_failure_is_visible_even_when_monitor_page_was_read(self):
+        report_text = "\n".join(report.retrieval_issue_link_lines(
+            latest={"products": [{
+                "id": "sku-sample",
+                "name": "Product with blocked checkout page",
+                "url": "https://example.com/spec",
+                "monitor_url": "https://example.com/spec",
+                "purchase_url": "https://store.example.com/exact-sku",
+                "purchase_page_fetch_status": "error",
+                "purchase_page_fetch_error": "HTTPError:403",
+                "fetch_status": "ok",
+                "current_price_jpy": None,
+                "stock_status": "unknown",
+                "price_validation_status": "missing",
+            }]},
+            component_prices={"products": []},
+            peripheral_prices={"products": []},
+        ))
+        self.assertIn("購入ページ取得エラー", report_text)
+        self.assertIn("https://store.example.com/exact-sku", report_text)
+
     def test_legacy_retrieval_section_shows_purchase_link_first_and_monitor_link_separately(self):
         monitor_url = "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/"
         purchase_url = "https://store.asus.com/jp/rog/90nr0nj7-m007r0-rog-strix-g16-2025-g614.html"
