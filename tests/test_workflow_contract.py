@@ -335,7 +335,9 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertNotIn("purchase_url", candidates["rog-g16-2025-275hx-5070ti"])
         self.assertNotIn("purchase_url", candidates["rog-g18-2025-275hx-5070ti"])
         self.assertEqual(candidates["candidate-4"]["monitor_page_type"], "family_landing")
-        self.assertEqual(candidates["gigabyte-a18-pro-240h-5070ti"]["monitor_page_type"], "family_landing")
+        self.assertEqual(candidates["gigabyte-a18-pro-240h-5070ti"]["monitor_page_type"], "sku_purchase_page")
+        self.assertTrue(candidates["gigabyte-a18-pro-240h-5070ti"]["url_is_exact"])
+        self.assertEqual(candidates["gigabyte-a18-pro-240h-5070ti"]["reference_price_jpy"], 419800)
         self.assertEqual(
             candidates["tuf-a16-8940hx-5070"]["url"],
             "https://www.asus.com/jp/laptops/for-gaming/tuf-gaming/asus-tuf-gaming-a16-2025/techspec/",
