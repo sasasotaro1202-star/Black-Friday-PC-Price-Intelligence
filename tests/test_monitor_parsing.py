@@ -697,5 +697,89 @@ class MonitorParsingTests(unittest.TestCase):
         self.assertTrue(all(not x["counts_toward_effective_cost"] for x in parsed["benefit_signals"]))
 
 
+    def test_identity_only_specification_page_never_creates_live_price_or_stock(self):
+        monitor_url = "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/"
+        purchase_url = "https://store.asus.com/jp/rog/90nr0nj7-m007r0-rog-strix-g16-2025-g614.html"
+        raw = {
+            "url": monitor_url,
+            "name": "ROG Strix G16 (G614)",
+            "price_jpy": 359800,
+            "stock_status": "in_stock",
+            "price_source_mode": "direct_text",
+            "parsed_spec": {"gpu": "RTX 5070 Ti Laptop GPU", "ram_gb": 16, "ssd": "512 GB"},
+            "page_text_excerpt": "G614PR-R9R5070TI Ryzen 9 8940HX RTX 5070 Ti Laptop GPU",
+            "page_role": "identity_only_specification",
+            "observation_route": "monitor_url",
+        }
+        item = monitor.apply_observation(
+            {"id": "rog-g16-test", "url": monitor_url, "query": "G614PR-R9R5070TI"},
+            raw,
+            {"current_price_jpy": 359800, "variant_match": "trusted_url", "price_validation_status": "validated"},
+            {
+                "id": "rog-g16-test",
+                "name": "ROG Strix G16 G614PR-R9R5070TI",
+                "family": "ROG Strix G16",
+                "cpu": "Ryzen 9 8940HX",
+                "gpu": "RTX 5070 Ti Laptop GPU",
+                "ram_gb": 32,
+                "ssd": "1 TB",
+                "aliases": ["G614PR-R9R5070TI"],
+                "url_is_exact": False,
+                "identity_confidence": "high",
+                "monitor_page_type": "official_model_specification",
+                "purchase_url": purchase_url,
+                "purchase_url_is_exact": True,
+            },
+            "2026-10-21T13:00:00+09:00",
+        )
+        self.assertIsNone(item["current_price_jpy"])
+        self.assertIsNone(item["last_valid_price_jpy"])
+        self.assertEqual(item["stock_status"], "unknown")
+        self.assertEqual(item["price_source_mode"], "none")
+        self.assertEqual(item["page_role"], "identity_only_specification")
+
+    def test_verified_sku_purchase_url_overrides_broad_spec_parser_conflicts(self):
+        monitor_url = "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/"
+        purchase_url = "https://store.asus.com/jp/rog/90nr0nj7-m007r0-rog-strix-g16-2025-g614.html"
+        item = monitor.apply_observation(
+            {"id": "rog-g16-test", "url": monitor_url, "query": "G614PR-R9R5070TI300"},
+            {
+                "url": purchase_url,
+                "name": "ROG Strix G16 (G614PR)",
+                "price_jpy": 549800,
+                "stock_status": "in_stock",
+                "price_source_mode": "direct_structured",
+                "parsed_spec": {"gpu": "RTX 5070 Ti Laptop GPU", "ram_gb": 16, "ssd": "512 GB"},
+                "page_text_excerpt": "G614PR-R9R5070TI300 Ryzen 9 8940HX RTX 5070 Ti Laptop GPU 549800 yen",
+                "observation_route": "purchase_url",
+                "purchase_page_fetch_status": "ok",
+                "page_role": "sku_purchase_page",
+            },
+            {},
+            {
+                "id": "rog-g16-test",
+                "name": "ROG Strix G16 G614PR-R9R5070TI300",
+                "family": "ROG Strix G16",
+                "cpu": "Ryzen 9 8940HX",
+                "gpu": "RTX 5070 Ti Laptop GPU",
+                "ram_gb": 32,
+                "ssd": "1 TB",
+                "reference_price_jpy": 549800,
+                "aliases": ["G614PR-R9R5070TI300"],
+                "url_is_exact": False,
+                "identity_confidence": "high",
+                "purchase_url": purchase_url,
+                "purchase_url_is_exact": True,
+            },
+            "2026-10-21T13:00:00+09:00",
+        )
+        self.assertEqual(item["current_price_jpy"], 549800)
+        self.assertIn(item["variant_match"], ("exact", "trusted_url", "strong"))
+        self.assertEqual(item["parsed_spec"], {})
+        self.assertEqual(item["observation_url"], purchase_url)
+        self.assertEqual(item["purchase_page_fetch_status"], "ok")
+        self.assertEqual(item["purchase_url"], purchase_url)
+
+
 if __name__ == "__main__":
     unittest.main()

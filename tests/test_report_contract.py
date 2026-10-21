@@ -1,0 +1,60 @@
+import pathlib
+import sys
+import unittest
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import report
+
+
+class ReportProductLinkTests(unittest.TestCase):
+    def test_pc_candidate_issue_links_prefer_verified_purchase_url(self):
+        monitor_url = "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/"
+        purchase_url = "https://store.asus.com/jp/rog/90nr0nj7-m007r0-rog-strix-g16-2025-g614.html"
+        item = {
+            "id": "sku-sample",
+            "name": "ROG Strix G16 exact SKU",
+            "url": monitor_url,
+            "monitor_url": monitor_url,
+            "purchase_url": purchase_url,
+            "fetch_status": "ok",
+            "current_price_jpy": None,
+            "stock_status": "unknown",
+            "price_validation_status": "missing",
+            "price_validation_reason": "not verified",
+        }
+        lines = report.retrieval_issue_link_lines(
+            latest={"products": [item]},
+            component_prices={"products": []},
+            peripheral_prices={"products": []},
+        )
+        matching = next(line for line in lines if "ROG Strix G16 exact SKU" in line)
+        self.assertIn(purchase_url, matching)
+        self.assertNotIn(monitor_url, matching)
+
+    def test_legacy_retrieval_section_shows_purchase_link_first_and_monitor_link_separately(self):
+        monitor_url = "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/"
+        purchase_url = "https://store.asus.com/jp/rog/90nr0nj7-m007r0-rog-strix-g16-2025-g614.html"
+        lines = report.retrieval_issue_link_section(
+            {"products": [{
+                "id": "sku-sample",
+                "name": "ROG Strix G16 exact SKU",
+                "url": monitor_url,
+                "monitor_url": monitor_url,
+                "purchase_url": purchase_url,
+                "fetch_status": "ok",
+                "current_price_jpy": None,
+                "stock_status": "unknown",
+                "price_validation_status": "missing",
+            }]},
+            build_components={"products": []},
+            peripherals={"products": []},
+        )
+        matching = next(line for line in lines if "ROG Strix G16 exact SKU" in line)
+        self.assertIn("[商品ページ](" + purchase_url + ")", matching)
+        self.assertIn("[監視/比較ページ](" + monitor_url + ")", matching)
+
+
+if __name__ == "__main__":
+    unittest.main()

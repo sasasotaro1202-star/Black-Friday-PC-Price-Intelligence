@@ -1082,18 +1082,19 @@ def meaningful_change(prev, item):
 def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
     cid = entry["id"]
     current_url = entry["url"]
+    page_role = (raw or {}).get("page_role") if isinstance(raw, dict) else None
     previous_valid = previous.get("current_price_jpy") if previous else None
-    # Historical values are reusable only when their prior observation had both
-    # a confirmed variant identity and a valid price state. Older snapshots can
-    # predate this guard and may contain a price for an ambiguous SKU.
-    if previous_valid is not None and (
+
+    # A family/specification page is not an offer page. Never preserve a prior
+    # price or sellability signal when the current observation only proves identity.
+    if page_role == "identity_only_specification":
+        previous_valid = None
+    elif previous_valid is not None and (
         previous.get("variant_match") not in ("exact", "trusted_url", "strong")
         or previous.get("price_validation_status") not in ("validated", "anomaly_corroborated")
     ):
         previous_valid = None
 
-    # Do not carry forward a value whose saved source context proves it came
-    # from a category-navigation filter rather than the requested SKU offer.
     previous_context = norm_text((previous or {}).get("price_context"))
     previous_was_navigation_bound = (
         previous_valid is not None
@@ -1111,6 +1112,8 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
     item = {
         "id": cid,
         "url": current_url,
+        "monitor_url": current_url,
+        "observation_url": (raw or {}).get("url") if isinstance(raw, dict) else None,
         "query": entry.get("query", ""),
         "priority": entry.get("priority", "normal"),
         "retrieval_time": retrieval_time,
@@ -1137,34 +1140,54 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
         "benefit_confidence": "unconfirmed",
     }
 
-    # Keep the human-facing product/checkout link separate from the official
-    # spec page used for automated observation. Some stores block GitHub-hosted
-    # collectors (403/timeout) even though their product page is still useful
-    # for a human to open. The spec URL is never represented as a checkout quote.
     purchase_url = str((catalog_item or {}).get("purchase_url") or "").strip()
     if purchase_url and purchase_url.startswith(("https://", "http://")) and purchase_url != current_url:
         item["purchase_url"] = purchase_url
         item["monitor_url"] = current_url
+    if isinstance(raw, dict):
+        for key in ("observation_route", "page_role", "purchase_page_fetch_status", "purchase_page_fetch_error"):
+            if raw.get(key) not in (None, ""):
+                item[key] = raw[key]
+        if raw.get("untrusted_parsed_spec"):
+            # Preserve parser output for diagnostics, but don't let a broad selector
+            # page's first SKU overwrite curated specs for a verified product URL.
+            item["untrusted_parsed_spec"] = raw.get("untrusted_parsed_spec")
 
     if raw:
+        route = raw.get("observation_route") or "monitor_url"
+        exact_purchase_observation = (
+            route == "purchase_url"
+            and (catalog_item or {}).get("purchase_url_is_exact") is True
+        )
+        identity_only = raw.get("page_role") == "identity_only_specification"
         item.update({
-            "name": raw.get("name") or item["name"],
-            "stock_status": raw.get("stock_status") or "unknown",
-            "price_source_mode": raw.get("price_source_mode") or "none",
-            "data_confidence": raw.get("data_confidence") or "low",
-            "parsed_spec": raw.get("parsed_spec") or {},
+            "name": (
+                (catalog_item or {}).get("name")
+                if exact_purchase_observation
+                else (raw.get("name") or item["name"])
+            ),
+            "stock_status": "unknown" if identity_only else (raw.get("stock_status") or "unknown"),
+            "price_source_mode": "none" if identity_only else (raw.get("price_source_mode") or "none"),
+            "data_confidence": "low" if identity_only else (raw.get("data_confidence") or "low"),
+            "parsed_spec": {} if identity_only or exact_purchase_observation else (raw.get("parsed_spec") or {}),
             "page_text_excerpt": raw.get("page_text_excerpt") or "",
             "price_context": raw.get("price_context"),
-            "benefit_signals": raw.get("benefit_signals") or [],
-            "confirmed_benefit_value_jpy": int(raw.get("confirmed_benefit_value_jpy") or 0),
-            "benefit_confidence": raw.get("benefit_confidence") or "unconfirmed",
+            "benefit_signals": [] if identity_only else (raw.get("benefit_signals") or []),
+            "confirmed_benefit_value_jpy": 0 if identity_only else int(raw.get("confirmed_benefit_value_jpy") or 0),
+            "benefit_confidence": "unconfirmed" if identity_only else (raw.get("benefit_confidence") or "unconfirmed"),
         })
-        item = enrich_identity(item, catalog_item)
+        identity_catalog = dict(catalog_item or {})
+        if exact_purchase_observation:
+            # This flag is set only for purchase links curated and verified to be
+            # SKU-specific. The path, not a family page's first parsed row, anchors
+            # the identity. Curated configuration fields remain authoritative.
+            identity_catalog["url_is_exact"] = True
+            item["identity_evidence_source"] = "verified_sku_purchase_url"
+        elif identity_only:
+            item["identity_evidence_source"] = "official_spec_or_family_page_only"
+        item = enrich_identity(item, identity_catalog)
         identity_usable = item.get("variant_match") in ("exact", "trusted_url", "strong")
         if not identity_usable:
-            # A price/stock signal from a page whose SKU conflicts with the
-            # curated target is not an actionable observation, even when the
-            # HTTP fetch and price parser succeeded.
             item["observed_price_source_mode"] = item.get("price_source_mode")
             item["price_source_mode"] = "none"
             item["price_validation_status"] = "variant_ambiguous"
@@ -1177,7 +1200,13 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
             item["stock_status"] = "unknown"
             item["data_confidence"] = "low"
 
-        candidate_price = raw.get("price_jpy") if identity_usable else None
+        # A specification/family page is reference-only even if its page-wide text
+        # contains a sale price or in-stock phrase for a sibling SKU.
+        candidate_price = (
+            raw.get("price_jpy")
+            if identity_usable and not identity_only
+            else None
+        )
         if candidate_price is not None:
             val = validate_price(candidate_price, item, reference_price=reference, corroborated=False)
             item["price_validation_status"] = val["status"]
@@ -1189,6 +1218,13 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
                 item["last_valid_price_jpy"] = candidate_price
             else:
                 item["current_price_jpy"] = None
+        elif identity_only:
+            item["current_price_jpy"] = None
+            item["price_jpy"] = None
+            item["available_at"] = None
+            item["price_source_mode"] = "none"
+            item["price_validation_status"] = "reference_only" if reference is not None else "missing"
+            item["price_validation_reason"] = "specification_page_is_not_sku_offer_evidence"
         if item.get("current_price_jpy") is None and previous_valid is not None:
             item["price_source_mode"] = "stale_previous"
             item["price_validation_status"] = item.get("price_validation_status") or "missing"
@@ -1254,6 +1290,7 @@ def main():
     changes = []
     stats = {
         "total": len(entries),
+        "purchase_route_errors": 0,
         "direct_verified": 0,
         "search_corrob": 0,
         "stale_previous": 0,
@@ -1273,17 +1310,91 @@ def main():
     def fetch_one(entry):
         cid = entry["id"]
         cat = catalog.get(cid, {})
+        purchase_url = str(cat.get("purchase_url") or "").strip()
+        purchase_url_is_exact = (
+            cat.get("purchase_url_is_exact") is True
+            and purchase_url.startswith(("https://", "http://"))
+        )
+
+        def exact_route_preserved(requested, final):
+            try:
+                req, dst = urlparse(requested), urlparse(final)
+                if (req.hostname or "").lower() != (dst.hostname or "").lower():
+                    return False
+                if req.path.rstrip("/") != dst.path.rstrip("/"):
+                    return False
+                req_params, dst_params = parse_qs(req.query), parse_qs(dst.query)
+                for key in ("config", "sku", "productId", "product_id"):
+                    if key in req_params and req_params[key] != dst_params.get(key):
+                        return False
+                return True
+            except Exception:
+                return False
+
+        def mark_identity_only(raw, route):
+            raw["observation_route"] = route
+            raw["monitor_url"] = entry["url"]
+            raw["untrusted_parsed_spec"] = raw.get("parsed_spec") or {}
+            raw["parsed_spec"] = {}
+            raw["price_jpy"] = None
+            raw["stock_status"] = "unknown"
+            raw["price_source_mode"] = "none"
+            raw["data_confidence"] = "low"
+            raw["page_role"] = "identity_only_specification"
+            return raw
+
+        if purchase_url_is_exact:
+            try:
+                html, final_url, _headers = fetch(purchase_url)
+                if not exact_route_preserved(purchase_url, final_url):
+                    raise RuntimeError("exact_purchase_url_redirected_to_different_product_route")
+                raw = parse_page(final_url, html, expected=cat)
+                raw["observation_route"] = "purchase_url"
+                raw["monitor_url"] = entry["url"]
+                raw["purchase_page_fetch_status"] = "ok"
+                raw["page_role"] = "sku_purchase_page"
+                raw["untrusted_parsed_spec"] = raw.get("parsed_spec") or {}
+                raw["parsed_spec"] = {}
+                return cid, raw, None
+            except Exception as purchase_exc:
+                purchase_error = f"{type(purchase_exc).__name__}:{str(purchase_exc)[:180]}"
+                try:
+                    html, final_url, _headers = fetch(entry["url"])
+                    raw = parse_page(final_url, html, expected=cat)
+                    raw["name"] = cat.get("name") or raw.get("name")
+                    raw = mark_identity_only(raw, "monitor_url")
+                    raw["purchase_page_fetch_status"] = "error"
+                    raw["purchase_page_fetch_error"] = purchase_error
+                    return cid, raw, None
+                except Exception as monitor_exc:
+                    return cid, None, (
+                        f"purchase_route_error:{purchase_error};"
+                        f"monitor_route_error:{type(monitor_exc).__name__}:{str(monitor_exc)[:150]}"
+                    )
+
         try:
             html, final_url, _headers = fetch(entry["url"])
-            return cid, parse_page(final_url, html, expected=cat), None
+            raw = parse_page(final_url, html, expected=cat)
+            raw["observation_route"] = "monitor_url"
+            raw["monitor_url"] = entry["url"]
+            if cat.get("monitor_page_type") in (
+                "official_model_specification", "family_landing", "variant_selector"
+            ):
+                raw = mark_identity_only(raw, "monitor_url")
+                if purchase_url:
+                    raw["purchase_page_fetch_status"] = "not_verified_sku_specific"
+                else:
+                    raw["purchase_page_fetch_status"] = "not_configured"
+            else:
+                raw["purchase_page_fetch_status"] = "not_used"
+            return cid, raw, None
         except HTTPError as exc:
             return cid, None, f"HTTPError:{exc.code}"
         except URLError as exc:
             return cid, None, f"URLError:{getattr(exc, 'reason', 'unknown')}"
         except Exception as exc:
-            # Keep transport diagnostics (e.g. curl_http_403 or curl_exit_6).
-            # Exception class alone made every curl failure look identical.
             return cid, None, f"{type(exc).__name__}:{str(exc)[:180]}"
+
 
     fetch_results = {}
     # Limit concurrency to reduce merchant-side 403/429 responses on free runners.
@@ -1301,6 +1412,8 @@ def main():
         raw, request_error = fetch_results.get(cid, (None, "fetch_result_missing"))
 
         item = apply_observation(entry, raw, previous, cat, retrieval_time)
+        if item.get("purchase_page_fetch_status") == "error":
+            stats["purchase_route_errors"] += 1
 
         if request_error:
             item["fetch_status"] = "error"

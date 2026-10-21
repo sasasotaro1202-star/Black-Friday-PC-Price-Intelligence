@@ -99,6 +99,9 @@ def retrieval_issue_link_section(latest, build_components=None, peripherals=None
             continue
         problems = []
         fetch_state = str(item.get("fetch_status") or "").strip().lower()
+        purchase_fetch_state = str(item.get("purchase_page_fetch_status") or "").strip().lower()
+        if purchase_fetch_state == "error":
+            problems.append("購入ページ取得エラー（掲載価格/在庫の根拠なし）: " + cell(item.get("purchase_page_fetch_error")))
         if fetch_state in ("error", "failed", "failure", "timeout", "exception"):
             problems.append("取得エラー: " + cell(item.get("last_fetch_error") or item.get("fetch_error") or item.get("price_validation_reason")))
         if item.get("variant_match") == "ambiguous" or item.get("price_validation_status") == "variant_ambiguous":
@@ -110,7 +113,7 @@ def retrieval_issue_link_section(latest, build_components=None, peripherals=None
         elif item.get("stock_status") == "out_of_stock":
             problems.append("在庫切れ信号あり。現在の販売可否を再確認")
         if problems:
-            url = product_url(item, item.get("url"), item.get("purchase_url"), item.get("monitor_url"))
+            url = product_url(item, item.get("purchase_url"), item.get("url"), item.get("monitor_url"))
             rows["PC候補"].append((item.get("name") or item.get("id"), "; ".join(problems), url, None))
 
     for item in build_components.get("products") or []:
@@ -283,9 +286,12 @@ def retrieval_issue_link_lines(latest=None, component_prices=None, peripheral_pr
         price = item.get("current_price_jpy")
         stock = str(item.get("stock_status") or "unknown").lower()
         err = error_text(item, ("last_fetch_error", "fetch_error", "error"))
+        purchase_err = error_text(item, ("purchase_page_fetch_error",))
+        purchase_fetch_state = str(item.get("purchase_page_fetch_status") or "").lower()
         failed = fetch_status in ("error", "failed", "timeout", "exception") or (not fetch_status and bool(err))
         unresolved = (
-            failed or not isinstance(price, (int, float)) or price <= 0
+            failed or purchase_fetch_state == "error"
+            or not isinstance(price, (int, float)) or price <= 0
             or stock not in ("in_stock", "low_stock")
             or validation in ("missing", "variant_ambiguous", "reference_only", "anomaly_rejected")
         )
@@ -294,13 +300,16 @@ def retrieval_issue_link_lines(latest=None, component_prices=None, peripheral_pr
         if failed:
             status = "取得エラー"
             reason = err or ("fetch_status=" + fetch_status)
+        elif purchase_fetch_state == "error":
+            status = "購入ページ取得エラー"
+            reason = purchase_err or "SKU-specific purchase page retrieval failed; price/stock remain unverified"
         elif validation == "variant_ambiguous":
             status, reason = "型番/構成不一致の疑い", "価格を購入判断から除外。商品ページで型番・GPU・仕様を確認"
         elif price is None or validation in ("missing", "reference_only", "anomaly_rejected"):
             status, reason = "価格未確認", err or ("price_validation_status=" + validation)
         else:
             status, reason = "在庫未確認", err or ("stock_status=" + stock)
-        add_row("完成品PC候補", item, ("url", "purchase_url", "monitor_url"), status, reason)
+        add_row("完成品PC候補", item, ("purchase_url", "url", "monitor_url"), status, reason)
 
     for item in component_prices.get("products") or []:
         item = item if isinstance(item, dict) else {}
