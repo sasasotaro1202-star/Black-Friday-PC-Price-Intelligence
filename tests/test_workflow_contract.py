@@ -297,6 +297,7 @@ class WorkflowContractTests(unittest.TestCase):
             "https://store.asus.com/jp/rog/90nr0nk7-m00cl0-rog-strix-g16-2025-g614.html",
         )
         self.assertTrue(g16_9955["purchase_url_is_exact"])
+        self.assertEqual(g16_9955["identity_confidence"], "high")
         self.assertFalse(g16_9955["url_is_exact"])
 
         # The official TUF F16 listing is a 512GB configuration, not 1TB.

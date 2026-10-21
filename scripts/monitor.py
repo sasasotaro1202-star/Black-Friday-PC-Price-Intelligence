@@ -1332,6 +1332,7 @@ def main():
                 return False
 
         def mark_identity_only(raw, route):
+            raw["name"] = cat.get("name") or raw.get("name")
             raw["observation_route"] = route
             raw["monitor_url"] = entry["url"]
             raw["untrusted_parsed_spec"] = raw.get("parsed_spec") or {}

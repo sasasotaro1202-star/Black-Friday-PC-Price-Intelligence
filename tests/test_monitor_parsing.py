@@ -737,6 +737,7 @@ class MonitorParsingTests(unittest.TestCase):
         self.assertEqual(item["stock_status"], "unknown")
         self.assertEqual(item["price_source_mode"], "none")
         self.assertEqual(item["page_role"], "identity_only_specification")
+        self.assertEqual(item["name"], "ROG Strix G16 G614PR-R9R5070TI")
 
     def test_verified_sku_purchase_url_overrides_broad_spec_parser_conflicts(self):
         monitor_url = "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/"
