@@ -591,6 +591,57 @@ class ReportLinkTests(unittest.TestCase):
         self.assertIn("[商品ページ](https://store.example.com/mouse)", rendered)
         self.assertNotIn("https://parts.example.com/gpu-ok", rendered)
 
+    def test_peripheral_failed_alternative_retailer_urls_remain_visible(self):
+        item = {
+            "id": "multi-source-mouse",
+            "name": "Multi-source mouse",
+            "purchase_url": "https://www.yodobashi.com/product/verified-mouse/",
+            "monitor_url": "https://www.yodobashi.com/product/verified-mouse/",
+            "price_verified": True,
+            "identity_verified": True,
+            "price_validation_status": "validated_exact_model_page",
+            "current_price_jpy": 5350,
+            "stock_status": "in_stock",
+            "status": "verified",
+            "channel_comparison_status": "ONLINE_OPTIONS_COMPARED_STORE_PENDING",
+            "retrieval_attempts": [
+                {
+                    "url": "https://www.yodobashi.com/product/verified-mouse/",
+                    "status": "verified",
+                    "price_jpy": 5350,
+                    "stock_status": "in_stock",
+                },
+                {
+                    "url": "https://www.biccamera.com/bc/item/12345/",
+                    "status": "error",
+                    "error": "RuntimeError: curl timeout",
+                },
+                {
+                    "url": "https://item.rakuten.co.jp/store/mouse/",
+                    "status": "price_unverified",
+                    "error": "missing_or_implausible_price",
+                },
+            ],
+        }
+        snapshot = {"products": [item]}
+
+        detailed = "\\n".join(report.retrieval_issue_link_lines(
+            {"products": []}, {"products": []}, snapshot
+        ))
+        self.assertIn("[商品ページを開く](https://www.biccamera.com/bc/item/12345/)", detailed)
+        self.assertIn("[商品ページを開く](https://item.rakuten.co.jp/store/mouse/)", detailed)
+        self.assertIn("RuntimeError: curl timeout", detailed)
+        self.assertIn("missing_or_implausible_price", detailed)
+        self.assertIn("周辺機器の個別取得元", detailed)
+
+        ranking_section = "\\n".join(report.retrieval_issue_link_section(
+            {"products": []}, {"products": []}, snapshot
+        ))
+        self.assertIn("[商品ページ](https://www.biccamera.com/bc/item/12345/)", ranking_section)
+        self.assertIn("[商品ページ](https://item.rakuten.co.jp/store/mouse/)", ranking_section)
+        self.assertIn("販売元別の確認未完了", ranking_section)
+        self.assertIn("curl timeout", ranking_section)
+
     def test_suppress_current_price_moves_value_to_reference_only(self):
         row = {"current_price_jpy": 299800, "last_valid_price_jpy": None, "price_jpy": 299800}
         out = report.suppress_current_price(row)

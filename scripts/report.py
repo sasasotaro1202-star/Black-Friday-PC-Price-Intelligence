@@ -187,18 +187,49 @@ def retrieval_issue_link_section(latest, build_components=None, peripherals=None
             problems.append("在庫切れ信号あり。再確認が必要")
         if item.get("channel_comparison_status") and item.get("channel_comparison_status") not in ("COMPLETE", "ALL_ROUTES_VERIFIED"):
             problems.append("購入ルート比較未完了: " + cell(item.get("channel_comparison_status")))
+        primary_url = product_url(
+            item,
+            item.get("purchase_url"), item.get("monitor_url"), item.get("source_url"),
+            item.get("online_best_offer_url"), item.get("retailer_listing_reference_url"),
+            item.get("direct_listing_display_url"),
+        )
+        monitor_url = product_url(
+            item, item.get("monitor_url"), item.get("source_url"),
+            item.get("retailer_listing_reference_url"), item.get("direct_listing_display_url"),
+        )
+        item_name = item.get("name") or item.get("id")
         if problems:
-            primary_url = product_url(
-                item,
-                item.get("purchase_url"), item.get("monitor_url"), item.get("source_url"),
-                item.get("online_best_offer_url"), item.get("retailer_listing_reference_url"),
-                item.get("direct_listing_display_url"),
-            )
-            monitor_url = product_url(
-                item, item.get("monitor_url"), item.get("source_url"),
-                item.get("retailer_listing_reference_url"), item.get("direct_listing_display_url"),
-            )
-            rows["周辺機器"].append((item.get("name") or item.get("id"), "; ".join(dict.fromkeys(problems)), primary_url, monitor_url))
+            rows["周辺機器"].append((item_name, "; ".join(dict.fromkeys(problems)), primary_url, monitor_url))
+
+        # Preserve links for each failed/unverified seller URL, even when another
+        # seller returned a usable offer. A successful primary offer must not hide
+        # timeouts, missing prices, or SKU mismatches at alternative retailers.
+        attempts = item.get("retrieval_attempts")
+        if isinstance(attempts, list):
+            seen_attempt_urls = set()
+            for attempt in attempts:
+                if not isinstance(attempt, dict):
+                    continue
+                attempt_status = str(attempt.get("status") or "").strip().lower()
+                if attempt_status == "verified":
+                    continue
+                attempt_url = product_url(attempt, attempt.get("url"), attempt.get("final_url"))
+                if not attempt_url or attempt_url in seen_attempt_urls:
+                    continue
+                seen_attempt_urls.add(attempt_url)
+                attempt_error = cell(attempt.get("error") or attempt.get("reason") or "URL別の価格・型番・在庫検証が未完了")
+                source_status = cell(attempt_status or "unknown")
+                source_problem = "販売元別の確認未完了（{}）: {}".format(source_status, attempt_error)
+                source_monitor_url = primary_url if primary_url and primary_url != attempt_url else (
+                    monitor_url if monitor_url and monitor_url != attempt_url else None
+                )
+                source_host = urlsplit(attempt_url).netloc
+                rows["周辺機器"].append((
+                    "{} — {}".format(item_name, source_host or "販売元不明"),
+                    source_problem,
+                    attempt_url,
+                    source_monitor_url,
+                ))
 
     lines = [
         "## 取得エラー・価格/在庫未確認商品のリンク",
@@ -369,6 +400,47 @@ def retrieval_issue_link_lines(latest=None, component_prices=None, peripheral_pr
         # remain visible so the report can flag the missing link instead of hiding the item.
         if item.get("category") in ("budget_reserve", "cables") or item.get("id") in ("store_price_buffer", "cables"):
             continue
+
+        # Report every unsuccessful configured retailer attempt independently. The
+        # overall item can still have a valid offer from another store; suppressing the
+        # whole item in that case would otherwise hide the failed retailer's exact URL.
+        attempts = item.get("retrieval_attempts")
+        if isinstance(attempts, list):
+            for attempt in attempts:
+                if not isinstance(attempt, dict):
+                    continue
+                attempt_status = str(attempt.get("status") or "").strip().lower()
+                if attempt_status == "verified":
+                    continue
+                attempt_url = _first_http_product_url(
+                    {"url": attempt.get("url"), "final_url": attempt.get("final_url")},
+                    ("url", "final_url"),
+                )
+                if not attempt_url:
+                    continue
+                if attempt_status in ("error", "timeout", "failed", "configuration_error"):
+                    attempt_label = "販売元取得エラー"
+                elif attempt_status == "identity_unverified":
+                    attempt_label = "販売元の型番未確認"
+                elif attempt_status == "price_unverified":
+                    attempt_label = "販売元の価格未確認"
+                else:
+                    attempt_label = "販売元の確認未完了"
+                attempt_error = error_text(attempt, ("error", "reason"))
+                attempt_reason = "URL別取得状態={}".format(attempt_status or "unknown")
+                if attempt_error:
+                    attempt_reason += "; " + attempt_error
+                attempt_item = dict(item)
+                attempt_item["purchase_url"] = attempt_url
+                attempt_item["monitor_url"] = None
+                add_row(
+                    "周辺機器の個別取得元",
+                    attempt_item,
+                    ("purchase_url",),
+                    attempt_label,
+                    attempt_reason,
+                )
+
         status_value = str(item.get("status") or "").lower()
         validation = str(item.get("price_validation_status") or "missing").lower()
         price = item.get("current_price_jpy")
