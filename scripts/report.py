@@ -223,7 +223,7 @@ def retrieval_issue_link_section(latest, build_components=None, peripherals=None
                 source_monitor_url = primary_url if primary_url and primary_url != attempt_url else (
                     monitor_url if monitor_url and monitor_url != attempt_url else None
                 )
-                source_host = urlparse(attempt_url).netloc
+                source_host = urlsplit(attempt_url).netloc
                 rows["周辺機器"].append((
                     "{} — {}".format(item_name, source_host or "販売元不明"),
                     source_problem,
