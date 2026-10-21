@@ -114,7 +114,13 @@ def retrieval_issue_link_section(latest, build_components=None, peripherals=None
             problems.append("在庫切れ信号あり。現在の販売可否を再確認")
         if problems:
             url = product_url(item, item.get("purchase_url"), item.get("url"), item.get("monitor_url"))
-            rows["PC候補"].append((item.get("name") or item.get("id"), "; ".join(problems), url, None))
+            monitor_url = product_url(item, item.get("monitor_url"), item.get("url"))
+            rows["PC候補"].append((
+                item.get("name") or item.get("id"),
+                "; ".join(problems),
+                url,
+                monitor_url if monitor_url != url else None,
+            ))
 
     for item in build_components.get("products") or []:
         if not isinstance(item, dict):

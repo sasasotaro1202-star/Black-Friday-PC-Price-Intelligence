@@ -277,8 +277,9 @@ class WorkflowContractTests(unittest.TestCase):
         )
         self.assertEqual(
             candidates["rog-g16-8940hx-5070ti"]["purchase_url"],
-            "https://store.asus.com/jp/rog/rog-strix-g16-g614.html",
+            "https://store.asus.com/jp/rog/90nr0nj7-m007r0-rog-strix-g16-2025-g614.html",
         )
+        self.assertTrue(candidates["rog-g16-8940hx-5070ti"]["purchase_url_is_exact"])
         self.assertEqual(
             candidates["zephyrus-g16-386h-5070ti"]["url"],
             "https://rog.asus.com/jp/laptops/rog-zephyrus/rog-zephyrus-g16-2026/spec/",
@@ -286,21 +287,24 @@ class WorkflowContractTests(unittest.TestCase):
 
         # Never transfer a sibling G614PR price to the different 9955HX3D SKU.
         g16_9955 = candidates["rog-g16-9955hx3d"]
-        self.assertNotIn("reference_price_jpy", g16_9955)
+        self.assertEqual(g16_9955["reference_price_jpy"], 699800)
         self.assertEqual(
             g16_9955["url"],
             "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/",
         )
         self.assertEqual(
             g16_9955["purchase_url"],
-            "https://store.asus.com/jp/rog-strix-g16-g614.html",
+            "https://store.asus.com/jp/rog/90nr0nk7-m00cl0-rog-strix-g16-2025-g614.html",
         )
+        self.assertTrue(g16_9955["purchase_url_is_exact"])
         self.assertFalse(g16_9955["url_is_exact"])
 
         # The official TUF F16 listing is a 512GB configuration, not 1TB.
         tuf_f16 = candidates["tuf-f16-14650hx-5070"]
         self.assertEqual(tuf_f16["ssd"], "512 GB")
-        self.assertEqual(tuf_f16["reference_price_jpy"], 359800)
+        self.assertTrue(tuf_f16["purchase_url_is_exact"])
+        self.assertNotIn("reference_price_jpy", tuf_f16)
+        self.assertEqual(tuf_f16["aliases"][0], "FX608JPR-I7R32G5R5070S")
 
         for candidate_id in (
             "galleria-zl9r-9955hx-5070ti",
@@ -325,6 +329,12 @@ class WorkflowContractTests(unittest.TestCase):
             "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1",
         )
         self.assertFalse(candidates["tuf-a16-8940hx-5070"]["url_is_exact"])
+        self.assertTrue(candidates["tuf-a16-8940hx-5070"]["purchase_url_is_exact"])
+        self.assertTrue(candidates["zephyrus-g14-386h-5070ti"]["purchase_url_is_exact"])
+        self.assertNotIn("purchase_url", candidates["rog-g16-2025-275hx-5070ti"])
+        self.assertNotIn("purchase_url", candidates["rog-g18-2025-275hx-5070ti"])
+        self.assertEqual(candidates["candidate-4"]["monitor_page_type"], "family_landing")
+        self.assertEqual(candidates["gigabyte-a18-pro-240h-5070ti"]["monitor_page_type"], "family_landing")
         self.assertEqual(
             candidates["tuf-a16-8940hx-5070"]["url"],
             "https://www.asus.com/jp/laptops/for-gaming/tuf-gaming/asus-tuf-gaming-a16-2025/techspec/",
