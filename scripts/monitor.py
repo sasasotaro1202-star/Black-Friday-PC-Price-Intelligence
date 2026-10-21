@@ -1163,7 +1163,7 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
         item.update({
             "name": (
                 (catalog_item or {}).get("name")
-                if exact_purchase_observation
+                if exact_purchase_observation or identity_only
                 else (raw.get("name") or item["name"])
             ),
             "stock_status": "unknown" if identity_only else (raw.get("stock_status") or "unknown"),
@@ -1190,10 +1190,20 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
         if not identity_usable:
             item["observed_price_source_mode"] = item.get("price_source_mode")
             item["price_source_mode"] = "none"
-            item["price_validation_status"] = "variant_ambiguous"
-            item["price_validation_reason"] = (
-                item.get("variant_ambiguity_reason") or "variant_identity_not_confirmed"
-            )
+            if identity_only:
+                # An official family/specification page that cannot prove a
+                # SKU-specific offer is reference-only, not evidence of a SKU
+                # contradiction. Keep it out of price/stock rankings without
+                # falsely labelling the candidate as a mismatched variant.
+                item["variant_match"] = "reference_only"
+                item["variant_ambiguity_reason"] = "sku_offer_not_observed"
+                item["price_validation_status"] = "reference_only"
+                item["price_validation_reason"] = "sku_offer_not_observed"
+            else:
+                item["price_validation_status"] = "variant_ambiguous"
+                item["price_validation_reason"] = (
+                    item.get("variant_ambiguity_reason") or "variant_identity_not_confirmed"
+                )
             item["current_price_jpy"] = None
             item["price_jpy"] = None
             item["available_at"] = None
