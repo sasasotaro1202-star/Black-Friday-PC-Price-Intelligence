@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-22T15:39:15+09:00
-Source snapshot: 2026-10-22T15:35:11+09:00
-Source snapshot SHA256: 609ac221c730e762888fa0cac885768ba9d4e793d7e0866662b50188191ebf9f
+Generated: 2026-10-22T19:19:13+09:00
+Source snapshot: 2026-10-22T19:14:55+09:00
+Source snapshot SHA256: e8f14bae43f2f34533a0c2704a284dd30a7e0c1a7aeec7f3714beb8181c0737f
 Budget: ¥360,000
 U.S. Black Friday calendar reference only (not official retailer sale dates): 2026-11-27
 
@@ -20,8 +20,9 @@ The primary purchase method is self-build. These completed-PC listings are price
 |6|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
 |7|G TUNE FG-A7G6T|¥360,728|0.2%|HIGH|rtx 5060 ti|28|direct_text|
 |8|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|10.0%|HIGH|rtx 5070 ti|38|direct_structured|
-|9|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|19.8%|REALISTIC|rtx 5070|32|direct_structured|
-|10|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|VERY_LOW|rtx 5070 ti|40|direct_structured|
+|9|GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|¥419,800|14.2%|REALISTIC|rtx 5070 ti|29|direct_structured|
+|10|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|19.8%|REALISTIC|rtx 5070|32|direct_structured|
+|11|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|VERY_LOW|rtx 5070 ti|40|direct_structured|
 
 ## Empirical price-change timing
 
