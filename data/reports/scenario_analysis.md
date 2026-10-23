@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-10-23T19:21:20+09:00
+更新: 2026-10-23T20:31:14+09:00
 価格フェーズ: **PRE_BLACK_FRIDAY_REFERENCE**
 暫定の広域監視窓（公式セール開催期間ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 総予算: ¥400,000
@@ -40,7 +40,7 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |G TUNE P6-I7G70BK-B|laptop|RTX 5070 Laptop GPU|¥360,000|未確認|—|¥284,700|¥284,700|¥0|0.0%|¥227,760|¥213,525|¥199,290|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/)|
 |GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|laptop|RTX 5070 Ti|¥360,000|未確認|—|¥419,800|¥419,800|¥59,800|14.2%|¥335,840|¥314,850|¥293,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200)|
 |G TUNE P5-I7G70BK-C（ブラック）|laptop|RTX 5070 Laptop GPU|¥360,000|未確認|—|¥448,800|¥448,800|¥88,800|19.8%|¥359,040|¥336,600|¥314,160|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/)|
-|Acer Predator Helios Neo 16 AI PHN16-I71-N93Z57T|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥547,800|¥547,800|¥187,800|34.3%|¥438,240|¥410,850|¥383,460|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.acer.com/jp-ja/predator/laptops/helios/helios-neo-16-ai/pdp/NH.U44SJ.001)|
+|Acer Predator Helios Neo 16 AI PHN16-I71-N93Z57T|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥547,800|¥547,800|¥187,800|34.3%|¥438,240|¥410,850|¥383,460|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.acer.com/jp-ja/predator/laptops/helios/helios-neo-16-ai/pdp/NH.U44SJ.001)|
 |ROG Strix G16 G614PR-R9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥549,800|¥549,800|¥189,800|34.5%|¥439,840|¥412,350|¥384,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/)|
 |ROG Zephyrus G16 GU606AR-U9R5070TIG32G|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥599,800|¥599,800|¥239,800|40.0%|¥479,840|¥449,850|¥419,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://rog.asus.com/jp/laptops/rog-zephyrus/rog-zephyrus-g16-2026/spec/)|
 |ROG Zephyrus G14 GU405AR-U9R5070TIG|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥684,800|¥684,800|¥324,800|47.4%|¥547,840|¥513,600|¥479,360|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://rog.asus.com/jp/laptops/rog-zephyrus/rog-zephyrus-g14-2026-gu405/spec/)|
@@ -71,8 +71,8 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|10.0%|¥359,800|¥339,800|¥319,800|¥299,800|¥279,900|10%|same_gpu|
 |GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|¥419,800|14.2%|¥377,800|¥356,800|¥335,800|¥314,800|¥293,900|15%|same_gpu|
 |G TUNE P5-I7G70BK-C（ブラック）|¥329,800|19.8%|¥403,900|¥381,500|¥359,000|¥336,600|¥314,200|20%|none|
-|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|¥665,100|¥628,100|¥591,200|¥554,200|¥517,300|未到達|same_gpu|
 |Acer Predator Helios Neo 16 AI PHN16-I71-N93Z57T/E|¥547,800|34.3%|¥493,000|¥465,600|¥438,200|¥410,800|¥383,500|未到達|none|
+|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|¥665,100|¥628,100|¥591,200|¥554,200|¥517,300|未到達|same_gpu|
 |ROG Strix G16 G614PR-R9R5070TI|¥549,800|34.5%|¥494,800|¥467,300|¥439,800|¥412,400|¥384,900|未到達|same_family|
 |ROG Zephyrus G16 GU606AR-U9R5070TIG32G|¥599,800|40.0%|¥539,800|¥509,800|¥479,800|¥449,800|¥419,900|未到達|none|
 |ROG Zephyrus G14 GU405AR-U9R5070TIG|¥684,800|47.4%|¥616,300|¥582,100|¥547,800|¥513,600|¥479,400|未到達|none|
