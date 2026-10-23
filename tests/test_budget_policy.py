@@ -436,7 +436,7 @@ class BudgetPolicyTests(unittest.TestCase):
         row = next(x for x in projection["peripherals"] if x["id"] == "main_monitor")
         self.assertEqual(row["store_inventory_status"], "low_stock")
         self.assertTrue(row["store_inventory_verified"])
-        self.assertEqual(row["current_price_jpy"], 20790)
+        self.assertIsNone(row["current_price_jpy"])  # unapproved online price is comparison-only
         self.assertEqual(row["online_comparison_price_jpy"], 20790)
         self.assertEqual(row["selected_purchase_channel"], "unconfirmed")
         self.assertFalse(row["store_price_confirmed"])
