@@ -374,16 +374,13 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertIn("mouse", projection["tracked_peripheral_unverified_ids"])
         self.assertFalse(projection["budget_data_ready"])
         self.assertEqual(mouse_row["selected_purchase_channel"], "unconfirmed")
-        self.assertEqual(mouse_row["channel_comparison_status"], "NO_ACTIONABLE_CHANNEL")
+        self.assertEqual(mouse_row["channel_comparison_status"], "STORE_FIRST_CASH_PRICE_OR_BOTH_BRANCHES_UNCONFIRMED")
         self.assertEqual(projection["peripheral_projection_jpy"], 35500)
         self.assertEqual(projection["flexible_reserve_offset_for_shipping_jpy"], 2000)
         self.assertEqual(projection["pc_dynamic_cap_jpy"], 359500)
-        self.assertEqual(projection["channel_comparison_required_count"], 4)
+        self.assertEqual(projection["channel_comparison_required_count"], 0)
         self.assertEqual(projection["channel_comparison_complete_count"], 0)
-        self.assertEqual(
-            set(projection["channel_comparison_pending_ids"]),
-            {"main_monitor", "keyboard", "mouse", "mousepad"},
-        )
+        self.assertEqual(projection["channel_comparison_pending_ids"], [])
         self.assertLessEqual(
             projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"] + self.cfg["unallocated_contingency_jpy"],
             projection["total_budget_jpy"],
@@ -439,12 +436,124 @@ class BudgetPolicyTests(unittest.TestCase):
         row = next(x for x in projection["peripherals"] if x["id"] == "main_monitor")
         self.assertEqual(row["store_inventory_status"], "low_stock")
         self.assertTrue(row["store_inventory_verified"])
-        self.assertEqual(row["current_price_jpy"], 20790)
+        self.assertIsNone(row["current_price_jpy"])  # unapproved online price is comparison-only
         self.assertEqual(row["online_comparison_price_jpy"], 20790)
-        self.assertEqual(row["selected_purchase_channel"], "online")
+        self.assertEqual(row["selected_purchase_channel"], "unconfirmed")
         self.assertFalse(row["store_price_confirmed"])
-        self.assertTrue(projection["budget_data_ready"])
-        self.assertIn("main_monitor", projection["channel_comparison_pending_ids"])
+        self.assertFalse(projection["budget_data_ready"])
+        self.assertFalse(row["price_verified"])
+        self.assertTrue(row["online_price_is_comparison_only"])
+        self.assertIn("main_monitor", projection["tracked_peripheral_unverified_ids"])
+        self.assertEqual(projection["channel_comparison_pending_ids"], [])
+
+    def test_store_first_purchase_requires_cash_quotes_and_stock_for_both_branches(self):
+        now_text = intelligence.iso(intelligence.now_jst())
+        original_load_json = intelligence.load_json
+
+        def quote(store_id, price, stock):
+            store_name = {
+                "biccamera_tenjin_1": "ビックカメラ天神1号館",
+                "yodobashi_hakata": "ヨドバシカメラ マルチメディア博多",
+            }[store_id]
+            url = (
+                "https://www.biccamera.com/bc/item/14369301/"
+                if store_id == "biccamera_tenjin_1"
+                else "https://www.yodobashi.com/product/100000001009314680/"
+            )
+            return {
+                "store_observation_store_id": store_id,
+                "store_name": store_name,
+                "store_price_jpy": price,
+                "store_price_checked_at": now_text,
+                "store_stock_status": stock,
+                "store_confirmation_url": url,
+                "store_model_match": True,
+                "store_evidence_type": "official_branch_price_page",
+                "store_evidence_notes": "Regression fixture: exact model, tax-inclusive cash price and same-branch stock.",
+                "store_observation_status": "PRICE_VERIFIED",
+                "store_observation_age_minutes": 0.0,
+                "store_price_confirmed": True,
+                "price_basis": "tax_inclusive_cash",
+            }
+
+        def fake_store_observation_validation(target, now=None, both_branches=False):
+            rows = []
+            if target.get("id") == "main_monitor":
+                rows = [quote("biccamera_tenjin_1", 19990, "in_stock")]
+                if both_branches:
+                    rows.append(quote("yodobashi_hakata", 20500, "low_stock"))
+            chosen_rows = [
+                row for row in rows
+                if row["store_price_confirmed"] and row["store_stock_status"] in ("in_stock", "low_stock")
+            ]
+            chosen = min(chosen_rows, key=lambda row: row["store_price_jpy"]) if chosen_rows else None
+            return {
+                "store_price_jpy": chosen["store_price_jpy"] if chosen else None,
+                "store_price_checked_at": chosen["store_price_checked_at"] if chosen else None,
+                "store_price_confirmed": bool(chosen),
+                "store_stock_status": chosen["store_stock_status"] if chosen else "unknown",
+                "store_confirmation_url": chosen["store_confirmation_url"] if chosen else None,
+                "store_model_match": bool(chosen),
+                "store_observation_store_id": chosen["store_observation_store_id"] if chosen else None,
+                "store_observation_store_name": chosen["store_name"] if chosen else None,
+                "store_evidence_type": chosen["store_evidence_type"] if chosen else None,
+                "store_evidence_notes": chosen["store_evidence_notes"] if chosen else None,
+                "store_observation_status": chosen["store_observation_status"] if chosen else "UNCONFIRMED",
+                "store_observation_age_minutes": 0.0 if chosen else None,
+                "store_price_observations": rows,
+                "store_price_observation_count": len(rows),
+                "store_price_verified_store_ids": [row["store_observation_store_id"] for row in rows],
+            }
+
+        products = []
+        for target in self.cfg["peripherals"]:
+            if not target.get("track_current_price"):
+                continue
+            products.append({
+                "id": target["id"],
+                "name": target["name"],
+                "current_price_jpy": target["target_price_jpy"],
+                "last_valid_price_jpy": target["target_price_jpy"],
+                "price_verified": True,
+                "identity_verified": True,
+                "stock_status": "in_stock",
+                "retrieval_time": now_text,
+                "available_at": now_text,
+            })
+        snapshot = {"generated_at": now_text, "products": products}
+
+        def deterministic_load_json(path, default):
+            if str(path).endswith("data/peripheral_prices.json"):
+                return snapshot
+            return original_load_json(path, default)
+
+        with (
+            patch.object(intelligence, "load_json", side_effect=deterministic_load_json),
+            patch.object(intelligence, "store_observation_validation", side_effect=fake_store_observation_validation),
+        ):
+            one_branch_projection = intelligence.peripheral_budget_projection()
+
+        one_branch = next(x for x in one_branch_projection["peripherals"] if x["id"] == "main_monitor")
+        self.assertFalse(one_branch["store_route_all_branches_confirmed"])
+        self.assertEqual(one_branch["store_price_verified_store_ids"], ["biccamera_tenjin_1"])
+        self.assertEqual(one_branch["selected_purchase_channel"], "unconfirmed")
+        self.assertFalse(one_branch["price_verified"])
+        self.assertTrue(one_branch["online_price_is_comparison_only"])
+        self.assertFalse(one_branch_projection["budget_data_ready"])
+
+        def both_branch_quotes(target, now=None):
+            return fake_store_observation_validation(target, now, both_branches=True)
+
+        with (
+            patch.object(intelligence, "load_json", side_effect=deterministic_load_json),
+            patch.object(intelligence, "store_observation_validation", side_effect=both_branch_quotes),
+        ):
+            both_branch_projection = intelligence.peripheral_budget_projection()
+
+        both = next(x for x in both_branch_projection["peripherals"] if x["id"] == "main_monitor")
+        self.assertTrue(both["store_route_all_branches_confirmed"])
+        self.assertEqual(both["selected_purchase_channel"], "physical_store")
+        self.assertEqual(both["budget_cost_jpy"], 19990)
 
     def test_store_pickup_quote_requires_exact_branch_model_and_fresh_checkout_total(self):
         target = dict(next(x for x in self.cfg["peripherals"] if x["id"] == "main_monitor"))

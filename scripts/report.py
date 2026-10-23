@@ -1786,9 +1786,12 @@ def main():
             target = all_peripheral_targets[candidate_id]
             observation = peripheral_live.get(candidate_id, {})
             physical_store = peripheral_is_physical_store(target, target_config)
+            # Route options identify evidence sources to monitor; they do not
+            # authorize an automatic cheapest-channel comparison. Keep report logic
+            # aligned with intelligence.py and the explicit comparison policy.
             comparison_route = bool(
                 target.get("purchase_channel") == "compare_online_and_store"
-                or {"physical_store", "store_pickup"}.intersection(target.get("purchase_channel_options") or [])
+                or target.get("compare_purchase_channels") is True
             )
             observed_price = observation.get("current_price_jpy") if observation.get("price_verified") else None
             if comparison_route:
