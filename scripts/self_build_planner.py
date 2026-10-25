@@ -5,7 +5,7 @@ import json
 import os
 import re
 from urllib.parse import urlparse
-from intelligence import ROOT, now_jst, iso, parse_dt, load_json, save_json
+from intelligence import ROOT, now_jst, iso, parse_dt, load_json, save_json, peripheral_budget_projection
 from report import retrieval_issue_link_lines
 
 CONFIG_PATH = os.path.join(ROOT, "config", "build_components.json")
@@ -2423,13 +2423,76 @@ def render_plan_markdown(plan):
 
 
 def section_from_plan(plan):
-    lines = [START_MARKER, "## 最優先：PC本体は自作構成", "",
-        "BTO完成品は価格比較用の参考枠に下げ、部品ごとの価格・互換性・送料を合算します。" +
-        "PC本体の計画上限は " + money(plan.get("pc_planned_budget_jpy")) +
-        "（周辺機器計画枠と総額予備費を先に確保。PC本体単体の比較上限（総額上限ではない）は " +
-        money(plan.get("pc_budget_jpy")) + "）。", "",
+    """Render both the target-budget cap and the current cost-based cap distinctly."""
+    def valid_amount(value):
+        return value if isinstance(value, int) and not isinstance(value, bool) and value >= 0 else None
+
+    def planned_amount(key):
+        return valid_amount(plan.get(key))
+
+    total_budget = planned_amount("total_budget_jpy")
+    peripheral_target = planned_amount("peripheral_budget_jpy")
+    contingency = planned_amount("unallocated_contingency_jpy")
+    absolute_pc_cap = planned_amount("pc_budget_jpy")
+    soft_total = planned_amount("soft_ceiling_total_jpy")
+    stored_soft_pc_cap = planned_amount("pc_planned_budget_jpy")
+
+    target_pc_cap = None
+    if None not in (total_budget, peripheral_target, contingency, absolute_pc_cap):
+        target_pc_cap = max(0, min(absolute_pc_cap, total_budget - peripheral_target - contingency))
+
+    soft_pc_cap = None
+    if None not in (soft_total, peripheral_target, contingency, absolute_pc_cap):
+        soft_pc_cap = max(0, min(absolute_pc_cap, soft_total - peripheral_target - contingency))
+
+    projection_error = None
+    try:
+        projection = peripheral_budget_projection()
+        if not isinstance(projection, dict):
+            projection = {}
+    except Exception as exc:
+        projection = {}
+        projection_error = type(exc).__name__
+
+    projected_peripherals = valid_amount(projection.get("peripheral_projection_jpy"))
+    live_pc_cap = valid_amount(projection.get("pc_dynamic_cap_jpy"))
+    budget_ready = projection.get("budget_data_ready") is True
+    unverified_ids = projection.get("tracked_peripheral_unverified_ids")
+    if not isinstance(unverified_ids, list):
+        unverified_ids = []
+    pending_count = valid_amount(projection.get("channel_comparison_pending_count"))
+    if pending_count is None:
+        pending_count = 0
+
+    lines = [
+        START_MARKER,
+        "## 最優先：PC本体は自作構成",
+        "",
+        "BTO完成品は価格比較用の参考枠に下げ、自作PCを本命として部品ごとの価格・互換性・送料を合算します。",
+        "40万円の基準総額に基づくPC本体上限は " + money(target_pc_cap) +
+        "（総額 " + money(total_budget) + " − 周辺機器の計画配分 " + money(peripheral_target) +
+        " − 総額予備費 " + money(contingency) + "）。",
+        "最新の周辺機器コスト試算は " + money(projected_peripherals) +
+        "、その試算に基づくPC本体の動的上限は " + money(live_pc_cap) +
+        "。周辺機器の価格・購入ルート検証は " + ("完了" if budget_ready else "未完了") +
+        "（未確認対象 " + str(len(unverified_ids)) + " 件、店舗/購入経路の比較保留 " + str(pending_count) + " 件）。",
+        "42万円までの初期許容帯を使った比較用PC本体上限は " + money(soft_pc_cap) +
+        "（総額許容上限 " + money(soft_total) + " − 周辺機器の計画配分 − 総額予備費）。これは40万円の基準目標ではなく、超過案を比較するための上限です。",
+        ("注意：周辺機器の価格・購入ルートが未確認のため、動的上限は暫定的な予算保護値です。店頭現金価格・支店在庫・最終決済額の証明ではなく、購入許可も意味しません。"
+            if not budget_ready else
+         "注意：予算計算に使う周辺機器データが揃っていても、PC部品の実売・在庫・互換性・送料・決済条件の確認が終わるまで購入許可にはなりません。"),
+        ("警告：self_build_plan.json の保存済み許容帯上限 " + money(stored_soft_pc_cap) +
+         " と算式による再計算値 " + money(soft_pc_cap) +
+         " が一致しません。レポートは算式による再計算値を表示しています。"
+            if stored_soft_pc_cap is not None and soft_pc_cap is not None and stored_soft_pc_cap != soft_pc_cap else ""),
+        ("警告：周辺機器コスト試算の取得に失敗しました（" + projection_error +
+         "）。最新の動的上限を未確認として扱ってください。" if projection_error else ""),
+        "",
         "|順位|自作構成|構成点/100|購入根拠充足度/100|PC本体目標|周辺機器込み|目標残額|互換性|判定|全パーツ商品リンク|",
-        "|---:|---|---:|---:|---:|---:|---:|---|---|---|"]
+        "|---:|---|---:|---:|---:|---:|---:|---|---|---|"
+    ]
+    lines = [line for line in lines if line is not None]
+
     for build in plan.get("builds") or []:
         score = build.get("scorecard") or {}
         component_links = " / ".join(

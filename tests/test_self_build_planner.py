@@ -2,6 +2,7 @@ import importlib.util
 import pathlib
 import sys
 import unittest
+from unittest.mock import patch
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
@@ -63,6 +64,54 @@ class SelfBuildRankingLinkTests(unittest.TestCase):
         self.assertIn("|判定|全パーツ商品リンク|", rendered)
         self.assertIn("[CPU test](https://shop.example/cpu)", rendered)
         self.assertIn("[GPU test](https://shop.example/gpu)", rendered)
+
+    @patch.object(planner, "peripheral_budget_projection", return_value={
+        "pc_dynamic_cap_jpy": 355900,
+        "peripheral_projection_jpy": 39100,
+        "budget_data_ready": False,
+        "tracked_peripheral_unverified_ids": ["monitor", "mouse"],
+        "channel_comparison_pending_count": 4,
+    })
+    def test_section_distinguishes_target_cap_dynamic_cap_and_soft_cap(self, _projection):
+        plan = {
+            "total_budget_jpy": 400000,
+            "peripheral_budget_jpy": 35000,
+            "unallocated_contingency_jpy": 5000,
+            "pc_budget_jpy": 395000,
+            "pc_target_jpy": 360000,
+            "soft_ceiling_total_jpy": 420000,
+            "pc_planned_budget_jpy": 380000,
+            "builds": [],
+        }
+        rendered = planner.section_from_plan(plan)
+        self.assertIn("40万円の基準総額に基づくPC本体上限は ¥360,000", rendered)
+        self.assertIn("最新の周辺機器コスト試算は ¥39,100", rendered)
+        self.assertIn("動的上限は ¥355,900", rendered)
+        self.assertIn("比較用PC本体上限は ¥380,000", rendered)
+        self.assertIn("周辺機器の価格・購入ルート検証は 未完了", rendered)
+        self.assertIn("未確認対象 2 件", rendered)
+        self.assertIn("購入許可も意味しません", rendered)
+
+    @patch.object(planner, "peripheral_budget_projection", return_value={})
+    def test_section_never_substitutes_zero_when_current_projection_is_missing(self, _projection):
+        rendered = planner.section_from_plan({"builds": []})
+        self.assertIn("PC本体の動的上限は 未確認", rendered)
+        self.assertIn("最新の周辺機器コスト試算は 未確認", rendered)
+        self.assertNotIn("動的上限は ¥0", rendered)
+
+    def test_section_warns_when_stored_soft_cap_disagrees_with_budget_arithmetic(self):
+        with patch.object(planner, "peripheral_budget_projection", return_value={}):
+            rendered = planner.section_from_plan({
+                "total_budget_jpy": 400000,
+                "peripheral_budget_jpy": 35000,
+                "unallocated_contingency_jpy": 5000,
+                "pc_budget_jpy": 395000,
+                "soft_ceiling_total_jpy": 410000,
+                "pc_planned_budget_jpy": 380000,
+                "builds": [],
+            })
+        self.assertIn("保存済み許容帯上限 ¥380,000", rendered)
+        self.assertIn("算式による再計算値 ¥370,000", rendered)
 
     def test_budget_scenario_component_breakdown_links_every_part(self):
         candidate = {
