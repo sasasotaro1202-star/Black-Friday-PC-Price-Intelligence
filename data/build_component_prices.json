@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-25T13:55:09+09:00",
+  "generated_at": "2026-10-25T15:16:07+09:00",
   "schema_version": 1,
   "source_role": "comparison_site_reference",
   "policy": "References may be direct comparison-site prices or directly fetched retailer product listings after identity and price checks; neither proves final checkout price or official BF actuals.",
@@ -89,7 +89,7 @@
           "query": "AMD Ryzen 7 9700X BOX",
           "status": "ok",
           "error": null,
-          "result_count": 323,
+          "result_count": 331,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
@@ -107,20 +107,20 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "AMD Ryzen 7 9700X BOX 100-100001404WOF",
-          "retailer_domain": "tsukumo.co.jp",
-          "status": "error",
-          "error": "RemoteDisconnected:Remote end closed connection without response",
-          "result_count": 0,
+          "retailer_domain": "rakuten.co.jp",
+          "status": "ok",
+          "error": null,
+          "result_count": 101,
           "page_fetch_count": 1,
-          "allowed_reference_host_count": 0,
+          "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
-          "identity_anchor_count": 0,
-          "in_range_price_count": 0,
-          "detail_link_count": 0,
-          "extraction_reason": "fetch_failed",
-          "direct_retailer_fetch_attempt_count": 0,
-          "verified_retailer_listing_count": 0,
+          "identity_anchor_count": 25,
+          "in_range_price_count": 23,
+          "detail_link_count": 24,
+          "extraction_reason": "exact_identity_detail_link_found",
+          "direct_retailer_fetch_attempt_count": 2,
+          "verified_retailer_listing_count": 2,
           "source_role": "direct_retailer_listing_reference"
         },
         {
@@ -134,9 +134,9 @@
           "rejected_host_samples": [
             "www.amd.com",
             "finance.yahoo.com",
-            "en.m.wikipedia.org",
-            "ir.amd.com",
-            "www.techspot.com"
+            "en.wikipedia.org",
+            "www.techspot.com",
+            "ir.amd.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en.html",
@@ -152,7 +152,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:frontier-direct.jp \"Ryzen 7 9700X\" 価格",
+          "query": "site:edion.com \"Ryzen 7 9700X\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -160,9 +160,9 @@
           "rejected_host_samples": [
             "www.amd.com",
             "en.wikipedia.org",
+            "www.ofzenandcomputing.com",
             "shop-us-en.amd.com",
-            "www.newegg.com",
-            "www.tomshardware.com"
+            "www.newegg.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en/products/processors/desktops/ryzen.html",
@@ -186,9 +186,9 @@
           "rejected_host_samples": [
             "www.amd.com",
             "en.wikipedia.org",
+            "www.ofzenandcomputing.com",
             "shop-us-en.amd.com",
-            "www.newegg.com",
-            "www.tomshardware.com"
+            "www.newegg.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en/products/processors/desktops/ryzen.html",
@@ -219,17 +219,17 @@
         }
       ],
       "retailer_listing_offer": {
-        "url": "https://www.yodobashi.com/product/100000001008661707/",
+        "url": "https://item.rakuten.co.jp/jism/0730143315593-44-22814-n/?variantId=0730143315593-44-22814-n",
         "title": "100-100001404WOF",
-        "price_jpy": 53110,
+        "price_jpy": 47800,
         "seller_name": null,
         "price_source_mode": "direct_meta",
         "stock_status": "unknown",
         "identity_anchor": "100-100001404WOF",
         "identity_match": true,
         "source_role": "direct_retailer_listing_reference",
-        "available_at": "2026-10-25T13:54:32+09:00",
-        "retrieval_time": "2026-10-25T13:54:32+09:00",
+        "available_at": "2026-10-25T15:15:44+09:00",
+        "retrieval_time": "2026-10-25T15:15:44+09:00",
         "pit_valid": true,
         "bf_actual_authorized": false,
         "price_context": null
@@ -245,8 +245,8 @@
           "identity_anchor": "100-100001404WOF",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T10:17:25+09:00",
-          "retrieval_time": "2026-10-25T10:17:25+09:00",
+          "available_at": "2026-10-25T15:15:44+09:00",
+          "retrieval_time": "2026-10-25T15:15:44+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -262,8 +262,8 @@
           "identity_anchor": "100-100001404WOF",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:32+09:00",
-          "retrieval_time": "2026-10-25T13:54:32+09:00",
+          "available_at": "2026-10-25T15:15:40+09:00",
+          "retrieval_time": "2026-10-25T15:15:40+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -279,8 +279,8 @@
           "identity_anchor": "100-100001404WOF",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T10:17:25+09:00",
-          "retrieval_time": "2026-10-25T10:17:25+09:00",
+          "available_at": "2026-10-25T15:15:44+09:00",
+          "retrieval_time": "2026-10-25T15:15:44+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -288,9 +288,9 @@
         }
       ],
       "retailer_listing_reference_price_jpy": null,
-      "retailer_listing_reference_url": "https://www.yodobashi.com/product/100000001008661707/",
+      "retailer_listing_reference_url": "https://item.rakuten.co.jp/jism/0730143315593-44-22814-n/?variantId=0730143315593-44-22814-n",
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:31+09:00",
+      "retrieval_time": "2026-10-25T15:15:38+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -308,7 +308,7 @@
       "early_buy_review": {
         "item_id": "cpu-ryzen7-9700x",
         "early_buy_threshold_jpy": 36000,
-        "observed_price_jpy": 53110,
+        "observed_price_jpy": 47800,
         "estimated_checkout_total_jpy": null,
         "verified_checkout_total_jpy": null,
         "checkout_total_verified": false,
@@ -348,14 +348,14 @@
           "query": "AMD Ryzen 9 9900X BOX",
           "status": "ok",
           "error": null,
-          "result_count": 464,
+          "result_count": 471,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
-          "identity_anchor_count": 134,
-          "in_range_price_count": 36,
+          "identity_anchor_count": 132,
+          "in_range_price_count": 38,
           "ambiguous_price_card_count": 0,
           "extraction_reason": "display_only_price_from_single_product_card",
           "direct_retailer_fetch_attempt_count": 0,
@@ -366,18 +366,18 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "AMD Ryzen 9 9900X BOX 100-100000662WOF",
-          "retailer_domain": "ark-pc.co.jp",
+          "retailer_domain": "pc-koubou.jp",
           "status": "ok",
           "error": null,
-          "result_count": 195,
+          "result_count": 858,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
-          "identity_anchor_count": 2,
+          "identity_anchor_count": 0,
           "in_range_price_count": 0,
           "detail_link_count": 0,
-          "extraction_reason": "no_allowed_product_detail_link",
+          "extraction_reason": "sku_identity_not_found_in_product_card",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "direct_retailer_listing_reference"
@@ -393,9 +393,9 @@
           "rejected_host_samples": [
             "www.amd.com",
             "finance.yahoo.com",
-            "en.m.wikipedia.org",
-            "ir.amd.com",
-            "www.techspot.com"
+            "en.wikipedia.org",
+            "www.techspot.com",
+            "ir.amd.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en.html",
@@ -411,7 +411,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:pc4u.co.jp \"Ryzen 9 9900X\" 価格",
+          "query": "site:ymall.jp \"Ryzen 9 9900X\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -419,9 +419,9 @@
           "rejected_host_samples": [
             "www.amd.com",
             "en.wikipedia.org",
+            "www.ofzenandcomputing.com",
             "shop-us-en.amd.com",
-            "www.newegg.com",
-            "www.tomshardware.com"
+            "www.newegg.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en/products/processors/desktops/ryzen.html",
@@ -445,9 +445,9 @@
           "rejected_host_samples": [
             "www.amd.com",
             "en.wikipedia.org",
+            "www.ofzenandcomputing.com",
             "shop-us-en.amd.com",
-            "www.newegg.com",
-            "www.tomshardware.com"
+            "www.newegg.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en/products/processors/desktops/ryzen.html",
@@ -478,29 +478,11 @@
         }
       ],
       "retailer_listing_offer": null,
-      "retailer_listing_offers": [
-        {
-          "url": "https://item.rakuten.co.jp/jism/0730143315296-44-22814-n/?variantId=0730143315296-44-22814-n",
-          "title": "100-100000662WOF",
-          "price_jpy": 69620,
-          "seller_name": null,
-          "price_source_mode": "direct_meta",
-          "stock_status": "unknown",
-          "identity_anchor": "100-100000662WOF",
-          "identity_match": true,
-          "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T08:18:02+09:00",
-          "retrieval_time": "2026-10-25T08:18:02+09:00",
-          "pit_valid": true,
-          "bf_actual_authorized": false,
-          "price_context": null,
-          "retailer_domain": "rakuten.co.jp"
-        }
-      ],
+      "retailer_listing_offers": [],
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:31+09:00",
+      "retrieval_time": "2026-10-25T15:15:38+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -534,7 +516,7 @@
         "purchase_authorized": false,
         "next_step": "ブラックフライデー目標で監視を継続"
       },
-      "retailer_listing_offer_count": 1
+      "retailer_listing_offer_count": 0
     },
     {
       "id": "cpu-ryzen9-9950x",
@@ -561,14 +543,14 @@
           "query": "AMD Ryzen 9 9950X BOX",
           "status": "ok",
           "error": null,
-          "result_count": 503,
+          "result_count": 477,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
-          "identity_anchor_count": 144,
-          "in_range_price_count": 52,
+          "identity_anchor_count": 142,
+          "in_range_price_count": 50,
           "ambiguous_price_card_count": 0,
           "extraction_reason": "display_only_price_from_single_product_card",
           "direct_retailer_fetch_attempt_count": 0,
@@ -579,9 +561,9 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "AMD Ryzen 9 9950X BOX 100-100001277WOF",
-          "retailer_domain": "biccamera.com",
+          "retailer_domain": "shopping.yahoo.co.jp",
           "status": "error",
-          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 6002 milliseconds with 0 bytes received",
+          "error": "RuntimeError:curl_http_500",
           "result_count": 0,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 0,
@@ -606,9 +588,9 @@
           "rejected_host_samples": [
             "www.amd.com",
             "finance.yahoo.com",
-            "en.m.wikipedia.org",
-            "ir.amd.com",
-            "www.techspot.com"
+            "en.wikipedia.org",
+            "www.techspot.com",
+            "ir.amd.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en.html",
@@ -624,7 +606,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:yodobashi.com \"Ryzen 9 9950X\" 価格",
+          "query": "site:kaago.com \"Ryzen 9 9950X\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -632,9 +614,9 @@
           "rejected_host_samples": [
             "www.amd.com",
             "en.wikipedia.org",
+            "www.ofzenandcomputing.com",
             "shop-us-en.amd.com",
-            "www.newegg.com",
-            "www.tomshardware.com"
+            "www.newegg.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en/products/processors/desktops/ryzen.html",
@@ -658,9 +640,9 @@
           "rejected_host_samples": [
             "www.amd.com",
             "en.wikipedia.org",
+            "www.ofzenandcomputing.com",
             "shop-us-en.amd.com",
-            "www.newegg.com",
-            "www.tomshardware.com"
+            "www.newegg.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en/products/processors/desktops/ryzen.html",
@@ -695,7 +677,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:31+09:00",
+      "retrieval_time": "2026-10-25T15:15:38+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -845,20 +827,20 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "PNY GeForce RTX 5070 12GB OC SLIM VCG507012DFSXPB1-O",
-          "retailer_domain": "rakuten.co.jp",
+          "retailer_domain": "ark-pc.co.jp",
           "status": "ok",
           "error": null,
-          "result_count": 97,
+          "result_count": 195,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
-          "identity_anchor_count": 3,
-          "in_range_price_count": 2,
-          "detail_link_count": 2,
-          "extraction_reason": "exact_identity_detail_link_found",
-          "direct_retailer_fetch_attempt_count": 2,
-          "verified_retailer_listing_count": 2,
+          "identity_anchor_count": 2,
+          "in_range_price_count": 0,
+          "detail_link_count": 0,
+          "extraction_reason": "no_allowed_product_detail_link",
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0,
           "source_role": "direct_retailer_listing_reference"
         },
         {
@@ -890,7 +872,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:mouse-jp.co.jp \"PNY GeForce RTX 5070 12GB OC SLIM\" 価格",
+          "query": "site:ark-pc.co.jp \"PNY GeForce RTX 5070 12GB OC SLIM\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -957,17 +939,17 @@
         }
       ],
       "retailer_listing_offer": {
-        "url": "https://item.rakuten.co.jp/ask-direct/vd9404/?iasid=07rpp_10095___3c-mvncsph4-32-33910e5e-5e4b-42aa-803f-8fcc7548c784",
-        "title": "VCG507012DFSXPB1-O",
-        "price_jpy": 192550,
+        "url": "https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845",
+        "title": "PNY GeForce RTX 5070 12GB OC SLIM   VCG507012DFSXPB1-O ［GeForce RTXシリーズ /12GB］",
+        "price_jpy": 190800,
         "seller_name": null,
-        "price_source_mode": "direct_meta",
-        "stock_status": "unknown",
+        "price_source_mode": "direct_structured",
+        "stock_status": "out_of_stock",
         "identity_anchor": "VCG507012DFSXPB1-O",
         "identity_match": true,
         "source_role": "direct_retailer_listing_reference",
-        "available_at": "2026-10-25T13:54:39+09:00",
-        "retrieval_time": "2026-10-25T13:54:39+09:00",
+        "available_at": "2026-10-25T15:15:43+09:00",
+        "retrieval_time": "2026-10-25T15:15:43+09:00",
         "pit_valid": true,
         "bf_actual_authorized": false,
         "price_context": null
@@ -1000,8 +982,8 @@
           "identity_anchor": "VCG507012DFSXPB1-O",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:35+09:00",
-          "retrieval_time": "2026-10-25T13:54:35+09:00",
+          "available_at": "2026-10-25T15:15:43+09:00",
+          "retrieval_time": "2026-10-25T15:15:43+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -1009,9 +991,9 @@
         }
       ],
       "retailer_listing_reference_price_jpy": null,
-      "retailer_listing_reference_url": "https://item.rakuten.co.jp/ask-direct/vd9404/?iasid=07rpp_10095___3c-mvncsph4-32-33910e5e-5e4b-42aa-803f-8fcc7548c784",
+      "retailer_listing_reference_url": "https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845",
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:31+09:00",
+      "retrieval_time": "2026-10-25T15:15:38+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -1031,18 +1013,18 @@
       "early_buy_review": {
         "item_id": "gpu-rtx5070-12gb",
         "early_buy_threshold_jpy": 119000,
-        "observed_price_jpy": 192550,
+        "observed_price_jpy": 190800,
         "estimated_checkout_total_jpy": null,
         "verified_checkout_total_jpy": null,
         "checkout_total_verified": false,
         "price_verified": true,
         "identity_verified": true,
-        "stock_status": "unknown",
+        "stock_status": "out_of_stock",
         "pit_valid": true,
-        "status": "STOCK_NOT_VERIFIED",
-        "label_ja": "在庫未確認",
+        "status": "UNAVAILABLE",
+        "label_ja": "在庫切れ",
         "purchase_authorized": false,
-        "next_step": "購入可能な在庫を直接確認"
+        "next_step": "同一型番の別販売店・再入荷を確認"
       },
       "retailer_listing_offer_count": 2
     },
@@ -1100,14 +1082,14 @@
           "query": "PNY GeForce RTX 5060 Ti 16GB OC",
           "status": "ok",
           "error": null,
-          "result_count": 161,
+          "result_count": 173,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
-          "identity_anchor_count": 28,
-          "in_range_price_count": 12,
+          "identity_anchor_count": 32,
+          "in_range_price_count": 14,
           "ambiguous_price_card_count": 0,
           "extraction_reason": "display_only_price_from_single_product_card",
           "direct_retailer_fetch_attempt_count": 0,
@@ -1118,10 +1100,10 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "PNY GeForce RTX 5060 Ti 16GB OC VCG5060T16DFXPB1-O",
-          "retailer_domain": "pc-koubou.jp",
+          "retailer_domain": "yodobashi.com",
           "status": "ok",
           "error": null,
-          "result_count": 858,
+          "result_count": 369,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
@@ -1145,8 +1127,8 @@
         "identity_anchor": "VCG5060T16DFXPB1-O",
         "identity_match": true,
         "source_role": "direct_retailer_listing_reference",
-        "available_at": "2026-10-25T13:54:35+09:00",
-        "retrieval_time": "2026-10-25T13:54:35+09:00",
+        "available_at": "2026-10-25T15:15:43+09:00",
+        "retrieval_time": "2026-10-25T15:15:43+09:00",
         "pit_valid": true,
         "bf_actual_authorized": false,
         "price_context": null
@@ -1162,8 +1144,8 @@
           "identity_anchor": "VCG5060T16DFXPB1-O",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:35+09:00",
-          "retrieval_time": "2026-10-25T13:54:35+09:00",
+          "available_at": "2026-10-25T15:15:43+09:00",
+          "retrieval_time": "2026-10-25T15:15:43+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -1173,8 +1155,8 @@
       "retailer_listing_reference_price_jpy": 137800,
       "retailer_listing_reference_url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:35+09:00",
-      "available_at": "2026-10-25T13:54:35+09:00",
+      "retrieval_time": "2026-10-25T15:15:43+09:00",
+      "available_at": "2026-10-25T15:15:43+09:00",
       "pit_valid": true,
       "fetch_status": "ok",
       "last_fetch_error": null,
@@ -1279,18 +1261,18 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "PNY GeForce RTX 5070 Ti 16GB ARGB VCG5070T16TFXXPB1-O",
-          "retailer_domain": "sofmap.com",
-          "status": "ok",
-          "error": null,
-          "result_count": 45,
+          "retailer_domain": "biccamera.com",
+          "status": "error",
+          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 6001 milliseconds with 0 bytes received",
+          "result_count": 0,
           "page_fetch_count": 1,
-          "allowed_reference_host_count": 1,
+          "allowed_reference_host_count": 0,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
-          "identity_anchor_count": 2,
+          "identity_anchor_count": 0,
           "in_range_price_count": 0,
           "detail_link_count": 0,
-          "extraction_reason": "no_allowed_product_detail_link",
+          "extraction_reason": "fetch_failed",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "direct_retailer_listing_reference"
@@ -1324,7 +1306,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:edion.com \"PNY GeForce RTX 5070 Ti 16GB ARGB Overclocked Triple Fan\" 価格",
+          "query": "site:dospara.co.jp \"PNY GeForce RTX 5070 Ti 16GB ARGB Overclocked Triple Fan\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -1400,8 +1382,8 @@
         "identity_anchor": "VCG5070T16TFXXPB1-O",
         "identity_match": true,
         "source_role": "direct_retailer_listing_reference",
-        "available_at": "2026-10-25T13:54:38+09:00",
-        "retrieval_time": "2026-10-25T13:54:38+09:00",
+        "available_at": "2026-10-25T15:15:44+09:00",
+        "retrieval_time": "2026-10-25T15:15:44+09:00",
         "pit_valid": true,
         "bf_actual_authorized": false,
         "price_context": null
@@ -1417,8 +1399,8 @@
           "identity_anchor": "VCG5070T16TFXXPB1-O",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:38+09:00",
-          "retrieval_time": "2026-10-25T13:54:38+09:00",
+          "available_at": "2026-10-25T15:15:44+09:00",
+          "retrieval_time": "2026-10-25T15:15:44+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -1428,7 +1410,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": "https://www.dospara.co.jp/SBR1892/IC634895.html",
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:37+09:00",
+      "retrieval_time": "2026-10-25T15:15:43+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -1595,18 +1577,18 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "ASRock B850M Pro RS WiFi B850M Pro RS WiFi",
-          "retailer_domain": "amazon.co.jp",
+          "retailer_domain": "sofmap.com",
           "status": "ok",
           "error": null,
-          "result_count": 201,
+          "result_count": 54,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
-          "identity_anchor_count": 0,
+          "identity_anchor_count": 2,
           "in_range_price_count": 0,
           "detail_link_count": 0,
-          "extraction_reason": "sku_identity_not_found_in_product_card",
+          "extraction_reason": "no_allowed_product_detail_link",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "direct_retailer_listing_reference"
@@ -1624,12 +1606,12 @@
             "oc.asrock.com",
             "en.wikipedia.org",
             "pg.asrock.com",
-            "www.newegg.com"
+            "www.asrockind.com"
           ],
           "rejected_url_samples": [
             "https://www.asrock.com/",
             "https://www.asrock.com/support/index.asp",
-            "https://oc.asrock.com/support/index.asp?cat=BIOS"
+            "https://oc.asrock.com/support/index.us.asp?cat=BIOS"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -1640,7 +1622,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:dospara.co.jp \"ASRock B850M Pro RS WiFi\" 価格",
+          "query": "site:corsair.com \"ASRock B850M Pro RS WiFi\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -1650,12 +1632,12 @@
             "oc.asrock.com",
             "en.wikipedia.org",
             "pg.asrock.com",
-            "www.newegg.com"
+            "www.asrockind.com"
           ],
           "rejected_url_samples": [
             "https://www.asrock.com/",
             "https://www.asrock.com/support/index.asp",
-            "https://oc.asrock.com/support/index.asp?cat=BIOS"
+            "https://oc.asrock.com/support/index.us.asp?cat=BIOS"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -1676,12 +1658,12 @@
             "oc.asrock.com",
             "en.wikipedia.org",
             "pg.asrock.com",
-            "www.newegg.com"
+            "www.asrockind.com"
           ],
           "rejected_url_samples": [
             "https://www.asrock.com/",
             "https://www.asrock.com/support/index.asp",
-            "https://oc.asrock.com/support/index.asp?cat=BIOS"
+            "https://oc.asrock.com/support/index.us.asp?cat=BIOS"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -1716,8 +1698,8 @@
         "identity_anchor": "B850M Pro RS WiFi",
         "identity_match": true,
         "source_role": "direct_retailer_listing_reference",
-        "available_at": "2026-10-25T13:54:43+09:00",
-        "retrieval_time": "2026-10-25T13:54:43+09:00",
+        "available_at": "2026-10-25T15:15:50+09:00",
+        "retrieval_time": "2026-10-25T15:15:50+09:00",
         "pit_valid": true,
         "bf_actual_authorized": false,
         "price_context": null
@@ -1733,8 +1715,8 @@
           "identity_anchor": "B850M Pro RS WiFi",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:43+09:00",
-          "retrieval_time": "2026-10-25T13:54:43+09:00",
+          "available_at": "2026-10-25T15:15:50+09:00",
+          "retrieval_time": "2026-10-25T15:15:50+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -1750,8 +1732,8 @@
           "identity_anchor": "B850M Pro RS WiFi",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:40+09:00",
-          "retrieval_time": "2026-10-25T13:54:40+09:00",
+          "available_at": "2026-10-25T15:15:47+09:00",
+          "retrieval_time": "2026-10-25T15:15:47+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": "i ASRock ASRock B850M Pro RS WiFi｜B850M Pro RS WiFi 【安心の正規代理店品】 メーカー名 ASRock 商品コード MB6711 32,080 円 (税込) 初期不良保証 --選択してください（必須） 初期不良延長保証（到着後30営業日）（+550円） 初期不良延長保証（到着後60営業日）（+990円） 初期不良延長保証（到",
@@ -1767,8 +1749,8 @@
           "identity_anchor": "B850M Pro RS WiFi",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:39+09:00",
-          "retrieval_time": "2026-10-25T13:54:39+09:00",
+          "available_at": "2026-10-25T15:15:46+09:00",
+          "retrieval_time": "2026-10-25T15:15:46+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -1778,7 +1760,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": "https://www.sofmap.com/product_detail.aspx?sku=101393495",
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:38+09:00",
+      "retrieval_time": "2026-10-25T15:15:45+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -1866,19 +1848,19 @@
           "retailer_domain": "www.amazon.co.jp",
           "url": "https://www.amazon.co.jp/dp/B0CHF9TH1B",
           "status": "unverified",
-          "error": "marketplace_seller_identity_unverified",
+          "error": "direct_price_missing_or_not_integer",
           "validation": {
-            "reason_code": "marketplace_seller_identity_unverified",
+            "reason_code": "direct_price_missing_or_not_integer",
             "final_url": "https://www.amazon.co.jp/dp/B0CHF9TH1B",
             "final_host": "www.amazon.co.jp",
             "identity_anchor": "CTCWD532G6000HC38ADC01",
             "page_name": "https://www.amazon.co.jp/dp/B0CHF9TH1B",
             "price_source_mode": "none",
+            "price_context_excerpt": "(64GBx2枚) CL42 T-CREATE EXPERT Black デスクトップ用メモリ ハイスピードタイプ 正規品 日本国内無期限正規保証 CTCED5128G6400HC42CDC01 5つ星のうち4.0 6 ￥456,841 ￥ 456,841 11月 2 - 6 日 にお届け 配送料無料 Acer Predator Pallas Ⅱ DDR5 6000MHz デスクトップPC用メモリ 32GB（16GB×2枚） CL36 ",
             "raw_stock_status": "unknown",
             "structured_stock_status": "unknown",
             "text_stock_status": "unknown",
-            "structured_identity_match": false,
-            "page_text_excerpt": " Amazon.co.jp: TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応【TEAMジャパン 国内正規品・メーカー無期限保証】CTCWD532G6000HC38ADC01 : パソコン・周辺機器 次に移動 メインコンテンツ この商品につい"
+            "structured_identity_match": false
           },
           "result_count": 0,
           "page_fetch_count": 1,
@@ -1911,9 +1893,9 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2) CTCWD532G6000HC38ADC01",
-          "retailer_domain": "joshinweb.jp",
+          "retailer_domain": "tsukumo.co.jp",
           "status": "error",
-          "error": "RuntimeError:curl_http_403",
+          "error": "RemoteDisconnected:Remote end closed connection without response",
           "result_count": 0,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 0,
@@ -1939,8 +1921,8 @@
             "www.teamgroupinc.com",
             "support.teamgroupinc.com",
             "event.teamgroupinc.com",
-            "www.reddit.com",
-            "www.amazon.com"
+            "www.amazon.com",
+            "industrial.teamgroupinc.com"
           ],
           "rejected_url_samples": [
             "https://www.teamgroupinc.com/en/",
@@ -1956,22 +1938,22 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:tsukumo.co.jp \"T-CREATE EXPERT White 32GB\" 価格",
+          "query": "site:amazon.co.jp \"T-CREATE EXPERT White 32GB\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "en.wikipedia.org",
+            "finance.yahoo.com",
             "www.tiktok.com",
             "www.t-mobile.com",
-            "www.youtube.com",
-            "www.att.com"
+            "www.youtube.com"
           ],
           "rejected_url_samples": [
             "https://en.wikipedia.org/wiki/T",
-            "https://www.tiktok.com/",
-            "https://www.t-mobile.com/?msockid=00f719deb41c6ba932dd0e23b5b96a40"
+            "https://finance.yahoo.com/quote/T/",
+            "https://www.tiktok.com/"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -1989,15 +1971,15 @@
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "en.wikipedia.org",
+            "finance.yahoo.com",
             "www.tiktok.com",
             "www.t-mobile.com",
-            "www.youtube.com",
-            "www.att.com"
+            "www.youtube.com"
           ],
           "rejected_url_samples": [
             "https://en.wikipedia.org/wiki/T",
-            "https://www.tiktok.com/",
-            "https://www.t-mobile.com/?msockid=387dc884d9d26d961383df79d8216c77"
+            "https://finance.yahoo.com/quote/T/",
+            "https://www.tiktok.com/"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -2032,8 +2014,8 @@
         "identity_anchor": "TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応",
         "identity_match": true,
         "source_role": "direct_retailer_listing_reference",
-        "available_at": "2026-10-25T13:54:44+09:00",
-        "retrieval_time": "2026-10-25T13:54:44+09:00",
+        "available_at": "2026-10-25T15:15:47+09:00",
+        "retrieval_time": "2026-10-25T15:15:47+09:00",
         "pit_valid": true,
         "bf_actual_authorized": false,
         "price_context": "000HC38ADC01-A 商品内容：16GBx2枚 色：T-CREATE EXPERT ホワイト 商品タイプ：DDR5 6000MHz CL38 【当店からの連絡】 販売価格 113,938円 (税込) ポイント 1% 1,140円相当進呈 送料無料 ※ポイントは商品発送後、且つ注文日から20日後に付与されます。 販売：株式会社マルチラテラル（登録番号：T8020001"
@@ -2049,8 +2031,8 @@
           "identity_anchor": "TEAMGROUP (旧称 Team) T-CREATE EXPERT DDR5 6000MHz 32GB (16GBx2枚) CL38 PC5-48000 デスクトップ用 メモリ ホワイト Intel XMP3.0 / AMD EXPO 両対応",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:44+09:00",
-          "retrieval_time": "2026-10-25T13:54:44+09:00",
+          "available_at": "2026-10-25T15:15:47+09:00",
+          "retrieval_time": "2026-10-25T15:15:47+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": "000HC38ADC01-A 商品内容：16GBx2枚 色：T-CREATE EXPERT ホワイト 商品タイプ：DDR5 6000MHz CL38 【当店からの連絡】 販売価格 113,938円 (税込) ポイント 1% 1,140円相当進呈 送料無料 ※ポイントは商品発送後、且つ注文日から20日後に付与されます。 販売：株式会社マルチラテラル（登録番号：T8020001",
@@ -2060,7 +2042,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": "https://ymall.jp/store/mlymall/b0chf9th1b-20260811/",
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:41+09:00",
+      "retrieval_time": "2026-10-25T15:15:46+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -2243,18 +2225,18 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "Crucial Pro DDR5-6000 32GB (16GBx2) CP2K16G60C36U5W",
-          "retailer_domain": "ark-pc.co.jp",
+          "retailer_domain": "pc-koubou.jp",
           "status": "ok",
           "error": null,
-          "result_count": 195,
+          "result_count": 858,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
-          "identity_anchor_count": 2,
+          "identity_anchor_count": 0,
           "in_range_price_count": 0,
           "detail_link_count": 0,
-          "extraction_reason": "no_allowed_product_detail_link",
+          "extraction_reason": "sku_identity_not_found_in_product_card",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "direct_retailer_listing_reference"
@@ -2269,13 +2251,14 @@
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.crucial.com",
+            "qa-cloud.crucial.com",
             "eu.crucial.com",
             "www.merriam-webster.com"
           ],
           "rejected_url_samples": [
             "https://www.crucial.com/",
-            "https://www.crucial.com/store/systemscanner",
-            "https://eu.crucial.com/support"
+            "https://www.crucial.com/upgrades",
+            "https://qa-cloud.crucial.com/store/systemscanner"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -2286,20 +2269,21 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:joshinweb.jp \"Crucial Pro DDR5-6000 32GB (16GBx2)\" 価格",
+          "query": "site:yodobashi.com \"Crucial Pro DDR5-6000 32GB (16GBx2)\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.crucial.com",
+            "qa-cloud.crucial.com",
             "eu.crucial.com",
             "www.merriam-webster.com"
           ],
           "rejected_url_samples": [
             "https://www.crucial.com/",
-            "https://www.crucial.com/store/systemscanner",
-            "https://eu.crucial.com/support"
+            "https://www.crucial.com/upgrades",
+            "https://qa-cloud.crucial.com/store/systemscanner"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -2317,13 +2301,14 @@
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.crucial.com",
+            "qa-cloud.crucial.com",
             "eu.crucial.com",
             "www.merriam-webster.com"
           ],
           "rejected_url_samples": [
             "https://www.crucial.com/",
-            "https://www.crucial.com/store/systemscanner",
-            "https://eu.crucial.com/support"
+            "https://www.crucial.com/upgrades",
+            "https://qa-cloud.crucial.com/store/systemscanner"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -2358,8 +2343,8 @@
         "identity_anchor": "CP2K16G60C36U5W",
         "identity_match": true,
         "source_role": "direct_retailer_listing_reference",
-        "available_at": "2026-10-25T13:54:45+09:00",
-        "retrieval_time": "2026-10-25T13:54:45+09:00",
+        "available_at": "2026-10-25T15:15:50+09:00",
+        "retrieval_time": "2026-10-25T15:15:50+09:00",
         "pit_valid": true,
         "bf_actual_authorized": false,
         "price_context": "y White CP2K16G60C36U5W この商品の最初の投稿者になる この商品に関する質問をする 投稿画像 最新情報 希望小売価格： オープンプライス 販売終了時の価格： ￥25,870 （税込） メーカー： crucial 販売開始日： 2025/08/20（販売終了商品） お取り扱い： のお取り扱い商品です。 バリエーション： Crucial Pro DDR5"
@@ -2375,29 +2360,12 @@
           "identity_anchor": "CP2K16G60C36U5W",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:45+09:00",
-          "retrieval_time": "2026-10-25T13:54:45+09:00",
+          "available_at": "2026-10-25T15:15:50+09:00",
+          "retrieval_time": "2026-10-25T15:15:50+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": "y White CP2K16G60C36U5W この商品の最初の投稿者になる この商品に関する質問をする 投稿画像 最新情報 希望小売価格： オープンプライス 販売終了時の価格： ￥25,870 （税込） メーカー： crucial 販売開始日： 2025/08/20（販売終了商品） お取り扱い： のお取り扱い商品です。 バリエーション： Crucial Pro DDR5",
           "retailer_domain": "yodobashi.com"
-        },
-        {
-          "url": "https://item.rakuten.co.jp/saino/b0cv7qkc8s/",
-          "title": "CP2K16G60C36U5W",
-          "price_jpy": 66890,
-          "seller_name": null,
-          "price_source_mode": "direct_meta",
-          "stock_status": "unknown",
-          "identity_anchor": "CP2K16G60C36U5W",
-          "identity_match": true,
-          "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T08:18:15+09:00",
-          "retrieval_time": "2026-10-25T08:18:15+09:00",
-          "pit_valid": true,
-          "bf_actual_authorized": false,
-          "price_context": null,
-          "retailer_domain": "rakuten.co.jp"
         },
         {
           "url": "https://www.pc4u.co.jp/view/item/000000090356?category_page_id=ct824",
@@ -2409,8 +2377,8 @@
           "identity_anchor": "CP2K16G60C36U5W",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:45+09:00",
-          "retrieval_time": "2026-10-25T13:54:45+09:00",
+          "available_at": "2026-10-25T15:15:49+09:00",
+          "retrieval_time": "2026-10-25T15:15:49+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": "R5-6000 UDIMM CL36 White (16Gbit)｜CP2K16G60C36U5W 【安心の正規代理店品】 メーカー名 Crucial 商品コード MM10121 67,158 円 (税込) 671ポイント還元 品切れ 購入可能のお知らせを受け取る お気に入りに追加 この商品について 問い合わせる この商品をシェアする ※返品について ※「購入可能のお知らせ",
@@ -2426,8 +2394,8 @@
           "identity_anchor": "CP2K16G60C36U5W",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:44+09:00",
-          "retrieval_time": "2026-10-25T13:54:44+09:00",
+          "available_at": "2026-10-25T15:15:49+09:00",
+          "retrieval_time": "2026-10-25T15:15:49+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -2437,7 +2405,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": "https://www.yodobashi.com/product/100000001009315413/",
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:42+09:00",
+      "retrieval_time": "2026-10-25T15:15:46+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -2468,7 +2436,7 @@
         "purchase_authorized": false,
         "next_step": "購入可能な在庫を直接確認"
       },
-      "retailer_listing_offer_count": 4
+      "retailer_listing_offer_count": 3
     },
     {
       "id": "ssd-crucial-p3-plus-1tb",
@@ -2581,7 +2549,7 @@
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
-          "identity_anchor_count": 46,
+          "identity_anchor_count": 49,
           "in_range_price_count": 14,
           "ambiguous_price_card_count": 0,
           "extraction_reason": "display_only_price_from_single_product_card",
@@ -2593,20 +2561,20 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "Crucial P3 Plus CT1000P3PSSD8JP 1TB CT1000P3PSSD8JP",
-          "retailer_domain": "yodobashi.com",
-          "status": "ok",
-          "error": null,
-          "result_count": 312,
+          "retailer_domain": "amazon.co.jp",
+          "status": "error",
+          "error": "RuntimeError:curl_http_503",
+          "result_count": 0,
           "page_fetch_count": 1,
-          "allowed_reference_host_count": 1,
+          "allowed_reference_host_count": 0,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
-          "identity_anchor_count": 1,
-          "in_range_price_count": 1,
-          "detail_link_count": 1,
-          "extraction_reason": "exact_identity_detail_link_found",
-          "direct_retailer_fetch_attempt_count": 1,
-          "verified_retailer_listing_count": 1,
+          "identity_anchor_count": 0,
+          "in_range_price_count": 0,
+          "detail_link_count": 0,
+          "extraction_reason": "fetch_failed",
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0,
           "source_role": "direct_retailer_listing_reference"
         },
         {
@@ -2619,13 +2587,14 @@
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.crucial.com",
+            "qa-cloud.crucial.com",
             "eu.crucial.com",
             "www.merriam-webster.com"
           ],
           "rejected_url_samples": [
             "https://www.crucial.com/",
-            "https://www.crucial.com/store/systemscanner",
-            "https://eu.crucial.com/support"
+            "https://www.crucial.com/upgrades",
+            "https://qa-cloud.crucial.com/store/systemscanner"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -2636,20 +2605,21 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:mouse-jp.co.jp \"Crucial P3 Plus 1TB\" 価格",
+          "query": "site:ark-pc.co.jp \"Crucial P3 Plus 1TB\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.crucial.com",
+            "qa-cloud.crucial.com",
             "eu.crucial.com",
             "www.merriam-webster.com"
           ],
           "rejected_url_samples": [
             "https://www.crucial.com/",
-            "https://www.crucial.com/store/systemscanner",
-            "https://eu.crucial.com/support"
+            "https://www.crucial.com/upgrades",
+            "https://qa-cloud.crucial.com/store/systemscanner"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -2667,13 +2637,14 @@
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.crucial.com",
+            "qa-cloud.crucial.com",
             "eu.crucial.com",
             "www.merriam-webster.com"
           ],
           "rejected_url_samples": [
             "https://www.crucial.com/",
-            "https://www.crucial.com/store/systemscanner",
-            "https://eu.crucial.com/support"
+            "https://www.crucial.com/upgrades",
+            "https://qa-cloud.crucial.com/store/systemscanner"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -2699,20 +2670,20 @@
         }
       ],
       "retailer_listing_offer": {
-        "url": "https://www.yodobashi.com/product/100000001007390887/",
-        "title": "CT1000P3PSSD8JP",
-        "price_jpy": 10210,
+        "url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
+        "title": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
+        "price_jpy": 35838,
         "seller_name": null,
         "price_source_mode": "direct_text",
         "stock_status": "unknown",
         "identity_anchor": "CT1000P3PSSD8JP",
         "identity_match": true,
         "source_role": "direct_retailer_listing_reference",
-        "available_at": "2026-10-25T13:54:53+09:00",
-        "retrieval_time": "2026-10-25T13:54:53+09:00",
+        "available_at": "2026-10-25T15:15:56+09:00",
+        "retrieval_time": "2026-10-25T15:15:56+09:00",
         "pit_valid": true,
         "bf_actual_authorized": false,
-        "price_context": "e Gen4 x4 CT1000P3PSSD8JP 4.11 レビュー （28） Q＆A （1） 投稿画像 （1） 最新情報 希望小売価格： オープンプライス 販売終了時の価格： ￥10,210 （税込） メーカー： crucial 販売開始日： 2022/09/09（販売終了商品） お取り扱い： のお取り扱い商品です。 バリエーション： 内蔵SSD Crucial P3"
+        "price_context": " CT1000P3PSSD8JP 1TB：オンラインショップ エクセラー crucial 内蔵型 M.2 SSD P3 Plus CT1000P3PSSD8JP 1TB 販売価格 ¥ 35,838 （税込） 支払い方法 代金引換 銀行振込 配送方法・送料 〒 送料を確認 ※配送方法は購入手続き最後の注文確認画面にて変更できます 注文合計が 10,000円 以上で送料無料 送"
       },
       "retailer_listing_offers": [
         {
@@ -2742,8 +2713,8 @@
           "identity_anchor": "CT1000P3PSSD8JP",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:50+09:00",
-          "retrieval_time": "2026-10-25T13:54:50+09:00",
+          "available_at": "2026-10-25T15:15:56+09:00",
+          "retrieval_time": "2026-10-25T15:15:56+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": " CT1000P3PSSD8JP 1TB：オンラインショップ エクセラー crucial 内蔵型 M.2 SSD P3 Plus CT1000P3PSSD8JP 1TB 販売価格 ¥ 35,838 （税込） 支払い方法 代金引換 銀行振込 配送方法・送料 〒 送料を確認 ※配送方法は購入手続き最後の注文確認画面にて変更できます 注文合計が 10,000円 以上で送料無料 送",
@@ -2759,8 +2730,8 @@
           "identity_anchor": "CT1000P3PSSD8JP",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:48+09:00",
-          "retrieval_time": "2026-10-25T13:54:48+09:00",
+          "available_at": "2026-10-25T15:15:54+09:00",
+          "retrieval_time": "2026-10-25T15:15:54+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -2768,9 +2739,9 @@
         }
       ],
       "retailer_listing_reference_price_jpy": null,
-      "retailer_listing_reference_url": "https://www.yodobashi.com/product/100000001007390887/",
+      "retailer_listing_reference_url": "https://kaago.com/excellar/crucial%E3%80%80%E5%86%85%E8%94%B5%E5%9E%8B-M.2-SSD%E3%80%80P3-Plus-CT1000P3PSSD8JP%E3%80%801TB/?itemcode=0001000033094",
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:45+09:00",
+      "retrieval_time": "2026-10-25T15:15:52+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -2788,7 +2759,7 @@
       "early_buy_review": {
         "item_id": "ssd-crucial-p3-plus-1tb",
         "early_buy_threshold_jpy": 16000,
-        "observed_price_jpy": 10210,
+        "observed_price_jpy": 35838,
         "estimated_checkout_total_jpy": null,
         "verified_checkout_total_jpy": null,
         "checkout_total_verified": false,
@@ -2903,20 +2874,20 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "Corsair RM850e 2025 850W ATX 3.1 Gold CP-9020296-JP",
-          "retailer_domain": "rakuten.co.jp",
+          "retailer_domain": "ark-pc.co.jp",
           "status": "ok",
           "error": null,
-          "result_count": 94,
+          "result_count": 195,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
-          "identity_anchor_count": 20,
-          "in_range_price_count": 19,
-          "detail_link_count": 19,
-          "extraction_reason": "exact_identity_detail_link_found",
-          "direct_retailer_fetch_attempt_count": 2,
-          "verified_retailer_listing_count": 1,
+          "identity_anchor_count": 2,
+          "in_range_price_count": 0,
+          "detail_link_count": 0,
+          "extraction_reason": "no_allowed_product_detail_link",
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0,
           "source_role": "direct_retailer_listing_reference"
         }
       ],
@@ -2930,8 +2901,8 @@
         "identity_anchor": "CP-9020296-JP",
         "identity_match": true,
         "source_role": "direct_retailer_listing_reference",
-        "available_at": "2026-10-25T13:54:48+09:00",
-        "retrieval_time": "2026-10-25T13:54:48+09:00",
+        "available_at": "2026-10-25T15:15:55+09:00",
+        "retrieval_time": "2026-10-25T15:15:55+09:00",
         "pit_valid": true,
         "bf_actual_authorized": false,
         "price_context": null
@@ -2947,8 +2918,8 @@
           "identity_anchor": "CP-9020296-JP",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:48+09:00",
-          "retrieval_time": "2026-10-25T13:54:48+09:00",
+          "available_at": "2026-10-25T15:15:55+09:00",
+          "retrieval_time": "2026-10-25T15:15:55+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -2975,8 +2946,8 @@
       "retailer_listing_reference_price_jpy": 15000,
       "retailer_listing_reference_url": "https://www.dospara.co.jp/SBR83/IC519918.html",
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:48+09:00",
-      "available_at": "2026-10-25T13:54:48+09:00",
+      "retrieval_time": "2026-10-25T15:15:55+09:00",
+      "available_at": "2026-10-25T15:15:55+09:00",
       "pit_valid": true,
       "fetch_status": "ok",
       "last_fetch_error": null,
@@ -3092,14 +3063,14 @@
           "query": "Fractal Design Pop Air TG",
           "status": "ok",
           "error": null,
-          "result_count": 815,
+          "result_count": 818,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
-          "identity_anchor_count": 19,
-          "in_range_price_count": 8,
+          "identity_anchor_count": 15,
+          "in_range_price_count": 6,
           "ambiguous_price_card_count": 0,
           "extraction_reason": "display_only_price_from_single_product_card",
           "direct_retailer_fetch_attempt_count": 0,
@@ -3110,9 +3081,9 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "Fractal Design Pop Air TG FD-C-POA1A-02",
-          "retailer_domain": "shopping.yahoo.co.jp",
+          "retailer_domain": "joshinweb.jp",
           "status": "error",
-          "error": "RuntimeError:curl_http_500",
+          "error": "RuntimeError:curl_http_403",
           "result_count": 0,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 0,
@@ -3137,8 +3108,8 @@
         "identity_anchor": "FD-C-POA1A-02",
         "identity_match": true,
         "source_role": "direct_retailer_listing_reference",
-        "available_at": "2026-10-25T13:54:51+09:00",
-        "retrieval_time": "2026-10-25T13:54:51+09:00",
+        "available_at": "2026-10-25T15:15:56+09:00",
+        "retrieval_time": "2026-10-25T15:15:56+09:00",
         "pit_valid": true,
         "bf_actual_authorized": false,
         "price_context": null
@@ -3154,8 +3125,8 @@
           "identity_anchor": "FD-C-POA1A-02",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:51+09:00",
-          "retrieval_time": "2026-10-25T13:54:51+09:00",
+          "available_at": "2026-10-25T15:15:56+09:00",
+          "retrieval_time": "2026-10-25T15:15:56+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -3171,8 +3142,8 @@
           "identity_anchor": "FD-C-POA1A-02",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:50+09:00",
-          "retrieval_time": "2026-10-25T13:54:50+09:00",
+          "available_at": "2026-10-25T15:15:55+09:00",
+          "retrieval_time": "2026-10-25T15:15:55+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -3182,8 +3153,8 @@
       "retailer_listing_reference_price_jpy": 13180,
       "retailer_listing_reference_url": "https://www.dospara.co.jp/SBR1959/IC480986.html",
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:51+09:00",
-      "available_at": "2026-10-25T13:54:51+09:00",
+      "retrieval_time": "2026-10-25T15:15:56+09:00",
+      "available_at": "2026-10-25T15:15:56+09:00",
       "pit_valid": true,
       "fetch_status": "ok",
       "last_fetch_error": null,
@@ -3288,20 +3259,20 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "Thermalright Peerless Assassin 120 SE V3 Peerless Assassin 120 SE V3",
-          "retailer_domain": "rakuten.co.jp",
+          "retailer_domain": "ark-pc.co.jp",
           "status": "ok",
           "error": null,
-          "result_count": 91,
+          "result_count": 195,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
-          "identity_anchor_count": 4,
+          "identity_anchor_count": 2,
           "in_range_price_count": 0,
-          "detail_link_count": 3,
-          "extraction_reason": "exact_identity_detail_link_found",
-          "direct_retailer_fetch_attempt_count": 2,
-          "verified_retailer_listing_count": 1,
+          "detail_link_count": 0,
+          "extraction_reason": "no_allowed_product_detail_link",
+          "direct_retailer_fetch_attempt_count": 0,
+          "verified_retailer_listing_count": 0,
           "source_role": "direct_retailer_listing_reference"
         }
       ],
@@ -3315,8 +3286,8 @@
         "identity_anchor": "Peerless Assassin 120 SE V3",
         "identity_match": true,
         "source_role": "direct_retailer_listing_reference",
-        "available_at": "2026-10-25T13:54:50+09:00",
-        "retrieval_time": "2026-10-25T13:54:50+09:00",
+        "available_at": "2026-10-25T15:15:58+09:00",
+        "retrieval_time": "2026-10-25T15:15:58+09:00",
         "pit_valid": true,
         "bf_actual_authorized": false,
         "price_context": null
@@ -3332,8 +3303,8 @@
           "identity_anchor": "Peerless Assassin 120 SE V3",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:50+09:00",
-          "retrieval_time": "2026-10-25T13:54:50+09:00",
+          "available_at": "2026-10-25T15:15:58+09:00",
+          "retrieval_time": "2026-10-25T15:15:58+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -3360,8 +3331,8 @@
       "retailer_listing_reference_price_jpy": 4970,
       "retailer_listing_reference_url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:50+09:00",
-      "available_at": "2026-10-25T13:54:50+09:00",
+      "retrieval_time": "2026-10-25T15:15:58+09:00",
+      "available_at": "2026-10-25T15:15:58+09:00",
       "pit_valid": true,
       "fetch_status": "ok",
       "last_fetch_error": null,
@@ -3466,9 +3437,9 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "Microsoft Windows 11 Home 日本語版 パッケージ版 HAJ-00094",
-          "retailer_domain": "biccamera.com",
+          "retailer_domain": "shopping.yahoo.co.jp",
           "status": "error",
-          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 6002 milliseconds with 0 bytes received",
+          "error": "RuntimeError:curl_http_500",
           "result_count": 0,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 0,
@@ -3495,12 +3466,12 @@
             "account.microsoft.com",
             "myaccount.microsoft.com",
             "en.wikipedia.org",
-            "support.microsoft.com"
+            "apps.microsoft.com"
           ],
           "rejected_url_samples": [
-            "https://www.microsoft.com/en-us?msockid=08d970f8623e6c373238670563f46db0",
+            "https://www.microsoft.com/en-us/?msockid=04c6dacb5d4a6dc832e8cd365c226ce5",
             "https://account.microsoft.com/account",
-            "https://myaccount.microsoft.com/"
+            "https://www.microsoft.com/?msockid=04c6dacb5d4a6dc832e8cd365c226ce5"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -3511,7 +3482,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:nojima.co.jp \"Windows 11 Home 日本語版\" 価格",
+          "query": "site:pc-koubou.jp \"Windows 11 Home 日本語版\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -3521,11 +3492,11 @@
             "blogs.windows.com",
             "en.wikipedia.org",
             "support.microsoft.com",
-            "www.thewindowdepot.com"
+            "www.lowes.com"
           ],
           "rejected_url_samples": [
-            "https://www.microsoft.com/en-us/windows/?msockid=0cb5189744fe6b6e38a50f6a458c6a39",
-            "https://www.microsoft.com/en-us/software-download/?msockid=0cb5189744fe6b6e38a50f6a458c6a39",
+            "https://www.microsoft.com/en-us/windows/?msockid=12441e0b6eff6973110509f66ff76859",
+            "https://www.microsoft.com/en-us/software-download/?msockid=12441e0b6eff6973110509f66ff76859",
             "https://blogs.windows.com/windowsexperience/2026/09/29/how-to-get-windows-11-2026-update/"
           ],
           "same_comparison_item_path_count": 0,
@@ -3547,11 +3518,11 @@
             "blogs.windows.com",
             "en.wikipedia.org",
             "support.microsoft.com",
-            "www.thewindowdepot.com"
+            "www.lowes.com"
           ],
           "rejected_url_samples": [
-            "https://www.microsoft.com/en-us/windows/?msockid=2610a99312d165932524be6e130a64e6",
-            "https://www.microsoft.com/en-us/software-download/?msockid=2610a99312d165932524be6e130a64e6",
+            "https://www.microsoft.com/en-us/windows/?msockid=2af915e722a16a1803eb021a23ee6b1c",
+            "https://www.microsoft.com/en-us/software-download/?msockid=2af915e722a16a1803eb021a23ee6b1c",
             "https://blogs.windows.com/windowsexperience/2026/09/29/how-to-get-windows-11-2026-update/"
           ],
           "same_comparison_item_path_count": 0,
@@ -3587,8 +3558,8 @@
         "identity_anchor": "Windows 11 Home 日本語版",
         "identity_match": true,
         "source_role": "direct_retailer_listing_reference",
-        "available_at": "2026-10-25T13:54:54+09:00",
-        "retrieval_time": "2026-10-25T13:54:54+09:00",
+        "available_at": "2026-10-25T15:15:59+09:00",
+        "retrieval_time": "2026-10-25T15:15:59+09:00",
         "pit_valid": true,
         "bf_actual_authorized": false,
         "price_context": null
@@ -3604,8 +3575,8 @@
           "identity_anchor": "Windows 11 Home 日本語版",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:54+09:00",
-          "retrieval_time": "2026-10-25T13:54:54+09:00",
+          "available_at": "2026-10-25T15:15:59+09:00",
+          "retrieval_time": "2026-10-25T15:15:59+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -3615,7 +3586,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": "https://www.yodobashi.com/product/100000001006975270/",
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:52+09:00",
+      "retrieval_time": "2026-10-25T15:15:58+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -3691,10 +3662,10 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "KIOXIA EXCERIA BASIC SSD-CK2.0N4B/N 2TB SSD-CK2.0N4B/N",
-          "retailer_domain": "pc-koubou.jp",
+          "retailer_domain": "yodobashi.com",
           "status": "ok",
           "error": null,
-          "result_count": 858,
+          "result_count": 312,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
@@ -3717,15 +3688,15 @@
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.kioxia.com",
-            "en.m.wikipedia.org",
             "americas.kioxia.com",
-            "finance.yahoo.com",
-            "www.kioxia-holdings.com"
+            "en.wikipedia.org",
+            "www.kioxia-holdings.com",
+            "finance.yahoo.com"
           ],
           "rejected_url_samples": [
             "https://www.kioxia.com/",
-            "https://en.m.wikipedia.org/wiki/Kioxia",
-            "https://americas.kioxia.com/en-us/top.html"
+            "https://americas.kioxia.com/en-us/top.html",
+            "https://en.wikipedia.org/wiki/Kioxia"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -3736,22 +3707,22 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:pc-koubou.jp \"KIOXIA EXCERIA BASIC 2TB\" 価格",
+          "query": "site:shopping.yahoo.co.jp \"KIOXIA EXCERIA BASIC 2TB\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.kioxia.com",
-            "en.m.wikipedia.org",
             "americas.kioxia.com",
-            "finance.yahoo.com",
-            "www.kioxia-holdings.com"
+            "en.wikipedia.org",
+            "www.kioxia-holdings.com",
+            "finance.yahoo.com"
           ],
           "rejected_url_samples": [
             "https://www.kioxia.com/",
-            "https://en.m.wikipedia.org/wiki/Kioxia",
-            "https://americas.kioxia.com/en-us/top.html"
+            "https://americas.kioxia.com/en-us/top.html",
+            "https://en.wikipedia.org/wiki/Kioxia"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -3769,15 +3740,15 @@
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.kioxia.com",
-            "en.m.wikipedia.org",
             "americas.kioxia.com",
-            "finance.yahoo.com",
-            "www.kioxia-holdings.com"
+            "en.wikipedia.org",
+            "www.kioxia-holdings.com",
+            "finance.yahoo.com"
           ],
           "rejected_url_samples": [
             "https://www.kioxia.com/",
-            "https://en.m.wikipedia.org/wiki/Kioxia",
-            "https://americas.kioxia.com/en-us/top.html"
+            "https://americas.kioxia.com/en-us/top.html",
+            "https://en.wikipedia.org/wiki/Kioxia"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -3807,7 +3778,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:53+09:00",
+      "retrieval_time": "2026-10-25T15:15:58+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -3896,18 +3867,18 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2) LD5U32G60C40BV-RGD",
-          "retailer_domain": "yodobashi.com",
-          "status": "ok",
-          "error": null,
-          "result_count": 351,
+          "retailer_domain": "amazon.co.jp",
+          "status": "error",
+          "error": "RuntimeError:curl_http_503",
+          "result_count": 0,
           "page_fetch_count": 1,
-          "allowed_reference_host_count": 1,
+          "allowed_reference_host_count": 0,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "identity_anchor_count": 0,
           "in_range_price_count": 0,
           "detail_link_count": 0,
-          "extraction_reason": "sku_identity_not_found_in_product_card",
+          "extraction_reason": "fetch_failed",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "direct_retailer_listing_reference"
@@ -3918,20 +3889,10 @@
           "query": "\"LD5U32G60C40BV-RGD\" 価格 site:kakaku.com",
           "status": "ok",
           "error": null,
-          "result_count": 10,
+          "result_count": 0,
           "allowed_reference_host_count": 0,
-          "rejected_host_samples": [
-            "www.bing.com",
-            "en.wikipedia.org",
-            "techdows.com",
-            "news.mynavi.jp",
-            "explore.microsoft.com"
-          ],
-          "rejected_url_samples": [
-            "https://www.bing.com/version",
-            "https://www.bing.com/ck/a?!&&p=17db50ab91e107400c21e420da8bb6743be88ca4b285ac9f21db92c7b229c364JmltdHM9MTc5MjgwMDAwMA&ptn=3&ver=2&hsh=4&fclid=1523fe2f-c842-6f7b-205c-e9d2c9586e46&u",
-            "https://www.bing.com/ck/a?!&&p=db23c1928c9ad7fae59abf725d3083a7cf2d360a0a5f23b9128a73bc177194a1JmltdHM9MTc5MjgwMDAwMA&ptn=3&ver=2&hsh=4&fclid=1523fe2f-c842-6f7b-205c-e9d2c9586e46&u"
-          ],
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0,
@@ -3941,22 +3902,22 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:ymall.jp \"Lexar THOR RGB 2nd Gen 64GB\" 価格",
+          "query": "site:joshinweb.jp \"Lexar THOR RGB 2nd Gen 64GB\" 価格",
           "status": "ok",
           "error": null,
-          "result_count": 7,
+          "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.lexar.com",
             "americas.lexar.com",
             "en.wikipedia.org",
             "lexarenterprise.com",
-            "www.lexarhomes.com"
+            "www.lexar.us"
           ],
           "rejected_url_samples": [
             "https://www.lexar.com/global/",
-            "https://americas.lexar.com/support/download/",
-            "https://americas.lexar.com/"
+            "https://americas.lexar.com/",
+            "https://americas.lexar.com/support/download/"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -3970,19 +3931,19 @@
           "query": "Lexar THOR RGB 2nd Gen 64GB 価格 最安値",
           "status": "ok",
           "error": null,
-          "result_count": 7,
+          "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "www.lexar.com",
             "americas.lexar.com",
             "en.wikipedia.org",
             "lexarenterprise.com",
-            "www.lexarhomes.com"
+            "www.lexar.us"
           ],
           "rejected_url_samples": [
             "https://www.lexar.com/global/",
-            "https://americas.lexar.com/support/download/",
-            "https://americas.lexar.com/"
+            "https://americas.lexar.com/",
+            "https://americas.lexar.com/support/download/"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -4017,8 +3978,8 @@
         "identity_anchor": "LD5U32G60C40BV-RGD",
         "identity_match": true,
         "source_role": "direct_retailer_listing_reference",
-        "available_at": "2026-10-25T13:54:54+09:00",
-        "retrieval_time": "2026-10-25T13:54:54+09:00",
+        "available_at": "2026-10-25T15:15:59+09:00",
+        "retrieval_time": "2026-10-25T15:15:59+09:00",
         "pit_valid": true,
         "bf_actual_authorized": false,
         "price_context": null
@@ -4034,8 +3995,8 @@
           "identity_anchor": "LD5U32G60C40BV-RGD",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:54+09:00",
-          "retrieval_time": "2026-10-25T13:54:54+09:00",
+          "available_at": "2026-10-25T15:15:59+09:00",
+          "retrieval_time": "2026-10-25T15:15:59+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -4127,9 +4088,9 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "Corsair VENGEANCE DDR5-6000 32GB (16GBx2) CL38 EXPO/XMP CMK32GX5M2D6000Z38",
-          "retailer_domain": "joshinweb.jp",
+          "retailer_domain": "tsukumo.co.jp",
           "status": "error",
-          "error": "RuntimeError:curl_http_403",
+          "error": "RemoteDisconnected:Remote end closed connection without response",
           "result_count": 0,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 0,
@@ -4162,22 +4123,22 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:pc-koubou.jp \"CMK32GX5M2D6000Z38\" 価格",
+          "query": "site:shopping.yahoo.co.jp \"CMK32GX5M2D6000Z38\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
-            "en.wikipedia.org",
-            "www.ecologicalart.org",
-            "jerwoodvisualarts.org",
-            "climate.sustainability-directory.com",
-            "harvardforest.fas.harvard.edu"
+            "wetransfer.com",
+            "web.whatsapp.com",
+            "ejje.weblio.jp",
+            "www.merriam-webster.com",
+            "en.m.wikipedia.org"
           ],
           "rejected_url_samples": [
-            "https://en.wikipedia.org/wiki/Ecological_art",
-            "https://www.ecologicalart.org/en.html",
-            "https://jerwoodvisualarts.org/art-theory-glossary/environmental-art/"
+            "https://wetransfer.com/?msockid=31aaa02a58e46c0e0845b7d759fd6dbc",
+            "https://web.whatsapp.com/",
+            "https://ejje.weblio.jp/content/We"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -4305,9 +4266,9 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "MSI SPATIUM M450 PCIe 4.0 NVMe M.2 1TB V1 SPATIUM M450 PCIe 4.0 NVMe M.2 1TB V1",
-          "retailer_domain": "shopping.yahoo.co.jp",
+          "retailer_domain": "joshinweb.jp",
           "status": "error",
-          "error": "RuntimeError:curl_http_500",
+          "error": "RuntimeError:curl_http_403",
           "result_count": 0,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 0,
@@ -4340,7 +4301,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:shopping.yahoo.co.jp \"SPATIUM M450 PCIe 4.0 NVMe M.2 1TB V1\" 価格",
+          "query": "site:sycom.co.jp \"SPATIUM M450 PCIe 4.0 NVMe M.2 1TB V1\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -4359,20 +4320,10 @@
           "query": "SPATIUM M450 PCIe 4.0 NVMe M.2 1TB V1 価格 最安値",
           "status": "ok",
           "error": null,
-          "result_count": 10,
+          "result_count": 0,
           "allowed_reference_host_count": 0,
-          "rejected_host_samples": [
-            "en.wikipedia.org",
-            "www.23andme.org",
-            "www.britannica.com",
-            "www.forbes.com",
-            "www.linkedin.com"
-          ],
-          "rejected_url_samples": [
-            "https://en.wikipedia.org/wiki/Anne_Wojcicki",
-            "https://www.23andme.org/about/governance/",
-            "https://www.britannica.com/money/Anne-Wojcicki"
-          ],
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0,
@@ -4406,8 +4357,8 @@
         "identity_anchor": "SPATIUM M450 PCIe 4.0 NVMe M.2 1TB V1",
         "identity_match": true,
         "source_role": "direct_retailer_listing_reference",
-        "available_at": "2026-10-25T13:54:57+09:00",
-        "retrieval_time": "2026-10-25T13:54:57+09:00",
+        "available_at": "2026-10-25T15:16:02+09:00",
+        "retrieval_time": "2026-10-25T15:16:02+09:00",
         "pit_valid": true,
         "bf_actual_authorized": false,
         "price_context": null
@@ -4423,8 +4374,8 @@
           "identity_anchor": "SPATIUM M450 PCIe 4.0 NVMe M.2 1TB V1",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:57+09:00",
-          "retrieval_time": "2026-10-25T13:54:57+09:00",
+          "available_at": "2026-10-25T15:16:02+09:00",
+          "retrieval_time": "2026-10-25T15:16:02+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -4537,20 +4488,20 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "Thermalright Assassin X 120 Refined SE AX120-R-SE",
-          "retailer_domain": "sofmap.com",
+          "retailer_domain": "yodobashi.com",
           "status": "ok",
           "error": null,
-          "result_count": 45,
+          "result_count": 332,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
-          "identity_anchor_count": 2,
+          "identity_anchor_count": 1,
           "in_range_price_count": 0,
-          "detail_link_count": 0,
-          "extraction_reason": "no_allowed_product_detail_link",
-          "direct_retailer_fetch_attempt_count": 0,
-          "verified_retailer_listing_count": 0,
+          "detail_link_count": 3,
+          "extraction_reason": "exact_identity_detail_link_found",
+          "direct_retailer_fetch_attempt_count": 2,
+          "verified_retailer_listing_count": 1,
           "source_role": "direct_retailer_listing_reference"
         },
         {
@@ -4572,7 +4523,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:frontier-direct.jp \"AX120-R-SE\" 価格",
+          "query": "site:edion.com \"AX120-R-SE\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 0,
@@ -4591,20 +4542,10 @@
           "query": "AX120-R-SE 価格 最安値",
           "status": "ok",
           "error": null,
-          "result_count": 10,
+          "result_count": 0,
           "allowed_reference_host_count": 0,
-          "rejected_host_samples": [
-            "corporate.ford.com",
-            "en.wikipedia.org",
-            "www.fromtheroad.ford.com",
-            "www.linkedin.com",
-            "digitaldefynd.com"
-          ],
-          "rejected_url_samples": [
-            "https://corporate.ford.com/corporate/corporate/about/leadership/",
-            "https://en.wikipedia.org/wiki/Jim_Farley_(businessman)",
-            "https://www.fromtheroad.ford.com/us/en/people-at-ford"
-          ],
+          "rejected_host_samples": [],
+          "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
           "in_range_price_count": 0,
@@ -4629,17 +4570,17 @@
         }
       ],
       "retailer_listing_offer": {
-        "url": "https://www.yodobashi.com/product/100000001008996814/",
+        "url": "https://www.yodobashi.com/product/100000001008996815/",
         "title": "AX120-R-SE",
-        "price_jpy": 2580,
+        "price_jpy": 2390,
         "seller_name": null,
         "price_source_mode": "direct_meta",
         "stock_status": "unknown",
         "identity_anchor": "AX120-R-SE",
         "identity_match": true,
         "source_role": "direct_retailer_listing_reference",
-        "available_at": "2026-10-25T13:54:59+09:00",
-        "retrieval_time": "2026-10-25T13:54:59+09:00",
+        "available_at": "2026-10-25T15:16:06+09:00",
+        "retrieval_time": "2026-10-25T15:16:06+09:00",
         "pit_valid": true,
         "bf_actual_authorized": false,
         "price_context": null
@@ -4655,8 +4596,8 @@
           "identity_anchor": "AX120-R-SE",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T10:17:48+09:00",
-          "retrieval_time": "2026-10-25T10:17:48+09:00",
+          "available_at": "2026-10-25T15:16:06+09:00",
+          "retrieval_time": "2026-10-25T15:16:06+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -4672,8 +4613,8 @@
           "identity_anchor": "AX120-R-SE",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T13:54:59+09:00",
-          "retrieval_time": "2026-10-25T13:54:59+09:00",
+          "available_at": "2026-10-25T15:16:02+09:00",
+          "retrieval_time": "2026-10-25T15:16:02+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": null,
@@ -4681,7 +4622,7 @@
         }
       ],
       "retailer_listing_reference_price_jpy": null,
-      "retailer_listing_reference_url": "https://www.yodobashi.com/product/100000001008996814/",
+      "retailer_listing_reference_url": "https://www.yodobashi.com/product/100000001008996815/",
       "comparison_stock_signal": "unknown",
       "retrieval_time": null,
       "available_at": null,
@@ -4698,7 +4639,7 @@
       "early_buy_review": {
         "item_id": "cooler-thermalright-assassin-x-120-refined-se",
         "early_buy_threshold_jpy": null,
-        "observed_price_jpy": 2580,
+        "observed_price_jpy": 2390,
         "estimated_checkout_total_jpy": null,
         "verified_checkout_total_jpy": null,
         "checkout_total_verified": false,
@@ -4759,7 +4700,7 @@
           "query": "MSI GeForce RTX 5070 12G VENTUS 2X OC",
           "status": "ok",
           "error": null,
-          "result_count": 593,
+          "result_count": 600,
           "page_fetch_count": 1,
           "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
@@ -4777,18 +4718,18 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "MSI GeForce RTX 5070 12G VENTUS 2X OC 4711377308229",
-          "retailer_domain": "ark-pc.co.jp",
-          "status": "ok",
-          "error": null,
-          "result_count": 195,
+          "retailer_domain": "tsukumo.co.jp",
+          "status": "error",
+          "error": "RemoteDisconnected:Remote end closed connection without response",
+          "result_count": 0,
           "page_fetch_count": 1,
-          "allowed_reference_host_count": 1,
+          "allowed_reference_host_count": 0,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
-          "identity_anchor_count": 2,
+          "identity_anchor_count": 0,
           "in_range_price_count": 0,
           "detail_link_count": 0,
-          "extraction_reason": "no_allowed_product_detail_link",
+          "extraction_reason": "fetch_failed",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "direct_retailer_listing_reference"
@@ -4799,14 +4740,14 @@
           "query": "site:kakaku.com/item/K0001679747 \"MSI GeForce RTX 5070 12G VENTUS 2X OC\"",
           "status": "ok",
           "error": null,
-          "result_count": 7,
+          "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "us.msi.com",
             "www.msi.com",
             "www.msisurfaces.com",
             "us-store.msi.com",
-            "msihoa.com"
+            "fileinfo.com"
           ],
           "rejected_url_samples": [
             "https://us.msi.com/",
@@ -4822,17 +4763,17 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:frontier-direct.jp \"MSI GeForce RTX 5070 12G VENTUS 2X OC\" 価格",
+          "query": "site:edion.com \"MSI GeForce RTX 5070 12G VENTUS 2X OC\" 価格",
           "status": "ok",
           "error": null,
-          "result_count": 7,
+          "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "us.msi.com",
             "www.msi.com",
             "www.msisurfaces.com",
             "us-store.msi.com",
-            "msihoa.com"
+            "fileinfo.com"
           ],
           "rejected_url_samples": [
             "https://us.msi.com/",
@@ -4851,14 +4792,14 @@
           "query": "MSI GeForce RTX 5070 12G VENTUS 2X OC 価格 最安値",
           "status": "ok",
           "error": null,
-          "result_count": 7,
+          "result_count": 10,
           "allowed_reference_host_count": 0,
           "rejected_host_samples": [
             "us.msi.com",
             "www.msi.com",
             "www.msisurfaces.com",
             "us-store.msi.com",
-            "msihoa.com"
+            "fileinfo.com"
           ],
           "rejected_url_samples": [
             "https://us.msi.com/",
@@ -4893,7 +4834,7 @@
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:54:58+09:00",
+      "retrieval_time": "2026-10-25T15:16:01+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -4971,18 +4912,18 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "AMD Ryzen 7 7700 BOX (Wraith Stealth Cooler) 100-100000592SBX",
-          "retailer_domain": "amazon.co.jp",
-          "status": "error",
-          "error": "RuntimeError:curl_http_503",
-          "result_count": 0,
+          "retailer_domain": "pc-koubou.jp",
+          "status": "ok",
+          "error": null,
+          "result_count": 858,
           "page_fetch_count": 1,
-          "allowed_reference_host_count": 0,
+          "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "identity_anchor_count": 0,
           "in_range_price_count": 0,
           "detail_link_count": 0,
-          "extraction_reason": "fetch_failed",
+          "extraction_reason": "sku_identity_not_found_in_product_card",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "direct_retailer_listing_reference"
@@ -4998,9 +4939,9 @@
           "rejected_host_samples": [
             "www.amd.com",
             "finance.yahoo.com",
-            "en.m.wikipedia.org",
-            "ir.amd.com",
-            "www.techspot.com"
+            "en.wikipedia.org",
+            "www.techspot.com",
+            "ir.amd.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en.html",
@@ -5016,7 +4957,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:yamada-denkiweb.com \"AMD Ryzen 7 7700 BOX\" 価格",
+          "query": "site:pc-koubou.jp \"AMD Ryzen 7 7700 BOX\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -5024,9 +4965,9 @@
           "rejected_host_samples": [
             "www.amd.com",
             "finance.yahoo.com",
-            "en.m.wikipedia.org",
-            "ir.amd.com",
-            "www.techspot.com"
+            "en.wikipedia.org",
+            "www.techspot.com",
+            "ir.amd.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en.html",
@@ -5050,9 +4991,9 @@
           "rejected_host_samples": [
             "www.amd.com",
             "finance.yahoo.com",
-            "en.m.wikipedia.org",
-            "ir.amd.com",
-            "www.techspot.com"
+            "en.wikipedia.org",
+            "www.techspot.com",
+            "ir.amd.com"
           ],
           "rejected_url_samples": [
             "https://www.amd.com/en.html",
@@ -5083,46 +5024,11 @@
         }
       ],
       "retailer_listing_offer": null,
-      "retailer_listing_offers": [
-        {
-          "url": "https://biccamera.rakuten.co.jp/item/0730143318037/?variantId=0730143318037",
-          "title": "楽天ビック｜AMD｜エーエムディー 〔CPU〕AMD Ryzen 7 7700 With Wraith Stealth Cooler (8C/16T3.8Ghz65W) 100-100000592SBX [AMD Ryzen 7 /Socket AM5 /グラフィックス搭載] 通販",
-          "price_jpy": 56034,
-          "seller_name": null,
-          "price_source_mode": "direct_structured",
-          "stock_status": "unknown",
-          "identity_anchor": "100-100000592SBX",
-          "identity_match": true,
-          "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T08:18:27+09:00",
-          "retrieval_time": "2026-10-25T08:18:27+09:00",
-          "pit_valid": true,
-          "bf_actual_authorized": false,
-          "price_context": null,
-          "retailer_domain": "rakuten.co.jp"
-        },
-        {
-          "url": "https://item.rakuten.co.jp/r-kojima/0730143318037/?variantId=0730143318037",
-          "title": "100-100000592SBX",
-          "price_jpy": 58010,
-          "seller_name": null,
-          "price_source_mode": "direct_meta",
-          "stock_status": "unknown",
-          "identity_anchor": "100-100000592SBX",
-          "identity_match": true,
-          "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T08:18:27+09:00",
-          "retrieval_time": "2026-10-25T08:18:27+09:00",
-          "pit_valid": true,
-          "bf_actual_authorized": false,
-          "price_context": null,
-          "retailer_domain": "rakuten.co.jp"
-        }
-      ],
+      "retailer_listing_offers": [],
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:55:01+09:00",
+      "retrieval_time": "2026-10-25T15:16:03+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -5157,7 +5063,7 @@
         "purchase_authorized": false,
         "next_step": "ブラックフライデー目標で監視を継続"
       },
-      "retailer_listing_offer_count": 2
+      "retailer_listing_offer_count": 0
     },
     {
       "id": "motherboard-asrock-b650m-pro-x3d-wifi",
@@ -5190,7 +5096,7 @@
           "rejected_host_samples": [],
           "rejected_url_samples": [],
           "same_comparison_item_path_count": 0,
-          "identity_anchor_count": 56,
+          "identity_anchor_count": 59,
           "in_range_price_count": 26,
           "ambiguous_price_card_count": 0,
           "extraction_reason": "display_only_price_from_single_product_card",
@@ -5202,18 +5108,18 @@
           "provider": "retailer_search_page",
           "query_index": 0,
           "query": "ASRock B650M Pro X3D WiFi B650M Pro X3D WiFi",
-          "retailer_domain": "shopping.yahoo.co.jp",
-          "status": "error",
-          "error": "RuntimeError:curl_http_500",
-          "result_count": 0,
+          "retailer_domain": "sofmap.com",
+          "status": "ok",
+          "error": null,
+          "result_count": 54,
           "page_fetch_count": 1,
-          "allowed_reference_host_count": 0,
+          "allowed_reference_host_count": 1,
           "rejected_host_samples": [],
           "rejected_url_samples": [],
-          "identity_anchor_count": 0,
+          "identity_anchor_count": 2,
           "in_range_price_count": 0,
           "detail_link_count": 0,
-          "extraction_reason": "fetch_failed",
+          "extraction_reason": "no_allowed_product_detail_link",
           "direct_retailer_fetch_attempt_count": 0,
           "verified_retailer_listing_count": 0,
           "source_role": "direct_retailer_listing_reference"
@@ -5231,12 +5137,12 @@
             "oc.asrock.com",
             "en.wikipedia.org",
             "pg.asrock.com",
-            "www.newegg.com"
+            "www.asrockind.com"
           ],
           "rejected_url_samples": [
             "https://www.asrock.com/",
             "https://www.asrock.com/support/index.asp",
-            "https://oc.asrock.com/support/index.asp?cat=BIOS"
+            "https://oc.asrock.com/support/index.us.asp?cat=BIOS"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -5247,7 +5153,7 @@
         {
           "provider": "bing",
           "query_index": 2,
-          "query": "site:amazon.co.jp \"ASRock B650M Pro X3D WiFi\" 価格",
+          "query": "site:mouse-jp.co.jp \"ASRock B650M Pro X3D WiFi\" 価格",
           "status": "ok",
           "error": null,
           "result_count": 10,
@@ -5257,12 +5163,12 @@
             "oc.asrock.com",
             "en.wikipedia.org",
             "pg.asrock.com",
-            "www.newegg.com"
+            "www.asrockind.com"
           ],
           "rejected_url_samples": [
             "https://www.asrock.com/",
             "https://www.asrock.com/support/index.asp",
-            "https://oc.asrock.com/support/index.asp?cat=BIOS"
+            "https://oc.asrock.com/support/index.us.asp?cat=BIOS"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -5283,12 +5189,12 @@
             "oc.asrock.com",
             "en.wikipedia.org",
             "pg.asrock.com",
-            "www.newegg.com"
+            "www.asrockind.com"
           ],
           "rejected_url_samples": [
             "https://www.asrock.com/",
             "https://www.asrock.com/support/index.asp",
-            "https://oc.asrock.com/support/index.asp?cat=BIOS"
+            "https://oc.asrock.com/support/index.us.asp?cat=BIOS"
           ],
           "same_comparison_item_path_count": 0,
           "identity_anchor_count": 0,
@@ -5314,29 +5220,11 @@
         }
       ],
       "retailer_listing_offer": null,
-      "retailer_listing_offers": [
-        {
-          "url": "https://www.yodobashi.com/product/100000001008993641/",
-          "title": "B650M Pro X3D WiFi",
-          "price_jpy": 25090,
-          "seller_name": null,
-          "price_source_mode": "direct_text",
-          "stock_status": "unknown",
-          "identity_anchor": "B650M Pro X3D WiFi",
-          "identity_match": true,
-          "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-10-25T08:18:30+09:00",
-          "retrieval_time": "2026-10-25T08:18:30+09:00",
-          "pit_valid": true,
-          "bf_actual_authorized": false,
-          "price_context": "ーボード B650M Pro X3D WiFi この商品の最初の投稿者になる この商品に関する質問をする 投稿画像 最新情報 希望小売価格： オープンプライス 販売終了時の価格： ￥25,090 （税込） メーカー： ASRock 販売開始日： 2025/03/21（販売終了商品） お取り扱い： のお取り扱い商品です。 バリエーション： ASRock Socket AM5",
-          "retailer_domain": "yodobashi.com"
-        }
-      ],
+      "retailer_listing_offers": [],
       "retailer_listing_reference_price_jpy": null,
       "retailer_listing_reference_url": null,
       "comparison_stock_signal": "unknown",
-      "retrieval_time": "2026-10-25T13:55:01+09:00",
+      "retrieval_time": "2026-10-25T15:16:04+09:00",
       "available_at": null,
       "pit_valid": false,
       "fetch_status": "ok",
@@ -5370,7 +5258,7 @@
         "purchase_authorized": false,
         "next_step": "ブラックフライデー目標で監視を継続"
       },
-      "retailer_listing_offer_count": 1
+      "retailer_listing_offer_count": 0
     }
   ]
 }
