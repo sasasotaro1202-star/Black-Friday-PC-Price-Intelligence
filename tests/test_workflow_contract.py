@@ -12,10 +12,13 @@ WORKFLOW = ROOT / ".github" / "workflows" / "pc-price-monitor.yml"
 class WorkflowContractTests(unittest.TestCase):
     def test_primary_collection_is_schedule_or_manual_only(self):
         text = WORKFLOW.read_text(encoding="utf-8")
-        triggers = text.split("\\non:", 1)[1].split("\\npermissions:", 1)[0]
-        self.assertNotIn("\\n  push:", triggers)
-        self.assertIn("\\n  workflow_dispatch:", triggers)
-        self.assertIn("\\n  schedule:", triggers)
+        lines = text.splitlines()
+        on_index = lines.index("on:")
+        permissions_index = lines.index("permissions:")
+        triggers = lines[on_index + 1:permissions_index]
+        self.assertFalse(any(line.strip() == "push:" for line in triggers))
+        self.assertTrue(any(line.strip() == "workflow_dispatch:" for line in triggers))
+        self.assertTrue(any(line.strip() == "schedule:" for line in triggers))
 
         # Code and workflow pushes remain covered by the fast regression workflow.
         test_workflow = (ROOT / ".github" / "workflows" / "pc-price-tests.yml").read_text(encoding="utf-8")
