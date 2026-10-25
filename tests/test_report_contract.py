@@ -9,6 +9,40 @@ import report
 
 
 class ReportProductLinkTests(unittest.TestCase):
+    def test_discovery_diagnostics_show_freshness_counts_and_search_failures(self):
+        lines = report.discovery_diagnostics_lines({
+            "generated_at": "2026-10-25T22:00:00+09:00",
+            "discovered_count": 23,
+            "last_discovery_attempt_at": "2026-10-25T22:00:00+09:00",
+            "last_discovery_attempt_status": "partial",
+            "discovery_search_stats": {
+                "query_count": 3,
+                "successful_query_count": 2,
+                "failed_query_count": 1,
+                "returned_url_count": 12,
+                "failures": [{
+                    "query": "RTX 5070 official product",
+                    "error_type": "HTTPError",
+                }],
+            },
+            "discovery_stats": {
+                "newly_discovered_count": 2,
+                "retained_count": 20,
+                "removed_count": 1,
+            },
+        })
+        rendered = "\\n".join(lines)
+        self.assertIn("最終探索試行時刻（JST）: 2026-10-25T22:00:00+09:00", rendered)
+        self.assertIn("探索クエリ成功/失敗: 2/1", rendered)
+        self.assertIn("新規追加/維持/削除候補: 2/20/1", rendered)
+        self.assertIn("RTX 5070 official product (HTTPError)", rendered)
+
+    def test_discovery_diagnostics_do_not_treat_missing_metrics_as_zero(self):
+        rendered = "\\n".join(report.discovery_diagnostics_lines({"urls": []}))
+        self.assertIn("探索クエリ成功/失敗: 未記録", rendered)
+        self.assertIn("新規追加/維持/削除候補: 未記録", rendered)
+        self.assertNotIn("探索クエリ成功/失敗: 0/0", rendered)
+
     def test_pc_candidate_issue_links_prefer_verified_purchase_url(self):
         monitor_url = "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/"
         purchase_url = "https://store.asus.com/jp/rog/90nr0nj7-m007r0-rog-strix-g16-2025-g614.html"

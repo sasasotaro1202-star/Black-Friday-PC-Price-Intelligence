@@ -31,6 +31,68 @@ def early_buy_amount_label(review):
     return "未確認"
 
 
+
+def discovery_diagnostics_lines(watch):
+    """Expose target-discovery freshness and query failures without inventing zeroes."""
+    watch = watch if isinstance(watch, dict) else {}
+    search_stats = watch.get("discovery_search_stats")
+    search_stats = search_stats if isinstance(search_stats, dict) else None
+    history = watch.get("discovery_stats")
+    history = history if isinstance(history, dict) else None
+
+    def count(value):
+        return value if isinstance(value, int) and not isinstance(value, bool) and value >= 0 else None
+
+    def display_count(value):
+        value = count(value)
+        return str(value) if value is not None else "未記録"
+
+    lines = [
+        "- 監視対象リスト件数: " + display_count(watch.get("discovered_count")),
+        "- 最終探索試行時刻（JST）: " + str(watch.get("last_discovery_attempt_at") or "未記録"),
+        "- 最終探索試行状態: " + str(watch.get("last_discovery_attempt_status") or "未記録"),
+    ]
+    if search_stats is None:
+        lines.append("- 探索クエリ成功/失敗: 未記録（未記録を0件とは扱いません）")
+        lines.append("- 新規追加/維持/削除候補: 未記録")
+        lines.append("- 探索失敗理由: 未記録")
+        return lines
+
+    lines.extend([
+        "- 探索クエリ成功/失敗: "
+        + display_count(search_stats.get("successful_query_count")) + "/"
+        + display_count(search_stats.get("failed_query_count")),
+        "- 探索で返ったURL数（許可ドメイン等による絞り込み前）: "
+        + display_count(search_stats.get("returned_url_count")),
+    ])
+    if history is None:
+        lines.append("- 新規追加/維持/削除候補: 未記録")
+    else:
+        lines.append(
+            "- 新規追加/維持/削除候補: "
+            + display_count(history.get("newly_discovered_count")) + "/"
+            + display_count(history.get("retained_count")) + "/"
+            + display_count(history.get("removed_count"))
+        )
+
+    failures = search_stats.get("failures")
+    failure_labels = []
+    if isinstance(failures, list):
+        for row in failures:
+            if not isinstance(row, dict):
+                continue
+            query = str(row.get("query") or "クエリ不明")[:100]
+            error_type = str(row.get("error_type") or "例外型不明")[:60]
+            failure_labels.append(query + " (" + error_type + ")")
+    if count(search_stats.get("failed_query_count")) == 0:
+        failure_summary = "なし"
+    elif failure_labels:
+        failure_summary = "、".join(failure_labels)
+    else:
+        failure_summary = "失敗の詳細未記録"
+    lines.append("- 探索失敗理由（クエリ名/例外型）: " + failure_summary)
+    return lines
+
 def peripheral_monitor_section_heading(target_config):
     """Describe the primary peripheral purchase set from the active target config."""
     primary = [
@@ -1942,6 +2004,7 @@ def main():
         "",
         "## データ品質",
         "",
+        *discovery_diagnostics_lines(watch),
         f"- 候補総数: {quality['candidate_count']}",
         f"- デスクトップ候補: {sum(1 for x in products if x.get('form_factor') == 'desktop')}",
         f"- ノート候補: {sum(1 for x in products if x.get('form_factor') == 'laptop')}",
