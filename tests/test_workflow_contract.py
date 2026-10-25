@@ -10,6 +10,19 @@ WORKFLOW = ROOT / ".github" / "workflows" / "pc-price-monitor.yml"
 
 
 class WorkflowContractTests(unittest.TestCase):
+    def test_primary_collection_is_schedule_or_manual_only(self):
+        text = WORKFLOW.read_text(encoding="utf-8")
+        triggers = text.split("\\non:", 1)[1].split("\\npermissions:", 1)[0]
+        self.assertNotIn("\\n  push:", triggers)
+        self.assertIn("\\n  workflow_dispatch:", triggers)
+        self.assertIn("\\n  schedule:", triggers)
+
+        # Code and workflow pushes remain covered by the fast regression workflow.
+        test_workflow = (ROOT / ".github" / "workflows" / "pc-price-tests.yml").read_text(encoding="utf-8")
+        self.assertIn("  push:", test_workflow)
+        self.assertIn('"scripts/**"', test_workflow)
+        self.assertIn('".github/workflows/**"', test_workflow)
+
     def test_primary_workflow_skips_unselected_cron_ticks_before_running_tests(self):
         text = WORKFLOW.read_text(encoding="utf-8")
         smoke_at = text.index("Production syntax and fail-closed smoke gate")

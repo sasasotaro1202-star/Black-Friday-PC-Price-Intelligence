@@ -2,14 +2,8 @@ name: PC Price Intelligence
 run-name: PC Price Intelligence${{ inputs.watchdog_recovery == true && ' [watchdog-recovery]' || '' }}
 
 on:
-  push:
-    branches: ["main"]
-    paths-ignore:
-      - "data/**"
-      - "docs/**"
-      - "tests/**"
-      - "README.md"
-      - ".github/copilot-instructions.md"
+  # Code pushes run the lightweight regression workflow; avoid triggering another full network collection per commit.
+  # Scheduled and manual runs remain the production data writers.
   workflow_dispatch:
     inputs:
       watchdog_recovery:
