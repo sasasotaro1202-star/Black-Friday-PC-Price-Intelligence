@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-26T03:24:39+09:00
-Source snapshot: 2026-10-26T03:20:58+09:00
-Source snapshot SHA256: d8fdf064ff80f420af00d27ea2a93fc203c0188675ff341c2c7b676fe5bf511f
+Generated: 2026-10-26T04:59:00+09:00
+Source snapshot: 2026-10-26T04:54:56+09:00
+Source snapshot SHA256: 386ac7d3a9ad9a0aa766e128c76cb27a68ec338d9d4bba094fcc62e3bd0d0239
 Budget: ¥360,000
 U.S. Black Friday calendar reference only (not official retailer sale dates): 2026-11-27
 
@@ -22,8 +22,7 @@ The primary purchase method is self-build. These completed-PC listings are price
 |8|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|10.0%|HIGH|rtx 5070 ti|38|direct_structured|
 |9|GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|¥419,800|14.2%|REALISTIC|rtx 5070 ti|29|direct_structured|
 |10|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|19.8%|REALISTIC|rtx 5070|32|direct_structured|
-|11|Acer Predator Helios Neo 16 AI PHN16-I71-N93Z57T/E|¥547,800|34.3%|LOW|rtx 5070 ti|40|direct_structured|
-|12|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|VERY_LOW|rtx 5070 ti|40|direct_structured|
+|11|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|VERY_LOW|rtx 5070 ti|40|direct_structured|
 
 ## Empirical price-change timing
 
