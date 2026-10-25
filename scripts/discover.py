@@ -148,10 +148,28 @@ def main():
             "priority": "high",
         })
 
+    query_attempts = []
     for query in cfg.get("queries", []):
         try:
             found = search(query)
-        except Exception:
+            if found is None:
+                found = []
+            if not isinstance(found, (list, tuple, set)):
+                raise TypeError("search result must be a list-like sequence")
+            found = list(found)
+            query_attempts.append({
+                "query": str(query),
+                "status": "ok",
+                "result_count": len(found),
+            })
+        except Exception as exc:
+            # Store the exception type, not its message, to avoid persisting
+            # request URLs or other potentially sensitive runtime details.
+            query_attempts.append({
+                "query": str(query),
+                "status": "error",
+                "error_type": type(exc).__name__,
+            })
             continue
         for url in found:
             add({"url": url, "query": query, "priority": "discovered"})
@@ -174,8 +192,28 @@ def main():
         "newly_discovered_ids": added_ids[:100],
         "removed_ids": removed_ids[:100],
     }
+    query_failures = [x for x in query_attempts if x.get("status") == "error"]
+    query_successes = [x for x in query_attempts if x.get("status") == "ok"]
+    if not entries:
+        attempt_status = "failed" if query_failures else "empty"
+    elif query_failures:
+        attempt_status = "partial"
+    else:
+        attempt_status = "ok"
     previous.update({
         "generated_at": now,
+        "last_discovery_attempt_at": now,
+        "last_discovery_attempt_status": attempt_status,
+        "discovery_search_stats": {
+            "query_count": len(query_attempts),
+            "successful_query_count": len(query_successes),
+            "failed_query_count": len(query_failures),
+            "returned_url_count": sum(int(x.get("result_count") or 0) for x in query_successes),
+            "failures": [
+                {"query": x.get("query"), "error_type": x.get("error_type")}
+                for x in query_failures
+            ],
+        },
         "urls": entries,
         "discovery_status": "ok" if entries else "empty",
         "discovery_error": None if entries else "No usable URLs discovered.",
@@ -183,7 +221,14 @@ def main():
         "discovery_stats": discovery_stats,
     })
     save(watch_path, previous)
-    print(json.dumps({"generated_at": now, "urls": len(entries), "status": previous["discovery_status"]}, ensure_ascii=False))
+    print(json.dumps({
+        "generated_at": now,
+        "last_discovery_attempt_status": attempt_status,
+        "urls": len(entries),
+        "search_queries": len(query_attempts),
+        "search_failures": len(query_failures),
+        "status": previous["discovery_status"],
+    }, ensure_ascii=False))
 
 if __name__ == "__main__":
     main()

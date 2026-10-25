@@ -111,6 +111,7 @@ jobs:
               with open("config/candidate_catalog.json", encoding="utf-8") as f: catalog=json.load(f)
               urls=d.get("urls") or []
               ts=d.get("generated_at")
+              attempt_ts=d.get("last_discovery_attempt_at")
               watch_url_by_id={str(x.get("id")): x.get("url") for x in urls if isinstance(x, dict) and x.get("id")}
               catalog_items=[x for x in (catalog.get("candidates") or []) if isinstance(x, dict) and x.get("id") and x.get("url")]
               catalog_url_by_id={str(x.get("id")): x.get("url") for x in catalog_items}
@@ -121,12 +122,24 @@ jobs:
                   cid for cid, url in catalog_url_by_id.items()
                   if cid in watch_url_by_id and watch_url_by_id[cid] != url
               }
-              age=(datetime.now(JST)-datetime.fromisoformat(ts.replace("Z","+00:00"))).total_seconds() if ts else 10**12
-              stale=age >= 24*3600
+              now=datetime.now(JST)
+              def age_seconds(value):
+                  if not value:
+                      return 10**12
+                  parsed=datetime.fromisoformat(str(value).replace("Z","+00:00"))
+                  if parsed.tzinfo is None:
+                      parsed=parsed.replace(tzinfo=JST)
+                  return (now-parsed.astimezone(JST)).total_seconds()
+              age=age_seconds(ts)
+              attempt_age=age_seconds(attempt_ts)
+              stale=age < 0 or age >= 24*3600
+              discovery_attempt_stale=attempt_age < 0 or attempt_age >= 24*3600
           except Exception:
-              urls=[]; stale=True; missing_catalog_ids={"catalog_unreadable"}; catalog_url_mismatch_ids=set()
-          needs_refresh=(not urls) or stale or bool(missing_catalog_ids) or bool(catalog_url_mismatch_ids)
+              urls=[]; stale=True; discovery_attempt_stale=True; missing_catalog_ids={"catalog_unreadable"}; catalog_url_mismatch_ids=set()
+          needs_refresh=(not urls) or stale or discovery_attempt_stale or bool(missing_catalog_ids) or bool(catalog_url_mismatch_ids)
           print(f"needs_refresh={str(needs_refresh).lower()}")
+          print(f"watchlist_stale={str(stale).lower()}")
+          print(f"discovery_attempt_stale={str(discovery_attempt_stale).lower()}")
           print(f"missing_catalog_count={len(missing_catalog_ids)}")
           print(f"catalog_url_mismatch_count={len(catalog_url_mismatch_ids)}")
           PY

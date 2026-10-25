@@ -47,6 +47,48 @@ class DiscoveryTests(unittest.TestCase):
             self.assertEqual(matches[0]["priority"], "critical")
             self.assertEqual(matches[0]["query"], "DGA7G70B5BBDW101DECWA")
 
+    def test_discovery_attempt_timestamp_and_search_failure_metrics_are_recorded(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            (root / "config").mkdir()
+            (root / "data").mkdir()
+            (root / "config" / "targets.json").write_text(json.dumps({
+                "allowed_domains": ["mouse-jp.co.jp"],
+                "queries": ["temporarily failing query", "working query"],
+            }), encoding="utf-8")
+            (root / "config" / "candidate_catalog.json").write_text(json.dumps({
+                "candidates": [{
+                    "id": "curated-candidate",
+                    "name": "Curated candidate",
+                    "url": "https://www.mouse-jp.co.jp/store/g/example-sku/",
+                    "url_is_exact": True,
+                    "aliases": ["EXAMPLE-SKU"],
+                }]
+            }), encoding="utf-8")
+            (root / "data" / "watchlist.json").write_text(json.dumps({
+                "generated_at": "2026-10-01T00:00:00+09:00",
+                "last_discovery_attempt_at": "2026-10-01T00:00:00+09:00",
+                "urls": [],
+            }), encoding="utf-8")
+
+            with patch.object(discover, "ROOT", str(root)), patch.object(
+                discover, "search", side_effect=[RuntimeError("do not persist raw error details"), []]
+            ):
+                discover.main()
+
+            result = json.loads((root / "data" / "watchlist.json").read_text(encoding="utf-8"))
+            stats = result["discovery_search_stats"]
+            self.assertEqual(result["last_discovery_attempt_at"], result["generated_at"])
+            self.assertEqual(result["last_discovery_attempt_status"], "partial")
+            self.assertEqual(stats["query_count"], 2)
+            self.assertEqual(stats["successful_query_count"], 1)
+            self.assertEqual(stats["failed_query_count"], 1)
+            self.assertEqual(stats["failures"], [{
+                "query": "temporarily failing query",
+                "error_type": "RuntimeError",
+            }])
+            self.assertNotIn("do not persist raw error details", json.dumps(result))
+
     def test_curated_skus_sharing_a_family_page_are_not_dropped(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = pathlib.Path(tmp)

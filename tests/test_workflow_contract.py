@@ -162,6 +162,8 @@ class WorkflowContractTests(unittest.TestCase):
             text = path.read_text(encoding="utf-8")
             self.assertIn("missing_catalog_ids=catalog_ids - watch_ids", text)
             self.assertIn("or bool(missing_catalog_ids)", text)
+            self.assertIn('attempt_ts=d.get("last_discovery_attempt_at")', text)
+            self.assertIn("or discovery_attempt_stale", text)
 
     def test_watchlist_refresh_detects_catalog_url_mismatches(self):
         for path in (
@@ -171,6 +173,8 @@ class WorkflowContractTests(unittest.TestCase):
             text = path.read_text(encoding="utf-8")
             self.assertIn("catalog_url_mismatch_ids", text)
             self.assertIn("or bool(catalog_url_mismatch_ids)", text)
+            self.assertIn('attempt_ts=d.get("last_discovery_attempt_at")', text)
+            self.assertIn("or discovery_attempt_stale", text)
 
     def test_primary_and_fast_workflows_share_current_writer_lock_without_cancelling_active_collection(self):
         text = WORKFLOW.read_text(encoding="utf-8")
