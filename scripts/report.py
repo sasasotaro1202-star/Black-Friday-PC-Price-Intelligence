@@ -1720,8 +1720,8 @@ def main():
         f"周辺機器の目標予算: ¥{budget['peripheral_budget_jpy']:,}",
         f"PC本体の基準目標: ¥{budget['pc_target_jpy']:,}",
         f"PC本体の絶対上限（周辺機器費用を加算する前の単体上限。総額上限ではない）: ¥{budget['pc_budget_jpy']:,}",
-        f"PC本体の動的上限（周辺機器の実費試算と総額予備費を控除後）: ¥{peripheral_projection['pc_dynamic_cap_jpy']:,}",
-        f"周辺機器の予算試算（ネット掲載価格と店頭現金価格は別項目。ネット配送は送料実額または送料予備額を反映）: ¥{peripheral_projection['peripheral_projection_jpy']:,}",
+        f"PC本体の予算保護用動的上限（周辺機器予算試算と総額予備費を控除後。未確認品は目標額等を使用し、実売総額を意味しない）: ¥{peripheral_projection['pc_dynamic_cap_jpy']:,}",
+        f"周辺機器の予算保護用試算（未確認の店頭価格・在庫があるため実売総額ではない。ネット送料は実額確認または送料予備額を反映）: ¥{peripheral_projection['peripheral_projection_jpy']:,}",
         f"周辺機器の購入予定ルート確認済み: {peripheral_projection['tracked_peripheral_verified_count']}/{peripheral_projection['tracked_peripheral_count']} 商品（ネット掲載価格のみの確認は購入許可を意味しません）",
         f"ネット掲載価格の型番一致・価格検証: {route_coverage['online_price_verified_count']}/{route_coverage['online_price_total_count']}" if route_coverage["online_price_total_count"] is not None else "ネット掲載価格の型番一致・価格検証: 未確認",
         f"指定店の店頭税込現金価格・同じ支店の在庫確認: {route_coverage['store_branch_confirmed_count']}/{route_coverage['store_branch_expected_count']} 支店別記録、両店舗の確認完了 {route_coverage['store_product_confirmed_count']}/{route_coverage['store_product_total_count']} 商品" if route_coverage["store_branch_expected_count"] is not None else "指定店の店頭税込現金価格・同じ支店の在庫確認: 対象支店未設定",
@@ -1809,7 +1809,7 @@ def main():
         "- 以下のBF購入目標価格は開催期間の目標。開催前の表示価格は参考であり、BF価格の確定値ではありません。",
         f"- 暫定の広域監視窓（公式セール開催期間ではない）: {purchase_strategy_status['watch_window_start_jst']} ～ {purchase_strategy_status['watch_window_end_jst']}",
         f"- BF本体計画上限: ¥{purchase_strategy_status['pc_planned_cap_jpy']:,}",
-        f"- 本体動的上限（追跡中の周辺機器価格を反映）: ¥{purchase_strategy_status['black_friday_pc_price_cap_jpy']:,}"
+        f"- PC本体の予算保護用動的上限（未確認の周辺機器は目標額等を使用。実売総額ではない）: ¥{purchase_strategy_status['black_friday_pc_price_cap_jpy']:,}"
         + ("（確定）" if purchase_strategy_status["black_friday_pc_price_cap_final"] else "（目標予算からの計画値。BF実売ではない）"),
         "- 暫定監視窓内の価格は「監視窓内参考価格」、監視窓より前/後の価格はそれぞれセール前/後参考として表示します。公式日付・SKU・直接価格・在庫・PITが揃わない価格はBF実売に数えません。",
         "",
