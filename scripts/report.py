@@ -93,6 +93,73 @@ def discovery_diagnostics_lines(watch):
     lines.append("- 探索失敗理由（クエリ名/例外型）: " + failure_summary)
     return lines
 
+
+def peripheral_route_coverage_summary(projection):
+    """Summarize online-price evidence and physical-store branch evidence separately."""
+    if not isinstance(projection, dict) or not isinstance(projection.get("peripherals"), list):
+        return {
+            "online_price_verified_count": None,
+            "online_price_total_count": None,
+            "store_branch_confirmed_count": None,
+            "store_branch_expected_count": None,
+            "store_product_confirmed_count": None,
+            "store_product_total_count": None,
+            "store_product_pending_names": [],
+            "all_route_comparison_complete_count": None,
+            "all_route_comparison_required_count": None,
+        }
+
+    rows = [row for row in projection["peripherals"] if isinstance(row, dict)]
+    tracked = [row for row in rows if row.get("track_current_price") is True]
+    online_verified = sum(1 for row in tracked if row.get("online_reference_price_verified") is True)
+    store_rows = [
+        row for row in tracked
+        if str(row.get("purchase_channel") or "").strip().lower() == "physical_store"
+    ]
+
+    expected_branch_count = 0
+    confirmed_branch_count = 0
+    for row in store_rows:
+        required = {
+            str(value).strip()
+            for value in (row.get("store_candidate_branch_ids") or row.get("physical_store_candidate_ids") or [])
+            if str(value).strip()
+        }
+        confirmed = {
+            str(value).strip()
+            for value in (row.get("store_price_verified_store_ids") or [])
+            if str(value).strip()
+        }
+        expected_branch_count += len(required)
+        confirmed_branch_count += len(required.intersection(confirmed))
+
+    pending_names = [
+        str(row.get("name") or row.get("id") or "商品名未設定")
+        for row in store_rows
+        if row.get("store_route_all_branches_confirmed") is not True
+    ]
+    complete_store_products = sum(
+        1 for row in store_rows if row.get("store_route_all_branches_confirmed") is True
+    )
+
+    def nonnegative_int(value):
+        return value if isinstance(value, int) and not isinstance(value, bool) and value >= 0 else None
+
+    compare_required = nonnegative_int(projection.get("channel_comparison_required_count"))
+    compare_complete = nonnegative_int(projection.get("channel_comparison_complete_count"))
+    return {
+        "online_price_verified_count": online_verified,
+        "online_price_total_count": len(tracked),
+        "store_branch_confirmed_count": confirmed_branch_count if expected_branch_count > 0 else None,
+        "store_branch_expected_count": expected_branch_count if expected_branch_count > 0 else None,
+        "store_product_confirmed_count": complete_store_products,
+        "store_product_total_count": len(store_rows),
+        "store_product_pending_names": pending_names,
+        "all_route_comparison_complete_count": compare_complete,
+        "all_route_comparison_required_count": compare_required,
+    }
+
+
 def peripheral_monitor_section_heading(target_config):
     """Describe the primary peripheral purchase set from the active target config."""
     primary = [
@@ -1641,8 +1708,10 @@ def main():
         "{}={}".format(k, v) for k, v in sorted(error_breakdown.items())
     ) or "なし"
 
+    route_coverage = peripheral_route_coverage_summary(peripheral_projection)
+
     lines = [
-        "# ブラックフライデー期間通算・購入ランキング",
+        "# ブラックフライデー購入計画・価格監視レポート",
         "",
         f"更新: {generated}",
         f"観測スナップショット: {source_snapshot_generated_at or '未確認'}",
@@ -1653,8 +1722,15 @@ def main():
         f"PC本体の絶対上限（周辺機器費用を加算する前の単体上限。総額上限ではない）: ¥{budget['pc_budget_jpy']:,}",
         f"PC本体の動的上限（周辺機器の実費試算と総額予備費を控除後）: ¥{peripheral_projection['pc_dynamic_cap_jpy']:,}",
         f"周辺機器の予算試算（ネット掲載価格と店頭現金価格は別項目。ネット配送は送料実額または送料予備額を反映）: ¥{peripheral_projection['peripheral_projection_jpy']:,}",
-        f"周辺機器の価格・ネット在庫の確認: {peripheral_projection['tracked_peripheral_verified_count']}/{peripheral_projection['tracked_peripheral_count']}",
-        f"周辺機器の全ルート比較: {peripheral_projection['channel_comparison_complete_count']}/{peripheral_projection['channel_comparison_required_count']}。比較保留: {', '.join(peripheral_projection['channel_comparison_pending_ids']) or 'なし'}",
+        f"周辺機器の購入予定ルート確認済み: {peripheral_projection['tracked_peripheral_verified_count']}/{peripheral_projection['tracked_peripheral_count']} 商品（ネット掲載価格のみの確認は購入許可を意味しません）",
+        f"ネット掲載価格の型番一致・価格検証: {route_coverage['online_price_verified_count']}/{route_coverage['online_price_total_count']}" if route_coverage["online_price_total_count"] is not None else "ネット掲載価格の型番一致・価格検証: 未確認",
+        f"指定店の店頭税込現金価格・同じ支店の在庫確認: {route_coverage['store_branch_confirmed_count']}/{route_coverage['store_branch_expected_count']} 支店別記録、両店舗の確認完了 {route_coverage['store_product_confirmed_count']}/{route_coverage['store_product_total_count']} 商品" if route_coverage["store_branch_expected_count"] is not None else "指定店の店頭税込現金価格・同じ支店の在庫確認: 対象支店未設定",
+        "店頭確認未完了の商品: " + (", ".join(route_coverage["store_product_pending_names"]) or "なし"),
+        (
+            f"明示指定のネット配送・店頭現金・店舗受取の全ルート比較: {route_coverage['all_route_comparison_complete_count']}/{route_coverage['all_route_comparison_required_count']} 対象"
+            if isinstance(route_coverage["all_route_comparison_required_count"], int) and route_coverage["all_route_comparison_required_count"] > 0
+            else "明示指定の全ルート自動比較: 対象なし（0件）。これは指定店の店頭価格・在庫が確認済みという意味ではありません。"
+        ),
         f"完成品PC参考候補の購入ゲート: **{'通過' if purchase_gate_allowed else '保留'}**（{out['purchase_gate']['reason']}）。自作PCの購入判定は別途、部品別互換性・実売・在庫・総額で評価します。",
         f"フェーズ: **{out['season_phase']}**",
         "",

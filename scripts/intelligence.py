@@ -1743,15 +1743,17 @@ def season_phase(now=None):
     cfg = load_json(os.path.join(ROOT, "config", "targets.json"), {})
     start = parse_dt(cfg.get("monitor_window_start")) or datetime(now.year, 11, 1, tzinfo=JST)
     end = parse_dt(cfg.get("monitor_window_end")) or datetime(now.year, 12, 11, 23, 59, 59, tzinfo=JST)
-    if not (start <= now <= end):
-        return "通常監視期間"
-    # These are only reporting buckets for the broad watch window. They are not
-    # claims that any retailer has started a promotion or changed prices.
+    if now < start:
+        return "通常監視頻度（暫定BF監視窓前・公式開催日未確認）"
+    if now > end:
+        return "通常監視頻度（暫定BF監視窓後・公式開催日未確認）"
+    # These are reporting buckets for a provisional data-collection window only.
+    # They are not claims that a retailer campaign is active or officially dated.
     if now.month == 11 and now.day < 27:
-        return "広域監視前半（各店の公式日程は未確認）"
+        return "暫定広域監視窓・前半（各店の公式開催日未確認）"
     if now.month == 11 and now.day <= 30:
-        return "Black Friday暦週（各店の公式日程は別確認）"
-    return "延長セール観測（各店の公式終了日は別確認）"
+        return "暫定BF暦週（各店の公式日程は別確認）"
+    return "暫定監視窓後半（各店の公式終了日は未確認）"
 
 def actionable_max_age_minutes(now=None):
     now = now or now_jst()

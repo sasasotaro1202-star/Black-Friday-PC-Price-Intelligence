@@ -1044,5 +1044,50 @@ class ReportLinkTests(unittest.TestCase):
         self.assertIn("ONLINE_OPTIONS_COMPARED_STORE_PENDING", summary)
 
 
+class PeripheralRouteCoverageTests(unittest.TestCase):
+    def test_store_first_quote_coverage_is_not_hidden_by_zero_explicit_comparison_count(self):
+        projection = {
+            "channel_comparison_required_count": 0,
+            "channel_comparison_complete_count": 0,
+            "peripherals": [
+                {
+                    "id": "main_monitor",
+                    "name": "AOC Q27G40E/11",
+                    "track_current_price": True,
+                    "purchase_channel": "physical_store",
+                    "store_candidate_branch_ids": ["biccamera_tenjin_1", "yodobashi_hakata"],
+                    "store_price_verified_store_ids": [],
+                    "store_route_all_branches_confirmed": False,
+                    "online_reference_price_verified": True,
+                },
+                {
+                    "id": "keyboard",
+                    "name": "Logicool G213r",
+                    "track_current_price": True,
+                    "purchase_channel": "physical_store",
+                    "store_candidate_branch_ids": ["biccamera_tenjin_1", "yodobashi_hakata"],
+                    "store_price_verified_store_ids": ["biccamera_tenjin_1"],
+                    "store_route_all_branches_confirmed": False,
+                    "online_reference_price_verified": False,
+                },
+            ],
+        }
+        summary = report.peripheral_route_coverage_summary(projection)
+        self.assertEqual(summary["online_price_verified_count"], 1)
+        self.assertEqual(summary["online_price_total_count"], 2)
+        self.assertEqual(summary["store_branch_confirmed_count"], 1)
+        self.assertEqual(summary["store_branch_expected_count"], 4)
+        self.assertEqual(summary["store_product_confirmed_count"], 0)
+        self.assertEqual(summary["store_product_total_count"], 2)
+        self.assertEqual(summary["store_product_pending_names"], ["AOC Q27G40E/11", "Logicool G213r"])
+        self.assertEqual(summary["all_route_comparison_required_count"], 0)
+
+    def test_missing_peripheral_projection_is_not_reported_as_zero_coverage(self):
+        summary = report.peripheral_route_coverage_summary(None)
+        self.assertIsNone(summary["online_price_total_count"])
+        self.assertIsNone(summary["store_branch_expected_count"])
+        self.assertIsNone(summary["all_route_comparison_required_count"])
+
+
 if __name__ == "__main__":
     unittest.main()

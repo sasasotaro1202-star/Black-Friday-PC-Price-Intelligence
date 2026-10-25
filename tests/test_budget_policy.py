@@ -737,5 +737,21 @@ class BudgetPolicyTests(unittest.TestCase):
         )
 
 
+class SeasonPhaseLabelTests(unittest.TestCase):
+    def test_pre_window_phase_is_not_mislabeled_as_generic_normal_monitoring(self):
+        now = __import__("datetime").datetime.fromisoformat("2026-10-25T20:00:00+09:00")
+        self.assertEqual(
+            intelligence.season_phase(now),
+            "通常監視頻度（暫定BF監視窓前・公式開催日未確認）",
+        )
+
+    def test_provisional_window_phase_does_not_claim_an_official_campaign(self):
+        now = __import__("datetime").datetime.fromisoformat("2026-11-15T12:00:00+09:00")
+        self.assertEqual(
+            intelligence.season_phase(now),
+            "暫定広域監視窓・前半（各店の公式開催日未確認）",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
