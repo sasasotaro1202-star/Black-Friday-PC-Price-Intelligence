@@ -6,6 +6,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from observation_contract import observation_metadata_schema_errors, purchase_gate_schema_errors
+from sanitize import final_fetch_stats
 
 
 def valid_snapshot():
@@ -140,6 +141,14 @@ class ProductionObservationContractTests(unittest.TestCase):
         del snapshot["fetch_stats"]["errors"]
         errors = observation_metadata_schema_errors(snapshot)
         self.assertIn("fetch_stats.errors is missing or invalid", errors)
+
+    def test_purchase_route_error_counter_survives_sanitization(self):
+        products = [
+            {"id": "sku-error", "fetch_status": "ok", "purchase_page_fetch_status": "error"},
+            {"id": "sku-ok", "fetch_status": "ok", "purchase_page_fetch_status": "not_used"},
+        ]
+        stats = final_fetch_stats(products, {"purchase_route_errors": 1})
+        self.assertEqual(stats["purchase_route_errors"], 1)
 
 
 if __name__ == "__main__":
