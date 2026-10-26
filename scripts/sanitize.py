@@ -51,6 +51,7 @@ def final_fetch_stats(final_products, monitor_stats=None):
     }
     # Monitor-side diagnostics are independent observations and survive sanitization.
     for key in (
+        "purchase_route_errors",
         "search_fallback_attempts", "search_fallback_successes", "search_fallback_failures",
         "search_identity_rejections", "errors_by_host_reason",
     ):
