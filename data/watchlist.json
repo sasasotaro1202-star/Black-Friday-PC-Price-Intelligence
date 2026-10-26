@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-25T22:35:43+09:00",
+  "generated_at": "2026-10-26T22:50:19+09:00",
   "urls": [
     {
       "url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/",
@@ -128,7 +128,7 @@
       "priority": "normal"
     }
   ],
-  "last_discovery_attempt_at": "2026-10-25T22:35:43+09:00",
+  "last_discovery_attempt_at": "2026-10-26T22:50:19+09:00",
   "discovery_status": "ok",
   "discovery_error": null,
   "desktop_included": true,
@@ -145,237 +145,33 @@
   "last_discovery_attempt_status": "partial",
   "discovery_search_stats": {
     "query_count": 57,
-    "successful_query_count": 0,
-    "failed_query_count": 57,
+    "successful_query_count": 51,
+    "failed_query_count": 6,
     "returned_url_count": 0,
     "failures": [
       {
-        "query": "G TUNE FG-A7G6T FGA7G6TG8BDDW101DECWA Ryzen 7 7700 RTX 5060 Ti 16GB 32GB 1TB デスクトップ 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "ROG Strix G16 Ryzen 9 9955HX3D RTX 5070 Ti 32GB 1TB 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "ROG Strix G16 Ryzen 9 8940HX RTX 5070 Ti 32GB 1TB 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "GALLERIA ZL9R-R57T-6 RTX 5070 Ti 9955HX 32GB 1TB",
-        "error_type": "URLError"
-      },
-      {
-        "query": "MSI Vector 16 HX AI RTX 5070 Ti 275HX 32GB 1TB 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "Legion Pro 5i Gen 10 RTX 5070 Ti 275HX 32GB 1TB 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "Predator Helios Neo 16 AI RTX 5070 Ti 32GB 1TB 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "OMEN MAX 16 RTX 5070 Ti 32GB 1TB 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "TUF Gaming A16 RTX 5070 8940HX 32GB 1TB 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "G TUNE P6 RTX 5070 13700HX 32GB 1TB 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "G TUNE P5 RTX 5070 13620H 32GB 1TB 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "TUF Gaming F16 RTX 5070 14650HX 32GB 1TB 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "GIGABYTE GAMING A18 PRO RTX 5070 Ti 32GB 1TB 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "GIGABYTE AERO X16 RTX 5070 32GB 1TB 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "RTX 5070 Ti Laptop 32GB 1TB ゲーミングノート 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "RTX 5080 Laptop 32GB 1TB ゲーミングノート 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "RTX 5090 Laptop 32GB 1TB ゲーミングノート 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "RTX 5070 Ti ゲーミングデスクトップ 32GB 1TB 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "RTX 5080 ゲーミングデスクトップ 32GB 1TB 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "RTX 5070 ゲーミングデスクトップ 32GB 1TB 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "G TUNE DG-I7G70 RTX 5070 Core Ultra 7 270K Plus 16GB 500GB デスクトップ 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "G TUNE FG-A7G7T RTX 5070 Ti Ryzen 7 7700 32GB 1TB デスクトップ 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "G TUNE DG-A5G60 RTX 5060 Ryzen 5 4500 16GB 500GB デスクトップ 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "G TUNE DG-I7G70 Core Ultra 7 270K Plus RTX 5070 16GB 500GB デスクトップ 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "G TUNE FG-A7G7T Ryzen 7 7700 RTX 5070 Ti 32GB 1TB TGS2026 デスクトップ 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "G TUNE DG-A5G60 Ryzen 5 4500 RTX 5060 16GB 500GB デスクトップ 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "G TUNE DG-I5G70 Core Ultra 5 250K Plus RTX 5070 16GB 500GB デスクトップ 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "G TUNE DG-A7G70 Ryzen 7 5700X RTX 5070 32GB 1TB デスクトップ 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "G TUNE FG-A7G70 Ryzen 7 7700 RTX 5070 32GB 1TB デスクトップ 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "Ryzen 7 9700X RTX 5070 32GB 1TB デスクトップ ゲーミングPC 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "THIRDWAVE Ryzen 7 9700X RTX 5070 32GB 1TB 価格",
-        "error_type": "URLError"
-      },
-      {
-        "query": "OZgaming M110A Ryzen 7 9700X RTX 5070 32GB 1TB",
-        "error_type": "URLError"
-      },
-      {
-        "query": "RTX 5060 Ti 16GB 64GB 1TB デスクトップPC 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "RTX 5070 Ti 32GB 1TB デスクトップPC アウトレット 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "RTX 5070 32GB 1TB デスクトップPC セール パソコン工房",
-        "error_type": "URLError"
-      },
-      {
-        "query": "RTX 5070 Ryzen 7 7700 32GB 1TB デスクトップPC TSUKUMO",
-        "error_type": "URLError"
-      },
-      {
-        "query": "RTX 5070 32GB 1TB デスクトップPC FRONTIER",
-        "error_type": "URLError"
-      },
-      {
-        "query": "G TUNE DG-I5G70 32GB 1TB 構成変更 価格",
-        "error_type": "URLError"
-      },
-      {
-        "query": "G TUNE DG-I7G70 32GB 1TB 構成変更 価格",
-        "error_type": "URLError"
-      },
-      {
-        "query": "Core Ultra 7 265 RTX 5070 32GB 1TB デスクトップ 特価 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "Ryzen 7 9700X RTX 5070 デスクトップ パソコン工房 ドスパラ マウス",
-        "error_type": "URLError"
-      },
-      {
-        "query": "G TUNE DG-I5G70 DGI5G70B8BGDW102DECRISE 32GB 1TB 追加料金 公式",
-        "error_type": "URLError"
-      },
-      {
-        "query": "site:mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa DGA7G70B5BBDW101DECWA RTX 5070 32GB 1TB",
-        "error_type": "URLError"
-      },
-      {
-        "query": "RTX 5070 Ti デスクトップPC アウトレット 32GB 1TB 316200円以下",
-        "error_type": "URLError"
-      },
-      {
-        "query": "RTX 5070 Ti ゲーミングPC 32GB 1TB 完成構成 セール 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "Ryzen 9 9900X RTX 5070 32GB 1TB ゲーム制作 Unreal Engine 5 デスクトップ",
-        "error_type": "URLError"
-      },
-      {
-        "query": "Ryzen 9 9900X RTX 5070 Ti 32GB 1TB ゲーム開発 デスクトップ",
-        "error_type": "URLError"
-      },
-      {
-        "query": "Ryzen 9 9950X RTX 5070 64GB 2TB ゲーム制作 デスクトップ",
-        "error_type": "URLError"
-      },
-      {
-        "query": "RTX 5070 64GB DDR5 2TB Unity Unreal Engine 5 開発 デスクトップ 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "RTX 5060 Ti 16GB 64GB RAM 2TB SSD ゲーム開発 デスクトップ 日本",
-        "error_type": "URLError"
-      },
-      {
-        "query": "12コア 16コア CPU RTX 5070 デスクトップPC ゲーム開発 Unity Unreal Engine 日本",
-        "error_type": "URLError"
-      },
-      {
         "query": "64GB RAM 2TB SSD Ryzen 9 RTX 5070 Python データ分析 ゲーム開発 デスクトップ",
-        "error_type": "URLError"
+        "error_type": "HTTPError"
       },
       {
         "query": "Ryzen 9 9900X 64GB 2TB RTX 5070 ローカルAI Python 予測分析 PC 日本",
-        "error_type": "URLError"
+        "error_type": "HTTPError"
       },
       {
         "query": "Ryzen 7 9700X 64GB DDR5 2TB SSD データ分析 ゲーム制作 デスクトップ",
-        "error_type": "URLError"
+        "error_type": "HTTPError"
       },
       {
         "query": "RTX 5060 Ti 16GB 64GB 2TB Python ローカルAI ゲーム開発 自作PC",
-        "error_type": "URLError"
+        "error_type": "HTTPError"
       },
       {
         "query": "Core Ultra 7 RTX 5070 64GB 2TB データ分析 Unity Unreal PC 日本",
-        "error_type": "URLError"
+        "error_type": "HTTPError"
       },
       {
         "query": "Ryzen 9 9950X RTX 5070 64GB 2TB シミュレーション Python 自作PC",
-        "error_type": "URLError"
+        "error_type": "HTTPError"
       }
     ]
   }
