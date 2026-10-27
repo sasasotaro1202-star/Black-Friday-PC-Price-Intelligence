@@ -7,6 +7,7 @@ import json
 import re
 import unittest
 from pathlib import Path
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -66,6 +67,25 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(targets["total_budget_jpy"], 400000)
         self.assertEqual(targets["peripheral_budget_jpy"], 35000)
         self.assertEqual(targets["pc_target_jpy"], 360000)
+
+    def test_component_monitor_urls_use_allowlisted_comparison_domains(self):
+        allowed_domains = tuple(
+            str(domain).lower().removeprefix("www.")
+            for domain in (self.profile.get("allowed_comparison_domains") or [])
+        )
+        self.assertTrue(allowed_domains, "comparison-source allowlist must not be empty")
+
+        for part in self.build.get("parts") or []:
+            with self.subTest(part_id=part.get("id")):
+                url = str(part.get("monitor_url") or "")
+                parsed = urlparse(url)
+                host = (parsed.hostname or "").lower().removeprefix("www.")
+                self.assertEqual(parsed.scheme, "https", f"{part.get('id')}: monitor URL must use HTTPS: {url}")
+                self.assertTrue(
+                    any(host == domain or host.endswith("." + domain) for domain in allowed_domains),
+                    f"{part.get('id')}: monitor URL must use an allowlisted comparison source, "
+                    f"not a direct retailer URL: {url}",
+                )
 
     def test_study_workflow_and_pc_scope_preserve_all_user_requirements(self):
         study = self.build.get("study_to_university_transfer_policy") or {}
