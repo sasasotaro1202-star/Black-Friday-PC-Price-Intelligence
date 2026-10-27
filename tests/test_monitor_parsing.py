@@ -10,6 +10,56 @@ import monitor
 
 
 class MonitorParsingTests(unittest.TestCase):
+    def test_fetch_limits_concurrent_requests_per_host(self):
+        from concurrent.futures import ThreadPoolExecutor
+        import threading
+        import time
+        from unittest.mock import patch
+
+        active = [0]
+        peak = [0]
+        lock = threading.Lock()
+
+        class Headers(dict):
+            def get_content_charset(self):
+                return "utf-8"
+
+        class Response:
+            headers = Headers()
+
+            def __init__(self, url):
+                self.url = url
+
+            def __enter__(self):
+                with lock:
+                    active[0] += 1
+                    peak[0] = max(peak[0], active[0])
+                return self
+
+            def __exit__(self, exc_type, exc, tb):
+                with lock:
+                    active[0] -= 1
+
+            def read(self):
+                time.sleep(0.04)
+                return b"<html></html>"
+
+            def geturl(self):
+                return self.url
+
+        def fake_urlopen(request, timeout=18):
+            return Response(request.full_url)
+
+        urls = [f"https://host-limiter-test.invalid/product/{i}" for i in range(8)]
+        with patch.object(monitor, "urlopen", side_effect=fake_urlopen):
+            with ThreadPoolExecutor(max_workers=8) as executor:
+                results = list(executor.map(monitor.fetch, urls))
+
+        self.assertEqual(len(results), len(urls))
+        self.assertTrue(all(result[1] == url for result, url in zip(results, urls)))
+        self.assertLessEqual(peak[0], monitor.MAX_CONCURRENT_REQUESTS_PER_HOST)
+        self.assertGreater(peak[0], 1, "host limiting should allow bounded parallelism")
+
     def test_monitor_output_separates_purchase_page_from_spec_monitor_page(self):
         monitor_url = "https://www.asus.com/jp/laptops/for-gaming/tuf-gaming/asus-tuf-gaming-a16-2025/techspec/"
         purchase_url = "https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gaming-a16-2025.html"

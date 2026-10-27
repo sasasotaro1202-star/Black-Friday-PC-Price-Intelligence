@@ -6,6 +6,7 @@ import os
 import re
 import subprocess
 import time
+import threading
 import base64
 from html.parser import HTMLParser
 from urllib.parse import quote, parse_qs, urlparse, unquote
@@ -31,6 +32,23 @@ SECONDARY_DOMAINS = {
     "edion.com", "ksdenki.com", "nojima.co.jp"
 }
 UA = "Mozilla/5.0 (compatible; BF-PC-Price-Intelligence/3.0)"
+
+# Limit bursts against a single retailer even when different SKU pages are
+# fetched by the global worker pool. A 503/429 remains an error; this only
+# reduces concurrent pressure and never turns a failed fetch into a price.
+MAX_CONCURRENT_REQUESTS_PER_HOST = 2
+_HOST_LIMITERS = {}
+_HOST_LIMITERS_LOCK = threading.Lock()
+
+
+def _host_limiter_for_url(url):
+    host = (urlparse(str(url or "")).hostname or "unknown").lower()
+    with _HOST_LIMITERS_LOCK:
+        limiter = _HOST_LIMITERS.get(host)
+        if limiter is None:
+            limiter = threading.BoundedSemaphore(MAX_CONCURRENT_REQUESTS_PER_HOST)
+            _HOST_LIMITERS[host] = limiter
+        return limiter
 
 def read(path, default):
     return load_json(path, default)
@@ -62,7 +80,7 @@ def decode_response_body(body, charset="utf-8"):
         return body.decode("utf-8", errors="replace")
 
 
-def fetch(url, timeout=18):
+def _fetch_unthrottled(url, timeout=18):
     headers = {
         "User-Agent": UA,
         "Accept-Language": "ja-JP,ja;q=0.9,en;q=0.5",
@@ -180,6 +198,17 @@ class SearchParser(HTMLParser):
         if self.capture:
             self.buf.append(data)
 
+
+
+def fetch(url, timeout=18):
+    """Fetch a URL under a per-host concurrency limit.
+
+    Keep the limiter held across the complete request/retry sequence so
+    concurrent SKUs from one seller do not create a burst of retry traffic.
+    """
+    limiter = _host_limiter_for_url(url)
+    with limiter:
+        return _fetch_unthrottled(url, timeout=timeout)
 
 def parse_duckduckgo_results(html):
     parser = SearchParser()
