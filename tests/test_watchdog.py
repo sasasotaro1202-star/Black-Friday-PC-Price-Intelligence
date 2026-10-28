@@ -1,4 +1,6 @@
 import importlib.util
+import os
+import subprocess
 import json
 import pathlib
 import unittest
@@ -160,6 +162,58 @@ class ConfiguredWatchWindowTests(unittest.TestCase):
             sum(1 for problem in problems if problem.startswith("self_build_base_memory_capacity_mismatch:")),
             3,
         )
+
+
+class SnapshotInputFreshnessTests(unittest.TestCase):
+    def _git(self, root, *args, env=None):
+        return subprocess.run(
+            ["git", *args],
+            cwd=root,
+            env=env,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+    def _commit(self, root, timestamp, message):
+        env = os.environ.copy()
+        env["GIT_AUTHOR_DATE"] = timestamp
+        env["GIT_COMMITTER_DATE"] = timestamp
+        self._git(root, "add", ".")
+        self._git(root, "commit", "-m", message, env=env)
+
+    def test_snapshot_older_than_inputs_is_detected(self):
+        self.assertTrue(watchdog.snapshot_predates_inputs(
+            "2026-10-28T17:56:23+09:00",
+            "2026-10-28T18:05:48+09:00",
+        ))
+
+    def test_snapshot_newer_than_inputs_is_not_stale_by_revision(self):
+        self.assertFalse(watchdog.snapshot_predates_inputs(
+            "2026-10-28T18:10:00+09:00",
+            "2026-10-28T18:05:48+09:00",
+        ))
+
+    def test_latest_input_timestamp_ignores_newer_data_only_commit(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = pathlib.Path(temp_dir)
+            self._git(root, "init", "-q", "-b", "main")
+            self._git(root, "config", "user.name", "Watchdog Test")
+            self._git(root, "config", "user.email", "watchdog-test@example.invalid")
+            (root / "config").mkdir()
+            (root / "data").mkdir()
+            (root / "config" / "targets.json").write_text("{}", encoding="utf-8")
+            source_timestamp = "2026-10-28T09:05:00+00:00"
+            self._commit(root, source_timestamp, "config: initial runtime input")
+            (root / "data" / "current_latest.json").write_text("{}", encoding="utf-8")
+            self._commit(root, "2026-10-28T12:00:00+00:00", "data: newer observation")
+            observed = watchdog.latest_input_change_at(str(root))
+            self.assertEqual(observed, watchdog.parse_dt(source_timestamp))
+
+    def test_missing_git_history_fails_closed(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            self.assertIsNone(watchdog.latest_input_change_at(temp_dir))
+
 
 if __name__ == "__main__":
     unittest.main()

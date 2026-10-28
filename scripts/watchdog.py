@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import subprocess
 from datetime import datetime, timezone, timedelta
 
 JST = timezone(timedelta(hours=9))
@@ -33,6 +34,43 @@ def configured_watch_window(now, config):
 def read_json(path):
     with open(path, encoding="utf-8") as f:
         return json.load(f)
+
+
+
+def latest_input_change_at(root=ROOT):
+    """Return the newest commit timestamp touching runtime inputs.
+
+    Data-only commits must not advance this timestamp; source/config/workflow
+    changes must be followed by a newly collected snapshot. Full git history is
+    required by the watchdog workflow so shallow clones do not silently skip it.
+    """
+    try:
+        result = subprocess.run(
+            ["git", "log", "-1", "--format=%cI", "--", "scripts", "config", ".github/workflows"],
+            cwd=root,
+            capture_output=True,
+            text=True,
+            timeout=10,
+            check=False,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if result.returncode != 0 or not result.stdout.strip():
+        return None
+    return parse_dt(result.stdout.strip())
+
+
+def snapshot_predates_inputs(snapshot_generated_at, latest_input_changed_at):
+    """True when source/config inputs changed after the data snapshot was built."""
+    snapshot_time = parse_dt(snapshot_generated_at)
+    input_change_time = parse_dt(latest_input_changed_at)
+    return bool(
+        snapshot_time is not None
+        and input_change_time is not None
+        and input_change_time > snapshot_time
+    )
+
+
 
 def self_build_artifact_problems(root, now, threshold):
     """Validate freshness and core invariants of the self-build data path."""
@@ -190,6 +228,12 @@ def main():
         problems.append("current_latest_unreadable:" + type(exc).__name__)
 
     generated = parse_dt(latest.get("generated_at"))
+    latest_input_changed_at = latest_input_change_at(ROOT)
+    if latest_input_changed_at is None:
+        problems.append("input_change_timestamp_unavailable")
+    elif snapshot_predates_inputs(latest.get("generated_at"), latest_input_changed_at.isoformat()):
+        problems.append("latest_data_predates_code_or_config_change")
+
     config_path = os.path.join(ROOT, "config", "targets.json")
     try:
         monitor_config = read_json(config_path)

@@ -27,7 +27,10 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
 
+      # Full history is needed so data-only commits cannot hide newer runtime-input changes.
       - name: Check freshness and integrity
         id: check
         continue-on-error: true
