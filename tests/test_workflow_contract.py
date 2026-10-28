@@ -223,9 +223,9 @@ class WorkflowContractTests(unittest.TestCase):
     def test_watchdog_checks_freshness_and_recovers_default_branch_failures(self):
         watchdog = (ROOT / ".github" / "workflows" / "pc-price-watchdog.yml").read_text(encoding="utf-8")
         primary = WORKFLOW.read_text(encoding="utf-8")
-        # The watchdog heartbeat is intentionally every 15 minutes; the collector itself
-        # still runs every 5 minutes during the provisional BF watch window.
-        self.assertIn('cron: "*/15 * * * *"', watchdog)
+        # Check freshness every 5 minutes so a missed/queued collector is detected promptly.
+        # This health check does not authorize purchase or imply a sale date.
+        self.assertIn('cron: "*/5 * * * *"', watchdog)
         self.assertIn("workflow_run:", watchdog)
         self.assertIn('"PC Price Intelligence"', watchdog)
         self.assertIn('"PC Price Intelligence - Tests"', watchdog)

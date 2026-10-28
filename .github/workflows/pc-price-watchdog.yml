@@ -3,7 +3,7 @@ name: PC Price Intelligence - Watchdog
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/5 * * * *"
   workflow_run:
     workflows:
       - "PC Price Intelligence"
