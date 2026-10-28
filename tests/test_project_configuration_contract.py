@@ -93,7 +93,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
             item for item in catalog["candidates"]
             if item.get("id") == "tuf-a16-8940hx-5070"
         )
-        self.assertIn("/tuf-gaming-a16-2025/", candidate["url"])
+        self.assertIn("asus-tuf-gaming-a16-2025", candidate["url"])
         self.assertIn("tuf-gaming-a16-2026.html", candidate["purchase_url"])
         self.assertFalse(candidate["url_is_exact"])
         self.assertFalse(candidate["purchase_url_is_exact"])

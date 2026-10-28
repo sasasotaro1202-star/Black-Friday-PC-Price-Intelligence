@@ -350,7 +350,9 @@ class WorkflowContractTests(unittest.TestCase):
             "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1",
         )
         self.assertFalse(candidates["tuf-a16-8940hx-5070"]["url_is_exact"])
-        self.assertTrue(candidates["tuf-a16-8940hx-5070"]["purchase_url_is_exact"])
+        # The monitor page is a 2025 model while the store URL is a 2026 model;
+        # retain the URL for reference but do not classify it as an exact SKU route.
+        self.assertFalse(candidates["tuf-a16-8940hx-5070"]["purchase_url_is_exact"])
         self.assertTrue(candidates["zephyrus-g14-386h-5070ti"]["purchase_url_is_exact"])
         self.assertNotIn("purchase_url", candidates["rog-g16-2025-275hx-5070ti"])
         self.assertNotIn("purchase_url", candidates["rog-g18-2025-275hx-5070ti"])
