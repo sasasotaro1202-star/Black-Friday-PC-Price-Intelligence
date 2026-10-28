@@ -37,10 +37,10 @@ class RankingTableAlignmentTests(unittest.TestCase):
             }],
         })
         rows = rendered.splitlines()
-        header_index = next(i for i, line in enumerate(rows) if line.startswith("|順位|自作構成|"))
+        header_index = next(i for i, line in enumerate(rows) if line.startswith("|購入順位|自作構成|"))
         header_cells = rows[header_index].strip("|").split("|")
         separator_cells = rows[header_index + 1].strip("|").split("|")
-        ranking_row = next(line for line in rows if line.startswith("|1|Balanced build|"))
+        ranking_row = next(line for line in rows if line.startswith("|保留|Balanced build|"))
         self.assertEqual(len(header_cells), len(separator_cells))
         self.assertEqual(len(header_cells), len(ranking_row.strip("|").split("|")))
         self.assertIn("[CPU test](https://shop.example/cpu)", ranking_row)
