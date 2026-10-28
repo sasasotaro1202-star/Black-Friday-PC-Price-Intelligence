@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-28T10:31:54+09:00
-Source snapshot: 2026-10-28T10:26:43+09:00
-Source snapshot SHA256: 75be6f0219497d90fff93011ec8d524fdafc0784b817b21982bcecf228f63c16
+Generated: 2026-10-28T11:23:43+09:00
+Source snapshot: 2026-10-28T11:17:30+09:00
+Source snapshot SHA256: 27f032a5008bb7483d71f0159dd65f7fc1cde9edc8707abe44f73596350d2668
 Budget: ¥360,000
 U.S. Black Friday calendar reference only (not official retailer sale dates): 2026-11-27
 
@@ -15,18 +15,17 @@ The primary purchase method is self-build. These completed-PC listings are price
 |1|G TUNE P6-I7G70BK-B|¥284,700|0.0%|HIGH|rtx 5070|35|direct_structured|
 |2|G TUNE FG-A7G70|¥319,800|0.0%|HIGH|rtx 5070|33|direct_structured|
 |3|G TUNE DG-I7G70|¥299,800|0.0%|HIGH|rtx 5070|32|direct_structured|
-|4|G TUNE DG-A7G70|¥327,091|0.0%|HIGH|rtx 5070|26|direct_text|
-|5|G TUNE DG-I5G70|¥279,800|0.0%|HIGH|rtx 5070|22|direct_structured|
-|6|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
-|7|G TUNE FG-A7G6T|¥360,728|0.2%|HIGH|rtx 5060 ti|28|direct_text|
-|8|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|10.0%|HIGH|rtx 5070 ti|38|direct_structured|
-|9|GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|¥419,800|14.2%|REALISTIC|rtx 5070 ti|29|direct_structured|
-|10|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|19.8%|REALISTIC|rtx 5070|32|direct_structured|
-|11|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|VERY_LOW|rtx 5070 ti|40|direct_structured|
+|4|G TUNE DG-I5G70|¥279,800|0.0%|HIGH|rtx 5070|22|direct_structured|
+|5|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
+|6|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|10.0%|HIGH|rtx 5070 ti|38|direct_structured|
+|7|G TUNE FG-A7G6T|¥406,182|11.4%|REALISTIC|rtx 5060 ti|28|direct_text|
+|8|GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|¥419,800|14.2%|REALISTIC|rtx 5070 ti|29|direct_structured|
+|9|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|19.8%|REALISTIC|rtx 5070|32|direct_structured|
+|10|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|VERY_LOW|rtx 5070 ti|40|direct_structured|
 
 ## Empirical price-change timing
 
-- Meaningful change sample: **11**
+- Meaningful change sample: **12**
 - **観測不足:** 20件未満なので時間帯の傾向は作りません。
 
 ## Historical anchors
