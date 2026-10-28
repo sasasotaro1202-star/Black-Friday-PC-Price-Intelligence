@@ -93,8 +93,8 @@
       ],
       "purchase_url": "https://store.asus.com/jp/90nr0md1-m001v0-asus-tuf-gaming-a16-2026.html",
       "monitor_page_type": "official_model_specification",
-      "notes": "SKU別ストア経路は整備済み品の掲載ページ。検索時点の掲載情報では在庫切れ・メーカー保証なしの条件が示されていたため、通常新品の比較価格には使わず、現行価格・在庫・保証を直接再確認する。公式仕様ページは型番の補助確認用であり、ページ内の他SKU価格・在庫を流用しない。",
-      "purchase_url_is_exact": true,
+      "notes": "仕様監視ページは2025年モデル表記だが、参照ストアURLは2026年モデル表記で、型番・年次の一致を確認できていない。ストアURLは比較・リンク表示専用とし、正確なSKUの購入ページとして取得・判定しない。現行価格・在庫・保証の証拠として採用せず、公式の年次・型番一致ページが確認できるまでREFERENCE_ONLYを維持する。",
+      "purchase_url_is_exact": false,
       "historical_sellout": true
     },
     {

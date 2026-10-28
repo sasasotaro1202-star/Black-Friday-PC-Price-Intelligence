@@ -87,6 +87,19 @@ class ProjectConfigurationContractTests(unittest.TestCase):
                     f"not a direct retailer URL: {url}",
                 )
 
+    def test_tuf_a16_year_mismatch_cannot_be_treated_as_exact_purchase_route(self):
+        catalog = read_json("config/candidate_catalog.json")
+        candidate = next(
+            item for item in catalog["candidates"]
+            if item.get("id") == "tuf-a16-8940hx-5070"
+        )
+        self.assertIn("/tuf-gaming-a16-2025/", candidate["url"])
+        self.assertIn("tuf-gaming-a16-2026.html", candidate["purchase_url"])
+        self.assertFalse(candidate["url_is_exact"])
+        self.assertFalse(candidate["purchase_url_is_exact"])
+        self.assertIn("2025", candidate["notes"])
+        self.assertIn("2026", candidate["notes"])
+
     def test_study_workflow_and_pc_scope_preserve_all_user_requirements(self):
         study = self.build.get("study_to_university_transfer_policy") or {}
         self.assertEqual(set(study.get("target_universities") or []), {"早稲田大学", "九州大学"})
