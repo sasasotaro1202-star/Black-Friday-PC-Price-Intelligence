@@ -31,6 +31,32 @@ def file_sha256(path):
 def money(value):
     return "¥{:,.0f}".format(value) if isinstance(value, (int, float)) else "未確認"
 
+
+PURCHASE_READY_DECISIONS = {"BUY_NOW", "BUY_NOW_LOW_STOCK", "BUY_NOW_NEAR_BUDGET"}
+
+
+def display_purchase_rank(candidate):
+    """Show a numeric purchase rank only after every purchase gate is evidenced."""
+    if not isinstance(candidate, dict):
+        return "保留"
+    if candidate.get("compatibility_status") != "PASS":
+        return "保留"
+    if candidate.get("decision") not in PURCHASE_READY_DECISIONS:
+        return "保留"
+    required = candidate.get("current_sellable_listing_required_part_count")
+    sellable = candidate.get("current_sellable_listing_part_count")
+    if (
+        not isinstance(required, int) or isinstance(required, bool) or required <= 0
+        or not isinstance(sellable, int) or isinstance(sellable, bool) or sellable != required
+    ):
+        return "保留"
+    if candidate.get("current_listing_subtotal_is_checkout_price") is not True:
+        return "保留"
+    if candidate.get("target_within_soft_total_budget") is not True:
+        return "保留"
+    return candidate.get("rank") or candidate.get("overall_comparison_rank") or candidate.get("display_rank_within_tier") or "—"
+
+
 def age_minutes(value, now):
     """Return None for missing or future-dated observations instead of hiding clock/PIT errors."""
     dt = parse_dt(value)
@@ -2039,15 +2065,16 @@ def render_plan_markdown(plan):
         "",
         "構成点は用途適性・目標総額ベースの相対価格効率・互換性で採点。ゲーム点は[Tom's Hardware GPU Benchmarks Hierarchy 2026](https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html)の1440p Ultraラスタライズ値を25点満点に正規化した代理指標で、対象ゲームの実測FPSではありません。参照表の最終更新日は2026-06-24です。GPU参照FPSも各構成に対応させて表示します。",
         "購入根拠充足度は直接価格・型番・取得時刻・販売可能在庫・検証済み決済総額・互換性を別計算し、購入許可とは切り離します。",
+        "購入順位は、互換性PASS・購入判断BUY_NOW・全必須部品の販売可能在庫・検証済み決済総額・許容予算内が揃った場合だけ数値化します。条件未達は「保留」。構成スコアと表示順は購入可能性の順位ではありません。",
         "",
-        "|順位|構成|GPU参照FPS (1440p Ultra)|総合点/100|ゲーム/25|制作/20|分析・AI/20|勉強・同時利用/10|価格効率/15|互換性/10|購入根拠充足度/100|直接価格・在庫・決済確認率|市場参考値|",
-        "|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|"
+        "|購入順位|構成|GPU参照FPS (1440p Ultra)|総合点/100|ゲーム/25|制作/20|分析・AI/20|勉強・同時利用/10|価格効率/15|互換性/10|購入根拠充足度/100|直接価格・在庫・決済確認率|市場参考値|",
+        "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|"
     ])
     for build in plan.get("builds") or []:
         score = build.get("scorecard") or {}
         benchmark = score.get("gaming_benchmark_reference") or {}
         lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
-            build.get("rank"), build.get("name"), benchmark.get("reference_mean_fps", "—"),
+            display_purchase_rank(build), build.get("name"), benchmark.get("reference_mean_fps", "—"),
             score.get("overall_score", "—"), score.get("gaming_score", "—"),
             score.get("game_creation_score", "—"), score.get("analysis_ai_score", "—"),
             score.get("study_multitasking_score", "—"),
@@ -2072,15 +2099,15 @@ def render_plan_markdown(plan):
         "",
         "主ランキングのRyzen 7 9700Xはゲームと一般的な制作・分析を両立する基準構成です。次のCPU案はRTX 5070 12GBを共通GPUとしてCPU差分を比較します。100点スコアは主ランキングと同じ式・価格効率の比較母集団で再計算していますが、互換性・冷却・販売価格の未確認が解消されたことを意味しません。",
         "",
-        "|全候補順位|CPU比較案|コア/スレッド|CPU BF目標|PC本体BF目標|周辺機器込みBF目標|基準案からの総額差|制作スコア/20|分析スコア/20|総合点/100|互換性|判定|",
-        "|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|",
+        "|購入順位|CPU比較案|コア/スレッド|CPU BF目標|PC本体BF目標|周辺機器込みBF目標|基準案からの総額差|制作スコア/20|分析スコア/20|総合点/100|互換性|判定|",
+        "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|",
     ])
     for item in cpu_alternatives:
         build = item.get("build") or {}
         score = item.get("scorecard") or {}
         fit = build.get("scorecard") or {}
         lines.append("|{}|{}|{}/{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
-            item.get("overall_comparison_rank", "—"),
+            display_purchase_rank(item),
             item.get("cpu_name") or item.get("cpu_choice_id"),
             item.get("cpu_cores", "—"), item.get("cpu_threads", "—"),
             money(item.get("cpu_target_price_jpy")),
@@ -2121,15 +2148,15 @@ def render_plan_markdown(plan):
         "",
         "## 目標総額と購入ゲート",
         "",
-        "|順位|構成|部品目標小計|PC本体目標総額|周辺機器込み目標|目標残額|比較参考合計|互換性|判定|全パーツ商品リンク|",
-        "|---:|---|---:|---:|---:|---:|---:|---|---|---|"
+        "|購入順位|構成|部品目標小計|PC本体目標総額|周辺機器込み目標|目標残額|比較参考合計|互換性|判定|全パーツ商品リンク|",
+        "|---|---|---:|---:|---:|---:|---:|---|---|---|"
     ])
     for build in plan.get("builds") or []:
         component_links = " / ".join(
             component_markdown_link(part) for part in (build.get("components") or [])
         ) or "パーツ未登録"
         lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(
-            build.get("rank"), build.get("name"), money(build.get("target_parts_subtotal_jpy")),
+            display_purchase_rank(build), build.get("name"), money(build.get("target_parts_subtotal_jpy")),
             money(build.get("target_pc_total_jpy")), money(build.get("target_all_in_jpy")),
             money(build.get("target_remaining_budget_jpy")), money(build.get("market_reference_estimate_jpy")),
             build.get("compatibility_status"), build.get("decision"), component_links
@@ -2139,13 +2166,14 @@ def render_plan_markdown(plan):
     if budget_scenarios:
         lines.extend(["", "## 35万円・40万円・45万円の一式予算比較（BF目標価格の計画値）", "",
             "各予算にはPC本体・OS・送料/小物・メインモニター1台と入力機器・必要送料・5,000円予備費を含みます。通常目標と20,000円の検討帯を分けて表示し、検討帯内でも購入許可は出しません。BF目標価格は現行決済価格ではありません。",
+            "購入順位は全必須部品の販売可能在庫・最終決済額・互換性・許容予算が揃うまで「保留」とし、目標価格だけの比較案に数値順位を付けません。",
             "", "**用途要件:** Cities: Skylines IIとFPS、Unreal Engine/Unity/Godotによるゲーム制作、Python・スポーツ/株式/BTC分析、可能な範囲のローカルAI、勉強・調査。購入時RAM32GB/SSD1TB/専用VRAM8GB以上を下回る案は採用しません。"])
         for tier in budget_scenarios:
             lines.extend(["", "### {}（総額目標 {} / 許容帯上限 {}）".format(
                     tier.get("id"), money(tier.get("total_budget_jpy")), money(tier.get("soft_ceiling_total_jpy"))), "",
                 str(tier.get("description_ja") or ""), "",
-                "|順位|構成案|CPU|GPU / VRAM|RAM|SSD|PC本体目標|周辺機器|予備費|一式目標|目標との差/残額|目標超過額|許容帯残額/超過|許容帯内|総合点/100|販売可能在庫信号|互換性|購入判定|",
-                "|---:|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|---|---|---|"])
+                "|購入順位|構成案|CPU|GPU / VRAM|RAM|SSD|PC本体目標|周辺機器|予備費|一式目標|目標との差/残額|目標超過額|許容帯残額/超過|許容帯内|総合点/100|販売可能在庫信号|互換性|購入判定|",
+                "|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|---|---|---|"])
             for candidate in tier.get("builds") or []:
                 cats={str(part.get("category")):part for part in (candidate.get("components") or []) if part.get("category")}
                 cpu=cats.get("cpu") or {}; gpu=cats.get("gpu") or {}; ram=cats.get("memory") or {}; ssd=cats.get("storage") or {}
@@ -2155,7 +2183,7 @@ def render_plan_markdown(plan):
                 soft_rem_text=("残り "+money(soft_rem)) if isinstance(soft_rem,int) and soft_rem>=0 else ("超過 "+money(abs(soft_rem))) if isinstance(soft_rem,int) else "未計算"
                 band_status="はい" if candidate.get("within_soft_band") is True else "いいえ"
                 row=[
-                    str(candidate.get("display_rank_within_tier")),str(candidate.get("name")),str(cpu.get("name") or "未確認"),
+                    display_purchase_rank(candidate),str(candidate.get("name")),str(cpu.get("name") or "未確認"),
                     "{} / {}GB".format(gpu.get("name") or "未確認",(gpu.get("specs") or {}).get("vram_gb","未確認")),
                     "{}GB".format((ram.get("specs") or {}).get("capacity_gb","未確認")),
                     "{}GB".format((ssd.get("specs") or {}).get("capacity_gb","未確認")),
@@ -2488,8 +2516,10 @@ def section_from_plan(plan):
         ("警告：周辺機器コスト試算の取得に失敗しました（" + projection_error +
          "）。最新の動的上限を未確認として扱ってください。" if projection_error else ""),
         "",
-        "|順位|自作構成|構成点/100|購入根拠充足度/100|PC本体目標|周辺機器込み|目標残額|互換性|判定|全パーツ商品リンク|",
-        "|---:|---|---:|---:|---:|---:|---:|---|---|---|"
+        "購入順位は購入ゲート通過時のみ数値表示します。現時点で条件未達の候補は「保留」であり、スコア順は購入推奨を意味しません。",
+        "",
+        "|購入順位|自作構成|構成点/100|購入根拠充足度/100|PC本体目標|周辺機器込み|目標残額|互換性|判定|全パーツ商品リンク|",
+        "|---|---|---:|---:|---:|---:|---:|---|---|---|"
     ]
     lines = [line for line in lines if line is not None]
 
@@ -2498,7 +2528,7 @@ def section_from_plan(plan):
         component_links = " / ".join(
             component_markdown_link(part) for part in (build.get("components") or [])
         ) or "パーツ未登録"
-        lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(build.get("rank"), build.get("name"),
+        lines.append("|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|".format(display_purchase_rank(build), build.get("name"),
             score.get("overall_score", "—"), score.get("purchase_evidence_completeness_score_out_of_100", "—"),
             money(build.get("target_pc_total_jpy")), money(build.get("target_all_in_jpy")),
             money(build.get("target_remaining_budget_jpy")), build.get("compatibility_status"),
