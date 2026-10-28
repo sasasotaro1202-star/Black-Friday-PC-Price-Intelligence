@@ -436,6 +436,12 @@ class BudgetPolicyTests(unittest.TestCase):
         row = next(x for x in projection["peripherals"] if x["id"] == "main_monitor")
         self.assertEqual(row["store_inventory_status"], "low_stock")
         self.assertTrue(row["store_inventory_verified"])
+        self.assertEqual(row["store_inventory_store_id"], "biccamera_tenjin_1")
+        # A physical-store inventory page is not evidence for the separate
+        # online-order/store-pickup route; no pickup checkout quote exists here.
+        self.assertEqual(row["store_pickup_branch_inventory_status"], "unknown")
+        self.assertFalse(row["store_pickup_branch_inventory_verified"])
+        self.assertIsNone(row["store_pickup_store_id"])
         self.assertIsNone(row["current_price_jpy"])  # unapproved online price is comparison-only
         self.assertEqual(row["online_comparison_price_jpy"], 20790)
         self.assertEqual(row["selected_purchase_channel"], "unconfirmed")

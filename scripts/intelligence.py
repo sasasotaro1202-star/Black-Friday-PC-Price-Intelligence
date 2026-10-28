@@ -1159,8 +1159,16 @@ def peripheral_budget_projection():
             "store_pickup_evidence_type": store_pickup_observation["store_pickup_evidence_type"],
             "store_pickup_evidence_notes": store_pickup_observation["store_pickup_evidence_notes"],
             "store_pickup_quote_age_minutes": store_pickup_observation["store_pickup_quote_age_minutes"],
-            "store_pickup_branch_inventory_status": live_store_inventory["store_inventory_status"],
-            "store_pickup_branch_inventory_verified": live_store_inventory["store_inventory_verified"],
+            # This field belongs to the online store-pickup route, not the
+            # physical-store inventory observation above. Do not copy branch
+            # page stock into a different purchase route without a verified
+            # pickup quote tied to an exact branch and checkout URL.
+            "store_pickup_branch_inventory_status": store_pickup_stock,
+            "store_pickup_branch_inventory_verified": bool(
+                store_pickup_quote_confirmed
+                and store_pickup_observation.get("store_pickup_store_id")
+                and store_pickup_stock in ("in_stock", "low_stock", "out_of_stock")
+            ),
             "purchase_channel": target.get("purchase_channel", "online"),
             "purchase_channel_options": target.get("purchase_channel_options") or [],
             "selected_purchase_channel": purchase_channel_selected,
