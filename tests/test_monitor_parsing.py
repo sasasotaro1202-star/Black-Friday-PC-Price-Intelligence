@@ -506,6 +506,34 @@ class MonitorParsingTests(unittest.TestCase):
         self.assertEqual(parsed["text_stock_status"], "out_of_stock")
         self.assertEqual(parsed["stock_status"], "in_stock")
 
+    def test_explicit_sold_out_text_conflicting_with_structured_instock_fails_closed(self):
+        html = """
+        <script type="application/ld+json">
+        {"@type":"Product","name":"G TUNE P6-I7G70BK-B P6I7G70BKBCDW101DECKK",
+         "sku":"P6I7G70BKBCDW101DECKK",
+         "offers":{"price":"284700","priceCurrency":"JPY","availability":"https://schema.org/InStock"}}
+        </script>
+        <h1>G TUNE P6-I7G70BK-B P6I7G70BKBCDW101DECKK</h1>
+        <div>WEB販売価格 284,700円</div>
+        <div>品切れ中</div>
+        <div>関連製品は販売中</div>
+        """
+        expected = {
+            "name": "G TUNE P6-I7G70BK-B",
+            "aliases": ["P6I7G70BKBCDW101DECKK"],
+            "model_code": "P6I7G70BKBCDW101DECKK",
+        }
+        parsed = monitor.parse_page(
+            "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
+            html,
+            expected=expected,
+        )
+        self.assertEqual(parsed["price_jpy"], 284700)
+        self.assertEqual(parsed["structured_stock_status"], "in_stock")
+        self.assertEqual(parsed["text_stock_status"], "out_of_stock")
+        self.assertEqual(parsed["stock_status"], "unknown")
+        self.assertEqual(parsed["stock_ambiguity"], "structured_text_conflict")
+
     def test_expected_model_does_not_borrow_jsonld_offer_from_related_product(self):
         html = """
         <script type="application/ld+json">
