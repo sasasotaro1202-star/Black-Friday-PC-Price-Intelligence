@@ -971,10 +971,29 @@ def parse_page(url, html, expected=None):
             picked = {"price_jpy": raw["price_jpy"], "source": "direct_text", "context": raw["context"]}
 
     text_stock = stock_from_text(text_html)
+    # Explicit product-page terms such as "品切れ中" or "販売終了" can
+    # contradict stale Product JSON-LD that still says InStock. Do not mark
+    # such a SKU as buyable; fail closed to unknown. Keep the existing
+    # protection against weaker store-level "在庫なし/在庫切れ" text, which
+    # can refer to unrelated physical branches rather than online stock.
+    normalized_stock_text = norm_text(text_html)
+    explicit_sold_out_text = any(
+        phrase in normalized_stock_text for phrase in ("品切れ中", "販売終了")
+    )
+    structured_text_conflict = bool(
+        matched_structured
+        and selected_states
+        and structured_stock == "in_stock"
+        and text_stock == "out_of_stock"
+        and explicit_sold_out_text
+    )
     # When the exact requested Product node states availability, prefer that
-    # SKU-scoped evidence over page-wide text. Retailer pages often include
-    # unrelated store-by-store inventory lists that mention sold-out branches.
-    if matched_structured and selected_states and len(all_availability_states) > 1:
+    # SKU-scoped evidence over page-wide text unless the page also carries an
+    # explicit sold-out/ended signal. Retailer pages often include unrelated
+    # store-by-store inventory lists that mention sold-out branches.
+    if structured_text_conflict:
+        final_stock = "unknown"
+    elif matched_structured and selected_states and len(all_availability_states) > 1:
         final_stock = "unknown"
     elif matched_structured and selected_states and structured_stock != "unknown":
         final_stock = structured_stock
@@ -1031,7 +1050,11 @@ def parse_page(url, html, expected=None):
         "structured_availability_states": sorted(all_availability_states),
         "structured_identity_match": matched_structured,
         "text_stock_status": text_stock,
-        "stock_ambiguity": "multiple_offer_availability" if len(all_availability_states) > 1 else None,
+        "stock_ambiguity": (
+            "structured_text_conflict"
+            if structured_text_conflict
+            else "multiple_offer_availability" if len(all_availability_states) > 1 else None
+        ),
         "parsed_spec": specs,
         "page_text_excerpt": text_html[:12000],
         "benefit_signals": benefit_signals,
