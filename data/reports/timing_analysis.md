@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-29T11:49:11+09:00
-Source snapshot: 2026-10-29T11:44:36+09:00
-Source snapshot SHA256: 9e20984ab81610929ac3cde5dc8e0aebf435b197dde211fd1514a2504fd8364c
+Generated: 2026-10-29T15:27:09+09:00
+Source snapshot: 2026-10-29T15:21:31+09:00
+Source snapshot SHA256: 71cea50e542b2776bfe3ee1d830202e74be1428b398128a40805fed07ca05b81
 Budget: ¥360,000
 U.S. Black Friday calendar reference only (not official retailer sale dates): 2026-11-27
 
@@ -21,8 +21,7 @@ The primary purchase method is self-build. These completed-PC listings are price
 |7|G TUNE FG-A7G6T|¥406,182|11.4%|REALISTIC|rtx 5060 ti|28|direct_text|
 |8|GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|¥419,800|14.2%|REALISTIC|rtx 5070 ti|29|direct_structured|
 |9|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|19.8%|REALISTIC|rtx 5070|32|direct_structured|
-|10|Acer Predator Helios Neo 16 AI PHN16-I71-N93Z57T/E|¥547,800|34.3%|LOW|rtx 5070 ti|40|direct_structured|
-|11|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|VERY_LOW|rtx 5070 ti|40|direct_structured|
+|10|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|VERY_LOW|rtx 5070 ti|40|direct_structured|
 
 ## Empirical price-change timing
 
