@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-30T16:59:22+09:00",
-  "prediction_time": "2026-10-30T16:59:22+09:00",
-  "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-  "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda",
+  "generated_at": "2026-10-30T18:08:46+09:00",
+  "prediction_time": "2026-10-30T18:08:46+09:00",
+  "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+  "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131",
   "budget_jpy": 360000,
   "budget_scope": "pc_only_excluding_peripherals",
   "total_budget_jpy": 400000,
@@ -103,31 +103,31 @@
       "store_route_all_branches_confirmed": false,
       "store_inventory_status": "preorder_or_backorder",
       "store_inventory_verified": true,
-      "store_inventory_checked_at": "2026-10-30T16:55:10+09:00",
+      "store_inventory_checked_at": "2026-10-30T18:03:22+09:00",
       "store_inventory_source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14369301",
       "store_inventory_store_id": "biccamera_tenjin_1",
       "store_inventory_store_name": "ビックカメラ天神1号館",
       "store_inventory_evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-      "store_inventory_age_minutes": 4.2,
+      "store_inventory_age_minutes": 5.4,
       "store_inventory_store_ids_available": [],
       "store_inventory_observations": [
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-10-30T16:55:10+09:00",
+          "checked_at": "2026-10-30T18:03:22+09:00",
           "source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14369301",
           "status": "preorder_or_backorder",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 4.2
+          "age_minutes": 5.4
         },
         {
           "store_id": "yodobashi_hakata",
           "store_name": "ヨドバシカメラ マルチメディア博多",
-          "checked_at": "2026-10-30T16:55:10+09:00",
+          "checked_at": "2026-10-30T18:03:22+09:00",
           "source_url": "https://www.yodobashi.com/product/100000001009314680/",
           "status": "unknown",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 4.2
+          "age_minutes": 5.4
         }
       ],
       "stock_status": "preorder_or_backorder",
@@ -219,12 +219,12 @@
       "store_route_all_branches_confirmed": false,
       "store_inventory_status": "low_stock",
       "store_inventory_verified": true,
-      "store_inventory_checked_at": "2026-10-30T16:55:10+09:00",
+      "store_inventory_checked_at": "2026-10-30T18:03:22+09:00",
       "store_inventory_source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=9242996",
       "store_inventory_store_id": "biccamera_tenjin_1",
       "store_inventory_store_name": "ビックカメラ天神1号館",
       "store_inventory_evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-      "store_inventory_age_minutes": 4.2,
+      "store_inventory_age_minutes": 5.4,
       "store_inventory_store_ids_available": [
         "biccamera_tenjin_1"
       ],
@@ -232,20 +232,20 @@
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-10-30T16:55:10+09:00",
+          "checked_at": "2026-10-30T18:03:22+09:00",
           "source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=9242996",
           "status": "low_stock",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 4.2
+          "age_minutes": 5.4
         },
         {
           "store_id": "yodobashi_hakata",
           "store_name": "ヨドバシカメラ マルチメディア博多",
-          "checked_at": "2026-10-30T16:55:10+09:00",
+          "checked_at": "2026-10-30T18:03:22+09:00",
           "source_url": "https://www.yodobashi.com/product/100000001006099089/",
           "status": "unknown",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 4.2
+          "age_minutes": 5.4
         }
       ],
       "stock_status": "low_stock",
@@ -337,12 +337,12 @@
       "store_route_all_branches_confirmed": false,
       "store_inventory_status": "low_stock",
       "store_inventory_verified": true,
-      "store_inventory_checked_at": "2026-10-30T16:55:10+09:00",
+      "store_inventory_checked_at": "2026-10-30T18:03:22+09:00",
       "store_inventory_source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=6566291",
       "store_inventory_store_id": "biccamera_tenjin_1",
       "store_inventory_store_name": "ビックカメラ天神1号館",
       "store_inventory_evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-      "store_inventory_age_minutes": 4.2,
+      "store_inventory_age_minutes": 5.4,
       "store_inventory_store_ids_available": [
         "biccamera_tenjin_1"
       ],
@@ -350,20 +350,20 @@
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-10-30T16:55:10+09:00",
+          "checked_at": "2026-10-30T18:03:22+09:00",
           "source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=6566291",
           "status": "low_stock",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 4.2
+          "age_minutes": 5.4
         },
         {
           "store_id": "yodobashi_hakata",
           "store_name": "ヨドバシカメラ マルチメディア博多",
-          "checked_at": "2026-10-30T16:55:10+09:00",
+          "checked_at": "2026-10-30T18:03:22+09:00",
           "source_url": "https://www.yodobashi.com/product/100000001004334450/",
           "status": "unknown",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 4.2
+          "age_minutes": 5.4
         }
       ],
       "stock_status": "low_stock",
@@ -455,12 +455,12 @@
       "store_route_all_branches_confirmed": false,
       "store_inventory_status": "low_stock",
       "store_inventory_verified": true,
-      "store_inventory_checked_at": "2026-10-30T16:55:10+09:00",
+      "store_inventory_checked_at": "2026-10-30T18:03:22+09:00",
       "store_inventory_source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=1570130",
       "store_inventory_store_id": "biccamera_tenjin_1",
       "store_inventory_store_name": "ビックカメラ天神1号館",
       "store_inventory_evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-      "store_inventory_age_minutes": 4.2,
+      "store_inventory_age_minutes": 5.4,
       "store_inventory_store_ids_available": [
         "biccamera_tenjin_1"
       ],
@@ -468,20 +468,20 @@
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-10-30T16:55:10+09:00",
+          "checked_at": "2026-10-30T18:03:22+09:00",
           "source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=1570130",
           "status": "low_stock",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 4.2
+          "age_minutes": 5.4
         },
         {
           "store_id": "yodobashi_hakata",
           "store_name": "ヨドバシカメラ マルチメディア博多",
-          "checked_at": "2026-10-30T16:55:10+09:00",
+          "checked_at": "2026-10-30T18:03:22+09:00",
           "source_url": "https://www.yodobashi.com/product/100000001001488658/",
           "status": "unknown",
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "age_minutes": 4.2
+          "age_minutes": 5.4
         }
       ],
       "stock_status": "low_stock",
@@ -740,9 +740,9 @@
       "observation_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/",
       "query": "G TUNE DG-I7G70 Core Ultra 7 270K Plus RTX 5070 16GB 500GB デスクトップ 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
-      "available_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
+      "available_at": "2026-10-30T18:03:12+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -796,7 +796,7 @@
       "variant_match": "exact",
       "identity_confidence": "high",
       "fingerprint": "320ed5724f6bf926c3fde71371542c71cec2ce10c7d0d734a03a393f8ab43409",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": 73,
       "score_detail": {
         "status": "NEEDS_CONFIGURATION",
@@ -833,7 +833,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "exact",
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30,
         "configuration_ready": false,
         "configuration_reasons": [
@@ -858,8 +858,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 299800,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/",
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda"
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131"
     },
     {
       "id": "desktop-gtune-fg-a7g70-5070",
@@ -868,9 +868,9 @@
       "observation_url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/",
       "query": "G TUNE FG-A7G70 Ryzen 7 7700 RTX 5070 32GB 1TB デスクトップ 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
-      "available_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
+      "available_at": "2026-10-30T18:03:12+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -924,7 +924,7 @@
       "variant_match": "exact",
       "identity_confidence": "high",
       "fingerprint": "2027b4b0db95da3c2aee784445eb560114de3c636133cf0ed60186d7660052d1",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": 72,
       "score_detail": {
         "status": "WAIT_FOR_DISCOUNT",
@@ -961,7 +961,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "exact",
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -983,8 +983,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 374800,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/",
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda"
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131"
     },
     {
       "id": "gtune-p6-13700hx-5070",
@@ -993,9 +993,9 @@
       "observation_url": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
       "query": "G TUNE P6-I7G70BK-B i7-13700HX RTX 5070 32GB 1TB 日本",
       "priority": "critical",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
-      "available_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
+      "available_at": "2026-10-30T18:03:12+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1049,7 +1049,7 @@
       "variant_match": "trusted_url",
       "identity_confidence": "high",
       "fingerprint": "71d7c57801bfe36cd00049d8010c73151717579dd747d71642566149e2b02860",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": 65,
       "score_detail": {
         "status": "WATCH",
@@ -1086,7 +1086,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "trusted_url",
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -1108,8 +1108,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 284700,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/",
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda"
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131"
     },
     {
       "id": "desktop-gtune-dg-i5g70-5070",
@@ -1118,9 +1118,9 @@
       "observation_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/",
       "query": "G TUNE DG-I5G70 Core Ultra 5 250K Plus RTX 5070 16GB 500GB デスクトップ 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
-      "available_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
+      "available_at": "2026-10-30T18:03:12+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1174,7 +1174,7 @@
       "variant_match": "exact",
       "identity_confidence": "high",
       "fingerprint": "4f20d819b55dcd4fb5923baa584fa4fdbef3f8f64e116490c4869c6c9ad53763",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": 63,
       "score_detail": {
         "status": "NEEDS_CONFIGURATION",
@@ -1211,7 +1211,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "exact",
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30,
         "configuration_ready": false,
         "configuration_reasons": [
@@ -1236,8 +1236,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 279800,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/",
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda"
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131"
     },
     {
       "id": "desktop-gtune-dg-a5g60-5060",
@@ -1246,9 +1246,9 @@
       "observation_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/",
       "query": "G TUNE DG-A5G60 Ryzen 5 4500 RTX 5060 16GB 500GB デスクトップ 日本",
       "priority": "normal",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
-      "available_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
+      "available_at": "2026-10-30T18:03:12+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1302,7 +1302,7 @@
       "variant_match": "exact",
       "identity_confidence": "high",
       "fingerprint": "edaf62b7389d839f69d09a0ae7d7af0cd02c0f7629489fbcf9eeaea495464cf5",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": 56,
       "score_detail": {
         "status": "NEEDS_CONFIGURATION",
@@ -1339,7 +1339,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "exact",
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30,
         "configuration_ready": false,
         "configuration_reasons": [
@@ -1364,8 +1364,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 194800,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/",
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda"
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131"
     },
     {
       "id": "desktop-gtune-fg-a7g6t-5060ti16",
@@ -1374,9 +1374,9 @@
       "observation_url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/",
       "query": "FGA7G6TG8BDDW101DECWA",
       "priority": "high",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
-      "available_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
+      "available_at": "2026-10-30T18:03:12+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1430,7 +1430,7 @@
       "variant_match": "exact",
       "identity_confidence": "high",
       "fingerprint": "e661dbe27da0cf6a4f976f344f64b7165f29664ace63ea9daca44e1e357429f0",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": 55,
       "score_detail": {
         "status": "VERIFY_NOW",
@@ -1458,7 +1458,7 @@
         "reason": "現金支払 ¥406,182 / 実質コスト ¥406,182 / 特典・構成価値 ¥0 / 加点 0 / PC目標価格 ¥360,000 まで必要値下げ 11.4% / 在庫 unknown / 構成判定 exact / 待機リスク観測不足",
         "historical_floor_jpy": null,
         "price_trend": {
-          "sample_size": 381,
+          "sample_size": 382,
           "down_count": 2,
           "up_count": 2,
           "down_rate": 0.005,
@@ -1467,7 +1467,7 @@
         "data_confidence": "medium",
         "price_source_mode": "direct_text",
         "variant_match": "exact",
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -1489,8 +1489,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 406182,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/",
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda"
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131"
     },
     {
       "id": "gtune-p5-13620h-5070",
@@ -1499,9 +1499,9 @@
       "observation_url": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
       "query": "G TUNE P5-I7G70BK-C i7-13620H RTX 5070 32GB 1TB 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
-      "available_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
+      "available_at": "2026-10-30T18:03:12+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1553,7 +1553,7 @@
       "variant_match": "trusted_url",
       "identity_confidence": "high",
       "fingerprint": "44584c487a512d747aa734e09805946563f134c7937145f902d4f32fb75df244",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": 55,
       "score_detail": {
         "status": "WAIT_FOR_DISCOUNT",
@@ -1590,7 +1590,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "trusted_url",
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -1612,8 +1612,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 448800,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/",
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda"
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131"
     }
   ],
   "unavailable_products": [
@@ -1624,9 +1624,9 @@
       "observation_url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/",
       "query": "G TUNE FG-A7G7T Ryzen 7 7700 RTX 5070 Ti 32GB 1TB TGS2026 デスクトップ 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
-      "available_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
+      "available_at": "2026-10-30T18:03:12+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1680,7 +1680,7 @@
       "variant_match": "exact",
       "identity_confidence": "high",
       "fingerprint": "0554661a5863401b38cfbb4b1dfa95a5d7f56bb5bd9d7204cb18c837150c4b7d",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": 65,
       "score_detail": {
         "status": "UNAVAILABLE",
@@ -1717,7 +1717,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "exact",
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -1739,8 +1739,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 399800,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/",
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda"
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131"
     },
     {
       "id": "gigabyte-a18-pro-240h-5070ti",
@@ -1749,9 +1749,9 @@
       "observation_url": "https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200",
       "query": "GIGABYTE GAMING A18 PRO RTX 5070 Ti 32GB 1TB 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
-      "available_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
+      "available_at": "2026-10-30T18:03:12+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1812,7 +1812,7 @@
       "variant_match": "trusted_url",
       "identity_confidence": "high",
       "fingerprint": "ca0d55d029538406b025d85f10e27e5d6b1eafadfaa418bf66d46ee601dbbab6",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": 54,
       "score_detail": {
         "status": "UNAVAILABLE",
@@ -1849,7 +1849,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "trusted_url",
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -1871,8 +1871,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 419800,
       "purchase_url": "https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200",
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda"
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131"
     },
     {
       "id": "galleria-zl9r-9955hx-5070ti",
@@ -1881,9 +1881,9 @@
       "observation_url": "https://www.dospara.co.jp/TC1085/MC24569.html",
       "query": "ZL9R-R57T-6-B",
       "priority": "critical",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
-      "available_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
+      "available_at": "2026-10-30T18:03:12+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -1917,7 +1917,7 @@
         "psu_w": 1000,
         "cooler": "liquid"
       },
-      "page_text_excerpt": " GALLERIA ZL9R-R57T-6-B（ZL9R-R57T-6-B）24569｜パソコン通販のドスパラ【公式】 MENU 初めての方へ サポート 店舗一覧 注文確認 比較リスト 0 カート 0 法人・個人事業主向け ログイン /会員登録 ご購入前の相談はこちら > 個人 03-4332-9656 法人 03-5294-2041 すべて すべてのカテゴリー パソコン PCパーツ 周辺機器 中古販売 パソコン PCパーツ 周辺機器 中古販売 中古買取 サポート・サービス 法人・個人事業主向け パソコン&nbsp;TOP ■用途・目的から探す ゲーミングPC・ゲーム向け クリエイティブ向け AI向けPC 一般向け ビジネス向け 学生向け ■特集から探す コラボモデル ゲーム推奨モデル GPU搭載&times;コスパ重視デスク Copilot+ PC AI開発向けPC アウトレット ■ブランドで探す GALLERIA（ガレリア） THIRDWAVE（サードウェーブ） ■形状で探す デスクトップパソコン ノートパソコン ポータブル ■パソコン部材を探す ノートPC用純正アダプタ・充電器 ケース別フィルタ・補修品 PCパーツ&nbsp;TOP ■PCのスペックを決めるパーツ グラフィックボード ┗ NVIDIA GeForce ┗ AMD Radeon CPU ┗ Intel プロセッサ ┗ AMD プロセッサ メモリ ┗ デスクトップ用 DDR5メモリ ┗ デスクトップ用 DDR4メモリ ┗ ノート用 DDR5メモリ ┗ ノート用 DDR4メモリ SSD ┗ M.2 SSD ┗ 2.5インチ SSD ■PC本体・主要パーツ マザーボード ┗ Intel 用 マザーボード ┗ AMD 用 マザーボード 電源ユニット ┗ 1000W以上 ┗ 850W以下 PCケース ケースファン CPUクーラー ┗ 簡易水冷式 ┗ 空冷式 HDD&#40;ハードディスク&#41; ┗ 10TB 以上 ┗ 8TB 以下 ベアボーンキット OS &#40;Windows&#41; ■ 拡張・カスタマイズパーツ ファンアクセサリ インターフェース・拡張デバイス ブルーレイ・DVDドライブ 装飾・ライティングパーツ ■ 組立・メンテナンス・周辺用品 グリス・ヒートシンク ┗ グリス・熱伝導シート ┗ M.2用 ヒートシンク SATAケーブル PC内部用 延長・変換ケーブル ライザーケーブル サポートステイ ネジ・ワッシャー 接続・変換パーツ 変換マウンタ リテンションキット ツール・メンテナンス マザーボード用ボタン電池 コネクタカバー・フィルター ■特集から探す ドスパラ専用販売モデル お得なセット商品 はじめてでも安心の自作キット アウトレットPCパーツ プライベートブランド「ドスパラセレクト」はこちら！ 周辺機器&nbsp;TOP ■分類から選ぶ 液晶モニター・ディスプレイ キーボード マウス イヤホン・ヘッドセット Webカメラ・映像機器 ネットワーク機器&#40;Wi-Fiルーター&#41; SDカード・USBメモリ その他の周辺機器はこちら ■パソコンライフをもっと楽しく モニターアーム ゲームコントローラー プリンター・スキャナ ペンタブレット DVD・ブルーレイメディア 外付けドライブ デスク・チェア・PC用デスク ■あると便利な周辺機器 NAS・外付けストレージケース USBハブ LANケーブル モニター用ケーブル USB端子用ケーブル ■特集から探す ドスパラ限定商品 アウトレット周辺機器 ゲーミングデバイス特集 配信機器特集 音響機器特集 中古販売&nbsp;TOP ■中古パソコン 中古ゲーミングデスクトップPC 中古デスクトップパソコン 中古ゲーミングノートPC 中古ノートパソコン 中古ポータブルゲーミングPC 中古MAC ジャンク品&#40;デスクトップPC&#41; ジャンク品&#40;ノートPC&#41; 一覧を見る ＞ ■中古スマホ・タブレット 中古iPhone 中古Android 中古タブレット 一覧を見る ＞ ■中古PCパーツ 中古グラフィックボード 中古CPU 中古マザーボード 中古メモリ 中古PCケース 中古冷却パーツ 一覧を見る ＞ ■中古ゲーミングデバイス 中古ゲーミングキーボード 中古ゲーミングマウス 中古ゲーミングヘッドセット 一覧を見る ＞ ■中古周辺機器 中古液晶モニター 中古キーボード 中古マウス 中古ペンタブレット 中古ウェアラブル機器 一覧を見る ＞ 全国店舗の中古商品を今すぐチェック 中古買取&nbsp;TOP ■買取について調べる 買取対象商品 よくあるご質問 宅配買取について 店頭買取について 法人買取について ■買取価格を確認する デスクトップパソコン ノートパソコン PCパーツ 周辺機器 スマートフォン すべての買取対象商品から探す ■もっとお得に買取 毎月3のつく日は買取5％UP セーフティサービス会員で買取10％UP 宅配買取のお申し込みはこちら サポート・サービス&nbsp;TOP ■ サポート情報・修理のお申込み 購入した商品の保証期間を確認する FAQ・故障診断 弊社製PCに関するサポート 中古商品に関するサポート パーツ・周辺機器の検査申し込み 保証期間外・他社製・自作のPCに関する修理申し込み ■保証・サービス セーフティサービス 延長保証 安心ワイド保証プラス アップグレードサービス パソコンクリーニングサービス クラウドバックアップサービス 保証・サービス一覧 ■ 設定・設置を任せたい 初期設定代行サービス 初期設定+ゲーミング設定サービス 出張設置サービス パソコン組立代行サービス ■ トラブルを解決したい データ復旧 出張・訪問サポート 電話・リモート相談サービス マニュアルダウンロード お問い合わせ窓口について 保証期間内パソコン・PCパーツの修理・サポート 法人・個人事業主向け&nbsp;TOP ■製品から探す デスクトップパソコン ノートパソコン ワークステーション PCパーツ 周辺機器 ■業務・用途から選ぶ オフィス・一般業務 設計・CAD 動画・映像・イラスト AI開発・データ分析 教育・研究 ゲーム開発 ■サービス PCレンタルサービス PCサブスクリプション ■製品情報、導入事例、カタログを探す 法人向けプロダクトサイト 圧倒的な速さでお届け！ 短納期 ドスパラのこだわり 圧倒的な速さでお届け！ 短納期 サポートも充実！ 24時間365日 国内サポート PCは安心の 国内生産・品質管理も徹底 圧倒的な速さでお届け！ 短納期 サポートも充実！ 24時間365日 国内サポート PCは安心の 国内生産・品質管理も徹底 中古PC・グラボ・CPUの 値下げ品 一覧 ＞ 中古PC・グラボ・CPUの 値下げ品 一覧 ＞ 水冷CPUファンに無料でアップグレード中! ※対象モデルのみ どんなPCでもOK! PC下取り で購入時 3,000円OFF どんなPCでもOK! PC下取り で購入時 3,000円OFF 今なら対象ノートPCに使える 15,000円OFFクーポン配布中 初めての方へ ログイン 新規登録 ご購入前の相談はこちら 個人： 03-4332-9656 法人： 03-5294-2041 パソコン パソコン ■用途・目的から探す ゲーミングPC・ゲーム向け クリエイティブ向け AI向けPC 一般向け ビジネス向け 学生向け ■特集から探す コラボモデル ゲーム推奨モデル GPU搭載&times;コスパ重視デスク Copilot+ PC AI開発向けPC アウトレット ■ブランドで探す GALLERIA（ガレリア） THIRDWAVE（サードウェーブ） ■形状で探す デスクトップパソコン ノートパソコン ポータブル ■パソコン部材を探す ノートPC用純正アダプタ・充電器 ケース別フィルタ・補修品 PCパーツ PCパーツ ■PCのスペックを決めるパーツ グラフィックボード ┗ NVIDIA GeForce ┗ AMD Radeon CPU ┗ Intel プロセッサ ┗ AMD プロセッサ メモリ ┗ デスクトップ用 DDR5メモリ ┗ デスクトップ用 DDR4メモリ ┗ ノート用 DDR5メモリ ┗ ノート用 DDR4メモリ SSD ┗ M.2 SSD ┗ 2.5インチ SSD ■PC本体・主要パーツ マザーボード ┗ Intel 用 マザーボード ┗ AMD 用 マザーボード 電源ユニット ┗ 1000W以上 ┗ 850W以下 PCケース ケースファン CPUクーラー ┗ 簡易水冷式 ┗ 空冷式 HDD&#40;ハードディスク&#41; ┗ 10TB 以上 ┗ 8TB 以下 ベアボーンキット OS &#40;Windows&#41; ■ 拡張・カスタマイズパーツ ファンアクセサリ インターフェース・拡張デバイス ブルーレイ・DVDドライブ 装飾・ライティングパーツ ■ 組立・メンテナンス・周辺用品 グリス・ヒートシンク ┗ グリス・熱伝導シート ┗ M.2用 ヒートシンク SATAケーブル PC内部用 延長・変換ケーブル ライザーケーブル サポートステイ ネジ・ワッシャー 接続・変換パーツ 変換マウンタ リテンションキット ツール・メンテナンス マザーボード用ボタン電池 コネクタカバー・フィルター ■特集から探す ドスパラ専用販売モデル お得なセット商品 はじめてでも安心の自作キット アウトレットPCパーツ プライベートブランド「ドスパラセレクト」はこちら！ 周辺機器 周辺機器 ■分類から選ぶ 液晶モニター・ディスプレイ キーボード マウス イヤホン・ヘッドセット Webカメラ・映像機器 ネットワーク機器&#40;Wi-Fiルーター&#41; SDカード・USBメモリ その他の周辺機器はこちら ■パソコンライフをもっと楽しく モニターアーム ゲームコントローラー プリンター・スキャナ ペンタブレット DVD・ブルーレイメディア 外付けドライブ デスク・チェア・PC用デスク ■あると便利な周辺機器 NAS・外付けストレージケース USBハブ LANケーブル モニター用ケーブル USB端子用ケーブル ■特集から探す ドスパラ限定商品 アウトレット周辺機器 ゲーミングデバイス特集 配信機器特集 音響機器特集 中古販売 中古販売 ■中古パソコン 中古ゲーミングデスクトップPC 中古デスクトップパソコン 中古ゲーミングノートPC 中古ノートパソコン 中古ポータブルゲーミングPC 中古MAC ジャンク品&#40;デスクトップPC&#41; ジャンク品&#40;ノートPC&#41; 一覧を見る ＞ ■中古スマホ・タブレット 中古iPhone 中古Android 中古タブレット 一覧を見る ＞ ■中古PCパーツ 中古グラフィックボード 中古CPU 中古マザーボード 中古メモリ 中古PCケース 中古冷却パーツ 一覧を見る ＞ ■中古ゲーミングデバイス 中古ゲーミングキーボード 中古ゲーミングマウス 中古ゲーミングヘッドセット 一覧を見る ＞ ■中古周辺機器 中古液晶モニター 中古キーボード 中古マウス 中古ペンタブレット 中古ウェアラブル機器 一覧を見る ＞ 全国店舗の中古商品を今すぐチェック 中古買取 中古買取 ■買取について調べる 買取対象商品 よくあるご質問 宅配買取について 店頭買取について 法人買取について ■買取価格を確認する デスクトップパソコン ノートパソコン PCパーツ 周辺機器 スマートフォン すべての買取対象商品から探す ■もっとお得に買取 毎月3のつく日は買取5％UP セーフティサービス会員で買取10％UP 宅配買取のお申し込みはこちら サポート・サービス サポート・サービス ■ サポート情報・修理のお申込み 購入した商品の保証期間を確認する FAQ・故障診断 弊社製PCに関するサポート 中古商品に関するサポート パーツ・周辺機器の検査申し込み 保証期間外・他社製・自作のPCに関する修理申し込み ■保証・サービス セーフティサービス 延長保証 安心ワイド保証プラス アップグレードサービス パソコンクリーニングサービス クラウドバックアップサービス 保証・サービス一覧 ■ 設定・設置を任せたい 初期設定代行サービス 初期設定+ゲーミング設定サービス 出張設置サービス パソコン組立代行サービス ■ トラブルを解決したい データ復旧 出張・訪問サポート 電話・リモート相談サービス マニュアルダウンロード お問い合わせ窓口について 保証期間内パソコン・PCパーツの修理・サポート 法人・個人事業主向け 法人・個人事業主向け ■製品から探す デスクトップパソコン ノートパソコン ワークステーション PCパーツ 周辺機器 ■業務・用途から選ぶ オフィス・一般業務 設計・CAD 動画・映像・イラスト AI開発・データ分析 教育・研究 ゲーム開発 ■サービス PCレンタルサービス PCサブスクリプション ■製品情報、導入事例、カタログを探す 法人向けプロダクトサイト ご利用ガイド 注文確認 修理・サポート 店舗一覧 個人のお客様のお問い合わせ 法人のお客様のお問い合わせ パソコン ビジネス向け ノート 法人向けGALLERIA（ノート） GALLERIA ZL9R-R57T-6-B 法人様限定 法人向けECサイトドスパラプラス会員登録で 1,000ポイント！ 既にご登録の方も抽選で 10,000ポイント 当たるチャンス！ 詳しくはこちら ＞ ＋ ※ 画像はイメージです。仕様・外観は製品により異なる場合があります。 GALLERIA ZL9R-R57T-6-B レビュー募集中 レビュー投稿で最大5,000ポイントプレゼント！ 比較リストに追加 比較できる商品は最大100件までです。 削除する商品を選択してください。 比較リストを見る 比較リストを見る 追加済 Ryzen 9 RTX 50シリーズ メモリ 32GB 1TB SSD 保証期間 3年 在庫なし 送料について：1台につき全国一律&nbsp;3,300円(税込)、離島&nbsp;6,600円(税込) 詳細 --> 送料について： 新品パソコン送料無料 2026年10月30日(金)17:00まで 基本構成 製品仕様を見る OS Windows 11 Pro CPU Ryzen 9 9955HX グラフィック GeForce RTX 5070 Ti 12GB Laptop GPU メモリ 32GBメモリ DDR5 ストレージ 1TB Gen4 SSD (DRAMキャッシュ) ベンチマーク 15860 詳細 3DMark Time Spyのトータルスコアです。基本構成時のスコアとなります。 お手持ちのパソコンと性能を比べる 3DMark Time Spy : LEVEL 4 15860 Fire Strike 35565 Fire Strike Ultra 11049 ※ 基本構成時のスコアとなります お持ちのパソコンと性能を比べてみる レベルごとの数値目安 LEVEL 5 OVER 19001 ほとんどの最新ゲームをストレスなくプレイ可能！ LEVEL 4 12001 - 19000 ワンランク上のフレームレートや解像度で楽しみたい方に！ LEVEL 3 8001 - 12000 WQHD環境でゲームを快適にプレイ可能！ LEVEL 2 5001 - 8000 フルHD環境でゲームを快適にプレイ可能！ LEVEL 1 UNDER 5000 3Dゲーム入門にオススメ！ 基本構成 738,980 円 送料 円 合計 円 （税込） ドスパラポイント 最大 0.5% 3,695 pt 獲得 できます 内訳 ポイント内訳 合計 3,695 pt&nbsp;(0.5%) ドスパラポイント 3,695 pt&nbsp;(0.5%) 通常ポイント 3,695 pt&nbsp;(0.5%) 特典によるポイントには、期間中の上限が設定されている場合がございます。詳しくは各特典内容をご確認ください。 合計は最大20％までとなります。対象となる内容によっては、ポイントが変更となる場合がございます。 カスタマイズする ゲーム性能 1080p 1440p 4K fpsスコアが推奨値以上だとより快適にゲームプレイが可能です。 fps値は3DMarkベンチマーク結果の参考値であり、各ゲームの動作やfpsを保証するものではありません fps値は基本構成の場合です ゲームタイトル毎のfpsスコアについて ①解像度切り替え ゲームの画面解像度を切り替えるタブです。 各タブは下記解像度を示しており、プレイする解像度に近いものに合わせてご選択ください。 フルHD（1080p）：1920×1080～1920×1200 WQHD（1440p）：2560×1440～2560×1600 4K（2160p）：3840×2160～3840×2400 解像度が高ければ画像は精細になりますが、その分PCへの負荷は高まり、fps（フレームレート）は低下します。 ②ゲームタイトル 人気のゲームタイトルを取り揃えております。希望のタイトルがない場合は同ジャンルのゲームタイトルを参考ください。 ③fpsスコア fpsとは？ 表示PCのゲームタイトル毎のfpsスコアが表示されます。 fpsとは「Frames Per Second」の略で、フレームレートとも呼ばれます。静止画（フレーム）が1秒間に何枚表示されることで、動画として見えているかを示す指標です。 推奨値は、公式の推奨スペックより算出した値です。 fpsスコアが推奨値以上だとより快適にゲームプレイが可能です。 表示のfps値は3DMarkベンチマーク結果の参考値であり、各ゲームの動作やfps値を保証するものではありません。 fpsスコアは基本構成の場合です。 ノートPC搭載のディスプレイは、リフレッシュレートを超えるfpsスコアを表示できません。 一部ゲームタイトルとRadeon（AMD）GPUはリアルタイムアップスケーリング技術（DLSS）非対応のため、Radeon構成時の数値は、ネイティブ描画の値を掲載しています。 解像度が高ければ画像は精細になりますが、その分PCへの負荷は高まり、fps（フレームレート）は低下します。 リアルタイムアップスケーリング技術（DLSS）は主に高解像度や重設定で効果が出ます。1080p（フルHD）では、fpsが伸びない／わずかに低下する場合があります。 製品仕様 製品仕様［基本構成］ OS Windows 11 Pro 64ビット オフィスソフト Office なし セキュリティソフト ノートン360スタンダード 30日版インストール済み Steam Steamクライアントのインストール CPU AMD Ryzen 9 9955HX (最大5.40GHz/16コア/32スレッド) グラフィック機能 NVIDIA GeForce RTX 5070 Ti 12GB Laptop GPU + AMD Radeon 610M メモリ 32GB (16GB×2) (DDR5-4800 SO-DIMM) SSD 1TB SSD (M.2 NVMe Gen4 DRAMキャッシュ TLC) パーティション分割 パーティション分割 無し 入出力ポート USB3.2 Gen1 (Type-A) x 3 USB3.2 Gen2 (Type-C、映像出力 DisplayPort1.4 対応、PD対応/100W) x 1 USB3.2 Gen2 (Type-C、映像出力 DisplayPort1.4 対応、PD対応/100W～140W) x 1 miniDisplayPort 2.1 x 1、HDMI 2.1 Type A x 1 マイク入力・ヘッドフォン出力 共用端子(3.5mm 4極 CTIA) カードリーダー カードリーダーなし LAN 2.5Gb Ethernet対応LANポート x1 無線LAN Wi-Fi 7 (IEEE802.11 a/b/g/n/ac/ax/be) ※160MHzまでサポート Bluetooth Bluetooth 5.4 サウンド 内蔵ステレオスピーカー / マザーボード 標準 オンボードHDサウンド / デュアルマイク WEBカメラ FHD画質 WEBカメラ / IR カメラ (Windows Hello対応) ディスプレイ 16インチ 非光沢 WQXGA液晶 (2560×1600ドット表示) / リフレッシュレート 300Hz 電源 ACアダプター (240W) バッテリー 駆動時間(JEITA 測定法 3.0)：2.7 時間(動画再生時) / 5.7 時間(アイドル時) 光学ドライブ 光学ドライブ無し 標準キーボード 日本語キーボード (テンキー付 / Per-keyRGBバックライト搭載 / Nキーロールオーバー / アンチゴースト) 標準マウス 本体内蔵タッチパッド (マウスは付属しません) エネルギー消費効率 区分/年間消費電力量(kWh/年)/2022年度省エネ達成率 ※計測値はベースモデルです 12区分 63.39kWh/年 (61.75%) サイズ 約 357（幅）×256（奥行）×31（高さ・ゴム足含む) mm 重量 約 2.4kg 付属品 ACアダプター、各種マニュアル セキュリティ機能 セキュリティ スロット (6 [幅] × 2.5 [高さ] mm) 持込修理保証 保証期間3年 管理コード：24569-3560 本ページ記載の製品仕様は基本構成時の内容であり、販売価格および製品仕様は予告なく変更する場合がございます。 OSの項目に(ディスク付属)の表記が無い場合はOSディスクは付属いたしません。初期化(リカバリー)を行う際はWindows上から行います。 本製品に付属していないソフトウェア(OSを含む)に関してのサポートは行っておりません。各ソフトウェアの販売元にお問い合わせください。 Windows搭載製品でのLinuxの利用はサポート対象外です。 ビデオメモリ(VRAM)はメインメモリの一部を使用します(グラフィックスカード搭載モデルを除く)。 選択されるグラフィックスカードによっては隣接する空きスロットがご利用頂けない場合がございます。 グラフィックスカード側の映像端子とマザーボード側の映像端子を組み合わせた画面同時出力についてはサポート対象外です。 映像出力に関してはディスプレイ、ケーブル、変換コネクタの全ての組み合わせにおける動作を保証するものではありません。 ストレージ容量の表記は1GB=1,000Byteの3乗換算であり、1GB=1,024Byteの3乗換算の場合とは同容量の場合でも実際の値は小さくなります。 製品搭載のSDカードリーダーは全てのメディアでのデータの読み書きを保証するものではありません。 液晶ディスプレイは非常に精度の高い技術で製造されています。画面の一部に点灯しない画素や常時点灯する画素、明るさのむらなどが現れる場合がありますが故障ではありません。あらかじめご了承ください。 バッテリー搭載製品の駆動時間は、JEITAバッテリ動作時間測定法(Ver.3.0)に基づいて測定した目安の時間です。実際の使用環境によってバッテリー駆動時間は異なります。 エネルギー消費効率とはJIS C62623(2014)に規定する方法により測定した年間消費電力量です。省エネ基準達成率の表示語「A」は達成率100％以上110％未満、「AA」は達成率110％以上140％未満、「AAA」は達成率140％以上を示します。また達成率が100％未満の場合は、達成率をそのまま％で表示しています。 × カスタマイズ 製品仕様 レビュー カスタマイズ OS Windows 11 Pro 64ビット 0 円 オフィスソフト 選び方のポイント ゲーマー必見！Officeの意外な活用術 詳しくはこちら --> 使い方で選べるサブスク型と買い切り型のオフィスソフト 製品一覧表 Microsoft 365 Personal 【サブスク型】 Copilot Word Excel PowerPoint Outlook OneNote OneDrive Microsoft Defender Microsoft Designer Clipchamp Microsoft Office Home and Business 2024 【買い切り型】 Word Excel PowerPoint Outlook OneNote ※一部のモデルでは選択できない場合がございます。 Microsoft 365とOfficeについて詳しくはこちら ■ Microsoft 365 Personalとは？ 月額でいつでもOfficeアプリの最新版が利用できるサブスク型、AI機能「Copilot」と1TBのクラウドストレージも利用可能。 1ユーザー(アカウント)あたりPCやスマートフォンなど最大5台のデバイスで同時に利用できます。 *利用にはMicrosoftアカウントが必要です。 ■ Microsoft Office Home and Business 2024とは？ 長く使うほどお得になる買い切り型(永続版)、慣れた定番バージョンで作業する利用方法におすすめです。 利用期間に制限がないので費用の追加なく長く利用することができます。(Microsoft Office 2024のサポートは2029年10月9日時点で終了予定です。) *セットアップ時にインターネット環境が必要です。 **デジタルライセンス版(中小企業向け)は個人の方でも利用可能です。 Microsoft Office 2024 はセット購入がオススメ！ アプリケーションをインストールした状態でお届けします。届いてすぐにオフィスソフトをご利用いただけるためオススメです！ 製品一覧表 Microsoft Office Home and Business 2024 オススメ --> Word Excel Outlook PowerPoint Microsoft Office について詳しく見る デジタルライセンス版には「個人向け」と「中小企業向け」がありますが、法人個人に関係なく、どちらでも自由にお選びいただけます。 ■デジタルライセンス版 【個人向け】とは？ ライセンス認証にはインターネット接続とMicrosoftアカウントが必須です。(ライセンスキーはMicrosoftアカウントに紐づきます) 1ライセンス1台まで利用可能で、プリインストールされた本体のみ有効なため他のPCに移行できません。 ■デジタルライセンス版 【中小企業向け】とは？ ライセンス認証にはインターネット接続が必須ですが、Microsoftアカウントは不要です。(ライセンスキーはPC本体に紐づきます) 1ライセンス1台まで利用可能で、プリインストールされた本体のみ有効なため他のPCに移行できません。 Microsoft Office 2024 セット購入で14,980円お得！ 【Microsoft Office Home and Business 2024(POSAカード版)の場合 】セット購入：29,000円、 単体購入：43,980円 ※ ※単体購入価格はマイクロソフト公式ページの価格を参照。(2025年4月1日時点) ※セット購入品は、単品購入品と構成するソフトウェアは同じですが以下のような利用条件があります。 ・セット購入品(POSAカード版) は「1ユーザー1ライセンス(1台)まで利用可能」です。 --> 『Microsoft Office Home &amp; Business』のオススメポイント オフィスソフトはMicrosoft Officeが標準です。『Home &amp; Business』は、Word、Excel、Outlook、PowerPointが含まれているので、仕事や勉強でのレポートやプレゼン資料作成、家庭では写真のアルバム作りなど、様々な用途で活用できて便利です。 ※一部モデルはカスタマイズ対象外となります Officeの活用法について（Officeテンプレート） --> 製品一覧表 Microsoft Office Home and Business オススメ --> Word Excel Outlook PowerPoint WPS Office 2 Writer Spredsheets Presentation WPS Office 2はワープロ、表計算、プ",
+      "page_text_excerpt": " GALLERIA ZL9R-R57T-6-B（ZL9R-R57T-6-B）24569｜パソコン通販のドスパラ【公式】 MENU 初めての方へ サポート 店舗一覧 注文確認 比較リスト 0 カート 0 法人・個人事業主向け ログイン /会員登録 ご購入前の相談はこちら > 個人 03-4332-9656 法人 03-5294-2041 すべて すべてのカテゴリー パソコン PCパーツ 周辺機器 中古販売 パソコン PCパーツ 周辺機器 中古販売 中古買取 サポート・サービス 法人・個人事業主向け パソコン&nbsp;TOP ■用途・目的から探す ゲーミングPC・ゲーム向け クリエイティブ向け AI向けPC 一般向け ビジネス向け 学生向け ■特集から探す コラボモデル ゲーム推奨モデル GPU搭載&times;コスパ重視デスク Copilot+ PC AI開発向けPC アウトレット ■ブランドで探す GALLERIA（ガレリア） THIRDWAVE（サードウェーブ） ■形状で探す デスクトップパソコン ノートパソコン ポータブル ■パソコン部材を探す ノートPC用純正アダプタ・充電器 ケース別フィルタ・補修品 PCパーツ&nbsp;TOP ■PCのスペックを決めるパーツ グラフィックボード ┗ NVIDIA GeForce ┗ AMD Radeon CPU ┗ Intel プロセッサ ┗ AMD プロセッサ メモリ ┗ デスクトップ用 DDR5メモリ ┗ デスクトップ用 DDR4メモリ ┗ ノート用 DDR5メモリ ┗ ノート用 DDR4メモリ SSD ┗ M.2 SSD ┗ 2.5インチ SSD ■PC本体・主要パーツ マザーボード ┗ Intel 用 マザーボード ┗ AMD 用 マザーボード 電源ユニット ┗ 1000W以上 ┗ 850W以下 PCケース ケースファン CPUクーラー ┗ 簡易水冷式 ┗ 空冷式 HDD&#40;ハードディスク&#41; ┗ 10TB 以上 ┗ 8TB 以下 ベアボーンキット OS &#40;Windows&#41; ■ 拡張・カスタマイズパーツ ファンアクセサリ インターフェース・拡張デバイス ブルーレイ・DVDドライブ 装飾・ライティングパーツ ■ 組立・メンテナンス・周辺用品 グリス・ヒートシンク ┗ グリス・熱伝導シート ┗ M.2用 ヒートシンク SATAケーブル PC内部用 延長・変換ケーブル ライザーケーブル サポートステイ ネジ・ワッシャー 接続・変換パーツ 変換マウンタ リテンションキット ツール・メンテナンス マザーボード用ボタン電池 コネクタカバー・フィルター ■特集から探す ドスパラ専用販売モデル お得なセット商品 はじめてでも安心の自作キット アウトレットPCパーツ プライベートブランド「ドスパラセレクト」はこちら！ 周辺機器&nbsp;TOP ■分類から選ぶ 液晶モニター・ディスプレイ キーボード マウス イヤホン・ヘッドセット Webカメラ・映像機器 ネットワーク機器&#40;Wi-Fiルーター&#41; SDカード・USBメモリ その他の周辺機器はこちら ■パソコンライフをもっと楽しく モニターアーム ゲームコントローラー プリンター・スキャナ ペンタブレット DVD・ブルーレイメディア 外付けドライブ デスク・チェア・PC用デスク ■あると便利な周辺機器 NAS・外付けストレージケース USBハブ LANケーブル モニター用ケーブル USB端子用ケーブル ■特集から探す ドスパラ限定商品 アウトレット周辺機器 ゲーミングデバイス特集 配信機器特集 音響機器特集 中古販売&nbsp;TOP ■中古パソコン 中古ゲーミングデスクトップPC 中古デスクトップパソコン 中古ゲーミングノートPC 中古ノートパソコン 中古ポータブルゲーミングPC 中古MAC ジャンク品&#40;デスクトップPC&#41; ジャンク品&#40;ノートPC&#41; 一覧を見る ＞ ■中古スマホ・タブレット 中古iPhone 中古Android 中古タブレット 一覧を見る ＞ ■中古PCパーツ 中古グラフィックボード 中古CPU 中古マザーボード 中古メモリ 中古PCケース 中古冷却パーツ 一覧を見る ＞ ■中古ゲーミングデバイス 中古ゲーミングキーボード 中古ゲーミングマウス 中古ゲーミングヘッドセット 一覧を見る ＞ ■中古周辺機器 中古液晶モニター 中古キーボード 中古マウス 中古ペンタブレット 中古ウェアラブル機器 一覧を見る ＞ 全国店舗の中古商品を今すぐチェック 中古買取&nbsp;TOP ■買取について調べる 買取対象商品 よくあるご質問 宅配買取について 店頭買取について 法人買取について ■買取価格を確認する デスクトップパソコン ノートパソコン PCパーツ 周辺機器 スマートフォン すべての買取対象商品から探す ■もっとお得に買取 毎月3のつく日は買取5％UP セーフティサービス会員で買取10％UP 宅配買取のお申し込みはこちら サポート・サービス&nbsp;TOP ■ サポート情報・修理のお申込み 購入した商品の保証期間を確認する FAQ・故障診断 弊社製PCに関するサポート 中古商品に関するサポート パーツ・周辺機器の検査申し込み 保証期間外・他社製・自作のPCに関する修理申し込み ■保証・サービス セーフティサービス 延長保証 安心ワイド保証プラス アップグレードサービス パソコンクリーニングサービス クラウドバックアップサービス 保証・サービス一覧 ■ 設定・設置を任せたい 初期設定代行サービス 初期設定+ゲーミング設定サービス 出張設置サービス パソコン組立代行サービス ■ トラブルを解決したい データ復旧 出張・訪問サポート 電話・リモート相談サービス マニュアルダウンロード お問い合わせ窓口について 保証期間内パソコン・PCパーツの修理・サポート 法人・個人事業主向け&nbsp;TOP ■製品から探す デスクトップパソコン ノートパソコン ワークステーション PCパーツ 周辺機器 ■業務・用途から選ぶ オフィス・一般業務 設計・CAD 動画・映像・イラスト AI開発・データ分析 教育・研究 ゲーム開発 ■サービス PCレンタルサービス PCサブスクリプション ■製品情報、導入事例、カタログを探す 法人向けプロダクトサイト 圧倒的な速さでお届け！ 短納期 ドスパラのこだわり 圧倒的な速さでお届け！ 短納期 サポートも充実！ 24時間365日 国内サポート PCは安心の 国内生産・品質管理も徹底 圧倒的な速さでお届け！ 短納期 サポートも充実！ 24時間365日 国内サポート PCは安心の 国内生産・品質管理も徹底 中古PC・グラボ・CPUの 値下げ品 一覧 ＞ 中古PC・グラボ・CPUの 値下げ品 一覧 ＞ 水冷CPUファンに無料でアップグレード中! ※対象モデルのみ どんなPCでもOK! PC下取り で購入時 3,000円OFF どんなPCでもOK! PC下取り で購入時 3,000円OFF 今なら対象ノートPCに使える 15,000円OFFクーポン配布中 初めての方へ ログイン 新規登録 ご購入前の相談はこちら 個人： 03-4332-9656 法人： 03-5294-2041 パソコン パソコン ■用途・目的から探す ゲーミングPC・ゲーム向け クリエイティブ向け AI向けPC 一般向け ビジネス向け 学生向け ■特集から探す コラボモデル ゲーム推奨モデル GPU搭載&times;コスパ重視デスク Copilot+ PC AI開発向けPC アウトレット ■ブランドで探す GALLERIA（ガレリア） THIRDWAVE（サードウェーブ） ■形状で探す デスクトップパソコン ノートパソコン ポータブル ■パソコン部材を探す ノートPC用純正アダプタ・充電器 ケース別フィルタ・補修品 PCパーツ PCパーツ ■PCのスペックを決めるパーツ グラフィックボード ┗ NVIDIA GeForce ┗ AMD Radeon CPU ┗ Intel プロセッサ ┗ AMD プロセッサ メモリ ┗ デスクトップ用 DDR5メモリ ┗ デスクトップ用 DDR4メモリ ┗ ノート用 DDR5メモリ ┗ ノート用 DDR4メモリ SSD ┗ M.2 SSD ┗ 2.5インチ SSD ■PC本体・主要パーツ マザーボード ┗ Intel 用 マザーボード ┗ AMD 用 マザーボード 電源ユニット ┗ 1000W以上 ┗ 850W以下 PCケース ケースファン CPUクーラー ┗ 簡易水冷式 ┗ 空冷式 HDD&#40;ハードディスク&#41; ┗ 10TB 以上 ┗ 8TB 以下 ベアボーンキット OS &#40;Windows&#41; ■ 拡張・カスタマイズパーツ ファンアクセサリ インターフェース・拡張デバイス ブルーレイ・DVDドライブ 装飾・ライティングパーツ ■ 組立・メンテナンス・周辺用品 グリス・ヒートシンク ┗ グリス・熱伝導シート ┗ M.2用 ヒートシンク SATAケーブル PC内部用 延長・変換ケーブル ライザーケーブル サポートステイ ネジ・ワッシャー 接続・変換パーツ 変換マウンタ リテンションキット ツール・メンテナンス マザーボード用ボタン電池 コネクタカバー・フィルター ■特集から探す ドスパラ専用販売モデル お得なセット商品 はじめてでも安心の自作キット アウトレットPCパーツ プライベートブランド「ドスパラセレクト」はこちら！ 周辺機器 周辺機器 ■分類から選ぶ 液晶モニター・ディスプレイ キーボード マウス イヤホン・ヘッドセット Webカメラ・映像機器 ネットワーク機器&#40;Wi-Fiルーター&#41; SDカード・USBメモリ その他の周辺機器はこちら ■パソコンライフをもっと楽しく モニターアーム ゲームコントローラー プリンター・スキャナ ペンタブレット DVD・ブルーレイメディア 外付けドライブ デスク・チェア・PC用デスク ■あると便利な周辺機器 NAS・外付けストレージケース USBハブ LANケーブル モニター用ケーブル USB端子用ケーブル ■特集から探す ドスパラ限定商品 アウトレット周辺機器 ゲーミングデバイス特集 配信機器特集 音響機器特集 中古販売 中古販売 ■中古パソコン 中古ゲーミングデスクトップPC 中古デスクトップパソコン 中古ゲーミングノートPC 中古ノートパソコン 中古ポータブルゲーミングPC 中古MAC ジャンク品&#40;デスクトップPC&#41; ジャンク品&#40;ノートPC&#41; 一覧を見る ＞ ■中古スマホ・タブレット 中古iPhone 中古Android 中古タブレット 一覧を見る ＞ ■中古PCパーツ 中古グラフィックボード 中古CPU 中古マザーボード 中古メモリ 中古PCケース 中古冷却パーツ 一覧を見る ＞ ■中古ゲーミングデバイス 中古ゲーミングキーボード 中古ゲーミングマウス 中古ゲーミングヘッドセット 一覧を見る ＞ ■中古周辺機器 中古液晶モニター 中古キーボード 中古マウス 中古ペンタブレット 中古ウェアラブル機器 一覧を見る ＞ 全国店舗の中古商品を今すぐチェック 中古買取 中古買取 ■買取について調べる 買取対象商品 よくあるご質問 宅配買取について 店頭買取について 法人買取について ■買取価格を確認する デスクトップパソコン ノートパソコン PCパーツ 周辺機器 スマートフォン すべての買取対象商品から探す ■もっとお得に買取 毎月3のつく日は買取5％UP セーフティサービス会員で買取10％UP 宅配買取のお申し込みはこちら サポート・サービス サポート・サービス ■ サポート情報・修理のお申込み 購入した商品の保証期間を確認する FAQ・故障診断 弊社製PCに関するサポート 中古商品に関するサポート パーツ・周辺機器の検査申し込み 保証期間外・他社製・自作のPCに関する修理申し込み ■保証・サービス セーフティサービス 延長保証 安心ワイド保証プラス アップグレードサービス パソコンクリーニングサービス クラウドバックアップサービス 保証・サービス一覧 ■ 設定・設置を任せたい 初期設定代行サービス 初期設定+ゲーミング設定サービス 出張設置サービス パソコン組立代行サービス ■ トラブルを解決したい データ復旧 出張・訪問サポート 電話・リモート相談サービス マニュアルダウンロード お問い合わせ窓口について 保証期間内パソコン・PCパーツの修理・サポート 法人・個人事業主向け 法人・個人事業主向け ■製品から探す デスクトップパソコン ノートパソコン ワークステーション PCパーツ 周辺機器 ■業務・用途から選ぶ オフィス・一般業務 設計・CAD 動画・映像・イラスト AI開発・データ分析 教育・研究 ゲーム開発 ■サービス PCレンタルサービス PCサブスクリプション ■製品情報、導入事例、カタログを探す 法人向けプロダクトサイト ご利用ガイド 注文確認 修理・サポート 店舗一覧 個人のお客様のお問い合わせ 法人のお客様のお問い合わせ パソコン ビジネス向け ノート 法人向けGALLERIA（ノート） GALLERIA ZL9R-R57T-6-B --> --> このパソコンに使える 円OFFクーポン クーポンコードの使い方はこちら クーポンを 取得する クーポンコードの使い方はこちら さらに合計3,000円以上購入＆エントリーで 抽選で1,000名様に豪華景品が当たる!! 詳しくはこちら --> × クーポンコードはショッピングカートで入力できます。 商品詳細の「カートに入れる」ボタンで対象商品をご投入いただいた後、ショッピングカートのクーポンコード入力欄にコードを入力して「適用」を 押してください。 ※上限に達した場合はクーポンをご利用いただけません。 --> 新品パソコン送料無料‼～10/30（金）17:00 ※ショッピングカートにてお値引き分が適用されます。 --> 出荷日数ごとの決済手段一覧 決済手段/出荷日数 ～3週 ～7週 8週以上 クレジットカード 〇 × × 楽天ペイ 〇 × × PayPay 〇 × × Amazon Pay 〇 × × PayPal 〇 × × d払い 〇 〇 × 分割払い（三井住友） 〇 〇 × コンビニ決済※1 〇 〇 〇 代金引き換え 〇 〇 〇 銀行振込（三菱ＵＦＪ銀行）※2 〇 〇 〇 銀行ネット決済 〇 〇 〇 PayPay銀行リンク決済 〇 〇 〇 ATM決済 （ペイジー決済） 〇 〇 〇 1.コンビニ決済は30万円未満のご注文に限りご利用可。セブンイレブン、ローソン/ミニストップ、ファミリーマート、デイリーヤマザキ、セイコーマートから選択可。 2.ATMから現金での振り込みはできません。窓口で振り込んでいただくかキャッシュカードを利用してお振込みください。 &times; 抽選で1,000名様 合計1,000円以上ご購入 ＆エントリーで 最大全額ドスパラポイント還元 キャンペーン期間 通販：2026年9月25日(金)11:00～2026年10月30日(金)10:59 店舗：2026年9月25日(金)開店～2026年10月29日(木)閉店 エントリー：2026年10月30日(金)10:59まで キャンペーン特典 期間中、合計1,000円以上ご購入＆エントリーで抽選で1,000名様にドスパラポイント全額還元‼(上限10万ポイント) 抽選内容 1 等 購入金額 全額 相当分 上限 10 万 ポイント 10 名様 2 等 購入金額 全額 相当分 上限 1 万 ポイント 30 名様 3 等 1,000 ポイント 960 名様 本キャンペーンは、ページ下部のエントリーボタンからエントリーが必要です。（開催期間内であればエントリー前のお買い物でも対象） 他の抽選キャンペーンとの併用可。ただし、景品表示法の抽選によるプレゼントの上限は、商品価格の20倍相当または10万円相当までとなります。 対象商品の価格は予告なく変更する場合がございます。 参加方法 期間中にドスパラ店舗・通販で対象商品を合計1,000円以上ご購入の上、エントリーされたドスパラ会員様。 期間内にご注文が確定している必要があります。 期間中の購入回数にかかわらず、抽選券は1会員様につき1口です。 期間中に複数回お買い物された場合、その合計金額を元に還元ポイントを算出いたします。 お支払い方法によっては確定までお時間を要する場合がございます。キャンペーンにご応募される場合はお早めのご注文をおすすめします。 対象商品 ドスパラ公式通販・ドスパラ店舗・デジタルドック店舗で販売している新品パソコン / 新品DIYパーツ / 周辺機器 / 中古商品 / 修理 / サービス(パソコンクリーニング等)。 ポイント付与について 本キャンペーンのポイント付与は 2026年11月20日(金)予定 です。 付与されるのは期間限定のポイントです。 有効期限は2027年2月23日(火) までとなります。 エントリー （要会員ログイン） はこちら エントリーにはドスパラ会員登録が必要です。 新規会員登録（年会費：無料）はこちら --> 本キャンペーンのエントリー受付期間は終了いたしました ＋ ※ 画像はイメージです。仕様・外観は製品により異なる場合があります。 GALLERIA ZL9R-R57T-6-B レビュー募集中 レビュー投稿で最大5,000ポイントプレゼント！ 比較リストに追加 比較できる商品は最大100件までです。 削除する商品を選択してください。 比較リストを見る 比較リストを見る 追加済 Ryzen 9 RTX 50シリーズ メモリ 32GB 1TB SSD 保証期間 3年 在庫なし 送料について：1台につき全国一律&nbsp;3,300円(税込)、離島&nbsp;6,600円(税込) 詳細 送料について： 新品パソコン送料無料 2026年10月30日(金)17:00まで --> 基本構成 製品仕様を見る OS Windows 11 Pro CPU Ryzen 9 9955HX グラフィック GeForce RTX 5070 Ti 12GB Laptop GPU メモリ 32GBメモリ DDR5 ストレージ 1TB Gen4 SSD (DRAMキャッシュ) ベンチマーク 15860 詳細 3DMark Time Spyのトータルスコアです。基本構成時のスコアとなります。 お手持ちのパソコンと性能を比べる 3DMark Time Spy : LEVEL 4 15860 Fire Strike 35565 Fire Strike Ultra 11049 ※ 基本構成時のスコアとなります お持ちのパソコンと性能を比べてみる レベルごとの数値目安 LEVEL 5 OVER 19001 ほとんどの最新ゲームをストレスなくプレイ可能！ LEVEL 4 12001 - 19000 ワンランク上のフレームレートや解像度で楽しみたい方に！ LEVEL 3 8001 - 12000 WQHD環境でゲームを快適にプレイ可能！ LEVEL 2 5001 - 8000 フルHD環境でゲームを快適にプレイ可能！ LEVEL 1 UNDER 5000 3Dゲーム入門にオススメ！ 基本構成 738,980 円 送料 円 合計 円 （税込） ドスパラポイント 最大 0.5% 3,695 pt 獲得 できます 内訳 ポイント内訳 合計 3,695 pt&nbsp;(0.5%) ドスパラポイント 3,695 pt&nbsp;(0.5%) 通常ポイント 3,695 pt&nbsp;(0.5%) 特典によるポイントには、期間中の上限が設定されている場合がございます。詳しくは各特典内容をご確認ください。 合計は最大20％までとなります。対象となる内容によっては、ポイントが変更となる場合がございます。 カスタマイズする ゲーム性能 1080p 1440p 4K fpsスコアが推奨値以上だとより快適にゲームプレイが可能です。 fps値は3DMarkベンチマーク結果の参考値であり、各ゲームの動作やfpsを保証するものではありません fps値は基本構成の場合です ゲームタイトル毎のfpsスコアについて ①解像度切り替え ゲームの画面解像度を切り替えるタブです。 各タブは下記解像度を示しており、プレイする解像度に近いものに合わせてご選択ください。 フルHD（1080p）：1920×1080～1920×1200 WQHD（1440p）：2560×1440～2560×1600 4K（2160p）：3840×2160～3840×2400 解像度が高ければ画像は精細になりますが、その分PCへの負荷は高まり、fps（フレームレート）は低下します。 ②ゲームタイトル 人気のゲームタイトルを取り揃えております。希望のタイトルがない場合は同ジャンルのゲームタイトルを参考ください。 ③fpsスコア fpsとは？ 表示PCのゲームタイトル毎のfpsスコアが表示されます。 fpsとは「Frames Per Second」の略で、フレームレートとも呼ばれます。静止画（フレーム）が1秒間に何枚表示されることで、動画として見えているかを示す指標です。 推奨値は、公式の推奨スペックより算出した値です。 fpsスコアが推奨値以上だとより快適にゲームプレイが可能です。 表示のfps値は3DMarkベンチマーク結果の参考値であり、各ゲームの動作やfps値を保証するものではありません。 fpsスコアは基本構成の場合です。 ノートPC搭載のディスプレイは、リフレッシュレートを超えるfpsスコアを表示できません。 一部ゲームタイトルとRadeon（AMD）GPUはリアルタイムアップスケーリング技術（DLSS）非対応のため、Radeon構成時の数値は、ネイティブ描画の値を掲載しています。 解像度が高ければ画像は精細になりますが、その分PCへの負荷は高まり、fps（フレームレート）は低下します。 リアルタイムアップスケーリング技術（DLSS）は主に高解像度や重設定で効果が出ます。1080p（フルHD）では、fpsが伸びない／わずかに低下する場合があります。 製品仕様 製品仕様［基本構成］ OS Windows 11 Pro 64ビット オフィスソフト Office なし セキュリティソフト ノートン360スタンダード 30日版インストール済み Steam Steamクライアントのインストール CPU AMD Ryzen 9 9955HX (最大5.40GHz/16コア/32スレッド) グラフィック機能 NVIDIA GeForce RTX 5070 Ti 12GB Laptop GPU + AMD Radeon 610M メモリ 32GB (16GB×2) (DDR5-4800 SO-DIMM) SSD 1TB SSD (M.2 NVMe Gen4 DRAMキャッシュ TLC) パーティション分割 パーティション分割 無し 入出力ポート USB3.2 Gen1 (Type-A) x 3 USB3.2 Gen2 (Type-C、映像出力 DisplayPort1.4 対応、PD対応/100W) x 1 USB3.2 Gen2 (Type-C、映像出力 DisplayPort1.4 対応、PD対応/100W～140W) x 1 miniDisplayPort 2.1 x 1、HDMI 2.1 Type A x 1 マイク入力・ヘッドフォン出力 共用端子(3.5mm 4極 CTIA) カードリーダー カードリーダーなし LAN 2.5Gb Ethernet対応LANポート x1 無線LAN Wi-Fi 7 (IEEE802.11 a/b/g/n/ac/ax/be) ※160MHzまでサポート Bluetooth Bluetooth 5.4 サウンド 内蔵ステレオスピーカー / マザーボード 標準 オンボードHDサウンド / デュアルマイク WEBカメラ FHD画質 WEBカメラ / IR カメラ (Windows Hello対応) ディスプレイ 16インチ 非光沢 WQXGA液晶 (2560×1600ドット表示) / リフレッシュレート 300Hz 電源 ACアダプター (240W) バッテリー 駆動時間(JEITA 測定法 3.0)：2.7 時間(動画再生時) / 5.7 時間(アイドル時) 光学ドライブ 光学ドライブ無し 標準キーボード 日本語キーボード (テンキー付 / Per-keyRGBバックライト搭載 / Nキーロールオーバー / アンチゴースト) 標準マウス 本体内蔵タッチパッド (マウスは付属しません) エネルギー消費効率 区分/年間消費電力量(kWh/年)/2022年度省エネ達成率 ※計測値はベースモデルです 12区分 63.39kWh/年 (61.75%) サイズ 約 357（幅）×256（奥行）×31（高さ・ゴム足含む) mm 重量 約 2.4kg 付属品 ACアダプター、各種マニュアル セキュリティ機能 セキュリティ スロット (6 [幅] × 2.5 [高さ] mm) 持込修理保証 保証期間3年 管理コード：24569-3560 本ページ記載の製品仕様は基本構成時の内容であり、販売価格および製品仕様は予告なく変更する場合がございます。 OSの項目に(ディスク付属)の表記が無い場合はOSディスクは付属いたしません。初期化(リカバリー)を行う際はWindows上から行います。 本製品に付属していないソフトウェア(OSを含む)に関してのサポートは行っておりません。各ソフトウェアの販売元にお問い合わせください。 Windows搭載製品でのLinuxの利用はサポート対象外です。 ビデオメモリ(VRAM)はメインメモリの一部を使用します(グラフィックスカード搭載モデルを除く)。 選択されるグラフィックスカードによっては隣接する空きスロットがご利用頂けない場合がございます。 グラフィックスカード側の映像端子とマザーボード側の映像端子を組み合わせた画面同時出力についてはサポート対象外です。 映像出力に関してはディスプレイ、ケーブル、変換コネクタの全ての組み合わせにおける動作を保証するものではありません。 ストレージ容量の表記は1GB=1,000Byteの3乗換算であり、1GB=1,024Byteの3乗換算の場合とは同容量の場合でも実際の値は小さくなります。 製品搭載のSDカードリーダーは全てのメディアでのデータの読み書きを保証するものではありません。 液晶ディスプレイは非常に精度の高い技術で製造されています。画面の一部に点灯しない画素や常時点灯する画素、明るさのむらなどが現れる場合がありますが故障ではありません。あらかじめご了承ください。 バッテリー搭載製品の駆動時間は、JEITAバッテリ動作時間測定法(Ver.3.0)に基づいて測定した目安の時間です。実際の使用環境によってバッテリー駆動時間は異なります。 エネルギー消費効率とはJIS C62623(2014)に規定する方法により測定した年間消費電力量です。省エネ基準達成率の表示語「A」は達成率100％以上110％未満、「AA」は達成率110％以上140％未満、「AAA」は達成率140％以上を示します。また達成率が100％未満の場合は、達成率をそのまま％で表示しています。 × カスタマイズ 製品仕様 レビュー カスタマイズ OS Windows 11 Pro 64ビット 0 円 オフィスソフト 選び方のポイント ゲーマー必見！Officeの意外な活用術 詳しくはこちら --> 使い方で選べるサブスク型と買い切り型のオフィスソフト 製品一覧表 Microsoft 365 Personal 【サブスク型】 Copilot Word Excel PowerPoint Outlook OneNote OneDrive Microsoft Defender Microsoft Designer Clipchamp Microsoft Office Home and Business 2024 【買い切り型】 Word Excel PowerPoint Outlook OneNote ※一部のモデルでは選択できない場合がございます。 Microsoft 365とOfficeについて詳しくはこちら ■ Micro",
       "benefit_signals": [
         {
           "kind": "additional_cash_discount_jpy",
@@ -1980,7 +1980,7 @@
       "variant_match": "exact",
       "identity_confidence": "high",
       "fingerprint": "ca729f496e4b71430b7c1d14340760b7b66e3b84703ac7a9d170e27ea8a96470",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": 43,
       "score_detail": {
         "status": "UNAVAILABLE",
@@ -2008,7 +2008,7 @@
         "reason": "現金支払 ¥738,980 / 実質コスト ¥720,980 / 特典・構成価値 ¥0 / 加点 2 / PC目標価格 ¥360,000 まで必要値下げ 50.1% / 在庫 out_of_stock / 構成判定 exact",
         "historical_floor_jpy": null,
         "price_trend": {
-          "sample_size": 137,
+          "sample_size": 138,
           "down_count": 0,
           "up_count": 0,
           "down_rate": 0.0,
@@ -2017,7 +2017,7 @@
         "data_confidence": "high",
         "price_source_mode": "direct_structured",
         "variant_match": "exact",
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30,
         "configuration_ready": true,
         "configuration_reasons": [],
@@ -2039,8 +2039,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": 720980,
       "purchase_url": "https://www.dospara.co.jp/TC1085/MC24569.html",
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda"
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131"
     }
   ],
   "reference_only": [
@@ -2051,8 +2051,8 @@
       "observation_url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/",
       "query": "G614FR-R9X3D5070TI",
       "priority": "critical",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
       "available_at": null,
       "fetch_status": "ok",
       "last_fetch_status": "ok",
@@ -2120,7 +2120,7 @@
       "observed_price_source_mode": "none",
       "variant_ambiguity_reason": "sku_offer_not_observed",
       "fingerprint": "17bd19a2453423c8837b7d60f3cb3d60be252e31a45b9f261fd7e171d9016d6b",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2131,7 +2131,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30
       },
       "rank": null,
@@ -2140,8 +2140,8 @@
       "effective_cost_jpy": null,
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda",
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131",
       "reference_price_jpy": null,
       "current_price_suppressed": true
     },
@@ -2152,8 +2152,8 @@
       "observation_url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/",
       "query": "G614PR-R9R5070TI",
       "priority": "high",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
       "available_at": null,
       "fetch_status": "ok",
       "last_fetch_status": "ok",
@@ -2220,7 +2220,7 @@
       "observed_price_source_mode": "none",
       "variant_ambiguity_reason": "sku_offer_not_observed",
       "fingerprint": "2d0da370e96c17de10fd7399825bc1c2317851e27fdf61bb64475a41a099250b",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2231,7 +2231,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30
       },
       "rank": null,
@@ -2240,8 +2240,8 @@
       "effective_cost_jpy": null,
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda",
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131",
       "reference_price_jpy": null,
       "current_price_suppressed": true
     },
@@ -2252,8 +2252,8 @@
       "observation_url": "https://www.asus.com/jp/laptops/for-gaming/tuf-gaming/asus-tuf-gaming-a16-2025/techspec/",
       "query": "FA608PP",
       "priority": "critical",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
       "available_at": null,
       "fetch_status": "ok",
       "last_fetch_status": "ok",
@@ -2320,7 +2320,7 @@
       "observed_price_source_mode": "none",
       "variant_ambiguity_reason": "sku_offer_not_observed",
       "fingerprint": "97115b435fccedd1e6b0e8cbc14515ea74a77b4c4beb57a2e0a52c692526cc57",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2331,7 +2331,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30
       },
       "rank": null,
@@ -2340,8 +2340,8 @@
       "effective_cost_jpy": null,
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda",
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131",
       "reference_price_jpy": null,
       "current_price_suppressed": true
     },
@@ -2352,8 +2352,8 @@
       "observation_url": "https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040",
       "query": "Lenovo Legion Pro 5i Gen 10 Core Ultra 9 275HX RTX 5070 Ti 32GB 1TB 日本",
       "priority": "critical",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
       "available_at": null,
       "fetch_status": "ok",
       "last_fetch_status": "ok",
@@ -2416,7 +2416,7 @@
       "variant_match": "strong",
       "identity_confidence": "medium",
       "fingerprint": "981175f4d266b92c43fff040f31f2cf302ce62944119cb8ea4a509569de9b464",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2427,7 +2427,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30
       },
       "rank": null,
@@ -2437,8 +2437,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
       "purchase_url": "https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040",
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda",
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131",
       "reference_price_jpy": null,
       "current_price_suppressed": true
     },
@@ -2449,8 +2449,8 @@
       "observation_url": "https://store.acer.com/ja-jp/acer-phn16-i71-n93z57t-e-1",
       "query": "PHN16-I71-N93Z57T/E",
       "priority": "high",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
       "available_at": null,
       "fetch_status": "ok",
       "last_fetch_status": "ok",
@@ -2508,7 +2508,7 @@
       "variant_match": "trusted_url",
       "identity_confidence": "high",
       "fingerprint": "7d47dc518b2cd2e68e3c0f53b1b401dca6e25dae17676208af14fa98e435d4d6",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2519,7 +2519,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30
       },
       "rank": null,
@@ -2528,8 +2528,8 @@
       "effective_cost_jpy": null,
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda",
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131",
       "reference_price_jpy": null,
       "current_price_suppressed": true
     },
@@ -2540,8 +2540,8 @@
       "observation_url": "https://www.asus.com/jp/laptops/for-gaming/tuf-gaming/asus-tuf-gaming-f16-2025/techspec/",
       "query": "FX608JPR",
       "priority": "high",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
       "available_at": null,
       "fetch_status": "ok",
       "last_fetch_status": "ok",
@@ -2609,7 +2609,7 @@
       "observed_price_source_mode": "none",
       "variant_ambiguity_reason": "sku_offer_not_observed",
       "fingerprint": "3e17b94fcb47eead04efe852b325cbcd0a8761fb0f6b1cd4d0e4ae63f30b6779",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2620,7 +2620,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30
       },
       "rank": null,
@@ -2629,8 +2629,8 @@
       "effective_cost_jpy": null,
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda",
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131",
       "reference_price_jpy": null,
       "current_price_suppressed": true
     },
@@ -2641,8 +2641,8 @@
       "observation_url": "https://rog.asus.com/jp/laptops/rog-zephyrus/rog-zephyrus-g16-2026/spec/",
       "query": "GU606AR-U9R5070TIG32G",
       "priority": "normal",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
       "available_at": null,
       "fetch_status": "ok",
       "last_fetch_status": "ok",
@@ -2710,7 +2710,7 @@
       "observed_price_source_mode": "none",
       "variant_ambiguity_reason": "sku_offer_not_observed",
       "fingerprint": "5aa61cb00c34ffc4605e2bd079c776ab74357888d3c2d0c2017f793c19d99e61",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2721,7 +2721,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30
       },
       "rank": null,
@@ -2730,8 +2730,8 @@
       "effective_cost_jpy": null,
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda",
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131",
       "reference_price_jpy": null,
       "current_price_suppressed": true
     },
@@ -2742,8 +2742,8 @@
       "observation_url": "https://rog.asus.com/jp/laptops/rog-zephyrus/rog-zephyrus-g14-2026-gu405/spec/",
       "query": "GU405AR-U9R5070TIG",
       "priority": "normal",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
       "available_at": null,
       "fetch_status": "ok",
       "last_fetch_status": "ok",
@@ -2811,7 +2811,7 @@
       "observed_price_source_mode": "none",
       "variant_ambiguity_reason": "sku_offer_not_observed",
       "fingerprint": "84963a54633e982884fefe108f5f7ef4171e10f94c32ef777a0a3972713109da",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2822,7 +2822,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30
       },
       "rank": null,
@@ -2831,8 +2831,8 @@
       "effective_cost_jpy": null,
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda",
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131",
       "reference_price_jpy": null,
       "current_price_suppressed": true
     },
@@ -2843,8 +2843,8 @@
       "observation_url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025/spec/",
       "query": "G615LR-U9R5070TI",
       "priority": "high",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
       "available_at": null,
       "fetch_status": "ok",
       "last_fetch_status": "ok",
@@ -2910,7 +2910,7 @@
       "observed_price_source_mode": "none",
       "variant_ambiguity_reason": "sku_offer_not_observed",
       "fingerprint": "da4b2fe5b63855de5e3199a70492836fbb2fb92774fddc625199b4ae7ab1ae57",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -2921,7 +2921,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30
       },
       "rank": null,
@@ -2931,8 +2931,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
       "purchase_url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025/spec/",
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda",
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131",
       "reference_price_jpy": null,
       "current_price_suppressed": true
     },
@@ -2943,8 +2943,8 @@
       "observation_url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025/spec/",
       "query": "ROG Strix G18 G815LR-U9R5070TI Core Ultra 9 275HX RTX 5070 Ti 32GB 1TB 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
       "available_at": null,
       "fetch_status": "ok",
       "last_fetch_status": "ok",
@@ -3008,7 +3008,7 @@
       "variant_match": "strong",
       "identity_confidence": "high",
       "fingerprint": "50931fd63c559e540b5c6be30f08a133f288556aeb9c3a44b8f3492b137e22cf",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -3019,7 +3019,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30
       },
       "rank": null,
@@ -3029,8 +3029,8 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
       "purchase_url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025/spec/",
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda",
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131",
       "reference_price_jpy": null,
       "current_price_suppressed": true
     },
@@ -3041,9 +3041,9 @@
       "observation_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
       "query": "G TUNE DG-A7G70 Ryzen 7 5700X RTX 5070 32GB 1TB デスクトップ 日本",
       "priority": "high",
-      "retrieval_time": "2026-10-30T16:54:58+09:00",
-      "observed_at": "2026-10-30T16:54:58+09:00",
-      "available_at": "2026-10-30T16:54:58+09:00",
+      "retrieval_time": "2026-10-30T18:03:12+09:00",
+      "observed_at": "2026-10-30T18:03:12+09:00",
+      "available_at": "2026-10-30T18:03:12+09:00",
       "fetch_status": "ok",
       "last_fetch_status": "ok",
       "last_fetch_error": null,
@@ -3115,7 +3115,7 @@
         }
       ],
       "fingerprint": "7b5c7df91c0fcd0bb9ac1f8a5773ab5e59725d135327972e2d4b365f5f9e9155",
-      "prediction_time": "2026-10-30T16:59:22+09:00",
+      "prediction_time": "2026-10-30T18:08:46+09:00",
       "decision_score": null,
       "score_detail": {
         "status": "UNACTIONABLE",
@@ -3126,7 +3126,7 @@
         "stock": 0,
         "timing": 0,
         "score_cap": 0,
-        "observation_age_minutes": 4.4,
+        "observation_age_minutes": 5.6,
         "max_actionable_age_minutes": 30
       },
       "rank": null,
@@ -3136,14 +3136,14 @@
       "noncash_benefit_value_jpy": 0,
       "value_equivalent_cost_jpy": null,
       "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga7g70b5bbdw101decwa/",
-      "source_snapshot_generated_at": "2026-10-30T16:54:58+09:00",
-      "source_snapshot_sha256": "8c0f223678ff25172ce107c4a5ed40146905c48378643127bfaf3f3fa4bf5cda",
+      "source_snapshot_generated_at": "2026-10-30T18:03:12+09:00",
+      "source_snapshot_sha256": "0bd0892b6d09ab582ae8834528e6e993a00147653fbc73133f3397dbdb3c4131",
       "reference_price_jpy": null,
       "current_price_suppressed": true
     }
   ],
   "purchase_strategy": {
-    "generated_at": "2026-10-30T16:59:22+09:00",
+    "generated_at": "2026-10-30T18:08:46+09:00",
     "pricing_phase": "PRE_BLACK_FRIDAY_REFERENCE",
     "black_friday_window_start_jst": "2026-11-01T00:00:00+09:00",
     "black_friday_window_end_jst": "2026-12-11T23:59:59+09:00",
@@ -3172,7 +3172,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 279800,
-        "pre_black_friday_reference_at": "2026-10-30T16:54:58+09:00",
+        "pre_black_friday_reference_at": "2026-10-30T18:03:12+09:00",
         "post_black_friday_reference_price_jpy": null,
         "post_black_friday_reference_at": null,
         "observed_price_jpy": 279800,
@@ -3263,7 +3263,7 @@
         "watch_window_reference_price_jpy": null,
         "watch_window_reference_at": null,
         "pre_black_friday_reference_price_jpy": 299800,
-        "pre_black_friday_reference_at": "2026-10-30T16:54:58+09:00",
+        "pre_black_friday_reference_at": "2026-10-30T18:03:12+09:00",
         "post_black_friday_reference_price_jpy": null,
         "post_black_friday_reference_at": null,
         "observed_price_jpy": 299800,
