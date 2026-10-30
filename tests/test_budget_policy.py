@@ -110,12 +110,26 @@ class BudgetPolicyTests(unittest.TestCase):
     def test_peripheral_report_heading_matches_configured_purchase_items(self):
         heading = report.peripheral_monitor_section_heading(self.cfg)
         self.assertIn("メインモニター1台", heading)
-        self.assertIn("サブモニターなし", heading)
+        self.assertIn("サブモニター後付け可・今回は除外", heading)
         self.assertIn("ヘッドセットなし", heading)
         ids = {item["id"] for item in self.cfg["peripherals"]}
         self.assertNotIn("speakers", ids)
         self.assertNotIn("secondary_monitor", ids)
         self.assertNotIn("power_strip", ids)
+        deferred = next(
+            item for item in self.cfg.get("deferred_optional_upgrades", [])
+            if item.get("id") == "secondary_monitor"
+        )
+        self.assertEqual(deferred["status"], "DEFERRED_OPTIONAL_UPGRADE")
+        self.assertFalse(deferred["purchase_now"])
+        self.assertFalse(deferred["mandatory_for_initial_purchase"])
+        self.assertFalse(deferred["required_for_initial_pc_purchase_gate"])
+        self.assertFalse(deferred["track_current_price"])
+        self.assertFalse(deferred["include_in_current_peripheral_ranking"])
+        self.assertFalse(deferred["include_in_current_budget"])
+        self.assertFalse(deferred["include_in_current_checkout_total"])
+        self.assertEqual(deferred["minimum_simultaneous_displays"], 2)
+        self.assertTrue(any("同時接続" in check for check in deferred["compatibility_checks"]))
 
     def test_all_in_budget_arithmetic(self):
         self.assertEqual(self.cfg["total_budget_jpy"], 400000)
