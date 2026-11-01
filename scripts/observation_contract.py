@@ -6,6 +6,7 @@ coverage/fetch counters needed to evaluate that pipeline have disappeared.
 """
 
 import math
+from datetime import datetime
 
 
 _COVERAGE_INTEGER_FIELDS = (
@@ -127,3 +128,77 @@ def purchase_gate_schema_errors(rankings):
         errors.append("purchase_gate.critical_unverified_ids contains duplicates")
 
     return errors
+
+
+_PIT_EVENT_TIMESTAMP_FIELDS = (
+    "event_time",
+    "publication_time",
+    "available_at",
+    "retrieval_time",
+    "prediction_time",
+)
+
+
+def point_in_time_event_metadata(event):
+    """Validate the complete event-time/publication/availability/knowledge chain.
+
+    Missing event or publisher timestamps are common for retail pages. They must
+    remain UNKNOWN rather than being filled with the observation time. Only a
+    complete, timezone-aware, monotonically ordered chain is PIT-valid.
+    """
+    if not isinstance(event, dict):
+        return {
+            "pit_valid": False,
+            "pit_status": "INVALID",
+            "pit_missing_fields": list(_PIT_EVENT_TIMESTAMP_FIELDS),
+            "pit_error": "event_is_not_an_object",
+        }
+
+    missing = [
+        field for field in _PIT_EVENT_TIMESTAMP_FIELDS
+        if event.get(field) in (None, "")
+    ]
+    parsed = {}
+    invalid = []
+    for field in _PIT_EVENT_TIMESTAMP_FIELDS:
+        value = event.get(field)
+        if value in (None, ""):
+            continue
+        try:
+            timestamp = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+            if timestamp.tzinfo is None or timestamp.utcoffset() is None:
+                raise ValueError("timezone_offset_missing")
+            parsed[field] = timestamp
+        except (TypeError, ValueError, OverflowError):
+            invalid.append(field)
+
+    if invalid:
+        return {
+            "pit_valid": False,
+            "pit_status": "INVALID",
+            "pit_missing_fields": missing,
+            "pit_error": "invalid_or_timezone_naive_timestamp:" + ",".join(invalid),
+        }
+    if missing:
+        return {
+            "pit_valid": False,
+            "pit_status": "UNKNOWN",
+            "pit_missing_fields": missing,
+            "pit_error": "missing_required_timestamps",
+        }
+
+    for earlier, later in zip(_PIT_EVENT_TIMESTAMP_FIELDS, _PIT_EVENT_TIMESTAMP_FIELDS[1:]):
+        if parsed[earlier] > parsed[later]:
+            return {
+                "pit_valid": False,
+                "pit_status": "INVALID",
+                "pit_missing_fields": [],
+                "pit_error": "timestamp_order_violation:" + earlier + ">" + later,
+            }
+
+    return {
+        "pit_valid": True,
+        "pit_status": "VALID",
+        "pit_missing_fields": [],
+        "pit_error": None,
+    }
