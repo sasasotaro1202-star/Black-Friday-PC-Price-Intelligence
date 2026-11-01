@@ -87,6 +87,11 @@ class ProjectConfigurationContractTests(unittest.TestCase):
                     f"not a direct retailer URL: {url}",
                 )
 
+    def test_dospara_black_friday_pre_sale_bto_candidate_is_in_search_coverage(self):
+        query_text = " ".join(self.targets.get("queries") or [])
+        self.assertIn("THIRDWAVE AD-R7A56C-0AW", query_text)
+        self.assertIn("dospara.co.jp", self.targets.get("allowed_domains") or [])
+
     def test_tuf_a16_year_mismatch_cannot_be_treated_as_exact_purchase_route(self):
         catalog = read_json("config/candidate_catalog.json")
         candidate = next(
