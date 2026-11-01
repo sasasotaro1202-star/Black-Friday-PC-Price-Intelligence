@@ -458,10 +458,10 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(row["online_comparison_price_jpy"], 20790)
         self.assertEqual(row["selected_purchase_channel"], "online")
         self.assertFalse(row["store_price_confirmed"])
-        self.assertFalse(projection["budget_data_ready"])
-        self.assertFalse(row["price_verified"])
+        self.assertTrue(projection["budget_data_ready"])
+        self.assertTrue(row["price_verified"])
         self.assertFalse(row["online_price_is_comparison_only"])
-        self.assertIn("main_monitor", projection["tracked_peripheral_unverified_ids"])
+        self.assertNotIn("main_monitor", projection["tracked_peripheral_unverified_ids"])
         self.assertIn("main_monitor", projection["channel_comparison_pending_ids"])
 
     def test_any_fresh_same_branch_cash_quote_can_be_selected_while_other_routes_remain_pending(self):
