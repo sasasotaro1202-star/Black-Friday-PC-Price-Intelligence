@@ -429,7 +429,7 @@
         "GPU tier selected by measured gaming/rendering vs VRAM needs",
         "12+ core CPU if local engine-source builds and parallel data jobs justify it"
       ],
-      "default_soft_overrun_allowance_jpy": 20000,
+      "default_soft_overrun_allowance_jpy": 0,
       "allow_target_overrun_for_value": true,
       "automatic_purchase_authorization": false,
       "score_policy": "Scenario scores compare candidates only within each budget tier; target-price scores are planning rubrics, not measured benchmarks or purchase permission."
