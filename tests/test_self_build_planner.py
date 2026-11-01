@@ -113,6 +113,117 @@ class SelfBuildRankingLinkTests(unittest.TestCase):
         self.assertIn("保存済み許容帯上限 ¥380,000", rendered)
         self.assertIn("算式による再計算値 ¥370,000", rendered)
 
+    def test_budget_tier_ceilings_match_explicit_350_400_450_policy(self):
+        profile = {
+            "peripheral_budget_jpy": 35000,
+            "unallocated_contingency_jpy": 5000,
+            "soft_overrun_allowance_jpy": 20000,
+            "budget_scenarios": [
+                {"id": "budget_350k", "total_budget_jpy": 350000,
+                 "soft_overrun_allowance_jpy": 0, "soft_ceiling_total_jpy": 350000},
+                {"id": "budget_400k", "total_budget_jpy": 400000,
+                 "soft_overrun_allowance_jpy": 20000, "soft_ceiling_total_jpy": 420000},
+                {"id": "budget_450k", "total_budget_jpy": 450000,
+                 "soft_overrun_allowance_jpy": 0, "soft_ceiling_total_jpy": 450000},
+            ],
+            "budget_build_candidates": [],
+        }
+        with patch.object(planner, "score_and_rank_builds", return_value=[]):
+            result = planner.build_budget_scenarios(profile, {}, {}, None, 360)
+        by_id = {row["id"]: row for row in result}
+        self.assertEqual(by_id["budget_350k"]["soft_ceiling_total_jpy"], 350000)
+        self.assertEqual(by_id["budget_400k"]["soft_ceiling_total_jpy"], 420000)
+        self.assertEqual(by_id["budget_450k"]["soft_ceiling_total_jpy"], 450000)
+        self.assertEqual(by_id["budget_350k"]["soft_overrun_allowance_jpy"], 0)
+        self.assertEqual(by_id["budget_400k"]["soft_overrun_allowance_jpy"], 20000)
+        self.assertEqual(by_id["budget_450k"]["soft_overrun_allowance_jpy"], 0)
+
+    def test_candidate_above_350k_ceiling_remains_visible_as_over_budget_only(self):
+        part_ids = ["cpu", "board", "gpu", "ram", "ssd", "psu", "case", "os"]
+        categories = {
+            "cpu": "cpu", "board": "motherboard", "gpu": "gpu", "ram": "memory",
+            "ssd": "storage", "psu": "psu", "case": "case", "os": "os_license",
+        }
+        parts = {
+            part_id: {
+                "id": part_id,
+                "category": categories[part_id],
+                "name": part_id.upper(),
+                "target_price_jpy": 39625,
+                "track_price": True,
+                "specs": {},
+                "purchase_url": "https://shop.example/" + part_id,
+                "monitor_url": "https://shop.example/" + part_id,
+            }
+            for part_id in part_ids
+        }
+        parts["cpu"]["specs"] = {"cores": 8, "threads": 16, "cooler_included": True}
+        parts["gpu"]["specs"] = {"vram_gb": 16}
+        parts["ram"]["specs"] = {"capacity_gb": 32, "modules": 2}
+        parts["ssd"]["specs"] = {"capacity_gb": 1000}
+        profile = {
+            "minimum_ram_gb": 32,
+            "minimum_ssd_gb": 1000,
+            "peripheral_budget_jpy": 35000,
+            "unallocated_contingency_jpy": 5000,
+            "soft_overrun_allowance_jpy": 20000,
+            "budget_scenarios": [{
+                "id": "budget_350k",
+                "total_budget_jpy": 350000,
+                "soft_overrun_allowance_jpy": 0,
+                "soft_ceiling_total_jpy": 350000,
+            }],
+            "budget_build_candidates": [{
+                "id": "350k-over",
+                "budget_tier_jpy": 350000,
+                "part_ids": part_ids,
+                "cpu_part_id": "cpu",
+                "motherboard_part_id": "board",
+                "gpu_choice_id": "gpu",
+                "memory_part_id": "ram",
+                "storage_part_id": "ssd",
+                "psu_part_id": "psu",
+                "case_part_id": "case",
+                "cooler_included_by_cpu": True,
+                "peripheral_budget_jpy": 35000,
+                "unallocated_contingency_jpy": 5000,
+                "build_shipping_reserve_jpy": 6000,
+                "small_parts_reserve_jpy": 3000,
+                "name": "35万円比較用の超過案",
+            }],
+        }
+        empty_price = {
+            "market_reference_price_jpy": None,
+            "display_reference_price_jpy": None,
+            "price_status": "missing",
+            "trusted_for_market_estimate": False,
+            "retrieval_time": None,
+            "reference_source_url": None,
+            "purchase_url": None,
+            "early_buy_review": {},
+            "direct_listing_display_price_jpy": None,
+            "direct_listing_display_url": None,
+            "direct_listing_display_title": None,
+            "direct_listing_display_stock_status": "unknown",
+            "direct_listing_sellable_price_jpy": None,
+            "direct_listing_sellable_stock_status": "unknown",
+            "direct_listing_stock_counts": {},
+        }
+        with (
+            patch.object(planner, "component_price", return_value=empty_price),
+            patch.object(planner, "compatibility_checks", return_value=("PASS", [])),
+            patch.object(planner, "assess_workload_fit", return_value={}),
+            patch.object(planner, "score_and_rank_builds", return_value=[]),
+        ):
+            result = planner.build_budget_scenarios(profile, parts, {}, None, 360)
+        candidates = result[0]["builds"]
+        self.assertEqual(len(candidates), 1)
+        self.assertEqual(candidates[0]["target_all_in_jpy"], 366000)
+        self.assertFalse(candidates[0]["within_scenario_target"])
+        self.assertFalse(candidates[0]["within_soft_band"])
+        self.assertEqual(candidates[0]["decision"], "OVER_SOFT_BUDGET_BAND")
+        self.assertEqual(candidates[0]["target_soft_overrun_jpy"], 16000)
+
     def test_budget_scenario_component_breakdown_links_every_part(self):
         candidate = {
             "id": "test-build",
