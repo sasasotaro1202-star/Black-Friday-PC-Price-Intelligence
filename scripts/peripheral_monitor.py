@@ -8,7 +8,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import unicodedata
 from html.parser import HTMLParser
 from urllib.parse import urlparse
-from intelligence import ROOT, iso, now_jst, load_json, save_json, norm_text, store_observation_validation
+from intelligence import ROOT, iso, now_jst, load_json, save_json, norm_text, store_observation_validation, parse_dt
+from observation_contract import point_in_time_event_metadata
 from monitor import fetch, parse_page, stock_from_text
 
 TARGETS_PATH = os.path.join(ROOT, "config", "targets.json")
@@ -128,6 +129,7 @@ def observe_store_inventory(target, retrieved_at):
             continue
         try:
             html, final_url, _headers = fetch(url, timeout=10)
+            record["checked_at"] = iso(now_jst())
             if not allowed_host(final_url, allowed_hosts):
                 raise ValueError("store_inventory_redirected_to_unapproved_host")
             text = normalized_visible_text(html)
@@ -151,6 +153,7 @@ def observe_store_inventory(target, retrieved_at):
                 # but is never treated as available or unavailable.
                 record["verified"] = True
         except Exception as exc:
+            record["checked_at"] = iso(now_jst())
             record["error"] = f"{type(exc).__name__}:{str(exc)[:180]}"
         observations.append(record)
 
@@ -331,6 +334,8 @@ def run_one(target, previous, retrieved_at):
     for attempt_index, candidate_url in enumerate(urls):
         try:
             html, final_url, _headers = fetch(candidate_url, timeout=18)
+            attempt_retrieved_at = iso(now_jst())
+            row["retrieval_time"] = attempt_retrieved_at
             if not allowed_host(final_url, allowed_hosts):
                 raise ValueError("redirected_to_unapproved_host")
             expected = {
@@ -396,7 +401,7 @@ def run_one(target, previous, retrieved_at):
                 "stock_status": stock, "price_source_mode": price_source,
                 "price_context": price_context, "page_title": parsed.get("name"),
                 "identity_verified": True, "price_verified": True,
-                "retrieval_time": retrieved_at, "available_at": retrieved_at,
+                "retrieval_time": attempt_retrieved_at, "available_at": attempt_retrieved_at,
                 "target_met": price <= int(target.get("target_price_jpy") or 0),
             })
             row["retrieval_attempts"].append({
@@ -432,7 +437,8 @@ def run_one(target, previous, retrieved_at):
             "price_source_mode": selected.get("price_source_mode") or "none",
             "price_validation_status": "validated_exact_model_page",
             "identity_verified": True,
-            "available_at": retrieved_at,
+            "available_at": selected.get("available_at"),
+            "retrieval_time": selected.get("retrieval_time") or row.get("retrieval_time"),
             "status": "verified" if actionable else "price_verified_stock_unknown",
             "target_met": bool(selected.get("target_met")),
             "page_title": selected.get("page_title"),
@@ -533,12 +539,12 @@ def main():
     targets = primary_targets + alternative_targets
     previous = load_json(OUTPUT_PATH, {"products": []})
     previous_by_id = {str(x.get("id")): x for x in (previous.get("products") or []) if x.get("id")}
+    collection_started_at = iso(now_jst())
+    # Collection-level generated_at is recorded after retrievals finish. Each
+    # online offer and branch-stock observation keeps its own request completion
+    # timestamp, rather than inheriting a timestamp captured before network I/O.
+    rows = observe_targets(targets, previous_by_id, collection_started_at, max_workers=3)
     observed_at = iso(now_jst())
-    # Keep target-only items cheap, but fetch tracked products concurrently with a
-    # small worker cap. This prevents 20+ independent 18-second timeouts from
-    # serially consuming the entire workflow window. Results are reassembled in
-    # configuration order so report/event output stays deterministic.
-    rows = observe_targets(targets, previous_by_id, observed_at, max_workers=3)
     old = {str(x.get("id")): x for x in (previous.get("products") or []) if x.get("id")}
     events = []
     for item in rows:
@@ -559,14 +565,45 @@ def main():
             continue
         if new_price is None and new_stock in (None, "unknown") and not before:
             continue
-        events.append({
-            "id": item.get("id"), "observed_at": observed_at,
-            "event_time": None, "event_time_upper_bound": observed_at,
-            "publication_time": None, "available_at": item.get("available_at"),
-            "retrieval_time": observed_at, "prediction_time": observed_at,
-            "pit_valid": bool(item.get("available_at") and item.get("available_at") <= observed_at),
-            "url": item.get("source_url") or item.get("monitor_url"), "old_price_jpy": old_price, "new_price_jpy": new_price,
-            "old_stock_status": old_stock, "new_stock_status": new_stock,
+
+        # A price/stock change is only known to have occurred between observations.
+        # Exact event time and retailer publication time are not exposed by these
+        # pages, so keep them null and mark PIT UNKNOWN instead of inventing them.
+        observation_times = [
+            item.get("retrieval_time"),
+            item.get("available_at"),
+            item.get("store_inventory_checked_at"),
+            item.get("store_price_checked_at"),
+        ]
+        observation_times.extend(
+            row.get("checked_at")
+            for row in (item.get("store_inventory_observations") or [])
+            if isinstance(row, dict)
+        )
+        observation_times.extend(
+            offer.get("retrieval_time")
+            for offer in (item.get("online_offers") or [])
+            if isinstance(offer, dict)
+        )
+        parsed_times = [parse_dt(value) for value in observation_times if value]
+        parsed_times = [value for value in parsed_times if value is not None]
+        event_retrieval_time = iso(max(parsed_times)) if parsed_times else None
+        previous_observed_at = before.get("retrieval_time") or before.get("observed_at")
+        event = {
+            "id": item.get("id"),
+            "observed_at": observed_at,
+            "event_time": None,
+            "event_time_lower_bound": previous_observed_at,
+            "event_time_upper_bound": event_retrieval_time,
+            "publication_time": None,
+            "available_at": event_retrieval_time,
+            "retrieval_time": event_retrieval_time,
+            "prediction_time": observed_at,
+            "url": item.get("source_url") or item.get("monitor_url"),
+            "old_price_jpy": old_price,
+            "new_price_jpy": new_price,
+            "old_stock_status": old_stock,
+            "new_stock_status": new_stock,
             "old_store_price_jpy": before.get("store_price_jpy"),
             "new_store_price_jpy": item.get("store_price_jpy"),
             "old_store_stock_status": before.get("store_stock_status"),
@@ -578,8 +615,11 @@ def main():
             "store_inventory_source_url": item.get("store_inventory_source_url"),
             "store_inventory_verified": item.get("store_inventory_verified"),
             "price_source_mode": item.get("price_source_mode"),
-            "price_verified": item.get("price_verified", False), "status": item.get("status"),
-        })
+            "price_verified": item.get("price_verified", False),
+            "status": item.get("status"),
+        }
+        event.update(point_in_time_event_metadata(event))
+        events.append(event)
     out = {
         "schema_version": 1, "generated_at": observed_at,
         "budget_scope": "Primary peripheral targets affect the mandatory budget. Ranked alternatives are observed but do not affect budget projections unless selected.",
@@ -593,10 +633,12 @@ def main():
         os.makedirs(os.path.dirname(EVENTS_PATH), exist_ok=True)
         with open(EVENTS_PATH, "a", encoding="utf-8") as f:
             for event in events:
-                f.write(json.dumps(event, ensure_ascii=False, separators=(",", ":")) + "\n")
+                f.write(json.dumps(event, ensure_ascii=False, separators=(",", ":")) + "\\n")
     print(json.dumps({
         "generated_at": observed_at, "tracked_count": out["tracked_count"],
         "verified_count": out["verified_count"], "price_changes": len(events),
+        "pit_unknown_events": sum(1 for event in events if event.get("pit_status") == "UNKNOWN"),
+        "pit_invalid_events": sum(1 for event in events if event.get("pit_status") == "INVALID"),
         "statuses": {str(x["id"]): x["status"] for x in rows},
     }, ensure_ascii=False))
 
