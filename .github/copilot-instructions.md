@@ -11,7 +11,7 @@
 
 ## 1. Current user choices — authoritative as of 2026-10-17
 
-- Preferred all-in total target: **¥400,000**, not a hard cutoff. Compare a soft band through **¥420,000** when the benefit is meaningful, and keep a separate **¥450,000 target / ¥470,000 soft-band** scenario.
+- Preferred all-in total target: **¥400,000**. Compare up to **¥420,000** only when a material workload benefit is demonstrated. The **¥350,000 scenario is evaluated against ¥350,000**, and the separate **¥450,000 scenario is evaluated against ¥450,000**. Keep over-ceiling candidates visible as comparison-only with explicit overrun; do not silently extend either ceiling.
 - PC planning target: **¥360,000**. Recalculate PC allocation from the selected scenario's soft-band total, actual necessary peripherals, fees and ¥5,000 contingency. Show overruns versus both target and soft band.
 - Flexible peripheral planning allocation: **¥35,000**; this is not an obligation to spend the whole amount.
 - Unallocated total-system contingency: **¥5,000**.
