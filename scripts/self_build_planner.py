@@ -2078,6 +2078,58 @@ def component_markdown_link(part):
     return "[{}]({})".format(name, target)
 
 
+def component_coverage_markdown_lines(plan):
+    coverage = (plan or {}).get("component_coverage")
+    if not isinstance(coverage, dict):
+        return [
+            "",
+            "## PC部品の価格証拠カバレッジ",
+            "",
+            "- スナップショット内訳: 未確認（価格証拠の内訳を取得できません）",
+        ]
+
+    def count(key):
+        value = coverage.get(key)
+        if isinstance(value, int) and not isinstance(value, bool) and value >= 0:
+            return value
+        return None
+
+    tracked = count("tracked_hardware_part_count")
+    verified = count("snapshot_verified_count")
+    market = count("snapshot_verified_market_reference_count")
+    retailer = count("snapshot_verified_retailer_listing_reference_count")
+    snippet = count("snapshot_search_snippet_reference_count")
+    missing = count("snapshot_unverified_or_missing_count")
+    if tracked is None:
+        return [
+            "",
+            "## PC部品の価格証拠カバレッジ",
+            "",
+            "- スナップショット内訳: 未確認（監視対象数を取得できません）",
+        ]
+
+    def ratio(value):
+        if value is None:
+            return "未確認"
+        return "{}/{}".format(value, tracked)
+
+    return [
+        "",
+        "## PC部品の価格証拠カバレッジ",
+        "",
+        "- 直接販売店ページで検証済み: {}".format(ratio(retailer)),
+        "- 比較サイトの検証済み参考価格: {}".format(ratio(market)),
+        "- 検証済み価格証拠の合計（上記2分類）: {}".format(ratio(verified)),
+        "- 検索スニペットのみ（価格の直接検証ではない）: {}".format(
+            snippet if snippet is not None else "未確認"
+        ),
+        "- 未検証・未取得: {}".format(
+            missing if missing is not None else "未確認"
+        ),
+        "- 注意: いずれも参考価格の証拠区分です。在庫・送料込み最終決済額・保証/返品・全9必須部品の完成見積が揃ったことを意味しません。",
+    ]
+
+
 def render_plan_markdown(plan):
     workload_profile = plan.get("workload_profile") or {}
     game_dev = workload_profile.get("game_development") or {}
@@ -2128,6 +2180,7 @@ def render_plan_markdown(plan):
         "**注意:** BF購入目標は購入希望額です。比較サイト価格は市場参考値であり、店舗の決済価格・在庫・公式BF実売価格ではありません。現在のデータから購入許可は出しません。",
         "",
         *workload_summary_lines,
+        *component_coverage_markdown_lines(plan),
         "",
         "**メモリ選択:** " + str((plan.get("memory_choice_selection") or {}).get("selected_name") or "未選定"),
         "選定方法: " + str((plan.get("memory_choice_selection") or {}).get("selection_method") or "未確認"),
