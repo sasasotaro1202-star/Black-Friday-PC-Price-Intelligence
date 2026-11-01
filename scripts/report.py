@@ -895,7 +895,12 @@ def peripheral_purchase_evidence_score(target, observation, now=None, max_age_mi
         or observation.get("channel_comparison_status") in ("CHANNEL_COMPARISON_COMPLETE", "ALL_PURCHASE_ROUTES_VERIFIED")
     )
     if channel == "compare_online_and_store":
-        route_ready = channel_complete and (direct_price_verified or store_checkout or pickup_checkout)
+        selected_route = str(observation.get("selected_purchase_channel") or "")
+        route_ready = {
+            "online": online_checkout,
+            "physical_store": store_checkout,
+            "store_pickup": pickup_checkout,
+        }.get(selected_route, False)
     elif channel == "physical_store":
         route_ready = store_checkout
     elif channel == "conditional_need_only":
@@ -938,7 +943,16 @@ def peripheral_route_label(item):
     item = item if isinstance(item, dict) else {}
     channel = str(item.get("purchase_channel") or "online")
     if channel == "compare_online_and_store":
-        return "ネット配送・実店舗・店舗受取を比較"
+        selected = str(item.get("selected_purchase_channel") or "unconfirmed")
+        labels = {
+            "online": "ネット配送",
+            "physical_store": "実店舗の現金購入",
+            "store_pickup": "ネット注文・店舗受け取り",
+        }
+        if selected in labels:
+            suffix = "（他ルート未確認）" if not item.get("channel_comparison_complete") else "（全ルート比較済み）"
+            return labels[selected] + suffix
+        return "確認できたネット配送・実店舗・店舗受取ルートを比較中"
     if channel == "physical_store":
         return "実店舗（現金価格・在庫を確認）"
     if channel == "conditional_need_only":
