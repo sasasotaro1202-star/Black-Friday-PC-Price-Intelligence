@@ -160,6 +160,24 @@ def peripheral_route_coverage_summary(projection):
     }
 
 
+
+def peripheral_price_stock_signal_summary(projection):
+    """Label price/stock evidence without implying purchase completion."""
+    if not isinstance(projection, dict):
+        return "周辺機器の有効な価格・在庫シグナル: 未確認"
+    verified = projection.get("tracked_peripheral_verified_count")
+    total = projection.get("tracked_peripheral_count")
+    if (
+        not isinstance(verified, int) or isinstance(verified, bool) or verified < 0
+        or not isinstance(total, int) or isinstance(total, bool) or total < 0
+        or verified > total
+    ):
+        return "周辺機器の有効な価格・在庫シグナル: 未確認"
+    return (
+        f"周辺機器の有効な価格・在庫シグナル: {verified}/{total} 商品 "
+        "（少なくとも1ルートの掲載価格・販売可能在庫の確認。送料・最終決済額・全ルート比較・保証/返品の完了を意味しない）"
+    )
+
 def peripheral_monitor_section_heading(target_config):
     """Describe the primary peripheral purchase set from the active target config."""
     primary = [
@@ -1747,7 +1765,7 @@ def main():
         f"PC本体の絶対上限（周辺機器費用を加算する前の単体上限。総額上限ではない）: ¥{budget['pc_budget_jpy']:,}",
         f"PC本体の予算保護用動的上限（周辺機器予算試算と総額予備費を控除後。未確認品は目標額等を使用し、実売総額を意味しない）: ¥{peripheral_projection['pc_dynamic_cap_jpy']:,}",
         f"周辺機器の予算保護用試算（未確認の店頭価格・在庫があるため実売総額ではない。ネット送料は実額確認または送料予備額を反映）: ¥{peripheral_projection['peripheral_projection_jpy']:,}",
-        f"周辺機器の購入予定ルート確認済み: {peripheral_projection['tracked_peripheral_verified_count']}/{peripheral_projection['tracked_peripheral_count']} 商品（ネット掲載価格のみの確認は購入許可を意味しません）",
+        peripheral_price_stock_signal_summary(peripheral_projection),
         f"ネット掲載価格の型番一致・価格検証: {route_coverage['online_price_verified_count']}/{route_coverage['online_price_total_count']}" if route_coverage["online_price_total_count"] is not None else "ネット掲載価格の型番一致・価格検証: 未確認",
         f"指定店の店頭税込現金価格・同じ支店の在庫確認: {route_coverage['store_branch_confirmed_count']}/{route_coverage['store_branch_expected_count']} 支店別記録、両店舗の確認完了 {route_coverage['store_product_confirmed_count']}/{route_coverage['store_product_total_count']} 商品" if route_coverage["store_branch_expected_count"] is not None else "指定店の店頭税込現金価格・同じ支店の在庫確認: 対象支店未設定",
         "店頭確認未完了の商品: " + (", ".join(route_coverage["store_product_pending_names"]) or "なし"),
