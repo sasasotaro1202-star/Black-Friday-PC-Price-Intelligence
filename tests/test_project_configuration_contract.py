@@ -440,9 +440,12 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(main["specs"]["card_length_mm"], 290)
         self.assertTrue(main.get("direct_retailer_urls"))
         self.assertEqual(len(main["direct_retailer_urls"]), 3)
-        self.assertIn("joshinweb.jp", main["direct_retailer_urls"][0])
-        self.assertIn("sofmap.com", main["direct_retailer_urls"][1])
-        self.assertIn("tsukumo.co.jp", main["direct_retailer_urls"][2])
+        # Keep the currently verified direct-route priority: Sofmap, TSUKUMO,
+        # then the Joshin fallback. The exact Joshin SKU route is still required
+        # by test_critical_parts_have_curated_exact_sku_retailer_fallbacks.
+        self.assertIn("sofmap.com", main["direct_retailer_urls"][0])
+        self.assertIn("tsukumo.co.jp", main["direct_retailer_urls"][1])
+        self.assertIn("joshinweb.jp", main["direct_retailer_urls"][2])
         self.assertIn("sofmap.com", self.profile["allowed_search_reference_domains"])
         self.assertIn("tsukumo.co.jp", self.profile["allowed_search_reference_domains"])
         self.assertIn("amazon.co.jp", self.profile["allowed_search_reference_domains"])
