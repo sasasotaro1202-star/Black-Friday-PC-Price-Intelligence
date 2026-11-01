@@ -581,6 +581,79 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertEqual(row["retrieval_attempts"][0]["status"], "error")
         self.assertEqual(row["retrieval_attempts"][1]["status"], "verified")
 
+    def test_main_writes_parseable_pit_unknown_event_jsonl_and_uses_retrieval_time(self):
+        import json
+        import tempfile
+        from pathlib import Path
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            targets_path = str(Path(temp_dir) / "targets.json")
+            output_path = str(Path(temp_dir) / "peripheral_prices.json")
+            events_path = str(Path(temp_dir) / "peripheral_change_events.jsonl")
+            config = {
+                "peripherals": [{"id": "mouse", "track_current_price": True, "target_price_jpy": 5000}],
+                "peripheral_alternatives": [],
+            }
+            previous = {
+                "products": [{
+                    "id": "mouse",
+                    "current_price_jpy": 5400,
+                    "stock_status": "in_stock",
+                    "retrieval_time": "2026-11-01T11:50:00+09:00",
+                    "store_price_jpy": None,
+                    "store_stock_status": "unknown",
+                    "store_observation_status": "UNCONFIRMED",
+                    "store_observation_store_id": None,
+                    "store_inventory_status": "unknown",
+                    "store_inventory_store_id": None,
+                }]
+            }
+            retrieved_at = "2026-11-01T11:59:40+09:00"
+            latest_row = {
+                "id": "mouse",
+                "name": "Logicool G304",
+                "current_price_jpy": 5200,
+                "stock_status": "in_stock",
+                "store_price_jpy": None,
+                "store_stock_status": "unknown",
+                "store_observation_status": "UNCONFIRMED",
+                "store_observation_store_id": None,
+                "store_inventory_status": "unknown",
+                "store_inventory_store_id": None,
+                "retrieval_time": retrieved_at,
+                "available_at": retrieved_at,
+                "source_url": "https://www.yodobashi.com/product/example/",
+                "monitor_url": "https://www.yodobashi.com/product/example/",
+                "price_source_mode": "direct_text",
+                "price_verified": True,
+                "status": "verified",
+                "online_offers": [{"retrieval_time": retrieved_at}],
+                "store_inventory_observations": [],
+            }
+
+            def fake_load_json(path, default):
+                return config if path == targets_path else previous
+
+            with (
+                patch.object(peripheral_monitor, "TARGETS_PATH", targets_path),
+                patch.object(peripheral_monitor, "OUTPUT_PATH", output_path),
+                patch.object(peripheral_monitor, "EVENTS_PATH", events_path),
+                patch.object(peripheral_monitor, "load_json", side_effect=fake_load_json),
+                patch.object(peripheral_monitor, "save_json"),
+                patch.object(peripheral_monitor, "observe_targets", return_value=[latest_row]),
+            ):
+                peripheral_monitor.main()
+
+            lines = Path(events_path).read_text(encoding="utf-8").splitlines()
+            self.assertEqual(len(lines), 1)
+            event = json.loads(lines[0])
+            self.assertEqual(event["retrieval_time"], retrieved_at)
+            self.assertFalse(event["pit_valid"])
+            self.assertEqual(event["pit_status"], "UNKNOWN")
+            self.assertEqual(event["pit_missing_fields"], ["event_time", "publication_time"])
+            self.assertIsNone(event["event_time"])
+            self.assertIsNone(event["publication_time"])
+
     def test_observe_targets_uses_bounded_parallelism_and_preserves_input_order(self):
         targets = [
             {"id": f"item_{i}", "name": f"Item {i}", "track_current_price": True}
