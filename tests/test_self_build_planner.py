@@ -68,6 +68,30 @@ class SelfBuildRankingLinkTests(unittest.TestCase):
         self.assertEqual(coverage["snapshot_fetch_error_count"], 1)
         self.assertEqual(coverage["snapshot_sha256"], "snapshot-hash")
 
+    def test_rendered_pc_plan_discloses_each_price_evidence_class(self):
+        plan = {
+            "component_coverage": {
+                "tracked_hardware_part_count": 9,
+                "snapshot_verified_count": 6,
+                "snapshot_verified_market_reference_count": 0,
+                "snapshot_verified_retailer_listing_reference_count": 6,
+                "snapshot_search_snippet_reference_count": 6,
+                "snapshot_unverified_or_missing_count": 10,
+            },
+            "builds": [],
+        }
+        rendered = planner.render_plan_markdown(plan)
+        self.assertIn("直接販売店ページで検証済み: 6/9", rendered)
+        self.assertIn("比較サイトの検証済み参考価格: 0/9", rendered)
+        self.assertIn("検証済み価格証拠の合計（上記2分類）: 6/9", rendered)
+        self.assertIn("検索スニペットのみ（価格の直接検証ではない）: 6", rendered)
+        self.assertIn("未検証・未取得: 10", rendered)
+        self.assertIn("最終決済額", rendered)
+
+    def test_rendered_pc_plan_does_not_substitute_zero_for_missing_coverage(self):
+        rendered = planner.render_plan_markdown({"component_coverage": {}, "builds": []})
+        self.assertIn("スナップショット内訳: 未確認", rendered)
+
     def test_component_link_uses_purchase_page_and_encodes_parentheses(self):
         rendered = planner.component_markdown_link({
             "name": "GPU test",
