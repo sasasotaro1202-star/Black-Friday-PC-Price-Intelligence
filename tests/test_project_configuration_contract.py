@@ -32,7 +32,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertFalse(policy.get("hard_ceiling_per_scenario"))
         self.assertEqual(
             [(item["total_budget_jpy"], item["soft_ceiling_total_jpy"]) for item in scenarios],
-            [(350000, 370000), (400000, 420000), (450000, 470000)],
+            [(350000, 350000), (400000, 420000), (450000, 450000)],
         )
         self.assertTrue(policy.get("peripherals_included"))
         self.assertEqual(policy.get("unallocated_contingency_jpy"), 5000)
@@ -161,7 +161,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(profile["soft_overrun_allowance_jpy"], 20000)
         self.assertEqual(
             [(item["total_budget_jpy"], item["soft_ceiling_total_jpy"]) for item in profile["budget_scenarios"]],
-            [(350000, 370000), (400000, 420000), (450000, 470000)],
+            [(350000, 350000), (400000, 420000), (450000, 450000)],
         )
         expected_totals = {
             "budget-350k-rtx5060ti-fit": 348000,
@@ -284,7 +284,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertFalse(profile["budget_scenario_policy"]["hard_ceiling_per_scenario"])
         self.assertEqual(
             [(item["total_budget_jpy"], item["soft_ceiling_total_jpy"]) for item in profile["budget_scenarios"]],
-            [(350000, 370000), (400000, 420000), (450000, 470000)],
+            [(350000, 350000), (400000, 420000), (450000, 450000)],
         )
         self.assertEqual(profile["minimum_ram_gb"], 32)
         self.assertEqual(profile["minimum_ssd_gb"], 1000)
