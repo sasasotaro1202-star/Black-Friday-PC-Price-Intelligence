@@ -138,6 +138,19 @@ class SelfBuildRankingLinkTests(unittest.TestCase):
         self.assertEqual(by_id["budget_400k"]["soft_overrun_allowance_jpy"], 20000)
         self.assertEqual(by_id["budget_450k"]["soft_overrun_allowance_jpy"], 0)
 
+    def test_unconfigured_budget_tier_does_not_inherit_global_400k_allowance(self):
+        profile = {
+            "peripheral_budget_jpy": 35000,
+            "unallocated_contingency_jpy": 5000,
+            "soft_overrun_allowance_jpy": 20000,
+            "budget_scenarios": [{"id": "budget_300k", "total_budget_jpy": 300000}],
+            "budget_build_candidates": [],
+        }
+        with patch.object(planner, "score_and_rank_builds", return_value=[]):
+            result = planner.build_budget_scenarios(profile, {}, {}, None, 360)
+        self.assertEqual(result[0]["soft_overrun_allowance_jpy"], 0)
+        self.assertEqual(result[0]["soft_ceiling_total_jpy"], 300000)
+
     def test_candidate_above_350k_ceiling_remains_visible_as_over_budget_only(self):
         part_ids = ["cpu", "board", "gpu", "ram", "ssd", "psu", "case", "os"]
         categories = {
