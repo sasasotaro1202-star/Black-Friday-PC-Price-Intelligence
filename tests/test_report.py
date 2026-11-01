@@ -1090,6 +1090,31 @@ class PeripheralRouteCoverageTests(unittest.TestCase):
         self.assertEqual(summary["store_product_pending_names"], ["AOC Q27G40E/11", "Logicool G213r"])
         self.assertEqual(summary["all_route_comparison_required_count"], 0)
 
+    def test_peripheral_signal_summary_does_not_claim_route_or_purchase_completion(self):
+        summary = report.peripheral_price_stock_signal_summary({
+            "tracked_peripheral_verified_count": 3,
+            "tracked_peripheral_count": 4,
+            "channel_comparison_complete_count": 0,
+            "channel_comparison_required_count": 4,
+        })
+        self.assertIn("有効な価格・在庫シグナル: 3/4", summary)
+        self.assertIn("最終決済額", summary)
+        self.assertIn("全ルート比較", summary)
+        self.assertNotIn("購入予定ルート確認済み", summary)
+
+    def test_peripheral_signal_summary_fails_closed_on_missing_or_invalid_counts(self):
+        self.assertEqual(
+            report.peripheral_price_stock_signal_summary(None),
+            "周辺機器の有効な価格・在庫シグナル: 未確認",
+        )
+        self.assertEqual(
+            report.peripheral_price_stock_signal_summary({
+                "tracked_peripheral_verified_count": 5,
+                "tracked_peripheral_count": 4,
+            }),
+            "周辺機器の有効な価格・在庫シグナル: 未確認",
+        )
+
     def test_missing_peripheral_projection_is_not_reported_as_zero_coverage(self):
         summary = report.peripheral_route_coverage_summary(None)
         self.assertIsNone(summary["online_price_total_count"])
