@@ -124,9 +124,16 @@ jobs:
           status="$(printf '%s' "$latest" | python -c 'import json,sys; print(json.load(sys.stdin).get("status",""))')"
           conclusion="$(printf '%s' "$latest" | python -c 'import json,sys; print(json.load(sys.stdin).get("conclusion") or "")')"
           run_id="$(printf '%s' "$latest" | python -c 'import json,sys; print(json.load(sys.stdin).get("databaseId") or "")')"
+          head_sha="$(printf '%s' "$latest" | python -c 'import json,sys; print(json.load(sys.stdin).get("headSha") or "")')"
+          main_sha="$(git rev-parse HEAD)"
           if [ "$status" = "completed" ] && [ "$conclusion" != "success" ]; then
-            echo "Latest monitor failed; re-running failed jobs: $run_id"
-            gh run rerun "$run_id" --failed
+            if [ -n "$head_sha" ] && [ "$head_sha" != "$main_sha" ]; then
+              echo "Latest monitor failed on stale commit $head_sha; dispatching recovery from current main $main_sha."
+              gh workflow run pc-price-monitor.yml --ref main -f watchdog_recovery=true
+            else
+              echo "Latest monitor failed on current main; re-running failed jobs: $run_id"
+              gh run rerun "$run_id" --failed
+            fi
           elif [ "$status" = "completed" ] && [ "$conclusion" = "success" ]; then
             echo "Latest monitor succeeded but watchdog still sees unhealthy data; dispatching a fresh run."
             gh workflow run pc-price-monitor.yml --ref main -f watchdog_recovery=true
