@@ -10,6 +10,33 @@ from intelligence import (
 from observation_contract import observation_metadata_schema_errors, purchase_gate_schema_errors
 
 
+
+def budget_scenario_tier_coverage_errors(actual_scenarios, configured_scenarios):
+    """Compare generated scenario tier ceilings with the authoritative build config."""
+    def normalized(rows):
+        result = {}
+        duplicates = set()
+        for row in rows if isinstance(rows, list) else []:
+            if not isinstance(row, dict):
+                continue
+            tier = row.get("total_budget_jpy")
+            ceiling = row.get("soft_ceiling_total_jpy")
+            if (
+                not isinstance(tier, int) or isinstance(tier, bool) or tier <= 0
+                or not isinstance(ceiling, int) or isinstance(ceiling, bool) or ceiling < tier
+            ):
+                continue
+            if tier in result:
+                duplicates.add(tier)
+            result[tier] = ceiling
+        return result, duplicates
+
+    actual, actual_duplicates = normalized(actual_scenarios)
+    expected, expected_duplicates = normalized(configured_scenarios)
+    if len(expected) != 3 or expected_duplicates or actual_duplicates or actual != expected:
+        return ["budget scenario tier/soft-ceiling coverage invalid"]
+    return []
+
 def file_sha256(path):
     h = hashlib.sha256()
     with open(path, "rb") as f:
@@ -94,23 +121,17 @@ def main():
             if build.get("buy_now_authorized") is not False or build.get("bf_actual_authorized") is not False:
                 errors.append("self-build candidate has invalid purchase authorization:" + str(build.get("id")))
 
-        # Validate per-budget complete DIY build records and keep target-price math fail-closed.
+        # Validate per-budget complete DIY build records against the single
+        # authoritative scenario policy in config/build_components.json.
         budget_scenarios = self_build_plan.get("budget_scenarios") or []
-        expected_tiers = {350000: 370000, 400000: 420000, 450000: 470000}
-        actual_tiers = {
-            int(row.get("total_budget_jpy")): int(row.get("soft_ceiling_total_jpy"))
-            for row in budget_scenarios if isinstance(row, dict)
-            and isinstance(row.get("total_budget_jpy"), int)
-            and isinstance(row.get("soft_ceiling_total_jpy"), int)
-        }
-        if actual_tiers != expected_tiers:
-            errors.append("budget scenario tier/soft-ceiling coverage invalid")
+        build_components_config = load_json(os.path.join(ROOT, "config", "build_components.json"), {})
+        build_profile = build_components_config.get("profile") if isinstance(build_components_config, dict) else {}
+        expected_scenario_policy = build_profile.get("budget_scenarios") if isinstance(build_profile, dict) else []
+        errors.extend(budget_scenario_tier_coverage_errors(budget_scenarios, expected_scenario_policy))
         all_scenario_builds = [
             candidate for tier in budget_scenarios if isinstance(tier, dict)
             for candidate in (tier.get("builds") or []) if isinstance(candidate, dict)
         ]
-        build_components_config = load_json(os.path.join(ROOT, "config", "build_components.json"), {})
-        build_profile = build_components_config.get("profile") if isinstance(build_components_config, dict) else {}
         configured_candidates = build_profile.get("budget_build_candidates") if isinstance(build_profile, dict) else []
         configured_candidate_ids = [
             str(candidate.get("id") or "")
