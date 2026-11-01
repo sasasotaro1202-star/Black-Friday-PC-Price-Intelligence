@@ -737,10 +737,9 @@ def peripheral_budget_projection():
         )
 
         channel_options = set(target.get("purchase_channel_options") or [])
-        # Available routes describe what may be observed, not what is approved for
-        # automatic selection. In STORE_FIRST_LOCAL_PURCHASE mode, only an explicit
-        # compare mode may select the cheapest channel. A physical_store target must
-        # never fall through to online merely because online is in its options.
+        # Each route is an independent candidate. In compare mode, choose only
+        # among exact-model routes with usable price/stock evidence; never copy
+        # store evidence into an online or store-pickup route.
         compare_channels = bool(
             target.get("purchase_channel") == "compare_online_and_store"
             or target.get("compare_purchase_channels") is True
