@@ -916,7 +916,9 @@ def build_budget_scenarios(profile, parts, by_id, now, max_age):
     allowed_domains = profile.get("allowed_search_reference_domains") or profile.get("allowed_comparison_domains") or ["kakaku.com"]
     default_peripherals = int(profile.get("peripheral_budget_jpy", 35000))
     default_reserve = int(profile.get("unallocated_contingency_jpy", 5000))
-    default_soft_overrun = max(0, int(profile.get("soft_overrun_allowance_jpy", 20000)))
+    # Scenario tiers are explicit contracts. Never inherit the 400k plan's
+    # allowance into 350k/450k (or a future unconfigured tier).
+    default_soft_overrun = 0
 
     for cfg in profile.get("budget_build_candidates") or []:
         if not isinstance(cfg, dict):
@@ -939,8 +941,10 @@ def build_budget_scenarios(profile, parts, by_id, now, max_age):
         reserve = int(cfg.get("unallocated_contingency_jpy", default_reserve))
         tier_policy = next((x for x in (profile.get("budget_scenarios") or [])
                             if isinstance(x, dict) and x.get("total_budget_jpy") == tier), {})
-        soft_allowance = max(0, int(tier_policy.get("soft_overrun_allowance_jpy", profile.get("soft_overrun_allowance_jpy", default_soft_overrun))))
-        soft_ceiling = max(tier, int(cfg.get("soft_ceiling_total_jpy", tier_policy.get("soft_ceiling_total_jpy", tier + soft_allowance))))
+        # The tier policy is authoritative; candidate-level fields cannot
+        # silently widen the budget tier. Missing policy means no overrun.
+        soft_allowance = max(0, int(tier_policy.get("soft_overrun_allowance_jpy", default_soft_overrun)))
+        soft_ceiling = max(tier, int(tier_policy.get("soft_ceiling_total_jpy", tier + soft_allowance)))
         shipping = int(cfg.get("build_shipping_reserve_jpy", profile.get("build_shipping_reserve_jpy", 0)))
         small_parts = int(cfg.get("small_parts_reserve_jpy", profile.get("small_parts_reserve_jpy", 0)))
 
@@ -1123,7 +1127,7 @@ def build_budget_scenarios(profile, parts, by_id, now, max_age):
         ))
         for rank, item in enumerate(tier_items, 1):
             item["display_rank_within_tier"] = rank
-        tier_soft_allowance = max(0, int(tier.get("soft_overrun_allowance_jpy", profile.get("soft_overrun_allowance_jpy", default_soft_overrun))))
+        tier_soft_allowance = max(0, int(tier.get("soft_overrun_allowance_jpy", default_soft_overrun)))
         tier_soft_ceiling = max(ceiling, int(tier.get("soft_ceiling_total_jpy", ceiling + tier_soft_allowance)))
         target_pc_ceiling = max(0, ceiling - default_peripherals - default_reserve)
         soft_pc_ceiling = max(0, tier_soft_ceiling - default_peripherals - default_reserve)
