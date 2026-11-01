@@ -15,6 +15,59 @@ spec.loader.exec_module(planner)
 
 
 class SelfBuildRankingLinkTests(unittest.TestCase):
+    def test_component_snapshot_coverage_counts_verified_retailer_and_market_prices_separately(self):
+        parts = [
+            {"id": "cpu", "track_price": True},
+            {"id": "board", "track_price": True},
+            {"id": "gpu", "track_price": True},
+            {"id": "ram", "track_price": True},
+            {"id": "excluded", "track_price": False},
+        ]
+        stamp = "2026-11-02T08:00:00+09:00"
+        rows = [
+            {
+                "id": "cpu", "price_validation_status": "verified_market_reference",
+                "identity_match": True, "bf_actual_authorized": False,
+                "market_reference_price_jpy": 47800, "pit_valid": True,
+                "available_at": stamp, "retrieval_time": stamp,
+            },
+            {
+                "id": "board", "price_validation_status": "verified_retailer_listing_reference",
+                "identity_match": True, "bf_actual_authorized": False,
+                "retailer_listing_reference_price_jpy": 19980,
+                "retailer_listing_offer": {
+                    "source_role": "direct_retailer_listing_reference",
+                    "identity_match": True, "bf_actual_authorized": False,
+                    "pit_valid": True, "price_source_mode": "direct_structured",
+                    "price_jpy": 19980, "available_at": stamp, "retrieval_time": stamp,
+                },
+            },
+            {
+                "id": "gpu", "price_validation_status": "search_snippet_reference",
+                "identity_match": True, "bf_actual_authorized": False,
+                "search_snippet_identity_anchor": "VCG507012DFSXPB1-O",
+                "search_snippet_reference_price_jpy": 138800,
+            },
+            {
+                "id": "ram", "price_validation_status": "missing",
+                "identity_match": False, "fetch_status": "error",
+            },
+        ]
+        with patch.object(planner, "file_sha256", return_value="snapshot-hash"):
+            coverage = planner.component_snapshot_coverage(
+                parts, rows, {"generated_at": stamp, "source_role": "comparison_site_reference"}
+            )
+        self.assertEqual(coverage["configured_component_count"], 5)
+        self.assertEqual(coverage["tracked_hardware_part_count"], 4)
+        self.assertEqual(coverage["snapshot_verified_count"], 2)
+        self.assertEqual(coverage["snapshot_verified_market_reference_count"], 1)
+        self.assertEqual(coverage["snapshot_verified_retailer_listing_reference_count"], 1)
+        self.assertEqual(coverage["snapshot_search_snippet_reference_count"], 1)
+        self.assertEqual(coverage["snapshot_unverified_or_missing_count"], 1)
+        self.assertEqual(coverage["snapshot_identity_unverified_count"], 1)
+        self.assertEqual(coverage["snapshot_fetch_error_count"], 1)
+        self.assertEqual(coverage["snapshot_sha256"], "snapshot-hash")
+
     def test_component_link_uses_purchase_page_and_encodes_parentheses(self):
         rendered = planner.component_markdown_link({
             "name": "GPU test",
