@@ -709,7 +709,11 @@ class ReportLinkTests(unittest.TestCase):
         policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 35000,
                   "pc_target_jpy": 350000, "pc_budget_jpy": 350000}
         projection = {"pc_dynamic_cap_jpy": 322200}
-        result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
+        from datetime import datetime, timezone, timedelta
+        from unittest.mock import patch
+        before_watch_window = datetime(2026, 10, 15, 12, 0, tzinfo=timezone(timedelta(hours=9)))
+        with patch.object(report, "now_jst", return_value=before_watch_window):
+            result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
         self.assertEqual(row["status"], "PRE_BF_TARGET_MONITORING")
         self.assertEqual(row["max_upgrade_cost_to_bf_target_jpy"], 70200)
@@ -755,7 +759,11 @@ class ReportLinkTests(unittest.TestCase):
         policy = {"total_budget_jpy": 400000, "peripheral_budget_jpy": 35000,
                   "pc_target_jpy": 320200, "pc_budget_jpy": 310200}
         projection = {"pc_dynamic_cap_jpy": 289240}
-        result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
+        from datetime import datetime, timezone, timedelta
+        from unittest.mock import patch
+        before_watch_window = datetime(2026, 10, 15, 12, 0, tzinfo=timezone(timedelta(hours=9)))
+        with patch.object(report, "now_jst", return_value=before_watch_window):
+            result = report.build_purchase_strategy_status([candidate], strategy, policy, projection)
         row = result["rows"][0]
         self.assertEqual(row["status"], "PRE_BF_TARGET_MONITORING")
         self.assertEqual(row["black_friday_target_price_jpy"], 320200)
