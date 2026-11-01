@@ -49,7 +49,7 @@ class SelfBuildRankingLinkTests(unittest.TestCase):
                 "search_snippet_reference_price_jpy": 138800,
             },
             {
-                "id": "ram", "price_validation_status": "missing",
+                "id": "ram", "price_validation_status": "identity_unverified",
                 "identity_match": False, "fetch_status": "error",
             },
         ]
