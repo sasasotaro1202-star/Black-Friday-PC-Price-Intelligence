@@ -17,7 +17,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JST = timezone(timedelta(hours=9))
 OUTPUT = os.path.join(ROOT, "data", "official_campaign_dates_status.json")
 CACHE_HOURS = 6
-SCANNER_VERSION = 2
+SCANNER_VERSION = 3
 DATE_RANGE = re.compile(
     r"(?P<year>2026)\s*(?:年|[./-])\s*(?P<month>\d{1,2})\s*(?:月|[./-])\s*(?P<day>\d{1,2})\s*日?"
     r"\s*(?:\([^)]{0,30}\))?\s*(?:(?P<start_hour>\d{1,2}):(?P<start_minute>\d{2}))?\s*"
@@ -28,6 +28,22 @@ DATE_RANGE = re.compile(
     re.IGNORECASE,
 )
 BF_WORDS = re.compile(r"ブラック\s*フライデー|black\s*friday|pre[- ]?black\s*friday", re.IGNORECASE)
+
+# A yearless MM/DD range is accepted only on an official campaign URL whose
+# dedicated slug itself anchors the year, e.g. /campaigns/blackfriday2026/.
+# The date range must still be visible on that retailer-owned page.
+DATE_RANGE_WITHOUT_YEAR = re.compile(
+    r"(?P<month>\d{1,2})\s*(?:月|[./-])\s*(?P<day>\d{1,2})\s*日?"
+    r"\s*(?:\([^)]{0,30}\))?\s*(?:(?P<start_hour>\d{1,2}):(?P<start_minute>\d{2}))?\s*"
+    r"(?:～|〜|~|–|—|－|-|から|to|through)\s*"
+    r"(?P<end_month>\d{1,2})\s*(?:月|[./-])\s*(?P<end_day>\d{1,2})\s*日?"
+    r"\s*(?:\([^)]{0,30}\))?\s*(?:(?P<end_hour>\d{1,2}):(?P<end_minute>\d{2}))?",
+    re.IGNORECASE,
+)
+YEAR_ANCHORED_BF_URL = re.compile(
+    r"/(?:campaigns/)?black[-_]?friday[-_]?2026(?:/|$)",
+    re.IGNORECASE,
+)
 
 
 class VisibleText(HTMLParser):
@@ -93,49 +109,60 @@ def visible_text(payload):
 
 
 def parse_explicit_2026_range(text, source_url):
-    """Return a dated range only when year 2026 is explicit at the start."""
+    """Return a 2026 range only when its year is anchored by text or the official URL."""
     text = re.sub(r"\s+", " ", str(text or "")).replace("（", "(").replace("）", ")")
     lowered_url = str(source_url or "").lower()
-    dedicated_url = "black-friday" in lowered_url or "blackfriday" in lowered_url or "pre-blackfriday" in lowered_url
-    for match in DATE_RANGE.finditer(text):
-        left = max(0, match.start() - 180)
-        right = min(len(text), match.end() + 180)
-        context = text[left:right]
-        if not dedicated_url and not BF_WORDS.search(context):
-            continue
-        try:
-            start = datetime(
-                2026,
-                int(match.group("month")),
-                int(match.group("day")),
-                int(match.group("start_hour") or 0),
-                int(match.group("start_minute") or 0),
-                tzinfo=JST,
-            )
-            end_year = int(match.group("end_year") or 2026)
-            end = datetime(
-                end_year,
-                int(match.group("end_month")),
-                int(match.group("end_day")),
-                int(match.group("end_hour") or 23),
-                int(match.group("end_minute") or 59),
-                59,
-                tzinfo=JST,
-            )
-        except (TypeError, ValueError):
-            continue
-        # Restrict detected ranges to the late-year campaign context and disallow
-        # overnight/reversed date mistakes or dates copied from unrelated content.
-        if start.year != 2026 or end.year != 2026 or start.month < 10 or end.month > 12:
-            continue
-        if end < start or (end - start).days > 60:
-            continue
-        snippet = text[max(0, match.start() - 90):min(len(text), match.end() + 90)]
-        return {
-            "start_jst": start.isoformat(),
-            "end_jst": end.isoformat(),
-            "evidence": snippet,
-        }
+    dedicated_url = (
+        "black-friday" in lowered_url
+        or "blackfriday" in lowered_url
+        or "pre-blackfriday" in lowered_url
+    )
+    year_anchored_url = bool(YEAR_ANCHORED_BF_URL.search(urlparse(lowered_url).path))
+    patterns = [(DATE_RANGE, "explicit_2026_page_text")]
+    if year_anchored_url:
+        patterns.append((DATE_RANGE_WITHOUT_YEAR, "official_2026_campaign_url_slug"))
+
+    for pattern, year_basis in patterns:
+        for match in pattern.finditer(text):
+            left = max(0, match.start() - 180)
+            right = min(len(text), match.end() + 180)
+            context = text[left:right]
+            if not dedicated_url and not BF_WORDS.search(context):
+                continue
+            try:
+                start = datetime(
+                    2026,
+                    int(match.group("month")),
+                    int(match.group("day")),
+                    int(match.group("start_hour") or 0),
+                    int(match.group("start_minute") or 0),
+                    tzinfo=JST,
+                )
+                end_year = int(match.groupdict().get("end_year") or 2026)
+                end = datetime(
+                    end_year,
+                    int(match.group("end_month")),
+                    int(match.group("end_day")),
+                    int(match.groupdict().get("end_hour") or 23),
+                    int(match.groupdict().get("end_minute") or 59),
+                    59,
+                    tzinfo=JST,
+                )
+            except (TypeError, ValueError):
+                continue
+            # Restrict detected ranges to the late-year campaign context and disallow
+            # overnight/reversed date mistakes or dates copied from unrelated content.
+            if start.year != 2026 or end.year != 2026 or start.month < 10 or end.month > 12:
+                continue
+            if end < start or (end - start).days > 60:
+                continue
+            snippet = text[max(0, match.start() - 90):min(len(text), match.end() + 90)]
+            return {
+                "start_jst": start.isoformat(),
+                "end_jst": end.isoformat(),
+                "evidence": snippet,
+                "year_basis": year_basis,
+            }
     return None
 
 
