@@ -281,7 +281,8 @@
       "allowed_hosts": [
         "www.yodobashi.com",
         "www.biccamera.com",
-        "joshinweb.jp"
+        "joshinweb.jp",
+        "www.sofmap.com"
       ],
       "min_price_jpy": 10000,
       "max_price_jpy": 60000,
@@ -291,7 +292,8 @@
       "monitor_urls": [
         "https://www.yodobashi.com/product/100000001009314680/",
         "https://www.biccamera.com/bc/item/14369301/",
-        "https://joshinweb.jp/kaden/73411/6973985233333.html"
+        "https://joshinweb.jp/kaden/73411/6973985233333.html",
+        "https://www.sofmap.com/product_detail.aspx?gid=&sku=101684307"
       ],
       "ranking_score_100": 94,
       "ranking_reason": "27型WQHD・Fast IPS・180Hz。FPSとCities: Skylines IIの画面解像度を両立。店頭で実物と接続端子を確認し、同一型番の現金価格を比較する。",
@@ -402,14 +404,16 @@
       "allowed_hosts": [
         "www.yodobashi.com",
         "www.biccamera.com",
-        "item.rakuten.co.jp"
+        "item.rakuten.co.jp",
+        "www.dospara.co.jp"
       ],
       "min_price_jpy": 3000,
       "max_price_jpy": 15000,
       "monitor_urls": [
         "https://www.yodobashi.com/product/100000001006099089/",
         "https://www.biccamera.com/bc/item/9242996/",
-        "https://item.rakuten.co.jp/logicool/g213r/"
+        "https://item.rakuten.co.jp/logicool/g213r/",
+        "https://www.dospara.co.jp/SBR295/IC473253.html"
       ],
       "ranking_score_100": 88,
       "ranking_reason": "フルサイズ日本語配列、テンキー、パームレスト付き。Python・データ入力・普段使いまで幅広く、目標価格も抑えられる。",
@@ -515,7 +519,8 @@
       "allowed_hosts": [
         "www.yodobashi.com",
         "www.biccamera.com",
-        "joshinweb.jp"
+        "joshinweb.jp",
+        "www.ksdenki.com"
       ],
       "min_price_jpy": 1000,
       "max_price_jpy": 15000,
@@ -540,7 +545,8 @@
       "monitor_urls": [
         "https://www.yodobashi.com/product/100000001004334450/",
         "https://www.biccamera.com/bc/item/6566291/",
-        "https://joshinweb.jp/peripheral/14608/4943765047377.html"
+        "https://joshinweb.jp/peripheral/14608/4943765047377.html",
+        "https://www.ksdenki.com/item?sku=4943765047377"
       ],
       "store_price_jpy": null,
       "store_price_checked_at": null,
