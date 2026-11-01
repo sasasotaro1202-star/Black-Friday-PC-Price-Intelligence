@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T09:05:19+09:00",
+  "generated_at": "2026-11-01T10:26:18+09:00",
   "urls": [
     {
       "url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/",
@@ -110,6 +110,12 @@
       "priority": "high"
     },
     {
+      "id": "desktop-dospara-ad-r7a56c-0aw-5060ti16",
+      "url": "https://www.dospara.co.jp/TC50/MC26301.html",
+      "query": "AD-R7A56C-0AW",
+      "priority": "high"
+    },
+    {
       "id": "zephyrus-g16-386h-5070ti",
       "url": "https://rog.asus.com/jp/laptops/rog-zephyrus/rog-zephyrus-g16-2026/spec/",
       "query": "GU606AR-U9R5070TIG32G",
@@ -128,25 +134,27 @@
       "priority": "normal"
     }
   ],
-  "last_discovery_attempt_at": "2026-11-01T09:05:19+09:00",
+  "last_discovery_attempt_at": "2026-11-01T10:26:18+09:00",
   "discovery_status": "ok",
   "discovery_error": null,
   "desktop_included": true,
-  "discovered_count": 21,
+  "discovered_count": 22,
   "discovery_stats": {
     "previous_count": 21,
-    "current_count": 21,
-    "newly_discovered_count": 0,
+    "current_count": 22,
+    "newly_discovered_count": 1,
     "retained_count": 21,
     "removed_count": 0,
-    "newly_discovered_ids": [],
+    "newly_discovered_ids": [
+      "desktop-dospara-ad-r7a56c-0aw-5060ti16"
+    ],
     "removed_ids": []
   },
   "last_discovery_attempt_status": "partial",
   "discovery_search_stats": {
-    "query_count": 57,
+    "query_count": 58,
     "successful_query_count": 51,
-    "failed_query_count": 6,
+    "failed_query_count": 7,
     "returned_url_count": 0,
     "failures": [
       {
@@ -171,6 +179,10 @@
       },
       {
         "query": "Ryzen 9 9950X RTX 5070 64GB 2TB シミュレーション Python 自作PC",
+        "error_type": "HTTPError"
+      },
+      {
+        "query": "THIRDWAVE AD-R7A56C-0AW Ryzen 7 7700 RTX 5060 Ti 16GB 32GB 1TB ブラックフライデー先取り ドスパラ",
         "error_type": "HTTPError"
       }
     ]
