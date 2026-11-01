@@ -280,7 +280,8 @@
       ],
       "allowed_hosts": [
         "www.yodobashi.com",
-        "www.biccamera.com"
+        "www.biccamera.com",
+        "joshinweb.jp"
       ],
       "min_price_jpy": 10000,
       "max_price_jpy": 60000,
@@ -289,7 +290,8 @@
       "target_price_note": "22,000円は2026年BFの店頭購入計画目標であり、確認済みの店頭価格ではない。現在のWeb掲載価格は比較参考のみ。ビックカメラ天神1号館・ヨドバシ博多で同一型番の税込現金価格・実物・接続端子・在庫を購入前に確認する。",
       "monitor_urls": [
         "https://www.yodobashi.com/product/100000001009314680/",
-        "https://www.biccamera.com/bc/item/14369301/"
+        "https://www.biccamera.com/bc/item/14369301/",
+        "https://joshinweb.jp/kaden/73411/6973985233333.html"
       ],
       "ranking_score_100": 94,
       "ranking_reason": "27型WQHD・Fast IPS・180Hz。FPSとCities: Skylines IIの画面解像度を両立。店頭で実物と接続端子を確認し、同一型番の現金価格を比較する。",
@@ -379,7 +381,8 @@
       "purchase_channel_preference": "best_verified_total",
       "purchase_channel_selection_mode": "BEST_VERIFIED_TOTAL",
       "online_order_requires_explicit_user_approval": false,
-      "store_inventory_required_before_store_route_selection": true
+      "store_inventory_required_before_store_route_selection": true,
+      "price_target_note": "22,000円は2026年BFの周辺機器計画目標であり、確認済みの実売価格ではない。ネット配送・実店舗現金購入・ネット注文の店舗受け取りを同一型番で比較する。ビックカメラ天神1号館・ヨドバシ博多の店頭現金価格と同一支店の在庫は独立して確認し、オンライン価格を店頭価格に流用しない。"
     },
     {
       "id": "keyboard",

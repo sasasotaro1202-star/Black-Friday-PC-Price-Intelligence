@@ -255,6 +255,13 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         policy = self.targets["purchase_strategy"]["purchase_channel_policy"]
         self.assertEqual(policy["channel_selection_mode"], "BEST_VERIFIED_TOTAL")
         self.assertTrue(policy["online_purchase_allowed_when_store_price_unconfirmed"])
+        legacy_policy = self.profile["selection_policy"] + " " + self.profile["peripheral_purchase_policy_ja"]
+        self.assertIn("ネット配送", legacy_policy)
+        self.assertIn("店舗受け取り", legacy_policy)
+        self.assertIn("オンライン", legacy_policy)
+        self.assertIn("最も低い", legacy_policy)
+        self.assertNotIn("明示承認なし", legacy_policy)
+        self.assertNotIn("明示承認が必要", legacy_policy)
         for item in self.targets["peripherals"] + self.targets.get("peripheral_alternatives", []):
             if item.get("category") == "budget_reserve" or item.get("purchase_channel") == "conditional_need_only":
                 continue

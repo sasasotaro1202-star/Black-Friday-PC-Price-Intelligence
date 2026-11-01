@@ -38,7 +38,7 @@ PC本体はネット購入、自作を本命とします。周辺機器はネッ
 ### 1. メインモニター
 | 順位 | 製品 | BF目標 | 判断 |
 |---:|---|---:|---|
-| 1 | AOC Q27G40E/11（27型WQHD・180Hz） | ¥22,000 | FPSとCities: Skylines IIの両方を考えた第一候補。[ヨドバシ](https://www.yodobashi.com/product/100000001009314680/) / [AOC仕様](https://www.aoc.com/jp/gaming/monitors/q27g40e_11) |
+| 1 | AOC Q27G40E/11（27型WQHD・180Hz） | ¥22,000 | FPSとCities: Skylines IIの両方を考えた第一候補。[ヨドバシ](https://www.yodobashi.com/product/100000001009314680/) / [Joshin web](https://joshinweb.jp/kaden/73411/6973985233333.html) / [AOC仕様](https://www.aoc.com/jp/gaming/monitors/q27g40e_11) |
 | 2 | MSI MAG 275QF（27型WQHD・180Hz） | ¥20,000 | 第一候補の価格・在庫が不利な場合。[仕様・価格比較](https://kakaku.com/item/K0001690691/) |
 | 3 | LG UltraGear 27GS75Q-B（27型WQHD・180Hz） | ¥22,000 | スタンド機能などを重視する場合。[メーカー仕様](https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/) |
 
