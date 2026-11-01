@@ -900,7 +900,7 @@ def peripheral_purchase_evidence_score(target, observation, now=None, max_age_mi
             "online": online_checkout,
             "physical_store": store_checkout,
             "store_pickup": pickup_checkout,
-        }.get(selected_route, False)
+        }.get(selected_route, channel_complete and checkout_verified)
     elif channel == "physical_store":
         route_ready = store_checkout
     elif channel == "conditional_need_only":
