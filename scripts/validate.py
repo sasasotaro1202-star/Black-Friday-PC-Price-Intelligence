@@ -4,7 +4,7 @@ import os
 import sys
 
 from intelligence import ROOT, parse_dt, load_catalog, load_json, purchase_budget_policy, peripheral_budget_projection, configuration_readiness
-from observation_contract import observation_metadata_schema_errors, purchase_gate_schema_errors
+from observation_contract import observation_metadata_schema_errors, purchase_gate_schema_errors, point_in_time_event_metadata
 
 def file_sha256(path):
     h = hashlib.sha256()
@@ -46,6 +46,30 @@ def main():
     for peripheral in (peripheral_snapshot.get("products") or []):
         if peripheral.get("current_price_jpy") is not None and not peripheral.get("price_verified"):
             errors.append(f"unverified peripheral price exposed as current: {peripheral.get('id')}")
+
+    # Historical accessory change events often lack source event/publication times.
+    # Such rows may remain in the audit log, but must never claim PIT validity.
+    peripheral_event_path = os.path.join(ROOT, "data", "peripheral_change_events.jsonl")
+    peripheral_event_counts = {"VALID": 0, "UNKNOWN": 0, "INVALID": 0}
+    if os.path.exists(peripheral_event_path):
+        with open(peripheral_event_path, encoding="utf-8") as event_stream:
+            for line_number, line in enumerate(event_stream, start=1):
+                if not line.strip():
+                    continue
+                try:
+                    event = json.loads(line)
+                except json.JSONDecodeError:
+                    errors.append(f"peripheral event JSONL malformed at line {line_number}")
+                    continue
+                expected_pit = point_in_time_event_metadata(event)
+                for field, expected_value in expected_pit.items():
+                    if event.get(field) != expected_value:
+                        errors.append(
+                            f"peripheral event PIT metadata mismatch at line {line_number}:{field}"
+                        )
+                status = expected_pit["pit_status"]
+                peripheral_event_counts[status] = peripheral_event_counts.get(status, 0) + 1
+
     catalog = load_catalog()
     if len(catalog) != len(set(catalog)):
         errors.append("duplicate catalog ids")
@@ -406,6 +430,7 @@ def main():
         "catalog_count": len(catalog),
         "latest_count": len(latest.get("products", [])),
         "ranking_count": len(rankings.get("products", [])),
+        "peripheral_event_pit_counts": peripheral_event_counts,
         "message": "Fail-closed data validation passed.",
     }, ensure_ascii=False))
 
