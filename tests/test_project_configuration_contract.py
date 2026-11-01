@@ -91,6 +91,19 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         query_text = " ".join(self.targets.get("queries") or [])
         self.assertIn("THIRDWAVE AD-R7A56C-0AW", query_text)
         self.assertIn("dospara.co.jp", self.targets.get("allowed_domains") or [])
+        catalog = read_json("config/candidate_catalog.json")
+        candidate = next(
+            item for item in catalog["candidates"]
+            if item.get("id") == "desktop-dospara-ad-r7a56c-0aw-5060ti16"
+        )
+        self.assertEqual(candidate["url"], "https://www.dospara.co.jp/TC50/MC26301.html")
+        self.assertTrue(candidate["url_is_exact"])
+        self.assertTrue(candidate["purchase_url_is_exact"])
+        self.assertFalse(candidate["baseline_configuration_is_purchase_ready"])
+        self.assertEqual(candidate["ram_gb"], 16)
+        self.assertEqual(candidate["ssd"], "500 GB")
+        self.assertEqual(candidate["target_ram_gb"], 32)
+        self.assertEqual(candidate["target_ssd_gb"], "1 TB")
 
     def test_tuf_a16_year_mismatch_cannot_be_treated_as_exact_purchase_route(self):
         catalog = read_json("config/candidate_catalog.json")

@@ -465,6 +465,39 @@
         "FGA7G6TG8BDDW101DECWA"
       ],
       "note": "Official listing verified 2026-10-11: RAM 32GB (32GB×1 single-channel), 1TB SSD, RTX 5060 Ti 16GB VRAM, Ryzen 7 7700. BF reference target is separate from actual BF price; require final BTO quote with adequate memory configuration and all-in PC cost within dynamic budget."
+    },
+    {
+      "id": "desktop-dospara-ad-r7a56c-0aw-5060ti16",
+      "name": "THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060 Ti 16GB)",
+      "family": "THIRDWAVE AD-R7A56C",
+      "form_factor": "desktop",
+      "gpu": "RTX 5060 Ti 16GB",
+      "cpu": "Ryzen 7 7700",
+      "tgp_w": null,
+      "ram_gb": 16,
+      "ssd": "500 GB",
+      "vram_gb": 16,
+      "psu_w": 650,
+      "url": "https://www.dospara.co.jp/TC50/MC26301.html",
+      "url_is_exact": true,
+      "identity_confidence": "high",
+      "reference_price_jpy": 279980,
+      "aliases": [
+        "AD-R7A56C-0AW",
+        "THIRDWAVE AD-R7A56C-0AW"
+      ],
+      "purchase_url": "https://www.dospara.co.jp/TC50/MC26301.html",
+      "monitor_page_type": "direct_product",
+      "purchase_url_is_exact": true,
+      "purchase_strategy_role": "bto_reference_only",
+      "target_ram_gb": 32,
+      "target_ssd_gb": "1 TB",
+      "configuration_upgrade_price_required": true,
+      "baseline_configuration_is_purchase_ready": false,
+      "baseline_price_reference_jpy": 279980,
+      "baseline_price_reference_ram_gb": 16,
+      "baseline_price_reference_ssd_gb": "500 GB",
+      "notes": "White model. Official listing baseline: Windows 11 Home, Ryzen 7 7700, RTX 5060 Ti 16GB, 16GB DDR5 (16GBx1), 500GB Gen4 SSD, 650W 80PLUS Bronze, no wireless LAN adapter, bundled keyboard and mouse, 1-year carry-in warranty. The 2026-10-30 to 2026-11-13 Black Friday pre-sale offers 32GB memory (+9,696 JPY), 1TB SSD (+19,696 JPY), and CPU grease (+960 JPY) for this exact model. The 850W PSU upgrade is not listed for this model. Exact 32GB DIMM layout, stock, final checkout total, delivery, and warranty/return terms must be rechecked before any purchase recommendation. Base price 279,980 JPY and shipping 3,300 JPY are a dated reference, not a verified final checkout total."
     }
   ]
 }
