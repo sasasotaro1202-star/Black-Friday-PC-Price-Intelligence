@@ -221,7 +221,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
             with self.subTest(part_id=part_id):
                 self.assertIn(url, parts[part_id].get("direct_retailer_urls") or [])
                 self.assertTrue(bcm.allowed_url(url, allowed_domains))
-                host = url.split("/", 3)[2]
+                host = url.split("/", 3)[2].removeprefix("www.")
                 self.assertIn(host, allowed_domains)
 
     def test_curated_direct_retailer_url_is_checked_before_general_search(self):
