@@ -5,7 +5,7 @@ import unittest
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from observation_contract import observation_metadata_schema_errors, purchase_gate_schema_errors
+from observation_contract import observation_metadata_schema_errors, purchase_gate_schema_errors, point_in_time_event_metadata
 from sanitize import final_fetch_stats
 
 
@@ -35,6 +35,44 @@ def valid_snapshot():
 
 
 class ProductionObservationContractTests(unittest.TestCase):
+    def test_peripheral_event_pit_requires_all_five_timezone_aware_timestamps(self):
+        event = {
+            "event_time": "2026-10-31T10:00:00+09:00",
+            "publication_time": "2026-10-31T10:01:00+09:00",
+            "available_at": "2026-10-31T10:02:00+09:00",
+            "retrieval_time": "2026-10-31T10:03:00+09:00",
+            "prediction_time": "2026-10-31T10:04:00+09:00",
+        }
+        self.assertEqual(
+            point_in_time_event_metadata(event),
+            {"pit_valid": True, "pit_status": "VALID", "pit_missing_fields": [], "pit_error": None},
+        )
+
+    def test_missing_event_or_publication_time_is_unknown_not_pit_valid(self):
+        event = {
+            "event_time": None,
+            "publication_time": None,
+            "available_at": "2026-10-31T10:02:00+09:00",
+            "retrieval_time": "2026-10-31T10:03:00+09:00",
+            "prediction_time": "2026-10-31T10:04:00+09:00",
+        }
+        result = point_in_time_event_metadata(event)
+        self.assertFalse(result["pit_valid"])
+        self.assertEqual(result["pit_status"], "UNKNOWN")
+        self.assertEqual(result["pit_missing_fields"], ["event_time", "publication_time"])
+
+    def test_timezone_naive_or_reversed_event_timestamps_are_invalid(self):
+        event = {
+            "event_time": "2026-10-31T10:00:00",
+            "publication_time": "2026-10-31T10:01:00+09:00",
+            "available_at": "2026-10-31T10:02:00+09:00",
+            "retrieval_time": "2026-10-31T10:03:00+09:00",
+            "prediction_time": "2026-10-31T10:04:00+09:00",
+        }
+        self.assertEqual(point_in_time_event_metadata(event)["pit_status"], "INVALID")
+        event["event_time"] = "2026-10-31T10:03:00+09:00"
+        self.assertEqual(point_in_time_event_metadata(event)["pit_error"], "timestamp_order_violation:event_time>publication_time")
+
     def test_purchase_gate_schema_passes(self):
         rankings = {
             "quality": {
