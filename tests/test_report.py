@@ -1053,7 +1053,7 @@ class ReportLinkTests(unittest.TestCase):
 
 
 class PeripheralRouteCoverageTests(unittest.TestCase):
-    def test_store_first_quote_coverage_is_not_hidden_by_zero_explicit_comparison_count(self):
+    def test_store_route_coverage_includes_online_and_store_comparison_mode(self):
         projection = {
             "channel_comparison_required_count": 0,
             "channel_comparison_complete_count": 0,
@@ -1062,7 +1062,7 @@ class PeripheralRouteCoverageTests(unittest.TestCase):
                     "id": "main_monitor",
                     "name": "AOC Q27G40E/11",
                     "track_current_price": True,
-                    "purchase_channel": "physical_store",
+                    "purchase_channel": "compare_online_and_store",
                     "store_candidate_branch_ids": ["biccamera_tenjin_1", "yodobashi_hakata"],
                     "store_price_verified_store_ids": [],
                     "store_route_all_branches_confirmed": False,
