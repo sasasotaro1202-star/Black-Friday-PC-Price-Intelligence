@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-10-31T23:40:57+09:00
-Source snapshot: 2026-10-31T23:36:22+09:00
-Source snapshot SHA256: 851f5abfdff4b1bf9c5b7b6871b550ca71eb5c36388c947fca1cfda5396c21ef
+Generated: 2026-11-01T09:11:46+09:00
+Source snapshot: 2026-11-01T09:05:19+09:00
+Source snapshot SHA256: dc944813128bf3d8aee1a5c78755d9f33b501ed57ab03e5c05113b66530a03a1
 Budget: ¥360,000
 U.S. Black Friday calendar reference only (not official retailer sale dates): 2026-11-27
 
@@ -41,14 +41,14 @@ The primary purchase method is self-build. These completed-PC listings are price
 ## BF window observation ledger
 
 - Ledger: data/buy_now_observations.jsonl
-- Rows loaded: 0
-- Rows appended this run: 0
+- Rows loaded: 4
+- Rows appended this run: 4
 - Only in-stock/low-stock, exact-identity, direct-structured and PIT-valid observations are added.
 
 ## Current buy-now decision
 
-- Status: **事前監視継続・公式日程未確認** (PRE_BF_MONITORING)
-- Recommendation: 現在価格は事前参考値です。設定期間は各社の公式開催日ではありません。公式ページで2026年の日付範囲を確認できるまではBF価格として扱わず、開催日推定に基づく購入推奨を出しません。
+- Status: **公式セール日程の確認待ち** (WAIT_FOR_OFFICIAL_DATES)
+- Recommendation: 価格監視は継続中ですが、対象販売店の2026年公式セール日程が未確認です。暫定の広域監視窓だけではBF実売として扱わず、公式日付確認前に購入推奨を出しません。
 - Full detail: data/reports/buy-now-now.md
 - The timing score is a heuristic priority signal, not a probability forecast.
 

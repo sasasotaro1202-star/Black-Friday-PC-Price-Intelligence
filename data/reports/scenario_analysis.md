@@ -1,7 +1,7 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-10-31T23:40:57+09:00
-価格フェーズ: **PRE_BLACK_FRIDAY_REFERENCE**
+更新: 2026-11-01T09:11:46+09:00
+価格フェーズ: **PROVISIONAL_BROAD_WATCH_WINDOW**
 暫定の広域監視窓（公式セール開催期間ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 総予算: ¥400,000
 BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器目標・予備費確保後）: ¥360,000 / PC単体の絶対上限: ¥395,000
@@ -17,9 +17,9 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |項目|BF購入目標|公式期間内の確認価格|監視窓内参考価格|セール前参考価格|在庫|費用の扱い|購入ページ|
 |---|---:|---:|---:|---|---|---|
 |AOC Q27G40E/11 27-inch WQHD 180Hz|¥22,000|未確認|—|—|preorder_or_backorder|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
-|Logicool G213r|¥4,500|未確認|—|¥7,920|in_stock|black_friday_target_reserve|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
-|Logicool G304|¥5,000|未確認|—|¥5,350|in_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
-|SteelSeries QcK Large Black 450x400mm (model 63003)|¥1,500|未確認|—|¥2,420|in_stock|black_friday_target_reserve|[商品ページ](https://www.biccamera.com/bc/item/1570130/)|
+|Logicool G213r|¥4,500|未確認|¥7,920|—|in_stock|black_friday_target_reserve|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
+|Logicool G304|¥5,000|未確認|¥5,350|—|in_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
+|SteelSeries QcK Large Black 450x400mm (model 63003)|¥1,500|未確認|¥2,420|—|in_stock|black_friday_target_reserve|[商品ページ](https://www.biccamera.com/bc/item/1570130/)|
 |Required cables only; check included monitor cables first|¥0|未確認|—|—|unknown|black_friday_target_reserve|予算枠/見積確認|
 |周辺機器の価格差・必要ケーブル不足用の柔軟な予備枠（商品ではない）|¥2,000|未確認|—|—|unknown|black_friday_target_reserve|予算枠/見積確認|
 
@@ -38,7 +38,7 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |G TUNE FG-A7G6T|desktop|RTX 5060 Ti 16GB|¥360,000|未確認|—|¥309,800|¥309,800|¥0|0.0%|¥247,840|¥232,350|¥216,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/)|
 |G TUNE P5-I7G70BK-C（ブラック）|laptop|RTX 5070 Laptop GPU|¥360,000|未確認|—|¥329,800|¥329,800|¥0|0.0%|¥263,840|¥247,350|¥230,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p5i7g70bkccdw102dec/)|
 |G TUNE P6-I7G70BK-B|laptop|RTX 5070 Laptop GPU|¥360,000|未確認|—|¥284,700|¥284,700|¥0|0.0%|¥227,760|¥213,525|¥199,290|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/)|
-|G TUNE FG-A7G70|desktop|RTX 5070|¥360,000|未確認|—|¥374,800|¥374,800|¥14,800|3.9%|¥299,840|¥281,100|¥262,360|達成|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/)|
+|G TUNE FG-A7G70|desktop|RTX 5070|¥360,000|未確認|¥374,800|¥319,800|¥374,800|¥14,800|3.9%|¥299,840|¥281,100|¥262,360|達成|PROVISIONAL_WATCH_WINDOW_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/)|
 |GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|laptop|RTX 5070 Ti|¥360,000|未確認|—|¥419,800|¥419,800|¥59,800|14.2%|¥335,840|¥314,850|¥293,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200)|
 |Acer Predator Helios Neo 16 AI PHN16-I71-N93Z57T|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥547,800|¥547,800|¥187,800|34.3%|¥438,240|¥410,850|¥383,460|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.acer.com/jp-ja/predator/laptops/helios/helios-neo-16-ai/pdp/NH.U44SJ.001)|
 |ROG Strix G16 G614PR-R9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|¥549,800|¥549,800|¥189,800|34.5%|¥439,840|¥412,350|¥384,860|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/)|
@@ -48,9 +48,9 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |GALLERIA ZL9R-R57T-6-B|laptop|RTX 5070 Ti|¥360,000|未確認|—|¥738,980|¥738,980|¥378,980|51.3%|¥591,184|¥554,235|¥517,286|達成|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.dospara.co.jp/TC1085/MC24569.html)|
 |ASUS TUF Gaming A16 FA608PP-R9R5070S（整備済み品・参考枠）|laptop|RTX 5070 Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://www.asus.com/jp/laptops/for-gaming/tuf-gaming/asus-tuf-gaming-a16-2025/techspec/)|
 |ASUS TUF Gaming F16 FX608|laptop|RTX 5070 Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|未達/未確認|NO_PRICE_REFERENCE|[販売ページ](https://www.asus.com/jp/laptops/for-gaming/tuf-gaming/asus-tuf-gaming-f16-2025/techspec/)|
-|G TUNE DG-A5G60|desktop|RTX 5060|¥360,000|未確認|—|¥194,800|¥194,800|—|—|¥155,840|¥146,100|¥136,360|未達/未確認|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
-|G TUNE DG-I5G70|desktop|RTX 5070|¥360,000|未確認|—|¥279,800|¥279,800|—|—|¥223,840|¥209,850|¥195,860|未達/未確認|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/)|
-|G TUNE DG-I7G70|desktop|RTX 5070|¥360,000|未確認|—|¥299,800|¥299,800|—|—|¥239,840|¥224,850|¥209,860|未達/未確認|PRE_BLACK_FRIDAY_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/)|
+|G TUNE DG-A5G60|desktop|RTX 5060|¥360,000|未確認|¥194,800|¥194,800|¥194,800|—|—|¥155,840|¥146,100|¥136,360|未達/未確認|PROVISIONAL_WATCH_WINDOW_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/)|
+|G TUNE DG-I5G70|desktop|RTX 5070|¥360,000|未確認|¥279,800|¥279,800|¥279,800|—|—|¥223,840|¥209,850|¥195,860|未達/未確認|PROVISIONAL_WATCH_WINDOW_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/)|
+|G TUNE DG-I7G70|desktop|RTX 5070|¥360,000|未確認|¥299,800|¥299,800|¥299,800|—|—|¥239,840|¥224,850|¥209,860|未達/未確認|PROVISIONAL_WATCH_WINDOW_REFERENCE|[販売ページ](https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/)|
 |Lenovo Legion Pro 5i Gen 10|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040)|
 |ROG Strix G16 G615LR-U9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025/spec/)|
 |ROG Strix G18 G815LR-U9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025/spec/)|
