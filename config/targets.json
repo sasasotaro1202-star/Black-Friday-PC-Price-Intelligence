@@ -256,7 +256,7 @@
   "max_results_per_query": 8,
   "max_pages_per_run": 50,
   "desktop_enabled": true,
-  "desktop_note": "Desktop self-build monitoring must optimize for gaming, game creation (Unreal Engine/Unity/Godot), schoolwork/research/multitasking, Python/data analysis, automated prediction systems and feasible local AI. Preferred all-in target ¥400,000 (not a hard cutoff); initially compare through a ¥420,000 soft band when the workload benefit is meaningful. Keep the separate ¥450,000 target / ¥470,000 soft-band scenario. PC-body planning target ¥360,000. Reference peripheral allocation: about ¥35,000 for one 27-inch WQHD high-refresh main monitor, keyboard, mouse, mousepad, and a flexible price/cable-shortage buffer; buy an extra cable only if no suitable cable is included. The power strip is already owned and excluded from purchase candidates, monitoring and budget. Speakers, sub-monitor and headset are excluded from purchase candidates, monitoring and all budget calculations. Required at purchase: 32GB RAM and 1TB SSD; 64GB/2TB is preferred only if exact complete-build price and compatibility evidence fit the total cap. No post-purchase upgrade assumptions. BTO is benchmark only.",
+  "desktop_note": "Desktop self-build monitoring optimizes for 1440p gaming (including Cities: Skylines II), Unity/Unreal/Godot game creation, Python/VS Code/GitHub, sports/stock/BTC analysis, feasible local AI, everyday research and study. Compare all-in scenarios separately: ¥350,000 ceiling for the ¥350,000 case; ¥420,000 only for the ¥400,000 base case when a material workload gain is demonstrated; ¥450,000 ceiling for the separate ¥450,000 case. Keep over-ceiling options visible as comparison-only with the exact overrun. Include one 27-inch WQHD main monitor, keyboard, mouse, mousepad, verified shipping/required small items, and ¥5,000 contingency. Compare online delivery, in-store cash, and online order/store pickup per exact SKU; never treat points as cash discounts. Verify included monitor cables before adding any cable. Exclude secondary monitors, speakers, headsets, and the already-owned power strip. At purchase require at least 32GB RAM and 1TB SSD; never count post-purchase upgrades as completing the build. BTO and laptops remain comparison-only.",
   "desktop_exact_candidate_count": 7,
   "total_budget_jpy": 400000,
   "peripheral_budget_jpy": 35000,
@@ -2260,5 +2260,7 @@
     "budget_350k",
     "budget_400k",
     "budget_450k"
-  ]
+  ],
+  "purpose": "総額35万円・40万円・45万円の3シナリオで、自作PC本体と必須周辺機器を購入時点の証拠に基づいて比較する。35万円案の評価上限は35万円、40万円案のみ性能向上が明確な場合に42万円まで、45万円案は別シナリオとして45万円を評価上限とする。上限超過候補は比較用に残し、購入不可・超過額を明示する。PC部品は正確な型番の直接販売ページ・税込価格・在庫・送料・最終決済額・保証/返品を確認する。周辺機器はオンライン配送、実店舗の現金購入、オンライン注文の店舗受取を商品別に比較し、未確認ルートを最安扱いしない。RAM32GB以上・SSD1TB以上を購入時点で満たす。購入許可は証拠が揃った場合のみ。",
+  "base_budget_scope_note": "トップレベルの総額・soft ceiling・overrun allowanceは標準の40万円案を表す。35万円・45万円はbudget_scenariosの個別設定を唯一の根拠とし、全体の40万円設定を継承しない。"
 }
