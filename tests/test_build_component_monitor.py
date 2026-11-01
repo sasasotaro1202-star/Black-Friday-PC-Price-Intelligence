@@ -202,6 +202,26 @@ class BuildComponentMonitorTests(unittest.TestCase):
                          "https://www.pc-koubou.jp/user_data/search.php")
         self.assertIn("?q=", urls[0]["url"])
 
+    def test_critical_parts_have_curated_exact_sku_retailer_fallbacks(self):
+        config = json.loads((ROOT / "config" / "build_components.json").read_text(encoding="utf-8"))
+        profile = config["profile"]
+        parts = {item["id"]: item for item in config["parts"]}
+        expected = {
+            "cpu-ryzen7-9700x": "https://joshinweb.jp/mobile/22814/0730143315593.html",
+            "motherboard-asrock-b850m-pro-rs-wifi": "https://www.dospara.co.jp/SBR1739/IC517983.html",
+            "gpu-rtx5070-12gb": "https://joshinweb.jp/peripheral/73259/0751492812151.html",
+            "memory-corsair-vengeance-ddr5-32gb-6000": "https://www.corsair.com/jp/ja/p/memory/cmk32gx5m2d6000z38/vengeance-32gb-2-x-16gb-ddr5-dram-up-to-6000mt-s-cl38-amd-expo-%26-intel-xmp-memory-kit-gray-cmk32gx5m2d6000z38",
+            "ssd-msi-spatium-m450-1tb": "https://www.yodobashi.com/product/100000001009402658/",
+            "ssd-kioxia-exceria-basic-2tb": "https://joshinweb.jp/pc/43736/4582761161566.html",
+        }
+        allowed_domains = profile["allowed_search_reference_domains"]
+        for part_id, url in expected.items():
+            with self.subTest(part_id=part_id):
+                self.assertIn(url, parts[part_id].get("direct_retailer_urls") or [])
+                self.assertTrue(bcm.allowed_url(url, allowed_domains))
+                host = url.split("/", 3)[2]
+                self.assertIn(host, allowed_domains)
+
     def test_curated_direct_retailer_url_is_checked_before_general_search(self):
         part = dict(self.part)
         part["direct_retailer_urls"] = ["https://www.dospara.co.jp/item/exact-sku"]
