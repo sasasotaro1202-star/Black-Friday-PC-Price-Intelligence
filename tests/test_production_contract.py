@@ -7,6 +7,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from observation_contract import observation_metadata_schema_errors, purchase_gate_schema_errors, point_in_time_event_metadata
 from sanitize import final_fetch_stats
+from healthcheck import budget_scenario_tier_coverage_errors
 
 
 def valid_snapshot():
@@ -35,6 +36,42 @@ def valid_snapshot():
 
 
 class ProductionObservationContractTests(unittest.TestCase):
+    def test_healthcheck_accepts_only_the_authoritative_350_420_450_tier_ceilings(self):
+        configured = [
+            {"total_budget_jpy": 350000, "soft_ceiling_total_jpy": 350000},
+            {"total_budget_jpy": 400000, "soft_ceiling_total_jpy": 420000},
+            {"total_budget_jpy": 450000, "soft_ceiling_total_jpy": 450000},
+        ]
+        self.assertEqual(budget_scenario_tier_coverage_errors(configured, configured), [])
+
+    def test_healthcheck_rejects_stale_370k_and_470k_scenario_ceilings(self):
+        configured = [
+            {"total_budget_jpy": 350000, "soft_ceiling_total_jpy": 350000},
+            {"total_budget_jpy": 400000, "soft_ceiling_total_jpy": 420000},
+            {"total_budget_jpy": 450000, "soft_ceiling_total_jpy": 450000},
+        ]
+        stale = [
+            {"total_budget_jpy": 350000, "soft_ceiling_total_jpy": 370000},
+            {"total_budget_jpy": 400000, "soft_ceiling_total_jpy": 420000},
+            {"total_budget_jpy": 450000, "soft_ceiling_total_jpy": 470000},
+        ]
+        self.assertEqual(
+            budget_scenario_tier_coverage_errors(stale, configured),
+            ["budget scenario tier/soft-ceiling coverage invalid"],
+        )
+
+    def test_healthcheck_rejects_duplicate_or_missing_budget_tiers(self):
+        configured = [
+            {"total_budget_jpy": 350000, "soft_ceiling_total_jpy": 350000},
+            {"total_budget_jpy": 400000, "soft_ceiling_total_jpy": 420000},
+            {"total_budget_jpy": 450000, "soft_ceiling_total_jpy": 450000},
+        ]
+        duplicate = [configured[0], configured[1], configured[1]]
+        missing = configured[:2]
+        self.assertTrue(budget_scenario_tier_coverage_errors(duplicate, configured))
+        self.assertTrue(budget_scenario_tier_coverage_errors(missing, configured))
+
+
     def test_peripheral_event_pit_requires_all_five_timezone_aware_timestamps(self):
         event = {
             "event_time": "2026-10-31T10:00:00+09:00",
