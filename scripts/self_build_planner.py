@@ -1144,6 +1144,114 @@ def build_budget_scenarios(profile, parts, by_id, now, max_age):
         })
     return grouped
 
+def component_snapshot_coverage(parts_list, rows, snapshot, snapshot_path=None):
+    """Count validated component price evidence by source class.
+
+    A direct retailer listing and a comparison-site reference are both
+    verified price references, but neither is a final checkout quote.
+    Search snippets remain separately labelled and never contribute to
+    verified coverage or build-cost arithmetic.
+    """
+    parts = [item for item in (parts_list or []) if isinstance(item, dict)]
+    tracked_ids = {
+        str(item.get("id") or "")
+        for item in parts
+        if item.get("id") and item.get("track_price")
+    }
+    by_id = {}
+    for row in rows or []:
+        if isinstance(row, dict) and row.get("id"):
+            by_id[str(row["id"])] = row
+
+    def positive_integer(value):
+        return isinstance(value, int) and not isinstance(value, bool) and value > 0
+
+    market_ids = set()
+    retailer_ids = set()
+    snippet_ids = set()
+    identity_unverified_ids = set()
+    fetch_error_ids = set()
+
+    for item_id in tracked_ids:
+        row = by_id.get(item_id) or {}
+        status = str(row.get("price_validation_status") or "")
+        identity_ok = row.get("identity_match") is True
+        not_bf_authorized = row.get("bf_actual_authorized") is False
+
+        if status == "verified_market_reference":
+            if (
+                identity_ok and not_bf_authorized
+                and positive_integer(row.get("market_reference_price_jpy"))
+                and row.get("pit_valid") is True
+                and parse_dt(row.get("available_at")) is not None
+                and parse_dt(row.get("retrieval_time")) is not None
+                and parse_dt(row.get("available_at")) <= parse_dt(row.get("retrieval_time"))
+            ):
+                market_ids.add(item_id)
+
+        if status == "verified_retailer_listing_reference":
+            offer = row.get("retailer_listing_offer")
+            offers = row.get("retailer_listing_offers") or []
+            candidates = [offer] if isinstance(offer, dict) else []
+            candidates.extend(x for x in offers if isinstance(x, dict))
+            verified_offer = any(
+                candidate.get("source_role") == "direct_retailer_listing_reference"
+                and candidate.get("identity_match") is True
+                and candidate.get("bf_actual_authorized") is False
+                and candidate.get("pit_valid") is True
+                and candidate.get("price_source_mode") in ("direct_structured", "direct_meta", "direct_text")
+                and positive_integer(candidate.get("price_jpy"))
+                and parse_dt(candidate.get("available_at")) is not None
+                and parse_dt(candidate.get("retrieval_time")) is not None
+                and parse_dt(candidate.get("available_at")) <= parse_dt(candidate.get("retrieval_time"))
+                for candidate in candidates
+            )
+            if (
+                identity_ok and not_bf_authorized
+                and positive_integer(row.get("retailer_listing_reference_price_jpy"))
+                and verified_offer
+            ):
+                retailer_ids.add(item_id)
+
+        if status == "search_snippet_reference":
+            if (
+                identity_ok and not_bf_authorized
+                and bool(row.get("search_snippet_identity_anchor"))
+                and positive_integer(row.get("search_snippet_reference_price_jpy"))
+            ):
+                snippet_ids.add(item_id)
+
+        if status == "identity_unverified" or (
+            row and row.get("identity_match") is False and status not in ("missing", "anomaly_rejected")
+        ):
+            identity_unverified_ids.add(item_id)
+        if row.get("fetch_status") == "error":
+            fetch_error_ids.add(item_id)
+
+    verified_market_count = len(market_ids)
+    verified_retailer_count = len(retailer_ids)
+    snippet_count = len(snippet_ids)
+    verified_count = verified_market_count + verified_retailer_count
+    return {
+        "configured_component_count": len(parts),
+        "tracked_hardware_part_count": len(tracked_ids),
+        # Backward-compatible aggregate: only validated comparison or direct
+        # retailer page prices. Search snippets are explicitly excluded.
+        "snapshot_verified_count": verified_count,
+        "snapshot_verified_market_reference_count": verified_market_count,
+        "snapshot_verified_retailer_listing_reference_count": verified_retailer_count,
+        "snapshot_search_snippet_reference_count": snippet_count,
+        "snapshot_unverified_or_missing_count": max(
+            0, len(tracked_ids) - verified_count - snippet_count
+        ),
+        "snapshot_identity_unverified_count": len(identity_unverified_ids),
+        "snapshot_fetch_error_count": len(fetch_error_ids),
+        "snapshot_generated_at": (snapshot or {}).get("generated_at"),
+        "snapshot_source_role": (snapshot or {}).get("source_role") or "missing_snapshot",
+        "snapshot_sha256": file_sha256(snapshot_path or PRICE_PATH),
+    }
+
+
 def build_plan(config=None, price_snapshot=None, now=None):
     config = config or load_json(CONFIG_PATH, {})
     profile = config.get("profile") or {}
@@ -1792,14 +1900,7 @@ def build_plan(config=None, price_snapshot=None, now=None):
             "low_stock_is_a_risk_flag_not_a_guaranteed_order": True,
             "partial_listing_subtotal_is_not_a_complete_build_or_checkout_price": True,
         },
-        "component_coverage": {
-            "configured_component_count": len(parts_list),
-            "tracked_hardware_part_count": sum(1 for x in parts_list if x.get("track_price")),
-            "snapshot_verified_count": sum(1 for x in rows if x.get("price_validation_status") == "verified_market_reference" and x.get("identity_match") is True and x.get("bf_actual_authorized") is False),
-            "snapshot_generated_at": snapshot.get("generated_at"),
-            "snapshot_source_role": snapshot.get("source_role") or "missing_snapshot",
-            "snapshot_sha256": file_sha256(PRICE_PATH)
-        },
+        "component_coverage": component_snapshot_coverage(parts_list, rows, snapshot, PRICE_PATH),
         "builds": builds, "bf_actual_authorized": False, "buy_now_authorized": False
     }
 
