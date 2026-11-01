@@ -835,7 +835,8 @@
       "notes": "BOXモデル。AM5。CPUクーラーは別途必要。比較サイト掲載額は決済価格ではない。 ヨドバシの型番一致商品ページも直接監視。 TSUKUMOの型番一致ページも第二監視先として追加。2026-10-14時点の検索表示は46,800円・在庫ありだが、監視時に直接価格と在庫を再取得する。 BF目標を¥38,000から¥45,000へ修正。直近の同一型番の在庫あり直接掲載¥47,800を基準にした目標であり、価格予測ではない。",
       "direct_retailer_urls": [
         "https://www.yodobashi.com/product/100000001008661707/",
-        "https://shop.tsukumo.co.jp/goods/0730143315593/"
+        "https://shop.tsukumo.co.jp/goods/0730143315593/",
+        "https://joshinweb.jp/mobile/22814/0730143315593.html"
       ],
       "image_url": "https://img.mm-vision.dk/images/v1/mmv/amd-9000-series-ryzen-7-02.webp",
       "image_source_url": "https://www.mm-vision.dk/amd-ryzen-7-9700x-processor",
@@ -978,9 +979,9 @@
       "spec_source_url": "https://www.pny.com/en-eu/geforce-rtx-5070-slim-models?sku=VCG507012DFSXPB1-O",
       "spec_source_verified_at": "2026-10-14",
       "direct_retailer_urls": [
-        "https://joshinweb.jp/kaden/73259/0751492812151.html",
         "https://www.sofmap.com/product_detail.aspx?eVar4=WBPT&sku=102194845",
-        "https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom"
+        "https://shop.tsukumo.co.jp/goods/0751492812151/?cid=kakakukcom",
+        "https://joshinweb.jp/peripheral/73259/0751492812151.html"
       ],
       "image_url": "https://teknoklik.com/images/product/pny/2745/pny-geforce-rtx-5070-oc-12gb-dual-fan-slim-gddr7-192bit-vcg507012dfsxpb1-o_1000x1000_NNAECGHFET.jpg",
       "image_source_url": "https://teknoklik.com/pny-geforce-rtx-5070-oc-12gb-dual-fan-slim-gddr7-192bit-vcg507012dfsxpb1-o-2744",
@@ -1139,7 +1140,8 @@
       "direct_retailer_urls": [
         "https://www.yodobashi.com/product/100000001008871801/",
         "https://www.pc4u.co.jp/view/item/000000092844",
-        "https://www.sofmap.com/product_detail.aspx?sku=101393495"
+        "https://www.sofmap.com/product_detail.aspx?sku=101393495",
+        "https://www.dospara.co.jp/SBR1739/IC517983.html"
       ],
       "image_url": "https://www.cclonline.com/images/avante/B850M-Pro-RS-WiFi_box.jpg",
       "image_source_url": "https://www.cclonline.com/90-mxbr7-a0uayz-asrock-b850m-pro-rs-wifi-matx-motherboard-for-amd-am5-cpus-476896/",
@@ -1527,7 +1529,9 @@
       },
       "spec_source_url": "https://www.kioxia.com/ja-jp/personal/ssd/exceria-basic.html",
       "notes": "条件付きの1TB SSD置換候補。監視SKUはSSD-CK2.0N4B/N。BF目標45,000円は希望値で、確定価格や価格予測ではない。2026-10-17の比較サイト検索結果にはこの型番で52,980円からの掲載表示がある一方、別のページ取得では68,280円・1店舗の表示例もあった。ページ・店舗・在庫条件が異なるため同一時点の確定相場とみなさず、監視時に直接価格・在庫・SKUを再確認する。QLC NANDのため継続的大容量書き込みではTLC製品とも比較する。1TB品に追加せず、必ず置換として総額を再計算する。",
-      "direct_retailer_urls": [],
+      "direct_retailer_urls": [
+        "https://joshinweb.jp/pc/43736/4582761161566.html"
+      ],
       "fit_scorecard": {
         "workload_fit_points": 38,
         "headroom_points": 23,
