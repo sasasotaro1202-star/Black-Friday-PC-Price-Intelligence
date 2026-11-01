@@ -265,7 +265,7 @@
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
-  "budget_scope_note": "総額目標400,000円（厳密な失格線ではなく、用途上の改善が明確なら初期許容帯は420,000円）、PC本体の基準目標360,000円。周辺機器の計画配分は約35,000円（27インチWQHDメインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差・ケーブル不足用の柔軟な予備枠）。電源タップは所有済みのため購入候補・価格監視・予算から除外する。スピーカーとヘッドセットは今回の購入対象外。サブモニターは今回の購入対象・候補・価格監視・総額計算から除外するが、PC購入後に必要なら別予算で追加できる任意アップグレードとする。周辺機器送料は購入チャネル別に計上する。オンライン配送では実際の送料・必須費用を最終支払額に加え、未確認時は該当商品の送料予備枠で保守的に試算して0円と仮定しない。実店舗の現金購入では配送送料を計上せず、同一型番の税込現金価格と支店在庫を別々に確認する。ネット注文の店舗受け取りはオンライン決済額に必須費用を反映し、受取可能な支店在庫を別途確認する。ポイントは現金値引きに算入しない。総額予備費5,000円を別に確保し、PC本体の最終許容額は40万円目標の許容帯内では、総額420,000円から実際の必要周辺機器費と予備費を引いてPC本体の比較上限を動的に算出する。45万円案は47万円の許容帯で別途比較する。価格目標は確定値ではなく、購入前に型番・在庫・決済額を確認する。 Compare 350,000/400,000/450,000 JPY as separate total-system ceilings; preserve mandatory peripherals and the 5,000 JPY contingency for each tier, and never treat target arithmetic as a checkout quote.",
+  "budget_scope_note": "総額目標は35万円・40万円・45万円の3シナリオ。35万円案は350,000円、40万円本命のみ用途上の明確な性能向上がある場合に420,000円、45万円案は独立して450,000円を評価上限とする。各シナリオに必須周辺機器、送料・必要小物、総額予備費5,000円を含める。周辺機器はネット配送・店頭現金・オンライン注文の店舗受取を商品別に比較し、ポイントは現金値引きに算入しない。",
   "peripherals": [
     {
       "id": "main_monitor",
@@ -1840,7 +1840,7 @@
   "monitor_window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
   "monitor_window_note": "暫定の広域監視窓であり、いずれかの販売店の公式BF開催日を意味しない。各店の2026年公式日程を公式ページから明示的な年付き日付範囲で確認するまで、価格をBF実売として認定せず、買い時判定は購入許可を出さない。過去日程、曜日、年のない月日から開催日を推定しない。",
   "budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
-  "budget_target_note": "総額400,000円を基準目標、初期の比較許容帯420,000円とする。40万円は厳密な失格線ではなく、用途上の性能改善が明確なら42万円まで比較する。45万円目標・47万円許容帯は別シナリオとして扱う。周辺機器35,000円は柔軟な参考配分で固定支出ではない。メインモニターは1台のみ。電源タップは所有済みのため購入・価格監視・予算計算から除外する。スピーカー・ヘッドセットは今回の対象外。サブモニターは今回の購入・候補・価格監視・費用計算から除外し、必要になれば購入後に別予算で追加する。周辺機器はネット配送・実店舗・ネット注文の店舗受け取りを同一型番の最終支払額で比較し、PC購入時にRAM 32GB以上、SSD 1TB以上を確保する。購入判断は価格目標ではなく、最新の直接価格・在庫・送料等込み最終決済額・互換性・保証/返品の確認を通過した場合に限る。",
+  "budget_target_note": "総額35万円・40万円・45万円を別シナリオで比較。40万円案だけ、用途上の性能向上が明確なら約42万円までを許容帯とする。35万円案は35万円、45万円案は45万円を評価上限とし、上限超過候補は比較用に残して超過額を明示する。周辺機器は約35,000円を参考配分とし、実費に応じて動的配分する。予備費5,000円を確保し、価格・在庫・最終決済額・互換性・保証が未確認なら購入を許可しない。",
   "purchase_channels": {
     "pc_body": {
       "channel": "online",
@@ -1940,7 +1940,7 @@
     "physical_store_price_and_stock_required_before_recommendation": false,
     "physical_store_price_and_stock_required_before_store_route_selection": true
   },
-  "target_budget_notes": "総額目標400,000円、初期許容帯420,000円。PC本体の基準目標360,000円。周辺機器35,000円は参考配分で固定枠ではない。メインモニターは1台だけ。電源タップは所有済みのため購入・監視・予算から除外。スピーカー・ヘッドセットは今回の対象外。サブモニターは今回の購入・ランキング・価格監視・総額試算に含めず、購入後に必要なら別予算で追加する。予備費5,000円を別途確保し、PC本体に使える額は周辺機器の実費から動的に算出する。許容帯を超える構成も45万円案等で比較対象から消さず、超過額・性能差を表示する。周辺機器送料は実費・チャネル別に計上し、ポイントは現金支払い額から控除しない。価格目標と実売価格を区別し、未確認が残る場合は購入許可しない。 Budget alternatives are separate complete-build plans; each includes peripherals and contingency, and all prices remain aspirational until direct SKU/stock/checkout verification.",
+  "target_budget_notes": "35万円・40万円・45万円の別シナリオ。35万円案は350,000円、40万円案は用途上の明確な性能向上がある場合のみ420,000円、45万円案は450,000円を評価上限とする。必須周辺機器・送料/必要小物・総額予備費5,000円込み。周辺機器はネット配送・店舗現金・ネット注文の店舗受取を商品別に比較し、同じ型番の税込現金決済額で評価。ポイントを現金値引き扱いしない。未確認ルートは未確認のまま残す。",
   "target_budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
   "market_risk_policy": {
     "snapshot_date": "2026-10-17",
@@ -2000,7 +2000,7 @@
       "A risk ranking does not automatically authorize a purchase; require exact live price, inventory, complete configuration, compatibility, return terms and final cash total."
     ]
   },
-  "target_budget_note": "総額400,000円を基準目標、初期の比較許容帯420,000円とし、PC本体の基準目標は360,000円とする。40万円は厳密な失格線ではなく、用途上の性能改善が明確なら42万円まで比較する。45万円目標・47万円許容帯は別シナリオとして扱う。周辺機器は約35,000円を計画配分として使うが固定枠ではない。メインモニターは1台のみ。電源タップは所有済みのため購入・候補・価格監視・予算計算から除外する。スピーカー・ヘッドセットは今回の対象外。サブモニターは今回の購入・候補・価格監視・予算計算から除外するが、購入後に必要なら別予算で追加できる。PC購入時にRAM 32GB以上、SSD 1TB以上を確保する。購入判断は価格目標ではなく、最新の直接価格・在庫・送料等込み最終決済額・互換性・保証/返品の確認を通過した場合に限る。",
+  "target_budget_note": "35万円・40万円・45万円の別シナリオ。40万円案のみ、用途上の性能向上が明確なら約42万円までを許容帯として比較。35万円案は350,000円、45万円案は450,000円を評価上限とし、上限超過候補は比較用だけに残して超過額を表示。周辺機器・送料/必要小物・予備費5,000円込み。PC購入時にRAM32GB以上・SSD1TB以上。購入許可はSKU、在庫、送料込み決済額、互換性、保証/返品の確認後のみ。",
   "unallocated_contingency_jpy": 5000,
   "user_workload_profile": {
     "priorities": [
@@ -2171,21 +2171,30 @@
       "total_budget_jpy": 350000,
       "description_ja": "35万円目標案。必要周辺機器・送料・5,000円予備費込み。37万円までの許容帯で超過額と性能差を比較。",
       "soft_ceiling_total_jpy": 370000,
-      "soft_overrun_allowance_jpy": 20000
+      "soft_overrun_allowance_jpy": 20000,
+      "allowance": 0,
+      "ceiling": 350000,
+      "description": "35万円目標案。必要周辺機器・送料・5,000円予備費込み。総額35万円を評価上限とし、超過候補は比較用に残して超過額を明示する。"
     },
     {
       "id": "budget_400k",
       "total_budget_jpy": 400000,
       "description_ja": "40万円目標案（本命）。必要周辺機器・送料・5,000円予備費込み。42万円までの許容帯で、数万円の超過だけでは候補を切り捨てない。",
       "soft_ceiling_total_jpy": 420000,
-      "soft_overrun_allowance_jpy": 20000
+      "soft_overrun_allowance_jpy": 20000,
+      "allowance": 20000,
+      "ceiling": 420000,
+      "description": "40万円目標案（本命）。必要周辺機器・送料・5,000円予備費込み。用途上の性能向上が明確な場合に限り、総額42万円までを許容帯として比較する。"
     },
     {
       "id": "budget_450k",
       "total_budget_jpy": 450000,
       "description_ja": "45万円目標案。必要周辺機器・送料・5,000円予備費込み。47万円までの許容帯で、64GB RAM・2TB SSD・高コアCPU・GPU性能を比較。",
       "soft_ceiling_total_jpy": 470000,
-      "soft_overrun_allowance_jpy": 20000
+      "soft_overrun_allowance_jpy": 20000,
+      "allowance": 0,
+      "ceiling": 450000,
+      "description": "45万円目標案（独立シナリオ）。必要周辺機器・送料・5,000円予備費込み。総額45万円を評価上限とし、超過候補は比較用に残して超過額を明示する。"
     }
   ],
   "budget_scenario_policy": {
@@ -2195,7 +2204,7 @@
     "unallocated_contingency_jpy": 5000,
     "required_peripherals": "One 27-inch WQHD main monitor, keyboard, mouse, mousepad, cables only if needed",
     "excluded": "Speakers, headset, power strip (already owned), and secondary monitor for the initial purchase only. A secondary monitor may be added later as a separate optional upgrade under a separate incremental budget.",
-    "selection_rule": "40万円は総額目標で、絶対的な失格線ではない。35万円・40万円・45万円の各シナリオに目標＋20,000円の許容帯を設ける。目標内・許容帯内・許容帯超過を分け、超過額、用途上の性能改善、互換性、実売根拠を比較する。許容帯超過も別シナリオで比較対象から消さず、購入判断は型番一致の直接価格・在庫・送料込み決済総額・互換性・保証条件を確認して行う。価格目標だけでは購入許可を出さない。",
+    "selection_rule": "35万円案は総額350,000円、40万円案のみ用途上の明確な性能向上がある場合に総額420,000円まで、45万円案は独立シナリオとして総額450,000円を評価上限にする。上限超過候補も比較から消さず、比較用・購入不可として超過額を明示する。PC部品・OS・送料/必要小物・必要周辺機器実費・周辺機器送料・総額予備費5,000円を含む。目標価格・比較価格だけでは購入許可しない。",
     "workload_priorities": [
       "gaming at 1440p",
       "game development in Unreal Engine/Unity/Godot",
@@ -2212,9 +2221,10 @@
       "GPU tier selected by measured gaming/rendering vs VRAM needs",
       "12+ core CPU if local engine-source builds and parallel data jobs justify it"
     ],
-    "default_soft_overrun_allowance_jpy": 20000,
+    "default_soft_overrun_allowance_jpy": 0,
     "allow_target_overrun_for_value": true,
-    "automatic_purchase_authorization": false
+    "automatic_purchase_authorization": false,
+    "score_policy": "各シナリオ内で相対比較する。目標価格から計算したスコアは計画用であり、実測ベンチマーク・購入確率・購入許可ではない。シナリオの評価上限超過候補はランキング上位に昇格させず比較専用として表示する。"
   },
   "budget_build_candidate_ids": [
     "budget-350k-rtx5060ti-fit",
@@ -2225,7 +2235,9 @@
     "budget-450k-balanced-capacity",
     "budget-450k-5070-64gb-1tb",
     "budget-450k-gpu-priority",
-    "budget-450k-gpu-storage"
+    "budget-450k-gpu-storage",
+    "budget-450k-9900x-5070-64gb-2tb",
+    "budget-450k-5070ti-64gb-2tb-over"
   ],
   "soft_ceiling_total_jpy": 420000,
   "soft_overrun_allowance_jpy": 20000,
@@ -2252,5 +2264,10 @@
       "budget_rule": "今回の35万円・40万円・45万円シナリオ、初回購入の周辺機器配分、5,000円予備費、初回購入ゲートには含めない。購入後に追加する場合は、その時点の別予算・追加費用として記録し、初回PC一式の購入総額と分離する。",
       "activation_rule": "PCとメインモニターの購入後、実際の作業領域・設置場所・用途から必要性を判断して追加する。"
     }
+  ],
+  "budget_scenario_ids": [
+    "budget_350k",
+    "budget_400k",
+    "budget_450k"
   ]
 }
