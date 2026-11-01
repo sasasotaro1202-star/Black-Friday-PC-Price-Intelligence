@@ -203,6 +203,7 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertIn("?q=", urls[0]["url"])
 
     def test_critical_parts_have_curated_exact_sku_retailer_fallbacks(self):
+        import json
         config = json.loads((ROOT / "config" / "build_components.json").read_text(encoding="utf-8"))
         profile = config["profile"]
         parts = {item["id"]: item for item in config["parts"]}
