@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-11-01T09:34:05+09:00
+更新: 2026-11-01T09:46:47+09:00
 価格フェーズ: **PROVISIONAL_BROAD_WATCH_WINDOW**
 暫定の広域監視窓（公式セール開催期間ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 総予算: ¥400,000
@@ -54,6 +54,7 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |Lenovo Legion Pro 5i Gen 10|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040)|
 |ROG Strix G16 G615LR-U9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025/spec/)|
 |ROG Strix G18 G815LR-U9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025/spec/)|
+|THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060|desktop|RTX 5060 Ti 16GB|¥360,000|未確認|—|¥279,980|¥279,980|—|—|¥223,984|¥209,985|¥195,986|未達/未確認|CATALOG_REFERENCE_ONLY|[販売ページ](https://www.dospara.co.jp/TC50/MC26301.html)|
 
 ## 既存の参照価格シナリオ（比較用・確率ではない）
 
@@ -72,6 +73,7 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |G TUNE P5-I7G70BK-C（ブラック）|¥329,800|19.8%|¥403,900|¥381,500|¥359,000|¥336,600|¥314,200|20%|none|
 |GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|¥665,100|¥628,100|¥591,200|¥554,200|¥517,300|未到達|same_gpu|
 |G TUNE DG-A7G70|¥304,800|0.0%|¥274,300|¥259,100|¥243,800|¥228,600|¥213,400|10%|same_gpu|
+|THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060 T|¥279,980|0.0%|¥252,000|¥238,000|¥224,000|¥210,000|¥196,000|10%|none|
 |Acer Predator Helios Neo 16 AI PHN16-I71-N93Z57T/E|¥547,800|34.3%|¥493,000|¥465,600|¥438,200|¥410,800|¥383,500|未到達|none|
 |ROG Strix G16 G614PR-R9R5070TI|¥549,800|34.5%|¥494,800|¥467,300|¥439,800|¥412,400|¥384,900|未到達|same_family|
 |ROG Zephyrus G16 GU606AR-U9R5070TIG32G|¥599,800|40.0%|¥539,800|¥509,800|¥479,800|¥449,800|¥419,900|未到達|none|
