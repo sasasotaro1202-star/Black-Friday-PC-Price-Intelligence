@@ -1043,7 +1043,7 @@ class ReportLinkTests(unittest.TestCase):
             "channel_comparison_status": "ONLINE_OPTIONS_COMPARED_STORE_PENDING",
         }
         self.assertFalse(report.peripheral_is_physical_store(item, {}))
-        self.assertEqual(report.peripheral_route_label(item), "ネット配送・実店舗・店舗受取を比較")
+        self.assertEqual(report.peripheral_route_label(item), "確認できたネット配送・実店舗・店舗受取ルートを比較中")
         summary = report.peripheral_route_price_summary(item)
         self.assertIn("ネット掲載 ¥20,790", summary)
         self.assertIn("送料込み推計 ¥21,790", summary)

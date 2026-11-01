@@ -36,10 +36,11 @@ class HistoricalBFAnalysisTests(unittest.TestCase):
         expected_categories = {"main_monitor", "mouse", "keyboard", "mousepad", "cables"}
         self.assertEqual(set(cfg["purchase_channels"]["physical_store_categories"]), expected_categories)
         self.assertEqual(set(cfg["purchase_channels"]["online_categories"]), expected_categories)
-        self.assertEqual(cfg["purchase_channels"]["channel_selection_mode"], "STORE_FIRST_LOCAL_PURCHASE")
-        self.assertEqual(cfg["purchase_channels"]["default_peripheral_channel"], "physical_store")
-        self.assertTrue(cfg["purchase_channels"]["physical_store_price_and_stock_required_before_recommendation"])
-        self.assertTrue(cfg["purchase_channels"]["online_orders_require_explicit_user_approval"])
+        self.assertEqual(cfg["purchase_channels"]["channel_selection_mode"], "BEST_VERIFIED_TOTAL")
+        self.assertEqual(cfg["purchase_channels"]["default_peripheral_channel"], "compare_online_and_store")
+        self.assertFalse(cfg["purchase_channels"]["physical_store_price_and_stock_required_before_recommendation"])
+        self.assertTrue(cfg["purchase_channels"]["physical_store_price_and_stock_required_before_store_route_selection"])
+        self.assertFalse(cfg["purchase_channels"]["online_orders_require_explicit_user_approval"])
         self.assertFalse(cfg["purchase_channels"]["online_price_is_store_price"])
         self.assertEqual(cfg["purchase_channels"]["pc_body"]["channel"], "online")
         items = cfg["peripherals"]

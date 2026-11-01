@@ -696,9 +696,10 @@ def store_pickup_quote_validation(target, now=None):
 def peripheral_budget_projection():
     """Project peripheral costs without treating comparison routes as approval.
 
-    A physical_store target stays unconfirmed until every configured branch has
-    a fresh exact-model cash quote and a known stock state. Online listings remain
-    comparison-only unless a target explicitly requests channel comparison.
+    Select the lowest-cost route among the exact-model offers whose price and
+    stock evidence is currently usable. A single verified store branch may be
+    selected while other branches remain pending; that does not mark the full
+    route comparison complete. Online and store evidence remain separate.
     """
     policy = purchase_budget_policy()
     snapshot = load_json(os.path.join(ROOT, "data", "peripheral_prices.json"), {})
@@ -736,10 +737,9 @@ def peripheral_budget_projection():
         )
 
         channel_options = set(target.get("purchase_channel_options") or [])
-        # Available routes describe what may be observed, not what is approved for
-        # automatic selection. In STORE_FIRST_LOCAL_PURCHASE mode, only an explicit
-        # compare mode may select the cheapest channel. A physical_store target must
-        # never fall through to online merely because online is in its options.
+        # Each route is an independent candidate. In compare mode, choose only
+        # among exact-model routes with usable price/stock evidence; never copy
+        # store evidence into an online or store-pickup route.
         compare_channels = bool(
             target.get("purchase_channel") == "compare_online_and_store"
             or target.get("compare_purchase_channels") is True
@@ -791,9 +791,10 @@ def peripheral_budget_projection():
         known_branch_stock_states = {
             "in_stock", "low_stock", "out_of_stock", "preorder_or_backorder"
         }
-        # Both configured branches must have a fresh, exact-model cash quote and
-        # an explicit stock state. Evidence from one branch cannot stand in for
-        # the other branch, even if the first branch is purchasable.
+        # Full store-route comparison requires every configured branch to have
+        # a fresh, exact-model cash quote and an explicit stock state. A verified
+        # branch can still be a selectable candidate while other branches remain
+        # pending; its stock must come from that same branch's quote.
         store_route_quotes_complete = bool(required_store_ids) and all(
             store_id in store_price_observation_by_id
             and store_price_observation_by_id[store_id].get("store_price_confirmed") is True
@@ -881,8 +882,7 @@ def peripheral_budget_projection():
             else store_observation.get("store_observation_age_minutes")
         )
         store_route_actionable = bool(
-            store_route_quotes_complete
-            and any(stocked(quote.get("store_stock_status")) for quote in store_price_observations)
+            any(stocked(quote.get("store_stock_status")) for quote in store_price_observations)
         )
         store_route_known = bool(store_route_quotes_complete)
         store_pickup_observation = store_pickup_quote_validation(target, now)
