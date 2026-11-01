@@ -31,6 +31,30 @@ class OfficialCampaignDateTests(unittest.TestCase):
         self.assertEqual(result["end_jst"], "2026-12-10T11:59:59+09:00")
         self.assertIn("2026年11月20日", result["evidence"])
 
+    def test_parses_yearless_range_only_on_year_anchored_2026_campaign_slug(self):
+        result = parse_explicit_2026_range(
+            "ブラックフライデーセール開催中 10/30(金)～11/12(木)",
+            "https://www.lenovo.com/jp/ja/campaigns/blackfriday2026/",
+        )
+        self.assertIsNotNone(result)
+        self.assertEqual(result["start_jst"], "2026-10-30T00:00:00+09:00")
+        self.assertEqual(result["end_jst"], "2026-11-12T23:59:59+09:00")
+        self.assertEqual(result["year_basis"], "official_2026_campaign_url_slug")
+
+    def test_does_not_infer_2026_from_yearless_range_on_generic_black_friday_url(self):
+        result = parse_explicit_2026_range(
+            "ブラックフライデーセール開催中 10/30(金)～11/12(木)",
+            "https://www.lenovo.com/jp/ja/campaigns/black-friday/",
+        )
+        self.assertIsNone(result)
+
+    def test_2025_campaign_slug_cannot_anchor_a_2026_date_range(self):
+        result = parse_explicit_2026_range(
+            "ブラックフライデーセール開催中 10/30(金)～11/12(木)",
+            "https://www.lenovo.com/jp/ja/campaigns/blackfriday2025/",
+        )
+        self.assertIsNone(result)
+
     def test_rejects_2025_dates_even_on_black_friday_page(self):
         result = parse_explicit_2026_range(
             "ブラックフライデー 2025年11月14日（金）～12月4日（木）",
