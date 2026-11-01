@@ -514,7 +514,8 @@
       ],
       "allowed_hosts": [
         "www.yodobashi.com",
-        "www.biccamera.com"
+        "www.biccamera.com",
+        "joshinweb.jp"
       ],
       "min_price_jpy": 1000,
       "max_price_jpy": 15000,
@@ -538,7 +539,8 @@
       ],
       "monitor_urls": [
         "https://www.yodobashi.com/product/100000001004334450/",
-        "https://www.biccamera.com/bc/item/6566291/"
+        "https://www.biccamera.com/bc/item/6566291/",
+        "https://joshinweb.jp/peripheral/14608/4943765047377.html"
       ],
       "store_price_jpy": null,
       "store_price_checked_at": null,

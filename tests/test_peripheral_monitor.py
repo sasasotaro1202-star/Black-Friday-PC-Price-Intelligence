@@ -49,6 +49,16 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertTrue(target["online_purchase_allowed_when_store_price_unconfirmed"])
         self.assertFalse(target["online_order_requires_explicit_user_approval"])
 
+
+    def test_mouse_tracks_joshin_exact_g304rwh_variant(self):
+        import json
+        config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))
+        target = next(x for x in config["peripherals"] if x["id"] == "mouse")
+        joshin_url = "https://joshinweb.jp/peripheral/14608/4943765047377.html"
+        self.assertIn(joshin_url, target["monitor_urls"])
+        self.assertIn("joshinweb.jp", target["allowed_hosts"])
+        self.assertIn("G304rWH", target["identity_terms"])
+
     def test_mouse_and_mousepad_do_not_use_foreign_retail_images(self):
         import json
         config = json.loads((ROOT / "config" / "targets.json").read_text(encoding="utf-8"))

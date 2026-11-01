@@ -52,7 +52,7 @@ PC本体はネット購入、自作を本命とします。周辺機器はネッ
 ### 3. マウス
 | 順位 | 製品 | BF目標 | 判断 |
 |---:|---|---:|---|
-| 1 | Logicool G304 | ¥5,000 | 無線FPS用の価格重視候補。[ヨドバシ](https://www.yodobashi.com/product/100000001004334450/) |
+| 1 | Logicool G304 | ¥5,000 | 無線FPS用の価格重視候補。[ヨドバシ](https://www.yodobashi.com/product/100000001004334450/) / [Joshin web](https://joshinweb.jp/peripheral/14608/4943765047377.html) |
 | 2 | Logicool G203 LIGHTSYNC | ¥3,500 | 有線でもよければ低価格な代替。[公式](https://gaming.logicool.co.jp/ja-jp/shop/p/g203-lightsync-rgb-gaming-mouse.910-005811) |
 | 3 | Logicool G304 X SUPERLIGHT | ¥10,000 | 軽量無線を優先するときだけ追加費用を検討。[ビックカメラ](https://www.biccamera.com/bc/item/15216264/) |
 
