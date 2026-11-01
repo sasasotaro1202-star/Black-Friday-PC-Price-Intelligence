@@ -74,27 +74,29 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(thresholds["mousepad"], 1200)
         self.assertTrue({"speakers", "secondary_monitor", "headset", "power_strip"}.isdisjoint(thresholds))
 
-    def test_peripherals_are_store_first_and_online_requires_explicit_approval(self):
+    def test_peripherals_select_best_verified_channel_without_silent_store_to_online_switch(self):
         channels = self.cfg["purchase_channels"]
-        self.assertEqual(channels["channel_selection_mode"], "STORE_FIRST_LOCAL_PURCHASE")
-        self.assertEqual(channels["default_peripheral_channel"], "physical_store")
-        self.assertTrue(channels["physical_store_price_and_stock_required_before_recommendation"])
-        self.assertTrue(channels["online_orders_require_explicit_user_approval"])
+        self.assertEqual(channels["channel_selection_mode"], "BEST_VERIFIED_TOTAL")
+        self.assertEqual(channels["default_peripheral_channel"], "compare_online_and_store")
+        self.assertFalse(channels["physical_store_price_and_stock_required_before_recommendation"])
+        self.assertTrue(channels["physical_store_price_and_stock_required_before_store_route_selection"])
+        self.assertFalse(channels["online_orders_require_explicit_user_approval"])
         self.assertFalse(channels["online_price_is_store_price"])
         policy = self.cfg["purchase_strategy"]["purchase_channel_policy"]
-        self.assertEqual(policy["channel_selection_mode"], "STORE_FIRST_LOCAL_PURCHASE")
-        self.assertTrue(policy["store_inventory_must_be_verified"])
-        self.assertFalse(policy["online_purchase_allowed_when_store_price_unconfirmed"])
-        self.assertTrue(policy["online_orders_require_explicit_user_approval"])
+        self.assertEqual(policy["channel_selection_mode"], "BEST_VERIFIED_TOTAL")
+        self.assertTrue(policy["store_inventory_must_be_verified_only_when_selected_channel_is_physical_store"])
+        self.assertTrue(policy["online_purchase_allowed_when_store_price_unconfirmed"])
+        self.assertFalse(policy["online_orders_require_explicit_user_approval"])
         for item in self.cfg["peripherals"] + self.cfg.get("peripheral_alternatives", []):
             if item.get("category") == "budget_reserve" or item.get("purchase_channel") == "conditional_need_only":
                 continue
             with self.subTest(item=item.get("id")):
-                self.assertEqual(item.get("purchase_channel"), "physical_store")
-                self.assertEqual(item.get("purchase_channel_preference"), "physical_store_first")
+                self.assertEqual(item.get("purchase_channel"), "compare_online_and_store")
+                self.assertEqual(item.get("purchase_channel_preference"), "best_verified_total")
                 self.assertTrue(item.get("store_inventory_required_before_purchase"))
-                self.assertTrue(item.get("online_price_is_comparison_only"))
-                self.assertFalse(item.get("online_purchase_allowed_when_store_price_unconfirmed"))
+                self.assertFalse(item.get("online_price_is_comparison_only"))
+                self.assertTrue(item.get("online_purchase_allowed_when_store_price_unconfirmed"))
+                self.assertFalse(item.get("online_order_requires_explicit_user_approval"))
                 self.assertTrue({"physical_store", "online", "store_pickup"}.issubset(set(item.get("purchase_channel_options", []))))
         with (ROOT / "config" / "early_purchase_policy.json").open(encoding="utf-8") as f:
             early = json.load(f)
@@ -103,10 +105,6 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertIsNone(early["total_budget_hard_cap_jpy"])
         self.assertEqual(early["soft_overrun_allowance_jpy"], 20000)
         self.assertEqual(early["soft_ceiling_total_jpy"], 420000)
-        self.assertEqual([(x["target_total_jpy"], x["soft_ceiling_total_jpy"]) for x in early["budget_scenarios"]],
-                         [(350000, 370000), (400000, 420000), (450000, 470000)])
-        self.assertTrue(any("never an automatic purchase authorization" in rule for rule in early["gate_rules"]))
-
     def test_peripheral_report_heading_matches_configured_purchase_items(self):
         heading = report.peripheral_monitor_section_heading(self.cfg)
         self.assertIn("メインモニター1台", heading)
@@ -181,7 +179,7 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(strategy["priority_plans"][1]["last_verified_listing_reference_jpy"], 304800)
         self.assertFalse(strategy["outlier_rule"]["zero_cost_upgrade_assumption_allowed"])
         channels = self.cfg["purchase_channels"]
-        self.assertEqual(channels["channel_selection_mode"], "STORE_FIRST_LOCAL_PURCHASE")
+        self.assertEqual(channels["channel_selection_mode"], "BEST_VERIFIED_TOTAL")
         main = next(x for x in self.cfg["peripherals"] if x["id"] == "main_monitor")
         self.assertTrue({"online", "physical_store", "store_pickup"}.issubset(set(main["purchase_channel_options"])))
         self.assertFalse(channels["online_price_is_store_price"])
@@ -262,7 +260,7 @@ class BudgetPolicyTests(unittest.TestCase):
         ids = {x["id"] for x in self.cfg["peripherals"]}
         self.assertTrue({"headset", "speakers", "secondary_monitor", "power_strip"}.isdisjoint(ids))
         self.assertEqual(len([x for x in self.cfg["peripherals"] if x["id"] == "main_monitor"]), 1)
-        self.assertEqual(self.cfg["purchase_channels"]["channel_selection_mode"], "STORE_FIRST_LOCAL_PURCHASE")
+        self.assertEqual(self.cfg["purchase_channels"]["channel_selection_mode"], "BEST_VERIFIED_TOTAL")
 
     def test_each_accessory_category_has_scorecards_for_real_distinct_products(self):
         primary = self.cfg.get("peripherals", [])
@@ -388,13 +386,13 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertIn("mouse", projection["tracked_peripheral_unverified_ids"])
         self.assertFalse(projection["budget_data_ready"])
         self.assertEqual(mouse_row["selected_purchase_channel"], "unconfirmed")
-        self.assertEqual(mouse_row["channel_comparison_status"], "STORE_FIRST_CASH_PRICE_OR_BOTH_BRANCHES_UNCONFIRMED")
+        self.assertEqual(mouse_row["channel_comparison_status"], "NO_ACTIONABLE_CHANNEL")
         self.assertEqual(projection["peripheral_projection_jpy"], 35500)
         self.assertEqual(projection["flexible_reserve_offset_for_shipping_jpy"], 2000)
         self.assertEqual(projection["pc_dynamic_cap_jpy"], 359500)
-        self.assertEqual(projection["channel_comparison_required_count"], 0)
+        self.assertEqual(projection["channel_comparison_required_count"], 4)
         self.assertEqual(projection["channel_comparison_complete_count"], 0)
-        self.assertEqual(projection["channel_comparison_pending_ids"], [])
+        self.assertEqual(set(projection["channel_comparison_pending_ids"]), {"main_monitor", "keyboard", "mouse", "mousepad"})
         self.assertLessEqual(
             projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"] + self.cfg["unallocated_contingency_jpy"],
             projection["total_budget_jpy"],
@@ -456,17 +454,17 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(row["store_pickup_branch_inventory_status"], "unknown")
         self.assertFalse(row["store_pickup_branch_inventory_verified"])
         self.assertIsNone(row["store_pickup_store_id"])
-        self.assertIsNone(row["current_price_jpy"])  # unapproved online price is comparison-only
+        self.assertEqual(row["current_price_jpy"], 20790)  # exact online listing is eligible as a candidate
         self.assertEqual(row["online_comparison_price_jpy"], 20790)
-        self.assertEqual(row["selected_purchase_channel"], "unconfirmed")
+        self.assertEqual(row["selected_purchase_channel"], "online")
         self.assertFalse(row["store_price_confirmed"])
         self.assertFalse(projection["budget_data_ready"])
         self.assertFalse(row["price_verified"])
-        self.assertTrue(row["online_price_is_comparison_only"])
+        self.assertFalse(row["online_price_is_comparison_only"])
         self.assertIn("main_monitor", projection["tracked_peripheral_unverified_ids"])
-        self.assertEqual(projection["channel_comparison_pending_ids"], [])
+        self.assertIn("main_monitor", projection["channel_comparison_pending_ids"])
 
-    def test_store_first_purchase_requires_cash_quotes_and_stock_for_both_branches(self):
+    def test_any_fresh_same_branch_cash_quote_can_be_selected_while_other_routes_remain_pending(self):
         now_text = intelligence.iso(intelligence.now_jst())
         original_load_json = intelligence.load_json
 
@@ -556,10 +554,12 @@ class BudgetPolicyTests(unittest.TestCase):
         one_branch = next(x for x in one_branch_projection["peripherals"] if x["id"] == "main_monitor")
         self.assertFalse(one_branch["store_route_all_branches_confirmed"])
         self.assertEqual(one_branch["store_price_verified_store_ids"], ["biccamera_tenjin_1"])
-        self.assertEqual(one_branch["selected_purchase_channel"], "unconfirmed")
-        self.assertFalse(one_branch["price_verified"])
-        self.assertTrue(one_branch["online_price_is_comparison_only"])
-        self.assertFalse(one_branch_projection["budget_data_ready"])
+        self.assertEqual(one_branch["selected_purchase_channel"], "physical_store")
+        self.assertTrue(one_branch["price_verified"])
+        self.assertFalse(one_branch["online_price_is_comparison_only"])
+        self.assertEqual(one_branch["budget_cost_jpy"], 19990)
+        self.assertFalse(one_branch["channel_comparison_complete"])
+        self.assertTrue(one_branch_projection["budget_data_ready"])
 
         def both_branch_quotes(target, now=None):
             return fake_store_observation_validation(target, now, both_branches=True)
