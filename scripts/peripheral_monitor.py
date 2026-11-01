@@ -633,7 +633,7 @@ def main():
         os.makedirs(os.path.dirname(EVENTS_PATH), exist_ok=True)
         with open(EVENTS_PATH, "a", encoding="utf-8") as f:
             for event in events:
-                f.write(json.dumps(event, ensure_ascii=False, separators=(",", ":")) + "\\n")
+                f.write(json.dumps(event, ensure_ascii=False, separators=(",", ":")) + "\n")
     print(json.dumps({
         "generated_at": observed_at, "tracked_count": out["tracked_count"],
         "verified_count": out["verified_count"], "price_changes": len(events),
