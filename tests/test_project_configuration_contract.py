@@ -260,6 +260,8 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertIn("店舗受け取り", legacy_policy)
         self.assertIn("オンライン", legacy_policy)
         self.assertIn("最も低い", legacy_policy)
+        self.assertIn("店頭税込現金価格", legacy_policy)
+        self.assertIn("支店在庫", legacy_policy)
         self.assertNotIn("明示承認なし", legacy_policy)
         self.assertNotIn("明示承認が必要", legacy_policy)
         for item in self.targets["peripherals"] + self.targets.get("peripheral_alternatives", []):
