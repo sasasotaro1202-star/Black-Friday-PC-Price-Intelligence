@@ -114,7 +114,7 @@ def peripheral_route_coverage_summary(projection):
     online_verified = sum(1 for row in tracked if row.get("online_reference_price_verified") is True)
     store_rows = [
         row for row in tracked
-        if str(row.get("purchase_channel") or "").strip().lower() == "physical_store"
+        if str(row.get("purchase_channel") or "").strip().lower() in ("physical_store", "compare_online_and_store")
     ]
 
     expected_branch_count = 0
