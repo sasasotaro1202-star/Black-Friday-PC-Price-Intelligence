@@ -2169,32 +2169,23 @@
     {
       "id": "budget_350k",
       "total_budget_jpy": 350000,
-      "description_ja": "35万円目標案。必要周辺機器・送料・5,000円予備費込み。37万円までの許容帯で超過額と性能差を比較。",
-      "soft_ceiling_total_jpy": 370000,
-      "soft_overrun_allowance_jpy": 20000,
-      "allowance": 0,
-      "ceiling": 350000,
-      "description": "35万円目標案。必要周辺機器・送料・5,000円予備費込み。総額35万円を評価上限とし、超過候補は比較用に残して超過額を明示する。"
+      "description_ja": "35万円目標案。必要周辺機器・送料・5,000円予備費込み。総額35万円を評価上限とし、超過候補は比較用に残して超過額を明示する。",
+      "soft_ceiling_total_jpy": 350000,
+      "soft_overrun_allowance_jpy": 0
     },
     {
       "id": "budget_400k",
       "total_budget_jpy": 400000,
-      "description_ja": "40万円目標案（本命）。必要周辺機器・送料・5,000円予備費込み。42万円までの許容帯で、数万円の超過だけでは候補を切り捨てない。",
+      "description_ja": "40万円目標案（本命）。必要周辺機器・送料・5,000円予備費込み。用途上の性能向上が明確な場合に限り、総額42万円までを許容帯として比較する。",
       "soft_ceiling_total_jpy": 420000,
-      "soft_overrun_allowance_jpy": 20000,
-      "allowance": 20000,
-      "ceiling": 420000,
-      "description": "40万円目標案（本命）。必要周辺機器・送料・5,000円予備費込み。用途上の性能向上が明確な場合に限り、総額42万円までを許容帯として比較する。"
+      "soft_overrun_allowance_jpy": 20000
     },
     {
       "id": "budget_450k",
       "total_budget_jpy": 450000,
-      "description_ja": "45万円目標案。必要周辺機器・送料・5,000円予備費込み。47万円までの許容帯で、64GB RAM・2TB SSD・高コアCPU・GPU性能を比較。",
-      "soft_ceiling_total_jpy": 470000,
-      "soft_overrun_allowance_jpy": 20000,
-      "allowance": 0,
-      "ceiling": 450000,
-      "description": "45万円目標案（独立シナリオ）。必要周辺機器・送料・5,000円予備費込み。総額45万円を評価上限とし、超過候補は比較用に残して超過額を明示する。"
+      "description_ja": "45万円目標案（独立シナリオ）。必要周辺機器・送料・5,000円予備費込み。総額45万円を評価上限とし、超過候補は比較用に残して超過額を明示する。",
+      "soft_ceiling_total_jpy": 450000,
+      "soft_overrun_allowance_jpy": 0
     }
   ],
   "budget_scenario_policy": {
