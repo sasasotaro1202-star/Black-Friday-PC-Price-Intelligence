@@ -36,6 +36,8 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertIn("G213r", target["identity_terms"])
         self.assertIn("www.biccamera.com", target["allowed_hosts"])
         self.assertIn("www.yodobashi.com", target["allowed_hosts"])
+        self.assertIn("https://www.dospara.co.jp/SBR295/IC473253.html", target["monitor_urls"])
+        self.assertIn("www.dospara.co.jp", target["allowed_hosts"])
 
 
     def test_main_monitor_tracks_joshin_exact_model_offer(self):
@@ -48,6 +50,8 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertIn("Q27G40E/11", target["identity_terms"])
         self.assertTrue(target["online_purchase_allowed_when_store_price_unconfirmed"])
         self.assertFalse(target["online_order_requires_explicit_user_approval"])
+        self.assertIn("https://www.sofmap.com/product_detail.aspx?gid=&sku=101684307", target["monitor_urls"])
+        self.assertIn("www.sofmap.com", target["allowed_hosts"])
 
 
     def test_mouse_tracks_joshin_exact_g304rwh_variant(self):
@@ -58,6 +62,8 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertIn(joshin_url, target["monitor_urls"])
         self.assertIn("joshinweb.jp", target["allowed_hosts"])
         self.assertIn("G304rWH", target["identity_terms"])
+        self.assertIn("https://www.ksdenki.com/item?sku=4943765047377", target["monitor_urls"])
+        self.assertIn("www.ksdenki.com", target["allowed_hosts"])
 
     def test_mouse_and_mousepad_do_not_use_foreign_retail_images(self):
         import json
