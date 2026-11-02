@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-02T18:23:36+09:00",
+  "generated_at": "2026-11-02T18:51:48+09:00",
   "budget_scope": "Primary peripheral targets affect the mandatory budget. Ranked alternatives are observed but do not affect budget projections unless selected.",
   "primary_target_count": 6,
   "alternative_target_count": 10,
@@ -32,11 +32,11 @@
       "model_code": null,
       "target_price_jpy": 22000,
       "monitor_url": "https://www.yodobashi.com/product/100000001009314680/",
-      "purchase_url": "https://www.sofmap.com/product_detail.aspx?gid=&sku=101684307",
-      "retrieval_time": "2026-11-02T18:20:46+09:00",
-      "available_at": "2026-11-02T18:20:46+09:00",
-      "current_price_jpy": 18900,
-      "online_comparison_price_jpy": 18900,
+      "purchase_url": "https://www.yodobashi.com/product/100000001009314680/",
+      "retrieval_time": "2026-11-02T18:48:11+09:00",
+      "available_at": "2026-11-02T18:48:11+09:00",
+      "current_price_jpy": 20790,
+      "online_comparison_price_jpy": 20790,
       "unverified_price_candidate_jpy": null,
       "online_reference_price_verified": true,
       "online_offers": [
@@ -50,29 +50,15 @@
           "page_title": "https://www.yodobashi.com/product/100000001009314680/",
           "identity_verified": true,
           "price_verified": true,
-          "retrieval_time": "2026-11-02T18:20:04+09:00",
-          "available_at": "2026-11-02T18:20:04+09:00",
-          "target_met": true
-        },
-        {
-          "url": "https://www.sofmap.com/product_detail.aspx?gid=&sku=101684307",
-          "final_url": "https://www.sofmap.com/product_detail.aspx?gid=&sku=101684307",
-          "price_jpy": 18900,
-          "stock_status": "out_of_stock",
-          "price_source_mode": "direct_structured",
-          "price_context": null,
-          "page_title": "Q27G40E/11 ゲーミングモニター  ブラック ［27型 /WQHD(2560&#215;1440） /ワイド /180Hz］ 【sof001】",
-          "identity_verified": true,
-          "price_verified": true,
-          "retrieval_time": "2026-11-02T18:20:46+09:00",
-          "available_at": "2026-11-02T18:20:46+09:00",
+          "retrieval_time": "2026-11-02T18:48:11+09:00",
+          "available_at": "2026-11-02T18:48:11+09:00",
           "target_met": true
         }
       ],
-      "online_offer_count": 2,
+      "online_offer_count": 1,
       "online_actionable_offer_count": 0,
-      "online_best_offer_url": "https://www.sofmap.com/product_detail.aspx?gid=&sku=101684307",
-      "online_best_offer_stock_status": "out_of_stock",
+      "online_best_offer_url": "https://www.yodobashi.com/product/100000001009314680/",
+      "online_best_offer_stock_status": "preorder_or_backorder",
       "store_price_jpy": null,
       "store_price_checked_at": null,
       "store_price_confirmed": false,
@@ -92,7 +78,7 @@
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-11-02T18:19:57+09:00",
+          "checked_at": "2026-11-02T18:48:08+09:00",
           "check_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14369301",
           "source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14369301",
           "source_type": "official_branch_stock_page",
@@ -106,7 +92,7 @@
         {
           "store_id": "yodobashi_hakata",
           "store_name": "ヨドバシカメラ マルチメディア博多",
-          "checked_at": "2026-11-02T18:20:01+09:00",
+          "checked_at": "2026-11-02T18:48:10+09:00",
           "check_url": "https://www.yodobashi.com/product/100000001009314680/",
           "source_url": "https://www.yodobashi.com/product/100000001009314680/",
           "source_type": "official_product_page_pickup_information",
@@ -120,16 +106,16 @@
       ],
       "store_inventory_status": "preorder_or_backorder",
       "store_inventory_verified": true,
-      "store_inventory_checked_at": "2026-11-02T18:19:57+09:00",
+      "store_inventory_checked_at": "2026-11-02T18:48:08+09:00",
       "store_inventory_source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=14369301",
       "store_inventory_store_id": "biccamera_tenjin_1",
       "store_inventory_store_name": "ビックカメラ天神1号館",
       "store_inventory_evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
       "store_inventory_store_ids_available": [],
-      "last_valid_price_jpy": 18900,
+      "last_valid_price_jpy": 20790,
       "price_verified": true,
-      "stock_status": "out_of_stock",
-      "price_source_mode": "direct_structured",
+      "stock_status": "preorder_or_backorder",
+      "price_source_mode": "direct_text",
       "price_validation_status": "validated_exact_model_page",
       "identity_verified": true,
       "status": "price_verified_stock_unknown",
@@ -146,7 +132,7 @@
         {
           "url": "https://www.biccamera.com/bc/item/14369301/",
           "status": "error",
-          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 18001 milliseconds with 0 bytes received"
+          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 18002 milliseconds with 0 bytes received"
         },
         {
           "url": "https://joshinweb.jp/kaden/73411/6973985233333.html",
@@ -157,20 +143,17 @@
         },
         {
           "url": "https://www.sofmap.com/product_detail.aspx?gid=&sku=101684307",
-          "final_url": "https://www.sofmap.com/product_detail.aspx?gid=&sku=101684307",
-          "status": "verified",
-          "price_jpy": 18900,
-          "stock_status": "out_of_stock",
-          "price_source_mode": "direct_structured"
+          "status": "error",
+          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Connection timed out after 10002 milliseconds"
         }
       ],
       "target_met": true,
-      "page_title": "Q27G40E/11 ゲーミングモニター  ブラック ［27型 /WQHD(2560&#215;1440） /ワイド /180Hz］ 【sof001】",
-      "price_context": null,
+      "page_title": "https://www.yodobashi.com/product/100000001009314680/",
+      "price_context": "】 ショッピングカートに入れる aoc エーオーシー ゲーミングモニター/27.0型/qhd（2560×1440）/fast ipsパネル/ノングレア/... ￥20,790 2,079 ゴールドポイント （10％還元） お取り寄せ 日本全国配達料金無料 会員ページ ご注文商品の確認・変更 お客様情報の確認・変更 ヨドバシ・ドット・",
       "coupon_note": null,
-      "monitor_url_used": "https://www.sofmap.com/product_detail.aspx?gid=&sku=101684307",
-      "source_url": "https://www.sofmap.com/product_detail.aspx?gid=&sku=101684307",
-      "fallback_url_used": true,
+      "monitor_url_used": "https://www.yodobashi.com/product/100000001009314680/",
+      "source_url": "https://www.yodobashi.com/product/100000001009314680/",
+      "fallback_url_used": false,
       "channel_comparison_status": "ONLINE_OPTIONS_COMPARED_STORE_PENDING"
     },
     {
@@ -200,8 +183,8 @@
       "target_price_jpy": 4500,
       "monitor_url": "https://www.yodobashi.com/product/100000001006099089/",
       "purchase_url": "https://www.dospara.co.jp/SBR295/IC473253.html",
-      "retrieval_time": "2026-11-02T18:20:43+09:00",
-      "available_at": "2026-11-02T18:20:43+09:00",
+      "retrieval_time": "2026-11-02T18:48:49+09:00",
+      "available_at": "2026-11-02T18:48:49+09:00",
       "current_price_jpy": 7128,
       "online_comparison_price_jpy": 7128,
       "unverified_price_candidate_jpy": null,
@@ -217,8 +200,8 @@
           "page_title": "https://www.yodobashi.com/product/100000001006099089/",
           "identity_verified": true,
           "price_verified": true,
-          "retrieval_time": "2026-11-02T18:20:04+09:00",
-          "available_at": "2026-11-02T18:20:04+09:00",
+          "retrieval_time": "2026-11-02T18:48:10+09:00",
+          "available_at": "2026-11-02T18:48:10+09:00",
           "target_met": false
         },
         {
@@ -231,8 +214,8 @@
           "page_title": "Logicool  G213 RGB Gaming Keyboard G213r ",
           "identity_verified": true,
           "price_verified": true,
-          "retrieval_time": "2026-11-02T18:20:43+09:00",
-          "available_at": "2026-11-02T18:20:43+09:00",
+          "retrieval_time": "2026-11-02T18:48:49+09:00",
+          "available_at": "2026-11-02T18:48:49+09:00",
           "target_met": false
         }
       ],
@@ -259,7 +242,7 @@
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-11-02T18:19:57+09:00",
+          "checked_at": "2026-11-02T18:48:08+09:00",
           "check_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=9242996",
           "source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=9242996",
           "source_type": "official_branch_stock_page",
@@ -273,7 +256,7 @@
         {
           "store_id": "yodobashi_hakata",
           "store_name": "ヨドバシカメラ マルチメディア博多",
-          "checked_at": "2026-11-02T18:20:01+09:00",
+          "checked_at": "2026-11-02T18:48:09+09:00",
           "check_url": "https://www.yodobashi.com/product/100000001006099089/",
           "source_url": "https://www.yodobashi.com/product/100000001006099089/",
           "source_type": "official_product_page_pickup_information",
@@ -287,7 +270,7 @@
       ],
       "store_inventory_status": "low_stock",
       "store_inventory_verified": true,
-      "store_inventory_checked_at": "2026-11-02T18:19:57+09:00",
+      "store_inventory_checked_at": "2026-11-02T18:48:08+09:00",
       "store_inventory_source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=9242996",
       "store_inventory_store_id": "biccamera_tenjin_1",
       "store_inventory_store_name": "ビックカメラ天神1号館",
@@ -315,7 +298,7 @@
         {
           "url": "https://www.biccamera.com/bc/item/9242996/",
           "status": "error",
-          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 18003 milliseconds with 0 bytes received"
+          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 18002 milliseconds with 0 bytes received"
         },
         {
           "url": "https://item.rakuten.co.jp/logicool/g213r/",
@@ -368,8 +351,8 @@
       "target_price_jpy": 5000,
       "monitor_url": "https://www.yodobashi.com/product/100000001004334450/",
       "purchase_url": "https://www.ksdenki.com/item?sku=4943765047377",
-      "retrieval_time": "2026-11-02T18:21:20+09:00",
-      "available_at": "2026-11-02T18:21:20+09:00",
+      "retrieval_time": "2026-11-02T18:49:27+09:00",
+      "available_at": "2026-11-02T18:49:27+09:00",
       "current_price_jpy": 4815,
       "online_comparison_price_jpy": 4815,
       "unverified_price_candidate_jpy": null,
@@ -385,8 +368,8 @@
           "page_title": "https://www.yodobashi.com/product/100000001004334450/",
           "identity_verified": true,
           "price_verified": true,
-          "retrieval_time": "2026-11-02T18:20:06+09:00",
-          "available_at": "2026-11-02T18:20:06+09:00",
+          "retrieval_time": "2026-11-02T18:48:11+09:00",
+          "available_at": "2026-11-02T18:48:11+09:00",
           "target_met": false
         },
         {
@@ -399,8 +382,8 @@
           "page_title": "LOGICOOL（ロジクール） ロジクール　ＬＩＧＨＴＳＰＥＥＤワイヤレスゲーミングマウス G304rWH",
           "identity_verified": true,
           "price_verified": true,
-          "retrieval_time": "2026-11-02T18:21:20+09:00",
-          "available_at": "2026-11-02T18:21:20+09:00",
+          "retrieval_time": "2026-11-02T18:49:27+09:00",
+          "available_at": "2026-11-02T18:49:27+09:00",
           "target_met": true
         }
       ],
@@ -427,7 +410,7 @@
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-11-02T18:19:58+09:00",
+          "checked_at": "2026-11-02T18:48:09+09:00",
           "check_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=6566291",
           "source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=6566291",
           "source_type": "official_branch_stock_page",
@@ -441,7 +424,7 @@
         {
           "store_id": "yodobashi_hakata",
           "store_name": "ヨドバシカメラ マルチメディア博多",
-          "checked_at": "2026-11-02T18:20:03+09:00",
+          "checked_at": "2026-11-02T18:48:11+09:00",
           "check_url": "https://www.yodobashi.com/product/100000001004334450/",
           "source_url": "https://www.yodobashi.com/product/100000001004334450/",
           "source_type": "official_product_page_pickup_information",
@@ -455,7 +438,7 @@
       ],
       "store_inventory_status": "low_stock",
       "store_inventory_verified": true,
-      "store_inventory_checked_at": "2026-11-02T18:19:58+09:00",
+      "store_inventory_checked_at": "2026-11-02T18:48:09+09:00",
       "store_inventory_source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=6566291",
       "store_inventory_store_id": "biccamera_tenjin_1",
       "store_inventory_store_name": "ビックカメラ天神1号館",
@@ -537,8 +520,8 @@
       "target_price_jpy": 1500,
       "monitor_url": "https://www.biccamera.com/bc/item/1570130/",
       "purchase_url": "https://www.yodobashi.com/product/100000001001488658/",
-      "retrieval_time": "2026-11-02T18:21:23+09:00",
-      "available_at": "2026-11-02T18:21:23+09:00",
+      "retrieval_time": "2026-11-02T18:49:30+09:00",
+      "available_at": "2026-11-02T18:49:30+09:00",
       "current_price_jpy": 2420,
       "online_comparison_price_jpy": 2420,
       "unverified_price_candidate_jpy": null,
@@ -554,8 +537,8 @@
           "page_title": "https://www.yodobashi.com/product/100000001001488658/",
           "identity_verified": true,
           "price_verified": true,
-          "retrieval_time": "2026-11-02T18:21:23+09:00",
-          "available_at": "2026-11-02T18:21:23+09:00",
+          "retrieval_time": "2026-11-02T18:49:30+09:00",
+          "available_at": "2026-11-02T18:49:30+09:00",
           "target_met": false
         }
       ],
@@ -582,7 +565,7 @@
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-11-02T18:20:43+09:00",
+          "checked_at": "2026-11-02T18:48:50+09:00",
           "check_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=1570130",
           "source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=1570130",
           "source_type": "official_branch_stock_page",
@@ -596,7 +579,7 @@
         {
           "store_id": "yodobashi_hakata",
           "store_name": "ヨドバシカメラ マルチメディア博多",
-          "checked_at": "2026-11-02T18:20:45+09:00",
+          "checked_at": "2026-11-02T18:48:51+09:00",
           "check_url": "https://www.yodobashi.com/product/100000001001488658/",
           "source_url": "https://www.yodobashi.com/product/100000001001488658/",
           "source_type": "official_product_page_pickup_information",
@@ -610,7 +593,7 @@
       ],
       "store_inventory_status": "low_stock",
       "store_inventory_verified": true,
-      "store_inventory_checked_at": "2026-11-02T18:20:43+09:00",
+      "store_inventory_checked_at": "2026-11-02T18:48:50+09:00",
       "store_inventory_source_url": "https://www.biccamera.com/bc/tenpo/SfrBcToriokiList.jsp?GOODS_NO=1570130",
       "store_inventory_store_id": "biccamera_tenjin_1",
       "store_inventory_store_name": "ビックカメラ天神1号館",
@@ -630,7 +613,7 @@
         {
           "url": "https://www.biccamera.com/bc/item/1570130/",
           "status": "error",
-          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 18003 milliseconds with 0 bytes received"
+          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 18002 milliseconds with 0 bytes received"
         },
         {
           "url": "https://www.yodobashi.com/product/100000001001488658/",
@@ -685,7 +668,7 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": "2026-11-02T18:19:56+09:00",
+      "retrieval_time": "2026-11-02T18:48:07+09:00",
       "available_at": null,
       "price_source_mode": "none"
     },
@@ -721,7 +704,7 @@
       "status": "target_only",
       "monitor_url": null,
       "purchase_url": null,
-      "retrieval_time": "2026-11-02T18:19:56+09:00",
+      "retrieval_time": "2026-11-02T18:48:07+09:00",
       "available_at": null,
       "price_source_mode": "none"
     },
@@ -750,7 +733,7 @@
       "target_price_jpy": 2200,
       "monitor_url": "https://www.elecom.co.jp/products/ECCAC-DP1420BK.html",
       "purchase_url": "https://www.elecom.co.jp/products/ECCAC-DP1420BK.html",
-      "retrieval_time": "2026-11-02T18:20:46+09:00",
+      "retrieval_time": "2026-11-02T18:49:27+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "online_comparison_price_jpy": null,
@@ -832,7 +815,7 @@
       "target_price_jpy": 3000,
       "monitor_url": "https://www.sanwa.co.jp/product/syohin?code=KC-DP1420",
       "purchase_url": "https://www.sanwa.co.jp/product/syohin?code=KC-DP1420",
-      "retrieval_time": "2026-11-02T18:19:56+09:00",
+      "retrieval_time": "2026-11-02T18:48:07+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "online_comparison_price_jpy": null,
@@ -910,8 +893,8 @@
       "target_price_jpy": 8000,
       "monitor_url": "https://www.yodobashi.com/product/100000001007258185/",
       "purchase_url": "https://www.yodobashi.com/product/100000001007258185/",
-      "retrieval_time": "2026-11-02T18:21:40+09:00",
-      "available_at": "2026-11-02T18:21:40+09:00",
+      "retrieval_time": "2026-11-02T18:49:53+09:00",
+      "available_at": "2026-11-02T18:49:53+09:00",
       "current_price_jpy": 10640,
       "online_comparison_price_jpy": 10640,
       "unverified_price_candidate_jpy": null,
@@ -927,8 +910,8 @@
           "page_title": "https://www.yodobashi.com/product/100000001007258185/",
           "identity_verified": true,
           "price_verified": true,
-          "retrieval_time": "2026-11-02T18:21:40+09:00",
-          "available_at": "2026-11-02T18:21:40+09:00",
+          "retrieval_time": "2026-11-02T18:49:53+09:00",
+          "available_at": "2026-11-02T18:49:53+09:00",
           "target_met": false
         }
       ],
@@ -955,7 +938,7 @@
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-11-02T18:21:39+09:00",
+          "checked_at": "2026-11-02T18:49:51+09:00",
           "check_url": "https://www.biccamera.com/bc/item/10326363/",
           "source_url": null,
           "source_type": "official_branch_stock_page",
@@ -964,7 +947,7 @@
           "branch_match": false,
           "model_match": false,
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 10001 milliseconds with 0 bytes received"
+          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 10002 milliseconds with 0 bytes received"
         }
       ],
       "store_inventory_status": "unknown",
@@ -1033,7 +1016,7 @@
       "target_price_jpy": 9500,
       "monitor_url": "https://www.yodobashi.com/product/100000001007258184/",
       "purchase_url": "https://www.biccamera.com/bc/item/10326362/",
-      "retrieval_time": "2026-11-02T18:21:45+09:00",
+      "retrieval_time": "2026-11-02T18:49:52+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "online_comparison_price_jpy": null,
@@ -1063,7 +1046,7 @@
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-11-02T18:21:43+09:00",
+          "checked_at": "2026-11-02T18:49:51+09:00",
           "check_url": "https://www.biccamera.com/bc/item/10326362/",
           "source_url": null,
           "source_type": "official_branch_stock_page",
@@ -1072,7 +1055,7 @@
           "branch_match": false,
           "model_match": false,
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 10001 milliseconds with 0 bytes received"
+          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 10002 milliseconds with 0 bytes received"
         }
       ],
       "store_inventory_status": "unknown",
@@ -1135,7 +1118,7 @@
       "target_price_jpy": 20000,
       "monitor_url": "https://kakaku.com/item/K0001690691/",
       "purchase_url": "https://kakaku.com/item/K0001690691/",
-      "retrieval_time": "2026-11-02T18:21:24+09:00",
+      "retrieval_time": "2026-11-02T18:49:37+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "online_comparison_price_jpy": null,
@@ -1216,7 +1199,7 @@
       "target_price_jpy": 22000,
       "monitor_url": "https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/",
       "purchase_url": "https://www.lg.com/jp/monitors/gaming-monitors/27gs75q-b/",
-      "retrieval_time": "2026-11-02T18:21:24+09:00",
+      "retrieval_time": "2026-11-02T18:49:40+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "online_comparison_price_jpy": null,
@@ -1299,8 +1282,8 @@
       "target_price_jpy": 3500,
       "monitor_url": "https://www.yodobashi.com/product/100000001005593918/",
       "purchase_url": "https://www.yodobashi.com/product/100000001005593918/",
-      "retrieval_time": "2026-11-02T18:22:02+09:00",
-      "available_at": "2026-11-02T18:22:02+09:00",
+      "retrieval_time": "2026-11-02T18:50:14+09:00",
+      "available_at": "2026-11-02T18:50:14+09:00",
       "current_price_jpy": 3720,
       "online_comparison_price_jpy": 3720,
       "unverified_price_candidate_jpy": null,
@@ -1316,8 +1299,8 @@
           "page_title": "https://www.yodobashi.com/product/100000001005593918/",
           "identity_verified": true,
           "price_verified": true,
-          "retrieval_time": "2026-11-02T18:22:02+09:00",
-          "available_at": "2026-11-02T18:22:02+09:00",
+          "retrieval_time": "2026-11-02T18:50:14+09:00",
+          "available_at": "2026-11-02T18:50:14+09:00",
           "target_met": false
         }
       ],
@@ -1344,7 +1327,7 @@
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-11-02T18:22:00+09:00",
+          "checked_at": "2026-11-02T18:50:12+09:00",
           "check_url": "https://www.biccamera.com/bc/item/8019882/",
           "source_url": null,
           "source_type": "official_branch_stock_page",
@@ -1353,7 +1336,7 @@
           "branch_match": false,
           "model_match": false,
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 10001 milliseconds with 0 bytes received"
+          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 10002 milliseconds with 0 bytes received"
         }
       ],
       "store_inventory_status": "unknown",
@@ -1384,7 +1367,7 @@
         {
           "url": "https://www.biccamera.com/bc/item/8019882/",
           "status": "error",
-          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 18003 milliseconds with 0 bytes received"
+          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 18002 milliseconds with 0 bytes received"
         }
       ],
       "target_met": false,
@@ -1422,7 +1405,7 @@
       "target_price_jpy": 10000,
       "monitor_url": "https://www.biccamera.com/bc/item/15216264/",
       "purchase_url": "https://www.biccamera.com/bc/item/15216264/",
-      "retrieval_time": "2026-11-02T18:19:56+09:00",
+      "retrieval_time": "2026-11-02T18:48:07+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "online_comparison_price_jpy": null,
@@ -1452,7 +1435,7 @@
         {
           "store_id": "biccamera_tenjin_1",
           "store_name": "ビックカメラ天神1号館",
-          "checked_at": "2026-11-02T18:22:59+09:00",
+          "checked_at": "2026-11-02T18:51:10+09:00",
           "check_url": "https://www.biccamera.com/bc/item/15216264/",
           "source_url": null,
           "source_type": "official_branch_stock_page",
@@ -1461,7 +1444,7 @@
           "branch_match": false,
           "model_match": false,
           "evidence_notes": "オンライン取り置き/店舗在庫ページの観測。店頭現金価格・棚在庫の保証ではない。",
-          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 10002 milliseconds with 0 bytes received"
+          "error": "RuntimeError:curl_exit_28:curl_http_000:curl: (28) Operation timed out after 10001 milliseconds with 0 bytes received"
         }
       ],
       "store_inventory_status": "unknown",
@@ -1515,7 +1498,7 @@
       "target_price_jpy": 2200,
       "monitor_url": "https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1",
       "purchase_url": "https://www.razer.com/jp-jp/gaming-mouse-mats/Razer-Gigantus-V2/RZ02-03330300-R3M1",
-      "retrieval_time": "2026-11-02T18:22:40+09:00",
+      "retrieval_time": "2026-11-02T18:50:52+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "online_comparison_price_jpy": null,
@@ -1597,7 +1580,7 @@
       "target_price_jpy": 3000,
       "monitor_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g640-cloth-gaming-mouse-pad",
       "purchase_url": "https://gaming.logicool.co.jp/ja-jp/shop/p/g640-cloth-gaming-mouse-pad",
-      "retrieval_time": "2026-11-02T18:22:41+09:00",
+      "retrieval_time": "2026-11-02T18:50:52+09:00",
       "available_at": null,
       "current_price_jpy": null,
       "online_comparison_price_jpy": null,
