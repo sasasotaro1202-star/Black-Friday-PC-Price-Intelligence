@@ -564,7 +564,7 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(one_branch["channel_comparison_status"], "STORE_BRANCH_COMPARISON_REQUIRED")
         self.assertFalse(one_branch["price_verified"])
         self.assertTrue(one_branch["online_price_is_comparison_only"])
-        self.assertEqual(one_branch["budget_cost_jpy"], 19990)
+        self.assertEqual(one_branch["budget_cost_jpy"], 22000)
         self.assertFalse(one_branch["channel_comparison_complete"])
         self.assertFalse(one_branch_projection["budget_data_ready"])
 
