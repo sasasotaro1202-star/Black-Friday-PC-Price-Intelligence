@@ -48,7 +48,9 @@ class PeripheralMonitorTests(unittest.TestCase):
         self.assertIn(joshin_url, target["monitor_urls"])
         self.assertIn("joshinweb.jp", target["allowed_hosts"])
         self.assertIn("Q27G40E/11", target["identity_terms"])
-        self.assertTrue(target["online_purchase_allowed_when_store_price_unconfirmed"])
+        self.assertFalse(target["online_purchase_allowed_when_store_price_unconfirmed"])
+        self.assertTrue(target["require_all_store_branches_before_purchase"])
+        self.assertTrue(target["online_price_is_comparison_only"])
         self.assertFalse(target["online_order_requires_explicit_user_approval"])
         self.assertIn("https://www.sofmap.com/product_detail.aspx?gid=&sku=101684307", target["monitor_urls"])
         self.assertIn("www.sofmap.com", target["allowed_hosts"])
@@ -464,9 +466,13 @@ class PeripheralMonitorTests(unittest.TestCase):
                 self.assertEqual(check["source_type"], "official_product_page_pickup_information")
                 self.assertIn("unknown", check.get("notes", ""))
                 self.assertTrue(target["store_price_is_separate_evidence"])
-                self.assertTrue(target["online_purchase_allowed_when_store_price_unconfirmed"])
-                self.assertFalse(target["online_price_is_comparison_only"])
-                self.assertEqual(target["purchase_channel_preference"], "best_verified_total")
+                self.assertFalse(target["online_purchase_allowed_when_store_price_unconfirmed"])
+                self.assertTrue(target["require_all_store_branches_before_purchase"])
+                self.assertTrue(target["online_price_is_comparison_only"])
+                self.assertEqual(
+                    target["purchase_channel_preference"],
+                    "best_verified_total_after_all_store_branches_confirmed",
+                )
 
     def test_official_tenjin_inventory_page_separates_branch_stock_from_cash_price(self):
         import json

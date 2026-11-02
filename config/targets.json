@@ -306,7 +306,7 @@
       "image_checked_at": "2026-10-15",
       "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": false,
+      "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -356,7 +356,7 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": false,
       "online_shipping_reserve_jpy": 1000,
       "online_shipping_cost_verified": false,
       "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。",
@@ -381,11 +381,12 @@
       },
       "store_price_observations": [],
       "store_price_basis": null,
-      "purchase_channel_preference": "best_verified_total",
+      "purchase_channel_preference": "best_verified_total_after_all_store_branches_confirmed",
       "purchase_channel_selection_mode": "BEST_VERIFIED_TOTAL",
       "online_order_requires_explicit_user_approval": false,
       "store_inventory_required_before_store_route_selection": true,
-      "price_target_note": "22,000円は2026年BFの周辺機器計画目標であり、確認済みの実売価格ではない。ネット配送・実店舗現金購入・ネット注文の店舗受け取りを同一型番で比較する。ビックカメラ天神1号館・ヨドバシ博多の店頭現金価格と同一支店の在庫は独立して確認し、オンライン価格を店頭価格に流用しない。"
+      "price_target_note": "22,000円は2026年BFの周辺機器計画目標であり、確認済みの実売価格ではない。ネット配送・実店舗現金購入・ネット注文の店舗受け取りを同一型番で比較する。ビックカメラ天神1号館・ヨドバシ博多の店頭現金価格と同一支店の在庫は独立して確認し、オンライン価格を店頭価格に流用しない。",
+      "require_all_store_branches_before_purchase": true
     },
     {
       "id": "keyboard",
@@ -426,7 +427,7 @@
       "image_checked_at": "2026-10-15",
       "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": false,
+      "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -476,7 +477,7 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": false,
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
       "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。",
@@ -501,10 +502,11 @@
       },
       "store_price_observations": [],
       "store_price_basis": null,
-      "purchase_channel_preference": "best_verified_total",
+      "purchase_channel_preference": "best_verified_total_after_all_store_branches_confirmed",
       "purchase_channel_selection_mode": "BEST_VERIFIED_TOTAL",
       "online_order_requires_explicit_user_approval": false,
-      "store_inventory_required_before_store_route_selection": true
+      "store_inventory_required_before_store_route_selection": true,
+      "require_all_store_branches_before_purchase": true
     },
     {
       "id": "mouse",
@@ -538,7 +540,7 @@
       "image_checked_at": "2026-10-15",
       "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": false,
+      "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -594,7 +596,7 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": false,
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
       "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。",
@@ -619,10 +621,11 @@
       },
       "store_price_observations": [],
       "store_price_basis": null,
-      "purchase_channel_preference": "best_verified_total",
+      "purchase_channel_preference": "best_verified_total_after_all_store_branches_confirmed",
       "purchase_channel_selection_mode": "BEST_VERIFIED_TOTAL",
       "online_order_requires_explicit_user_approval": false,
-      "store_inventory_required_before_store_route_selection": true
+      "store_inventory_required_before_store_route_selection": true,
+      "require_all_store_branches_before_purchase": true
     },
     {
       "id": "mousepad",
@@ -655,7 +658,7 @@
       "image_checked_at": "2026-10-17",
       "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": false,
+      "online_price_is_comparison_only": true,
       "model_code": "63003",
       "monitor_urls": [
         "https://www.biccamera.com/bc/item/1570130/",
@@ -710,7 +713,7 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": false,
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
       "online_shipping_note": "オンライン配送時の暫定的な送料予備枠。実際の送料ではない。決済画面の送料を検証したら置き換える。",
@@ -735,10 +738,11 @@
       },
       "store_price_observations": [],
       "store_price_basis": null,
-      "purchase_channel_preference": "best_verified_total",
+      "purchase_channel_preference": "best_verified_total_after_all_store_branches_confirmed",
       "purchase_channel_selection_mode": "BEST_VERIFIED_TOTAL",
       "online_order_requires_explicit_user_approval": false,
-      "store_inventory_required_before_store_route_selection": true
+      "store_inventory_required_before_store_route_selection": true,
+      "require_all_store_branches_before_purchase": true
     },
     {
       "id": "cables",
@@ -786,8 +790,8 @@
     }
   ],
   "purchase_strategy": {
-    "updated_at": "2026-10-20",
-    "purpose": "総額40万円を基準目標、約42万円を初期許容帯として自作PC本体と必要な周辺機器を最適化する。40万円は絶対失格線ではなく、用途上の性能改善と完成総額を比較する。35万円目標/37万円許容帯、40万円目標/42万円許容帯、45万円目標/47万円許容帯を別々に表示する。PC本体はネットでパーツごとに購入し、周辺機器はネット配送・実店舗現金・店舗受け取りのうち確認済み購入ルートを税込総額・在庫・保証・返品条件で比較して選ぶ。オンライン候補は店頭価格・在庫が未確認でも、オンライン側の正確な型番・販売元・価格・在庫・送料/必須費用・最終決済額・保証/返品条件が確認できれば選択可能とする。未確認ルートは比較未完了と明示し、確認済み候補内の暫定最安と全ルート最安を区別する。購入時にRAM32GB以上、SSD1TB以上を確保し、スピーカー・ヘッドセット・電源タップは今回の対象外。サブモニターは今回の購入対象外だが、PC購入後に必要なら別予算で追加できる。",
+    "updated_at": "2026-11-03",
+    "purpose": "総額40万円を基準目標、約42万円を初期許容帯として自作PC本体と必要な周辺機器を最適化する。40万円は絶対失格線ではなく、用途上の性能改善と完成総額を比較する。35万円目標/37万円許容帯、40万円目標/42万円許容帯、45万円目標/47万円許容帯を別々に表示する。PC本体はネットでパーツごとに購入する。周辺機器はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の両支店について、同一型番の税込現金価格と同じ支店の在庫を確認する。どちらか未確認ならネット配送・店舗受け取りに自動切替しない。両支店比較の完了後に、オンラインの型番・販売元・在庫・実送料・最終決済額・保証/返品条件も確認して比較する。購入時にRAM32GB以上、SSD1TB以上を確保し、スピーカー・ヘッドセット・電源タップは今回の対象外。サブモニターは今回の購入対象外だが、PC購入後に必要なら別予算で追加できる。",
     "priority_plans": [
       {
         "candidate_id": "desktop-gtune-dg-i5g70-5070",
@@ -916,14 +920,15 @@
       "store_inventory_must_be_verified": true,
       "online_price_is_store_price": false,
       "channel_selection_mode": "BEST_VERIFIED_TOTAL",
-      "store_inventory_must_be_verified_only_when_selected_channel_is_physical_store": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "store_inventory_must_be_verified_only_when_selected_channel_is_physical_store": false,
+      "online_purchase_allowed_when_store_price_unconfirmed": false,
       "store_pickup_counts_as_online_order_but_requires_separate_stock_confirmation": true,
-      "selection_policy": "周辺機器はネット配送・実店舗の現金購入・ネット注文の店舗受け取りを商品別に比較し、確認できた購入可能ルートの税込現金総額が最も低い候補を選ぶ。オンラインの正確な型番・販売元・価格・在庫・送料/必須費用・最終決済額・保証/返品条件が確認できれば、店頭価格や店頭在庫が未確認でもオンライン候補として採用できる。ただし店頭価格をネット価格から推定せず、店頭価格と在庫は同じ支店の証拠だけで判定する。未確認ルートは比較未完了として明示し、確認済みルートの中での暫定最安と全ルート最安を区別する。ポイントは現金値引きに算入しない。",
+      "selection_policy": "周辺機器はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の両支店について、同一型番の店頭税込現金価格と同じ支店の在庫を確認してから購入ルートを選ぶ。いずれか未確認ならネット配送・店舗受け取りへ自動切替せず、選択ルートをunconfirmedとして購入判断を保留する。両支店の比較完了後に限り、オンラインの型番・販売元・在庫・実送料・最終決済額・保証/返品条件も確認し、購入可能ルートの税込現金総額が最も低い候補を選ぶ。ポイントは現金値引きに含めない。",
       "online_orders_require_explicit_user_approval": false,
       "default_peripheral_channel": "compare_online_and_store",
-      "physical_store_price_and_stock_required_before_recommendation": false,
-      "physical_store_price_and_stock_required_before_store_route_selection": true
+      "physical_store_price_and_stock_required_before_recommendation": true,
+      "physical_store_price_and_stock_required_before_store_route_selection": true,
+      "require_all_store_branches_before_purchase": true
     },
     "peripheral_allocation_scenario_jpy": 35000,
     "peripheral_allocation_scenario_note": "周辺機器の計画配分は約35,000円（メインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差用の柔軟な予備枠）。電源タップは所有済みで購入・価格監視・予算対象外。スピーカー・ヘッドセットは今回の購入・監視対象外。サブモニターは今回の購入・監視・予算対象外だが、必要になれば購入後に別予算で追加できる。参考配分を使い切ることは目的ではない。ネット配送・店頭購入・ネット注文の店舗受け取りを同一型番・最終支払額・在庫・保証条件で比較する。総額40万円目標を基本とし、性能上の利点が明確なら約42万円までの許容帯で比較し、別枠予備費5,000円を維持し、PCの許容額は確認できた実支出から動的に計算する。",
@@ -956,7 +961,7 @@
       "best_for": "付属ケーブルが不足した場合",
       "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": false,
+      "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -968,7 +973,7 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": false,
       "store_price_jpy": null,
       "store_price_checked_at": null,
       "store_stock_status": "unknown",
@@ -1002,10 +1007,11 @@
       },
       "store_price_observations": [],
       "store_price_basis": null,
-      "purchase_channel_preference": "best_verified_total",
+      "purchase_channel_preference": "best_verified_total_after_all_store_branches_confirmed",
       "purchase_channel_selection_mode": "BEST_VERIFIED_TOTAL",
       "online_order_requires_explicit_user_approval": false,
-      "store_inventory_required_before_store_route_selection": true
+      "store_inventory_required_before_store_route_selection": true,
+      "require_all_store_branches_before_purchase": true
     },
     {
       "id": "cables_alt_sanwa_kc_dp1420",
@@ -1034,7 +1040,7 @@
       "category": "cables",
       "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": false,
+      "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -1046,7 +1052,7 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": false,
       "store_price_jpy": null,
       "store_price_checked_at": null,
       "store_stock_status": "unknown",
@@ -1080,10 +1086,11 @@
       },
       "store_price_observations": [],
       "store_price_basis": null,
-      "purchase_channel_preference": "best_verified_total",
+      "purchase_channel_preference": "best_verified_total_after_all_store_branches_confirmed",
       "purchase_channel_selection_mode": "BEST_VERIFIED_TOTAL",
       "online_order_requires_explicit_user_approval": false,
-      "store_inventory_required_before_store_route_selection": true
+      "store_inventory_required_before_store_route_selection": true,
+      "require_all_store_branches_before_purchase": true
     },
     {
       "id": "keyboard_alt_logicool_g413_tkl_se",
@@ -1113,7 +1120,7 @@
       "best_for": "FPSの操作スペース",
       "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": false,
+      "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -1153,7 +1160,7 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": false,
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
       "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
@@ -1178,10 +1185,11 @@
       },
       "store_price_observations": [],
       "store_price_basis": null,
-      "purchase_channel_preference": "best_verified_total",
+      "purchase_channel_preference": "best_verified_total_after_all_store_branches_confirmed",
       "purchase_channel_selection_mode": "BEST_VERIFIED_TOTAL",
       "online_order_requires_explicit_user_approval": false,
-      "store_inventory_required_before_store_route_selection": true
+      "store_inventory_required_before_store_route_selection": true,
+      "require_all_store_branches_before_purchase": true
     },
     {
       "id": "keyboard_alt_logicool_g413se",
@@ -1211,7 +1219,7 @@
       "best_for": "テンキーとメカニカル打鍵感",
       "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": false,
+      "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -1251,7 +1259,7 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": false,
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
       "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
@@ -1276,10 +1284,11 @@
       },
       "store_price_observations": [],
       "store_price_basis": null,
-      "purchase_channel_preference": "best_verified_total",
+      "purchase_channel_preference": "best_verified_total_after_all_store_branches_confirmed",
       "purchase_channel_selection_mode": "BEST_VERIFIED_TOTAL",
       "online_order_requires_explicit_user_approval": false,
-      "store_inventory_required_before_store_route_selection": true
+      "store_inventory_required_before_store_route_selection": true,
+      "require_all_store_branches_before_purchase": true
     },
     {
       "id": "main_monitor_alt_msi_mag_275qf",
@@ -1307,7 +1316,7 @@
       "best_for": "AOCが高い・在庫切れの場合",
       "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": false,
+      "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -1328,7 +1337,7 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": false,
       "online_shipping_reserve_jpy": 1000,
       "online_shipping_cost_verified": false,
       "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
@@ -1353,10 +1362,11 @@
       },
       "store_price_observations": [],
       "store_price_basis": null,
-      "purchase_channel_preference": "best_verified_total",
+      "purchase_channel_preference": "best_verified_total_after_all_store_branches_confirmed",
       "purchase_channel_selection_mode": "BEST_VERIFIED_TOTAL",
       "online_order_requires_explicit_user_approval": false,
-      "store_inventory_required_before_store_route_selection": true
+      "store_inventory_required_before_store_route_selection": true,
+      "require_all_store_branches_before_purchase": true
     },
     {
       "id": "main_monitor_alt_lg_27gs75qb",
@@ -1383,7 +1393,7 @@
       "best_for": "高さ調整・ピボットの必要性が高い場合",
       "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": false,
+      "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -1404,7 +1414,7 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": false,
       "online_shipping_reserve_jpy": 1000,
       "online_shipping_cost_verified": false,
       "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
@@ -1429,10 +1439,11 @@
       },
       "store_price_observations": [],
       "store_price_basis": null,
-      "purchase_channel_preference": "best_verified_total",
+      "purchase_channel_preference": "best_verified_total_after_all_store_branches_confirmed",
       "purchase_channel_selection_mode": "BEST_VERIFIED_TOTAL",
       "online_order_requires_explicit_user_approval": false,
-      "store_inventory_required_before_store_route_selection": true
+      "store_inventory_required_before_store_route_selection": true,
+      "require_all_store_branches_before_purchase": true
     },
     {
       "id": "mouse_alt_logicool_g203",
@@ -1463,7 +1474,7 @@
       "best_for": "価格優先・有線で問題ない場合",
       "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": false,
+      "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -1503,7 +1514,7 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": false,
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
       "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
@@ -1528,10 +1539,11 @@
       },
       "store_price_observations": [],
       "store_price_basis": null,
-      "purchase_channel_preference": "best_verified_total",
+      "purchase_channel_preference": "best_verified_total_after_all_store_branches_confirmed",
       "purchase_channel_selection_mode": "BEST_VERIFIED_TOTAL",
       "online_order_requires_explicit_user_approval": false,
-      "store_inventory_required_before_store_route_selection": true
+      "store_inventory_required_before_store_route_selection": true,
+      "require_all_store_branches_before_purchase": true
     },
     {
       "id": "mouse_alt_logicool_g304_x_superlight",
@@ -1560,7 +1572,7 @@
       "best_for": "軽さを優先",
       "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": false,
+      "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -1599,7 +1611,7 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": false,
       "online_shipping_reserve_jpy": 500,
       "online_shipping_cost_verified": false,
       "online_shipping_note": "暫定の送料予備枠。実際の配送費はカート画面で同一型番・販売元とともに確認し、オンライン価格に二重加算しない。",
@@ -1624,10 +1636,11 @@
       },
       "store_price_observations": [],
       "store_price_basis": null,
-      "purchase_channel_preference": "best_verified_total",
+      "purchase_channel_preference": "best_verified_total_after_all_store_branches_confirmed",
       "purchase_channel_selection_mode": "BEST_VERIFIED_TOTAL",
       "online_order_requires_explicit_user_approval": false,
-      "store_inventory_required_before_store_route_selection": true
+      "store_inventory_required_before_store_route_selection": true,
+      "require_all_store_branches_before_purchase": true
     },
     {
       "id": "mousepad_alt_razer_gigantus_v2_l",
@@ -1655,7 +1668,7 @@
       "best_for": "大型布製パッドを安く確保したい場合",
       "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": false,
+      "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -1667,7 +1680,7 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": false,
       "store_price_jpy": null,
       "store_price_checked_at": null,
       "store_stock_status": "unknown",
@@ -1701,10 +1714,11 @@
       },
       "store_price_observations": [],
       "store_price_basis": null,
-      "purchase_channel_preference": "best_verified_total",
+      "purchase_channel_preference": "best_verified_total_after_all_store_branches_confirmed",
       "purchase_channel_selection_mode": "BEST_VERIFIED_TOTAL",
       "online_order_requires_explicit_user_approval": false,
-      "store_inventory_required_before_store_route_selection": true
+      "store_inventory_required_before_store_route_selection": true,
+      "require_all_store_branches_before_purchase": true
     },
     {
       "id": "mousepad_alt_logicool_g640s",
@@ -1732,7 +1746,7 @@
       "best_for": "表面の好みで選ぶ",
       "purchase_channel": "compare_online_and_store",
       "store_inventory_required_before_purchase": true,
-      "online_price_is_comparison_only": false,
+      "online_price_is_comparison_only": true,
       "physical_store_candidate_ids": [
         "biccamera_tenjin_1",
         "yodobashi_hakata"
@@ -1744,7 +1758,7 @@
       ],
       "online_offer_actionable_if_exact_price_stock_verified": true,
       "store_price_is_separate_evidence": true,
-      "online_purchase_allowed_when_store_price_unconfirmed": true,
+      "online_purchase_allowed_when_store_price_unconfirmed": false,
       "store_price_jpy": null,
       "store_price_checked_at": null,
       "store_stock_status": "unknown",
@@ -1778,10 +1792,11 @@
       },
       "store_price_observations": [],
       "store_price_basis": null,
-      "purchase_channel_preference": "best_verified_total",
+      "purchase_channel_preference": "best_verified_total_after_all_store_branches_confirmed",
       "purchase_channel_selection_mode": "BEST_VERIFIED_TOTAL",
       "online_order_requires_explicit_user_approval": false,
-      "store_inventory_required_before_store_route_selection": true
+      "store_inventory_required_before_store_route_selection": true,
+      "require_all_store_branches_before_purchase": true
     }
   ],
   "peripheral_price_max_age_minutes": 360,
@@ -1895,10 +1910,10 @@
         ]
       }
     ],
-    "store_stock_rule": "周辺機器はネット配送・実店舗の現金購入・ネット注文の店舗受け取りを商品別に比較し、確認できた購入可能ルートの税込現金総額が最も低い候補を選ぶ。オンラインの正確な型番・販売元・価格・在庫・送料/必須費用・最終決済額・保証/返品条件が確認できれば、店頭価格や店頭在庫が未確認でもオンライン候補として採用できる。ただし店頭価格をネット価格から推定せず、店頭価格と在庫は同じ支店の証拠だけで判定する。未確認ルートは比較未完了として明示し、確認済みルートの中での暫定最安と全ルート最安を区別する。ポイントは現金値引きに算入しない。",
-    "online_price_handling": "オンライン価格は、正確な型番・販売元・税込価格・在庫・送料/必須費用・最終決済額・取得時刻・保証/返品条件を確認できた場合に購入候補として選択可能。店頭価格・支店在庫とは別の証拠として保持する。店頭情報が未確認でも、それだけを理由にオンライン候補を除外しない。未確認ルートが残る場合は比較範囲を明示し、全ルート最安と誤認させない。",
+    "store_stock_rule": "周辺機器は購入ルートを選択する前に、ビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の両支店について、正確な型番の税込現金価格と同じ支店の在庫状態を新しい証拠で確認する。どちらか一方でも未確認ならselected_purchase_channelはunconfirmedのままとし、ネット配送・ネット注文の店舗受け取りへ自動切替しない。ネット価格は比較参考として表示するだけで、店頭価格・支店在庫の代用にしない。両支店の比較完了後に限り、正確な型番・販売元・販売可能在庫・実送料・最終決済額・保証/返品条件が確認できたオンライン候補を比較対象に加える。ポイントは現金値引きに算入しない。",
+    "online_price_handling": "ネット掲載価格は、両指定支店の現金税込価格と同一支店在庫の比較が完了するまで比較参考のみとし、ネット配送・店舗受け取りを自動選択しない。両支店の比較完了後も、正確な型番・販売元・販売可能在庫・実送料/必須費用・最終決済額・取得時刻・保証/返品条件が確認できた場合だけオンライン購入候補にできる。店頭価格・支店在庫とは別の証拠として保持し、ポイントを現金値引きに算入しない。",
     "channel_selection_mode": "BEST_VERIFIED_TOTAL",
-    "channel_selection_policy": "周辺機器はネット配送・実店舗の現金購入・ネット注文の店舗受け取りを商品別に比較し、確認できた購入可能ルートの税込現金総額が最も低い候補を選ぶ。オンラインの正確な型番・販売元・価格・在庫・送料/必須費用・最終決済額・保証/返品条件が確認できれば、店頭価格や店頭在庫が未確認でもオンライン候補として採用できる。ただし店頭価格をネット価格から推定せず、店頭価格と在庫は同じ支店の証拠だけで判定する。未確認ルートは比較未完了として明示し、確認済みルートの中での暫定最安と全ルート最安を区別する。ポイントは現金値引きに算入しない。",
+    "channel_selection_policy": "周辺機器はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の両支店について、同一型番の店頭税込現金価格と同じ支店の在庫を確認してから購入ルートを選ぶ。いずれか未確認ならネット配送・店舗受け取りへ自動切替せず、選択ルートをunconfirmedとして購入判断を保留する。両支店の比較完了後に限り、オンラインの型番・販売元・在庫・実送料・最終決済額・保証/返品条件も確認し、購入可能ルートの税込現金総額が最も低い候補を選ぶ。ポイントは現金値引きに含めない。",
     "online_store_comparison_requirements": [
       "exact_model_and_variant_match",
       "direct_retailer_checkout_or_product_listing",
@@ -1938,8 +1953,11 @@
     },
     "default_peripheral_channel": "compare_online_and_store",
     "online_orders_require_explicit_user_approval": false,
-    "physical_store_price_and_stock_required_before_recommendation": false,
-    "physical_store_price_and_stock_required_before_store_route_selection": true
+    "physical_store_price_and_stock_required_before_recommendation": true,
+    "physical_store_price_and_stock_required_before_store_route_selection": true,
+    "online_purchase_allowed_when_store_price_unconfirmed": false,
+    "require_all_store_branches_before_purchase": true,
+    "store_inventory_must_be_verified_only_when_selected_channel_is_physical_store": false
   },
   "target_budget_notes": "35万円・40万円・45万円の別シナリオ。35万円案は350,000円、40万円案は用途上の明確な性能向上がある場合のみ420,000円、45万円案は450,000円を評価上限とする。必須周辺機器・送料/必要小物・総額予備費5,000円込み。周辺機器はネット配送・店舗現金・ネット注文の店舗受取を商品別に比較し、同じ型番の税込現金決済額で評価。ポイントを現金値引き扱いしない。未確認ルートは未確認のまま残す。",
   "target_budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",

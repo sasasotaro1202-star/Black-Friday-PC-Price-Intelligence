@@ -1052,6 +1052,19 @@ class ReportLinkTests(unittest.TestCase):
         self.assertIn("ONLINE_OPTIONS_COMPARED_STORE_PENDING", summary)
 
 
+class PeripheralStoreBranchGateLabelTests(unittest.TestCase):
+    def test_incomplete_store_branch_matrix_is_not_labelled_as_online_purchase(self):
+        item = {
+            "purchase_channel": "compare_online_and_store",
+            "selected_purchase_channel": "unconfirmed",
+            "channel_comparison_status": "STORE_BRANCH_COMPARISON_REQUIRED",
+        }
+        self.assertEqual(
+            report.peripheral_route_label(item),
+            "指定2支店の現金価格・同支店在庫の確認待ち",
+        )
+
+
 class PeripheralRouteCoverageTests(unittest.TestCase):
     def test_store_route_coverage_includes_online_and_store_comparison_mode(self):
         projection = {

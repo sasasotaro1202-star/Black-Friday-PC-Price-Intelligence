@@ -244,17 +244,23 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(self.profile["pc_build_method_preference"], "SELF_BUILD_REQUIRED_FOR_PRIMARY_RECOMMENDATION")
         self.assertEqual(self.profile["bto_role"], "REFERENCE_BENCHMARK_ONLY")
 
-    def test_peripheral_policy_selects_best_verified_purchase_route(self):
+    def test_peripheral_policy_requires_both_store_branches_before_route_selection(self):
         channels = self.targets["purchase_channels"]
         self.assertEqual(channels["channel_selection_mode"], "BEST_VERIFIED_TOTAL")
         self.assertEqual(channels["default_peripheral_channel"], "compare_online_and_store")
-        self.assertFalse(channels["physical_store_price_and_stock_required_before_recommendation"])
+        self.assertTrue(channels["physical_store_price_and_stock_required_before_recommendation"])
         self.assertTrue(channels["physical_store_price_and_stock_required_before_store_route_selection"])
         self.assertFalse(channels["online_orders_require_explicit_user_approval"])
         self.assertFalse(channels["online_price_is_store_price"])
+        self.assertFalse(channels["online_purchase_allowed_when_store_price_unconfirmed"])
+        self.assertTrue(channels["require_all_store_branches_before_purchase"])
+        self.assertFalse(channels["store_inventory_must_be_verified_only_when_selected_channel_is_physical_store"])
         policy = self.targets["purchase_strategy"]["purchase_channel_policy"]
         self.assertEqual(policy["channel_selection_mode"], "BEST_VERIFIED_TOTAL")
-        self.assertTrue(policy["online_purchase_allowed_when_store_price_unconfirmed"])
+        self.assertFalse(policy["online_purchase_allowed_when_store_price_unconfirmed"])
+        self.assertTrue(policy["require_all_store_branches_before_purchase"])
+        self.assertTrue(policy["physical_store_price_and_stock_required_before_recommendation"])
+        self.assertFalse(policy["store_inventory_must_be_verified_only_when_selected_channel_is_physical_store"])
         legacy_policy = self.profile["selection_policy"] + " " + self.profile["peripheral_purchase_policy_ja"]
         self.assertIn("ネット配送", legacy_policy)
         self.assertIn("店舗受け取り", legacy_policy)
@@ -262,6 +268,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertIn("最も低い", legacy_policy)
         self.assertIn("店頭税込現金価格", legacy_policy)
         self.assertIn("支店在庫", legacy_policy)
+        self.assertIn("自動切替", legacy_policy)
         self.assertNotIn("明示承認なし", legacy_policy)
         self.assertNotIn("明示承認が必要", legacy_policy)
         for item in self.targets["peripherals"] + self.targets.get("peripheral_alternatives", []):
@@ -269,8 +276,10 @@ class ProjectConfigurationContractTests(unittest.TestCase):
                 continue
             self.assertEqual(item.get("purchase_channel"), "compare_online_and_store", item.get("id"))
             self.assertTrue(item.get("store_inventory_required_before_purchase"), item.get("id"))
-            self.assertFalse(item.get("online_price_is_comparison_only"), item.get("id"))
-            self.assertTrue(item.get("online_purchase_allowed_when_store_price_unconfirmed"), item.get("id"))
+            self.assertTrue(item.get("require_all_store_branches_before_purchase"), item.get("id"))
+            self.assertTrue(item.get("online_price_is_comparison_only"), item.get("id"))
+            self.assertFalse(item.get("online_purchase_allowed_when_store_price_unconfirmed"), item.get("id"))
+            self.assertEqual(item.get("purchase_channel_preference"), "best_verified_total_after_all_store_branches_confirmed", item.get("id"))
 
     def test_diy_profile_matches_budget_and_never_penalizes_assembly_time(self):
         profile = self.profile
