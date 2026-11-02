@@ -949,7 +949,7 @@ def peripheral_budget_projection():
                 ))
                 selected_cost = int(chosen["cash_total_jpy"])
                 exposed_price = int(price) if online_price_verified else None
-                exposed_price_verified = bool(online_route_actionable and shipping_verified) if chosen["channel"] == "online" else False
+                exposed_price_verified = bool(online_route_actionable)
                 stock = chosen["stock_status"]
                 cost_basis = "verified_channel_choice_" + chosen["channel"]
                 purchase_channel_selected = chosen["channel"]
