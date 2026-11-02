@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-02T19:07:17+09:00",
-  "source_snapshot_generated_at": "2026-11-02T19:01:54+09:00",
-  "source_snapshot_sha256": "442aa024a07ad521e540f10883c9f66111544bcdb8fec68ce181cb1974ca06e8",
+  "generated_at": "2026-11-03T04:41:43+09:00",
+  "source_snapshot_generated_at": "2026-11-03T04:36:05+09:00",
+  "source_snapshot_sha256": "46b3be19a5149ac7c48822e4c0194faa0f5bee0ce03a2b5a735f5048baf2ac23",
   "budget_jpy": 360000,
   "budget_scope": "pc_only_excluding_peripherals",
   "total_budget_jpy": 400000,
@@ -46,7 +46,7 @@
         "black_friday_target_price_jpy": 22000,
         "black_friday_price_observed_jpy": null,
         "black_friday_price_verified": false,
-        "retailer_key": "yodobashi",
+        "retailer_key": null,
         "retailer_campaign_status": "UNCONFIRMED",
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
@@ -55,7 +55,7 @@
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "TARGET_ONLY_UNVERIFIED",
-        "stock_status": "preorder_or_backorder",
+        "stock_status": "out_of_stock",
         "target_gap_vs_pre_bf_reference_jpy": null,
         "discount_needed_to_target_pct": null,
         "planning_cost_jpy": 22000,
@@ -74,7 +74,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 7128,
-        "watch_window_reference_at": "2026-11-02T19:03:15+09:00",
+        "watch_window_reference_at": "2026-11-03T04:37:37+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -97,7 +97,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 4815,
-        "watch_window_reference_at": "2026-11-02T19:03:51+09:00",
+        "watch_window_reference_at": "2026-11-03T04:37:00+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -120,7 +120,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 2420,
-        "watch_window_reference_at": "2026-11-02T19:03:55+09:00",
+        "watch_window_reference_at": "2026-11-03T04:37:41+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -579,7 +579,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 374800,
-        "watch_window_reference_at": "2026-11-02T19:01:54+09:00",
+        "watch_window_reference_at": "2026-11-03T04:36:05+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 319800,
@@ -643,9 +643,9 @@
       },
       {
         "id": "gigabyte-a18-pro-240h-5070ti",
-        "name": "GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）",
+        "name": "GIGABYTE GAMING A18 PRO DXJG3JPBC4JH",
         "form_factor": "laptop",
-        "gpu": "RTX 5070 Ti",
+        "gpu": "RTX 5070 Ti Laptop GPU",
         "ram_gb": 32,
         "ssd": "1 TB",
         "black_friday_target_price_jpy": 360000,
@@ -715,7 +715,7 @@
         "catalog_configuration_ready": true,
         "catalog_configuration_reasons": [],
         "complete_build_target_comparable": true,
-        "stock_status": "out_of_stock",
+        "stock_status": "unknown",
         "purchase_url": "https://storejp.gigabyte.com/c/item-list/notebook/gigabyte-pc9200"
       },
       {
@@ -1271,7 +1271,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 194800,
-        "watch_window_reference_at": "2026-11-02T19:01:54+09:00",
+        "watch_window_reference_at": "2026-11-03T04:36:05+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 194800,
@@ -1354,7 +1354,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 279800,
-        "watch_window_reference_at": "2026-11-02T19:01:54+09:00",
+        "watch_window_reference_at": "2026-11-03T04:36:05+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 279800,
@@ -1437,7 +1437,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 299800,
-        "watch_window_reference_at": "2026-11-02T19:01:54+09:00",
+        "watch_window_reference_at": "2026-11-03T04:36:05+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 299800,
@@ -1628,7 +1628,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 279980,
-        "watch_window_reference_at": "2026-11-02T19:01:54+09:00",
+        "watch_window_reference_at": "2026-11-03T04:36:05+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 279980,
@@ -2115,47 +2115,6 @@
       "dynamic_candidate": false
     },
     {
-      "id": "gigabyte-a18-pro-240h-5070ti",
-      "name": "GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）",
-      "form_factor": "laptop",
-      "current_price_jpy": 419800,
-      "reference_price_jpy": 419800,
-      "reference_only": false,
-      "required_discount_pct": 14.2,
-      "historical_floor_jpy": 299800,
-      "historical_floor_strength": "same_gpu",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 377800
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 356800
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 335800
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 314800
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 293900
-        }
-      ],
-      "first_pc_target_scenario": {
-        "discount_pct": 15,
-        "price_jpy": 356800
-      },
-      "stock_status": "out_of_stock",
-      "price_source_mode": "direct_structured",
-      "price_validation_status": "validated",
-      "dynamic_candidate": false
-    },
-    {
       "id": "gtune-p5-13620h-5070",
       "name": "G TUNE P5-I7G70BK-C（ブラック）",
       "form_factor": "laptop",
@@ -2276,6 +2235,47 @@
       "dynamic_candidate": false
     },
     {
+      "id": "gigabyte-a18-pro-240h-5070ti",
+      "name": "GIGABYTE GAMING A18 PRO DXJG3JPBC4JH",
+      "form_factor": "laptop",
+      "current_price_jpy": null,
+      "reference_price_jpy": 419800,
+      "reference_only": true,
+      "required_discount_pct": 14.2,
+      "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 377800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 356800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 335800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 314800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 293900
+        }
+      ],
+      "first_pc_target_scenario": {
+        "discount_pct": 15,
+        "price_jpy": 356800
+      },
+      "stock_status": "unknown",
+      "price_source_mode": "stale_previous",
+      "price_validation_status": "missing",
+      "dynamic_candidate": false
+    },
+    {
       "id": "candidate-5",
       "name": "Acer Predator Helios Neo 16 AI PHN16-I71-N93Z57T/E",
       "form_factor": "laptop",
@@ -2310,7 +2310,7 @@
       "first_pc_target_scenario": null,
       "stock_status": "unknown",
       "price_source_mode": "none",
-      "price_validation_status": "reference_only",
+      "price_validation_status": "missing",
       "dynamic_candidate": false
     },
     {
