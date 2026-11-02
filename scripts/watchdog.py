@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 import re
@@ -35,6 +36,165 @@ def read_json(path):
     with open(path, encoding="utf-8") as f:
         return json.load(f)
 
+
+# The campaign scanner caches a verified scan for six hours. Allow one bounded
+# 30-minute collection/queue grace period, but never let a failed scan remain
+# silently authoritative for an entire day.
+OFFICIAL_CALENDAR_MAX_AGE = timedelta(hours=6, minutes=30)
+ARTIFACT_FUTURE_CLOCK_TOLERANCE = timedelta(minutes=2)
+
+
+def _file_sha256(path):
+    digest = hashlib.sha256()
+    with open(path, "rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def critical_decision_artifact_problems(root, now, observation_threshold):
+    """Fail closed when official-calendar or buy-now artifacts are stale or detached.
+
+    These files directly influence the final purchase decision, so the watchdog
+    validates them independently of the ordinary ranking and self-build reports.
+    """
+    problems = []
+    data_dir = os.path.join(root, "data")
+    latest_path = os.path.join(data_dir, "current_latest.json")
+    latest = {}
+    try:
+        latest = read_json(latest_path)
+    except Exception as exc:
+        problems.append("decision_artifact_source_snapshot_unreadable:" + type(exc).__name__)
+
+    latest_generated = parse_dt(latest.get("generated_at"))
+    try:
+        latest_sha256 = _file_sha256(latest_path)
+    except OSError as exc:
+        latest_sha256 = None
+        problems.append("decision_artifact_source_snapshot_hash_unavailable:" + type(exc).__name__)
+
+    # Buy-now JSON must be fresh and point to the exact bytes/timestamp of the
+    # current observation snapshot. A matching timestamp alone is insufficient.
+    decision_path = os.path.join(data_dir, "buy_now_decision.json")
+    decision = {}
+    try:
+        decision = read_json(decision_path)
+    except Exception as exc:
+        problems.append("buy_now_decision_unreadable:" + type(exc).__name__)
+
+    decision_generated = parse_dt(decision.get("generated_at"))
+    if decision_generated is None:
+        problems.append("buy_now_decision_generated_at_missing")
+    else:
+        decision_age = now.astimezone(JST) - decision_generated
+        if decision_age < -ARTIFACT_FUTURE_CLOCK_TOLERANCE:
+            problems.append("buy_now_decision_generated_at_in_future")
+        elif decision_age > observation_threshold:
+            problems.append("buy_now_decision_stale:{}m".format(int(decision_age.total_seconds() / 60)))
+
+    if latest_generated is None:
+        problems.append("buy_now_source_snapshot_generated_at_missing")
+    elif decision.get("source_snapshot_generated_at") != latest.get("generated_at"):
+        problems.append("buy_now_source_snapshot_generated_at_mismatch")
+    if latest_sha256 is not None and decision.get("source_snapshot_sha256") != latest_sha256:
+        problems.append("buy_now_source_snapshot_sha256_mismatch")
+
+    if not isinstance(decision.get("purchase_gate_allowed"), bool):
+        problems.append("buy_now_purchase_gate_flag_missing_or_invalid")
+    if decision.get("coverage_status") == "PARTIAL" and decision.get("purchase_gate_allowed") is True:
+        problems.append("buy_now_partial_coverage_cannot_authorize_purchase")
+
+    # The calendar scanner uses a six-hour cache. Its age is checked separately
+    # from the five-minute observation cadence because the cache is intentional.
+    calendar_path = os.path.join(data_dir, "official_campaign_dates_status.json")
+    calendar = {}
+    try:
+        calendar = read_json(calendar_path)
+    except Exception as exc:
+        problems.append("official_campaign_dates_unreadable:" + type(exc).__name__)
+
+    calendar_generated = parse_dt(calendar.get("generated_at"))
+    calendar_checked = parse_dt(calendar.get("checked_at"))
+    if calendar_generated is None:
+        problems.append("official_campaign_dates_generated_at_missing")
+    if calendar_checked is None:
+        problems.append("official_campaign_dates_checked_at_missing")
+    else:
+        calendar_age = now.astimezone(JST) - calendar_checked
+        if calendar_age < -ARTIFACT_FUTURE_CLOCK_TOLERANCE:
+            problems.append("official_campaign_dates_checked_at_in_future")
+        elif calendar_age > OFFICIAL_CALENDAR_MAX_AGE:
+            problems.append("official_campaign_dates_stale:{}m".format(int(calendar_age.total_seconds() / 60)))
+    if calendar_generated is not None and calendar_checked is not None:
+        if abs(calendar_generated - calendar_checked) > timedelta(minutes=10):
+            problems.append("official_campaign_dates_generated_checked_mismatch")
+
+    sources = calendar.get("sources")
+    if not isinstance(sources, dict) or not sources:
+        problems.append("official_campaign_dates_sources_missing")
+        sources = {}
+    summary = calendar.get("summary") if isinstance(calendar.get("summary"), dict) else {}
+    status_counts = {
+        "confirmed_count": 0,
+        "unconfirmed_count": 0,
+        "fetch_error_count": 0,
+    }
+    for retailer, entry in sources.items():
+        if not isinstance(entry, dict):
+            problems.append("official_campaign_dates_entry_invalid:" + str(retailer))
+            continue
+        status = entry.get("status")
+        if status == "CONFIRMED":
+            status_counts["confirmed_count"] += 1
+            start = parse_dt(entry.get("start_jst"))
+            end = parse_dt(entry.get("end_jst"))
+            source_url = str(entry.get("source_url") or "")
+            if start is None or end is None or end < start:
+                problems.append("official_campaign_dates_confirmed_range_invalid:" + str(retailer))
+            elif start.year != 2026 or end.year != 2026:
+                problems.append("official_campaign_dates_confirmed_year_invalid:" + str(retailer))
+            if not source_url.startswith("https://"):
+                problems.append("official_campaign_dates_confirmed_source_missing:" + str(retailer))
+        elif status == "UNCONFIRMED":
+            status_counts["unconfirmed_count"] += 1
+            if entry.get("start_jst") is not None or entry.get("end_jst") is not None:
+                problems.append("official_campaign_dates_unconfirmed_exposes_range:" + str(retailer))
+        elif status == "FETCH_ERROR":
+            status_counts["fetch_error_count"] += 1
+            if entry.get("start_jst") is not None or entry.get("end_jst") is not None:
+                problems.append("official_campaign_dates_fetch_error_exposes_range:" + str(retailer))
+        else:
+            problems.append("official_campaign_dates_status_invalid:" + str(retailer))
+
+    if summary.get("retailer_count") != len(sources):
+        problems.append("official_campaign_dates_retailer_count_mismatch")
+    for key, actual in status_counts.items():
+        if summary.get(key) != actual:
+            problems.append("official_campaign_dates_{}_mismatch".format(key))
+
+    # A freshly timestamped report can still be stale relative to its JSON
+    # decision; require both artifacts to describe the same decision generation.
+    buy_report_path = os.path.join(data_dir, "reports", "buy-now-now.md")
+    try:
+        with open(buy_report_path, encoding="utf-8") as stream:
+            report_text = stream.read()
+        match = re.search(r"^更新:\\s*(.+?)\\s*$", report_text, re.M)
+        report_generated = parse_dt(match.group(1)) if match else None
+        if report_generated is None:
+            problems.append("buy_now_report_generated_at_missing")
+        else:
+            report_age = now.astimezone(JST) - report_generated
+            if report_age < -ARTIFACT_FUTURE_CLOCK_TOLERANCE:
+                problems.append("buy_now_report_generated_at_in_future")
+            elif report_age > observation_threshold:
+                problems.append("buy_now_report_stale")
+            if decision_generated is not None and abs(report_generated - decision_generated) > timedelta(minutes=10):
+                problems.append("buy_now_report_stale_relative_to_decision")
+    except Exception as exc:
+        problems.append("buy_now_report_unreadable:" + type(exc).__name__)
+
+    return problems
 
 
 def latest_input_change_at(root=ROOT):
@@ -266,6 +426,7 @@ def main():
             problems.append("ranking_stale_relative_to_latest")
 
     problems.extend(self_build_artifact_problems(ROOT, now, threshold))
+    problems.extend(critical_decision_artifact_problems(ROOT, now, threshold))
 
     try:
         peripherals = read_json(peripheral_path)
