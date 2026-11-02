@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T10:26:18+09:00",
+  "generated_at": "2026-11-02T10:54:25+09:00",
   "urls": [
     {
       "url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/",
@@ -134,20 +134,18 @@
       "priority": "normal"
     }
   ],
-  "last_discovery_attempt_at": "2026-11-01T10:26:18+09:00",
+  "last_discovery_attempt_at": "2026-11-02T10:54:25+09:00",
   "discovery_status": "ok",
   "discovery_error": null,
   "desktop_included": true,
   "discovered_count": 22,
   "discovery_stats": {
-    "previous_count": 21,
+    "previous_count": 22,
     "current_count": 22,
-    "newly_discovered_count": 1,
-    "retained_count": 21,
+    "newly_discovered_count": 0,
+    "retained_count": 22,
     "removed_count": 0,
-    "newly_discovered_ids": [
-      "desktop-dospara-ad-r7a56c-0aw-5060ti16"
-    ],
+    "newly_discovered_ids": [],
     "removed_ids": []
   },
   "last_discovery_attempt_status": "partial",
