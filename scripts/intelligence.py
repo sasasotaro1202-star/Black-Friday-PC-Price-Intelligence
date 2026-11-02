@@ -696,10 +696,9 @@ def store_pickup_quote_validation(target, now=None):
 def peripheral_budget_projection():
     """Project peripheral costs without treating comparison routes as approval.
 
-    Select the lowest-cost route among the exact-model offers whose price and
-    stock evidence is currently usable. A single verified store branch may be
-    selected while other branches remain pending; that does not mark the full
-    route comparison complete. Online and store evidence remain separate.
+    For targets requiring all configured store branches, do not select any
+    purchase route until every branch has a fresh exact-model cash quote and
+    stock state. Online listings remain comparison-only until that gate opens.
     """
     policy = purchase_budget_policy()
     snapshot = load_json(os.path.join(ROOT, "data", "peripheral_prices.json"), {})
@@ -739,7 +738,8 @@ def peripheral_budget_projection():
         channel_options = set(target.get("purchase_channel_options") or [])
         # Each route is an independent candidate. In compare mode, choose only
         # among exact-model routes with usable price/stock evidence; never copy
-        # store evidence into an online or store-pickup route.
+        # store evidence into an online or store-pickup route. A target-level
+        # all-branch gate is applied before any route can be selected.
         compare_channels = bool(
             target.get("purchase_channel") == "compare_online_and_store"
             or target.get("compare_purchase_channels") is True
@@ -792,9 +792,9 @@ def peripheral_budget_projection():
             "in_stock", "low_stock", "out_of_stock", "preorder_or_backorder"
         }
         # Full store-route comparison requires every configured branch to have
-        # a fresh, exact-model cash quote and an explicit stock state. A verified
-        # branch can still be a selectable candidate while other branches remain
-        # pending; its stock must come from that same branch's quote.
+        # a fresh, exact-model cash quote and an explicit stock state. Targets with
+        # require_all_store_branches_before_purchase cannot select even one branch
+        # until this complete branch matrix is available.
         store_route_quotes_complete = bool(required_store_ids) and all(
             store_id in store_price_observation_by_id
             and store_price_observation_by_id[store_id].get("store_price_confirmed") is True
@@ -903,31 +903,39 @@ def peripheral_budget_projection():
         )
 
         if compare_channels:
+            require_all_store_branches = bool(target.get("require_all_store_branches_before_purchase"))
+            online_requires_store_branch_comparison = target.get("online_purchase_allowed_when_store_price_unconfirmed") is False
+            store_branch_gate_required = require_all_store_branches or online_requires_store_branch_comparison
+            store_branch_gate_open = not store_branch_gate_required or store_route_quotes_complete
             channel_options_available = []
-            if online_route_actionable:
-                channel_options_available.append({
-                    "channel": "online", "cash_total_jpy": int(online_cash_estimate),
-                    "stock_status": online_stock,
-                    "shipping_jpy": estimated_shipping,
-                    "shipping_verified": shipping_verified,
-                    "url": live.get("online_best_offer_url") or live.get("purchase_url") or target.get("purchase_url") or target.get("monitor_url"),
-                })
-            if store_route_actionable:
-                channel_options_available.append({
-                    "channel": "physical_store", "cash_total_jpy": int(store_price),
-                    "stock_status": store_stock, "shipping_jpy": 0,
-                    "shipping_verified": True,
-                    "url": store_url,
-                    "store_id": store_observation_store_id,
-                })
-            if store_pickup_route_actionable:
-                channel_options_available.append({
-                    "channel": "store_pickup", "cash_total_jpy": int(store_pickup_price),
-                    "stock_status": store_pickup_stock, "shipping_jpy": 0,
-                    "shipping_verified": True,
-                    "url": store_pickup_observation.get("store_pickup_checkout_url"),
-                    "store_id": store_pickup_observation.get("store_pickup_store_id"),
-                })
+            if store_branch_gate_open:
+                # An online route is actionable only when both the item price and
+                # the actual shipping cost are verified. A shipping reserve is a
+                # budget estimate, not permission to select the route.
+                if online_route_actionable and shipping_verified:
+                    channel_options_available.append({
+                        "channel": "online", "cash_total_jpy": int(online_cash_estimate),
+                        "stock_status": online_stock,
+                        "shipping_jpy": estimated_shipping,
+                        "shipping_verified": shipping_verified,
+                        "url": live.get("online_best_offer_url") or live.get("purchase_url") or target.get("purchase_url") or target.get("monitor_url"),
+                    })
+                if store_route_actionable:
+                    channel_options_available.append({
+                        "channel": "physical_store", "cash_total_jpy": int(store_price),
+                        "stock_status": store_stock, "shipping_jpy": 0,
+                        "shipping_verified": True,
+                        "url": store_url,
+                        "store_id": store_observation_store_id,
+                    })
+                if store_pickup_route_actionable:
+                    channel_options_available.append({
+                        "channel": "store_pickup", "cash_total_jpy": int(store_pickup_price),
+                        "stock_status": store_pickup_stock, "shipping_jpy": 0,
+                        "shipping_verified": True,
+                        "url": store_pickup_observation.get("store_pickup_checkout_url"),
+                        "store_id": store_pickup_observation.get("store_pickup_store_id"),
+                    })
             channel_comparison_complete = bool(
                 online_route_known and store_route_known and store_pickup_route_known
             )
@@ -941,7 +949,7 @@ def peripheral_budget_projection():
                 ))
                 selected_cost = int(chosen["cash_total_jpy"])
                 exposed_price = int(price) if online_price_verified else None
-                exposed_price_verified = bool(online_route_actionable)
+                exposed_price_verified = bool(online_route_actionable and shipping_verified) if chosen["channel"] == "online" else False
                 stock = chosen["stock_status"]
                 cost_basis = "verified_channel_choice_" + chosen["channel"]
                 purchase_channel_selected = chosen["channel"]
@@ -959,9 +967,28 @@ def peripheral_budget_projection():
                     }[chosen["channel"]]
                 else:
                     channel_status = "ALL_PURCHASE_ROUTES_VERIFIED"
+            elif not store_branch_gate_open:
+                # Keep observed listings and partial branch quotes as reference
+                # evidence only. Never silently fall back to online delivery or
+                # select one branch while the other required branch is unknown.
+                route_estimates = []
+                if online_price_verified and online_cash_estimate is not None:
+                    route_estimates.append(int(online_cash_estimate))
+                if store_price_verified and valid_money(store_price):
+                    route_estimates.append(int(store_price))
+                if store_pickup_quote_confirmed and store_pickup_stock in ("in_stock", "low_stock"):
+                    route_estimates.append(int(store_pickup_price))
+                selected_cost = max(target_price, min(route_estimates)) if route_estimates else target_price
+                exposed_price = int(price) if online_price_verified else None
+                exposed_price_verified = False
+                stock = "unknown"
+                purchase_channel_selected = "unconfirmed"
+                cost_basis = "store_branch_comparison_incomplete_reference_reserve"
+                channel_status = "STORE_BRANCH_COMPARISON_REQUIRED"
+                unverified.append(pid)
             elif online_price_verified or store_price_verified or store_pickup_quote_confirmed:
                 route_estimates = []
-                if online_price_verified:
+                if online_price_verified and online_cash_estimate is not None:
                     route_estimates.append(int(online_cash_estimate))
                 if store_price_verified and valid_money(store_price):
                     route_estimates.append(int(store_price))
@@ -985,7 +1012,9 @@ def peripheral_budget_projection():
                 channel_status = "NO_VERIFIED_PRICE_OR_STOCK"
                 unverified.append(pid)
             online_comparison_price = int(price) if online_price_verified else None
-            online_price_is_comparison_only = False
+            online_price_is_comparison_only = bool(
+                store_branch_gate_required and not store_route_quotes_complete
+            )
         elif target.get("purchase_channel") == "physical_store" and target.get("store_inventory_required_before_purchase"):
             stock = store_stock if store_price_verified else (
                 live_store_inventory["store_inventory_status"] if live_store_inventory.get("store_inventory_verified") else "unknown"
@@ -1098,7 +1127,10 @@ def peripheral_budget_projection():
                 snapshot_fresh and available_dt is not None and retrieval_dt is not None
                 and available_dt <= retrieval_dt <= now
             )
-            early_checkout_verified = bool(online_route_actionable and shipping_verified)
+            early_checkout_verified = bool(
+                online_route_actionable and shipping_verified
+                and (not compare_channels or store_branch_gate_open)
+            )
             early_verified_total = online_cash_estimate if early_checkout_verified else None
         elif purchase_channel_selected == "physical_store":
             early_observed_price = store_price if valid_money(store_price) else None
