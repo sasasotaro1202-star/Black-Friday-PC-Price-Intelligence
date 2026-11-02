@@ -923,7 +923,7 @@
       "store_inventory_must_be_verified_only_when_selected_channel_is_physical_store": false,
       "online_purchase_allowed_when_store_price_unconfirmed": false,
       "store_pickup_counts_as_online_order_but_requires_separate_stock_confirmation": true,
-      "selection_policy": "周辺機器はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の両支店について、同一型番の税込現金価格と同じ支店の在庫を確認してから購入ルートを選ぶ。いずれか未確認ならネット配送・店舗受け取りへ自動切替せず、選択ルートをunconfirmedとして購入判断を保留する。両支店の比較完了後に限り、オンラインの型番・販売元・在庫・実送料・最終決済額・保証/返品条件も確認して総額比較する。確認できた購入可能ルートの税込現金総額を比較し、ポイントは現金値引きに含めない。",
+      "selection_policy": "周辺機器はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の両支店について、同一型番の店頭税込現金価格と同じ支店の在庫を確認してから購入ルートを選ぶ。いずれか未確認ならネット配送・店舗受け取りへ自動切替せず、選択ルートをunconfirmedとして購入判断を保留する。両支店の比較完了後に限り、オンラインの型番・販売元・在庫・実送料・最終決済額・保証/返品条件も確認し、購入可能ルートの税込現金総額が最も低い候補を選ぶ。ポイントは現金値引きに含めない。",
       "online_orders_require_explicit_user_approval": false,
       "default_peripheral_channel": "compare_online_and_store",
       "physical_store_price_and_stock_required_before_recommendation": true,
@@ -1913,7 +1913,7 @@
     "store_stock_rule": "周辺機器は購入ルートを選択する前に、ビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の両支店について、正確な型番の税込現金価格と同じ支店の在庫状態を新しい証拠で確認する。どちらか一方でも未確認ならselected_purchase_channelはunconfirmedのままとし、ネット配送・ネット注文の店舗受け取りへ自動切替しない。ネット価格は比較参考として表示するだけで、店頭価格・支店在庫の代用にしない。両支店の比較完了後に限り、正確な型番・販売元・販売可能在庫・実送料・最終決済額・保証/返品条件が確認できたオンライン候補を比較対象に加える。ポイントは現金値引きに算入しない。",
     "online_price_handling": "ネット掲載価格は、両指定支店の現金税込価格と同一支店在庫の比較が完了するまで比較参考のみとし、ネット配送・店舗受け取りを自動選択しない。両支店の比較完了後も、正確な型番・販売元・販売可能在庫・実送料/必須費用・最終決済額・取得時刻・保証/返品条件が確認できた場合だけオンライン購入候補にできる。店頭価格・支店在庫とは別の証拠として保持し、ポイントを現金値引きに算入しない。",
     "channel_selection_mode": "BEST_VERIFIED_TOTAL",
-    "channel_selection_policy": "周辺機器はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の両支店について、同一型番の税込現金価格と同じ支店の在庫を確認してから購入ルートを選ぶ。いずれか未確認ならネット配送・店舗受け取りへ自動切替せず、選択ルートをunconfirmedとして購入判断を保留する。両支店の比較完了後に限り、オンラインの型番・販売元・在庫・実送料・最終決済額・保証/返品条件も確認して総額比較する。確認できた購入可能ルートの税込現金総額を比較し、ポイントは現金値引きに含めない。",
+    "channel_selection_policy": "周辺機器はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の両支店について、同一型番の店頭税込現金価格と同じ支店の在庫を確認してから購入ルートを選ぶ。いずれか未確認ならネット配送・店舗受け取りへ自動切替せず、選択ルートをunconfirmedとして購入判断を保留する。両支店の比較完了後に限り、オンラインの型番・販売元・在庫・実送料・最終決済額・保証/返品条件も確認し、購入可能ルートの税込現金総額が最も低い候補を選ぶ。ポイントは現金値引きに含めない。",
     "online_store_comparison_requirements": [
       "exact_model_and_variant_match",
       "direct_retailer_checkout_or_product_listing",
