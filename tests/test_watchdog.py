@@ -212,7 +212,7 @@ class CriticalDecisionArtifactTests(unittest.TestCase):
             },
         }), encoding="utf-8")
         (reports / "buy-now-now.md").write_text(
-            "# Buy now\\n\\n更新: " + report_generated + "\\n",
+            "# Buy now\n\n更新: " + report_generated + "\n",
             encoding="utf-8",
         )
 
