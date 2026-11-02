@@ -467,10 +467,12 @@ class PeripheralMonitorTests(unittest.TestCase):
                 self.assertIn("unknown", check.get("notes", ""))
                 self.assertTrue(target["store_price_is_separate_evidence"])
                 self.assertFalse(target["online_purchase_allowed_when_store_price_unconfirmed"])
-        self.assertTrue(target["require_all_store_branches_before_purchase"])
-        self.assertTrue(target["online_price_is_comparison_only"])
-                self.assertFalse(target["online_price_is_comparison_only"])
-                self.assertEqual(target["purchase_channel_preference"], "best_verified_total")
+                self.assertTrue(target["require_all_store_branches_before_purchase"])
+                self.assertTrue(target["online_price_is_comparison_only"])
+                self.assertEqual(
+                    target["purchase_channel_preference"],
+                    "best_verified_total_after_all_store_branches_confirmed",
+                )
 
     def test_official_tenjin_inventory_page_separates_branch_stock_from_cash_price(self):
         import json
