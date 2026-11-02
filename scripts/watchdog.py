@@ -179,7 +179,7 @@ def critical_decision_artifact_problems(root, now, observation_threshold):
     try:
         with open(buy_report_path, encoding="utf-8") as stream:
             report_text = stream.read()
-        match = re.search(r"^更新:\\s*(.+?)\\s*$", report_text, re.M)
+        match = re.search(r"^更新:\s*(.+?)\s*$", report_text, re.M)
         report_generated = parse_dt(match.group(1)) if match else None
         if report_generated is None:
             problems.append("buy_now_report_generated_at_missing")
