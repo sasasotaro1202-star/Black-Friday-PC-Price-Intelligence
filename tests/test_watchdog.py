@@ -246,6 +246,18 @@ class CriticalDecisionArtifactTests(unittest.TestCase):
             )
         self.assertIn("buy_now_source_snapshot_sha256_mismatch", problems)
 
+    def test_buy_now_report_must_match_json_decision_generation(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            self._write_fixture(
+                temp_dir,
+                report_generated="2026-11-20T11:30:00+09:00",
+            )
+            problems = watchdog.critical_decision_artifact_problems(
+                temp_dir, now, timedelta(minutes=20)
+            )
+        self.assertIn("buy_now_report_stale_relative_to_decision", problems)
+
     def test_partial_coverage_cannot_authorize_purchase(self):
         now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
         with tempfile.TemporaryDirectory() as temp_dir:
