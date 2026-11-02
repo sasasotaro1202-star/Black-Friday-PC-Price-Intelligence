@@ -164,6 +164,98 @@ class ConfiguredWatchWindowTests(unittest.TestCase):
         )
 
 
+class CriticalDecisionArtifactTests(unittest.TestCase):
+    def _write_fixture(self, root, *, calendar_checked="2026-11-20T11:55:00+09:00",
+                       decision_generated="2026-11-20T11:57:00+09:00",
+                       report_generated="2026-11-20T11:57:00+09:00",
+                       gate_allowed=False, coverage="PARTIAL", corrupt_hash=False):
+        data = pathlib.Path(root) / "data"
+        reports = data / "reports"
+        reports.mkdir(parents=True)
+        latest = {
+            "generated_at": "2026-11-20T11:55:00+09:00",
+            "products": [],
+        }
+        latest_path = data / "current_latest.json"
+        latest_path.write_text(json.dumps(latest, ensure_ascii=False), encoding="utf-8")
+        snapshot_hash = watchdog._file_sha256(str(latest_path))
+        if corrupt_hash:
+            snapshot_hash = "0" * 64
+
+        (data / "buy_now_decision.json").write_text(json.dumps({
+            "generated_at": decision_generated,
+            "source_snapshot_generated_at": latest["generated_at"],
+            "source_snapshot_sha256": snapshot_hash,
+            "purchase_gate_allowed": gate_allowed,
+            "coverage_status": coverage,
+        }), encoding="utf-8")
+
+        calendar_checked_dt = watchdog.parse_dt(calendar_checked)
+        (data / "official_campaign_dates_status.json").write_text(json.dumps({
+            "generated_at": calendar_checked,
+            "checked_at": calendar_checked,
+            "scanner_version": 3,
+            "sources": {
+                "sample": {
+                    "status": "CONFIRMED",
+                    "start_jst": "2026-11-20T00:00:00+09:00",
+                    "end_jst": "2026-11-27T23:59:59+09:00",
+                    "source_url": "https://example.com/blackfriday2026/",
+                    "checked_at": calendar_checked,
+                }
+            },
+            "summary": {
+                "retailer_count": 1,
+                "confirmed_count": 1,
+                "unconfirmed_count": 0,
+                "fetch_error_count": 0,
+            },
+        }), encoding="utf-8")
+        (reports / "buy-now-now.md").write_text(
+            "# Buy now\\n\\n更新: " + report_generated + "\\n",
+            encoding="utf-8",
+        )
+
+    def test_fresh_consistent_decision_and_calendar_pass(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            self._write_fixture(temp_dir)
+            problems = watchdog.critical_decision_artifact_problems(
+                temp_dir, now, timedelta(minutes=20)
+            )
+        self.assertEqual(problems, [])
+
+    def test_stale_official_calendar_is_detected_beyond_scanner_cache(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            self._write_fixture(
+                temp_dir,
+                calendar_checked="2026-11-20T05:00:00+09:00",
+            )
+            problems = watchdog.critical_decision_artifact_problems(
+                temp_dir, now, timedelta(minutes=20)
+            )
+        self.assertTrue(any(x.startswith("official_campaign_dates_stale:") for x in problems))
+
+    def test_buy_now_snapshot_hash_mismatch_is_detected(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            self._write_fixture(temp_dir, corrupt_hash=True)
+            problems = watchdog.critical_decision_artifact_problems(
+                temp_dir, now, timedelta(minutes=20)
+            )
+        self.assertIn("buy_now_source_snapshot_sha256_mismatch", problems)
+
+    def test_partial_coverage_cannot_authorize_purchase(self):
+        now = datetime(2026, 11, 20, 12, 0, tzinfo=JST)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            self._write_fixture(temp_dir, gate_allowed=True, coverage="PARTIAL")
+            problems = watchdog.critical_decision_artifact_problems(
+                temp_dir, now, timedelta(minutes=20)
+            )
+        self.assertIn("buy_now_partial_coverage_cannot_authorize_purchase", problems)
+
+
 class SnapshotInputFreshnessTests(unittest.TestCase):
     def _git(self, root, *args, env=None):
         return subprocess.run(
