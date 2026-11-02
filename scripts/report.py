@@ -961,6 +961,8 @@ def peripheral_route_label(item):
     item = item if isinstance(item, dict) else {}
     channel = str(item.get("purchase_channel") or "online")
     if channel == "compare_online_and_store":
+        if item.get("channel_comparison_status") == "STORE_BRANCH_COMPARISON_REQUIRED":
+            return "指定2支店の現金価格・同支店在庫の確認待ち"
         selected = str(item.get("selected_purchase_channel") or "unconfirmed")
         labels = {
             "online": "ネット配送",
