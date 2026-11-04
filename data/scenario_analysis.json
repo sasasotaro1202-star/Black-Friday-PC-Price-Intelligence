@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-04T11:17:13+09:00",
-  "source_snapshot_generated_at": "2026-11-04T11:10:23+09:00",
-  "source_snapshot_sha256": "3580aeb6c0a9759d35cceb33d73e5a0db2a80d686a9114b316aba38e5cb44920",
+  "generated_at": "2026-11-04T11:35:07+09:00",
+  "source_snapshot_generated_at": "2026-11-04T11:26:59+09:00",
+  "source_snapshot_sha256": "9e93eab033ac6dda7a83336f2b9308bba3c66399b143cdbf49e8cc191819fd9f",
   "budget_jpy": 360000,
   "budget_scope": "pc_only_excluding_peripherals",
   "total_budget_jpy": 400000,
@@ -74,7 +74,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 7128,
-        "watch_window_reference_at": "2026-11-04T11:12:32+09:00",
+        "watch_window_reference_at": "2026-11-04T11:30:14+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -97,7 +97,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 4815,
-        "watch_window_reference_at": "2026-11-04T11:13:08+09:00",
+        "watch_window_reference_at": "2026-11-04T11:30:47+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -120,7 +120,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 2420,
-        "watch_window_reference_at": "2026-11-04T11:13:12+09:00",
+        "watch_window_reference_at": "2026-11-04T11:30:55+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -1628,7 +1628,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 279980,
-        "watch_window_reference_at": "2026-11-04T11:10:23+09:00",
+        "watch_window_reference_at": "2026-11-04T11:26:59+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 279980,
@@ -1943,8 +1943,8 @@
         "price_jpy": 269800
       },
       "stock_status": "unknown",
-      "price_source_mode": "stale_previous",
-      "price_validation_status": "missing",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
       "dynamic_candidate": false
     },
     {
@@ -1984,8 +1984,8 @@
         "price_jpy": 251800
       },
       "stock_status": "unknown",
-      "price_source_mode": "stale_previous",
-      "price_validation_status": "missing",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
       "dynamic_candidate": false
     },
     {
@@ -2066,8 +2066,8 @@
         "price_jpy": 287800
       },
       "stock_status": "unknown",
-      "price_source_mode": "stale_previous",
-      "price_validation_status": "missing",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
       "dynamic_candidate": false
     },
     {
@@ -2107,8 +2107,8 @@
         "price_jpy": 256200
       },
       "stock_status": "unknown",
-      "price_source_mode": "stale_previous",
-      "price_validation_status": "missing",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
       "dynamic_candidate": false
     },
     {
@@ -2148,8 +2148,8 @@
         "price_jpy": 296800
       },
       "stock_status": "unknown",
-      "price_source_mode": "stale_previous",
-      "price_validation_status": "missing",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
       "dynamic_candidate": false
     },
     {
@@ -2189,8 +2189,8 @@
         "price_jpy": 278800
       },
       "stock_status": "unknown",
-      "price_source_mode": "stale_previous",
-      "price_validation_status": "missing",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
       "dynamic_candidate": false
     },
     {
@@ -2230,8 +2230,8 @@
         "price_jpy": 175300
       },
       "stock_status": "unknown",
-      "price_source_mode": "stale_previous",
-      "price_validation_status": "missing",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
       "dynamic_candidate": false
     },
     {
@@ -2271,8 +2271,8 @@
         "price_jpy": 359800
       },
       "stock_status": "unknown",
-      "price_source_mode": "stale_previous",
-      "price_validation_status": "missing",
+      "price_source_mode": "public_baseline",
+      "price_validation_status": "reference_only",
       "dynamic_candidate": false
     },
     {
