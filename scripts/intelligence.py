@@ -131,6 +131,34 @@ PRICE_INCLUDE_CONTEXT = (
     "割引価格", "支払価格", "price", "sale",
 )
 
+TAX_EXCLUSIVE_PRICE_CONTEXT = ("税抜", "税別", "本体価格")
+
+
+def price_has_tax_exclusive_label(text, price_jpy):
+    """Return True only when the exact amount is explicitly labelled tax-exclusive."""
+    try:
+        value = int(price_jpy)
+    except (TypeError, ValueError):
+        return False
+    if value <= 0:
+        return False
+
+    source = str(text or "")
+    variants = sorted({f"{value:,}", str(value)}, key=len, reverse=True)
+    for variant in variants:
+        pattern = r"(?<!\\d)" + re.escape(variant) + r"(?!\\d)"
+        for match in re.finditer(pattern, source):
+            before = source[max(0, match.start() - 28):match.start()]
+            after = source[match.end():min(len(source), match.end() + 28)]
+            if re.search(r"(?:税抜|税別|本体価格)(?:価格)?[\\s:：]*$", before):
+                return True
+            if re.match(
+                r"[\\s:：]*(?:円\\s*)?[\\(（]?\\s*(?:税抜|税別|本体価格)(?:価格)?",
+                after,
+            ):
+                return True
+    return False
+
 # Navigation facets such as "価格から探す 300,001円～" describe a filter
 # boundary, not the price of the requested SKU. Never promote such numbers to
 # current-price evidence, even when they look numerically plausible.
@@ -1489,6 +1517,8 @@ def price_candidates(text):
             seen.add(value)
             context = text[max(0, m.start()-110):min(len(text), m.end()+110)]
             normalized_context = norm_text(context)
+            if price_has_tax_exclusive_label(text, value):
+                continue
             if any(phrase in normalized_context for phrase in PRICE_NAVIGATION_CONTEXT):
                 continue
             score = price_context_score(context)
