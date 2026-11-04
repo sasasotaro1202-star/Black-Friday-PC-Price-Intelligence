@@ -131,9 +131,6 @@ PRICE_INCLUDE_CONTEXT = (
     "割引価格", "支払価格", "price", "sale",
 )
 
-TAX_EXCLUSIVE_PRICE_CONTEXT = ("税抜", "税別", "本体価格")
-
-
 def price_has_tax_exclusive_label(text, price_jpy):
     """Return True only when the exact amount is explicitly labelled tax-exclusive."""
     try:
@@ -146,14 +143,14 @@ def price_has_tax_exclusive_label(text, price_jpy):
     source = str(text or "")
     variants = sorted({f"{value:,}", str(value)}, key=len, reverse=True)
     for variant in variants:
-        pattern = r"(?<!\\d)" + re.escape(variant) + r"(?!\\d)"
+        pattern = r"(?<!\d)" + re.escape(variant) + r"(?!\\d)"
         for match in re.finditer(pattern, source):
             before = source[max(0, match.start() - 28):match.start()]
             after = source[match.end():min(len(source), match.end() + 28)]
-            if re.search(r"(?:税抜|税別|本体価格)(?:価格)?[\\s:：]*$", before):
+            if re.search(r"(?:税抜|税別|本体価格)(?:価格)?[\s:：]*$", before):
                 return True
             if re.match(
-                r"[\\s:：]*(?:円\\s*)?[\\(（]?\\s*(?:税抜|税別|本体価格)(?:価格)?",
+                r"[\s:：]*(?:円\s*)?[\(（]?\s*(?:税抜|税別|本体価格)(?:価格)?",
                 after,
             ):
                 return True
