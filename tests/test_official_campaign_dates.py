@@ -31,6 +31,16 @@ class OfficialCampaignDateTests(unittest.TestCase):
         self.assertEqual(result["end_jst"], "2026-12-10T11:59:59+09:00")
         self.assertIn("2026年11月20日", result["evidence"])
 
+    def test_parses_company_press_release_range_with_same_year_marker(self):
+        result = parse_explicit_2026_range(
+            "ブラックフライデー先取りキャンペーン 期間：2026年10月30日(金)11:00 から 同11月13日(金)10:59まで",
+            "https://www.value-press.com/pressrelease/383493",
+        )
+        self.assertIsNotNone(result)
+        self.assertEqual(result["start_jst"], "2026-10-30T11:00:00+09:00")
+        self.assertEqual(result["end_jst"], "2026-11-13T10:59:59+09:00")
+        self.assertEqual(result["year_basis"], "explicit_2026_page_text")
+
     def test_parses_yearless_range_only_on_year_anchored_2026_campaign_slug(self):
         result = parse_explicit_2026_range(
             "ブラックフライデーセール開催中 10/30(金)～11/12(木)",
