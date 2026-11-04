@@ -143,7 +143,7 @@ def price_has_tax_exclusive_label(text, price_jpy):
     source = str(text or "")
     variants = sorted({f"{value:,}", str(value)}, key=len, reverse=True)
     for variant in variants:
-        pattern = r"(?<!\d)" + re.escape(variant) + r"(?!\\d)"
+        pattern = r"(?<!\d)" + re.escape(variant) + r"(?!\d)"
         for match in re.finditer(pattern, source):
             before = source[max(0, match.start() - 28):match.start()]
             after = source[match.end():min(len(source), match.end() + 28)]
