@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-04T11:35:07+09:00",
-  "source_snapshot_generated_at": "2026-11-04T11:26:59+09:00",
-  "source_snapshot_sha256": "9e93eab033ac6dda7a83336f2b9308bba3c66399b143cdbf49e8cc191819fd9f",
+  "generated_at": "2026-11-04T18:31:13+09:00",
+  "source_snapshot_generated_at": "2026-11-04T18:25:04+09:00",
+  "source_snapshot_sha256": "5b5d71e52887c479b9d28b1566e019cd023ba9b23e1fff137f27fad5ca5d6a7e",
   "budget_jpy": 360000,
   "budget_scope": "pc_only_excluding_peripherals",
   "total_budget_jpy": 400000,
@@ -74,7 +74,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 7128,
-        "watch_window_reference_at": "2026-11-04T11:30:14+09:00",
+        "watch_window_reference_at": "2026-11-04T18:26:31+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -97,7 +97,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 4815,
-        "watch_window_reference_at": "2026-11-04T11:30:47+09:00",
+        "watch_window_reference_at": "2026-11-04T18:27:09+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -120,7 +120,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 2420,
-        "watch_window_reference_at": "2026-11-04T11:30:55+09:00",
+        "watch_window_reference_at": "2026-11-04T18:27:12+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -253,12 +253,12 @@
         "catalog_configuration_ready": true,
         "catalog_configuration_reasons": [],
         "complete_build_target_comparable": true,
-        "stock_status": "unknown",
+        "stock_status": "out_of_stock",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/"
       },
       {
         "id": "desktop-gtune-dg-a7g70-5070",
-        "name": "G TUNE DG-A7G70 (official outlet; Ryzen 7 5700X / RTX 5070)",
+        "name": "G TUNE DG-A7G70",
         "form_factor": "desktop",
         "gpu": "RTX 5070",
         "ram_gb": 32,
@@ -335,7 +335,7 @@
       },
       {
         "id": "desktop-gtune-fg-a7g6t-5060ti16",
-        "name": "G TUNE FG-A7G6T (RTX 5060 Ti 16GB / Ryzen 7 7700)",
+        "name": "G TUNE FG-A7G6T",
         "form_factor": "desktop",
         "gpu": "RTX 5060 Ti 16GB",
         "ram_gb": 32,
@@ -411,85 +411,8 @@
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa/"
       },
       {
-        "id": "desktop-gtune-fg-a7g70-5070",
-        "name": "G TUNE FG-A7G70",
-        "form_factor": "desktop",
-        "gpu": "RTX 5070",
-        "ram_gb": 32,
-        "ssd": "1 TB",
-        "black_friday_target_price_jpy": 360000,
-        "black_friday_price_observed_jpy": null,
-        "black_friday_offer_verified": false,
-        "retailer_key": "mouse_computer",
-        "retailer_campaign_status": "UNCONFIRMED",
-        "retailer_campaign_start_jst": null,
-        "retailer_campaign_end_jst": null,
-        "watch_window_reference_price_jpy": null,
-        "watch_window_reference_at": null,
-        "pre_black_friday_reference_price_jpy": null,
-        "pre_black_friday_reference_at": null,
-        "catalog_reference_price_jpy": 319800,
-        "price_reference_kind": "CATALOG_REFERENCE_ONLY",
-        "scenario_base_price_jpy": 319800,
-        "scenario_base_note": "セール前の参考額を基準にした仮想割引。BF実売価格・値下げ確率ではない",
-        "scenario_prices": [
-          {
-            "discount_pct": 0,
-            "price_jpy": 319800
-          },
-          {
-            "discount_pct": 5,
-            "price_jpy": 303810
-          },
-          {
-            "discount_pct": 10,
-            "price_jpy": 287820
-          },
-          {
-            "discount_pct": 15,
-            "price_jpy": 271830
-          },
-          {
-            "discount_pct": 20,
-            "price_jpy": 255840
-          },
-          {
-            "discount_pct": 25,
-            "price_jpy": 239850
-          },
-          {
-            "discount_pct": 30,
-            "price_jpy": 223860
-          },
-          {
-            "discount_pct": 35,
-            "price_jpy": 207870
-          },
-          {
-            "discount_pct": 40,
-            "price_jpy": 191880
-          },
-          {
-            "discount_pct": 45,
-            "price_jpy": 175890
-          }
-        ],
-        "discount_needed_to_bf_target_jpy": 0,
-        "discount_needed_to_bf_target_pct": 0.0,
-        "discount_needed_to_planned_cap_jpy": 0,
-        "discount_needed_to_planned_cap_pct": 0.0,
-        "is_rtx_5070_ti_outlier": false,
-        "configuration_ready": true,
-        "configuration_reasons": [],
-        "catalog_configuration_ready": true,
-        "catalog_configuration_reasons": [],
-        "complete_build_target_comparable": true,
-        "stock_status": "unknown",
-        "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/"
-      },
-      {
         "id": "gtune-p5-13620h-5070",
-        "name": "G TUNE P5-I7G70BK-C",
+        "name": "G TUNE P5-I7G70BK-C（ブラック）",
         "form_factor": "laptop",
         "gpu": "RTX 5070 Laptop GPU",
         "ram_gb": 32,
@@ -640,6 +563,83 @@
         "complete_build_target_comparable": true,
         "stock_status": "unknown",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-p6i7g70bkbcdw101deckk/"
+      },
+      {
+        "id": "desktop-gtune-fg-a7g70-5070",
+        "name": "G TUNE FG-A7G70",
+        "form_factor": "desktop",
+        "gpu": "RTX 5070",
+        "ram_gb": 32,
+        "ssd": "1 TB",
+        "black_friday_target_price_jpy": 360000,
+        "black_friday_price_observed_jpy": null,
+        "black_friday_offer_verified": false,
+        "retailer_key": "mouse_computer",
+        "retailer_campaign_status": "UNCONFIRMED",
+        "retailer_campaign_start_jst": null,
+        "retailer_campaign_end_jst": null,
+        "watch_window_reference_price_jpy": 374800,
+        "watch_window_reference_at": "2026-11-04T18:25:04+09:00",
+        "pre_black_friday_reference_price_jpy": null,
+        "pre_black_friday_reference_at": null,
+        "catalog_reference_price_jpy": 319800,
+        "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
+        "scenario_base_price_jpy": 374800,
+        "scenario_base_note": "暫定監視窓内の参考価格を基準にした仮想割引。公式BF実売価格・値下げ確率ではない",
+        "scenario_prices": [
+          {
+            "discount_pct": 0,
+            "price_jpy": 374800
+          },
+          {
+            "discount_pct": 5,
+            "price_jpy": 356060
+          },
+          {
+            "discount_pct": 10,
+            "price_jpy": 337320
+          },
+          {
+            "discount_pct": 15,
+            "price_jpy": 318580
+          },
+          {
+            "discount_pct": 20,
+            "price_jpy": 299840
+          },
+          {
+            "discount_pct": 25,
+            "price_jpy": 281100
+          },
+          {
+            "discount_pct": 30,
+            "price_jpy": 262360
+          },
+          {
+            "discount_pct": 35,
+            "price_jpy": 243620
+          },
+          {
+            "discount_pct": 40,
+            "price_jpy": 224880
+          },
+          {
+            "discount_pct": 45,
+            "price_jpy": 206140
+          }
+        ],
+        "discount_needed_to_bf_target_jpy": 14800,
+        "discount_needed_to_bf_target_pct": 3.9,
+        "discount_needed_to_planned_cap_jpy": 0,
+        "discount_needed_to_planned_cap_pct": 0.0,
+        "is_rtx_5070_ti_outlier": false,
+        "configuration_ready": true,
+        "configuration_reasons": [],
+        "catalog_configuration_ready": true,
+        "catalog_configuration_reasons": [],
+        "complete_build_target_comparable": true,
+        "stock_status": "in_stock",
+        "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g70g8bddw101decwa/"
       },
       {
         "id": "gigabyte-a18-pro-240h-5070ti",
@@ -1270,12 +1270,12 @@
         "retailer_campaign_status": "UNCONFIRMED",
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
-        "watch_window_reference_price_jpy": null,
-        "watch_window_reference_at": null,
+        "watch_window_reference_price_jpy": 194800,
+        "watch_window_reference_at": "2026-11-04T18:25:04+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 194800,
-        "price_reference_kind": "CATALOG_REFERENCE_ONLY",
+        "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
         "scenario_base_price_jpy": 194800,
         "scenario_base_note": "基本構成の参考額。RAM/SSD構成変更費を含まないため完成構成のBF目標と比較不可",
         "scenario_prices": [
@@ -1336,7 +1336,7 @@
           "SSD 500GB<1000GB"
         ],
         "complete_build_target_comparable": false,
-        "stock_status": "unknown",
+        "stock_status": "in_stock",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dga5g60b5badw102decwa/"
       },
       {
@@ -1353,12 +1353,12 @@
         "retailer_campaign_status": "UNCONFIRMED",
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
-        "watch_window_reference_price_jpy": null,
-        "watch_window_reference_at": null,
+        "watch_window_reference_price_jpy": 279800,
+        "watch_window_reference_at": "2026-11-04T18:25:04+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 279800,
-        "price_reference_kind": "CATALOG_REFERENCE_ONLY",
+        "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
         "scenario_base_price_jpy": 279800,
         "scenario_base_note": "基本構成の参考額。RAM/SSD構成変更費を含まないため完成構成のBF目標と比較不可",
         "scenario_prices": [
@@ -1419,7 +1419,7 @@
           "SSD 500GB<1000GB"
         ],
         "complete_build_target_comparable": false,
-        "stock_status": "unknown",
+        "stock_status": "in_stock",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi5g70b8bgdw102decrise/"
       },
       {
@@ -1436,12 +1436,12 @@
         "retailer_campaign_status": "UNCONFIRMED",
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
-        "watch_window_reference_price_jpy": null,
-        "watch_window_reference_at": null,
+        "watch_window_reference_price_jpy": 299800,
+        "watch_window_reference_at": "2026-11-04T18:25:04+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 299800,
-        "price_reference_kind": "CATALOG_REFERENCE_ONLY",
+        "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
         "scenario_base_price_jpy": 299800,
         "scenario_base_note": "基本構成の参考額。RAM/SSD構成変更費を含まないため完成構成のBF目標と比較不可",
         "scenario_prices": [
@@ -1502,7 +1502,7 @@
           "SSD 500GB<1000GB"
         ],
         "complete_build_target_comparable": false,
-        "stock_status": "unknown",
+        "stock_status": "in_stock",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-dgi7g70b8bgdw102decrise/"
       },
       {
@@ -1628,7 +1628,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 279980,
-        "watch_window_reference_at": "2026-11-04T11:26:59+09:00",
+        "watch_window_reference_at": "2026-11-04T18:25:04+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 279980,
@@ -1772,7 +1772,7 @@
         "catalog_configuration_ready": true,
         "catalog_configuration_reasons": [],
         "complete_build_target_comparable": true,
-        "stock_status": "unknown",
+        "stock_status": "out_of_stock",
         "purchase_url": "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g7tg8bddw101dectgst/"
       }
     ],
@@ -1786,6 +1786,129 @@
   },
   "note": "BF purchase targets, pre-BF references, observed BF prices, and arithmetic discount scenarios are separate. Scenario bands are not probabilities.",
   "rows": [
+    {
+      "id": "desktop-gtune-dg-i7g70-5070",
+      "name": "G TUNE DG-I7G70",
+      "form_factor": "desktop",
+      "current_price_jpy": 299800,
+      "reference_price_jpy": 299800,
+      "reference_only": false,
+      "required_discount_pct": 0.0,
+      "historical_floor_jpy": 219800,
+      "historical_floor_strength": "same_gpu",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 269800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 254800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 239800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 224800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 209900
+        }
+      ],
+      "first_pc_target_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 269800
+      },
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "desktop-gtune-dg-i5g70-5070",
+      "name": "G TUNE DG-I5G70",
+      "form_factor": "desktop",
+      "current_price_jpy": 279800,
+      "reference_price_jpy": 279800,
+      "reference_only": false,
+      "required_discount_pct": 0.0,
+      "historical_floor_jpy": 219800,
+      "historical_floor_strength": "same_gpu",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 251800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 237800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 223800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 209800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 195900
+        }
+      ],
+      "first_pc_target_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 251800
+      },
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "gtune-p6-13700hx-5070",
+      "name": "G TUNE P6-I7G70BK-B",
+      "form_factor": "laptop",
+      "current_price_jpy": 284700,
+      "reference_price_jpy": 284700,
+      "reference_only": false,
+      "required_discount_pct": 0.0,
+      "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 256200
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 242000
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 227800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 213500
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 199300
+        }
+      ],
+      "first_pc_target_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 256200
+      },
+      "stock_status": "unknown",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
     {
       "id": "desktop-dospara-ad-r7a56c-0aw-5060ti16",
       "name": "THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060 Ti 16GB)",
@@ -1824,6 +1947,170 @@
       },
       "stock_status": "in_stock",
       "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "desktop-gtune-dg-a5g60-5060",
+      "name": "G TUNE DG-A5G60",
+      "form_factor": "desktop",
+      "current_price_jpy": 194800,
+      "reference_price_jpy": 194800,
+      "reference_only": false,
+      "required_discount_pct": 0.0,
+      "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 175300
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 165600
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 155800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 146100
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 136400
+        }
+      ],
+      "first_pc_target_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 175300
+      },
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "desktop-gtune-fg-a7g70-5070",
+      "name": "G TUNE FG-A7G70",
+      "form_factor": "desktop",
+      "current_price_jpy": 374800,
+      "reference_price_jpy": 319800,
+      "reference_only": false,
+      "required_discount_pct": 3.9,
+      "historical_floor_jpy": 219800,
+      "historical_floor_strength": "same_gpu",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 337300
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 318600
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 299800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 281100
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 262400
+        }
+      ],
+      "first_pc_target_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 337300
+      },
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "desktop-gtune-fg-a7g7t-5070ti",
+      "name": "G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）",
+      "form_factor": "desktop",
+      "current_price_jpy": 399800,
+      "reference_price_jpy": 399800,
+      "reference_only": false,
+      "required_discount_pct": 10.0,
+      "historical_floor_jpy": 299800,
+      "historical_floor_strength": "same_gpu",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 359800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 339800
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 319800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 299800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 279900
+        }
+      ],
+      "first_pc_target_scenario": {
+        "discount_pct": 10,
+        "price_jpy": 359800
+      },
+      "stock_status": "out_of_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "desktop-gtune-fg-a7g6t-5060ti16",
+      "name": "G TUNE FG-A7G6T",
+      "form_factor": "desktop",
+      "current_price_jpy": 406182,
+      "reference_price_jpy": 309800,
+      "reference_only": false,
+      "required_discount_pct": 11.4,
+      "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 365600
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 345300
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 324900
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 304600
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 284300
+        }
+      ],
+      "first_pc_target_scenario": {
+        "discount_pct": 15,
+        "price_jpy": 345300
+      },
+      "stock_status": "unknown",
+      "price_source_mode": "direct_text",
       "price_validation_status": "validated",
       "dynamic_candidate": false
     },
@@ -1869,6 +2156,47 @@
       "dynamic_candidate": false
     },
     {
+      "id": "gtune-p5-13620h-5070",
+      "name": "G TUNE P5-I7G70BK-C（ブラック）",
+      "form_factor": "laptop",
+      "current_price_jpy": 448800,
+      "reference_price_jpy": 329800,
+      "reference_only": false,
+      "required_discount_pct": 19.8,
+      "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 403900
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 381500
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 359000
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 336600
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 314200
+        }
+      ],
+      "first_pc_target_scenario": {
+        "discount_pct": 20,
+        "price_jpy": 359000
+      },
+      "stock_status": "unknown",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
       "id": "galleria-zl9r-9955hx-5070ti",
       "name": "GALLERIA ZL9R-R57T-6-B",
       "form_factor": "laptop",
@@ -1907,90 +2235,8 @@
       "dynamic_candidate": false
     },
     {
-      "id": "desktop-gtune-dg-i7g70-5070",
-      "name": "G TUNE DG-I7G70",
-      "form_factor": "desktop",
-      "current_price_jpy": null,
-      "reference_price_jpy": 299800,
-      "reference_only": true,
-      "required_discount_pct": 0.0,
-      "historical_floor_jpy": 219800,
-      "historical_floor_strength": "same_gpu",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 269800
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 254800
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 239800
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 224800
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 209900
-        }
-      ],
-      "first_pc_target_scenario": {
-        "discount_pct": 10,
-        "price_jpy": 269800
-      },
-      "stock_status": "unknown",
-      "price_source_mode": "public_baseline",
-      "price_validation_status": "reference_only",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "desktop-gtune-dg-i5g70-5070",
-      "name": "G TUNE DG-I5G70",
-      "form_factor": "desktop",
-      "current_price_jpy": null,
-      "reference_price_jpy": 279800,
-      "reference_only": true,
-      "required_discount_pct": 0.0,
-      "historical_floor_jpy": 219800,
-      "historical_floor_strength": "same_gpu",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 251800
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 237800
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 223800
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 209800
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 195900
-        }
-      ],
-      "first_pc_target_scenario": {
-        "discount_pct": 10,
-        "price_jpy": 251800
-      },
-      "stock_status": "unknown",
-      "price_source_mode": "public_baseline",
-      "price_validation_status": "reference_only",
-      "dynamic_candidate": false
-    },
-    {
       "id": "desktop-gtune-dg-a7g70-5070",
-      "name": "G TUNE DG-A7G70 (official outlet; Ryzen 7 5700X / RTX 5070)",
+      "name": "G TUNE DG-A7G70",
       "form_factor": "desktop",
       "current_price_jpy": null,
       "reference_price_jpy": 304800,
@@ -2025,254 +2271,8 @@
         "price_jpy": 274300
       },
       "stock_status": "unknown",
-      "price_source_mode": "public_baseline",
-      "price_validation_status": "reference_only",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "desktop-gtune-fg-a7g70-5070",
-      "name": "G TUNE FG-A7G70",
-      "form_factor": "desktop",
-      "current_price_jpy": null,
-      "reference_price_jpy": 319800,
-      "reference_only": true,
-      "required_discount_pct": 0.0,
-      "historical_floor_jpy": 219800,
-      "historical_floor_strength": "same_gpu",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 287800
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 271800
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 255800
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 239800
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 223900
-        }
-      ],
-      "first_pc_target_scenario": {
-        "discount_pct": 10,
-        "price_jpy": 287800
-      },
-      "stock_status": "unknown",
-      "price_source_mode": "public_baseline",
-      "price_validation_status": "reference_only",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "gtune-p6-13700hx-5070",
-      "name": "G TUNE P6-I7G70BK-B",
-      "form_factor": "laptop",
-      "current_price_jpy": null,
-      "reference_price_jpy": 284700,
-      "reference_only": true,
-      "required_discount_pct": 0.0,
-      "historical_floor_jpy": null,
-      "historical_floor_strength": "none",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 256200
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 242000
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 227800
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 213500
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 199300
-        }
-      ],
-      "first_pc_target_scenario": {
-        "discount_pct": 10,
-        "price_jpy": 256200
-      },
-      "stock_status": "unknown",
-      "price_source_mode": "public_baseline",
-      "price_validation_status": "reference_only",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "gtune-p5-13620h-5070",
-      "name": "G TUNE P5-I7G70BK-C",
-      "form_factor": "laptop",
-      "current_price_jpy": null,
-      "reference_price_jpy": 329800,
-      "reference_only": true,
-      "required_discount_pct": 0.0,
-      "historical_floor_jpy": null,
-      "historical_floor_strength": "none",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 296800
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 280300
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 263800
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 247400
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 230900
-        }
-      ],
-      "first_pc_target_scenario": {
-        "discount_pct": 10,
-        "price_jpy": 296800
-      },
-      "stock_status": "unknown",
-      "price_source_mode": "public_baseline",
-      "price_validation_status": "reference_only",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "desktop-gtune-fg-a7g6t-5060ti16",
-      "name": "G TUNE FG-A7G6T (RTX 5060 Ti 16GB / Ryzen 7 7700)",
-      "form_factor": "desktop",
-      "current_price_jpy": null,
-      "reference_price_jpy": 309800,
-      "reference_only": true,
-      "required_discount_pct": 0.0,
-      "historical_floor_jpy": null,
-      "historical_floor_strength": "none",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 278800
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 263300
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 247800
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 232400
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 216900
-        }
-      ],
-      "first_pc_target_scenario": {
-        "discount_pct": 10,
-        "price_jpy": 278800
-      },
-      "stock_status": "unknown",
-      "price_source_mode": "public_baseline",
-      "price_validation_status": "reference_only",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "desktop-gtune-dg-a5g60-5060",
-      "name": "G TUNE DG-A5G60",
-      "form_factor": "desktop",
-      "current_price_jpy": null,
-      "reference_price_jpy": 194800,
-      "reference_only": true,
-      "required_discount_pct": 0.0,
-      "historical_floor_jpy": null,
-      "historical_floor_strength": "none",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 175300
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 165600
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 155800
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 146100
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 136400
-        }
-      ],
-      "first_pc_target_scenario": {
-        "discount_pct": 10,
-        "price_jpy": 175300
-      },
-      "stock_status": "unknown",
-      "price_source_mode": "public_baseline",
-      "price_validation_status": "reference_only",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "desktop-gtune-fg-a7g7t-5070ti",
-      "name": "G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）",
-      "form_factor": "desktop",
-      "current_price_jpy": null,
-      "reference_price_jpy": 399800,
-      "reference_only": true,
-      "required_discount_pct": 10.0,
-      "historical_floor_jpy": 299800,
-      "historical_floor_strength": "same_gpu",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 359800
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 339800
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 319800
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 299800
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 279900
-        }
-      ],
-      "first_pc_target_scenario": {
-        "discount_pct": 10,
-        "price_jpy": 359800
-      },
-      "stock_status": "unknown",
-      "price_source_mode": "public_baseline",
-      "price_validation_status": "reference_only",
+      "price_source_mode": "direct_text",
+      "price_validation_status": "anomaly_rejected",
       "dynamic_candidate": false
     },
     {
