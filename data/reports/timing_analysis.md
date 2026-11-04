@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-11-05T07:48:54+09:00
-Source snapshot: 2026-11-05T07:44:33+09:00
-Source snapshot SHA256: a1c377313a98797835aa8a7fd5bf7017e2388aab5f7693de855dfe8ef089b6cc
+Generated: 2026-11-05T08:33:04+09:00
+Source snapshot: 2026-11-05T08:27:33+09:00
+Source snapshot SHA256: 98e93793d85a7c7cce4f084a347e1ef587905be80acfcaa1b2b8f5a379da53f1
 Budget: ¥360,000
 U.S. Black Friday calendar reference only (not official retailer sale dates): 2026-11-27
 
@@ -14,19 +14,20 @@ The primary purchase method is self-build. These completed-PC listings are price
 |---:|---|---:|---:|---|---|---:|---|
 |1|G TUNE P6-I7G70BK-B|¥284,700|0.0%|HIGH|rtx 5070|35|direct_structured|
 |2|G TUNE DG-I7G70|¥299,800|0.0%|HIGH|rtx 5070|32|direct_structured|
-|3|G TUNE DG-I5G70|¥279,800|0.0%|HIGH|rtx 5070|22|direct_structured|
-|4|THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060 Ti 16G|¥279,980|0.0%|HIGH|rtx 5060 ti|22|direct_structured|
-|5|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
-|6|G TUNE FG-A7G70|¥374,800|3.9%|HIGH|rtx 5070|33|direct_structured|
-|7|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|10.0%|HIGH|rtx 5070 ti|38|direct_structured|
-|8|G TUNE FG-A7G6T|¥406,182|11.4%|REALISTIC|rtx 5060 ti|28|direct_text|
-|9|GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|¥419,800|14.2%|REALISTIC|rtx 5070 ti|29|direct_structured|
-|10|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|19.8%|REALISTIC|rtx 5070|32|direct_structured|
-|11|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|VERY_LOW|rtx 5070 ti|40|direct_structured|
+|3|G TUNE DG-A7G70|¥321,900|0.0%|HIGH|rtx 5070|26|direct_text|
+|4|G TUNE DG-I5G70|¥279,800|0.0%|HIGH|rtx 5070|22|direct_structured|
+|5|THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060 Ti 16G|¥279,980|0.0%|HIGH|rtx 5060 ti|22|direct_structured|
+|6|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
+|7|G TUNE FG-A7G6T|¥363,900|1.1%|HIGH|rtx 5060 ti|28|direct_text|
+|8|G TUNE FG-A7G70|¥374,800|3.9%|HIGH|rtx 5070|33|direct_structured|
+|9|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|10.0%|HIGH|rtx 5070 ti|38|direct_structured|
+|10|GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|¥419,800|14.2%|REALISTIC|rtx 5070 ti|29|direct_structured|
+|11|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|19.8%|REALISTIC|rtx 5070|32|direct_structured|
+|12|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|VERY_LOW|rtx 5070 ti|40|direct_structured|
 
 ## Empirical price-change timing
 
-- Meaningful change sample: **13**
+- Meaningful change sample: **14**
 - **観測不足:** 20件未満なので時間帯の傾向は作りません。
 
 ## Historical anchors
@@ -42,14 +43,14 @@ The primary purchase method is self-build. These completed-PC listings are price
 ## BF window observation ledger
 
 - Ledger: data/buy_now_observations.jsonl
-- Rows loaded: 209
+- Rows loaded: 214
 - Rows appended this run: 5
 - Only in-stock/low-stock, exact-identity, direct-structured and PIT-valid observations are added.
 
 ## Current buy-now decision
 
-- Status: **公式セール日程の確認待ち** (WAIT_FOR_OFFICIAL_DATES)
-- Recommendation: 価格監視は継続中ですが、対象販売店の2026年公式セール日程が未確認です。暫定の広域監視窓だけではBF実売として扱わず、公式日付確認前に購入推奨を出しません。
+- Status: **データ確認が揃うまで判断保留** (WAIT_FOR_VERIFICATION)
+- Recommendation: 価格・在庫・完成構成・周辺機器込み予算・重要候補の確認が不足しています。取得失敗を売り切れとみなさず、確認できた時点で再判定します。
 - Full detail: data/reports/buy-now-now.md
 - The timing score is a heuristic priority signal, not a probability forecast.
 
