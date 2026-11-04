@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-11-05T02:34:01+09:00
-Source snapshot: 2026-11-05T02:27:39+09:00
-Source snapshot SHA256: e413d4495e0c36eb3ddfbce8d6234abd306b7d378e74dbcce149b9ceb6241d53
+Generated: 2026-11-05T07:48:54+09:00
+Source snapshot: 2026-11-05T07:44:33+09:00
+Source snapshot SHA256: a1c377313a98797835aa8a7fd5bf7017e2388aab5f7693de855dfe8ef089b6cc
 Budget: ¥360,000
 U.S. Black Friday calendar reference only (not official retailer sale dates): 2026-11-27
 
@@ -42,7 +42,7 @@ The primary purchase method is self-build. These completed-PC listings are price
 ## BF window observation ledger
 
 - Ledger: data/buy_now_observations.jsonl
-- Rows loaded: 204
+- Rows loaded: 209
 - Rows appended this run: 5
 - Only in-stock/low-stock, exact-identity, direct-structured and PIT-valid observations are added.
 
