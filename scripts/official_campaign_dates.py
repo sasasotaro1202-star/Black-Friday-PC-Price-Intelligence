@@ -17,11 +17,12 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JST = timezone(timedelta(hours=9))
 OUTPUT = os.path.join(ROOT, "data", "official_campaign_dates_status.json")
 CACHE_HOURS = 6
-SCANNER_VERSION = 3
+SCANNER_VERSION = 4
 DATE_RANGE = re.compile(
     r"(?P<year>2026)\s*(?:年|[./-])\s*(?P<month>\d{1,2})\s*(?:月|[./-])\s*(?P<day>\d{1,2})\s*日?"
     r"\s*(?:\([^)]{0,30}\))?\s*(?:(?P<start_hour>\d{1,2}):(?P<start_minute>\d{2}))?\s*"
     r"(?:～|〜|~|–|—|－|-|から|to|through)\s*"
+    r"(?:同\s*)?"
     r"(?:(?P<end_year>2026)\s*(?:年|[./-])\s*)?"
     r"(?P<end_month>\d{1,2})\s*(?:月|[./-])\s*(?P<end_day>\d{1,2})\s*日?"
     r"\s*(?:\([^)]{0,30}\))?\s*(?:(?P<end_hour>\d{1,2}):(?P<end_minute>\d{2}))?",
@@ -36,6 +37,7 @@ DATE_RANGE_WITHOUT_YEAR = re.compile(
     r"(?P<month>\d{1,2})\s*(?:月|[./-])\s*(?P<day>\d{1,2})\s*日?"
     r"\s*(?:\([^)]{0,30}\))?\s*(?:(?P<start_hour>\d{1,2}):(?P<start_minute>\d{2}))?\s*"
     r"(?:～|〜|~|–|—|－|-|から|to|through)\s*"
+    r"(?:同\s*)?"
     r"(?P<end_month>\d{1,2})\s*(?:月|[./-])\s*(?P<end_day>\d{1,2})\s*日?"
     r"\s*(?:\([^)]{0,30}\))?\s*(?:(?P<end_hour>\d{1,2}):(?P<end_minute>\d{2}))?",
     re.IGNORECASE,
