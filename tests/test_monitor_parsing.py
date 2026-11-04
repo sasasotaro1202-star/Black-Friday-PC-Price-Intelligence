@@ -350,6 +350,51 @@ class MonitorParsingTests(unittest.TestCase):
         self.assertIsNotNone(picked)
         self.assertEqual(picked["price_jpy"], 329800)
 
+    def test_tax_exclusive_price_is_not_selected_as_a_current_price(self):
+        self.assertTrue(
+            intelligence.price_has_tax_exclusive_label("税抜 406,182円", 406182)
+        )
+        self.assertFalse(
+            intelligence.price_has_tax_exclusive_label("363,900円（税込）", 363900)
+        )
+        self.assertIsNone(intelligence.pick_price("G TUNE FG-A7G7T 税抜 406,182円"))
+
+    def test_product_page_price_is_scoped_to_the_exact_sku_not_a_sibling_variant(self):
+        expected = {
+            "name": "G TUNE FG-A7G6T",
+            "model_code": "FGA7G6TG8BDDW101DECWA",
+            "aliases": ["FG-A7G6T"],
+        }
+        html = """
+        <script type="application/ld+json">
+        {"@type":"Product","name":"G TUNE FG-A7G6T FGA7G6TG8BDDW101DECWA",
+         "offers":{"price":"406182","priceCurrency":"JPY",
+                   "availability":"https://schema.org/InStock"}}
+        </script>
+        WEB販売価格 G TUNE FG-A7G6T FGA7G6TG8BDDW101DECWA 363,900円（税込）
+        """ + ("関連モデル一覧 " * 20) + """
+        G TUNE FG-A7G7T FGA7G7TG8BDDW102DECWA 446,800円～ 税抜406,182円～
+        """
+        result = monitor.parse_page(
+            "https://www.mouse-jp.co.jp/store/g/ggtune-fga7g6tg8bddw101decwa",
+            html,
+            expected=expected,
+        )
+        self.assertEqual(result["price_jpy"], 363900)
+        self.assertEqual(result["price_source_mode"], "direct_text")
+        self.assertIn("FGA7G6TG8BDDW101DECWA", result["price_context"])
+
+    def test_sibling_variant_price_is_not_used_when_expected_sku_is_absent(self):
+        expected = {
+            "name": "G TUNE FG-A7G6T",
+            "model_code": "FGA7G6TG8BDDW101DECWA",
+            "aliases": ["FG-A7G6T"],
+        }
+        html = """
+        G TUNE FG-A7G7T FGA7G7TG8BDDW102DECWA 446,800円～ 税抜406,182円～
+        """
+        self.assertIsNone(monitor.pick_product_page_price(html, expected))
+
     def test_matching_jsonld_offer_preserves_seller_name(self):
         html = """
         <script type="application/ld+json">

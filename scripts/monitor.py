@@ -16,6 +16,7 @@ from urllib.request import Request, urlopen
 from intelligence import (
     ROOT, JST, load_json, save_json, load_catalog, now_jst,
     norm_text, pick_price, price_candidates, validate_price,
+    price_has_tax_exclusive_label,
     enrich_identity, iso, plausible_floor, PRICE_NAVIGATION_CONTEXT
 )
 
@@ -792,6 +793,41 @@ def extract_benefit_signals(text):
     return signals
 
 
+def pick_product_page_price(text, expected=None):
+    """Pick direct-text prices only when the local context identifies the expected SKU.
+
+    Retailer product pages can contain a related-model lineup below the requested
+    product. When several prices appear, a sibling SKU's price must not be used
+    merely because it is on the same page. Ambiguous pages fail closed.
+    """
+    candidates = price_candidates(text)
+    if not candidates:
+        return None
+    expected = expected if isinstance(expected, dict) else {}
+    anchors = []
+    if expected.get("model_code"):
+        anchors.append(str(expected["model_code"]))
+    anchors.extend(str(x) for x in (expected.get("aliases") or []) if x)
+    if expected.get("name"):
+        anchors.append(str(expected["name"]))
+    normalized_anchors = [
+        _normalized_model_anchor(anchor)
+        for anchor in anchors
+        if len(_normalized_model_anchor(anchor)) >= 5
+    ]
+    if not normalized_anchors:
+        return candidates[0] if len(candidates) == 1 else None
+
+    anchored = [
+        candidate for candidate in candidates
+        if any(
+            anchor in _normalized_model_anchor(candidate.get("context") or "")
+            for anchor in normalized_anchors
+        )
+    ]
+    return anchored[0] if anchored else None
+
+
 def parse_page(url, html, expected=None):
     text_html = re.sub(r"<script[^>]*>.*?</script>", " ", html, flags=re.I | re.S)
     text_html = re.sub(r"<style[^>]*>.*?</style>", " ", text_html, flags=re.I | re.S)
@@ -961,12 +997,12 @@ def parse_page(url, html, expected=None):
     picked = None
     if price_ambiguity:
         picked = None
-    elif structured_price:
+    elif structured_price and not price_has_tax_exclusive_label(text_html, structured_price):
         picked = {"price_jpy": structured_price, "source": "direct_structured"}
-    elif meta_price:
+    elif meta_price and not price_has_tax_exclusive_label(text_html, meta_price):
         picked = {"price_jpy": meta_price, "source": "direct_meta"}
     else:
-        raw = pick_price(text_html)
+        raw = pick_product_page_price(text_html, expected)
         if raw:
             picked = {"price_jpy": raw["price_jpy"], "source": "direct_text", "context": raw["context"]}
 
