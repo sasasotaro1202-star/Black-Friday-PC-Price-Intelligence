@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T11:26:59+09:00",
+  "generated_at": "2026-11-05T11:50:59+09:00",
   "urls": [
     {
       "url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/",
@@ -134,7 +134,7 @@
       "priority": "normal"
     }
   ],
-  "last_discovery_attempt_at": "2026-11-04T11:26:59+09:00",
+  "last_discovery_attempt_at": "2026-11-05T11:50:59+09:00",
   "discovery_status": "ok",
   "discovery_error": null,
   "desktop_included": true,
@@ -157,31 +157,31 @@
     "failures": [
       {
         "query": "64GB RAM 2TB SSD Ryzen 9 RTX 5070 Python データ分析 ゲーム開発 デスクトップ",
-        "error_type": "HTTPError"
+        "error_type": "ConnectionResetError"
       },
       {
         "query": "Ryzen 9 9900X 64GB 2TB RTX 5070 ローカルAI Python 予測分析 PC 日本",
-        "error_type": "HTTPError"
+        "error_type": "URLError"
       },
       {
         "query": "Ryzen 7 9700X 64GB DDR5 2TB SSD データ分析 ゲーム制作 デスクトップ",
-        "error_type": "HTTPError"
+        "error_type": "URLError"
       },
       {
         "query": "RTX 5060 Ti 16GB 64GB 2TB Python ローカルAI ゲーム開発 自作PC",
-        "error_type": "HTTPError"
+        "error_type": "URLError"
       },
       {
         "query": "Core Ultra 7 RTX 5070 64GB 2TB データ分析 Unity Unreal PC 日本",
-        "error_type": "HTTPError"
+        "error_type": "URLError"
       },
       {
         "query": "Ryzen 9 9950X RTX 5070 64GB 2TB シミュレーション Python 自作PC",
-        "error_type": "HTTPError"
+        "error_type": "URLError"
       },
       {
         "query": "THIRDWAVE AD-R7A56C-0AW Ryzen 7 7700 RTX 5060 Ti 16GB 32GB 1TB ブラックフライデー先取り ドスパラ",
-        "error_type": "HTTPError"
+        "error_type": "URLError"
       }
     ]
   }
