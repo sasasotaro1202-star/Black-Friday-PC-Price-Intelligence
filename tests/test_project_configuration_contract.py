@@ -785,10 +785,10 @@ class ProjectConfigurationContractTests(unittest.TestCase):
     def test_monitor_workflow_has_one_cadence_switch_and_fast_workflow_is_manual(self):
         regular = read_text(".github/workflows/pc-price-monitor.yml")
         fast = read_text(".github/workflows/pc-price-monitor-bf-fast.yml")
-        self.assertIn('cron: "3-59/5 * * * *"', regular)
+        self.assertIn('cron: "3/5 * * * *"', regular)
         self.assertIn('cron: "7,22,37,52 * * * *"', regular)
         self.assertIn(
-            'expected_cron = "3-59/5 * * * *" if in_watch_window else "7,22,37,52 * * * *"',
+            'expected_cron = "3/5 * * * *" if in_watch_window else "7,22,37,52 * * * *"',
             regular,
         )
         self.assertIn("workflow_dispatch:", fast)
