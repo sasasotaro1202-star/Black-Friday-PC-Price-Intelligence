@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-06T11:53:53+09:00",
+  "generated_at": "2026-11-07T12:02:09+09:00",
   "urls": [
     {
       "url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/",
@@ -134,7 +134,7 @@
       "priority": "normal"
     }
   ],
-  "last_discovery_attempt_at": "2026-11-06T11:53:53+09:00",
+  "last_discovery_attempt_at": "2026-11-07T12:02:09+09:00",
   "discovery_status": "ok",
   "discovery_error": null,
   "desktop_included": true,
@@ -156,12 +156,12 @@
     "returned_url_count": 0,
     "failures": [
       {
-        "query": "G TUNE FG-A7G6T FGA7G6TG8BDDW101DECWA Ryzen 7 7700 RTX 5060 Ti 16GB 32GB 1TB デスクトップ 日本",
-        "error_type": "URLError"
+        "query": "64GB RAM 2TB SSD Ryzen 9 RTX 5070 Python データ分析 ゲーム開発 デスクトップ",
+        "error_type": "HTTPError"
       },
       {
-        "query": "ROG Strix G16 Ryzen 9 9955HX3D RTX 5070 Ti 32GB 1TB 日本",
-        "error_type": "URLError"
+        "query": "Ryzen 9 9900X 64GB 2TB RTX 5070 ローカルAI Python 予測分析 PC 日本",
+        "error_type": "HTTPError"
       },
       {
         "query": "Ryzen 7 9700X 64GB DDR5 2TB SSD データ分析 ゲーム制作 デスクトップ",
