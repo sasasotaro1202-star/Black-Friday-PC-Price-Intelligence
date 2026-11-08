@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-20",
-  "purpose": "Pre-Black-Friday purchase-review triggers. Thresholds start a manual review only; they are neither forecasts nor purchase permission. ¥400,000 is the all-in target with a ¥420,000 initial soft band; the ¥350,000/¥370,000 and ¥450,000/¥470,000 scenarios remain separate.",
-  "total_budget_hard_cap_jpy": null,
+  "updated_at": "2026-11-08",
+  "purpose": "2026年ブラックフライデー期間内に総額450,000円を主予算として購入するための検証ポリシー。35万円と40万円/42万円のシナリオは比較用。前倒し購入は行わず、閾値は価格監視の参考情報に限定する。450,000円にはPC本体、必須周辺機器、送料/小物、5,000円の総額予備費を含む。",
+  "total_budget_hard_cap_jpy": 450000,
   "unallocated_contingency_jpy": 5000,
   "max_observation_age_minutes": 120,
   "rules": [
@@ -170,31 +170,41 @@
     }
   ],
   "gate_rules": [
-    "A threshold hit is an EARLY_BUY_REVIEW alert, never an automatic purchase authorization.",
-    "Only exact-model, direct-page price evidence with valid observation time may trigger a review; comparison search snippets, points, coupons not applied at checkout, stale prices and ambiguous variants do not trigger.",
-    "For components, require identity match, valid point-in-time evidence and a current in-stock/low-stock status before labeling a trigger actionable.",
-    "Before buying, verify final checkout price, shipping, stock, seller, warranty, returns, SKU and compatibility.",
-    "Recalculate the complete PC plus required peripherals, shipping/small parts and ¥5,000 contingency after every proposed early purchase. Compare the ¥400,000 all-in target and the ¥420,000 initial soft ceiling; modest overrun may be justified by measurable workload benefits. Do not compare only the PC body or hide required peripheral costs.",
-    "Keep the ¥350,000 target / ¥370,000 soft band, ¥400,000 target / ¥420,000 soft band, and ¥450,000 target / ¥470,000 soft band as separate complete-system scenarios. Do not force all tiers into the ¥400,000 target.",
-    "Do not assume that the rest of the build can later be upgraded for free. RAM must be at least 32GB and SSD at least 1TB at purchase; 64GB/2TB are substitutions only when the exact final build fits.",
-    "Wait when an early target is not met. Black Friday is not guaranteed to have the lowest price, and a target is not a forecast."
+    "購入時期は2026年ブラックフライデー期間内のみ。期間前の価格トリガー到達は監視・比較用アラートに限定し、前倒し購入候補や購入許可を出さない。",
+    "2026年の公式キャンペーン期間は販売店ごとに一次情報で確認する。年付き日付範囲が確認できない販売店の価格を公式BF実売として扱わない。",
+    "価格・在庫・型番・PITが揃った直接ページの証拠のみを購入判断に使用する。比較サイトのスニペット、ポイント、未適用クーポン、古い価格、曖昧なSKUは決済価格として採用しない。",
+    "購入前に正確な型番、販売元、販売可能在庫、取得時刻、税込最終決済額、送料、保証/返品、互換性を確認する。",
+    "PC部品は全必須部品を同一完成構成として積算する。RAMは32GB以上、SSDは1TB以上を購入時点で満たす。64GB/2TBは全構成総額と互換性が確認できた場合だけ採用し、購入後増設を前提に合格扱いしない。",
+    "総額450,000円を主予算・評価上限とする。PC本体、周辺機器、送料/小物、総額予備費5,000円を含む。周辺機器35,000円は参考配分で、実支出からPC本体上限を動的に再計算する。",
+    "35万円・40万円（明確な性能向上がある場合のみ42万円まで）は比較用シナリオ。45万円シナリオを主比較にする。上限超過案は比較用に残すが、購入許可・予算内扱いにしない。",
+    "周辺機器はビックカメラ天神1号館・ヨドバシカメラ マルチメディア博多の同一型番の現金税込価格と同支店在庫を確認する。未確認ならオンライン購入へ自動切替しない。",
+    "ポイント還元は現金値引きから分離し、予算を使い切るためだけの追加購入を行わない。",
+    "購入ゲートは自動許可しない。公式BF期間内の新しい実売観測で全条件を再検証する。"
   ],
-  "total_budget_target_jpy": 400000,
-  "soft_overrun_allowance_jpy": 20000,
-  "soft_ceiling_total_jpy": 420000,
+  "total_budget_target_jpy": 450000,
+  "soft_overrun_allowance_jpy": 0,
+  "soft_ceiling_total_jpy": 450000,
   "budget_is_approximate": true,
   "budget_scenarios": [
     {
       "target_total_jpy": 350000,
-      "soft_ceiling_total_jpy": 370000
+      "soft_ceiling_total_jpy": 350000,
+      "role": "comparison_only"
     },
     {
       "target_total_jpy": 400000,
-      "soft_ceiling_total_jpy": 420000
+      "soft_ceiling_total_jpy": 420000,
+      "role": "comparison_only"
     },
     {
       "target_total_jpy": 450000,
-      "soft_ceiling_total_jpy": 470000
+      "soft_ceiling_total_jpy": 450000,
+      "role": "primary"
     }
-  ]
+  ],
+  "purchase_window_mode": "BLACK_FRIDAY_ONLY",
+  "pre_black_friday_purchase_allowed": false,
+  "early_purchase_triggers_enabled": false,
+  "reference_thresholds_only": true,
+  "purchase_timing_description": "購入時期は2026年ブラックフライデー期間内に固定。期間前の価格トリガー到達は監視・記録だけに使い、前倒し購入候補や購入許可を生成しない。販売店ごとの公式2026年開催期間を確認し、その期間内の新しい直接価格・正確なSKU・販売可能在庫・送料込み現金決済額・保証/返品・互換性が揃った場合に購入判断を行う。"
 }
