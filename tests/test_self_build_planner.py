@@ -201,7 +201,7 @@ class SelfBuildRankingLinkTests(unittest.TestCase):
                 {"id": "budget_400k", "total_budget_jpy": 400000,
                  "soft_overrun_allowance_jpy": 20000, "soft_ceiling_total_jpy": 420000},
                 {"id": "budget_450k", "total_budget_jpy": 450000,
-                 "soft_overrun_allowance_jpy": 0, "soft_ceiling_total_jpy": 450000},
+                 "soft_overrun_allowance_jpy": 20000, "soft_ceiling_total_jpy": 470000},
             ],
             "budget_build_candidates": [],
         }
@@ -210,10 +210,10 @@ class SelfBuildRankingLinkTests(unittest.TestCase):
         by_id = {row["id"]: row for row in result}
         self.assertEqual(by_id["budget_350k"]["soft_ceiling_total_jpy"], 350000)
         self.assertEqual(by_id["budget_400k"]["soft_ceiling_total_jpy"], 420000)
-        self.assertEqual(by_id["budget_450k"]["soft_ceiling_total_jpy"], 450000)
+        self.assertEqual(by_id["budget_450k"]["soft_ceiling_total_jpy"], 470000)
         self.assertEqual(by_id["budget_350k"]["soft_overrun_allowance_jpy"], 0)
         self.assertEqual(by_id["budget_400k"]["soft_overrun_allowance_jpy"], 20000)
-        self.assertEqual(by_id["budget_450k"]["soft_overrun_allowance_jpy"], 0)
+        self.assertEqual(by_id["budget_450k"]["soft_overrun_allowance_jpy"], 20000)
 
     def test_unconfigured_budget_tier_does_not_inherit_global_400k_allowance(self):
         profile = {
