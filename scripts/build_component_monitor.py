@@ -525,14 +525,38 @@ def direct_price_context_conflicts_with_selected_gpu(part, context):
 def stock_from_component_context(text):
     """Interpret stock only from the directly associated title/price context."""
     value = str(text or "")
+
+    # A labelled status in the exact product/price window is stronger than
+    # unrelated recommendation text in the same window. Conflicting labelled
+    # states remain unknown so this cannot silently promote ambiguous stock.
+    labelled_tokens = re.findall(
+        r"(?:在庫状況|在庫状態)\\s*[:：]?\\s*"
+        r"(在庫切れ|品切れ|売り切れ|在庫なし|残りわずか|残り1|"
+        r"取り寄せ|予約|preorder|back\\s*order|在庫あり|在庫有|即納|in\\s*stock|お取り寄せ可能)",
+        value,
+        re.I,
+    )
+    if labelled_tokens:
+        labelled_statuses = set()
+        for token in labelled_tokens:
+            if re.search(r"在庫切れ|品切れ|売り切れ|在庫なし", token, re.I):
+                labelled_statuses.add("out_of_stock")
+            elif re.search(r"残りわずか|残り1", token, re.I):
+                labelled_statuses.add("low_stock")
+            elif re.search(r"お取り寄せ可能|在庫あり|在庫有|即納|in\\s*stock", token, re.I):
+                labelled_statuses.add("in_stock")
+            elif re.search(r"取り寄せ|予約|preorder|back\\s*order", token, re.I):
+                labelled_statuses.add("preorder_or_backorder")
+        return next(iter(labelled_statuses)) if len(labelled_statuses) == 1 else "unknown"
+
     if re.search(r"在庫切れ|品切れ|売り切れ|在庫なし|out of stock|sold out", value, re.I):
         return "out_of_stock"
     if re.search(r"残りわずか|残り1|low stock|only 1|only one", value, re.I):
         return "low_stock"
-    if re.search(r"取り寄せ|予約|preorder|back order", value, re.I):
-        return "preorder_or_backorder"
     if re.search(r"在庫あり|在庫有|即納|in stock|お取り寄せ可能", value, re.I):
         return "in_stock"
+    if re.search(r"取り寄せ|予約|preorder|back order", value, re.I):
+        return "preorder_or_backorder"
     return "unknown"
 
 
@@ -635,6 +659,10 @@ def parse_component_direct_text_price(part, html_body, identity_anchor=None):
                 continue
             before = local_text[max(0, match.start() - 42):match.start()]
             context = local_text[max(0, match.start() - 90):min(len(local_text), match.end() + 90)]
+            stock_context = local_text[
+                max(0, match.start() - 120):
+                min(len(local_text), match.end() + 500)
+            ]
             if excluded.search(before[-28:]):
                 continue
             if direct_price_context_conflicts_with_selected_gpu(part, context):
@@ -654,6 +682,7 @@ def parse_component_direct_text_price(part, html_body, identity_anchor=None):
                 "price_jpy": value,
                 "score": score,
                 "context": context[:260],
+                "stock_context": stock_context[:700],
                 "identity_anchor": anchor,
                 "matched_anchor_term": window["term"],
             })
@@ -669,6 +698,7 @@ def parse_component_direct_text_price(part, html_body, identity_anchor=None):
         "price_jpy": chosen["price_jpy"],
         "price_source_mode": "direct_text",
         "price_context": chosen["context"],
+        "stock_context": chosen["stock_context"],
         "identity_anchor": chosen["identity_anchor"],
     }
 
@@ -989,6 +1019,7 @@ def verify_retailer_listing(part, candidate_url, domains, diagnostic_out=None):
         price = raw.get("price_jpy")
         source_mode = raw.get("price_source_mode")
         price_context = raw.get("price_context")
+        direct_text_stock_context = None
         # Reparse direct-text prices around the primary product heading. The
         # shared PC parser has a higher minimum price and may select a related
         # product amount from an accessory page.
@@ -1004,6 +1035,7 @@ def verify_retailer_listing(part, candidate_url, domains, diagnostic_out=None):
                 price = direct["price_jpy"]
                 source_mode = direct["price_source_mode"]
                 price_context = direct.get("price_context")
+                direct_text_stock_context = direct.get("stock_context")
                 anchor = direct.get("identity_anchor") or anchor
                 diagnostic.update({
                     "identity_anchor": str(anchor)[:180],
@@ -1042,7 +1074,9 @@ def verify_retailer_listing(part, candidate_url, domains, diagnostic_out=None):
                 # parser schema. Live parse_page now emits the scoped field.
                 stock_status = raw.get("stock_status") or "unknown"
         else:
-            stock_status = stock_from_component_context(price_context)
+            stock_status = stock_from_component_context(
+                direct_text_stock_context or price_context
+            )
         diagnostic["stock_status"] = stock_status
 
         retrieved = iso(now_jst())
