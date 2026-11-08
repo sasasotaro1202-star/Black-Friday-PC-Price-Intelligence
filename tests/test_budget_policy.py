@@ -106,10 +106,12 @@ class BudgetPolicyTests(unittest.TestCase):
         with (ROOT / "config" / "early_purchase_policy.json").open(encoding="utf-8") as f:
             early = json.load(f)
         self.assertTrue(early["budget_is_approximate"])
-        self.assertEqual(early["total_budget_target_jpy"], 400000)
+        self.assertEqual(early["total_budget_target_jpy"], 450000)
         self.assertIsNone(early["total_budget_hard_cap_jpy"])
         self.assertEqual(early["soft_overrun_allowance_jpy"], 20000)
-        self.assertEqual(early["soft_ceiling_total_jpy"], 420000)
+        self.assertEqual(early["soft_ceiling_total_jpy"], 470000)
+        self.assertEqual(early["purchase_timing_mode"], "OFFICIAL_BLACK_FRIDAY_WINDOW_ONLY")
+        self.assertFalse(early["pre_black_friday_purchase_allowed"])
     def test_peripheral_report_heading_matches_configured_purchase_items(self):
         heading = report.peripheral_monitor_section_heading(self.cfg)
         self.assertIn("メインモニター1台", heading)
@@ -135,10 +137,10 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertTrue(any("同時接続" in check for check in deferred["compatibility_checks"]))
 
     def test_all_in_budget_arithmetic(self):
-        self.assertEqual(self.cfg["total_budget_jpy"], 400000)
+        self.assertEqual(self.cfg["total_budget_jpy"], 450000)
         self.assertEqual(self.cfg["peripheral_budget_jpy"], 35000)  # flexible reference allocation, not a hard cap
-        self.assertEqual(self.cfg["pc_target_jpy"], 360000)
-        self.assertEqual(self.cfg["pc_budget_jpy"], 395000)
+        self.assertEqual(self.cfg["pc_target_jpy"], 410000)
+        self.assertEqual(self.cfg["pc_budget_jpy"], 445000)
         self.assertEqual(self.cfg["unallocated_contingency_jpy"], 5000)
         self.assertFalse(self.cfg["peripheral_budget_is_hard_cap"])
         self.assertEqual(self.cfg["peripheral_budget_mode"], "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET")
@@ -148,7 +150,7 @@ class BudgetPolicyTests(unittest.TestCase):
             self.cfg["peripheral_budget_jpy"],
         )
         dynamic_cap = max(0, min(self.cfg["pc_budget_jpy"], self.cfg["total_budget_jpy"] - self.cfg["peripheral_budget_jpy"] - self.cfg["unallocated_contingency_jpy"]))
-        self.assertEqual(dynamic_cap, 360000)
+        self.assertEqual(dynamic_cap, 410000)
 
 
     def test_hard_budget_ceiling_and_dynamic_peripheral_allocation_are_distinct(self):
@@ -176,8 +178,8 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertEqual(self.cfg["peripheral_budget_jpy"], 35000)
         self.assertEqual(self.cfg["pc_target_jpy"], 360000)
         self.assertEqual(self.cfg["pc_budget_jpy"], 395000)
-        self.assertEqual(self.cfg["pc_target_jpy"] - 279800, 80200)
-        self.assertEqual(self.cfg["pc_budget_jpy"] - 279800, 115200)
+        self.assertEqual(self.cfg["pc_target_jpy"] - 279800, 130200)
+        self.assertEqual(self.cfg["pc_budget_jpy"] - 279800, 165200)
         ids = {x["id"] for x in self.cfg["peripherals"]}
         self.assertTrue({"speakers", "secondary_monitor", "headset", "power_strip"}.isdisjoint(ids))
         self.assertEqual(strategy["priority_plans"][0]["candidate_id"], "desktop-gtune-dg-i5g70-5070")
@@ -191,7 +193,7 @@ class BudgetPolicyTests(unittest.TestCase):
 
     def test_budget_notes_and_dark_horse_caps_match_40man_policy(self):
         strategy = self.cfg["purchase_strategy"]
-        self.assertIn("40万円", strategy["purpose"])
+        self.assertIn("450,000円", strategy["purpose"])
         self.assertNotIn("38万円", strategy["purpose"])
         self.assertLessEqual(strategy["outlier_rule"]["black_friday_target_cap_jpy"], self.cfg["pc_target_jpy"])
         self.assertLessEqual(strategy["ai_vram_outlier_rule"]["black_friday_target_cap_jpy"], self.cfg["pc_target_jpy"])
@@ -327,10 +329,10 @@ class BudgetPolicyTests(unittest.TestCase):
             self.assertTrue(p["monitor_url"].startswith("https://"))
 
     def test_intelligence_uses_pc_only_budget(self):
-        self.assertEqual(intelligence.TOTAL_BUDGET, 400000)
+        self.assertEqual(intelligence.TOTAL_BUDGET, 450000)
         self.assertEqual(intelligence.PERIPHERAL_BUDGET, 35000)
-        self.assertEqual(intelligence.BUDGET, 360000)
-        self.assertEqual(intelligence.PC_BUDGET, 395000)
+        self.assertEqual(intelligence.BUDGET, 410000)
+        self.assertEqual(intelligence.PC_BUDGET, 445000)
 
     def test_incomplete_pc_base_config_is_not_ready(self):
         ready, reasons = intelligence.configuration_readiness({"spec": {"ram_gb": 16, "ssd": "500 GB"}})
@@ -717,7 +719,7 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertFalse(projection["budget_data_ready"])
         self.assertEqual(projection["tracked_peripheral_unverified_ids"], sorted(tracked_ids))
         self.assertEqual(projection["peripheral_projection_jpy"], 35000)
-        self.assertEqual(projection["pc_dynamic_cap_jpy"], 360000)
+        self.assertEqual(projection["pc_dynamic_cap_jpy"], 410000)
         self.assertLessEqual(
             projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"],
             projection["total_budget_jpy"],
@@ -760,7 +762,7 @@ class BudgetPolicyTests(unittest.TestCase):
                     int(self.cfg["total_budget_jpy"]) - target_sum - int(self.cfg["unallocated_contingency_jpy"]),
                 ),
             ),
-            360000,
+            410000,
         )
 
 
