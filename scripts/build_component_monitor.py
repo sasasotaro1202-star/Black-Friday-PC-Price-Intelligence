@@ -530,9 +530,9 @@ def stock_from_component_context(text):
     # unrelated recommendation text in the same window. Conflicting labelled
     # states remain unknown so this cannot silently promote ambiguous stock.
     labelled_tokens = re.findall(
-        r"(?:在庫状況|在庫状態)\\s*[:：]?\\s*"
+        r"(?:在庫状況|在庫状態)\s*[:：]?\s*"
         r"(在庫切れ|品切れ|売り切れ|在庫なし|残りわずか|残り1|"
-        r"取り寄せ|予約|preorder|back\\s*order|在庫あり|在庫有|即納|in\\s*stock|お取り寄せ可能)",
+        r"取り寄せ|予約|preorder|back\s*order|在庫あり|在庫有|即納|in\s*stock|お取り寄せ可能)",
         value,
         re.I,
     )
@@ -543,9 +543,9 @@ def stock_from_component_context(text):
                 labelled_statuses.add("out_of_stock")
             elif re.search(r"残りわずか|残り1", token, re.I):
                 labelled_statuses.add("low_stock")
-            elif re.search(r"お取り寄せ可能|在庫あり|在庫有|即納|in\\s*stock", token, re.I):
+            elif re.search(r"お取り寄せ可能|在庫あり|在庫有|即納|in\s*stock", token, re.I):
                 labelled_statuses.add("in_stock")
-            elif re.search(r"取り寄せ|予約|preorder|back\\s*order", token, re.I):
+            elif re.search(r"取り寄せ|予約|preorder|back\s*order", token, re.I):
                 labelled_statuses.add("preorder_or_backorder")
         return next(iter(labelled_statuses)) if len(labelled_statuses) == 1 else "unknown"
 
@@ -553,10 +553,10 @@ def stock_from_component_context(text):
         return "out_of_stock"
     if re.search(r"残りわずか|残り1|low stock|only 1|only one", value, re.I):
         return "low_stock"
-    if re.search(r"在庫あり|在庫有|即納|in stock|お取り寄せ可能", value, re.I):
-        return "in_stock"
     if re.search(r"取り寄せ|予約|preorder|back order", value, re.I):
         return "preorder_or_backorder"
+    if re.search(r"在庫あり|在庫有|即納|in stock|お取り寄せ可能", value, re.I):
+        return "in_stock"
     return "unknown"
 
 
