@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-20",
-  "purpose": "Pre-Black-Friday purchase-review triggers. Thresholds start a manual review only; they are neither forecasts nor purchase permission. ¥400,000 is the all-in target with a ¥420,000 initial soft band; the ¥350,000/¥370,000 and ¥450,000/¥470,000 scenarios remain separate.",
+  "updated_at": "2026-11-08",
+  "purpose": "2026年ブラックフライデー期間内に45万円前後のPC一式を購入するための手動レビュー基準。45万円が総額主目標、47万円は測定可能な追加価値がある場合の例外比較帯。セール前の価格トリガー到達は事前参考アラートのみで、前倒し購入しない。",
   "total_budget_hard_cap_jpy": null,
   "unallocated_contingency_jpy": 5000,
   "max_observation_age_minutes": 120,
@@ -40,7 +40,7 @@
       "early_trigger_price_jpy": 145000,
       "bf_target_price_jpy": 154000,
       "url": "https://kakaku.com/item/K0001696164/",
-      "note": "Dark-horse alternative; keep it in comparison. At the ¥400,000 target this build may exceed target, but do not reject it solely for that reason while the completed all-in total remains within the ¥420,000 initial soft band and the performance gain justifies it. Compare the ¥450,000/¥470,000 scenario separately too."
+      "note": "45万円主シナリオのGPU候補。RTX 5070/5060 Tiとも実売総額・VRAM・性能差で比較。価格トリガーは公式BF期間内の手動レビュー開始条件であり、事前購入・自動購入は許可しない。"
     },
     {
       "id": "motherboard-asrock-b850m-pro-rs-wifi",
@@ -170,31 +170,44 @@
     }
   ],
   "gate_rules": [
-    "A threshold hit is an EARLY_BUY_REVIEW alert, never an automatic purchase authorization.",
-    "Only exact-model, direct-page price evidence with valid observation time may trigger a review; comparison search snippets, points, coupons not applied at checkout, stale prices and ambiguous variants do not trigger.",
-    "For components, require identity match, valid point-in-time evidence and a current in-stock/low-stock status before labeling a trigger actionable.",
-    "Before buying, verify final checkout price, shipping, stock, seller, warranty, returns, SKU and compatibility.",
-    "Recalculate the complete PC plus required peripherals, shipping/small parts and ¥5,000 contingency after every proposed early purchase. Compare the ¥400,000 all-in target and the ¥420,000 initial soft ceiling; modest overrun may be justified by measurable workload benefits. Do not compare only the PC body or hide required peripheral costs.",
-    "Keep the ¥350,000 target / ¥370,000 soft band, ¥400,000 target / ¥420,000 soft band, and ¥450,000 target / ¥470,000 soft band as separate complete-system scenarios. Do not force all tiers into the ¥400,000 target.",
-    "Do not assume that the rest of the build can later be upgraded for free. RAM must be at least 32GB and SSD at least 1TB at purchase; 64GB/2TB are substitutions only when the exact final build fits.",
-    "Wait when an early target is not met. Black Friday is not guaranteed to have the lowest price, and a target is not a forecast."
+    "価格閾値への到達は手動レビューの開始条件だけであり、自動購入許可ではない。",
+    "現行の購入時期指定では、購入判断は各販売店の2026年公式ブラックフライデー期間内に限定する。公式期間前に閾値へ到達しても事前参考として保存し、前倒し購入候補にはしない。",
+    "BF価格として認定するには、販売店の2026年公式日付範囲が一次情報で確認でき、商品オファーの観測時刻がその期間内であること。",
+    "正確なSKU・直接販売ページ・価格検証・identity・PIT・新しいin_stock/low_stock・送料込み現金決済額を確認する。検索スニペット、ポイント、未適用クーポン、古い価格、型番違いは不可。",
+    "保証、返品、販売者、納期を確認する。",
+    "PC部品はCPU/マザーボード/BIOS、RAM QVL/EXPO、GPU寸法・補助電源、ケース、電源、冷却、SSD品質を確認する。",
+    "PC本体・モニター・キーボード・マウス・マウスパッド・送料/必要小物・総額予備費5,000円を合算する。35万円案・40/42万円案・45万円主案を分ける。",
+    "45万円を総額主目標とする。470,000円までの例外は、測定可能なゲーム/制作/分析上の性能向上があり、完成構成・実売・保証が確認された場合のみ。予算を使い切るための購入は禁止。",
+    "RAMは購入時32GB以上、SSDは購入時1TB以上。64GB/2TBは既成完成構成の代替として、購入時の価格と互換性が確認できた場合のみ採用する。",
+    "各シナリオのBF目標価格は予測・保証ではない。購入判断は当日観測された公式BF価格と最終決済額を使う。"
   ],
-  "total_budget_target_jpy": 400000,
+  "total_budget_target_jpy": 450000,
   "soft_overrun_allowance_jpy": 20000,
-  "soft_ceiling_total_jpy": 420000,
+  "soft_ceiling_total_jpy": 470000,
   "budget_is_approximate": true,
   "budget_scenarios": [
     {
       "target_total_jpy": 350000,
-      "soft_ceiling_total_jpy": 370000
+      "soft_ceiling_total_jpy": 350000,
+      "soft_overrun_allowance_jpy": 0,
+      "role": "saving_comparison"
     },
     {
       "target_total_jpy": 400000,
-      "soft_ceiling_total_jpy": 420000
+      "soft_ceiling_total_jpy": 420000,
+      "soft_overrun_allowance_jpy": 20000,
+      "role": "intermediate_comparison"
     },
     {
       "target_total_jpy": 450000,
-      "soft_ceiling_total_jpy": 470000
+      "soft_ceiling_total_jpy": 470000,
+      "soft_overrun_allowance_jpy": 20000,
+      "role": "primary_budget"
     }
-  ]
+  ],
+  "purchase_timing_mode": "OFFICIAL_BLACK_FRIDAY_WINDOW_ONLY",
+  "pre_black_friday_purchase_allowed": false,
+  "require_official_2026_campaign_dates": true,
+  "black_friday_purchase_policy": "2026年の販売店別公式キャンペーン期間内に限って購入を判断する。セール前の価格トリガー到達は事前参考アラートにとどめ、前倒し購入はしない。",
+  "trigger_outcome": "OFFICIAL_BF_WINDOW_MANUAL_REVIEW_ONLY_NO_AUTOMATIC_BUY"
 }
