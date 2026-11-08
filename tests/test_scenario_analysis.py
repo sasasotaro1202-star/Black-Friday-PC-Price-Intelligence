@@ -44,7 +44,7 @@ class BlackFridayScenarioTests(unittest.TestCase):
         cls.catalog_data = read_json("config/candidate_catalog.json")
         cls.catalog = {x["id"]: x for x in cls.catalog_data["candidates"]}
 
-    def test_pre_bf_prices_are_reference_only_and_targets_sum_to_40man(self):
+    def test_pre_bf_prices_are_reference_only_and_targets_sum_to_45man(self):
         now = datetime.fromisoformat("2026-10-10T18:00:00+09:00")
         ts = "2026-10-10T17:59:00+09:00"
         outlier = self.catalog["desktop-gtune-fg-a7g7t-5070ti"]
@@ -78,12 +78,12 @@ class BlackFridayScenarioTests(unittest.TestCase):
         )
         self.assertEqual(result["pricing_phase"], "PRE_BLACK_FRIDAY_REFERENCE")
         self.assertFalse(result["black_friday_prices_known"])
-        self.assertEqual(result["total_budget_jpy"], 400000)
+        self.assertEqual(result["total_budget_jpy"], 450000)
         self.assertEqual(result["peripheral_target_total_jpy"], 35000)
-        self.assertEqual(result["black_friday_ideal_bundle_target_jpy"], 400000)
+        self.assertEqual(result["black_friday_ideal_bundle_target_jpy"], 450000)
         self.assertEqual(result["black_friday_target_buffer_jpy"], 0)
-        self.assertEqual(result["pc_planned_hard_cap_jpy"], 360000)
-        self.assertEqual(result["pc_absolute_hard_cap_jpy"], 395000)
+        self.assertEqual(result["pc_planned_hard_cap_jpy"], 410000)
+        self.assertEqual(result["pc_absolute_hard_cap_jpy"], 445000)
         self.assertEqual(result["unallocated_contingency_jpy"], 5000)
         self.assertEqual(
             result["pc_planned_hard_cap_jpy"] + result["peripheral_target_total_jpy"] + result["unallocated_contingency_jpy"],
@@ -97,7 +97,7 @@ class BlackFridayScenarioTests(unittest.TestCase):
             ),
         )
         self.assertEqual(result["black_friday_pc_price_cap_jpy"], expected_dynamic_pc_cap)
-        self.assertEqual(result["black_friday_hard_cap_bundle_jpy"], 400000)
+        self.assertEqual(result["black_friday_hard_cap_bundle_jpy"], 450000)
         self.assertFalse(result["all_in_checkout_total_final"])
 
         peripheral_ids = {x["id"] for x in result["peripherals"]}
