@@ -365,6 +365,58 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertEqual(price["price_jpy"], 23780)
         self.assertEqual(price["price_source_mode"], "direct_text")
 
+    def test_component_stock_context_prefers_explicit_inventory_label_and_fails_closed_on_conflict(self):
+        self.assertEqual(
+            bcm.stock_from_component_context(
+                "47,800円 在庫状況：在庫あり 最短出荷。関連商品は取り寄せ。"
+            ),
+            "in_stock",
+        )
+        self.assertEqual(
+            bcm.stock_from_component_context(
+                "在庫状況：在庫あり。別の表示 在庫状況：取り寄せ。"
+            ),
+            "unknown",
+        )
+        self.assertEqual(
+            bcm.stock_from_component_context("在庫状況：お取り寄せ可能"),
+            "in_stock",
+        )
+        self.assertEqual(
+            bcm.stock_from_component_context("在庫状況：取り寄せ"),
+            "preorder_or_backorder",
+        )
+
+    def test_component_direct_text_parser_captures_explicit_inventory_label_after_price(self):
+        part = {
+            "id": "cpu-ryzen7-9700x",
+            "category": "cpu",
+            "name": "AMD Ryzen 7 9700X BOX",
+            "model_code": "100-100001404WOF",
+            "aliases": ["AMD Ryzen 7 9700X BOX", "100-100001404WOF"],
+            "identity_terms": ["AMD Ryzen 7 9700X BOX", "100-100001404WOF"],
+            "min_price_jpy": 25000,
+            "max_price_jpy": 100000,
+        }
+        html = (
+            "<html><body><h1>AMD Ryzen 7 9700X BOX "
+            "100-100001404WOF</h1>"
+            "<div>会員様web価格 47,800円（税込）</div>"
+            "<div>発売日 2024年08月</div>"
+            "<div>在庫状況：在庫あり</div>"
+            "<div>最短 11月8日出荷</div>"
+            "<section><h2>関連商品</h2><p>関連商品は取り寄せ</p></section>"
+            "</body></html>"
+        )
+        anchor = bcm.component_primary_identity_anchor(part, html)
+        offer = bcm.parse_component_direct_text_price(part, html, anchor)
+        self.assertIsNotNone(offer)
+        self.assertEqual(offer["price_jpy"], 47800)
+        self.assertEqual(
+            bcm.stock_from_component_context(offer["stock_context"]),
+            "in_stock",
+        )
+
     def test_component_direct_text_parser_rejects_missing_identity_and_ambiguous_prices(self):
         part = {
             "id": "motherboard-test", "name": "ASRock B850M Pro RS WiFi",
@@ -507,6 +559,51 @@ class BuildComponentMonitorTests(unittest.TestCase):
         self.assertEqual(offer["stock_status"], "in_stock")
         self.assertEqual(offer["seller_name"], "Dospara direct sales")
         self.assertEqual(offer["source_role"], "direct_retailer_listing_reference")
+
+    def test_direct_text_listing_uses_explicit_joshin_inventory_label(self):
+        part = {
+            "id": "cpu-ryzen7-9700x",
+            "category": "cpu",
+            "name": "AMD Ryzen 7 9700X BOX",
+            "model_code": "100-100001404WOF",
+            "aliases": ["AMD Ryzen 7 9700X BOX", "100-100001404WOF"],
+            "identity_terms": ["AMD Ryzen 7 9700X BOX", "100-100001404WOF"],
+            "min_price_jpy": 25000,
+            "max_price_jpy": 100000,
+        }
+        url = "https://joshinweb.jp/mobile/22814/0730143315593.html"
+        html = (
+            "<html><body><h1>AMD Ryzen 7 9700X BOX "
+            "100-100001404WOF</h1>"
+            "<div>会員様web価格 47,800円（税込）</div>"
+            "<div>在庫状況：在庫あり</div>"
+            "<div>最短 11月8日出荷</div>"
+            "<section><h2>関連商品</h2><p>別商品は取り寄せ</p></section>"
+            "</body></html>"
+        )
+        raw = {
+            "name": url,
+            "seller_name": None,
+            "page_text_excerpt": (
+                "AMD Ryzen 7 9700X BOX 100-100001404WOF "
+                "47,800円（税込） 在庫状況：在庫あり 最短 11月8日出荷"
+            ),
+            "price_jpy": None,
+            "price_source_mode": "none",
+            "stock_status": "preorder_or_backorder",
+            "structured_stock_status": "unknown",
+            "text_stock_status": "preorder_or_backorder",
+            "structured_identity_match": False,
+        }
+        with patch.object(
+            bcm, "fetch", return_value=(html, url, {})
+        ), patch.object(bcm, "parse_page", return_value=raw):
+            offer = bcm.verify_retailer_listing(
+                part, url, ("joshinweb.jp",)
+            )
+        self.assertIsNotNone(offer)
+        self.assertEqual(offer["price_jpy"], 47800)
+        self.assertEqual(offer["stock_status"], "in_stock")
 
     def test_teamgroup_ram_ymall_primary_title_matches_exact_kit_alias(self):
         part = {
