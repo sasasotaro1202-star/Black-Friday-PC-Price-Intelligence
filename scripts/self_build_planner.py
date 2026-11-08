@@ -1480,11 +1480,11 @@ def build_plan(config=None, price_snapshot=None, now=None):
 
     # All amounts are JPY. The configured PC ceiling is a fallback maximum, not
     # an amount that can be spent in addition to peripherals and contingency.
-    pc_budget = int(profile.get("pc_budget_jpy", 395000))
-    all_budget = int(profile.get("total_budget_jpy", 400000))
+    pc_budget = int(profile.get("pc_budget_jpy", 445000))
+    all_budget = int(profile.get("total_budget_jpy", 450000))
     peripheral_budget = int(profile.get("peripheral_budget_jpy", 35000))
     contingency = int(profile.get("unallocated_contingency_jpy", 0))
-    pc_target = int(profile.get("pc_target_jpy", 360000))
+    pc_target = int(profile.get("pc_target_jpy", 410000))
     soft_overrun_allowance = int(profile.get("soft_overrun_allowance_jpy", 20000))
     soft_ceiling_total = int(profile.get("soft_ceiling_total_jpy", all_budget + soft_overrun_allowance))
     pc_planned_budget = max(0, min(pc_budget, soft_ceiling_total - peripheral_budget - contingency))
