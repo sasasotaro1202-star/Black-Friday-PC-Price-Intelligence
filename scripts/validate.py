@@ -70,6 +70,32 @@ def main():
                 status = expected_pit["pit_status"]
                 peripheral_event_counts[status] = peripheral_event_counts.get(status, 0) + 1
 
+    # Main and component change events use the same strict event-time contract.
+    # UNKNOWN is allowed in the audit log, but must never be mislabeled VALID.
+    change_event_pit_counts = {}
+    for filename in ("change_events.jsonl", "build_component_change_events.jsonl"):
+        event_path = os.path.join(ROOT, "data", filename)
+        counts = {"VALID": 0, "UNKNOWN": 0, "INVALID": 0}
+        if os.path.exists(event_path):
+            with open(event_path, encoding="utf-8") as event_stream:
+                for line_number, line in enumerate(event_stream, start=1):
+                    if not line.strip():
+                        continue
+                    try:
+                        event = json.loads(line)
+                    except json.JSONDecodeError:
+                        errors.append(f"{filename} malformed at line {line_number}")
+                        continue
+                    expected_pit = point_in_time_event_metadata(event)
+                    for field, expected_value in expected_pit.items():
+                        if event.get(field) != expected_value:
+                            errors.append(
+                                f"{filename} PIT metadata mismatch at line {line_number}:{field}"
+                            )
+                    status = expected_pit["pit_status"]
+                    counts[status] = counts.get(status, 0) + 1
+        change_event_pit_counts[filename] = counts
+
     catalog = load_catalog()
     if len(catalog) != len(set(catalog)):
         errors.append("duplicate catalog ids")
@@ -431,6 +457,7 @@ def main():
         "latest_count": len(latest.get("products", [])),
         "ranking_count": len(rankings.get("products", [])),
         "peripheral_event_pit_counts": peripheral_event_counts,
+        "change_event_pit_counts": change_event_pit_counts,
         "message": "Fail-closed data validation passed.",
     }, ensure_ascii=False))
 
