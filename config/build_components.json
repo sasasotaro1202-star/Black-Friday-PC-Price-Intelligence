@@ -4,9 +4,9 @@
   "profile": {
     "build_type": "DIY_PC",
     "currency": "JPY",
-    "total_budget_jpy": 400000,
+    "total_budget_jpy": 450000,
     "peripheral_budget_jpy": 35000,
-    "pc_budget_jpy": 395000,
+    "pc_budget_jpy": 445000,
     "minimum_ram_gb": 32,
     "minimum_memory_modules": 2,
     "minimum_ssd_gb": 1000,
@@ -40,7 +40,7 @@
     "allowed_comparison_domains": [
       "kakaku.com"
     ],
-    "policy": "Black Friday target prices are aspirational, not forecasts. JPY 400,000 is the preferred total-system target, not an absolute cutoff. A soft evaluation band extends to JPY 420,000 only for a materially better JPY 400,000 configuration. The JPY 350,000 and separate JPY 450,000 scenarios are evaluated against their stated totals; over-ceiling candidates remain visible as comparison-only. PC planning target is JPY 360,000, while maximum PC spend is dynamically capped by the all-in total. Peripheral allocation is flexible at JPY 35,000, not an obligation to spend the full amount. Include exactly one 27-inch WQHD high-refresh main monitor, keyboard, mouse, and mousepad. In-stock fallbacks are tracked for RAM, 1TB NVMe SSD, CPU cooler, and the RTX 5070 class; substitution is allowed only after exact model/price/stock/compatibility verification. The power strip is already owned and excluded from purchase, monitoring, and budget. Buy only necessary cables after checking included cables. Do not include speakers, a sub-monitor, or a headset in candidate lists, monitoring, budgets, or totals. Keep JPY 5,000 as an unallocated contingency. Compare online delivery, in-store cash purchase, and online order with store pickup per item using the exact SKU/variant, direct price, total cash checkout amount including fees, stock, warranty and return terms. Points are not cash discounts. Comparison-site prices and BF targets are not checkout prices or verified BF deals. Include online delivery shipping, but never assume peripheral shipping for in-store purchases. Keep dark-horse candidates in comparisons with explicit target overrun and scenario-ceiling status; never auto-reject a modest overrun when the workload benefit is meaningful, and never authorize purchases from target prices alone. Track a Ryzen 9 9900X alternative with the same RTX 5070 12GB for a CPU-workload comparison; show a Ryzen 9 9950X as a CPU dark horse only with an explicit over-budget lower-bound calculation and cooling caveat. Never treat either comparison target as a live checkout quote.",
+    "policy": "2026 Black Friday is the intended purchase window; do not authorize or recommend pre-Black-Friday purchases. The primary all-in system budget is JPY 450,000 including one 27-inch WQHD monitor, keyboard, mouse, mousepad, necessary shipping/small parts and a separately reserved JPY 5,000 contingency. The JPY 35,000 peripheral allocation is a flexible reference, not mandatory spend. The PC planning allocation is JPY 410,000 (450,000 - 35,000 - 5,000); maximum PC spend is dynamically recalculated from verified peripheral spend and required costs. Compare the JPY 350,000 and JPY 400,000 scenarios as alternatives, but make JPY 450,000 the primary scenario. At purchase require RAM >=32GB and SSD >=1TB in the actual completed build. Compare 64GB RAM and 2TB SSD only as complete as-purchased substitutions within the all-in ceiling; never assume free post-purchase upgrades. Track GPU gaming performance and VRAM separately; RTX 5070 Ti 16GB, RTX 5070 12GB and RTX 5060 Ti 16GB are alternatives, never additions. Compare Ryzen 7 9700X gaming balance with Ryzen 9 9900X parallel-build/data workloads; include any additional cooling cost. Preserve exact SKU identity, fresh direct price, purchasable stock, PIT validity, final cash checkout total, shipping, compatibility, warranty and return evidence. Points are not cash discounts. Official campaign dates must be verified for each retailer; the broad watch window is not an official sale period. The power strip is already owned. Exclude speakers, headset and secondary monitor from initial purchase.",
     "allowed_search_reference_domains": [
       "kakaku.com",
       "amazon.co.jp",
@@ -71,7 +71,7 @@
     "assembly_time_penalty_points": 0,
     "pc_build_method_preference": "SELF_BUILD_REQUIRED_FOR_PRIMARY_RECOMMENDATION",
     "bto_role": "REFERENCE_BENCHMARK_ONLY",
-    "selection_policy": "PC本体は自作パーツをネット購入する方式を本命とし、組み立て時間を減点しない。周辺機器はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の両支店について、同一型番の店頭税込現金価格と同じ支店の在庫・支店在庫を確認してから購入ルートを選ぶ。実店舗の価格と在庫を両支店で確認する。どちらか未確認ならネット配送・ネット注文の店舗受け取りへ自動切替せず、選択ルートを未確認のまま保留する。両支店の比較完了後に限り、オンラインの正確な型番・販売元・税込価格・在庫・送料/必須費用・最終決済額・保証/返品条件も比較し、購入可能ルートの税込現金総額が最も低い候補を選ぶ。ネット価格を店頭価格に流用せず、ポイントは現金値引きに含めない。BTOは同等構成の価格・性能・品質・保証の比較枠のみ。ゲーム、ゲーム制作、スポーツ/株/BTC分析、ローカルAI、学校の授業から早稲田/九大の入試応用までを一つの多目的構成として評価する。価格目標だけで購入許可を出さず、正確なSKU、最新在庫、決済額、互換性、返品/保証を確認する。",
+    "selection_policy": "PC本体は自作パーツ購入を本命とし、組み立て時間を減点しない。購入時期は2026年ブラックフライデー期間内を原則とし、前倒し購入は行わない。45万円を主予算、周辺機器35,000円を参考配分、予備費5,000円を別枠確保し、PC本体上限は周辺機器実費等から動的に再計算する。周辺機器はビックカメラ天神1号館・ヨドバシカメラ マルチメディア博多の両支店で同一型番の店頭現金価格と同じ支店の在庫を確認し、未確認なら購入ルートを確定しない。オンライン価格を店頭価格に流用せず、ポイントを現金値引きに含めない。BTOは比較参考枠。",
     "purchase_decision_factors": [
       {
         "name": "combined_performance_for_gaming_game_creation_study_analysis",
@@ -248,7 +248,7 @@
       },
       "local_ai_policy_ja": "ローカルAIはモデル形式、量子化、VRAM、システムRAM、コンテキスト長、処理速度を個別に確認する。VRAM容量が大きいほど動かせるモデルの選択肢が広がる傾向はあるが、特定モデルの速度や完全な動作を保証しない。オンラインAPI・月額サービス・クラウドGPU・有料データセットを必須にしない。"
     },
-    "pc_target_jpy": 360000,
+    "pc_target_jpy": 410000,
     "peripheral_budget_mode": "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET",
     "peripheral_budget_is_hard_cap": false,
     "ongoing_cost_policy": {
@@ -388,21 +388,24 @@
         "total_budget_jpy": 350000,
         "description_ja": "35万円目標案。必要周辺機器・送料・5,000円予備費込み。総額35万円を上限とし、超過候補は比較用に残して超過額を表示する。",
         "soft_overrun_allowance_jpy": 0,
-        "soft_ceiling_total_jpy": 350000
+        "soft_ceiling_total_jpy": 350000,
+        "is_primary": false
       },
       {
         "id": "budget_400k",
         "total_budget_jpy": 400000,
-        "description_ja": "40万円目標案（本命）。必要周辺機器・送料・5,000円予備費込み。用途上の性能向上が明確な場合に限り、総額42万円までを許容帯として比較する。",
+        "description_ja": "40万円比較案。必要周辺機器・送料・5,000円予備費込み。明確な性能向上がある場合のみ420,000円まで比較する。購入判断の主シナリオは45万円案。",
         "soft_overrun_allowance_jpy": 20000,
-        "soft_ceiling_total_jpy": 420000
+        "soft_ceiling_total_jpy": 420000,
+        "is_primary": false
       },
       {
         "id": "budget_450k",
         "total_budget_jpy": 450000,
-        "description_ja": "45万円目標案（独立シナリオ）。必要周辺機器・送料・5,000円予備費込み。総額45万円を上限として評価し、超過候補は比較用に残して超過額を表示する。GPU・64GB RAM・2TB SSD・高コアCPUの実益を比較する。",
+        "description_ja": "45万円主予算案。必要周辺機器・送料/必要小物・5,000円予備費込み。主シナリオの評価上限は450,000円。RTX 5070 Ti 16GB、64GB RAM、2TB SSD、12コアCPUを用途と実価格に応じて比較する。",
         "soft_overrun_allowance_jpy": 0,
-        "soft_ceiling_total_jpy": 450000
+        "soft_ceiling_total_jpy": 450000,
+        "is_primary": true
       }
     ],
     "budget_scenario_policy": {
@@ -412,7 +415,7 @@
       "unallocated_contingency_jpy": 5000,
       "required_peripherals": "One 27-inch WQHD main monitor, keyboard, mouse, mousepad, cables only if needed",
       "excluded": "Speakers, secondary monitor, headset, power strip",
-      "selection_rule": "各金額は総額目標。35万円案と45万円案の評価上限は各目標額、40万円案のみ用途上の性能向上が明確な場合に約42万円までを許容帯として比較する。上限超過候補も比較対象から消さず、超過額・用途上の性能差・互換性・実売根拠を分けて提示する。PC部品・OS・送料/小物・必要周辺機器実費・送料・総額予備費5,000円を含む。BF目標額のみで購入許可を出さない。",
+      "selection_rule": "主予算は総額450,000円（PC本体、必要周辺機器、送料/小物、別枠予備費5,000円込み）。周辺機器35,000円は参考配分であり、実費に応じてPC本体上限を動的に再計算する。35万円と40万円（明確な性能向上がある場合のみ42万円まで）は比較用シナリオ。45万円シナリオを標準・主比較として採点し、450,000円超過候補は比較専用として超過額・性能差・リスクを明示する。購入許可には2026年公式BF期間内の新しい直接価格、正確なSKU、販売可能在庫、送料込み現金決済額、互換性、保証/返品をすべて要求する。前倒し購入は行わない。",
       "workload_priorities": [
         "gaming at 1440p",
         "game development in Unreal Engine/Unity/Godot",
@@ -432,10 +435,12 @@
       "default_soft_overrun_allowance_jpy": 0,
       "allow_target_overrun_for_value": true,
       "automatic_purchase_authorization": false,
-      "score_policy": "Scenario scores compare candidates only within each budget tier; target-price scores are planning rubrics, not measured benchmarks or purchase permission."
+      "score_policy": "Scenario scores compare candidates only within each budget tier; target-price scores are planning rubrics, not measured benchmarks or purchase permission.",
+      "primary_scenario_id": "budget_450k",
+      "primary_total_budget_jpy": 450000
     },
-    "soft_overrun_allowance_jpy": 20000,
-    "soft_ceiling_total_jpy": 420000,
+    "soft_overrun_allowance_jpy": 0,
+    "soft_ceiling_total_jpy": 450000,
     "budget_is_approximate": true,
     "budget_build_candidates": [
       {
@@ -605,8 +610,8 @@
         "id": "budget-450k-balanced-capacity",
         "budget_tier_jpy": 450000,
         "budget_tier_label": "45万円",
-        "name": "45万円総合案：RTX 5070 + 64GB RAM + 2TB SSD",
-        "scenario_role": "balanced_capacity_primary",
+        "name": "45万円容量重視案：Ryzen 7 9700X + RTX 5070 12GB + 64GB RAM + 2TB SSD",
+        "scenario_role": "memory_storage_capacity_alternative",
         "part_ids": [
           "cpu-ryzen7-9700x",
           "motherboard-asrock-b850m-pro-rs-wifi",
@@ -631,8 +636,8 @@
         "unallocated_contingency_jpy": 5000,
         "build_shipping_reserve_jpy": 6000,
         "small_parts_reserve_jpy": 3000,
-        "purpose_note_ja": "ゲーム性能を保ちつつ、ゲーム制作素材・ビルド・Pythonと分析データの同時利用に向けRAM64GBとSSD2TBを購入時点で確保。",
-        "tradeoff_note_ja": "RTX 5070 TiほどGPU性能は高くない。正確なRAM QVL/EXPO・SSD持続書込適合・現行価格を確認。"
+        "purpose_note_ja": "64GB RAMと2TB SSDを購入時点で確保し、制作アセット・大規模データ・並行作業を優先する。",
+        "tradeoff_note_ja": "GPUはRTX 5070 12GBで、5070 Ti 16GB案よりゲーム描画性能とVRAM容量が低い。実際に32GBを超える作業が多い場合に選ぶ。"
       },
       {
         "id": "budget-450k-5070-64gb-1tb",
@@ -671,8 +676,8 @@
         "id": "budget-450k-gpu-priority",
         "budget_tier_jpy": 450000,
         "budget_tier_label": "45万円",
-        "name": "45万円GPU案：RTX 5070 Ti 16GB + 64GB RAM",
-        "scenario_role": "gpu_performance_priority",
+        "name": "45万円GPU/RAM案：Ryzen 7 9700X + RTX 5070 Ti 16GB + 64GB RAM + 1TB SSD",
+        "scenario_role": "gpu_memory_alternative",
         "part_ids": [
           "cpu-ryzen7-9700x",
           "motherboard-asrock-b850m-pro-rs-wifi",
@@ -704,8 +709,8 @@
         "id": "budget-450k-gpu-storage",
         "budget_tier_jpy": 450000,
         "budget_tier_label": "45万円",
-        "name": "45万円GPU+容量案：RTX 5070 Ti 16GB + 2TB SSD",
-        "scenario_role": "gpu_storage_priority",
+        "name": "45万円主予算候補：Ryzen 7 9700X + RTX 5070 Ti 16GB + 32GB RAM + 2TB SSD",
+        "scenario_role": "primary_performance_storage_candidate",
         "part_ids": [
           "cpu-ryzen7-9700x",
           "motherboard-asrock-b850m-pro-rs-wifi",
@@ -730,8 +735,8 @@
         "unallocated_contingency_jpy": 5000,
         "build_shipping_reserve_jpy": 6000,
         "small_parts_reserve_jpy": 3000,
-        "purpose_note_ja": "GPU性能・16GB VRAM・2TB SSDを優先する別案。",
-        "tradeoff_note_ja": "RAMは基準の32GB。予算余裕があってもRAM QVLと実価格の条件を確認して選ぶ。"
+        "purpose_note_ja": "WQHDゲーム・ゲーム制作のGPU性能と16GB VRAMを優先し、2TB NVMeを購入時点で確保。32GB RAMは必須基準を満たす。登録目標の算術総額は423,000円で45万円の範囲内だが、実売価格・在庫・互換性が揃うまでは購入可能扱いしない。",
+        "tradeoff_note_ja": "64GB RAMではなく32GB。大規模Unrealプロジェクトや複数の大型分析を同時実行する場合は64GB案と比較。残額を使い切らず、実売で上位CPU・TLC SSD・冷却品質を改善できるか再評価する。"
       },
       {
         "id": "budget-450k-9900x-5070-64gb-2tb",
@@ -800,9 +805,12 @@
         "tradeoff_note_ja": "BF目標額ベースの一式目標は465,000円で、45万円目標を15,000円超える一方、45万円の評価上限を15,000円超過するため比較用に残し、45万円以内の適合案とは分ける。実売価格ではない。SSDはQLC NANDのため大規模な持続書き込み速度をTLC候補と比較。RAM QVL/EXPO、GPU実SKU寸法/電源ケーブル余裕、BIOS、全パーツ在庫・最終決済額が未確認の間は購入可能扱いしない。"
       }
     ],
-    "peripheral_purchase_policy_ja": "PC本体パーツはネット購入。周辺機器はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の両支店について、同一型番の店頭税込現金価格と同じ支店の在庫・支店在庫を確認する。実店舗の価格と在庫を両支店で確認する。どちらか一方でも未確認ならネット配送・ネット注文の店舗受け取りへ自動切替せず、購入ルートは未確認として保留する。両支店の比較完了後に限り、オンラインの型番・販売元・税込価格・在庫・実送料/必須費用・最終決済額・保証/返品条件も比較し、購入可能ルートの税込現金総額が最も低いものを選ぶ。ネット価格で店頭価格を代用せず、ポイント還元は現金値引きに含めない。",
-    "default_budget_scenario_id": "budget_400k",
-    "default_budget_scope_note": "Top-level total_budget_jpy, soft_overrun_allowance_jpy and soft_ceiling_total_jpy describe only the default JPY 400,000 scenario. The explicit budget_scenarios table is authoritative for every tier; 350k and 450k never inherit the global 20k allowance."
+    "peripheral_purchase_policy_ja": "主予算は総額45万円。周辺機器35,000円は参考配分で固定支出ではなく、27インチWQHDモニター1台・キーボード・マウス・マウスパッドの実費を計上する。予備費5,000円は別枠で残す。ビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の同一型番・現金税込価格・同一支店在庫を確認し、未確認ならネット配送へ自動切替しない。",
+    "default_budget_scenario_id": "budget_450k",
+    "default_budget_scope_note": "Top-level total_budget_jpy, soft_overrun_allowance_jpy and soft_ceiling_total_jpy describe only the default JPY 400,000 scenario. The explicit budget_scenarios table is authoritative for every tier; 350k and 450k never inherit the global 20k allowance.",
+    "primary_budget_scenario_id": "budget_450k",
+    "purchase_window_mode": "BLACK_FRIDAY_ONLY",
+    "pre_black_friday_purchase_allowed": false
   },
   "parts": [
     {
