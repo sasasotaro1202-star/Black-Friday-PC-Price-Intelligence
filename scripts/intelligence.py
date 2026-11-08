@@ -16,15 +16,15 @@ def _initial_budget_settings():
     except Exception:
         cfg = {}
     try:
-        total = int(cfg.get("total_budget_jpy", 400000))
+        total = int(cfg.get("total_budget_jpy", 450000))
         peripherals = int(cfg.get("peripheral_budget_jpy", 35000))
-        pc_cap = int(cfg.get("pc_budget_jpy", 395000))
-        pc_target = int(cfg.get("pc_target_jpy", min(360000, pc_cap)))
+        pc_cap = int(cfg.get("pc_budget_jpy", 445000))
+        pc_target = int(cfg.get("pc_target_jpy", min(410000, pc_cap)))
         contingency = int(cfg.get("unallocated_contingency_jpy", max(0, total - peripherals - pc_cap)))
         mode = str(cfg.get("peripheral_budget_mode") or "").upper()
         dynamic_peripherals = mode == "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET" or cfg.get("peripheral_budget_is_hard_cap") is False
     except (TypeError, ValueError):
-        total, peripherals, pc_cap, pc_target, contingency, dynamic_peripherals = 400000, 35000, 395000, 360000, 5000, True
+        total, peripherals, pc_cap, pc_target, contingency, dynamic_peripherals = 450000, 35000, 445000, 410000, 5000, True
     invalid = (
         min(total, peripherals, pc_cap, pc_target, contingency) < 0
         or pc_target > pc_cap
@@ -198,6 +198,8 @@ def purchase_budget_policy():
         "peripheral_budget_is_hard_cap": bool(cfg.get("peripheral_budget_is_hard_cap", True)),
         "pc_target_jpy": int(cfg.get("pc_target_jpy", BUDGET)),
         "pc_budget_jpy": int(cfg.get("pc_budget_jpy", PC_BUDGET)),
+        "soft_ceiling_total_jpy": int(cfg.get("soft_ceiling_total_jpy", cfg.get("total_budget_jpy", TOTAL_BUDGET))),
+        "soft_overrun_allowance_jpy": int(cfg.get("soft_overrun_allowance_jpy", 0)),
         "unallocated_contingency_jpy": int(cfg.get("unallocated_contingency_jpy", 0)),
         "minimum_ram_gb": int(cfg.get("minimum_ram_gb", MINIMUM_RAM_GB)),
         "minimum_ssd_gb": int(cfg.get("minimum_ssd_gb", MINIMUM_SSD_GB)),
@@ -272,7 +274,7 @@ def early_buy_review_assessment(
     result.update(
         status="EARLY_BUY_REVIEW_ONLY",
         label_ja="前倒し候補：総額・返品条件の最終確認",
-        next_step="40万円総額・保証/返品・互換性を人手で最終確認。自動購入許可は出さない",
+        next_step=f"{purchase_budget_policy()['total_budget_jpy']:,}円総額・保証/返品・互換性を人手で最終確認。公式BF期間内の価格であることも確認し、自動購入許可は出さない",
     )
     return result
 
