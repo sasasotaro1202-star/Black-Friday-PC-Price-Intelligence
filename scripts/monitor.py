@@ -19,6 +19,7 @@ from intelligence import (
     price_has_tax_exclusive_label,
     enrich_identity, iso, plausible_floor, PRICE_NAVIGATION_CONTEXT
 )
+from observation_contract import point_in_time_event_metadata
 
 PRIMARY_DOMAINS = {
     "lenovo.com", "asus.com", "hp.com", "msi.com", "acer.com", "gigabyte.com",
@@ -1207,6 +1208,8 @@ def apply_observation(entry, raw, previous, catalog_item, retrieval_time):
         "retrieval_time": retrieval_time,
         "observed_at": retrieval_time,
         "available_at": retrieval_time if raw and raw.get("price_jpy") is not None else None,
+        "source_event_time": (raw or {}).get("source_event_time") if isinstance(raw, dict) else None,
+        "source_publication_time": (raw or {}).get("source_publication_time") if isinstance(raw, dict) else None,
         "fetch_status": "ok",
         "last_fetch_status": "ok",
         "last_fetch_error": None,
@@ -1624,13 +1627,13 @@ def main():
             event = {
                 "id": cid,
                 "observed_at": retrieval_time,
-                "event_time": None,
+                "event_time": item.get("source_event_time"),
+                "event_time_lower_bound": previous.get("retrieval_time") or previous.get("observed_at"),
                 "event_time_upper_bound": retrieval_time,
                 "publication_time": item.get("source_publication_time"),
                 "available_at": item.get("available_at"),
                 "retrieval_time": retrieval_time,
                 "prediction_time": retrieval_time,
-                "pit_valid": bool(item.get("available_at") and item.get("available_at") <= retrieval_time),
                 "url": entry["url"],
                 "store": item.get("store"),
                 "name": item.get("name"),
@@ -1646,6 +1649,7 @@ def main():
                 "new_spec": item.get("spec"),
                 "event_type": "new" if not previous else "changed",
             }
+            event.update(point_in_time_event_metadata(event))
             changes.append(event)
 
     processed_count = len(products)
