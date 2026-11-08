@@ -16,9 +16,18 @@ if SCRIPTS not in sys.path:
     sys.path.insert(0, SCRIPTS)
 
 from intelligence import load_json, save_json, now_jst, iso, parse_dt, early_buy_review_assessment
+from observation_contract import point_in_time_event_metadata
 from monitor import fetch, parse_page, ddg_search, bing_search, search_identity_anchor, pick_price
 
 JST = timezone(timedelta(hours=9))
+
+
+def append_pit_change_event(events, event):
+    """Persist a change event without inventing unavailable event/publication times."""
+    event.setdefault("event_time", None)
+    event.setdefault("publication_time", None)
+    event.update(point_in_time_event_metadata(event))
+    events.append(event)
 CONFIG_PATH = os.path.join(ROOT, "config", "build_components.json")
 OUTPUT_PATH = os.path.join(ROOT, "data", "build_component_prices.json")
 OBSERVATIONS_PATH = os.path.join(ROOT, "data", "build_component_observations.jsonl")
@@ -1906,7 +1915,7 @@ def collect_component_prices(config=None):
                 "stock_signal": row.get("comparison_stock_signal"), "bf_actual_authorized": False
             })
             if isinstance(prev_price, int) and prev_price != price:
-                events.append({
+                append_pit_change_event(events, {
                     "id": row["id"], "category": row["category"], "model_code": row.get("model_code"),
                     "observed_at": row.get("retrieval_time"), "available_at": row.get("available_at"),
                     "retrieval_time": row.get("retrieval_time"), "prediction_time": row.get("retrieval_time"),
