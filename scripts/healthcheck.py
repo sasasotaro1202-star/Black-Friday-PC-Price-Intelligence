@@ -7,7 +7,7 @@ from intelligence import (
     effective_cost, EFFECTIVE_SOFT_MAX, EFFECTIVE_HARD_MAX,
     purchase_budget_policy, configuration_readiness, peripheral_budget_projection
 )
-from observation_contract import observation_metadata_schema_errors, purchase_gate_schema_errors
+from observation_contract import observation_metadata_schema_errors, purchase_gate_schema_errors, point_in_time_event_metadata
 
 
 
@@ -387,12 +387,30 @@ def main():
                     errors.append(f"duplicate change event line {n}")
                 seen_events.add(key)
 
-                if e.get("new_price_jpy") is not None:
-                    av = parse_dt(e.get("available_at"))
-                    rt = parse_dt(e.get("retrieval_time"))
-                    pr = parse_dt(e.get("prediction_time"))
-                    if av is None or rt is None or pr is None or av > rt or rt > pr:
-                        errors.append(f"invalid PIT in change event line {n}")
+                expected_pit = point_in_time_event_metadata(e)
+                for field, expected_value in expected_pit.items():
+                    if e.get(field) != expected_value:
+                        errors.append(f"change event PIT metadata mismatch line {n}:{field}")
+                if expected_pit["pit_status"] == "INVALID":
+                    errors.append(f"invalid PIT in change event line {n}")
+
+    component_event_path = os.path.join(ROOT, "data", "build_component_change_events.jsonl")
+    if os.path.exists(component_event_path):
+        with open(component_event_path, encoding="utf-8") as f:
+            for n, line in enumerate(f, 1):
+                if not line.strip():
+                    continue
+                try:
+                    event = json.loads(line)
+                except Exception:
+                    errors.append(f"malformed build_component_change_events line {n}")
+                    continue
+                expected_pit = point_in_time_event_metadata(event)
+                for field, expected_value in expected_pit.items():
+                    if event.get(field) != expected_value:
+                        errors.append(f"build component event PIT metadata mismatch line {n}:{field}")
+                if expected_pit["pit_status"] == "INVALID":
+                    errors.append(f"invalid PIT in build component change event line {n}")
 
     anchors = load_anchors()
     events = read_events()
