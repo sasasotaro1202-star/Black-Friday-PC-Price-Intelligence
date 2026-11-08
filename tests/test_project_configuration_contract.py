@@ -55,7 +55,7 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(targets["pc_budget_jpy"] + targets["unallocated_contingency_jpy"], targets["total_budget_jpy"])
         self.assertEqual(
             max(0, min(targets["pc_budget_jpy"], targets["total_budget_jpy"] - targets["peripheral_budget_jpy"] - targets["unallocated_contingency_jpy"])),
-            360000,
+            410000,
         )
         self.assertEqual(targets["budget_jpy"], targets["pc_target_jpy"])
         mandatory_peripheral_target = sum(
@@ -64,9 +64,9 @@ class ProjectConfigurationContractTests(unittest.TestCase):
             if item.get("mandatory", True)
         )
         self.assertEqual(mandatory_peripheral_target, targets["peripheral_budget_jpy"])
-        self.assertEqual(targets["total_budget_jpy"], 400000)
+        self.assertEqual(targets["total_budget_jpy"], 450000)
         self.assertEqual(targets["peripheral_budget_jpy"], 35000)
-        self.assertEqual(targets["pc_target_jpy"], 360000)
+        self.assertEqual(targets["pc_target_jpy"], 410000)
 
     def test_component_monitor_urls_use_allowlisted_comparison_domains(self):
         allowed_domains = tuple(
@@ -157,8 +157,8 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         candidates = profile["budget_build_candidates"]
         self.assertEqual(len(candidates), 11)
         self.assertEqual({item["budget_tier_jpy"] for item in candidates}, {350000, 400000, 450000})
-        self.assertEqual(profile["soft_ceiling_total_jpy"], 420000)
-        self.assertEqual(profile["soft_overrun_allowance_jpy"], 20000)
+        self.assertEqual(profile["soft_ceiling_total_jpy"], 450000)
+        self.assertEqual(profile["soft_overrun_allowance_jpy"], 0)
         self.assertEqual(
             [(item["total_budget_jpy"], item["soft_ceiling_total_jpy"]) for item in profile["budget_scenarios"]],
             [(350000, 350000), (400000, 420000), (450000, 450000)],
@@ -287,6 +287,8 @@ class ProjectConfigurationContractTests(unittest.TestCase):
         self.assertEqual(profile["peripheral_budget_jpy"], self.targets["peripheral_budget_jpy"])
         self.assertEqual(profile["pc_target_jpy"], self.targets["pc_target_jpy"])
         self.assertEqual(profile["pc_budget_jpy"], self.targets["pc_budget_jpy"])
+        self.assertEqual(profile["default_budget_scenario_id"], "budget_450k")
+        self.assertEqual(profile["primary_budget_scenario_id"], "budget_450k")
         self.assertTrue(profile["budget_is_approximate"])
         self.assertEqual(profile["soft_overrun_allowance_jpy"], 20000)
         self.assertEqual(profile["soft_ceiling_total_jpy"], 420000)
