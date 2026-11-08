@@ -1,5 +1,5 @@
 {
-  "budget_jpy": 360000,
+  "budget_jpy": 410000,
   "target_date": "2026-11-27",
   "monitor_window_start": "2026-11-01T00:00:00+09:00",
   "monitor_window_end": "2026-12-11T23:59:59+09:00",
@@ -262,14 +262,14 @@
   "desktop_enabled": true,
   "desktop_note": "Desktop self-build monitoring optimizes for 1440p gaming (including Cities: Skylines II), Unity/Unreal/Godot game creation, Python/VS Code/GitHub, sports/stock/BTC analysis, feasible local AI, everyday research and study. Compare all-in scenarios separately: ¥350,000 ceiling for the ¥350,000 case; ¥420,000 only for the ¥400,000 base case when a material workload gain is demonstrated; ¥450,000 ceiling for the separate ¥450,000 case. Keep over-ceiling options visible as comparison-only with the exact overrun. Include one 27-inch WQHD main monitor, keyboard, mouse, mousepad, verified shipping/required small items, and ¥5,000 contingency. Compare online delivery, in-store cash, and online order/store pickup per exact SKU; never treat points as cash discounts. Verify included monitor cables before adding any cable. Exclude secondary monitors, speakers, headsets, and the already-owned power strip. At purchase require at least 32GB RAM and 1TB SSD; never count post-purchase upgrades as completing the build. BTO and laptops remain comparison-only.",
   "desktop_exact_candidate_count": 7,
-  "total_budget_jpy": 400000,
+  "total_budget_jpy": 450000,
   "peripheral_budget_jpy": 35000,
-  "pc_target_jpy": 360000,
-  "pc_budget_jpy": 395000,
+  "pc_target_jpy": 410000,
+  "pc_budget_jpy": 445000,
   "minimum_ram_gb": 32,
   "minimum_ssd_gb": 1000,
   "desktop_preferred": true,
-  "budget_scope_note": "総額目標は35万円・40万円・45万円の3シナリオ。35万円案は350,000円、40万円本命のみ用途上の明確な性能向上がある場合に420,000円、45万円案は独立して450,000円を評価上限とする。各シナリオに必須周辺機器、オンライン配送送料または実店舗購入条件、必要小物、総額予備費5,000円を含める。周辺機器はオンライン配送・実店舗の現金購入・オンライン注文の店舗受取を商品別に比較し、同一型番の税込最終支払額で評価する。ポイントは現金値引きに算入しない。",
+  "budget_scope_note": "主予算は総額450,000円。PC本体、27インチWQHDモニター、キーボード、マウス、マウスパッド、PC/周辺機器の送料、必要小物、総額予備費5,000円を含む。周辺機器35,000円は参考配分で固定支出ではなく、実費に応じてPC本体の動的上限を再計算する。45万円を主目標とし、明確な性能向上があり実売根拠も揃う場合のみ470,000円まで例外比較する。35万円/40万円は別シナリオで残す。ポイントは現金値引きとみなさない。ブラックフライデー前の価格は事前参考価格として扱い、各販売店の年付き公式キャンペーン期間内に観測された価格だけをBF価格と認定する。",
   "peripherals": [
     {
       "id": "main_monitor",
@@ -793,8 +793,8 @@
     }
   ],
   "purchase_strategy": {
-    "updated_at": "2026-11-03",
-    "purpose": "総額40万円を基準目標、約42万円を初期許容帯として自作PC本体と必要な周辺機器を最適化する。40万円は絶対失格線ではなく、用途上の性能改善と完成総額を比較する。35万円目標/37万円許容帯、40万円目標/42万円許容帯、45万円目標/47万円許容帯を別々に表示する。PC本体はネットでパーツごとに購入する。周辺機器はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の両支店について、同一型番の税込現金価格と同じ支店の在庫を確認する。どちらか未確認ならネット配送・店舗受け取りに自動切替しない。両支店比較の完了後に、オンラインの型番・販売元・在庫・実送料・最終決済額・保証/返品条件も確認して比較する。購入時にRAM32GB以上、SSD1TB以上を確保し、スピーカー・ヘッドセット・電源タップは今回の対象外。サブモニターは今回の購入対象外だが、PC購入後に必要なら別予算で追加できる。",
+    "updated_at": "2026-11-08",
+    "purpose": "総額450,000円を主目標として、2026年ブラックフライデー期間中に購入する自作PC一式を最適化する。必須周辺機器・PC/周辺機器送料・必要小物・予備費5,000円を含む。35万円・40万円案は節約/中間比較として維持。45万円を使い切ることは目的にせず、測定可能な性能・容量・信頼性向上が明確な場合のみ470,000円まで例外比較する。購入時RAM32GB以上/SSD1TB以上。価格目標・事前価格・BF実売・最終決済額を分離し、全構成の証拠が揃わなければ購入を許可しない。",
     "priority_plans": [
       {
         "candidate_id": "desktop-gtune-dg-i5g70-5070",
@@ -871,7 +871,7 @@
       "maximum_completed_pc_price_uses": "dynamic_pc_cap_jpy",
       "requires_direct_price_stock_exact_identity_and_valid_pit": true,
       "zero_cost_upgrade_assumption_allowed": false,
-      "black_friday_target_cap_jpy": 350000,
+      "black_friday_target_cap_jpy": 410000,
       "price_basis": "completed_build_black_friday_offer_only",
       "include_in_final_ranking": true,
       "over_target_policy": "KEEP_IN_RANKING; SHOW FINAL ACTUAL ALL-IN PRICE, NEEDED DISCOUNT AND BLOCKERS; NEVER ADD EXCLUDED PERIPHERALS"
@@ -887,7 +887,7 @@
       "coupon_and_points": "exclude unless final checkout cash price and eligibility are verified",
       "window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
       "official_campaign_dates_required": true,
-      "official_campaign_policy": "A price is a verified 2026 BF offer only if the product's retailer has a source-verified 2026 campaign range and the retrieved offer timestamp lies inside that range. The broad watch window never substitutes for retailer dates."
+      "official_campaign_policy": "A price is a verified 2026 Black Friday offer only when the exact retailer/product offer is observed inside that retailer's source-verified 2026 campaign range. Pre-campaign and broad-watch-window prices are reference-only. Never buy before the official campaign window under the current user instruction."
     },
     "ai_vram_outlier_rule": {
       "label": "RTX 5060 Ti 16GB AI-VRAM dark horse",
@@ -899,7 +899,7 @@
       "requires_direct_price_stock_exact_identity_and_valid_pit": true,
       "requires_final_configuration_quote": true,
       "zero_cost_upgrade_assumption_allowed": false,
-      "black_friday_target_cap_jpy": 350000,
+      "black_friday_target_cap_jpy": 410000,
       "price_basis": "completed_build_black_friday_offer_only",
       "rationale": "Track beside faster RTX 5070 options because 16GB VRAM may better support some local-AI workloads; do not outrank based on VRAM alone.",
       "include_in_final_ranking": true
@@ -934,9 +934,55 @@
       "require_all_store_branches_before_purchase": true
     },
     "peripheral_allocation_scenario_jpy": 35000,
-    "peripheral_allocation_scenario_note": "周辺機器の計画配分は約35,000円（メインモニター1台、キーボード、マウス、マウスパッド、必要な場合のみケーブル、価格差用の柔軟な予備枠）。電源タップは所有済みで購入・価格監視・予算対象外。スピーカー・ヘッドセットは今回の購入・監視対象外。サブモニターは今回の購入・監視・予算対象外だが、必要になれば購入後に別予算で追加できる。参考配分を使い切ることは目的ではない。ネット配送・店頭購入・ネット注文の店舗受け取りを同一型番・最終支払額・在庫・保証条件で比較する。総額40万円目標を基本とし、性能上の利点が明確なら約42万円までの許容帯で比較し、別枠予備費5,000円を維持し、PCの許容額は確認できた実支出から動的に計算する。",
+    "peripheral_allocation_scenario_note": "周辺機器35,000円は参考配分であり使い切る義務もハード上限もない。45万円の総額主予算にPC本体・モニター1台・キーボード・マウス・マウスパッド・必要なケーブル・送料/必要小物・予備費5,000円をすべて含める。",
     "budget_formula": "dynamic_pc_cap_jpy = max(0, min(pc_budget_jpy, total_budget_jpy - current_or_reserved_mandatory_peripheral_cost_jpy - unallocated_contingency_jpy))",
-    "budget_optimization_policy": "総額40万円を使い切ることを目的にしない。周辺機器は必要なものだけ実費計上し、ネット配送・店頭購入・ネット注文の店舗受け取りを同一型番の最終支払額・送料・在庫・保証・返品条件で比較する。電源タップは所有済みのため買い足さない。余りが出た場合は、総額上限を守りながらゲーム性能・ゲーム制作・勉強・分析を改善するCPU/GPU/RAM/SSD候補を再比較する。スピーカー・ヘッドセットは対象外で、予算消化のために追加しない。サブモニターは今回の購入に含めず、必要になった場合のみ購入後の別予算で評価する。"
+    "budget_optimization_policy": "総額450,000円を主目標とするが使い切らない。必須周辺機器は現金実支出を計上し、実費に応じてPC本体上限を動的に再計算する。総額470,000円までは、測定可能な性能・容量・信頼性向上が明確で全品の実売/在庫/決済/互換性/保証が揃う場合だけ例外比較する。2026年の販売店公式BF期間前には購入しない。スピーカー・ヘッドセット・サブモニター・既所有の電源タップは初回購入から除外する。",
+    "purchase_timing_policy": {
+      "updated_at": "2026-11-08",
+      "default_action": "WAIT_FOR_OFFICIAL_2026_BLACK_FRIDAY_WINDOW",
+      "description": "ユーザーの購入時期指定により、購入は2026年の各販売店の公式ブラックフライデー開催期間中に限定する。開催前の低価格トリガーは事前参考・監視アラートにとどめ、購入候補や前倒し購入に昇格させない。公式の年付き開催期間、期間中の新しい直接価格、正確な型番、販売可能在庫、送料込み現金決済額、互換性、保証/返品が全て揃った場合のみ人手で最終判定する。",
+      "early_buy_thresholds_jpy": {
+        "cpu-ryzen7-9700x": 36000,
+        "gpu-rtx5070-12gb": 119000,
+        "gpu-rtx5060ti-16gb": 100000,
+        "gpu-rtx5070ti-16gb": 140000,
+        "motherboard-asrock-b850m-pro-rs-wifi": 18000,
+        "memory-teamgroup-ddr5-32gb-6000": 36000,
+        "memory-crucial-pro-ddr5-32gb-6000": 54000,
+        "ssd-crucial-p3-plus-1tb": 16000,
+        "psu-corsair-rm850e-2025": 13000,
+        "case-fractal-pop-air-tg": 11000,
+        "cooler-thermalright-pa120-se-v3": 4500,
+        "os-windows11-home": 13500,
+        "ssd-kioxia-exceria-basic-2tb": 42000,
+        "memory-lexar-thor-ddr5-64gb-6000": 90000,
+        "main_monitor": 18000,
+        "keyboard": 4000,
+        "mouse": 4000,
+        "mousepad": 1200
+      },
+      "thresholds_are_forecasts": false,
+      "thresholds_are_purchase_promises": false,
+      "purchase_authorization_automatic": false,
+      "evidence_requirements": [
+        "正確な型番・容量・仕様の一致",
+        "直接販売ページまたは選択した購入チャネルの価格が検証済み",
+        "取得時刻と有効時刻が検証済みで、価格データが新しい",
+        "購入可能な在庫が確認済み（在庫切れ・不明は不可）",
+        "送料・必須手数料込みの現金決済額を確認",
+        "保証・返品条件を確認",
+        "PC部品はマザーボード・電源・ケース・冷却等との互換性を確認",
+        "PC本体・必須周辺機器・送料・小物・予備費込みの総額が400000円以内"
+      ],
+      "trigger_outcome": "REVIEW_ONLY_NO_AUTOMATIC_BUY",
+      "notes": "この価格は前倒し検討用の閾値であり、BF価格予測・最安値予測・購入許可ではない。ポイント還元を現金支払額から差し引かない。公式BF日程は前年の日付や暫定監視窓から推定しない。",
+      "pre_black_friday_purchase_allowed": false,
+      "require_verified_official_campaign_window": true,
+      "broad_watch_window_is_not_purchase_window": true,
+      "price_thresholds_before_official_bf": "REFERENCE_ONLY_NO_PURCHASE_REVIEW",
+      "price_thresholds_during_official_bf": "MANUAL_REVIEW_ONLY_NO_AUTOMATIC_PURCHASE",
+      "purchase_window_note_ja": "2026年の年付き公式キャンペーン期間が確認できない販売店は、価格が安くても購入候補の最終確定を保留する。"
+    }
   },
   "peripheral_alternatives": [
     {
@@ -1859,7 +1905,7 @@
   "monitor_window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
   "monitor_window_note": "暫定の広域監視窓であり、いずれかの販売店の公式BF開催日を意味しない。各店の2026年公式日程を公式ページから明示的な年付き日付範囲で確認するまで、価格をBF実売として認定せず、買い時判定は購入許可を出さない。過去日程、曜日、年のない月日から開催日を推定しない。",
   "budget_mode": "DYNAMIC_ALLOCATION_WITH_SOFT_TARGETS",
-  "budget_target_note": "総額35万円・40万円・45万円を別シナリオで比較。40万円案だけ、用途上の性能向上が明確なら約42万円までを許容帯とする。35万円案は35万円、45万円案は45万円を評価上限とし、上限超過候補は比較用に残して超過額を明示する。周辺機器は約35,000円を参考配分とし、実費に応じて動的配分する。予備費5,000円を確保し、価格・在庫・最終決済額・互換性・保証が未確認なら購入を許可しない。",
+  "budget_target_note": "45万円を主予算とし、2026年ブラックフライデー期間中の購入を基本とする。35万円/40万円は節約・中間比較。総額450,000円を目標とし、性能・容量・信頼性の明確な追加価値が実売・全構成で確認できる場合のみ470,000円まで例外比較。PC本体・必須周辺機器・送料/小物・総額予備費5,000円込み。購入時RAM32GB以上・SSD1TB以上。公式期間前の価格をBF実売と呼ばず、購入ゲート未達なら待つ。",
   "purchase_channels": {
     "pc_body": {
       "channel": "online",
@@ -2140,9 +2186,9 @@
   "peripheral_allocation_scenario_jpy": 35000,
   "budget_optimization_policy": "総額40万円を使い切ることを目的にしない。必須周辺機器のみ実費計上する。余りが出たときだけ、総額上限を守りながら、ゲーム性能・ゲーム制作・勉強・分析を実際に改善するCPU/GPU/RAM/SSDを比較する。スピーカー・ヘッドセットは今回の対象外で、予算消化のために追加しない。サブモニターは今回の購入に含めず、必要になった場合のみ購入後の別予算で追加する。",
   "purchase_timing_policy": {
-    "updated_at": "2026-10-17",
-    "default_action": "WAIT_FOR_BLACK_FRIDAY_OR_UNUSUALLY_LOW_VERIFIED_PRICE",
-    "description": "ブラックフライデーを基本の購入時期とする。ただし同一型番の価格が個別の前倒し購入トリガー以下になり、直接価格・在庫・取得時刻が検証できた場合は、ブラックフライデー前の購入候補として再評価する。",
+    "updated_at": "2026-11-08",
+    "default_action": "WAIT_FOR_OFFICIAL_2026_BLACK_FRIDAY_WINDOW",
+    "description": "ユーザーの購入時期指定により、購入は2026年の各販売店の公式ブラックフライデー開催期間中に限定する。開催前の低価格トリガーは事前参考・監視アラートにとどめ、購入候補や前倒し購入に昇格させない。公式の年付き開催期間、期間中の新しい直接価格、正確な型番、販売可能在庫、送料込み現金決済額、互換性、保証/返品が全て揃った場合のみ人手で最終判定する。",
     "early_buy_thresholds_jpy": {
       "cpu-ryzen7-9700x": 36000,
       "gpu-rtx5070-12gb": 119000,
@@ -2177,7 +2223,13 @@
       "PC本体・必須周辺機器・送料・小物・予備費込みの総額が400000円以内"
     ],
     "trigger_outcome": "REVIEW_ONLY_NO_AUTOMATIC_BUY",
-    "notes": "この価格は前倒し検討用の閾値であり、BF価格予測・最安値予測・購入許可ではない。ポイント還元を現金支払額から差し引かない。公式BF日程は前年の日付や暫定監視窓から推定しない。"
+    "notes": "この価格は前倒し検討用の閾値であり、BF価格予測・最安値予測・購入許可ではない。ポイント還元を現金支払額から差し引かない。公式BF日程は前年の日付や暫定監視窓から推定しない。",
+    "pre_black_friday_purchase_allowed": false,
+    "require_verified_official_campaign_window": true,
+    "broad_watch_window_is_not_purchase_window": true,
+    "price_thresholds_before_official_bf": "REFERENCE_ONLY_NO_PURCHASE_REVIEW",
+    "price_thresholds_during_official_bf": "MANUAL_REVIEW_ONLY_NO_AUTOMATIC_PURCHASE",
+    "purchase_window_note_ja": "2026年の年付き公式キャンペーン期間が確認できない販売店は、価格が安くても購入候補の最終確定を保留する。"
   },
   "peripheral_shipping_policy": {
     "mode": "CHANNEL_SPECIFIC",
@@ -2191,23 +2243,23 @@
     {
       "id": "budget_350k",
       "total_budget_jpy": 350000,
-      "description_ja": "35万円目標案。必要周辺機器・送料・5,000円予備費込み。総額35万円を評価上限とし、超過候補は比較用に残して超過額を明示する。",
+      "description_ja": "35万円の節約比較案。PC本体・必須周辺機器・送料/必要小物・総額予備費5,000円込み。総額350,000円を目標・評価上限とし、超過案は比較用に残して超過額を明示する。",
       "soft_ceiling_total_jpy": 350000,
       "soft_overrun_allowance_jpy": 0
     },
     {
       "id": "budget_400k",
       "total_budget_jpy": 400000,
-      "description_ja": "40万円目標案（本命）。必要周辺機器・送料・5,000円予備費込み。用途上の性能向上が明確な場合に限り、総額42万円までを許容帯として比較する。",
+      "description_ja": "40万円の中間比較案。PC本体・必須周辺機器・送料/必要小物・総額予備費5,000円込み。用途上の明確な性能向上がある場合のみ総額420,000円まで比較する。",
       "soft_ceiling_total_jpy": 420000,
       "soft_overrun_allowance_jpy": 20000
     },
     {
       "id": "budget_450k",
       "total_budget_jpy": 450000,
-      "description_ja": "45万円目標案（独立シナリオ）。必要周辺機器・送料・5,000円予備費込み。総額45万円を評価上限とし、超過候補は比較用に残して超過額を明示する。",
-      "soft_ceiling_total_jpy": 450000,
-      "soft_overrun_allowance_jpy": 0
+      "description_ja": "45万円の主シナリオ。PC本体・必須周辺機器・送料/必要小物・総額予備費5,000円込み。450,000円を主目標とし、明確な性能・信頼性の向上が実額で確認できる場合だけ470,000円まで例外比較する。使い切りは目的にしない。",
+      "soft_ceiling_total_jpy": 470000,
+      "soft_overrun_allowance_jpy": 20000
     }
   ],
   "budget_scenario_policy": {
@@ -2215,9 +2267,9 @@
     "hard_ceiling_per_scenario": false,
     "peripherals_included": true,
     "unallocated_contingency_jpy": 5000,
-    "required_peripherals": "One 27-inch WQHD main monitor, keyboard, mouse, mousepad, cables only if needed",
-    "excluded": "Speakers, headset, power strip (already owned), and secondary monitor for the initial purchase only. A secondary monitor may be added later as a separate optional upgrade under a separate incremental budget.",
-    "selection_rule": "35万円案は総額350,000円、40万円案のみ用途上の明確な性能向上がある場合に総額420,000円まで、45万円案は独立シナリオとして総額450,000円を評価上限にする。上限超過候補も比較から消さず、比較用・購入不可として超過額を明示する。PC部品・OS・送料/必要小物・必要周辺機器実費・周辺機器送料・総額予備費5,000円を含む。目標価格・比較価格だけでは購入許可しない。",
+    "required_peripherals": "One 27-inch WQHD main monitor, keyboard, mouse, mousepad; cables only if required after checking box contents",
+    "excluded": "Speakers, headset, power strip (already owned), and secondary monitor for the initial purchase",
+    "selection_rule": "45万円案を主シナリオ（総額450,000円目標）として最優先で評価する。45万円を使い切ることは目的にしない。総額470,000円までは、ゲーム・ゲーム制作・ローカルAI・分析で測定可能な性能/容量/信頼性向上が明確で、全構成・在庫・決済・互換性・保証が確認できる場合だけ例外比較する。40万円案は中間比較（明確な価値があれば420,000円まで）、35万円案は節約比較（350,000円上限）。各総額にPC本体・OS・必須周辺機器・送料/必要小物・総額予備費5,000円を含める。BF目標価格の合算は実売ではなく、公式BF期間中の新しい直接価格・販売可能在庫・税込最終決済額が揃わない限り購入を許可しない。",
     "workload_priorities": [
       "gaming at 1440p",
       "game development in Unreal Engine/Unity/Godot",
@@ -2227,17 +2279,18 @@
       "schoolwork/research and multitasking"
     ],
     "upgrade_preference_order_if_complete_total_fits": [
-      "32GB RAM minimum at purchase",
-      "1TB NVMe SSD minimum at purchase",
-      "64GB RAM for large game projects/data and multitasking",
-      "2TB NVMe SSD for games/assets/builds/datasets",
-      "GPU tier selected by measured gaming/rendering vs VRAM needs",
-      "12+ core CPU if local engine-source builds and parallel data jobs justify it"
+      "購入時点で32GB RAM以上・1TB NVMe SSD以上を満たす",
+      "RTX 5070 Ti 16GBとRTX 5070 12GBの実売差・ゲーム性能・VRAM余裕を比較",
+      "2TB NVMe SSDをゲーム/制作アセット/データ保存の実益と持続書込性能で評価",
+      "64GB RAMをUnreal大型プロジェクト・複数ツール・分析の同時実行に必要な場合だけ採用",
+      "12コア以上CPUはソースビルド/並列処理の実測メリットと冷却費を含めて評価"
     ],
     "default_soft_overrun_allowance_jpy": 0,
     "allow_target_overrun_for_value": true,
     "automatic_purchase_authorization": false,
-    "score_policy": "各シナリオ内で相対比較する。目標価格から計算したスコアは計画用であり、実測ベンチマーク・購入確率・購入許可ではない。シナリオの評価上限超過候補はランキング上位に昇格させず比較専用として表示する。"
+    "score_policy": "45万円主シナリオを中心に、35/40万円を節約・中間比較として相対評価する。目標価格ベースの点数は計画用で、実測ベンチマーク・購入確率・購入許可ではない。470,000円を超える候補は比較専用で、購入可能案と混ぜない。",
+    "primary_scenario_id": "budget_450k",
+    "soft_overrun_allowance_jpy": 20000
   },
   "budget_build_candidate_ids": [
     "budget-350k-rtx5060ti-fit",
@@ -2252,7 +2305,7 @@
     "budget-450k-9900x-5070-64gb-2tb",
     "budget-450k-5070ti-64gb-2tb-over"
   ],
-  "soft_ceiling_total_jpy": 420000,
+  "soft_ceiling_total_jpy": 470000,
   "soft_overrun_allowance_jpy": 20000,
   "deferred_optional_upgrades": [
     {
@@ -2283,6 +2336,6 @@
     "budget_400k",
     "budget_450k"
   ],
-  "purpose": "総額35万円・40万円・45万円の3シナリオで、自作PC本体と必須周辺機器を購入時点の証拠に基づいて比較する。35万円案の評価上限は35万円、40万円案のみ性能向上が明確な場合に42万円まで、45万円案は別シナリオとして45万円を評価上限とする。上限超過候補は比較用に残し、購入不可・超過額を明示する。PC部品は正確な型番の直接販売ページ・税込価格・在庫・送料・最終決済額・保証/返品を確認する。周辺機器はオンライン配送、実店舗の現金購入、オンライン注文の店舗受取を商品別に比較し、未確認ルートを最安扱いしない。RAM32GB以上・SSD1TB以上を購入時点で満たす。購入許可は証拠が揃った場合のみ。",
+  "purpose": "2026年ブラックフライデー期間中に購入する総額約45万円の自作PC一式を主目標として最適化する。35万円/40万円は節約・中間比較用。45万円の主目標に対し、測定可能な性能・容量・信頼性向上が明確な場合のみ総額470,000円まで例外比較する。PC部品・OS・必須周辺機器・送料/必要小物・総額予備費5,000円を含む。価格・在庫・公式セール期間・最終決済額・互換性・保証が揃わなければ購入許可を出さない。",
   "base_budget_scope_note": "トップレベルの総額・soft ceiling・overrun allowanceは標準の40万円案を表す。35万円・45万円はbudget_scenariosの個別設定を唯一の根拠とし、全体の40万円設定を継承しない。"
 }
