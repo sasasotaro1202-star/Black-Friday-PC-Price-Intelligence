@@ -15,64 +15,41 @@ class BudgetPolicyTests(unittest.TestCase):
         with (ROOT / "config" / "targets.json").open(encoding="utf-8") as f:
             self.cfg = json.load(f)
 
-    def test_pre_black_friday_early_buy_threshold_requires_fresh_exact_evidence_and_never_authorizes(self):
+    def test_black_friday_only_policy_blocks_pre_event_purchase_reviews(self):
         timing = self.cfg["purchase_timing_policy"]
-        self.assertFalse(timing["thresholds_are_forecasts"])
+        self.assertEqual(timing["purchase_window_mode"], "BLACK_FRIDAY_ONLY")
+        self.assertFalse(timing["pre_black_friday_purchase_allowed"])
+        self.assertFalse(timing["early_buy_review_enabled"])
         self.assertFalse(timing["purchase_authorization_automatic"])
-        self.assertEqual(timing["early_buy_thresholds_jpy"]["cpu-ryzen7-9700x"], 36000)
-        self.assertEqual(timing["early_buy_thresholds_jpy"]["main_monitor"], 18000)
-        self.assertEqual(timing["early_buy_thresholds_jpy"]["mouse"], 4000)
+        self.assertEqual(timing["early_buy_thresholds_jpy"], {})
+        self.assertEqual(timing["black_friday_reference_thresholds_jpy"]["cpu-ryzen7-9700x"], 36000)
 
-        triggered = intelligence.early_buy_review_assessment(
-            "cpu-ryzen7-9700x", 35900, True, True, "in_stock", True, False,
-            estimated_checkout_total_jpy=36900,
+        # Even a valid low price, stock and PIT signal cannot create a pre-event
+        # purchase review. It remains a monitoring reference until Black Friday.
+        result = intelligence.early_buy_review_assessment(
+            "cpu-ryzen7-9700x", 30000, True, True, "in_stock", True, True,
+            estimated_checkout_total_jpy=30500, verified_checkout_total_jpy=30500,
         )
-        self.assertEqual(triggered["status"], "PRICE_TRIGGERED_CHECKOUT_REVIEW")
-        self.assertFalse(triggered["purchase_authorized"])
-        self.assertIn("決済総額", triggered["next_step"])
-        self.assertEqual(triggered["observed_price_jpy"], 35900)
-        self.assertTrue(triggered["price_verified"])
-        self.assertTrue(triggered["identity_verified"])
-        self.assertTrue(triggered["pit_valid"])
-        self.assertEqual(triggered["stock_status"], "in_stock")
-        self.assertEqual(triggered["estimated_checkout_total_jpy"], 36900)
-        self.assertIsNone(triggered["verified_checkout_total_jpy"])
-        self.assertFalse(triggered["checkout_total_verified"])
+        self.assertEqual(result["status"], "WAIT_FOR_BLACK_FRIDAY")
+        self.assertEqual(result["label_ja"], "ブラックフライデー期間まで購入保留")
+        self.assertFalse(result["purchase_authorized"])
+        self.assertEqual(result["observed_price_jpy"], 30000)
+        self.assertTrue(result["price_verified"])
+        self.assertTrue(result["identity_verified"])
+        self.assertTrue(result["pit_valid"])
+        self.assertEqual(result["stock_status"], "in_stock")
+        self.assertEqual(result["verified_checkout_total_jpy"], 30500)
 
-        verified = intelligence.early_buy_review_assessment(
-            "cpu-ryzen7-9700x", 35000, True, True, "in_stock", True, True,
-            estimated_checkout_total_jpy=35500, verified_checkout_total_jpy=35500,
-        )
-        self.assertEqual(verified["status"], "EARLY_BUY_REVIEW_ONLY")
-        self.assertEqual(verified["verified_checkout_total_jpy"], 35500)
-        self.assertTrue(verified["checkout_total_verified"])
-        self.assertFalse(verified["purchase_authorized"])
-
-        above = intelligence.early_buy_review_assessment(
-            "cpu-ryzen7-9700x", 38000, True, True, "in_stock", True, True
-        )
-        self.assertEqual(above["status"], "WAIT_FOR_EARLY_BUY_THRESHOLD")
-        self.assertFalse(above["purchase_authorized"])
-
-        bad_pit = intelligence.early_buy_review_assessment(
-            "cpu-ryzen7-9700x", 35000, True, True, "in_stock", False, True
-        )
-        self.assertEqual(bad_pit["status"], "PIT_NOT_VERIFIED")
-
-        unknown_stock = intelligence.early_buy_review_assessment(
-            "cpu-ryzen7-9700x", 35000, True, True, "unknown", True, True
-        )
-        self.assertEqual(unknown_stock["status"], "STOCK_NOT_VERIFIED")
-        self.assertEqual(unknown_stock["stock_status"], "unknown")
-        self.assertFalse(unknown_stock["purchase_authorized"])
-
-    def test_peripheral_early_buy_thresholds_exclude_unwanted_items(self):
-        thresholds = self.cfg["purchase_timing_policy"]["early_buy_thresholds_jpy"]
-        self.assertEqual(thresholds["main_monitor"], 18000)
-        self.assertEqual(thresholds["keyboard"], 4000)
-        self.assertEqual(thresholds["mouse"], 4000)
-        self.assertEqual(thresholds["mousepad"], 1200)
-        self.assertTrue({"speakers", "secondary_monitor", "headset", "power_strip"}.isdisjoint(thresholds))
+    def test_black_friday_reference_thresholds_exclude_unwanted_items(self):
+        timing = self.cfg["purchase_timing_policy"]
+        thresholds = timing["early_buy_thresholds_jpy"]
+        reference = timing["black_friday_reference_thresholds_jpy"]
+        self.assertEqual(thresholds, {})
+        self.assertEqual(reference["main_monitor"], 18000)
+        self.assertEqual(reference["keyboard"], 4000)
+        self.assertEqual(reference["mouse"], 4000)
+        self.assertEqual(reference["mousepad"], 1200)
+        self.assertTrue({"speakers", "secondary_monitor", "headset", "power_strip"}.isdisjoint(reference))
 
     def test_peripherals_require_both_store_branches_before_any_route_selection(self):
         channels = self.cfg["purchase_channels"]
@@ -106,10 +83,10 @@ class BudgetPolicyTests(unittest.TestCase):
         with (ROOT / "config" / "early_purchase_policy.json").open(encoding="utf-8") as f:
             early = json.load(f)
         self.assertTrue(early["budget_is_approximate"])
-        self.assertEqual(early["total_budget_target_jpy"], 400000)
-        self.assertIsNone(early["total_budget_hard_cap_jpy"])
-        self.assertEqual(early["soft_overrun_allowance_jpy"], 20000)
-        self.assertEqual(early["soft_ceiling_total_jpy"], 420000)
+        self.assertEqual(early["total_budget_target_jpy"], 450000)
+        self.assertEqual(early["total_budget_hard_cap_jpy"], 450000)
+        self.assertEqual(early["soft_overrun_allowance_jpy"], 0)
+        self.assertEqual(early["soft_ceiling_total_jpy"], 450000)
     def test_peripheral_report_heading_matches_configured_purchase_items(self):
         heading = report.peripheral_monitor_section_heading(self.cfg)
         self.assertIn("メインモニター1台", heading)
@@ -135,10 +112,10 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertTrue(any("同時接続" in check for check in deferred["compatibility_checks"]))
 
     def test_all_in_budget_arithmetic(self):
-        self.assertEqual(self.cfg["total_budget_jpy"], 400000)
+        self.assertEqual(self.cfg["total_budget_jpy"], 450000)
         self.assertEqual(self.cfg["peripheral_budget_jpy"], 35000)  # flexible reference allocation, not a hard cap
-        self.assertEqual(self.cfg["pc_target_jpy"], 360000)
-        self.assertEqual(self.cfg["pc_budget_jpy"], 395000)
+        self.assertEqual(self.cfg["pc_target_jpy"], 410000)
+        self.assertEqual(self.cfg["pc_budget_jpy"], 445000)
         self.assertEqual(self.cfg["unallocated_contingency_jpy"], 5000)
         self.assertFalse(self.cfg["peripheral_budget_is_hard_cap"])
         self.assertEqual(self.cfg["peripheral_budget_mode"], "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET")
@@ -148,7 +125,7 @@ class BudgetPolicyTests(unittest.TestCase):
             self.cfg["peripheral_budget_jpy"],
         )
         dynamic_cap = max(0, min(self.cfg["pc_budget_jpy"], self.cfg["total_budget_jpy"] - self.cfg["peripheral_budget_jpy"] - self.cfg["unallocated_contingency_jpy"]))
-        self.assertEqual(dynamic_cap, 360000)
+        self.assertEqual(dynamic_cap, 410000)
 
 
     def test_hard_budget_ceiling_and_dynamic_peripheral_allocation_are_distinct(self):
@@ -170,14 +147,14 @@ class BudgetPolicyTests(unittest.TestCase):
             targets["peripheral_budget_jpy"],
         )
 
-    def test_purchase_strategy_matches_40man_target_and_channel_policy(self):
+    def test_purchase_strategy_matches_45man_primary_target_and_channel_policy(self):
         strategy = self.cfg["purchase_strategy"]
         self.assertEqual(self.cfg["total_budget_jpy"], 400000)
         self.assertEqual(self.cfg["peripheral_budget_jpy"], 35000)
         self.assertEqual(self.cfg["pc_target_jpy"], 360000)
         self.assertEqual(self.cfg["pc_budget_jpy"], 395000)
-        self.assertEqual(self.cfg["pc_target_jpy"] - 279800, 80200)
-        self.assertEqual(self.cfg["pc_budget_jpy"] - 279800, 115200)
+        self.assertEqual(self.cfg["pc_target_jpy"] - 279800, 130200)
+        self.assertEqual(self.cfg["pc_budget_jpy"] - 279800, 165200)
         ids = {x["id"] for x in self.cfg["peripherals"]}
         self.assertTrue({"speakers", "secondary_monitor", "headset", "power_strip"}.isdisjoint(ids))
         self.assertEqual(strategy["priority_plans"][0]["candidate_id"], "desktop-gtune-dg-i5g70-5070")
@@ -189,9 +166,9 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertTrue({"online", "physical_store", "store_pickup"}.issubset(set(main["purchase_channel_options"])))
         self.assertFalse(channels["online_price_is_store_price"])
 
-    def test_budget_notes_and_dark_horse_caps_match_40man_policy(self):
+    def test_budget_notes_and_dark_horse_caps_match_45man_policy(self):
         strategy = self.cfg["purchase_strategy"]
-        self.assertIn("40万円", strategy["purpose"])
+        self.assertIn("45万円", strategy["purpose"])
         self.assertNotIn("38万円", strategy["purpose"])
         self.assertLessEqual(strategy["outlier_rule"]["black_friday_target_cap_jpy"], self.cfg["pc_target_jpy"])
         self.assertLessEqual(strategy["ai_vram_outlier_rule"]["black_friday_target_cap_jpy"], self.cfg["pc_target_jpy"])
@@ -327,10 +304,10 @@ class BudgetPolicyTests(unittest.TestCase):
             self.assertTrue(p["monitor_url"].startswith("https://"))
 
     def test_intelligence_uses_pc_only_budget(self):
-        self.assertEqual(intelligence.TOTAL_BUDGET, 400000)
+        self.assertEqual(intelligence.TOTAL_BUDGET, 450000)
         self.assertEqual(intelligence.PERIPHERAL_BUDGET, 35000)
-        self.assertEqual(intelligence.BUDGET, 360000)
-        self.assertEqual(intelligence.PC_BUDGET, 395000)
+        self.assertEqual(intelligence.BUDGET, 410000)
+        self.assertEqual(intelligence.PC_BUDGET, 445000)
 
     def test_incomplete_pc_base_config_is_not_ready(self):
         ready, reasons = intelligence.configuration_readiness({"spec": {"ram_gb": 16, "ssd": "500 GB"}})
@@ -717,7 +694,7 @@ class BudgetPolicyTests(unittest.TestCase):
         self.assertFalse(projection["budget_data_ready"])
         self.assertEqual(projection["tracked_peripheral_unverified_ids"], sorted(tracked_ids))
         self.assertEqual(projection["peripheral_projection_jpy"], 35000)
-        self.assertEqual(projection["pc_dynamic_cap_jpy"], 360000)
+        self.assertEqual(projection["pc_dynamic_cap_jpy"], 410000)
         self.assertLessEqual(
             projection["pc_dynamic_cap_jpy"] + projection["peripheral_projection_jpy"],
             projection["total_budget_jpy"],
@@ -760,7 +737,7 @@ class BudgetPolicyTests(unittest.TestCase):
                     int(self.cfg["total_budget_jpy"]) - target_sum - int(self.cfg["unallocated_contingency_jpy"]),
                 ),
             ),
-            360000,
+            410000,
         )
 
 
