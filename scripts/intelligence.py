@@ -16,15 +16,15 @@ def _initial_budget_settings():
     except Exception:
         cfg = {}
     try:
-        total = int(cfg.get("total_budget_jpy", 400000))
+        total = int(cfg.get("total_budget_jpy", 450000))
         peripherals = int(cfg.get("peripheral_budget_jpy", 35000))
-        pc_cap = int(cfg.get("pc_budget_jpy", 395000))
-        pc_target = int(cfg.get("pc_target_jpy", min(360000, pc_cap)))
+        pc_cap = int(cfg.get("pc_budget_jpy", 445000))
+        pc_target = int(cfg.get("pc_target_jpy", min(410000, pc_cap)))
         contingency = int(cfg.get("unallocated_contingency_jpy", max(0, total - peripherals - pc_cap)))
         mode = str(cfg.get("peripheral_budget_mode") or "").upper()
         dynamic_peripherals = mode == "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET" or cfg.get("peripheral_budget_is_hard_cap") is False
     except (TypeError, ValueError):
-        total, peripherals, pc_cap, pc_target, contingency, dynamic_peripherals = 400000, 35000, 395000, 360000, 5000, True
+        total, peripherals, pc_cap, pc_target, contingency, dynamic_peripherals = 450000, 35000, 445000, 410000, 5000, True
     invalid = (
         min(total, peripherals, pc_cap, pc_target, contingency) < 0
         or pc_target > pc_cap
@@ -192,12 +192,12 @@ def purchase_budget_policy():
     cfg = load_json(os.path.join(ROOT, "config", "targets.json"), {})
     peripherals = [x for x in (cfg.get("peripherals") or []) if isinstance(x, dict)]
     return {
-        "total_budget_jpy": int(cfg.get("total_budget_jpy", TOTAL_BUDGET)),
+        "total_budget_jpy": int(cfg.get("total_budget_jpy", 450000)),
         "peripheral_budget_jpy": int(cfg.get("peripheral_budget_jpy", PERIPHERAL_BUDGET)),
         "peripheral_budget_mode": str(cfg.get("peripheral_budget_mode") or "FIXED_TARGET_BUDGET"),
         "peripheral_budget_is_hard_cap": bool(cfg.get("peripheral_budget_is_hard_cap", True)),
-        "pc_target_jpy": int(cfg.get("pc_target_jpy", BUDGET)),
-        "pc_budget_jpy": int(cfg.get("pc_budget_jpy", PC_BUDGET)),
+        "pc_target_jpy": int(cfg.get("pc_target_jpy", 410000)),
+        "pc_budget_jpy": int(cfg.get("pc_budget_jpy", 445000)),
         "unallocated_contingency_jpy": int(cfg.get("unallocated_contingency_jpy", 0)),
         "minimum_ram_gb": int(cfg.get("minimum_ram_gb", MINIMUM_RAM_GB)),
         "minimum_ssd_gb": int(cfg.get("minimum_ssd_gb", MINIMUM_SSD_GB)),
@@ -235,6 +235,19 @@ def early_buy_review_assessment(
         "purchase_authorized": False,
         "next_step": "ブラックフライデー目標で監視を継続",
     }
+    # The user-selected purchase window is Black Friday only. Price thresholds
+    # remain reference data; they must never create a pre-event purchase review.
+    if (
+        policy.get("purchase_window_mode") == "BLACK_FRIDAY_ONLY"
+        and policy.get("pre_black_friday_purchase_allowed") is False
+    ):
+        result.update(
+            status="WAIT_FOR_BLACK_FRIDAY",
+            label_ja="ブラックフライデー期間まで購入保留",
+            purchase_authorized=False,
+            next_step="前倒し購入は禁止。販売店の公式2026年開催期間内に、直接価格・在庫・税込決済額・保証・互換性を再確認",
+        )
+        return result
     if result["early_buy_threshold_jpy"] is None or result["early_buy_threshold_jpy"] <= 0:
         return result
     if not isinstance(observed_price_jpy, int) or isinstance(observed_price_jpy, bool) or observed_price_jpy <= 0 or not price_verified:
