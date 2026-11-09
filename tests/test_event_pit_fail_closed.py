@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import timing_analysis
 import report
+import healthcheck
 from build_component_monitor import append_pit_change_event, normalize_component_event_log
 from monitor import normalize_change_event_log
 from observation_contract import normalize_point_in_time_event
@@ -106,6 +107,55 @@ class StrictChangeEventPitTests(unittest.TestCase):
             )
             with patch.object(report, "ROOT", temp_dir):
                 self.assertEqual(report.read_events(), [])
+
+    def test_healthcheck_scoring_recomputation_uses_only_fully_pit_valid_events(self):
+        def event(event_id, event_time, publication_time, available_at, retrieval_time, prediction_time):
+            row = {
+                "id": event_id,
+                "observed_at": prediction_time,
+                "event_time": event_time,
+                "publication_time": publication_time,
+                "available_at": available_at,
+                "retrieval_time": retrieval_time,
+                "prediction_time": prediction_time,
+                "old_price_jpy": 100000,
+                "new_price_jpy": 99000,
+            }
+            return {**row, **normalize_point_in_time_event(row)}
+
+        valid = event(
+            "valid",
+            "2026-11-09T08:00:00+09:00",
+            "2026-11-09T08:01:00+09:00",
+            "2026-11-09T08:02:00+09:00",
+            "2026-11-09T08:03:00+09:00",
+            "2026-11-09T08:04:00+09:00",
+        )
+        unknown = event(
+            "unknown",
+            None,
+            None,
+            "2026-11-09T08:02:00+09:00",
+            "2026-11-09T08:03:00+09:00",
+            "2026-11-09T08:04:00+09:00",
+        )
+        invalid = event(
+            "invalid",
+            "2026-11-09T08:03:00+09:00",
+            "2026-11-09T08:01:00+09:00",
+            "2026-11-09T08:02:00+09:00",
+            "2026-11-09T08:03:30+09:00",
+            "2026-11-09T08:04:00+09:00",
+        )
+        with tempfile.TemporaryDirectory() as temp_dir:
+            data_dir = pathlib.Path(temp_dir) / "data"
+            data_dir.mkdir()
+            (data_dir / "change_events.jsonl").write_text(
+                "".join(json.dumps(row) + "\\n" for row in (valid, unknown, invalid)),
+                encoding="utf-8",
+            )
+            with patch.object(healthcheck, "ROOT", temp_dir):
+                self.assertEqual(healthcheck.read_events(), [valid])
 
     def test_component_event_writer_marks_missing_source_times_unknown(self):
         events = []
