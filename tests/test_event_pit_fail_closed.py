@@ -80,7 +80,7 @@ class StrictChangeEventPitTests(unittest.TestCase):
         for normalizer in (normalize_change_event_log, normalize_component_event_log):
             with tempfile.TemporaryDirectory() as temp_dir:
                 path = pathlib.Path(temp_dir) / "events.jsonl"
-                path.write_text(json.dumps(legacy) + "\\n", encoding="utf-8")
+                path.write_text(json.dumps(legacy) + "\n", encoding="utf-8")
                 self.assertEqual(normalizer(str(path)), 1)
                 migrated = json.loads(path.read_text(encoding="utf-8").splitlines()[0])
                 self.assertFalse(migrated["pit_valid"])
@@ -102,7 +102,7 @@ class StrictChangeEventPitTests(unittest.TestCase):
             data_dir = pathlib.Path(temp_dir) / "data"
             data_dir.mkdir()
             (data_dir / "change_events.jsonl").write_text(
-                json.dumps(legacy) + "\\n", encoding="utf-8"
+                json.dumps(legacy) + "\n", encoding="utf-8"
             )
             with patch.object(report, "ROOT", temp_dir):
                 self.assertEqual(report.read_events(), [])
