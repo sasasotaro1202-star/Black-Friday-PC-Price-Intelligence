@@ -227,6 +227,21 @@ class BlackFridayScenarioTests(unittest.TestCase):
         self.assertFalse(row["black_friday_offer_verified"])
         self.assertIsNone(row["black_friday_price_observed_jpy"])
 
+    def test_bf_report_labels_mixed_peripheral_cost_basis(self):
+        lines = scenario_analysis.peripheral_plan_summary_lines({
+            "peripheral_projected_cost_jpy": 37628,
+            "peripheral_target_total_jpy": 35000,
+            "unallocated_contingency_jpy": 5000,
+            "black_friday_pc_price_cap_jpy": 357372,
+        })
+        self.assertIn("周辺機器BF計画額", lines[0])
+        self.assertIn("公式BF期間内の確認価格は観測額", lines[0])
+        self.assertIn("未確認品はBF目標価格で計上", lines[0])
+        self.assertIn("実売総額ではない", lines[0])
+        self.assertIn("このBF計画額に基づくPC本体上限", lines[1])
+        self.assertNotIn("現在の周辺機器費試算", lines[0])
+        self.assertNotIn("現在の周辺機器費試算", lines[1])
+
 
 if __name__ == "__main__":
     unittest.main()

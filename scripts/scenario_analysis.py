@@ -307,6 +307,19 @@ def file_sha256(path):
     return h.hexdigest()
 
 
+def peripheral_plan_summary_lines(plan):
+    """Describe the BF scenario's mixed observed-price/target-reserve cost basis."""
+    return [
+        (
+            f"周辺機器BF計画額（公式BF期間内の確認価格は観測額、未確認品はBF目標価格で計上。"
+            f"実売総額ではない）: ¥{plan['peripheral_projected_cost_jpy']:,} "
+            f"(BF目標合計 ¥{plan['peripheral_target_total_jpy']:,} / "
+            f"総額予備費 ¥{plan['unallocated_contingency_jpy']:,})"
+        ),
+        f"このBF計画額に基づくPC本体上限（最終決済額ではない）: ¥{plan['black_friday_pc_price_cap_jpy']:,}",
+    ]
+
+
 def main():
     latest_path=os.path.join(ROOT,"data","current_latest.json")
     latest=load_json(latest_path,{"products":[]})
@@ -409,10 +422,10 @@ def main():
            f"暫定の広域監視窓（公式セール開催期間ではない）: {bf_plan['watch_window_start_jst']} ～ {bf_plan['watch_window_end_jst']}",
            f"総予算: ¥{bf_plan['total_budget_jpy']:,}",
            f"BF PC理想目標: ¥{bf_plan['pc_target_price_jpy']:,} / 総額制約後のPC本体上限（周辺機器目標・予備費確保後）: ¥{bf_plan['pc_planned_hard_cap_jpy']:,} / PC単体の絶対上限: ¥{bf_plan['pc_absolute_hard_cap_jpy']:,}",
-           f"周辺機器目標合計: ¥{bf_plan['peripheral_target_total_jpy']:,} / 現在の周辺機器費試算: ¥{bf_plan['peripheral_projected_cost_jpy']:,} / 総額予備費: ¥{bf_plan['unallocated_contingency_jpy']:,}",
+           *peripheral_plan_summary_lines(bf_plan),
            f"理想目標構成の総額（PC理想目標＋周辺機器目標＋予備費）: ¥{bf_plan['black_friday_ideal_bundle_target_jpy']:,} (予算残 ¥{bf_plan['black_friday_target_buffer_jpy']:,})",
            f"総額制約後のPC本体上限＋周辺機器目標＋予備費: ¥{bf_plan['black_friday_hard_cap_bundle_jpy']:,}",
-           f"現在の周辺機器費試算に基づくPC本体上限（最終決済額ではない）: ¥{bf_plan['black_friday_pc_price_cap_jpy']:,}",
+
            "",
            "**重要:** BF目標額は購入目標で、実売の保証ではありません。暫定監視窓内の価格でも、販売元の公式2026年開催期間が確認できなければBF実売とは認定しません。割引シナリオは算術上の仮定であり確率ではありません。",
            "",
