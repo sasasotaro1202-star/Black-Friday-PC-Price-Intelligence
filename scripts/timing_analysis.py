@@ -10,6 +10,7 @@ from intelligence import (
     parse_dt, actionable_max_age_minutes, configuration_readiness
 )
 from sale_calendar import campaign_window_for_item
+from observation_contract import point_in_time_event_metadata
 
 JST=timezone(timedelta(hours=9))
 # A calendar reference for the U.S. Black Friday date only; this is not a retailer sale window.
@@ -46,6 +47,15 @@ def read_events():
                 continue
     return events
 
+def pit_valid_change_event(event):
+    """Only use change events whose full event/publication/PIT chain is proven."""
+    expected = point_in_time_event_metadata(event)
+    return bool(
+        expected.get("pit_valid") is True
+        and all(event.get(field) == value for field, value in expected.items())
+    )
+
+
 def dynamic_change_timing(events):
     hours=Counter()
     dates=Counter()
@@ -55,7 +65,7 @@ def dynamic_change_timing(events):
         new=e.get("new_price_jpy")
         if old is None or new is None or old==new:
             continue
-        if e.get("pit_valid") is not True:
+        if not pit_valid_change_event(e):
             continue
         ts=e.get("observed_at") or e.get("retrieval_time")
         if not ts:
@@ -171,7 +181,7 @@ def _window_observations(events, item, start, end, include_current, price_observ
     product_id = str(item.get("id") or "")
     observations = []
     for event in events:
-        if str(event.get("id") or "") != product_id or event.get("pit_valid") is not True:
+        if str(event.get("id") or "") != product_id or not pit_valid_change_event(event):
             continue
         if event.get("price_source_mode") != "direct_structured":
             continue
@@ -227,7 +237,7 @@ def _window_observations(events, item, start, end, include_current, price_observ
 def _window_price_movement(events, candidate_id, start, end):
     changes = []
     for event in events:
-        if str(event.get("id") or "") != str(candidate_id) or event.get("pit_valid") is not True:
+        if str(event.get("id") or "") != str(candidate_id) or not pit_valid_change_event(event):
             continue
         if event.get("price_source_mode") != "direct_structured":
             continue

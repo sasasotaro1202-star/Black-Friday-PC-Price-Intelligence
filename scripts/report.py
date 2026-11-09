@@ -14,6 +14,7 @@ from intelligence import (
     configuration_readiness, gpu_key
 )
 from sale_calendar import campaign_window_for_item
+from observation_contract import point_in_time_event_metadata
 
 def early_buy_amount_label(review):
     """Display a product listing price separately from a shipping estimate or verified checkout total."""
@@ -1505,9 +1506,14 @@ def read_events():
     with open(path, encoding="utf-8") as f:
         for line in f:
             try:
-                events.append(json.loads(line))
+                event = json.loads(line)
             except Exception:
                 continue
+            expected_pit = point_in_time_event_metadata(event)
+            if expected_pit["pit_valid"] is True and all(
+                event.get(field) == value for field, value in expected_pit.items()
+            ):
+                events.append(event)
     return events
 
 def build_products(latest, catalog):

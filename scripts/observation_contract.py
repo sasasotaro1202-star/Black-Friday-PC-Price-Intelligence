@@ -202,3 +202,12 @@ def point_in_time_event_metadata(event):
         "pit_missing_fields": [],
         "pit_error": None,
     }
+
+
+def normalize_point_in_time_event(event):
+    """Return an event copy whose PIT flags are derived only from its timestamps."""
+    if not isinstance(event, dict):
+        return event
+    normalized = dict(event)
+    normalized.update(point_in_time_event_metadata(normalized))
+    return normalized

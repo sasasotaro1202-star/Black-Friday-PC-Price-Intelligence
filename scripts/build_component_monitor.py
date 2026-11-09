@@ -16,9 +16,44 @@ if SCRIPTS not in sys.path:
     sys.path.insert(0, SCRIPTS)
 
 from intelligence import load_json, save_json, now_jst, iso, parse_dt, early_buy_review_assessment
+from observation_contract import point_in_time_event_metadata, normalize_point_in_time_event
 from monitor import fetch, parse_page, ddg_search, bing_search, search_identity_anchor, pick_price
 
 JST = timezone(timedelta(hours=9))
+
+
+def append_pit_change_event(events, event):
+    """Persist a change event without inventing unavailable event/publication times."""
+    event.setdefault("event_time", None)
+    event.setdefault("publication_time", None)
+    event.update(point_in_time_event_metadata(event))
+    events.append(event)
+
+
+def normalize_component_event_log(path):
+    """Migrate legacy component event flags to the strict PIT contract."""
+    if not os.path.exists(path):
+        return 0
+    temp_path = path + ".pit-normalized.tmp"
+    changed = 0
+    with open(path, encoding="utf-8") as source, open(temp_path, "w", encoding="utf-8") as target:
+        for line in source:
+            if not line.strip():
+                continue
+            try:
+                event = json.loads(line)
+            except Exception:
+                target.write(line if line.endswith("\n") else line + "\n")
+                continue
+            normalized = normalize_point_in_time_event(event)
+            if normalized != event:
+                changed += 1
+            target.write(json.dumps(normalized, ensure_ascii=False) + "\n")
+    if changed:
+        os.replace(temp_path, path)
+    else:
+        os.remove(temp_path)
+    return changed
 CONFIG_PATH = os.path.join(ROOT, "config", "build_components.json")
 OUTPUT_PATH = os.path.join(ROOT, "data", "build_component_prices.json")
 OBSERVATIONS_PATH = os.path.join(ROOT, "data", "build_component_observations.jsonl")
@@ -1829,6 +1864,7 @@ def collect_component_prices(config=None):
     parts = [x for x in (config.get("parts") or []) if isinstance(x, dict) and x.get("track_price")]
     prior = load_json(OUTPUT_PATH, {})
     prior_by_id = last_by_id(prior.get("products") or [])
+    normalize_component_event_log(EVENTS_PATH)
     previous_events = last_by_id(read_jsonl(EVENTS_PATH))
     results = {}
     with ThreadPoolExecutor(max_workers=min(4, max(1, len(parts)))) as pool:
@@ -1906,7 +1942,7 @@ def collect_component_prices(config=None):
                 "stock_signal": row.get("comparison_stock_signal"), "bf_actual_authorized": False
             })
             if isinstance(prev_price, int) and prev_price != price:
-                events.append({
+                append_pit_change_event(events, {
                     "id": row["id"], "category": row["category"], "model_code": row.get("model_code"),
                     "observed_at": row.get("retrieval_time"), "available_at": row.get("available_at"),
                     "retrieval_time": row.get("retrieval_time"), "prediction_time": row.get("retrieval_time"),
