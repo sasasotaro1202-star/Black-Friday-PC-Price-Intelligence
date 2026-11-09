@@ -46,6 +46,12 @@ def file_sha256(path):
 
 
 def read_events():
+    """Return only fully PIT-validated events for scoring recomputation.
+
+    The raw event log is audited separately below so UNKNOWN/INVALID rows remain
+    visible to the integrity gate. They must not influence trend-derived fields
+    such as wait_risk, which are recomputed from the same evidence set as report.py.
+    """
     path = os.path.join(ROOT, "data", "change_events.jsonl")
     events = []
     if not os.path.exists(path):
@@ -55,9 +61,14 @@ def read_events():
             if not line.strip():
                 continue
             try:
-                events.append(json.loads(line))
+                event = json.loads(line)
             except Exception:
-                pass
+                continue
+            expected_pit = point_in_time_event_metadata(event)
+            if expected_pit.get("pit_valid") is True and all(
+                event.get(field) == value for field, value in expected_pit.items()
+            ):
+                events.append(event)
     return events
 
 def main():
