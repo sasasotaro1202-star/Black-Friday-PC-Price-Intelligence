@@ -43,12 +43,12 @@ def normalize_component_event_log(path):
             try:
                 event = json.loads(line)
             except Exception:
-                target.write(line if line.endswith("\\n") else line + "\\n")
+                target.write(line if line.endswith("\n") else line + "\n")
                 continue
             normalized = normalize_point_in_time_event(event)
             if normalized != event:
                 changed += 1
-            target.write(json.dumps(normalized, ensure_ascii=False) + "\\n")
+            target.write(json.dumps(normalized, ensure_ascii=False) + "\n")
     if changed:
         os.replace(temp_path, path)
     else:
