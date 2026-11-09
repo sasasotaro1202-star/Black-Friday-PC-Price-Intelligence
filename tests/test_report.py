@@ -1125,7 +1125,7 @@ class PeripheralRouteCoverageTests(unittest.TestCase):
                 "tracked_peripheral_verified_count": 5,
                 "tracked_peripheral_count": 4,
             }),
-            "周辺機器の有効な価格・在庫シグナル: 未確認",
+            "指定購入ルートの価格・在庫確認完了: 未確認",
         )
 
     def test_missing_peripheral_projection_is_not_reported_as_zero_coverage(self):
