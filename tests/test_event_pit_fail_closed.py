@@ -151,7 +151,7 @@ class StrictChangeEventPitTests(unittest.TestCase):
             data_dir = pathlib.Path(temp_dir) / "data"
             data_dir.mkdir()
             (data_dir / "change_events.jsonl").write_text(
-                "".join(json.dumps(row) + "\\n" for row in (valid, unknown, invalid)),
+                "".join(json.dumps(row) + "\n" for row in (valid, unknown, invalid)),
                 encoding="utf-8",
             )
             with patch.object(healthcheck, "ROOT", temp_dir):
