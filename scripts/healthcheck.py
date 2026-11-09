@@ -62,6 +62,8 @@ def read_events():
 
 def main():
     errors = []
+    event_pit_counts = {"VALID": 0, "UNKNOWN": 0, "INVALID": 0}
+    legacy_unknown_pit_claims = 0
     budget_policy = purchase_budget_policy()
     budget_projection = peripheral_budget_projection()
     if budget_policy["pc_budget_jpy"] + budget_policy.get("unallocated_contingency_jpy", 0) != budget_policy["total_budget_jpy"]:
@@ -388,11 +390,17 @@ def main():
                 seen_events.add(key)
 
                 expected_pit = point_in_time_event_metadata(e)
-                for field, expected_value in expected_pit.items():
-                    if e.get(field) != expected_value:
-                        errors.append(f"change event PIT metadata mismatch line {n}:{field}")
-                if expected_pit["pit_status"] == "INVALID":
+                status = expected_pit["pit_status"]
+                event_pit_counts[status] = event_pit_counts.get(status, 0) + 1
+                if status == "UNKNOWN":
+                    if e.get("pit_valid") is True:
+                        legacy_unknown_pit_claims += 1
+                elif status == "INVALID":
                     errors.append(f"invalid PIT in change event line {n}")
+                else:
+                    for field, expected_value in expected_pit.items():
+                        if e.get(field) != expected_value:
+                            errors.append(f"change event PIT metadata mismatch line {n}:{field}")
 
     component_event_path = os.path.join(ROOT, "data", "build_component_change_events.jsonl")
     if os.path.exists(component_event_path):
@@ -406,11 +414,17 @@ def main():
                     errors.append(f"malformed build_component_change_events line {n}")
                     continue
                 expected_pit = point_in_time_event_metadata(event)
-                for field, expected_value in expected_pit.items():
-                    if event.get(field) != expected_value:
-                        errors.append(f"build component event PIT metadata mismatch line {n}:{field}")
-                if expected_pit["pit_status"] == "INVALID":
+                status = expected_pit["pit_status"]
+                event_pit_counts[status] = event_pit_counts.get(status, 0) + 1
+                if status == "UNKNOWN":
+                    if event.get("pit_valid") is True:
+                        legacy_unknown_pit_claims += 1
+                elif status == "INVALID":
                     errors.append(f"invalid PIT in build component change event line {n}")
+                else:
+                    for field, expected_value in expected_pit.items():
+                        if event.get(field) != expected_value:
+                            errors.append(f"build component event PIT metadata mismatch line {n}:{field}")
 
     anchors = load_anchors()
     events = read_events()
@@ -720,6 +734,8 @@ def main():
         "unavailable_products": len(unavailable),
         "reference_only": len(reference_only),
         "events": event_count,
+        "event_pit_counts": event_pit_counts,
+        "legacy_unknown_pit_claims": legacy_unknown_pit_claims,
     }, ensure_ascii=False))
 
 
