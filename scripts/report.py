@@ -175,8 +175,9 @@ def peripheral_price_stock_signal_summary(projection):
     ):
         return "周辺機器の有効な価格・在庫シグナル: 未確認"
     return (
-        f"周辺機器の有効な価格・在庫シグナル: {verified}/{total} 商品 "
-        "（少なくとも1ルートの掲載価格・販売可能在庫の確認。送料・最終決済額・全ルート比較・保証/返品の完了を意味しない）"
+        f"指定購入ルートの価格・在庫確認完了: {verified}/{total} 商品 "
+        "（購入ポリシーで必須のルートを確認できた件数。ネット掲載価格の型番一致だけでは加算しない。"
+        "送料・最終決済額・全ルート比較・保証/返品の完了を意味しない）"
     )
 
 def peripheral_monitor_section_heading(target_config):
