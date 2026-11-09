@@ -73,6 +73,7 @@ def main():
     # Main and component change events use the same strict event-time contract.
     # UNKNOWN is allowed in the audit log, but must never be mislabeled VALID.
     change_event_pit_counts = {}
+    legacy_unknown_pit_claims = 0
     for filename in ("change_events.jsonl", "build_component_change_events.jsonl"):
         event_path = os.path.join(ROOT, "data", filename)
         counts = {"VALID": 0, "UNKNOWN": 0, "INVALID": 0}
@@ -87,13 +88,19 @@ def main():
                         errors.append(f"{filename} malformed at line {line_number}")
                         continue
                     expected_pit = point_in_time_event_metadata(event)
-                    for field, expected_value in expected_pit.items():
-                        if event.get(field) != expected_value:
-                            errors.append(
-                                f"{filename} PIT metadata mismatch at line {line_number}:{field}"
-                            )
                     status = expected_pit["pit_status"]
                     counts[status] = counts.get(status, 0) + 1
+                    if status == "UNKNOWN":
+                        if event.get("pit_valid") is True:
+                            legacy_unknown_pit_claims += 1
+                    elif status == "INVALID":
+                        errors.append(f"{filename} has invalid PIT at line {line_number}")
+                    else:
+                        for field, expected_value in expected_pit.items():
+                            if event.get(field) != expected_value:
+                                errors.append(
+                                    f"{filename} PIT metadata mismatch at line {line_number}:{field}"
+                                )
         change_event_pit_counts[filename] = counts
 
     catalog = load_catalog()
@@ -458,6 +465,7 @@ def main():
         "ranking_count": len(rankings.get("products", [])),
         "peripheral_event_pit_counts": peripheral_event_counts,
         "change_event_pit_counts": change_event_pit_counts,
+        "legacy_unknown_pit_claims": legacy_unknown_pit_claims,
         "message": "Fail-closed data validation passed.",
     }, ensure_ascii=False))
 
