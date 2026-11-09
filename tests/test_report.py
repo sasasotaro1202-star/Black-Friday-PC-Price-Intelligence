@@ -1110,7 +1110,7 @@ class PeripheralRouteCoverageTests(unittest.TestCase):
             "channel_comparison_complete_count": 0,
             "channel_comparison_required_count": 4,
         })
-        self.assertIn("有効な価格・在庫シグナル: 3/4", summary)
+        self.assertIn("指定購入ルートの価格・在庫確認完了: 3/4", summary)
         self.assertIn("最終決済額", summary)
         self.assertIn("全ルート比較", summary)
         self.assertNotIn("購入予定ルート確認済み", summary)
@@ -1118,7 +1118,7 @@ class PeripheralRouteCoverageTests(unittest.TestCase):
     def test_peripheral_signal_summary_fails_closed_on_missing_or_invalid_counts(self):
         self.assertEqual(
             report.peripheral_price_stock_signal_summary(None),
-            "周辺機器の有効な価格・在庫シグナル: 未確認",
+            "指定購入ルートの価格・在庫確認完了: 未確認",
         )
         self.assertEqual(
             report.peripheral_price_stock_signal_summary({
