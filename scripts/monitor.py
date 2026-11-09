@@ -19,7 +19,7 @@ from intelligence import (
     price_has_tax_exclusive_label,
     enrich_identity, iso, plausible_floor, PRICE_NAVIGATION_CONTEXT
 )
-from observation_contract import point_in_time_event_metadata
+from observation_contract import point_in_time_event_metadata, normalize_point_in_time_event
 
 PRIMARY_DOMAINS = {
     "lenovo.com", "asus.com", "hp.com", "msi.com", "acer.com", "gigabyte.com",
@@ -1364,10 +1364,37 @@ def corroborate_anomaly(item, search):
         item["corroborating_source_snippet"] = search.get("snippet")
     return item
 
+def normalize_change_event_log(path):
+    """Migrate legacy event rows to the strict PIT contract before they are reused."""
+    if not os.path.exists(path):
+        return 0
+    temp_path = path + ".pit-normalized.tmp"
+    changed = 0
+    with open(path, encoding="utf-8") as source, open(temp_path, "w", encoding="utf-8") as target:
+        for line in source:
+            if not line.strip():
+                continue
+            try:
+                event = json.loads(line)
+            except Exception:
+                target.write(line if line.endswith("\\n") else line + "\\n")
+                continue
+            normalized = normalize_point_in_time_event(event)
+            if normalized != event:
+                changed += 1
+            target.write(json.dumps(normalized, ensure_ascii=False) + "\\n")
+    if changed:
+        os.replace(temp_path, path)
+    else:
+        os.remove(temp_path)
+    return changed
+
+
 def main():
     watch_path = os.path.join(ROOT, "data", "watchlist.json")
     latest_path = os.path.join(ROOT, "data", "current_latest.json")
     event_path = os.path.join(ROOT, "data", "change_events.jsonl")
+    migrated_event_count = normalize_change_event_log(event_path)
 
     watch = read(watch_path, {"generated_at": None, "urls": []})
     entries = [normalize_entry(x) for x in watch.get("urls", [])]
@@ -1688,6 +1715,7 @@ def main():
         "watch_urls": len(entries),
         "products": len(products),
         "changes": len(changes),
+        "pit_event_rows_normalized": migrated_event_count,
         "fetch_stats": stats,
         "coverage": coverage,
     }, ensure_ascii=False))
