@@ -165,7 +165,7 @@ def peripheral_route_coverage_summary(projection):
 def peripheral_price_stock_signal_summary(projection):
     """Label price/stock evidence without implying purchase completion."""
     if not isinstance(projection, dict):
-        return "周辺機器の有効な価格・在庫シグナル: 未確認"
+        return "指定購入ルートの価格・在庫確認完了: 未確認"
     verified = projection.get("tracked_peripheral_verified_count")
     total = projection.get("tracked_peripheral_count")
     if (
@@ -173,7 +173,7 @@ def peripheral_price_stock_signal_summary(projection):
         or not isinstance(total, int) or isinstance(total, bool) or total < 0
         or verified > total
     ):
-        return "周辺機器の有効な価格・在庫シグナル: 未確認"
+        return "指定購入ルートの価格・在庫確認完了: 未確認"
     return (
         f"指定購入ルートの価格・在庫確認完了: {verified}/{total} 商品 "
         "（購入ポリシーで必須のルートを確認できた件数。ネット掲載価格の型番一致だけでは加算しない。"
