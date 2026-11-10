@@ -17,7 +17,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JST = timezone(timedelta(hours=9))
 OUTPUT = os.path.join(ROOT, "data", "official_campaign_dates_status.json")
 CACHE_HOURS = 6
-SCANNER_VERSION = 4
+SCANNER_VERSION = 5
 DATE_RANGE = re.compile(
     r"(?P<year>2026)\s*(?:年|[./-])\s*(?P<month>\d{1,2})\s*(?:月|[./-])\s*(?P<day>\d{1,2})\s*日?"
     r"\s*(?:\([^)]{0,30}\))?\s*(?:(?P<start_hour>\d{1,2}):(?P<start_minute>\d{2}))?\s*"
@@ -29,23 +29,6 @@ DATE_RANGE = re.compile(
     re.IGNORECASE,
 )
 BF_WORDS = re.compile(r"ブラック\s*フライデー|black\s*friday|pre[- ]?black\s*friday", re.IGNORECASE)
-
-# A yearless MM/DD range is accepted only on an official campaign URL whose
-# dedicated slug itself anchors the year, e.g. /campaigns/blackfriday2026/.
-# The date range must still be visible on that retailer-owned page.
-DATE_RANGE_WITHOUT_YEAR = re.compile(
-    r"(?P<month>\d{1,2})\s*(?:月|[./-])\s*(?P<day>\d{1,2})\s*日?"
-    r"\s*(?:\([^)]{0,30}\))?\s*(?:(?P<start_hour>\d{1,2}):(?P<start_minute>\d{2}))?\s*"
-    r"(?:～|〜|~|–|—|－|-|から|to|through)\s*"
-    r"(?:同\s*)?"
-    r"(?P<end_month>\d{1,2})\s*(?:月|[./-])\s*(?P<end_day>\d{1,2})\s*日?"
-    r"\s*(?:\([^)]{0,30}\))?\s*(?:(?P<end_hour>\d{1,2}):(?P<end_minute>\d{2}))?",
-    re.IGNORECASE,
-)
-YEAR_ANCHORED_BF_URL = re.compile(
-    r"/(?:campaigns/)?black[-_]?friday[-_]?2026(?:/|$)",
-    re.IGNORECASE,
-)
 
 
 class VisibleText(HTMLParser):
@@ -111,7 +94,7 @@ def visible_text(payload):
 
 
 def parse_explicit_2026_range(text, source_url):
-    """Return a 2026 range only when its year is anchored by text or the official URL."""
+    """Return a 2026 range only when the date range itself explicitly includes 2026."""
     text = re.sub(r"\s+", " ", str(text or "")).replace("（", "(").replace("）", ")")
     lowered_url = str(source_url or "").lower()
     dedicated_url = (
@@ -119,10 +102,7 @@ def parse_explicit_2026_range(text, source_url):
         or "blackfriday" in lowered_url
         or "pre-blackfriday" in lowered_url
     )
-    year_anchored_url = bool(YEAR_ANCHORED_BF_URL.search(urlparse(lowered_url).path))
     patterns = [(DATE_RANGE, "explicit_2026_page_text")]
-    if year_anchored_url:
-        patterns.append((DATE_RANGE_WITHOUT_YEAR, "official_2026_campaign_url_slug"))
 
     for pattern, year_basis in patterns:
         for match in pattern.finditer(text):
