@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-11T06:36:34+09:00",
-  "source_snapshot_generated_at": "2026-11-11T06:31:59+09:00",
-  "source_snapshot_sha256": "5db06d804b24447e0f5a04946f2d3ed1dbc4f68adc1c9c9149ababc24ef02587",
+  "generated_at": "2026-11-11T08:30:28+09:00",
+  "source_snapshot_generated_at": "2026-11-11T08:24:43+09:00",
+  "source_snapshot_sha256": "5b9bf3bc01c67d49d0f64a207ce53333df41f54287acde80112cf51e8d1d9f9f",
   "budget_jpy": 360000,
   "budget_scope": "pc_only_excluding_peripherals",
   "total_budget_jpy": 400000,
@@ -51,7 +51,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 18900,
-        "watch_window_reference_at": "2026-11-11T06:32:57+09:00",
+        "watch_window_reference_at": "2026-11-11T08:25:40+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -97,7 +97,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 4815,
-        "watch_window_reference_at": "2026-11-11T06:33:31+09:00",
+        "watch_window_reference_at": "2026-11-11T08:25:39+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -120,7 +120,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 2420,
-        "watch_window_reference_at": "2026-11-11T06:33:35+09:00",
+        "watch_window_reference_at": "2026-11-11T08:26:21+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -579,7 +579,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 374800,
-        "watch_window_reference_at": "2026-11-11T06:31:59+09:00",
+        "watch_window_reference_at": "2026-11-11T08:24:43+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 319800,
@@ -656,7 +656,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 419800,
-        "watch_window_reference_at": "2026-11-11T06:31:59+09:00",
+        "watch_window_reference_at": "2026-11-11T08:24:43+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 419800,
@@ -732,14 +732,14 @@
         "retailer_campaign_status": "UNCONFIRMED",
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
-        "watch_window_reference_price_jpy": null,
-        "watch_window_reference_at": null,
+        "watch_window_reference_price_jpy": 547800,
+        "watch_window_reference_at": "2026-11-11T08:24:43+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 547800,
-        "price_reference_kind": "CATALOG_REFERENCE_ONLY",
+        "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
         "scenario_base_price_jpy": 547800,
-        "scenario_base_note": "セール前の参考額を基準にした仮想割引。BF実売価格・値下げ確率ではない",
+        "scenario_base_note": "暫定監視窓内の参考価格を基準にした仮想割引。公式BF実売価格・値下げ確率ではない",
         "scenario_prices": [
           {
             "discount_pct": 0,
@@ -792,7 +792,7 @@
         "catalog_configuration_ready": true,
         "catalog_configuration_reasons": [],
         "complete_build_target_comparable": true,
-        "stock_status": "unknown",
+        "stock_status": "in_stock",
         "purchase_url": "https://www.acer.com/jp-ja/predator/laptops/helios/helios-neo-16-ai/pdp/NH.U44SJ.001"
       },
       {
@@ -1271,7 +1271,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 194800,
-        "watch_window_reference_at": "2026-11-11T06:31:59+09:00",
+        "watch_window_reference_at": "2026-11-11T08:24:43+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 194800,
@@ -1354,7 +1354,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 279800,
-        "watch_window_reference_at": "2026-11-11T06:31:59+09:00",
+        "watch_window_reference_at": "2026-11-11T08:24:43+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 279800,
@@ -1437,7 +1437,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 299800,
-        "watch_window_reference_at": "2026-11-11T06:31:59+09:00",
+        "watch_window_reference_at": "2026-11-11T08:24:43+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 299800,
@@ -2238,6 +2238,44 @@
       "dynamic_candidate": false
     },
     {
+      "id": "candidate-5",
+      "name": "Acer Predator Helios Neo 16 AI PHN16-I71-N93Z57T/E",
+      "form_factor": "laptop",
+      "current_price_jpy": 547800,
+      "reference_price_jpy": 547800,
+      "reference_only": false,
+      "required_discount_pct": 34.3,
+      "historical_floor_jpy": null,
+      "historical_floor_strength": "none",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 493000
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 465600
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 438200
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 410800
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 383500
+        }
+      ],
+      "first_pc_target_scenario": null,
+      "stock_status": "in_stock",
+      "price_source_mode": "direct_structured",
+      "price_validation_status": "validated",
+      "dynamic_candidate": false
+    },
+    {
       "id": "galleria-zl9r-9955hx-5070ti",
       "name": "GALLERIA ZL9R-R57T-6-B",
       "form_factor": "laptop",
@@ -2273,44 +2311,6 @@
       "stock_status": "out_of_stock",
       "price_source_mode": "direct_structured",
       "price_validation_status": "validated",
-      "dynamic_candidate": false
-    },
-    {
-      "id": "candidate-5",
-      "name": "Acer Predator Helios Neo 16 AI PHN16-I71-N93Z57T/E",
-      "form_factor": "laptop",
-      "current_price_jpy": null,
-      "reference_price_jpy": 547800,
-      "reference_only": true,
-      "required_discount_pct": 34.3,
-      "historical_floor_jpy": null,
-      "historical_floor_strength": "none",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 493000
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 465600
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 438200
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 410800
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 383500
-        }
-      ],
-      "first_pc_target_scenario": null,
-      "stock_status": "unknown",
-      "price_source_mode": "none",
-      "price_validation_status": "missing",
       "dynamic_candidate": false
     },
     {
