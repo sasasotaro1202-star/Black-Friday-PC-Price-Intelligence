@@ -41,15 +41,12 @@ class OfficialCampaignDateTests(unittest.TestCase):
         self.assertEqual(result["end_jst"], "2026-11-13T10:59:59+09:00")
         self.assertEqual(result["year_basis"], "explicit_2026_page_text")
 
-    def test_parses_yearless_range_only_on_year_anchored_2026_campaign_slug(self):
+    def test_rejects_yearless_range_even_on_year_anchored_2026_campaign_slug(self):
         result = parse_explicit_2026_range(
             "ブラックフライデーセール開催中 10/30(金)～11/12(木)",
             "https://www.lenovo.com/jp/ja/campaigns/blackfriday2026/",
         )
-        self.assertIsNotNone(result)
-        self.assertEqual(result["start_jst"], "2026-10-30T00:00:00+09:00")
-        self.assertEqual(result["end_jst"], "2026-11-12T23:59:59+09:00")
-        self.assertEqual(result["year_basis"], "official_2026_campaign_url_slug")
+        self.assertIsNone(result)
 
     def test_does_not_infer_2026_from_yearless_range_on_generic_black_friday_url(self):
         result = parse_explicit_2026_range(
