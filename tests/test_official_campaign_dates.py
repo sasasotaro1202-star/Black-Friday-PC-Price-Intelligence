@@ -11,6 +11,7 @@ from official_campaign_dates import (
     initial_source_queue,
     parse_explicit_2026_range,
     should_skip_calendar_refresh,
+    is_policy_valid_confirmation,
 )
 from sale_calendar import (
     campaign_entry_for_retailer,
@@ -164,6 +165,24 @@ class OfficialCampaignDateTests(unittest.TestCase):
         self.assertFalse(should_skip_calendar_refresh(old_scanner, one_store, now))
         future_checked = dict(old, checked_at="2026-10-12T22:30:00+09:00")
         self.assertFalse(should_skip_calendar_refresh(future_checked, one_store, now))
+
+    def test_legacy_yearless_confirmation_is_not_preserved(self):
+        legacy = {
+            "status": "CONFIRMED",
+            "start_jst": "2026-10-30T00:00:00+09:00",
+            "end_jst": "2026-11-12T23:59:59+09:00",
+            "year_basis": "official_2026_campaign_url_slug",
+        }
+        self.assertFalse(is_policy_valid_confirmation(legacy))
+
+    def test_explicit_2026_confirmation_can_be_preserved_after_transient_fetch_gap(self):
+        explicit = {
+            "status": "CONFIRMED",
+            "start_jst": "2026-10-30T11:00:00+09:00",
+            "end_jst": "2026-11-13T10:59:59+09:00",
+            "year_basis": "explicit_2026_page_text",
+        }
+        self.assertTrue(is_policy_valid_confirmation(explicit))
 
     def test_retailer_domain_mapping_is_exact_suffix_not_substring(self):
         self.assertEqual(retailer_key_for_url("https://www.mouse-jp.co.jp/store/g/sku"), "mouse_computer")
