@@ -244,6 +244,17 @@ def calendar_config_signature(calendar):
     return dict(sorted(result.items()))
 
 
+def is_policy_valid_confirmation(entry):
+    """Only preserve confirmations that satisfy the current explicit-year policy."""
+    return (
+        isinstance(entry, dict)
+        and entry.get("status") == "CONFIRMED"
+        and entry.get("year_basis") == "explicit_2026_page_text"
+        and bool(entry.get("start_jst"))
+        and bool(entry.get("end_jst"))
+    )
+
+
 def should_skip_calendar_refresh(old, calendar, now, cache_hours=CACHE_HOURS):
     old_checked = parse_dt((old or {}).get("checked_at"))
     old_sources = (old or {}).get("sources") or {}
@@ -336,9 +347,9 @@ def main():
 
         if confirmed:
             entry = confirmed
-        elif previous.get("status") == "CONFIRMED" and previous.get("start_jst") and previous.get("end_jst"):
-            # Preserve a previously source-verified calendar range if a later fetch
-            # is blocked or the landing page rotates to a new page after announcing it.
+        elif is_policy_valid_confirmation(previous):
+            # Preserve only a prior confirmation that still satisfies the current explicit-year policy;
+            # legacy URL-slug-only confirmations must be invalidated.
             entry = dict(previous)
             entry["checked_at"] = iso(now)
             entry["latest_fetch_status"] = "ERROR" if errors else "NO_NEW_2026_RANGE"
