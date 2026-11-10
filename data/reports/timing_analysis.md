@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-11-10T09:54:10+09:00
-Source snapshot: 2026-11-10T09:49:01+09:00
-Source snapshot SHA256: 6fa6c34f1b2d6199fa977edaae4f81160e74cea1cb5ed85d3f434000b0fd6098
+Generated: 2026-11-10T16:14:29+09:00
+Source snapshot: 2026-11-10T16:08:42+09:00
+Source snapshot SHA256: 29a7d8a1881c860d626ca75af9b8cedb0e2db88fb54688cddcd28e838e4ee36d
 Budget: ¥360,000
 U.S. Black Friday calendar reference only (not official retailer sale dates): 2026-11-27
 
@@ -13,7 +13,7 @@ The primary purchase method is self-build. These completed-PC listings are price
 |Rank|Completed-PC reference model|Current reference price|Required drop to target|Reference feasibility|GPU|Perf|Source|
 |---:|---|---:|---:|---|---|---:|---|
 |1|G TUNE P6-I7G70BK-B|¥284,700|0.0%|HIGH|rtx 5070|35|direct_structured|
-|2|G TUNE DG-I7G70|¥299,800|0.0%|HIGH|rtx 5070|32|direct_structured|
+|2|G TUNE DG-I7G70（EC限定）|¥299,800|0.0%|HIGH|rtx 5070|32|direct_structured|
 |3|G TUNE DG-A7G70|¥321,900|0.0%|HIGH|rtx 5070|26|direct_text|
 |4|G TUNE DG-I5G70|¥279,800|0.0%|HIGH|rtx 5070|22|direct_structured|
 |5|THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060 Ti 16G|¥279,980|0.0%|HIGH|rtx 5060 ti|22|direct_structured|
@@ -22,7 +22,7 @@ The primary purchase method is self-build. These completed-PC listings are price
 |8|G TUNE FG-A7G70|¥374,800|3.9%|HIGH|rtx 5070|33|direct_structured|
 |9|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|10.0%|HIGH|rtx 5070 ti|38|direct_structured|
 |10|GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|¥419,800|14.2%|REALISTIC|rtx 5070 ti|29|direct_structured|
-|11|G TUNE P5-I7G70BK-C（ブラック）|¥448,800|19.8%|REALISTIC|rtx 5070|32|direct_structured|
+|11|G TUNE P5-I7G70BK-C（ブラック）|¥468,800|23.2%|AGGRESSIVE|rtx 5070|32|direct_structured|
 |12|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|VERY_LOW|rtx 5070 ti|40|direct_structured|
 
 ## Empirical price-change timing
@@ -43,8 +43,8 @@ The primary purchase method is self-build. These completed-PC listings are price
 ## BF window observation ledger
 
 - Ledger: data/buy_now_observations.jsonl
-- Rows loaded: 445
-- Rows appended this run: 5
+- Rows loaded: 451
+- Rows appended this run: 6
 - Only in-stock/low-stock, exact-identity, direct-structured and PIT-valid observations are added.
 
 ## Current buy-now decision
