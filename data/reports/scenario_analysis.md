@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-11-10T16:52:36+09:00
+更新: 2026-11-11T00:44:32+09:00
 価格フェーズ: **PROVISIONAL_BROAD_WATCH_WINDOW**
 暫定の広域監視窓（公式セール開催期間ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 総予算: ¥400,000
@@ -54,7 +54,7 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |Lenovo Legion Pro 5i Gen 10|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://www.lenovo.com/jp/ja/p/laptops/legion-laptops/legion-5-series/legion-pro-5i-gen-10-16-inch-intel/len101g0040)|
 |ROG Strix G16 G615LR-U9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025/spec/)|
 |ROG Strix G18 G815LR-U9R5070TI|laptop|RTX 5070 Ti Laptop GPU|¥360,000|未確認|—|—|—|—|—|—|—|—|達成|NO_PRICE_REFERENCE|[販売ページ](https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g18-2025/spec/)|
-|THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060|desktop|RTX 5060 Ti 16GB|¥360,000|¥279,980|—|¥279,980|¥279,980|—|—|¥223,984|¥209,985|¥195,986|未達/未確認|BLACK_FRIDAY_OBSERVED_PRICE|[販売ページ](https://www.dospara.co.jp/TC50/MC26301.html)|
+|THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060|desktop|RTX 5060 Ti 16GB|¥360,000|¥274,980|—|¥279,980|¥274,980|—|—|¥219,984|¥206,235|¥192,486|未達/未確認|BLACK_FRIDAY_OBSERVED_PRICE|[販売ページ](https://www.dospara.co.jp/TC50/MC26301.html)|
 
 ## 既存の参照価格シナリオ（比較用・確率ではない）
 
@@ -66,7 +66,7 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |G TUNE DG-I5G70|¥279,800|0.0%|¥251,800|¥237,800|¥223,800|¥209,800|¥195,900|10%|same_gpu|
 |G TUNE DG-A7G70|¥304,800|0.0%|¥289,700|¥273,600|¥257,500|¥241,400|¥225,300|10%|same_gpu|
 |G TUNE P6-I7G70BK-B|¥284,700|0.0%|¥256,200|¥242,000|¥227,800|¥213,500|¥199,300|10%|none|
-|THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060 T|¥279,980|0.0%|¥252,000|¥238,000|¥224,000|¥210,000|¥196,000|10%|none|
+|THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060 T|¥279,980|0.0%|¥247,500|¥233,700|¥220,000|¥206,200|¥192,500|10%|none|
 |G TUNE DG-A5G60|¥194,800|0.0%|¥175,300|¥165,600|¥155,800|¥146,100|¥136,400|10%|none|
 |G TUNE FG-A7G6T|¥309,800|1.1%|¥327,500|¥309,300|¥291,100|¥272,900|¥254,700|10%|none|
 |G TUNE FG-A7G70|¥319,800|3.9%|¥337,300|¥318,600|¥299,800|¥281,100|¥262,400|10%|same_gpu|

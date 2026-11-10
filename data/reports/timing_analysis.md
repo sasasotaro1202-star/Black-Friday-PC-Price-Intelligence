@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-11-10T16:52:36+09:00
-Source snapshot: 2026-11-10T16:48:02+09:00
-Source snapshot SHA256: d485571576f48be83864aa1edd717eabe01924194d797d0fd6edb97dd0030299
+Generated: 2026-11-11T00:44:32+09:00
+Source snapshot: 2026-11-11T00:38:56+09:00
+Source snapshot SHA256: c7e12f30599dafd183d3599bb81f25446e29f423a918344d670ab31486a77314
 Budget: ¥360,000
 U.S. Black Friday calendar reference only (not official retailer sale dates): 2026-11-27
 
@@ -16,7 +16,7 @@ The primary purchase method is self-build. These completed-PC listings are price
 |2|G TUNE DG-I7G70（EC限定）|¥299,800|0.0%|HIGH|rtx 5070|32|direct_structured|
 |3|G TUNE DG-A7G70|¥321,900|0.0%|HIGH|rtx 5070|26|direct_text|
 |4|G TUNE DG-I5G70|¥279,800|0.0%|HIGH|rtx 5070|22|direct_structured|
-|5|THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060 Ti 16G|¥279,980|0.0%|HIGH|rtx 5060 ti|22|direct_structured|
+|5|THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060 Ti 16G|¥274,980|0.0%|HIGH|rtx 5060 ti|22|direct_structured|
 |6|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
 |7|G TUNE FG-A7G6T|¥363,900|1.1%|HIGH|rtx 5060 ti|28|direct_text|
 |8|G TUNE FG-A7G70|¥374,800|3.9%|HIGH|rtx 5070|33|direct_structured|
@@ -43,7 +43,7 @@ The primary purchase method is self-build. These completed-PC listings are price
 ## BF window observation ledger
 
 - Ledger: data/buy_now_observations.jsonl
-- Rows loaded: 457
+- Rows loaded: 463
 - Rows appended this run: 6
 - Only in-stock/low-stock, exact-identity, direct-structured and PIT-valid observations are added.
 
