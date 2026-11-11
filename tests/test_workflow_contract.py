@@ -220,6 +220,11 @@ class WorkflowContractTests(unittest.TestCase):
         text = (ROOT / "scripts" / "monitor.py").read_text(encoding="utf-8")
         self.assertIn('MONITOR_MAX_URLS", "100"', text)
 
+    def test_watchdog_schedule_is_not_cancelled_by_workflow_run_events(self):
+        watchdog = (ROOT / ".github" / "workflows" / "pc-price-watchdog.yml").read_text(encoding="utf-8")
+        self.assertIn("group: pc-price-intelligence-watchdog-${{ github.event_name }}", watchdog)
+        self.assertIn("cancel-in-progress: false", watchdog)
+
     def test_watchdog_checks_freshness_and_recovers_default_branch_failures(self):
         watchdog = (ROOT / ".github" / "workflows" / "pc-price-watchdog.yml").read_text(encoding="utf-8")
         primary = WORKFLOW.read_text(encoding="utf-8")
