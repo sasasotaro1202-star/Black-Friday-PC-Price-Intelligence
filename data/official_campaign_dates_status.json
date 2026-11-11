@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-11T08:56:06.171483+09:00",
-  "checked_at": "2026-11-11T08:56:06.171483+09:00",
-  "scanner_version": 6,
+  "generated_at": "2026-11-11T09:24:48.526576+09:00",
+  "checked_at": "2026-11-11T09:24:48.526576+09:00",
+  "scanner_version": 7,
   "configured_sources": {
     "acer": [
       "https://store.acer.com/ja-jp/",
@@ -13,7 +13,9 @@
       "https://www.amazon.co.jp/blackfriday"
     ],
     "ark": [
-      "https://www.ark-pc.co.jp/"
+      "https://www.ark-pc.co.jp/",
+      "https://www.ark-pc.co.jp/release/2026-11-06-02/",
+      "https://www.ark-pc.co.jp/t/c/774/"
     ],
     "askul": [
       "https://www.askul.co.jp/"
@@ -67,7 +69,7 @@
       "end_jst": null,
       "source_url": "https://www.amazon.co.jp/blackfriday",
       "evidence": null,
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -97,7 +99,7 @@
       "end_jst": null,
       "source_url": "https://www.lenovo.com/jp/ja/campaigns/blackfriday2026/",
       "evidence": null,
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -127,7 +129,7 @@
       "end_jst": null,
       "source_url": "https://www.asus.com/jp/deals/black-friday/",
       "evidence": null,
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [
         "https://store.asus.com/jp/asus-store-campaign: HTTP Error 403: Forbidden"
@@ -159,7 +161,7 @@
       "end_jst": null,
       "source_url": "https://www.mouse-jp.co.jp/",
       "evidence": null,
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -186,11 +188,11 @@
     "dospara": {
       "start_jst": "2026-10-30T11:00:00+09:00",
       "end_jst": "2026-11-13T10:59:59+09:00",
-      "evidence": "//www.dospara.co.jp/event/pc-customize.html ───────────────────── ◆ブラックフライデー先取りキャンペーン ●期間：2026年10月30日(金)11:00 から 同11月13日(金)10:59まで ※店舗は12日(木)閉店まで 【対象パーツカスタマイズ】 ●メモリ 倍増 16GB → 32GB プラス9,696円 ●SSD倍増 500GB→1TB プラス19,696円 ",
+      "evidence": "//www.dospara.co.jp/event/pc-customize.html ───────────────────── ◆ブラックフライデー先取りキャンペーン ●期間:2026年10月30日(金)11:00 から 同11月13日(金)10:59まで ※店舗は12日(木)閉店まで 【対象パーツカスタマイズ】 ●メモリ 倍増 16GB → 32GB プラス9,696円 ●SSD倍増 500GB→1TB プラス19,696円 ",
       "year_basis": "explicit_2026_page_text",
       "source_url": "https://www.value-press.com/pressrelease/383493",
       "status": "CONFIRMED",
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
       "fetch_status": "OK",
       "discovered_from": null,
       "sources_checked": [
@@ -208,7 +210,7 @@
       "end_jst": null,
       "source_url": "https://www.acer.com/jp-ja",
       "evidence": null,
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
       "latest_fetch_status": "ERROR",
       "last_check_errors": [
         "https://www.acer.com/jp-ja: The read operation timed out",
@@ -235,7 +237,7 @@
       "end_jst": null,
       "source_url": "https://www.gigabyte.com/jp",
       "evidence": null,
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
       "latest_fetch_status": "ERROR",
       "last_check_errors": [
         "https://www.gigabyte.com/jp: HTTP Error 403: Forbidden"
@@ -255,7 +257,7 @@
       "end_jst": null,
       "source_url": "https://www.yodobashi.com/",
       "evidence": null,
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
       "latest_fetch_status": "ERROR",
       "last_check_errors": [
         "https://www.yodobashi.com/: The read operation timed out"
@@ -275,7 +277,7 @@
       "end_jst": null,
       "source_url": "https://www.biccamera.com/bc/main/",
       "evidence": null,
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
       "latest_fetch_status": "ERROR",
       "last_check_errors": [
         "https://www.biccamera.com/bc/main/: The read operation timed out"
@@ -295,7 +297,7 @@
       "end_jst": null,
       "source_url": "https://www.edifier.jp/",
       "evidence": null,
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -313,7 +315,7 @@
       "end_jst": null,
       "source_url": "https://www.askul.co.jp/",
       "evidence": null,
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -343,7 +345,7 @@
       "end_jst": null,
       "source_url": "https://www.frontier-direct.jp/",
       "evidence": null,
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -368,32 +370,21 @@
       ]
     },
     "ark": {
-      "status": "UNCONFIRMED",
-      "start_jst": null,
-      "end_jst": null,
-      "source_url": "https://www.ark-pc.co.jp/",
-      "evidence": null,
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
-      "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
-      "last_check_errors": [],
+      "start_jst": "2026-11-06T17:00:00+09:00",
+      "end_jst": "2026-12-01T23:59:59+09:00",
+      "evidence": "https://x.com/ark_akiba で随時発信いたしますのでお見逃しのないようお願いいたします。 キャンペーン名 アーク ブラックフライデーセール 2026 実施期間 2026年11月6日(金)17:00 ～ 2026年12月1日(火)23:59 特設ページ https://www.ark-pc.co.jp/t/c/774/ 留意点 ・キャンペーン対象モデルはタイムセール方式となり、予告なく入れ替わります。 ・本キャンペー",
+      "year_basis": "explicit_2026_page_text",
+      "source_url": "https://www.ark-pc.co.jp/release/2026-11-06-02/",
+      "status": "CONFIRMED",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
+      "fetch_status": "OK",
+      "discovered_from": null,
       "sources_checked": [
         {
-          "url": "https://www.ark-pc.co.jp/",
+          "url": "https://www.ark-pc.co.jp/release/2026-11-06-02/",
           "discovered_from": null,
           "fetch_status": "OK",
-          "explicit_2026_range_found": false
-        },
-        {
-          "url": "https://www.ark-pc.co.jp/bto/special/bto-weekly-sale/",
-          "discovered_from": "https://www.ark-pc.co.jp/",
-          "fetch_status": "OK",
-          "explicit_2026_range_found": false
-        },
-        {
-          "url": "https://www.ark-pc.co.jp/bto/customizer/?pc_id=3276",
-          "discovered_from": "https://www.ark-pc.co.jp/bto/special/bto-weekly-sale/",
-          "fetch_status": "OK",
-          "explicit_2026_range_found": false
+          "explicit_2026_range_found": true
         }
       ]
     },
@@ -403,7 +394,7 @@
       "end_jst": null,
       "source_url": "https://shop.tsukumo.co.jp/",
       "evidence": null,
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
       "latest_fetch_status": "ERROR",
       "last_check_errors": [
         "https://shop.tsukumo.co.jp/: Remote end closed connection without response"
@@ -423,7 +414,7 @@
       "end_jst": null,
       "source_url": "https://www.sycom.co.jp/",
       "evidence": null,
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -441,7 +432,7 @@
       "end_jst": null,
       "source_url": "https://www.stormst.com/",
       "evidence": null,
-      "checked_at": "2026-11-11T08:56:06.171483+09:00",
+      "checked_at": "2026-11-11T09:24:48.526576+09:00",
       "latest_fetch_status": "NO_EXPLICIT_2026_RANGE",
       "last_check_errors": [],
       "sources_checked": [
@@ -456,8 +447,8 @@
   },
   "summary": {
     "retailer_count": 16,
-    "confirmed_count": 1,
-    "unconfirmed_count": 10,
+    "confirmed_count": 2,
+    "unconfirmed_count": 9,
     "fetch_error_count": 5
   }
 }
