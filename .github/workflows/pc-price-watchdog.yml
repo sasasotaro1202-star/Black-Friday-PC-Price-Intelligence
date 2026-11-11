@@ -15,8 +15,9 @@ permissions:
   actions: write
 
 concurrency:
-  group: pc-price-intelligence-watchdog
-  cancel-in-progress: true
+  # Keep scheduled health checks separate from workflow_run completions so one event type cannot cancel the other.
+  group: pc-price-intelligence-watchdog-${{ github.event_name }}
+  cancel-in-progress: false
 
 jobs:
   watchdog:
