@@ -17,7 +17,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JST = timezone(timedelta(hours=9))
 OUTPUT = os.path.join(ROOT, "data", "official_campaign_dates_status.json")
 CACHE_HOURS = 6
-SCANNER_VERSION = 6
+SCANNER_VERSION = 7
 DATE_RANGE = re.compile(
     r"(?P<year>2026)\s*(?:年|[./-])\s*(?P<month>\d{1,2})\s*(?:月|[./-])\s*(?P<day>\d{1,2})\s*日?"
     r"\s*(?:\([^)]{0,30}\))?\s*(?:(?P<start_hour>\d{1,2}):(?P<start_minute>\d{2}))?\s*"
@@ -95,7 +95,7 @@ def visible_text(payload):
 
 def parse_explicit_2026_range(text, source_url):
     """Return a 2026 range only when the date range itself explicitly includes 2026."""
-    text = re.sub(r"\s+", " ", str(text or "")).replace("（", "(").replace("）", ")")
+    text = re.sub(r"\s+", " ", str(text or "")).replace("（", "(").replace("）", ")").replace("：", ":")
     lowered_url = str(source_url or "").lower()
     dedicated_url = (
         "black-friday" in lowered_url
