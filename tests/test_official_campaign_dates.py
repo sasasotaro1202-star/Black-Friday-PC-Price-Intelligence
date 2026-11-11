@@ -1,3 +1,5 @@
+import json
+import os
 import sys
 import unittest
 from datetime import datetime
@@ -41,6 +43,22 @@ class OfficialCampaignDateTests(unittest.TestCase):
         self.assertEqual(result["start_jst"], "2026-10-30T11:00:00+09:00")
         self.assertEqual(result["end_jst"], "2026-11-13T10:59:59+09:00")
         self.assertEqual(result["year_basis"], "explicit_2026_page_text")
+
+    def test_parses_ark_2026_press_release_with_fullwidth_time_colons(self):
+        result = parse_explicit_2026_range(
+            "アーク ブラックフライデーセール 2026年11月6日（金）17：00 ～ 2026年12月1日（火）23：59",
+            "https://www.ark-pc.co.jp/release/2026-11-06-02/",
+        )
+        self.assertIsNotNone(result)
+        self.assertEqual(result["start_jst"], "2026-11-06T17:00:00+09:00")
+        self.assertEqual(result["end_jst"], "2026-12-01T23:59:59+09:00")
+        self.assertEqual(result["year_basis"], "explicit_2026_page_text")
+
+    def test_ark_official_release_is_a_configured_campaign_source(self):
+        with open(os.path.join("config", "targets.json"), encoding="utf-8") as handle:
+            config = json.load(handle)
+        sources = config["official_2026_dates"]["ark"]["source_urls"]
+        self.assertIn("https://www.ark-pc.co.jp/release/2026-11-06-02/", sources)
 
     def test_rejects_yearless_range_even_on_year_anchored_2026_campaign_slug(self):
         result = parse_explicit_2026_range(
