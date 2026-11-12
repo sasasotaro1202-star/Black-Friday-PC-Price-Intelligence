@@ -485,7 +485,7 @@ def compatibility_checks(parts, profile, gpu_id, memory_part_id=None, storage_pa
             bios_detail = "Observed BIOS {} meets the manufacturer minimum {} for Ryzen 7 9700X.".format(observed_bios, minimum_bios)
     elif cpu.get("series") in (board.get("supported_cpu_series") or []):
         bios_status = "REVIEW"
-        bios_detail = "The motherboard manufacturer lists the Ryzen 9000 series as supported, but the exact minimum BIOS for {} and the shipped BIOS are not confirmed in this plan. Verify the exact CPU row and update BIOS if required.".format((parts.get(cpu_part_id) or {}).get("name") or cpu_part_id)
+        bios_detail = "The motherboard manufacturer lists {} as supported, but the exact minimum BIOS for {} and the shipped BIOS are not confirmed in this plan. Verify the exact CPU row and update BIOS if required.".format(cpu.get("series") or "the CPU series", (parts.get(cpu_part_id) or {}).get("name") or cpu_part_id)
     else:
         bios_status = "REVIEW"
         bios_detail = "Exact motherboard support-list entry and minimum BIOS for {} remain unverified.".format((parts.get(cpu_part_id) or {}).get("name") or cpu_part_id)

@@ -379,5 +379,85 @@ class SelfBuildRankingLinkTests(unittest.TestCase):
         self.assertIn("[GPU test](https://shop.example/gpu) ¥10,000", rendered)
 
 
+
+    def test_cpu_bios_review_names_the_actual_supported_cpu_series(self):
+        parts = {
+            "cpu": {
+                "category": "cpu",
+                "name": "AMD Ryzen 7 7700 BOX",
+                "specs": {"socket": "AM5", "series": "Ryzen 7000 Series", "cooler_included": True},
+            },
+            "board": {
+                "category": "motherboard",
+                "name": "ASRock B650M Pro X3D WiFi",
+                "specs": {
+                    "socket": "AM5",
+                    "supported_cpu_series": ["Ryzen 7000 Series"],
+                    "memory_type": "DDR5",
+                    "form_factor": "MicroATX",
+                },
+            },
+            "ram": {
+                "category": "memory",
+                "name": "32GB DDR5 kit",
+                "specs": {
+                    "memory_type": "DDR5",
+                    "capacity_gb": 32,
+                    "modules": 2,
+                    "qvl_verified_with_board": True,
+                },
+            },
+            "ssd": {
+                "category": "storage",
+                "name": "1TB NVMe SSD",
+                "specs": {"capacity_gb": 1000, "interface": "NVMe"},
+            },
+            "gpu": {
+                "category": "gpu",
+                "name": "GPU",
+                "specs": {
+                    "vram_gb": 16,
+                    "card_length_mm": 245,
+                    "card_thickness_slots": 2,
+                    "minimum_psu_w": 600,
+                    "connector": "8-pin PCIe",
+                },
+            },
+            "psu": {
+                "category": "psu",
+                "name": "850W PSU",
+                "specs": {"wattage_w": 850, "connector_pcie_8pin": True},
+            },
+            "case": {
+                "category": "case",
+                "name": "MicroATX case",
+                "specs": {
+                    "supported_motherboard_form_factors": ["MicroATX"],
+                    "gpu_clearance_mm": 405,
+                    "cooler_clearance_mm": 170,
+                },
+            },
+            "os": {"category": "os_license", "name": "Windows 11 Home", "specs": {}},
+        }
+        overall, checks = planner.compatibility_checks(
+            parts,
+            {"minimum_ram_gb": 32, "minimum_memory_modules": 2, "minimum_ssd_gb": 1000},
+            "gpu",
+            memory_part_id="ram",
+            storage_part_id="ssd",
+            cpu_part_id="cpu",
+            motherboard_part_id="board",
+            psu_part_id="psu",
+            case_part_id="case",
+            selected_part_ids=["cpu", "board", "ram", "ssd", "gpu", "psu", "case", "os"],
+            cooler_included=True,
+        )
+        bios = next(item for item in checks if item["check"] == "cpu_bios_support")
+        self.assertEqual(overall, "REVIEW")
+        self.assertEqual(bios["status"], "REVIEW")
+        self.assertIn("Ryzen 7000 Series", bios["detail"])
+        self.assertNotIn("Ryzen 9000 series", bios["detail"])
+
+
 if __name__ == "__main__":
     unittest.main()
