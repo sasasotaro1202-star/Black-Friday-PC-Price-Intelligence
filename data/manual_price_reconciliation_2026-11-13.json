@@ -88,13 +88,14 @@
       "id": "memory-corsair-vengeance-ddr5-32gb-6000",
       "name": "Corsair VENGEANCE DDR5-6000 32GB (16GBx2)",
       "model_code": "CMK32GX5M2D6000Z38",
-      "price_jpy": 72980,
-      "source_class": "retailer_listing_price_stock_unconfirmed",
-      "seller": "Jism on Rakuten",
-      "stock": "unknown",
-      "shipping": "not_verified",
-      "url": "https://item.rakuten.co.jp/jism/0840440438649-44-61330-n/?variantId=0840440438649-44-61330-n",
-      "note": "Exact SKU in the repo's retailer offers; direct listing price exists, but stock is unknown."
+      "price_jpy": 72979,
+      "source_class": "direct_retailer_listing",
+      "seller": "PC SHOP Ark",
+      "stock": "in_stock_remaining_5",
+      "shipping": "free_shipping",
+      "url": "https://www.ark-pc.co.jp/i/11759511/",
+      "note": "Exact SKU CMK32GX5M2D6000Z38; DDR5-6000 CL38-48-48 1.35V; AMD EXPO support and Ryzen 7000/9000 compatibility described on the page. Online member coupon/points are not deducted from cash price.",
+      "dispatch": "same-day dispatch if ordered by 15:00 on business days"
     },
     {
       "id": "memory-crucial-pro-ddr5-32gb-6000",
@@ -164,13 +165,14 @@
       "id": "cooler-thermalright-pa120-se-v3",
       "name": "Thermalright Peerless Assassin 120 SE V3",
       "model_code": "PA120SE-V3",
-      "price_jpy": 4526,
-      "source_class": "direct_retailer_listing_out_of_stock",
-      "seller": "Dospara",
-      "stock": "out_of_stock",
-      "shipping": "not applicable while unavailable",
-      "url": "https://www.dospara.co.jp/SBR1968/IC645423.html",
-      "note": "Price captured but the SKU is sold out. Keep as price history only."
+      "price_jpy": 4980,
+      "source_class": "direct_retailer_listing",
+      "seller": "PC SHOP Ark",
+      "stock": "in_stock_remaining_1",
+      "shipping": "not confirmed; confirm Kyushu shipping at checkout",
+      "url": "https://www.ark-pc.co.jp/i/10401914/",
+      "note": "Exact SKU PA120SE-V3; 2x120mm fans, six heatpipes, 155mm height, AM5 support, one-year warranty. Only one left in the captured listing; shipping for Fukuoka was not separately verified.",
+      "dispatch": "same-day dispatch if ordered by 15:00 on business days"
     },
     {
       "id": "cooler-thermalright-assassin-x-120-refined-se",
@@ -222,14 +224,29 @@
       "dispatch": "1-2 days",
       "url": "https://www.ksdenki.com/item?sku=4549576190358",
       "note": "Exact model and in-stock page. The final all-in build must include delivery charge unless store pickup is selected and feasible."
+    },
+    {
+      "id": "cpu-cooler-assassin-x-120-refined-se",
+      "name": "Thermalright Assassin X 120 Refined SE",
+      "model_code": "AX120-R-SE",
+      "price_jpy": 2370,
+      "source_class": "direct_retailer_listing",
+      "seller": "Yodobashi.com",
+      "stock": "in_stock",
+      "shipping": "free_delivery",
+      "points": 237,
+      "points_percent": 10,
+      "url": "https://www.yodobashi.com/product/100000001008996814/",
+      "note": "Single-tower lower-cost alternative; do not assume equivalent sustained-load cooling to the dual-tower Peerless Assassin 120 SE V3."
     }
   ],
   "unresolved": [
-    "32GB RAM kits: exact model availability remains uncertain; do not use comparison-only numbers as checkout prices.",
     "RTX 5070 12GB PNY price from price.com remains snippet-only; use a separately verified MSI RTX 5070 model if a direct stock-and-price source is needed.",
     "1TB SSD: Crucial P3 Plus is sold out; MSI M450 is a priced/in-stock substitute, but review NAND/DRAM/TBW/warranty before selection.",
     "Shipping to Fukuoka and checkout totals are not fully confirmed for every merchant.",
-    "The old peripheral subtotal had an arithmetic discrepancy: AOC 18,900 + G213r 7,128 + G304 4,815 + QcK Large 2,420 = 33,263 yen, not 38,363 yen."
+    "The old peripheral subtotal had an arithmetic discrepancy: AOC 18,900 + G213r 7,128 + G304 4,815 + QcK Large 2,420 = 33,263 yen, not 38,363 yen.",
+    "The 32GB Corsair VENGEANCE DDR5-6000 kit SKU CMK32GX5M2D6000Z38 now has a direct PC SHOP Ark listing at ¥72,979, 5 remaining in the captured page, with free shipping and same-day dispatch cutoff 15:00; stock and dispatch must be reconfirmed on order day.",
+    "The Peerless Assassin 120 SE V3 now has a direct Ark listing at ¥4,980 and one remaining; Fukuoka shipping charge is not verified."
   ],
   "component_scores": [
     {
