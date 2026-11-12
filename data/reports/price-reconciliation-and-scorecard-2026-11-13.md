@@ -20,13 +20,13 @@
 | GPU RTX 5070 Ti 16GB PNY | VCG5070T16TFXXPB1-O | ¥229,800 | ドスパラYahoo!店・送料無料。数量選択は表示されるが在庫数/配送日はカート前に最終確認が必要。ドスパラ直販ページの別価格¥239,800と混同しない | [ドスパラYahoo!店](https://store.shopping.yahoo.co.jp/dospara-y/ic634895.html) |
 | マザーボード B850M Pro RS WiFi | B850M Pro RS WiFi | ¥19,980 | ドスパラ直販掲載・在庫あり。配送条件は決済前に確認 | [ドスパラ](https://www.dospara.co.jp/SBR1739/IC517983.html) |
 | メモリ TeamGroup DDR5-6000 32GB | CTCWD532G6000HC38ADC01 | ¥78,880 | 価格比較ページ参考値のみ。販売元/在庫未確認。購入可能額として扱わない | [価格.com](https://kakaku.com/item/K0001610896/) |
-| メモリ Corsair DDR5-6000 32GB | CMK32GX5M2D6000Z38 | ¥72,980 | Jism楽天掲載価格。現在在庫・送料未確認 | [Jism楽天](https://item.rakuten.co.jp/jism/0840440438649-44-61330-n/?variantId=0840440438649-44-61330-n) |
+| メモリ Corsair VENGEANCE DDR5-6000 32GB | CMK32GX5M2D6000Z38 | ¥72,979 | Ark直販・在庫5点表示・送料無料・15時までの営業日注文は当日出荷表示。EXPO対応。 | [Ark](https://www.ark-pc.co.jp/i/11759511/) |
 | メモリ Crucial Pro DDR5-6000 32GB | CP2K16G60C36U5W | ¥69,800 | ドスパラ直販ページで在庫なし。購入可能価格に含めない | [ドスパラ](https://www.dospara.co.jp/SBR1534/IC512079.html) |
 | メモリ Lexar DDR5-6000 64GB | LD5U32G60C40BV-RGD | ¥154,800 | Ark直販掲載・在庫ありの記録。送料/納期を再確認 | [Ark](https://www.ark-pc.co.jp/i/11650134/) |
 | SSD MSI SPATIUM M450 1TB | SPATIUM M450 PCIe 4.0 NVMe M.2 1TB V1 | ¥29,130 | ヨドバシ在庫あり・送料無料表示・2,913ポイント（10%）。ポイントは現金値引きに含めない | [ヨドバシ](https://www.yodobashi.com/product/100000001009402658/) |
 | SSD Crucial P3 Plus 1TB | CT1000P3PSSD8JP | ¥9,300 | ドスパラ掲載価格だが在庫切れ。代替SKUの価格を使う | [ドスパラ](https://www.dospara.co.jp/SBR1144/IC481159.html) |
 | SSD KIOXIA EXCERIA BASIC 2TB | SSD-CK2.0N4B/N | ¥68,280 | Joshin在庫あり・送料無料表示・682ポイント（1%）。QLC。出荷目安は福岡への到着保証ではない | [Joshin](https://joshinweb.jp/diy/43736/4582761161566.html) |
-| CPUクーラー Peerless Assassin 120 SE V3 | PA120SE-V3 | ¥4,526 | ドスパラ掲載価格だが在庫切れ | [ドスパラ](https://www.dospara.co.jp/SBR1968/IC645423.html) |
+| CPUクーラー Peerless Assassin 120 SE V3 | PA120SE-V3 | ¥4,980 | Ark直販・在庫1点表示・15時までの営業日注文は当日出荷表示。福岡向け送料は未確認。 | [Ark](https://www.ark-pc.co.jp/i/10401914/) |
 | CPUクーラー Assassin X 120 Refined SE | AX120-R-SE | ¥2,370 | ヨドバシ在庫あり・送料無料表示・237ポイント（10%）。PA120と同等冷却とはみなさない | [ヨドバシ](https://www.yodobashi.com/product/100000001008996814/) |
 | 電源 Corsair RM850e 2025 | CP-9020296-JP | ¥14,850 | ドスパラ直販掲載・在庫ありの記録。ケーブル/保証条件を再確認 | [ドスパラ](https://www.dospara.co.jp/SBR83/IC519918.html) |
 | ケース Fractal Pop Air TG | FD-C-POA1A-02 | ¥13,180 | ドスパラ直販掲載・在庫ありの記録。GPU寸法とのクリアランス確認が必要 | [ドスパラ](https://www.dospara.co.jp/SBR1959/IC480986.html) |
@@ -35,10 +35,10 @@
 ### 価格欄の扱い
 
 - 価格があるだけでは購入可能と判定しない。在庫不明は「価格あり・在庫未確認」とする。
-- Crucial P3 Plus 1TB、Thermalright PA120 SE V3、Crucial 32GB kitは売り切れ/在庫なしとして計上対象から外し、代替候補を持つ。
+- Crucial P3 Plus 1TBとCrucial 32GB kitは掲載先で在庫なし。Thermalright PA120 SE V3は旧ドスパラ掲載が在庫切れだったが、Arkに¥4,980・在庫1点の新しい販売掲載を確認した。旧価格¥4,526は購入候補から外し、Arkの新しい掲載へ切り替える。
 - 1TB SSDはMSI M450 1TBを補完候補として追加した。価格は¥29,130、10%ポイント、送料無料表示。TLC/耐久性/保証の評価確認が終わるまでは最終採用ではない。
 - 2TB KIOXIAは¥68,280、QLCであり、価格・長期書込耐久の観点で強い推奨ではない。
-- 32GBメモリは、比較ページ表示と販売ページ表示を分離。現時点で「型番・在庫・送料まで確実な最安32GB kit」は未確定。
+- 32GBメモリはCorsair VENGEANCE DDR5-6000（CMK32GX5M2D6000Z38）のArk直販¥72,979が在庫5点表示・送料無料で確認できた。旧Jism楽天¥72,980は在庫不明の別販売店情報として扱い、最安・購入可能在庫はArk掲載を優先する。
 - 福岡市向け送料、注文時点の在庫、決済合計、保証・返品条件がそろうまでは購入ゲートを通さない。
 
 ## 構成の点数（100点満点）
@@ -70,7 +70,7 @@
 | RTX 5070 Ti 16GB | 97 | 高価格・消費電力・寸法・電源端子を確認 |
 | Corsair RM850e 2025 | 94 | 12V-2x6付属、保証、型番を最終確認 |
 | Lexar THOR 64GB DDR5-6000 | 91 | 価格が高い。QVLと総額が課題 |
-| Peerless Assassin 120 SE V3 | 91 | 現行掲載先は在庫切れ |
+| Peerless Assassin 120 SE V3 | 91 | Arkに¥4,980・在庫1点表示。福岡向け送料未確認 |
 | Ryzen 7 9700X | 89 | 目標¥45,000に対し掲載¥47,800 |
 | RTX 5070 12GB | 89 | 12GB VRAMを長期AI用途で評価 |
 | KIOXIA EXCERIA BASIC 2TB | 87 | QLC。大容量長時間書込みにはTLC案も比較 |
@@ -88,3 +88,15 @@
 - 以前の周辺機器合計に誤差があった。AOC ¥18,900 + Logicool G213r ¥7,128 + G304 ¥4,815 + SteelSeries QcK Large ¥2,420 = **¥33,263**。過去表示の¥38,363は誤り（差額¥5,100）。
 - 450,000円は絶対上限。構成価格は計画値であり、実売・送料込み最終額と混同しない。
 - 購入・注文・決済は実行しない。
+
+
+## 2026-11-13 追加確認（Ark直販）
+
+| 部品 | 型番 | 税込掲載価格 | 現時点の販売情報 | 商品ページ |
+|---|---|---:|---|---|
+| Corsair VENGEANCE DDR5-6000 32GB (16GB×2) | CMK32GX5M2D6000Z38 | **¥72,979** | Ark直販・在庫5点表示・送料無料・営業日15時までの注文は当日出荷表示。AMD EXPO、DDR5-6000、CL38。 | [Ark](https://www.ark-pc.co.jp/i/11759511/) |
+| Thermalright Peerless Assassin 120 SE V3 | PA120SE-V3 | **¥4,980** | Ark直販・在庫1点表示・営業日15時までの注文は当日出荷表示。高さ155mm、AM5対応、1年保証。福岡向け送料は未確認。 | [Ark](https://www.ark-pc.co.jp/i/10401914/) |
+
+これにより、32GBメモリの価格欠損は「同一型番の直接販売価格と在庫表示あり」へ改善した。PA120も売り切れ先の古い価格ではなく、Arkの直接掲載へ更新した。ただし数量が少なく、実際の注文時点で在庫が維持されるとは限らない。
+
+1TB SSDの代替候補としてMSI SPATIUM M450 1TB（¥29,130、ヨドバシ掲載・送料無料・2,913ポイント）を記録している。ポイントは現金値引きに含めない。SSDはTLC/QLC、DRAM/HMB、TBW、保証、連続書込み性能を比較し、型番だけで採用を確定しない。
