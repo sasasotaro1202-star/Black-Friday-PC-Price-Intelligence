@@ -1,6 +1,6 @@
 # ブラックフライデー価格・一式購入シナリオ
 
-更新: 2026-11-12T12:29:11+09:00
+更新: 2026-11-12T19:49:59+09:00
 価格フェーズ: **PROVISIONAL_BROAD_WATCH_WINDOW**
 暫定の広域監視窓（公式セール開催期間ではない）: 2026-11-01T00:00:00+09:00 ～ 2026-12-11T23:59:59+09:00
 総予算: ¥400,000
@@ -18,7 +18,7 @@ BF PC理想目標: ¥360,000 / 総額制約後のPC本体上限（周辺機器�
 |---|---:|---:|---:|---|---|---|
 |AOC Q27G40E/11 27-inch WQHD 180Hz|¥22,000|未確認|¥18,900|—|in_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001009314680/)|
 |Logicool G213r|¥4,500|¥7,128|—|—|in_stock|observed_bf_price|[商品ページ](https://www.biccamera.com/bc/item/9242996/)|
-|Logicool G304|¥5,000|未確認|¥5,180|—|in_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
+|Logicool G304|¥5,000|未確認|¥4,815|—|in_stock|black_friday_target_reserve|[商品ページ](https://www.yodobashi.com/product/100000001004334450/)|
 |SteelSeries QcK Large Black 450x400mm (model 63003)|¥1,500|未確認|¥2,420|—|low_stock|black_friday_target_reserve|[商品ページ](https://www.biccamera.com/bc/item/1570130/)|
 |Required cables only; check included monitor cables first|¥0|未確認|—|—|unknown|black_friday_target_reserve|予算枠/見積確認|
 |周辺機器の価格差・必要ケーブル不足用の柔軟な予備枠（商品ではない）|¥2,000|未確認|—|—|unknown|black_friday_target_reserve|予算枠/見積確認|
