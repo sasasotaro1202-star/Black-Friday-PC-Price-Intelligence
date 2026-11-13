@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-11-13T09:26:14+09:00
-Source snapshot: 2026-11-13T09:21:23+09:00
-Source snapshot SHA256: 6a210c598acf2ebe43ffa1d3dbafae114e491ef35858ecb4fa539ad49df9d826
+Generated: 2026-11-13T12:45:32+09:00
+Source snapshot: 2026-11-13T12:39:21+09:00
+Source snapshot SHA256: 2c5f6590affbd27c439733a438ec06e230ec7cc3a4f3557dceb539279903fa6c
 Budget: ¥360,000
 U.S. Black Friday calendar reference only (not official retailer sale dates): 2026-11-27
 
@@ -16,7 +16,7 @@ The primary purchase method is self-build. These completed-PC listings are price
 |2|G TUNE DG-I7G70（EC限定）|¥299,800|0.0%|HIGH|rtx 5070|32|direct_structured|
 |3|G TUNE DG-A7G70|¥321,900|0.0%|HIGH|rtx 5070|26|direct_text|
 |4|G TUNE DG-I5G70|¥279,800|0.0%|HIGH|rtx 5070|22|direct_structured|
-|5|THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060 Ti 16G|¥274,980|0.0%|HIGH|rtx 5060 ti|22|direct_structured|
+|5|THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060 Ti 16G|¥269,980|0.0%|HIGH|rtx 5060 ti|22|direct_structured|
 |6|G TUNE DG-A5G60|¥194,800|0.0%|HIGH|rtx 5060|15|direct_structured|
 |7|G TUNE FG-A7G6T|¥363,900|1.1%|HIGH|rtx 5060 ti|28|direct_text|
 |8|G TUNE FG-A7G70|¥374,800|3.9%|HIGH|rtx 5070|33|direct_structured|
@@ -43,14 +43,14 @@ The primary purchase method is self-build. These completed-PC listings are price
 ## BF window observation ledger
 
 - Ledger: data/buy_now_observations.jsonl
-- Rows loaded: 608
+- Rows loaded: 614
 - Rows appended this run: 6
 - Only in-stock/low-stock, exact-identity, direct-structured and PIT-valid observations are added.
 
 ## Current buy-now decision
 
-- Status: **データ確認が揃うまで判断保留** (WAIT_FOR_VERIFICATION)
-- Recommendation: 価格・在庫・完成構成・周辺機器込み予算・重要候補の確認が不足しています。取得失敗を売り切れとみなさず、確認できた時点で再判定します。
+- Status: **公式セール開催窓の開始待ち** (WAIT_FOR_CAMPAIGN_WINDOW)
+- Recommendation: 公式の2026年開催日程は確認済みですが、監視対象のいずれの公式開催窓も現在アクティブではありません。対象店舗の期間に入ったら価格・在庫・PITを再確認します。
 - Full detail: data/reports/buy-now-now.md
 - The timing score is a heuristic priority signal, not a probability forecast.
 

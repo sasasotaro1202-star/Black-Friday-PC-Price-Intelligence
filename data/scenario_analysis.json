@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-13T09:26:14+09:00",
-  "source_snapshot_generated_at": "2026-11-13T09:21:23+09:00",
-  "source_snapshot_sha256": "6a210c598acf2ebe43ffa1d3dbafae114e491ef35858ecb4fa539ad49df9d826",
+  "generated_at": "2026-11-13T12:45:32+09:00",
+  "source_snapshot_generated_at": "2026-11-13T12:39:21+09:00",
+  "source_snapshot_sha256": "2c5f6590affbd27c439733a438ec06e230ec7cc3a4f3557dceb539279903fa6c",
   "budget_jpy": 360000,
   "budget_scope": "pc_only_excluding_peripherals",
   "total_budget_jpy": 400000,
@@ -14,9 +14,9 @@
     "watch_window_start_jst": "2026-11-01T00:00:00+09:00",
     "watch_window_end_jst": "2026-12-11T23:59:59+09:00",
     "watch_window_type": "PROVISIONAL_BROAD_WATCH_WINDOW",
-    "official_bf_pc_price_count": 1,
-    "official_bf_peripheral_price_count": 1,
-    "black_friday_prices_known": true,
+    "official_bf_pc_price_count": 0,
+    "official_bf_peripheral_price_count": 0,
+    "black_friday_prices_known": false,
     "future_black_friday_prices_confirmed": false,
     "all_configured_prices_are_bf_targets": true,
     "targets_are_estimates_not_promises": true,
@@ -25,17 +25,17 @@
     "pc_target_price_jpy": 360000,
     "pc_planned_hard_cap_jpy": 360000,
     "pc_absolute_hard_cap_jpy": 395000,
-    "peripheral_projected_cost_jpy": 37628,
+    "peripheral_projected_cost_jpy": 35000,
     "unallocated_contingency_jpy": 5000,
     "peripheral_target_total_jpy": 35000,
     "black_friday_ideal_bundle_target_jpy": 400000,
     "black_friday_target_buffer_jpy": 0,
     "black_friday_hard_cap_bundle_jpy": 400000,
-    "black_friday_pc_price_cap_jpy": 357372,
+    "black_friday_pc_price_cap_jpy": 360000,
     "black_friday_pc_price_cap_final": false,
     "peripheral_snapshot_fresh": true,
     "tracked_peripheral_count": 4,
-    "tracked_peripheral_bf_price_verified_count": 1,
+    "tracked_peripheral_bf_price_verified_count": 0,
     "tracked_peripheral_all_bf_prices_verified": false,
     "all_in_checkout_total_final": false,
     "peripherals": [
@@ -51,7 +51,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 18900,
-        "watch_window_reference_at": "2026-11-13T09:22:47+09:00",
+        "watch_window_reference_at": "2026-11-13T12:40:53+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -67,22 +67,22 @@
         "name": "Logicool G213r",
         "purchase_url": "https://www.biccamera.com/bc/item/9242996/",
         "black_friday_target_price_jpy": 4500,
-        "black_friday_price_observed_jpy": 7128,
-        "black_friday_price_verified": true,
+        "black_friday_price_observed_jpy": null,
+        "black_friday_price_verified": false,
         "retailer_key": "dospara",
-        "retailer_campaign_status": "CONFIRMED_ACTIVE",
+        "retailer_campaign_status": "CONFIRMED_NOT_ACTIVE",
         "retailer_campaign_start_jst": "2026-10-30T11:00:00+09:00",
         "retailer_campaign_end_jst": "2026-11-13T10:59:59+09:00",
-        "watch_window_reference_price_jpy": null,
-        "watch_window_reference_at": null,
+        "watch_window_reference_price_jpy": 7128,
+        "watch_window_reference_at": "2026-11-13T12:41:28+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
-        "price_reference_kind": "OFFICIAL_BLACK_FRIDAY_OBSERVED_PRICE",
+        "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
         "stock_status": "in_stock",
-        "target_gap_vs_pre_bf_reference_jpy": null,
-        "discount_needed_to_target_pct": null,
-        "planning_cost_jpy": 7128,
-        "cost_basis": "observed_bf_price",
+        "target_gap_vs_pre_bf_reference_jpy": 2628,
+        "discount_needed_to_target_pct": 36.9,
+        "planning_cost_jpy": 4500,
+        "cost_basis": "black_friday_target_reserve",
         "track_current_price": true
       },
       {
@@ -97,7 +97,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 4815,
-        "watch_window_reference_at": "2026-11-13T09:23:21+09:00",
+        "watch_window_reference_at": "2026-11-13T12:40:50+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -115,18 +115,18 @@
         "black_friday_target_price_jpy": 1500,
         "black_friday_price_observed_jpy": null,
         "black_friday_price_verified": false,
-        "retailer_key": "bic_camera",
+        "retailer_key": "yodobashi",
         "retailer_campaign_status": "UNCONFIRMED",
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
-        "watch_window_reference_price_jpy": null,
-        "watch_window_reference_at": null,
+        "watch_window_reference_price_jpy": 2420,
+        "watch_window_reference_at": "2026-11-13T12:41:32+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
-        "price_reference_kind": "TARGET_ONLY_UNVERIFIED",
-        "stock_status": "unknown",
-        "target_gap_vs_pre_bf_reference_jpy": null,
-        "discount_needed_to_target_pct": null,
+        "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
+        "stock_status": "low_stock",
+        "target_gap_vs_pre_bf_reference_jpy": 920,
+        "discount_needed_to_target_pct": 38.0,
         "planning_cost_jpy": 1500,
         "cost_basis": "black_friday_target_reserve",
         "track_current_price": true
@@ -579,7 +579,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 374800,
-        "watch_window_reference_at": "2026-11-13T09:21:23+09:00",
+        "watch_window_reference_at": "2026-11-13T12:39:21+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 319800,
@@ -656,7 +656,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 419800,
-        "watch_window_reference_at": "2026-11-13T09:21:23+09:00",
+        "watch_window_reference_at": "2026-11-13T12:39:21+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 419800,
@@ -1114,7 +1114,7 @@
         "black_friday_price_observed_jpy": null,
         "black_friday_offer_verified": false,
         "retailer_key": "dospara",
-        "retailer_campaign_status": "CONFIRMED_ACTIVE",
+        "retailer_campaign_status": "CONFIRMED_NOT_ACTIVE",
         "retailer_campaign_start_jst": "2026-10-30T11:00:00+09:00",
         "retailer_campaign_end_jst": "2026-11-13T10:59:59+09:00",
         "watch_window_reference_price_jpy": null,
@@ -1271,7 +1271,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 194800,
-        "watch_window_reference_at": "2026-11-13T09:21:23+09:00",
+        "watch_window_reference_at": "2026-11-13T12:39:21+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 194800,
@@ -1354,7 +1354,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 279800,
-        "watch_window_reference_at": "2026-11-13T09:21:23+09:00",
+        "watch_window_reference_at": "2026-11-13T12:39:21+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 279800,
@@ -1437,7 +1437,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 299800,
-        "watch_window_reference_at": "2026-11-13T09:21:23+09:00",
+        "watch_window_reference_at": "2026-11-13T12:39:21+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 299800,
@@ -1621,60 +1621,60 @@
         "ram_gb": 16,
         "ssd": "500 GB",
         "black_friday_target_price_jpy": 360000,
-        "black_friday_price_observed_jpy": 274980,
-        "black_friday_offer_verified": true,
+        "black_friday_price_observed_jpy": null,
+        "black_friday_offer_verified": false,
         "retailer_key": "dospara",
-        "retailer_campaign_status": "CONFIRMED_ACTIVE",
+        "retailer_campaign_status": "CONFIRMED_NOT_ACTIVE",
         "retailer_campaign_start_jst": "2026-10-30T11:00:00+09:00",
         "retailer_campaign_end_jst": "2026-11-13T10:59:59+09:00",
-        "watch_window_reference_price_jpy": null,
-        "watch_window_reference_at": null,
+        "watch_window_reference_price_jpy": 269980,
+        "watch_window_reference_at": "2026-11-13T12:39:21+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 279980,
-        "price_reference_kind": "BLACK_FRIDAY_OBSERVED_PRICE",
-        "scenario_base_price_jpy": 274980,
-        "scenario_base_note": "公式セール期間内の確認価格を基準にした算術シナリオ",
+        "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
+        "scenario_base_price_jpy": 269980,
+        "scenario_base_note": "基本構成の参考額。RAM/SSD構成変更費を含まないため完成構成のBF目標と比較不可",
         "scenario_prices": [
           {
             "discount_pct": 0,
-            "price_jpy": 274980
+            "price_jpy": 269980
           },
           {
             "discount_pct": 5,
-            "price_jpy": 261231
+            "price_jpy": 256481
           },
           {
             "discount_pct": 10,
-            "price_jpy": 247482
+            "price_jpy": 242982
           },
           {
             "discount_pct": 15,
-            "price_jpy": 233733
+            "price_jpy": 229483
           },
           {
             "discount_pct": 20,
-            "price_jpy": 219984
+            "price_jpy": 215984
           },
           {
             "discount_pct": 25,
-            "price_jpy": 206235
+            "price_jpy": 202485
           },
           {
             "discount_pct": 30,
-            "price_jpy": 192486
+            "price_jpy": 188986
           },
           {
             "discount_pct": 35,
-            "price_jpy": 178737
+            "price_jpy": 175487
           },
           {
             "discount_pct": 40,
-            "price_jpy": 164988
+            "price_jpy": 161988
           },
           {
             "discount_pct": 45,
-            "price_jpy": 151239
+            "price_jpy": 148489
           }
         ],
         "discount_needed_to_bf_target_jpy": null,
@@ -1954,7 +1954,7 @@
       "id": "desktop-dospara-ad-r7a56c-0aw-5060ti16",
       "name": "THIRDWAVE AD-R7A56C-0AW (Ryzen 7 7700 / RTX 5060 Ti 16GB)",
       "form_factor": "desktop",
-      "current_price_jpy": 274980,
+      "current_price_jpy": 269980,
       "reference_price_jpy": 279980,
       "reference_only": false,
       "required_discount_pct": 0.0,
@@ -1963,28 +1963,28 @@
       "scenario_prices": [
         {
           "discount_pct": 10,
-          "price_jpy": 247500
+          "price_jpy": 243000
         },
         {
           "discount_pct": 15,
-          "price_jpy": 233700
+          "price_jpy": 229500
         },
         {
           "discount_pct": 20,
-          "price_jpy": 220000
+          "price_jpy": 216000
         },
         {
           "discount_pct": 25,
-          "price_jpy": 206200
+          "price_jpy": 202500
         },
         {
           "discount_pct": 30,
-          "price_jpy": 192500
+          "price_jpy": 189000
         }
       ],
       "first_pc_target_scenario": {
         "discount_pct": 10,
-        "price_jpy": 247500
+        "price_jpy": 243000
       },
       "stock_status": "in_stock",
       "price_source_mode": "direct_structured",
