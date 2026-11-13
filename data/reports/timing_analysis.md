@@ -1,8 +1,8 @@
 # Black Friday price timing analysis
 
-Generated: 2026-11-13T12:45:32+09:00
-Source snapshot: 2026-11-13T12:39:21+09:00
-Source snapshot SHA256: 2c5f6590affbd27c439733a438ec06e230ec7cc3a4f3557dceb539279903fa6c
+Generated: 2026-11-13T16:04:50+09:00
+Source snapshot: 2026-11-13T15:59:44+09:00
+Source snapshot SHA256: 18f65cadd7b9c63d3378b7ec2568ccc0b14db85264f3bf2f55b0121ea5aa3328
 Budget: ¥360,000
 U.S. Black Friday calendar reference only (not official retailer sale dates): 2026-11-27
 
@@ -23,7 +23,8 @@ The primary purchase method is self-build. These completed-PC listings are price
 |9|G TUNE FG-A7G7T（TGS2026出展記念モデル第2弾）|¥399,800|10.0%|HIGH|rtx 5070 ti|38|direct_structured|
 |10|GAMING A18 PRO DXJG3JPBC4JH （英語配列キーボード）|¥419,800|14.2%|REALISTIC|rtx 5070 ti|29|direct_structured|
 |11|G TUNE P5-I7G70BK-C（ブラック）|¥468,800|23.2%|AGGRESSIVE|rtx 5070|32|direct_structured|
-|12|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|VERY_LOW|rtx 5070 ti|40|direct_structured|
+|12|ROG Strix G16 G614PR-R9R5070TI|¥529,800|32.0%|LOW|rtx 5070 ti|40|direct_meta|
+|13|GALLERIA ZL9R-R57T-6-B|¥738,980|51.3%|VERY_LOW|rtx 5070 ti|40|direct_structured|
 
 ## Empirical price-change timing
 
@@ -43,7 +44,7 @@ The primary purchase method is self-build. These completed-PC listings are price
 ## BF window observation ledger
 
 - Ledger: data/buy_now_observations.jsonl
-- Rows loaded: 614
+- Rows loaded: 620
 - Rows appended this run: 6
 - Only in-stock/low-stock, exact-identity, direct-structured and PIT-valid observations are added.
 
