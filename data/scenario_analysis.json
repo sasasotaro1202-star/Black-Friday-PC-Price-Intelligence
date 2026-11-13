@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-13T16:04:50+09:00",
-  "source_snapshot_generated_at": "2026-11-13T15:59:44+09:00",
-  "source_snapshot_sha256": "18f65cadd7b9c63d3378b7ec2568ccc0b14db85264f3bf2f55b0121ea5aa3328",
+  "generated_at": "2026-11-13T20:36:24+09:00",
+  "source_snapshot_generated_at": "2026-11-13T20:30:16+09:00",
+  "source_snapshot_sha256": "d77b7cc70a834dff29a643006c5bf2ca0e239145049f8d3232e5073c3a6f5e9a",
   "budget_jpy": 360000,
   "budget_scope": "pc_only_excluding_peripherals",
   "total_budget_jpy": 400000,
@@ -51,7 +51,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 18900,
-        "watch_window_reference_at": "2026-11-13T16:01:51+09:00",
+        "watch_window_reference_at": "2026-11-13T20:31:39+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -74,7 +74,7 @@
         "retailer_campaign_start_jst": "2026-10-30T11:00:00+09:00",
         "retailer_campaign_end_jst": "2026-11-13T10:59:59+09:00",
         "watch_window_reference_price_jpy": 7128,
-        "watch_window_reference_at": "2026-11-13T16:01:10+09:00",
+        "watch_window_reference_at": "2026-11-13T20:31:38+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -97,7 +97,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 4815,
-        "watch_window_reference_at": "2026-11-13T16:01:11+09:00",
+        "watch_window_reference_at": "2026-11-13T20:32:15+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -120,7 +120,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 2420,
-        "watch_window_reference_at": "2026-11-13T16:01:50+09:00",
+        "watch_window_reference_at": "2026-11-13T20:32:19+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "price_reference_kind": "PROVISIONAL_WATCH_WINDOW_REFERENCE",
@@ -579,7 +579,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 374800,
-        "watch_window_reference_at": "2026-11-13T15:59:44+09:00",
+        "watch_window_reference_at": "2026-11-13T20:30:16+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 319800,
@@ -656,7 +656,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 419800,
-        "watch_window_reference_at": "2026-11-13T15:59:44+09:00",
+        "watch_window_reference_at": "2026-11-13T20:30:16+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 419800,
@@ -869,7 +869,7 @@
         "catalog_configuration_ready": true,
         "catalog_configuration_reasons": [],
         "complete_build_target_comparable": true,
-        "stock_status": "preorder_or_backorder",
+        "stock_status": "unknown",
         "purchase_url": "https://rog.asus.com/jp/laptops/rog-strix/rog-strix-g16-2025-g614/spec/"
       },
       {
@@ -1271,7 +1271,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 194800,
-        "watch_window_reference_at": "2026-11-13T15:59:44+09:00",
+        "watch_window_reference_at": "2026-11-13T20:30:16+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 194800,
@@ -1354,7 +1354,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 279800,
-        "watch_window_reference_at": "2026-11-13T15:59:44+09:00",
+        "watch_window_reference_at": "2026-11-13T20:30:16+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 279800,
@@ -1437,7 +1437,7 @@
         "retailer_campaign_start_jst": null,
         "retailer_campaign_end_jst": null,
         "watch_window_reference_price_jpy": 299800,
-        "watch_window_reference_at": "2026-11-13T15:59:44+09:00",
+        "watch_window_reference_at": "2026-11-13T20:30:16+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 299800,
@@ -1628,7 +1628,7 @@
         "retailer_campaign_start_jst": "2026-10-30T11:00:00+09:00",
         "retailer_campaign_end_jst": "2026-11-13T10:59:59+09:00",
         "watch_window_reference_price_jpy": 269980,
-        "watch_window_reference_at": "2026-11-13T15:59:44+09:00",
+        "watch_window_reference_at": "2026-11-13T20:30:16+09:00",
         "pre_black_friday_reference_price_jpy": null,
         "pre_black_friday_reference_at": null,
         "catalog_reference_price_jpy": 279980,
@@ -2238,44 +2238,6 @@
       "dynamic_candidate": false
     },
     {
-      "id": "rog-g16-8940hx-5070ti",
-      "name": "ROG Strix G16 G614PR-R9R5070TI",
-      "form_factor": "laptop",
-      "current_price_jpy": 529800,
-      "reference_price_jpy": 549800,
-      "reference_only": false,
-      "required_discount_pct": 32.0,
-      "historical_floor_jpy": 299800,
-      "historical_floor_strength": "same_family",
-      "scenario_prices": [
-        {
-          "discount_pct": 10,
-          "price_jpy": 476800
-        },
-        {
-          "discount_pct": 15,
-          "price_jpy": 450300
-        },
-        {
-          "discount_pct": 20,
-          "price_jpy": 423800
-        },
-        {
-          "discount_pct": 25,
-          "price_jpy": 397400
-        },
-        {
-          "discount_pct": 30,
-          "price_jpy": 370900
-        }
-      ],
-      "first_pc_target_scenario": null,
-      "stock_status": "preorder_or_backorder",
-      "price_source_mode": "direct_meta",
-      "price_validation_status": "validated",
-      "dynamic_candidate": false
-    },
-    {
       "id": "galleria-zl9r-9955hx-5070ti",
       "name": "GALLERIA ZL9R-R57T-6-B",
       "form_factor": "laptop",
@@ -2343,6 +2305,44 @@
         {
           "discount_pct": 30,
           "price_jpy": 383500
+        }
+      ],
+      "first_pc_target_scenario": null,
+      "stock_status": "unknown",
+      "price_source_mode": "none",
+      "price_validation_status": "reference_only",
+      "dynamic_candidate": false
+    },
+    {
+      "id": "rog-g16-8940hx-5070ti",
+      "name": "ROG Strix G16 G614PR-R9R5070TI",
+      "form_factor": "laptop",
+      "current_price_jpy": null,
+      "reference_price_jpy": 549800,
+      "reference_only": true,
+      "required_discount_pct": 34.5,
+      "historical_floor_jpy": 299800,
+      "historical_floor_strength": "same_family",
+      "scenario_prices": [
+        {
+          "discount_pct": 10,
+          "price_jpy": 494800
+        },
+        {
+          "discount_pct": 15,
+          "price_jpy": 467300
+        },
+        {
+          "discount_pct": 20,
+          "price_jpy": 439800
+        },
+        {
+          "discount_pct": 25,
+          "price_jpy": 412400
+        },
+        {
+          "discount_pct": 30,
+          "price_jpy": 384900
         }
       ],
       "first_pc_target_scenario": null,
