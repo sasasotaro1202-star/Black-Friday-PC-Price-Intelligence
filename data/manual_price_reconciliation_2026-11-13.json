@@ -478,6 +478,27 @@
       "conditions": [
         "Ryzen 7 9700X priced conservatively at ¥49,800 from the latest 09:00 JST direct capture; an older cached web view showed ¥47,800 and is not used."
       ]
+    },
+    {
+      "id": "current-direct-observed-5070-1tb",
+      "name": "RTX 5070 12GB / 32GB DDR5 / 1TB SSD",
+      "observed_parts_subtotal_jpy": 388225,
+      "pc_shipping_reserve_jpy": 6000,
+      "small_parts_reserve_jpy": 3000,
+      "peripheral_budget_jpy": 35000,
+      "contingency_jpy": 5000,
+      "estimated_all_in_jpy": 437225,
+      "remaining_budget_jpy": 12775,
+      "component_prices_are_direct_listing_observations": true,
+      "checkout_verified": false,
+      "conditions": [
+        "Ryzen 7 9700X priced at ¥49,800 from latest direct capture; stock and shipping remain unconfirmed",
+        "MSI RTX 5070 12G VENTUS 2X OC direct PC Koubou listing ¥166,800, free shipping, 0 points, orderable page; stock count not shown",
+        "Corsair VENGEANCE DDR5-6000 32GB kit ¥72,979 at Ark, five units shown, free shipping",
+        "MSI SPATIUM M450 1TB ¥29,130 at Yodobashi, in stock, free delivery, 2,913 points excluded from cash price",
+        "Remaining part prices and shipping reserve as used in other scenarios"
+      ],
+      "decision": "Fits the ¥450,000 cap on observed listing prices while trading away 1TB capacity and 4GB VRAM versus the 5060 Ti 16GB + 2TB scenario. Not purchase-approved until final checkout and compatibility verification."
     }
   ]
 }
