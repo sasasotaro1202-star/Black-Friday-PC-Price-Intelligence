@@ -238,6 +238,25 @@
       "points_percent": 10,
       "url": "https://www.yodobashi.com/product/100000001008996814/",
       "note": "Single-tower lower-cost alternative; do not assume equivalent sustained-load cooling to the dual-tower Peerless Assassin 120 SE V3."
+    },
+    {
+      "id": "ssd-verbatim-vi5000-2tb",
+      "name": "Verbatim Vi5000 NVMe Gen4x4 2TB",
+      "model_code": "31827-J",
+      "price_jpy": 48980,
+      "source_class": "direct_retailer_listing",
+      "seller": "Joshin web",
+      "stock": "in_stock",
+      "shipping": "free_shipping",
+      "points": 489,
+      "points_percent": 1,
+      "dispatch": "same-day dispatch displayed; exact Fukuoka delivery date not guaranteed",
+      "warranty": "2-year manufacturer warranty per retailer listing",
+      "performance": "sequential read 5,000 MB/s; write 4,300 MB/s per retailer listing",
+      "endurance": "2,500 TBW per retailer listing",
+      "nand_type": "not_verified",
+      "url": "https://joshinweb.jp/peripheral/53600/4991348089986.html?ACK=ADKC",
+      "note": "Direct same-SKU retail listing; NAND type was not specified in the captured product page. Do not infer TLC/QLC. Compare warranty and independent endurance test data before selection."
     }
   ],
   "unresolved": [
@@ -246,7 +265,8 @@
     "Shipping to Fukuoka and checkout totals are not fully confirmed for every merchant.",
     "The old peripheral subtotal had an arithmetic discrepancy: AOC 18,900 + G213r 7,128 + G304 4,815 + QcK Large 2,420 = 33,263 yen, not 38,363 yen.",
     "The 32GB Corsair VENGEANCE DDR5-6000 kit SKU CMK32GX5M2D6000Z38 now has a direct PC SHOP Ark listing at ¥72,979, 5 remaining in the captured page, with free shipping and same-day dispatch cutoff 15:00; stock and dispatch must be reconfirmed on order day.",
-    "The Peerless Assassin 120 SE V3 now has a direct Ark listing at ¥4,980 and one remaining; Fukuoka shipping charge is not verified."
+    "The Peerless Assassin 120 SE V3 now has a direct Ark listing at ¥4,980 and one remaining; Fukuoka shipping charge is not verified.",
+    "Verbatim Vi5000 2TB (31827-J) is a direct in-stock listing at ¥48,980 with free shipping and 1% points. NAND type not verified; retailer lists 2-year warranty, 5,000/4,300 MB/s sequential, and 2,500 TBW. Exact delivery date to Fukuoka and stock must be reconfirmed."
   ],
   "component_scores": [
     {
