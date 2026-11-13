@@ -15,14 +15,14 @@
       "id": "cpu-ryzen7-9700x",
       "name": "AMD Ryzen 7 9700X BOX",
       "model_code": "100-100001404WOF",
-      "price_jpy": 47800,
+      "price_jpy": 49800,
       "source_class": "direct_retailer_listing",
       "seller": "Joshin web",
-      "stock": "in_stock_on_page",
-      "shipping": "free_shipping",
+      "stock": "unknown",
+      "shipping": "not confirmed in latest 09:00 JST direct capture",
       "delivery": "page's dispatch date appears stale; do not promise delivery day",
       "url": "https://joshinweb.jp/mobile/22814/0730143315593.html",
-      "note": "The pipeline captured ¥49,800 with stock unknown. Rechecked listing is ¥47,800 and stock-in text is shown; delivery estimate needs separate local checkout confirmation."
+      "note": "Latest direct retailer capture in repository at 2026-11-13 09:00 JST is ¥49,800 incl tax, stock status unknown. A separate web crawl of an older page (four days old) displayed ¥47,800 and in-stock text but its dispatch estimate was stale (Nov 8); treat ¥47,800 as stale conflicting display, not the latest confirmed price."
     },
     {
       "id": "gpu-rtx5060ti-16gb",
@@ -421,13 +421,13 @@
     {
       "id": "current-direct-observed-5060ti",
       "name": "RTX 5060 Ti 16GB / 32GB DDR5 / 2TB SSD",
-      "observed_parts_subtotal_jpy": 384255,
+      "observed_parts_subtotal_jpy": 386255,
       "pc_shipping_reserve_jpy": 6000,
       "small_parts_reserve_jpy": 3000,
       "peripheral_budget_jpy": 35000,
       "contingency_jpy": 5000,
-      "estimated_all_in_jpy": 433255,
-      "remaining_budget_jpy": 16745,
+      "estimated_all_in_jpy": 435255,
+      "remaining_budget_jpy": 14745,
       "component_prices_are_direct_listing_observations": true,
       "checkout_verified": false,
       "conditions": [
@@ -436,37 +436,44 @@
         "RAM Corsair CMK32GX5M2D6000Z38 ¥72,979 at Ark, five units shown in capture",
         "SSD Verbatim Vi5000 2TB ¥48,980 at Joshin, in stock, NAND type not verified",
         "Motherboard, PSU, case, cooler and OS are direct listing observations; shipping/checkout not fully reconfirmed",
-        "Includes plan reserves for PC shipping ¥6,000, small parts ¥3,000, peripherals ¥35,000, contingency ¥5,000"
+        "Includes plan reserves for PC shipping ¥6,000, small parts ¥3,000, peripherals ¥35,000, contingency ¥5,000",
+        "Ryzen 7 9700X priced conservatively at ¥49,800 from the latest 09:00 JST direct capture; an older cached web view showed ¥47,800 and is not used."
       ],
       "decision": "Best current full-build price scenario with a 16GB VRAM card that fits the budget on observed listing prices, but not purchase-approved because final checkout/compatibility/ship dates remain unverified."
     },
     {
       "id": "current-direct-observed-rtx5070",
       "name": "RTX 5070 12GB / 32GB DDR5 / 2TB SSD",
-      "observed_parts_subtotal_jpy": 406075,
+      "observed_parts_subtotal_jpy": 408075,
       "pc_shipping_reserve_jpy": 6000,
       "small_parts_reserve_jpy": 3000,
       "peripheral_budget_jpy": 35000,
       "contingency_jpy": 5000,
-      "estimated_all_in_jpy": 455075,
-      "remaining_budget_jpy": -5075,
+      "estimated_all_in_jpy": 457075,
+      "remaining_budget_jpy": -7075,
       "component_prices_are_direct_listing_observations": true,
       "checkout_verified": false,
-      "decision": "Slightly above the ¥450,000 cap using captured PC Koubou price. Could fit only through verified reductions in other costs or different stock-priced offer; do not assume."
+      "decision": "Slightly above the ¥450,000 cap using captured PC Koubou price. Could fit only through verified reductions in other costs or different stock-priced offer; do not assume.",
+      "conditions": [
+        "Ryzen 7 9700X priced conservatively at ¥49,800 from the latest 09:00 JST direct capture; an older cached web view showed ¥47,800 and is not used."
+      ]
     },
     {
       "id": "current-direct-observed-5070ti",
       "name": "RTX 5070 Ti 16GB / 32GB DDR5 / 2TB SSD",
-      "observed_parts_subtotal_jpy": 469075,
+      "observed_parts_subtotal_jpy": 471075,
       "pc_shipping_reserve_jpy": 6000,
       "small_parts_reserve_jpy": 3000,
       "peripheral_budget_jpy": 35000,
       "contingency_jpy": 5000,
-      "estimated_all_in_jpy": 518075,
-      "remaining_budget_jpy": -68075,
+      "estimated_all_in_jpy": 520075,
+      "remaining_budget_jpy": -70075,
       "component_prices_are_direct_listing_observations": true,
       "checkout_verified": false,
-      "decision": "Does not fit ¥450,000 cap at the captured direct ¥229,800 GPU listing. A 5070 Ti build requires a lower GPU offer or major justified savings elsewhere."
+      "decision": "Does not fit ¥450,000 cap at the captured direct ¥229,800 GPU listing. A 5070 Ti build requires a lower GPU offer or major justified savings elsewhere.",
+      "conditions": [
+        "Ryzen 7 9700X priced conservatively at ¥49,800 from the latest 09:00 JST direct capture; an older cached web view showed ¥47,800 and is not used."
+      ]
     }
   ]
 }
