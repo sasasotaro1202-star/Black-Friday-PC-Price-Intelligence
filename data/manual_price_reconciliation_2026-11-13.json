@@ -76,13 +76,13 @@
       "id": "memory-teamgroup-ddr5-32gb-6000",
       "name": "TeamGroup T-CREATE EXPERT White DDR5-6000 32GB (16GBx2)",
       "model_code": "CTCWD532G6000HC38ADC01",
-      "price_jpy": 78880,
+      "price_jpy": 88990,
       "source_class": "comparison_site_reference_only",
       "seller": "Seller not independently confirmed",
       "stock": "not_verified",
       "shipping": "not_verified",
       "url": "https://kakaku.com/item/K0001610896/",
-      "note": "Displayed comparison reference only; do not count as purchaseable inventory."
+      "note": "Price.com page currently displays 88,990 JPY for exact SKU CTCWD532G6000HC38ADC01; this is a comparison-page lowest-price display, not a directly confirmed seller offer or available stock. Direct Corsair CMK32GX5M2D6000Z38 at Ark is the stronger buyable alternative."
     },
     {
       "id": "memory-corsair-vengeance-ddr5-32gb-6000",
@@ -178,15 +178,15 @@
       "id": "cooler-thermalright-assassin-x-120-refined-se",
       "name": "Thermalright Assassin X 120 Refined SE",
       "model_code": "AX120-R-SE",
-      "price_jpy": 2370,
+      "price_jpy": 2580,
       "source_class": "direct_retailer_listing",
       "seller": "Yodobashi.com",
-      "stock": "in_stock",
+      "stock": "unknown",
       "shipping": "free delivery",
-      "points": 237,
+      "points": 258,
       "points_percent": 10,
       "url": "https://www.yodobashi.com/product/100000001008996814/",
-      "note": "Available single-tower alternative. For long sustained CPU workloads, verify temperature/noise; not a like-for-like replacement for the dual-tower PA120."
+      "note": "Yodobashi page crawl 3 days old displayed ¥2,580, stock in then, 258 points and free delivery. Its delivery estimate was Nov 10 (past by Nov 13), so current stock/delivery must be reconfirmed. Single-tower cooler, not equal to PA120 SE V3."
     },
     {
       "id": "psu-corsair-rm850e-2025",
@@ -266,7 +266,11 @@
     "The old peripheral subtotal had an arithmetic discrepancy: AOC 18,900 + G213r 7,128 + G304 4,815 + QcK Large 2,420 = 33,263 yen, not 38,363 yen.",
     "The 32GB Corsair VENGEANCE DDR5-6000 kit SKU CMK32GX5M2D6000Z38 now has a direct PC SHOP Ark listing at ¥72,979, 5 remaining in the captured page, with free shipping and same-day dispatch cutoff 15:00; stock and dispatch must be reconfirmed on order day.",
     "The Peerless Assassin 120 SE V3 now has a direct Ark listing at ¥4,980 and one remaining; Fukuoka shipping charge is not verified.",
-    "Verbatim Vi5000 2TB (31827-J) is a direct in-stock listing at ¥48,980 with free shipping and 1% points. NAND type not verified; retailer lists 2-year warranty, 5,000/4,300 MB/s sequential, and 2,500 TBW. Exact delivery date to Fukuoka and stock must be reconfirmed."
+    "Verbatim Vi5000 2TB (31827-J) is a direct in-stock listing at ¥48,980 with free shipping and 1% points. NAND type not verified; retailer lists 2-year warranty, 5,000/4,300 MB/s sequential, and 2,500 TBW. Exact delivery date to Fukuoka and stock must be reconfirmed.",
+    "TeamGroup T-CREATE 32GB kit exact SKU is currently ¥88,990 on the Price.com comparison page, but this is not a direct sellable offer and stock remains unverified; Corsair VENGEANCE 32GB Ark direct listing at ¥72,979 is the stronger alternative.",
+    "Crucial Pro DDR5-6000 32GB exact Yodobashi product page now states sales discontinued; older captured price ¥25,870 must not be treated as current or purchasable.",
+    "MSI SPATIUM M450 1TB is directly shown at ¥29,130, in stock, free delivery, ¥2,913 points, with delivery shown by Nov 14. Points remain separate from cash price.",
+    "Thermalright Assassin X 120 Refined SE Yodobashi page crawl is 3 days old: ¥2,580 and 258 points were displayed, but delivery estimate was Nov 10, already past on Nov 13. Stock is therefore treated as unknown pending a fresh check."
   ],
   "component_scores": [
     {
