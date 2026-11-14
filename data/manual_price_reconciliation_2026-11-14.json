@@ -149,32 +149,33 @@
       "name": "PNY GeForce RTX 5060 Ti OC 16GB",
       "model_code": "VCG5060T16DFXPB1-O",
       "price_jpy": 144980,
-      "previous_observed_price_jpy": 144980,
-      "delta_jpy": 290,
+      "previous_observed_price_jpy": 145270,
+      "delta_jpy": -290,
       "target_price_jpy": 120000,
       "target_gap_jpy": 24980,
-      "target_gap_percent": 21.1,
+      "target_gap_percent": 20.8,
       "source_class": "direct_retailer_product_page",
       "seller": "Dospara",
       "stock": "in_stock_orderable",
       "shipping": "free",
-      "delivery": "page shows 2026-11-13 dispatch; date has passed, Fukuoka delivery date unconfirmed",
+      "delivery": "24 hours dispatch; Tokyo ETA shown as 2026-11-15; Fukuoka ETA unconfirmed",
       "points": 0,
-      "warranty": "3 years",
-      "initial_defect": "not separately confirmed",
+      "warranty": "3 years domestic authorized warranty",
+      "initial_defect": "1 week standard; 1 month for free Dospara members",
       "url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
-      "note": "Joshin direct product page confirms exact SKU, ¥145,270 incl. tax, stock in, free shipping and 3-year warranty. Previous Dospara observation was ¥144,980; the Dospara page fetch did not expose price/stock text in this run, so the lower offer is not used as the confirmed buy line.",
+      "note": "Direct Dospara product page opened 2026-11-14: exact PNY SKU, ¥144,980 incl. tax, free shipping, 24-hour dispatch, 3-year warranty and in-stock status. This is ¥290 below the prior Joshin direct listing; Fukuoka delivery date remains unconfirmed.",
       "alternate_offers": [
         {
-          "seller": "Dospara",
-          "price_jpy": 144980,
-          "stock": "previous capture showed orderable 24h dispatch; not revalidated in current page fetch",
+          "seller": "Joshin web",
+          "price_jpy": 145270,
+          "stock": "in_stock_on_prior_direct_capture",
           "shipping": "free_shipping",
-          "url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
-          "status": "reference_only"
+          "warranty": "3 years",
+          "url": "https://joshinweb.jp/peripheral/48266/0751492795072.html",
+          "status": "prior_direct_offer"
         }
       ],
-      "evidence_completeness_score": 92,
+      "evidence_completeness_score": 96,
       "dispatch": "within 24 hours",
       "target_gap_pct": 20.8,
       "prior_comparable_price_jpy": 145270,
@@ -727,7 +728,7 @@
         "evidence_warranty": 9
       },
       "buy_status": "best_current_cuda_budget_fit_but_wait_for_target",
-      "note": "Lowest exact-SKU direct price now ¥144,980 at Dospara; CUDA + 16GB + 180W, but target is still ¥24,980 lower."
+      "note": "Dospara direct page now confirms ¥144,980, in stock, free shipping, 24-hour dispatch and 3-year warranty. CUDA + 16GB + 180W remains the best Windows-AI budget fit, but the ¥120,000 target is still ¥24,980 lower."
     },
     {
       "rank": 3,
