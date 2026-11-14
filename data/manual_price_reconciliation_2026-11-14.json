@@ -849,7 +849,34 @@
         "ppt_w": 162
       }
     ],
-    "system_wall_power": "not measured in this run; do not infer from component TGP/TDP"
+    "system_wall_power": "not measured in this run; do not infer from component TGP/TDP",
+    "review_power_observations": {
+      "source": "ComputerBase RX 9070/XT and RTX 5070/5070 Ti review; ComputerBase RTX 5060 Ti 16GB review",
+      "gaming_power_w": {
+        "RX9070": 223,
+        "RX9070XT": 307,
+        "RTX5070": 253,
+        "RTX5070Ti": 315,
+        "RTX5060Ti16_WQHD_MetroExodus": 169
+      },
+      "wqhd_144fps_limited_power_w": {
+        "RX9070": 91,
+        "RX9070XT": 96
+      },
+      "annual_gpu_electricity_delta_jpy_at_3h_daily_and_31yen_per_kwh": {
+        "uncapped_rx9070_vs_rx9070xt": 2851,
+        "wqhd_144fps_limited_rx9070_vs_rx9070xt": 170
+      },
+      "idle_4k144_w": {
+        "RX9070": 14,
+        "RX9070XT": 15
+      },
+      "transient_spike_after_idle_to_full_load_w": {
+        "RX9070": 359,
+        "RX9070XT": 467
+      },
+      "interpretation": "The 84W uncapped gaming-power difference shrinks to 5W with a 144-FPS WQHD cap in the ComputerBase test. Transient spikes after idle-to-full-load are unusually high, so PSU quality and transient handling matter. These are review bench results, not guaranteed board power for every partner model."
+    }
   },
   "decision": {
     "cpu": "WAIT: 9700X remains the overall efficiency/value leader at ¥44,800, ¥4,800 above the user's ¥40,000 target. 9800X3D and 9850X3D are both 79-point X3D alternatives; 9850X3D is ¥1,750 cheaper at ¥70,050 but its measured performance/W is slightly lower, so compare the exact simulation games before paying for either.",
