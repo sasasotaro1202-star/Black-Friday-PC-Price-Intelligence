@@ -121,8 +121,11 @@
       "warranty": "3 years authorized distributor warranty",
       "initial_defect": "not separately confirmed",
       "url": "https://www.ark-pc.co.jp/i/10240292/",
-      "note": "Direct Ark page opened 2026-11-14: ¥70,050 incl. tax, in stock, free shipping, 3-year warranty. 120W TDP, 8C/16T, 96MB L3, boost 5.6GHz. This is ¥1,750 below the current 9800X3D listing at ¥71,800; no explicit user buy target is set for 9850X3D.",
-      "evidence_completeness_score": 90
+      "note": "Direct Ark page opened 2026-11-14: ¥70,050 incl. tax, in stock, free shipping, 3-year warranty. 120W TDP, 8C/16T, 96MB L3, boost 5.6GHz. It is ¥1,750 below the current 9800X3D listing at ¥71,800. For score comparison only, the same ¥60,000 reference line as 9800X3D is applied; this is not a separately stated user target.",
+      "evidence_completeness_score": 90,
+      "comparison_target_jpy": 60000,
+      "comparison_gap_jpy": 10050,
+      "comparison_gap_percent": 16.75
     },
     {
       "id": "gpu-rtx5060ti-16gb",
@@ -489,16 +492,16 @@
       "rank": 3,
       "id": "cpu-ryzen7-9850x3d",
       "name": "Ryzen 7 9850X3D",
-      "score": 74,
+      "score": 79,
       "breakdown": {
         "simulation_gaming": 30,
-        "productivity": 13,
-        "power_efficiency": 10,
-        "price_vs_target": 7,
-        "platform": 5,
+        "development_multithread": 13,
+        "power_efficiency": 12,
+        "price_vs_target": 10,
+        "platform_longevity": 5,
         "evidence_warranty": 9
       },
-      "score_note": "Direct Ark price is ¥70,050, ¥1,750 below 9800X3D's ¥71,800. It is a real candidate, but 120W TDP and lack of a clear measured efficiency advantage keep 9700X first for the user's power/value priority."
+      "score_note": "At ¥70,050 it is ¥1,750 cheaper than 9800X3D. Same 120W TDP and 5.6GHz boost, but PC Watch found only modest WQHD game gains over 9800X3D and slightly lower system-level performance per watt. Uses the same ¥60,000 comparison reference line, not a user-stated target."
     }
   ],
   "gpu_scores_new": [
@@ -849,7 +852,7 @@
     "system_wall_power": "not measured in this run; do not infer from component TGP/TDP"
   },
   "decision": {
-    "cpu": "WAIT: 9700X is the efficiency/value leader at ¥44,800, ¥4,800 above the user's ¥40,000 target. 9800X3D is ¥71,800, ¥11,800 above its ¥60,000 target. 9850X3D is directly confirmed at ¥70,050, slightly below 9800X3D, but remains a 120W candidate requiring efficiency validation.",
+    "cpu": "WAIT: 9700X remains the overall efficiency/value leader at ¥44,800, ¥4,800 above the user's ¥40,000 target. 9800X3D and 9850X3D are both 79-point X3D alternatives; 9850X3D is ¥1,750 cheaper at ¥70,050 but its measured performance/W is slightly lower, so compare the exact simulation games before paying for either.",
     "gpu": "WAIT: RX 9070 16GB is directly confirmed in stock at Joshin for ¥125,800; RTX 5060 Ti 16GB is ¥145,270 at Joshin; RX 9070 XT is ¥148,000 at Joshin. All remain above their buy targets. RTX 5070 Ti has a lower ¥229,800 Dospara listing with stock count unpublished and a ¥260,800 Joshin listing in stock.",
     "overall": "WAIT / NO PURCHASE APPROVAL. Updated planning scenarios: 9700X + RX 9070 16GB + 32GB + 2TB estimated ¥414,968; 9700X + RTX 5060 Ti 16GB + 32GB + 2TB estimated ¥434,438; 9700X + RTX 5070 12GB + 32GB + 1TB estimated ¥436,118; 9700X + RX 9070 XT 16GB + 32GB + 2TB estimated ¥437,168. These are planning estimates only; non-CPU/GPU prices, compatibility and Fukuoka checkout totals are not all revalidated."
   },
