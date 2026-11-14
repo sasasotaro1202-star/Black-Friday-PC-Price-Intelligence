@@ -271,16 +271,19 @@
           "price_jpy": 49800,
           "seller_name": null,
           "price_source_mode": "direct_text",
-          "stock_status": "unknown",
+          "stock_status": "in_stock",
           "identity_anchor": "100-100001404WOF",
           "identity_match": true,
           "source_role": "direct_retailer_listing_reference",
-          "available_at": "2026-11-14T08:56:17+09:00",
+          "available_at": "2026-11-14T09:40:00+09:00",
           "retrieval_time": "2026-11-14T08:56:17+09:00",
           "pit_valid": true,
           "bf_actual_authorized": false,
           "price_context": "スペック 設置 レビュー カートに入れる AMD｜エーエムディー AMD Ryzen 7 9700X BOX【国内正規品】 100-100001404WOF × 会員様web価格 49,800円 (税込) カートに入れる 初期不良判断・修理対応などの製品に関するお問い合わせは「ASKサポート」をご利用ください。 TEL 03-5215-5652（受付時間：10:00～16",
-          "retailer_domain": "joshinweb.jp"
+          "retailer_domain": "joshinweb.jp",
+          "shipping_jpy": 0,
+          "dispatch_status": "same_day_dispatch",
+          "warranty_years": 3
         },
         {
           "url": "https://www.yodobashi.com/product/100000001008661707/",
@@ -336,13 +339,14 @@
       },
       "retailer_listing_offer_count": 2,
       "display_reference_price_jpy": 49800,
-      "display_reference_price_status": "price_observed_stock_unknown",
+      "display_reference_price_status": "price_observed_in_stock",
       "display_reference_price_source": "joshinweb.jp",
       "display_reference_price_url": "https://joshinweb.jp/mobile/22814/0730143315593.html",
-      "display_reference_price_observed_at": "2026-11-14T08:56:17+09:00",
+      "display_reference_price_observed_at": "2026-11-14T09:40:00+09:00",
       "display_reference_price_note": "Exact-identity direct retailer price. Display price does not imply stock availability; unknown/out-of-stock is not buyable.",
       "price_display_reconciled": true,
-      "price_validation_note": "Exact-identity direct retailer listing price confirmed; stock status is stored separately and does not imply purchase availability."
+      "price_validation_note": "Exact-SKU direct listing price, stock in, free shipping, 3-year manufacturer warranty. Purchase availability still requires final cart and Fukuoka delivery check.",
+      "manual_price_display_reconciled": true
     },
     {
       "id": "cpu-ryzen9-9900x",
