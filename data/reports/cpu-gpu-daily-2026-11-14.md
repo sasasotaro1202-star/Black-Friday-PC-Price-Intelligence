@@ -48,7 +48,7 @@ Tom's Hardwareの相対指標では、ゲーム性能は9850X3Dを100とした�
 - RTX 5060 Ti 16GB：Dospara 144,980円、在庫あり、24時間以内出荷、送料無料、3年保証。前回Joshin掲載145,270円より290円安い。
 - RTX 5070 12GB：ASUS DualがDospara 149,800円、在庫あり、24時間以内出荷、送料無料、1年保証。旧MSI Ventus 166,800円とは別SKUで、同一商品の値下げではない。
 - RX 9070 16GB：Joshin 125,800円、在庫あり、送料無料、2年保証。Dospara PowerColor 119,800円は在庫なし。
-- RX 9070 XT 16GB：Joshin ASRock Steel Legend DARK 148,000円、在庫あり、送料無料、2年保証。ただしページ上の出荷予定11月9日は既に過去日で、福岡向けの新しい納期は未確認。Dospara Challenger 159,800円は別SKU。
+- RX 9070 XT 16GB：Joshin ASRock Steel Legend DARK 148,000円、在庫あり、送料無料、2年保証、最短11月14日出荷。福岡市への到着日は未確認。Dospara Challenger 159,800円は別SKU。
 
 Tom's Hardwareの1440p Ultra平均では、RTX 5070 Ti 116.8fps、RX 9070 XT 116.5fps、RX 9070 104.0fps、RTX 5070 96.4fps、RTX 5060 Ti 73.4fps。レイトレーシング平均はそれぞれ66.2、55.5、47.6、51.5、38.9fps。特定ゲームの保証値ではない。
 
