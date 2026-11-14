@@ -61,7 +61,8 @@
     "evidence_score_is_separate_from_hardware_fit": true,
     "performance_per_watt_proxy": "2026-11-11 GPU comparison score divided by published TGP; not a measured wall-power benchmark",
     "provisional_unknown_price_rule": "価格が未確認の候補はprice_vs_targetを中立7/15とし、必ず暫定と明記する。",
-    "note": "Daily CPU/GPU comparison scores are distinct from the repository's existing full-build score, component fit score and dynamic purchase-evidence score. Do not compare these scales as if they measure the same thing."
+    "note": "Daily CPU/GPU comparison scores are distinct from the repository's existing full-build score, component fit score and dynamic purchase-evidence score. Do not compare these scales as if they measure the same thing.",
+    "evidence_completeness_score_definition": "Separate 0-100 confidence score: exact model identity, direct current product page, current price, stock, seller, shipping, delivery, warranty/return terms, and for used cards physical-condition and operating-test evidence. It does not change the hardware-fit score."
   },
   "observations": [
     {
@@ -83,7 +84,8 @@
       "warranty": "3 years authorized distributor warranty",
       "initial_defect": "not separately confirmed",
       "url": "https://www.ark-pc.co.jp/i/10240257/",
-      "note": "Ark Black Friday 2026: regular 49,800 yen, discount 5,000 yen, current tax-included 44,800 yen. Previous 49,800 yen observation was at Joshin, so the 5,000 yen difference is cross-retailer rather than a same-seller historical comparison. 65W TDP / 88W PPT."
+      "note": "Ark Black Friday 2026: regular 49,800 yen, discount 5,000 yen, current tax-included 44,800 yen. Previous 49,800 yen observation was at Joshin, so the 5,000 yen difference is cross-retailer rather than a same-seller historical comparison. 65W TDP / 88W PPT.",
+      "evidence_completeness_score": 90
     },
     {
       "id": "cpu-ryzen7-9800x3d",
@@ -102,7 +104,8 @@
       "warranty": "3 years authorized distributor warranty",
       "initial_defect": "not separately confirmed",
       "url": "https://www.ark-pc.co.jp/i/10240267/",
-      "note": "TDP 120W / PPT 162W; 8 cores / 16 threads / 96MB L3. Not at the 60,000 yen buy target."
+      "note": "TDP 120W / PPT 162W; 8 cores / 16 threads / 96MB L3. Not at the 60,000 yen buy target.",
+      "evidence_completeness_score": 90
     },
     {
       "id": "cpu-ryzen7-9850x3d",
@@ -118,7 +121,8 @@
       "warranty": "3 years authorized distributor warranty",
       "initial_defect": "not separately confirmed",
       "url": "https://www.ark-pc.co.jp/i/10240292/",
-      "note": "Direct Ark page opened 2026-11-14: ¥70,050 incl. tax, in stock, free shipping, 3-year warranty. 120W TDP, 8C/16T, 96MB L3, boost 5.6GHz. This is ¥1,750 below the current 9800X3D listing at ¥71,800; no explicit user buy target is set for 9850X3D."
+      "note": "Direct Ark page opened 2026-11-14: ¥70,050 incl. tax, in stock, free shipping, 3-year warranty. 120W TDP, 8C/16T, 96MB L3, boost 5.6GHz. This is ¥1,750 below the current 9800X3D listing at ¥71,800; no explicit user buy target is set for 9850X3D.",
+      "evidence_completeness_score": 90
     },
     {
       "id": "gpu-rtx5060ti-16gb",
@@ -149,7 +153,8 @@
           "url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
           "status": "reference_only"
         }
-      ]
+      ],
+      "evidence_completeness_score": 92
     },
     {
       "id": "gpu-rtx5070-12gb-msi-ventus2x",
@@ -170,7 +175,8 @@
       "warranty": "standard warranty term not stated on captured page; optional WEB安心交換保証 costs 10% of product price",
       "initial_defect": "not separately confirmed",
       "url": "https://www.pc-koubou.jp/products/detail.php?product_id=1133257",
-      "note": "Direct PC Koubou page opened today. ¥166,800 incl. tax, free shipping, 0 points, same-day dispatch. 12GB GDDR7, 250W, 16-pin, recommended PSU 650W, dimensions 236x126x50mm."
+      "note": "Direct PC Koubou page opened today. ¥166,800 incl. tax, free shipping, 0 points, same-day dispatch. 12GB GDDR7, 250W, 16-pin, recommended PSU 650W, dimensions 236x126x50mm.",
+      "evidence_completeness_score": 85
     },
     {
       "id": "gpu-rtx5070ti-16gb",
@@ -203,7 +209,8 @@
           "url": "https://joshinweb.jp/mobile/7/0751492794594.html",
           "status": "direct_page_opened_2026-11-14"
         }
-      ]
+      ],
+      "evidence_completeness_score": 80
     },
     {
       "id": "gpu-rx9070-16gb",
@@ -231,7 +238,8 @@
           "url": "https://www.dospara.co.jp/SBR1891/IC518909.html",
           "status": "not_buyable"
         }
-      ]
+      ],
+      "evidence_completeness_score": 92
     },
     {
       "id": "gpu-rx9070xt-16gb",
@@ -261,7 +269,8 @@
           "url": "https://www.dospara.co.jp/SBR1891/IC518907.html",
           "status": "reference_only"
         }
-      ]
+      ],
+      "evidence_completeness_score": 92
     },
     {
       "id": "gpu-rtx4070ti-super-used",
@@ -292,7 +301,8 @@
           "url": "https://www.dospara.co.jp/SBR1522/IC664115.html",
           "status": "unverified_search_lead"
         }
-      ]
+      ],
+      "evidence_completeness_score": 55
     },
     {
       "id": "gpu-rtx4080super-used",
@@ -320,7 +330,8 @@
           "url": "https://www.dospara.co.jp/SBR1522/IC615073.html",
           "status": "unverified_search_lead"
         }
-      ]
+      ],
+      "evidence_completeness_score": 55
     },
     {
       "id": "gpu-rtx3090-used",
@@ -345,7 +356,8 @@
           "url": "https://store.shopping.yahoo.co.jp/janpara/226069561-39.html",
           "status": "not_buyable"
         }
-      ]
+      ],
+      "evidence_completeness_score": 20
     },
     {
       "id": "gpu-rtx4070super-used",
@@ -359,7 +371,8 @@
       "delivery": "not reverified",
       "warranty": "3 months in last observed listing",
       "url": null,
-      "note": "Price and stock are stale. 12GB VRAM and used condition make it secondary to new 16GB options."
+      "note": "Price and stock are stale. 12GB VRAM and used condition make it secondary to new 16GB options.",
+      "evidence_completeness_score": 35
     },
     {
       "id": "gpu-rx7900xtx-24gb",
