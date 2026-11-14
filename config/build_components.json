@@ -4,9 +4,9 @@
   "profile": {
     "build_type": "DIY_PC",
     "currency": "JPY",
-    "total_budget_jpy": 400000,
+    "total_budget_jpy": 450000,
     "peripheral_budget_jpy": 35000,
-    "pc_budget_jpy": 395000,
+    "pc_budget_jpy": 401000,
     "minimum_ram_gb": 32,
     "minimum_memory_modules": 2,
     "minimum_ssd_gb": 1000,
@@ -31,16 +31,18 @@
     "gpu_choice_ids": [
       "gpu-rtx5070-12gb",
       "gpu-rtx5060ti-16gb",
-      "gpu-rtx5070ti-16gb"
+      "gpu-rtx5070ti-16gb",
+      "gpu-rx9070-16gb",
+      "gpu-rx9070xt-16gb"
     ],
-    "primary_gpu_choice_id": "gpu-rtx5070-12gb",
+    "primary_gpu_choice_id": "gpu-rtx5060ti-16gb",
     "build_shipping_reserve_jpy": 6000,
     "small_parts_reserve_jpy": 3000,
     "market_reference_max_age_minutes": 360,
     "allowed_comparison_domains": [
       "kakaku.com"
     ],
-    "policy": "Black Friday target prices are aspirational, not forecasts. JPY 400,000 is the preferred total-system target, not an absolute cutoff. A soft evaluation band extends to JPY 420,000 only for a materially better JPY 400,000 configuration. The JPY 350,000 and separate JPY 450,000 scenarios are evaluated against their stated totals; over-ceiling candidates remain visible as comparison-only. PC planning target is JPY 360,000, while maximum PC spend is dynamically capped by the all-in total. Peripheral allocation is flexible at JPY 35,000, not an obligation to spend the full amount. Include exactly one 27-inch WQHD high-refresh main monitor, keyboard, mouse, and mousepad. In-stock fallbacks are tracked for RAM, 1TB NVMe SSD, CPU cooler, and the RTX 5070 class; substitution is allowed only after exact model/price/stock/compatibility verification. The power strip is already owned and excluded from purchase, monitoring, and budget. Buy only necessary cables after checking included cables. Do not include speakers, a sub-monitor, or a headset in candidate lists, monitoring, budgets, or totals. Keep JPY 5,000 as an unallocated contingency. Compare online delivery, in-store cash purchase, and online order with store pickup per item using the exact SKU/variant, direct price, total cash checkout amount including fees, stock, warranty and return terms. Points are not cash discounts. Comparison-site prices and BF targets are not checkout prices or verified BF deals. Include online delivery shipping, but never assume peripheral shipping for in-store purchases. Keep dark-horse candidates in comparisons with explicit target overrun and scenario-ceiling status; never auto-reject a modest overrun when the workload benefit is meaningful, and never authorize purchases from target prices alone. Track a Ryzen 9 9900X alternative with the same RTX 5070 12GB for a CPU-workload comparison; show a Ryzen 9 9950X as a CPU dark horse only with an explicit over-budget lower-bound calculation and cooling caveat. Never treat either comparison target as a live checkout quote.",
+    "policy": "総額450,000円を絶対上限とする。PC本体・OS・27インチWQHDメインモニター・キーボード・マウス・マウスパッド・必要小物・全送料・予備費5,000円を含む。40万円は比較目標であり、使い切る目標ではない。周辺機器35,000円は柔軟な参考配分。PC部品予算は周辺機器実費・送料・小物・予備費を差し引いて動的に計算する。35万円/40万円/45万円シナリオは個別の評価上限を維持し、45万円を超える構成は比較専用で購入不可と明示する。自作PCを主候補、BTOは別枠比較。RAM32GB以上、SSD1TB以上を購入時点で必須、64GB/2TBを優先する。スピーカー・サブモニター・ヘッドセットは今回の購入対象外。ポイントは現金値引きに算入しない。福岡市への送料・納期・保証/返品・正確なSKU・在庫・最終決済額・BIOS/QVL/寸法/電源接続を確認し、未確認は購入可能扱いしない。",
     "allowed_search_reference_domains": [
       "kakaku.com",
       "amazon.co.jp",
@@ -182,10 +184,12 @@
         "note": "Do not assume every AI/data workload uses the GPU. Distinguish model VRAM fit from overall runtime and CPU/RAM/SSD bottlenecks."
       },
       "gpu_candidate_roles": {
-        "gpu-rtx5070-12gb": "Balanced first choice for gaming, game creation and general use; 12GB VRAM clears the project's preferred VRAM threshold.",
-        "gpu-rtx5060ti-16gb": "VRAM-capacity alternative for larger textures/assets and local-AI models that fit in 16GB; do not assume it beats RTX 5070 in gaming performance.",
-        "gpu-rtx5070ti-16gb": "Performance dark horse for higher gaming/render headroom with 16GB VRAM; only promote if the full build price, PSU/cable, dimensions and case clearance are verified.",
-        "gpu-rtx5070-12gb-msi-ventus2x": "Stockout fallback SKU for the RTX 5070 12GB tier. Same GPU class, but exact board size, cooling, power connector, stock and checkout must be revalidated; not assumed interchangeable by model name alone."
+        "gpu-rtx5060ti-16gb": "現在の予算・AI用途の第一比較候補。CUDA、16GB VRAM、180W TGPを優先し、WQHDラスタ性能がRTX 5070より低い点は明示する。",
+        "gpu-rtx5070-12gb": "WQHDラスタ性能を優先する比較候補。12GB VRAMは16GB優先条件を下回るため、価格・性能差が明確な場合のみ選ぶ。",
+        "gpu-rtx5070ti-16gb": "高いWQHD/レンダリング性能と16GB VRAMを持つ上位候補。総額450,000円以内に実売で収まる場合だけ昇格。",
+        "gpu-rtx5070-12gb-msi-ventus2x": "RTX 5070 12GBクラスの別SKU。カード寸法・冷却・端子・保証・在庫はPNYと同一視しない。",
+        "gpu-rx9070-16gb": "16GB・220W級で性能/Wが有力な代替。ROCm 7.2.1のWindows 11/PyTorch対応は限定範囲のため、使うAIライブラリごとに互換性を確認。",
+        "gpu-rx9070xt-16gb": "16GBで高いラスタ性能を狙う代替。ただし304W級、ROCm/Windows互換性、電源・ケース寸法を厳格に確認。"
       },
       "ranking_rules": [
         "Evaluate playing games and creating games as separate high-priority workloads; do not reduce the recommendation to FPS alone.",
@@ -353,14 +357,17 @@
       ]
     },
     "cpu_alternative_choice_ids": [
-      "cpu-ryzen9-9900x"
+      "cpu-ryzen9-9900x",
+      "cpu-ryzen7-9800x3d",
+      "cpu-ryzen7-9850x3d"
     ],
     "cpu_comparison_gpu_choice_id": "gpu-rtx5070-12gb",
     "cpu_dark_horse_ids": [
-      "cpu-ryzen9-9950x"
+      "cpu-ryzen9-9950x",
+      "cpu-ryzen7-9850x3d"
     ],
     "cpu_comparison_policy": {
-      "comparison_method": "Keep Ryzen 7 9700X as the base build; create a separate fully itemized Ryzen 9 9900X scenario paired with the RTX 5070 12GB for a like-for-like CPU comparison. The 16-core Ryzen 9 9950X is monitored as a dark-horse CPU candidate but is not called a complete build because current target arithmetic exceeds the cap before its recommended cooling change.",
+      "comparison_method": "Ryzen 7 9700Xを省電力/価格の基準とし、Ryzen 7 9800X3Dと9850X3DをCities: Skylines II等のシミュレーション性能・電力・価格差で別比較する。Ryzen 9 9900Xは12コア並列作業比較、9950Xは16コア大穴として別枠に残す。",
       "current_base_pc_target_jpy": 342000,
       "current_base_all_in_target_jpy": 382000,
       "alternative_cpu_targets_are_aspirational": true,
@@ -373,7 +380,8 @@
         "Report CPU target-price delta, complete component list and total-system target.",
         "Do not treat a comparison-page reference as a current checkout quote.",
         "Exact CPU BIOS, selected memory QVL/EXPO, sustained cooling, stock, shipping, warranty and return status must be checked.",
-        "For Ryzen 9 9950X, show the over-budget arithmetic separately and exclude any unpriced liquid-cooling change from claims of a complete-system cost."
+        "For Ryzen 9 9950X, show the over-budget arithmetic separately and exclude any unpriced liquid-cooling change from claims of a complete-system cost.",
+        "Ryzen 7 9700X / 9800X3D / 9850X3Dは同じ100点基準で比較し、X3Dのゲーム性能とTDP/PPT・実測電力・価格プレミアムを分離表示する。"
       ],
       "sources": [
         "https://www.amd.com/ja/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9900x.html",
@@ -412,7 +420,7 @@
       "unallocated_contingency_jpy": 5000,
       "required_peripherals": "One 27-inch WQHD main monitor, keyboard, mouse, mousepad, cables only if needed",
       "excluded": "Speakers, secondary monitor, headset, power strip",
-      "selection_rule": "各金額は総額目標。35万円案と45万円案の評価上限は各目標額、40万円案のみ用途上の性能向上が明確な場合に約42万円までを許容帯として比較する。上限超過候補も比較対象から消さず、超過額・用途上の性能差・互換性・実売根拠を分けて提示する。PC部品・OS・送料/小物・必要周辺機器実費・送料・総額予備費5,000円を含む。BF目標額のみで購入許可を出さない。",
+      "selection_rule": "35万円案は総額350,000円、40万円案は用途上の明確な性能向上がある場合に限り総額420,000円までの比較帯、45万円案は絶対上限450,000円とする。総額450,000円を超える候補は比較専用で購入不可。PC部品・OS・必須周辺機器実費・全送料・必要小物・予備費5,000円を含む。目標価格・検索スニペットだけでは購入許可しない。",
       "workload_priorities": [
         "gaming at 1440p",
         "game development in Unreal Engine/Unity/Godot",
@@ -434,9 +442,9 @@
       "automatic_purchase_authorization": false,
       "score_policy": "Scenario scores compare candidates only within each budget tier; target-price scores are planning rubrics, not measured benchmarks or purchase permission."
     },
-    "soft_overrun_allowance_jpy": 20000,
-    "soft_ceiling_total_jpy": 420000,
-    "budget_is_approximate": true,
+    "soft_overrun_allowance_jpy": 0,
+    "soft_ceiling_total_jpy": 450000,
+    "budget_is_approximate": false,
     "budget_build_candidates": [
       {
         "id": "budget-350k-rtx5060ti-fit",
@@ -798,11 +806,47 @@
         "small_parts_reserve_jpy": 3000,
         "purpose_note_ja": "GPU性能・16GB VRAM・RAM 64GB・SSD 2TBを一度に確保する45万円帯の上位大穴。ゲーム、ゲーム制作アセット、ローカルAI、データ分析、並行開発を広く狙う。",
         "tradeoff_note_ja": "BF目標額ベースの一式目標は465,000円で、45万円目標を15,000円超える一方、45万円の評価上限を15,000円超過するため比較用に残し、45万円以内の適合案とは分ける。実売価格ではない。SSDはQLC NANDのため大規模な持続書き込み速度をTLC候補と比較。RAM QVL/EXPO、GPU実SKU寸法/電源ケーブル余裕、BIOS、全パーツ在庫・最終決済額が未確認の間は購入可能扱いしない。"
+      },
+      {
+        "id": "budget-450k-5060ti-2tb",
+        "budget_tier_jpy": 450000,
+        "budget_tier_label": "45万円",
+        "name": "45万円以内のVRAM/容量重視案：9700X + RTX 5060 Ti 16GB + 32GB + 2TB",
+        "scenario_role": "balanced_vram_storage_primary",
+        "part_ids": [
+          "cpu-ryzen7-9700x",
+          "motherboard-asrock-b850m-pro-rs-wifi",
+          "gpu-rtx5060ti-16gb",
+          "memory-teamgroup-ddr5-32gb-6000",
+          "ssd-kioxia-exceria-basic-2tb",
+          "psu-corsair-rm850e-2025",
+          "case-fractal-pop-air-tg",
+          "cooler-thermalright-pa120-se-v3",
+          "os-windows11-home"
+        ],
+        "cpu_part_id": "cpu-ryzen7-9700x",
+        "motherboard_part_id": "motherboard-asrock-b850m-pro-rs-wifi",
+        "psu_part_id": "psu-corsair-rm850e-2025",
+        "case_part_id": "case-fractal-pop-air-tg",
+        "gpu_choice_id": "gpu-rtx5060ti-16gb",
+        "memory_part_id": "memory-teamgroup-ddr5-32gb-6000",
+        "storage_part_id": "ssd-kioxia-exceria-basic-2tb",
+        "cooler_part_id": "cooler-thermalright-pa120-se-v3",
+        "cooler_included_by_cpu": false,
+        "peripheral_budget_jpy": 35000,
+        "unallocated_contingency_jpy": 5000,
+        "build_shipping_reserve_jpy": 6000,
+        "small_parts_reserve_jpy": 3000,
+        "purpose_note_ja": "16GB CUDA GPUと2TB NVMeを購入時点で確保し、AI用途・制作アセット・ゲーム容量と電力効率をバランスさせる現行優先案。",
+        "tradeoff_note_ja": "GPU描画性能はRTX 5070より低い。RAMは32GBの最低条件。全SKUの当日価格、福岡送料、SSDのQLC NAND、QVL/EXPO、BIOS、ケース寸法・電源端子を確認するまで購入可能扱いしない。"
       }
     ],
     "peripheral_purchase_policy_ja": "PC本体パーツはネット購入。周辺機器はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の両支店について、同一型番の店頭税込現金価格と同じ支店の在庫・支店在庫を確認する。実店舗の価格と在庫を両支店で確認する。どちらか一方でも未確認ならネット配送・ネット注文の店舗受け取りへ自動切替せず、購入ルートは未確認として保留する。両支店の比較完了後に限り、オンラインの型番・販売元・税込価格・在庫・実送料/必須費用・最終決済額・保証/返品条件も比較し、購入可能ルートの税込現金総額が最も低いものを選ぶ。ネット価格で店頭価格を代用せず、ポイント還元は現金値引きに含めない。",
-    "default_budget_scenario_id": "budget_400k",
-    "default_budget_scope_note": "Top-level total_budget_jpy, soft_overrun_allowance_jpy and soft_ceiling_total_jpy describe only the default JPY 400,000 scenario. The explicit budget_scenarios table is authoritative for every tier; 350k and 450k never inherit the global 20k allowance."
+    "default_budget_scenario_id": "budget_450k",
+    "default_budget_scope_note": "Top-level total_budget_jpy, soft_overrun_allowance_jpy and soft_ceiling_total_jpy describe only the default JPY 400,000 scenario. The explicit budget_scenarios table is authoritative for every tier; 350k and 450k never inherit the global 20k allowance.",
+    "budget_build_candidate_ids": [
+      "budget-450k-5060ti-2tb"
+    ]
   },
   "parts": [
     {
@@ -822,7 +866,7 @@
       "monitor_url": "https://kakaku.com/item/K0001630332/",
       "purchase_url": "https://kakaku.com/item/K0001630332/",
       "track_price": true,
-      "target_price_jpy": 45000,
+      "target_price_jpy": 40000,
       "min_price_jpy": 25000,
       "max_price_jpy": 80000,
       "specs": {
@@ -961,7 +1005,7 @@
       "monitor_url": "https://kakaku.com/item/K0001798041/",
       "purchase_url": "https://kakaku.com/item/K0001798041/",
       "track_price": true,
-      "target_price_jpy": 138000,
+      "target_price_jpy": 110000,
       "min_price_jpy": 100000,
       "max_price_jpy": 330000,
       "specs": {
@@ -1066,7 +1110,7 @@
       "monitor_url": "https://kakaku.com/item/K0001696164/",
       "purchase_url": "https://kakaku.com/item/K0001696164/",
       "track_price": true,
-      "target_price_jpy": 158000,
+      "target_price_jpy": 180000,
       "min_price_jpy": 140000,
       "max_price_jpy": 450000,
       "specs": {
@@ -1746,7 +1790,7 @@
         "https://shop.tsukumo.co.jp/goods/4711377308229/"
       ],
       "track_price": true,
-      "target_price_jpy": 138000,
+      "target_price_jpy": 110000,
       "min_price_jpy": 95000,
       "max_price_jpy": 300000,
       "specs": {
@@ -1875,6 +1919,181 @@
         "integration_flexibility_points": 14,
         "rationale_ja": "AM5/DDR5、Wi-Fi、複数M.2を備えるMicroATX候補。35万円ではCPU/GPUに予算を残す。",
         "limitations_ja": "正確なRAM QVL、CPU出荷時BIOS、店頭在庫と最終決済額が未確認のためREVIEW。"
+      }
+    },
+    {
+      "id": "cpu-ryzen7-9800x3d",
+      "category": "cpu",
+      "role": "simulation_performance_alternative",
+      "name": "AMD Ryzen 7 9800X3D BOX",
+      "model_code": "100-100001084WOF",
+      "aliases": [
+        "Ryzen 7 9800X3D",
+        "100-100001084WOF"
+      ],
+      "identity_terms": [
+        "Ryzen 7 9800X3D",
+        "100-100001084WOF"
+      ],
+      "monitor_url": "https://www.ark-pc.co.jp/i/10240267/",
+      "purchase_url": "https://www.ark-pc.co.jp/i/10240267/",
+      "track_price": true,
+      "target_price_jpy": 60000,
+      "min_price_jpy": 30000,
+      "max_price_jpy": 160000,
+      "direct_retailer_urls": [
+        "https://www.ark-pc.co.jp/i/10240267/"
+      ],
+      "specs": {
+        "socket": "AM5",
+        "cores": 8,
+        "threads": 16,
+        "package_power_w": 120,
+        "ppt_w": 162,
+        "cooler_included": false,
+        "l3_cache_mb": 96
+      },
+      "notes": "X3Dキャッシュによるシミュレーション/ゲーム性能の比較候補。9700Xより高価・高消費電力。目標60,000円はユーザー指定。正確なBIOS/QVL/冷却を確認。",
+      "fit_scorecard": {
+        "workload_fit_points": 39,
+        "headroom_points": 22,
+        "quality_reliability_points": 18,
+        "integration_flexibility_points": 13,
+        "rationale_ja": "大容量3D V-CacheによりCities: Skylines II等のシミュレーション性能を重視する場合の有力候補。",
+        "limitations_ja": "120W TDP/162W PPT。9700Xより価格と電力が高く、ゲーム性能向上率に対する価格プレミアムを毎回確認する。"
+      }
+    },
+    {
+      "id": "cpu-ryzen7-9850x3d",
+      "category": "cpu",
+      "role": "low_priority_x3d_dark_horse",
+      "name": "AMD Ryzen 7 9850X3D BOX",
+      "model_code": "100-100001973WOF",
+      "aliases": [
+        "Ryzen 7 9850X3D",
+        "100-100001973WOF"
+      ],
+      "identity_terms": [
+        "Ryzen 7 9850X3D",
+        "100-100001973WOF"
+      ],
+      "monitor_url": "https://www.ark-pc.co.jp/i/10240292/",
+      "purchase_url": "https://www.ark-pc.co.jp/i/10240292/",
+      "track_price": true,
+      "target_price_jpy": 0,
+      "min_price_jpy": 30000,
+      "max_price_jpy": 180000,
+      "direct_retailer_urls": [
+        "https://www.ark-pc.co.jp/i/10240292/"
+      ],
+      "specs": {
+        "socket": "AM5",
+        "cores": 8,
+        "threads": 16,
+        "package_power_w": 120,
+        "ppt_w": 162,
+        "cooler_included": false,
+        "l3_cache_mb": 96
+      },
+      "notes": "ユーザー指定の低優先度比較候補。target_price_jpy=0は未設定を意味し、購入目標・買いラインを作らない。9800X3D比の実測性能差、実消費電力差、価格差が合理的な場合のみ検討。",
+      "fit_scorecard": {
+        "workload_fit_points": 40,
+        "headroom_points": 23,
+        "quality_reliability_points": 18,
+        "integration_flexibility_points": 12,
+        "rationale_ja": "Ryzen 7 X3Dの中で高いクロックを狙う上位比較候補。",
+        "limitations_ja": "9800X3Dからの性能差は小さい可能性があり、価格プレミアムと実負荷電力が不利なら採用しない。"
+      }
+    },
+    {
+      "id": "gpu-rx9070-16gb",
+      "category": "gpu",
+      "role": "amd_efficiency_16gb_alternative",
+      "name": "ASRock Radeon RX 9070 Challenger 16GB",
+      "model_code": "RX9070 CL 16G",
+      "aliases": [
+        "ASRock RX 9070 Challenger 16GB",
+        "RX9070 CL 16G",
+        "RX9070CL16G"
+      ],
+      "identity_terms": [
+        "RX9070 CL 16G",
+        "RX9070CL16G",
+        "ASRock Radeon RX 9070 Challenger 16GB"
+      ],
+      "monitor_url": "https://www.dospara.co.jp/SBR1891/IC518909.html",
+      "purchase_url": "https://www.dospara.co.jp/SBR1891/IC518909.html",
+      "track_price": true,
+      "target_price_jpy": 105000,
+      "min_price_jpy": 60000,
+      "max_price_jpy": 300000,
+      "direct_retailer_urls": [
+        "https://www.dospara.co.jp/SBR1891/IC518909.html"
+      ],
+      "specs": {
+        "gpu": "Radeon RX 9070",
+        "vram_gb": 16,
+        "board_power_w": 220,
+        "card_length_mm": 290,
+        "card_width_mm": 123,
+        "card_thickness_mm": 51,
+        "connector": "2x8-pin",
+        "card_thickness_slots": 2.5
+      },
+      "notes": "16GB/220W級。目標105,000円はユーザー指定。ROCm 7.2.1のWindows 11/PyTorch対応は限定範囲。Dosparaページの在庫切れ価格は購入可能価格に算入しない。",
+      "fit_scorecard": {
+        "workload_fit_points": 36,
+        "headroom_points": 24,
+        "quality_reliability_points": 17,
+        "integration_flexibility_points": 14,
+        "rationale_ja": "16GB VRAMと220W級の消費電力で、WQHD性能と効率のバランスを狙える。",
+        "limitations_ja": "CUDA依存ツールとの互換性はNVIDIAより弱い。ROCm対応バージョン・OS・ライブラリを用途別に確認。"
+      }
+    },
+    {
+      "id": "gpu-rx9070xt-16gb",
+      "category": "gpu",
+      "role": "amd_high_raster_16gb_alternative",
+      "name": "ASRock Radeon RX 9070 XT Steel Legend 16GB",
+      "model_code": "RX9070XT SL 16G",
+      "aliases": [
+        "ASRock RX 9070 XT Steel Legend 16GB",
+        "RX9070XT SL 16G",
+        "RX9070XT Steel Legend"
+      ],
+      "identity_terms": [
+        "RX9070XT SL 16G",
+        "RX9070XT Steel Legend 16GB",
+        "RX9070 XT"
+      ],
+      "monitor_url": "https://www.dospara.co.jp/SBR1891/IC518907.html",
+      "purchase_url": "https://www.dospara.co.jp/SBR1891/IC518907.html",
+      "track_price": true,
+      "target_price_jpy": 120000,
+      "min_price_jpy": 70000,
+      "max_price_jpy": 350000,
+      "direct_retailer_urls": [
+        "https://www.dospara.co.jp/SBR1891/IC518907.html"
+      ],
+      "specs": {
+        "gpu": "Radeon RX 9070 XT",
+        "vram_gb": 16,
+        "board_power_w": 304,
+        "minimum_psu_w": 750,
+        "card_length_mm": 298,
+        "card_width_mm": 131,
+        "card_thickness_mm": 58,
+        "connector": "2x8-pin",
+        "card_thickness_slots": 2.9
+      },
+      "notes": "16GB・304W級。目標120,000円はユーザー指定。高消費電力、2.9スロット、ケース/電源余裕を厳格確認。ROCm/Windows互換性は用途別に検証。",
+      "fit_scorecard": {
+        "workload_fit_points": 37,
+        "headroom_points": 24,
+        "quality_reliability_points": 17,
+        "integration_flexibility_points": 13,
+        "rationale_ja": "高いWQHDラスタ性能と16GB VRAMを狙えるAMD上位候補。",
+        "limitations_ja": "304W級で発熱・騒音・電力が増える。CUDA依存AI環境では導入負荷が高い。"
       }
     }
   ],
