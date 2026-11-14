@@ -378,57 +378,67 @@
       "id": "gpu-rx7900xtx-24gb",
       "name": "AMD Radeon RX 7900 XTX 24GB",
       "model_code": "board_partner_varies",
-      "price_jpy": null,
-      "source_class": "no_current_direct_offer_verified",
-      "seller": null,
-      "stock": "not_verified",
-      "shipping": "not_verified",
-      "delivery": "not_verified",
-      "warranty": "not_verified",
-      "url": null,
-      "note": "24GB GDDR6, 355W reference TBP class. ROCm 7.2.1 Linux support includes RX 7900 XTX; Windows support matrix in this run does not list it."
+      "price_jpy": 183800,
+      "source_class": "direct_product_page_stale",
+      "seller": "Tsukumo",
+      "stock": "out_of_stock",
+      "shipping": "free_shipping_listed",
+      "delivery": "not available while out of stock",
+      "warranty": "not verified on current captured page",
+      "url": "https://shop.tsukumo.co.jp/goods/4713436174622/",
+      "note": "PowerColor RX7900XTX 24G-E/OC listing shows ¥183,800 incl. tax and free shipping, but out of stock; page capture is six months old. PC4U category also lists all RX 7900 XTX variants as out of stock. Do not use as a buyable price.",
+      "evidence_completeness_score": 20
     },
     {
       "id": "gpu-rx7900xt-20gb",
       "name": "AMD Radeon RX 7900 XT 20GB",
       "model_code": "board_partner_varies",
-      "price_jpy": null,
-      "source_class": "no_current_direct_offer_verified",
-      "seller": null,
-      "stock": "not_verified",
-      "shipping": "not_verified",
-      "delivery": "not_verified",
-      "warranty": "not_verified",
-      "url": null,
-      "note": "20GB GDDR6, 315W reference TBP class. ROCm 7.2.1 Linux support includes RX 7900 XT; Windows support matrix in this run does not list it."
+      "price_jpy": 176660,
+      "source_class": "direct_retailer_product_page_stale",
+      "seller": "Bic Camera.com",
+      "stock": "unknown",
+      "shipping": "free_shipping_listed",
+      "delivery": "not shown",
+      "warranty": "not verified on captured page",
+      "url": "https://www.biccamera.com/bc/item/10849713/",
+      "note": "ASRock Radeon RX 7900 XT 20GB page shows ¥176,660 incl. tax and 17,666 points (10%). Stock not shown in captured page. A Sapphire variant page shows ¥176,680 with 10% points. Treat price as reference only, not buyable stock.",
+      "points": 17666,
+      "points_note": "10% points; not cash discount",
+      "evidence_completeness_score": 45
     },
     {
       "id": "gpu-rx7800xt-16gb",
       "name": "AMD Radeon RX 7800 XT 16GB",
       "model_code": "board_partner_varies",
-      "price_jpy": null,
-      "source_class": "no_current_direct_offer_verified",
-      "seller": null,
-      "stock": "not_verified",
-      "shipping": "not_verified",
-      "delivery": "not_verified",
-      "warranty": "not_verified",
-      "url": null,
-      "note": "16GB GDDR6, 263W reference TBP class. ROCm Linux support exists; current direct Japanese offer not verified."
+      "price_jpy": 119980,
+      "source_class": "direct_retailer_product_page_stale",
+      "seller": "Bic Camera.com",
+      "stock": "unknown",
+      "shipping": "free_shipping_listed",
+      "delivery": "not shown",
+      "warranty": "not verified on captured page",
+      "url": "https://www.biccamera.com/bc/item/12103031/",
+      "note": "ASUS TUF RX 7800 XT 16GB page shows ¥119,980 incl. tax and 11,998 points (10%); stock not shown. Dospara has a lower ¥67,980 listing for KurotoShikou RD-RX7800XT-E16GB/DF but it is explicitly out of stock and has 1-year warranty.",
+      "points": 11998,
+      "points_note": "10% points; not cash discount",
+      "evidence_completeness_score": 45
     },
     {
       "id": "gpu-intel-arc-b580-12gb",
       "name": "Intel Arc B580 12GB",
       "model_code": "board_partner_varies",
-      "price_jpy": 49980,
-      "source_class": "benchmark_table_reference_only",
-      "seller": null,
-      "stock": "not_verified",
-      "shipping": "not_verified",
-      "delivery": "not_verified",
-      "warranty": "not_verified",
-      "url": null,
-      "note": "11/11 comparison table reference only; 12GB, 190W TGP, gaming score 23,110. No direct current sellable page verified."
+      "price_jpy": 54780,
+      "source_class": "direct_retailer_product_page_stale",
+      "seller": "Bic Camera.com / SPARKLE",
+      "stock": "unknown",
+      "shipping": "free_shipping_listed",
+      "delivery": "not shown",
+      "warranty": "2 years",
+      "url": "https://www.biccamera.com/bc/item/14806288/",
+      "note": "SPARKLE Arc B580 ROC Luna OC Ultra SB580RW12GOC page shows ¥54,780 incl. tax, 5,478 points (10%), free shipping, 2-year warranty. Stock not shown in captured page. Tsukumo B580 listings include sold-out reference prices; do not treat them as current buy lines.",
+      "points": 5478,
+      "points_note": "10% points; not cash discount",
+      "evidence_completeness_score": 55
     }
   ],
   "unresolved": [
@@ -643,7 +653,7 @@
     {
       "id": "gpu-rx7900xtx-24gb",
       "name": "RX 7900 XTX 24GB",
-      "score": 68,
+      "score": 70,
       "provisional": true,
       "breakdown": {
         "wqhd_gaming": 24,
@@ -651,13 +661,14 @@
         "vram": 15,
         "efficiency": 5,
         "price_vs_target": 7,
-        "evidence_warranty": 0
-      }
+        "evidence_warranty": 2
+      },
+      "note": "24GB VRAM and strong raster performance, but 355W class and current ¥183,800 Tsukumo listing is out of stock; no current buyable offer."
     },
     {
       "id": "gpu-rx7900xt-20gb",
       "name": "RX 7900 XT 20GB",
-      "score": 66,
+      "score": 69,
       "provisional": true,
       "breakdown": {
         "wqhd_gaming": 22,
@@ -665,13 +676,14 @@
         "vram": 14,
         "efficiency": 6,
         "price_vs_target": 7,
-        "evidence_warranty": 0
-      }
+        "evidence_warranty": 3
+      },
+      "note": "20GB VRAM, but current Bic Camera ¥176,660 price is a stale page with stock unknown and 10% points; not a buyable price."
     },
     {
       "id": "gpu-rx7800xt-16gb",
       "name": "RX 7800 XT 16GB",
-      "score": 62,
+      "score": 66,
       "provisional": true,
       "breakdown": {
         "wqhd_gaming": 17,
@@ -679,13 +691,14 @@
         "vram": 14,
         "efficiency": 7,
         "price_vs_target": 7,
-        "evidence_warranty": 0
-      }
+        "evidence_warranty": 4
+      },
+      "note": "Bic Camera ¥119,980 with 10% points, stock unknown; Dospara ¥67,980 listing is out of stock. No confirmed buyable offer."
     },
     {
       "id": "gpu-intel-arc-b580-12gb",
       "name": "Intel Arc B580 12GB",
-      "score": 49,
+      "score": 54,
       "provisional": true,
       "breakdown": {
         "wqhd_gaming": 12,
@@ -693,8 +706,9 @@
         "vram": 10,
         "efficiency": 9,
         "price_vs_target": 8,
-        "evidence_warranty": 0
-      }
+        "evidence_warranty": 5
+      },
+      "note": "Bic Camera SPARKLE model ¥54,780 with 10% points and 2-year warranty; stock unknown. oneAPI/AI ecosystem narrower than CUDA; budget-only alternative."
     }
   ],
   "current_price_scenarios": [
