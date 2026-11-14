@@ -252,7 +252,7 @@
       "warranty": "2 years domestic authorized warranty",
       "initial_defect": "not separately confirmed",
       "url": "https://joshinweb.jp/house/48275/4711581490475.html",
-      "note": "Joshin direct product page opened today: ¥125,800 incl. tax, in stock, free shipping, 2-year warranty. 16GB GDDR6, 220W-class reference power, 2x8-pin, 290x123x51mm, recommended PSU 700W. Dospara also lists ¥125,800 but is out of stock; do not use that offer as buyable.",
+      "note": "Joshin direct page opened today: ¥125,800 incl. tax, in stock, free shipping, shortest dispatch 2026-11-14, 2-year warranty. 16GB GDDR6, 220W-class reference power, 2x8-pin, 290x123x51mm, recommended PSU 700W. Dospara lower ¥119,800 PowerColor listing is out of stock and not buyable.",
       "target_gap_jpy": 20800,
       "target_gap_percent": 19.8,
       "alternate_offers": [
@@ -262,6 +262,14 @@
           "stock": "out_of_stock",
           "shipping": "free_shipping_listed_but_not_applicable",
           "url": "https://www.dospara.co.jp/SBR1891/IC518909.html",
+          "status": "not_buyable"
+        },
+        {
+          "seller": "Dospara PowerColor",
+          "price_jpy": 119800,
+          "stock": "out_of_stock",
+          "shipping": "free_shipping_listed_but_not_applicable",
+          "url": "https://www.dospara.co.jp/SBR1891/IC522643.html",
           "status": "not_buyable"
         }
       ],
@@ -276,12 +284,12 @@
       "seller": "Joshin web",
       "stock": "in_stock",
       "shipping": "free_shipping",
-      "delivery": "page shows 2026-11-09 dispatch; date has passed, Fukuoka arrival date unconfirmed",
+      "delivery": "page shows 2026-11-14 dispatch; Fukuoka arrival date unconfirmed",
       "points": 0,
       "warranty": "2 years domestic authorized warranty",
       "initial_defect": "not separately confirmed",
       "url": "https://joshinweb.jp/apparel/48265/4711581490697.html",
-      "note": "Joshin direct page opened this run: ¥148,000 incl. tax, in stock, free shipping, 2-year warranty. Maximum board power 304W, recommended PSU 800W, dimensions 298x131x58mm, 2x8-pin. Previous Dospara reference ¥164,800 was ¥16,800 higher.",
+      "note": "Joshin direct page opened today: ¥148,000 incl. tax, in stock, free shipping, shortest dispatch 2026-11-14, 2-year warranty. Maximum board power 304W, recommended PSU 800W, dimensions 298x131x58mm, 2x8-pin.",
       "previous_observed_price_jpy": 164800,
       "delta_jpy": -16800,
       "target_gap_jpy": 28000,
@@ -1222,7 +1230,7 @@
     "RTX 5060 Ti 16GB PNY: Dospara ¥144,980, in stock, free shipping, 3-year warranty; ¥290 below the prior Joshin ¥145,270 direct listing.",
     "RTX 5070: ASUS Dual ¥149,800 at Dospara is a new exact SKU; PC Koubou MSI Ventus 2X ¥166,800 is a different SKU, so do not call this a same-SKU price drop.",
     "RX 9070 16GB: best buyable direct offer is Joshin ¥125,800, in stock, free shipping, 2-year warranty. Dospara PowerColor ¥119,800 is out of stock.",
-    "RX 9070 XT 16GB: best buyable direct offer is Joshin ASRock Steel Legend DARK ¥148,000, in stock, free shipping, 2-year warranty. Dospara Challenger ¥159,800 is a different AIB SKU.",
+    "RX 9070 XT 16GB: Joshin ASRock Steel Legend DARK ¥148,000, in stock, free shipping, 2-year warranty, shortest dispatch 2026-11-14; Dospara Challenger ¥159,800 is a different AIB SKU.",
     "RTX 5070 Ti 16GB PNY: ¥229,800, in stock, free shipping, 3-year warranty; unchanged versus previous capture.",
     "Used RTX 4070 Ti SUPER: Janpara ¥169,980 listing, one item, 1-week warranty and RGB flicker; do not buy.",
     "Used RTX 4080 SUPER: Janpara ¥187,980 listing, one item; exact condition/warranty not confirmed.",
