@@ -25,7 +25,17 @@
         "platform_longevity": 5,
         "purchase_evidence_and_warranty": 10
       },
-      "interpretation": "同一配点で比較。Cities: Skylines II等のシミュレーション、制作・分析、消費電力、購入目標価格、AM5継続性、販売証拠を評価。"
+      "interpretation": "同一配点で比較。Cities: Skylines II等のシミュレーション、制作・分析、消費電力、購入目標価格、AM5継続性、販売証拠を評価。",
+      "price_vs_target_bands": {
+        "at_or_below_target": 20,
+        "0_to_5_percent_over": 18,
+        "5_to_10_percent_over": 16,
+        "10_to_15_percent_over": 14,
+        "15_to_20_percent_over": 10,
+        "20_to_30_percent_over": 6,
+        "over_30_percent": 2,
+        "no_explicit_target": 7
+      }
     },
     "gpu": {
       "weights": {
@@ -36,11 +46,22 @@
         "price_vs_target": 15,
         "purchase_evidence_and_warranty": 10
       },
-      "interpretation": "WQHD性能スコア、CUDA/ROCm/oneAPIの実用互換性、VRAM、性能スコア÷TGPの効率proxy、購入目標価格、保証/在庫証拠を評価。"
+      "interpretation": "WQHD性能スコア、CUDA/ROCm/oneAPIの実用互換性、VRAM、性能スコア÷TGPの効率proxy、購入目標価格、保証/在庫証拠を評価。",
+      "price_vs_target_bands": {
+        "at_or_below_target": 15,
+        "0_to_5_percent_over": 13,
+        "5_to_10_percent_over": 11,
+        "10_to_20_percent_over": 8,
+        "20_to_30_percent_over": 5,
+        "30_to_50_percent_over": 2,
+        "over_50_percent": 1,
+        "no_explicit_target_or_current_price": 7
+      }
     },
     "evidence_score_is_separate_from_hardware_fit": true,
     "performance_per_watt_proxy": "2026-11-11 GPU comparison score divided by published TGP; not a measured wall-power benchmark",
-    "provisional_unknown_price_rule": "価格が未確認の候補はprice_vs_targetを中立7/15とし、必ず暫定と明記する。"
+    "provisional_unknown_price_rule": "価格が未確認の候補はprice_vs_targetを中立7/15とし、必ず暫定と明記する。",
+    "note": "Daily CPU/GPU comparison scores are distinct from the repository's existing full-build score, component fit score and dynamic purchase-evidence score. Do not compare these scales as if they measure the same thing."
   },
   "observations": [
     {
@@ -375,13 +396,13 @@
       "rank": 1,
       "id": "gpu-rtx5070ti-16gb",
       "name": "RTX 5070 Ti 16GB",
-      "score": 84,
+      "score": 87,
       "breakdown": {
         "wqhd_gaming": 25,
         "ai_compatibility": 25,
         "vram": 15,
         "efficiency": 8,
-        "price_vs_target": 2,
+        "price_vs_target": 5,
         "evidence_warranty": 9
       },
       "buy_status": "not_recommended_at_current_price",
@@ -457,13 +478,13 @@
       "rank": 1,
       "id": "gpu-rtx4070ti-super-used",
       "name": "RTX 4070 Ti SUPER 16GB used",
-      "score": 83,
+      "score": 84,
       "breakdown": {
         "wqhd_gaming": 23,
         "ai_compatibility": 25,
         "vram": 15,
         "efficiency": 8,
-        "price_vs_target": 10,
+        "price_vs_target": 11,
         "evidence_warranty": 2
       },
       "buy_status": "do_not_buy_without_fresh_page_and_warranty",
