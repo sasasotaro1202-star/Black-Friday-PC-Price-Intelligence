@@ -48,7 +48,7 @@ Tom's Hardwareの相対指標では、ゲーム性能は9850X3Dを100とした�
 - RTX 5060 Ti 16GB：Dospara 144,980円、在庫あり、24時間以内出荷、送料無料、3年保証。前回Joshin掲載145,270円より290円安い。
 - RTX 5070 12GB：ASUS DualがDospara 149,800円、在庫あり、24時間以内出荷、送料無料、1年保証。旧MSI Ventus 166,800円とは別SKUで、同一商品の値下げではない。
 - RX 9070 16GB：Joshin 125,800円、在庫あり、送料無料、2年保証。Dospara PowerColor 119,800円は在庫なし。
-- RX 9070 XT 16GB：Joshin ASRock Steel Legend DARK 148,000円、在庫あり、送料無料、2年保証。Dospara Challenger 159,800円は別SKU。
+- RX 9070 XT 16GB：Joshin ASRock Steel Legend DARK 148,000円、在庫あり、送料無料、2年保証。ただしページ上の出荷予定11月9日は既に過去日で、福岡向けの新しい納期は未確認。Dospara Challenger 159,800円は別SKU。
 
 Tom's Hardwareの1440p Ultra平均では、RTX 5070 Ti 116.8fps、RX 9070 XT 116.5fps、RX 9070 104.0fps、RTX 5070 96.4fps、RTX 5060 Ti 73.4fps。レイトレーシング平均はそれぞれ66.2、55.5、47.6、51.5、38.9fps。特定ゲームの保証値ではない。
 
@@ -64,7 +64,7 @@ ComputerBaseの実測平均ゲーム時ボード電力は、RX 9070 223W、RX 90
 |RX 9070 XT|307W|約10,415円|
 |RTX 5070 Ti|315W|約10,693円|
 
-年間費用は3時間/日、365日、31円/kWhでGPUが平均ゲーム電力を維持すると仮定した概算。PC全体やモニターの実測消費電力ではない。
+年間費用は3時間/日、365日、31円/kWhでGPUが平均ゲーム電力を維持すると仮定した概算。PC全体やモニターの実測消費電力ではない。DosparaのRTX 5060 Ti/5070/5070 Tiは24時間以内出荷表示だが、画面上の最短到着日は東京都向け。福岡市への到着日は未確認。
 
 【重大】RX 9070 XTはレビューで約467Wの過渡スパイクが観測されている。850W電源でも電源品質、ATX規格、GPU補助電源ケーブルと接続を確認する。RX 9070は同条件で約359W。144fps制限時はRX 9070が約91W、RX 9070 XTが約96Wで、フレームレート上限の設定が省電力に有効。
 
@@ -120,7 +120,18 @@ ComputerBaseの実測平均ゲーム時ボード電力は、RX 9070 223W、RX 90
 - 福岡市への実納期、全パーツ同時購入時の送料、マザーボードBIOS、RAM QVL、GPU寸法、PSUの12V-2x6/8-pinケーブル、全パーツ保証・返品条件は未完了。
 - 64GB RAMは追跡キット154,800円、32GBは72,979円。差額81,821円で45万円を超えるため、現状は32GB開始・後日64GB化が現実的。
 
-## 10. 今日の最終判定
+## 10. 直接販売ページ
+
+- CPU Ryzen 7 9700X： [Ark](https://www.ark-pc.co.jp/i/10240257/)
+- CPU Ryzen 7 9800X3D： [Ark](https://www.ark-pc.co.jp/i/10240267/)
+- CPU Ryzen 7 9850X3D： [Ark](https://www.ark-pc.co.jp/i/10240292/)
+- GPU RTX 5070 Ti 16GB： [Dospara](https://www.dospara.co.jp/SBR1892/IC634895.html)
+- GPU RTX 5060 Ti 16GB： [Dospara](https://www.dospara.co.jp/SBR1892/IC625088.html)
+- GPU RTX 5070 12GB ASUS Dual： [Dospara](https://www.dospara.co.jp/SBR1892/IC528415.html)
+- GPU RX 9070 16GB： [Joshin](https://joshinweb.jp/house/48275/4711581490475.html)
+- GPU RX 9070 XT 16GB： [Joshin](https://joshinweb.jp/apparel/48265/4711581490697.html)
+
+## 11. 今日の最終判定
 
 - CPU：**待つ**。9700Xは44,800円まで下がったが40,000円目標未達。Ark発送遅延にも注意。
 - GPU新品：**待つ**。購入目標に到達した候補なし。
