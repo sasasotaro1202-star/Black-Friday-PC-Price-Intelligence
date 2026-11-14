@@ -301,6 +301,22 @@
           "bf_actual_authorized": false,
           "price_context": null,
           "retailer_domain": "yodobashi.com"
+        },
+        {
+          "retailer_domain": "ark-pc.co.jp",
+          "retailer_name": "PC SHOP Ark",
+          "url": "https://www.ark-pc.co.jp/i/10240257/",
+          "price_jpy": 44800,
+          "shipping_jpy": 0,
+          "stock_status": "in_stock",
+          "points_jpy": 0,
+          "source_role": "direct_retailer_listing_reference",
+          "identity_anchor": "100-100001404WOF",
+          "identity_match": true,
+          "available_at": "2026-11-14T09:40:00+09:00",
+          "dispatch_status": "dispatch_delay_warning_microsoft_outage",
+          "warranty_years": 3,
+          "note": "Ark Black Friday listing; regular ¥49,800, discount ¥5,000. Exact Fukuoka delivery date not confirmed."
         }
       ],
       "retailer_listing_reference_price_jpy": null,
@@ -338,14 +354,14 @@
         "next_step": "購入可能な在庫を直接確認"
       },
       "retailer_listing_offer_count": 2,
-      "display_reference_price_jpy": 49800,
+      "display_reference_price_jpy": 44800,
       "display_reference_price_status": "price_observed_in_stock",
-      "display_reference_price_source": "joshinweb.jp",
-      "display_reference_price_url": "https://joshinweb.jp/mobile/22814/0730143315593.html",
+      "display_reference_price_source": "ark-pc.co.jp",
+      "display_reference_price_url": "https://www.ark-pc.co.jp/i/10240257/",
       "display_reference_price_observed_at": "2026-11-14T09:40:00+09:00",
-      "display_reference_price_note": "Exact-identity direct retailer price. Display price does not imply stock availability; unknown/out-of-stock is not buyable.",
+      "display_reference_price_note": "Lowest exact-SKU direct listing found today. Price is displayed separately from the Ark dispatch-delay warning; stock does not guarantee Fukuoka delivery date.",
       "price_display_reconciled": true,
-      "price_validation_note": "Exact-SKU direct listing price, stock in, free shipping, 3-year manufacturer warranty. Purchase availability still requires final cart and Fukuoka delivery check.",
+      "price_validation_note": "Exact-SKU direct Ark listing price ¥44,800, in stock, free shipping, 3-year authorized distributor warranty; dispatch delay warning remains.",
       "manual_price_display_reconciled": true
     },
     {
@@ -5428,8 +5444,8 @@
     }
   ],
   "price_display_reconciliation": {
-    "checked_at_jst": "2026-11-14T09:40:34+09:00",
-    "rule": "Display exact-identity direct retailer offer prices separately from market_reference_price_jpy; stock status is kept separate and unknown/out-of-stock is not buyable.",
+    "checked_at_jst": "2026-11-14T09:40:00+09:00",
+    "rule": "Exact-SKU direct retailer listing prices are shown independently from stock/dispatch status.",
     "records_reconciled": 16
   }
 }
