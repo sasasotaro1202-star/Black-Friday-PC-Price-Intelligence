@@ -234,6 +234,57 @@ def sales_url(item):
     return url
 
 
+def _component_direct_price_offers(item):
+    """Return exact-SKU direct prices even when stock is unknown or unavailable."""
+    offer = item.get("retailer_listing_offer") if isinstance(item.get("retailer_listing_offer"), dict) else {}
+    offers = item.get("retailer_listing_offers") if isinstance(item.get("retailer_listing_offers"), list) else []
+    if not offers and offer:
+        offers = [offer]
+    accepted = []
+    for candidate in offers:
+        if not isinstance(candidate, dict):
+            continue
+        price = candidate.get("price_jpy")
+        if (
+            not isinstance(price, (int, float))
+            or isinstance(price, bool)
+            or price <= 0
+            or candidate.get("identity_match") is not True
+            or candidate.get("pit_valid") is not True
+            or candidate.get("price_source_mode") not in ("direct_text", "direct_structured", "direct_meta", "direct_page")
+        ):
+            continue
+        url = str(candidate.get("url") or "")
+        host = str(candidate.get("retailer_domain") or candidate.get("seller_name") or urlsplit(url).netloc or "販売元不明")
+        stock = str(candidate.get("stock_status") or "unknown").strip().lower()
+        stock_label = {
+            "in_stock": "在庫あり",
+            "low_stock": "在庫少",
+            "out_of_stock": "在庫切れ",
+            "unknown": "在庫不明",
+        }.get(stock, "在庫未確認")
+        accepted.append({
+            "price_jpy": int(price),
+            "seller": host,
+            "stock_status": stock,
+            "stock_label": stock_label,
+            "url": url,
+        })
+    return accepted
+
+
+def _component_direct_price_summary(offers):
+    if not offers:
+        return ""
+    labels = [
+        "{} ¥{:,} ({})".format(
+            row["seller"], row["price_jpy"], row["stock_label"]
+        )
+        for row in offers
+    ]
+    return "直接掲載価格: " + " / ".join(labels)
+
+
 def retrieval_issue_link_section(latest, build_components=None, peripherals=None):
     """Render explicit per-item links whenever retrieval, price, variant or stock evidence is incomplete."""
     latest = latest if isinstance(latest, dict) else {}
@@ -306,11 +357,18 @@ def retrieval_issue_link_section(latest, build_components=None, peripherals=None
             errors.append("比較ページ取得失敗: " + cell(item.get("comparison_fetch_error")))
         if retailer_state in failure_states or retailer_state == "configuration_error" or item.get("retailer_search_error"):
             errors.append("販売店検索失敗: " + cell(item.get("retailer_search_error")))
+        direct_price_offers = _component_direct_price_offers(item)
         if not direct_sellable:
-            errors.append("直接価格・型番・販売可能在庫の同時確認が未完了 (" + cell(item.get("price_validation_status")) + ")")
-        if item.get("price_validation_status") == "search_snippet_reference":
+            if direct_price_offers:
+                errors.append(
+                    _component_direct_price_summary(direct_price_offers)
+                    + "（在庫あり/在庫少の同時確認なし。購入可能価格には算入しない）"
+                )
+            else:
+                errors.append("直接価格・型番・販売可能在庫の同時確認が未完了 (" + cell(item.get("price_validation_status")) + ")")
+        if item.get("price_validation_status") == "search_snippet_reference" and not direct_price_offers:
             errors.append("検索スニペット参考値のみ。実売価格ではない")
-        if item.get("price_validation_status") == "missing":
+        if item.get("price_validation_status") == "missing" and not direct_price_offers:
             errors.append("価格/在庫を確認できず")
         if errors:
             primary_url = product_url(
@@ -527,6 +585,7 @@ def retrieval_issue_link_lines(latest=None, component_prices=None, peripheral_pr
             and candidate.get("pit_valid") is True
             for candidate in offers
         )
+        direct_price_offers = _component_direct_price_offers(item)
         err = error_text(item, ("last_fetch_error", "fetch_error", "comparison_fetch_error", "retailer_search_error"))
         failed = (
             fetch_status in ("error", "failed", "timeout", "exception")
@@ -540,9 +599,22 @@ def retrieval_issue_link_lines(latest=None, component_prices=None, peripheral_pr
         if failed:
             status = "取得/照合エラー"
             reason = err or "取得または販売店照合の状態がエラー"
+            if direct_price_offers:
+                reason = _component_direct_price_summary(direct_price_offers) + "。購入可能性は別途未確認。 " + reason
         elif validation == "variant_ambiguous":
             status, reason = "型番/構成未確定", "同一型番・構成の直接掲載価格を確認できていない"
-        elif validation == "search_snippet_reference":
+        elif direct_price_offers and not sellable_offer:
+            stocks = {row["stock_status"] for row in direct_price_offers}
+            if stocks and stocks <= {"out_of_stock"}:
+                status = "掲載価格あり・在庫切れ"
+            elif "unknown" in stocks or not stocks:
+                status = "掲載価格あり・在庫未確認"
+            else:
+                status = "掲載価格あり・販売可否未確認"
+            reason = _component_direct_price_summary(direct_price_offers) + "。掲載価格は表示するが、購入可能価格/買いライン達成には算入しない。"
+            if err:
+                reason += " " + err
+        elif validation == "search_snippet_reference" and not direct_price_offers:
             status, reason = "検索結果の参考値のみ", err or "検索スニペットは販売可能価格・在庫の根拠にしない"
         elif not sellable_offer:
             status, reason = "販売可能価格/在庫未確認", err or "直接掲載・型番一致・在庫あり/在庫少の条件を満たす掲載がない"
