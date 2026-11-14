@@ -305,6 +305,54 @@ class ReportLinkTests(unittest.TestCase):
         self.assertEqual(reason, "peripheral_purchase_channel_comparison_incomplete")
 
 
+    def test_direct_retailer_price_is_visible_when_stock_is_unknown_or_out_of_stock(self):
+        for stock_status, expected_status, expected_stock_label in (
+            ("unknown", "掲載価格あり・在庫未確認", "在庫不明"),
+            ("out_of_stock", "掲載価格あり・在庫切れ", "在庫切れ"),
+        ):
+            url = "https://www.joshinweb.jp/mobile/22814/0730143315593.html"
+            offer = {
+                "url": url,
+                "price_jpy": 49800,
+                "price_source_mode": "direct_text",
+                "stock_status": stock_status,
+                "identity_anchor": "100-100001404WOF",
+                "identity_match": True,
+                "source_role": "direct_retailer_listing_reference",
+                "available_at": "2026-11-14T08:56:17+09:00",
+                "retrieval_time": "2026-11-14T08:56:17+09:00",
+                "pit_valid": True,
+                "retailer_domain": "joshinweb.jp",
+            }
+            item = {
+                "id": "cpu-9700x",
+                "name": "Ryzen 7 9700X",
+                "price_validation_status": "missing",
+                "retailer_listing_offer": offer,
+                "retailer_listing_offers": [offer],
+                "retailer_listing_reference_url": url,
+            }
+            lines = report.retrieval_issue_link_lines(
+                {"products": []},
+                {"products": [item]},
+                {"products": []},
+            )
+            rendered = "\\n".join(lines)
+            self.assertIn("49,800", rendered)
+            self.assertIn(expected_status, rendered)
+            self.assertIn(expected_stock_label, rendered)
+            self.assertNotIn("価格/在庫を確認できず", rendered)
+
+            section = report.retrieval_issue_link_section(
+                {"products": []},
+                {"products": [item]},
+                {"products": []},
+            )
+            section_text = "\\n".join(section)
+            self.assertIn("49,800", section_text)
+            self.assertIn(expected_stock_label, section_text)
+
+
     def test_retrieval_issue_links_include_failed_pc_component_and_peripheral_pages(self):
         lines = report.retrieval_issue_link_lines(
             {
