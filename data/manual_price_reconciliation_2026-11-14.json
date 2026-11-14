@@ -769,7 +769,12 @@
         "1TB MSI SPATIUM M450 29,130 yen Yodobashi prior capture, free delivery, points excluded",
         "Same other components and reserves as 5060 Ti build"
       ],
-      "decision": "Fits the cap on observed prices but trades away 4GB VRAM and 1TB capacity for about 26% higher raster performance."
+      "decision": "Fits the cap on observed prices but trades away 4GB VRAM and 1TB capacity for about 26% higher raster performance.",
+      "peripherals_jpy": 33263,
+      "shipping_reserve_jpy": 6000,
+      "small_parts_reserve_jpy": 3000,
+      "contingency_jpy": 5000,
+      "parts_subtotal_jpy": 388855
     },
     {
       "id": "current-direct-rx9070xt16-2tb-32gb",
@@ -783,7 +788,11 @@
         "304W TGP and 2x8-pin; GPU dimensions 298x131x58mm"
       ],
       "decision": "Fits the cap on observed prices, but the 304W GPU, Fukuoka checkout and other-part verification make it a secondary planning scenario.",
-      "parts_subtotal_jpy": 389905
+      "parts_subtotal_jpy": 389905,
+      "peripherals_jpy": 33263,
+      "shipping_reserve_jpy": 6000,
+      "small_parts_reserve_jpy": 3000,
+      "contingency_jpy": 5000
     },
     {
       "id": "current-direct-5070ti16-2tb-32gb",
@@ -795,7 +804,12 @@
       "conditions": [
         "RTX 5070 Ti direct Dospara 229,800 yen, free shipping, 3-year warranty"
       ],
-      "decision": "Exceeds the 450,000 yen cap by 68,968 yen; wait for price correction."
+      "decision": "Exceeds the 450,000 yen cap by 68,968 yen; wait for price correction.",
+      "peripherals_jpy": 33263,
+      "shipping_reserve_jpy": 6000,
+      "small_parts_reserve_jpy": 3000,
+      "contingency_jpy": 5000,
+      "parts_subtotal_jpy": 471705
     }
   ],
   "performance_and_power": {
