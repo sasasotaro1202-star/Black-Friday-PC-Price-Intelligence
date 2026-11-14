@@ -124,22 +124,32 @@
       "id": "gpu-rtx5060ti-16gb",
       "name": "PNY GeForce RTX 5060 Ti OC 16GB",
       "model_code": "VCG5060T16DFXPB1-O",
-      "price_jpy": 144980,
+      "price_jpy": 145270,
       "previous_observed_price_jpy": 144980,
-      "delta_jpy": 0,
+      "delta_jpy": 290,
       "target_price_jpy": 120000,
-      "target_gap_jpy": 24980,
-      "target_gap_percent": 20.8,
+      "target_gap_jpy": 25270,
+      "target_gap_percent": 21.1,
       "source_class": "direct_retailer_product_page",
-      "seller": "Dospara",
-      "stock": "orderable_24h_dispatch_stock_count_not_published",
+      "seller": "Joshin web",
+      "stock": "in_stock",
       "shipping": "free_shipping",
-      "delivery": "24-hour dispatch shown; earliest 2026-11-15 estimate is for Tokyo, Fukuoka date unconfirmed",
+      "delivery": "page shows 2026-11-13 dispatch; date has passed, Fukuoka delivery date unconfirmed",
       "points": 0,
       "warranty": "3 years domestic authorized warranty",
-      "initial_defect": "1 week standard; 1 month for free Dospara members",
-      "url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
-      "note": "16GB GDDR7, 180W TGP, one 8-pin connector. Exact SKU match. 0% points."
+      "initial_defect": "not separately confirmed",
+      "url": "https://joshinweb.jp/peripheral/48266/0751492795072.html",
+      "note": "Joshin direct product page confirms exact SKU, ¥145,270 incl. tax, stock in, free shipping and 3-year warranty. Previous Dospara observation was ¥144,980; the Dospara page fetch did not expose price/stock text in this run, so the lower offer is not used as the confirmed buy line.",
+      "alternate_offers": [
+        {
+          "seller": "Dospara",
+          "price_jpy": 144980,
+          "stock": "previous capture showed orderable 24h dispatch; not revalidated in current page fetch",
+          "shipping": "free_shipping",
+          "url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
+          "status": "reference_only"
+        }
+      ]
     },
     {
       "id": "gpu-rtx5070-12gb-msi-ventus2x",
@@ -155,12 +165,12 @@
       "seller": "PC Koubou",
       "stock": "orderable_same_day_dispatch_quantity_not_published",
       "shipping": "free_shipping",
-      "delivery": "same-day dispatch cutoff 14:00 on business days; Fukuoka delivery date unconfirmed",
+      "delivery": "same-day dispatch shown; Fukuoka delivery date unconfirmed",
       "points": 0,
-      "warranty": "standard manufacturer/store warranty term not stated on captured page; optional WEB安心交換保証 is 10% of price for 1 month",
+      "warranty": "standard warranty term not stated on captured page; optional WEB安心交換保証 costs 10% of product price",
       "initial_defect": "not separately confirmed",
       "url": "https://www.pc-koubou.jp/products/detail.php?product_id=1133257",
-      "note": "12GB GDDR7, 250W reference TGP, 16-pin connector, recommended PSU 650W, card dimensions 236x126x50mm. 0 points."
+      "note": "Direct PC Koubou page opened today. ¥166,800 incl. tax, free shipping, 0 points, same-day dispatch. 12GB GDDR7, 250W, 16-pin, recommended PSU 650W, dimensions 236x126x50mm."
     },
     {
       "id": "gpu-rtx5070ti-16gb",
@@ -181,39 +191,77 @@
       "warranty": "3 years domestic authorized warranty",
       "initial_defect": "1 week standard; 1 month for free Dospara members",
       "url": "https://www.dospara.co.jp/SBR1892/IC634895.html",
-      "note": "16GB GDDR7, 300W TGP, one 16-pin connector. 0% points. Direct page is current; do not use older cross-channel prices as this offer."
+      "note": "16GB GDDR7, 300W TGP, one 16-pin connector. 0% points. Direct page is current; do not use older cross-channel prices as this offer. Additional current Joshin direct offer: ¥260,800, in stock, free shipping, 3-year warranty. Lower Dospara ¥229,800 offer remains the price reference; stock count is not published.",
+      "alternate_offers": [
+        {
+          "seller": "Joshin web",
+          "price_jpy": 260800,
+          "stock": "in_stock",
+          "shipping": "free_shipping",
+          "points": 0,
+          "warranty": "3 years",
+          "url": "https://joshinweb.jp/mobile/7/0751492794594.html",
+          "status": "direct_page_opened_2026-11-14"
+        }
+      ]
     },
     {
       "id": "gpu-rx9070-16gb",
       "name": "ASRock Radeon RX 9070 Challenger 16GB",
       "model_code": "RX9070 CL 16G",
       "price_jpy": 125800,
-      "source_class": "direct_retailer_product_page_out_of_stock",
-      "seller": "Dospara",
-      "stock": "out_of_stock",
-      "shipping": "free shipping shown but not applicable while unavailable",
-      "delivery": "not available",
+      "source_class": "direct_retailer_product_page",
+      "seller": "Joshin web",
+      "stock": "in_stock",
+      "shipping": "free_shipping",
+      "delivery": "page shows 2026-11-14 dispatch; Fukuoka arrival date unconfirmed",
       "points": 0,
       "warranty": "2 years domestic authorized warranty",
-      "initial_defect": "1 week standard; 1 month for free mobile members",
-      "url": "https://www.dospara.co.jp/SBR1891/IC518909.html",
-      "note": "16GB GDDR6, 220W TGP, 2x8-pin, 290x123x51mm. Price is displayed but the page explicitly says out of stock; not included in buyable build totals."
+      "initial_defect": "not separately confirmed",
+      "url": "https://joshinweb.jp/house/48275/4711581490475.html",
+      "note": "Joshin direct product page opened today: ¥125,800 incl. tax, in stock, free shipping, 2-year warranty. 16GB GDDR6, 220W-class reference power, 2x8-pin, 290x123x51mm, recommended PSU 700W. Dospara also lists ¥125,800 but is out of stock; do not use that offer as buyable.",
+      "target_gap_jpy": 20800,
+      "target_gap_percent": 19.8,
+      "alternate_offers": [
+        {
+          "seller": "Dospara",
+          "price_jpy": 125800,
+          "stock": "out_of_stock",
+          "shipping": "free_shipping_listed_but_not_applicable",
+          "url": "https://www.dospara.co.jp/SBR1891/IC518909.html",
+          "status": "not_buyable"
+        }
+      ]
     },
     {
       "id": "gpu-rx9070xt-16gb",
       "name": "ASRock Radeon RX 9070 XT Steel Legend 16GB",
       "model_code": "RX9070XT SL 16G",
-      "price_jpy": 164800,
+      "price_jpy": 148000,
       "source_class": "direct_retailer_product_page",
-      "seller": "Dospara",
-      "stock": "orderable_24h_dispatch_stock_count_not_published",
+      "seller": "Joshin web",
+      "stock": "in_stock",
       "shipping": "free_shipping",
-      "delivery": "24-hour dispatch shown; earliest 2026-11-15 estimate is for Tokyo, Fukuoka date unconfirmed",
+      "delivery": "page shows 2026-11-09 dispatch; date has passed, Fukuoka arrival date unconfirmed",
       "points": 0,
       "warranty": "2 years domestic authorized warranty",
-      "initial_defect": "1 week standard; 1 month for free mobile members",
-      "url": "https://www.dospara.co.jp/SBR1891/IC518907.html",
-      "note": "16GB GDDR6, 304W TGP, 2x8-pin, 298x131x58mm, 2.9 slots. Price is 44,800 yen above the 120,000 yen target."
+      "initial_defect": "not separately confirmed",
+      "url": "https://joshinweb.jp/apparel/48265/4711581490697.html",
+      "note": "Joshin direct page opened this run: ¥148,000 incl. tax, in stock, free shipping, 2-year warranty. Maximum board power 304W, recommended PSU 800W, dimensions 298x131x58mm, 2x8-pin. Previous Dospara reference ¥164,800 was ¥16,800 higher.",
+      "previous_observed_price_jpy": 164800,
+      "delta_jpy": -16800,
+      "target_gap_jpy": 28000,
+      "target_gap_percent": 23.3,
+      "alternate_offers": [
+        {
+          "seller": "Dospara",
+          "price_jpy": 164800,
+          "stock": "prior captured orderable 24h dispatch; not revalidated in current page fetch",
+          "shipping": "free_shipping",
+          "url": "https://www.dospara.co.jp/SBR1891/IC518907.html",
+          "status": "reference_only"
+        }
+      ]
     },
     {
       "id": "gpu-rtx4070ti-super-used",
@@ -231,7 +279,20 @@
       "target_gap_jpy": 14900,
       "target_gap_percent": 9.9,
       "url": "https://www.dospara.co.jp/SBR1522/IC675220.html",
-      "note": "Last observed at 164,900 yen with one unit and 3-month warranty in a prior crawl. Current fetch failed, and another older 149,900 yen listing returned 404. Not a current buyable offer."
+      "note": "Last observed at 164,900 yen with one unit and 3-month warranty in a prior crawl. Current fetch failed, and another older 149,900 yen listing returned 404. Not a current buyable offer.",
+      "alternate_offers": [
+        {
+          "seller": "Dospara Mito Akatsuka",
+          "price_jpy": 145900,
+          "stock": "last search result showed 1 unit; current stock not revalidated",
+          "condition": "C rank",
+          "warranty": "3 months",
+          "dispatch": "5 days shown",
+          "operating_test_evidence": "not provided",
+          "url": "https://www.dospara.co.jp/SBR1522/IC664115.html",
+          "status": "unverified_search_lead"
+        }
+      ]
     },
     {
       "id": "gpu-rtx4080super-used",
@@ -246,7 +307,20 @@
       "warranty": "3 months in last captured listing",
       "initial_defect": "used listing terms not revalidated",
       "url": null,
-      "note": "Last observed price and 3-month warranty are stale; no current product URL/stock could be revalidated in this run. Do not treat as purchasable."
+      "note": "Last observed price and 3-month warranty are stale; no current product URL/stock could be revalidated in this run. Do not treat as purchasable.",
+      "alternate_offers": [
+        {
+          "seller": "Dospara Shizuoka Higashi-Sena",
+          "price_jpy": 179900,
+          "stock": "last search result showed 1 unit; current stock not revalidated",
+          "condition": "C rank",
+          "warranty": "3 months",
+          "dispatch": "5 days shown",
+          "operating_test_evidence": "not provided",
+          "url": "https://www.dospara.co.jp/SBR1522/IC615073.html",
+          "status": "unverified_search_lead"
+        }
+      ]
     },
     {
       "id": "gpu-rtx3090-used",
@@ -260,7 +334,18 @@
       "delivery": "not available",
       "warranty": "3 months in last observed listing; not current",
       "url": null,
-      "note": "24GB VRAM helps memory-bound local AI, but 350W class power, older architecture, high price and no current stock make this a weak buy."
+      "note": "24GB VRAM helps memory-bound local AI, but 350W class power, older architecture, high price and no current stock make this a weak buy.",
+      "alternate_offers": [
+        {
+          "seller": "Janpara Yahoo!店",
+          "price_jpy": 211980,
+          "stock": "out_of_stock",
+          "condition": "heavy exterior wear and heatsink corrosion noted",
+          "warranty": "1 week",
+          "url": "https://store.shopping.yahoo.co.jp/janpara/226069561-39.html",
+          "status": "not_buyable"
+        }
+      ]
     },
     {
       "id": "gpu-rtx4070super-used",
@@ -342,7 +427,9 @@
     "RX 7900 XTX / RX 7900 XT / RX 7800 XT have no current direct Japanese seller offer verified in this run.",
     "Arc B580 price is a comparison-table reference only, not a direct seller offer.",
     "No current full-system wall-power measurement was found; GPU TGP and CPU TDP/PPT are shown as component specifications, not measured system consumption.",
-    "No full build is checkout-verified. The 5060 Ti build is a planning estimate based on direct listing prices and reserved shipping/small-parts/peripheral costs."
+    "No full build is checkout-verified. The 5060 Ti build is a planning estimate based on direct listing prices and reserved shipping/small-parts/peripheral costs.",
+    "Joshin product pages show dispatch dates that are at or before the current date for some GPU listings; exact Fukuoka delivery date must be checked at checkout.",
+    "Used GPU search leads at 145,900 yen (RTX 4070 Ti SUPER) and 179,900 yen (RTX 4080 SUPER) have not been revalidated on the live product pages; do not treat them as currently buyable."
   ],
   "cpu_scores": [
     {
@@ -428,33 +515,33 @@
       "rank": 3,
       "id": "gpu-rx9070-16gb",
       "name": "RX 9070 16GB",
-      "score": 75,
+      "score": 81,
       "breakdown": {
         "wqhd_gaming": 22,
         "ai_compatibility": 17,
         "vram": 15,
         "efficiency": 10,
         "price_vs_target": 8,
-        "evidence_warranty": 3
+        "evidence_warranty": 9
       },
-      "buy_status": "out_of_stock",
-      "note": "Best TGP efficiency proxy and 16GB, but current listing is out of stock and ROCm Windows support remains partial."
+      "buy_status": "in_stock_but_over_target",
+      "note": "Direct Joshin offer is now in stock at ¥125,800 with free shipping and 2-year warranty. 16GB and 220W-class power are attractive; ROCm/PyTorch is officially supported on Windows 11 but the broader CUDA ecosystem remains wider."
     },
     {
       "rank": 4,
       "id": "gpu-rx9070xt-16gb",
       "name": "RX 9070 XT 16GB",
-      "score": 74,
+      "score": 77,
       "breakdown": {
         "wqhd_gaming": 24,
         "ai_compatibility": 17,
         "vram": 15,
         "efficiency": 7,
-        "price_vs_target": 2,
+        "price_vs_target": 5,
         "evidence_warranty": 9
       },
-      "buy_status": "available_but_over_target",
-      "note": "Raster performance near RTX 5070 Ti at lower price, but 304W, 164,800 yen and no CUDA."
+      "buy_status": "in_stock_but_over_target",
+      "note": "Joshin in-stock offer ¥148,000 with 2-year warranty. 304W maximum board power and 800W recommended PSU make it less efficient than RX 9070."
     },
     {
       "rank": 5,
@@ -599,11 +686,31 @@
   ],
   "current_price_scenarios": [
     {
+      "id": "current-direct-rx9070-16-2tb-32gb",
+      "name": "Ryzen 7 9700X + RX 9070 16GB + 32GB RAM + 2TB SSD",
+      "all_in_estimate_jpy": 414968,
+      "remaining_from_450k_jpy": 35032,
+      "parts_subtotal_jpy": 367705,
+      "peripherals_jpy": 33263,
+      "shipping_reserve_jpy": 6000,
+      "small_parts_reserve_jpy": 3000,
+      "contingency_jpy": 5000,
+      "checkout_verified": false,
+      "build_score": 82,
+      "conditions": [
+        "CPU Ark 44,800 yen in stock, free shipping, 3-year warranty; dispatch delay warning remains",
+        "GPU Joshin 125,800 yen direct page, in stock, free shipping, 2-year warranty; Fukuoka delivery date unconfirmed",
+        "RAM, SSD, motherboard, PSU, case, cooler and OS use prior direct listing captures and require same-day revalidation",
+        "Peripherals 33,263 yen, shipping reserve 6,000 yen, small parts 3,000 yen and contingency 5,000 yen are planning allowances"
+      ],
+      "decision": "Best current price/performance and efficiency planning scenario, but not checkout-verified; AI stack compatibility must be tested against the actual software list."
+    },
+    {
       "id": "current-direct-5060ti16-2tb-32gb",
       "name": "Ryzen 7 9700X + RTX 5060 Ti 16GB + 32GB RAM + 2TB SSD",
-      "all_in_estimate_jpy": 434148,
-      "remaining_from_450k_jpy": 15852,
-      "parts_subtotal_jpy": 386885,
+      "all_in_estimate_jpy": 434438,
+      "remaining_from_450k_jpy": 15562,
+      "parts_subtotal_jpy": 387175,
       "peripherals_jpy": 33263,
       "shipping_reserve_jpy": 6000,
       "small_parts_reserve_jpy": 3000,
@@ -612,7 +719,7 @@
       "build_score": 85,
       "conditions": [
         "CPU Ark 44,800 yen in stock but dispatch delays warned",
-        "GPU Dospara 144,980 yen free shipping and 24-hour dispatch; Fukuoka date unconfirmed",
+        "GPU Joshin 145,270 yen direct page, in stock, free shipping, 3-year warranty; Fukuoka arrival date unconfirmed.",
         "RAM Corsair 32GB 72,979 yen Ark capture; stock 5 in previous direct capture; must reconfirm",
         "SSD Verbatim 2TB 48,980 yen Joshin capture; free shipping; NAND type unverified",
         "Motherboard, PSU, case, cooler and OS are direct listing observations but not all current Fukuoka checkout totals reverified",
@@ -637,15 +744,16 @@
     {
       "id": "current-direct-rx9070xt16-2tb-32gb",
       "name": "Ryzen 7 9700X + RX 9070 XT 16GB + 32GB RAM + 2TB SSD",
-      "all_in_estimate_jpy": 453968,
-      "remaining_from_450k_jpy": -3968,
+      "all_in_estimate_jpy": 437168,
+      "remaining_from_450k_jpy": 12832,
       "checkout_verified": false,
       "build_score": 78,
       "conditions": [
-        "RX 9070 XT 164,800 yen direct Dospara, free shipping, 2-year warranty",
+        "RX 9070 XT ASRock Steel Legend DARK 148,000 yen direct Joshin page, in stock, free shipping, 2-year warranty; 304W max board power.",
         "304W TGP and 2x8-pin; GPU dimensions 298x131x58mm"
       ],
-      "decision": "Exceeds cap by 3,968 yen before any unplanned shipping or compatibility costs; not a buy recommendation."
+      "decision": "Exceeds cap by 3,968 yen before any unplanned shipping or compatibility costs; not a buy recommendation.",
+      "parts_subtotal_jpy": null
     },
     {
       "id": "current-direct-5070ti16-2tb-32gb",
@@ -714,8 +822,8 @@
     "system_wall_power": "not measured in this run; do not infer from component TGP/TDP"
   },
   "decision": {
-    "cpu": "WAIT: 9700X is the best value/efficiency candidate but still 4,800 yen above the 40,000 yen target. Re-evaluate in the Nov 19-25 window.",
-    "gpu": "WAIT: 5060 Ti 16GB is the best current budget fit but remains 24,980 yen above target. 5070 Ti is not viable at 229,800 yen. Re-evaluate in the Nov 22-29 window.",
-    "overall": "WAIT / NO PURCHASE APPROVAL. Best planning build is 9700X + RTX 5060 Ti 16GB + 32GB + 2TB at an estimated 434,148 yen, but not checkout-verified."
+    "cpu": "WAIT: 9700X is the leading efficiency/value option at 44,800 yen, 4,800 yen above the 40,000 yen target. 9800X3D is 11,800 yen above its target.",
+    "gpu": "WAIT: RX 9070 16GB is now directly confirmed in stock at Joshin for 125,800 yen, while Dospara's same-price listing is out of stock. RTX 5060 Ti 16GB is 145,270 yen at Joshin; both remain above target. RX 9070 XT is now 148,000 yen at Joshin, but 304W power is a disadvantage.",
+    "overall": "WAIT / NO PURCHASE APPROVAL. Updated planning scenarios: 9700X + RX 9070 16GB + 32GB + 2TB estimated 414,968 yen; 9700X + RTX 5060 Ti 16GB + 32GB + 2TB estimated 434,438 yen; 9700X + RX 9070 XT 16GB + 32GB + 2TB estimated 437,168 yen. None is checkout-verified and non-GPU component prices need same-day revalidation."
   }
 }
