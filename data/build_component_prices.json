@@ -26,7 +26,7 @@
       "source_role": "comparison_site_reference",
       "bf_actual_authorized": false,
       "price_source_mode": "none",
-      "price_validation_status": "missing",
+      "price_validation_status": "verified_retailer_listing_reference",
       "market_reference_price_jpy": null,
       "search_snippet_reference_price_jpy": null,
       "search_snippet_reference_url": null,
@@ -341,7 +341,8 @@
       "display_reference_price_url": "https://joshinweb.jp/mobile/22814/0730143315593.html",
       "display_reference_price_observed_at": "2026-11-14T08:56:17+09:00",
       "display_reference_price_note": "Exact-identity direct retailer price. Display price does not imply stock availability; unknown/out-of-stock is not buyable.",
-      "price_display_reconciled": true
+      "price_display_reconciled": true,
+      "price_validation_note": "Exact-identity direct retailer listing price confirmed; stock status is stored separately and does not imply purchase availability."
     },
     {
       "id": "cpu-ryzen9-9900x",
@@ -550,7 +551,7 @@
       "source_role": "comparison_site_reference",
       "bf_actual_authorized": false,
       "price_source_mode": "none",
-      "price_validation_status": "search_snippet_reference",
+      "price_validation_status": "verified_retailer_listing_reference",
       "market_reference_price_jpy": null,
       "search_snippet_reference_price_jpy": 113830,
       "search_snippet_reference_url": "https://search.kakaku.com/AMD%20Ryzen%209%209950X%20BOX/",
@@ -773,7 +774,8 @@
       "display_reference_price_url": "https://item.rakuten.co.jp/jism/0730143315272-44-22814-n/?variantId=0730143315272-44-22814-n",
       "display_reference_price_observed_at": "2026-11-14T03:44:39+09:00",
       "display_reference_price_note": "Exact-identity direct retailer price. Display price does not imply stock availability; unknown/out-of-stock is not buyable.",
-      "price_display_reconciled": true
+      "price_display_reconciled": true,
+      "price_validation_note": "Exact-identity direct retailer listing price confirmed; stock status is stored separately and does not imply purchase availability."
     },
     {
       "id": "gpu-rtx5070-12gb",
@@ -1942,7 +1944,7 @@
       "source_role": "comparison_site_reference",
       "bf_actual_authorized": false,
       "price_source_mode": "none",
-      "price_validation_status": "missing",
+      "price_validation_status": "verified_retailer_listing_reference",
       "market_reference_price_jpy": null,
       "search_snippet_reference_price_jpy": null,
       "search_snippet_reference_url": null,
@@ -2298,7 +2300,8 @@
       "display_reference_price_url": "https://www.yodobashi.com/product/100000001009315413/",
       "display_reference_price_observed_at": "2026-11-14T08:56:24+09:00",
       "display_reference_price_note": "Exact-identity direct retailer price. Display price does not imply stock availability; unknown/out-of-stock is not buyable.",
-      "price_display_reconciled": true
+      "price_display_reconciled": true,
+      "price_validation_note": "Exact-identity direct retailer listing price confirmed; stock status is stored separately and does not imply purchase availability."
     },
     {
       "id": "ssd-crucial-p3-plus-1tb",
@@ -2312,7 +2315,7 @@
       "source_role": "comparison_site_reference",
       "bf_actual_authorized": false,
       "price_source_mode": "none",
-      "price_validation_status": "missing",
+      "price_validation_status": "verified_retailer_listing_reference",
       "market_reference_price_jpy": null,
       "search_snippet_reference_price_jpy": null,
       "search_snippet_reference_url": null,
@@ -2598,7 +2601,8 @@
       "display_reference_price_url": "https://www.dospara.co.jp/SBR1144/IC481159.html",
       "display_reference_price_observed_at": "2026-11-14T08:56:25+09:00",
       "display_reference_price_note": "Exact-identity direct retailer price. Display price does not imply stock availability; unknown/out-of-stock is not buyable.",
-      "price_display_reconciled": true
+      "price_display_reconciled": true,
+      "price_validation_note": "Exact-identity direct retailer listing price confirmed; stock status is stored separately and does not imply purchase availability."
     },
     {
       "id": "psu-corsair-rm850e-2025",
@@ -3073,7 +3077,7 @@
       "source_role": "comparison_site_reference",
       "bf_actual_authorized": false,
       "price_source_mode": "none",
-      "price_validation_status": "missing",
+      "price_validation_status": "verified_retailer_listing_reference",
       "market_reference_price_jpy": null,
       "search_snippet_reference_price_jpy": null,
       "search_snippet_reference_url": null,
@@ -3338,7 +3342,8 @@
       "display_reference_price_url": "https://www.yodobashi.com/product/100000001009948470/",
       "display_reference_price_observed_at": "2026-11-14T08:56:33+09:00",
       "display_reference_price_note": "Exact-identity direct retailer price. Display price does not imply stock availability; unknown/out-of-stock is not buyable.",
-      "price_display_reconciled": true
+      "price_display_reconciled": true,
+      "price_validation_note": "Exact-identity direct retailer listing price confirmed; stock status is stored separately and does not imply purchase availability."
     },
     {
       "id": "os-windows11-home",
@@ -3352,7 +3357,7 @@
       "source_role": "comparison_site_reference",
       "bf_actual_authorized": false,
       "price_source_mode": "none",
-      "price_validation_status": "missing",
+      "price_validation_status": "verified_retailer_listing_reference",
       "market_reference_price_jpy": null,
       "search_snippet_reference_price_jpy": null,
       "search_snippet_reference_url": null,
@@ -3633,7 +3638,8 @@
       "display_reference_price_url": "https://item.rakuten.co.jp/hotcos/win11home/?iasid=07rpp_10095___30-mwfbtqi5-2s-e00089c6-de8a-4cdb-a63e-331f7a294082",
       "display_reference_price_observed_at": "2026-11-14T03:45:01+09:00",
       "display_reference_price_note": "Exact-identity direct retailer price. Display price does not imply stock availability; unknown/out-of-stock is not buyable.",
-      "price_display_reconciled": true
+      "price_display_reconciled": true,
+      "price_validation_note": "Exact-identity direct retailer listing price confirmed; stock status is stored separately and does not imply purchase availability."
     },
     {
       "id": "ssd-kioxia-exceria-basic-2tb",
@@ -3647,7 +3653,7 @@
       "source_role": "comparison_site_reference",
       "bf_actual_authorized": false,
       "price_source_mode": "none",
-      "price_validation_status": "missing",
+      "price_validation_status": "verified_retailer_listing_reference",
       "market_reference_price_jpy": null,
       "search_snippet_reference_price_jpy": null,
       "search_snippet_reference_url": null,
@@ -3879,7 +3885,8 @@
       "display_reference_price_url": "https://joshinweb.jp/pc/43736/4582761161566.html",
       "display_reference_price_observed_at": "2026-11-14T08:56:35+09:00",
       "display_reference_price_note": "Exact-identity direct retailer price. Display price does not imply stock availability; unknown/out-of-stock is not buyable.",
-      "price_display_reconciled": true
+      "price_display_reconciled": true,
+      "price_validation_note": "Exact-identity direct retailer listing price confirmed; stock status is stored separately and does not imply purchase availability."
     },
     {
       "id": "memory-lexar-thor-ddr5-64gb-6000",
@@ -4246,7 +4253,7 @@
       "source_role": "comparison_site_reference",
       "bf_actual_authorized": false,
       "price_source_mode": "none",
-      "price_validation_status": "missing",
+      "price_validation_status": "verified_retailer_listing_reference",
       "market_reference_price_jpy": null,
       "search_snippet_reference_price_jpy": null,
       "search_snippet_reference_url": null,
@@ -4510,7 +4517,8 @@
       "display_reference_price_url": "https://www.yodobashi.com/product/100000001009402658/",
       "display_reference_price_observed_at": "2026-11-14T08:56:39+09:00",
       "display_reference_price_note": "Exact-identity direct retailer price. Display price does not imply stock availability; unknown/out-of-stock is not buyable.",
-      "price_display_reconciled": true
+      "price_display_reconciled": true,
+      "price_validation_note": "Exact-identity direct retailer listing price confirmed; stock status is stored separately and does not imply purchase availability."
     },
     {
       "id": "cooler-thermalright-assassin-x-120-refined-se",
@@ -4524,7 +4532,7 @@
       "source_role": "comparison_site_reference",
       "bf_actual_authorized": false,
       "price_source_mode": "none",
-      "price_validation_status": "missing",
+      "price_validation_status": "verified_retailer_listing_reference",
       "market_reference_price_jpy": null,
       "search_snippet_reference_price_jpy": null,
       "search_snippet_reference_url": null,
@@ -4782,7 +4790,8 @@
       "display_reference_price_url": "https://www.yodobashi.com/product/100000001008996814/",
       "display_reference_price_observed_at": "2026-11-14T08:56:40+09:00",
       "display_reference_price_note": "Exact-identity direct retailer price. Display price does not imply stock availability; unknown/out-of-stock is not buyable.",
-      "price_display_reconciled": true
+      "price_display_reconciled": true,
+      "price_validation_note": "Exact-identity direct retailer listing price confirmed; stock status is stored separately and does not imply purchase availability."
     },
     {
       "id": "gpu-rtx5070-12gb-msi-ventus2x",
@@ -5207,7 +5216,7 @@
       "source_role": "comparison_site_reference",
       "bf_actual_authorized": false,
       "price_source_mode": "none",
-      "price_validation_status": "search_snippet_reference",
+      "price_validation_status": "verified_retailer_listing_reference",
       "market_reference_price_jpy": null,
       "search_snippet_reference_price_jpy": 22580,
       "search_snippet_reference_url": "https://search.kakaku.com/ASRock%20B650M%20Pro%20X3D%20WiFi/",
@@ -5410,7 +5419,8 @@
       "display_reference_price_url": "https://item.rakuten.co.jp/janpara/219075108-219/?variantId=219075108-219",
       "display_reference_price_observed_at": "2026-11-14T06:32:49+09:00",
       "display_reference_price_note": "Exact-identity direct retailer price. Display price does not imply stock availability; unknown/out-of-stock is not buyable.",
-      "price_display_reconciled": true
+      "price_display_reconciled": true,
+      "price_validation_note": "Exact-identity direct retailer listing price confirmed; stock status is stored separately and does not imply purchase availability."
     }
   ],
   "price_display_reconciliation": {
