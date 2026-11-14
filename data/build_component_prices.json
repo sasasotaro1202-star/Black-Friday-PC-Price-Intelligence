@@ -5300,5 +5300,10 @@
       },
       "retailer_listing_offer_count": 1
     }
-  ]
+  ],
+  "price_display_reconciliation": {
+    "checked_at_jst": "2026-11-14T09:40:34+09:00",
+    "rule": "Populate display_reference_price_jpy from exact-SKU direct retailer offers when market_reference_price_jpy is missing; stock status is stored separately and does not imply buyability.",
+    "records_reconciled": 0
+  }
 }
