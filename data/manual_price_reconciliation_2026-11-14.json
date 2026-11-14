@@ -1,0 +1,700 @@
+{
+  "checked_date": "2026-11-14",
+  "checked_at_jst": "2026-11-14T09:12:25+09:00",
+  "purpose": "Daily CPU/GPU price reconciliation, stock verification and standardized 100-point scorecards for the 2026 Black Friday PC purchase",
+  "purchase_authorized": false,
+  "policy": {
+    "all_prices_tax_included": true,
+    "shipping_to_fukuoka_must_be_separately_verified": true,
+    "points_are_not_cash_discount": true,
+    "unknown_stock_is_not_available": true,
+    "out_of_stock_is_not_buyable": true,
+    "stale_listing_is_not_current_offer": true,
+    "same_sku_and_condition_required": true,
+    "no_purchase_or_payment_actions": true,
+    "benchmark_scores_are_not_purchase_authorization": true,
+    "unknown_price_value_score_is_neutral_provisional": true
+  },
+  "score_policy": {
+    "cpu": {
+      "weights": {
+        "simulation_and_gaming": 30,
+        "productivity_and_multithread": 15,
+        "power_efficiency": 20,
+        "price_vs_target": 20,
+        "platform_longevity": 5,
+        "purchase_evidence_and_warranty": 10
+      },
+      "interpretation": "同一配点で比較。Cities: Skylines II等のシミュレーション、制作・分析、消費電力、購入目標価格、AM5継続性、販売証拠を評価。"
+    },
+    "gpu": {
+      "weights": {
+        "wqhd_raster_performance": 25,
+        "ai_framework_compatibility": 25,
+        "vram_longevity": 15,
+        "performance_per_tgp_watt": 10,
+        "price_vs_target": 15,
+        "purchase_evidence_and_warranty": 10
+      },
+      "interpretation": "WQHD性能スコア、CUDA/ROCm/oneAPIの実用互換性、VRAM、性能スコア÷TGPの効率proxy、購入目標価格、保証/在庫証拠を評価。"
+    },
+    "evidence_score_is_separate_from_hardware_fit": true,
+    "performance_per_watt_proxy": "2026-11-11 GPU comparison score divided by published TGP; not a measured wall-power benchmark",
+    "provisional_unknown_price_rule": "価格が未確認の候補はprice_vs_targetを中立7/15とし、必ず暫定と明記する。"
+  },
+  "observations": [
+    {
+      "id": "cpu-ryzen7-9700x",
+      "name": "AMD Ryzen 7 9700X BOX",
+      "model_code": "100-100001404WOF",
+      "price_jpy": 44800,
+      "previous_observed_price_jpy": 49800,
+      "delta_jpy": -5000,
+      "target_price_jpy": 40000,
+      "target_gap_jpy": 4800,
+      "target_gap_percent": 12,
+      "source_class": "direct_retailer_product_page",
+      "seller": "PC SHOP Ark",
+      "stock": "in_stock",
+      "shipping": "free_shipping",
+      "delivery": "exact Fukuoka delivery date unconfirmed; Ark warns of dispatch delays caused by Microsoft outage beginning 2026-11-13",
+      "points": 0,
+      "warranty": "3 years authorized distributor warranty",
+      "initial_defect": "not separately confirmed",
+      "url": "https://www.ark-pc.co.jp/i/10240257/",
+      "note": "Ark Black Friday 2026: regular 49,800 yen, discount 5,000 yen, current tax-included 44,800 yen. Previous 49,800 yen observation was at Joshin, so the 5,000 yen difference is cross-retailer rather than a same-seller historical comparison. 65W TDP / 88W PPT."
+    },
+    {
+      "id": "cpu-ryzen7-9800x3d",
+      "name": "AMD Ryzen 7 9800X3D BOX",
+      "model_code": "100-100001084WOF",
+      "price_jpy": 71800,
+      "target_price_jpy": 60000,
+      "target_gap_jpy": 11800,
+      "target_gap_percent": 19.7,
+      "source_class": "direct_retailer_product_page",
+      "seller": "PC SHOP Ark",
+      "stock": "in_stock",
+      "shipping": "free_shipping",
+      "delivery": "exact Fukuoka delivery date unconfirmed; Ark Microsoft-related dispatch delay warning",
+      "points": 0,
+      "warranty": "3 years authorized distributor warranty",
+      "initial_defect": "not separately confirmed",
+      "url": "https://www.ark-pc.co.jp/i/10240267/",
+      "note": "TDP 120W / PPT 162W; 8 cores / 16 threads / 96MB L3. Not at the 60,000 yen buy target."
+    },
+    {
+      "id": "cpu-ryzen7-9850x3d",
+      "name": "AMD Ryzen 7 9850X3D BOX",
+      "model_code": "100-100001973WOF",
+      "price_jpy": 81800,
+      "source_class": "direct_retailer_product_page",
+      "seller": "PC SHOP Ark",
+      "stock": "in_stock",
+      "shipping": "free_shipping",
+      "delivery": "exact Fukuoka delivery date unconfirmed; Ark Microsoft-related dispatch delay warning",
+      "points": 0,
+      "warranty": "3 years authorized distributor warranty",
+      "initial_defect": "not separately confirmed",
+      "url": "https://www.ark-pc.co.jp/i/10240292/",
+      "note": "TDP 120W / PPT 162W. 10,000 yen above the same-store 9800X3D. Recent Cities: Skylines II test reports about 5% WQHD uplift over 9800X3D, while another review measured about 20W higher gaming power; not a rational premium at this price."
+    },
+    {
+      "id": "gpu-rtx5060ti-16gb",
+      "name": "PNY GeForce RTX 5060 Ti OC 16GB",
+      "model_code": "VCG5060T16DFXPB1-O",
+      "price_jpy": 144980,
+      "previous_observed_price_jpy": 144980,
+      "delta_jpy": 0,
+      "target_price_jpy": 120000,
+      "target_gap_jpy": 24980,
+      "target_gap_percent": 20.8,
+      "source_class": "direct_retailer_product_page",
+      "seller": "Dospara",
+      "stock": "orderable_24h_dispatch_stock_count_not_published",
+      "shipping": "free_shipping",
+      "delivery": "24-hour dispatch shown; earliest 2026-11-15 estimate is for Tokyo, Fukuoka date unconfirmed",
+      "points": 0,
+      "warranty": "3 years domestic authorized warranty",
+      "initial_defect": "1 week standard; 1 month for free Dospara members",
+      "url": "https://www.dospara.co.jp/SBR1892/IC625088.html",
+      "note": "16GB GDDR7, 180W TGP, one 8-pin connector. Exact SKU match. 0% points."
+    },
+    {
+      "id": "gpu-rtx5070-12gb-msi-ventus2x",
+      "name": "MSI GeForce RTX 5070 12G VENTUS 2X OC",
+      "model_code": "4711377308229",
+      "price_jpy": 166800,
+      "previous_observed_price_jpy": 166800,
+      "delta_jpy": 0,
+      "target_price_jpy": 110000,
+      "target_gap_jpy": 56800,
+      "target_gap_percent": 51.6,
+      "source_class": "direct_retailer_product_page",
+      "seller": "PC Koubou",
+      "stock": "orderable_same_day_dispatch_quantity_not_published",
+      "shipping": "free_shipping",
+      "delivery": "same-day dispatch cutoff 14:00 on business days; Fukuoka delivery date unconfirmed",
+      "points": 0,
+      "warranty": "standard manufacturer/store warranty term not stated on captured page; optional WEB安心交換保証 is 10% of price for 1 month",
+      "initial_defect": "not separately confirmed",
+      "url": "https://www.pc-koubou.jp/products/detail.php?product_id=1133257",
+      "note": "12GB GDDR7, 250W reference TGP, 16-pin connector, recommended PSU 650W, card dimensions 236x126x50mm. 0 points."
+    },
+    {
+      "id": "gpu-rtx5070ti-16gb",
+      "name": "PNY GeForce RTX 5070 Ti 16GB ARGB",
+      "model_code": "VCG5070T16TFXXPB1-O",
+      "price_jpy": 229800,
+      "previous_observed_price_jpy": 229800,
+      "delta_jpy": 0,
+      "target_price_jpy": 180000,
+      "target_gap_jpy": 49800,
+      "target_gap_percent": 27.7,
+      "source_class": "direct_retailer_product_page",
+      "seller": "Dospara",
+      "stock": "orderable_24h_dispatch_stock_count_not_published",
+      "shipping": "free_shipping",
+      "delivery": "24-hour dispatch shown; earliest 2026-11-15 estimate is for Tokyo, Fukuoka date unconfirmed",
+      "points": 0,
+      "warranty": "3 years domestic authorized warranty",
+      "initial_defect": "1 week standard; 1 month for free Dospara members",
+      "url": "https://www.dospara.co.jp/SBR1892/IC634895.html",
+      "note": "16GB GDDR7, 300W TGP, one 16-pin connector. 0% points. Direct page is current; do not use older cross-channel prices as this offer."
+    },
+    {
+      "id": "gpu-rx9070-16gb",
+      "name": "ASRock Radeon RX 9070 Challenger 16GB",
+      "model_code": "RX9070 CL 16G",
+      "price_jpy": 125800,
+      "source_class": "direct_retailer_product_page_out_of_stock",
+      "seller": "Dospara",
+      "stock": "out_of_stock",
+      "shipping": "free shipping shown but not applicable while unavailable",
+      "delivery": "not available",
+      "points": 0,
+      "warranty": "2 years domestic authorized warranty",
+      "initial_defect": "1 week standard; 1 month for free mobile members",
+      "url": "https://www.dospara.co.jp/SBR1891/IC518909.html",
+      "note": "16GB GDDR6, 220W TGP, 2x8-pin, 290x123x51mm. Price is displayed but the page explicitly says out of stock; not included in buyable build totals."
+    },
+    {
+      "id": "gpu-rx9070xt-16gb",
+      "name": "ASRock Radeon RX 9070 XT Steel Legend 16GB",
+      "model_code": "RX9070XT SL 16G",
+      "price_jpy": 164800,
+      "source_class": "direct_retailer_product_page",
+      "seller": "Dospara",
+      "stock": "orderable_24h_dispatch_stock_count_not_published",
+      "shipping": "free_shipping",
+      "delivery": "24-hour dispatch shown; earliest 2026-11-15 estimate is for Tokyo, Fukuoka date unconfirmed",
+      "points": 0,
+      "warranty": "2 years domestic authorized warranty",
+      "initial_defect": "1 week standard; 1 month for free mobile members",
+      "url": "https://www.dospara.co.jp/SBR1891/IC518907.html",
+      "note": "16GB GDDR6, 304W TGP, 2x8-pin, 298x131x58mm, 2.9 slots. Price is 44,800 yen above the 120,000 yen target."
+    },
+    {
+      "id": "gpu-rtx4070ti-super-used",
+      "name": "GeForce RTX 4070 Ti SUPER 16GB used",
+      "model_code": "various_board_partners",
+      "price_jpy": 164900,
+      "source_class": "stale_direct_used_listing",
+      "seller": "Dospara",
+      "stock": "last_observed_stock_1_not_revalidated",
+      "shipping": "not reverified",
+      "delivery": "stale estimate; not a current promise",
+      "warranty": "3 months in last captured listing",
+      "initial_defect": "used listing terms not revalidated",
+      "target_price_jpy": 150000,
+      "target_gap_jpy": 14900,
+      "target_gap_percent": 9.9,
+      "url": "https://www.dospara.co.jp/SBR1522/IC675220.html",
+      "note": "Last observed at 164,900 yen with one unit and 3-month warranty in a prior crawl. Current fetch failed, and another older 149,900 yen listing returned 404. Not a current buyable offer."
+    },
+    {
+      "id": "gpu-rtx4080super-used",
+      "name": "GeForce RTX 4080 SUPER 16GB used",
+      "model_code": "various_board_partners",
+      "price_jpy": 189900,
+      "source_class": "stale_direct_used_listing",
+      "seller": "Dospara",
+      "stock": "last_observed_stock_1_4_days_before_not_revalidated",
+      "shipping": "not reverified",
+      "delivery": "not reverified",
+      "warranty": "3 months in last captured listing",
+      "initial_defect": "used listing terms not revalidated",
+      "url": null,
+      "note": "Last observed price and 3-month warranty are stale; no current product URL/stock could be revalidated in this run. Do not treat as purchasable."
+    },
+    {
+      "id": "gpu-rtx3090-used",
+      "name": "GeForce RTX 3090 24GB used",
+      "model_code": "various_board_partners",
+      "price_jpy": 189900,
+      "source_class": "stale_used_price_reference",
+      "seller": "Dospara",
+      "stock": "out_of_stock_in_last_observation",
+      "shipping": "not applicable",
+      "delivery": "not available",
+      "warranty": "3 months in last observed listing; not current",
+      "url": null,
+      "note": "24GB VRAM helps memory-bound local AI, but 350W class power, older architecture, high price and no current stock make this a weak buy."
+    },
+    {
+      "id": "gpu-rtx4070super-used",
+      "name": "GeForce RTX 4070 SUPER 12GB used",
+      "model_code": "various_board_partners",
+      "price_jpy": 104900,
+      "source_class": "stale_used_price_reference",
+      "seller": "Dospara",
+      "stock": "last_observed_stock_1_about_1_month_before_not_revalidated",
+      "shipping": "not reverified",
+      "delivery": "not reverified",
+      "warranty": "3 months in last observed listing",
+      "url": null,
+      "note": "Price and stock are stale. 12GB VRAM and used condition make it secondary to new 16GB options."
+    },
+    {
+      "id": "gpu-rx7900xtx-24gb",
+      "name": "AMD Radeon RX 7900 XTX 24GB",
+      "model_code": "board_partner_varies",
+      "price_jpy": null,
+      "source_class": "no_current_direct_offer_verified",
+      "seller": null,
+      "stock": "not_verified",
+      "shipping": "not_verified",
+      "delivery": "not_verified",
+      "warranty": "not_verified",
+      "url": null,
+      "note": "24GB GDDR6, 355W reference TBP class. ROCm 7.2.1 Linux support includes RX 7900 XTX; Windows support matrix in this run does not list it."
+    },
+    {
+      "id": "gpu-rx7900xt-20gb",
+      "name": "AMD Radeon RX 7900 XT 20GB",
+      "model_code": "board_partner_varies",
+      "price_jpy": null,
+      "source_class": "no_current_direct_offer_verified",
+      "seller": null,
+      "stock": "not_verified",
+      "shipping": "not_verified",
+      "delivery": "not_verified",
+      "warranty": "not_verified",
+      "url": null,
+      "note": "20GB GDDR6, 315W reference TBP class. ROCm 7.2.1 Linux support includes RX 7900 XT; Windows support matrix in this run does not list it."
+    },
+    {
+      "id": "gpu-rx7800xt-16gb",
+      "name": "AMD Radeon RX 7800 XT 16GB",
+      "model_code": "board_partner_varies",
+      "price_jpy": null,
+      "source_class": "no_current_direct_offer_verified",
+      "seller": null,
+      "stock": "not_verified",
+      "shipping": "not_verified",
+      "delivery": "not_verified",
+      "warranty": "not_verified",
+      "url": null,
+      "note": "16GB GDDR6, 263W reference TBP class. ROCm Linux support exists; current direct Japanese offer not verified."
+    },
+    {
+      "id": "gpu-intel-arc-b580-12gb",
+      "name": "Intel Arc B580 12GB",
+      "model_code": "board_partner_varies",
+      "price_jpy": 49980,
+      "source_class": "benchmark_table_reference_only",
+      "seller": null,
+      "stock": "not_verified",
+      "shipping": "not_verified",
+      "delivery": "not_verified",
+      "warranty": "not_verified",
+      "url": null,
+      "note": "11/11 comparison table reference only; 12GB, 190W TGP, gaming score 23,110. No direct current sellable page verified."
+    }
+  ],
+  "unresolved": [
+    "Fukuoka-specific delivery dates and checkout totals are not exposed on the current product pages; Tokyo estimates must not be transferred to Fukuoka.",
+    "Ark reports Microsoft-related dispatch delays from 2026-11-13; all three CPU listings are in stock but delivery dates are not guaranteed.",
+    "RTX 5070 12GB direct offer at PC Koubou is 166,800 yen; Joshin's 157,800 yen listing had a stale Nov 9 dispatch estimate and is not treated as a current verified offer.",
+    "RX 9070 16GB is priced at 125,800 yen on Dospara but explicitly out of stock.",
+    "Used RTX 4070 Ti SUPER / 4080 SUPER / RTX 3090 / RTX 4070 SUPER listings could not be revalidated; stale prices are references only.",
+    "RX 7900 XTX / RX 7900 XT / RX 7800 XT have no current direct Japanese seller offer verified in this run.",
+    "Arc B580 price is a comparison-table reference only, not a direct seller offer.",
+    "No current full-system wall-power measurement was found; GPU TGP and CPU TDP/PPT are shown as component specifications, not measured system consumption.",
+    "No full build is checkout-verified. The 5060 Ti build is a planning estimate based on direct listing prices and reserved shipping/small-parts/peripheral costs."
+  ],
+  "cpu_scores": [
+    {
+      "rank": 1,
+      "id": "cpu-ryzen7-9700x",
+      "name": "Ryzen 7 9700X",
+      "score": 84,
+      "breakdown": {
+        "simulation_gaming": 23,
+        "productivity": 13,
+        "power_efficiency": 20,
+        "price_vs_target": 14,
+        "platform": 5,
+        "evidence_warranty": 9
+      },
+      "score_note": "Best balance of simulation, 65W efficiency and current price; target still missed by 4,800 yen."
+    },
+    {
+      "rank": 2,
+      "id": "cpu-ryzen7-9800x3d",
+      "name": "Ryzen 7 9800X3D",
+      "score": 79,
+      "breakdown": {
+        "simulation_gaming": 29,
+        "productivity": 13,
+        "power_efficiency": 13,
+        "price_vs_target": 10,
+        "platform": 5,
+        "evidence_warranty": 9
+      },
+      "score_note": "Best gaming/simulation option but 27,000 yen above 9700X; current price exceeds target by 11,800 yen."
+    },
+    {
+      "rank": 3,
+      "id": "cpu-ryzen7-9850x3d",
+      "name": "Ryzen 7 9850X3D",
+      "score": 74,
+      "breakdown": {
+        "simulation_gaming": 30,
+        "productivity": 13,
+        "power_efficiency": 10,
+        "price_vs_target": 7,
+        "platform": 5,
+        "evidence_warranty": 9
+      },
+      "score_note": "Only small uplift over 9800X3D, current premium 10,000 yen and poorer measured gaming efficiency."
+    }
+  ],
+  "gpu_scores_new": [
+    {
+      "rank": 1,
+      "id": "gpu-rtx5070ti-16gb",
+      "name": "RTX 5070 Ti 16GB",
+      "score": 84,
+      "breakdown": {
+        "wqhd_gaming": 25,
+        "ai_compatibility": 25,
+        "vram": 15,
+        "efficiency": 8,
+        "price_vs_target": 2,
+        "evidence_warranty": 9
+      },
+      "buy_status": "not_recommended_at_current_price",
+      "note": "Best combined WQHD and CUDA fit, but 229,800 yen is 49,800 yen above target and makes the 450,000 yen build impossible."
+    },
+    {
+      "rank": 2,
+      "id": "gpu-rtx5060ti-16gb",
+      "name": "RTX 5060 Ti 16GB",
+      "score": 81,
+      "breakdown": {
+        "wqhd_gaming": 17,
+        "ai_compatibility": 25,
+        "vram": 15,
+        "efficiency": 10,
+        "price_vs_target": 5,
+        "evidence_warranty": 9
+      },
+      "buy_status": "best_current_budget_fit_but_wait_for_target",
+      "note": "CUDA + 16GB + 180W; weaker WQHD raster than RTX 5070, but best balance for AI capacity and power."
+    },
+    {
+      "rank": 3,
+      "id": "gpu-rx9070-16gb",
+      "name": "RX 9070 16GB",
+      "score": 75,
+      "breakdown": {
+        "wqhd_gaming": 22,
+        "ai_compatibility": 17,
+        "vram": 15,
+        "efficiency": 10,
+        "price_vs_target": 8,
+        "evidence_warranty": 3
+      },
+      "buy_status": "out_of_stock",
+      "note": "Best TGP efficiency proxy and 16GB, but current listing is out of stock and ROCm Windows support remains partial."
+    },
+    {
+      "rank": 4,
+      "id": "gpu-rx9070xt-16gb",
+      "name": "RX 9070 XT 16GB",
+      "score": 74,
+      "breakdown": {
+        "wqhd_gaming": 24,
+        "ai_compatibility": 17,
+        "vram": 15,
+        "efficiency": 7,
+        "price_vs_target": 2,
+        "evidence_warranty": 9
+      },
+      "buy_status": "available_but_over_target",
+      "note": "Raster performance near RTX 5070 Ti at lower price, but 304W, 164,800 yen and no CUDA."
+    },
+    {
+      "rank": 5,
+      "id": "gpu-rtx5070-12gb-msi-ventus2x",
+      "name": "RTX 5070 12GB",
+      "score": 74,
+      "breakdown": {
+        "wqhd_gaming": 21,
+        "ai_compatibility": 25,
+        "vram": 10,
+        "efficiency": 8,
+        "price_vs_target": 1,
+        "evidence_warranty": 9
+      },
+      "buy_status": "available_but_over_target",
+      "note": "Good CUDA and stronger WQHD performance than 5060 Ti, but 12GB VRAM, 250W and 166,800 yen."
+    }
+  ],
+  "gpu_scores_used": [
+    {
+      "rank": 1,
+      "id": "gpu-rtx4070ti-super-used",
+      "name": "RTX 4070 Ti SUPER 16GB used",
+      "score": 83,
+      "breakdown": {
+        "wqhd_gaming": 23,
+        "ai_compatibility": 25,
+        "vram": 15,
+        "efficiency": 8,
+        "price_vs_target": 10,
+        "evidence_warranty": 2
+      },
+      "buy_status": "do_not_buy_without_fresh_page_and_warranty",
+      "note": "Last seen 164,900 yen and 3-month warranty, but stock/page not revalidated."
+    },
+    {
+      "rank": 2,
+      "id": "gpu-rtx4080super-used",
+      "name": "RTX 4080 SUPER 16GB used",
+      "score": 81,
+      "breakdown": {
+        "wqhd_gaming": 25,
+        "ai_compatibility": 25,
+        "vram": 15,
+        "efficiency": 7,
+        "price_vs_target": 7,
+        "evidence_warranty": 2
+      },
+      "buy_status": "do_not_buy_without_fresh_page_and_warranty",
+      "note": "Last seen 189,900 yen and 3-month warranty; current stock not revalidated."
+    },
+    {
+      "rank": 3,
+      "id": "gpu-rtx3090-used",
+      "name": "RTX 3090 24GB used",
+      "score": 71,
+      "breakdown": {
+        "wqhd_gaming": 20,
+        "ai_compatibility": 25,
+        "vram": 15,
+        "efficiency": 4,
+        "price_vs_target": 7,
+        "evidence_warranty": 0
+      },
+      "buy_status": "not_available",
+      "note": "24GB helps AI, but 350W class power, old architecture, 189,900 yen stale price and last observed out of stock."
+    },
+    {
+      "rank": 4,
+      "id": "gpu-rtx4070super-used",
+      "name": "RTX 4070 SUPER 12GB used",
+      "score": 70,
+      "breakdown": {
+        "wqhd_gaming": 18,
+        "ai_compatibility": 25,
+        "vram": 10,
+        "efficiency": 9,
+        "price_vs_target": 7,
+        "evidence_warranty": 1
+      },
+      "buy_status": "stale_listing",
+      "note": "Last observed 104,900 yen with 3-month warranty; current stock not verified."
+    }
+  ],
+  "gpu_scores_other": [
+    {
+      "id": "gpu-rx7900xtx-24gb",
+      "name": "RX 7900 XTX 24GB",
+      "score": 68,
+      "provisional": true,
+      "breakdown": {
+        "wqhd_gaming": 24,
+        "ai_compatibility": 17,
+        "vram": 15,
+        "efficiency": 5,
+        "price_vs_target": 7,
+        "evidence_warranty": 0
+      }
+    },
+    {
+      "id": "gpu-rx7900xt-20gb",
+      "name": "RX 7900 XT 20GB",
+      "score": 66,
+      "provisional": true,
+      "breakdown": {
+        "wqhd_gaming": 22,
+        "ai_compatibility": 17,
+        "vram": 14,
+        "efficiency": 6,
+        "price_vs_target": 7,
+        "evidence_warranty": 0
+      }
+    },
+    {
+      "id": "gpu-rx7800xt-16gb",
+      "name": "RX 7800 XT 16GB",
+      "score": 62,
+      "provisional": true,
+      "breakdown": {
+        "wqhd_gaming": 17,
+        "ai_compatibility": 17,
+        "vram": 14,
+        "efficiency": 7,
+        "price_vs_target": 7,
+        "evidence_warranty": 0
+      }
+    },
+    {
+      "id": "gpu-intel-arc-b580-12gb",
+      "name": "Intel Arc B580 12GB",
+      "score": 49,
+      "provisional": true,
+      "breakdown": {
+        "wqhd_gaming": 12,
+        "ai_compatibility": 10,
+        "vram": 10,
+        "efficiency": 9,
+        "price_vs_target": 8,
+        "evidence_warranty": 0
+      }
+    }
+  ],
+  "current_price_scenarios": [
+    {
+      "id": "current-direct-5060ti16-2tb-32gb",
+      "name": "Ryzen 7 9700X + RTX 5060 Ti 16GB + 32GB RAM + 2TB SSD",
+      "all_in_estimate_jpy": 434148,
+      "remaining_from_450k_jpy": 15852,
+      "parts_subtotal_jpy": 386885,
+      "peripherals_jpy": 33263,
+      "shipping_reserve_jpy": 6000,
+      "small_parts_reserve_jpy": 3000,
+      "contingency_jpy": 5000,
+      "checkout_verified": false,
+      "build_score": 85,
+      "conditions": [
+        "CPU Ark 44,800 yen in stock but dispatch delays warned",
+        "GPU Dospara 144,980 yen free shipping and 24-hour dispatch; Fukuoka date unconfirmed",
+        "RAM Corsair 32GB 72,979 yen Ark capture; stock 5 in previous direct capture; must reconfirm",
+        "SSD Verbatim 2TB 48,980 yen Joshin capture; free shipping; NAND type unverified",
+        "Motherboard, PSU, case, cooler and OS are direct listing observations but not all current Fukuoka checkout totals reverified",
+        "Peripherals use prior observed prices totaling 33,263 yen; not reverified this run"
+      ],
+      "decision": "Best current planning fit below 450,000 yen. Not purchase-approved because Fukuoka delivery, checkout totals, full compatibility and stock reconfirmation remain open."
+    },
+    {
+      "id": "current-direct-5070-12gb-1tb-32gb",
+      "name": "Ryzen 7 9700X + RTX 5070 12GB + 32GB RAM + 1TB SSD",
+      "all_in_estimate_jpy": 436118,
+      "remaining_from_450k_jpy": 13882,
+      "checkout_verified": false,
+      "build_score": 79,
+      "conditions": [
+        "RTX 5070 PC Koubou 166,800 yen, free shipping, same-day dispatch; Fukuoka delivery date unconfirmed",
+        "1TB MSI SPATIUM M450 29,130 yen Yodobashi prior capture, free delivery, points excluded",
+        "Same other components and reserves as 5060 Ti build"
+      ],
+      "decision": "Fits the cap on observed prices but trades away 4GB VRAM and 1TB capacity for about 26% higher raster performance."
+    },
+    {
+      "id": "current-direct-rx9070xt16-2tb-32gb",
+      "name": "Ryzen 7 9700X + RX 9070 XT 16GB + 32GB RAM + 2TB SSD",
+      "all_in_estimate_jpy": 453968,
+      "remaining_from_450k_jpy": -3968,
+      "checkout_verified": false,
+      "build_score": 78,
+      "conditions": [
+        "RX 9070 XT 164,800 yen direct Dospara, free shipping, 2-year warranty",
+        "304W TGP and 2x8-pin; GPU dimensions 298x131x58mm"
+      ],
+      "decision": "Exceeds cap by 3,968 yen before any unplanned shipping or compatibility costs; not a buy recommendation."
+    },
+    {
+      "id": "current-direct-5070ti16-2tb-32gb",
+      "name": "Ryzen 7 9700X + RTX 5070 Ti 16GB + 32GB RAM + 2TB SSD",
+      "all_in_estimate_jpy": 518968,
+      "remaining_from_450k_jpy": -68968,
+      "checkout_verified": false,
+      "build_score": 83,
+      "conditions": [
+        "RTX 5070 Ti direct Dospara 229,800 yen, free shipping, 3-year warranty"
+      ],
+      "decision": "Exceeds the 450,000 yen cap by 68,968 yen; wait for price correction."
+    }
+  ],
+  "performance_and_power": {
+    "benchmark_source": "2026-11-11 GPU comparison table",
+    "gaming_score_and_tgp": [
+      {
+        "gpu": "RTX 5070 Ti 16GB",
+        "score": 46573,
+        "tgp_w": 300,
+        "score_per_tgp_w": 155.2
+      },
+      {
+        "gpu": "RX 9070 XT 16GB",
+        "score": 44982,
+        "tgp_w": 304,
+        "score_per_tgp_w": 148
+      },
+      {
+        "gpu": "RX 9070 16GB",
+        "score": 41093,
+        "tgp_w": 220,
+        "score_per_tgp_w": 186.8
+      },
+      {
+        "gpu": "RTX 5070 12GB",
+        "score": 39624,
+        "tgp_w": 250,
+        "score_per_tgp_w": 158.5
+      },
+      {
+        "gpu": "RTX 5060 Ti 16GB",
+        "score": 31460,
+        "tgp_w": 180,
+        "score_per_tgp_w": 174.8
+      }
+    ],
+    "cpu_power_specs": [
+      {
+        "cpu": "Ryzen 7 9700X",
+        "tdp_w": 65,
+        "ppt_w": 88
+      },
+      {
+        "cpu": "Ryzen 7 9800X3D",
+        "tdp_w": 120,
+        "ppt_w": 162
+      },
+      {
+        "cpu": "Ryzen 7 9850X3D",
+        "tdp_w": 120,
+        "ppt_w": 162
+      }
+    ],
+    "system_wall_power": "not measured in this run; do not infer from component TGP/TDP"
+  },
+  "decision": {
+    "cpu": "WAIT: 9700X is the best value/efficiency candidate but still 4,800 yen above the 40,000 yen target. Re-evaluate in the Nov 19-25 window.",
+    "gpu": "WAIT: 5060 Ti 16GB is the best current budget fit but remains 24,980 yen above target. 5070 Ti is not viable at 229,800 yen. Re-evaluate in the Nov 22-29 window.",
+    "overall": "WAIT / NO PURCHASE APPROVAL. Best planning build is 9700X + RTX 5060 Ti 16GB + 32GB + 2TB at an estimated 434,148 yen, but not checkout-verified."
+  }
+}
