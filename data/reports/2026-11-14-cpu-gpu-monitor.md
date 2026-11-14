@@ -58,14 +58,14 @@ WQHDラスタ性能25、AIフレームワーク互換性25、VRAM余裕15、性�
 
 ### その他の監視候補（価格表示はあるが、在庫未確認または売切れ）
 
-| GPU | 価格表示 | 状態 | 条件・注意 | 商品ページ |
-|---|---:|---|---|---|
-| RX 7900 XTX 24GB / PowerColor | ¥183,800 | 在庫なし | 送料無料。ページ取得は6か月前で古い | [Tsukumo](https://shop.tsukumo.co.jp/goods/4713436174622/) |
-| RX 7900 XT 20GB / ASRock | ¥176,660 | 在庫不明 | BIC 17,666ポイント（10%）、送料無料。ポイントは現金値引きではない | [Bic Camera](https://www.biccamera.com/bc/item/10849713/) |
-| RX 7900 XT 20GB / Sapphire | ¥176,680 | 在庫不明 | BIC 17,668ポイント（10%）、送料無料 | [Bic Camera](https://www.biccamera.com/bc/item/10849708/) |
-| RX 7800 XT 16GB / ASUS TUF | ¥119,980 | 在庫不明 | BIC 11,998ポイント（10%）、送料無料 | [Bic Camera](https://www.biccamera.com/bc/item/12103031/) |
-| RX 7800 XT 16GB / 玄人志向 | ¥67,980 | 在庫なし | ドスパラ1年保証の表示。価格は購入不可 | [Dospara](https://www.dospara.co.jp/SBR1770/IC511355.html) |
-| Intel Arc B580 12GB / SPARKLE | ¥54,780 | 在庫不明 | BIC 5,478ポイント（10%）、送料無料、2年保証 | [Bic Camera](https://www.biccamera.com/bc/item/14806288/) |
+| GPU | 価格表示 | 状態 | 条件・注意 | 点数 | 証拠 | 商品ページ |
+|---|---:|---|---|---:|---:|---|
+| RX 7900 XTX 24GB / PowerColor | ¥183,800 | 在庫なし | 送料無料。ページ取得は6か月前で古い | 70 | 20 | [Tsukumo](https://shop.tsukumo.co.jp/goods/4713436174622/) |
+| RX 7900 XT 20GB / ASRock | ¥176,660 | 在庫不明 | BIC 17,666ポイント（10%）、送料無料。ポイントは現金値引きではない | 69 | 45 | [Bic Camera](https://www.biccamera.com/bc/item/10849713/) |
+| RX 7900 XT 20GB / Sapphire | ¥176,680 | 在庫不明 | BIC 17,668ポイント（10%）、送料無料 | 69 | 45 | [Bic Camera](https://www.biccamera.com/bc/item/10849708/) |
+| RX 7800 XT 16GB / ASUS TUF | ¥119,980 | 在庫不明 | BIC 11,998ポイント（10%）、送料無料 | 66 | 45 | [Bic Camera](https://www.biccamera.com/bc/item/12103031/) |
+| RX 7800 XT 16GB / 玄人志向 | ¥67,980 | 在庫なし | ドスパラ1年保証の表示。価格は購入不可 | 66 | 45 | [Dospara](https://www.dospara.co.jp/SBR1770/IC511355.html) |
+| Intel Arc B580 12GB / SPARKLE | ¥54,780 | 在庫不明 | BIC 5,478ポイント（10%）、送料無料、2年保証 | 54 | 55 | [Bic Camera](https://www.biccamera.com/bc/item/14806288/) |
 
 RX 7900 XTXは24GB VRAMが魅力だが、現在確認できた¥183,800の直販ページは売切れ。RX 7900 XTとRX 7800 XT、Arc B580は価格表示は取得できたが、BICの在庫表示が取得できていないため購入可能価格とは扱わない。Arc B580はoneAPI等の用途が限定され、CUDA前提AI用途では優先度を下げる。
 
