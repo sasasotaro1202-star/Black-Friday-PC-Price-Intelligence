@@ -60,7 +60,7 @@
   "cpu_offers": [
     {
       "model": "AMD Ryzen 7 9700X BOX",
-      "sku": "100-100001404WOF",
+      "sku": "AMD P/N 100-100001404WOF; Ark product 10240257; Ark page displays 00-100001404WOF; JAN 0730143315593",
       "price_jpy": 44800,
       "target_jpy": 40000,
       "gap_jpy": 4800,
@@ -801,6 +801,23 @@
       "observed_at": "2026-11-16",
       "count_as_buyable": false,
       "reason": "C rank, only 3-month warranty, no published operating-test evidence; stock can be sold in store"
+    },
+    {
+      "category": "CPU",
+      "model": "Ryzen 7 9700X BOX",
+      "sku": "100-100001404WOF",
+      "retailer": "Joshin web",
+      "price_jpy": 49800,
+      "stock_status": "in_stock",
+      "condition": "new",
+      "shipping": "free",
+      "points_jpy": 0,
+      "url": "https://joshinweb.jp/mobile/74565/0730143315593.html",
+      "observed_at": "2026-11-16",
+      "count_as_buyable": true,
+      "dispatch": "最短11/16出荷",
+      "warranty": "メーカー3年",
+      "note": "Ark 44,800円より5,000円高い代替販売店"
     }
   ],
   "performance_and_power": {
@@ -847,7 +864,8 @@
     "RX 9070 XT ASRock Steel Legend DARK: 148,000 yen, current in-stock Joshin listing. Different SKU from the prior Dospara Challenger 159,800 yen; not a same-SKU price drop.",
     "RTX 5070 Ti Colorful Battle AX SFF: 237,172 yen with 2,371 points; direct product page last captured 2026-11-15 and current category listing repeats price/stock on 2026-11-16. Different AIB SKU from prior PNY offer.",
     "RTX 5070 MSI: 166,800 yen; previous direct page price unchanged but stock was not revalidated today.",
-    "Used RTX 4070 SUPER PNY: 123,900 yen; direct page still shows one C-rank unit at Sapporo and 3-month warranty."
+    "Used RTX 4070 SUPER PNY: 123,900 yen; direct page still shows one C-rank unit at Sapporo and 3-month warranty.",
+    "Ryzen 7 9700X: Joshin web also directly verified at 49,800 yen, in stock, free shipping, 3-year manufacturer warranty; Ark remains 5,000 yen cheaper."
   ],
   "decision": {
     "verdict": "WAIT",
