@@ -22,8 +22,8 @@ GPU：WQHDラスタ性能25、AI互換性25、VRAM/長期余裕15、性能/W10�
 
 |順位|CPU|現在価格|目標との差|点数|証拠|販売条件|
 |---:|---|---:|---:|---:|---:|---|
-|1|Ryzen 7 9700X|44,800円|+4,800円|84|97|Ark在庫あり、送料無料、3年保証、対象決済15時まで当日出荷|
-|2|Ryzen 7 9800X3D|71,800円|+11,800円|79|96|Ark在庫あり、送料無料、3年保証、対象決済15時まで当日出荷|
+|1|Ryzen 7 9700X（総合価値）|44,800円|+4,800円|84|97|Ark在庫あり、送料無料、3年保証、対象決済15時まで当日出荷|
+|2|Ryzen 7 9800X3D（ゲーム性能）|71,800円|+11,800円|79|96|Ark在庫あり、送料無料、3年保証、対象決済15時まで当日出荷|
 |3|Ryzen 7 9850X3D|79,443円|+19,443円|70|96|Joshin在庫あり、送料無料、3年保証、11/17出荷表示|
 
 商品ページ：
@@ -31,7 +31,7 @@ GPU：WQHDラスタ性能25、AI互換性25、VRAM/長期余裕15、性能/W10�
 - [Ark Ryzen 7 9800X3D](https://www.ark-pc.co.jp/i/10240267/)
 - [Joshin Ryzen 7 9850X3D](https://joshinweb.jp/mobile/22814/0730143318280.html)
 
-9700Xは65W TDPで価格・電力効率のバランスが最良。ただし目標40,000円に4,800円届いていない。9800X3Dはゲーム・シミュレーション向けだが目標60,000円に11,800円届かない。9850X3Dは9800X3Dとの差額7,643円に対して性能向上が小さく、優先度を下げる。
+9700Xは65W TDPで価格・電力効率のバランスが最良。ただし目標40,000円に4,800円届いていない。ゲーム性能だけなら9800X3Dが明確に上で、TechSpotの14ゲーム平均では9700X比約30%高速。Cyberpunk 2077では93W、9700X比11%増の電力で35%高い性能だった。Cities: Skylines IIやHOI4の個別実測ではないが、シミュレーション重視なら9800X3Dを選ぶ合理性がある。9850X3Dは9800X3D比14ゲーム平均5%高速にとどまり、ゲーム時電力は24〜35%増、Cinebench EPS電力は27%増。現在の差額7,643円では優先度を下げる。
 
 ## 3. GPUランキング（新品）
 
@@ -73,7 +73,9 @@ GPU：WQHDラスタ性能25、AI互換性25、VRAM/長期余裕15、性能/W10�
 
 - RX 7900 XT 20GB Sapphire：Bic Cameraに188,280円表示、18,828ポイント表示。ただし販売終了・在庫なし。ポイントは現金値引きに含めない。[商品ページ](https://www.biccamera.com/bc/item/10849706/)
 - RX 7800 XT 16GB Kuroutoshikou：Dospara 67,980円表示だが在庫なし。1年保証の掲載。[商品ページ](https://www.dospara.co.jp/SBR1770/IC511355.html)
-- RX 7900 XTX 24GB：PC4U 189,200円の過去掲載は在庫切れ。
+- RX 7900 XTX 24GB：PC4Uに189,200円表示、品切れ・在庫限り販売終了。[商品ページ](https://www.pc4u.co.jp/view/item/000000082319)。同店のTaichi White 189,900円、Phantom Gaming 179,801円も品切れ。
+- RX 7900 XT 20GB：PC4Uに122,801円・134,800円の表示があるが品切れ。Bic CameraのSapphire 188,280円も販売終了・在庫なし。[PC4U一覧](https://www.pc4u.co.jp/view/category/ct2855)
+- RX 7800 XT 16GB：Dospara 67,980円表示だがオンライン在庫なし、店頭も全店在庫なし。
 - Intel Arc B580 12GB：Arkの過去観測価格54,780円。現行取扱い・在庫は確認できず。
 
 ## 6. WQHD性能・電力・AI
@@ -98,7 +100,7 @@ NVIDIA CUDAはWindowsでのAIライブラリ互換性が広い。AMD ROCm 7.2.1 
 |RTX 5070 12GB|447,697円|2,303円|461,877円|-11,877円|
 |RTX 5070 Ti 16GB|522,697円|-72,697円|未試算|—|
 
-現時点では9700X＋RX 9070 16GB＋32GB RAM＋2TB TLCが432,877円、残額17,123円の最有力仮案。64GB RAMへ増やす費用が未確定なので、完成構成とは扱わない。
+現時点では9700X＋RX 9070 16GB＋32GB RAM＋2TB TLCが432,877円、残額17,123円の最有力仮案。ゲーム性能を優先して9800X3Dへ変更すると同じRX9070＋2TB QLCで445,697円、残額4,303円。TLCにすると459,877円で9,877円超過。いずれもRAM32GBのみで64GB RAMへ増やす費用が未確定なので、完成構成とは扱わない。
 
 ## 8. 互換性・購入手順の注意
 
@@ -132,4 +134,5 @@ NVIDIA CUDAはWindowsでのAIライブラリ互換性が広い。AMD ROCm 7.2.1 
 - [Dospara中古 RTX 4070 SUPER 12GB](https://www.dospara.co.jp/SBR1522/IC648626-50.html)
 - [Tom's Hardware GPU Hierarchy 2026](https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html)
 - [AMD ROCm Windows Compatibility](https://rocm.docs.amd.com/projects/radeon-ryzen/en/latest/docs/compatibility/compatibilityryz/windows/windows_compatibility.html)
-- [TechSpot Ryzen 7 9850X3D Review](https://www.techspot.com/review/3134-amd-ryzen-7-9850x3d/)
+- [TechSpot Ryzen 7 9800X3D Review](https://www.techspot.com/review/2915-amd-ryzen-7-9800x3d/)
+- [TechSpot Ryzen 7 9850X3D Review](https://www.techspot.com/review/3082-amd-ryzen-7-9850x3d/)
