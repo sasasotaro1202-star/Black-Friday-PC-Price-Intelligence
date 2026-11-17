@@ -633,10 +633,13 @@
     "latest_monitor_workflow_run": "2026-11-17 scheduled run",
     "status": "failure",
     "conclusion": "failure",
-    "failed_job": "regression-gate",
-    "observed_failures": 32,
-    "main_reason": "Regression gate stopped data collection. The failure output contains assertions expecting older configuration wording and assumptions; this run did not repair code/tests.",
-    "consequence": "Today's price report was independently reconciled from direct retailer pages. GitHub Actions automated data refresh is not considered healthy until regression gate is repaired and rerun successfully."
+    "failed_step": "Full regression gate before production collection",
+    "tests_run": 451,
+    "failures": 32,
+    "main_reason": "The regression suite still asserts the previous 400,000 JPY total budget and older derived values while config now specifies 450,000 JPY; examples include total_budget_jpy 400000 vs 450000 and the 9700X early-buy threshold 36000 vs 38000. Additional failures cover stale build counts/status labels and report wording.",
+    "current_repository_snapshot": "data/current_latest.json generated_at=2026-11-14T08:51:58+09:00",
+    "latest_full_report": "data/reports/latest.md updated=2026-11-14T08:56:53+09:00; still says total budget 400,000 JPY",
+    "consequence": "The current repository snapshot/report was not promoted by the scheduled workflow. Today's CPU/GPU offers were independently rechecked on direct retailer pages and recorded in the new 2026-11-18 manual ledger/report. GitHub Actions automation is not healthy until stale tests and the publish path are reconciled."
   },
   "sources": [
     "https://joshinweb.jp/mobile/22814/0730143315593.html",
