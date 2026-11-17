@@ -78,11 +78,11 @@
       "warranty": "正規代理店保証3年",
       "return": "返品規定ページへのリンクあり。個別返品条件は購入前に要確認。",
       "tdp_w": 120,
-      "score": 79,
+      "score": 83,
       "score_breakdown": {
         "game_sim": 29,
         "development": 13,
-        "efficiency": 13,
+        "efficiency": 17,
         "price": 10,
         "platform": 5,
         "evidence": 9
@@ -107,11 +107,11 @@
       "warranty": "メーカー保証3年",
       "return": "返品種別B。外箱の擦れ・へこみだけでは返品不可との注意書きあり。",
       "tdp_w": 120,
-      "score": 70,
+      "score": 67,
       "score_breakdown": {
         "game_sim": 30,
         "development": 13,
-        "efficiency": 11,
+        "efficiency": 8,
         "price": 2,
         "platform": 5,
         "evidence": 9
@@ -548,7 +548,7 @@
     }
   ],
   "benchmarks_and_power": {
-    "gpu_benchmark_source": "Tom's Hardware GPU Hierarchy 2026 1440p Ultra raster index, 2026-10-07更新。相対比較であり個別タイトルFPSではない。",
+    "gpu_benchmark_source": "Tom's Hardware GPU Hierarchy 2026、2026-06-24更新。1440p Ultraの11ゲーム幾何平均。DLSS/FSR/Frame Generationなし。RTX 5070 Ti 116.8fps、RX9070 XT 116.5、RX9070 104.0、RTX5070 96.4、RTX5060Ti16GB73.4。",
     "qualitative_wqhd_order": "RTX 5070 Ti ≈ RX 9070 XT > RX 9070 > RTX 5070 > RTX 5060 Ti 16GB",
     "note": "The 5070 Ti and RX 9070 XT are effectively tied in the cited 1440p Ultra raster index; RX 9070 is about 12% behind RX 9070 XT; RTX 5070 is about 21% behind 5070 Ti; RTX 5060 Ti is about 31% behind RTX 5070.",
     "gpu_power_reference": [
@@ -556,34 +556,39 @@
         "model": "RTX 5060 Ti 16GB",
         "measured_game_power_w": 184,
         "board_power_tgp_w": 180,
-        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 6246
+        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 6246,
+        "pcgh_fps_per_w_index": 0.227
       },
       {
         "model": "RX 9070 16GB",
         "measured_game_power_w": 225,
         "board_power_tbp_w": 220,
-        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 7638
+        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 7638,
+        "pcgh_fps_per_w_index": 0.248
       },
       {
         "model": "RTX 5070 12GB",
         "measured_game_power_w": 263,
         "board_power_tgp_w": 250,
-        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 8928
+        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 8928,
+        "pcgh_fps_per_w_index": 0.222
       },
       {
         "model": "RTX 5070 Ti 16GB",
         "measured_game_power_w": 311,
         "board_power_tgp_w": 300,
-        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 10557
+        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 10557,
+        "pcgh_fps_per_w_index": 0.235
       },
       {
         "model": "RX 9070 XT 16GB",
         "measured_game_power_w": 312,
         "board_power_tbp_w": 304,
-        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 10591
+        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 10591,
+        "pcgh_fps_per_w_index": 0.203
       }
     ],
-    "electricity_note": "Annual cost is a rough GPU-only calculation from game-load power at 3 hours/day and 31 JPY/kWh. It is not a wall-power whole-PC measurement.",
+    "electricity_note": "PCGHのゲーム負荷実測電力とRaster FPS/W指数を参照。年間額はGPU単体が最大ゲーム負荷で3時間/日動く仮定、31円/kWh。PC全体の壁電力・実際の平均負荷ではない。",
     "ai_compatibility": "NVIDIA CUDA has the broader Windows AI library path. AMD ROCm on Windows is more limited: the cited ROCm 7.2.1 compatibility documentation lists PyTorch 2.9 and Python 3.12; do not assume full Linux ROCm feature parity or broad third-party library compatibility.",
     "cpu_efficiency": "9700X TDP 65W、9800X3D/9850X3D TDP 120W。ただしTDPは実消費電力ではない。TechSpotの14ゲーム平均では9800X3Dは9700Xより平均30%高速。Cyberpunk 2077で9800X3Dは93W、9700X比11%増の電力で35%高い性能。9850X3Dは9800X3D比で14ゲーム平均5%高速だが、ゲーム時電力24〜35%増、Cinebench EPS電力27%増。9850X3Dは現価格では非推奨。"
   },
@@ -669,7 +674,7 @@
     "final_gate": "Do not approve a build until exact case/GPU dimensions, PSU connectors, RAM QVL, BIOS, M.2 sharing and total delivered price are all verified."
   },
   "decision": {
-    "cpu": "WAIT. 9700X remains best overall value but is 4,800 JPY above the 40,000 JPY target. 9800X3D is 11,800 JPY above target. 9850X3D is not justified.",
+    "cpu": "総合価値は9700X（84点）を僅差で維持。純ゲーム/シミュレーション性能は9800X3Dが優位で、TechSpot 14ゲーム平均では9700X比30%高速。Cyberpunk 2077で93W、9700X比11%増の電力で35%高性能。9800X3Dは予算が許せばゲーム重視候補だが、71,800円で目標60,000円を11,800円超過。9850X3Dは9800X3D比平均5%高速に対しゲーム時電力24〜35%増、Cinebench EPS電力27%増のため非推奨。",
     "gpu_new": "WAIT. RTX 5070 Ti is strongest but 49,800 JPY above target; RX9070 is best power/price balance; RTX5060Ti is preferred if Windows CUDA compatibility is decisive.",
     "gpu_used": "Avoid as default. Current RX9070XT and RTX4070SUPER used listings are C rank with only 3-month warranty and one unit at remote stores.",
     "full_build": "HOLD. Provisional RX9070 + 9700X + 32GB + 2TB TLC scenario is 432,877 JPY, but full parts/64GB/OS/Fukuoka delivery/compatibility are not yet reverified."
@@ -750,6 +755,26 @@
     {
       "name": "PC4U ASRock RX 7900 XTX Taichi White 24GB",
       "url": "https://www.pc4u.co.jp/view/item/000000082335?category_page_id=ct2855"
+    },
+    {
+      "name": "Tom's Hardware GPU Hierarchy 2026",
+      "url": "https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html"
+    },
+    {
+      "name": "PC Games Hardware RX 9070/9070 XT/RTX 5070/5070 Ti power",
+      "url": "https://www.pcgameshardware.de/Radeon-RX-9070-XT-Grafikkarte-281023/Tests/Preis-Test-kaufen-Release-Specs-Benchmark-1467270/6/"
+    },
+    {
+      "name": "PC Games Hardware RTX 5060 Ti power",
+      "url": "https://www.pcgameshardware.de/Geforce-RTX-5060-Ti-16GB-Grafikkarte-281131/Tests/Release-Review-Preis-kaufen-Benchmark-Specs-1470373/6/"
+    },
+    {
+      "name": "PC Games Hardware Raster FPS/W 2026",
+      "url": "https://www.pcgameshardware.de/Grafikkarten-Grafikkarte-97980/Specials/Welche-Grafikkarte-verbraucht-am-wenigsten-Strom-1450597/"
+    },
+    {
+      "name": "AMD Radeon Windows PyTorch compatibility matrix",
+      "url": "https://rocm.docs.amd.com/projects/radeon-ryzen/en/latest/docs/compatibility/compatibilityrad/windows/windows_compatibility.html"
     }
   ]
 }
