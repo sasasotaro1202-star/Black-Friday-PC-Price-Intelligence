@@ -268,7 +268,7 @@
       "tgp_w": 250,
       "vram_gb": 12,
       "connector": "16ピン×1",
-      "recommended_psu_w": 650,
+      "recommended_psu_w": null,
       "dimensions_mm": "236 x 126 x 50",
       "score": 74,
       "score_breakdown": {
@@ -282,7 +282,7 @@
       "evidence_completeness": 90,
       "url": "https://www.pc-koubou.jp/products/detail.php?product_id=1133257",
       "source_checked": "2026-11-17",
-      "note": "11/16の166,800円から12,000円値下げ。ただし12GB VRAMと購入目標超過が弱点。"
+      "note": "11/16の166,800円から12,000円値下げ。標準保証期間と推奨電源容量は商品ページで未確認。"
     }
   ],
   "gpu_used_offers": [
@@ -447,16 +447,16 @@
       "sku": "Kuroutoshikou RX 7800 XT 16GB RD-RX7800XT-E16GB/DF",
       "price_jpy": 67980,
       "retailer": "Dospara",
-      "stock_status": "out_of_stock",
-      "warranty": "1年",
-      "url": "https://www.dospara.co.jp/SBR1770/IC511355.html"
+      "stock_status": "out_of_stock_all_store_listings",
+      "url": "https://www.dospara.co.jp/SBR1770/IC511355.html",
+      "note": "67,980円の価格表示はあるが、Dosparaオンライン在庫なし・店頭在庫なし。"
     },
     {
       "sku": "RX 7900 XTX 24GB Sapphire (PC4U listing)",
       "price_jpy": 189200,
       "retailer": "PC4U",
-      "stock_status": "out_of_stock",
-      "url": "https://www.pc4u.co.jp/"
+      "stock_status": "sold_out_end_of_life",
+      "url": "https://www.pc4u.co.jp/view/item/000000082319"
     },
     {
       "sku": "Intel Arc B580 12GB ASRock Challenger",
@@ -464,6 +464,27 @@
       "retailer": "Ark prior observed price",
       "stock_status": "end_of_life_or_not_handled",
       "url": "https://www.ark-pc.co.jp/"
+    },
+    {
+      "sku": "ASRock RX7900XT Phantom Gaming White 20GB",
+      "price_jpy": 122801,
+      "retailer": "PC4U",
+      "stock_status": "sold_out",
+      "url": "https://www.pc4u.co.jp/view/category/ct2855"
+    },
+    {
+      "sku": "ASRock RX7900XT Phantom Gaming 20GB",
+      "price_jpy": 134800,
+      "retailer": "PC4U",
+      "stock_status": "sold_out",
+      "url": "https://www.pc4u.co.jp/view/category/ct2855"
+    },
+    {
+      "sku": "ASRock RX7900XTX Taichi White 24GB",
+      "price_jpy": 189900,
+      "retailer": "PC4U",
+      "stock_status": "sold_out",
+      "url": "https://www.pc4u.co.jp/view/category/ct2855"
     }
   ],
   "price_change_summary": [
@@ -526,7 +547,7 @@
     }
   ],
   "benchmarks_and_power": {
-    "gpu_benchmark_source": "Tom's Hardware GPU Hierarchy 2026 1440p Ultra raster index, updated 2026-10-07; relative comparison only, not title-specific FPS.",
+    "gpu_benchmark_source": "Tom's Hardware GPU Hierarchy 2026 1440p Ultra raster index, 2026-10-07更新。相対比較であり個別タイトルFPSではない。",
     "qualitative_wqhd_order": "RTX 5070 Ti ≈ RX 9070 XT > RX 9070 > RTX 5070 > RTX 5060 Ti 16GB",
     "note": "The 5070 Ti and RX 9070 XT are effectively tied in the cited 1440p Ultra raster index; RX 9070 is about 12% behind RX 9070 XT; RTX 5070 is about 21% behind 5070 Ti; RTX 5060 Ti is about 31% behind RTX 5070.",
     "gpu_power_reference": [
@@ -563,7 +584,7 @@
     ],
     "electricity_note": "Annual cost is a rough GPU-only calculation from game-load power at 3 hours/day and 31 JPY/kWh. It is not a wall-power whole-PC measurement.",
     "ai_compatibility": "NVIDIA CUDA has the broader Windows AI library path. AMD ROCm on Windows is more limited: the cited ROCm 7.2.1 compatibility documentation lists PyTorch 2.9 and Python 3.12; do not assume full Linux ROCm feature parity or broad third-party library compatibility.",
-    "cpu_efficiency": "9700X TDP 65W; 9800X3D/9850X3D TDP 120W. TDP is not measured wall power. TechSpot 9850X3D testing indicates small average gaming uplift over 9800X3D with a larger power increase; 9850X3D remains poor value at 79,443 JPY."
+    "cpu_efficiency": "9700X TDP 65W、9800X3D/9850X3D TDP 120W。ただしTDPは実消費電力ではない。TechSpotの14ゲーム平均では9800X3Dは9700Xより平均30%高速。Cyberpunk 2077で9800X3Dは93W、9700X比11%増の電力で35%高い性能。9850X3Dは9800X3D比で14ゲーム平均5%高速だが、ゲーム時電力24〜35%増、Cinebench EPS電力27%増。9850X3Dは現価格では非推奨。"
   },
   "build_estimates": [
     {
@@ -613,6 +634,18 @@
       "total_jpy": 522697,
       "remaining_jpy": -72697,
       "status": "provisional carry-forward; uses PNY 229,800 JPY; exceeds cap"
+    },
+    {
+      "build": "9800X3D + RX 9070 16GB + 32GB RAM + 2TB QLC",
+      "total_jpy": 445697,
+      "remaining_jpy": 4303,
+      "status": "provisional carry-forward; non-CPU/GPU parts not reverified 11/17"
+    },
+    {
+      "build": "9800X3D + RX 9070 16GB + 32GB RAM + 2TB TLC",
+      "total_jpy": 459877,
+      "remaining_jpy": -9877,
+      "status": "provisional carry-forward; exceeds cap"
     }
   ],
   "build_assumptions": {
@@ -688,6 +721,22 @@
     {
       "name": "Dospara Kuroutoshikou RX 7800 XT 16GB",
       "url": "https://www.dospara.co.jp/SBR1770/IC511355.html"
+    },
+    {
+      "name": "PC4U Sapphire RX 7900 XTX 24GB",
+      "url": "https://www.pc4u.co.jp/view/item/000000082319"
+    },
+    {
+      "name": "PC4U RX 7900 XT/XTX listings",
+      "url": "https://www.pc4u.co.jp/view/category/ct2855"
+    },
+    {
+      "name": "TechSpot Ryzen 7 9800X3D Review",
+      "url": "https://www.techspot.com/review/2915-amd-ryzen-7-9800x3d/"
+    },
+    {
+      "name": "TechSpot Ryzen 7 9850X3D Review",
+      "url": "https://www.techspot.com/review/3082-amd-ryzen-7-9850x3d/"
     }
   ]
 }
