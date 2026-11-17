@@ -463,28 +463,29 @@
       "price_jpy": 54780,
       "retailer": "Ark prior observed price",
       "stock_status": "end_of_life_or_not_handled",
-      "url": "https://www.ark-pc.co.jp/"
+      "url": null,
+      "note": "現行の直接販売ページは確認できず。54,780円は過去観測価格のみ。"
     },
     {
       "sku": "ASRock RX7900XT Phantom Gaming White 20GB",
       "price_jpy": 122801,
       "retailer": "PC4U",
       "stock_status": "sold_out",
-      "url": "https://www.pc4u.co.jp/view/category/ct2855"
+      "url": "https://www.pc4u.co.jp/view/item/000000093241?category_page_id=ct2855"
     },
     {
       "sku": "ASRock RX7900XT Phantom Gaming 20GB",
       "price_jpy": 134800,
       "retailer": "PC4U",
       "stock_status": "sold_out",
-      "url": "https://www.pc4u.co.jp/view/category/ct2855"
+      "url": "https://www.pc4u.co.jp/view/item/000000081395?category_page_id=ct2855"
     },
     {
       "sku": "ASRock RX7900XTX Taichi White 24GB",
       "price_jpy": 189900,
       "retailer": "PC4U",
       "stock_status": "sold_out",
-      "url": "https://www.pc4u.co.jp/view/category/ct2855"
+      "url": "https://www.pc4u.co.jp/view/item/000000082335?category_page_id=ct2855"
     }
   ],
   "price_change_summary": [
@@ -737,6 +738,18 @@
     {
       "name": "TechSpot Ryzen 7 9850X3D Review",
       "url": "https://www.techspot.com/review/3082-amd-ryzen-7-9850x3d/"
+    },
+    {
+      "name": "PC4U ASRock RX 7900 XT Phantom Gaming White 20GB",
+      "url": "https://www.pc4u.co.jp/view/item/000000093241?category_page_id=ct2855"
+    },
+    {
+      "name": "PC4U ASRock RX 7900 XT Phantom Gaming 20GB",
+      "url": "https://www.pc4u.co.jp/view/item/000000081395?category_page_id=ct2855"
+    },
+    {
+      "name": "PC4U ASRock RX 7900 XTX Taichi White 24GB",
+      "url": "https://www.pc4u.co.jp/view/item/000000082335?category_page_id=ct2855"
     }
   ]
 }
