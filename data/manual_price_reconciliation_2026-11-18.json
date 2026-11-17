@@ -32,13 +32,17 @@
       "purchase_evidence_and_warranty": 10
     },
     "evidence_completeness_weights": {
-      "exact_direct_page_and_sku": 30,
-      "current_stock_state": 25,
-      "shipping_dispatch_and_fukuoka_total": 20,
-      "warranty_and_return_terms": 15,
-      "technical_and_compatibility_data": 10
+      "exact_direct_page_sku_and_pit": 30,
+      "saleable_stock": 25,
+      "verified_final_checkout_total": 25,
+      "compatibility": 20
     },
-    "interpretation": "100点は用途適合・性能・効率・価格の比較点。購入確率や購入許可ではない。証拠充足度は別の100点で表示。実測と推定を分離する。"
+    "interpretation": "100点は用途適合・性能・効率・価格の比較点。購入確率や購入許可ではない。証拠充足度は別の100点で表示。実測と推定を分離する。 購入根拠充足度は、直接価格/PIT・販売可能在庫・検証済み最終決済総額・互換性の既存ルーブリックに準拠。保証/返品、在庫、販売元の証拠は別スコアで表示する。",
+    "separate_proof_scores": {
+      "warranty_and_return": "0-100, explicit standard warranty and return/initial-failure terms",
+      "stock": "0-100, direct current listing status; online orderable is distinct from store stock",
+      "seller": "0-100, seller identity and retailer authenticity"
+    }
   },
   "cpu_offers": [
     {
@@ -65,10 +69,19 @@
         "platform": 5,
         "evidence": 9
       },
-      "evidence_completeness": 91,
+      "evidence_completeness": 65,
       "url": "https://joshinweb.jp/mobile/22814/0730143315593.html",
       "checked_at": "2026-11-18",
-      "note": "11/13のJoshin直販記録49,800円から2,000円下落。11/17のArk44,800円記録より3,000円高いが、Arkページは本日再取得できず、販売店をまたぐ比較。"
+      "note": "11/13のJoshin直販記録49,800円から2,000円下落。11/17のArk44,800円記録より3,000円高いが、Arkページは本日再取得できず、販売店をまたぐ比較。",
+      "purchase_evidence_breakdown": {
+        "direct_price_sku_pit": 30,
+        "saleable_stock": 25,
+        "verified_checkout_total": 0,
+        "compatibility": 10
+      },
+      "stock_evidence_score": 100,
+      "warranty_return_evidence_score": 80,
+      "seller_evidence_score": 100
     },
     {
       "model": "AMD Ryzen 7 9800X3D BOX",
@@ -94,10 +107,19 @@
         "platform": 5,
         "evidence": 9
       },
-      "evidence_completeness": 91,
+      "evidence_completeness": 65,
       "url": "https://joshinweb.jp/mobile/22814/0730143315289.html",
       "checked_at": "2026-11-18",
-      "note": "11/17 Ark記録と同額だが販売店が異なる。ゲーム・シミュレーション性能を重視する場合の候補。"
+      "note": "11/17 Ark記録と同額だが販売店が異なる。ゲーム・シミュレーション性能を重視する場合の候補。",
+      "purchase_evidence_breakdown": {
+        "direct_price_sku_pit": 30,
+        "saleable_stock": 25,
+        "verified_checkout_total": 0,
+        "compatibility": 10
+      },
+      "stock_evidence_score": 100,
+      "warranty_return_evidence_score": 80,
+      "seller_evidence_score": 100
     },
     {
       "model": "AMD Ryzen 7 9850X3D BOX",
@@ -123,10 +145,19 @@
         "platform": 5,
         "evidence": 9
       },
-      "evidence_completeness": 91,
+      "evidence_completeness": 65,
       "url": "https://joshinweb.jp/mobile/22814/0730143318280.html",
       "checked_at": "2026-11-18",
-      "note": "11/17と同額。9800X3D比でゲーム性能の伸びが小さく、消費電力増加を考慮すると優先度は低い。"
+      "note": "11/17と同額。9800X3D比でゲーム性能の伸びが小さく、消費電力増加を考慮すると優先度は低い。",
+      "purchase_evidence_breakdown": {
+        "direct_price_sku_pit": 30,
+        "saleable_stock": 25,
+        "verified_checkout_total": 0,
+        "compatibility": 10
+      },
+      "stock_evidence_score": 100,
+      "warranty_return_evidence_score": 80,
+      "seller_evidence_score": 100
     }
   ],
   "gpu_new_offers": [
@@ -157,10 +188,19 @@
         "price": 5,
         "evidence": 10
       },
-      "evidence_completeness": 94,
+      "evidence_completeness": 65,
       "url": "https://www.dospara.co.jp/SBR1892/IC634895.html",
       "checked_at": "2026-11-18",
-      "note": "11/17と同額。オンライン注文可能。店頭は博多店を含め在庫問い合わせ表示が中心。"
+      "note": "11/17と同額。オンライン注文可能。店頭は博多店を含め在庫問い合わせ表示が中心。",
+      "purchase_evidence_breakdown": {
+        "direct_price_sku_pit": 30,
+        "saleable_stock": 25,
+        "verified_checkout_total": 0,
+        "compatibility": 10
+      },
+      "stock_evidence_score": 100,
+      "warranty_return_evidence_score": 100,
+      "seller_evidence_score": 100
     },
     {
       "model": "ASRock Radeon RX 9070 Challenger 16GB",
@@ -190,10 +230,19 @@
         "price": 8,
         "evidence": 9
       },
-      "evidence_completeness": 92,
+      "evidence_completeness": 67,
       "url": "https://joshinweb.jp/mobile/51/4711581490475.html",
       "checked_at": "2026-11-18",
-      "note": "11/17と同額。電力効率と16GB VRAMのバランスが現行新品候補で最良。Windows ROCmの制約は要確認。"
+      "note": "11/17と同額。電力効率と16GB VRAMのバランスが現行新品候補で最良。Windows ROCmの制約は要確認。",
+      "purchase_evidence_breakdown": {
+        "direct_price_sku_pit": 30,
+        "saleable_stock": 25,
+        "verified_checkout_total": 0,
+        "compatibility": 12
+      },
+      "stock_evidence_score": 100,
+      "warranty_return_evidence_score": 80,
+      "seller_evidence_score": 100
     },
     {
       "model": "PNY GeForce RTX 5060 Ti 16GB Overclocked Dualfan",
@@ -224,10 +273,19 @@
         "price": 5,
         "evidence": 9
       },
-      "evidence_completeness": 92,
+      "evidence_completeness": 67,
       "url": "https://joshinweb.jp/mobile/51/0751492795072.html",
       "checked_at": "2026-11-18",
-      "note": "11/17と同額。CUDAと16GB、180W、3年保証が強み。WQHD描画性能は上位GPUより低い。"
+      "note": "11/17と同額。CUDAと16GB、180W、3年保証が強み。WQHD描画性能は上位GPUより低い。",
+      "purchase_evidence_breakdown": {
+        "direct_price_sku_pit": 30,
+        "saleable_stock": 25,
+        "verified_checkout_total": 0,
+        "compatibility": 12
+      },
+      "stock_evidence_score": 100,
+      "warranty_return_evidence_score": 80,
+      "seller_evidence_score": 100
     },
     {
       "model": "ASRock Radeon RX 9070 XT Steel Legend DARK 16GB",
@@ -259,10 +317,19 @@
         "price": 5,
         "evidence": 9
       },
-      "evidence_completeness": 92,
+      "evidence_completeness": 67,
       "url": "https://joshinweb.jp/mobile/51/4711581490697.html",
       "checked_at": "2026-11-18",
-      "note": "11/17と同額。高性能だが304W・推奨800Wで、電力効率と電源費用に注意。"
+      "note": "11/17と同額。高性能だが304W・推奨800Wで、電力効率と電源費用に注意。",
+      "purchase_evidence_breakdown": {
+        "direct_price_sku_pit": 30,
+        "saleable_stock": 25,
+        "verified_checkout_total": 0,
+        "compatibility": 12
+      },
+      "stock_evidence_score": 100,
+      "warranty_return_evidence_score": 80,
+      "seller_evidence_score": 100
     },
     {
       "model": "MSI GeForce RTX 5070 12G VENTUS 2X OC",
@@ -295,10 +362,19 @@
         "price": 2,
         "evidence": 8
       },
-      "evidence_completeness": 80,
+      "evidence_completeness": 63,
       "url": "https://www.pc-koubou.jp/products/detail.php?product_id=1133257",
       "checked_at": "2026-11-18",
-      "note": "11/13から12,000円下落、11/17からは変化なし。12GB VRAMと標準保証の未確認が弱点。"
+      "note": "11/13から12,000円下落、11/17からは変化なし。12GB VRAMと標準保証の未確認が弱点。",
+      "purchase_evidence_breakdown": {
+        "direct_price_sku_pit": 30,
+        "saleable_stock": 25,
+        "verified_checkout_total": 0,
+        "compatibility": 8
+      },
+      "stock_evidence_score": 100,
+      "warranty_return_evidence_score": 40,
+      "seller_evidence_score": 100
     }
   ],
   "gpu_used_offers": [
@@ -322,10 +398,19 @@
         "price": 13,
         "evidence": 4
       },
-      "evidence_completeness": 75,
+      "evidence_completeness": 58,
       "url": "https://www.dospara.co.jp/SBR1522/IC683590.html",
       "checked_at": "2026-11-18",
-      "note": "新品RX9070XT 148,000円との差は22,100円のみ。新品2年保証に対して中古3か月保証のため割引幅が小さい。"
+      "note": "新品RX9070XT 148,000円との差は22,100円のみ。新品2年保証に対して中古3か月保証のため割引幅が小さい。",
+      "purchase_evidence_breakdown": {
+        "direct_price_sku_pit": 30,
+        "saleable_stock": 18,
+        "verified_checkout_total": 0,
+        "compatibility": 10
+      },
+      "stock_evidence_score": 72,
+      "warranty_return_evidence_score": 60,
+      "seller_evidence_score": 100
     },
     {
       "model": "PNY GeForce RTX 4070 SUPER 12GB VERTO OC",
@@ -347,10 +432,19 @@
         "price": 7,
         "evidence": 6
       },
-      "evidence_completeness": 75,
+      "evidence_completeness": 58,
       "url": "https://www.dospara.co.jp/SBR1522/IC648626-50.html",
       "checked_at": "2026-11-18",
-      "note": "12GB・Cランク・3か月保証。新品RX9070/RTX5060Tiと比べて積極的に選ぶ根拠は弱い。"
+      "note": "12GB・Cランク・3か月保証。新品RX9070/RTX5060Tiと比べて積極的に選ぶ根拠は弱い。",
+      "purchase_evidence_breakdown": {
+        "direct_price_sku_pit": 30,
+        "saleable_stock": 18,
+        "verified_checkout_total": 0,
+        "compatibility": 10
+      },
+      "stock_evidence_score": 72,
+      "warranty_return_evidence_score": 60,
+      "seller_evidence_score": 100
     }
   ],
   "non_buyable_price_observations": [
