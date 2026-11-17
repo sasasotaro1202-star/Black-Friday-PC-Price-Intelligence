@@ -23,15 +23,15 @@ GPU：WQHDラスタ性能25、AI互換性25、VRAM/長期余裕15、性能/W10�
 |順位|CPU|現在価格|目標との差|点数|証拠|販売条件|
 |---:|---|---:|---:|---:|---:|---|
 |1|Ryzen 7 9700X（総合価値）|44,800円|+4,800円|84|97|Ark在庫あり、送料無料、3年保証、対象決済15時まで当日出荷|
-|2|Ryzen 7 9800X3D（ゲーム性能）|71,800円|+11,800円|79|96|Ark在庫あり、送料無料、3年保証、対象決済15時まで当日出荷|
-|3|Ryzen 7 9850X3D|79,443円|+19,443円|70|96|Joshin在庫あり、送料無料、3年保証、11/17出荷表示|
+|2|Ryzen 7 9800X3D（ゲーム性能）|71,800円|+11,800円|83|96|Ark在庫あり、送料無料、3年保証、対象決済15時まで当日出荷|
+|3|Ryzen 7 9850X3D|79,443円|+19,443円|67|96|Joshin在庫あり、送料無料、3年保証、11/17出荷表示|
 
 商品ページ：
 - [Ark Ryzen 7 9700X](https://www.ark-pc.co.jp/i/10240257/)
 - [Ark Ryzen 7 9800X3D](https://www.ark-pc.co.jp/i/10240267/)
 - [Joshin Ryzen 7 9850X3D](https://joshinweb.jp/mobile/22814/0730143318280.html)
 
-9700Xは65W TDPで価格・電力効率のバランスが最良。ただし目標40,000円に4,800円届いていない。ゲーム性能だけなら9800X3Dが明確に上で、TechSpotの14ゲーム平均では9700X比約30%高速。Cyberpunk 2077では93W、9700X比11%増の電力で35%高い性能だった。Cities: Skylines IIやHOI4の個別実測ではないが、シミュレーション重視なら9800X3Dを選ぶ合理性がある。9850X3Dは9800X3D比14ゲーム平均5%高速にとどまり、ゲーム時電力は24〜35%増、Cinebench EPS電力は27%増。現在の差額7,643円では優先度を下げる。
+総合価値点は9700X84、9800X3D83。純ゲーム/シミュレーション性能は9800X3Dが上で、TechSpotの14ゲーム平均では9700X比約30%高速。Cyberpunk 2077では93W、9700X比11%増の電力で35%高性能。Cities: Skylines IIやHOI4の個別実測ではないが、シミュレーション重視なら9800X3Dを選ぶ合理性がある。9700Xは65W TDPと価格差27,000円が強み。9850X3Dは9800X3D比14ゲーム平均5%高速にとどまり、ゲーム時電力は24〜35%増、Cinebench EPS電力は27%増。現在の差額7,643円では優先度を下げる。
 
 ## 3. GPUランキング（新品）
 
@@ -80,11 +80,11 @@ GPU：WQHDラスタ性能25、AI互換性25、VRAM/長期余裕15、性能/W10�
 
 ## 6. WQHD性能・電力・AI
 
-Tom's Hardwareの2026年10月更新1440p Ultraラスタ比較では、RTX 5070 TiとRX 9070 XTがほぼ同等、RX 9070はRX 9070 XTより約12%下、RTX 5070はRTX 5070 Tiより約21%下、RTX 5060 TiはRTX 5070より約31%下。これは平均ラスタ比較であり、Cities: Skylines II等の個別タイトルFPSではない。
+Tom's Hardwareの2026年6月更新・1440p Ultra・11ゲーム幾何平均（ネイティブ、DLSS/FSR/フレーム生成なし）では、RTX 5070 Ti 116.8fps、RX 9070 XT 116.5fps、RX 9070 104.0fps、RTX 5070 96.4fps、RTX 5060 Ti 16GB 73.4fps。これは11ゲームの平均で、Cities: Skylines II等の個別タイトルFPSではない。
 
 公称TGP/TBP：RTX 5060 Ti 180W、RX 9070 220W、RTX 5070 250W、RTX 5070 Ti 300W、RX 9070 XT 304W。実ゲーム負荷の電力はカード・ゲームで変わる。PC全体の壁コンセント実測値は未取得。
 
-3時間/日・31円/kWhでGPU単体のゲーム負荷電力を試算した参考年間額：RTX 5060 Ti約6,246円、RX 9070約7,638円、RTX 5070約8,928円、RTX 5070 Ti約10,557円、RX 9070 XT約10,591円。PC全体の年間電気代ではない。
+PCGHの最大ゲーム負荷実測はRTX 5060 Ti 184W、RX 9070 225W、RTX 5070 263W、RTX 5070 Ti 311W、RX 9070 XT 312W。3時間/日・31円/kWhでGPU単体を試算すると年間約6,246円、7,638円、8,928円、10,557円、10,591円。PC全体の年間電気代ではない。PCGHのRaster FPS/W指数はRX 9070 0.248、RTX 5070 Ti 0.235、RTX 5060 Ti 0.227、RTX 5070 0.222、RX 9070 XT 0.203。RX 9070が最も電力効率に優れる。
 
 NVIDIA CUDAはWindowsでのAIライブラリ互換性が広い。AMD ROCm 7.2.1 Windows版はPyTorch 2.9・Python 3.12等の制約があり、Linux版と同等の互換性を前提にしない。Windowsでローカル学習・各種ライブラリを広く使うならRTX 5060 Ti 16GB以上を優先。ゲーム性能/電力効率を優先し、利用ライブラリが対応するならRX 9070が有力。
 
@@ -135,4 +135,8 @@ NVIDIA CUDAはWindowsでのAIライブラリ互換性が広い。AMD ROCm 7.2.1 
 - [Tom's Hardware GPU Hierarchy 2026](https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html)
 - [AMD ROCm Windows Compatibility](https://rocm.docs.amd.com/projects/radeon-ryzen/en/latest/docs/compatibility/compatibilityryz/windows/windows_compatibility.html)
 - [TechSpot Ryzen 7 9800X3D Review](https://www.techspot.com/review/2915-amd-ryzen-7-9800x3d/)
+- [PC Games Hardware GPU power measurements](https://www.pcgameshardware.de/Radeon-RX-9070-XT-Grafikkarte-281023/Tests/Preis-Test-kaufen-Release-Specs-Benchmark-1467270/6/)
+- [PC Games Hardware RTX 5060 Ti power measurements](https://www.pcgameshardware.de/Geforce-RTX-5060-Ti-16GB-Grafikkarte-281131/Tests/Release-Review-Preis-kaufen-Benchmark-Specs-1470373/6/)
+- [PC Games Hardware Raster FPS/W 2026](https://www.pcgameshardware.de/Grafikkarten-Grafikkarte-97980/Specials/Welche-Grafikkarte-verbraucht-am-wenigsten-Strom-1450597/)
+- [AMD Radeon Windows PyTorch support matrix](https://rocm.docs.amd.com/projects/radeon-ryzen/en/latest/docs/compatibility/compatibilityrad/windows/windows_compatibility.html)
 - [TechSpot Ryzen 7 9850X3D Review](https://www.techspot.com/review/3082-amd-ryzen-7-9850x3d/)
