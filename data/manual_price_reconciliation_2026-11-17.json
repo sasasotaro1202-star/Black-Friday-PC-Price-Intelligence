@@ -554,43 +554,43 @@
     "gpu_power_reference": [
       {
         "model": "RTX 5060 Ti 16GB",
-        "measured_game_power_w": 184,
+        "pcgh_average_power_w": 160,
         "board_power_tgp_w": 180,
-        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 6246,
+        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 5431,
         "pcgh_fps_per_w_index": 0.227
       },
       {
         "model": "RX 9070 16GB",
-        "measured_game_power_w": 225,
+        "pcgh_average_power_w": 220,
         "board_power_tbp_w": 220,
-        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 7638,
+        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 7468,
         "pcgh_fps_per_w_index": 0.248
       },
       {
         "model": "RTX 5070 12GB",
-        "measured_game_power_w": 263,
+        "pcgh_average_power_w": 225,
         "board_power_tgp_w": 250,
-        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 8928,
+        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 7638,
         "pcgh_fps_per_w_index": 0.222
       },
       {
         "model": "RTX 5070 Ti 16GB",
-        "measured_game_power_w": 311,
+        "pcgh_average_power_w": 260,
         "board_power_tgp_w": 300,
-        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 10557,
+        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 8826,
         "pcgh_fps_per_w_index": 0.235
       },
       {
         "model": "RX 9070 XT 16GB",
-        "measured_game_power_w": 312,
+        "pcgh_average_power_w": 305,
         "board_power_tbp_w": 304,
-        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 10591,
+        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 10353,
         "pcgh_fps_per_w_index": 0.203
       }
     ],
-    "electricity_note": "PCGHのゲーム負荷実測電力とRaster FPS/W指数を参照。年間額はGPU単体が最大ゲーム負荷で3時間/日動く仮定、31円/kWh。PC全体の壁電力・実際の平均負荷ではない。",
+    "electricity_note": "PC Games Hardwareの平均ゲーム負荷電力・Raster FPS/W指数。年間額は平均電力でGPU単体を3時間/日使用、31円/kWhと仮定。PC全体の壁電力ではない。騒音dBAはこのAIB SKUの同一条件実測を確認できていない。",
     "ai_compatibility": "NVIDIA CUDA has the broader Windows AI library path. AMD ROCm on Windows is more limited: the cited ROCm 7.2.1 compatibility documentation lists PyTorch 2.9 and Python 3.12; do not assume full Linux ROCm feature parity or broad third-party library compatibility.",
-    "cpu_efficiency": "9700X TDP 65W、9800X3D/9850X3D TDP 120W。ただしTDPは実消費電力ではない。TechSpotの14ゲーム平均では9800X3Dは9700Xより平均30%高速。Cyberpunk 2077で9800X3Dは93W、9700X比11%増の電力で35%高い性能。9850X3Dは9800X3D比で14ゲーム平均5%高速だが、ゲーム時電力24〜35%増、Cinebench EPS電力27%増。9850X3Dは現価格では非推奨。"
+    "cpu_efficiency": "9700X TDP 65W、9800X3D/9850X3D TDP 120W。ただしTDPは実消費電力ではない。TechSpotのCPU制限条件の14ゲーム平均では9800X3Dは9700Xより平均約30%高速。Cyberpunk 2077で9800X3Dは93W、9700X比11%増の電力で35%高性能。9850X3Dは9800X3D比で14ゲーム平均5%高速だが、ゲーム時電力24〜35%増、Cinebench EPS電力27%増。"
   },
   "build_estimates": [
     {
@@ -657,12 +657,14 @@
   "build_assumptions": {
     "ram": "32GB minimum only; 64GB price and QVL not revalidated on 11/17.",
     "ssd": "2TB QLC/TLC variants; prior price records carried forward, not revalidated on 11/17.",
-    "peripherals": "Monitor/keyboard/mouse/mousepad subtotal 33,263 JPY from prior record.",
+    "peripherals": "34,180 JPY = AOC monitor 18,900 + Logitech G213r 7,670 + Logitech G304 5,190 + SteelSeries QcK+ 2,420; these are prior-day direct offers and not revalidated on 11/17.",
     "shipping_reserve_jpy": 6000,
     "small_items_jpy": 3000,
     "contingency_jpy": 5000,
     "exclusions": "Sub-monitor, speakers, headset excluded.",
-    "bto": "BTO configuration comparison not reverified on 11/17."
+    "bto": "BTO configuration comparison not reverified on 11/17.",
+    "windows_os": "Windows 11 Home Japanese retail pack HAJ-00094 18,980 JPY was included in prior-day build baseline; not revalidated on 11/17 and dispatch date was unconfirmed due retailer-side delay.",
+    "note": "Build totals include Windows 11 Home 18,980 JPY, monitor/peripherals 34,180 JPY, shipping reserve 6,000 JPY, small items 3,000 JPY and contingency 5,000 JPY. All non-CPU/GPU component prices are carried forward from 11/16, not revalidated 11/17. 32GB RAM only; 64GB price/QVL unconfirmed."
   },
   "compatibility_audit": {
     "cpu": "AM5 motherboard must have Ryzen 9000-capable BIOS; USB BIOS Flashback strongly preferred.",
@@ -775,6 +777,22 @@
     {
       "name": "AMD Radeon Windows PyTorch compatibility matrix",
       "url": "https://rocm.docs.amd.com/projects/radeon-ryzen/en/latest/docs/compatibility/compatibilityrad/windows/windows_compatibility.html"
+    },
+    {
+      "name": "PC Games Hardware GPU average power and raster FPS/W 2026",
+      "url": "https://www.pcgameshardware.de/Grafikkarten-Grafikkarte-97980/Specials/Welche-Grafikkarte-verbraucht-am-wenigsten-Strom-1450597/"
+    },
+    {
+      "name": "NVIDIA CUDA Windows installation guide",
+      "url": "https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/"
+    },
+    {
+      "name": "AMD ROCm Radeon Windows compatibility",
+      "url": "https://rocm.docs.amd.com/projects/radeon-ryzen/en/latest/docs/compatibility/compatibilityrad/windows/windows_compatibility.html"
+    },
+    {
+      "name": "AMD ROCm PyTorch Windows install guide",
+      "url": "https://rocm.docs.amd.com/projects/radeon-ryzen/en/latest/docs/install/installrad/windows/install-pytorch.html"
     }
   ]
 }
