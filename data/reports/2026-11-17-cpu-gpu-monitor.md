@@ -73,8 +73,8 @@ GPU：WQHDラスタ性能25、AI互換性25、VRAM/長期余裕15、性能/W10�
 
 - RX 7900 XT 20GB Sapphire：Bic Cameraに188,280円表示、18,828ポイント表示。ただし販売終了・在庫なし。ポイントは現金値引きに含めない。[商品ページ](https://www.biccamera.com/bc/item/10849706/)
 - RX 7800 XT 16GB Kuroutoshikou：Dospara 67,980円表示だが在庫なし。1年保証の掲載。[商品ページ](https://www.dospara.co.jp/SBR1770/IC511355.html)
-- RX 7900 XTX 24GB：PC4Uに189,200円表示、品切れ・在庫限り販売終了。[商品ページ](https://www.pc4u.co.jp/view/item/000000082319)。同店のTaichi White 189,900円、Phantom Gaming 179,801円も品切れ。
-- RX 7900 XT 20GB：PC4Uに122,801円・134,800円の表示があるが品切れ。Bic CameraのSapphire 188,280円も販売終了・在庫なし。[PC4U一覧](https://www.pc4u.co.jp/view/category/ct2855)
+- RX 7900 XTX 24GB：PC4U Sapphire 189,200円は品切れ・在庫限り販売終了（[個別ページ](https://www.pc4u.co.jp/view/item/000000082319)）。ASRock Taichi White 189,900円も品切れ（[個別ページ](https://www.pc4u.co.jp/view/item/000000082335?category_page_id=ct2855)）。同店Phantom Gaming 179,801円も品切れ。
+- RX 7900 XT 20GB：PC4U ASRock Phantom Gaming White 122,801円（[個別ページ](https://www.pc4u.co.jp/view/item/000000093241?category_page_id=ct2855)）、Phantom Gaming 134,800円（[個別ページ](https://www.pc4u.co.jp/view/item/000000081395?category_page_id=ct2855)）はいずれも品切れ。Bic CameraのSapphire 188,280円も販売終了・在庫なし。[PC4U一覧](https://www.pc4u.co.jp/view/category/ct2855)
 - RX 7800 XT 16GB：Dospara 67,980円表示だがオンライン在庫なし、店頭も全店在庫なし。
 - Intel Arc B580 12GB：Arkの過去観測価格54,780円。現行取扱い・在庫は確認できず。
 
