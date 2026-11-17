@@ -1,0 +1,693 @@
+{
+  "report_date": "2026-11-17",
+  "captured_at": "2026-11-17T09:16:39+09:00",
+  "monitoring_period": {
+    "start": "2026-11-14",
+    "end": "2026-11-30",
+    "final_report": "2026-11-30"
+  },
+  "purpose": "45万円以内のPC一式購入判断。購入・注文・決済・予約は実行しない。",
+  "source_reconciliation": {
+    "prior_ledger_read": "data/manual_price_reconciliation_2026-11-13.json",
+    "latest_prior_ledger_read": "data/manual_price_reconciliation_2026-11-16.json",
+    "prior_report_directory_checked": true,
+    "note": "data/reports/ に2026-11-13対応Markdownレポートは見当たらず。11/13 JSON台帳と11/16 JSON台帳を参照。11/17は販売店の直接商品ページを再取得して更新。",
+    "price_rule": "price_validation_status単独で価格欠損判定をしない。retailer_listing_offersに同一SKUのdirect priceがあれば価格表示し、stock_statusを別管理。在庫不明・売切れは買いライン到達としない。"
+  },
+  "scoring": {
+    "cpu_weights": {
+      "game_and_simulation": 30,
+      "development_multithread": 15,
+      "efficiency": 20,
+      "price_vs_target": 20,
+      "platform": 5,
+      "purchase_evidence_and_warranty": 10
+    },
+    "gpu_weights": {
+      "wqhd_raster_performance": 25,
+      "ai_framework_compatibility": 25,
+      "vram_and_longevity": 15,
+      "performance_per_watt": 10,
+      "price_vs_target": 15,
+      "purchase_evidence_and_warranty": 10
+    },
+    "interpretation": "合計100点。性能・用途適合の比較スコアであり、購入許可や購入確率ではない。実測ベンチマークと推定評価を区別する。証拠充足度は別途100点で表示。"
+  },
+  "cpu_offers": [
+    {
+      "model": "AMD Ryzen 7 9700X BOX",
+      "jan": "0730143315593",
+      "retailer": "パソコンSHOPアーク",
+      "price_jpy": 44800,
+      "target_jpy": 40000,
+      "gap_jpy": 4800,
+      "gap_pct": 12,
+      "stock_status": "in_stock",
+      "shipping": "送料無料",
+      "points": "0",
+      "dispatch": "15:00までの対象決済で当日出荷表示。福岡市到着日は未確認。",
+      "warranty": "正規代理店保証3年",
+      "return": "返品規定ページへのリンクあり。個別返品条件は購入前に要確認。",
+      "tdp_w": 65,
+      "score": 84,
+      "score_breakdown": {
+        "game_sim": 23,
+        "development": 13,
+        "efficiency": 20,
+        "price": 14,
+        "platform": 5,
+        "evidence": 9
+      },
+      "evidence_completeness": 97,
+      "url": "https://www.ark-pc.co.jp/i/10240257/",
+      "source_checked": "2026-11-17",
+      "note": "通常47,800円から3,000円引き。CPUクーラー別売り。Ryzen 9000対応UEFIが必要。"
+    },
+    {
+      "model": "AMD Ryzen 7 9800X3D BOX",
+      "jan": "0730143315289",
+      "retailer": "パソコンSHOPアーク",
+      "price_jpy": 71800,
+      "target_jpy": 60000,
+      "gap_jpy": 11800,
+      "gap_pct": 19.7,
+      "stock_status": "in_stock",
+      "shipping": "送料無料",
+      "points": "0",
+      "dispatch": "15:00までの対象決済で当日出荷表示。福岡市到着日は未確認。",
+      "warranty": "正規代理店保証3年",
+      "return": "返品規定ページへのリンクあり。個別返品条件は購入前に要確認。",
+      "tdp_w": 120,
+      "score": 79,
+      "score_breakdown": {
+        "game_sim": 29,
+        "development": 13,
+        "efficiency": 13,
+        "price": 10,
+        "platform": 5,
+        "evidence": 9
+      },
+      "evidence_completeness": 96,
+      "url": "https://www.ark-pc.co.jp/i/10240267/",
+      "source_checked": "2026-11-17",
+      "note": "L3 96MB。CPUクーラー別売り。シミュレーション・ゲーム重視の対抗候補。"
+    },
+    {
+      "model": "AMD Ryzen 7 9850X3D BOX",
+      "jan": "0730143318280",
+      "retailer": "Joshin web",
+      "price_jpy": 79443,
+      "target_jpy": 60000,
+      "gap_jpy": 19443,
+      "gap_pct": 32.4,
+      "stock_status": "in_stock",
+      "shipping": "送料無料",
+      "points": "0",
+      "dispatch": "最短11月17日出荷表示。福岡市到着日は未確認。",
+      "warranty": "メーカー保証3年",
+      "return": "返品種別B。外箱の擦れ・へこみだけでは返品不可との注意書きあり。",
+      "tdp_w": 120,
+      "score": 70,
+      "score_breakdown": {
+        "game_sim": 30,
+        "development": 13,
+        "efficiency": 11,
+        "price": 2,
+        "platform": 5,
+        "evidence": 9
+      },
+      "evidence_completeness": 96,
+      "url": "https://joshinweb.jp/mobile/22814/0730143318280.html",
+      "source_checked": "2026-11-17",
+      "note": "9800X3D比のゲーム性能増加は小さく、消費電力増加を考えると優先度低。CPUクーラー別売り。"
+    }
+  ],
+  "gpu_new_offers": [
+    {
+      "model": "PNY VCG5070T16TFXXPB1-O GeForce RTX 5070 Ti 16GB",
+      "retailer": "Dospara",
+      "price_jpy": 229800,
+      "target_jpy": 180000,
+      "gap_jpy": 49800,
+      "gap_pct": 27.7,
+      "stock_status": "online_orderable_24h_dispatch",
+      "shipping": "送料無料",
+      "points": "0",
+      "dispatch": "24時間以内出荷表示。ページ例は東京都11/18到着。福岡市到着日は未確認。",
+      "warranty": "3年保証",
+      "initial_failure_exchange": "通常1週間。無料会員登録で1か月",
+      "tgp_w": 300,
+      "vram_gb": 16,
+      "connector": "16ピン×1",
+      "score": 88,
+      "score_breakdown": {
+        "wqhd": 25,
+        "ai": 25,
+        "vram": 15,
+        "perf_per_watt": 8,
+        "price": 5,
+        "evidence": 10
+      },
+      "evidence_completeness": 97,
+      "url": "https://www.dospara.co.jp/SBR1892/IC634895.html",
+      "source_checked": "2026-11-17",
+      "note": "現時点の5070 Ti最良確認オファー。目標価格より49,800円高く、45万円構成には厳しい。"
+    },
+    {
+      "model": "ASRock RX9070CL16G Radeon RX 9070 Challenger 16GB",
+      "retailer": "Joshin web",
+      "price_jpy": 125800,
+      "target_jpy": 105000,
+      "gap_jpy": 20800,
+      "gap_pct": 19.8,
+      "stock_status": "in_stock",
+      "shipping": "送料無料",
+      "points": "0",
+      "dispatch": "最短11月17日出荷表示。福岡市到着日は未確認。",
+      "warranty": "メーカー保証2年",
+      "return": "返品種別B",
+      "tgp_w": 220,
+      "vram_gb": 16,
+      "connector": "8ピン×2",
+      "recommended_psu_w": 700,
+      "dimensions_mm": "290 x 123 x 51",
+      "score": 81,
+      "score_breakdown": {
+        "wqhd": 22,
+        "ai": 17,
+        "vram": 15,
+        "perf_per_watt": 10,
+        "price": 8,
+        "evidence": 9
+      },
+      "evidence_completeness": 96,
+      "url": "https://joshinweb.jp/mobile/51/4711581490475.html",
+      "source_checked": "2026-11-17",
+      "note": "16GBと電力効率のバランスが良い。Windows ROCm/PyTorchの制約を確認すること。"
+    },
+    {
+      "model": "PNY VCG5060T16DFXPB1-O GeForce RTX 5060 Ti 16GB",
+      "retailer": "Joshin web",
+      "price_jpy": 144980,
+      "target_jpy": 120000,
+      "gap_jpy": 24980,
+      "gap_pct": 20.8,
+      "stock_status": "in_stock",
+      "shipping": "送料無料",
+      "points": "0",
+      "dispatch": "最短11月17日出荷表示。福岡市到着日は未確認。",
+      "warranty": "メーカー保証3年",
+      "return": "返品種別B",
+      "tgp_w": 180,
+      "vram_gb": 16,
+      "connector": "8ピン×1",
+      "recommended_psu_w": 600,
+      "dimensions_mm": "245 x 120 x 39.9",
+      "score": 81,
+      "score_breakdown": {
+        "wqhd": 17,
+        "ai": 25,
+        "vram": 15,
+        "perf_per_watt": 10,
+        "price": 5,
+        "evidence": 9
+      },
+      "evidence_completeness": 96,
+      "url": "https://joshinweb.jp/mobile/51/0751492795072.html",
+      "source_checked": "2026-11-17",
+      "note": "CUDAと16GB VRAM、180W、3年保証。WQHD高リフレッシュ用途では上位GPUより描画余力が低い。"
+    },
+    {
+      "model": "ASRock RX9070XTSLD16G Radeon RX 9070 XT Steel Legend DARK 16GB",
+      "retailer": "Joshin web",
+      "price_jpy": 148000,
+      "target_jpy": 120000,
+      "gap_jpy": 28000,
+      "gap_pct": 23.3,
+      "stock_status": "in_stock",
+      "shipping": "送料無料",
+      "points": "0",
+      "dispatch": "最短11月17日出荷表示。福岡市到着日は未確認。",
+      "warranty": "メーカー保証2年",
+      "return": "返品種別B",
+      "tgp_w": 304,
+      "vram_gb": 16,
+      "connector": "8ピン×2",
+      "recommended_psu_w": 800,
+      "dimensions_mm": "298 x 131 x 58",
+      "score": 77,
+      "score_breakdown": {
+        "wqhd": 24,
+        "ai": 17,
+        "vram": 15,
+        "perf_per_watt": 7,
+        "price": 5,
+        "evidence": 9
+      },
+      "evidence_completeness": 96,
+      "url": "https://joshinweb.jp/mobile/51/4711581490697.html",
+      "source_checked": "2026-11-17",
+      "note": "高性能だが304W・推奨800Wで電力効率と電源費用に注意。"
+    },
+    {
+      "model": "MSI GeForce RTX 5070 12G VENTUS 2X OC",
+      "retailer": "パソコン工房",
+      "price_jpy": 154800,
+      "previous_price_jpy": 166800,
+      "change_jpy": -12000,
+      "change_pct": -7.2,
+      "target_jpy": 110000,
+      "gap_jpy": 44800,
+      "gap_pct": 40.7,
+      "stock_status": "online_orderable_same_day_dispatch",
+      "shipping": "送料無料",
+      "points": "0",
+      "dispatch": "14時までの対象決済で当日出荷表示。福岡市到着日は未確認。",
+      "warranty": "商品ページで標準メーカー保証期間を確認できず",
+      "return": "返品規定リンクあり。任意のWEB安心交換保証は商品代金の10%で1か月",
+      "tgp_w": 250,
+      "vram_gb": 12,
+      "connector": "16ピン×1",
+      "recommended_psu_w": 650,
+      "dimensions_mm": "236 x 126 x 50",
+      "score": 74,
+      "score_breakdown": {
+        "wqhd": 21,
+        "ai": 25,
+        "vram": 10,
+        "perf_per_watt": 8,
+        "price": 2,
+        "evidence": 8
+      },
+      "evidence_completeness": 90,
+      "url": "https://www.pc-koubou.jp/products/detail.php?product_id=1133257",
+      "source_checked": "2026-11-17",
+      "note": "11/16の166,800円から12,000円値下げ。ただし12GB VRAMと購入目標超過が弱点。"
+    }
+  ],
+  "gpu_used_offers": [
+    {
+      "model": "GIGABYTE GV-R9070XTGAMING OC-16GD Radeon RX 9070 XT 16GB",
+      "retailer": "Dospara 甲府飯田店",
+      "price_jpy": 125900,
+      "condition": "Cランク・並品",
+      "stock_status": "in_stock_1_unit_store",
+      "dispatch": "5日以内で出荷表示",
+      "shipping": "福岡市向け送料未確認",
+      "points": "0",
+      "warranty": "3か月",
+      "return": "店頭販売併売。注文後でも在庫確保できずキャンセルの可能性あり。Cランク外観の詳細は店舗へ要確認。",
+      "vram_gb": 16,
+      "score": 80,
+      "score_breakdown": {
+        "wqhd": 24,
+        "ai": 17,
+        "vram": 15,
+        "perf_per_watt": 7,
+        "price": 13,
+        "evidence": 4
+      },
+      "evidence_completeness": 72,
+      "url": "https://www.dospara.co.jp/SBR1522/IC683590.html",
+      "source_checked": "2026-11-17",
+      "note": "新品148,000円との差は22,100円。新品2年保証に対し中古3か月保証なので割引幅は十分とは言いにくい。"
+    },
+    {
+      "model": "PNY GeForce RTX 4070 SUPER 12GB VERTO OC",
+      "retailer": "Dospara 札幌店",
+      "price_jpy": 123900,
+      "condition": "Cランク・並品",
+      "stock_status": "in_stock_1_unit_store",
+      "dispatch": "5日以内で出荷表示",
+      "shipping": "福岡市向け送料未確認",
+      "points": "0",
+      "warranty": "3か月",
+      "return": "店頭販売併売。注文後でも在庫確保できずキャンセルの可能性あり。",
+      "vram_gb": 12,
+      "score": 75,
+      "score_breakdown": {
+        "wqhd": 18,
+        "ai": 25,
+        "vram": 10,
+        "perf_per_watt": 9,
+        "price": 7,
+        "evidence": 6
+      },
+      "evidence_completeness": 70,
+      "url": "https://www.dospara.co.jp/SBR1522/IC648626-50.html",
+      "source_checked": "2026-11-17",
+      "note": "12GB・Cランク・3か月保証。新品RX9070/RTX5060Tiと比較して積極的に選ぶ根拠は弱い。"
+    },
+    {
+      "model": "GeForce RTX 4070 Ti SUPER 16GB 中古",
+      "retailer": "Dospara中古・過去掲載",
+      "price_jpy": 145900,
+      "stock_status": "unconfirmed_current_page_fetch_failed",
+      "condition": "過去掲載Cランク",
+      "warranty": "過去掲載3か月",
+      "evidence_completeness": 20,
+      "score": null,
+      "url": "https://www.dospara.co.jp/SBR1522/IC664115.html",
+      "source_checked": "2026-11-17",
+      "note": "目標150,000円以下の過去価格だが、現行ページ取得失敗。買いライン達成・在庫ありとは認定しない。"
+    },
+    {
+      "model": "GeForce RTX 4080 SUPER 16GB 中古",
+      "retailer": "Dospara中古・過去掲載",
+      "price_jpy": 179900,
+      "stock_status": "page_404_current",
+      "condition": "過去掲載",
+      "warranty": "過去掲載3か月",
+      "evidence_completeness": 10,
+      "score": null,
+      "url": "https://www.dospara.co.jp/SBR1522/IC683911.html",
+      "source_checked": "2026-11-17",
+      "note": "現行ページ404。現在価格・在庫・状態は未確認。"
+    },
+    {
+      "model": "GeForce RTX 3090 24GB 中古",
+      "retailer": "Dospara中古・過去掲載",
+      "price_jpy": 189900,
+      "stock_status": "unconfirmed_current_page_fetch_failed",
+      "condition": "過去掲載",
+      "warranty": "過去掲載3か月",
+      "evidence_completeness": 10,
+      "score": null,
+      "url": "https://www.dospara.co.jp/SBR1522/IC671408.html",
+      "source_checked": "2026-11-17",
+      "note": "現行ページ404。過去には状態難ありの個体記録もあり、個体状態の確認が必要。"
+    }
+  ],
+  "retailer_listing_offers": [
+    {
+      "sku": "AMD Ryzen 7 9700X BOX / 0730143315593",
+      "price_jpy": 44800,
+      "retailer": "Ark",
+      "stock_status": "in_stock",
+      "url": "https://www.ark-pc.co.jp/i/10240257/"
+    },
+    {
+      "sku": "AMD Ryzen 7 9800X3D BOX / 0730143315289",
+      "price_jpy": 71800,
+      "retailer": "Ark",
+      "stock_status": "in_stock",
+      "url": "https://www.ark-pc.co.jp/i/10240267/"
+    },
+    {
+      "sku": "AMD Ryzen 7 9850X3D BOX / 0730143318280",
+      "price_jpy": 79443,
+      "retailer": "Joshin",
+      "stock_status": "in_stock",
+      "url": "https://joshinweb.jp/mobile/22814/0730143318280.html"
+    },
+    {
+      "sku": "PNY VCG5070T16TFXXPB1-O",
+      "price_jpy": 229800,
+      "retailer": "Dospara",
+      "stock_status": "online_orderable_24h_dispatch",
+      "url": "https://www.dospara.co.jp/SBR1892/IC634895.html"
+    },
+    {
+      "sku": "ASRock RX9070CL16G",
+      "price_jpy": 125800,
+      "retailer": "Joshin",
+      "stock_status": "in_stock",
+      "url": "https://joshinweb.jp/mobile/51/4711581490475.html"
+    },
+    {
+      "sku": "PNY VCG5060T16DFXPB1-O",
+      "price_jpy": 144980,
+      "retailer": "Joshin",
+      "stock_status": "in_stock",
+      "url": "https://joshinweb.jp/mobile/51/0751492795072.html"
+    },
+    {
+      "sku": "ASRock RX9070XTSLD16G",
+      "price_jpy": 148000,
+      "retailer": "Joshin",
+      "stock_status": "in_stock",
+      "url": "https://joshinweb.jp/mobile/51/4711581490697.html"
+    },
+    {
+      "sku": "MSI RTX 5070 12G VENTUS 2X OC",
+      "price_jpy": 154800,
+      "retailer": "PC Koubou",
+      "stock_status": "online_orderable_same_day_dispatch",
+      "url": "https://www.pc-koubou.jp/products/detail.php?product_id=1133257"
+    },
+    {
+      "sku": "Sapphire RX 7900 XT 20GB SAP-AMDRX7900XT20GB/21323-01-20G",
+      "price_jpy": 188280,
+      "retailer": "Bic Camera",
+      "stock_status": "sold_out_production_ended",
+      "points": "18,828pt (10%, conditional value; not cash discount)",
+      "url": "https://www.biccamera.com/bc/item/10849706/"
+    },
+    {
+      "sku": "Kuroutoshikou RX 7800 XT 16GB RD-RX7800XT-E16GB/DF",
+      "price_jpy": 67980,
+      "retailer": "Dospara",
+      "stock_status": "out_of_stock",
+      "warranty": "1年",
+      "url": "https://www.dospara.co.jp/SBR1770/IC511355.html"
+    },
+    {
+      "sku": "RX 7900 XTX 24GB Sapphire (PC4U listing)",
+      "price_jpy": 189200,
+      "retailer": "PC4U",
+      "stock_status": "out_of_stock",
+      "url": "https://www.pc4u.co.jp/"
+    },
+    {
+      "sku": "Intel Arc B580 12GB ASRock Challenger",
+      "price_jpy": 54780,
+      "retailer": "Ark prior observed price",
+      "stock_status": "end_of_life_or_not_handled",
+      "url": "https://www.ark-pc.co.jp/"
+    }
+  ],
+  "price_change_summary": [
+    {
+      "item": "Ryzen 7 9700X",
+      "current_jpy": 44800,
+      "previous_jpy": 44800,
+      "change_jpy": 0,
+      "status": "unchanged"
+    },
+    {
+      "item": "Ryzen 7 9800X3D",
+      "current_jpy": 71800,
+      "previous_jpy": 71800,
+      "change_jpy": 0,
+      "status": "unchanged"
+    },
+    {
+      "item": "Ryzen 7 9850X3D",
+      "current_jpy": 79443,
+      "previous_jpy": 79443,
+      "change_jpy": 0,
+      "status": "unchanged"
+    },
+    {
+      "item": "RTX 5070 12GB MSI",
+      "current_jpy": 154800,
+      "previous_jpy": 166800,
+      "change_jpy": -12000,
+      "change_pct": -7.2,
+      "status": "same SKU direct price down"
+    },
+    {
+      "item": "RTX 5060 Ti 16GB PNY",
+      "current_jpy": 144980,
+      "previous_jpy": 144980,
+      "change_jpy": 0,
+      "status": "unchanged"
+    },
+    {
+      "item": "RX 9070 16GB ASRock",
+      "current_jpy": 125800,
+      "previous_jpy": 125800,
+      "change_jpy": 0,
+      "status": "unchanged"
+    },
+    {
+      "item": "RX 9070 XT 16GB ASRock",
+      "current_jpy": 148000,
+      "previous_jpy": 148000,
+      "change_jpy": 0,
+      "status": "unchanged"
+    },
+    {
+      "item": "RTX 5070 Ti 16GB PNY",
+      "current_jpy": 229800,
+      "previous_jpy": 229800,
+      "change_jpy": 0,
+      "status": "unchanged; current stock/24h dispatch reverified"
+    }
+  ],
+  "benchmarks_and_power": {
+    "gpu_benchmark_source": "Tom's Hardware GPU Hierarchy 2026 1440p Ultra raster index, updated 2026-10-07; relative comparison only, not title-specific FPS.",
+    "qualitative_wqhd_order": "RTX 5070 Ti ≈ RX 9070 XT > RX 9070 > RTX 5070 > RTX 5060 Ti 16GB",
+    "note": "The 5070 Ti and RX 9070 XT are effectively tied in the cited 1440p Ultra raster index; RX 9070 is about 12% behind RX 9070 XT; RTX 5070 is about 21% behind 5070 Ti; RTX 5060 Ti is about 31% behind RTX 5070.",
+    "gpu_power_reference": [
+      {
+        "model": "RTX 5060 Ti 16GB",
+        "measured_game_power_w": 184,
+        "board_power_tgp_w": 180,
+        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 6246
+      },
+      {
+        "model": "RX 9070 16GB",
+        "measured_game_power_w": 225,
+        "board_power_tbp_w": 220,
+        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 7638
+      },
+      {
+        "model": "RTX 5070 12GB",
+        "measured_game_power_w": 263,
+        "board_power_tgp_w": 250,
+        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 8928
+      },
+      {
+        "model": "RTX 5070 Ti 16GB",
+        "measured_game_power_w": 311,
+        "board_power_tgp_w": 300,
+        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 10557
+      },
+      {
+        "model": "RX 9070 XT 16GB",
+        "measured_game_power_w": 312,
+        "board_power_tbp_w": 304,
+        "annual_gpu_only_jpy_at_3h_day_31yen_kwh": 10591
+      }
+    ],
+    "electricity_note": "Annual cost is a rough GPU-only calculation from game-load power at 3 hours/day and 31 JPY/kWh. It is not a wall-power whole-PC measurement.",
+    "ai_compatibility": "NVIDIA CUDA has the broader Windows AI library path. AMD ROCm on Windows is more limited: the cited ROCm 7.2.1 compatibility documentation lists PyTorch 2.9 and Python 3.12; do not assume full Linux ROCm feature parity or broad third-party library compatibility.",
+    "cpu_efficiency": "9700X TDP 65W; 9800X3D/9850X3D TDP 120W. TDP is not measured wall power. TechSpot 9850X3D testing indicates small average gaming uplift over 9800X3D with a larger power increase; 9850X3D remains poor value at 79,443 JPY."
+  },
+  "build_estimates": [
+    {
+      "build": "9700X + RTX 5060 Ti 16GB + 32GB RAM + 2TB QLC",
+      "total_jpy": 437877,
+      "remaining_jpy": 12123,
+      "status": "provisional carry-forward; non-CPU/GPU parts not reverified 11/17"
+    },
+    {
+      "build": "9700X + RTX 5060 Ti 16GB + 32GB RAM + 2TB TLC",
+      "total_jpy": 452057,
+      "remaining_jpy": -2057,
+      "status": "provisional carry-forward; exceeds cap"
+    },
+    {
+      "build": "9700X + RX 9070 16GB + 32GB RAM + 2TB QLC",
+      "total_jpy": 418697,
+      "remaining_jpy": 31303,
+      "status": "provisional carry-forward; non-CPU/GPU parts not reverified 11/17"
+    },
+    {
+      "build": "9700X + RX 9070 16GB + 32GB RAM + 2TB TLC",
+      "total_jpy": 432877,
+      "remaining_jpy": 17123,
+      "status": "provisional carry-forward; non-CPU/GPU parts not reverified 11/17"
+    },
+    {
+      "build": "9700X + RX 9070 XT 16GB + 32GB RAM + 2TB QLC",
+      "total_jpy": 440897,
+      "remaining_jpy": 9103,
+      "status": "provisional carry-forward; non-CPU/GPU parts not reverified 11/17"
+    },
+    {
+      "build": "9700X + RX 9070 XT 16GB + 32GB RAM + 2TB TLC",
+      "total_jpy": 455077,
+      "remaining_jpy": -5077,
+      "status": "provisional carry-forward; exceeds cap"
+    },
+    {
+      "build": "9700X + RTX 5070 12GB + 32GB RAM + 2TB QLC",
+      "total_jpy": 447697,
+      "remaining_jpy": 2303,
+      "status": "provisional carry-forward; current RTX 5070 direct price reduced by 12,000 JPY; only 32GB/QLC scenario"
+    },
+    {
+      "build": "9700X + RTX 5070 Ti 16GB + 32GB RAM + 2TB QLC",
+      "total_jpy": 522697,
+      "remaining_jpy": -72697,
+      "status": "provisional carry-forward; uses PNY 229,800 JPY; exceeds cap"
+    }
+  ],
+  "build_assumptions": {
+    "ram": "32GB minimum only; 64GB price and QVL not revalidated on 11/17.",
+    "ssd": "2TB QLC/TLC variants; prior price records carried forward, not revalidated on 11/17.",
+    "peripherals": "Monitor/keyboard/mouse/mousepad subtotal 33,263 JPY from prior record.",
+    "shipping_reserve_jpy": 6000,
+    "small_items_jpy": 3000,
+    "contingency_jpy": 5000,
+    "exclusions": "Sub-monitor, speakers, headset excluded.",
+    "bto": "BTO configuration comparison not reverified on 11/17."
+  },
+  "compatibility_audit": {
+    "cpu": "AM5 motherboard must have Ryzen 9000-capable BIOS; USB BIOS Flashback strongly preferred.",
+    "memory": "Use 2-DIMM DDR5 kit; QVL/EXPO and 64GB configuration must be checked against exact motherboard SKU.",
+    "gpu_clearance": "RX9070 290mm; RX9070XT 298mm; RTX5070Ti PNY card dimensions/slot clearance must be checked against exact case.",
+    "psu": "RX9070 recommended 700W, RX9070XT 800W; RTX5070Ti uses 16-pin. Exact PSU cable/ATX 3.1 and 12V-2x6 compatibility not yet reverified.",
+    "storage": "Check M.2 slot lane sharing and GPU slot configuration on exact motherboard.",
+    "cooler": "All three Ryzen CPUs are retail box without CPU cooler; separate cooler required.",
+    "final_gate": "Do not approve a build until exact case/GPU dimensions, PSU connectors, RAM QVL, BIOS, M.2 sharing and total delivered price are all verified."
+  },
+  "decision": {
+    "cpu": "WAIT. 9700X remains best overall value but is 4,800 JPY above the 40,000 JPY target. 9800X3D is 11,800 JPY above target. 9850X3D is not justified.",
+    "gpu_new": "WAIT. RTX 5070 Ti is strongest but 49,800 JPY above target; RX9070 is best power/price balance; RTX5060Ti is preferred if Windows CUDA compatibility is decisive.",
+    "gpu_used": "Avoid as default. Current RX9070XT and RTX4070SUPER used listings are C rank with only 3-month warranty and one unit at remote stores.",
+    "full_build": "HOLD. Provisional RX9070 + 9700X + 32GB + 2TB TLC scenario is 432,877 JPY, but full parts/64GB/OS/Fukuoka delivery/compatibility are not yet reverified."
+  },
+  "sources": [
+    {
+      "name": "Ark Ryzen 7 9700X",
+      "url": "https://www.ark-pc.co.jp/i/10240257/"
+    },
+    {
+      "name": "Ark Ryzen 7 9800X3D",
+      "url": "https://www.ark-pc.co.jp/i/10240267/"
+    },
+    {
+      "name": "Joshin Ryzen 7 9850X3D",
+      "url": "https://joshinweb.jp/mobile/22814/0730143318280.html"
+    },
+    {
+      "name": "Dospara PNY RTX 5070 Ti 16GB",
+      "url": "https://www.dospara.co.jp/SBR1892/IC634895.html"
+    },
+    {
+      "name": "Joshin ASRock RX 9070 16GB",
+      "url": "https://joshinweb.jp/mobile/51/4711581490475.html"
+    },
+    {
+      "name": "Joshin PNY RTX 5060 Ti 16GB",
+      "url": "https://joshinweb.jp/mobile/51/0751492795072.html"
+    },
+    {
+      "name": "Joshin ASRock RX 9070 XT 16GB",
+      "url": "https://joshinweb.jp/mobile/51/4711581490697.html"
+    },
+    {
+      "name": "PC Koubou MSI RTX 5070 12GB",
+      "url": "https://www.pc-koubou.jp/products/detail.php?product_id=1133257"
+    },
+    {
+      "name": "Dospara used GIGABYTE RX 9070 XT 16GB",
+      "url": "https://www.dospara.co.jp/SBR1522/IC683590.html"
+    },
+    {
+      "name": "Dospara used PNY RTX 4070 SUPER 12GB",
+      "url": "https://www.dospara.co.jp/SBR1522/IC648626-50.html"
+    },
+    {
+      "name": "Bic Camera Sapphire RX 7900 XT 20GB",
+      "url": "https://www.biccamera.com/bc/item/10849706/"
+    },
+    {
+      "name": "Dospara Kuroutoshikou RX 7800 XT 16GB",
+      "url": "https://www.dospara.co.jp/SBR1770/IC511355.html"
+    }
+  ]
+}
