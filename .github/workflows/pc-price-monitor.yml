@@ -44,30 +44,42 @@ jobs:
           JST=timezone(timedelta(hours=9))
           now=datetime.now(JST)
           config_status="ok"
+          monitoring_active=False
+          stop_reason="configuration_invalid"
           try:
               with open("config/targets.json", encoding="utf-8") as f:
                   cfg=json.load(f)
               start=datetime.fromisoformat(cfg["monitor_window_start"].replace("Z","+00:00")).astimezone(JST)
               end=datetime.fromisoformat(cfg["monitor_window_end"].replace("Z","+00:00")).astimezone(JST)
+              stop=datetime.fromisoformat(cfg["monitoring_stop_at"].replace("Z","+00:00")).astimezone(JST)
+              if stop != end:
+                  raise ValueError("monitoring_stop_at_must_match_window_end")
               in_watch_window=start <= now <= end
+              monitoring_active=start <= now <= stop
+              stop_reason="active" if monitoring_active else ("not_started" if now < start else "monitoring_period_expired")
           except Exception as exc:
-              # Missing or malformed calendar must never be presented as an
-              # official sale date. Retain normal-cadence monitoring.
+              # Invalid/missing boundaries never authorize data collection.
               config_status="error:"+type(exc).__name__
               in_watch_window=False
+              monitoring_active=False
+              stop_reason="configuration_invalid_fail_closed"
           event=os.environ.get("GITHUB_EVENT_NAME","")
           schedule_cron=os.environ.get("SCHEDULE_CRON","")
-          # The configured dates only define a provisional broad watch window.
-          # Retailer sale authorization is separately source-verified by Python.
-          if event == "schedule":
-              expected_cron = "3/5 * * * *" if in_watch_window else "7,22,37,52 * * * *"
-              run_now = schedule_cron == expected_cron
+          # No collection (including manual/recovery dispatches) is permitted
+          # outside the user-defined 2026-11-14..2026-11-30 JST window.
+          if not monitoring_active:
+              run_now=False
+          elif event == "schedule":
+              run_now = schedule_cron == "3/5 * * * *"
           else:
               run_now = True
           skip = not run_now
           print(f"skip={str(skip).lower()}")
           print(f"now_jst={now.isoformat()}")
           print(f"in_watch_window={str(in_watch_window).lower()}")
+          print(f"monitoring_active={str(monitoring_active).lower()}")
+          print(f"monitoring_stop_at={stop.isoformat() if monitoring_active else 'unavailable_or_expired'}")
+          print(f"stop_reason={stop_reason}")
           print(f"calendar_config_status={config_status}")
           print(f"schedule_cron={schedule_cron}")
           print(f"run_now={str(run_now).lower()}")
