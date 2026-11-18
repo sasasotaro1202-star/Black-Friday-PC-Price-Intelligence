@@ -1,0 +1,621 @@
+{
+  "schema_version": "2.0",
+  "checked_at_jst": "2026-11-19T08:39:05+09:00",
+  "source_ledger": "data/manual_price_reconciliation_2026-11-13.json",
+  "budget_jpy": 450000,
+  "scoring_standard": "PC完成構成スコアリング標準 v3",
+  "rules": {
+    "direct_price_is_shown_even_if_validation_status_is_missing": true,
+    "out_of_stock_price_is_not_a_buyable_offer": true,
+    "stock_unknown_price_is_not_a_buy_line": true,
+    "points_are_separate_from_cash_price": true,
+    "shipping_and_fukuoka_delivery_must_be_verified_before_BUY": true,
+    "no_purchase_order_payment_or_reservation": true
+  },
+  "observations": [
+    {
+      "id": "cpu-9700x-ark",
+      "category": "CPU",
+      "product": "AMD Ryzen 7 9700X BOX",
+      "sku": "100-100001404WOF",
+      "price_jpy": 44800,
+      "seller": "パソコンSHOPアーク",
+      "stock_status": "在庫あり",
+      "shipping": "送料無料表示",
+      "dispatch": "15:00までの対象決済で当日出荷表示。福岡市への到着日は地域別・未確定",
+      "warranty": "メーカー保証3年表示",
+      "price_target_jpy": 40000,
+      "delta_to_target_jpy": 4800,
+      "source_url": "https://www.ark-pc.co.jp/i/10107631/",
+      "source_class": "direct_retailer_page_opened",
+      "note": "11/18更新表示。11/13台帳の49,800円より5,000円低いが販売店は異なる。"
+    },
+    {
+      "id": "cpu-9800x3d-ark",
+      "category": "CPU",
+      "product": "AMD Ryzen 7 9800X3D BOX",
+      "sku": "100-100001084WOF",
+      "price_jpy": 71800,
+      "seller": "パソコンSHOPアーク",
+      "stock_status": "在庫あり",
+      "shipping": "送料無料表示",
+      "dispatch": "15:00までの対象決済で当日出荷表示。福岡市到着日は未確定",
+      "warranty": "メーカー保証3年表示",
+      "price_target_jpy": 60000,
+      "delta_to_target_jpy": 11800,
+      "source_url": "https://www.ark-pc.co.jp/i/10107631/",
+      "source_class": "direct_retailer_page_opened",
+      "note": "9700Xよりゲーム特化だが価格差27,000円、TDP120W。"
+    },
+    {
+      "id": "gpu-rx9070-challenger-ark",
+      "category": "GPU",
+      "product": "ASRock Radeon RX 9070 Challenger 16GB",
+      "sku": "RX9070 CL 16G / 4711581490475",
+      "price_jpy": 125800,
+      "seller": "パソコンSHOPアーク",
+      "stock_status": "在庫あり",
+      "shipping": "送料無料表示",
+      "dispatch": "15:00までの対象決済で当日出荷表示。福岡市到着日は地域別・未確定",
+      "warranty": "正規代理店保証付き。保証年数は商品ページで未確認",
+      "vram_gb": 16,
+      "board_power_w": 220,
+      "card_dimensions_mm": [
+        290,
+        123,
+        51
+      ],
+      "power_connectors": "8-pin x2",
+      "recommended_psu_w": 700,
+      "price_target_jpy": 105000,
+      "delta_to_target_jpy": 20800,
+      "source_url": "https://www.ark-pc.co.jp/i/20107534/",
+      "source_class": "direct_retailer_page_opened",
+      "note": "価格・在庫・仕様を当日商品ページで確認。"
+    },
+    {
+      "id": "gpu-5060ti16-pny-dospara",
+      "category": "GPU",
+      "product": "PNY GeForce RTX 5060 Ti 16GB",
+      "sku": "VCG5060T16TFXXPB1-O",
+      "price_jpy": 152800,
+      "seller": "ドスパラ",
+      "stock_status": "ドスパラ博多店 在庫あり表示。オンラインは24時間以内出荷表示",
+      "shipping": "送料無料表示",
+      "dispatch": "24時間以内に出荷表示。福岡市宛の到着日は未確定",
+      "warranty": "メーカー保証3年表示。初期不良交換は通常1週間、会員条件で1か月表示",
+      "vram_gb": 16,
+      "board_power_w": 180,
+      "recommended_psu_w": 600,
+      "price_target_jpy": 120000,
+      "delta_to_target_jpy": 32800,
+      "source_url": "https://www.dospara.co.jp/SBR1892/IC640024.html",
+      "source_class": "direct_retailer_page_opened",
+      "note": "ページ表示価格152,800円。11/13台帳の144,980円は別SKUのため価格差比較対象外。"
+    },
+    {
+      "id": "gpu-5070-12-msi-pckoubou",
+      "category": "GPU",
+      "product": "MSI GeForce RTX 5070 12G VENTUS 2X OC",
+      "sku": "4711377308229",
+      "price_jpy": 154800,
+      "seller": "パソコン工房",
+      "stock_status": "注文可能・当日出荷表示。数量在庫の明示は未確認",
+      "shipping": "送料無料表示",
+      "dispatch": "当日出荷表示",
+      "points_jpy": 0,
+      "vram_gb": 12,
+      "board_power_w": 250,
+      "price_target_jpy": 110000,
+      "delta_to_target_jpy": 44800,
+      "source_url": "https://www.pc-koubou.jp/products/detail.php?product_id=1133257",
+      "source_class": "direct_retailer_page_opened",
+      "note": "11/13台帳の166,800円から同一SKUで12,000円低下。"
+    },
+    {
+      "id": "gpu-5070ti-pny-tsukumo-unverified",
+      "category": "GPU",
+      "product": "PNY GeForce RTX 5070 Ti 16GB",
+      "sku": "VCG5070T16TFXPB1-O",
+      "price_jpy": 174980,
+      "seller": "ツクモ",
+      "stock_status": "検索取得ページは在庫・24時間以内出荷を表示。直接ページ再取得は502で失敗",
+      "shipping": "送料無料表示（検索取得ページ）",
+      "warranty": "未確認",
+      "vram_gb": 16,
+      "board_power_w": 300,
+      "price_target_jpy": 180000,
+      "delta_to_target_jpy": -5020,
+      "source_url": "https://shop.tsukumo.co.jp/goods/4711581490475/",
+      "source_class": "indexed_product_page_direct_fetch_failed",
+      "note": "買いライン達成とは認定しない。"
+    },
+    {
+      "id": "gpu-5070ti-zotac-tsukumo-unverified",
+      "category": "GPU",
+      "product": "ZOTAC GeForce RTX 5070 Ti 16GB",
+      "sku": "ZT-B50710F-10P",
+      "price_jpy": 164980,
+      "seller": "ツクモ",
+      "stock_status": "検索取得ページは在庫・24時間以内出荷を表示。直接ページ再取得は502で失敗",
+      "shipping": "送料無料表示（検索取得ページ）",
+      "warranty": "未確認",
+      "vram_gb": 16,
+      "board_power_w": 300,
+      "price_target_jpy": 180000,
+      "delta_to_target_jpy": -15020,
+      "source_url": "https://shop.tsukumo.co.jp/",
+      "source_class": "indexed_product_page_direct_fetch_failed",
+      "note": "価格参照のみ。正確な商品URLと在庫の再確認が必要。"
+    },
+    {
+      "id": "gpu-5070ti-gigabyte-dospara-oos",
+      "category": "GPU",
+      "product": "GIGABYTE GeForce RTX 5070 Ti 16GB WINDFORCE OC SFF",
+      "sku": "GV-N507TWF3-16GD",
+      "price_jpy": 148800,
+      "seller": "ドスパラ",
+      "stock_status": "在庫切れ・販売終了扱い。購入候補に算入しない",
+      "source_url": "https://www.dospara.co.jp/SBR1892/IC524963.html",
+      "source_class": "prior_direct_listing_out_of_stock",
+      "note": "安値表示が残っても現在購入可能価格ではない。"
+    },
+    {
+      "id": "ram-corsair-32gb-ark",
+      "category": "RAM",
+      "product": "Corsair Vengeance DDR5-6000 32GB (16GBx2) CL38 EXPO",
+      "sku": "CMK32GX5M2D6000Z38",
+      "price_jpy": 72979,
+      "seller": "パソコンSHOPアーク",
+      "stock_status": "在庫あり・残り3点表示",
+      "shipping": "送料無料表示",
+      "points_or_coupon": "会員限定1%クーポン表示。現金値引きとしては算入しない",
+      "source_url": "https://www.ark-pc.co.jp/i/11759511/",
+      "source_class": "direct_retailer_page_opened",
+      "note": "32GBの価格が高い。64GBキットの当日購入可能価格は未確認。"
+    },
+    {
+      "id": "motherboard-b850mx-tsukumo-unverified",
+      "category": "Motherboard",
+      "product": "ASRock B850M-X WiFi R2.0",
+      "price_jpy": 15816,
+      "seller": "ツクモ",
+      "stock_status": "検索取得ページは在庫・24時間以内出荷を表示。直接ページ再取得は502で失敗",
+      "shipping": "送料無料表示（検索取得ページ）",
+      "source_url": "https://shop.tsukumo.co.jp/goods/4711581490765/",
+      "source_class": "indexed_product_page_direct_fetch_failed",
+      "note": "AM5/B850、2 DIMM、最大128GB、M.2 x2、BIOS Flashback、Wi-Fi 6/BT5.2の仕様参照。価格・在庫はHOLD。"
+    },
+    {
+      "id": "motherboard-sapphire-b850m-oos",
+      "category": "Motherboard",
+      "product": "SAPPHIRE PULSE B850M WIFI",
+      "price_jpy": 19980,
+      "seller": "パソコンSHOPアーク",
+      "stock_status": "在庫切れ表示",
+      "shipping": "送料無料表示",
+      "source_url": "https://www.ark-pc.co.jp/i/12201623/",
+      "source_class": "direct_retailer_page_opened_out_of_stock",
+      "note": "価格は表示されるが購入可能候補ではない。"
+    },
+    {
+      "id": "psu-msi-a850gl-ark",
+      "category": "PSU",
+      "product": "MSI MAG A850GL PCIE5",
+      "sku": "MAG A850GL PCIE5 / 4526541045950",
+      "price_jpy": 15980,
+      "seller": "パソコンSHOPアーク",
+      "stock_status": "在庫あり・残り5点表示",
+      "shipping": "送料無料表示",
+      "warranty": "7年",
+      "capacity_w": 850,
+      "efficiency": "80PLUS GOLD",
+      "standard": "ATX 3.0",
+      "connectors": "native 12VHPWR x1, PCIe 6+2-pin x4",
+      "dimensions_mm": [
+        150,
+        86,
+        140
+      ],
+      "source_url": "https://www.ark-pc.co.jp/i/15601813/",
+      "source_class": "direct_retailer_page_opened",
+      "note": "ATX 3.1ではないが、現行RX 9070の8-pin x2には対応。"
+    },
+    {
+      "id": "cooler-pa140se-ark",
+      "category": "CPU cooler",
+      "product": "Thermalright Peerless Assassin 140 SE",
+      "price_jpy": 5480,
+      "seller": "パソコンSHOPアーク",
+      "stock_status": "在庫あり・残り1点表示",
+      "shipping": "送料無料表示",
+      "warranty": "1年表示",
+      "source_url": "https://www.ark-pc.co.jp/i/10401915/",
+      "source_class": "direct_retailer_page_opened",
+      "note": "AM5対応。ケース側CPUクーラー高さ上限との最終照合を要する。"
+    },
+    {
+      "id": "case-pop-mini-air-ark",
+      "category": "Case",
+      "product": "Fractal Design Pop Mini Air RGB White TG Clear Tint",
+      "price_jpy": 15180,
+      "seller": "パソコンSHOPアーク",
+      "stock_status": "在庫あり表示",
+      "shipping": "送料無料表示",
+      "source_url": "https://www.ark-pc.co.jp/i/15300943/",
+      "source_class": "direct_retailer_page_opened",
+      "note": "mATXケース。GPU 365mm、CPUクーラー170mm、PSU150mmのクリアランス表示。"
+    },
+    {
+      "id": "ssd-verbatim-2tb-joshin",
+      "category": "SSD",
+      "product": "Verbatim Vi5000 2TB",
+      "sku": "31827-J",
+      "price_jpy": 48980,
+      "seller": "Joshin web",
+      "stock_status": "在庫あり表示だが出荷予定表示が11/3で過去日。現在在庫・納期は未確定",
+      "shipping": "送料無料表示",
+      "points_jpy": 489,
+      "warranty": "2年",
+      "tbw": 2500,
+      "sequential_read_mbs": 5000,
+      "sequential_write_mbs": 4300,
+      "source_url": "https://joshinweb.jp/apparel/16353/4991348089986.html",
+      "source_class": "direct_product_listing_extracted_stale_delivery",
+      "note": "価格は必ず表示するが、購入可能価格としては認定しない。"
+    },
+    {
+      "id": "os-windows11home-ksdenki",
+      "category": "OS",
+      "product": "Microsoft Windows 11 Home retail",
+      "sku": "HAJ-00094",
+      "price_jpy": 16526,
+      "seller": "ケーズデンキ",
+      "stock_status": "在庫あり・1〜2日出荷表示",
+      "shipping": "店頭受取無料。オンライン配送費は未確認",
+      "source_url": "https://www.ksdenki.com/item?sku=4549576190358",
+      "source_class": "direct_retailer_page_opened",
+      "note": "正規パッケージ版を候補。"
+    },
+    {
+      "id": "monitor-aoc-q27g40e",
+      "category": "Monitor",
+      "product": "AOC Q27G40E/11 27-inch WQHD 180Hz",
+      "price_jpy": 20790,
+      "seller": "ヨドバシ.com",
+      "stock_status": "在庫僅少表示",
+      "shipping": "送料無料表示。福岡市宛の到着日は未確定",
+      "points_jpy": 2079,
+      "source_url": "https://www.yodobashi.com/product/100000001009314680/",
+      "source_class": "direct_retailer_page_opened",
+      "note": "オンライン表示。ヨドバシ博多店頭在庫は未確認。"
+    },
+    {
+      "id": "keyboard-logitech-g213r",
+      "category": "Keyboard",
+      "product": "Logitech G213r",
+      "price_jpy": 7670,
+      "seller": "ビックカメラ.com",
+      "stock_status": "注文可表示。数量在庫の明示は未確認",
+      "shipping": "送料無料表示",
+      "points_jpy": 767,
+      "source_url": "https://www.biccamera.com/bc/item/9242996/",
+      "source_class": "direct_retailer_page_opened",
+      "note": "ビックカメラ天神1号館の店頭在庫は未確認。"
+    },
+    {
+      "id": "mouse-logitech-g304rwh",
+      "category": "Mouse",
+      "product": "Logitech G304rWH",
+      "price_jpy": 5720,
+      "seller": "ヨドバシ.com",
+      "stock_status": "在庫あり表示",
+      "shipping": "送料無料表示。福岡市宛の到着日は未確定",
+      "points_jpy": 572,
+      "source_url": "https://www.yodobashi.com/product/100000001004334450/",
+      "source_class": "direct_retailer_page_opened",
+      "note": "ヨドバシ博多店頭在庫は未確認。"
+    },
+    {
+      "id": "mousepad-steelseries-qck-large",
+      "category": "Mousepad",
+      "product": "SteelSeries QcK Large",
+      "price_jpy": 2420,
+      "seller": "ビックカメラ.com",
+      "stock_status": "在庫あり表示",
+      "shipping": "送料無料表示",
+      "points_jpy": 242,
+      "source_url": "https://www.biccamera.com/bc/item/1570130/",
+      "source_class": "direct_retailer_page_opened",
+      "note": "ビックカメラ天神1号館の店頭在庫は未確認。"
+    },
+    {
+      "id": "bto-thirdwave-ad-r7a56c",
+      "category": "BTO",
+      "product": "THIRDWAVE AD-R7A56C-0AW",
+      "base_price_jpy": 269980,
+      "base_specs": "Ryzen 7 7700 / RTX 5060 Ti 16GB / 16GB DDR5-4800 / 500GB NVMe Gen4 / A620A / 650W 80PLUS Bronze / Windows 11 Home / standard keyboard and mouse / 1-year warranty",
+      "upgrades": {
+        "ram_32gb": 66000,
+        "ssd_1tb": 24000,
+        "ssd_2tb": 75000,
+        "wifi6_bluetooth52": 8000,
+        "warranty_2_years_formula": "PC configured price x 6%",
+        "warranty_3_years_formula": "PC configured price x 10%",
+        "warranty_5_years_formula": "PC configured price x 18%"
+      },
+      "shipping": "商品ページで送料額・福岡市納期を確認できず",
+      "stock_status": "カスタマイズ・注文導線あり。納期・在庫明示なし",
+      "source_url": "https://www.dospara.co.jp/TC50/MC26301.html",
+      "source_class": "direct_bto_configurator_page_opened",
+      "note": "6,600円表示は延長保証ではなく別サービス。3年保証は構成価格の10%。"
+    }
+  ],
+  "price_changes": [
+    {
+      "sku": "100-100001404WOF",
+      "item": "Ryzen 7 9700X",
+      "prior_price_jpy": 49800,
+      "current_price_jpy": 44800,
+      "delta_jpy": -5000,
+      "comparison_note": "同一SKUだが販売店が異なる"
+    },
+    {
+      "sku": "4711377308229",
+      "item": "MSI RTX 5070 12G VENTUS 2X OC",
+      "prior_price_jpy": 166800,
+      "current_price_jpy": 154800,
+      "delta_jpy": -12000,
+      "comparison_note": "同一SKU・同一販売店の比較"
+    },
+    {
+      "item": "Peripherals subtotal",
+      "prior_corrected_sum_jpy": 33263,
+      "prior_reported_sum_jpy": 38363,
+      "current_sum_jpy": 36600,
+      "note": "旧合計38,363円は算術誤り。旧価格の正しい合計は33,263円。現行ページ価格の合計は36,600円。"
+    }
+  ],
+  "component_scores": {
+    "cpu_rubric": {
+      "points": {
+        "game_simulation": 30,
+        "production_analysis": 20,
+        "performance_per_watt": 20,
+        "price_vs_target": 15,
+        "platform_longevity": 10,
+        "evidence_warranty": 5
+      },
+      "scores": [
+        {
+          "item": "Ryzen 7 9700X",
+          "score": 87,
+          "breakdown": {
+            "game_simulation": 25,
+            "production_analysis": 18,
+            "performance_per_watt": 18,
+            "price_vs_target": 11,
+            "platform_longevity": 10,
+            "evidence_warranty": 5
+          }
+        },
+        {
+          "item": "Ryzen 7 9800X3D",
+          "score": 83,
+          "breakdown": {
+            "game_simulation": 30,
+            "production_analysis": 17,
+            "performance_per_watt": 13,
+            "price_vs_target": 8,
+            "platform_longevity": 10,
+            "evidence_warranty": 5
+          }
+        }
+      ]
+    },
+    "gpu_rubric": {
+      "points": {
+        "wqhd_performance": 25,
+        "ai_compatibility": 20,
+        "vram_longevity": 15,
+        "performance_per_watt": 15,
+        "price_vs_target": 15,
+        "evidence_warranty": 10
+      },
+      "scores": [
+        {
+          "item": "ASRock RX 9070 Challenger 16GB",
+          "score": 82,
+          "breakdown": {
+            "wqhd_performance": 23,
+            "ai_compatibility": 14,
+            "vram_longevity": 15,
+            "performance_per_watt": 12,
+            "price_vs_target": 10,
+            "evidence_warranty": 8
+          }
+        },
+        {
+          "item": "PNY RTX 5060 Ti 16GB",
+          "score": 80,
+          "breakdown": {
+            "wqhd_performance": 17,
+            "ai_compatibility": 20,
+            "vram_longevity": 15,
+            "performance_per_watt": 14,
+            "price_vs_target": 5,
+            "evidence_warranty": 9
+          }
+        },
+        {
+          "item": "MSI RTX 5070 12GB",
+          "score": 71,
+          "breakdown": {
+            "wqhd_performance": 20,
+            "ai_compatibility": 20,
+            "vram_longevity": 10,
+            "performance_per_watt": 10,
+            "price_vs_target": 3,
+            "evidence_warranty": 8
+          }
+        }
+      ],
+      "unverified_candidate": {
+        "item": "RTX 5070 Ti 16GB",
+        "indicative_score": 85,
+        "price_evidence": "direct page fetch failed; excluded from confirmed buyable ranking"
+      }
+    }
+  },
+  "build_candidates": [
+    {
+      "id": "self-build-9700x-rx9070-32gb-2tb",
+      "type": "自作",
+      "specs": {
+        "cpu": "AMD Ryzen 7 9700X",
+        "motherboard": "ASRock B850M-X WiFi R2.0 (price/stock not live-verified; substitute candidate)",
+        "gpu": "ASRock Radeon RX 9070 Challenger 16GB",
+        "ram": "Corsair Vengeance DDR5-6000 32GB (16GBx2)",
+        "ssd": "Verbatim Vi5000 2TB",
+        "cooler": "Thermalright Peerless Assassin 140 SE",
+        "psu": "MSI MAG A850GL PCIE5 850W 80PLUS Gold ATX3.0",
+        "case": "Fractal Design Pop Mini Air RGB White TG Clear Tint",
+        "os": "Windows 11 Home retail",
+        "monitor": "AOC Q27G40E/11 27-inch WQHD 180Hz",
+        "keyboard": "Logitech G213r",
+        "mouse": "Logitech G304rWH",
+        "mousepad": "SteelSeries QcK Large"
+      },
+      "cost_breakdown_jpy": {
+        "cpu": 44800,
+        "motherboard_reference": 15816,
+        "gpu": 125800,
+        "ram": 72979,
+        "ssd_reference": 48980,
+        "cooler": 5480,
+        "psu": 15980,
+        "case": 15180,
+        "os": 16526,
+        "monitor": 20790,
+        "keyboard": 7670,
+        "mouse": 5720,
+        "mousepad": 2420,
+        "small_parts_reserve": 3000,
+        "contingency": 5000
+      },
+      "estimated_all_in_jpy_ex_shipping": 410305,
+      "shipping_jpy": null,
+      "remaining_to_budget_before_shipping_jpy": 39695,
+      "points_separate_jpy": 3660,
+      "ram_capacity_gb": 32,
+      "ssd_capacity_tb": 2,
+      "score": {
+        "scored_points": 47,
+        "scored_max": 65,
+        "unscored_max": 35,
+        "possible_range": [
+          47,
+          82
+        ],
+        "breakdown": {
+          "use_fit": {
+            "score": 20,
+            "max": 25,
+            "subscore": {
+              "game_simulation": "7/8",
+              "ue5_unity": "5/6",
+              "ai_gpu": "4/6",
+              "python_data": "4/5"
+            }
+          },
+          "total_cost": "未採点/25",
+          "reliability_warranty": "10/15",
+          "compatibility_upgrade": "10/15",
+          "stock_delivery": "未採点/10",
+          "power_thermal_noise": "7/10"
+        }
+      },
+      "evidence_completeness_pct": 78,
+      "purchase_gate": "HOLD",
+      "note": "Board price/stock, SSD delivery, Fukuoka delivery and checkout totals are not fully confirmed. 64GB is not included."
+    },
+    {
+      "id": "bto-thirdwave-32gb-1tb-3y",
+      "type": "BTO",
+      "specs": {
+        "model": "THIRDWAVE AD-R7A56C-0AW",
+        "cpu": "Ryzen 7 7700",
+        "gpu": "RTX 5060 Ti 16GB",
+        "ram": "32GB DDR5-4800 (16GBx2 option)",
+        "ssd": "1TB NVMe Gen4 option",
+        "motherboard": "A620A (exact maker/model not disclosed)",
+        "psu": "650W 80PLUS Bronze (maker/model not disclosed)",
+        "os": "Windows 11 Home",
+        "keyboard_mouse": "standard keyboard and mouse included",
+        "monitor": "AOC Q27G40E/11 27-inch WQHD 180Hz",
+        "mousepad": "SteelSeries QcK Large",
+        "warranty": "3-year option"
+      },
+      "cost_breakdown_jpy": {
+        "base_pc": 269980,
+        "ram_32gb_upgrade": 66000,
+        "ssd_1tb_upgrade": 24000,
+        "configured_pc": 359980,
+        "warranty_3y": 35998,
+        "monitor": 20790,
+        "mousepad": 2420,
+        "contingency": 5000
+      },
+      "estimated_all_in_jpy_ex_shipping": 424188,
+      "shipping_jpy": null,
+      "remaining_to_budget_before_shipping_jpy": 25812,
+      "points_separate_jpy": "base listing shows 1,350pt; final custom points not confirmed",
+      "score": {
+        "scored_points": 38,
+        "scored_max": 65,
+        "unscored_max": 35,
+        "possible_range": [
+          38,
+          73
+        ],
+        "breakdown": {
+          "use_fit": {
+            "score": 19,
+            "max": 25,
+            "subscore": {
+              "game_simulation": "6/8",
+              "ue5_unity": "4/6",
+              "ai_gpu": "5/6",
+              "python_data": "4/5"
+            }
+          },
+          "total_cost": "未採点/25",
+          "reliability_warranty": "8/15",
+          "compatibility_upgrade": "5/15",
+          "stock_delivery": "未採点/10",
+          "power_thermal_noise": "6/10"
+        }
+      },
+      "evidence_completeness_pct": 64,
+      "purchase_gate": "HOLD",
+      "note": "Shipping/stock not confirmed. 5-year warranty makes all-in 452,986円 before shipping, over budget. 2TB SSD or 64GB RAM upgrades also exceed budget."
+    }
+  ],
+  "unresolved": [
+    "B850M-X WiFi R2.0 direct product page returned 502; price 15,816円 and stock status are not treated as confirmed.",
+    "Verbatim Vi5000 2TB page shows 48,980円 and in-stock text, but dispatch date is stale; current delivery not confirmed.",
+    "Fukuoka-specific shipping/arrival date for the assembled self-build and BTO is not verified.",
+    "64GB DDR5 kit current buyable price not verified.",
+    "BIOS version shipped on the motherboard and exact Corsair RAM QVL match not confirmed.",
+    "Bic Camera Tenjin 1-gokan and Yodobashi Hakata physical store stock not confirmed, except Dospara Hakata stock for the PNY RTX 5060 Ti.",
+    "Used RTX 4070 Ti SUPER, RTX 4080 SUPER and RTX 3090 listings with exact SKU, warranty and return period not verified."
+  ],
+  "decision": {
+    "cpu": "WAIT",
+    "gpu": "WAIT",
+    "self_build": "HOLD",
+    "bto": "HOLD",
+    "overall": "HOLD",
+    "reason": "No completed configuration has all prices, inventory, Fukuoka shipping, compatibility and warranty verified at checkout."
+  }
+}
