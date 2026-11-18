@@ -6,7 +6,7 @@
     "currency": "JPY",
     "total_budget_jpy": 450000,
     "peripheral_budget_jpy": 35000,
-    "pc_budget_jpy": 401000,
+    "pc_budget_jpy": 410000,
     "minimum_ram_gb": 32,
     "minimum_memory_modules": 2,
     "minimum_ssd_gb": 1000,
@@ -42,7 +42,7 @@
     "allowed_comparison_domains": [
       "kakaku.com"
     ],
-    "policy": "総額450,000円を絶対上限とする。PC本体・OS・27インチWQHDメインモニター・キーボード・マウス・マウスパッド・必要小物・全送料・予備費5,000円を含む。40万円は比較目標であり、使い切る目標ではない。周辺機器35,000円は柔軟な参考配分。PC部品予算は周辺機器実費・送料・小物・予備費を差し引いて動的に計算する。35万円/40万円/45万円シナリオは個別の評価上限を維持し、45万円を超える構成は比較専用で購入不可と明示する。自作PCを主候補、BTOは別枠比較。RAM32GB以上、SSD1TB以上を購入時点で必須、64GB/2TBを優先する。スピーカー・サブモニター・ヘッドセットは今回の購入対象外。ポイントは現金値引きに算入しない。福岡市への送料・納期・保証/返品・正確なSKU・在庫・最終決済額・BIOS/QVL/寸法/電源接続を確認し、未確認は購入可能扱いしない。",
+    "policy": "総額450,000円を絶対上限とする。PC本体・OS・27インチWQHDメインモニター・キーボード・マウス・マウスパッド・必要小物・全送料・予備費5,000円を含む。40万円は比較目標であり、使い切る目標ではない。周辺機器35,000円は柔軟な参考配分。PC部品予算は周辺機器実費・送料・小物・予備費を差し引いて動的に計算する。35万円/40万円/45万円シナリオは個別の評価上限を維持し、45万円を超える構成は比較専用で購入不可と明示する。自作PCを主候補、BTOは別枠比較。RAM32GB以上、SSD1TB以上を購入時点で必須、64GB/2TBを優先する。スピーカー・サブモニター・ヘッドセットは今回の購入対象外。ポイントは現金値引きに算入しない。福岡市への送料・納期・保証/返品・正確なSKU・在庫・最終決済額・BIOS/QVL/寸法/電源接続を確認し、未確認は購入可能扱いしない。 Do not include speakers, secondary monitor, headset, or power strip in the current purchase list.",
     "allowed_search_reference_domains": [
       "kakaku.com",
       "amazon.co.jp",
@@ -73,7 +73,7 @@
     "assembly_time_penalty_points": 0,
     "pc_build_method_preference": "SELF_BUILD_REQUIRED_FOR_PRIMARY_RECOMMENDATION",
     "bto_role": "REFERENCE_BENCHMARK_ONLY",
-    "selection_policy": "PC本体は自作パーツをネット購入する方式を本命とし、組み立て時間を減点しない。周辺機器はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の両支店について、同一型番の店頭税込現金価格と同じ支店の在庫・支店在庫を確認してから購入ルートを選ぶ。実店舗の価格と在庫を両支店で確認する。どちらか未確認ならネット配送・ネット注文の店舗受け取りへ自動切替せず、選択ルートを未確認のまま保留する。両支店の比較完了後に限り、オンラインの正確な型番・販売元・税込価格・在庫・送料/必須費用・最終決済額・保証/返品条件も比較し、購入可能ルートの税込現金総額が最も低い候補を選ぶ。ネット価格を店頭価格に流用せず、ポイントは現金値引きに含めない。BTOは同等構成の価格・性能・品質・保証の比較枠のみ。ゲーム、ゲーム制作、スポーツ/株/BTC分析、ローカルAI、学校の授業から早稲田/九大の入試応用までを一つの多目的構成として評価する。価格目標だけで購入許可を出さず、正確なSKU、最新在庫、決済額、互換性、返品/保証を確認する。",
+    "selection_policy": "PC本体は自作を主候補とする。周辺機器はオンライン配送・指定店舗の店頭現金購入・オンライン注文の店舗受取を同一SKUで比較する。店頭購入は選択する同一支店の税込現金価格と在庫が必須。オンライン配送は正確な型番・販売者・販売可能在庫・福岡市宛の実送料/必須費用・最終現金決済額・保証/返品が確認できれば、店頭価格未確認でも購入候補にできる。店舗受取は同一支店の受取在庫と受取決済額を必須とする。未確認ルートは購入可能扱いしない。ポイントは現金値引きに算入しない。",
     "purchase_decision_factors": [
       {
         "name": "combined_performance_for_gaming_game_creation_study_analysis",
@@ -291,20 +291,20 @@
       "incremental_budget_target_jpy": 21000,
       "full_system_scenario": {
         "gpu_id": "gpu-rtx5070ti-16gb",
-        "base_pc_target_jpy": 362000,
-        "pc_target_with_2tb_ssd_jpy": 383000,
+        "base_pc_target_jpy": 379000,
+        "pc_target_with_2tb_ssd_jpy": 400000,
         "peripherals_reference_jpy": 35000,
         "contingency_jpy": 5000,
-        "all_in_target_jpy": 423000,
-        "remaining_to_hard_ceiling_jpy": -23000,
+        "all_in_target_jpy": 440000,
+        "remaining_to_hard_ceiling_jpy": 10000,
         "soft_ceiling_total_jpy": 420000,
-        "target_overrun_vs_400k_jpy": 23000,
-        "remaining_to_soft_ceiling_jpy": -3000
+        "target_overrun_vs_400k_jpy": 40000,
+        "remaining_to_soft_ceiling_jpy": -20000
       },
       "rules": [
         "The 2TB drive replaces the 1TB drive; never add both SSD prices to the same build.",
         "JPY 45,000 is an aspirational Black Friday target, not a forecast or confirmed offer.",
-        "Only select the 2TB configuration if the exact model price, stock, motherboard compatibility, and complete checkout total are verified and total <= JPY 400,000.",
+        "Only select the 2TB configuration if the exact model price, stock, motherboard compatibility, and complete checkout total are verified and total <= JPY 450,000 (absolute hard cap); compare against the JPY 400,000 target and JPY 420,000 soft band first.",
         "If the 2TB target is missed, compare another exact-model 2TB SSD or keep the 1TB baseline; do not exceed the total budget for capacity alone.",
         "The KIOXIA EXCERIA BASIC model uses QLC NAND; evaluate sustained-write workload suitability rather than treating its sequential-speed headline as proof of workstation endurance."
       ],
@@ -326,22 +326,22 @@
       "current_offer_expiry": "2026-10-29T23:59:00+09:00",
       "full_system_scenario": {
         "gpu_id": "gpu-rtx5060ti-16gb",
-        "base_pc_target_jpy": 324000,
+        "base_pc_target_jpy": 319000,
         "base_memory_target_jpy": 58000,
         "memory64_target_jpy": 100000,
-        "pc_target_with_64gb_jpy": 366000,
+        "pc_target_with_64gb_jpy": 361000,
         "peripherals_reference_jpy": 35000,
         "contingency_jpy": 5000,
-        "all_in_target_jpy": 406000,
-        "remaining_to_hard_ceiling_jpy": -6000,
+        "all_in_target_jpy": 401000,
+        "remaining_to_hard_ceiling_jpy": 49000,
         "soft_ceiling_total_jpy": 420000,
-        "target_overrun_vs_400k_jpy": 6000,
-        "remaining_to_soft_ceiling_jpy": 14000
+        "target_overrun_vs_400k_jpy": 1000,
+        "remaining_to_soft_ceiling_jpy": 19000
       },
       "rules": [
         "The 64GB kit replaces the selected 32GB kit; never add both RAM prices to the same build.",
         "The ¥100,000 BF target is aspirational, not a forecast or confirmed BF offer.",
-        "The plan pairs 64GB RAM with RTX 5060 Ti 16GB; do not combine it with RTX 5070 or RTX 5070 Ti in a recommended under-¥400,000 build unless the exact full-system calculation and observed prices prove it fits.",
+        "The plan pairs 64GB RAM with RTX 5060 Ti 16GB; do not combine it with RTX 5070 or RTX 5070 Ti in a recommended within the ¥450,000 absolute all-in hard cap (prefer ¥400,000 and the ¥420,000 comparison band) unless the exact full-system calculation and observed prices prove it fits.",
         "Verify exact model, motherboard QVL, BIOS, AMD EXPO stability, retailer stock, checkout price, and all-in total before promotion.",
         "If the RAM target is missed or compatibility remains unclear, retain the 32GB default configuration and do not assume post-purchase upgrades."
       ]
@@ -476,7 +476,10 @@
         "build_shipping_reserve_jpy": 6000,
         "small_parts_reserve_jpy": 3000,
         "purpose_note_ja": "8コア/16スレッド、32GB RAM、16GB VRAM、1TB NVMeを購入時点で維持する予算優先案。",
-        "tradeoff_note_ja": "9700X/RTX 5070より処理余裕・ゲーム描画は低い。付属クーラーの長時間負荷時の音・温度を確認。"
+        "tradeoff_note_ja": "9700X/RTX 5070より処理余裕・ゲーム描画は低い。付属クーラーの長時間負荷時の音・温度を確認。",
+        "target_all_in_jpy": 348000,
+        "target_overrun_vs_absolute_hard_cap_jpy": 0,
+        "within_absolute_hard_cap": true
       },
       {
         "id": "budget-350k-rtx5070-over",
@@ -508,7 +511,10 @@
         "build_shipping_reserve_jpy": 6000,
         "small_parts_reserve_jpy": 3000,
         "purpose_note_ja": "RTX 5070を選んだ場合の性能差と必要予算を比較する参考案。",
-        "tradeoff_note_ja": "目標構成でも総額35万円を16,000円超過。GPU以外を無理に削って適合扱いしない。"
+        "tradeoff_note_ja": "目標構成でも総額35万円を16,000円超過。GPU以外を無理に削って適合扱いしない。",
+        "target_all_in_jpy": 338000,
+        "target_overrun_vs_absolute_hard_cap_jpy": 0,
+        "within_absolute_hard_cap": true
       },
       {
         "id": "budget-400k-rtx5070-balanced",
@@ -541,7 +547,10 @@
         "build_shipping_reserve_jpy": 6000,
         "small_parts_reserve_jpy": 3000,
         "purpose_note_ja": "ゲーム、ゲーム制作、分析、勉強を広く両立する基準構成。",
-        "tradeoff_note_ja": "標準ではRAM64GB/SSD2TBを含めない。価格と互換性の最終確認を優先。"
+        "tradeoff_note_ja": "標準ではRAM64GB/SSD2TBを含めない。価格と互換性の最終確認を優先。",
+        "target_all_in_jpy": 349000,
+        "target_overrun_vs_absolute_hard_cap_jpy": 0,
+        "within_absolute_hard_cap": true
       },
       {
         "id": "budget-400k-rtx5060ti-2tb",
@@ -574,7 +583,10 @@
         "build_shipping_reserve_jpy": 6000,
         "small_parts_reserve_jpy": 3000,
         "purpose_note_ja": "16GB VRAMと2TB NVMeを購入時点で確保。",
-        "tradeoff_note_ja": "RTX 5070よりゲーム描画は低くなり得る。KIOXIAのQLC NANDは持続書込み負荷との適合も確認。"
+        "tradeoff_note_ja": "RTX 5070よりゲーム描画は低くなり得る。KIOXIAのQLC NANDは持続書込み負荷との適合も確認。",
+        "target_all_in_jpy": 380000,
+        "target_overrun_vs_absolute_hard_cap_jpy": 0,
+        "within_absolute_hard_cap": true
       },
       {
         "id": "budget-400k-rtx5070ti-over",
@@ -607,7 +619,10 @@
         "build_shipping_reserve_jpy": 6000,
         "small_parts_reserve_jpy": 3000,
         "purpose_note_ja": "最高いGPU性能と16GB VRAMを狙う参考案。",
-        "tradeoff_note_ja": "目標で総額2,000円超過。2.98スロット厚、補助電源配線とケース周囲クリアランスはREVIEW。"
+        "tradeoff_note_ja": "目標で総額2,000円超過。2.98スロット厚、補助電源配線とケース周囲クリアランスはREVIEW。",
+        "target_all_in_jpy": 419000,
+        "target_overrun_vs_absolute_hard_cap_jpy": 0,
+        "within_absolute_hard_cap": true
       },
       {
         "id": "budget-450k-balanced-capacity",
@@ -640,7 +655,10 @@
         "build_shipping_reserve_jpy": 6000,
         "small_parts_reserve_jpy": 3000,
         "purpose_note_ja": "ゲーム性能を保ちつつ、ゲーム制作素材・ビルド・Pythonと分析データの同時利用に向けRAM64GBとSSD2TBを購入時点で確保。",
-        "tradeoff_note_ja": "RTX 5070 TiほどGPU性能は高くない。正確なRAM QVL/EXPO・SSD持続書込適合・現行価格を確認。"
+        "tradeoff_note_ja": "RTX 5070 TiほどGPU性能は高くない。正確なRAM QVL/EXPO・SSD持続書込適合・現行価格を確認。",
+        "target_all_in_jpy": 412000,
+        "target_overrun_vs_absolute_hard_cap_jpy": 0,
+        "within_absolute_hard_cap": true
       },
       {
         "id": "budget-450k-5070-64gb-1tb",
@@ -673,14 +691,17 @@
         "build_shipping_reserve_jpy": 6000,
         "small_parts_reserve_jpy": 3000,
         "purpose_note_ja": "RAM容量とCPU並列作業を優先して64GBを購入時点で確保。",
-        "tradeoff_note_ja": "SSDは1TBに留まるため、ゲーム素材やデータセット容量と比較。"
+        "tradeoff_note_ja": "SSDは1TBに留まるため、ゲーム素材やデータセット容量と比較。",
+        "target_all_in_jpy": 391000,
+        "target_overrun_vs_absolute_hard_cap_jpy": 0,
+        "within_absolute_hard_cap": true
       },
       {
         "id": "budget-450k-gpu-priority",
         "budget_tier_jpy": 450000,
         "budget_tier_label": "45万円",
         "name": "45万円GPU案：RTX 5070 Ti 16GB + 64GB RAM",
-        "scenario_role": "gpu_performance_priority",
+        "scenario_role": "over_budget_comparison_only",
         "part_ids": [
           "cpu-ryzen7-9700x",
           "motherboard-asrock-b850m-pro-rs-wifi",
@@ -706,7 +727,10 @@
         "build_shipping_reserve_jpy": 6000,
         "small_parts_reserve_jpy": 3000,
         "purpose_note_ja": "GPUレンダリング/ゲーム性能とRAM64GBを優先。",
-        "tradeoff_note_ja": "SSDは1TB。RTX 5070 Tiの厚さ、電源ケーブル、RAM QVLと全決済価格を確認。"
+        "tradeoff_note_ja": "SSDは1TB。RTX 5070 Tiの厚さ、電源ケーブル、RAM QVLと全決済価格を確認。 総額461,000円で45万円上限を11,000円超過。購入不可・比較専用。",
+        "target_all_in_jpy": 461000,
+        "target_overrun_vs_absolute_hard_cap_jpy": 11000,
+        "within_absolute_hard_cap": false
       },
       {
         "id": "budget-450k-gpu-storage",
@@ -739,7 +763,10 @@
         "build_shipping_reserve_jpy": 6000,
         "small_parts_reserve_jpy": 3000,
         "purpose_note_ja": "GPU性能・16GB VRAM・2TB SSDを優先する別案。",
-        "tradeoff_note_ja": "RAMは基準の32GB。予算余裕があってもRAM QVLと実価格の条件を確認して選ぶ。"
+        "tradeoff_note_ja": "RAMは基準の32GB。予算余裕があってもRAM QVLと実価格の条件を確認して選ぶ。",
+        "target_all_in_jpy": 440000,
+        "target_overrun_vs_absolute_hard_cap_jpy": 0,
+        "within_absolute_hard_cap": true
       },
       {
         "id": "budget-450k-9900x-5070-64gb-2tb",
@@ -772,14 +799,17 @@
         "build_shipping_reserve_jpy": 6000,
         "small_parts_reserve_jpy": 3000,
         "purpose_note_ja": "12コア/24スレッドでローカルビルド・並列分析の余裕を確保しながら、RTX 5070 12GB・RAM 64GB・SSD 2TBを購入時点で狙うCPU並列重視案。",
-        "tradeoff_note_ja": "CPU目標55,000円、RAM/SSD/GPUもBF目標を使った計画値で、実売ではない。9900Xは120W TDPでAMDは最適性能のため液冷を推奨するため、Peerless Assassin空冷での長時間全コア負荷時の温度・騒音・クロックを検証する。冷却変更が必要なら未計上費を追加し、総額を再計算する。メモリQVL/EXPO・GPU寸法/電源・BIOS・全SKUの実売/在庫を確認するまで購入可能扱いしない。"
+        "tradeoff_note_ja": "CPU目標55,000円、RAM/SSD/GPUもBF目標を使った計画値で、実売ではない。9900Xは120W TDPでAMDは最適性能のため液冷を推奨するため、Peerless Assassin空冷での長時間全コア負荷時の温度・騒音・クロックを検証する。冷却変更が必要なら未計上費を追加し、総額を再計算する。メモリQVL/EXPO・GPU寸法/電源・BIOS・全SKUの実売/在庫を確認するまで購入可能扱いしない。",
+        "target_all_in_jpy": 427000,
+        "target_overrun_vs_absolute_hard_cap_jpy": 0,
+        "within_absolute_hard_cap": true
       },
       {
         "id": "budget-450k-5070ti-64gb-2tb-over",
         "budget_tier_jpy": 450000,
         "budget_tier_label": "45万円",
         "name": "45万円上位大穴：Ryzen 7 9700X + RTX 5070 Ti 16GB + 64GB RAM + 2TB SSD",
-        "scenario_role": "over_budget_comparison",
+        "scenario_role": "over_budget_comparison_only",
         "part_ids": [
           "cpu-ryzen7-9700x",
           "motherboard-asrock-b850m-pro-rs-wifi",
@@ -805,7 +835,10 @@
         "build_shipping_reserve_jpy": 6000,
         "small_parts_reserve_jpy": 3000,
         "purpose_note_ja": "GPU性能・16GB VRAM・RAM 64GB・SSD 2TBを一度に確保する45万円帯の上位大穴。ゲーム、ゲーム制作アセット、ローカルAI、データ分析、並行開発を広く狙う。",
-        "tradeoff_note_ja": "BF目標額ベースの一式目標は465,000円で、45万円目標を15,000円超える一方、45万円の評価上限を15,000円超過するため比較用に残し、45万円以内の適合案とは分ける。実売価格ではない。SSDはQLC NANDのため大規模な持続書き込み速度をTLC候補と比較。RAM QVL/EXPO、GPU実SKU寸法/電源ケーブル余裕、BIOS、全パーツ在庫・最終決済額が未確認の間は購入可能扱いしない。"
+        "tradeoff_note_ja": "BF目標額ベースの一式目標は465,000円で、45万円目標を15,000円超える一方、45万円の評価上限を15,000円超過するため比較用に残し、45万円以内の適合案とは分ける。実売価格ではない。SSDはQLC NANDのため大規模な持続書き込み速度をTLC候補と比較。RAM QVL/EXPO、GPU実SKU寸法/電源ケーブル余裕、BIOS、全パーツ在庫・最終決済額が未確認の間は購入可能扱いしない。 総額482,000円で45万円上限を32,000円超過。購入不可・比較専用。",
+        "target_all_in_jpy": 482000,
+        "target_overrun_vs_absolute_hard_cap_jpy": 32000,
+        "within_absolute_hard_cap": false
       },
       {
         "id": "budget-450k-5060ti-2tb",
@@ -838,15 +871,21 @@
         "build_shipping_reserve_jpy": 6000,
         "small_parts_reserve_jpy": 3000,
         "purpose_note_ja": "16GB CUDA GPUと2TB NVMeを購入時点で確保し、AI用途・制作アセット・ゲーム容量と電力効率をバランスさせる現行優先案。",
-        "tradeoff_note_ja": "GPU描画性能はRTX 5070より低い。RAMは32GBの最低条件。全SKUの当日価格、福岡送料、SSDのQLC NAND、QVL/EXPO、BIOS、ケース寸法・電源端子を確認するまで購入可能扱いしない。"
+        "tradeoff_note_ja": "GPU描画性能はRTX 5070より低い。RAMは32GBの最低条件。全SKUの当日価格、福岡送料、SSDのQLC NAND、QVL/EXPO、BIOS、ケース寸法・電源端子を確認するまで購入可能扱いしない。",
+        "target_all_in_jpy": 380000,
+        "target_overrun_vs_absolute_hard_cap_jpy": 0,
+        "within_absolute_hard_cap": true
       }
     ],
-    "peripheral_purchase_policy_ja": "PC本体パーツはネット購入。周辺機器はビックカメラ天神1号館とヨドバシカメラ マルチメディア博多の両支店について、同一型番の店頭税込現金価格と同じ支店の在庫・支店在庫を確認する。実店舗の価格と在庫を両支店で確認する。どちらか一方でも未確認ならネット配送・ネット注文の店舗受け取りへ自動切替せず、購入ルートは未確認として保留する。両支店の比較完了後に限り、オンラインの型番・販売元・税込価格・在庫・実送料/必須費用・最終決済額・保証/返品条件も比較し、購入可能ルートの税込現金総額が最も低いものを選ぶ。ネット価格で店頭価格を代用せず、ポイント還元は現金値引きに含めない。",
+    "peripheral_purchase_policy_ja": "PC本体は自作を主候補とする。周辺機器はオンライン配送・指定店舗の店頭現金購入・オンライン注文の店舗受取を同一SKUで比較する。店頭購入は選択する同一支店の税込現金価格と在庫が必須。オンライン配送は正確な型番・販売者・販売可能在庫・福岡市宛の実送料/必須費用・最終現金決済額・保証/返品が確認できれば、店頭価格未確認でも購入候補にできる。店舗受取は同一支店の受取在庫と受取決済額を必須とする。未確認ルートは購入可能扱いしない。ポイントは現金値引きに算入しない。",
     "default_budget_scenario_id": "budget_450k",
     "default_budget_scope_note": "Top-level total_budget_jpy, soft_overrun_allowance_jpy and soft_ceiling_total_jpy describe only the default JPY 400,000 scenario. The explicit budget_scenarios table is authoritative for every tier; 350k and 450k never inherit the global 20k allowance.",
     "budget_build_candidate_ids": [
       "budget-450k-5060ti-2tb"
-    ]
+    ],
+    "monitoring_window_start_jst": "2026-11-14T00:00:00+09:00",
+    "monitoring_window_end_jst": "2026-11-30T23:59:59+09:00",
+    "monitoring_stop_at_jst": "2026-11-30T23:59:59+09:00"
   },
   "parts": [
     {
@@ -1935,7 +1974,7 @@
         "Ryzen 7 9800X3D",
         "100-100001084WOF"
       ],
-      "monitor_url": "https://www.ark-pc.co.jp/i/10240267/",
+      "monitor_url": "https://search.kakaku.com/100-100001084WOF/",
       "purchase_url": "https://www.ark-pc.co.jp/i/10240267/",
       "track_price": true,
       "target_price_jpy": 60000,
@@ -1977,7 +2016,7 @@
         "Ryzen 7 9850X3D",
         "100-100001973WOF"
       ],
-      "monitor_url": "https://www.ark-pc.co.jp/i/10240292/",
+      "monitor_url": "https://search.kakaku.com/Ryzen%207%209850X3D%20BOX/?category=0001",
       "purchase_url": "https://www.ark-pc.co.jp/i/10240292/",
       "track_price": true,
       "target_price_jpy": 0,
@@ -2021,7 +2060,7 @@
         "RX9070CL16G",
         "ASRock Radeon RX 9070 Challenger 16GB"
       ],
-      "monitor_url": "https://www.dospara.co.jp/SBR1891/IC518909.html",
+      "monitor_url": "https://search.kakaku.com/ASRock%20Radeon%20RX%209070%20Challenger%2016GB/",
       "purchase_url": "https://www.dospara.co.jp/SBR1891/IC518909.html",
       "track_price": true,
       "target_price_jpy": 105000,
@@ -2066,7 +2105,7 @@
         "RX9070XT Steel Legend 16GB",
         "RX9070 XT"
       ],
-      "monitor_url": "https://www.dospara.co.jp/SBR1891/IC518907.html",
+      "monitor_url": "https://search.kakaku.com/Radeon%20RX%209070XT%20Steel%20Legend%2016G/",
       "purchase_url": "https://www.dospara.co.jp/SBR1891/IC518907.html",
       "track_price": true,
       "target_price_jpy": 120000,
