@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-20",
-  "purpose": "Pre-Black-Friday purchase-review triggers. Thresholds start a manual review only; they are neither forecasts nor purchase permission. ¥400,000 is the all-in target with a ¥420,000 initial soft band; the ¥350,000/¥370,000 and ¥450,000/¥470,000 scenarios remain separate.",
-  "total_budget_hard_cap_jpy": null,
+  "updated_at": "2026-11-18",
+  "purpose": "Early purchase-review triggers only; not forecasts or authorization. ¥400,000 is the preferred all-in comparison target, ¥420,000 is the benefit-justified comparison band, and ¥450,000 is the absolute all-in hard cap. Never authorize or recommend a configuration above ¥450,000.",
+  "total_budget_hard_cap_jpy": 450000,
   "unallocated_contingency_jpy": 5000,
   "max_observation_age_minutes": 120,
   "rules": [
@@ -10,7 +10,7 @@
       "id": "cpu-ryzen7-9700x",
       "source": "build_component",
       "name": "AMD Ryzen 7 9700X BOX",
-      "early_trigger_price_jpy": 36000,
+      "early_trigger_price_jpy": 38000,
       "bf_target_price_jpy": 38000,
       "url": "https://kakaku.com/item/K0001630332/",
       "note": "Do not buy solely from the low headline price; confirm exact BOX SKU, seller, stock, shipping, return window and motherboard BIOS."
@@ -174,8 +174,8 @@
     "Only exact-model, direct-page price evidence with valid observation time may trigger a review; comparison search snippets, points, coupons not applied at checkout, stale prices and ambiguous variants do not trigger.",
     "For components, require identity match, valid point-in-time evidence and a current in-stock/low-stock status before labeling a trigger actionable.",
     "Before buying, verify final checkout price, shipping, stock, seller, warranty, returns, SKU and compatibility.",
-    "Recalculate the complete PC plus required peripherals, shipping/small parts and ¥5,000 contingency after every proposed early purchase. Compare the ¥400,000 all-in target and the ¥420,000 initial soft ceiling; modest overrun may be justified by measurable workload benefits. Do not compare only the PC body or hide required peripheral costs.",
-    "Keep the ¥350,000 target / ¥370,000 soft band, ¥400,000 target / ¥420,000 soft band, and ¥450,000 target / ¥470,000 soft band as separate complete-system scenarios. Do not force all tiers into the ¥400,000 target.",
+    "Recalculate the complete PC plus required peripherals, shipping/small parts and ¥5,000 contingency after every proposed early purchase. Compare the ¥400,000 all-in target, the ¥420,000 benefit-justified comparison band, and the ¥450,000 absolute hard cap; modest overrun may be justified by measurable workload benefits. Do not compare only the PC body or hide required peripheral costs.",
+    "Keep the ¥350,000 target / ¥370,000 soft band, ¥400,000 target / ¥420,000 soft band, and ¥450,000 absolute all-in hard cap (no over-cap purchase band) as separate complete-system scenarios. Do not force all tiers into the ¥400,000 target.",
     "Do not assume that the rest of the build can later be upgraded for free. RAM must be at least 32GB and SSD at least 1TB at purchase; 64GB/2TB are substitutions only when the exact final build fits.",
     "Wait when an early target is not met. Black Friday is not guaranteed to have the lowest price, and a target is not a forecast."
   ],
@@ -194,7 +194,7 @@
     },
     {
       "target_total_jpy": 450000,
-      "soft_ceiling_total_jpy": 470000
+      "soft_ceiling_total_jpy": 450000
     }
   ]
 }
