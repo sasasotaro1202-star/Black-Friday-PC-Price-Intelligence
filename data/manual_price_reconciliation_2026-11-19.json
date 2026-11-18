@@ -17,7 +17,7 @@
       "id": "cpu-9700x-ark",
       "category": "CPU",
       "product": "AMD Ryzen 7 9700X BOX",
-      "sku": "100-100001404WOF",
+      "sku": "00-100001404WOF",
       "price_jpy": 44800,
       "seller": "パソコンSHOPアーク",
       "stock_status": "在庫あり",
@@ -26,7 +26,7 @@
       "warranty": "メーカー保証3年表示",
       "price_target_jpy": 40000,
       "delta_to_target_jpy": 4800,
-      "source_url": "https://www.ark-pc.co.jp/i/10107631/",
+      "source_url": "https://www.ark-pc.co.jp/i/10240257/",
       "source_class": "direct_retailer_page_opened",
       "note": "11/18更新表示。11/13台帳の49,800円より5,000円低いが販売店は異なる。"
     },
@@ -43,7 +43,7 @@
       "warranty": "メーカー保証3年表示",
       "price_target_jpy": 60000,
       "delta_to_target_jpy": 11800,
-      "source_url": "https://www.ark-pc.co.jp/i/10107631/",
+      "source_url": "https://www.ark-pc.co.jp/i/10240267/",
       "source_class": "direct_retailer_page_opened",
       "note": "9700Xよりゲーム特化だが価格差27,000円、TDP120W。"
     },
@@ -126,27 +126,9 @@
       "board_power_w": 300,
       "price_target_jpy": 180000,
       "delta_to_target_jpy": -5020,
-      "source_url": "https://shop.tsukumo.co.jp/goods/4711581490475/",
+      "source_url": "https://shop.tsukumo.co.jp/goods/0751492794594/",
       "source_class": "indexed_product_page_direct_fetch_failed",
-      "note": "買いライン達成とは認定しない。"
-    },
-    {
-      "id": "gpu-5070ti-zotac-tsukumo-unverified",
-      "category": "GPU",
-      "product": "ZOTAC GeForce RTX 5070 Ti 16GB",
-      "sku": "ZT-B50710F-10P",
-      "price_jpy": 164980,
-      "seller": "ツクモ",
-      "stock_status": "検索取得ページは在庫・24時間以内出荷を表示。直接ページ再取得は502で失敗",
-      "shipping": "送料無料表示（検索取得ページ）",
-      "warranty": "未確認",
-      "vram_gb": 16,
-      "board_power_w": 300,
-      "price_target_jpy": 180000,
-      "delta_to_target_jpy": -15020,
-      "source_url": "https://shop.tsukumo.co.jp/",
-      "source_class": "indexed_product_page_direct_fetch_failed",
-      "note": "価格参照のみ。正確な商品URLと在庫の再確認が必要。"
+      "note": "検索取得ページは174,980円・在庫/24時間以内出荷表示。正確な商品URLでの直接取得はタイムアウト。買いライン達成とは認定しない。"
     },
     {
       "id": "gpu-5070ti-gigabyte-dospara-oos",
@@ -180,23 +162,11 @@
       "product": "ASRock B850M-X WiFi R2.0",
       "price_jpy": 15816,
       "seller": "ツクモ",
-      "stock_status": "検索取得ページは在庫・24時間以内出荷を表示。直接ページ再取得は502で失敗",
+      "stock_status": "検索取得ページ（最終クロール5か月前）は在庫・24時間以内出荷表示。2026-11-19の直接ページ再取得は502で失敗し、現在在庫不明",
       "shipping": "送料無料表示（検索取得ページ）",
       "source_url": "https://shop.tsukumo.co.jp/goods/4711581490765/",
-      "source_class": "indexed_product_page_direct_fetch_failed",
-      "note": "AM5/B850、2 DIMM、最大128GB、M.2 x2、BIOS Flashback、Wi-Fi 6/BT5.2の仕様参照。価格・在庫はHOLD。"
-    },
-    {
-      "id": "motherboard-sapphire-b850m-oos",
-      "category": "Motherboard",
-      "product": "SAPPHIRE PULSE B850M WIFI",
-      "price_jpy": 19980,
-      "seller": "パソコンSHOPアーク",
-      "stock_status": "在庫切れ表示",
-      "shipping": "送料無料表示",
-      "source_url": "https://www.ark-pc.co.jp/i/12201623/",
-      "source_class": "direct_retailer_page_opened_out_of_stock",
-      "note": "価格は表示されるが購入可能候補ではない。"
+      "source_class": "stale_indexed_product_page_direct_fetch_failed",
+      "note": "価格15,816円は古い検索インデックスの参考値で、現在価格として確定しない。AM5/B850、2 DIMM、最大128GB、M.2 x2、BIOS Flashback、Wi-Fi 6/BT5.2の仕様参照。"
     },
     {
       "id": "psu-msi-a850gl-ark",
@@ -349,6 +319,20 @@
       "source_url": "https://www.dospara.co.jp/TC50/MC26301.html",
       "source_class": "direct_bto_configurator_page_opened",
       "note": "6,600円表示は延長保証ではなく別サービス。3年保証は構成価格の10%。"
+    },
+    {
+      "id": "ram-lexar-thor-64gb-ark",
+      "category": "RAM",
+      "product": "Lexar THOR RGB 2nd Gen DDR5-6000 64GB (32GBx2) CL40",
+      "sku": "LD5U32G60C40BV-RGD",
+      "price_jpy": 154800,
+      "seller": "パソコンSHOPアーク",
+      "stock_status": "在庫あり表示",
+      "shipping": "ArkのPCパーツ3点同時購入送料無料キャンペーン対象。カート送料は未計算",
+      "dispatch": "15:00までの対象決済で当日出荷表示",
+      "source_url": "https://www.ark-pc.co.jp/i/11650134/",
+      "source_class": "direct_retailer_page_opened",
+      "note": "11/14更新表示。32GBキット72,979円との差額81,821円。自作案の64GB化は492,126円+送料となり45万円を42,126円超過。"
     }
   ],
   "price_changes": [
@@ -510,12 +494,12 @@
       "ram_capacity_gb": 32,
       "ssd_capacity_tb": 2,
       "score": {
-        "scored_points": 47,
+        "scored_points": 46,
         "scored_max": 65,
         "unscored_max": 35,
         "possible_range": [
-          47,
-          82
+          46,
+          81
         ],
         "breakdown": {
           "use_fit": {
@@ -530,14 +514,17 @@
           },
           "total_cost": "未採点/25",
           "reliability_warranty": "10/15",
-          "compatibility_upgrade": "10/15",
+          "compatibility_upgrade": "9/15",
           "stock_delivery": "未採点/10",
           "power_thermal_noise": "7/10"
         }
       },
-      "evidence_completeness_pct": 78,
+      "evidence_completeness_pct": 75,
       "purchase_gate": "HOLD",
-      "note": "Board price/stock, SSD delivery, Fukuoka delivery and checkout totals are not fully confirmed. 64GB is not included."
+      "note": "410,305円はマザーボード15,816円の古い検索インデックス価格とSSD48,980円の古い出荷表示を含む参考試算。現行購入可能総額ではない。64GB化は492,126円+送料となり予算超過。",
+      "total_status": "reference_only_not_checkout_verified",
+      "ram_64gb_variant_jpy_ex_shipping": 492126,
+      "ram_64gb_variant_over_budget_jpy": 42126
     },
     {
       "id": "bto-thirdwave-32gb-1tb-3y",
@@ -605,10 +592,10 @@
     "B850M-X WiFi R2.0 direct product page returned 502; price 15,816円 and stock status are not treated as confirmed.",
     "Verbatim Vi5000 2TB page shows 48,980円 and in-stock text, but dispatch date is stale; current delivery not confirmed.",
     "Fukuoka-specific shipping/arrival date for the assembled self-build and BTO is not verified.",
-    "64GB DDR5 kit current buyable price not verified.",
     "BIOS version shipped on the motherboard and exact Corsair RAM QVL match not confirmed.",
     "Bic Camera Tenjin 1-gokan and Yodobashi Hakata physical store stock not confirmed, except Dospara Hakata stock for the PNY RTX 5060 Ti.",
-    "Used RTX 4070 Ti SUPER, RTX 4080 SUPER and RTX 3090 listings with exact SKU, warranty and return period not verified."
+    "Used RTX 4070 Ti SUPER, RTX 4080 SUPER and RTX 3090 listings with exact SKU, warranty and return period not verified.",
+    "B850M-X WiFi R2.0の15,816円は5か月前の検索インデックス値。直接ページ502のため現在価格・在庫は未確認。"
   ],
   "decision": {
     "cpu": "WAIT",
@@ -616,6 +603,6 @@
     "self_build": "HOLD",
     "bto": "HOLD",
     "overall": "HOLD",
-    "reason": "No completed configuration has all prices, inventory, Fukuoka shipping, compatibility and warranty verified at checkout."
+    "reason": "自作案のマザーボード価格・在庫、SSD出荷日、福岡市宛送料、BTO納期が未確定。点数が高くてもBUYにはしない。"
   }
 }
