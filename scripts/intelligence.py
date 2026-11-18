@@ -8,30 +8,34 @@ from urllib.parse import urlparse
 JST = timezone(timedelta(hours=9))
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def _initial_budget_settings():
-    """Read the total ceiling, a soft peripheral reference, and the dynamic PC ceiling."""
+    """Read the all-in ceiling and PC allocation; invalid config must fail closed."""
     path = os.path.join(ROOT, "config", "targets.json")
     try:
         with open(path, encoding="utf-8") as f:
             cfg = json.load(f)
-    except Exception:
-        cfg = {}
-    try:
-        total = int(cfg.get("total_budget_jpy", 400000))
-        peripherals = int(cfg.get("peripheral_budget_jpy", 35000))
-        pc_cap = int(cfg.get("pc_budget_jpy", 395000))
-        pc_target = int(cfg.get("pc_target_jpy", min(360000, pc_cap)))
-        contingency = int(cfg.get("unallocated_contingency_jpy", max(0, total - peripherals - pc_cap)))
+        total = int(cfg["total_budget_jpy"])
+        peripherals = int(cfg["peripheral_budget_jpy"])
+        pc_cap = int(cfg["pc_budget_jpy"])
+        pc_target = int(cfg["pc_target_jpy"])
+        contingency = int(cfg["unallocated_contingency_jpy"])
         mode = str(cfg.get("peripheral_budget_mode") or "").upper()
-        dynamic_peripherals = mode == "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET" or cfg.get("peripheral_budget_is_hard_cap") is False
-    except (TypeError, ValueError):
-        total, peripherals, pc_cap, pc_target, contingency, dynamic_peripherals = 400000, 35000, 395000, 360000, 5000, True
+        dynamic_peripherals = (
+            mode == "DYNAMIC_WITHIN_TOTAL_SYSTEM_BUDGET"
+            or cfg.get("peripheral_budget_is_hard_cap") is False
+        )
+    except Exception:
+        # Never substitute a stale, larger, or guessed PC allowance when the
+        # authoritative budget contract is missing or unreadable.
+        return 450000, 35000, 0, 0
     invalid = (
         min(total, peripherals, pc_cap, pc_target, contingency) < 0
         or pc_target > pc_cap
-        or (pc_cap + contingency > total if dynamic_peripherals else pc_cap + peripherals + contingency != total)
+        or pc_cap + peripherals + contingency != total
+        or total != 450000
+        or contingency != 5000
     )
     if invalid:
-        total, peripherals, pc_cap, pc_target, contingency, dynamic_peripherals = 400000, 35000, 395000, 360000, 5000, True
+        return 450000, 35000, 0, 0
     return total, peripherals, pc_target, pc_cap
 
 TOTAL_BUDGET, PERIPHERAL_BUDGET, BUDGET, PC_BUDGET = _initial_budget_settings()
